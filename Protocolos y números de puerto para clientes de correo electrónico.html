@@ -1,0 +1,129 @@
+<h2>Visión general</h2>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.objects-us-west-1.dream.io/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En este artículo se explican en detalle las configuraciones de puertos que usted puede utilizar para configurar un cliente de correo electrónico. Asegúrese de consultar el artículo de "configuración de cliente de correo electrónico" para un resumen general de cómo configurar su correo electrónico en su cliente de correo electrónico preferido:</p>
+<ul>
+<li><a href="/hc/en-us/articles/214918038-Email-client-configuration-overview">Resumen de configuración de cliente de correo electrónico</a></li>
+</ul>
+</div>
+</div>
+<p>Los números de puerto que establezca determinarán al protocolo (IMAP o POP3) que utilizará su cliente de correo electrónico. Existen cuatro opciones básicas. IMAP seguro es la configuración recomendada:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215612887#Example_setup_using_a_secure_IMAP_connection">IMAP (seguro)</a> — RECOMENDADA</li>
+<li>IMAP (inseguro)</li>
+<li>POP3 (seguro)</li>
+<li>POP3 (inseguro)</li>
+</ul>
+<p>Siga los pasos indicados a continuación para elegir el protocolo y números de puerto que le gustaría usar para conectarse a su servidor de correo.</p>
+<h2>Paso 1 — Decida entre POP3 o IMAP</h2>
+<p>POP3 e IMAP son dos maneras diferentes de revisar su correo. Un programa de cliente de correo se conecta al servidor de correo usando o POP3 o IMAP. Todas las cuentas de correo de DreamHost soportan automáticamente tanto conexiones POP3 como conexiones IMAP.</p>
+<h3>¿Qué es POP3?</h3>
+<p>POP3 descarga todo el correo desde el servidor de la bandeja de entrada y lo almacena en su computador. De esta manera, los correos electrónicos están disponibles incluso cuando usted no está conectado a internet.</p>
+<p>Usted también tiene la opción (en su cliente de correo electrónico) de conservar su correo en el servidor. Si usted elije no activar esta configuración en su cliente de correo electrónico, los correos electrónicos se eliminan del servidor y solamente se almacenan localmente en su programa de cliente de correo electrónico.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.objects-us-west-1.dream.io/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>La configuración de POP solamente descargará el correo de la carpeta de bandeja de entrada. Cualquier otro (u otros) correo electrónico en carpetas o subcarpetas (como Papelera, Borradores y Enviados) debe ser movido a la bandeja de entrada para poder verlo o descargarlo usando POP.</p>
+</div>
+</div>
+<h3>¿Qué es IMAP?</h3>
+<p>IMAP sincroniza su programa de cliente de correo electrónico con el servidor. Los correos electrónicos permanecen en el servidor, y usted puede crear y ver carpetas de correo electrónico en el servidor, además de en la Bandeja de entrada. La mayoría de los programas de cliente de correo electrónico tienen una funcionalidad para sincronizar inicialmente solo los encabezados de los correos electrónicos, para que usted pueda ver rápidamente qué correos electrónicos tiene, y descargar el cuerpo del mensaje cuando desee leer el mensaje entero. Como los correos electrónicos permanecen en el servidor, usted puede ver todos sus correos electrónicos desde cualquier programa o dispositivo de cliente de correo electrónico. El correo web usa IMAP.</p>
+<p>IMAP es el protocolo preferido para acceder a su correo desde varias ubicaciones, así como desde múltiples dispositivos. Por ejemplo, al tener su dirección de correo electrónico configurada en su computador personal, una Tablet y un teléfono, el IMAP centraliza el almacenamiento de sus correos electrónicos a su servidor de correo de DreamHost. Siempre y cuando tenga conexión a internet, usted podrá conectarse a sus servidores IMAP para acceder a su correo electrónico desde cualquier parte y cualquier dispositivo.</p>
+<h3>¿Cuál debo elegir?</h3>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.objects-us-west-1.dream.io/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Se recomienda IMAP, puesto que el correo electrónico estará disponible desde cualquier dispositivo con el cual quiera conectarse. El POP descarga los correos electrónicos a un dispositivo específico, lo que hace posible que un mensaje específico pueda perderse o extraviarse.</p>
+</div>
+</div>
+<p>Use IMAP su quiere revisar su correo electrónico desde múltiples computadores o dispositivos. Use POP3 si quiere que su correo electrónico siempre esté accesible, incluso sin conexión a internet. Pero tenga presente que el correo electrónico solamente estará disponible en el dispositivo en el cual usted lo ha descargado.</p>
+<p>Si usted ha estado usando IMAP y tiene algunos correos electrónicos guardados en carpetas que no sean la Bandeja de entrada, mueva los correos electrónicos a la bandeja de entrada antes de usar el POP3.</p>
+<h2>Paso 2 — Elija un puerto de entrada seguro o inseguro</h2>
+<p>Basado en su decisión de usar POP o IMAP, elija el número de puerto correspondiente según se indica a continuación. De nuevo, le recomendamos usar el IMAP seguro.</p>
+<h3>Entrada (seguro) — (Configuración recomendada)</h3>
+<ul>
+<li><strong>IMAP | Puerto 993</strong> (Transporte Seguro - función SSL habilitada)</li>
+<li><strong>POP3 | Puerto 995</strong> (Transporte Seguro - función SSL habilitada)</li>
+</ul>
+<h3>Entrada (seguro) — (No recomendado)</h3>
+<ul>
+<li><strong>IMAP | Puerto 143</strong> (Transporte inseguro — Función SSL no habilitada)</li>
+<li><strong>POP3 | Puerto 110</strong> (Transporte inseguro — Función SSL no habilitada)</li>
+</ul>
+<h2>Paso 3 — Elija un puerto SMTP de salida</h2>
+<p><em>Vea también: <a href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">SMTP en Wikipedia</a>, <a href="/hc/en-us/articles/215730467-SMTP-quota-overview">cuota de SMTP</a></em></p>
+<p>El protocolo para transferencia simple de correo (en inglés <strong>Simple Mail Transfer Protocol</strong> o <strong>SMTP</strong>) es el estándar de facto para transmisión de correo electrónico saliente en internet.</p>
+<p>El SMTP es un protocolo relativamente sencillo, basado en texto, donde se especifican uno o más destinatarios de un mensaje (y, en la mayoría de los casos, se verifica su existencia), y entonces el texto del mensaje es transferido.</p>
+<p>Es un protocolo cliente-servidor, donde el cliente retransmite un mensaje de correo electrónico al servidor.</p>
+<h3>Opciones de puerto de salida</h3>
+<ul>
+<li><strong>SMTP | Puerto 587</strong> (Transporte inseguro, pero puede ser transformado en una conexión segura usando STARTTLS)</li>
+<li><strong>SMTP | Puerto 465</strong> (Transporte Seguro - función SSL habilitada)</li>
+<li><strong>SMTP | Puerto 25</strong> (Obsoleto y no recomendado. es IMPRESCINDIBLE la autentificación con nombre de usuario/contraseña si se usa este puerto)</li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.objects-us-west-1.dream.io/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El puerto 587 es un puerto alternativo altamente recomendado, porque los ISP suelen bloquear el puerto 25. Asegúrese de que ha habilitado el <a href="/hc/en-us/articles/215612887#STARTTLS">STARTTLS</a> al usar el puerto 587.</p>
+</div>
+</div>
+<h2>Resumen de seguridad en la conexión</h2>
+<p>Cuando usted elige un número de puerto seguro, su conexión está asegurada como conexión SSL/TLS. A continuación, se muestran algunos de los beneficios de usar un número de puerto seguro.</p>
+<h3>Comunicaciones encriptadas</h3>
+<p>Su información de inicio de sesión y sus mensajes de correo electrónico se envían encriptados, de modo que nadie pueda espiarle.</p>
+<h3>Autenticación de servidor</h3>
+<p>Con los certificados correctamente configurados, usted puede verificar que el servidor POP/IMAP al cual se está conectando sea la máquina correcta (y no un impostor que solamente quiera robarse su contraseña). El servidor le proveerá un certificado (clave pública) que corresponde con una clave privada en el servidor IMAP/POP. Una vez que el cliente esté seguro de que la clave pública del servidor es auténtica, podrá validar las comunicaciones de ese servidor.</p>
+<p>La configuración segura es particularmente útil si está usando redes Wi-Fi públicas, que pudieran no estar encriptadas. La configuración segura garantiza que nadie pueda leer sus correos electrónicos espiando en la red, y que tampoco puedan (de manera más invasiva) establecer un servidor falso de correo electrónico para capturar sus correos electrónicos.</p>
+<h3>Correo web</h3>
+<p>Usted también debería usar el correo web en lugar de una conexión segura (HTTPS). Por ejemplo:</p>
+<ul>
+<li><strong>https</strong>://webmail.example.com</li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.objects-us-west-1.dream.io/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Algunos clientes establecen automáticamente el puerto cuando usted selecciona TLS/SSL, o seleccionan TLS/SSL automáticamente cuando usted selecciona el puerto adecuado. Otros clientes necesariamente requieren que usted haga ambas elecciones para poder configurar completamente el SSL para el servicio apropiado.</p>
+</div>
+</div>
+<h3>¿Qué es la conexión tipo STARTTLS?</h3>
+<p>Existe otro método que usa STARTTLS. El método STARTTLS se conecta al puerto usual SMTP/IMAP/POP3, y después mejora la conexión a TLS enviando una solicitud de STARTTLS. Algunos clientes de correo electrónico llaman a esto "TLS", y llaman "SSL" al método de usar directamente la encriptación en un puerto diferente. ¡Esta distinción es técnicamente incorrecta!</p>
+<h2>Configuración de ejemplo usando una conexión segura IMAP</h2>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.objects-us-west-1.dream.io/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los siguientes pantallazos son de Thunderbird, pero la configuración es la misma para cualquier cliente.</p>
+</div>
+</div>
+<h3>Configuración IMAP segura de entrada</h3>
+<dl>
+<dd><img src="https://objects-us-west-1.dream.io/kbimages/images/IMAP_secure.fw.png" alt="IMAP_secure.fw.png" /></dd>
+</dl>
+<ul>
+<li>Este ejemplo muestra cómo se configuraría al usuario "contact@example.com" como un usuario de IMAP con SSL habilitado, usando el Puerto 993 para correo entrante.</li>
+<li>El nombre del servidor que es está usando es "sub4.mail.dreamhost.com" con el apartado "Autentificación" configurado como "Contraseña normal". Asegúrese de estar usando solamente el nombre de su <a href="/hc/en-us/articles/214918038#Server_names">clúster de correo</a>.</li>
+</ul>
+<h3>Configuración segura de salida</h3>
+<dl>
+<dd><img src="https://objects-us-west-1.dream.io/kbimages/images/IMAP_outgoing.fw.png" alt="IMAP_outgoing.fw.png" /></dd>
+</dl>
+<ul>
+<li>Esta configuración muestra las configuraciones de SMTP con SSL habilitada para la dirección de correo electrónico contact@example.com.</li>
+<li>El usuario está configurado para usar el Puerto 465 con SSL para conexiones seguras, y el apartado "Autentificación" configurado como "Contraseña normal".</li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.objects-us-west-1.dream.io/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>La configuración del puerto y la opción SSL deben coincidir. Es decir, si usted está usando SSL/TLS, debe usar también puertos seguros.</li>
+<li><a href="/hc/en-us/articles/216041537-Secure-Hosting-overview">El habilitar SSL</a> (Transporte Seguro) requerirá de un paso adicional de confirmación y aceptación del certificado para conexión segura, tanto para correo entrante como saliente.</li>
+<li>Es normal recibir una advertencia de certificados al intentar conectarse usando una conexión segura. Ver el artículo de <a href="/hc/en-us/articles/215306748-Certificate-domain-mismatch-error-when-connecting-to-a-DreamHost-mail-server">Error de discrepancia de dominio de certificado</a> para más soluciones.</li>
+</ul>
+</div>
+</div>
+<h2>Ver también</h2>
+<ul>
+<li><a href="/hc/en-us/articles/214918038-Email-client-configuration-overview">Resumen de configuración de cliente de correo electrónico</a></li>
+<li><a href="/hc/en-us/articles/215306748-Certificate-domain-mismatch-error-when-connecting-to-a-DreamHost-mail-server">Error de discrepancia de dominio de certificado al conectarse a un servidor de correo de DreamHost</a></li>
+<li><a href="/hc/en-us/articles/215030208-Email-troubleshooting-checklist-for-escalation">Lista de resolución de problemas de correo electrónico para escalamiento</a></li>
+</ul>
