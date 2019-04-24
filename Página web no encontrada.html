@@ -1,53 +1,53 @@
 <h2>Visión general</h2>
-<p>Es posible que, al intentar visitar su página, se encuentre con un error que dice: "Página web no encontrada":</p>
+<p>Es posible que, al intentar visitar tu página, se encuentre con un error que dice: "Página web no encontrada":</p>
 <dl>
 <dd><img src="https://objects-us-east-1.dream.io/kbimages/images/Site_Not_Found_Dreambot.fw.png" alt="Site_Not_Found_Dreambot.fw.png" /></dd>
 </dl>
-<p>Este artículo le explicará las causas probables de que usted esté viendo este error, y cómo resolverlo.</p>
+<p>Este artículo te explicará las causas probables de que estés viendo este error, y cómo resolverlo.</p>
 <h2>La causa subyacente del error</h2>
-<p>El error de "página web no encontrada" significa que la dirección IP que su dominio está usando no está orientada <a href="https://help.dreamhost.com/hc/en-us/articles/214694378-What-DNS-records-do-I-point-my-site-to-" target="_self">hacia la IP correcta</a>.</p>
-<p>De manera más técnica, el error "página web no encontrada" significa que los registros de DNS para su dominio se están resolviendo hacia la dirección IP de un servidor web Apache que no está configurado para su dominio.</p>
-<p>Cuando esto ocurre, el servidor web Apache está diseñado para simplemente mostrar el primer dominio listado en su archivo de configuración. Para garantizar que nunca ocurra que la página web de alguien muestre accidentalmente otra página cualquiera que esté alojada en el mismo servicio Apache, DreamHost deliberadamente hace que el primer dominio en todos sus archivos de configuración muestre la misma página de error personalizada.</p>
-<p>Existen algunas razones, que se explican a continuación, por las cuales su IP pudiera no estar dirigida correctamente hacia la IP de su servidor web.</p>
-<h2>Ver la dirección IP de su página en su navegador</h2>
-<p>Debido a la forma en la que DreamHost configura Apache, a menos que usted haya comprado una dirección IP única para su dominio, el intentar ver su página web introduciendo la dirección IP en su navegador arrojará automáticamente el error de Página web no encontrada. Esto se debe a que usted estaría viendo la IP compartida de su servidor web, en vez de la IP de su página.</p>
-<p>Si usted necesariamente debe ver su página a través de una dirección IP, deberá adquirir una IP única. Puede leer más acerca de las IP únicas aquí:</p>
+<p>El error de "página web no encontrada" significa que la dirección IP que tu dominio está usando no está orientada <a href="https://help.dreamhost.com/hc/en-us/articles/214694378-What-DNS-records-do-I-point-my-site-to-" target="_self">hacia la IP correcta</a>.</p>
+<p>De manera más técnica, el error "página web no encontrada" significa que los registros de DNS para tu dominio se están resolviendo hacia la dirección IP de un servidor web Apache que no está configurado para tu dominio.</p>
+<p>Cuando esto ocurre, el servidor web Apache está diseñado para simplemente mostrar el primer dominio listado en tu archivo de configuración. Para garantizar que nunca ocurra que la página web de alguien muestre accidentalmente otra página cualquiera que esté alojada en el mismo servicio Apache, DreamHost deliberadamente hace que el primer dominio en todos sus archivos de configuración muestre la misma página de error personalizada.</p>
+<p>Existen algunas razones, que se explican a continuación, por las cuales tu IP pudiera no estar dirigida correctamente hacia la IP de tu servidor web.</p>
+<h2>Ver la dirección IP de tu página en tu navegador</h2>
+<p>Debido a la forma en la que DreamHost configura Apache, a menos que tu hayas comprado una dirección IP única para tu dominio, el intentar ver tu página web introduciendo la dirección IP en tu navegador arrojará automáticamente el error de Página web no encontrada. Esto se debe a que tu estarías viendo la IP compartida de tu servidor web, en vez de la IP de tu página.</p>
+<p>Si necesariamente debes ver tu página a través de una dirección IP, deberás adquirir una IP única. Puedes leer más acerca de las IP únicas aquí:</p>
 <ul>
 <li><a href="/hc/en-us/articles/216109647-Unique-IP-overview">IP única</a></li>
 </ul>
 <h2>Cambios en el DNS</h2>
-<p>Es frecuente encontrar este error debido a un cambio en su dirección IP, que suele ser desencadenado por la eliminación del alojamiento (hosting) web para un dominio, seguido por la configuración de alguno de los siguientes: <a href="/hc/en-us/articles/215416417-Mirror-domain-overview">MIRROR</a>, <a href="/hc/en-us/articles/215455377-How-do-I-redirect-my-domain-">REDIRECT</a>, PARK, o <a href="/hc/en-us/articles/216512358-Cloaking-a-domain">CLOAK</a>. Si bien los cambios en el DNS de DreamHost son casi instantáneos, la nueva información no llega a los demás servidores en distintas partes del mundo hasta que los otros servidores hagan caducar los datos antiguos que aún contienen. A esto se le conoce como <a href="/hc/en-us/articles/215840248-DNS-propagation-overview">propagación de DNS</a>.</p>
-<p>El motivo por el cual usted recibe este error durante este período es que la información de DNS que usted está recibiendo en su computador local está desactualizada, y que la instancia de Apache a la cual se le está (incorrectamente) dirigiendo ya no cuenta con ningún registro de su página. Dependiendo de su ubicación, los cambios en el DNS pueden tardar algunas horas en propagarse, así que lo mejor que se puede hacer es dejar su dominio tal y como está durante algunas horas antes de intentar cualquier tipo de arreglo.</p>
-<p>Adicionalmente, si usted se dirige a <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a> y hace clic en el pequeño enlace "DNS" debajo del dominio, le aparecerá una página de DNS.</p>
+<p>Es frecuente encontrar este error debido a un cambio en tu dirección IP, que suele ser desencadenado por la eliminación del alojamiento (hosting) web para un dominio, seguido por la configuración de alguno de los siguientes: <a href="/hc/en-us/articles/215416417-Mirror-domain-overview">MIRROR</a>, <a href="/hc/en-us/articles/215455377-How-do-I-redirect-my-domain-">REDIRECT</a>, PARK, o <a href="/hc/en-us/articles/216512358-Cloaking-a-domain">CLOAK</a>. Si bien los cambios en el DNS de DreamHost son casi instantáneos, la nueva información no llega a los demás servidores en distintas partes del mundo hasta que los otros servidores hagan caducar los datos antiguos que aún contienen. A esto se le conoce como <a href="/hc/en-us/articles/215840248-DNS-propagation-overview">propagación de DNS</a>.</p>
+<p>El motivo por el cual tu recibes este error durante este período es que la información de DNS que está recibiendo en tu computador local está desactualizada, y que la instancia de Apache a la cual se le está (incorrectamente) dirigiendo ya no cuenta con ningún registro de tu página. Dependiendo de tu ubicación, los cambios en el DNS pueden tardar algunas horas en propagarse, así que lo mejor que se puede hacer es dejar tu dominio tal y como está durante algunas horas antes de intentar cualquier tipo de arreglo.</p>
+<p>Adicionalmente, si te diriges a <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a> y haces clic en el pequeño enlace "DNS" debajo del dominio, te aparecerá una página de DNS.</p>
 <dl>
 <dd><img src="https://objects-us-east-1.dream.io/kbimages/images/Refresh_DNS_Go_button.png" alt="Refresh_DNS_Go_button.png" /></dd>
 </dl>
-<p>Al hacer clic en el botón azul <strong>Go!</strong> (¡Vamos!) en la parte superior, obligará al sistema de DreamHost a hacer una actualización de DNS. Pero, aun así, la propagación de DNS por internet puede tardar algunas horas en completarse.</p>
-<h2>Cómo consultar sus registros de DNS actuales</h2>
-<p>Para consultar el estado de su actualización de DNS, puede visitar <a href="https://www.whatsmydns.net/">¿Cuál es mi DNS?</a> para ver hacia cuál dirección IP se resuelve su dominio actualmente.</p>
-<h3>Si usa Linux o Apple Mac</h3>
-<p>Si usted usa un computador Linux o Mac, también puede ejecutar algunos comandos en su terminal para consultar la IP actual de su página. Visite el artículo de SSH acerca de cómo iniciar sesión en su terminal:</p>
+<p>Al hacer clic en el botón azul <strong>Go!</strong> (¡Vamos!) en la parte superior, obligarás al sistema de DreamHost a hacer una actualización de DNS. Pero, aun así, la propagación de DNS por internet puede tardar algunas horas en completarse.</p>
+<h2>Cómo consultar tus registros de DNS actuales</h2>
+<p>Para consultar el estado de tu actualización de DNS, puedes visitar <a href="https://www.whatsmydns.net/">¿Cuál es mi DNS?</a> para ver hacia cuál dirección IP se resuelve tu dominio actualmente.</p>
+<h3>Si usas Linux o Apple Mac</h3>
+<p>Si usas un computador Linux o Mac, también puedes ejecutar algunos comandos en tu terminal para consultar la IP actual de tu página. Visita el artículo de SSH acerca de cómo iniciar sesión en tu terminal:</p>
 <ul>
 <li><a href="/hc/en-us/articles/216041267-SSH-overview">Resumen de SSH</a></li>
 </ul>
-<p>Una vez que haya iniciado sesión en su terminal, puede ejecutar el comando "dig" para verificar el estado de la resolución de IP. Por ejemplo, este comando comprueba la dirección IP actual que se resuelve por internet en su ubicación. (Su IP será diferente dependiendo del servidor en el cual esté ubicada su página):</p>
+<p>Una vez que hayas iniciado sesión en tu terminal, puedes ejecutar el comando "dig" para verificar el estado de la resolución de IP. Por ejemplo, este comando comprueba la dirección IP actual que se resuelve por internet en tu ubicación. (Tu IP será diferente dependiendo del servidor en el cual esté ubicada tu página):</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">dig +short example.com</span>
 <span class="cmdoutput">64.90.47.165</span>
 </pre>
 </div>
-<p>Este comando consulta la dirección IP asignada actualmente a su servidor web de DreamHost. (Su IP será diferente dependiendo del servidor en el cual esté ubicada su página.)</p>
+<p>Este comando consulta la dirección IP asignada actualmente a tu servidor web de DreamHost. (Tu IP será diferente dependiendo del servidor en el cual esté ubicada tu página.)</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">dig +short example.com @ns1.DreamHost.com</span>
 <span class="cmdoutput">64.90.47.165</span>
 </pre>
 </div>
-<p>Si example.com está usando servidores de nombres de DreamHost, ambos comandos deberían arrojar la misma IP. Si no, intente purgar su DNS local. Puede leer más acerca de esto en el siguiente artículo:</p>
+<p>Si example.com está usando servidores de nombres de DreamHost, ambos comandos deberían arrojar la misma IP. Si no, intenta purgar tu DNS local. Puedes leer más acerca de esto en el siguiente artículo:</p>
 <ul>
 <li><a href="/hc/en-us/articles/215680477-Flush-DNS-overview">Resumen de Purga de DNS</a></li>
 </ul>
-<h3>Si usa Windows</h3>
-<p>Los usuarios de Windows pueden usar el comando "nslookup" en el símbolo de sistema. Puede leer más acerca del uso del símbolo de sistema en Windows aquí:</p>
+<h3>Si usas Windows</h3>
+<p>Los usuarios de Windows pueden usar el comando "nslookup" en el símbolo de sistema. Puedes leer más acerca del uso del símbolo de sistema en Windows aquí:</p>
 <ul>
 <li><a href="https://support.microsoft.com/en-us/products/windows?os=windows-7">Microsoft Windows 7 help</a></li>
 </ul>
@@ -58,15 +58,15 @@
 Dirección: 64.90.47.165</span>
 </pre>
 </div>
-<p>Este comando comprueba la dirección IP actual que se resuelve por internet en su ubicación. (Su IP será diferente dependiendo del servidor en el cual esté ubicada su página.)</p>
+<p>Este comando comprueba la dirección IP actual que se resuelve por internet en tu ubicación. (Tu IP será diferente dependiendo del servidor en el cual esté ubicada tu página.)</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">C:\Users\user&gt; </span><span class="command">nslookup example.com ns1.DreamHost.com</span>
 <span class="cmdoutput">Nombre: example.com
 Dirección: 64.90.47.165</span>
 </pre>
 </div>
-<p>Este comando consulta la dirección IP asignada actualmente a su servidor de nombres de DreamHost. (Su IP será diferente dependiendo del servidor en el cual esté ubicada su página.)</p>
-<p>Si example.com está usando servidores de nombres de DreamHost, ambos comandos deberían arrojar la misma IP. Si no, intente purgar su DNS local. Puede leer más acerca de esto en el siguiente artículo:</p>
+<p>Este comando consulta la dirección IP asignada actualmente a tus nombres de servidores de DreamHost. (Tu IP será diferente dependiendo del servidor en el cual esté ubicada tu página.)</p>
+<p>Si example.com está usando nombres de servidores DreamHost, ambos comandos deberían arrojar la misma IP. Si no, intenta purgar tu DNS local. Puedes leer más acerca de esto en el siguiente artículo:</p>
 <ul>
 <li><a href="/hc/en-us/articles/215680477-Flush-DNS-overview">Resumen de Purga de DNS</a></li>
 </ul>
@@ -75,27 +75,27 @@ Dirección: 64.90.47.165</span>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.objects-us-east-1.dream.io/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Si el problema surge poco después de hacer un cambio de configuración para el dominio en el panel de control, la causa podría ser este cambio de dirección IP para el dominio. Si ese es el caso, este error debería desaparecer en unas 4 horas ─ una vez que el cambio de DNS se propague por la internet. Esto es normal. Si no desaparece después de unas 6 horas, entonces pruebe con lo siguiente.</p>
+<p>Si el problema surge poco después de hacer un cambio de configuración para el dominio en el panel de control, la causa podría ser este cambio de dirección IP para el dominio. Si ese es el caso, este error debería desaparecer en unas 4 horas ─ una vez que el cambio de DNS se propague por la internet. Esto es normal. Si no desaparece después de unas 6 horas, entonces prueba con lo siguiente.</p>
 </div>
 </div>
 <h3>Reconstrucción del httpd mediante el panel de control de DreamHost</h3>
-<p>Vaya a <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a> en su panel, y haga clic en el botón <strong>Editar</strong> a la derecha del nombre de dominio, en la columna "Alojamiento web". No hará falca cambiar nada en esta página. Simplemente guarde los cambios presionando el botón azul <strong>Cambiar configuración</strong>. Después, espere hasta 10 minutos para ver si el problema se ha resuelto. Con esta solución, usted sencillamente habrá reconstruido la configuración httpd del servidor web.</p>
-<h3>Si usted no está usando el DNS de DreamHost</h3>
-<p>Si usted no está usando DreamHost para administrar el DNS de su dominio, lo más probable es que la dirección IP de su proveedor de DNS que indica hacia DreamHost sea incorrecta.</p>
-<p>Usted puede averiguar la IP correcta haciendo una consulta al servidor de nombres de DreamHost con uno de los comandos en la sección anterior (dependiendo de su sistema operativo).</p>
+<p>Ve a <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a> en tu panel, y haz clic en el botón <strong>Editar</strong> a la derecha del nombre de dominio, en la columna "Alojamiento web". No hará falta cambiar nada en esta página. Simplemente guarda los cambios presionando el botón azul <strong>Cambiar configuración</strong>. Después, espera hasta 10 minutos para ver si el problema se ha resuelto. Con esta solución, sencillamente habrás reconstruido la configuración httpd del servidor web.</p>
+<h3>Si tu no estás usando el DNS de DreamHost</h3>
+<p>Si tu no está usando DreamHost para administrar el DNS de tu dominio, lo más probable es que la dirección IP de su proveedor de DNS que apunta hacia DreamHost sea incorrecta.</p>
+<p>Tu puedes averiguar la IP correcta haciendo una consulta al los nombres de servidores de DreamHost con uno de los comandos en la sección anterior (dependiendo de tu sistema operativo).</p>
 <p>Aquí hay otra forma de <a href="/hc/en-us/articles/214694378-What-DNS-records-do-I-point-my-site-to-">averiguar la IP correcta</a>:</p>
 <ol>
-<li>Inicie sesión en su panel en <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a>.</li>
-<li>Haga clic en el enlace "DNS" ubicado debajo su dominio.</li>
-<li>Cuando se abra la página de Administrar dominios, busque el registro A en la sección "no editable".</li>
-<li>Actualice su registro A con su proveedor de DNS para apuntar hacia esta IP de DreamHost.</li>
+<li>Inicia sesión en tu panel en <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a>.</li>
+<li>Haz clic en el enlace "DNS" ubicado debajo tu dominio.</li>
+<li>Cuando se abra la página de Administrar dominios, busca el registro A en la sección "no editable".</li>
+<li>Actualiza tu registro A con tu proveedor de DNS para apuntar hacia esta IP de DreamHost.</li>
 </ol>
-<p>Una vez que la DNS se haya propagado, no debería seguir apareciendo el robot con sueño de DreamHost.</p>
+<p>Una vez que la DNS se haya propagado, no debería seguir apareciendo el robot durmiendo de DreamHost.</p>
 <h3>Uso de cuentas suspendidas</h3>
-<p>Para cuentas que se hayan suspendido por falta de pago, DreamHost dejará de servir el DNS para la cuenta. Sus páginas mostrarán el mensaje de "página web no encontrada" hasta que se haya ejecutado el pago, y la cuenta se haya reactivado. Inicie sesión en su panel de control o consulte sus correos electrónicos de DreamHost para ver si este es el caso.</p>
+<p>Para cuentas que se hayan suspendido por falta de pago, DreamHost dejará de servir el DNS para la cuenta. Sus páginas mostrarán el mensaje de "página web no encontrada" hasta que se haya ejecutado el pago, y la cuenta se haya reactivado. Inicia sesión en tu panel de control o consulta tus correos electrónicos de DreamHost para ver si este es el caso.</p>
 <h3>Contactar al soporte técnico</h3>
-<p>Si usted no puede resolver este problema con las sugerencias antes mencionadas, por favor contacte a nuestro departamento de soporte técnico para recibir asistencia.</p>
-<p>Usted puede contactar a soporte técnico a través de su panel en <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_self">Contact Support</a>. O consulte el siguiente artículo para otros métodos de contacto:</p>
+<p>Si no puedes resolver este problema con las sugerencias antes mencionadas, por favor contacta a nuestro departamento de soporte técnico para recibir asistencia.</p>
+<p>Puedes contactar a soporte técnico a través de tu panel en <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_self">Contact Support</a>. O consulta el siguiente artículo para otros métodos de contacto:</p>
 <ul>
 <li><a href="/hc/en-us/articles/218084068-Contacting-support-overview">Contactar a DreamHost</a></li>
 </ul>
@@ -107,7 +107,7 @@ Dirección: 64.90.47.165</span>
 <li>Se superan los límites de tiempo para acceder a la página.</li>
 <li>No aparecen procesos de Passenger cuando se ejecuta ps -A desde el intérprete de comandos.</li>
 </ul>
-<p>En esta instancia, la solución es la misma – editar el dominio y hacer clic en <strong>Cambiar Configuración</strong>. Y después esperar que se propague. También puede probar a desactivar y reactivar el Passenger en la misma página de editar dominios.</p>
+<p>En esta instancia, la solución es la misma – editar el dominio y hacer clic en <strong>Cambiar Configuración</strong>. Y después esperar que se propague. También puedes probar a desactivar y reactivar el Passenger en la misma página de editar dominios.</p>
 <p>Esto cambiará las configuraciones del dominio sin alterar los registros de DNS de este.</p>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.objects-us-east-1.dream.io/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
@@ -121,6 +121,6 @@ Dirección: 64.90.47.165</span>
 <li><a href="/hc/en-us/categories/202186727">Lista de artículos de resolución de problemas en páginas web</a></li>
 <li><a href="/hc/en-us/articles/216041267-SSH-overview">Resumen de SSH</a></li>
 <li><a href="/hc/en-us/articles/216109647-Unique-IP-overview">Resumen de IP única</a></li>
-<li><a href="/hc/en-us/articles/216456827-How-to-clear-your-browser-s-cache">Como limpiar el cache de su navegador</a></li>
+<li><a href="/hc/en-us/articles/216456827-How-to-clear-your-browser-s-cache" target="_self">Como limpiar el cache de tu navegador</a></li>
 <li><a href="/hc/en-us/articles/215680477-Flush-DNS-overview">Resumen de Purga de DNS</a></li>
 </ul>
