@@ -1,0 +1,140 @@
+<h2>Visión general</h2>
+<div class="solvvy-solution">
+<p>Traceroute es una herramienta de diagnóstico de red que se utiliza para verificar la red entre dos ubicaciones. Por ejemplo, para determinar la causa de la lentitud o los tiempos de espera, un Traceroute debe ejecutarse desde el punto de inicio de una conexión de red a tu servidor DreamHost.</p>
+</div>
+<h2>¿Cuándo debo usar Traceroute?</h2>
+<div class="solvvy-solution">
+<p>A continuación, se incluyen algunos ejemplos de cuándo se puede necesitar un traceroute para solucionar un problema que estés experimentando.</p>
+<h3>Lentitud con la página web</h3>
+<p>Si notas que tu sitio está cargando lentamente, ejecuta un traceroute desde tu computadora a tu sitio web para ver si hay problemas de red entre tu ubicación y el servidor de DreamHost.</p>
+<h3>Tiempo de espera del cliente de correo electrónico</h3>
+<p>Si tienes problemas relacionados con tu conexión de correo, ejecuta un traceroute para determinar la calidad de la conexión al servidor de correo.</p>
+<ol>
+<li>Visita la página <a href="https://help.dreamhost.com/hc/es/articles/214918038#nombre-del-servidor" target="_self">Configuración del cliente de correo electrónico</a> para encontrar el nombre de tu servidor de correo. Puede ser imap.dreamhost.com o pop.dreamhost.com, según tu preferencia de conexión.</li>
+<li>Ejecuta un traceroute.<br />
+<dl>
+<dd><em>El siguiente ejemplo muestra un traceroute ejecutándose en Windows:</em></dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">C:\Users\DreamHost&gt; </span><span class="command">tracert imap.dreamhost.com</span>
+Tracing route to imap.dreamhost.com [64.90.62.162]
+over a maximum of 30 hops:
+
+  1    &lt;1 ms    &lt;1 ms    &lt;1 ms  192.168.106.1
+  2     1 ms    &lt;1 ms    &lt;1 ms  216.112.17.9.ptr.us.xo.net [216.112.17.9]
+  3    29 ms    28 ms    28 ms  ae1d0.mcr1.santaana-ca.us.xo.net [216.156.1.58]
+  4    11 ms    11 ms    11 ms  216.156.16.70.ptr.us.xo.net [216.156.16.70]
+  5    25 ms    25 ms    25 ms  216.156.16.63.ptr.us.xo.net [216.156.16.63]
+  6    30 ms    30 ms    30 ms  209.48.213.194
+  7    30 ms    30 ms    30 ms  pdx1-cr-1.sd.dreamhost.com [66.33.200.2]
+  8    45 ms    42 ms    43 ms  ip-66-33-200-25.dreamhost.com [66.33.200.25]
+  9    30 ms    30 ms    30 ms  pop.dreamhost.com [64.90.62.162]
+
+Trace complete.</pre>
+</div>
+</li>
+</ol>
+<p><span style="font-weight: 400;">El ejemplo anterior muestra los saltos en la red al servidor y no muestra tiempos de espera en la conexión de red. Si ven tiempos de espera, puede haber un problema relacionado con la red.</span></p>
+</div>
+<h2>Cómo ejecutar un traceroute</h2>
+<div class="solvvy-solution">
+<h3>Usando Windows</h3>
+<ol>
+<li>Abre el <a href="https://www.tenforums.com/tutorials/3288-open-command-prompt-windows-10-a.html" target="_self">Símbolo del Sistema</a>.</li>
+<li>Escribe la palabra 'tracert' seguido de un espacio y luego el nombre del sitio/servidor al que deseas conectarte. Por ejemplo, si deseas conectarte a example.com, deberás ejecutar esto:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">C:\Users\DreamHost&gt; </span><span class="command">tracert example.com
+</span></pre>
+</div>
+</li>
+<li>Presiona la tecla "Enter" para ejecutar el comando.<br />
+<ul>
+<li>También puedes probar tu servidor de correo DreamHost ejecutando un traceroute al <a href="https://help.dreamhost.com/hc/es/articles/214918038#nombre-del-servidor" target="_self">subdominio de correo</a>. Por ejemplo:</li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">C:\Users\DreamHost&gt; </span><span class="command">tracert imap.dreamhost.com</span></pre>
+</div>
+</li>
+</ol>
+<h3>Usando linux</h3>
+<p>Para la mayoría de las distribuciones de Linux, primero deberás instalar el paquete traceroute.</p>
+<p>Para instalar:</p>
+<ol>
+<li>Abre tu terminal.</li>
+<li>Ejecuta lo siguiente para realizar la instalación en Ubuntu:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo apt-get install traceroute</span>
+</pre>
+</div>
+</li>
+<li>Una vez instalado, puedes ejecutar el comando de la siguiente manera:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">traceroute example.com</span>
+</pre>
+</div>
+<ul>
+<li>Algunas variantes de Linux requieren que también especifiques el protocolo después de -I. Por ejemplo:</li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">traceroute -I ICMP example.com</span>
+</pre>
+</div>
+</li>
+</ol>
+<h3><span id="Mac_OS_X">Mac OS X</span></h3>
+<p>Para ejecutar traceroute:</p>
+<ol>
+<li>Visita el artículo de <a href="/hc/en-us/articles/215360828-SSH-client-software" target="_self">SSH para Mac OS X</a> para obtener instrucciones sobre cómo abrir tu terminal.</li>
+<li>Ejecuta el siguiente comando:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">traceroute example.com</span></pre>
+</div>
+</li>
+</ol>
+<p>Otra opción es usar el programa gráfico Network Utility (puedes usar Finder y buscar aplicaciones para ubicar y abrir el programa):</p>
+<ol>
+<li>Haz clic en el botón <strong>Traceroute</strong> en la barra superior.</li>
+<li>Escribe el nombre del servidor.</li>
+<li>Haz clic en el botón <strong>Trace</strong>.<br />
+<dl>
+<dd><em>The Network Utility Traceroute results should look like this:</em></dd>
+<dd><img src="https://kbimages.dreamhosters.com/images/03_Traceroute.fw.png" alt="03 Traceroute.fw.png" width="713" height="441" /></dd>
+</dl>
+</li>
+</ol>
+</div>
+<h2>Copiar y pegar los resultados</h2>
+<div class="solvvy-solution">
+<p>Si deseas compartir tus resultados con un representante de soporte, deberás pegarlos en tu ticket.</p>
+<h3>Windows</h3>
+<ol>
+<li>En el símbolo del sistema de Windows, haz clic con el botón derecho y elije 'Marcar'.</li>
+<li>Arrastra el cursor sobre el área completa que deseas copiar.</li>
+<li>Haz clic derecho de nuevo.</li>
+</ol>
+<p>Luego puedes pegar en cualquier editor de texto o en tu ticket para soporte.</p>
+<p>Otra opción es tener resultados de traceroute escritos directamente en un archivo de texto.</p>
+<p>Para crear un archivo de texto de sus resultados de traceroute, ejecuta el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">C:\Users\DreamHost&gt; </span><span class="command">tracert example.com &gt; C:\tracert.txt</span>
+</pre>
+</div>
+<p>Esto crea un archivo llamado tracert.txt dentro de tu carpeta C: \. Puedes seleccionar cualquier carpeta en la que desees guardar el archivo.</p>
+<h3>Mac &amp; Linux</h3>
+<p>Puedes ejecutar el siguiente comando para escribir los resultados de traceroute en un archivo, y puedes especificar la ubicación que desees.</p>
+<p>En el siguiente ejemplo, los resultados se escriben en un archivo llamado trace.txt debajo del usuario llamado 'username':</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">traceroute -I example.com &gt; /home/username/trace.txt</span>
+</pre>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216560958-Website-tools" target="_self">Herramientas para sitio web</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Visi%C3%B3n-general-del-SSH" target="_self">Visión general de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/217213327-Wget">Wget</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216661778-Rsync">Rsync</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216606088-Telnet">Telnet</a></li>
+</ul>
+</div>
