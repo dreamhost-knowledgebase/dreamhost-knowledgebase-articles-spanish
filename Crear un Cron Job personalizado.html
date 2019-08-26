@@ -1,11 +1,11 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este artículo muestra cómo crear manualmente un cron job usando tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-Habilitando-acceso-Shell" target="_self">usuario Shell</a>. Esto envuelve iniciar sesión dentro del servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Visi%C3%B3n-general-del-SSH">SSH</a> para correr varios comandos.</p>
+<p>Este artículo muestra cómo crear manualmente un cron job usando tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-Habilitando-acceso-Shell" target="_self">usuario Shell</a>.&nbsp;Esto envuelve iniciar sesión dentro del servidor vía&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Visi%C3%B3n-general-del-SSH">SSH</a>&nbsp;para correr varios comandos.</p>
 <p>Estas instrucciones pueden ser usadas también para editar un cron job existente creado en el panel, sin embargo por simplicidad, es recomendado que si lo has creado en el panel, seguirlo editando desde el panel.</p>
 </div>
 <h2>Detalles básicos</h2>
 <div class="solvvy-solution">
-<p>Los archivos crontab están donde las listas de jobs y otras instrucciones del cron daemon están guardadas. Cada usuario en DreamHost tiene su propio archivo crontab que puede ser accesado corriendo el siguiente comando en tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-Habilitando-acceso-Shell" target="_self">usuario Shell</a>:</p>
+<p>Los archivos crontab están donde las listas de jobs y otras instrucciones del cron daemon están guardadas. Cada usuario en DreamHost tiene su propio archivo crontab que puede ser accesado corriendo el siguiente comando en tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-Habilitando-acceso-Shell" target="_self">usuario Shell</a>:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">crontab -e</span>
 </pre>
@@ -38,7 +38,7 @@
 <p>Las siguientes instrucciones explican cómo agregar un cron job en tu usuario Shell. Estas instrucciones asumen que NO has agregado un cron job en tu panel todavía, entonces el archivo crontab está vacío.</p>
 <ol>
 <ol>
-<li>Inicia sesion en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Visi%C3%B3n-general-del-SSH">SSH</a> usando el usuario Shell en el que deseas crear el cron job.</li>
+<li>Inicia sesion en tu servidor vía&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Visi%C3%B3n-general-del-SSH">SSH</a>&nbsp;usando el usuario Shell en el que deseas crear el cron job.</li>
 <li>Una vez dentro, corre el siguiente comando para abrir el archivo crontab.<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">crontab -e</span>
@@ -63,7 +63,7 @@ Choose 1-13 [3]: <span class="command">3</span>
 </pre>
 </div>
 </li>
-<li>Deberás escoger un editor para ver este archivo #3 usa un programa “nano” el cual es el más fácil. Vé el artículo '<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo cía SSH</a>' para ver instrucciones de como usar nano.</li>
+<li>Deberás escoger un editor para ver este archivo #3 usa un programa “nano” el cual es el más fácil. Vé el artículo&nbsp;'<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo cía SSH</a>'&nbsp;para ver instrucciones de como usar nano.</li>
 <li>Se te presentará este nuevo archivo crontab:<br />
 <div class="preboxcontainer">
 <pre class="prebox"># Edit this file to introduce tasks to be run by cron.
@@ -282,13 +282,13 @@ El tiempo es basado en eso del servidor que corre el cron.
 </div>
 <h2>Salida</h2>
 <div class="solvvy-solution">
-<p>La salida del cron job es determinado por lo que es enviado al terminal como resultado de los comandos/scripts que son ejecutados. Por defecto, todas las salidas son enviadas por correo a la variable <a href="/hc/en-us/articles/215767107-Execution-environment-of-a-cron-job">MAILTO</a> (ver la sección del requerimiento de la variable MAILTO para más información). Como se ve arriba, si un comando de cron job no crea ninguna salida en el comando entonces ningún correo es enviado.</p>
+<p>La salida del cron job es determinado por lo que es enviado al terminal como resultado de los comandos/scripts que son ejecutados. Por defecto, todas las salidas son enviadas por correo a la variable&nbsp;<a href="/hc/en-us/articles/215767107-Execution-environment-of-a-cron-job">MAILTO</a>&nbsp;(ver la sección del requerimiento de la variable MAILTO para más información). Como se ve arriba, si un comando de cron job no crea ninguna salida en el comando entonces ningún correo es enviado.</p>
 <p>Tú puedes proveer de instrucciones especiales para la salida estándar o "standard out" (STDOUT), un error estándar o un "standard error" (STDERR) usando el operador "&gt;". Cuando tu usas "&gt;" sin un número antes de él, se pondrá automáticamente como "1&gt;". Esta es la salida estándar de no error (non-error).</p>
 <p>Cuando usas "2&gt;" estás especificando qué hacer con la salida del error. Por ejemplo, "&gt;mi_archivo.txt" redirecciona la salida estándar a un archivo llamado "&gt;mi_archivo.txt", y "2&gt;mis_errores.txt" redirecciona los errores a un archivo llamado "mis_errores.txt".</p>
 </div>
 <h2>Permisos</h2>
 <div class="solvvy-solution">
-<p>Por defecto, los archivos creados en los servidores de DreamHost tienen permisos nivel 644. Si tu escoges ejecutar un script vía cron, puedes necesitar poner los permisos del archivo a 744 usando  <a href="http://linux.die.net/man/1/chmod">chmod</a> para permitir que se ejecute correctamente.</p>
+<p>Por defecto, los archivos creados en los servidores de DreamHost tienen permisos nivel 644. Si tu escoges ejecutar un script vía cron, puedes necesitar poner los permisos del archivo a 744 usando&nbsp;&nbsp;<a href="http://linux.die.net/man/1/chmod">chmod</a> para permitir que se ejecute correctamente.</p>
 </div>
 <h2>Ejemplos de scripts de cron personalizados</h2>
 <div class="solvvy-solution">
@@ -325,7 +325,7 @@ El tiempo es basado en eso del servidor que corre el cron.
 </pre>
 </div>
 <p>&amp;&gt;/dev/null es una abreviación para 1&gt; /dev/null 2&gt; &amp;1. Redirecciona ambos descriptor de archivos 2 (STDERR) y descriptor 1 (STDOUT) a /dev/null.</p>
-<p>Ve <a href="http://unix.stackexchange.com/a/70971">http://unix.stackexchange.com/a/70971</a> para más información.</p>
+<p>Ve&nbsp;<a href="http://unix.stackexchange.com/a/70971">http://unix.stackexchange.com/a/70971</a>&nbsp;para más información.</p>
 <p><strong>Ejemplo 7</strong>: Esto corre el script local (alojado en DreamHost) cada 10 minutos.</p>
 <div class="preboxcontainer">
 <pre class="prebox">*/10 * * * * /usr/local/php71/bin/php /home/example_username/myscript.php
@@ -339,12 +339,12 @@ El tiempo es basado en eso del servidor que corre el cron.
 </div>
 <h2>Editar un servidor dedicado</h2>
 <div class="solvvy-solution">
-<p>Si estás logueado como usuario <a href="https://help.dreamhost.com/hc/en-us/articles/215945467-How-do-I-add-users-to-a-Dedicated-server-" target="_self">administrador de servidor Dedicado</a>, tu puedes editar el archivo crontab directamente. Está almacenado aquí.</p>
+<p>Si estás logueado como usuario&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215945467-How-do-I-add-users-to-a-Dedicated-server-" target="_self">administrador de servidor Dedicado</a>,&nbsp;tu puedes editar el archivo crontab directamente. Está almacenado aquí.</p>
 <div class="preboxcontainer">
 <pre class="prebox">/var/spool/cron/crontabs/youruser
 </pre>
 </div>
-<p>Necesitarás usar <code>sudo</code> en tu servidor Dedicado (o iniciar una sesión interactiva como el usuario root con <code>sudo -i</code>) para acceder al archivo.</p>
+<p>Necesitarás usar&nbsp;<code>sudo</code>&nbsp;en tu servidor Dedicado (o iniciar una sesión interactiva como el usuario root con&nbsp;<code>sudo -i</code>) para acceder al archivo.</p>
 <div id="mw-content-text" class="mw-content-ltr" dir="ltr" lang="en">
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
@@ -362,11 +362,11 @@ El tiempo es basado en eso del servidor que corre el cron.
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Visi%C3%B3n-general-del-SSH" target="_self">Visión general de SSH</a></li>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/215088608-Crontab-overview" target="_self">Visión general de Crontab</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Visi%C3%B3n-general-del-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215088608-Crontab-overview" target="_self">Generalidades de Crontab</a></li>
 <li><a href="https://help.dreamhost.com/hc/en-us/articles/215767107-Execution-environment-of-a-cron-job" target="_self">Ambiente de ejecución de un cron job</a></li>
 <li><a href="https://help.dreamhost.com/hc/en-us/articles/215088668-How-do-I-create-a-cron-job-" target="_self">¿Como creo un cron job?</a></li>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/214202238-Command-line-PHP-overview" target="_self">Visión general de la línea de comando PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214202238-Command-line-PHP-overview" target="_self">Generalidades de las líneas de comando de PHP</a></li>
 </ul>
 </div>
 </div>
