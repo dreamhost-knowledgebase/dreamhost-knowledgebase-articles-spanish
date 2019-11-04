@@ -14,6 +14,13 @@
 <div class="solvvy-solution">
 <p>Los ejemplos a continuación pueden ser ingresados dentro de tu archivo de .htaccess como se muestran. Solo asegurate de ajustar el camino al archivo para que el .htaccess sepa donde está localizado. También, si ves el dominio “ejemplo.com” cambialo por tu nombre de dominio.</p>
 </div>
+<h2>Redireccionar todas las URL</h2>
+<div class="solvvy-solution">
+<p>La siguiente línea redirecciona todas las URL en tu sitio a un nuevo sitio.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Redirect 301 / https://example.com/</pre>
+</div>
+</div>
 <h2>Redireccionar una URL</h2>
 <div class="solvvy-solution">
 <p>Usando una redirección en un archivo .htaccess puedes redireccionar a los usuarios de una vieja página a una nueva sin tener que mantener la vieja página. Por ejemplo, si usas index.html como tu archivo index y luego renombras index.html a home.html, puedes hacer una redirección para enviar a los usuarios del index.html a home.html. Por ejemplo:</p>
@@ -52,7 +59,7 @@
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Asegúrate que el otro sitio sea tuyo. Nunca hagas <a href="https://help.dreamhost.com/hc/en-us/articles/216363197-How-do-I-prevent-image-hotlinking-" target="_self">enlaces calientes</a> de otros sitios web.</p>
+<p>Asegúrate que el otro sitio sea tuyo. Nunca hagas&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216363197-How-do-I-prevent-image-hotlinking-" target="_self">enlaces calientes</a>&nbsp;de otros sitios web.</p>
 </div>
 </div>
 <div class="preboxcontainer">
@@ -81,8 +88,8 @@
 <div class="preboxcontainer">
 <pre class="prebox">Options +SymLinksIfOwnerMatch 
 RewriteEngine On 
-RewriteCond %{REQUEST_FILENAME} !-f 
-RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond&nbsp;%{REQUEST_FILENAME}&nbsp;!-f 
+RewriteCond&nbsp;%{REQUEST_FILENAME}&nbsp;!-d
 RewriteRule . /index.php [L]
 </pre>
 </div>
@@ -101,7 +108,7 @@ RewriteRule ^$ /subdir1/ [L]
 <div class="solvvy-solution">
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
-RewriteCond %{HTTP_HOST} ^<span class="command">example.com</span>
+RewriteCond&nbsp;%{HTTP_HOST} ^<span class="command">example.com</span>
 RewriteRule (.*) http://<span class="command">www.example.com</span>/$1 [R=301,L]
 </pre>
 </div>
@@ -110,7 +117,7 @@ RewriteRule (.*) http://<span class="command">www.example.com</span>/$1 [R=301,L
 <div class="solvvy-solution">
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
-RewriteCond %{HTTP_HOST} ^<span class="command">www.example.com</span>
+RewriteCond&nbsp;%{HTTP_HOST} ^<span class="command">www.example.com</span>
 RewriteRule (.*) http://<span class="command">example.com</span>/$1 [R=301,L]</pre>
 </div>
 </div>
@@ -151,8 +158,8 @@ RewriteRule ^<span class="command">([0-9]+).html /abc.php</span>?id=$1 [QSA,L]
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond&nbsp;%{REQUEST_FILENAME}&nbsp;!-f
+RewriteCond&nbsp;%{REQUEST_FILENAME}&nbsp;!-d
 RewriteRule . /<span class="command">index.php</span> [L]
 &lt;/IfModule&gt;
 </pre>
@@ -168,7 +175,7 @@ RewriteRule . /<span class="command">index.php</span> [L]
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Visi%C3%B3n-general-del-htaccess" target="_self">Visión General de .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades de .htaccess</a></li>
 <li><a href="https://help.dreamhost.com/hc/en-us/articles/217738987-What-can-I-do-with-an-htaccess-file-" target="_self">¿Que puedo hacer con un archivo .htacess?</a></li>
 <li><a href="https://help.dreamhost.com/hc/en-us/articles/216456087-Creating-redirects-with-Nginx" target="_self">Crear redirecciones con Nginx</a></li>
 </ul>

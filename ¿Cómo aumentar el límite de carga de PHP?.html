@@ -50,6 +50,19 @@ max_input_time = 500</pre>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no se está actualizando</a></li>
 </ul>
 </div>
+<h2>Sitios WordPress</h2>
+<div class="solvvy-solution">
+<p>Si tu sitio ejecuta WordPress, es posible que también debas agregar una línea al archivo wp-config.php para actualizar el límite de carga.</p>
+<ol>
+<li>Inicia sesión en tu servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/115000675027-FTP-overview-and-credentials" target="_self">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview" target="_self">SSH</a>.</li>
+<li>Edita tu archivo wp-config.php en tu&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/115000098272-Creating-and-editing-a-file-via-FTP" target="_self">FTP client</a>, o&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH" target="_self">SSH</a>.</li>
+<li>Agrega lo siguiente justo arriba <strong>/ * Eso es todo, ¡deja de editar! Feliz blogging */</strong> <br />
+<div class="preboxcontainer">
+<pre class="prebox">@ini_set( 'upload_max_size' , '100M' );</pre>
+</div>
+</li>
+</ol>
+</div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
 <ul>

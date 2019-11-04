@@ -8,7 +8,7 @@
 <p>El siguiente artículo describe como instalar Python 3.6.2 y 3.7.1 en su&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/214694298-What-are-the-different-types-of-DreamHost-users-" target="_self">usuario del sitio web</a>.</p>
 <ul>
 <li><a href="#3.6.2" target="_self">Instalar Python 3.6.2</a></li>
-<li><a href="#3.7.1" target="_self">Instalar Python 3.7.1</a></li>
+<li><a href="#3.7.1" target="_self">Instalar Python 3.7.1+</a></li>
 </ul>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
@@ -16,7 +16,7 @@
 <p>Para correr los siguientes comandos, debes iniciar sesión en tu servidor vía SSH con tu usuario Shell. Ve los siguiente artículos para más información:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-Habilitando-acceso-Shell" target="_self">Habilitar el acceso Shell</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Cómo crear un usuario con acceso Shell (SSH)</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo vía SSH</a></li>
 </ul>
 </div>
@@ -73,8 +73,14 @@
 </li>
 </ol>
 </div>
-<h2><span id="3.7.1">Instalar Python 3.7.1</span></h2>
+<h2><span id="3.7.1">Instalar Python 3.7.1+</span></h2>
 <div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Esas instituciones han sido probadas en la versión 3.8.0.</p>
+</div>
+</div>
 <h3>Nota importante sobre la versión 3.7.1 en Trusty en los servidores</h3>
 <p>Si tu servidor está corriendo Ubuntu 14 (Trusty) y deseas instalar la Versión 3.7.1+ de Python, necesitarás instalar unas versión personalizada de OpenSSL. Esto es porque las nuevas versiones de Python requires OpenSSL (1.0.2 o mejores) que el viejo servidor Ubuntu no tiene. También necesitarás instalar OpenSSL localmente luego configurar Python para usar la versión local de OpenSSL. Vé el siguiente link para más detalles:</p>
 <ul>
@@ -100,7 +106,7 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 </div>
 </div>
 <h3>Instalar OpenSSL</h3>
-<p>Vé el siguiente artículo para ver instrucciones de como instalar OpenSSL localmente dentro de tu usuario Shell:</p>
+<p>Si tu servidor está corriendo Ubunto 14 (Trusty), vé el siguiente artículo para ver instrucciones de instalar OpenSSL localmente en tu usuario Shell:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360001435926-Instalar-OpenSSL-localmente-dentro-de-tu-usuario" target="_self">Instalar OpenSSL localmente dentro de tu usuario</a></li>
 </ul>
@@ -125,7 +131,7 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">vim +211 Setup.dist</span></pre>
 </div>
 </li>
-<li>Necesitarás editar la línea #211-214 eliminando el signo # en frente de esas líneas. Debes también editar la primera línea al&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360001435926-Instalar-OpenSSL-localmente-dentro-de-tu-usuario" target="_self">camino donde instalaste OpenSSL locamente dentro de tu usuario</a>.&nbsp;Esto asume que has seguido el artículo e instalado en un directorio llamado 'openssl'<br /> Asegúrate de cambiar 'username' a tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-Habilitando-acceso-Shell" target="_self">usuario Shell</a>.
+<li>Necesitarás editar la línea #211-214 eliminando el signo # en frente de esas líneas. Debes también editar la primera línea al&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360001435926-Instalar-OpenSSL-localmente-dentro-de-tu-usuario" target="_self">camino donde instalaste OpenSSL locamente dentro de tu usuario</a>.&nbsp;Esto asume que has seguido el artículo e instalado en un directorio llamado 'openssl'<br /> Asegúrate de cambiar 'username' a tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.
 <div class="preboxcontainer">
 <pre class="prebox">SSL=<span class="command">/home/username/openssl
 </span>_ssl _ssl.c \
@@ -143,6 +149,13 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 <ul>
 <li>Esos comandos instalan tu versión local de Python a /home/&lt;username&gt;/opt/python-3.7.1.</li>
 </ul>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Algunos usuarios quieren usar la opción <span class="code">--enable-optimizations</span> cuando configuran Python. Esto solamente funciona en maquinas que corren Ubunto 18 (Bionic). Si tu servidor está corriendo Ubuntu 14 (Trusty) éste fallará para instalar.</p>
+<p>Adicionalmente, si estás en un servidor web Shared, ésta opción causará que tu usuario alcance los límites de memoria. Antes de correr en un servidor Shared, asegúrate de contactar a soporte para que puedan remover temporalmente tu limitación de memoria. Esto te permitirá completar la instalación usando esta opción. La instalación también tomará 1 hora para completar si esta opción se ha seleccionado.</p>
+</div>
+</div>
 </li>
 <li>Navega de nuevo al directorio home de tu usuario:<br />
 <div class="preboxcontainer">
@@ -189,7 +202,7 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360001435926-Instalar-OpenSSL-localmente-dentro-de-tu-usuario" target="_self">Instalar OpenSSL localmente dentro de tu usuario</a></li>
 </ul>
-<p>Entonces, sigue las direcciones de arriba para reinstalar Python3. Si sigues viendo este error, <span class="wysiwyg-color-red"><a href="https://help.dreamhost.com/hc/en-us/articles/218084068-Contacting-support-overview" target="_self">contacta a soporte</a>.</span></p>
+<p>Entonces, sigue las direcciones de arriba para reinstalar Python3. Si sigues viendo este error, <span class="wysiwyg-color-red"><a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">contacta a soporte</a>.</span></p>
 </div>
 <div class="solvvy-solution">
 <h3>Error libssl cuando instales Python 3</h3>
