@@ -1,0 +1,78 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cada instalación de PHP viene con configuraciones predeterminadas que generalmente están bien para la mayoría de los sitios web. Ocasionalmente, las necesidades de un sitio web hacen que sea necesario ajustar esta configuración de PHP. Para ver cualquier error o advertencia de PHP que pueda resultar, puedes ver tu archivo error.log:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214894197-Where-can-I-view-PHP-errors-and-warnings-" target="_self">¿Donde puedo ver los errores PHP y advertencias?</a></li>
+</ul>
+<p>También puedes crear tu propio archivo PHP error.log para almacenar estos errores en una ubicación diferente.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>La creación de tu propio archivo PHP error.log personalizado anulará la ubicación predeterminada de tu archivo error.log. Cuando crees el archivo como se muestra a continuación, ya no verás futuros errores/advertencias de PHP en tu archivo error.log. Solo verás futuros errores/advertencias de PHP dentro de tu archivo PHP error.log personalizado.</p>
+<p>Sin embargo, esto solo se aplica a los errores de PHP. Cualquier otro error del sitio web, como los errores del servidor web Apache, continuará mostrándose en su archivo regular error.log.</p>
+</div>
+</div>
+</div>
+<h2>Registro de errores</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El término estándar para un archivo de configuración de PHP es php.ini. Sin embargo, DreamHost utiliza el término archivo "phprc" en su lugar. Esto actúa de la misma manera: solo el nombre es diferente. En este artículo, solo se usa el término phprc.</p>
+</div>
+</div>
+<p>De forma predeterminada, DreamHost registra los errores de PHP en el archivo error.log de su dominio, pero puede cambiar la ubicación del registro de errores de PHP utilizando un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">archivo phprc</a>.&nbsp;Cambiar la ubicación del registro de errores de PHP es un paso simple que permite el acceso personalizado a los errores de PHP para diagnosticar problemas con tu sitio web.</p>
+<p>Visita los siguientes artículos para obtener instrucciones sobre cómo crear un archivo phprc.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214894037--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-FTP-" target="_self">¿Cómo creo un archivo phprc por medio de FTP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200668--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-SSH-" target="_self">¿Cómo creo un archivo phprc por medio de SSH?</a></li>
+</ul>
+<p>Si el archivo ya existe, visita los siguientes artículos para obtener instrucciones sobre cómo actualizarlo (dependiendo de si está utilizando un cliente FTP o SSH):</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar un archivo por medio de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo por medio de SSH</a></li>
+</ul>
+<p>Agrega estas líneas a su archivo phprc:</p>
+<div class="preboxcontainer">
+<pre class="prebox">log_errors = 1 <br />error_log = /home/username/php.log</pre>
+</div>
+<p>Reemplaza el 'username'&nbsp;con tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario SHELL</a>.</p>
+</div>
+<h2>Elimina todos los procesos de php en ejecución</h2>
+<div class="solvvy-solution">
+<p>Asegúrate de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">eliminar los procesos php en ejecución</a>&nbsp;para garantizar que tu nueva configuración surta efecto.</p>
+</div>
+<h2>Confirmando tus cambios</h2>
+<div class="solvvy-solution">
+<p>Después de editar el archivo y eliminar todos los procesos PHP, debes verificar para confirmar que los valores se hayan actualizado. Puedes hacer esto creando un <a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">archivo phpinfo.php</a>.</p>
+<p>Si no ves que tus cambios se han actualizado, intenta eliminar tus procesos PHP nuevamente:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no está actualizando</a></li>
+</ul>
+</div>
+<h2>Probar el archivo php.log</h2>
+<div class="solvvy-solution">
+<p>Para probar el archivo php.log, crea un archivo PHP que arroje un error. Por ejemplo, crea un archivo llamado error.php con el siguiente contenido y cárgalo en tu sitio.</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php 
+$file=fopen("welcome.txt","r");
+?&gt;&nbsp;</pre>
+</div>
+<p>Visita la página example.com/error.php en un navegador. Se arroja un error. Si luego verificas el directorio de inicio de tu usuario, verás que el archivo php.log ha sido creado y que registró este error de PHP. Ejecuta lo siguiente para verificarlo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat $HOME/php.log</span></pre>
+</div>
+</div>
+<h2>Resumen</h2>
+<div class="solvvy-solution">
+<p>Al principio, el nuevo archivo php.log no existirá. Solo después de que se produce un error de PHP se crea automáticamente el archivo php.log. Este archivo continuará registrando cualquier error futuro de PHP.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">Generalidades de php.ini</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/sections/203272338-Custom-Configurations" target="_self">Configuraciones predeterminadas PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/sections/203275788-Troubleshooting" target="_self">Artículos de solución de problemas PHP </a></li>
+</ul>
+</div>
