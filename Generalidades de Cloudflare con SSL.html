@@ -1,0 +1,114 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cloudflare ofrece varias opciones para habilitar SSL dentro del panel. Este artículo es una descripción general de cómo habilitar SSL para un dominio habilitado para Cloudflare.</p>
+<p>Al configurar&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216041537-SSL-certificates-overview" target="_self">un certificado SSL</a>&nbsp;con tu cuenta de Cloudflare, notarás algunas opciones diferentes disponibles. Las siguientes secciones detallan estas opciones. Consulta el siguiente artículo de Cloudflare para obtener más información:</p>
+<ul>
+<li><a href="https://support.cloudflare.com/hc/en-us/articles/200170416-What-do-the-SSL-options-mean-" target="_self">¿Qué significan las opciones SSL?</a></li>
+</ul>
+</div>
+<h2>Seleccionar un plan Cloudflare</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>El primer paso para configurar SSL en tu dominio usando Cloudflare es agregar un plan Cloudflare al dominio. Los planes FREE y Plus funcionan con un certificado SSL.</li>
+<li>Actualmente tampoco es posible agregar Cloudflare a un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360002284771--Que-es-un-subdominio-dreamhosters-com-" target="_self">subdominio dreamhosters.com</a>.</li>
+</ul>
+</div>
+</div>
+<p>Vista el siguiente artículo para agregar un plan Cloudflare a su dominio.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216477717-C%C3%B3mo-habilitar-Cloudflare-en-tu-dominio" target="_self">Cómo habilitar Cloudflare en tu dominio</a></li>
+</ul>
+</div>
+<h2>Opciones de SSL en el panel Cloudflare</h2>
+<div class="solvvy-solution">
+<p>Una vez que crees un plan de Cloudflare, usa tus credenciales de inicio de sesión recién creadas para iniciar sesión en el panel de Cloudflare:</p>
+<ol>
+<li>Ve a&nbsp;<a href="https://dash.cloudflare.com">https://dash.cloudflare.com</a>&nbsp;e inicia sesión.
+<dl>
+<dd><em>En la página de resumen, tus dominios se enumeran junto con el tipo de plan que estás utilizando:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/CloudFlare_panel_overview.png" alt="CloudFlare panel overview.png" /></dd>
+</dl>
+</li>
+<li>Haz clic en tu dominio para modificar tu configuración.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/cloudflare-ssl-tls.png" alt="" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón SSL/TLS en la parte superior para ajustar la configuración de seguridad.<br />
+<dl>
+<dd><em>Si has habilitado el plan pago de Cloudflare en el panel DreamHost, 'Flexible SSL' está seleccionado por defecto:</em></dd>
+</dl>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/cloudflare-ssl-mode.png" alt="CloudFlare SSL CF panel options.png" /></dd>
+</dl>
+</li>
+<li>Selecciona una opción SSL del menú desplegable a la derecha de la sección SSL:<br />
+<ul>
+<li>Off</li>
+<li>Flexible SSL</li>
+<li>Full SSL</li>
+<li>Full SSL (Strict)</li>
+</ul>
+</li>
+</ol>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>La única opción que debes usar es 'SSL completo (estrict)' con un certificado&nbsp;<a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215089748--C%C3%B3mo-comprar-un-certificado-SSL-firmado-profesionalmente-" target="_self">firmado profesionalmente</a> o '<a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/en-us/articles/216539558-Let-s-Encrypt-SSL-certificate-overview">Let's Encrypt</a>'.</p>
+<p>Cualquier otra opción no es completamente segura.</p>
+</div>
+</div>
+<p>A continuación se menciona una explicación de los planes, pero también puedes ver más información visitando la&nbsp;<a href="https://support.cloudflare.com/hc/en-us/articles/200170416-What-do-the-SSL-options-Off-Flexible-SSL-Full-SSL-Full-SSL-Strict-mean-" target="_self">página de soporte de Cloudflare</a>.</p>
+</div>
+<h2>SSL flexible — (solo si no tiene un certificado SSL)</h2>
+<div class="solvvy-solution">
+<ul>
+<li>NO uses esta opción si has agregado un certificado SSL a tu dominio.</li>
+<li>La conexión entre el usuario y Cloudflare es segura, pero la conexión entre DreamHost y Cloudflare no está encriptada.</li>
+<li>Esta es la configuración predeterminada para tu dominio cuando agregas un plan GRATUITO de Cloudflare a tu dominio sin un certificado SSL.</li>
+<li>NO se recomienda esta configuración si tienes información confidencial en tu sitio web.</li>
+<li>Visita&nbsp;<a href="https://blog.cloudflare.com/introducing-universal-ssl/" target="_self">El blog de publicaciones de Cloudflare</a>&nbsp;acerca de esta opción SSL universal.</li>
+<li>Esta configuración no requiere que compres un certificado SSL, por lo tanto, es una&nbsp;<a href="https://support.cloudflare.com/hc/en-us/articles/200170416-What-do-the-SSL-options-mean-" target="_self">opción de último recurso</a>.</li>
+</ul>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Es posible que veas un bucle de redireccionamiento infinito en tu sitio cuando habilites 'SSL flexible' ('Flexible SSL'.). Dado que 'SSL flexible' no funciona con un certificado SSL de DreamHost, asegúrate de que no estés utilizando ningún <a href="https://help.dreamhost.com/hc/es/articles/215747758-Forzar-tu-sitio-a-cargar-de-forma-segura-con-un-archivo-htaccess" target="_self">redireccionamiento en el archivo .htaccess</a>. Tu sitio solo debe resolver la versión HTTP.</p>
+</div>
+</div>
+</div>
+<h2><span id="Full_SSL">Full SSL —&nbsp;(solo para certificados Self-signed)</span></h2>
+<div class="solvvy-solution">
+<ul>
+<li>ÚNICAMENTE usa esta opción si tienes un certificado Self-signed.</li>
+<li>La conexión entre el usuario y Cloudflare es segura. La conexión entre Cloudflare y DreamHost es segura, pero no está autenticada.</li>
+<li>Tus visitantes verán HTTPS y un candado seguro en su navegador.</li>
+<li>Debes tener al menos un&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215767487-How-do-I-add-a-free-self-signed-SSL-certificate-" target="_self">certificado self-signed</a> instalado.</li>
+<li>Cloudflare no verifica la autenticidad del certificado que instalaste.</li>
+</ul>
+</div>
+<h2>Full SSL (Strict) — (para certificados SSL válidos)</h2>
+<div class="solvvy-solution">
+<ul>
+<li>Usa esta opción si tienes un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215089748--C%C3%B3mo-comprar-un-certificado-SSL-firmado-profesionalmente-" target="_self">certificado firmado profesionalmente</a>, o&nbsp;un certificado '<a href="https://help.dreamhost.com/hc/en-us/articles/216539558-Let-s-Encrypt-SSL-certificate-overview">Let's Encrypt</a>'.</li>
+<li>La conexión entre el usuario y Cloudflare y de Cloudflare a DreamHost es segura.</li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p><span style="font-weight: 400;">Solo un certificado firmado profesionalmente o 'Let's Encrypt' funcionará con la configuración SSL (estricta) completa de Cloudflare</span>.&nbsp;</p>
+</div>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216474977-Preguntas-frecuentes-sobre-Cloudflare-con-SSL" target="_self">Preguntas frecuentes Cloudflare con SSL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215873088-Generalidades-de-Cloudflare" target="_self">Generalidades sobre Cloudflare</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216477687-Preguntas-frecuentes-Cloudflare" target="_self">Preguntas frecuentes sobre Cloudflare</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216477717-C%C3%B3mo-habilitar-Cloudflare-en-tu-dominio" target="_self">Cómo habilitar Cloudflare en tu dominio</a></li>
+</ul>
+</div>
