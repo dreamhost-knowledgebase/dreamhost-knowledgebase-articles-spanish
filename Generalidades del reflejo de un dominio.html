@@ -1,0 +1,153 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Un espejo te permite subir tu contenido para un sitio (sitio A), pero usar otro URL del sitio (sitio B) en la misma cuenta para ver el sitio original (Sitio A).</p>
+<p>Más técnicamente, un dominio reflejado es un alias en el servidor que te permite acceder al mismo contenido del sitio de DreamHost dentro de más de una dirección. Por ejemplo, puedes tener un sitio .com y .net que comparten el mismo contenido, o acceder a tu sitio en vivo antes que tu dominio sea configurado. Ve el siguiente artículo para más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214695758-Ver-tu-sitio-utilizando-un-subdominio-dreamhosters-com-antes-de-cambiar-los-DNS" target="_self">Prever tu sitio con un subdominio dreamhosters.com ante de cambiar tus DNS</a></li>
+</ul>
+<p>Un dominio reflejado sólo puede "reflejar" una cuenta existente en DreamHost, es simplemente un alias de servidor. Un dominio reflejado es solamente un "reflejo" en términos de tener un alias de una dirección; no es un espejo físico y no hay contenido duplicado envuelto, tampoco es un "encubierto" o una facilidad de "dominio agarrado".</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los dominios configurados como espejo o reflejo no funcionan bien o en absoluto con lo siguiente:</p>
+<ul>
+<li><strong>Algunas aplicaciones CMS (WordPress, por ejemplo)</strong>&nbsp;—&nbsp;esto se debe a que algunas aplicaciones CMS codifican la URL del sitio y reescriben activamente la URL en la barra de direcciones del navegador. Esto hace que la URL del sitio cambie, arruinando efectivamente la configuración reflejada. Es posible que debas realizar más ajustes dentro del CMS si este es el caso.</li>
+<li><strong>DreamPress</strong> —&nbsp;un espejo de un sitio de DreamPress no funcionará en la mayoría de los casos debido al almacenamiento en caché de DreamPress.</li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Subdominios dreamhosters.com</h2>
+<div class="solvvy-solution">
+<p>Si los registros DNS de tu dominio no están apuntados a DreamHost y quieres configurar el dominio antes de cambiar los DNS para minimizar el tiempo del sitio caído, puedes usar un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360002284771--Que-es-un-subdominio-dreamhosters-com-" target="_self">dominio dreamhosters.com</a>.&nbsp;Puedes leer sobre cómo configurarlo en el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214695758-Ver-tu-sitio-utilizando-un-subdominio-dreamhosters-com-antes-de-cambiar-los-DNS" target="_self">Prever tu sitio con un subdominio dreamhosters.com antes de cambiar tus DNS</a></li>
+</ul>
+<p>Si necesitas acceso a tu base de datos mientras el DNS no está apuntando a DreamHost, vé el siguiente artículo:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215730267-How-do-I-access-my-database-before-a-DNS-change-" target="_self">Acceder a tu Base de Datos antes de cambiar tus DNS</a></li>
+</ul>
+<p>Configurar un subdominio puede tomar muchas horas, entonces una alternativa más rápida es modificar tus archivos de alojamiento para apuntar los registros DNS de DreamHost. El siguiente artículo explica cómo hacerlo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006086308-C%C3%B3mo-ver-tu-sitio-DreamHost-usando-su-archivo-de-hosts" target="_self">Ver tu sitio a través de archivos de alojamiento</a></li>
+</ul>
+</div>
+<h2>Enlace interno</h2>
+<div class="solvvy-solution">
+<p>Para tener enlaces a un sitio dentro de la dirección URL original, no deben contener el nombre del dominio. Esto es llamado usar un camino o link relativo. Por ejemplo, si mirror.ejemplo.com es un espejo para el sitio llamado ejemplo.com, cualquier enlace en el sitio ejemplo.com que contiene "ejemplo.com" llevará a los visitantes a ejemplo.com Esto anula el propósito de un espejo.</p>
+<p>Por ejemplo:</p>
+<dl>
+<dd><strong>Good (Relative)</strong>: /about-us.html<br />
+<dl>
+<dd><em>Este funciona y mantiene el usuario en la URL actual.</em></dd>
+</dl>
+</dd>
+</dl>
+<dl>
+<dd><strong>Bad (Absolute)</strong>: http://www.example.com/about-us.html<br />
+<dl>
+<dd><em>Esto saca al usuario de mirror.example.com. Con este tipo de enlazamiento, sería mejor usar una redirección que un reflejo.</em></dd>
+</dl>
+</dd>
+</dl>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Usar caminos relativos es también esencial si decides implementar alojamiento seguro en tu sitio web, pues no tienes que cambiar nada en absoluto en los enlaces/caminos de http a https.</p>
+</div>
+</div>
+</div>
+<h2>Una razón para redirigir un dominio en vez</h2>
+<div class="solvvy-solution">
+<p>En muchas situaciones, es mejor&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215455377--C%C3%B3mo-redirecciono-mi-dominio-" target="_self">redireccionar un dominio</a>&nbsp;si quieres que el mismo contenido sea accesible desde diferentes dominios. Aquí es donde los visitantes de cualquier dominio alternativo son automáticamente redireccionados a tu dominio primario, en vez de ver el contenido idéntico en la URL alternativa.</p>
+<p>La principal diferencia es la URL que ves: si creas un espejo en sitioB.ejemplo.com que refleja el sitio llamado sitioA.ejemplo.com, cuando visites sitioB.ejemplo.com la barra de direccion no cambia. Pero, aún verás el contenido en sitioA.ejemplo.com<br /> <br /> Si creas una redirección, cuando visitas sitioB.ejemplo.com la barra de direccion cambia a sitioA.ejemplo.com</p>
+<p>Casi todos los buscadores ponen en listas negras a tu dominio si encuentran el mismo contenido en otro dominio, lo cual lo pone en los resultados de búsqueda muy abajo. Si quieres el mismo contenido accesible desde diferentes URL, lo mejor es usar una&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215455377--C%C3%B3mo-redirecciono-mi-dominio-" target="_self">redirección</a>.</p>
+</div>
+<h2>Crear un dominio reflejado</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Abre la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage" target="_blank" rel="noopener">Manage Domains</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_add_hosting_to_a_domain_button.png" /></dd>
+</dl>
+</li>
+<li>Da click en el botón <strong>Add Hosting to a Domain / Sub-Domain</strong> para crear un nuevo dominio reflejado.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-07_panel_edit_link.png" /></dd>
+</dl>
+Si estás cambiando un dominio existente a un reflejo, en vez, da click en el enlace 'Edit' a la derecha de tu dominio.<br />
+<dl>
+<dd><em>La sección de Reflejo aparece en la parte inferior de la página Manage Domains:</em></dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-08_panel_mirroring_02.png" /></dd>
+</dl>
+</li>
+<li>Ingresa los dominios en los siguientes campos:<br />
+<ul>
+<li><strong>Crea un espejo en</strong>: Esta URL que refleja el sitio real. Por ejemplo, si has subido tu contenido a un dominio DreamHost llamado ejemplo.dreamhosters.com y quieres que los visitantes sean capaces de acceder a ejemplo.com, ingresa "ejemplo.com".</li>
+<li><strong>Refleja éste sitio</strong>: De la lista desplegable, selecciona el dominio del cual has subido el contenido. Este es el dominio que será reflejado.</li>
+</ul>
+</li>
+<li>Da click a <strong>Mirror this domain</strong> para guardar las configuraciones.</li>
+</ol>
+<p>Debes asegurarte que los registros DNS para el dominio que están reflejando el sitio real apuntan a DreamHost. Puedes ver el siguiente artículo para más información:</p>
+<dl>
+<dd>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self">DNS de DreamHost</a></li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>Los DNS pueden tomar unas horas para actualizar después de guardar el reflejo.</li>
+<li>Una vez que el dominio funcione, los visitantes del dominio reflejado verán el mismo contenido como el sitio real que es un alias.</li>
+<li>En el ejemplo de arriba, visitando ejemplo.com te muestra el contenido de ejemplo.dreamhosters.com.</li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Apagar un Reflejo</h2>
+<div class="solvvy-solution">
+<p>Para apagar un reflejo, debes cambiar la configuración de alojamiento a otra opción como 'Fully Hosted' o 'DNS Only'. Una lista completa se puede encontrar en la siguiente página:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215909407-Domains-panel-overview" target="_self">Generalidades del panel de Domains</a></li>
+</ul>
+</div>
+<h2>¿El reflejo funcionará con https?</h2>
+<div class="solvvy-solution">
+<p>No. Si el sitio está reflejando un dominio con&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216041537-SSL-certificates-overview" target="_self">https habilitado</a>,&nbsp;el sitio reflejado arrojará un error cuando se visite. Por ejemplo:</p>
+<p>Sigamos que configuras el sitio 'example.com' para reflejar 'https://dreamhostexample.com'. Cuando visitas 'example.com', la URL cambia a 'https://example.com y trata de reflejar el contenido de 'https://dreamhostexample.com'.</p>
+<p>Desde que el certificado SSL no está instalado en 'example.com', el buscador arroja un error dándole saber al visitante que su sitio no es seguro.</p>
+<p>Por esta razón, no debes reflejar un sitio usando un&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216041537-SSL-certificates-overview" target="_self">certificado SSL</a>.</p>
+</div>
+<h2>¿Cuánto tiempo para que el reflejo funcione?</h2>
+<div class="solvvy-solution">
+<p>Reflejar tu sitio es lo mismo que cualquier otro cambio de DNS. Esto quiere decir que el DNS tiene que&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215840248-DNS-propagation-overview" target="_self">propagar</a>&nbsp;primero antes de que puedas ver los cambios en línea. En general, esto no debería tomar más de 6 horas. Puedes tener un rastro de cuando los&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self">nuevos registros DNS</a>&nbsp;actualicen en diferentes ubicaciones en tu sitio.</p>
+<ul>
+<li><a href="https://www.whatsmydns.net/" target="_self">Propagación Global de DNS</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<h3>Enlaces Internos</h3>
+<ul>
+<li><a href="/hc/en-us/sections/203272388-Adding-Managing-Domains" target="_self">Lista de artículos de Agregar &amp; administrar dominios</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360002284771--Que-es-un-subdominio-dreamhosters-com-" target="_self">¿Que es un dominio dreamhosters.com?</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="http://httpd.apache.org/docs/2.0/mod/core.html#serveralias" target="_self">Series de documentación sobre ServerAlias en el apache 2.0</a></li>
+</ul>
+</div>
