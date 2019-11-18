@@ -11,7 +11,7 @@
 </div>
 </div>
 </div>
-<h2>Agregar un certificado SSL al dominio</h2>
+<h2>Paso 1 —&nbsp;Agregar un certificado SSL al dominio</h2>
 <div class="solvvy-solution">
 <p>Asegúrese de que su sitio esté configurado correctamente para HTTPS. Debe tener un&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216041537-SSL-certificates-overview" target="_self">certificado SSL</a>&nbsp;aplicado a su sitio y posiblemente una dirección IP única, dependiendo de sus requisitos para el sitio. Consulte el artículo de&nbsp;<a href="/hc/en-us/articles/216109647-Unique-IP-overview" target="_self">IP única</a>&nbsp;para obtener más información.</p>
 <div class="alert alert-important">
@@ -21,21 +21,22 @@
 </div>
 </div>
 </div>
-<h2>Actualizar los URL de la base de datos</h2>
+<h2>Paso 2 —&nbsp;Actualizar los URL de la base de datos</h2>
 <div class="solvvy-solution">
-<p>Su base de datos de WordPress tiene varios URLs codificados que apuntan a la versión 'http' de su dominio. Para actualizar todo muy rápidamente a 'https', use un plugin. Esto cambiará todos los URL internos para usar el nuevo URL seguro. Vea el siguiente artículo para obtener instrucciones sobre cómo hacer esto con un plugin:</p>
+<p>Tu base de datos de WordPress tiene varias URL codificadas que apuntan a la versión 'http' de tu dominio. Tienes dos opciones para actualizar las URL de tu base de datos:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360003300591-Cambiar-la-URL-a-https-en-la-base-de-datos-de-WordPress-usando-un-plugin" target="_self">Cambiar los URL de la base de datos de WordPress a https usando un plugin</a></li>
+<li>Usa un complemento (plugin)</li>
+<li>Usa la línea de comando</li>
 </ul>
-<p>En este punto, todos los URL de su base de datos ahora apuntan a 'https'. Se saldrá de la sesión después de ejecutar el proceso del plugin anterior. Vuelva a iniciar sesión en su sitio nuevamente en el URL 'https'. Por ejemplo:</p>
+<p>Consulta el siguiente artículo para obtener más instrucciones:</p>
 <ul>
-<li>https://example.com</li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360003304711-Changing-all-URLs-in-your-WordPress-database" target="_self">Cambiar todas las URL en tu base de datos de WordPress</a></li>
 </ul>
 </div>
-<h2>Verificar que el URL de dirección de WordPress y del sitio estén actualizados</h2>
+<h2>Paso 3 —&nbsp;Verificar que el URL de dirección de WordPress y del sitio estén actualizados</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Después de ejecutar el proceso del plugin anterior, inicie sesión en WordPress utilizando el nuevo URL de HTTPS seguro.<br />
+<li>Inicie sesión en WordPress utilizando el nuevo URL de HTTPS seguro.<br />
 <ul>
 <li><strong>https://example.com/wp-login.php</strong></li>
 </ul>
@@ -50,8 +51,14 @@
 </li>
 <li>En la página General, debería ver que su URL de dirección de WordPress y del sitio ahora apunten a 'https'.</li>
 </ol>
+<h3>Limpia el caché de tu complemento (plugin)</h3>
+<p>En este punto, también debes eliminar tu caché si usas WP Super Cache.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214588698#delete-cache" target="_self">Eliminar el caché</a></li>
+</ul>
+<p>Si revisas tu sitio ahora, todas las URL dentro de tu sitio de WordPress usarán el nuevo nombre de dominio.</p>
 </div>
-<h2>Actualiza tu archivo wp-config.php</h2>
+<h2>Paso 4 —&nbsp;Actualiza tu archivo wp-config.php</h2>
 <div class="solvvy-solution">
 <ol>
 <li>Inicie una sesión en su servidor de web a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027#seguridad">SFTP</a>.</li>
@@ -65,19 +72,23 @@ define('FORCE_SSL_ADMIN',true);
 </li>
 </ol>
 </div>
-<h2>Forzar el URL para redirigir a HTTPS</h2>
+<h2>Paso 5 —&nbsp;Forzar el URL para redirigir a HTTPS</h2>
 <div class="solvvy-solution">
 <p>Puede forzar que su sitio sea redirigido de HTTP a HTTPS de dos maneras:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215747758#forzar-https-con-wordpress" target="_self">Actualizar las reglas en el archivo .htaccess de su sitio</a></li>
 <li><a href="https://wordpress.org/plugins/wordpress-https/" target="_self">Usar un plugin de HTTPS de WordPress</a></li>
 </ul>
+<p>También es una buena idea agregar algunas líneas adicionales de código a tu archivo .htaccess para evitar posibles advertencias de contenido mixto.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215364618#content-security-policy" target="_self">Resolving insecure site and mixed-content warnings</a></li>
+</ul>
 </div>
 <h2>Configurando Cloudflare con su certificado de SSL</h2>
 <div class="solvvy-solution">
 <p>Esta sección solo es necesaria si también ha&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216477717-Cómo-habilitar-Cloudflare-en-tu-dominio" target="_self">agregado Cloudflare a su dominio</a>. Si es así, consulte el siguiente artículo para obtener información sobre cómo configurarlo correctamente.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/360003360511-Using-Cloudflare-with-an-SSL-certificate-and-WordPress" target="_self">Usando un certificado de SSL con Cloudflare y WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360003360511-Using-Cloudflare-with-an-SSL-certificate-and-WordPress" target="_self">Resolución de advertencias de sitios inseguros y contenido mixto</a></li>
 </ul>
 </div>
 <h2>Resumen</h2>
