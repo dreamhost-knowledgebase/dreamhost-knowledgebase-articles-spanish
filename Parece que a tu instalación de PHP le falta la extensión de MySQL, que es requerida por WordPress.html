@@ -4,7 +4,11 @@
 <div class="preboxcontainer">
 <pre class="prebox">Your PHP installation appears to be missing the MySQL extension which is required by WordPress.</pre>
 </div>
-<p>Esto generalmente se debe a una personalización de la versión de PHP en tus archivos .htaccess o phprc.</p>
+<p>Esto ocurre cuando el código PHP en tu sitio no es compatible con la versión de PHP que tu sitio está usando actualmente. Más específicamente, el problema es con la extensión obsoleta de MySQL que se eliminó a partir de PHP 7.0.</p>
+<ul>
+<li><a href="https://www.php.net/manual/en/intro.mysql.php">https://www.php.net/manual/en/intro.mysql.php</a></li>
+</ul>
+<p>Si estás utilizando cualquier versión de PHP anterior a 7.0 y estás viendo este error, se debe a un código antiguo que debe actualizarse. Deberás actualizar los archivos principales de WordPress a la versión actual, así como cualquier complemento que esté utilizando tu sitio.</p>
 </div>
 <h2>Comprueba qué versión de PHP está usando tu sitio</h2>
 <div class="solvvy-solution">
@@ -18,20 +22,22 @@
 </ul>
 <p>Si hay una discrepancia, hay una personalización potencial en algún lugar que hace que las versiones sean diferentes.</p>
 </div>
-<h2>Comprueba si hay personalizaciones</h2>
+<h2 class="subheader">Actualizando tu código</h2>
 <div class="solvvy-solution">
-<h3>Revisa tu archivo .htaccess en búsqueda de personalizaciones de PHP</h3>
-<p>Primero, verifica el archivo <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">.htaccess</a> en el directorio principal de tu sitio web. Lo más probable es que se encuentre aquí:</p>
+<p>Si tu sitio web se ha actualizado a una versión de PHP superior a 7.0 y estás viendo este error, significa que debes actualizar la versión principal de WordPress y sus complementos para usar las extensiones MySQLi o PDO_MySQL más nuevas.</p>
 <ul>
-<li>/home/username/example.com/.htaccess</li>
+<li><a href="https://www.php.net/manual/en/mysql.requirements.php">https://www.php.net/manual/en/mysql.requirements.php</a></li>
 </ul>
-<p>Abre ese archivo en un cliente&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">FTP</a>&nbsp;o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">SSH</a>. Asegúrate de que no haya líneas que hagan referencia a una versión diferente de PHP.</p>
-<h3>Revisa tu archivo phprc en búsqueda de personalizaciones de PHP</h3>
-<p>Después de confirmar qué versión de PHP estás usando el sitio anterior, verifica tu archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">phprc file</a>. Lo puedes encontrar aquí:</p>
+<h3>Actualización de WordPress</h3>
+<p>Si has instalado WordPress como Instalación de un clic, puedes actualizarlo manualmente en tu panel, o configurarlo para que se actualice automáticamente.</p>
 <ul>
-<li>/home/username/.php/php#.#/phprc</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215915977--C%C3%B3mo-actualizar-una-instalaci%C3%B3n-de-un-clic-" target="_self">Cómo actualizar una instalación de un clic</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300747--C%C3%B3mo-configurar-las-actualizaciones-autom%C3%A1ticas-en-tu-instalaci%C3%B3n-de-WordPress-con-un-clic-" target="_self">Cómo configurar tu instalación de WordPress de un clic para actualizar automáticamente</a></li>
 </ul>
-<p>Asegúrate de ajustar el php #. # a la versión de PHP que está usando tu sitio. Verifica tu archivo phprc utilizando un cliente&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">FTP</a>&nbsp;o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">SSH</a>&nbsp;para asegurarte de que no haya personalizaciones que puedan causar un problema.</p>
+<p>Y puedes actualizar tus complementos en el tablero.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300817#plugins" target="_self">Actualización de complementos de WordPress</a></li>
+</ul>
 </div>
 <h2>Para servidores Dedicated</h2>
 <div class="solvvy-solution">
