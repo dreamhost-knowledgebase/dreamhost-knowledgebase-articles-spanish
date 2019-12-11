@@ -1,0 +1,93 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>A partir de enero de 2019, PHP 5.6 y 7.0 se han eliminado del panel de DreamHost. Los sitios configurados anteriormente para estas versiones continuarán ejecutándose normalmente. Sin embargo, es muy recomendable que actualices a PHP 7.1 o 7.2 ya que las versiones anteriores pronto se eliminarán por completo de todos los servidores de DreamHost.</p>
+</div>
+</div>
+<p>PHP 7 ofrece varias mejoras con respecto a versiones anteriores. Puedes leer más sobre estas aquí:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/217253517-PHP-7-overview">PHP 7 Generalidades</a></li>
+</ul>
+<p>Un problema importante con PHP 5.6 es que consume más memoria de la necesaria y se ejecuta más lentamente que las versiones más recientes. Si tu sitio de WordPress se ejecuta en PHP 5.6, se ejecuta más lento de lo que lo haría en PHP 7.</p>
+<p>Las últimas versiones del software principal de WordPress han sido compatibles con PHP 7 durante algunos años. Actualizar a PHP 7 es una forma rápida y fácil de obtener más rendimiento para tu sitio WordPress y el servidor.</p>
+<h3>Posibles conflictos de software</h3>
+<p>Si no has sido diligente sobre el mantenimiento de tu software WordPress, complementos y versiones de temas, y no te aseguraste de que tus desarrolladores los respalden bien, es posible que tengas un código incompatible con PHP 7.</p>
+<p>Si tienes algún problema, el área de <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">Soporte de DreamHost</a> estará feliz de ayudarte.</p>
+</div>
+<h2>¿Cómo sé si necesito actualizar?</h2>
+<div class="solvvy-solution">
+<h3>Planes de alojamiento de DreamPress</h3>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=wordpress.dreampress&amp;" target="_blank" rel="noopener">Managed WordPress</a> del panel.</li>
+<li>Hacia la derecha de tu dominio, haz clic en el botón <strong>Manage</strong>.</li>
+<li>En la parte superior debajo de tu dominio, deberías ver la versión de PHP:
+<ul>
+<li>Si ves PHP 7.1, 7.2, o PHP-FPM, ya tienes una versión compatible de PHP 7.</li>
+<li>Si ves PHP 5.6 o PHP 7.0 o si pediste específicamente cambiar a PHP 5.6 en PHP-FPM, <a href="#actualizar-a-php-7">deberías actualizar a PHP 7.1 o 7.2</a>.</li>
+</ul>
+</li>
+</ol>
+<h3>Todos los demás planes de alojamiento</h3>
+<p>Esto incluye cualquier sitio de WordPress instalado en un plan que no sea DreamPress. Por ejemplo, Alojamiento Compartido (Shared), VPS o Dedicado.</p>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a> del panel.</li>
+<li>Haz clic en el enlace 'Edit' hacia la derecha de un dominio.</li>
+<li>En la página de configuración del dominio, busca en la sección 'Web Options' la versión PHP:
+<ul>
+<li>Si dice PHP 5.6 o 7.0, <a href="#actualizar-a-php-7">deberías actualizar a PHP 7.1 or 7.2</a>.</li>
+</ul>
+</li>
+</ol>
+</div>
+<h2>¿A qué versión debo actualizar?</h2>
+<div class="solvvy-solution">
+<p>Se recomienda encarecidamente actualizar a la última versión de PHP si el software de tu sitio puede hacerlo sin problemas. La última versión en el panel para 2018 es PHP 7.2.</p>
+<p>La última versión es la que <a href="http://php.net/supported-versions.php">será soportada por más tiempo</a> y tiene la mayoría de las correcciones para mejorar el rendimiento. <span style="font-weight: 400;">Varios estudios muestran que PHP 7.2 ofrece una mejora de velocidad de 20-30% sobre PHP 7.0 y una mejora de velocidad de 250-300% sobre PHP 5.6</span>.</p>
+<p>Si encuentras un problema con la última versión, puedes probar la siguiente versión más reciente sin mucha diferencia en rendimiento o soporte.</p>
+<p>Cada versión de PHP ofrece dos opciones: FastCGI y CGI. Por lo general, debes elegir FastCGI, ya que ofrece un rendimiento más rápido para la mayoría de los sitios. Si la versión de PHP de tu sitio está configurada actualmente en CGI, es posible que en algún momento hayas encontrado problemas de rendimiento con FastCGI que provocaron el cambio a CGI. Puedes probar cualquiera de los dos para comparar el rendimiento.</p>
+</div>
+<h2>Prepara tu sitio de WordPress para una actualización de PHP 7</h2>
+<div class="solvvy-solution">
+<p>El uso de la lista de verificación a continuación ayudará a minimizar el riesgo de problemas al actualizar la versión de PHP, sin embargo, siempre hay una pequeña posibilidad de un error o problema después de una actualización debido a los miles de temas, complementos y personalizaciones disponibles para WordPress.</p>
+<p>Recuerda que siempre puedes probar la actualización y la degradación si hay un problema. <span style="font-weight: 400;">Estos pasos no son</span> obligatorios, pero son muy recomendables para una actualización de PHP, así como para el mantenimiento y la seguridad regulares de tu sitio.</p>
+<p><strong>Lista de Verificación</strong></p>
+<ul>
+<li>¿Estás utilizando la última versión del software principal de WordPress?</li>
+<li>¿Tienes alguna actualización pendiente que se muestre en tu panel de administración de WordPress?</li>
+<li>¿Tienes algún tema o complemento más antiguo que el desarrollador no haya actualizado en más de un año, o algún tema / complemento pagado que haya expirado la licencia para las actualizaciones?</li>
+<li>¿Tienes alguna personalización escrita en PHP que necesita un desarrollador para revisar?</li>
+</ul>
+<p><strong>Herramientas para ayudar a facilitar esta investigación</strong></p>
+<ul>
+<li>Instala el complemento (plugin) '<a href="https://wordpress.org/plugins/xgen-date-information/">xGEN Plugin Date Information</a>'. Este complemento muestra la fecha en que se actualizó por última vez cada plugin en la página de complementos en el tablero. <span style="font-weight: 400;">Si has aplicado todas las actualizaciones disponibles a tus complementos, esta fecha puede ayudarte a identificar los complementos que no han recibido una actualización de su desarrollador en más de un año.</span>.</li>
+<li>Configura tu Instalación de 1-Clic para <a href="https://help.dreamhost.com/hc/es/articles/215915977--C%C3%B3mo-actualizar-una-instalaci%C3%B3n-de-un-clic-">actualizar los archivos principales de WordPress</a>&nbsp;automaticamente en el panel.</li>
+</ul>
+<h3>Probar la actualización utilizando un sitio de preparación</h3>
+<p>Una forma segura de probar la nueva versión de PHP es crear un sitio web provisional. Este sitio de preparación se convertirá en un duplicado de tu sitio web en vivo existente. Luego puedes proceder a ejecutar pruebas en este sitio de ensayo para ver cómo reacciona. Si no sucede nada inusual, puedes continuar con la actualización de tu sitio web en vivo. Revisa los siguientes artículos para obtener información sobre cómo crear un sitio web provisional para WordPress:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360001265112-Staging-a-DreamPress-site-overview">Generalidades sobre sitios de vista previa en DreamPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360003838631-Creating-a-staging-WordPress-site">Crear un sitio de vista previa para WordPress (Sitios que no son DreamPress)</a></li>
+</ul>
+</div>
+<h2><span id="actualizar-a-php-7">Actualizar a PHP 7</span></h2>
+<div class="solvvy-solution">
+<h3>DreamPress</h3>
+<p>El área de soporte de DreamHost puede actualizar la versión de PHP por ti. Para solicitar esto,&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-a-trav%C3%A9s-de-Correo-Electr%C3%B3nico">envía un ticket de soporte</a>&nbsp;en tu panel. Asegúrate de incluir el nombre de tu sitio DreamPress y la versión a la que deseas actualizar.</p>
+<h3>Sitios de WordPress en todos los demás planes de alojamiento</h3>
+<p>La siguiente guía explica como cambiar la versión PHP de tu sitio:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-">¿Cómo cambio la versión PHP de mi sitio?</a></li>
+</ul>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214202188-PHP-overview">Generalidades sobre PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214205508-Updating-PHP-overview-">Generalidades sobre actualización de PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214897627-Updating-PHP-FAQs">Preguntas Frecuentes sobre la actualización de PHP</a></li>
+<li><a href="http://php.net/manual/en/migration70.new-features.php">Nuevas características de PHP 7</a></li>
+<li><a href="https://secure.php.net/releases/">Lanzamientos de PHP</a></li>
+</ul>
+</div>
