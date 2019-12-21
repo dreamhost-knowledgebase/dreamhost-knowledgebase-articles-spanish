@@ -1,0 +1,84 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cuando se hacen cambios de PHP en tu sitio (comúnmente sobre <a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-">actualización de la versión de PHP</a>), puede que encuentres que el PHP arroje errores y alertas. En el pasado, estos eran visibles en tu sitio y podías desactivarla usando un archivo phprc.</p>
+<p>DreamHost ahora deshabilita todas las alertas de PHP de manera predeterminada. Esto quiere decir que nunca las verás en tu sitio al hacer cambios de PHP.</p>
+</div>
+<h2>¿Donde puedo ver errores y alertas de PHP?</h2>
+<div class="solvvy-solution">
+<p>Ya que las alertas se deshabilitaron a nivel global, no vas a poder verlas en tu sitio. Pero todavía puedes ver los errores y alertas en el archivo error.log.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP">Ver tus registros de acceso y error a través de SFTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216512217-Ver-y-examinar-un-log-de-errores-v%C3%ADa-SSH">Ver y examinar tu registro de errores a través de SSH</a></li>
+</ul>
+</div>
+<h2>¿Cómo puedo hacer visible las alertas en mi sitio web?</h2>
+<div class="solvvy-solution">
+<p>Para hacer que las alertas sean visibles en tu sitio web, solo necesitas <a href="https://help.dreamhost.com/hc/es/articles/214894037--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-FTP-">agregar la siguiente línea en tu archivo phprc</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">display_errors = on</pre>
+</div>
+<p>Si el PHP está arrojando algún error, ahora serán visibles en tu sitio.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Esto <strong>NO</strong> es recomendable para un sitio que esté en línea ya que los visitantes podrán ver los errores. La mejor opción es especificar qué tipo de errores te gustaría registrar y habilitar el registro de errores PHP como se describe a continuación.</p>
+</div>
+</div>
+</div>
+<h2>Controla el tipo de errores que se muestran</h2>
+<p>PHP te permite especificar los tipos de errores que te gustaría mostrar, o guardar en tu archivo de registros de errores PHP. Por ejemplo:</p>
+<table class="wikitable"><colgroup> <col width="38%" /> <col width="62%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Directriz PHP</th>
+<th bgcolor="#F2F2F2">Explicación</th>
+</tr>
+<tr>
+<td>error_reporting = E_ALL&nbsp;</td>
+<td>Registra todos los errores y las alertas.</td>
+</tr>
+<tr>
+<td>error_reporting = E_ERROR</td>
+<td>Errores fatales que ocurren durante la fase inicial de PHP.</td>
+</tr>
+<tr>
+<td>error_reporting = E_WARNING</td>
+<td>Advertencias en tiempo de ejecución (errores no fatales). La ejecución del script no se detiene.</td>
+</tr>
+<tr>
+<td>error_reporting = E_NOTICE</td>
+<td>Registra avisos de tiempo de ejecución (generalmente errores en el código de su sitio web).</td>
+</tr>
+</tbody>
+</table>
+<p>Puedes encontrar la lista completa de opciones aquí:</p>
+<ul>
+<li><a href="https://php.net/manual/en/errorfunc.constants.php" target="_self">https://php.net/manual/en/errorfunc.constants.php</a></li>
+</ul>
+<p>Adicionalmente, puedes excluir ciertos tipos de errores al usar el operador bit a bit <span class="code">~</span>. Por ejemplo, esto va a mostrar todos los errores, excepto las alertas NOTICE y DEPRECATED.</p>
+<div class="preboxcontainer">
+<pre class="prebox">error_reporting = E_ALL &amp; ~E_NOTICE &amp; ~E_DEPRECATED</pre>
+</div>
+<p>Una vez agregadas a tu archivo phprc, puedes habilitar tu registro de errores PHP.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214199378--C%C3%B3mo-habilito-el-registro-de-errores-de-PHP-" target="_self">¿Cómo habilitar el registro de errores PHP?</a></li>
+</ul>
+<p>Esto te permite ver los errores en tu archivo de registro, en lugar de mostrarlos en tu sitio web.</p>
+<h2>Configurar el reporte de errores en tu script</h2>
+<div class="solvvy-solution">
+<p>Como mencionamos anteriormente, el archivo phprc controla los errores que se muestran. Como tal, las siguientes líneas no van a funcionar en tu script para mostrar errores:</p>
+<div class="preboxcontainer">
+<pre class="prebox">ini_set('display_errors',1);
+error_reporting(E_ALL);</pre>
+</div>
+<p>La única manera para mostrar errores es editar tu archivo phprc.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">Generalidades sobre php.ini</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/sections/203272338-Configuraciones-personalizadas">Configuraciones personalizadas de PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/sections/203275788-Soluci%C3%B3n-del-problemas">Solución de problemas de PHP</a></li>
+</ul>
+</div>

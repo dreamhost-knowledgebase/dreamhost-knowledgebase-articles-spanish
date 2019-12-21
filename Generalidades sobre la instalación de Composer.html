@@ -1,0 +1,152 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Para poder ejecutar Composer debes tener un&nbsp;<a href="/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-" target="_self">VPS</a> debido a la cantidad de recursos que requiere.</p>
+</div>
+</div>
+<p>Composer es una herramienta de gestión de dependencias para proyectos PHP. Te permite declarar las bibliotecas que su proyecto requiere y las instala / actualiza por ti.</p>
+<p>Está implementado como un archivo PHAR (PHP Archive). Phar está habilitado de manera predeterminada en tu servidor de DreamHost. Lo puedes confirmar al ejecutar el siguiente comando por&nbsp;<a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">php -m | grep Phar</span>
+Phar</pre>
+</div>
+<p>Algunos proyectos PHP sugieren que se use Composer para administrar bibliotecas externas durante la instalación. MediaWiki es uno de esos ejemplos, al&nbsp;<a href="https://www.mediawiki.org/w/index.php?title=Download_from_Git&amp;oldid=1657013#Fetch_external_libraries" target="_self">indicarlo en sus instrucciones de instalación</a>:</p>
+</div>
+<h2>Cambiar el CLI de PHP predeterminada que usa tu shell</h2>
+<div class="solvvy-solution">
+<p>Si deseas que tus comandos se ejecuten usando una versión específica de PHP, mira el siguiente artículo:</p>
+<ul>
+<li><a href="/hc/es/articles/214202148--Cómo-cambio-la-versión-de-PHP-que-usa-mi-shell-" target="_self">¿Cómo cambio la versión de PHP que usa mi shell?</a></li>
+</ul>
+</div>
+<h2>Instalar Composer</h2>
+<div class="solvvy-solution">
+<p>Haz clic en el siguiente enlace para encontrar más detalles:</p>
+<ul>
+<li><a href="https://getcomposer.org/doc/00-intro.md" target="_self">Instalar Composer</a></li>
+</ul>
+</div>
+<h2>Instalación Local</h2>
+<div class="solvvy-solution">
+<p>Instalar Composer a nivel local es buena idea si sólo tienes que mantener un proyecto.</p>
+<ol>
+<li>Inicia sesión por&nbsp;<a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>&nbsp;en tu servidor.</li>
+<li>Navega al directorio de tu proyecto.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">cd ~/&lt;path-to-your-project&gt;</span></pre>
+</div>
+<dl>
+<dd><em>Reemplaza &lt;path-to-your-project&gt; con la ruta a tu proyecto. Si el directorio del proyecto se llama "proyecto" y está en el dominio "ejemplo.com", la ruta sería "ejemplo.com/proyecto".</em></dd>
+</dl>
+</li>
+<li>Ejecuta el instalador de Composer.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">curl -sS https://getcomposer.org/installer | php</span></pre>
+</div>
+<dl>
+<dd><em>Si eso no funciona, entonces intenta lo siguiente:</em></dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">php -r "readfile('https://getcomposer.org/installer');" | php</span></pre>
+</div>
+</li>
+<li>Si funciona, verás el siguiente mensaje:
+<div class="preboxcontainer">
+<pre class="prebox">#!/usr/bin/env php All settings correct for using Composer Downloading... Composer successfully installed to: /home/example_username/example.com/project/composer.phar 
+
+Use it: php composer.phar
+</pre>
+</div>
+<p>Esto descarga el archivo 'composer.phar'.</p>
+</li>
+</ol>
+</div>
+<h2>Instalación Global</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión por&nbsp;<a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>&nbsp;en tu servidor.</li>
+<li>Navega al directorio de tu proyecto.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li>Crea un directorio para la instalación. Puedes escoger cualquier nombre que sea válido, en las siguientes instrucciones le llamaremos "~/.php/composer".
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">mkdir -p ~/.php/composer</span></pre>
+</div>
+</li>
+<li>Navega al directorio de la instalación.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">cd ~/.php/composer</span></pre>
+</div>
+</li>
+<li>Ejecuta el instalador de Composer.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">curl -sS https://getcomposer.org/installer | php</span></pre>
+</div>
+<p>Si eso no funciona, entonces intenta lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">php -r "readfile('https://getcomposer.org/installer');" | php</span></pre>
+</div>
+</li>
+<li>Revisa el artículo&nbsp;<a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">crear y editar un archivo por SSH</a> para que encuentres instrucciones sobre cómo editar tu archivo existente .bash_profile. Luego agrega la siguiente ruta para el archivo composer.phar.
+<div class="preboxcontainer">
+<pre class="prebox">export PATH=/home/&lt;username&gt;/.php/composer:$PATH</pre>
+</div>
+<dl>
+<dd><em>Reemplaza &lt;username&gt; con tu usuario shell.</em></dd>
+</dl>
+</li>
+<li>Guarda el archivo y ciérralo.</li>
+<li>Ejecuta el siguiente comando para actualizar el archivo .bash_profile:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">. ~/.bash_profile</span></pre>
+</div>
+</li>
+<li>Renombra el archivo de composer para que sea más fácil de manejarlo.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">mv ~/.php/composer/composer.phar ~/.php/composer/composer</span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2>Usar Composer</h2>
+<div class="solvvy-solution">
+<p>Si instalaste Composer a nivel local, entonces, mientras estás en el directorio del proyecto invocarás a Composer de esta manera:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">php composer.phar &lt;composer-command&gt;</span></pre>
+</div>
+<p>Si instalaste Composer a nivel global, deberías invocar a Composer de esta manera:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">composer &lt;composer-command&gt;</span></pre>
+</div>
+<p>En cualquier caso, reemplaza &lt;composer-command&gt; con el comando de composer que quieras ejecutar. Puedes encontrar una lista de los comandos de Composer aquí en&nbsp;<a href="https://getcomposer.org/doc/03-cli.md">Composer documentation</a>.</p>
+</div>
+<h2>Solución de problemas</h2>
+<div class="solvvy-solution">
+<p>Al ejecutar composer, puede que encuentres el siguiente error:</p>
+<p><strong>PHP Fatal error: Uncaught Error: Class 'Phar' not found</strong></p>
+<p>Phar ya está habilitado de manera predeterminada, por lo que este error generalmente significa que hay líneas en tu archivo phprc que hacen referencia a Phar que deben eliminarse. Primero, verifica qué versión de PHP está usando tu Shell.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">php -v</span></pre>
+</div>
+<p>A continuación, revisa el archivo phprc correspondiente a esa versión. Por ejemplo, si tu shell usa PHP 7.1, ejecuta el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">cat ~/.php/7.3/phprc</span></pre>
+</div>
+<p>Si ves que en alguna de las líneas se menciona a Phar, <a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">eliminalas</a>, y luego elimina los procesos para actualizar el archivo.</p>
+<ul>
+<li><a href="/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no se actualiza</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">Generalidades de php.ini</a></li>
+<li><a href="https://getcomposer.org/doc/00-intro.md" target="_self">Instalar Composer</a></li>
+<li><a href="https://github.com/composer/composer" target="_self">Composer an GitHub</a></li>
+</ul>
+</div>
