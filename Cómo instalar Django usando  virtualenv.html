@@ -24,7 +24,7 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/115000702772-Instalar-una-versi%C3%B3n-personalizada-de-Python-3" target="_self">Instalar una versión personalizada de Python 3</a></li>
 </ul>
 </div>
-<h2>Paso 2 — Crear un entorno virtual</h2>
+<h2>Paso 2 — Crea y activa tu entorno virtual</h2>
 <div class="solvvy-solution">
 <p>Revisa el siguiente artículo (dependiendo de tu versión de Python) para crear un entorno virtual:</p>
 <ul>
@@ -32,8 +32,14 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3" target="_self">Instalar y usar virtualenv de Python con la versión de Python 3</a></li>
 </ul>
 <p>Después de haber creado y activado el proyecto en el entorno virtual, puedes proceder a instalar Django dentro del mismo entorno aislado.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Estas instrucciones asumen que el nombre del entorno virtual que creaste es 'venv'.</p>
 </div>
-<h2><span id="Setting_up_your_Django_site_in_virtualenv">Paso 3 — Montando tu sitio Django en virtualenv</span></h2>
+</div>
+</div>
+<h2><span id="Setting_up_your_Django_site_in_virtualenv">Paso 3 — Configura tu sitio Django en tu entorno virtual (virtualenv)</span></h2>
 <div class="solvvy-solution">
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
@@ -48,14 +54,14 @@
 <p>Instala una versión personalizada de Django y cualquier otro paquete requirido por tu sitio web usando pip (por ejemplo, mysqlclient si vas a usar una base de datos con MySQL):</p>
 <h3>Using Python 2</h3>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">(my_project) [server]$ </span><span class="command">pip install Django</span>
-<span class="server">(my_project) [server]$ </span><span class="command">pip install mysqlclient</span></pre>
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">pip install Django</span>
+<span class="server">(venv) [server]$ </span><span class="command">pip install mysqlclient</span></pre>
 </div>
 <h3>Using Python 3</h3>
 <p>Si lo estás instalando en un entorno Python3, usa este comando:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">(my_project) [server]$ </span><span class="command">pip3 install Django</span>
-<span class="server">(my_project) [server]$ </span><span class="command">pip3 install mysqlclient</span></pre>
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">pip3 install Django</span>
+<span class="server">(venv) [server]$ </span><span class="command">pip3 install mysqlclient</span></pre>
 </div>
 </div>
 <h2>Instalar versión 2+ de Django</h2>
@@ -95,7 +101,7 @@
 <div class="solvvy-solution">
 <p>Ejecuta este comando para ver la versión de Django que instalaste:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">(my_project) [server]$ </span><span class="command">python -c "import django; print(django.get_version())"</span></pre>
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">python -c "import django; print(django.get_version())"</span></pre>
 </div>
 </div>
 <h2>Solución de problemas</h2>
@@ -106,10 +112,10 @@
 </div>
 <p>Si ves ese error, intenta actualizar la versión de pip en tu entorno virutal. Ejemplo:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">(my_project) [server]$ </span><span class="command">python -m pip install --upgrade pip</span></pre>
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">python -m pip install --upgrade pip</span></pre>
 </div>
 <p>O para Python 3</p>
-<pre class="prebox"><span class="server">(my_project) [server]$ </span><span class="command">python3 -m pip install --upgrade pip</span></pre>
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">python3 -m pip install --upgrade pip</span></pre>
 <p>Esto debería corregir el error en la instalación.</p>
 </div>
 <h2>Ver también</h2>

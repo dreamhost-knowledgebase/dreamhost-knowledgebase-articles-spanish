@@ -24,7 +24,7 @@
 <p>Ahora puedes acceder a pip3. Confirmalo corriendo lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">pip3 --version</span>
-<span class="cmdoutput">pip 18.1 from /home/username/my_project/lib/python3.6/site-packages/pip (python 3.6)</span></pre>
+<span class="cmdoutput">pip 18.1 from /home/username/opt/python-3.6.2/lib/python3.6/site-packages/pip (python 3.6)</span></pre>
 </div>
 </div>
 <h2>Actualizar pip3</h2>
@@ -59,22 +59,29 @@ pip 18.1 from /home/username/opt/python-3.6.2/lib/python3.6/site-packages/pip (p
 <p>Para usar pip3 para instalar fácilmente módulos personalizados:</p>
 <ol>
 <li>Instala una&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000702772-Instalar-una-versi%C3%B3n-personalizada-de-Python-3" target="_self">versión personalizada de Python3</a>&nbsp;y crear un <a href="https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3" target="_self">ambiente virtual</a>.</li>
+<li>Asegúrate de estar en el mismo directorio que el entorno virtual que creaste.</li>
 <li>Corre el siguiente comando para activar este nuevo ambiente virtual (cambia el directorio donde lo instalaste):<br />
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Asegúrate de cambiar el directorio a donde lo instalaste. Este ejemplo supone que el nombre de tu entorno virtual es 'venv'.</p>
+</div>
+</div>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">source my_project/bin/activate</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">source venv/bin/activate</span></pre>
 </div>
 <em>El nombre del ambiente virtual actual aparece a la izquierda del intento. Por ejemplo:</em><br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">(my_project) [server]$ </span></pre>
+<pre class="prebox"><span class="server">(venv) [server]$ </span></pre>
 </div>
 </li>
 <li>Usa pip3 para instalar un módulo:<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">pip3 install &lt;module&gt;</span></pre>
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">pip3 install &lt;module&gt;</span></pre>
 </div>
 <em>Tu puedes “python-openstackclient” si vas a trabajar con usar&nbsp;<a href="https://www.openstack.org/">openstack</a>. Por ejemplo:</em>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">pip3 install python-openstackclient</span></pre>
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">pip3 install python-openstackclient</span></pre>
 </div>
 </li>
 </ol>
