@@ -1,0 +1,61 @@
+<h2>Bases de datos</h2>
+<div class="solvvy-solution">
+<p>Tu base de datos contiene toda la información clave de tu sitio web. No protegerla significa no solo la pérdida potencial de información privada, como nombres de usuario, direcciones de correo electrónico y más, sino que también permite que un atacante agregue entradas que podrían crear enlaces de spam o malware en tu sitio (o peor). Por lo tanto, debes considerar cómo se accede a tus bases de datos para el mantenimiento de rutina.</p>
+</div>
+<h2>Manteniendo tu software actualizado</h2>
+<div class="solvvy-solution">
+<p>Los sitios web a menudo se hackean a través de agujeros de seguridad que se encuentran en versiones antiguas de software web, como foros web, wikis y blogs. Es tu responsabilidad mantener actualizadas las aplicaciones del sitio web con la última versión.</p>
+<p>Las <a href="/hc/es/articles/215089938--Cuales-instaladores-de-un-clic-ofrece-DreamHost-" target="_self">Instalaciones de 1-clic</a> se actualizan automáticamente, si seleccionas la opción de actualización automática. Si no habilitas la función de actualización automática, tu eres responsable de mantener tus aplicaciones actualizadas.</p>
+<p>Algunas aplicaciones (e.j., <a href="/hc/en-us/articles/217071817-Joomla">Joomla</a>) no proporcionan una ruta de actualización desde versiones anteriores, por lo que luego deberán actualizarse manualmente. Consulta con los desarrolladores de la aplicación para obtener más ayuda sobre la actualización.</p>
+</div>
+<h2>Establecer permisos de archivo</h2>
+<div class="solvvy-solution">
+<p>Al&nbsp;<a href="/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">configurar permisos de archivo</a>, DreamHost recomienda que establezca los permisos de la siguiente manera:</p>
+<p><strong>Archivos</strong> –&nbsp;Establecer a 644 los permisos usando el comando <span class="code">chmod 644 &lt;filename&gt;</span></p>
+<p><strong>Directorios</strong> –&nbsp;Establecer a 755 los permisos usando el comando <span class="code">chmod 755 &lt;directory_name&gt;</span></p>
+<p><strong>Ejecutables</strong> –&nbsp;Establecer a 755 los permisos usando el comando <span class="code">chmod 755 &lt;executable_name&gt;</span></p>
+<p>Aquí hay un ejemplo de cómo deberían verse sus permisos de archivo/carpeta en el servidor cuando se ejecuta ls -la:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -al</span>
+<span class="cmdoutput">drwxr-xr-x 2 exampleuser pg5034488  10 Apr 22 09:13 example_directory
+-rwxr-xr-x 1 exampleuser pg5034488   0 Apr 22 09:14 example_executable.cgi
+-rw-r--r-- 1 exampleuser pg5034488   0 Apr 22 09:12 example_file.php
+</span></pre>
+</div>
+<p>Visita el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">Comandos de Unix — Cambiar permisos</a></li>
+</ul>
+</div>
+<h2>Asignar un usuario único a cada dominio</h2>
+<div class="solvvy-solution">
+<p>DreamHost recomienda que alojes cada uno de tus sitios individuales con sus propios y&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216745348-FTP-SSH-Users-panel" target="_self">usuarios web</a>&nbsp;únicos. La razón de esto es que si uno de sus sitios se ve comprometido, el exploit no se expandirá a sus otros sitios.</p>
+</div>
+<h2>Administrar tus archivos en el servidor</h2>
+<div class="solvvy-solution">
+<p>Cuando te conectas a tu servidor para administrar sus archivos, DreamHost recomienda que utilices&nbsp;<a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> o&nbsp;<a href="/hc/es/articles/115000675027#seguridad" target="_self">SFTP</a>. FTP no es seguro y no debe usarse a menos que sea absolutamente necesario.</p>
+<h3><span id="SSH">SSH</span></h3>
+<p>SSH, shell seguro, es el método preferido para conectarse a tu máquina. SSH cifra la comunicación de la máquina local y la máquina de destino. Esto significa que tu contraseña no se transmite en texto plano, que es lo que hace TELNET.</p>
+<p>SSH debe estar activado para tus usuarios. Visita el artículo&nbsp;<a href="/hc/es/articles/216385837-Cómo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Habilitar Acceso Shell</a> para más detalles.</p>
+<h3>SFTP en vez de FTP</h3>
+<p>Como FTP no es seguro, SFTP solo se recomienda cuando se conecta a su servidor. Ver el artículo SFTP para más detalles.</p>
+</div>
+<h2>Sirviendo tus archivos de forma segura</h2>
+<div class="solvvy-solution">
+<p>Puedes haber situaciones en las que desees servir tus archivos de forma segura, como si estás ejecutando un sitio web de comercio electrónico: obviamente, no querrías enviar información vital a través de Internet sin protección.</p>
+<p>Para agregar una capa adicional de seguridad, puedes configurar un alojamiento seguro y comprar un certificado SSL. Puedes encontrar más información sobre cómo configurar estos servicios en el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216041537-SSL-certificates-overview" target="_self">Generalidades sobre certificados SSL</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215947927-How-do-I-enable-Extra-Web-Security-for-my-website-" target="_self">¿Cómo habilito seguridad web para mi página?</a></li>
+<li><a href="/hc/en-us/articles/215282088-How-do-I-set-up-Enhanced-User-Security-" target="_self">¿Cómo habilito seguridad mejorada de usuario?</a></li>
+<li><a style="background-color: #ffffff;" href="/hc/es/articles/215608187-Mantener-tu-panel-DreamHost-seguro" target="_self">Mantener tu panel DreamHost seguro</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214827868-How-to-modify-a-One-Click-upgrade-action" target="_self">Cómo modifico una acción de actualización de 1-clic</a></li>
+<li><a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214750888-UNIX-commands-overview" target="_self">Generalidades sobre comandos UNIX</a></li>
+</ul>
+</div>
