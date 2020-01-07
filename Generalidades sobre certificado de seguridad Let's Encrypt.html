@@ -1,0 +1,103 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Let’s Encrypt es una nueva Autoridad de Certificados (CA) que ofrece certificados SSL <strong>GRATUITOS</strong> que son tan seguros como los certificados pagos actuales. Este proyecto fue pionero para hacer conexiones encriptadas a través de Internet.</p>
+<p>El proyecto 'Let's Encrypt' es un un paso grande para la seguridad y privacidad en Internet.</p>
+</div>
+<h2>Beneficios</h2>
+<div class="solvvy-solution">
+<p>Hay unos beneficios claves de usar un certificado SSL Let’s Encrypt:</p>
+<ul>
+<li><strong>Es gratuito</strong> – Cualquiera que sea propietario de un dominio puede obtener un certificado de confianza para ese dominio sin costo.</li>
+<li><strong>Es automática</strong> – El proceso entero de enrolamiento para los certificados ocurren sin dolor durante la instalación nativa en el servidor o proceso de configuración. La renovación ocurre automáticamente en segundo plano.</li>
+<li><strong>Es simple</strong> – There's no payment, no validation emails, and certificates renew automatically.</li>
+<li><strong>Es seguro&nbsp;</strong>– Let’s Encrypt sirve como una plataforma para implementar técnicas de seguridad modernas y mejores prácticas.</li>
+</ul>
+</div>
+<h2><span id="diferencia-lets-encrypt-y-sectigo">Diferencias entre un certificado gratuito Let's Encrypt y un certificado pagado de Sectigo</span></h2>
+<div class="solvvy-solution">
+<p>No hay diferencia en la protección de cifrado que ofrecen estos certificados. Sin embargo, los certificados 'Let's Encrypt' solo proporcionan certificados de validación de dominio de dominio (DV). Los certificados 'Let's Encrypt' no son compatibles con los certificados de validación organizacional (OV). Mira el siguiente enlace para más detalles:</p>
+<ul>
+<li><a href="https://letsencrypt.org/docs/faq/">https://letsencrypt.org/docs/faq/</a></li>
+</ul>
+<h3>¿Cuál es la diferencia?</h3>
+<p>Los certificados (DV) solo pueden garantizar una conexión segura al sitio web. Cualquier persona con derechos de administrador en el panel del sitio web puede agregar un certificado 'Let's Encrypt'. Después de agregar en el panel, el certificado se agrega automáticamente.</p>
+<p class="p1">Los certificados (OV) validan todo lo que hace un (DV), a la vez que validan información organizativa adicional sobre quién compra el certificado, como su nombre, ciudad, estado o país. Los certificados (OV) pueden requerir que el usuario responda a un correo electrónico con un código de verificación que luego debe ingresarse en el sitio web de Sectigo. Sin embargo, esto depende de cómo el <a href="/hc/en-us/articles/360001402683-What-is-the-DCV-process-" target="_self">proceso DCV</a> verifique el certificado.</p>
+<p class="p1">Consulte el siguiente artículo para ver todos los pasos necesarios:</p>
+<ul>
+<li class="p1"><a href="/hc/es/articles/215089748--Cómo-comprar-un-certificado-SSL-firmado-profesionalmente-" target="_self">¿Cómo comprar un certificado SSL firmado profesionalmente?</a></li>
+</ul>
+<h3>¿Debería usar un 'Secifrado encriptado' o un certificado pagado de Sectigo?</h3>
+<p>Si tu sitio web es una empresa que procesa tarjetas de crédito o transmite información confidencial (como un sitio de comercio electrónico), o tiene una sección de inicio de sesión de usuario, solo debe usar un certificado Sectigo pagado. Esto ayuda a tus usuarios a garantizar que la conexión sea válida y segura.</p>
+<p>Los sitios web simples que necesitan el mismo nivel de encriptación sin la garantía absoluta de propiedad pueden continuar usando un certificado 'Let's Encrypt'.</p>
+<p>Aunque los certificados DV y OV ofrecen el mismo nivel de encriptación que los certificados OV, los certificados DV no muestran el nombre real del sitio dentro del certificado, lo que significa que los visitantes no pueden validar el certificado al verlo. Además, estos son potencialmente vulnerables a los ataques de phishing. Por ejemplo, un usuario malintencionado podría crear un sitio similar con un certificado DV para crear una copia falsificada de su tienda en línea. Por estas razones, los certificados DV no se recomiendan para los sitios de comercio electrónico que procesan información de pago.&nbsp;</p>
+</div>
+<h2>Obligar a tu sitio web a cargar de forma segura (HTTPS)</h2>
+<div class="solvvy-solution">
+<h3>Sitios WordPress</h3>
+<p>Consulta el siguiente artículo para obtener detalles sobre cómo forzar que tu sitio WordPress se cargue solo con HTTPS:</p>
+<ul>
+<li><a href="/hc/es/articles/218428687--Cómo-uso-un-certificado-SSL-con-WordPress-" target="_self">¿Cómo uso un certificado SSL con WordPress?</a></li>
+</ul>
+<h3>Sitios DreamPress</h3>
+<p>Consulta el siguiente artículo para obtener detalles sobre cómo forzar que tu sitio DreamPress se cargue solo con HTTPS:</p>
+<ul>
+<li><a href="/hc/es/articles/215747758#forzar-https-con-dreampress" target="_self">Forzar HTTPS con DreamPress</a></li>
+</ul>
+<h3>Los demás sitio web</h3>
+<p>Puedes forzar que tu sitio web se cargue de forma segura utilizando HTTPS utilizando un archivo .htaccess. Ve el siguiente artículo para ver ejemplos:</p>
+<ul>
+<li><a href="/hc/es/articles/215747758-Forzar-tu-sitio-a-cargar-de-forma-segura-con-un-archivo-htaccess" target="_self">Forzar tu sitio a cargar de forma segura con un archivo .htaccess</a></li>
+</ul>
+</div>
+<h2>Límites de velocidad</h2>
+<div class="solvvy-solution">
+<p>'Let's Encrypt' ha establecido limitaciones de velocidad para ayudar a proteger sus servidores. Los límites son los siguientes:</p>
+<ul>
+<li><strong>Nombres/Certificado</strong> – Limite la cantidad de nombres de dominio que puede incluir en un solo certificado. Actualmente está limitado a 100 nombres o sitios web por certificado emitido. Certificados por dominio con los que podría encontrarse a través de una reemisión repetida. Este límite mide los certificados emitidos para una combinación dada de sufijo público + dominio (un "dominio registrado"). Esto está limitado a 5 certificados por dominio por semana.</li>
+<li><strong>Registros/IP address</strong> – Limita el número de registros que puede realizar en un período de tiempo determinado; Actualmente 500 por 3 horas. Este límite solo debería afectar a los usuarios más grandes de Let's Encrypt.</li>
+<li><strong>Autorizaciones pendientes/Cuenta</strong> – Limita la cantidad de veces que un cliente ACME puede solicitar que se autorice un nombre de dominio sin cumplir realmente con la solicitud misma. Esto se encuentra más comúnmente cuando se desarrollan clientes ACME, y este límite se establece en 300 por cuenta por semana.</li>
+</ul>
+<p>Ve el siguiente enlace para más detalles:</p>
+<ul>
+<li><a href="https://letsencrypt.org/docs/rate-limits/" target="_self">Límites de velocidad de Let’s Encrypt</a></li>
+</ul>
+</div>
+<h2>Preguntas Frecuentes</h2>
+<div class="solvvy-solution">
+<h3>¿Por cuánto tiempo es válido el certificado?</h3>
+<p>Los certificados SSL generados por Let's Encrypt son válidos por 90 días y luego se renuevan automáticamente. Esto es por dos razones como se indica en su <a href="https://letsencrypt.org/2015/11/09/why-90-days.html" target="_self">publicación de blog</a>:</p>
+<ul>
+<li>Limitan los daños causados por el compromiso de claves y la emisión incorrecta ya que las claves robadas y los certificados emitidos incorrectamente son válidos por un período de tiempo más corto.</li>
+</ul>
+<ul>
+<li>Fomentan la automatización, que es absolutamente esencial para la facilidad de uso. Esto quita la carga de los administradores del sistema para manejar manualmente las renovaciones. Una vez que la emisión y la renovación se hayan automatizado, las vidas más cortas no serán menos convenientes que las más largas.</li>
+</ul>
+<h3>¿Qué nivel de encriptación está disponible?</h3>
+<p>RSA-signed usando llaves 2048-bit RSA.</p>
+<ul>
+<li><a href="https://letsencrypt.readthedocs.org/en/latest/ciphers.html?highlight=rsa#cryptographic-choices" target="_self">Opciones Criptográficas</a></li>
+</ul>
+<h3>¿Los certificados Wildcard están disponibles para su uso?</h3>
+<p>No. Aunque 'Let's Encrypt' ofrece certificados comodín, actualmente no es posible usarlos en DreamHost. Si necesita certificados SSL en tus subdominios, debes habilitarlos individualmente.</p>
+<h3>¿Qué navegadores admiten los certificados Let's Encrypt?</h3>
+<p>Los certificados son confiables en todos los principales navegadores. Ve la publicación del blog aquí:</p>
+<ul>
+<li><a href="https://letsencrypt.org/2015/10/19/lets-encrypt-is-trusted.html">https://letsencrypt.org/2015/10/19/lets-encrypt-is-trusted.html</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="/hc/es/articles/216539548-Añadir-un-certificado-gratuito-de-Let-s-Encrypt" target="_self">Añadir un certificado gratuito de Let's Encrypt</a></li>
+<li><a href="/hc/es/articles/216041537-Generalidades-sobre-certificados-SSL" target="_self">Generalidades sobre certificados SSL</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="https://letsencrypt.org/about/" target="_self">Sitio oficial de Let's Encrypt</a></li>
+<li><a href="https://letsencrypt.readthedocs.org/en/latest/" target="_self">Documentación del cliente de Let's Encrypt</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Let%27s_Encrypt" target="_self">Let's Encrypt en Wikipedia</a></li>
+<li><a href="https://www.dreamhost.com/blog/2015/12/03/lets-encrypt-and-dreamhost/" target="_self">Let's Encrypt y DreamHost (publicaciones de Blog)</a></li>
+<li><a href="https://community.letsencrypt.org/t/rate-limits-for-lets-encrypt/6769" target="_self">Límites de seguridad de Let's Encrypt</a></li>
+</ul>
+</div>
