@@ -1,0 +1,64 @@
+<h2 class="subheader">Diferentes métodos de validación</h2>
+<div class="solvvy-solution">
+<p>Cuando busques certificados SSL, notará algunas diferencias en el tipo de validación que ofrecen. Por ejemplo:</p>
+<ul>
+<li>DV (Validación de Dominio)</li>
+<li>OV (Validación Organizacional)</li>
+<li>EV (Validación Extendida)</li>
+</ul>
+<p>No hay diferencia en la protección de cifrado que ofrecen estos certificados, sin embargo, existe una diferencia en la validación requerida para emitirlos en tu sitio.</p>
+<p>El método de validación describe cómo la autoridad de certificación emisora verifica el certificado. Esto garantiza que el sitio para el que se emite sea correcto y esté autorizado para usarlo.</p>
+<h3>Validación de dominio</h3>
+<p>Estas incluyen <a href="https://help.dreamhost.com/hc/en-us/articles/216539558-Let-s-Encrypt-SSL-certificate-overview">certificados ‘Let's Encrypt'</a>.</p>
+<p>Estos tipos de certificados se validan utilizando solo el nombre de dominio. Como tal, el nombre de tu sitio web no se incluye en el certificado en sí mismo al verlo. Cualquier persona con derechos de administrador en el panel del sitio web puede agregar un certificado 'Let's Encrypt'. Después de agregar en el panel, el certificado se agrega automáticamente.</p>
+<p>Estos certificados solo deben ser utilizados por sitios más pequeños que no intercambian información confidencial. Esto incluiría:</p>
+<ul>
+<li>blogs</li>
+<li>foros</li>
+<li>Sitios personales</li>
+</ul>
+<p>Aunque ofrecen el mismo nivel de cifrado que los certificados OV, estos certificados no muestran el nombre real del sitio dentro del certificado, lo que significa que los visitantes no pueden validar el certificado al verlo. Además, estos son potencialmente vulnerables a los ataques de phishing. Por ejemplo, un usuario malintencionado podría crear un sitio similar con un certificado DV para crear una copia falsificada de su tienda en línea. Por estas razones, no se recomiendan para sitios de comercio electrónico que procesan información de pago.</p>
+<h3>Validación organizacional</h3>
+<p>Estos incluyen <a href="https://help.dreamhost.com/hc/en-us/articles/215089748-How-do-I-purchase-a-professionally-signed-SSL-certificate-">certificados Sectigo</a> pagos.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El 1 de noviembre de 2018, Comodo anunció que la compañía está cambiando su nombre a Sectigo. Para obtener más información al respecto, consulte el siguiente anuncio en el sitio web de Sectigo:</p>
+<ul>
+<li><a href="https://sectigo.com/sectigo-story-faq">Comodo CA Es Ahora Sectigo</a></li>
+</ul>
+<p>Cualquier certificado de Comodo emitido después de enero de 2019 hará referencia a Sectigo como la autoridad de certificación, mientras que cualquier certificado emitido antes de eso seguirá haciendo referencia a Comodo. Estas siguen siendo la misma compañía, y la única diferencia es el nombre.</p>
+</div>
+</div>
+<p class="p1">Estos validan todo lo que hace un (DV), al tiempo que validan información organizacional adicional sobre quién está comprando el certificado, como tu nombre, ciudad, estado o país. El nombre de la organización también se incluye en el certificado. Esto agrega una capa adicional de confianza a los visitantes, ya que pueden garantizar que el sitio web y la empresa tengan buena reputación.</p>
+<p class="p1">Los certificados (OV) pueden requerir que el usuario responda a un correo electrónico con un código de verificación que luego debe ingresarse en el sitio web de Sectigo. Sin embargo, esto depende de cómo el&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/360001402683-What-is-the-DCV-process-">proceso DCV</a> verifique el certificado. Vea el siguiente artículo para ver todos los pasos necesarios:</p>
+<ul>
+<li class="p1"><a href="https://help.dreamhost.com/hc/en-us/articles/215089748-How-do-I-purchase-a-professionally-signed-SSL-certificate-">¿Cómo compro un certificado SSL profesionalmente firmado?</a></li>
+</ul>
+<p>Estos certificados se pueden usar en sitios de comercio electrónico para procesar pagos.</p>
+<h3>Certificados de validación extendidos</h3>
+<p>Los certificados EV garantizan la mayor cantidad de confianza para los visitantes, ya que requieren que se valide la mayor cantidad de información para poder emitirse en el sitio.</p>
+<p>Se pueden observar en la barra de URL verde que se muestra en el navegador al visitar el sitio. Esta es una confirmación visual rápida para el usuario de que el sitio que está visitando ha tomado los pasos máximos para asegurarse de confirmar a los usuarios el sitio que está visitando. Un ejemplo de un sitio con este tipo de certificado es bestbuy.com:</p>
+<ul>
+<li><a href="https://www.bestbuy.com/">https://www.bestbuy.com/</a></li>
+</ul>
+<p>DreamHost no ofrece actualmente este tipo de certificados.</p>
+</div>
+<h2>¿Qué tipo de certificado debo usar para mi sitio de comercio electrónico?</h2>
+<div class="solvvy-solution">
+<p>Puedes usar un certificado 'Let's Encrypt' o un certificado 'Sectigo' firmado profesionalmente para su sitio web de comercio electrónico. Ambos utilizan una clave RSA de 2048 bits para cifrar la conexión, por lo que la seguridad es la misma para ambas opciones.</p>
+<h3>¿Cúal es la diferencia?</h3>
+<p>La diferencia principal es el tipo de validación. Los certificados 'Let's Encrypt' son 'Validado por dominio' (DV). Esto significa que el dominio solo está validado por 'Let's Encrypt' en función del nombre de dominio en sí. No es necesario proporcionar más credenciales para obtener este tipo de certificado.</p>
+<p>Un certificado pagado de 'Comodo' ofrece 'Validación de organización' (OV). Esto puede considerarse como un paso adelante en la validación, ya que requiere que la empresa/organización que solicita el certificado se valide primero. Después de la validación, el certificado incluye el nombre de la organización en la información del certificado. Esta validación adicional puede parecer más confiable para los clientes, por lo que este tipo se recomienda para sitios de comercio electrónico.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215089118-Adding-an-SSL-certificate-overview">Generalidades sobre agregar certificados SSL</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216539548-Adding-a-free-Let-s-Encrypt-certificate">Agregar un certificado gratuito Let's Encrypt</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/218084098-CSR-overview">Generalidades sobre CSR</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215364588-How-much-does-an-SSL-certificate-cost-">¿Cuánto cuesta un certificado SSL?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215747758-Force-your-site-to-load-securely-with-an-htaccess-file">Forzar tu sitio para que cargue de manera segura con un archivo .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/218428687-How-do-I-use-an-SSL-certificate-with-WordPress-">¿Cómo usar un certificado SSL con WordPress?</a></li>
+</ul>
+</div>
