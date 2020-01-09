@@ -1,0 +1,115 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Se eligió la aplicación Google Authenticator porque es gratuita y está ampliamente disponible en dispositivos móviles Android, iOS / Apple, BlackBerry o Windows, y otras API / aplicaciones de terceros. Por ejemplo:</p>
+<ul>
+<li>Dropbox</li>
+<li>Lastpass</li>
+<li>KeepSafe</li>
+<li><a href="https://wordpress.org/plugins/google-authenticator/">WordPress Login Plugin</a></li>
+<li><a href="https://github.com/heapsource/active_model_otp">Rails</a></li>
+<li><a href="https://github.com/tadeck/onetimepass">Python</a></li>
+<li><a href="https://github.com/gbraad/gauth">HTML5</a></li>
+</ul>
+<p>Los detalles completos del método de seguridad y las implementaciones de Google se pueden encontrar aquí:</p>
+<ul>
+<li><a href="https://support.google.com/accounts/answer/1066447?hl=en">https://support.google.com/accounts/answer/1066447?hl=en</a></li>
+</ul>
+<p>Google Authenticator es particularmente útil con tabletas/teléfonos móviles con una conexión celular o de Internet. En el caso de un dispositivo móvil perdido o desconectado, Google Authenticator también proporciona una lista de códigos de respaldo que no caducan (durante la configuración inicial) que se pueden usar. Fuera de la aplicación Google Authenticator, se pueden usar mensajes de texto SMS o llamadas de voz para obtener el código de la segunda capa.</p>
+</div>
+<h2>Obtener la aplicación Google Authenticator</h2>
+<div class="solvvy-solution">
+<p>Para poder habilitar la autenticación multifactor en tu cuenta DreamHost, deberás instalar la aplicación Google Authenticator en tu teléfono inteligente o tableta.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si ya tienes la aplicación Google Authenticator en tu teléfono inteligente o tableta, solo tienes que hacer clic en "+" en la esquina inferior derecha (iOS) o abrir la configuración de la aplicación y hacer clic en "Agregar cuenta" (Android). Luego, pasa a la siguiente sección de este tutorial.</p>
+</div>
+</div>
+<p>La documentación oficial de Google sobre la descarga e instalación de la aplicación se puede encontrar aquí:</p>
+<p><a href="http://support.google.com/accounts/bin/answer.py?hl=en&amp;answer=1066447">http://support.google.com/accounts/bin/answer.py?hl=en&amp;answer=1066447</a></p>
+<p>La aplicación se puede descargar desde la App Store de su dispositivo (o usar el enlace directo de Google para BlackBerry):</p>
+<ul>
+<li><a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2">Android devices: Google Play</a></li>
+<li><a href="https://itunes.apple.com/us/app/google-authenticator/id388497605">iPhone, iPad, or iPod Touch: iTunes App Store</a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2">BlackBerry devices: Google Authenticator Download (visit from your BlackBerry device)</a></li>
+</ul>
+</div>
+<h2>Habilitación de MFA en el panel de Google Authenticator</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega a la página de&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=billing.secure&amp;" target="_blank" rel="noopener">Security</a>.
+<dl>
+<dd><em>La segunda sección de esa página se titula 'Autenticación multifactorial':</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/01_MFA.png" alt="01 MFA.png" />
+<ul>
+<li><strong>Current Password:</strong>&nbsp;Ingresa la contraseña de tu cuenta DreamHost.</li>
+<li><strong>Multifactor Authentication Type:</strong>&nbsp;Tipo de autenticación multifactor: haz clic en el menú desplegable para elegir cuál de los dos métodos de Google le gustaría usar:</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dd>
+<dl>
+<dd><strong>-</strong>&nbsp;Autenticador de Google, basado en el tiempo (recomendado)</dd>
+<dd><strong>-</strong>&nbsp;Autenticador de Google, basado en contador</dd>
+</dl>
+</dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>DreamHost recomienda contraseñas de un solo uso basadas en el tiempo. Los códigos basados ​​en el tiempo brindan una mejor protección contra el phishing y los keyloggers ya que cada código solo es válido por un corto período de tiempo. Los códigos basados ​​en el tiempo también se sincronizan automáticamente con los servidores de DreamHost, a diferencia de los códigos basados ​​en contador que requieren sincronización manual.</p>
+<ul>
+<li>Si usas códigos basados ​​en el contador, deberás presionar el botón de actualización junto al código en la aplicación Google Authenticator cada vez que lo uses para avanzar al siguiente código.</li>
+</ul>
+</div>
+</div>
+</li>
+<li>Haz click en el botón&nbsp;<strong>Get Started</strong>.
+<dl>
+<dd><em>Ahora verás un código QR y una clave secreta de 16 dígitos que necesitarás para activar la autenticación multifactor:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/02_MFA.png" alt="02 MFA.png" /></dd>
+</dl>
+</li>
+<li>Usa la aplicación Google Authenticator para escanear el código QR.<br />
+<ul>
+<li>Si tu dispositivo no tiene cámara, puedes ingresar manualmente la clave secreta de 16 dígitos que se muestra debajo del código QR en la aplicación.</li>
+<li>Si tienes más de un dispositivo con Google Authenticator, escanea el código QR o ingresa la clave en cada dispositivo que desees usar con tu cuenta DreamHost.</li>
+</ul>
+</li>
+<li>Cuando la aplicación Google Authenticator muestre un código de acceso de 6 dígitos, ingrésalo en el campo de código de acceso.<br />
+<ul>
+<li>Si estás utilizando códigos basados ​​en contador, es posible que debas presionar el botón refresh para mostrar el primer código.</li>
+</ul>
+</li>
+<li><span id="codigo"></span> Haz clic en el botón <strong>Activate!</strong> y el servidor de DreamHost se sincroniza con tu dispositivo.<br />
+<dl>
+<dd>Luego verá el cuadro de confirmación '¡Éxito!':</dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/04_MFA.png" alt="04 MFA.png" /></dd>
+</dl>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>Guarda los códigos de respaldo presentados en el cuadro de diálogo ‘¡Éxito!’. Si sospechas que tu cuenta puede estar comprometida (por ejemplo, si has perdido tu teléfono o dispositivo móvil) y estás utilizando Google Authenticator, puedes usar el botón de Regenerate Key para invalidar la clave anterior y crear una nueva.</li>
+<li>Si estás haciendo una copia de seguridad de un iPhone en tu computadora local, selecciona '<a href="http://lifehacker.com/5799274/encrypt-your-iphone-backups-for-convenience-not-just-security" target="_self">Encrypt iPhone Backup</a>' también para hacer una copia de seguridad de la(s) cuenta(s) de Google Authenticator. De lo contrario, Google Authenticator no tendrá ninguna cuenta asociada cuando se restaure.</li>
+</ul>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<h2>¿Qué pasa si necesito un teléfono nuevo?</h2>
+<div class="solvvy-solution">
+<p>Si estás comprando un teléfono nuevo, asegúrate de DESACTIVAR la autenticación multifactor en tu panel. Puedes hacer esto desde la página de&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=billing.secure&amp;" target="_blank" rel="noopener">Security</a>.&nbsp;En la sección Autenticación multifactorial, ingresa tu contraseña y haz clic en el botón <strong>disable</strong>.</p>
+<p>Cuando tengas tu nuevo teléfono, vuelve a iniciar sesión en tu panel y configúralo nuevamente como se muestra arriba.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216013897-Generalidades-sobre-autenticaci%C3%B3n-Multifactor" target="_self">Generalidades Autenticación Multifactor </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216013917-Preguntas-frecuentes-Autenticaci%C3%B3n-Multifactor" target="_self">Preguntas frecuentes Autenticación Multifactor</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216013907-Recuperando-tu-cuenta-con-Autenticaci%C3%B3n-Multifactor" target="_self">Recuperar tu cuenta con Autenticación Multifactor </a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215343118-How-to-use-YubiKey-with-Multifactor-Authentication" target="_self">Cómo usar YubiKey con Autenticación Multifactor</a></li>
+</ul>
+</div>

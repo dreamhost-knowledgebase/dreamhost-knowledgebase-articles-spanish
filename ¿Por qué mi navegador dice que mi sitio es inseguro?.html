@@ -1,0 +1,77 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Un problema común después de agregar un certificado SSL es que su navegador aún muestra tu sitio como inseguro. Esto ocurre con mayor frecuencia porque hay enlaces en tu página que todavía apuntan a HTTP en lugar de HTTPS. Por ejemplo, mire el siguiente código para vincular una imagen.</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;img src="<span class="command">http</span>://www.example.com/images/pic_mountain.jpg" alt="Mountain View"&gt;</pre>
+</div>
+<p>Observa cómo la URL está directamente vinculada con 'http' al principio. Al visitar el sitio en Firefox, se muestra lo siguiente:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/01_SSL_troubleshooting.png" alt="01 SSL troubleshooting.png" width="419" height="380" /></dd>
+</dl>
+<p>Puedes ver que el ícono del candado en la esquina superior izquierda del navegador muestra un ícono de advertencia.</p>
+</div>
+<h2>Buscar errores HTTPS</h2>
+<div class="solvvy-solution">
+<p>Si intentas conectarte a un sitio que tiene un certificado SSL faltante, inválido o autofirmado utilizando una URL HTTPS, tu navegador mostrará una <a href="https://help.dreamhost.com/hc/en-us/articles/215767487#self_signed_warnings">advertencia de seguridad</a> como 'Su conexión no es privada' en Chrome o 'Riesgo potencial de seguridad por delante' en Firefox Para evitar estos errores, debes dejar de usar la URL segura HTTPS o agregar un certificado SSL válido a su sitio. Para obtener más información sobre cómo agregar un certificado SSL a su sitio, consulte el siguiente artículo:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215089118-Adding-an-SSL-certificate-overview">Visión general de la adición de un certificado SSL</a></li>
+</ul>
+</div>
+<h2><span id="Cause_of_this_error">Causa de este error</span></h2>
+<div class="solvvy-solution">
+<p>Si haces clic en el icono de advertencia, el texto explica que hay "elementos sin cifrar" en la página que está viendo.</p>
+<p>En el ejemplo anterior, esto sucede porque la imagen se vinculó usando 'HTTP' y no 'HTTPS'. Otra forma de confirmar lo que en tu sitio está vinculado de forma insegura es utilizar el siguiente sitio:</p>
+<ul>
+<li><a href="https://www.whynopadlock.com/">whynopadlock.com</a></li>
+</ul>
+</div>
+<h2><span id="Arreglando_enlaces_no_encriptados">Arreglando enlaces no encriptados</span></h2>
+<div class="solvvy-solution">
+<p>Hay dos soluciones:</p>
+<h3>Usa enlaces absolutos</h3>
+<p>Los enlaces absolutos son la ubicación completa de la URL de su archivo. Esto incluye el nombre de dominio. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;img src="<span class="command">https</span>://www.example.com/images/pic_mountain.jpg" alt="Mountain View"&gt;</pre>
+</div>
+<p>Solo asegúrate de estar usando HTTPS al vincular de esta manera.</p>
+<h3>Usar enlaces relativos</h3>
+<p>Los enlaces relativos no incluyen el nombre de dominio. Estos enlaces apuntan a un archivo local en su lugar. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;img src="images/pic_mountain.jpg" alt="Mountain View"&gt;</pre>
+</div>
+<p>Ver el siguiente enlace para más detalles:</p>
+<ul>
+<li><a href="https://www.w3schools.com/html/html_filepaths.asp">Caminos de archivos HTML</a></li>
+</ul>
+</div>
+<h2><span id="Política_de_seguridad_de_contenido">Resolver la advertencia agregando código a su archivo .htaccess</span></h2>
+<div class="solvvy-solution">
+<p>En lugar de actualizar manualmente los enlaces en su código, puedes agregar las siguientes líneas al archivo .htaccess de tu sitio.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115000098272-Creating-and-editing-a-file-via-FTP" target="_self">Crear y editar un archivo a través de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216456227--htaccess-overview" target="_self">Visión general de .htaccess</a></li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox">Header always set Content-Security-Policy "upgrade-insecure-requests;"</pre>
+</div>
+<p>Estas líneas obligan al navegador a actualizar automáticamente los enlaces inseguros a enlaces seguros. Una vez agregado, la advertencia debería desaparecer inmediatamente. Ve el siguiente enlace para más detalles.</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests" target="_self">CSP: solicitudes de actualización inseguras</a></li>
+</ul>
+</div>
+<h2>Sitios WordPress</h2>
+<div class="solvvy-solution">
+<p>Hay algunos pasos adicionales que debes seguir para asegurar un sitio de WordPress. Consulta el siguiente artículo para obtener una lista de pasos para asegurarse de que tu sitio de WordPress esté utilizando enlaces seguros tanto en los archivos del sitio web como en la base de datos.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/218428687-How-do-I-use-an-SSL-certificate-with-WordPress-">¿Cómo usar un certificado SSL con WordPress?</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216041537-SSL-certificates-overview">Visión General de los certificados SSL</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215364588-How-much-does-an-SSL-certificate-cost-">¿Cuánto cuesta un certificado SSL?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215364598-Should-I-add-www-to-my-Comodo-SSL-certificate-">¿Debo agregar 'www' a mi certificado SSL de Sectigo?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115003505112-How-to-force-your-site-to-redirect-to-https-SSL-" target="_self">Cómo forzar a tu sitio a redirigir a https (SSL)</a></li>
+</ul>
+</div>
