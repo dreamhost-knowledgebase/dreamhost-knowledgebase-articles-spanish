@@ -1,0 +1,101 @@
+<h2>Crear un archivo .htaccess en tu servidor web DreamHost</h2>
+<div class="solvvy-solution">
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo crear un archivo .htaccess en su servidor web:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227#crear-un-archivo-htaccess" target="_self">Crear un archivo .htaccess en tu servidor web DreamHost</a></li>
+</ul>
+<p>Si el archivo ya existe, consulte los siguientes artículos para obtener instrucciones sobre cómo actualizarlo (dependiendo de si está utilizando un cliente FTP o SSH):</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar un archivo por medio de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo por medio de SSH</a></li>
+</ul>
+</div>
+<h2><span id="GZIP">GZIP</span></h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Debido a ciertas&nbsp;<a href="https://arstechnica.com/information-technology/2016/08/new-attack-steals-ssns-e-mail-addresses-and-more-from-https-pages/" target="_self">vulnerabilidades</a>&nbsp;de seguridad encontradas al combinar HTTPS y compresión GZIP, la compresión GZIP está desactivada para HTTPS en todos los planes DreamHost. Sin embargo, la compresión GZIP se habilita automáticamente para HTTP.</p>
+<p>Puede leer más sobre la compresión GZIP y las alternativas a usar para HTTPS en el siguiente artículo:</p>
+<ul>
+<li><a href="/hc/en-us/articles/360005040932-How-do-I-enable-GZIP-Compression-" target="_self">¿Cómo habilitar compresión GZIP?</a></li>
+</ul>
+</div>
+</div>
+<p>DEFLATE es un algoritmo de compresión de datos sin pérdidas similar a gzip, pero funciona en Apache 2. En el pasado, mod_gzip era una herramienta recomendada. Pero DreamHost usa Apache 2 y mod_deflate, que llama a gzip en el back-end automáticamente. Si lo desea, puede agregar tipos de codificación adicionales al filtro para cosas como XML o JSON. Por ejemplo, agregue lo siguiente a su archivo .htaccess:</p>
+<div class="preboxcontainer">
+<pre class="prebox">#Gzip
+&lt;ifmodule mod_deflate.c&gt;
+AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript text/javascript
+&lt;/ifmodule&gt;
+#End Gzip
+</pre>
+</div>
+<p>Visita la página siguiente para más detalles:</p>
+<ul>
+<li><a href="http://httpd.apache.org/docs/2.2/mod/mod_deflate.html">mod_deflate</a></li>
+</ul>
+</div>
+<h2>Almacenamiento en caché del navegador</h2>
+<div class="solvvy-solution">
+<p>Usando <a href="http://httpd.apache.org/docs/2.2/mod/mod_expires.html">mod_expires</a>,&nbsp;puede decirle a los navegadores visitantes que retengan ciertos archivos por más tiempo (le gustan las imágenes, que rara vez se cambian). Este ejemplo .htaccess muestra cómo almacenar en caché tipos de archivos específicos durante períodos específicos de tiempo.</p>
+<p>En el siguiente ejemplo, los archivos png caducan su caché 2592000 segundos después de que un navegador accede a ellos. Visita la página&nbsp;<a href="http://httpd.apache.org/docs/2.2/mod/mod_expires.html">mod_expires</a>&nbsp;para más detalles.</p>
+<div class="preboxcontainer">
+<pre class="prebox"># BEGIN Expire headers  
+&lt;ifModule mod_expires.c&gt;  
+        ExpiresActive On  
+        ExpiresDefault "access plus 5 seconds"  
+        ExpiresByType image/x-icon "access plus 2592000 seconds"  
+        ExpiresByType image/jpeg "access plus 2592000 seconds"  
+        ExpiresByType image/png "access plus 2592000 seconds"  
+        ExpiresByType image/gif "access plus 2592000 seconds"  
+        ExpiresByType image/svg+xml "access plus 2592000 seconds"
+        ExpiresByType application/x-font-ttf "access plus 2592000 seconds"
+        ExpiresByType application/x-font-truetype "access plus 2592000 seconds"
+        ExpiresByType application/x-font-opentype "access plus 2592000 seconds"
+        ExpiresByType application/x-font-woff "access plus 2592000 seconds"
+        ExpiresByType application/font-woff2 "access plus 2592000 seconds"
+        ExpiresByType application/vnd.ms-fontobject "access plus 2592000 seconds"
+        ExpiresByType application/font-sfnt "access plus 2592000 seconds"
+        ExpiresByType application/x-shockwave-flash "access plus 2592000 seconds"  
+        ExpiresByType text/css "access plus 604800 seconds"  
+        ExpiresByType text/javascript "access plus 216000 seconds"  
+        ExpiresByType application/javascript "access plus 216000 seconds"  
+        ExpiresByType application/x-javascript "access plus 216000 seconds"  
+        ExpiresByType text/html "access plus 600 seconds"  
+        ExpiresByType application/xhtml+xml "access plus 600 seconds"  
+&lt;/ifModule&gt;  
+# END Expire headers  
+</pre>
+</div>
+<p>Alternativamente, puedes usar&nbsp;<a href="http://httpd.apache.org/docs/2.2/mod/mod_headers.html">mod_headers</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"># BEGIN Caching
+&lt;ifModule mod_headers.c&gt;
+&lt;filesMatch "\\.(ico|pdf|flv|jpg|jpeg|png|gif|swf|ttf|otf|woff|woff2|eot|svg)$"&gt;
+Header set Cache-Control "max-age=2592000, public"
+&lt;/filesMatch&gt;
+&lt;filesMatch "\\.(css)$"&gt;
+Header set Cache-Control "max-age=604800, public"
+&lt;/filesMatch&gt;
+&lt;filesMatch "\\.(js)$"&gt;
+Header set Cache-Control "max-age=216000, private"
+&lt;/filesMatch&gt;
+&lt;filesMatch "\\.(xml|txt)$"&gt;
+Header set Cache-Control "max-age=216000, public, must-revalidate"
+&lt;/filesMatch&gt;
+&lt;filesMatch "\\.(html|htm|php)$"&gt;
+Header set Cache-Control "max-age=1, private, must-revalidate"
+&lt;/filesMatch&gt;
+&lt;/ifModule&gt;
+# END Caching
+</pre>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades sobre .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-" target="_self">¿Qué puedo hacer con un archivo .htaccess?</a></li>
+</ul>
+</div>
