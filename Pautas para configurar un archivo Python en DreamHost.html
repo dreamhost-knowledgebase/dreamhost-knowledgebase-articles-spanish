@@ -1,0 +1,66 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Al crear un script de Python en DreamHost, hay ciertas reglas que se deben seguir para garantizar que el archivo funcione correctamente.</p>
+</div>
+<h2>Extensiones de Archivo</h2>
+<div class="solvvy-solution">
+<p>Todos los scripts Python CGI en DreamHost deben terminar con las siguientes extensiones:</p>
+<ul>
+<li><code>.py</code></li>
+<li><code>.cgi</code></li>
+<li><code>.fcgi</code></li>
+</ul>
+</div>
+<h2>Primera línea del archivo Python</h2>
+<div class="solvvy-solution">
+<p>La primera línea del archivo debe ser cualquiera de los siguientes:</p>
+<ul>
+<li><code>#!/usr/bin/python</code></li>
+<li><code>#!/usr/bin/python2.x</code></li>
+<li><code>#!/usr/bin/env python2.x</code></li>
+</ul>
+</div>
+<h2>Permisos de Archivo</h2>
+<div class="solvvy-solution">
+<p>Los permisos del archivo deben establecerse en 755. Puede cambiar esto ejecutando el siguiente comando a través de&nbsp;<a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 755</span></pre>
+</div>
+</div>
+<h2>Terminaciones de línea</h2>
+<div class="solvvy-solution">
+<p>Asegurate de usar <a href="https://en.wikipedia.org/wiki/Newline#Representations" target="_self">líneas nuevas de estilo UNIX</a>, no Windows.</p>
+</div>
+<h2>Ver salida</h2>
+<div class="solvvy-solution">
+<p>Si deseas ver la salida impresa de tu código Python, debes <a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">agregar esto como la primera línea</a> de salida:</p>
+<div class="preboxcontainer">
+<pre class="prebox">print "Content-type: text/html\n\n"</pre>
+</div>
+</div>
+<h2>Ejecución de Apache</h2>
+<div class="solvvy-solution">
+<p>Si no deseas que Apache ejecute archivos .py <a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">agrega lo siguiente</a> a tu archivo <a href="/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">.htaccess</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">RemoveHandler .py</pre>
+</div>
+</div>
+<h2>Grupo Unix</h2>
+<div class="solvvy-solution">
+<p>En DreamHost, todos los scripts Python CGI Y su directorio primario inmediato deben tener su usuario Unix y su grupo Unix configurados para el usuario Unix de su dominio Y el grupo UNIX PREDETERMINADO de ese usuario (de lo contrario, obtendrá un error interno del servidor <a href="http://svn.apache.org/viewvc/httpd/httpd/trunk/support/suexec.c?annotate=758944#l541" target="_self">desde el suexec de Apache</a>).</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216137717-Python-overview" target="_self">Generalidades sobre Python</a></li>
+<li><a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo via SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215489188-How-to-install-a-newer-version-of-SWIG" target="_self">Cómo instalar una nueva versión de SWIG</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115000218612-Installing-a-custom-version-of-Python" target="_self">Instalando una versión personalizada de Python 2</a></li>
+<li><a href="/hc/es/articles/115000702772-Instalar-una-versión-personalizada-de-Python-3" target="_self">Instalar una versión personalizada de Python 3</a></li>
+<li><a href="/hc/es/articles/215489338-Instalar-y-usar-virtualenv-con-Python-2" target="_self">Instalar y usar virtualenv con Python 2</a></li>
+<li><a href="/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3" target="_self">Instalar y usar virtualenv con Python 3</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216137637-Pyenv-simple-Python-version-management" target="_self">Pyenv: Gestión simple de versiones de Python</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215503458-Python-setuptools" target="_self">Herramientas de instalación Python</a></li>
+</ul>
+</div>
