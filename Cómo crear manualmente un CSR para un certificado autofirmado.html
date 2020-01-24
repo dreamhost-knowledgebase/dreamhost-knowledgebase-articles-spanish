@@ -1,0 +1,99 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Puedes crear manualmente un CSR a través de Secure Shell. Para continuar con estos pasos, debes tener un usuario de Shell configurado en tu panel y un conocimiento general del UNIX Shell.</p>
+<p>Visita los siguientes artículos para obtener más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Cómo crear un usuario con acceso Shell (SSH)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El soporte de DreamHost no puede proporcionar asistencia con estos pasos. Debes tener conocimientos básicos del shell de UNIX para completar este procedimiento.</p>
+</div>
+</div>
+</div>
+<h2>Crear un CSR</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Conéctate a tu dominio a través de SSH. Visita el artículo de SSH para obtener instrucciones.</li>
+<li>Una vez que hayas iniciado sesión en tu servidor a través de SSH, asegúrate de estar en el directorio de inicio de tu usuario:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li>Usa OpenSSL para crear tu clave privada (private key) que usarás para crear el CSR. Escribe lo siguiente para abrir la herramienta de línea de comandos OpenSSL.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">openssl</span></pre>
+</div>
+<dl>
+<dd><em>Tu símbolo del sistema ahora cambia a OpenSSL &gt; lo que significa que está listo para ejecutar los siguientes comandos.</em></dd>
+</dl>
+</li>
+<li>Genera una nueva clave privada (private key) RSA ingresando el siguiente comando sin contraseña:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">OpenSSL&gt; </span><span class="command">genrsa -out private.key 2048</span>
+Generating RSA private key, 2048 bit long modulus
+......................+++
+......................+++
+e is 65537 (0x10001)</pre>
+</div>
+<dl>
+<dd><em>Esto creará una clave privada llamada private.key. La usarás para crear el CSR.</em></dd>
+</dl>
+</li>
+<li>Crea el CSR ejecutando el siguiente comando:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">OpenSSL&gt; </span><span class="command">req -new -sha256 -key private.key -out file.csr</span></pre>
+</div>
+<dl>
+<dd><em>Luego se te solicita la siguiente información:</em></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>“Common Name" es donde colocas tu nombre de dominio, por ejemplo, example.com o www.example.com.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN. 
+There are quite a few fields but you can leave some blank 
+For some fields there will be a default value, 
+If you enter '.', the field will be left blank.-----
+Country Name (2 letter code) [AU]: 
+State or Province Name (full name) [Some-State]: 
+Locality Name (eg, city) []: 
+Organization Name (eg, company) [Internet Widgits Pty Ltd]: 
+Organizational Unit Name (eg, section) []: 
+Common Name (eg, YOUR name) []: 
+Email Address []: 
+
+Please enter the following 'extra' attributes 
+to be sent with your certificate request 
+A challenge password []: (Enter a . and click ENTER) 
+An optional company name []:(Enter a . and click ENTER)</pre>
+</div>
+</li>
+<li>Sal del openssl:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">OpenSSL&gt; </span><span class="command">quit</span></pre>
+</div>
+</li>
+<li>
+<p>Ahora se crea tu CSR. Según el comando que ejecutaste anteriormente, este archivo se llama file.csr. Puedes ver su contenido ejecutando el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat file.csr</span></pre>
+</div>
+</li>
+<li>Puedes cortar y pegar esto en un archivo en tu computador local, o iniciar sesión en tu servidor a&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">través de FTP</a>&nbsp;y descargar el archivo.</li>
+</ol>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215088748--DreamHost-puede-crear-un-CSR-por-m%C3%AD-" target="_self">¿Puede DreamHost crear un CSR por mí?</a></li>
+</ul>
+</div>

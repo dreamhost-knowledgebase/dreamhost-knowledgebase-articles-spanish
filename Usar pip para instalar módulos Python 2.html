@@ -1,0 +1,111 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Para correr comandos en este artículo, debes iniciar sesión en tu servidor vía SSH con tu usuario Shell. Ve los siguientes artículos para más información:</p>
+<ul>
+<li><a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="/hc/es/articles/216385837-Cómo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Cómo crear un usuario con acceso Shell (SSH)</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Crear un ambiente virtual para tu proyecto</h2>
+<div class="solvvy-solution">
+<p>Cuando estés trabajando con proyectos de Python, es siempre una buena idea crear un <a href="https://virtualenv.pypa.io/en/latest/" target="_self">virtualenv</a> (ambiente virtual). Esto te permite crear un ambiente asolado, separado de la versión del sistema de Python. Cualquier cambio a este que hagas a este ambiente laboral solo afecta el proyecto en sí, nada más. De esta manera, es seguro probar tus proyectos pues pueden ser eliminados y reconstruidos muy fácilmente. Vé el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="/hc/es/articles/215489338-Instalar-y-usar-virtualenv-con-Python-2" target="_self">Instalar y usar virtualenv con Python 2</a></li>
+</ul>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Esto es importante si quieres correr 'pip'. Normalmente, pip trata de instalar la carpeta del sistema por defecto de Python del servidor. Esto no funciona pues tú no tienes acceso a esta carpeta. Cuando creas un ambiente virtual, pip se instala localmente dentro del usuario, entonces vas a poder instalar cualquier cosa que quieras sin error.</p>
+</div>
+</div>
+</div>
+<h2>Instalación de pip</h2>
+<div class="solvvy-solution">
+<p>pip no está instalado por defecto. Solo está disponible si has instalado una versión personalizada de Python 2. Cuando instales una versión personalizada, pip está instalada con esto:</p>
+<ul>
+<li><a href="/hc/es/articles/115000218612-Instalar-una-versión-de-Python-2" target="_self">Instalar una versión de Python 2</a></li>
+</ul>
+<p>Puedes usar pip para crear un virtualenv, activarlo, y correr pup para instalar módulos.</p>
+</div>
+<h2>Actualizar pip</h2>
+<div class="solvvy-solution">
+<p>Después de instalar una versión personalizada de Python, debes <a href="/hc/es/articles/215489338-Instalar-y-usar-virtualenv-con-Python-2" target="_self">crear un virtualenv</a> que use esa versión personalizada. Una vez está creado y activado, puedes usar pip.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Para actualizar la versión de pip, debes usar un virtualenv. Si no creas un virtualenv usando una versión personalizada de Python 2, pip usará la versión del sistema. Esto hará fallar la actualización de pip o instalar paquetes pues no tienes acceso a ciertos directorios en el servidor.</p>
+<p>Si creas un virtualenv, tienes acceso total a actualizar e instalar lo que quieras.</p>
+</div>
+</div>
+<p>Es también una buena idea actualizar pip en este punto. Vé el siguiente artículo para ver instrucciones de cómo actualizar pip dentro de tu virtualenv:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215489338#actualizar_pip" target="_self">Actualizar pip en un virtualenv</a></li>
+</ul>
+</div>
+<h2>Instalar módulos personalizados</h2>
+<div class="solvvy-solution">
+<p>Se recomienda que uses pip (en tu ambiente virtual) para instalar fácilmente los módulos personalizados. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">pip install &lt;module&gt;</span></pre>
+</div>
+<p>Por ejemplo, (e.g., mysqlclient si quieres usar una base de datos MySQL) para tu sitio web usando pip:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">pip install mysqlclient</span></pre>
+</div>
+<p>Vé los siguientes enlaces para más detalles:</p>
+<ul>
+<li><a href="https://docs.python.org/3/installing/" target="_self">Instalar Módulos de Python</a></li>
+<li><a href="https://pypi.python.org" target="_self">Buscar Paquetes</a></li>
+</ul>
+<h3>Solución de problemas</h3>
+<p>Después de haber creado y activado tu virtualenv, puede que veas el siguiente error cuando instales paquetes con pip:</p>
+<div class="preboxcontainer">
+<pre class="prebox">SNIMissingWarning: An HTTPS request has been made, but the SNI (Server Name Indication) extension to TLS is not available on this platform.</pre>
+</div>
+<p>Esto usualmente significa que estás usando una versión de Python más vieja que 2.7.9. Para arreglar esto, instala estos tres paquetes de Python para actualizar las librerías viejas:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">pip install pyOpenSSL ndg-httpsclient pyasn1</span></pre>
+</div>
+<p>No deberás ver más esos errores cuando instales.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Recuerda que debido a la actualización de Linux Kernel, instalar una versión de Python menor a 2.7.15 fallará en todos los servidores de DreamHost. Si necesitas instalar una versión personalizada de Python, asegúrate que sea una más nueva a 2.7.15:</p>
+<ul>
+<li><a href="/hc/es/articles/115000218612-Instalar-una-versión-de-Python-2" target="_self">Instalar una versión de Python 2</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Si estás usando Python 3</h2>
+<div class="solvvy-solution">
+<p>Si estás usando Python 3, usa el comando 'pip3'. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">pip3 install mysqlclient</span></pre>
+</div>
+<p>Sin embargo, tendrás ya que instalar una versión personalizada Python 3 en un virtualenv:</p>
+<ul>
+<li><a href="/hc/es/articles/115000702772-Instalar-una-versión-personalizada-de-Python-3" target="_self">Instalar una versión personalizada de Python 3</a></li>
+<li><a href="/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3" target="_self">Instalar y usar virtualenv con Python 3</a></li>
+</ul>
+<p>Vé el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="/hc/es/articles/115000699011-Usar-pip3-para-instalar-módulos-de-Python3" target="_self">Usar pip3 para instalar módulos de Python3</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216137717-Python-overview" target="_self">Generalidades de Python</a></li>
+<li><a href="/hc/es/articles/115000218612-Instalar-una-versión-de-Python-2" target="_self">Instalar una versión de Python 2</a></li>
+<li><a href="/hc/es/articles/115000702772-Instalar-una-versión-personalizada-de-Python-3" target="_self">Instalar una versión personalizada de Python 3</a></li>
+<li><a href="/hc/es/articles/216128557-Pautas-para-configurar-un-archivo-Python-en-DreamHost" target="_self">Pautas para configurar un archivo Python en DreamHost</a></li>
+<li><a href="/hc/es/articles/215489338-Instalar-y-usar-virtualenv-con-Python-2" target="_self">Instalar y usar virtualenv con Python 2</a></li>
+<li><a href="/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3" target="_self">Instalar y usar virtualenv con Python 3</a></li>
+</ul>
+</div>
