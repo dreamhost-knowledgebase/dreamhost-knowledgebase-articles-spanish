@@ -1,0 +1,89 @@
+<h2>¿Qué son los encabezados http?</h2>
+<div class="solvvy-solution">
+<p>Los encabezados http son parte de una solicitud y respuesta HTTP. Definen los parámetros operativos de una transacción HTTP. Ve el siguiente enlace para más detalles.</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/List_of_HTTP_header_fields">Lista de campos de encabezados</a></li>
+</ul>
+<p>Puedes usar un archivo .htaccess para ajustar o agregar encabezados a tus encabezados de respuesta HTTP.</p>
+</div>
+<h2>Crear un archivo .htaccess en tu servidor web DreamHost</h2>
+<div class="solvvy-solution">
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo crear un archivo .htaccess en tu servidor web:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess#crear-un-archivo-htaccess">Creando un archivo .htaccess en tu servidor web DreamHost</a></li>
+</ul>
+<p>Si el archivo ya existe, ve los siguientes artículos para obtener instrucciones sobre cómo actualizarlo (dependiendo de si estás utilizando un cliente FTP o SSH):</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">Creando y editando un archivo por medio de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Creando y editando un archivo por medio de SSH</a></li>
+</ul>
+</div>
+<h2>Solución de problemas de encabezado para archivos PHP</h2>
+<div class="solvvy-solution">
+<p>Si observas que los encabezados que ha agregado a tu archivo .htaccess no funcionan correctamente con los archivos PHP, verifique si tu sitio se ejecuta en modo PHP CGI.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-" target="_self">¿Cómo cambio la versión PHP de mi sitio?</a></li>
+</ul>
+<p>Estas instrucciones explican cómo ver y cambiar la versión PHP de tu sitio. Al cambiar la versión, tienes las opciones de:</p>
+<ul>
+<li>CGI</li>
+<li>FastCGI</li>
+</ul>
+<p>Si tu sitio ya está utilizando CGI, intenta configurarlo en FastCGI. Esto debería resolver tus problemas de encabezado para archivos PHP.</p>
+</div>
+<h2><span id="Agregar_un_tipo_de_contenido_.3D_encabezado_UTF-8">Agregar un tipo de contenido = encabezado UTF-8</span></h2>
+<div class="solvvy-solution">
+<p>Utiliza uno de los siguientes en un archivo .htaccess para forzar el encabezado de tipo de contenido específico. Un <a href="https://www.w3.org/International/articles/http-charset/index">encabezado charset</a> especifica la codificación de caracteres del documento. Esto agrega el encabezado sin tener que usar una meta tag:</p>
+<div class="preboxcontainer">
+<pre class="prebox">AddDefaultCharset UTF-8   
+AddDefaultCharset ISO-8859-1
+</pre>
+</div>
+</div>
+<h2><span id="Adding_a_language_header">Agregar un encabezado de idioma</span></h2>
+<div class="solvvy-solution">
+<p>Usa lo siguiente en un archivo .htaccess para especificar un encabezado de idioma. Esto agrega el encabezado sin tener que usar una meta tag:</p>
+<div class="preboxcontainer">
+<pre class="prebox">DefaultLanguage en-us</pre>
+</div>
+</div>
+<h2>Encabezados Cache-Control</h2>
+<div class="solvvy-solution">
+<p>Uno de los encabezados más comunes para agregar a una página es Cache-Control. Esto define la cantidad de tiempo que se debe almacenar en caché un archivo.</p>
+<p>Por ejemplo, si el encabezado Cache-Control se establece en 5 minutos, un navegador descargará el archivo y lo almacenará en caché durante cinco minutos. Después de que hayan transcurrido 5 minutos, el archivo deberá recuperarse nuevamente del servidor.</p>
+<h3>Ejemplo</h3>
+<p>Este ejemplo permite que cualquier visitante guarde en caché la página durante 5 minutos.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Header set Cache-Control "max-age=300, public"</pre>
+</div>
+<h3>Sintaxis</h3>
+<p><strong>max-age</strong> se establece en segundos.</p>
+<p>La directiva de almacenamiento en caché es la siguiente. Puede ser 'público', 'privado' o 'sin tienda'. Muy a menudo, desea mantener esto como 'público' para que se aplique a todos los visitantes.</p>
+</div>
+<h2>Uso del encabezado HTTP 'Vary' para sitios móviles</h2>
+<div class="solvvy-solution">
+<p>Vea el siguiente enlace de Google que explica en detalle cómo usar el encabezado "Variar" para un sitio móvil:</p>
+<ul>
+<li><a href="https://developers.google.com/webmasters/mobile-sites/mobile-seo/dynamic-serving#the-vary-http-header">El encabezado Vary HTTP </a></li>
+</ul>
+</div>
+<h2>Encabezados de seguridad</h2>
+<div class="solvvy-solution">Hay varios encabezados dedicados a asegurar su sitio web. Consulte el siguiente artículo para ver ejemplos de encabezados de seguridad.
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360036486952-Security-headers" target="_self">Encabezado de Seguridad</a>&nbsp;</li>
+</ul>
+</div>
+<h2>Habilitando CORS</h2>
+<div class="solvvy-solution">
+<p>Consulta el siguiente artículo para obtener información sobre cómo configurar los encabezados CORS.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360037198972-CORS-headers" target="_self">Encabezados CORS</a></li>
+</ul>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216456227--htaccess-overview">Generalidades sobre .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/217738987-What-can-I-do-with-an-htaccess-file-">¿Qué puedo hacer con un archivo .htaccess?</a></li>
+</ul>
+</div>
