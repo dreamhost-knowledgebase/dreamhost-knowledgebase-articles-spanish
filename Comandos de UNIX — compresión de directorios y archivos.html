@@ -1,0 +1,95 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Los sitios web a menudo te permitirán descargar un sólo archivo comprimido que contiene muchos otros archivos. Esto facilita y agiliza la descarga a través de tu navegador, ya que el archivo es más pequeño que la carpeta que contiene todos los archivos. Estos archivos comprimidos generalmente terminan con estas extensiones:</p>
+<ul>
+<li>.zip</li>
+<li>.gz</li>
+<li>.tar.gz</li>
+<li>.tar.bz2</li>
+</ul>
+<p>Puedes descomprimirlos en tu computadora utilizando el software de tu computadora. De lo contrario, puedes cargar el archivo comprimido en su servidor web y descomprimirlo allí utilizando los comandos que se encuentran en el siguiente artículo.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115002768331-Comandos-UNIX-Descomprimiendo-archivos" target="_self">Comandos UNIX — Descomprimir archivos</a></li>
+</ul>
+<p>Pero, ¿qué pasa si necesitas hacer lo contrario? ¿Qué sucede si necesitas comprimir carpetas en tu servidor web para poder descargarlas en tu computadora local? Todo lo que necesitas hacer es iniciar sesión en su servidor a través de SSH y ejecutar los comandos que se muestran a continuación.</p>
+</div>
+<h2>Comprimir un directorio</h2>
+<div class="solvvy-solution">
+<h3>Comprimir a un archivo .zip</h3>
+<p>Puedes usar el comando 'zip' para comprimir una carpeta llena de archivos. Por ejemplo, si tienes un sitio de WordPress llamado 'example.com', es posible que desees comprimir todos los archivos y carpetas dentro de él antes de descargarlo.</p>
+<p>El siguiente comando comprime el directorio llamado 'example.com' y crea un nuevo archivo zip llamado 'example.com.zip'. El directorio original permanece intacto.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">zip -r example.com.zip example.com</span></pre>
+</div>
+<p>Puedes usar la configuración de compresión máxima (-9) que intentará comprimir todos los archivos. Sin embargo, esto puede ser más lento:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">zip -9 -r example.com.zip example.com<br /></span></pre>
+</div>
+<h3>Comprimir a un archivo .tar.gz</h3>
+<p>El siguiente comando usa 'tar' para comprimir un directorio de 'imágenes' en un archivo llamado image_backup.tar.gz.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ <span class="command">tar zcvf image_backup.tar.gz images</span></span></pre>
+</div>
+<p>La carpeta original seguirá existiendo.</p>
+<h3>Comprimir a un archivo .tar.bz2</h3>
+<p>El siguiente comando usa 'tar' para comprimir un directorio de 'imágenes' en un archivo llamado image_backup.tar.bz2.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ <span class="command">tar cjvf image_backup.tar.bz2 images</span></span></pre>
+</div>
+<p>La carpeta original seguirá existiendo.</p>
+</div>
+<h2>Comprimir archivos</h2>
+<div class="solvvy-solution">
+<h3>Comprimir un archivo usando GZIP</h3>
+<p>Los comandos anteriores muestran cómo comprimir un directorio completo. Sin embargo, a veces solo necesitarás comprimir un solo archivo. Para lograr esto, puedes usar gzip. El siguiente comando comprime un archivo llamado test.log y lo renombra test.log.gz. Tenga en cuenta que el archivo 'test.log' ya no existirá ya que se ha comprimido.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ <span class="command">gzip test.log</span></span></pre>
+</div>
+<p>Si aún necesitas el archivo 'test.log' para existir, ejecuta lo siguiente en su lugar. Esto crea una copia comprimida del archivo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ <span class="command">gzip -c test.log &gt; test.log.gz</span></span></pre>
+</div>
+</div>
+<h2>Confirmar que tu carpeta ha sido comprimida</h2>
+<div class="solvvy-solution">
+<p>Una vez que ejecutes los comandos anteriores, verifica que el directorio se haya comprimido. Puedes hacer esto usando du -sh para los directorios antiguos y nuevos.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">du -sh example.com.zip</span>
+30M example.com_backup
+<span class="server">[server]$ </span><span class="command">du -sh example.com</span>
+82M example.com</pre>
+</div>
+<p>Puedes ver arriba que la copia de seguridad comprimida es más pequeña que la carpeta original.</p>
+</div>
+<h2>¿Qué comando comprime más un directorio?</h2>
+<div class="solvvy-solution">
+<p>A continuación se muestra cuánto se comprime un sitio de WordPress usando las diferentes opciones de compresión.</p>
+<p>Primero, verifica el tamaño del directorio de WordPress. Esto muestra que es 82M.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">du -sh example.com</span>
+82M example.com</pre>
+</div>
+<p>Los siguientes son los resultados de los diferentes métodos de compresión.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">du -sh example.com.zip</span>
+30M example.com.zip
+<span class="server">[server]$ </span><span class="command">du -sh example.com.tar.gz</span>
+27M example.com.tar.gz
+<span class="server">[server]$ </span><span class="command">du -sh example.com.tar.bz2</span>
+24M example.com.tar.bz2
+</pre>
+</div>
+<p>En general, tar.bz2 comprime más.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<h3>Enlaces Internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215465297-UNIX-commands-Working-with-directories" target="_self">Comandos de UNIX — Trabajar con los directorios</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214750848-UNIX-commands-Working-with-files" target="_self">Comandos de UNIX — Trabajar con los directorios</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214750918-Comandos-UNIX-Cambiar-propiedad" target="_self">Comandos de UNIX — Cambiar propiedad</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">Comandos de UNIX — Cambiar permisos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115002768331-Comandos-UNIX-Descomprimiendo-archivos" target="_self">Comandos de UNIX — Archivos descompresos</a></li>
+</ul>
+</div>

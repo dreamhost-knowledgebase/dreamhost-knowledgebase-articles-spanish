@@ -1,0 +1,121 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica cómo configurar el inicio de sesión sin contraseña con PuTTY. Asegúrate de haber&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215464538-How-do-I-configure-PuTTY-" target="_self">configurado PuTTY</a>&nbsp;antes de continuar con este artículo.</p>
+</div>
+<h2>Configuración de inicio de sesión sin contraseña</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Abre el archivo puttygen.exe que&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215464538-How-do-I-configure-PuTTY-" target="_self">descargaste al configurar PuTTY</a>.&nbsp;Lo usarás para crear tu par de claves privada/pública.</li>
+<li>En el cuadro Generador de claves PuTTY, asegúrate de que el botón de opción en la parte inferior esté seleccionado para 'RSA'.<br />
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/02_putty_keygen.png" alt="02 putty keygen.png" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón <strong>Generar</strong>.</li>
+<li>Mueve el mouse alrededor de la caja para ayudar a generar las claves.<br />
+<dl>
+<dd><em>Una vez que se crea la clave, aparece un nuevo cuadro emergente:</em></dd>
+</dl>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/03_pubkey.png" alt="03 pubkey.png" /></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" /></div>
+<div class="alert-content">
+<ul>
+<li>En la parte inferior derecha, hay botones <strong>Save public key</strong> y <strong>Save private key</strong>&nbsp;– guarda ambos en tu computadora.</li>
+<li>Cuando guardes la clave pública, asígnale un nombre similar a "dreamhostpublickey". No agregues manualmente la extensión, ya que no es necesario.</li>
+<li>Cuando guardes la clave privada, asígnale un nombre similar a "dreamhostprivatekey" y asegúrate de guardarla en una ubicación segura en su computadora. Nuevamente, no agregues manualmente la extensión, ya que no es necesario.</li>
+<li>Al guardar, aparece un mensaje sobre una frase de contraseña.<br />
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/putty_passphrase.png" alt="putty_passphrase" /></dd>
+</dl>
+Haz clic en <strong>Yes</strong> para guardar sin una frase de contraseña.</li>
+</ul>
+</div>
+</div>
+</li>
+<li>Carga la clave pública que acabas de crear en el directorio de inicio de los usuarios de DreamHost. Para hacer esto, puedes usar un&nbsp;<a href="/hc/en-us/articles/215613107-List-of-FTP-client-software" target="_self">Cliente FTP</a> como Filezilla.</li>
+<li>Inicia sesión en tu servidor web DreamHost a través de PuTTY.</li>
+<li>Navega al directorio del usuario.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li>Crea un directorio /.ssh ejecutando este comando<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir .ssh</span></pre>
+</div>
+</li>
+<li>Cambie los permisos en este directorio a 700.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 700 .ssh</span></pre>
+</div>
+</li>
+<li>Mientras todavía está en el directorio de inicio de su usuario, agregue la clave pública que acaba de cargar a un nuevo archivo llamado 'authorized_keys' que se encuentra en el directorio /.ssh ejecutando este comando:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh-keygen -i -f dreamhostpublickey &gt;&gt; ~/.ssh/authorized_keys</span></pre>
+</div>
+<p>Esto agrega el dreamhostpublickey que cargó desde tu computadora a un nuevo archivo llamado 'authorized_keys'. Solo asegúrate de que el nombre del archivo de clave pública, en el comando, sea el nombre del archivo que cargaste.</p>
+</li>
+<li>Ajusta los permisos ejecutando este comando:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 600 ~/.ssh/authorized_keys</span></pre>
+</div>
+<p>Luego, elimina el archivo original dreamhostkey.pub:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rm dreamhostpublickey</span></pre>
+</div>
+<p>Ahora la clave se encuentra en el servidor (protegida del acceso de otros)</p>
+</li>
+<li>Sal de PuTTY y vuelve a iniciar el programa.</li>
+<li>Cuando el programa se reinicie, abre el cuadro de configuración y haz clic en la categoría 'Conexión&gt; Datos' a la izquierda.<br />
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/04_username.png" alt="04 username.png" /></dd>
+</dl>
+</li>
+<li>Ingresa tu nombre de usuario SHELL en el primer campo que se llama usuario 'Auto-login'.<br />
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/05_auth.png" alt="05 auth.png" /></dd>
+</dl>
+</li>
+<li>En el mismo cuadro de configuración, haz clic en 'Conexión'&gt; 'SSH&gt; Auth'.</li>
+<li>Haz clic en el botón <strong>Browse</strong> y navega hasta la ubicación en tu computadora donde guardaste el archivo de dreamhostprivatekey.<br />
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/06_sessions.png" alt="06_sessions.png" /></dd>
+</dl>
+</li>
+<li>En el cuadro de configuración, haz clic en la categoría 'Sesión' e ingresa la siguiente información:<br />
+<ul>
+<li><strong>Host Name</strong>: Tu servidor.dreamhost.com (<a href="https://help.dreamhost.com/hc/en-us/articles/115000675027#Finding_your_FTP_server_hostname" target="_self">Este es el nombre de tu servidor DreamHost</a>)</li>
+<li><strong>Port</strong>: 22</li>
+<li><strong>Connection Type</strong>: SSH</li>
+<li><strong>Saved Session</strong>: Ingresa un nombre nuevo</li>
+</ul>
+</li>
+<li>Haz clic en el botón <strong>Save</strong>.</li>
+<li>Abre PuTTY y haz clic en la nueva sesión guardada que creaste para el inicio de sesión sin contraseña, luego haz clic en el botón <strong>Open</strong>. Has iniciado sesión sin una solicitud de contraseña.</li>
+</ol>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" /></div>
+<div class="alert-content">
+<p>Si la consola PuTTY responde con "Servidor rechazó nuestra clave", esto puede indicar que la clave pública que PuTTY generaste no está en una forma que el sistema remoto reconozca o pueda usar para autenticar tu acceso. Consulta el siguiente enlace para obtener instrucciones sobre cómo editar el archivo de clave pública en un formato que el servidor remoto reconozca:</p>
+<ul>
+<li><a href="http://www.walkernews.net/2009/03/22/how-to-fix-server-refused-our-key-error-that-caused-by-putty-generated-rsa-public-key/">http://www.walkernews.net/2009/03/22/how-to-fix-server-refused-our-key-error-that-caused-by-putty-generated-rsa-public-key/</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215464538-How-do-I-configure-PuTTY-" target="_self">¿Cómo configurar PuTTY?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216109837-PuTTY-binary-files" target="_self">Archivos binarios de PuTTY</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215466658-Troubleshooting-PuTTY" target="_self">Solución de Problemas en PuTTY</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/en-us/articles/216499537-How-to-configure-passwordless-login-in-Mac-OS-X-and-Linux" target="_self">Cómo configurar el inicio de sesión sin contraseña en Mac OS X y Linux</a></li>
+</ul>
+</div>

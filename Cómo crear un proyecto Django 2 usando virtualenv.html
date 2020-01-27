@@ -1,0 +1,246 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este artículo muestra cómo crear un proyecto Django (versión 2+). Si necesitas crear un proyecto Django (versión 1), consulta el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215319648-How-to-create-a-Django-project-using-virtualenv" target="_self">Como crear un proyecto Django 1 usando virtualenv</a></li>
+</ul>
+<p>Visita el siguiente artículo para ver qué versiones de Python son compatibles con versiones específicas de Django:</p>
+<ul>
+<li><a href="https://docs.djangoproject.com/en/2.0/faq/install/#what-python-version-can-i-use-with-django" target="_self">¿Qué versión Python puedo usar con Django?</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>¿Qué versión de Python es compatible con Django 2?</h2>
+<div class="solvvy-solution">
+<p>Debes usar Python 3.4 o superior para usar Django 2. Visita la siguiente tabla para obtener una lista completa de versiones compatibles:</p>
+<ul>
+<li><a href="https://docs.djangoproject.com/en/2.0/faq/install/#what-python-version-can-i-use-with-django" target="_self">¿Qué versión de Python puedo usar con Django?</a></li>
+</ul>
+</div>
+<h2>Configuración inicial</h2>
+<div class="solvvy-solution">
+<p>Primero, asegúrate de haber instalado una versión personalizada de Python y creado un entorno virtual en el directorio de tu sitio web:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000702772-Instalar-una-versi%C3%B3n-personalizada-de-Python-3" target="_self">Instalar una versión personalizada de Python 3</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3" target="_self">Instalar y usar el virtualenv de Python usando Python 3</a></li>
+</ul>
+<p>Luego, instala Django en su virtualenv:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215317948-C%C3%B3mo-instalar-Django-usando-virtualenv" target="_self">Cómo instalar Django usando virtualenv</a></li>
+</ul>
+<p>Finalmente, habilita Passenger en tu dominio.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216385637-How-do-I-enable-Passenger-on-my-domain-" target="_self">¿Cómo habilitar Passenger en mi dominio?</a></li>
+</ul>
+</div>
+<h2>Creando un proyecto Django</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Para ejecutar los comandos en este artículo, debes iniciar sesión en tu servidor a través de SSH con tu usuario de Shell. Visita los siguientes artículos para obtener más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades SSH </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Crear un usuario con acceso Shell (SSH)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo por medio de SSH</a></li>
+</ul>
+</div>
+</div>
+<p>Las siguientes instrucciones asumen que has creado un entorno virtual titulado 'my_project' usando los enlaces de arriba.</p>
+<ol>
+<li>Ejecute los siguientes comandos para crear tu proyecto Django dentro de este entorno:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd $HOME/example.com</span>
+<span class="server">[server]$ </span><span class="command">source $HOME/example.com/venv/bin/activate</span>
+<span class="server">(venv) [server]$ </span><span class="command">python3 venv/bin/django-admin.py startproject &lt;projectname&gt;</span></pre>
+</div>
+<ul>
+<li>Reemplaza 'example.com' con tu nombre de dominio.</li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Cuando ejecutas el comando 'startproject', crea una nueva carpeta en el directorio de tu sitio llamada cualquiera que sea el nombre de tu proyecto Django.</p>
+</div>
+</div>
+</li>
+<li>Para que Passenger pueda recoger tu proyecto, crea un archivo passenger_wsgi.py dentro del directorio de nivel superior de tu sitio (/home/username/example.com). Agregua lo siguiente:<br />
+<div class="preboxcontainer">
+<pre class="prebox">import sys, os
+INTERP = "<span class="command">/home/username/example.com/venv/bin/python3</span>"
+#INTERP is present twice so that the new python interpreter <br />#knows the actual executable path 
+if sys.executable != INTERP: os.execl(INTERP, INTERP, *sys.argv)
+
+cwd = os.getcwd()
+sys.path.append(cwd)
+sys.path.append(cwd + '/<span class="command">djangoprojectname</span>')  #You must add your project here
+
+sys.path.insert(0,cwd+'<span class="command">/venv/bin</span>')
+sys.path.insert(0,cwd+'<span class="command">/venv/lib/python3.6/site-packages</span>')
+
+os.environ['DJANGO_SETTINGS_MODULE'] = "<span class="command">djangoprojectname</span>.settings"
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Asegúrate de reemplazar lo siguiente en el archivo passenger_wsgi.py:</p>
+<ul>
+<li>La ruta a tu versión local de Python en la línea # 2. Ejecuta <span class="code">which python3</span> para confirmar:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">which python3</span>
+<span class="cmdoutput">/home/username/example.com/venv/bin/python3</span></pre>
+</div>
+</li>
+<li>Tu nombre de proyecto virtualenv en las líneas 11 y 12</li>
+<li>Tu nombre de proyecto Django en las líneas 9 y 14</li>
+<li>Tu versión de Python3 en la línea 1212</li>
+</ul>
+</div>
+</div>
+</li>
+<li>Configura los ajustes de archivo estático de Django para servir correctamente las imágenes, CSS y JavaScript, ya que lo necesitarás para que funcione la interfaz de administración. Por ejemplo:<br />
+<ul>
+<li>Abra el archivo settings.py del proyecto que se encuentra en <strong>example.com/projectname/projectname/settings.py</strong>. Desplácese hasta la parte inferior y verá que STATIC_URL probablemente esté configurado en /static/.</li>
+<li>Agrega otra línea para establecer la ubicación en el servidor del directorio estático real:</li>
+</ul>
+<dl>
+<dd>
+<div class="preboxcontainer">
+<pre class="prebox">STATIC_ROOT = os.path.dirname(BASE_DIR) + '/public/static/'</pre>
+</div>
+</dd>
+</dl>
+</li>
+<li>En tu directorio /home/username/example.com/, asegúrate de crear este directorio /static.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">cd $HOME/example.com/public</span>
+<span class="server">(venv) [server]$ </span><span class="command">mkdir static</span></pre>
+</div>
+<ul>
+<li>Esta será la ubicación donde Django colocará todos tus archivos estáticos – no debes colocar cosas aquí manualmente, ya que se sobrescribe. Ver el siguiente enlace para más detalles:</li>
+</ul>
+<dl>
+<dd><a href="https://docs.djangoproject.com/en/1.8/howto/static-files/">https://docs.djangoproject.com/en/1.8/howto/static-files/</a></dd>
+</dl>
+</li>
+<li>Ejecuta el comando collectstatic para configurar los elementos estáticos para la interfaz de administración:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">cd $HOME/example.com/projectname/</span>
+<span class="server">(venv) [server]$ </span><span class="command">python3 manage.py collectstatic</span></pre>
+</div>
+</li>
+<li>Configura tu base de datos según sea necesario dentro del archivo settings.py. La sección del archivo settings.py originalmente se ve así:<br />
+<div class="preboxcontainer">
+<pre class="prebox">DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+</pre>
+</div>
+</li>
+<li>Edita para hacer las siguientes adiciones con las&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">credenciales de tu base de datos actual</a>:
+<div class="preboxcontainer">
+<pre class="prebox">DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mydatabase',
+        'USER': 'mydatabaseuser',
+        'PASSWORD': 'mypassword',
+        'HOST': 'mysql.example.com',
+        'PORT': '3306',
+    }
+}
+</pre>
+</div>
+</li>
+<li>El valor predeterminado es usar sqlite3, que puede ser adecuado para los sitios más pequeños, pero es probable que desees configurar una base de datos mysql.</li>
+<li>También en tu archivo settings.py, actualiza el campo ALLOWED_HOSTS con tu nombre de dominio. Al principio, parece así:<br />
+<div class="preboxcontainer">
+<pre class="prebox">ALLOWED_HOSTS = []</pre>
+</div>
+Actualízalo para incluir tu nombre de dominio.<br />
+<div class="preboxcontainer">
+<pre class="prebox">ALLOWED_HOSTS = ['example.com' , 'www.example.com']</pre>
+</div>
+</li>
+<li>Asegúrate de estar en el directorio de tu proyecto:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">cd ~/example.com/&lt;projectname&gt;</span></pre>
+</div>
+</li>
+<li>Asegúrate de que mysqlclient esté instalado.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">pip3 install mysqlclient</span></pre>
+</div>
+</li>
+<li>Una vez configurado, ejecuta migrate en el directorio de tu proyecto:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">python3 manage.py migrate</span>
+Operations to perform:<br /> Apply all migrations: admin, auth, contenttypes, sessions<br />Running migrations:<br /> Applying contenttypes.0001_initial... OK<br /> Applying auth.0001_initial... OK<br /> Applying admin.0001_initial... OK<br /> Applying admin.0002_logentry_remove_auto_add... OK<br /> Applying contenttypes.0002_remove_content_type_name... OK<br /> Applying auth.0002_alter_permission_name_max_length... OK<br /> Applying auth.0003_alter_user_email_max_length... OK<br /> Applying auth.0004_alter_user_username_opts... OK<br /> Applying auth.0005_alter_user_last_login_null... OK<br /> Applying auth.0006_require_contenttypes_0002... OK<br /> Applying auth.0007_alter_validators_add_error_messages... OK<br /> Applying auth.0008_alter_user_username_max_length... OK<br /> Applying sessions.0001_initial... OK</pre>
+</div>
+</li>
+<li>Crea un superusuario:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">python3 manage.py createsuperuser</span>
+<span class="cmdoutput">Username (leave blank to use 'username'): my_django_user
+Email address: email@example.com
+Password:
+Password (again):
+Superuser created successfully.</span></pre>
+</div>
+</li>
+<li>Navega a tu directorio /home/username/example.com.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">cd /home/username/example.com</span></pre>
+</div>
+</li>
+<li>Agrega un archivo /tmp/restart.txt:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">mkdir tmp</span>
+<span class="server">(venv) [server]$ </span><span class="command">cd tmp</span>
+<span class="server">(venv) [server]$ </span><span class="command">touch restart.txt</span></pre>
+</div>
+</li>
+<li>Cada vez que realices un cambio en tu configuración, asegúrate de ejecutar lo siguiente en el directorio de tu sitio para notificar a Passenger del cambio:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">touch tmp/restart.txt</span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2>Confirmar que la instalación fue exitosa</h2>
+<div class="solvvy-solution">
+<p>Visita tu página web.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-04_django-create-project.png" alt="" /></dd>
+</dl>
+<p>Ahora deberías ver la página de retención estándar de Django y poder acceder a la consola de administración en example.com/admin/.</p>
+</div>
+<h2>Solución de problemas</h2>
+<div class="solvvy-solution">
+<p>Si observas algún error después de la instalación, verifica si tienes un archivo .htaccess en los directorios de tu sitio. Es posible que el código en él pueda causar problemas con tu instalación.</p>
+<h3>ModuleNotFoundError: No module named 'django'</h3>
+<p>Si ves este error cuando visitas tu sitio, verifica tu archivo passenger_wsgi.py. Confirma los siguientes puntos de línea a tu versión personalizada de Python. Por ejemplo, debería ser 3.6 o 3.7 si instalaste una de esas versiones.</p>
+<div class="preboxcontainer">
+<pre class="prebox">sys.path.insert(0,cwd+'/venv/lib/python3.7/site-packages')</pre>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215319598-Django-overview" target="_self">Generalidades sobre Django</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215317948-C%C3%B3mo-instalar-Django-usando-virtualenv" target="_self">Cómo instalar Django usando virtualenv</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215317698-Django-troubleshooting" target="_self">Solución de problemas Django</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216137717-Python-overview" target="_self">Generalidades sobre Python</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3" target="_self">Instalar y usar virtualenv con Python 3</a></li>
+</ul>
+</div>

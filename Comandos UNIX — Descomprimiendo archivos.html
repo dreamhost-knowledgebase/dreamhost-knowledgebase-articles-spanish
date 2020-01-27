@@ -1,0 +1,128 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Los sitios web a menudo te permiten descargar un solo archivo comprimido que contiene muchos otros archivos. Esto facilita y agiliza la descarga a través de tu navegador, ya que el archivo es más pequeño que la carpeta que contiene todos los archivos. Estos archivos comprimidos generalmente terminan con estas extensiones:</p>
+<ul>
+<li>.zip</li>
+<li>.gz</li>
+<li>.tar.gz</li>
+<li>.tar.bz2</li>
+</ul>
+<p>Puedes descomprimirlos en tu computadora utilizando el software de tu computadora. De lo contrario, puedes cargar el archivo comprimido en tu servidor web y descomprimirlo allí. Esto requiere que inicies sesión en el servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>&nbsp;y ejecutes un comando.</p>
+</div>
+<h2>Banderas utilizadas para descomprimir archivos</h2>
+<div class="solvvy-solution">
+<p>Los comandos unzip y tar se muestran a continuación. Cada uno tienes varias banderas que puedes (o debes) usar para descomprimir el archivo.</p>
+<h3>Banderas zip</h3>
+<p>Visita la&nbsp;<a href="https://linux.die.net/man/1/zip" target="_self">página del manual de zip Linux</a>&nbsp;para más información.</p>
+<h3>Banderas tar</h3>
+<ul>
+<li>f =&nbsp;Informa al comando tar que el siguiente parámetro es el nombre del archivo.</li>
+<li>j =&nbsp;Filtra el archivo a través de bzip2.</li>
+<li>v =&nbsp;Detallado (opcional). Muestra los archivos a medida que se descomprimen.</li>
+<li>x = Extrae archivos de un archivo.</li>
+<li>z = Filtra el archivo a través de gzip.</li>
+<li>C = Envía la salida a un directorio específico.</li>
+</ul>
+</div>
+<h2>.zip (Archivo Zip)</h2>
+<div class="solvvy-solution">
+<p>Los archivos ZIP terminan con la extensión .zip. Ejecuta lo siguiente para descomprimir:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">unzip filename.zip</span>
+Archive:  filename.zip
+  inflating: list
+  inflating: of
+  inflating: files
+  inflating: being
+  inflating: uncompressed
+  inflating: from
+  inflating: the
+  inflating: zip
+  inflating: archive
+</pre>
+</div>
+<p>Todos los archivos se extraen en el directorio donde ejecutó el comando. Ver el siguiente sitio para más información:</p>
+<ul>
+<li><a href="https://linux.die.net/man/1/zip">https://linux.die.net/man/1/zip</a></li>
+</ul>
+</div>
+<h2><span id="gzip">.gz (Gzip)</span></h2>
+<div class="solvvy-solution">
+<p>Los archivos GZIP terminan con la extensión .gz. El comando gunzip descomprime un archivo para que pueda abrirlo normalmente. Este comando es particularmente importante para los usuarios de DreamHost. En el directorio de inicio de tu sitio web hay una carpeta de registro que almacena tus archivos error.log y access.log. Consulta el siguiente artículo para obtener más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP" target="_self">Ver tus logs de acceso y error por medio de SFTP</a></li>
+</ul>
+<p>Los registros más antiguos terminan con .gz. Puedes usar el siguiente comando para descomprimir un archivo de registro y ver su contenido:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">gunzip error.log.2018-04-11.gz</span></pre>
+</div>
+<p>No hay salida cuando descomprimes el archivo. Ejecuta ls -la para ver el directorio en el que acabas de ejecutar el comando. Verás que el archivo ya no termina con .gz, y ahora puedes abrirlo en cualquier editor de texto normal para ver su contenido. Ver el siguiente sitio para más información:</p>
+<ul>
+<li><a href="https://linux.die.net/man/1/gzip">https://linux.die.net/man/1/gzip</a></li>
+</ul>
+</div>
+<h2>.tar</h2>
+<div class="solvvy-solution">
+<p>Los archivos TAR terminan con la extensión .tar. Por defecto, los archivos .tar no están comprimidos, solo archivan varios archivos en un solo archivo. Si un archivo .tar se comprimiera, terminaría con .tar.gz o tar.bz2.</p>
+<p>Sin embargo, aún puedes abrir un archivo .tar de manera similar a un archivo .tar comprimido. Ejecuta los siguientes comandos para abrir un archivo .tar:</p>
+<p><strong>Extraer en el directorio actual</strong></p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar xvf filename.tar</span></pre>
+</div>
+<p>El contenido se extrae en el directorio actual.</p>
+<h4><strong>Extraer en un directorio diferente</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar xvf filename.tar -C /home/user/</span></pre>
+</div>
+<p>El contenido se extrae en el directorio /home/user. Ver el siguiente sitio para más información:</p>
+<ul>
+<li><a href="https://linux.die.net/man/1/tar">https://linux.die.net/man/1/tar</a></li>
+</ul>
+</div>
+<h2>.tar.gz</h2>
+<div class="solvvy-solution">
+<p>Los archivos TAR comprimidos terminan con la extensión .tar.gz. Ejecute los siguientes comandos para descomprimir un archivo:</p>
+<h4><strong>Extraer en el directorio actual</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar xvzf filename.tar.gz</span>
+</pre>
+</div>
+<p>Esto crea una nueva carpeta en tu directorio que se llama igual que el archivo.</p>
+<h4><strong>Extraer en un directorio diferente</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar -zxvf backup2.tar.gz -C /home/user/</span>
+</pre>
+</div>
+<p>Esto extrae los archivos en una carpeta en su directorio /home/user/. Ver el siguiente sitio para más información:</p>
+<ul>
+<li><a href="https://linux.die.net/man/1/tar">https://linux.die.net/man/1/tar</a></li>
+</ul>
+</div>
+<h2><span id="tarbz2">.tar.bz2</span></h2>
+<div class="solvvy-solution">
+<p>Los archivos Bzipped2 terminan con la extensión .tar.bz2. Ejecuta los siguientes comandos para descomprimir un archivo:</p>
+<h4><strong>Extraer en el directorio actual</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar xvjf filename.bz2</span></pre>
+</div>
+<p>Esto crea una nueva carpeta en tu directorio que se llama igual que el archivo.</p>
+<h4><strong>Extraer en un directorio diferente</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar xvjf filename.bz2&nbsp;-C /home/user/</span></pre>
+</div>
+<p>Esto extrae los archivos en una carpeta en tu directorio /home/user/. Ver el siguiente sitio para más información:</p>
+<ul>
+<li><a href="https://linux.die.net/man/1/tar">https://linux.die.net/man/1/tar</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<h3>Links internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215465297-UNIX-commands-Working-with-directories" target="_self">Comandos UNIX — Trabajando con Directorios</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214750848-UNIX-commands-Working-with-files" target="_self">Comandos UNIX — Trabajando con archivos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214750918-Comandos-UNIX-Cambiar-propiedad" target="_self">Comandos UNIX — Cambiar propiedad </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">Comandos UNIX — Cambiar permisos</a></li>
+</ul>
+</div>
