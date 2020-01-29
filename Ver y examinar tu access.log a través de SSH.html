@@ -1,0 +1,249 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Es posible que encuentres abuso de IP específicas, y a menudo esto se debe a que los bots golpean tu sitio. Sin embargo, también puedes encontrar direcciones IP que no están asociadas con los robots que navegan demasiado en tu sitio.</p>
+<p>Esta sección enumera algunos comandos que puedes ejecutar a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>&nbsp;para ayudar a identificar qué IP están afectando tu sitio.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los registros se rotan diariamente, lo que significa que solo hay unos pocos días en cualquier momento. Si necesitas registros a largo plazo, debes respaldarlos continuamente. Por reciente&nbsp;<a href="https://ec.europa.eu/commission/priorities/justice-and-fundamental-rights/data-protection/2018-reform-eu-data-protection-rules_en">GDPR</a>&nbsp;(Mayo 2018), DreamHost almacena registros HTTP de forma predeterminada durante 3 días.</p>
+</div>
+</div>
+</div>
+<h2>Iniciar sesión en tu servidor</h2>
+<div class="solvvy-solution">
+<p>Para ejecutar los siguientes comandos, primero debes iniciar sesión en tu servidor a través de SSH:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+</ul>
+<p>Después de iniciar sesión, navega al directorio de registros correcto.</p>
+<h3>¿Qué directorio de registros debo ver?</h3>
+<p>Si ha agregado un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041537-Generalidades-sobre-certificados-SSL" target="_self">certificado SSL</a> a su sitio web, verá dos carpetas. Uno para / http y otro para / https. Por ejemplo:&nbsp;</p>
+<ul>
+<li>/logs/example.com/http</li>
+<li>/logs/example.com/https</li>
+</ul>
+<p>Si visitas tu sitio y ves que está usando HTTPS en la URL (https://example.com), esto significa que debes ver el directorio/https. Si tu sitio muestra HTTP cuando lo visitas, deberías ver el directorio/http en su lugar. Los siguientes ejemplos asumen que tu sitio está usando HTTPS.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/logs/example.com/https</span></pre>
+</div>
+<p>Aquí es donde ejecutará los siguientes comandos.</p>
+</div>
+<h2><span id="Listing_IP_hits">Listado de visitas de IP</span></h2>
+<div class="solvvy-solution">
+<table class="wikitable">
+<tbody>
+<tr style="font-style: bold;">
+<th bgcolor="#F2F2F2">Comando</th>
+<th bgcolor="#F2F2F2">Descripción</th>
+</tr>
+<tr>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat access.log| awk '{print $1}' | sort | uniq -c |sort -n</span></pre>
+</div>
+</td>
+<td>Genera una lista de direcciones IP precedida por la cantidad de veces que llega a un sitio.</td>
+</tr>
+<tr>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tail -10000 access.log| awk '{print $1}' | sort | uniq -c |sort -n</span></pre>
+</div>
+</td>
+<td>Genera una lista que muestra los últimos 10,000 accesos a un sitio.</td>
+</tr>
+<tr>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">host 66.249.66.167</span>
+<span class="cmdoutput">167.66.249.66.in-addr.arpa domain name pointer crawl-66-249-66-167.googlebot.com</span>
+</pre>
+</div>
+</td>
+<td>El comando 'host' determina la compañía de hosting desde la cual una IP específica está golpeando un sitio. En este ejemplo, la IP pertenece a Google.</td>
+</tr>
+<tr>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tail -f -q access.log</span></pre>
+</div>
+</td>
+<td>Mira los registros de su servidor en tiempo real para ver si el problema se presenta con una IP específica (para problemas intermitentes).</td>
+</tr>
+<tr>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox">order allow,deny
+deny from 66.249.66.167
+allow from all 
+</pre>
+</div>
+</td>
+<td>Bloquea la IP en un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a>.&nbsp;En este ejemplo, el archivo .htaccess bloquea la IP de Google anterior.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Listado de archivos, carpetas y dominios principales</h2>
+<div class="solvvy-solution">
+<table class="wikitable">
+<tbody>
+<tr style="font-style: bold;">
+<th bgcolor="#F2F2F2">Comando</th>
+<th bgcolor="#F2F2F2">Descripción</th>
+</tr>
+<tr>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">awk '{print $7}' access.log|cut -d? -f1|sort|uniq -c|sort -nk1|tail -n10</span></pre>
+</div>
+</td>
+<td>Genera una lista de archivos o directorios en su sitio que se llama más.</td>
+</tr>
+<tr>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">for k in `ls -S */https/access.log`; do wc -l $k | sort -r -n; done</span></pre>
+</div>
+</td>
+<td>
+<ul>
+<li>Genera una lista de tráfico para todos los dominios listados bajo un usuario específico (en un servidor compartido).</li>
+<li>Este comando debe ejecutarse en su directorio /logs/.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>SHELL usuarios en un VPS o plan Dedicado</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los siguientes comandos solo muestran sitios bajo un solo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.&nbsp;Si necesitas ver todos los registros del sitio en su servidor, ve la sección a continuación titulada 'Usuarios administradores en un plan Dedicado'</p>
+</div>
+</div>
+<table class="wikitable">
+<tbody>
+<tr style="font-style: bold;">
+<th bgcolor="#F2F2F2">Comando</th>
+<th bgcolor="#F2F2F2">Descripción</th>
+</tr>
+<tr>
+<td style="width: 44%;">
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">for k in `ls -S /home/*/logs/*/https/access.log`; do wc -l $k | sort -r -n; done</span></pre>
+</div>
+</td>
+<td>
+<ul>
+<li>Genera una lista de todo el tráfico para todos los dominios bajo un solo usuario de SHELL.</li>
+<li>Puede ejecutar este comando desde cualquier directorio.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="width: 44%;">
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tail -f -q /home/*/logs/*/https/access.log</span></pre>
+</div>
+</td>
+<td>
+<ul>
+<li>Mira los registros de tu servidor (bajo un solo usuario de Shell) en tiempo real para ver si el problema se presenta con una IP específica (para problemas intermitentes).</li>
+<li>Puedes ejecutar este comando desde cualquier directorio.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Administrar usuarios en un plan dedicado</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los siguientes comandos solo funcionan si tiene un usuario&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215945467-How-do-I-add-users-to-a-Dedicated-server-" target="_self">'Admin'</a>&nbsp;en tu servidor dedicado. Luego debe cambiar a su usuario 'root'. Sólo entonces verás todos los registros de todos los sitios en tu servidor.</p>
+</div>
+</div>
+<h3>Cómo cambiar al usuario 'root' después de iniciar sesión como usuario 'admin'</h3>
+<p>Los siguientes pasos detallan cómo iniciar sesión como usuario 'root' en tu servidor DESPUÉS de iniciar sesión como tu usuario 'admin' primero.</p>
+<ol>
+<li>Inicie sesión en tu servidor como su usuario 'admin'.</li>
+<li>Corre 'sudo su':
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo su</span>
+<span class="cmdoutput">[sudo] password for exampleuser:</span>
+</pre>
+</div>
+</li>
+<li>Ingresa tu contraseña para su usuario 'admin'.</li>
+<li>Ahora ha iniciado sesión como usuario 'root'. Puedes ver esto en el símbolo del sistema:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">root@ds123456#</span>
+</pre>
+</div>
+</li>
+</ol>
+Después de iniciar sesión como usuario 'root', ejecuta los siguientes comandos para ver los registros de todos los sitios en tu servidor.
+<table class="wikitable">
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Comando</th>
+<th bgcolor="#F2F2F2">Descripción</th>
+</tr>
+<tr>
+<td style="width: 44%;">
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">for k in `ls -S /home/*/logs/*/https/access.log`; do wc -l $k | sort -r -n; done</span></pre>
+</div>
+</td>
+<td>
+<ul>
+<li>Genera una lista de todo el tráfico para todos los dominios en un servidor dedicado.</li>
+<li>Puedes ejecutar este comando desde cualquier directorio.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="width: 44%;">
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tail -f -q /home/*/logs/*/https/access.log</span></pre>
+</div>
+</td>
+<td>
+<ul>
+<li>Mira los registros de tu servidor en tiempo real para ver si el problema se presenta con una IP específica (para problemas intermitentes).</li>
+<li>Puedes ejecutar este comando desde cualquier directorio.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Mi IP única está haciendo muchas conexiones</h2>
+<div class="solvvy-solution">
+<p>Puedes encontrar en tu access.log que la IP única de tu sitio está haciendo muchas conexiones. Esto no es un problema y puede ignorarse con seguridad.</p>
+<p>Esto ocurre porque Apache está generando internamente estas conexiones para cerrar procesos innecesarios.</p>
+<p>Puedes leer más al respecto&nbsp;<a href="http://wiki.apache.org/httpd/InternalDummyConnection" target="_self">aquí</a>.</p>
+</div>
+<h2>Solución de problemas</h2>
+<div class="solvvy-solution">
+<p>Puedes ver la siguiente respuesta de error después de ejecutar el comando para ver todo el tráfico de todos los dominios en un servidor.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">for k in `ls -S /home/*/logs/*/https/access.log`; do wc -l $k | sort -r -n; done</span>
+<span class="cmdoutput">ls: cannot access /home/*/logs/*/https/access.log: No such file or directory
+</span></pre>
+</div>
+<p>Este error ocurre cuando ejecuta el comando como un usuario SFTP. Debes ejecutarlo como usuario 'Shell' en un VPS o usuario 'Shell' o 'Admin' en un servidor dedicado.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades de .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216105077-How-can-I-control-bots-spiders-and-crawlers-" target="_self">¿Cómo controlar bots, arañas y rastreadores?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP" target="_self">Ver el log de acceso vía SFTP</a></li>
+</ul>
+</div>
