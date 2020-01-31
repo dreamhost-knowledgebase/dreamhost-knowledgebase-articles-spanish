@@ -1,0 +1,153 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>MySQL es un sistema de gestión de bases de datos relacionales (RDBMS) publicado bajo la Licencia Pública General de GNU (GPL). Es uno de los sistemas de bases de datos de código abierto más utilizados y es compatible con multitud de aplicaciones de sitios web. DreamHost también ofrece&nbsp;<a href="/hc/en-us/articles/217294097-SQLite">SQLite</a>&nbsp;en DreamHost VPS y servidores dedicados.&nbsp;</p>
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo agregar una base de datos MySQL:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/221691727-Creating-a-MySQL-database" target="_self">Crear una base de datos MySQL</a></li>
+</ul>
+<p>Puede realizar cambios en tus bases de datos MySQL en el&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">MySQL Databases</a>.</p>
+</div>
+<h2>Versión de MySQL</h2>
+<div class="solvvy-solution">
+<p>Los servidores MySQL compartidos ejecutan la versión 5.7 de MySQL. Los&nbsp;<a href="/hc/en-us/articles/215945917-MySQL-VPS-overview" target="_self">servidores MySQL privados</a>&nbsp;creados después de diciembre de 2018 también ejecutan 5.7.</p>
+<p>Otros servidores de bases de datos como&nbsp;<a href="/hc/en-us/articles/214581158-DreamPress-overview">DreamPress</a>, <a href="https://help.dreamhost.com/hc/en-us/articles/215279658-Dedicated-server-overview" target="_self">Dedicated</a>, y servidores&nbsp;<a href="/hc/en-us/articles/215945917-MySQL-VPS-overview" target="_self">MySQL privados</a>&nbsp;más antiguos ejecutan 5.6.</p>
+</div>
+<h2>Motores de almacenamiento</h2>
+<div class="solvvy-solution">
+<p>Los motores de almacenamiento más comunes se proporcionan con todos los productos MySQL administrados por DreamHost. Aquí hay una lista de los motores de almacenamiento disponibles:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">mysql&gt; </span><span class="command">show engines;</span>
+</pre>
+</div>
+<table border="1">
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Máquina</th>
+<th bgcolor="#F2F2F2">Soporte</th>
+<th bgcolor="#F2F2F2">Comentario</th>
+<th bgcolor="#F2F2F2">Transacciones</th>
+<th bgcolor="#F2F2F2">XA</th>
+<th bgcolor="#F2F2F2">Punto de recuperación</th>
+</tr>
+<tr>
+<td>CSV</td>
+<td>SI</td>
+<td>Motor de almacenamiento CSV</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>MRG_MYISAM</td>
+<td>SI</td>
+<td>Colección de tablas MyISAM idénticas</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>FEDERATED</td>
+<td>NO</td>
+<td>Motor de almacenamiento federado MySQL</td>
+<td>NULL</td>
+<td>NULL</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td>MyISAM</td>
+<td>POR DEFECTO</td>
+<td>Motor predeterminado a partir de MySQL 3.23 con gran rendimiento</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>InnoDB</td>
+<td>SI</td>
+<td>Admite transacciones, bloqueo de nivel de fila y claves externas</td>
+<td>SI</td>
+<td>SI</td>
+<td>SI</td>
+</tr>
+<tr>
+<td>MEMORY</td>
+<td>SI</td>
+<td>Basado en hash, almacenado en la memoria, útil para tablas temporales</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+</tbody>
+</table>
+<p><br /> Los clientes familiarizados con la ejecución de su propio servidor MySQL y que deseen usar una versión más nueva, pueden estar interesados en probar&nbsp;<a href="/hc/en-us/articles/214840947-What-is-DreamCompute">DreamCompute</a>&nbsp;que ofrece múltiples sistemas operativos más nuevos para elegir, que tienen versiones más nuevas de MySQL disponibles para instalar.</p>
+</div>
+<h2>Comparación de productos MySQL</h2>
+<div class="solvvy-solution">
+<p>DreamHost comparte y los productos VPS para MySQL se ejecutan en hardware especializado para optimizar la E/S de disco y, por lo tanto, las velocidades en las que devuelven su consulta. Estos son productos en red que se ejecutan independientemente del hardware del servidor web. Los servidores dedicados ofrecen MySQL que está optimizado para otros casos de uso en los que el servidor web y el servidor MySQL coexisten tienen más sentido.</p>
+<table border="1" cellspacing="0" cellpadding="10">
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Producto</th>
+<th bgcolor="#F2F2F2">Descripción</th>
+<th bgcolor="#F2F2F2">Local/en red</th>
+<th bgcolor="#F2F2F2">Apto para necesidades de alojamiento</th>
+</tr>
+<tr>
+<td><strong>Shared MySQL</strong></td>
+<td>Incluido con un plan de alojamiento compartido y con un servidor web VPS.</td>
+<td align="center">Networked</td>
+<td>MySQL estándar para hospedaje optimizado y compartido de bases de datos apropiadas.</td>
+</tr>
+<tr>
+<td><strong>MySQL VPS</strong></td>
+<td>Un servicio adicional similar a un servidor web VPS que solo ejecuta el servidor MySQL y no otros servicios.</td>
+<td align="center">Networked</td>
+<td>MySQL de alto rendimiento para clientes que necesitan un mayor tiempo de actividad o han superado MySQL compartido.</td>
+</tr>
+<tr>
+<td><strong>Dedicated MySQL</strong></td>
+<td>Un servidor dedicado ejecuta un servidor MySQL localmente junto con los otros servicios web.</td>
+<td align="center">Local</td>
+<td>Un servidor dedicado es ideal para software que envía grandes cantidades de datos entre aplicaciones web y MySQL, ya que no hay una red intermedia para limitar el rendimiento.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Limitaciones de MySQL debido al alojamiento compartido</h2>
+<div class="solvvy-solution">
+<p>No todos los privilegios están disponibles para administrar tu base de datos debido a la naturaleza del alojamiento compartido. Ve el siguiente artículo para obtener una lista de los privilegios disponibles.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115000263911-MySQL-limitations-due-to-shared-hosting" target="_self">Limitaciones de MySQL debido a un servidor compartido</a></li>
+</ul>
+</div>
+<h2>¿Cuántas bases de datos puede contener mi cuenta?</h2>
+<div class="solvvy-solution">
+<p>No hay límite para la cantidad de bases de datos, pero en general tendrás una para cada sitio que requiera una base de datos.</p>
+</div>
+<h2>¿Se admite el cifrado de la base de datos?</h2>
+<div class="solvvy-solution">
+<p>DreamHost no proporciona el cifrado de la base de datos. Ten en cuenta que si planeas crear una solución personalizada para cifrar su base de datos y requiere acceso root / sudo al servidor de la base de datos, deberás comprar un&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215279658-Dedicated-server-overview" target="_self">servidor dedicado</a> o&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/214840947-What-is-DreamCompute-">DreamCompute</a>.&nbsp;Solo en esos planes tendrías acceso directo a la base de datos.&nbsp;</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215100557--C%C3%B3mo-restauro-mi-base-de-datos-en-el-panel-" target="_self">¿Cómo restaurar mi base de datos en el panel?</a></li>
+<li><a href="/hc/en-us/articles/221621388-Managing-existing-MySQL-databases" target="_self">¿Cómo administrar mi base de datos?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214882998--C%C3%B3mo-me-conecto-a-mi-base-de-datos-a-trav%C3%A9s-de-SSH-" target="_self">¿Cómo conectar mi base de datos vía SSH?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215036088-How-do-I-connect-to-my-database-with-a-temporary-MySQL-hostname-" target="_self">¿Cómo conectar mi base de datos con un hostname de MySQL temporal?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214883058--C%C3%B3mo-me-conecto-a-mi-base-de-datos-utilizando-un-programa-de-terceros-" target="_self">¿Cómo conectar mi base de datos usando un programa tercero?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215577937-How-do-I-connect-to-my-database-using-SQLyog-" target="_self">¿Cómo conectar mi base de datos usando SQLyog?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215730087-Troubleshooting-your-MySQL-database" target="_self">Solucionar problemas en tu base de datos MySQL</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215039758-Backing-up-database-overview" target="_self">Generalidades de las copias de seguridad de las bases de datos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encontrar las credenciales de inicio de sesión de la base de datos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin" target="_self">Generalidades de phpMyAdmin</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215036388-How-do-I-optimize-my-database-" target="_self">¿Cómo optimizar mi base de datos?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="http://dev.mysql.com/doc/mysql/" target="_self">Documentación de MySQL</a></li>
+<li><a href="http://www.phpmyadmin.net/" target="_self">Página principal de de phpMyAdmin</a></li>
+<li><a href="http://thecustomizewindows.com/2011/03/indispensable-mysql-queries-for-custom-fields-in-wordpress/" target="_self">Consultas indispensables MySQL para campos personalizados en WordPress </a></li>
+</ul>
+</div>

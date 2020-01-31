@@ -1,0 +1,56 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo cubre algunos problemas comunes y pasos de solución de problemas que puede seguir para arreglar sus trabajos cron.</p>
+</div>
+<h2>Pasos de solución de problemas</h2>
+<div class="solvvy-solution">
+<h3>Establecer una dirección de correo electrónico</h3>
+<p>Cuando pruebes tu nuevo trabajo cron, asegúrate de establecer una dirección de correo electrónico para informar los resultados. Esto te brinda información importante sobre lo que puede estar yendo mal si la línea de comando no ejecuta el trabajo cron como se desea.</p>
+<h3>Establecer los permisos de archivo correctos</h3>
+<p>Si planeas utilizar software externo con un trabajo cron, asegúrate de haber configurado 'write' y otros permisos para los archivos en tus carpetas remotas. Si recibes un mensaje de error sobre "permiso denegado", significa que tus permisos no están configurados correctamente. También especificar la ruta completa del archivo en el que estás escribiendo puede evitar problemas con el entorno cron ejecutándose desde un directorio diferente.</p>
+</div>
+<h3>Usar rutas de archivo completas</h3>
+<p>El crontab del servidor necesita saber exactamente dónde leer y escribir archivos. Por ejemplo, si ejecutas manualmente el siguiente archivo llamado 'file.sh', creará un nuevo archivo llamado 'output.txt' en el directorio en el que ejecuta el comando.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sh file.sh &gt; output.txt</span></pre>
+</div>
+<p>Sin embargo, un trabajo cron no podría localizar ninguno de estos archivos. En cambio, tu trabajo cron necesitaría especificar las rutas completas como esta:</p>
+<div class="preboxcontainer">
+<pre class="prebox">0 12 * * * sh /home/username/example.com/file.sh &gt; /home/username/example.com/output.txt</pre>
+</div>
+<h2>Mensajes de Error</h2>
+<div class="solvvy-solution">
+<h3>Could not open input file</h3>
+<p>Es posible que te enviemos un correo electrónico cuando el trabajo cron no se ejecute. Verifica el asunto del correo electrónico que se te envió.&nbsp;Comenzará así:</p>
+<p><strong>Cron &lt;username@server&gt;</strong></p>
+<p>Toma nota de este 'nombre de usuario', luego verifica el trabajo Cron que creaste en el panel. Estos deberían ser el mismo nombre de usuario. Si el nombre de usuario es diferente de lo que ves en el panel, asegúrate de ajustar tu trabajo cron al nombre de usuario correcto.</p>
+<p>Además, asegúrate de que los permisos del archivo estén configurados para que el usuario pueda ejecutarlo. Esto generalmente significa 644 permisos para un archivo y 755 para un directorio.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360029138491-Unix-permissions-overview" target="_self">Generalidades de permisos Unix</a></li>
+</ul>
+<h3>No such file or directory</h3>
+<p>Verifica las rutas de tus archivos. Intenta agregar la ruta completa del archivo al archivo que estás intentando ejecutar, así como la ruta completa del archivo a cualquier archivo en el que estés escribiendo. Por ejemplo, en lugar de:</p>
+<div class="preboxcontainer">
+<pre class="prebox">cat file.txt</pre>
+</div>
+<p>Cambialo a:</p>
+<div class="preboxcontainer">
+<pre class="prebox">cat /home/username/example.com/file.txt</pre>
+</div>
+</div>
+<h2>Solución de problemas de servidor dedicado</h2>
+<div class="solvvy-solution">
+<p>Es raro que el servicio cron en un servidor deje de ejecutarse. Sin embargo, si estás utilizando un servidor dedicado, puedes verificar que el cron se esté ejecutando ejecutando este comando de shell:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ps aux | grep cron</span></pre>
+</div>
+<p>También puedes verificar el registro del sistema para ver las entradas etiquetadas como 'CRON' después de&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215945467-How-do-I-add-users-to-a-Dedicated-server-" target="_self">cambiar tu usuario administrador</a>&nbsp;y ejecutar los siguientes comandos.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo su -</span>
+<span class="server">[root]# </span><span class="command">sudo grep CRON /var/log/syslog</span></pre>
+</div>
+<p>Si no ves ninguna entrada CRON reciente, puedes reiniciar el servicio cron. Para reiniciar cron, ejecuta este comando en el servidor dedicado desde el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214694298#Dedi" target="_self">usuario administrador</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root]# </span><span class="command">sudo service cron restart</span></pre>
+</div>
+</div>
