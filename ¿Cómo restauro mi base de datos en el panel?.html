@@ -29,8 +29,31 @@
 <dl>
 <dd>
 <dl>
-<dd><strong>Opciones 1 y 2</strong>&nbsp;<span data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;—&quot;}" data-sheets-userformat="{&quot;2&quot;:15167,&quot;3&quot;:{&quot;1&quot;:0},&quot;4&quot;:[null,2,16777215],&quot;5&quot;:{&quot;1&quot;:[{&quot;1&quot;:2,&quot;2&quot;:0,&quot;5&quot;:[null,2,0]},{&quot;1&quot;:0,&quot;2&quot;:0,&quot;3&quot;:3},{&quot;1&quot;:1,&quot;2&quot;:0,&quot;4&quot;:1}]},&quot;6&quot;:{&quot;1&quot;:[{&quot;1&quot;:2,&quot;2&quot;:0,&quot;5&quot;:[null,2,0]},{&quot;1&quot;:0,&quot;2&quot;:0,&quot;3&quot;:3},{&quot;1&quot;:1,&quot;2&quot;:0,&quot;4&quot;:1}]},&quot;7&quot;:{&quot;1&quot;:[{&quot;1&quot;:2,&quot;2&quot;:0,&quot;5&quot;:[null,2,0]},{&quot;1&quot;:0,&quot;2&quot;:0,&quot;3&quot;:3},{&quot;1&quot;:1,&quot;2&quot;:0,&quot;4&quot;:1}]},&quot;8&quot;:{&quot;1&quot;:[{&quot;1&quot;:2,&quot;2&quot;:0,&quot;5&quot;:[null,2,0]},{&quot;1&quot;:0,&quot;2&quot;:0,&quot;3&quot;:3},{&quot;1&quot;:1,&quot;2&quot;:0,&quot;4&quot;:1}]},&quot;11&quot;:4,&quot;12&quot;:0,&quot;14&quot;:[null,2,0],&quot;15&quot;:&quot;Arial&quot;,&quot;16&quot;:10}">—</span> Las dos primeras opciones restauran tus tablas, pero los nombres cambian. De esta manera, los archivos restaurados NO toman el lugar de los archivos actuales. Deberás cambiar manualmente los nombres de las tablas o ajustar el archivo de configuración de tu sitio para ver la base de datos restaurada</dd>
+<dd><strong>Opciones 1 y 2</strong>&nbsp;— Las dos primeras opciones restauran tus tablas, pero los nombres cambian. De esta manera, los archivos restaurados NO toman el lugar de los archivos actuales. Deberás cambiar manualmente los nombres de las tablas o ajustar el archivo de configuración de tu sitio para ver la base de datos restaurada</dd>
 <dd><strong>Opciones 3 y 4</strong> — Las dos últimas opciones reemplazan inmediatamente las tablas de tu base de datos. Las tablas actuales se renombran. Con mayor frecuencia desearás una de las dos últimas opciones</dd>
+</dl>
+</dd>
+</dl>
+<dl>
+<dd>
+<dl>
+<dd>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p><strong>Sitios de WordPress</strong></p>
+<p>Al restaurar una base de datos del sitio de WordPress, se recomienda encarecidamente que selecciones la Opción 4. Esto te permite revertir fácilmente el sitio a la versión anterior de tu base de datos si hay algún problema con los datos restaurados.</p>
+<p>Puedes volver rápidamente a la versión anterior actualizando el valor del prefijo en tu archivo wp-config.php. Inicia sesión en tu sitio a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>&nbsp;y abre el archivo wp-config.php (está en el directorio de tu sitio). Verás la siguiente línea:</p>
+<div class="preboxcontainer">
+<pre class="prebox">$table_prefix = 'wp_';</pre>
+</div>
+<p>Reemplaza el valor con la nueva marca de tiempo de la copia de seguridad que creaste. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">$table_prefix = '20180924_141233_wp_';</pre>
+</div>
+</div>
+</div>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -48,7 +71,7 @@
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL" target="_self">Generalidades sobre MySQL</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214395738-phpMyAdmin-C%C3%B3mo-hacer-una-copia-de-seguridad-o-exportar-una-base-de-datos-o-tabla" target="_self">¿Cómo hacer una copia de seguridad/exportar mi base de datos usando phpMyAdmin?</a></li>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/215039758-Backing-up-database-overview" target="_self">Generalidades sobre copias de seguridad de bases de datos</a></li>
+<li><a href="/hc/es/articles/215039758-Generalidades-sobre-copias-de-seguridad-de-bases-de-datos" target="_self">Generalidades sobre copias de seguridad de bases de datos</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214395768-phpMyAdmin-C%C3%B3mo-importar-o-restaurar-una-base-de-datos-o-una-tabla" target="_self">phpMyAdmin — ¿Cómo importar/restaurar una base de datos o tabla?</a></li>
 <li><a href="https://help.dreamhost.com/hc/en-us/articles/217117947-Using-a-script-to-backup-your-website-and-database-to-DreamObjects" target="_self">Usar un script para hacer una copia de seguridad de tu sitio web y base de datos en DreamObjects</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin" target="_self">Generalidades sobre phpMyAdmin</a></li>
