@@ -136,7 +136,7 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 </li>
 <li>Necesitarás editar la línea #211-214 eliminando el signo # en frente de esas líneas. Debes también editar la primera línea al&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360001435926-Instalar-OpenSSL-localmente-dentro-de-tu-usuario" target="_self">camino donde instalaste OpenSSL locamente dentro de tu usuario</a>.&nbsp;Esto asume que has seguido el artículo e instalado en un directorio llamado 'openssl'<br /> Asegúrate de cambiar 'username' a tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.
 <div class="preboxcontainer">
-<pre class="prebox">SSL=<span class="command">/home/username/openssl
+<pre class="prebox">SSL=<span class="code-highlight">/home/username/openssl
 </span>_ssl _ssl.c \
         -DUSE_SSL -I$(SSL)/include -I$(SSL)/include/openssl \
         -L$(SSL)/lib -lssl -lcrypto</pre>
@@ -216,7 +216,7 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 <p><strong>Could not build the ssl module! Python requires an OpenSSL 1.0.2 or 1.1 compatible libssl with X509_VERIFY_PARAM_set1_host().</strong></p>
 <p>Agregar la siguiente línea cuando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360001435926-Instalar-OpenSSL-localmente-dentro-de-tu-usuario" target="_self">instales la versión personalizada de OpenSSL</a>&nbsp;a tu .bash_profile resuelve esto.</p>
 <div class="preboxcontainer">
-<pre class="prebox">export LDFLAGS="-L/home/<span class="command">username</span>/openssl/lib -Wl,-rpath,/home/<span class="command">username</span>/openssl/lib"</pre>
+<pre class="prebox">export LDFLAGS="-L/home/<span class="code-highlight">username</span>/openssl/lib -Wl,-rpath,/home/<span class="code-highlight">username</span>/openssl/lib"</pre>
 </div>
 </div>
 <h2>Si estás usando Django</h2>

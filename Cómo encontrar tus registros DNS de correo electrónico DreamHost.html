@@ -1,0 +1,127 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Si tu dominio no utiliza los&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers">nameservers</a>, de DreamHost, los registros DNS relacionados con el correo no estarán automáticamente activos para el dominio. Deberás configurar manualmente esos registros en el host donde se administra los DNS tu dominio. Puedes verificar hacia dónde apuntan sus servidores de nombres en <a href="http://whoisweb.dreamhost.com">http://whoisweb.dreamhost.com</a>.</p>
+<ul>
+<li>Cuando un dominio tiene direcciones de correo electrónico configuradas en el panel de DreamHost, todos los registros DNS relacionados con el correo se crean automáticamente en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.addresses&amp;" target="_blank" rel="noopener">Manage Email</a>.</li>
+<li>Puedes encontrar tus registros DNS de correo en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a>.</li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si buscas información sobre cómo configurar tu correo electrónico en un cliente de correo, mira los siguientes artículos:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214918038-Generalidades-de-las-configuraciones-del-cliente-de-correo" target="_self">Generalidades de las configuraciones del cliente de correo</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215612887-Protocolos-y-n%C3%BAmeros-de-puerto-para-clientes-de-correo-electr%C3%B3nico" target="_self">Protocolos y números de puerto para clientes de correo electrónico</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Encontrar tus registros DNS de correo electrónico</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Haz clic en el enlace 'DNS' debajo del dominio para ver tus registros.<br />
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Please note that the records below are only examples. Your specific DNS records will be different.&nbsp;Tus registros DNS específicos serán diferentes.</p>
+<p>Los siguientes ejemplos <strong>SÓLO</strong> muestran registros DNS de correo electrónico. Tu sitio web tendrá registros adicionales, sobre los cuales puedes leer más en el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self">Generalidades de los DNS de DreamHost</a></li>
+</ul>
+</div>
+</div>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_email_dns_records.png" alt="" /></dd>
+</dl>
+Hay dos tipos de registros DNS relacionados con el correo.<br />
+<dl>
+<dt><strong>Registros MX</strong></dt>
+<dd>le dice a los remitentes a dónde deben enviarse los correos electrónicos.<br /> Por ejemplo, si el&nbsp;<a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/en-us/articles/215686487-How-do-I-configure-my-Anti-spam-settings-" target="_self">filtro de spam</a>&nbsp;<strong>NO</strong> se habilitó, los registros se ven así:</dd>
+</dl>
+<dl>
+<dd>
+<ul>
+<li>mx1.dreamhost.com</li>
+<li>mx2.dreamhost.com</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dd>Si el&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215686487-How-do-I-configure-my-Anti-spam-settings-" target="_self">filtro de spam está habilitado</a>&nbsp;tus registros MX serán los siguientes:
+<ul>
+<li>vade-in1.mail.dreamhost.com</li>
+<li>vade-in2.mail.dreamhost.com</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><strong>Registros A</strong></dt>
+<dd>Los utiliza tu programa de correo cuando se conecta al servidor de correo para ver tu bandeja de entrada o enviar correos electrónicos. Hay varios registros de correo A para tu dominio.</dd>
+</dl>
+</li>
+<li>Encuentra los siguientes registros:<br />
+<table class="wikitable"><colgroup> <col width="25%" /> <col width="75%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Registros DNS</th>
+<th bgcolor="#F2F2F2">Ejemplo de los valores</th>
+</tr>
+<tr>
+<td>_domainkey</td>
+<td>Los <a href="https://help.dreamhost.com/hc/en-us/articles/215029758-What-are-DKIM-records-" target="_self">Registros DKIM</a>&nbsp;firman los correo electrónicos para ayudar a la validación del remitente.</td>
+</tr>
+<tr>
+<td>_autodiscover._tcp (SRV)</td>
+<td>5 0 443 autoconfig.dreamhost.com —&nbsp;Este es un registro SRV que ayuda a las aplicaciones de correo electrónico a aplicar la configuración correcta automáticamente.</td>
+</tr>
+<tr>
+<td>autoconfig (CNAME)</td>
+<td>autoconfig.dreamhost.com —&nbsp;Este es un registro CNAME que ayuda a las aplicaciones de correo electrónico a aplicar la configuración correcta automáticamente.</td>
+</tr>
+<tr>
+<td>*mail. (A)</td>
+<td>64.90.62.162 —&nbsp;Este es un subdominio estándar que se puede utilizar para conectar su cliente o programa al servidor de correo.</td>
+</tr>
+<tr>
+<td>*mail. (MX)</td>
+<td>
+<p>Este dominio ha&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215686487-How-do-I-configure-my-Anti-spam-settings-" target="_self">habilitado el filtro de spam</a>,&nbsp;entonces los registros MX aparecen así:<br /> <strong>vade-in1.mail.dreamhost.com </strong><br /> <strong> vade-in2.mail.dreamhost.com</strong>.</p>
+<p>Si el filtro de spam no se ha habilitado, verás:&nbsp;<strong>mx1.dreamhost.com</strong>&nbsp;y&nbsp;<strong>mx2.dreamhost.com</strong>.<br /> <br /> <img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_mail_cluster_mx_records.png" /></p>
+</td>
+</tr>
+<tr>
+<td>*mailboxes. (A)</td>
+<td>66.33.205.233&nbsp;—&nbsp;Esto se usa para iniciar sesión en la&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/217133137-The-Mailboxes-interface" target="_self">Interfaz Mailboxes</a>&nbsp;de DreamHost.</td>
+</tr>
+<tr>
+<td>*www.mailboxes. (A)</td>
+<td>66.33.205.233&nbsp;— Esto se usa para iniciar sesión en la&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/217133137-The-Mailboxes-interface" target="_self">Interfaz Mailboxes</a>&nbsp;de DreamHost.</td>
+</tr>
+<tr>
+<td>*webmail. (A)</td>
+<td>69.163.136.138 —&nbsp;Esto se usa para iniciar sesión en el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216540008-Generalidades-sobre-Webmail" target="_self">panel de webmail</a>.</td>
+</tr>
+<tr>
+<td>*www.webmail. (A)</td>
+<td>69.163.136.138 —&nbsp;Esto se usa para iniciar sesión en el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216540008-Generalidades-sobre-Webmail" target="_self">panel de webmail</a>.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>Ingresa todos esos registros en el sistema donde se alojan y administran los DNS del dominio.</li>
+</ol>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Después de realizar el ajuste de DNS, los cambios tardarán varias horas en actualizarse en línea debido a&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">propagación de los DNS</a>.</p>
+</div>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215032408--Qu%C3%A9-es-un-registro-MX-" target="_self">¿Qué es un registro MX?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215035328-How-do-I-change-my-MX-records-" target="_self">¿Cómo cambio mis registros MX?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215035868-How-can-I-view-my-DreamHost-email-if-my-MX-records-are-not-pointed-to-DreamHost-" target="_self">¿Cómo puedo ver mi correo electrónico de DreamHost si mis registros MX no apuntan a DreamHost?</a></li>
+</ul>
+</div>

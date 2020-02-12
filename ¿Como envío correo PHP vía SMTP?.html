@@ -3,7 +3,7 @@
 <p>Cuando usas la&nbsp;<a href="/hc/en-us/articles/215507058-PHP-mail-overview" target="_self">funcionalidad de correo PHP</a>,&nbsp;estas enviando correo directamente desde tu servidor web. Esto puede causar inconvenientes en la dirección de REMITENTE si el correo no está bien configurado o si el mismo no está alojado en DreamHost. Enviar correos vía SMTP es recomendado que se envíe desde el servidor de correo más que el servidor web. Vé el artículo&nbsp;<a href="/hc/en-us/articles/215507068-Troubleshooting-PHP-mail-" target="_self">solucionando correos PHP</a> para más detalles.</p>
 <p>Aquí hay algunas opciones para enviar correo PHP vía SMTP. Por ejemplo:</p>
 <ul>
-<li>Usar&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215842658-PHPmailer-overview">PHPmailer</a></li>
+<li>Usar&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer">PHPmailer</a></li>
 <li>Usar el paquete de correo PEAR</li>
 </ul>
 <p>Este artículo explica como usar la opción PEAR.</p>
@@ -32,7 +32,7 @@
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Solo necesitas llenar los campos que están en negrita.</p>
+<p>Solo necesita completar los campos que están resaltados.</p>
 </div>
 </div>
 <h3>Encontrar tu nombre de alojamiento de correo</h3>
@@ -45,15 +45,15 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED ^ E_STRICT);
 set_include_path("." . PATH_SEPARATOR . ($UserDir = dirname($_SERVER['DOCUMENT_ROOT'])) . "/pear/php" . PATH_SEPARATOR . get_include_path());
 require_once "Mail.php";
 
-$host = "ssl://<span class="command"><strong>smtp.dreamhost.com</strong></span>";
-$username = "<span class="command"><strong>tucorreo@example.com</strong></span>";
-$password = "<span class="command"><strong>la contraseña de tu correo</strong></span>";
+$host = "ssl://<span class="code-highlight">smtp.dreamhost.com</span>";
+$username = "<span class="code-highlight">tucorreo@example.com</span>";
+$password = "<span class="code-highlight">la contraseña de tu correo</span>";
 $port = "465";
-$to = "<span class="command"><strong>correo_destinatario@example.com</strong></span>";
-$email_from = "<span class="command"><strong>tucorreo@example.com</strong></span>";
-$email_subject = "<span class="command"><strong>Línea de asunto aquí:</strong></span>";
-$email_body = "<span class="command"><strong>Lo que tu quieras</strong></span>";
-$email_address = "<span class="command"><strong>responder-a@example.com</strong></span>";
+$to = "<span class="code-highlight">correo_destinatario@example.com</span>";
+$email_from = "<span class="code-highlight">tucorreo@example.com</span>";
+$email_subject = "<span class="code-highlight">Línea de asunto aquí:</span>";
+$email_body = "<span class="code-highlight">Lo que tu quieras</span>";
+$email_address = "<span class="code-highlight">responder-a@example.com</span>";
 
 $headers = array ('From' =&gt; $email_from, 'To' =&gt; $to, 'Subject' =&gt; $email_subject, 'Reply-To' =&gt; $email_address);
 $smtp = Mail::factory('smtp', array ('host' =&gt; $host, 'port' =&gt; $port, 'auth' =&gt; true, 'username' =&gt; $username, 'password' =&gt; $password));
@@ -88,7 +88,7 @@ echo("&lt;p&gt;Message successfully sent!&lt;/p&gt;");
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/215842658-PHPmailer-overview" target="_self">Generalidades de PHPmailer</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer" target="_self">Generalidades de PHPmailer</a></li>
 <li><a href="https://help.dreamhost.com/hc/en-us/articles/215507058-PHP-mail-overview" target="_self">Generalidades de PHP mail()</a></li>
 <li><a href="https://help.dreamhost.com/hc/en-us/articles/215507068-Troubleshooting-PHP-mail-" target="_self">Solucionar PHP mail()</a></li>
 </ul>
