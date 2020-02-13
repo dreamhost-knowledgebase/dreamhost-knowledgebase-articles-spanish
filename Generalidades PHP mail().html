@@ -1,0 +1,169 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Los sitios web creados en PHP pueden aprovechar la función de correo PHP que crea la capacidad de enviar correos electrónicos directamente desde tu sitio web. Puedes leer más sobre esta función en el sitio web de PHP:</p>
+<ul>
+<li><a href="http://php.net/manual/en/function.mail.php">http://php.net/manual/en/function.mail.php</a></li>
+</ul>
+<p>PHP está disponible de forma predeterminada en todos los planes de alojamiento, por lo que no hay nada que necesites habilitar para usar la función de correo PHP.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Nunca uses la entrada de formulario (como nombres o direcciones de correo electrónico) en la sección "Additional headers" del comando PHP mail(). Esto puede conducir a exploits de inyección de encabezado de correo que permiten a los spammers secuestrar tus formularios de correo electrónico. Visita la siguiente página para obtener información adicional sobre cómo funcionan estos ataques y cómo prevenirlos:</p>
+<ul>
+<li><a href="http://www.damonkohler.com/2008/12/email-injection.html" target="_self">Inyección de correo Electrónico</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Ejemplo simple de phpmail()</h2>
+<div class="solvvy-solution">
+<p><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crea un archivo</a> llamado algo así como "phpmail.php" y agrega el siguiente código.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Asegúrate de cambiar la dirección FROM a un correo electrónico en el dominio de tu sitio. Por ejemplo, si su sitio es 'example.com', la dirección FROM debería ser algo como 'admin@example.com'. Esto es para evitar cualquier problema con la '<a href="https://help.dreamhost.com/hc/en-us/articles/215036118-Sender-domain-policy-FAQs" target="_self">Política de dominio del remitente</a>'.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+//sending email with the php mail()
+mail('user@example.com', 'Subject Line Here', 'Body of Message Here', 'From: <a href="mailto:webmaster@example.com">admin@example.com</a>');
+?&gt;
+</pre>
+</div>
+<p>Cuando visites esta página en un navegador, aparecerá como una página en blanco en blanco. Pero al visitarlo, invoca la función de correo PHP para enviar un correo electrónico a la dirección ingresada.</p>
+</div>
+<h2>Ejemplo básico con variables</h2>
+<div class="solvvy-solution">
+<p>Este ejemplo agrega las variables $message directamente en los parámetros mail():</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+
+// compose message
+$message = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
+$message .= " Nam iaculis pede ac quam. Etiam placerat suscipit nulla.";
+$message .= " Maecenas id mauris eget tortor facilisis egestas.";
+$message .= " Praesent ac augue sed enim aliquam auctor. Ut dignissim ultricies est.";
+$message .= " Pellentesque convallis tempor tortor. Nullam nec purus.";
+
+// make sure each line doesn't exceed 70 characters
+$message = wordwrap($message, 70);
+
+// send email
+mail('somebody@example.com', 'Nonsensical Latin', $message);
+?&gt;
+</pre>
+</div>
+</div>
+<h2>Ejemplo Avanzado</h2>
+<div class="solvvy-solution">
+<p>Este ejemplo utiliza variables como $to, $subject y $headers que luego se agregan a los parámetros de mail():</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+$to = "somebody@example.com";
+$subject = "Nonsensical Latin";
+
+// compose headers
+$headers = "From: webmaster@example.com\r\n";
+$headers .= "Reply-To: webmaster@example.com\r\n";
+$headers .= "X-Mailer: PHP/".phpversion();
+
+// compose message
+$message = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
+$message .= " Nam iaculis pede ac quam. Etiam placerat suscipit nulla.";
+$message .= " Maecenas id mauris eget tortor facilisis egestas.";
+$message .= " Praesent ac augue sed enim aliquam auctor. Ut dignissim ultricies est.";
+$message .= " Pellentesque convallis tempor tortor. Nullam nec purus.";
+$message = wordwrap($message, 70);
+
+// send email
+mail($to, $subject, $message, $headers);
+?&gt;
+</pre>
+</div>
+</div>
+<h2>Envío de correo HTML</h2>
+<div class="solvvy-solution">
+<p>Este ejemplo te permite agregar código HTML a tu correo electrónico. Pon el siguiente contenido en un archivo con una extensión .php:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+
+// multiple recipients (note the commas)
+$to = "somebody@example.com, ";
+$to .= "nobody@example.com, ";
+$to .= "somebody_else@example.com";
+
+// subject
+$subject = "Nonsensical Latin";
+
+// compose message
+$message = "
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Nonsensical Latin&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Nonsensical Latin&lt;/h1&gt;
+    &lt;p&gt;Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+       Nam iaculis pede ac quam. Etiam placerat suscipit nulla.
+       Maecenas id mauris eget tortor facilisis egestas.
+       Praesent ac augue sed &lt;a href=\"http://lipsum.com/\"&gt;enim&lt;/a&gt; aliquam auctor.
+       Pellentesque convallis tempor tortor. Nullam nec purus.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+";
+
+// To send HTML mail, the Content-type header must be set
+$headers = "MIME-Version: 1.0\r\n";
+$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+
+// send email
+mail($to, $subject, $message, $headers);
+?&gt;
+</pre>
+</div>
+</div>
+<h2>Inyección de encabezado de correo</h2>
+<div class="solvvy-solution">
+<p>El siguiente código se puede colocar en la parte superior de tu script PHP para disuadir las inyecciones de encabezado más comunes. Ten en cuenta que este código no permite el acceso directo a la página, así que solo agrega a una página de "proceso" accesible mediante una acción Enviar. Filtrará cualquier encabezado CC o BCC que se esté inyectando, así como cualquier nueva línea o etiquetas de retorno de carro inyectadas en el encabezado del correo electrónico.</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+if (!isset($_POST['submit'])) {
+   echo "&lt;h1&gt;Error&lt;/h1&gt;\n
+      &lt;p&gt;Accessing this page directly is not allowed.&lt;/p&gt;";
+   exit;
+}
+
+$email = preg_replace("([\r\n])", "", $email);
+
+$find = "/(content-type|bcc:|cc:)/i";
+if (preg_match($find, $name) || preg_match($find, $email) || preg_match($find, $url) || preg_match($find, $comments)) {
+   echo "&lt;h1&gt;Error&lt;/h1&gt;\n
+      &lt;p&gt;No meta/header injections, please.&lt;/p&gt;";
+   exit;
+}
+?&gt;
+</pre>
+</div>
+</div>
+<h2>Script avanzado de correo PHP</h2>
+<div class="solvvy-solution">
+<p>Ve los siguientes artículos para ver ejemplos completos sobre cómo enviar correo SMTP a través de un script PHP.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer" target="_self">Generalidades PHPmailer </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-env%C3%ADo-correo-PHP-v%C3%ADa-SMTP-" target="_self">¿Cómo envío correo PHP por medio de SMTP?</a></li>
+</ul>
+</div>
+<h2>Ver También</h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215507068-Troubleshooting-PHP-mail-" target="_self">Solución de problemas PHP mail()</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216507288-PHP-IMAP">PHP IMAP</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215730437-SMTP-quota-limits" target="_self">Límites de cuota SMTP </a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="http://www.php.net/manual/en/function.mail.php" target="_self">Documentación de función PHP.net mail()</a></li>
+</ul>
+</div>
