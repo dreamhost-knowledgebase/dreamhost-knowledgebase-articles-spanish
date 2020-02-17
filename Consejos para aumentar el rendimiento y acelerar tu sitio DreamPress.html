@@ -1,0 +1,221 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="performance_tips_dp" class="solvvy-hidden">
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#cache">Caché</a></li>
+<li><a class="reference internal" href="#plugins">Verificar tus plugins</a></li>
+<li><a class="reference internal" href="#tema">Verificar tu tema</a></li>
+<li><a class="reference internal" href="#db">Verificar tu base de datos</a></li>
+<li><a class="reference internal" href="#visitantes">Determinar qué páginas reciben la mayor cantidad de visitantes</a></li>
+<li><a class="reference internal" href="#imagenes">Optimizar los tamaños de imágenes</a></li>
+<li><a class="reference internal" href="#scripts">Minificar tus scripts</a></li>
+<li><a class="reference internal" href="#faltan">¿Faltan archivos en mi instalación de WordPress?</a></li>
+<li><a class="reference internal" href="#comunes">blemas comunes que causan bajo rendimiento</a></li>
+<li><a class="reference internal" href="#herramientas">Uso de herramientas en línea para solucionar problemas de tu sitio</a></li>
+</ul>
+</div>
+</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>A veces, puedes notar que tu sitio WordPress funciona lentamente o no funciona tan bien como debería en DreamPress. Hay varias razones por las que esto puede ocurrir.</p>
+<p>Este artículo describe algunos de los pasos básicos que puedes seguir para abordar los problemas que comúnmente conducen a sitios web lentos o ineficientes en DreamPress.</p>
+</div>
+<h2><span id="cache">Caché</span></h2>
+<div class="solvvy-solution">
+<h3>Plugins de caché</h3>
+<p>DreamPress viene con un&nbsp;<a href="/hc/en-us/articles/215300647-Managing-the-DreamPress-cache" target="_self">caché de servidor incorporado</a>.</p>
+<p>El almacenamiento en caché crea versiones estáticas de tu sitio, lo que significa que el servidor debe procesar mucho menos cuando un cliente visita tu sitio. Esto permite que tu sitio se cargue más rápido y también ayuda a administrar grandes cantidades de tráfico.</p>
+<p>Muchas guías, incluidas las de DreamHost, recomiendan plugins de almacenamiento en caché como WP Super Cache en sitios de WordPress. Sin embargo, dado que DreamPress viene con almacenamiento en caché incorporado, un plugin de almacenamiento en caché de terceros como WP Super Cache no es necesario e incluso podría entrar en conflicto con el caché de DreamPress. Cabe notar que debes mantener una versión actualizada del plugin&nbsp;<a href="/hc/en-us/articles/215300647-How-do-I-purge-the-DreamPress-cache-">Proxy Cache Purge</a>&nbsp;instalado en tu sitio DreamPress. Este plugin proporciona herramientas para administrar el caché de DreamPress automáticamente y analiza tu sitio para indicar si tiene el caché en funcionamiento.</p>
+<h3>¿Está mi sitio usando el caché DreamPress de manera efectiva?</h3>
+<p>Debido a los miles de plugins y personalizaciones disponibles para los sitios de WordPress, no todos los sitios funcionan automáticamente de manera efectiva con todos los métodos de almacenamiento en caché. El plugin Proxy Cache Purge ofrece una opción en tu panel WP-Admin para que puedas verificar las URL de las páginas en tu sitio y asegurarte de que se almacenan en caché correctamente. Si una página de tu sitio no se almacena en caché, la opción 'Check Caching' te indica los elementos a verificar que pueden resolver este problema.</p>
+<p>Para acceder a esta opción:</p>
+<ol>
+<li>Abre la página WP-Admin de tu sitio DreamPress.</li>
+<li>Busca el menú 'Proxy Cache &gt; Check Caching' en el panel izquierdo de tu panel de control de WP-Admin:<br />
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/2018-10_wp-admin_proxy_cache_01.fw.png" alt="2018-10_wp-admin_proxy_cache_01.fw.png" /></dd>
+</dl>
+</li>
+<li>Haz clic en la opción 'Check Caching'.<br />
+<dl>
+<dd><em>Se abre la página 'Check Caching Status' donde puedes verificar una URL en tu sitio:</em></dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-10_wp-admin_proxy_cache_02.fw.png" alt="2018-10_wp-admin_proxy_cache_02.fw.png" /></dd>
+</dl>
+</li>
+<li>Ingresa una URL en el cuadro de campo 'Check A URL On Your Site' y luego haga clic en el botón&nbsp;<strong>Check URL</strong>.</li>
+</ol>
+<p>Esta función escanea automáticamente la URL que seleccionaste e informa sobre cualquier problema que encuentre, así como cualquier complemento problemático conocido.</p>
+</div>
+<h2><span id="plugins">Verificar tus plugins</span></h2>
+<div class="solvvy-solution">
+<p>Ciertos plugins pueden estar escritos de manera que interfieran con el almacenamiento en caché adecuado de las páginas y el contenido de tu sitio. Puedes usar la opción 'Proxy Cache &gt; Check Caching' mencionada anteriormente para identificar un plugin específico que pueda causar esta interferencia.</p>
+<p>Para optimizar los plugins en general, visita el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-plugins-de-WordPress" target="_self">Administración de plugins en WordPress</a></li>
+</ul>
+</div>
+<h2><span id="tema">Verificar tu tema</span></h2>
+<div class="solvvy-solution">
+<p>Si bien los temas disponibles en wordpress.org son gratuitos y seguros de usar, algunos son mejores que otros. Cuando compres un tema, asegúrate de buscar en línea para determinar si algún usuario se ha quejado de problemas de velocidad al usarlo. Estos resultados pueden ayudarte a determinar qué tema es mejor para ti.</p>
+<p>Una forma rápida de verificar si tu tema está causando problemas con tu sitio es volver a un tema predeterminado (como 'TwentySeventeen') y ver si eso resuelve algún problema con tu sitio.</p>
+<p>Para cambiar el tema predeterminado:</p>
+<ol>
+<li>Inicia sesión en el panel de tu sitio de WordPress.</li>
+<li>En el panel izquierdo, haz clic en 'Appearance &gt; Themes'.</li>
+<li>Busca el tema predeterminado 'TwentySeventeen'.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-07_dreampress_slowness_02.png" alt="" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Activate</strong>.</li>
+</ol>
+<p>Una vez que tu sitio esté usando el tema TwentySeventeen, usa la herramienta mencionada anteriormente para verificar si esto mejora el rendimiento de tu sitio.</p>
+<p>Si estás pensando en un nuevo tema, algunos&nbsp;<a href="/hc/en-us/articles/115006051887-Using-Jetpack-with-DreamPress" target="_self">planes de DreamPress</a>&nbsp;ofrecen una suscripción gratuita a Jetpack Professional (con un valor anual de $299) que incluye temas premium seleccionados específicamente por el equipo de Jetpack, los cuales son de uso gratuito mientras se mantenga tu suscripción.</p>
+</div>
+<h2><span id="db">Verificar tu base de datos</span></h2>
+<div class="solvvy-solution">
+<h3>Uso del plugin WP-DBManager para optimizar tu base de datos</h3>
+<p>Debes optimizar de manera rutinaria la base de datos de tu sitio para evitar un efecto de "fragmentación". La forma más sencilla de hacerlo es utilizar el plugin&nbsp;<a href="https://wordpress.org/plugins/wp-dbmanager/">WP-DBManager</a></p>
+<p>que incluye una función para optimizar tu base de datos, así como la capacidad de programar esta optimización para que se ejecute en un momento deseado (recomendado al menos una vez al mes).</p>
+<p>Visita el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-plugins-de-WordPress" target="_self">Administrar plugins de WordPress</a>&nbsp;para obtener instrucciones sobre cómo instalar un plugin.</p>
+<p>Una vez instalado, haz clic en 'Database' en el panel izquierdo:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-07_dreampress_slowness_03.png" alt="" /></dd>
+</dl>
+<p>Luego, haz clic en 'Database &gt; Optimize DB' en el panel izquierdo.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-07_dreampress_slowness_04.png" alt="" /></dd>
+</dl>
+<p>En el panel central verá una lista de las tablas de tu base de datos. Haz clic en el botón <strong>Optimize</strong> en la parte inferior.</p>
+<h3>Usar wp-cli para optimizar tu base de datos</h3>
+<p>También puedes usar&nbsp;<a href="/hc/en-us/articles/214693248-WordPress-wp-cli-overview">wp-cli</a> para optimizar tu base de datos.</p>
+<p>Para optimizar tu base de datos usando wp-cli:</p>
+<ol>
+<li>Inicia sesión en tu servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Asegúrate de estar en el directorio de tu sitio de WordPress:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/example.com</span></pre>
+</div>
+</li>
+<li>Ejecuta el siguiente comando para ver todas las opciones de comando de la base de datos:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp help db</span></pre>
+</div>
+</li>
+<li>Para optimizar la base de datos, ejecuta lo siguiente:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db optimize</span></pre>
+</div>
+</li>
+</ol>
+<h3>Usar SSH para optimizar tu base de datos</h3>
+<p>Visita el siguiente artículo para obtener detalles sobre cómo optimizar tu base de datos a través de SSH:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215036388#Optimizing_via_SSH" target="_self">Optimizar tu base de datos utilizando SSH</a></li>
+</ul>
+<h3>Usar phpMyAdmin para optimizar tu base de datos</h3>
+<p>Visita el siguiente artículo para obtener detalles sobre cómo optimizar tu base de datos a través de phpMyAdmin:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215036388-How-do-I-optimize-my-database-" target="_self">Optimizar tu base de datos usando phpMyAdmin</a></li>
+</ul>
+<h3>Verificar el tamaño y el contenido de tu tabla wp_options</h3>
+<p>Además de optimizar tu base de datos, es útil verificar el tamaño de la tabla wp_options. Normalmente, esta tabla debe tener menos de 1 MB, pero los plugins y otras personalizaciones pueden hacer que esto sea mucho más grande. Por lo general, notarás cierta lentitud en tu sitio si esta tabla supera los 3 MB.</p>
+</div>
+<h2><span id="visitantes">Determinar qué páginas reciben la mayor cantidad de visitantes </span></h2>
+<div class="solvvy-solution">
+<p>Cada sitio web DreamHost almacena información en el archivo access.log sobre el sitio. Estos registros pueden volverse muy grandes y difíciles de leer, pero hay algunos comandos que puedes ejecutar para determinar rápidamente qué sitio está recibiendo la mayor cantidad de tráfico. Visita el siguiente artículo para obtener más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216105097-Ver-y-examinar-tu-access-log-a-trav%C3%A9s-de-SSH" target="_self">Ver y examinar tu archivo access.log vía SSH</a></li>
+</ul>
+</div>
+<h2><span id="imagenes">Optimizar los tamaños de imágenes</span></h2>
+<div class="solvvy-solution">
+<p>El tamaño de tus imágenes a menudo puede hacer que un sitio se cargue lentamente. Cuanto más grande sea una imagen, más tardará en descargarse al extremo del visitante. Asegúrate de que tus imágenes sean lo más pequeñas posible mientras se conserva su calidad. Puedes usar un sitio gratuito como&nbsp;<a href="https://tinyjpg.com/">https://tinyjpg.com/</a>&nbsp;para comprimir y optimizar tus imágenes. También puedes usar un plugin para ayudarte a hacer esto, como:</p>
+<ul>
+<li><a href="https://wordpress.org/plugins/wp-smushit/" target="_self">Smush Image Compression &amp; Optimization</a></li>
+</ul>
+</div>
+<h2><span id="scripts">Minificar tus scripts</span></h2>
+<div class="solvvy-solution">
+<p>También puedes minificar tu código HTML/CSS/JavaScript para ayudar a mejorar el tiempo que toma cargar tu sitio. Hay varios complementos que puedes instalar para ayudarte a minificar este código, y es posible que debas hacer un poco de ensayo y error para encontrar cuál funciona mejor para tu sitio. Aquí hay un par de opciones:</p>
+<ul>
+<li><a href="https://wordpress.org/plugins/fast-velocity-minify/">Fast Velocity Minify</a></li>
+<li><a href="https://wordpress.org/plugins/autoptimize/">Autoptimize</a></li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Con Autoptimize, es mejor comenzar con la menor cantidad de opciones posible, ya que algunas de las opciones pueden causar errores en tu sitio. Es posible que desees comenzar solo minimizando CSS y JavaScript.</p>
+</div>
+</div>
+</div>
+<h2><span id="faltan">¿Faltan archivos en mi instalación de WordPress?</span></h2>
+<div class="solvvy-solution">
+<p>A tu instalación de WordPress le pueden faltar ciertos archivos clave. Esto puede provocar errores 404 y puede hacer que un servidor trabaje más de lo normal al intentar encontrarlos. Esto resulta en tiempos de carga considerablemente más lentos, especialmente en sitios web populares.</p>
+<p>Uno de los archivos faltantes más comunes es el archivo favicon (favicon.ico). DreamHost genera automáticamente un favicon en blanco para todos los dominios de forma predeterminada, pero si notas que falta, puedes crear uno nuevo fácilmente.</p>
+<p>Agregar un favicon si aún no existe es fácil de hacer. Puedes agregar uno utilizando un cliente&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a>&nbsp;o iniciando sesión en tu servidor a través de&nbsp; <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.&nbsp;Una vez que hayas iniciado sesión, crea un archivo en blanco en la raíz del directorio de tu sitio web. Si lo estás creando a través de SSH, ejecuta los siguientes comandos después de iniciar sesión:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/example.com</span>
+<span class="server">[server]$ </span><span class="command">touch favicon.ico</span></pre>
+</div>
+<p>El comando 'touch' crea un archivo favicon.ico en blanco. Un icono en blanco es mucho mejor que uno que falta, ya que tu servidor no trabajará más duro buscándolo.</p>
+<p>Para buscar cualquier otro archivo faltante, puedes inspeccionar tu sitio con una herramienta como&nbsp;<a style="background-color: #ffffff;" href="http://tools.pingdom.com/">Pingdom Tools</a>.&nbsp;Un solo paso por el sitio muestra los archivos que faltan que pueden hacer que tu sitio se cargue lentamente. Simplemente busca los nombres de los archivos en rojo y luego reemplázalos o elimina las referencias a ellos en tus temas o entradas.</p>
+</div>
+<h2><span id="comunes">Otros problemas comunes que causan bajo rendimiento</span></h2>
+<div class="solvvy-solution">
+<p>Hay muchas más razones por las que un sitio puede funcionar más lento de lo esperado. Visita el siguiente artículo para obtener más información sobre cómo solucionar otros problemas, como CSS, JavaScript y otros problemas en línea. Ten en cuenta que no todos los elementos enumerados pertenecen a tu sitio DreamPress:</p>
+<ul>
+<li><a href="/hc/en-us/articles/216349808-Common-reasons-for-poor-website-performance" target="_self">Razones comunes para el bajo rendimiento del sitio web</a></li>
+</ul>
+</div>
+<h2><span id="herramientas"> Uso de herramientas en línea para solucionar problemas de tu sitio </span></h2>
+<div class="solvvy-solution">
+<h3>Herramientas de análisis de carga del sitio</h3>
+<p>Existen varias herramientas en línea que puedes usar para analizar tu sitio web. Estos tipos de herramientas pueden proporcionar información sobre el rendimiento de tu sitio web, identificar problemas que hacen que tu sitio se cargue más lento de lo esperado e incluso recomendar soluciones para ayudarte a resolver problemas.</p>
+<p>Visita el siguiente artículo para obtener una lista de las herramientas que puedes usar para solucionar problemas de tu sitio:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216560958#Herramientas-de-carga-de-sitios-web" target="_self">Herramientas de carga de web</a></li>
+</ul>
+<h3>Herramientas del navegador</h3>
+<p>Las siguientes son algunas herramientas recomendadas en el navegador para ayudarte a solucionar problemas de rendimiento con tu sitio de WordPress:</p>
+<ul>
+<li><a href="https://getfirebug.com/">Firebug </a>—&nbsp;Una herramienta muy útil que muestra qué se está cargando y cuánto tarda.</li>
+<li><a href="http://yslow.org/">YSlow</a> — Un complemento de Firebug que puede proporcionar algunos consejos sobre qué solucionar y cómo.</li>
+<li><a href="http://trac.webkit.org/wiki/WebInspector">Web Inspector</a> —&nbsp;Integrado en Chrome y Safari, proporciona mucha de la misma información que Firebug.</li>
+</ul>
+<p>Puedes usar la siguiente herramienta para verificar tu servidor DreamPress:</p>
+<ul>
+<li><a href="http://loadimpact.com/">Load Impact</a> — Un servicio de prueba de carga que visita tu servidor con muchos usuarios simultáneos. La versión gratuita proporciona una prueba de 50 usuarios. Asegúrate de tener habilitado el almacenamiento en caché antes de ejecutarlo. Durante este proceso, puede ver la carga de la CPU con '<a href="/hc/en-us/articles/115000683852-Using-the-top-command-to-troubleshoot-your-website">top</a>', los niveles de RAM con '<a href="/hc/en-us/articles/214879348#Using_the_free_command">free -m</a>', o ambos con 'vmstat 1' (Ctrl-C para detener).</li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-solution">
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="/hc/en-us/articles/215300817-Managing-WordPress-plugins" target="_self">Administrar plugins de WordPress</a></li>
+<li><a href="/hc/en-us/articles/215300647-Managing-the-DreamPress-cache" target="_self">Administrar el caché de DreamPress</a></li>
+<li><a href="/hc/en-us/articles/214586458-Fine-tuning-your-WordPress-JavaScript" target="_self">Ajuste detallado de JavaScript en WordPress</a></li>
+<li><a href="/hc/en-us/articles/214586518-Fine-tuning-WordPress-revisions" target="_self">Ajuste detallado de revisiones de WordPress</a></li>
+<li><a href="/hc/en-us/articles/215300907-WordPress-SPAM-plugins" target="_self">Plugins de SPAM con WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215527157-Administrar-los-temas-de-WordPress" target="_self">Administrar temas de WordPress</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="https://codex.wordpress.org/WordPress_Optimization" target="_self">Optimización de WordPress</a></li>
+<li><a href="http://wordpress.org/extend/plugins/" target="_self">Directorio de Plugins de WordPress</a></li>
+<li><a href="http://wordpress.org/support/" target="_self">Foros de Apoyo de Wordpress</a></li>
+<li><a href="https://gtmetrix.com/wordpress-optimization-guide.html" target="_self">Guía de optimización con GTmetrix</a></li>
+<li><a href="https://blog.sucuri.net/2017/01/wordpress-performance-optimization-guide.html" target="_self">Guía de optimización del rendimiento WordPress</a></li>
+<li><a href="http://www.wpbeginner.com/wordpress-performance-speed/" target="_self">Guía última para aumentar la velocidad y rendimiento de WordPress </a></li>
+<li><a href="http://www.prelovac.com/vladimir/wordpress-optimization-guide/" target="_self">La biblia de optimización de WordPress</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>

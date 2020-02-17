@@ -1,0 +1,65 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>DreamHost limita la cantidad de correo saliente de sus servidores en un esfuerzo por combatir el correo electrónico masivo no solicitado (UBE), también conocido como SPAM. Esto ayuda a evitar que los servidores DreamHost aparezcan en la lista negra/gris y se agreguen a las listas de bloqueo, lo que a su vez evita que el correo electrónico se entregue a tiempo. A cambio, tu servicio de correo electrónico es más confiable y estable.</p>
+<p>Cuando excedas este límite de cuota saliente, recibirás un aviso de rechazo que dice que el correo electrónico no se pudo enviar debido a "Policy Rejection- Quota Exceeded". Esto significa que has excedido o intentado exceder tu límite de envío de correo para esa cuenta en particular.</p>
+<p>Visita el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215730437-L%C3%ADmites-de-cuota-SMTP">límites de cuota SMTP</a>&nbsp;para ver ejemplos de lo que puede hacer que se superen esos límites.</p>
+</div>
+<h2><span id="Viruses.2C_spyware.2C_and_adware">Virus, spyware, y adware</span></h2>
+<div class="solvvy-solution">
+<p>Los virus, el spyware y el adware pueden infectar tu computadora y enviar correos electrónicos a todos en la libreta de direcciones de tu cliente. O bien, pueden usar tu cuenta de correo electrónico para enviar sus mensajes de spam.</p>
+<p>Los límites de envío ayudan a reducir la cantidad de daño causado por estas infracciones. Si sabes que no has excedido tus límites de envío y recibes el error "Policy Rejection- Quota Exceeded", <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener">contacta el equipo de soporte de DreamHost</a>. Al contactar al soporte, asegúrate de agregar la dirección de correo electrónico/nombre de usuario que está siendo bloqueado. El soporte puede revisar los registros de correo para determinar qué ha sucedido.</p>
+<p>Es posible que se haya enviado un correo electrónico a través de tu cuenta sin tu conocimiento. Si eso sucede, debes ejecutar análisis de virus, spyware y adware para limpiar tu computadora.</p>
+</div>
+<h2>Listas de Anuncios</h2>
+<div class="solvvy-solution">
+<p>Si necesitas enviar correos electrónicos de manera rutinaria a un gran número de destinatarios, DreamHost te recomienda encarecidamente que uses una Lista de Anuncios. Puedes configurar esto en tu panel en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.list&amp;" target="_blank" rel="noopener">Announcement Lists</a>.</p>
+<p>El servicio de Lista de anuncios facilita el trato con grandes grupos de suscriptores, ya que no tienes que preocuparte por enviar límites o alcanzar cuotas. El servicio de la Lista de anuncios también gestiona las confirmaciones de suscripción para ti, que cumple con las políticas Anti-Spam. Para obtener más información sobre este servicio, visite el siguiente artículo:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215683487-What-is-an-Announcement-mailing-list-">Lista de Correo de Anuncios</a></li>
+</ul>
+</div>
+<h2>Salida de registro</h2>
+<div class="solvvy-solution">
+<p>Si el soporte de DreamHost te envía la salida de tus registros para tu verificación, aquí te mostramos cómo interpretarlos.</p>
+<p>Ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">-------1------- ------2--------- ---------3--------- ---------4------------- -----------5------------- 
+Jan  2 07:40:47 throttle=new(a), host=99.128.162.62, from=user@example.com, to=family@example.com, 
+
+
+------6-------- ------7------- ---------8--------- ----------------9--------------
+count=1/100(1), rcpt=1/100(1), threshold=0%|0%|0%, sasl_username=user@example.com
+</pre>
+</div>
+<p>Los campos son los siguientes:</p>
+<ol>
+<li>Fecha y hora</li>
+<li>Código de estado del regulador (ver detalles a continuación)</li>
+<li>Dirección IP del host del cliente de correo (Webmail aparece como 127.0.0.1)</li>
+<li>Dirección&nbsp;"De"</li>
+<li>Dirección&nbsp;"Para" &nbsp;(también puede ser del campo CC o BCC)</li>
+<li>Recuento de mensajes – número de mensajes durante este período/límite de período (los mensajes pueden tener múltiples destinatarios)</li>
+<li>Recuento de destinatarios – total durante este período/límite de período</li>
+<li>Información de umbral (porcentajes) – el tercero es el único relevante</li>
+<li>"sasl_username" – cuenta utilizada para la autenticación SMTP (Webmail no muestra este campo)</li>
+</ol>
+<dl>
+<dd><em>Ignora números o letras entre paréntesis en la salida del registro.</em></dd>
+</dl>
+<dl>
+<dt>Códigos de estados de regulación y significados</dt>
+<dd><strong>new</strong> = Arranque inicial del regulardor (primer mensaje enviado comenzando un nuevo período).</dd>
+<dd><strong>clear</strong> = Regulador reiniciado (primer mensaje enviado comenzando un nuevo período).</dd>
+<dd><strong>update</strong> = Actualización al regulador (período actual en proceso).</dd>
+<dd><strong>abuse</strong> = Regulador excedido. Cuenta bloqueada hasta que expire el período de regulación. No se enviaron mensajes.</dd>
+</dl>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215730437-L%C3%ADmites-de-cuota-SMTP">Límites de cuota SMTP</a></li>
+<li><a href="http://www.dreamhost.com/spam.html">Política Anti-Spam de DreamHost</a></li>
+<li><a href="http://www.dreamhost.com/tos.html">Términos de servicio de DreamHost</a> (<em>Estos son los términos que acordaste al suscribirte a los servicios de DreamHost).</em></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115000837592-Spam-UBE">Centro de Abuso de Dreamhost (sección de Spam y UBE)</a></li>
+</ul>
+</div>
