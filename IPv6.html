@@ -1,0 +1,85 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>DreamHost permite a los usuarios agregar direcciones IPv6 a dominios alojados en el panel. IPv6 tiene algunas ventajas, una de las cuales es que hay un grupo mucho más grande de IP disponibles que IPv4, que se está volviendo obsoleto.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los <a href="/hc/es/articles/360002284771--Que-es-un-subdominio-dreamhosters-com-" target="_self">subdominios dreamhosters.com</a> no pueden agregar IPs únicas.</p>
+</div>
+</div>
+</div>
+<h2>Agregar una dirección IPv6</h2>
+<div class="solvvy-solution">
+<p>Si bien hay un cargo por agregar una dirección IPv4, no hay ningún cargo al agregar un IPv6 ya que todavía hay muchas direcciones disponibles.</p>
+<p>Para agregar una dirección IPv6:</p>
+<ol>
+<li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_unique_ip_add.png" alt="01 IPv6.fw.png" /></dd>
+</dl>
+</li>
+<li>Haz clic en el enlace ‘Add IP’ debajo de tu dominio.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_unique_ipv6_add.png" alt="02 IPv6.fw.png" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Add IPv6 IP Now</strong> para agregar una dirección IPv6 a tu dominio.
+<dl>
+<dd><em>Después de agregar la dirección IPv6, serás redirigido a la página ‘Manage Domains’ donde verás la nueva dirección asignada al dominio o subdominio correspondiente:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_unique_ipv6.png" /></dd>
+</dl>
+</li>
+<li>Para eliminar la IP, selecciona la 'X' roja al lado de la IP.</li>
+</ol>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+</div>
+<h2>Probar una IPv6</h2>
+<div class="solvvy-solution">
+<p>Hay algunas formas de probar si una dirección IPv6 está activa y responde.</p>
+<h3>Hacer ping (llamar) a la dirección</h3>
+<p>Ejecuta un comando ping (de llamado) a tu nombre de host. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ping6 example.com</span>
+<span class="cmdoutput">PING example.com(example.com) 56 data bytes
+64 bytes from example.com: icmp_seq=1 ttl=63 time=0.302 ms
+64 bytes from example.com: icmp_seq=2 ttl=63 time=0.718 ms
+64 bytes from example.com: icmp_seq=3 ttl=63 time=0.340 ms
+64 bytes from example.com: icmp_seq=4 ttl=63 time=0.843 ms
+64 bytes from example.com: icmp_seq=5 ttl=63 time=0.592 ms
+
+--- example.com ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4009ms
+rtt min/avg/max/mdev = 0.302/0.559/0.843/0.210 ms</span>
+</pre>
+</div>
+<p>También puedes usar una herramienta en línea para hacer ping (llamado) a IPv6. Por ejemplo:</p>
+<ul>
+<li><a href="http://www.subnetonline.com/pages/ipv6-network-tools/online-ipv6-ping.php">http://www.subnetonline.com/pages/ipv6-network-tools/online-ipv6-ping.php</a></li>
+<li><a href="http://centralops.net/co/Ping.aspx">http://centralops.net/co/Ping.aspx</a></li>
+</ul>
+<h3>Ejecuta un comando dig para verificar si la IP está resolviendo</h3>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">dig +short AAAA example.com</span>
+<span class="cmdoutput">2607:f298:4:152::3d1:2cb7</span>
+</pre>
+</div>
+<p>Si está resolviendo, verás que la dirección IP responde.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="/hc/es/articles/216109647-Generalidades-de-las-IP-Únicas" target="_self">Generalidades de las IP Únicas</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a class="new" title="W:IPv6 (page does not exist)" href="https://en.wikipedia.org/wiki/IPv6" target="_self">Información en Wikipedia sobre IPv6</a></li>
+<li><a href="http://centralops.net/co/Ping.aspx">http://centralops.net/co/Ping.aspx</a></li>
+<li><a href="http://www.cogentco.com/en/network/looking-glass">http://www.cogentco.com/en/network/looking-glass</a></li>
+<li><a href="http://www.traceroute6.net/">http://www.traceroute6.net/</a></li>
+</ul>
+</div>

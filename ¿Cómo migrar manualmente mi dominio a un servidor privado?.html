@@ -1,6 +1,6 @@
 <h2>Overview</h2>
 <div class="solvvy-solution">
-<p>Este artículo explica cómo mover un dominio de un servidor compartido a un servidor privado, ya sea una <a href="/hc/en-us/articles/215280058-Virtual-Private-Server-overview-VPS-">Virtual Private Server</a> (VPS) o un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">servidor Dedicado</a>&nbsp;manualmente copiando los datos del dominio del alojamiento compartido al servidor privado y luego configurando el nuevo usuario.</p>
+<p>Este artículo explica cómo mover un dominio de un servidor compartido a un servidor privado, ya sea una <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">Virtual Private Server</a> (VPS) o un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">servidor Dedicado</a>&nbsp;manualmente copiando los datos del dominio del alojamiento compartido al servidor privado y luego configurando el nuevo usuario.</p>
 </div>
 <h2>Cómo mover manualmente un dominio copiando sus archivos</h2>
 <div class="solvvy-solution">
@@ -10,9 +10,9 @@
 <li><a href="/hc/en-us/articles/216661778-Rsync">rsync</a></li>
 </ul>
 <h3>Migración manual de archivos a través de FTP</h3>
-<p>Si tiene menos de 1 GB de archivos para mover, puede ser más fácil de usar&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/115000675027#FTP_security">SFTP</a>:</p>
+<p>Si tiene menos de 1 GB de archivos para mover, puede ser más fácil de usar&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027#seguridad">SFTP</a>:</p>
 <ol>
-<li>Conéctate a tu servidor web compartido siguiendo las instrucciones del artículo&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/115000675027-FTP-overview-and-credentials">FTP</a>.</li>
+<li>Conéctate a tu servidor web compartido siguiendo las instrucciones del artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a>.</li>
 <li>Descarga todo el contenido de tu sitio web a tu computadora local.</li>
 <li>Crea un nuevo usuario en el servidor privado. Visita el artículo<br /> Habilitación del acceso a Shell para obtener más detalles.</li>
 <li>Conéctate a su nuevo servidor.<br />
@@ -26,7 +26,7 @@
 </ol>
 <h3>Migración manual de archivos a través de rsync</h3>
 <ol>
-<li>Crea un nuevo usuario en el servidor privado. Visita el artículo&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access" target="_self">Crear un usuario con acceso Shell (SSH)</a>&nbsp;para obtener detalles sobre cómo crear este usuario.</li>
+<li>Crea un nuevo usuario en el servidor privado. Visita el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Crear un usuario con acceso Shell (SSH)</a>&nbsp;para obtener detalles sobre cómo crear este usuario.</li>
 <li>Encuentra la ruta completa a tu nuevo servidor privado y tu nuevo usuario.<br />
 <ul>
 <li>Por ejemplo, si tu servidor privado se llama ps9123456 y el nuevo usuario que creó se llama user2, la ruta al servidor privado es:</li>
@@ -38,7 +38,7 @@
 <dd><em>Con esta información, estás listo para ejecutar el siguiente comando rsync.</em></dd>
 </dl>
 </li>
-<li>Inicie sesión en tu servidor compartido a través de&nbsp;<a href="/hc/en-us/articles/216041267-SSH-overview">SSH</a>.</li>
+<li>Inicie sesión en tu servidor compartido a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
 <li>Ejecuta el siguiente comando para copiar tus datos de su usuario compartido a tu nuevo usuario de servidor privado. Asegúrate de cambiar '/example.com' al directorio web de tu dominio real:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync -e ssh -av /home/shareduser/example.com user2@ps9123456.dreamhostps.com:/home/user2/</span></pre>
@@ -59,7 +59,7 @@
 </div>
 </div>
 <p>Una vez completada, tu carpeta de dominio compartida y todos sus contenidos se copian a su usuario de servidor privado.</p>
-<p>El último paso es ajustar qué nombre de usuario está asignado al dominio en su panel. Ve el artículo&nbsp;<a href="/hc/en-us/articles/215945947-How-do-I-move-a-single-domain-from-Shared-hosting-to-a-private-server-" target="_self">Mover un solo dominio del alojamiento compartido a un servidor privado</a>&nbsp;para instrucciones Sin embargo, esta vez hay dos diferencias:</p>
+<p>El último paso es ajustar qué nombre de usuario está asignado al dominio en su panel. Ve el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945947--C%C3%B3mo-mover-un-solo-dominio-de-un-alojamiento-compartido-a-un-servidor-privado-" target="_self">Mover un solo dominio del alojamiento compartido a un servidor privado</a>&nbsp;para instrucciones Sin embargo, esta vez hay dos diferencias:</p>
 <ul>
 <li>No es necesario crear un usuario, ya que ya existe. Simplemente selecciona el usuario del servidor privado del menú desplegable que ya ha creado.</li>
 <li>Deje la casilla de verificación 'Move files to a new user?' deshabilitada.</li>
@@ -80,9 +80,9 @@
 <div class="solvvy-hidden">
 <h3>Enlaces Internos</h3>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview" target="_self">Generalidades de SSH overview</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH overview</a></li>
 <li><a href="https://help.dreamhost.com/hc/en-us/articles/215840248-DNS-propagation-overview" target="_self">Generalidades de la propagación de DNS</a></li>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/215945947-How-do-I-move-a-single-domain-from-Shared-hosting-to-a-private-server-" target="_self">¿Cómo mover un solo dominio desde alojamiento compartido a un servidor privado?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215945947--C%C3%B3mo-mover-un-solo-dominio-de-un-alojamiento-compartido-a-un-servidor-privado-" target="_self">¿Cómo mover un solo dominio desde alojamiento compartido a un servidor privado?</a></li>
 <li><a href="https://help.dreamhost.com/hc/en-us/articles/215945717-How-do-I-add-a-user-to-my-private-server-" target="_self">¿Cómo agrego un usuario a mi servidor privado?</a></li>
 <li><a href="https://help.dreamhost.com/hc/en-us/articles/215280048-How-do-I-move-users-and-domains-to-my-private-server-" target="_self">¿Cómo muevo usuarios y dominios a mi servidor privado?</a></li>
 </ul>
