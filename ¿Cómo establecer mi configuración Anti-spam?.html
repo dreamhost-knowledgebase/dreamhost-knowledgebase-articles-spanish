@@ -1,0 +1,225 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="configuring-antispam-settings" class="solvvy-hidden">
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#whitelist_blacklist">Agregar una dirección de correo electrónico a una lista de remitentes aprobados (Whitelist) o de remitentes restringidos (Blacklist)</a></li>
+<li><a class="reference internal" href="#1">Opción 1 — Crear una Lista Blanca/Lista Negra para TODAS las direcciones de un dominio</a></li>
+<li><a class="reference internal" href="#2">Opción 2 — Crear una Lista Blanca/Lista Negra para una sola dirección de correo electrónico</a></li>
+<li><a class="reference internal" href="#explicacion">Explicación sobre las opciones de aprobación/ restricción de remitentes</a></li>
+<li><a class="reference internal" href="#habilitar">Habilitar el filtro de spam en un dominio existente</a></li>
+<li><a class="reference internal" href="#deshabilitar">Deshabilitar la carpeta de spam</a></li>
+<li><a class="reference internal" href="#configurando">Configurando filtros alternos</a></li>
+<li><a class="reference internal" href="#externas">Compañías externas que proveen filtro de correo electrónico</a></li>
+</ul>
+</div>
+</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>El filtrado de correo no deseado está habilitado de forma predeterminada mediante los filtros 'Vade' para todas las direcciones de correo electrónico alojadas de DreamHost con el fin de proporcionarte la mejor experiencia de correo electrónico posible.</p>
+<p>Los filtros analizan el correo electrónico entrante y los compara con un conjunto de reglas o características compartidas por los correos electrónicos no deseados. Si el filtro 'Vade' etiqueta el correo electrónico con un encabezado de X-vr-status: Spam, se filtra en tu carpeta Spam.</p>
+<p>Este artículo es un desglose básico sobre cómo usar el filtro de spam en tu dominio. Si deseas leer información más detallada sobre el filtrado de spam, consulta el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215686647-Technical-details-on-how-Anti-spam-filters-work" target="_self">Detalles técnicos sobre cómo funcionan los filtros antispam</a></li>
+</ul>
+</div>
+<h2><span id="whitelist_blacklist"> Agregar una dirección de correo electrónico a una lista de remitentes aprobados (Whitelist) o de remitentes restringidos (Blacklist)</span></h2>
+<div class="solvvy-solution">
+<p>Las entradas de la lista de remitentes restringidos son direcciones de correo electrónico o dominios de los que nunca deseas recibir correos electrónicos. Los correos electrónicos de remitentes en la <strong>lista negra</strong> se ponen en cuarentena independientemente de la puntuación de correo no deseado.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si te envían un correo electrónico desde una dirección de correo electrónico que esté en la lista negra, simplemente nunca va a llegar a tu Bandeja de entrada. El remitente tampoco recibe un mensaje de devolución, el mensaje simplemente nunca se entrega.</p>
+</div>
+</div>
+<p>Las entradas de remitentes aprobados son direcciones de correo electrónico o dominios de los que siempre deseas recibir correos electrónicos. Los correos electrónicos de los remitentes en la <strong>lista blanca</strong> se entregan a la bandeja de entrada independientemente de la puntuación de correo no deseado.</p>
+<ol>
+<li>Para aprobar o restringir una dirección, navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.junk&amp;" target="_blank" rel="noopener">Anti-Spam</a>.</li>
+<li>Hacia el lado derecho de tu dominio, haz clic en el botón&nbsp;<strong>Edit Filter</strong>.</li>
+<li>En la página de correo electrónico del dominio, tienes dos opciones para crear una Lista Blanca o Lista Negra.<br />
+<ul>
+<li><a href="#1" target="_self">Opción 1 — Crear una Lista Blanca/Lista Negra para TODAS las direcciones de un dominio</a></li>
+<li><a href="#2" target="_self">Opción 2 — Crear una Lista Blanca/Lista Negra para una sola dirección de correo electrónico</a></li>
+</ul>
+</li>
+</ol>
+</div>
+<h2><span id="1"> Opción 1 — Crear una Lista Blanca/Lista Negra para TODAS las direcciones de un dominio</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Para incluir una dirección en la lista blanca o en la lista negra, navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.junk&amp;" target="_blank" rel="noopener">Anti-Spam</a>.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si tienes&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/360028389972-G-Suite-overview" target="_self">G Suite habilitado en tu dominio</a>,&nbsp;tu correo está alojado en Google, donde debes configurar tus filtros. Vas a ver esto en la página Anti-Spam hacia el lado derecho de tu dominio:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/mail-settings-configured-in-gsuite.png" alt="G Suite filters" /></dd>
+</dl>
+</div>
+</div>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Edit Filter</strong>&nbsp;hacia el lado derecho de tu dominio.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_email_configuring_anti_spam_settings_01.png" alt="" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Edit settings for example.com</strong>&nbsp;en la parte superior de la página.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_email_configuring_anti_spam_settings_03.png" alt="" /></dd>
+</dl>
+</li>
+<li>En el campo&nbsp;<strong>Emails from the address</strong>,&nbsp;ingresa el dominio de esta manera:
+<div class="preboxcontainer">
+<pre class="prebox">@domain.com</pre>
+</div>
+Esto establece el dominio de SPAM como restringido para todos los correos electrónicos de tu dominio.</li>
+</ol>
+</div>
+<h2><span id="2"> Opción 2 — Crear una Lista Blanca/Lista Negra para una sola dirección de correo electrónico</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Para incluir solamente una dirección de correo electrónico en la lista blanca o en la lista negra (y no todas las direcciones de un dominio), navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.junk&amp;" target="_blank" rel="noopener">Anti-Spam</a>.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si tienes&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/360028389972-G-Suite-overview" target="_self">G Suite habilitado en tu dominio</a>,&nbsp;tu correo está alojado en Google, donde debes configurar tus filtros. Vas a ver esto en la página Anti-Spam hacia el lado derecho de tu dominio:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/mail-settings-configured-in-gsuite.png" alt="G Suite filters" /></dd>
+</dl>
+</div>
+</div>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Edit Filter</strong> hacia el lado derecho de tu dominio.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_email_configuring_anti_spam_settings_04.png" alt="" /></dd>
+</dl>
+</li>
+<li>En la página de dirección de correo electrónico específica, puedes 'Agregar listas blancas / listas negras personalizadas' ('Add Custom Whitelists/Blacklists').</li>
+</ol>
+</div>
+<h2><span id="explicacion"> Explicación sobre las opciones de aprobación/ restricción de remitentes </span></h2>
+<div class="solvvy-solution">
+<h3>Correos electrónicos desde la dirección</h3>
+<ul>
+<li>Al ingresar un correo electrónico, pueden ser direcciones de correo electrónico individuales usuario@EXAMPLE.com o una entrada para cubrir un dominio completo @ EXAMPLE.com.</li>
+<li>El límite es de 1000 entradas en la lista negra y 7500 entradas en la lista blanca. Si te estás acercando a ese límite, puedes consolidar varias direcciones de correo electrónico en un solo dominio con una sola entrada para todo el dominio.</li>
+<li>Todas las direcciones deben ingresarse manualmente. No hay importación masiva de direcciones.</li>
+<li>Las entradas de la lista blanca y la lista negra se aplican al sobre o al remitente SMTP, que no siempre coincide con la información en los detalles 'De' del encabezado. El remitente del sobre a menudo se registra en los encabezados completos de un correo electrónico como el remitente original o la ruta de retorno.</li>
+</ul>
+<h3>Type</h3>
+<p>Esto es simplemente Lista blanca o Lista negra.</p>
+<h3>Priority</h3>
+<p>La prioridad de una entrada en la lista blanca o negra generalmente se ignora y solo se usa cuando un correo electrónico entrante puede coincidir con más de una entrada.</p>
+<p>Todas las entradas de la lista blanca y la lista negra se almacenan juntas y cualquier correo electrónico entrante se compara potencialmente con todos ellos. Si solo hay una entrada de lista en blanco y negro para remitente@EXAMPLE.com, y no hay entrada para @ EXAMPLE.com (es decir, todos los remitentes en ese dominio), entonces la prioridad no importa. Se utiliza la entrada para remitente@EXAMPLE.com.</p>
+<p>La prioridad entra en juego cuando hay varias entradas. La prioridad informa qué entrada tiene prioridad. Si hay un empate, se elige al azar qué entrada se selecciona para enrutar el correo electrónico.</p>
+<dl>
+<dd>
+<h4><strong>Example</strong></h4>
+</dd>
+</dl>
+<dl>
+<dd>
+<p>Todo el correo que recibes de 'example.com' es correo no deseado o cartas en cadena; correo que nunca quieres leer. Sin embargo, hay muchos correos electrónicos importantes que debes leer de los remitentes de correo de confianza que también pueden estar usando 'example.com'. Por ejemplo, digamos que remitenteaprobado@ necesita pasar.</p>
+<p>En este caso, crearías una entrada en la lista negra para @example.com con la prioridad establecida en 'Low' (baja), luego una entrada en la lista blanca separada para remitenteaprobado@example.com con una prioridad más alta.</p>
+<p>Con esa combinación, los correos electrónicos de remitenteaprobado@example.com serán manejados por la entrada de la lista blanca de mayor prioridad, y todos los demás correos electrónicos de otros remitentes que usan @example.com serán manejados por la entrada de la lista negra de menor prioridad.</p>
+</dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_email_configuring_anti_spam_settings_05.png" alt="" /></dd>
+</dl>
+<p>Los mensajes de "remitenteaprobado@example.com" se enviarán a la bandeja de entrada a pesar de que el dominio "@example.com" se encuentre en la lista negra debido a la configuración de prioridad.</p>
+</div>
+<h2><span id="habilitar">Habilitar el filtro de spam en un dominio existente</span></h2>
+<div class="solvvy-solution">
+<p>Si anteriormente estabas usando un dominio en DreamHost pero no tenías habilitado el filtro de spam, DreamHost recomienda encarecidamente que lo habilites.</p>
+<p>Para habilitar el filtro de spam en un dominio existente:</p>
+<ol>
+<li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.junk&amp;" target="_blank" rel="noopener">Anti-Spam</a>.</li>
+<li>Haz clic en 'Enable Filter' al lado de tu dominio (solo se muestra para dominios con alojamiento de correo electrónico activo).<br />
+<dl>
+<dd>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Una vez que hayas habilitado el filtro de spam en un dominio, no hay forma de revertir esta acción.</p>
+</div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<h2><span id="deshabilitar">Deshabilitar la carpeta de spam</span></h2>
+<div class="solvvy-solution">
+<p>Actualmente no es posible desactivar el filtro de spam. Sin embargo, es posible evitar que el spam se filtre en tu carpeta /Spam. Solo necesitas desmarcar 'Filter spam messages' (Filtrar mensajes de spam) en el panel.</p>
+<p>Ten en cuenta que esto NO deshabilita el filtro de Vade, solo evita que el correo electrónico vaya a la carpeta /Spam. Luego se enviará a la bandeja de entrada.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Deshabilitar la carpeta de spam no deshabilita el filtro saliente. Si el algoritmo del sistema de filtro de DreamHost detecta spam potencial de tu dirección de correo electrónico, se devolverá como no entregado. Después de revisar el mensaje, lo, <a href="/hc/en-us/articles/360032561551" target="_self">puedes marcar como falso positivo</a>.&nbsp;Si notas que esto sucede regularmente, puede haber formas de evitarlo. Consulta el siguiente artículo para obtener más información:</p>
+<ul>
+<li><a href="/hc/en-us/articles/360001447486-Why-is-my-email-going-to-spam-" target="_self">¿Por qué los correos que envío se van a spam?</a></li>
+</ul>
+</div>
+</div>
+<ol>
+<li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.junk&amp;" target="_blank" rel="noopener">Anti-spam</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_email_configuring_anti_spam_settings_06.png" alt="" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón <strong>Edit Filter</strong>, hacia el lado derecho del dominio con el filtro habilitado.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_email_configuring_anti_spam_settings_01.png" alt="" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón <strong>Edit settings</strong> en tu dominio.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_email_configuring_anti_spam_settings_07.png" alt="" /></dd>
+</dl>
+</li>
+<li>Desmarca la casilla 'Filter spam messages'.</li>
+<li>Haz clic en <strong>Set Filtering Options</strong> para guardar tu configuración.</li>
+</ol>
+</div>
+<h2><span id="configurando">Configurando filtros alternos</span></h2>
+<div class="solvvy-solution">
+<p>Si no deseas utilizar la función de filtrado antispam que DreamHost ofrece a través del panel, tienes algunas alternativas para filtrar el correo entrante antes de que se entregue al usuario alojado con DreamHost.</p>
+<p>A continuación se muestra una descripción de filtros de mensajes basura alternos:</p>
+<dl>
+<dt><strong>Filtros de mensajes</strong></dt>
+<dt>Estos están disponibles a través del panel de tu cuenta en&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.filters&amp;" target="_blank" rel="noopener">Message Filters</a>.&nbsp;Esta característica te permite personalizar y crear tu propio conjunto de reglas de filtro para cada usuario. Puedes consultar el siguiente artículo para obtener detalles con esta función:</dt>
+<dt></dt>
+</dl>
+<ul>
+<li><a style="background-color: #ffffff;" href="/hc/es/articles/215030678-Filtros-personalizados-Cómo-habilitar-filtros-de-mensajes-en-una-dirección-de-correo-electrónico" target="_self">Filtros personalizados — Cómo habilitar filtros de mensajes en una dirección de correo electrónico</a></li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>No puedes configurar estos filtros de mensajes personalizados en todo el dominio. Deben crearse para cada usuario al que desees aplicarlos.</p>
+</div>
+</div>
+</div>
+<h2><span id="externas">Compañías externas que proveen filtro de correo electrónico</span></h2>
+<div class="solvvy-solution">
+<p>También puedes configurar servicios de filtro de correo para tu dominio por parte de compañías externas y hacer que esos servicios de filtrado entreguen el correo a los servidores de correo DreamHost una vez que se complete el filtrado. Esto se puede configurar a través del panel de tu cuenta en&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.mx&amp;" target="_blank" rel="noopener">Custom MX</a>.</p>
+<p>Puedes leer más sobre cómo configurar esto en el siguiente artículo:</p>
+<ul>
+<li><a style="background-color: #ffffff;" href="/hc/en-us/articles/216445687" target="_self">¿Qué es un proveedor de servicios de correo?</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214984738-Generalidades-sobre-Anti-spam" target="_self">Generalidades sobre Anti-spam</a></li>
+<li><a href="/hc/en-us/articles/215686647-Technical-details-on-how-Anti-spam-filters-work" target="_self">Detalles técnicos sobre cómo funcionan los filtros antispam</a></li>
+<li><a href="/hc/en-us/articles/215686667-Troubleshooting-Anti-spam-settings" target="_self">Solución de problemas de la configuración antispam</a></li>
+<li><a href="/hc/en-us/articles/360032561551-How-to-report-false-positive-spam-email" target="_self">¿Cómo reportar falsos positivos en correos marcados como spam?</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="clearer">&nbsp;</div>
