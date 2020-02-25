@@ -1,0 +1,246 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Agregar encabezados de seguridad a su archivo .htaccess puede ayudar a proteger tu sitio web y sus datos. Este artículo explica cómo agregar los siguientes encabezados de seguridad.</p>
+<ul>
+<li><a href="#content-security-policy">Content-Security-Policy</a></li>
+<li><a href="#hsts">Strict-Transport-Security (HSTS)</a></li>
+<li><a href="#x-frame-options">X-Frame-Options</a></li>
+<li><a href="#xss" target="_self">Protección de secuencias de comandos entre sitios (XSS)</a></li>
+<li><a href="#x-content-type-options" target="_self">X-Content-Type-Options</a></li>
+<li><a href="#referrer-policy" target="_self">Referrer Policy</a></li>
+<li><a href="#feature-policy" target="_self">Feature-Policy</a></li>
+<li><a href="#cors" target="_self">Encabezados CORS</a></li>
+</ul>
+</div>
+<h2>Agregar un archivo .htaccess</h2>
+<div class="solvvy-solution">
+<p>The examples in this article assume your site is on an Apache server and you are adding headers to your site's .htaccess file. View the following article for an overview of what an .htaccess file is and how to add one to your site.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades del archivo .htaccess</a></li>
+</ul>
+</div>
+<h2><span id="content-security-policy">Content-Security-Policy</span></h2>
+<div class="solvvy-solution">
+<p>El encabezado Content-Security-Policy especifica las fuentes de contenido aprobadas que el navegador puede cargar desde tu sitio web. Cuando incluye en la lista blanca fuentes de contenido aprobadas, ayuda a evitar que se cargue código malicioso en su sitio. Esta es una forma de ayudar a reducir los riesgos de XSS.</p>
+<p>Ve la siguiente página para más detalles:</p>
+<ul>
+<li><a href="https://content-security-policy.com/">https://content-security-policy.com/</a></li>
+</ul>
+<p>Este ejemplo permite que cualquier activo se cargue solo desde tu sitio web.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Header set Content-Security-Policy "default-src self"</pre>
+</div>
+<p>Este ejemplo permite que cualquier activo se cargue desde su dominio a través de HTTPS solo en el puerto 443.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Header set Content-Security-Policy "default-src https://example.com:443"</pre>
+</div>
+<p>Luego puede probar si está activo ejecutando el siguiente comando curl&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview" target="_self">via SSH</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
+HTTP/1.1 200 OK
+Date: Mon, 25 Nov 2019 22:17:47 GMT
+Server: Apache
+Last-Modified: Sun, 22 Apr 2018 17:05:19 GMT
+ETag: "2f5-56a72ed086011"
+Accept-Ranges: bytes
+Content-Length: 757
+<span class="green">Content-Security-Policy: default-src https://example.com:443</span>
+Content-Type: text/html</pre>
+</div>
+<h3>Resolución de advertencias de sitios inseguros y contenido mixto</h3>
+<p>Si tu sitio web tiene activos que se cargan a través de http, su sitio mostrará una advertencia SSL en la barra de URL de tu navegador para notificar al visitante que la conexión no es segura.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215364618--Por-qu%C3%A9-mi-navegador-dice-que-mi-sitio-es-inseguro-" target="_self">Resolver advertencias de sitios inseguros y contenido mixto</a></li>
+</ul>
+<p>El siguiente código actualiza todas las solicitudes para recursos inseguros automáticamente. Esto corrige la advertencia SSL en su navegador.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Header always set Content-Security-Policy "upgrade-insecure-requests;"</pre>
+</div>
+</div>
+<h2><span id="hsts">Strict-Transport-Security (HSTS)</span></h2>
+<div class="solvvy-solution">
+<p>Los encabezados Strict-Transport-Security le dicen al navegador que SOLO interactúe con el sitio usando HTTPS y nunca HTTP. Ve las siguientes páginas para más detalles.</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security" target="_self">en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html" target="_self">cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</a></li>
+</ul>
+<p>Puedes habilitar esto en su archivo .htaccess con el siguiente código:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Header set Strict-Transport-Security "max-age=31536000;includeSubDomains;"</pre>
+</div>
+<p>Puedes habilitar esto en tu archivo .htaccess con el siguiente código&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview" target="_self">via SSH</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
+HTTP/1.1 200 OK
+Date: Tue, 05 Jun 2018 20:05:52 GMT
+Server: Apache
+Last-Modified: Tue, 05 Jun 2018 16:26:52 GMT
+ETag: "2f9-56de78493cbc8"
+Accept-Ranges: bytes
+Content-Length: 761
+<span class="green">Strict-Transport-Security: max-age=31536000;includeSubDomains;</span>
+Content-Type: text/html
+</pre>
+</div>
+<h3>hsts preload y Cloudflare</h3>
+<p>Chrome te ofrece la opción de agregar tu dominio a su lista de precarga de HSTS.</p>
+<ul>
+<li><a href="https://hstspreload.org">https://hstspreload.org</a></li>
+</ul>
+<p>Si has habilitado Cloudflare en el panel DreamHost, te obliga a agregar el subdominio 'www' como se muestra en estos artículos.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215457387--C%C3%B3mo-agrego-o-elimino-www-de-mi-dominio-" target="_self">¿Cómo agregar o eliminar www de mi dominio?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216477717-C%C3%B3mo-habilitar-Cloudflare-en-tu-dominio" target="_self">Cómo habilitar Cloudflare en tu dominio</a></li>
+</ul>
+<p>Agregar el subdominio 'www' en el panel hará que la comprobación de precarga de HSTS falle con el siguiente mensaje.</p>
+<div class="preboxcontainer">
+<pre class="prebox">`http://example.com` (HTTP) should immediately redirect to `https://example.com`<br />(HTTPS) before adding the www subdomain. Right now, the first redirect is to <br />`http://www.example.com/`. The extra redirect is required to ensure that any <br />browser which supports HSTS will record the HSTS entry for the top level domain,<br />not just the subdomain.</pre>
+</div>
+<p>Si deseas utilizar Cloudflare y agregar tu dominio a la lista de HSTS preload, debes comprar una cuenta de Cloudflare directamente de Cloudflare. Esto te permitirá la opción de eliminar el subdominio 'www'.</p>
+</div>
+<h2><span id="x-frame-options">X-Frame-Options</span></h2>
+<div class="solvvy-solution">
+<p>Este encabezado ayuda a proteger a sus visitantes contra los ataques de clickjacking. Agrega este encabezado en las páginas que no deberían poder representar una página dentro de un marco. Velos siguientes enlaces para obtener más información:</p>
+<ul>
+<li><a href="https://www.keycdn.com/blog/x-frame-options" target="_self">keycdn.com/blog/x-frame-options</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options" target="_self">developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a></li>
+</ul>
+<p>Este ejemplo desactiva por completo la capacidad de cargar cualquier página en un marco.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Header always set X-Frame-Options DENY</pre>
+</div>
+<p>Este ejemplo sólo permite que tu sitio web incruste un iframe en sus páginas.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Header always set X-Frame-Options SAMEORIGIN</pre>
+</div>
+<p>Luego puedes probar si está activo ejecutando el siguiente comando curl&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview" target="_self">via SSH</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
+HTTP/1.1 200 OK
+Date: Mon, 25 Nov 2019 22:49:51 GMT
+Server: Apache
+<span class="green">X-Frame-Options: SAMEORIGIN</span>
+Last-Modified: Sun, 22 Apr 2018 17:05:19 GMT
+ETag: "2f5-56a72ed086011"
+Accept-Ranges: bytes
+Content-Length: 757
+Content-Type: text/html</pre>
+</div>
+</div>
+<h2><span id="xss">Protección de secuencias de comandos entre sitios (XSS)</span></h2>
+<div class="solvvy-solution">
+<p>El encabezado de X-XSS-Protection ayuda a proteger a sus visitantes contra los ataques de Cross-site Scripting. Ve el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a></li>
+</ul>
+<p>En este ejemplo, se usa el valor <strong>1</strong>. Esto habilita el filtrado XSS (generalmente predeterminado en los navegadores). Si se detecta un ataque de secuencias de comandos entre sitios, el navegador desinfectará la página (eliminará las partes inseguras).</p>
+<div class="preboxcontainer">
+<pre class="prebox">Header set X-XSS-Protection "1"</pre>
+</div>
+<p>En este ejemplo, el valor&nbsp;<strong>1; mode=block </strong>se utiliza.&nbsp;En lugar de desinfectar la página, el navegador evitará la representación de la página si se detecta un ataque.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Header set X-XSS-Protection "1; mode=block"</pre>
+</div>
+<p>Luego puedes probar si está activo ejecutando el siguiente comando curl&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview" target="_self">via SSH</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
+HTTP/1.1 200 OK
+Date: Mon, 25 Nov 2019 22:55:52 GMT
+Server: Apache
+Last-Modified: Sun, 22 Apr 2018 17:05:19 GMT
+ETag: "2f5-56a72ed086011"
+Accept-Ranges: bytes
+Content-Length: 757
+<span class="green">X-XSS-Protection: 1; mode=block</span>
+Content-Type: text/html
+</pre>
+</div>
+</div>
+<h2><span id="x-content-type-options">X-Content-Type-Options</span></h2>
+<div class="solvvy-solution">
+<p>Este encabezado bloquea la detección de contenido que podría transformar los tipos MIME no ejecutables en tipos MIME ejecutables. Ve el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options</a></li>
+</ul>
+</div>
+<div class="solvvy-solution">
+<div class="preboxcontainer">
+<pre class="prebox">Header set X-Content-Type-Options nosniff</pre>
+</div>
+<p>Luego puedes probar si está activo ejecutando el siguiente comando curl <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">via SSH</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
+HTTP/1.1 200 OK
+Date: Mon, 25 Nov 2019 23:10:02 GMT
+Server: Apache
+Last-Modified: Sun, 22 Apr 2018 17:05:19 GMT
+ETag: "2f5-56a72ed086011"
+Accept-Ranges: bytes
+Content-Length: 757
+<span class="green">X-Content-Type-Options: nosniff</span>
+Content-Type: text/html</pre>
+</div>
+</div>
+<h2><span id="referrer-policy">Referrer-Policy</span></h2>
+<div class="solvvy-solution">
+<p>Este encabezado controla la cantidad de información de referencia de tu sitio que se envía a otro servidor. Por ejemplo, si un enlace en su sitio abre un sitio web diferente, el servidor de ese sitio web registra tu nombre de dominio como el referente de ese enlace. Con esta política, puedes controlar qué información de referencia se envía a ese servidor externo. Ve el siguiente enlace para más detalles.</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy" target="_self">developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy</a></li>
+</ul>
+<p>Este ejemplo no envía ninguna información de referencia.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Header set Referrer-Policy: no-referrer</pre>
+</div>
+<p>Luego puedes probar si está activo ejecutando el siguiente comando curl&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">via SSH</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
+HTTP/1.1 200 OK
+Date: Tue, 26 Nov 2019 00:40:50 GMT
+Server: Apache
+Last-Modified: Tue, 26 Nov 2019 00:33:15 GMT
+ETag: "391-5983506a2c574"
+Accept-Ranges: bytes
+Content-Length: 913
+<span class="green">Referrer-Policy: no-referrer</span>
+Content-Type: text/html
+</pre>
+</div>
+</div>
+<h2><span id="feature-policy">Feature-Policy</span></h2>
+<div class="solvvy-solution">
+<p>El encabezado Feature-Policy controla qué funciones del navegador están permitidas en tu sitio web. Esta política permite al propietario/desarrollador del sitio web restringir API específicas a las que el sitio puede acceder en el navegador. Aquí están algunos ejemplos:</p>
+<ul>
+<li>Cambiar el comportamiento predeterminado de reproducción automática en los videos.</li>
+<li>Restringe el sitio del uso de una cámara o micrófono.</li>
+<li>Deshabilita la API de geolocalización.</li>
+</ul>
+<p>Esto es importante si el sitio permite contenido de terceros, ya que ayuda a controlar lo que esas aplicaciones de terceros pueden intentar hacer con el navegador del usuario cuando alguien visita su sitio web. Ve los siguientes enlaces para más información.</p>
+<ul>
+<li><a href="https://developers.google.com/web/updates/2018/06/feature-policy" target="_self">developers.google.com/web/updates/2018/06/feature-policy</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy" target="_self">developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy</a></li>
+</ul>
+<p>Este ejemplo bloquea el funcionamiento de la API de geolocalización en el navegador en su sitio.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Header set Feature-Policy: "geolocation none"</pre>
+</div>
+<p>Luego puedes probar si está activo ejecutando el siguiente comando curl&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview" target="_self">via SSH</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
+HTTP/1.1 200 OK
+Date: Tue, 26 Nov 2019 01:00:49 GMT
+Server: Apache
+Last-Modified: Tue, 26 Nov 2019 00:33:15 GMT
+ETag: "391-5983506a2c574"
+Accept-Ranges: bytes
+Content-Length: 913
+<span class="green">Feature-Policy: geolocation none</span>
+Content-Type: text/html</pre>
+</div>
+</div>
+<h2><span id="cors">Habilitar CORS</span></h2>
+<div class="solvvy-solution">
+<p>Consulta el siguiente artículo para obtener información sobre cómo configurar los encabezados CORS.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360037198972-Encabezados-de-CORS" target="_self">Encabezados de CORS</a></li>
+</ul>
+</div>
