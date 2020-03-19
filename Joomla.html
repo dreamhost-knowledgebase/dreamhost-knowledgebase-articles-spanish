@@ -1,0 +1,97 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/Joomla.fw.png" alt="Joomla.fw.png" width="149" height="138" /></p>
+<p>Joomla es un popular sistema de gestión de contenido (CMS) disponible para los clientes de DreamHost como <a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215915837--C%C3%B3mo-realizo-la-instalaci%C3%B3n-de-un-solo-clic-">instalación de un clic</a>. Joomla te permite construir rápidamente sitios web y aplicaciones sin conocimientos de programación.</p>
+<p>Visita la siguiente página para más información:</p>
+<ul>
+<li><a href="http://www.joomla.org/about-joomla.html" rel="nofollow">What is Joomla?</a></li>
+</ul>
+<p>Para obtener detalles sobre cómo instalar la última versión que ofrece DreamHost, visita el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215915837--C%C3%B3mo-realizo-la-instalaci%C3%B3n-de-un-solo-clic-">Instalar Joomla usando el instalador de un clic</a></li>
+</ul>
+</div>
+<h2><span id="Email_settings">Configuraciones de correo electrónico</span></h2>
+<div class="solvvy-solution">
+<p>Se recomienda enviar correo electrónico a través de SMTP. Cuando envías un correo electrónico directamente desde tu sitio web, el correo electrónico se envía DESDE el servidor web. Si la dirección FROM en Joomla no está configurada correctamente, es posible que el correo electrónico no se envíe.</p>
+<p>Sin embargo, si has habilitado la autenticación SMTP en el panel de Joomla, el correo electrónico se envía desde el servidor de correo. Este es el método preferido para evitar problemas de envío.</p>
+<h3>Habilitar la autenticación SMTP</h3>
+<ol>
+<li>En la esquina superior izquierda, haz clic en el elemento de menú ‘System’.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/01_Joomla.fw.png" alt="01 Joomla.fw.png" width="286" height="271" /></dd>
+</dl>
+</li>
+<li>En el menú desplegable, selecciona ‘Global Configuration’.
+<dl>
+<dd><em>La página Global Configuration se abre:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/02_Joomla.fw.png" alt="02 Joomla.fw.png" width="678" height="239" /></dd>
+</dl>
+</li>
+<li>Haz clic en la pestaña ‘Server’.
+<dl>
+<dd><em>En la parte inferior derecha de esta página está la sección ‘Mail Settings’.</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/03_Joomla.fw.png" alt="03 Joomla.fw.png" width="428" height="603" /></dd>
+</dl>
+</li>
+<li>Haz las siguientes selecciones:
+<ul>
+<li>En el menú desplegable ‘Mailer’, selecciona ‘SMTP’.</li>
+<li>Junto a ‘SMTP Authentication’, haz clic en el botón&nbsp;<strong>Yes</strong>.</li>
+<li>Completa todos los demás campos, incluida la información de tu dirección de correo electrónico como se muestra en la captura de pantalla anterior.</li>
+</ul>
+</li>
+<li>En la parte superior izquierda de la página, haz clic en el botón&nbsp;<strong>Save</strong> para guardar estos nuevos ajustes.</li>
+</ol>
+<p>Los correos electrónicos ahora se envían a través de SMTP desde tu sitio web. Visite lo siguiente para más detalles:</p>
+<ul>
+<li><a href="https://docs.joomla.org/J3.x:Global_configuration#.E2.80.9CMail_Settings.E2.80.9D_GroupSMTP%20authentication%20settings" rel="nofollow">Joomla! Documentation – Global configuration</a></li>
+</ul>
+<h3>Solución de problemas de correo electrónico</h3>
+<p>Si eliges no utilizar la autenticación SMTP y encuentras que no se envían correos electrónicos, marca la opción ‘Custom Reply’.</p>
+<p>Ve a 'Components -&gt; Contacts -&gt; Options'. En la pestaña Form, asegúrate de que la "Custom Reply" está configurada en NO.</p>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si esto no se hace, Joomla puede que ni siquiera genere el correo electrónico y que el formulario no funcione.</p>
+</div>
+</div>
+</div>
+<h2><span id="Extensions">Extensiones</span></h2>
+<div class="solvvy-solution">
+<p>Joomla ofrece una amplia selección de extensiones que puede agregar a su sitio para mayor funcionalidad. Visite las siguientes páginas para más detalles:</p>
+<ul>
+<li><a href="https://docs.joomla.org/Extension_types_%28general_definitions%29" rel="nofollow">Joomla! Documentation – Extension types (general definitions)</a></li>
+<li><a href="http://extensions.joomla.org/" rel="nofollow">Joomla! Extensions Directory</a></li>
+</ul>
+</div>
+<h2>Solución de problemas</h2>
+<div class="solvvy-solution">
+<p>Puedes ver el siguiente error al visitar tu sitio de Joomla.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Database connection error (1): The MySQL adapter 'mysql' is not available.</pre>
+</div>
+<p>La función MySQL solo está disponible en versiones de PHP inferiores a 7.0. Este error indica que tu sitio está ejecutando una versión anterior de Joomla que no es compatible con las versiones más nuevas de PHP, como 7.2, 7.3 o 7.4. La solución es actualizar tu sitio a la versión #3 de Joomla. Puedes leer más sobre las versiones recomendadas de PHP para tu versión de Joomla aquí.</p>
+<ul>
+<li><a href="https://downloads.joomla.org/us/technical-requirements-us" target="_self">Technical Requirements</a></li>
+</ul>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215915837--C%C3%B3mo-realizo-la-instalaci%C3%B3n-de-un-solo-clic-">¿Cómo nstalo una instalación de un clic?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089938--Cuales-instaladores-de-un-clic-ofrece-DreamHost-">¿Qué instalaciones de un clic ofrece DreamHost?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215916107--C%C3%B3mo-elimino-una-instalaci%C3%B3n-de-un-clic-">¿Cómo eliminar una instalación de un clic?</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="http://www.joomla.org/about-joomla.html" rel="nofollow">What is Joomla?</a></li>
+<li><a href="https://docs.joomla.org/J3.x:Global_configuration#.E2.80.9CMail_Settings.E2.80.9D_GroupSMTP%20authentication%20settings" rel="nofollow">Joomla! Documentation – Global configuration</a></li>
+<li><a href="https://docs.joomla.org/Tutorials:Beginners" rel="nofollow">Joomla! Documentation – Beginners</a></li>
+</ul>
+</div>
