@@ -1,0 +1,84 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>No hay acceso SSH a un servidor MySQL compartido o privado. Toda la solución de problemas debe realizarse en el panel DreamHost o dentro de tu software.</p>
+<p>Si necesitas acceso SSH, debes actualizar a un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicated server</a> o&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/214840947-What-is-DreamCompute-">DreamCompute</a>&nbsp;donde la base de datos está alojada en la misma máquina.</p>
+</div>
+</div>
+</div>
+<h2>Problemas para iniciar sesión</h2>
+<div class="solvvy-solution">
+<h3>Actualización de 'Allowable hosts'</h3>
+<p>Además, asegúrate de agregar tu dirección IP actual a los hosts permitidos de la base de datos. Puedes administrar esta configuración en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">MySQL Databases</a>.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_database_credentials_02.png" /></dd>
+</dl>
+<p>A la derecha de tu base de datos, haz clic en el nombre de usuario. En la página siguiente puede ver el campo 'Hosts permitidos' ('Allowable hosts').</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_database_allowable_hosts.png" alt="allowable hosts.png" /></dd>
+</dl>
+<p>En la imagen de arriba, reemplazarías xxx.xxx.xxx.xxx con la dirección IP de tu computadora. Puedes encontrarla en un sitio como&nbsp;<a href="https://whatismyipaddress.com/">whatismyipaddress.com</a>.&nbsp;El panel también muestra tu dirección IP actual en esta sección.</p>
+</div>
+<h2>Reiniciar el servidor</h2>
+<div class="solvvy-solution">
+<p>Debido a la naturaleza del alojamiento compartido de MySQL, no es posible reiniciar tu servidor MySQL. La única forma en que esto sería posible es si estuviera en un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">plan de alojamiento Dedicado</a>.&nbsp;En un plan dedicado, el servidor MySQL está alojado en la misma máquina, lo que te permite acceso completo a la raíz.</p>
+</div>
+<h2>Mensajes de Error</h2>
+<div class="solvvy-solution">
+<h3>"<em>The used command is not allowed with this MySQL version</em>"</h3>
+<p>Este error puede ocurrir cuando se usa la declaración "LOAD DATA LOCAL INFILE" en los servidores web Ubuntu 12.04. Un cambio en la biblioteca mysql de Debian a Ubuntu requiere cambios de código para evitar este error y permitir que se ejecute su declaración.</p>
+<dl>
+<dt>
+<h3>línea de comando mysql</h3>
+</dt>
+<dd>Agrega el indicador --local-infile a tu declaración de conexión mysql, como:</dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql --local-infile -h HOSTNAME -u USERNAME -pPASSWORD DATABASENAME</span></pre>
+</div>
+<dl>
+<dt>
+<h3>PHP mysql_connect()</h3>
+</dt>
+<dd>Agrega 2 parámetros adicionales a mysql_connect, uno falso para nuevos enlaces "new link" y luego un indicador de cliente de 128 o CLIENT_LOCAL_FILES:</dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="cmdoutput">mysql_connect('HOSTNAME','USERNAME','PASSWORD', false, 128);</span></pre>
+</div>
+<dl>
+<dt>
+<h3>PHP mysqli_connect()</h3>
+</dt>
+<dd>Inicializa mysqli primero a través de mysqli_init y usa mysqli_options () para especificar el archivo local como verdadero antes de conectarte al servidor mysql:</dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="cmdoutput">$link = mysqli_init();
+mysqli_options($link, MYSQLI_OPT_LOCAL_INFILE, true);
+mysqli_real_connect($link, 'HOSTNAME','USERNAME','PASSWORD','DATABASENAME');</span></pre>
+</div>
+<dl>
+<dt>
+<h3>PERL DBI</h3>
+</dt>
+<dd>El parámetro mysql_local_infile se puede agregar a la variable de nombre de la fuente de datos o directamente en DBI-&gt; connect:</dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="cmdoutput">$dbh = DBI-&gt;connect("DBI:mysql:database=DATABASENAME;host=HOSTNAME;mysql_local_infile=1", "USERNAME", "PASSWORD");</span></pre>
+</div>
+<h3><span id="mysqldump:_Couldn.27t_execute_.27SET_OPTION_SQL_QUOTE_SHOW_CREATE.3D1.27">mysqldump: Couldn't execute 'SET OPTION SQL_QUOTE_SHOW_CREATE=1'</span></h3>
+<p>Este error es causado por una incompatibilidad con el antiguo sistema operativo Debian de DreamHost en productos VPS dedicados y de servidor web cuando se usa con la versión más reciente del servidor MySQL 5.6.x. Si ves este error, pónte en contacto con el servicio de asistencia para analizar las opciones de actualización del sistema operativo.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL" target="_self">Generalidades sobre MySQL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215100557--C%C3%B3mo-restauro-mi-base-de-datos-en-el-panel-" target="_self">¿Cómo hacer una copia de seguridad y restaurar mi base de datos?</a></li>
+<li><a href="/hc/en-us/articles/221621388-Managing-existing-MySQL-databases" target="_self">¿Cómo administrar mi base de datos?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214882998--C%C3%B3mo-me-conecto-a-mi-base-de-datos-a-trav%C3%A9s-de-SSH-" target="_self">¿Cómo me conecto a mi base de datos a través de SSH?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214883058--C%C3%B3mo-me-conecto-a-mi-base-de-datos-utilizando-un-programa-de-terceros-" target="_self">¿Cómo me conecto a mi base de datos usando un programa externo?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215577937-How-do-I-connect-to-my-database-using-SQLyog-" target="_self">¿Cómo me conecto a mi base de datos usando SQLyog?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115000263911-MySQL-limitations-due-to-shared-hosting" target="_self">Limitaciones de MySQL debido al alojamiento compartido</a></li>
+</ul>
+</div>
