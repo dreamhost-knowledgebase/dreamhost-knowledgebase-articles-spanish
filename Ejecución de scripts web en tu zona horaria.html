@@ -1,0 +1,90 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Muchos programas web registran o muestran la hora. Si estos programas usan la hora local, muestra la zona horaria de la costa oeste de EE. UU. (PDT / PST) que&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215252448-Generalidades-de-DreamHost">DreamHost</a>&nbsp;usa para sus servidores.</p>
+<p>Sin embargo, puedes cambiar eso para tus scripts. Ve al siguiente enlace para ver un mapa de zona horaria mundial:</p>
+<ul>
+<li><a href="https://www.worldtimezone.com/">worldtimezone.com</a></li>
+</ul>
+</div>
+<h2>Encontrar tu zona horaria</h2>
+<div class="solvvy-solution">
+<p>Puedes encontrar una lista de zonas horarias conocidas en tu servidor. Primero debes&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">crear un usuario de shell</a>, luego iniciar sesión a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.&nbsp;Luego puedes ejecutar el siguiente comando para ver todas las zonas horarias configuradas.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat /usr/share/zoneinfo/zone.tab</span></pre>
+</div>
+<p>Por ejemplo, si vives en o cerca de Buenos Aires, Argentina (en América del Sur), tu zona horaria se encuentra en una línea como esta:</p>
+<div class="preboxcontainer">
+<pre class="prebox">AR  -3436-05827 America/Argentina/Buenos_Aires  Buenos Aires (BA, CF)
+</pre>
+</div>
+<ul>
+<li>El primer campo es el código de país ISO 3166 de 2 caracteres:<strong> AR</strong> en el ejemplo significa <strong>Argentina</strong>.</li>
+<li>El segundo campo es la latitud y longitud de la ubicación principal de la zona en formato de signo ISO 6709-grados-minutos-segundos. Ya sea + -DDMM + -DDDMM o + -DDMMSS + -DDDMMSS, la primera latitud (+ es el norte), luego la longitud (+ es el este). En el ejemplo, <strong>-3436-05287</strong> representa <strong>34 ° 36'S 52 ° 87'W</strong>.</li>
+<li>El tercer campo es el más importante: este es el nombre de la zona y el que debes recordar. <strong>América/Argentina/Buenos_Aires</strong> aparece en este ejemplo.</li>
+<li>Puede haber un cuarto campo con comentarios que pueden ayudarte a identificar otras localidades cubiertas en la zona.</li>
+</ul>
+<p>También puedes consultar esta lista de Wikipedia para obtener más información:</p>
+<ul>
+<li><a class="new" title="W:List of tz database time zones (page does not exist)" href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_self">Wikipedia – Lista de zonas horarias de la base de datos tz</a></li>
+</ul>
+</div>
+<h2>Cambiar la zona horaria en un script PHP</h2>
+<div class="solvvy-solution">
+<p>Usa una de las siguientes opciones en tu código PHP antes de ejecutar cualquier otra función de fecha. Los siguientes ejemplos usan 'América/Argentina/Buenos_Aires' como zona horaria.</p>
+<div class="preboxcontainer">
+<pre class="prebox">ini_set("date.timezone", "America/Argentina/Buenos_Aires");
+</pre>
+</div>
+<dl>
+<dd><em><strong>-o-</strong></em></dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox">date_default_timezone_set("America/Argentina/Buenos_Aires");</pre>
+</div>
+<p>Puedes encontrar tu zona horaria visitando la siguiente página:</p>
+<ul>
+<li><a href="http://php.net/manual/en/timezones.php" target="_self">php.net – Lista de zonas horarias admitidas</a></li>
+</ul>
+</div>
+<h2>Cambiar la zona horaria en un archivo php.ini</h2>
+<div class="solvvy-solution">
+<p>Además, si deseas que todos tus sitios bajo un usuario se ejecuten en una zona horaria específica, puedes crear un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214894037--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-FTP-">phprc</a>. En ese archivo, agrega la siguiente línea:</p>
+<div class="preboxcontainer">
+<pre class="prebox">date.timezone=(America/Argentina/Buenos_Aires)</pre>
+</div>
+<p>Elimina todos los procesos PHP en ejecución como se indica en el artículo. Cuando termines, todos los scripts PHP usan la zona horaria especificada en este archivo.</p>
+</div>
+<h2><span id="MySQL">MySQL</span></h2>
+<div class="solvvy-solution">
+<p>Para MySQL, configura tu zona horaria UTC/GMT preferida ejecutando la siguiente consulta antes que cualquier otra. Este ejemplo utiliza la función PHP mysql_query, donde -X- es tu desplazamiento de hora UTC / GMT). Por ejemplo, usarías -5 para la ciudad de Nueva York,&nbsp;<a href="https://www.worldtimezone.com/" target="_self">ya que está 5 horas detrás de GMT</a>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">mysql_query("SET time_zone = '-5:00';");
+</pre>
+</div>
+<p>Esta consulta debe correrse al comienzo de cada ejecución de script, ya que el cambio dura sólo mientras se ejecuta tu script, o si estás conectado al servidor MySQL.</p>
+<p>Para mayor información por favor visita:</p>
+<ul>
+<li><a href="http://dev.mysql.com/doc/refman/5.1/en/time-zone-support.html">MySQL Server Time Zone Support</a></li>
+<li><a href="http://www.google.com/search?hl=en&amp;q=utc+time&amp;btnG=Search">Google UTC/GMT Clock</a></li>
+</ul>
+</div>
+<h2>Ver el tiempo que usa PHP</h2>
+<div class="solvvy-solution">
+<p>Crea un nuevo archivo llamado algo así como date.php con el siguiente código:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+echo date('l jS \of F Y h:i:s A');
+?&gt;</pre>
+</div>
+<p>Visita esta página en un navegador para ver el tiempo que usa tu código PHP.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214202188-PHP-overview" target="_self">Generalidades sobre PHP</a></li>
+<li><a class="new" title="W:List of tz database time zones (page does not exist)" href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_self">Wikipedia – Lista de zonas horarias de la base de datos tz</a></li>
+<li><a href="http://php.net/manual/en/timezones.php" target="_self">php.net – Lista de zonas horarias admitidas</a></li>
+<li><a href="https://www.worldtimezone.com/" target="_self">Mapa de la zona horaria mundial</a></li>
+</ul>
+</div>
