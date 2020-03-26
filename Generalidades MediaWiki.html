@@ -1,0 +1,329 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="mediawiki" class="solvvy-hidden">
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#instalar">Instalar MediaWiki</a></li>
+<li><a class="reference internal" href="#complementos">Complementos comunes de MediaWiki</a></li>
+<li><a class="reference internal" href="#imagenes">Manejo de imagenes</a></li>
+<li><a class="reference internal" href="#correo-electronico">Correo electrónico y spam</a></li>
+<li><a class="reference internal" href="#utilidades">Utilidades de MediaWiki</a></li>
+<li><a class="reference internal" href="#seguras">Configuraciones Seguras</a></li>
+<li><a class="reference internal" href="#licencia">Configuraciones de licencia</a></li>
+<li><a class="reference internal" href="#actualizando">Actualizando MediaWiki</a></li>
+<li><a class="reference internal" href="#avanzada">Configuraciones avanzadas y solución de problemas</a></li>
+</ul>
+</div>
+</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/Mediawiki.fw.png" alt="Mediawiki.fw.png" width="149" height="149" /></dd>
+</dl>
+<p>MediaWiki es un software gratuito de código abierto que puedes usar para crear contenido wiki, como&nbsp;<a href="https://www.wikipedia.org/" rel="nofollow">Wikipedia</a>. La aplicación es ideal para crear páginas de base de conocimiento similares a una enciclopedia.</p>
+<p>Para obtener más información, visita el sitio oficial de MediaWiki:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Template:Main_page/es" target="_self" rel="nofollow">MediaWiki.org</a></li>
+</ul>
+<p>MediaWiki se ofrece como&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215089938--Cuales-instaladores-de-un-clic-ofrece-DreamHost-">instalación de un clic</a> en tu panel DreamHost.</p>
+</div>
+<h2><span id="instalar">Instalar MediaWiki</span></h2>
+<div class="solvvy-solution">
+<p>La forma más sencilla de instalar MediaWiki es utilizar la función de&nbsp; <a href="https://help.dreamhost.com/hc/es/articles/215915837--C%C3%B3mo-realizo-la-instalaci%C3%B3n-de-un-solo-clic-">instalación de un clic</a> en tu panel que instala el software por ti.</p>
+<p>La otra opción es instalarlo manualmente, lo que requiere que tú mismo descargues los archivos y los cargues en tu servidor web.</p>
+<p>Las instrucciones detalladas sobre la instalación manual de MediaWiki se proporcionan en el siguiente artículo:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Manual:Installation_guide/es" target="_self">Guía de Instalación Manual de MediaWiki</a></li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Ambos métodos de instalación instalan los mismos archivos y configuraciones. Sin embargo, si eliges instalar MediaWiki manualmente, tienes la opción de instalar la última versión de MediaWiki que DreamHost no ofrece actualmente en el panel.</p>
+</div>
+</div>
+</div>
+<h2><span id="complementos">Complementos comunes de MediaWiki</span></h2>
+<div class="solvvy-solution">
+<h3>Extensiones</h3>
+<p>MediaWiki ofrece muchos tipos diferentes de extensiones que puedes usar para agregar más funcionalidad y personalización a tu sitio. Consulta el siguiente artículo para obtener más detalles:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Category:Extensions/es" target="_self" rel="nofollow">Extensiones MediaWiki</a>&nbsp;</li>
+</ul>
+<h3>Google Analytics</h3>
+<p>También puedes agregar Google Analytics a tu instalación de MediaWiki si lo deseas. Consulta el siguiente artículo para obtener instrucciones detalladas:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Extension:Google_Analytics_Integration" rel="nofollow">Google Analytics Integration</a>&nbsp;</li>
+</ul>
+</div>
+<h2><span id="imagenes">Manejo de imágenes</span></h2>
+<div class="solvvy-solution">
+<h3>Problemas de miniaturas</h3>
+<p>MediaWiki ocasionalmente puede tener problemas para generar miniaturas de imágenes, como devolver imágenes corruptas o el mensaje de error "Error creating thumbnail". Una causa común de esto es que no hay suficiente memoria.</p>
+<p>Si cargas una imagen grande y ves "Error creating thumbnail" donde debería estar una miniatura, intenta agregar lo siguiente a tu archivo LocalSettings.php en el directorio principal de tu sitio:</p>
+<div class="preboxcontainer">
+<pre class="prebox">$wgMaxShellMemory = 524288;
+</pre>
+</div>
+<h3>Imagenes SVG</h3>
+<p>Para obtener los mejores resultados en la generación de miniaturas de imágenes SVG, puedes instalar&nbsp;<a href="https://en.wikipedia.org/wiki/Librsvg">librsvg</a>.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El proceso de instalación de SVG no es soportado y se recomienda solo para usuarios avanzados. Consulta el siguiente artículo para obtener más información:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Manual:Image_administration#SVG" rel="nofollow">MediaWiki Manual:Image administration – SVG</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2><span id="correo-electronico">Correo electrónico y spam</span></h2>
+<div class="solvvy-solution">
+<h3>Suplantación de dominio</h3>
+<p>Agrega lo siguiente a tu archivo LocalSettings.php</p>
+<div class="preboxcontainer">
+<pre class="prebox">$wgUserEmailUseReplyTo = true;
+</pre>
+</div>
+<p>Esto falsifica el dominio para que el correo electrónico del usuario que envía esté en un encabezado 'Reply-To' en lugar del encabezado 'From'. De lo contrario, el correo electrónico que los usuarios intentan enviarse entre sí a través de Special:EmailUser en tu wiki no se puede entregar.</p>
+<h3>Notificaciones</h3>
+<p>Dada la&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215730467-Generalidades-sobre-la-cuota-SMTP">cuota SMTP</a>,&nbsp;debes tener cuidado si habilitas&nbsp;<a href="https://www.mediawiki.org/wiki/Manual:$wgEnotifWatchlist/es" target="_self" rel="nofollow">$wgEnotifWatchlist</a>.</p>
+<p>Si una página está 'watchlisted' por 100 usuarios que tienen habilitada esa preferencia de usuario, entonces un cambio en esa página agota tu cuota durante una hora, si estás en un alojamiento compartido (Shared hosting).</p>
+<h3>Bloqueo de spam de MediaWiki</h3>
+<dl>
+<dt><a href="https://www.mediawiki.org/wiki/Manual:Combating_spam" rel="nofollow">Combating SPAM</a></dt>
+</dl>
+<dl>
+<dd>Proporciona los pasos que puedes seguir para combatir el SPAM en tu sitio web.</dd>
+</dl>
+<dl>
+<dt><a href="https://meta.wikimedia.org/wiki/Wiki_spam" rel="nofollow">MediaWiki Wiki Spam</a></dt>
+</dl>
+<dl>
+<dd>Descripción de qué es el spam de wiki e instrucciones sobre cómo cualquier usuario puede ayudar a resolver el problema de spam de wiki (no solo los administradores). No todo es obvio, por lo que vale la pena que los administradores lo lean también, ya que es posible que desees referir atsus usuarios de wiki a esto.</dd>
+</dl>
+<dl>
+<dt><a href="https://www.mediawiki.org/wiki/CAPTCHA" rel="nofollow">CAPTCHA</a></dt>
+</dl>
+<dl>
+<dd>Habilitar un Captcha en cualquier formulario ayuda a reducir el spam.</dd>
+</dl>
+<dl>
+<dt><a href="https://www.mediawiki.org/wiki/Manual:Preventing_access/es#Restringir_la_creaci%C3%B3n_de_cuentas" target="_self" rel="nofollow">Restringir la creación de cuentas</a></dt>
+</dl>
+<dl>
+<dd>Por defecto, cualquiera puede crear una cuenta en tu wiki. Sin embargo, puedes restringir quién tiene la capacidad de crear cuentas.</dd>
+</dl>
+<dl>
+<dt><a href="https://www.mediawiki.org/wiki/Manual_talk:User_rights" rel="nofollow">User rights</a></dt>
+</dl>
+<dl>
+<dd>También tienes control sobre los derechos del usuario. Puedes&nbsp;<a href="https://www.mediawiki.org/wiki/Manual:$wgGroupPermissions/es" target="_self" rel="nofollow">deshabilitar las ediciones que no sean de usuario</a> con esta función.</dd>
+</dl>
+</div>
+<h2><span id="utilidades">Utilidades de MediaWiki</span></h2>
+<div class="solvvy-solution">
+<h3>Scripts de Mantenimiento</h3>
+<p>En la instalación root de MediaWiki, hay un subdirectorio llamado /maintenance que incluye varios scripts que puedes ejecutar en tu instalación de MediaWiki.&nbsp;Para ejecutar los scripts PHP, debes <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">crear un usuario Shell (SSH)</a>&nbsp;en tu dominio.</p>
+<p>Para ejecutar los scripts, debes ingresar 'php' antes del nombre del archivo. Por ejemplo, ejecuta el siguiente comando si deseas ejecutar el script eval.php en el directorio de mantenimiento:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">php eval.php</span></pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si simplemente escribes <span class="code">php</span>, utiliza la versión predeterminada en el servidor. Sin embargo, puedes elegir explícitamente cualquier versión utilizando en su lugar lo siguiente:</p>
+<ul>
+<li>/usr/local/php72/bin/php</li>
+<li>/usr/local/php73/bin/php</li>
+<li>/usr/local/php74/bin/php</li>
+</ul>
+</div>
+</div>
+<p>Para obtener más información sobre los scripts individuales, consulta el siguiente artículo:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Manual:Maintenance_scripts/es" target="_self" rel="nofollow">Scripts de mantenimiento</a></li>
+</ul>
+<h3>Almacenamiento en caché</h3>
+<p>El almacenamiento en caché de tu sitio puede mejorar el rendimiento. Hay varias formas de almacenar en caché tus datos utilizando MediaWiki. Consulta los siguientes artículos para obtener más información:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Manual:Cache/es" target="_self" rel="nofollow">MediaWiki Cache</a></li>
+<li><a href="https://www.mediawiki.org/wiki/Manual:File_cache/es" target="_self" rel="nofollow">File cache</a></li>
+</ul>
+<h3>Habilitar subidas</h3>
+<p>Consulta la siguiente guía para obtener instrucciones sobre cómo habilitar la subida de archivos:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Manual:Configuring_file_uploads" rel="nofollow">Configuring file uploads</a></li>
+</ul>
+<h3>Copias de Seguridad</h3>
+<p>Consulta la siguiente guía para obtener instrucciones sobre cómo hacer una copia de seguridad de tus datos:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Manual:Backing_up_a_wiki/es" target="_self" rel="nofollow">Hacer una copia de seguridad de MediaWiki</a></li>
+</ul>
+<p>Además, consulta el siguiente artículo de DreamHost para obtener más instrucciones:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089918--C%C3%B3mo-crear-una-copia-de-seguridad-de-mi-cuenta-entera-">Copias de seguridad</a></li>
+</ul>
+</div>
+<h2><span id="seguras">Configuraciones seguras</span></h2>
+<div class="solvvy-solution">
+<h3>Contraseñas y HTTPS</h3>
+<p>La&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215089938--Cuales-instaladores-de-un-clic-ofrece-DreamHost-">instalación de un clic</a> utiliza un formulario en una página web HTTP para tomar tu contraseña. Esto significa que tu contraseña se transmite a través de la red en texto claro.&nbsp;Para usar HTTPS, debes agregar un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041537-Generalidades-sobre-certificados-SSL">certificado SSL</a>. Una vez que se agrega un certificado SSL a tu dominio, puedes forzar HTTPS en cualquier solicitud agregando código a un archivo de configuración. Consulta los siguientes artículos para obtener más detalles dependiendo de si tu sitio se ejecuta en un servidor Apache o Nginx:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215747758-Forzar-tu-sitio-a-cargar-de-forma-segura-con-un-archivo-htaccess">Forzar HTTPS con un archivo .htaccess en un servidor Apache</a></li>
+<li><a href="/hc/en-us/articles/216456087-Creating-redirects-with-Nginx">Forzar tu sitio Nginx para cargar de manera segura</a></li>
+</ul>
+<h3>Permisos LocalSettings.php</h3>
+<p>El archivo LocalSettings.php almacena la información de inicio de sesión de tu base de datos, incluido el nombre de usuario y la contraseña de la base de datos. Después de mover el archivo LocalSettings.php a tu directorio raíz, puedes revisar sus permisos.</p>
+<p>Debes actualizar los permisos en ese archivo a 640 o 600. Esto se puede hacer ejecutando el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 640 LocalSettings.php</span>
+</pre>
+</div>
+<p>Esto hace que el archivo solo se pueda escribir para el propietario, mientras que el grupo aún puede leerlo. Sin embargo, la opción más segura es marcar el archivo como solo readable/writable (legible/escribible) por el propietario:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 600 LocalSettings.php</span>
+</pre>
+</div>
+<p>De esta manera, tu contraseña de MySQL en este archivo está a salvo de otros usuarios en el mismo servidor. Consulta el siguiente artículo para obtener más detalles sobre los permisos:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214750848-Comandos-de-UNIX-Trabajando-con-archivos">Permisos de archivos Unix</a>&nbsp;</li>
+</ul>
+<h3>Mover las credenciales de la base de datos a otro archivo</h3>
+<p>Otra buena práctica de seguridad es configurar un archivo PHP separado almacenado en el directorio de su usuario. Este archivo almacena tus credenciales y las pasa como variables. La siguiente configuración describe cómo vincular tu archivo LocalSettings.php a este nuevo archivo:</p>
+<ol>
+<li>En el directorio de tu usuario (no el directorio del dominio), crea un nuevo directorio llamado "external_includes".</li>
+<li>En esta nueva carpeta, crea un archivo llamado "database_info.php".
+<dl>
+<dd>La ruta completa a este nuevo archivo es:</dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox">/home/[yourusername]/external_includes/database_info.php</pre>
+</div>
+<dl>
+<dd>El archivo incluye lo siguiente (<a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos">completa tus valores verdaderos dentro de las comillas</a>):</dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+ $database_server = "mysql.example.com"; 
+ $database_name   = "databasename"; 
+ $database_user   = "username";
+ $database_pw     = "password";
+ ?&gt;
+</pre>
+</div>
+</li>
+<li>Elimina las credenciales de la base de datos actual en tu archivo LocalSettings.php.</li>
+<li>Reemplaza esas líneas con lo siguiente:
+<div class="preboxcontainer">
+<pre class="prebox"># enhanced DB security
+ require_once ("/home/[yourusername]/external_includes/database_info.php");
+ 
+ $wgDBserver     = $database_server;
+ $wgDBname       = $database_name;
+ $wgDBuser       = $database_user;
+ $wgDBpassword   = $database_pw;
+ 
+ # DB variables not security related - leave these alone from how when you set up your wiki
+ $wgDBprefix     = "wiki_";
+ $wgDBtype       = "mysql";
+</pre>
+</div>
+</li>
+</ol>
+<p>Con esta configuración, tus credenciales en el archivo LocalSettings ahora están ocultas de forma segura.</p>
+</div>
+<h2><span id="licencia">Configuraciones de licencia</span></h2>
+<div class="solvvy-solution">
+<p>Puedes seleccionar qué licencia de MediaWiki deseas utilizar. Ve el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="https://wiki.creativecommons.org/GFDL_versus_CC-by-sa" rel="nofollow">GFDL versus CC</a></li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Wikipedia usa GFDL. Si deseas habilitar contenido reutilizable en Wikipedia y otros proyectos GFDL, entonces debes usar GFDL (o licencia múltiple para usar ambos). En general, si hay otros proyectos con los que deseas trabajar, debes usar licencias compatibles.</p>
+</div>
+</div>
+</div>
+<h2><span id="actualizando">Actualizando MediaWiki</span></h2>
+<div class="solvvy-solution">
+<p>Siempre asegúrate de hacer una copia de seguridad de los archivos de tu base de datos y sitio web antes de hacer cualquier ajuste. De esta manera, si algo tuviera un error, podrías reemplazar rápidamente tus archivos. Ve el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089918--C%C3%B3mo-crear-una-copia-de-seguridad-de-mi-cuenta-entera-">¿Cómo hago una copia de seguridad de toda mi cuenta?</a></li>
+</ul>
+<p>Si utilizaste la función de instalación de un clic para instalar MediaWiki, visita el siguiente artículo para obtener instrucciones de actualización:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215915977--C%C3%B3mo-actualizar-una-instalaci%C3%B3n-de-un-clic-">Cómo actualizar una instalación de un clic</a></li>
+</ul>
+<p>Si tienes una instalación manual, consulta la siguiente guía en mediawiki.org:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Manual:Upgrading/es" target="_self" rel="nofollow">Actualización</a></li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Puede ser necesario ejecutar el script /maintenance/update.php después de la actualización. Para hacerlo, inicia sesión en tu sitio a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. Luego ejecuta el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">php /maintenance/update.php</span></pre>
+</div>
+<p>Esto ejecuta un script de actualización que debería corregir los errores actuales en tu sitio. Si eso no funciona, especifica la ruta completa a una versión de PHP. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php74/bin/php maintenance/update.php</span></pre>
+</div>
+</div>
+</div>
+</div>
+<h2><span id="avanzada">Configuración avanzada y solución de problemas</span></h2>
+<div class="solvvy-solution">
+<h3>Habilitar depuración</h3>
+<p>Puedes habilitar la depuración agregando líneas en la parte inferior de tu&nbsp;<a href="https://www.mediawiki.org/wiki/Manual:LocalSettings.php/es" target="_self" rel="nofollow">archivo LocalSettings.php</a>.&nbsp;Al habilitar esto, se le proporciona información de depuración detallada para ayudar a aislar la causa.</p>
+<p>Consulta el siguiente artículo para obtener más detalles:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Manual:How_to_debug/es" target="_self" rel="nofollow">Cómo depurar</a></li>
+</ul>
+<p>Después de que termines de solucionar tu instalación, debes deshabilitar la configuración de depuración.</p>
+<h3>URL cortas</h3>
+<p>Puedes acortar las URL para que parezcan más fáciles de usar. Por ejemplo, puedes cambiar el siguiente ejemplo de URL:</p>
+<dl>
+<dd><strong>example.com/w/index.php?title=Main_Page</strong>
+<p>a</p>
+<strong>example.com/wiki/Main_Page</strong></dd>
+</dl>
+<p>Consulta los siguientes artículos para obtener más instrucciones:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Manual:Short_URL/es" target="_self" rel="nofollow">URL corto</a></li>
+<li><a href="https://shorturls.redwerks.org/" rel="nofollow">MediaWiki ShortURL Builder</a></li>
+</ul>
+<h3>Arreglando MediaWiki después de agregar un certificado SSL a un dominio</h3>
+<p>Puedes notar que MediaWiki se carga incorrectamente o muestra advertencias de 'insecure content'&nbsp;en la barra del navegador después de agregar un <a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL">certificado SSL</a> al dominio donde está instalado MediaWiki.</p>
+<p>Tu archivo LocalSettings.php debe ser editado para reflejar HTTPS para tu dominio. Para solucionarlo, busca el valor <span class="code">$wgServer</span> en el archivo LocalSettings.php y asegúrate de que el dominio muestre HTTPS (y no HTTP) para el valor de URL:</p>
+<div class="preboxcontainer">
+<pre class="prebox">## The protocol and server name to use in fully-qualified URLs
+$wgServer = "<span class="code-highlight">https</span>://www.example.com";</pre>
+</div>
+<p>Después de hacer esta edición, guárdala y luego transfiere el archivo LocalSettings.php a la carpeta wiki raíz en tu servidor. Actualiza tu navegador y MediaWiki debería cargarse normalmente.</p>
+</div>
+<h2><span id="see">Ver también</span></h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215915837--C%C3%B3mo-realizo-la-instalaci%C3%B3n-de-un-solo-clic-">¿Cómo instalo una instalación de un clic?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089938--Cuales-instaladores-de-un-clic-ofrece-DreamHost-">¿Qué instalaciones de un clic ofrece DreamHost?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215916107--C%C3%B3mo-elimino-una-instalaci%C3%B3n-de-un-clic-">¿Cómo eliminar una instalación de un clic?</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Template:Main_page/es" target="_self" rel="nofollow">MediaWiki's official website</a></li>
+<li><a href="https://meta.wikimedia.org/wiki/Help:Editing" rel="nofollow">MetaWikipedia Help:Editing</a> – Referencia de marcado de MediaWiki</li>
+<li><a href="https://www.mediawiki.org/wiki/Category:Extensions/es" target="_self" rel="nofollow">Extensiones MediaWiki</a></li>
+<li><a href="https://www.mediawiki.org/wiki/Manual:Maintenance_scripts/es" target="_self" rel="nofollow">Scripts de mantenimiento</a></li>
+<li><a href="https://www.mediawiki.org/wiki/Manual:Combating_spam" rel="nofollow">Combating SPAM</a></li>
+<li><a href="https://www.mediawiki.org/wiki/Manual:Cache/es" target="_self" rel="nofollow">MediaWiki Cache</a></li>
+<li><a href="https://www.mediawiki.org/wiki/Manual:LocalSettings.php/es" target="_self" rel="nofollow">Archivo LocalSettings.php</a></li>
+<li><a href="https://www.mediawiki.org/wiki/Manual:How_to_debug/es" target="_self" rel="nofollow">Cómo depurar</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>

@@ -18,18 +18,47 @@
 <p>Debido a ciertas&nbsp;<a href="https://arstechnica.com/information-technology/2016/08/new-attack-steals-ssns-e-mail-addresses-and-more-from-https-pages/" target="_self">vulnerabilidades</a>&nbsp;de seguridad encontradas al combinar HTTPS y compresión GZIP, la compresión GZIP está desactivada para HTTPS en todos los planes DreamHost. Sin embargo, la compresión GZIP se habilita automáticamente para HTTP.</p>
 <p>Puede leer más sobre la compresión GZIP y las alternativas a usar para HTTPS en el siguiente artículo:</p>
 <ul>
-<li><a href="/hc/en-us/articles/360005040932-How-do-I-enable-GZIP-Compression-" target="_self">¿Cómo habilitar compresión GZIP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360005040932--C%C3%B3mo-habilito-la-compresi%C3%B3n-GZIP-" target="_self">¿Cómo habilitar compresión GZIP?</a></li>
 </ul>
 </div>
 </div>
-<p>DEFLATE es un algoritmo de compresión de datos sin pérdidas similar a gzip, pero funciona en Apache 2. En el pasado, mod_gzip era una herramienta recomendada. Pero DreamHost usa Apache 2 y mod_deflate, que llama a gzip en el back-end automáticamente. Si lo desea, puede agregar tipos de codificación adicionales al filtro para cosas como XML o JSON. Por ejemplo, agregue lo siguiente a su archivo .htaccess:</p>
+<p>DEFLATE es un algoritmo de compresión de datos sin pérdidas similar a gzip, pero funciona en Apache 2. En el pasado, mod_gzip era una herramienta recomendada. Pero DreamHost usa Apache 2 y mod_deflate, que llama a gzip en el back-end automáticamente.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Las siguientes son configuraciones predeterminadas en los servidores DreamHost y no es necesario habilitarlas. Sin embargo, puedes ajustar estos valores en tu archivo .htaccess según sea necesario:</p>
+</div>
+</div>
 <div class="preboxcontainer">
-<pre class="prebox">#Gzip
-&lt;ifmodule mod_deflate.c&gt;
-AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript text/javascript
-&lt;/ifmodule&gt;
-#End Gzip
-</pre>
+<pre class="prebox">&lt;ifmodule mod_deflate.c&gt;
+  # Compress HTML, CSS, JavaScript, Text, XML and fonts
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+  AddOutputFilterByType DEFLATE application/x-font
+  AddOutputFilterByType DEFLATE application/x-font-opentype
+  AddOutputFilterByType DEFLATE application/x-font-otf
+  AddOutputFilterByType DEFLATE application/x-font-truetype
+  AddOutputFilterByType DEFLATE application/x-font-ttf
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE font/opentype
+  AddOutputFilterByType DEFLATE font/otf
+  AddOutputFilterByType DEFLATE font/ttf
+  AddOutputFilterByType DEFLATE image/x-icon
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/xml
+  # Remove browser bugs (only needed for really old browsers)
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+  Header append Vary User-Agent
+&lt;/ifmodule&gt;</pre>
 </div>
 <p>Visita la página siguiente para más detalles:</p>
 <ul>
@@ -38,58 +67,65 @@ AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css a
 </div>
 <h2>Almacenamiento en caché del navegador</h2>
 <div class="solvvy-solution">
-<p>Usando <a href="http://httpd.apache.org/docs/2.2/mod/mod_expires.html">mod_expires</a>,&nbsp;puede decirle a los navegadores visitantes que retengan ciertos archivos por más tiempo (le gustan las imágenes, que rara vez se cambian). Este ejemplo .htaccess muestra cómo almacenar en caché tipos de archivos específicos durante períodos específicos de tiempo.</p>
-<p>En el siguiente ejemplo, los archivos png caducan su caché 2592000 segundos después de que un navegador accede a ellos. Visita la página&nbsp;<a href="http://httpd.apache.org/docs/2.2/mod/mod_expires.html">mod_expires</a>&nbsp;para más detalles.</p>
+<p>Usando <a href="http://httpd.apache.org/docs/2.2/mod/mod_expires.html">mod_expires</a>,&nbsp;puede decirle a los navegadores visitantes que retengan ciertos archivos por más tiempo (le gustan las imágenes, que rara vez se cambian).</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Las siguientes son configuraciones predeterminadas en los servidores DreamHost y no es necesario habilitarlas. Sin embargo, puedes ajustar estos valores en tu archivo .htaccess según sea necesario:</p>
+</div>
+</div>
 <div class="preboxcontainer">
 <pre class="prebox"># BEGIN Expire headers  
-&lt;ifModule mod_expires.c&gt;  
-        ExpiresActive On  
-        ExpiresDefault "access plus 5 seconds"  
-        ExpiresByType image/x-icon "access plus 2592000 seconds"  
-        ExpiresByType image/jpeg "access plus 2592000 seconds"  
-        ExpiresByType image/png "access plus 2592000 seconds"  
-        ExpiresByType image/gif "access plus 2592000 seconds"  
-        ExpiresByType image/svg+xml "access plus 2592000 seconds"
-        ExpiresByType application/x-font-ttf "access plus 2592000 seconds"
-        ExpiresByType application/x-font-truetype "access plus 2592000 seconds"
-        ExpiresByType application/x-font-opentype "access plus 2592000 seconds"
-        ExpiresByType application/x-font-woff "access plus 2592000 seconds"
-        ExpiresByType application/font-woff2 "access plus 2592000 seconds"
-        ExpiresByType application/vnd.ms-fontobject "access plus 2592000 seconds"
-        ExpiresByType application/font-sfnt "access plus 2592000 seconds"
-        ExpiresByType application/x-shockwave-flash "access plus 2592000 seconds"  
-        ExpiresByType text/css "access plus 604800 seconds"  
-        ExpiresByType text/javascript "access plus 216000 seconds"  
-        ExpiresByType application/javascript "access plus 216000 seconds"  
-        ExpiresByType application/x-javascript "access plus 216000 seconds"  
-        ExpiresByType text/html "access plus 600 seconds"  
-        ExpiresByType application/xhtml+xml "access plus 600 seconds"  
-&lt;/ifModule&gt;  
+&lt;IfModule mod_expires.c&gt;  
+  # Turn on the module.
+  ExpiresActive on
+  # Set the default expiry times.
+  ExpiresDefault "access plus 2 days"
+  ExpiresByType image/jpg "access plus 1 month"
+  ExpiresByType image/svg+xml "access 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType application/x-shockwave-flash "access plus 1 month"
+  ExpiresByType image/ico "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+  ExpiresByType text/html "access plus 600 seconds"
+&lt;/IfModule&gt;  
 # END Expire headers  
 </pre>
 </div>
-<p>Alternativamente, puedes usar&nbsp;<a href="http://httpd.apache.org/docs/2.2/mod/mod_headers.html">mod_headers</a>:</p>
+</div>
+<h2>Deshabilitar el almacenamiento en caché</h2>
+<div class="solvvy-solution">
+<p>Los ejemplos anteriores muestran la configuración predeterminada del servidor de DreamHost. Sin embargo, a veces puede ser necesario deshabilitar el almacenamiento en caché por completo. Esto se puede lograr agregando las siguientes reglas a tu archivo .htaccess.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Deshabilitar la memoria caché podría afectar significativamente la velocidad de tu sitio y los puntajes de optimización del sitio.&nbsp;Es muy recomendable que dejes el almacenamiento en caché activo en tu sitio para asegurarte de que responda lo más rápido posible.</p>
+<p>Solo continúa agregando las siguientes reglas si estás absolutamente seguro de saber lo que estás haciendo y comprendes las consecuencias. Puedes probar la velocidad de tu sitio utilizando algunos de los sitios web mencionados aquí:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216560958-#Website_loading_tools" target="_self">Herramientas de carga de sitios web</a></li>
+</ul>
+</div>
+</div>
 <div class="preboxcontainer">
-<pre class="prebox"># BEGIN Caching
-&lt;ifModule mod_headers.c&gt;
-&lt;filesMatch "\\.(ico|pdf|flv|jpg|jpeg|png|gif|swf|ttf|otf|woff|woff2|eot|svg)$"&gt;
-Header set Cache-Control "max-age=2592000, public"
-&lt;/filesMatch&gt;
-&lt;filesMatch "\\.(css)$"&gt;
-Header set Cache-Control "max-age=604800, public"
-&lt;/filesMatch&gt;
-&lt;filesMatch "\\.(js)$"&gt;
-Header set Cache-Control "max-age=216000, private"
-&lt;/filesMatch&gt;
-&lt;filesMatch "\\.(xml|txt)$"&gt;
-Header set Cache-Control "max-age=216000, public, must-revalidate"
-&lt;/filesMatch&gt;
-&lt;filesMatch "\\.(html|htm|php)$"&gt;
-Header set Cache-Control "max-age=1, private, must-revalidate"
-&lt;/filesMatch&gt;
-&lt;/ifModule&gt;
-# END Caching
-</pre>
+<pre class="prebox">#Disables GZIP
+SetEnv no-gzip 1
+    
+#Turns off the expires headers for Apache
+&lt;IfModule mod_expires.c&gt;
+  ExpiresActive Off
+&lt;/IfModule&gt;
+
+# Disable Caching
+&lt;IfModule mod_headers.c&gt;
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+&lt;/IfModule&gt;</pre>
 </div>
 </div>
 <h2>Ver también</h2>

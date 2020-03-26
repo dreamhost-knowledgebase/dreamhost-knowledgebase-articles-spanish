@@ -15,8 +15,8 @@
 <h3>Ejemplo simple</h3>
 <p>Vé el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">artículo de SSH</a>&nbsp;para ver instrucciones detalladas de como iniciar sesion dentro del servidor web vía SSH. Una vez en sesión, puedes correr el siguiente comando para enviar correo:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/sbin/sendmail youremail@example.com
-Subject: Test Send Mail
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/sbin/sendmail youremail@example.com</span>
+<span class="code-highlight">Subject: Test Send Mail
 Hello World</span>
 control d (this key combination of control key and d will finish the email.)
 </pre>
@@ -32,8 +32,8 @@ control d (this key combination of control key and d will finish the email.)
 <h3>Agregar correos de REMITENTE y DESTINATARIO</h3>
 <p>Este ejemplo es el mismo que se mostró anteriormente pero especifica el correo Remitente y Destinatario:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/sbin/sendmail youremail@example.com
-To: differentemail@example.com
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/sbin/sendmail youremail@example.com</span>
+<span class="code-highlight">To: differentemail@example.com
 From: anyone@example.com
 Subject: Test Send Mail
 Hello World</span>
@@ -69,16 +69,16 @@ control d (this key combination will finish the email.)
 <pre class="prebox">#!/usr/bin/perl
 use strict;
 my($mailprog) = '/usr/sbin/sendmail';
-my($from_address) ='<span class="command">AnyoneYouWant@example.com</span>';
-my($to_address) ='<span class="command">email@example.com</span>';
+my($from_address) ='<span class="code-highlight">AnyoneYouWant@example.com</span>';
+my($to_address) ='<span class="code-highlight">email@example.com</span>';
        open (MAIL, "|$mailprog -t $to_address") || die "Can't open $mailprog!\n";
        print MAIL "To: $to_address\n";
        print MAIL "From: $from_address\n";
-       print MAIL "<span class="command">Subject: Hello, self. Nice to email myself.</span>";
-       print MAIL "<span class="command">This is still subject line.\n</span>";
-       print MAIL "<span class="command">This is the body of my message.\n</span>";
-       print MAIL "<span class="command">Pretty boring, yes?\n</span>";
-       print MAIL "<span class="command">Goodbye.\n</span>";
+       print MAIL "<span class="code-highlight">Subject: Hello, self. Nice to email myself.</span>";
+       print MAIL "<span class="code-highlight">This is still subject line.\n</span>";
+       print MAIL "<span class="code-highlight">This is the body of my message.\n</span>";
+       print MAIL "<span class="code-highlight">Pretty boring, yes?\n</span>";
+       print MAIL "<span class="code-highlight">Goodbye.\n</span>";
        close (MAIL);
 </pre>
 </div>

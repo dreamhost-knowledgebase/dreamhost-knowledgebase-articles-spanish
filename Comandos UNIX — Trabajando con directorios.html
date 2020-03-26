@@ -1,0 +1,102 @@
+<h2>Ver tu directorio actual</h2>
+<div class="solvvy-solution">
+<p>Siempre puede descubrir en qué directorio se encuentra actualmente utilizando el comando <code>pwd</code>. A continuación se muestra que este usuario está en el directorio /home/username/example.com:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">pwd</span>
+<span class="cmdoutput">/home/username/example.com</span></pre>
+</div>
+</div>
+<h2><span id="Creando_directorios">Creando directorios</span></h2>
+<div class="solvvy-solution">
+<p>Para crear un nuevo directorio, usa el comando <code>mkdir</code>. El siguiente ejemplo crea un nuevo directorio llamado "nombre_directorio":</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir directory_name</span></pre>
+</div>
+</div>
+<h2><span id="Deleting_directories">Eliminar directorios</span></h2>
+<div class="solvvy-solution">
+<p>En realidad, hay algunas formas de eliminar directorios en el shell. Para eliminar un directorio vacío, use el comando <code>rmdir</code>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rmdir directory_name</span></pre>
+</div>
+<p>Para eliminar un directorio no vacío (uno que todavía contiene archivos u otros directorios) <code>rmdir</code> no funcionará. Aquí tienes dos opciones. Puedes eliminar todos los archivos y directorios contenidos a mano con los comandos <code>rmdir</code> y <code>rm</code> commands, o puede usar el indicador <code>rm</code>'s <code>-r</code>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rm -r directory_name</span></pre>
+</div>
+<p>Ten cuidado al usar esta bandera, ya que eliminará <strong>todo</strong> lo que contenga el directorio especificado. No hay "Papelera de reciclaje" o "Papelera" en el shell. Lo que elimines se ha ido para siempre, así que ten cuidado.</p>
+</div>
+<h2><span id="Cambiar_directorios">Cambiar directorios</span></h2>
+<div class="solvvy-solution">
+<p>Para cambiar a otro directorio, usa el comando <code>cd</code>.Lo siguiente cambia el directorio utilizado para / target / directory:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd /target/directory</span></pre>
+</div>
+<p>Un cambio exitoso no devolverá ningún mensaje.</p>
+<p>Para cambiar a tu directorio anterior, use el comando <code>cd -</code>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">pwd</span>
+<span class="cmdoutput">/current/directory/</span>
+<span class="server">[server]$ </span><span class="command">cd /new/directory/</span>
+<span class="server">[server]$ </span><span class="command">pwd</span>
+<span class="cmdoutput">/new/directory/</span>
+<span class="server">[server]$ </span><span class="command">cd -</span>
+<span class="server">[server]$ </span><span class="command">pwd</span>
+<span class="cmdoutput">/current/directory/</span></pre>
+</div>
+<p>El usuario anterior ha cambiado de un directorio a otro, luego usó el comando <code>cd -</code> para regresar a tu directorio anterior.</p>
+<p>Puedes ir al directorio principal rápidamente mediante el uso de <code>../</code>. Si has iniciado sesión en su servidor web a través de SSH, ejecutar el siguiente comando cambia tu directorio al directorio de tu usuario:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ../</span></pre>
+</div>
+<p>Puedes subir varios directorios al unir los <code>../</code> juntos.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ../../</span></pre>
+</div>
+</div>
+<h2><span id="Listar_contenidos_del_directorio_actual">Listar contenidos del directorio actual</span></h2>
+<div class="solvvy-solution">
+<p>Para enumerar el contenido de un directorio, use el comando <code>ls</code>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ls</span>
+ Maildir    example.com    logs
+</pre>
+</div>
+<p>Agrega el indicador <code>-l</code> para enumerar los contenidos con todos los detalles, incluidos los permisos, el tamaño del archivo y la última fecha de modificación:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -l</span>
+<span class="cmdoutput">drwx--S---    12 username  groupname    4096 Mar 15 17:28 Maildir
+drwxr-xr-x     5 username  groupname    4096 Mar  7 12:35 example.com
+drwxr-sr-x     8 root      root         4096 Apr 17 06:33 logs</span>
+</pre>
+</div>
+<p>Para enumerar todos los archivos dentro del directorio (incluidos los archivos ocultos) en formato vertical, agrega los indicadores <code>-la</code>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la</span>
+-rw-------  1 username pg######   10541 Mar 12 18:46 .bash_history
+-rwxr-xr-x  1 username pg######   430 Dec 18 14:45 .bash_profile
+-rw-r--r--  1 username pg######   237 Sep 16  2014 .bashrc
+drwxr-xr-x  5 username pg######   4096 Sep  6  2011 Maildir
+</pre>
+</div>
+</div>
+<h2><span id="Directory_sizes">Tamaños de directorio</span></h2>
+<div class="solvvy-solution">
+<p>Para determinar el tamaño de un directorio, usa el comando du con las banderas <code>-sh</code>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">du -sh example.com</span>
+1532    example.com
+</pre>
+</div>
+<p>Agregue el indicador <code>-sh</code> para ver el tamaño en un formato más legible (KB, MB, GB, etc.). También puedes enumerar múltiples directorios y archivos separados por espacios.</p>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214750888-Generalidades-sobre-comandos-UNIX">Generalidades de los Comandos de UNIX</a></li>
+<li><a href="/hc/es/articles/214750848-Comandos-de-UNIX-Trabajando-con-archivos">Comandos de UNIX — Trabajar en archivos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214750918-Comandos-UNIX-Cambiar-propiedad">Comandos de UNIX — Cambiar de propiedad</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos">Comandos de UNIX — Cambiar permisos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115002768331-Comandos-UNIX-Descomprimiendo-archivos">Comandos de UNIX — Archivos descompresos</a></li>
+</ul>
+</div>

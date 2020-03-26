@@ -14,7 +14,7 @@
 <div class="solvvy-solution">
 <p>Los ejemplos a continuación pueden ser ingresados dentro de tu archivo de .htaccess como se muestran. Solo asegurate de ajustar el camino al archivo para que el .htaccess sepa donde está localizado. También, si ves el dominio “ejemplo.com” cambialo por tu nombre de dominio.</p>
 </div>
-<h2>Redireccionar todas las URL</h2>
+<h2><span id="todas">Redireccionar todas las URL</span></h2>
 <div class="solvvy-solution">
 <p>La siguiente línea redirecciona todas las URL en tu sitio a un nuevo sitio.</p>
 <div class="preboxcontainer">
@@ -53,7 +53,7 @@
 </div>
 <h3>Redireccionar de un directorio local /privado a otro directorio privado del sitio</h3>
 <div class="preboxcontainer">
-<pre class="prebox">Redirect /private/ http://<span class="command">www.example.com/private/</span></pre>
+<pre class="prebox">Redirect /private/ http://<span class="code-highlight">www.example.com/private/</span></pre>
 </div>
 <h3>Cargar un archivo .gif de un sitio diferente</h3>
 <div class="alert alert-important">
@@ -63,18 +63,18 @@
 </div>
 </div>
 <div class="preboxcontainer">
-<pre class="prebox">Redirect /img/logo.gif http://<span class="command">www.example.com/images/logo.gif</span>
+<pre class="prebox">Redirect /img/logo.gif http://<span class="code-highlight">www.example.com/images/logo.gif</span>
 </pre>
 </div>
 <h3>Usar Expresiones Regulares</h3>
 <p>Si quieres usar una Expresión Regular para redirigir algo, usa la directríz <a href="https://httpd.apache.org/docs/2.4/mod/mod_alias.html#redirectmatch">RedirectMatch</a>:</p>
 <div class="preboxcontainer">
-<pre class="prebox">RedirectMatch "^/oldfile\.html/?$" "http://<span class="command">example.com/newfile.php</span>"</pre>
+<pre class="prebox">RedirectMatch "^/oldfile\.html/?$" "http://<span class="code-highlight">example.com/newfile.php</span>"</pre>
 </div>
 <h3>Redirigir mensajes de error</h3>
 <p>Puedes también redirigir errores 404. En vez de lanzar una página 404, este redirecciona a la página principal del sitio.</p>
 <div class="preboxcontainer">
-<pre class="prebox">ErrorDocument 404 http://<span class="command">example.com</span>/</pre>
+<pre class="prebox">ErrorDocument 404 http://<span class="code-highlight">example.com</span>/</pre>
 </div>
 <h3>Redirigir un directorio viejo a un nuevo directorio</h3>
 <p>Estos archivos redirigen de un directorio viejo (/blog/archivados) a un nuevo directorio (/archivados). Este archivo debe existir en el nuevo directorio para que funcione.</p>
@@ -108,8 +108,8 @@ RewriteRule ^$ /subdir1/ [L]
 <div class="solvvy-solution">
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
-RewriteCond&nbsp;%{HTTP_HOST} ^<span class="command">example.com</span>
-RewriteRule (.*) http://<span class="command">www.example.com</span>/$1 [R=301,L]
+RewriteCond&nbsp;%{HTTP_HOST} ^<span class="code-highlight">example.com</span>
+RewriteRule (.*) http://<span class="code-highlight">www.example.com</span>/$1 [R=301,L]
 </pre>
 </div>
 </div>
@@ -117,8 +117,8 @@ RewriteRule (.*) http://<span class="command">www.example.com</span>/$1 [R=301,L
 <div class="solvvy-solution">
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
-RewriteCond&nbsp;%{HTTP_HOST} ^<span class="command">www.example.com</span>
-RewriteRule (.*) http://<span class="command">example.com</span>/$1 [R=301,L]</pre>
+RewriteCond&nbsp;%{HTTP_HOST} ^<span class="code-highlight">www.example.com</span>
+RewriteRule (.*) http://<span class="code-highlight">example.com</span>/$1 [R=301,L]</pre>
 </div>
 </div>
 <h2>Sobrescribir una URL</h2>
@@ -127,7 +127,7 @@ RewriteRule (.*) http://<span class="command">example.com</span>/$1 [R=301,L]</p
 <div class="preboxcontainer">
 <pre class="prebox">Options +FollowSymLinks
 RewriteEngine On
-RewriteRule ^<span class="command">([0-9]+).html /abc.php</span>?id=$1 [QSA,L]
+RewriteRule ^<span class="code-highlight">([0-9]+).html /abc.php</span>?id=$1 [QSA,L]
 </pre>
 </div>
 <p>Lo siguiente explica las reglas de arriba:</p>
@@ -160,7 +160,7 @@ RewriteBase /
 RewriteRule ^index\.php$ - [L]
 RewriteCond&nbsp;%{REQUEST_FILENAME}&nbsp;!-f
 RewriteCond&nbsp;%{REQUEST_FILENAME}&nbsp;!-d
-RewriteRule . /<span class="command">index.php</span> [L]
+RewriteRule . /<span class="code-highlight">index.php</span> [L]
 &lt;/IfModule&gt;
 </pre>
 </div>
@@ -176,7 +176,7 @@ RewriteRule . /<span class="command">index.php</span> [L]
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades de .htaccess</a></li>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/217738987-What-can-I-do-with-an-htaccess-file-" target="_self">¿Que puedo hacer con un archivo .htacess?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-" target="_self">¿Que puedo hacer con un archivo .htacess?</a></li>
 <li><a href="https://help.dreamhost.com/hc/en-us/articles/216456087-Creating-redirects-with-Nginx" target="_self">Crear redirecciones con Nginx</a></li>
 </ul>
 </div>

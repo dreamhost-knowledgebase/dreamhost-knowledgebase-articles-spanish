@@ -1,0 +1,116 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Esta guía asume que ya has instalado PEAR usando la siguiente guía:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214392988--C%C3%B3mo-instalo-PEAR-" target="_self">¿Cómo instalo PEAR?</a></li>
+</ul>
+</div>
+</div>
+<p>Es posible que tu sitio PHP arroje un error si ciertos paquetes PEAR no están instalados. Por ejemplo, si recibes un error que hace referencia a alguno de los siguientes, ejecuta el siguiente comando (en tu directorio de usuarios) para instalar ese paquete.</p>
+<table style="border: 1px solid #BEBEBE; width: 40%;" border="1" cellspacing="0" cellpadding="10">
+<tbody>
+<tr style="font-style: bold;">
+<th bgcolor="#F2F2F2">Referencia de error</th>
+<th bgcolor="#F2F2F2">Comando para arreglar</th>
+</tr>
+<tr>
+<td><strong>Mail.php</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">pear install --alldeps Mail</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>Mail/mime.php</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">pear install --alldeps Mail_Mime</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>Console/Getopt.php</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">pear install --alldeps Console_Getopt</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>DB.php</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">pear install --alldeps MDB2</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>Net/SMTP.php</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">pear install --alldeps Net_SMTP</span></pre>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Errores de script</h2>
+<div class="solvvy-solution">
+<p>Cuando creas un script que hace referencia a PEAR, asegúrate de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">agregar estas dos líneas</a>&nbsp;en la parte superior de ese script:</p>
+<div class="preboxcontainer">
+<pre class="prebox">error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED ^ E_STRICT);
+set_include_path("." . PATH_SEPARATOR . ($UserDir = dirname($_SERVER['DOCUMENT_ROOT'])) . "/pear/php" . PATH_SEPARATOR . get_include_path());
+</pre>
+</div>
+<ul>
+<li>La primera línea desactiva los errores que puedan aparecer.</li>
+<li>La segunda línea permite que el script haga referencia a tu instalación PEAR.</li>
+</ul>
+<p>Además, es posible que debas incluir el archivo de configuración que creaste. El archivo de configuración incluye variables para la plantilla y la ruta de datos, que son necesarias para algunos módulos PEAR:</p>
+<div class="preboxcontainer">
+<pre class="prebox">$pear_user_config = $UserDir . "/.pearrc";</pre>
+</div>
+<p>Donde&nbsp;<strong>$UserDir = dirname($_SERVER['DOCUMENT_ROOT'])</strong> determina dinámicamente el directorio de inicio de DreamHost, e.g., '/home/user'.</p>
+</div>
+<h2>Error de instalación</h2>
+<div class="solvvy-solution">
+<p>Es posible que veas el siguiente error después de intentar instalar un paquete:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">pear install --onlyreqdeps Mail</span><span class="cmdoutput">
+No releases available for package "pear.php.net/Mail"
+install failed</span>
+</pre>
+</div>
+<p>Para arreglar este error, revisa el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214392988#Cambiar_el_directorio_de_cach%C3%A9_/tmp" target="_self">Cambiar el directorio /tmp que usa PEAR</a></li>
+</ul>
+<p>Si eso no funciona, intenta cambiar los canales y actualizar. Esto se mostrará si hay algún error al conectarse a pear.php.net. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">pear update-channels</span>
+Updating channel "doc.php.net"
+Update of Channel "doc.php.net" succeeded
+Updating channel "pear.php.net"
+<span class="code-highlight">Channel "pear.php.net" is not responding over http://, failed with message: Connection to `ssl://pear.php.net:443' failed:
+Trying channel "pear.php.net" over https:// instead
+Cannot retrieve channel.xml for channel "pear.php.net" (Connection to `ssl://pear.php.net:443' failed: )</span>
+Updating channel "pecl.php.net"
+Update of Channel "pecl.php.net" succeeded
+
+<span class="server">[server]$ </span><span class="command">pear upgrade</span>
+Error getting channel info from pear.php.net: Connection to `ssl://pear.php.net:443' failed:</pre>
+</div>
+<p>En este caso, es un problema con el sitio web pear.php.net que debe resolverse por su parte.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="/hc/en-us/articles/214202188-PHP-overview" target="_self">Generalidades sobre PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214392988--C%C3%B3mo-instalo-PEAR-" target="_self">¿Cómo instalo PEAR?</a></li>
+</ul>
+</div>

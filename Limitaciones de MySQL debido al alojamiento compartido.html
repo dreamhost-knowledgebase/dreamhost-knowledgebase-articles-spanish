@@ -1,0 +1,177 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>En los servidores MySQL privados y compartidos de DreamHost, algunos de los comandos SQL no están disponibles para secuencias de comandos ni en phpMyAdmin. Su funcionalidad está disponible en su lugar a través del panel de control DreamHost.</p>
+<p>Éstos incluyen:</p>
+<ul>
+<li>CREATE DATABASE (CREAR BASE DE DATOS): solo funciona desde el shell si anteriormente creaste una base de datos con el mismo nombre especificado utilizando tu Panel DreamHost y luego la eliminaste en algún momento. Deberías usar --drop-database con mysqldump al hacer una copia de seguridad de una base de datos.</li>
+<li>GRANT (CONCEDER/OTORGAR)</li>
+<li>REVOKE (REVOCAR)</li>
+</ul>
+<p>La siguiente tabla resume los privilegios que puede tener un usuario de MySQL en DreamHost, en comparación con todos los privilegios disponibles.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Esta tabla se refiere a servidores MySQL compartidos, así como a <a href="https://help.dreamhost.com/hc/es/articles/215945917-Generalidades-de-MySQL-VPS">Servidores MySQL privados</a>. Solo si actualizas a un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Servidor Dedicado</a> donde la base de datos MySQL está en la máquina local, la tabla a continuación no se aplicará.</p>
+</div>
+</div>
+BLOQUEO DE TABLAS
+<table class="wikitable">
+<tbody>
+<tr>
+<th>Privilegio</th>
+<th>Descripción</th>
+<th>Disponible</th>
+</tr>
+<tr class="table-background-red">
+<td>TODOS [PRIVILEGIOS]</td>
+<td>Otorga todos los privilegios en el nivel de acceso especificado, excepto OPCIÓN DE CONCESIÓN</td>
+<td>NO</td>
+</tr>
+<tr class="table-background-green">
+<td>ALTERAR</td>
+<td>Habilitar el uso de ALTERAR TABLAS</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-green">
+<td>ALTERAR RUTINA</td>
+<td>Permite que las rutinas almacenadas se modifiquen o eliminen (solo si tu eres el usuario @ host DEFINER que creó la rutina)</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-green">
+<td>CREAR</td>
+<td>Habilita la creación de bases de datos y tablas (solo se pueden crear tablas, las bases de datos deben crearse en el panel de control)</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-green">
+<td>CREAR RUTINA</td>
+<td>Habilita la creación de la rutina almacenada (No se puede establecer DEFINER como usuario no root, elimina el combo DEFINER = 'user' @ 'host' para crear rutinas)</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-green">
+<td>CREAR TABLAS TEMPORALES</td>
+<td>Habilita el uso de CREAR TABLA TEMPORAL (CREATE TEMPORARY TABLE)</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-red">
+<td>CREAR USUARIO</td>
+<td>Habilita el uso de CREAR USUARIO, ELIMINAR USUARIO, RENOMBRAR USUARIO y REVOCAR TODOS LOS PRIVILEGIOS</td>
+<td>NO</td>
+</tr>
+<tr class="table-background-green">
+<td>CREAR VISTA</td>
+<td>Habilitar vistas para ser creadas o alteradas</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-green">
+<td>ELIMINAR</td>
+<td>Habilitar el uso de ELIMINACIÓN</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-green">
+<td>DESCARTAR</td>
+<td>Permite que se descarten bases de datos, tablas y vistas</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-red">
+<td>EVENTO</td>
+<td>Habilitar el uso de eventos para el Programador de eventos</td>
+<td>NO</td>
+</tr>
+<tr class="table-background-green">
+<td>EJECUTAR</td>
+<td>Permitir al usuario ejecutar rutinas almacenadas</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-red">
+<td>ARCHIVO</td>
+<td>Permite que el usuario haga que el servidor lea o escriba archivos (innecesario, si recibes este error probablemente estés usando "CARGAR DATOS DE ARCHIVO" y deberías usar "CARGAR DATOS DE ARCHIVO LOCAL" en su lugar)</td>
+<td>NO</td>
+</tr>
+<tr class="table-background-red">
+<td>OTORGAR OPCIÓN</td>
+<td>Habilitar privilegios para ser otorgados o eliminados de otras cuentas</td>
+<td>NO</td>
+</tr>
+<tr class="table-background-green">
+<td>ÍNDICE</td>
+<td>Permitir que se creen o descarten índices</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-green">
+<td>INSERTAR</td>
+<td>Habilitar el uso de INSERTAR</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-green">
+<td>BLOQUEO DE TABLAS</td>
+<td>Habilita el uso de LOCK TABLES en las tablas para las que tienes el privilegio SELECT</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-green">
+<td>PROCESO</td>
+<td>Permite que el usuario vea todos los procesos con SHOW PROCESSLIST (muestra sólo tus procesos específicos de usuarios de MySQL)</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-red">
+<td>REFERENCIAS</td>
+<td>No está implementado</td>
+<td>NO</td>
+</tr>
+<tr class="table-background-red">
+<td>RECARGAR</td>
+<td>Permitir el uso de operaciones FLUSH</td>
+<td>NO</td>
+</tr>
+<tr class="table-background-red">
+<td>CLIENTE DE REPLICACIÓN</td>
+<td>Permite al usuario preguntar dónde están los servidores maestros o esclavos</td>
+<td>NO</td>
+</tr>
+<tr class="table-background-red">
+<td>REPLICACIÓN ESCLAVO</td>
+<td>Habilita los esclavos de replicación para leer eventos de registro binarios del maestro</td>
+<td>NO</td>
+</tr>
+<tr class="table-background-green">
+<td>SELECCIONAR</td>
+<td>Habilita el uso de SELECCIONAR</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-red">
+<td>MOSTRAR BASES DE DATOS</td>
+<td>Habilita SHOW DATABASES para mostrar todas las bases de datos (solo muestra las bases de datos a las que tienes acceso)</td>
+<td>NO</td>
+</tr>
+<tr class="table-background-green">
+<td>MOSTRAR VISTA</td>
+<td>Habilitar el uso de SHOW CREATE VIEW</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-red">
+<td>APAGAR</td>
+<td>Habilitar el uso del apagado de mysqladmin</td>
+<td>NO</td>
+</tr>
+<tr class="table-background-red">
+<td>SUPER</td>
+<td>Habilitar el uso de CHANGE MASTER TO, KILL, PURGE BINARY LOGS y SET GLOBAL, el comando mysqladmin debug; Te permite conectarte (una vez) incluso si se alcanza max_ connections</td>
+<td>NO</td>
+</tr>
+<tr class="table-background-green">
+<td>DESENCADENAR</td>
+<td>Habilita los desencadenantes para crearlos o descartarlos (No se puede establecer DEFINER como usuario no root, elimina DEFINER = 'user' @ 'host' combo para crear el desencadenante)</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-green">
+<td>ACTUALIZAR</td>
+<td>Habilita el uso de UPDATE</td>
+<td>SI</td>
+</tr>
+<tr class="table-background-red">
+<td>USO</td>
+<td>Sinónimo de "sin privilegios"</td>
+<td>NO</td>
+</tr>
+</tbody>
+</table>
+</div>

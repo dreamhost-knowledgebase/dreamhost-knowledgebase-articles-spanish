@@ -67,7 +67,7 @@
 <pre class="prebox">#Protect Directory
 AuthName "Dialog prompt"
 AuthType Basic
-AuthUserFile <span class="command">/home/username/example.com/.htpasswd</span>
+AuthUserFile <span class="code-highlight">/home/username/example.com/.htpasswd</span>
 Require valid-user
 </pre>
 </div>
@@ -78,7 +78,7 @@ Require valid-user
 &lt;Files admin.php&gt;
 AuthName "Dialog prompt"
 AuthType Basic
-AuthUserFile <span class="command">/home/username/example.com/.htpasswd</span>
+AuthUserFile <span class="code-highlight">/home/username/example.com/.htpasswd</span>
 Require valid-user
 &lt;/Files&gt;
 </pre>
@@ -90,7 +90,7 @@ Require valid-user
 &lt;FilesMatch "^(admin|staff).php$"&gt;
 AuthName "Dialog prompt"
 AuthType Basic
-AuthUserFile <span class="command">/home/username/example.com/.htpasswd</span>
+AuthUserFile <span class="code-highlight">/home/username/example.com/.htpasswd</span>
 Require valid-user
 &lt;/FilesMatch&gt;
 </pre>
@@ -101,12 +101,12 @@ Require valid-user
 <p>Debido a cómo WordPress enruta todas las solicitudes de página, intentar acceder a un subdirectorio protegido por contraseña arrojará un error 404 No encontrado. Para resolver esto, debes añadir una línea adicional al archivo .htaccess para hacer referencia a ErrorDocument.</p>
 <p>Este ejemplo protege un subdirectorio llamado 'members'.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="command">ErrorDocument 401 default</span>
+<pre class="prebox"><span class="code-highlight">ErrorDocument 401 default</span>
     
 #Protect Directory
 AuthName "Dialog prompt"
 AuthType Basic
-AuthUserFile <span class="command">/home/username/example.com/<span class="command">members</span>/.htpasswd</span>
+AuthUserFile <span class="code-highlight">/home/username/example.com/members/.htpasswd</span>
 Require valid-user
 </pre>
 </div>
@@ -127,10 +127,10 @@ Require valid-user
 <div class="preboxcontainer">
 <pre class="prebox">SSLOptions +StrictRequire
 SSLRequireSSL
-SSLRequire&nbsp;%{HTTP_HOST} eq "<span class="command">example.com</span>"<br />
-ErrorDocument 403 /<span class="command">error_redirect.php</span>
+SSLRequire&nbsp;%{HTTP_HOST} eq "<span class="code-highlight">example.com</span>"<br />
+ErrorDocument 403 /<span class="code-highlight">error_redirect.php</span>
 
-&lt;Files /<span class="command">error_redirect.php</span>&gt;
+&lt;Files /<span class="code-highlight">error_redirect.php</span>&gt;
   AuthType none
 &lt;/Files&gt;</pre>
 </div>
@@ -140,14 +140,14 @@ ErrorDocument 403 /<span class="command">error_redirect.php</span>
 <pre class="prebox">#Protect Directory
 AuthName "Dialog prompt"
 AuthType Basic
-AuthUserFile /home/example_username/example.com<span class="command">/blog/</span>.htpasswd
+AuthUserFile /home/example_username/example.com<span class="code-highlight">/blog/</span>.htpasswd
 Require valid-user
 
 SSLOptions +StrictRequire
 SSLRequireSSL
 SSLRequire %{HTTP_HOST} eq "www.example.com"
 
-ErrorDocument 403 <span class="command">/blog/</span>error_redirect.php
+ErrorDocument 403 <span class="code-highlight">/blog/</span>error_redirect.php
 
 &lt;Files /error_redirect.php&gt;
   AuthType none
@@ -159,7 +159,7 @@ ErrorDocument 403 <span class="command">/blog/</span>error_redirect.php
 <div class="alert-content">
 <p>Si tu sitio está en&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360022178852#version" target="_self">un servidor que ejecuta Ubuntu 14 (Trusty)</a>,&nbsp;asegúrate de cambiar la línea ErrorDocument a la ruta URL completa. Por ejemplo:</p>
 <div class="preboxcontainer">
-<pre class="prebox">ErrorDocument 403 <span class="command">https://example.com/blog/</span>error_redirect.php</pre>
+<pre class="prebox">ErrorDocument 403 <span class="code-highlight">https://example.com/blog/</span>error_redirect.php</pre>
 </div>
 </div>
 </div>
@@ -178,6 +178,6 @@ ErrorDocument 403 <span class="command">/blog/</span>error_redirect.php
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades de .htaccess</a></li>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/217738987-What-can-I-do-with-an-htaccess-file-" target="_self">¿Qué puedo hacer con un archivo .htaccess?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-" target="_self">¿Qué puedo hacer con un archivo .htaccess?</a></li>
 </ul>
 </div>

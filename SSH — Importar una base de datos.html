@@ -1,0 +1,64 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo asume que ya tienes una&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215039758-Generalidades-sobre-copias-de-seguridad-de-bases-de-datos" target="_self">copia de seguridad de tu base de datos MySQL</a>.&nbsp;Para importar el archivo de respaldo, necesitarás las credenciales de tu base de datos. Mira el siguiente artículo para encontrar las credenciales de tu base de datos:</p>
+<ul>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encuentra tus credenciales para acceder a la base de datos</a></li>
+</ul>
+</div>
+<h2>Importar una copia de respaldo de base de datos en formato .sql creado a través de SSH</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Revisa el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Cómo crear un usuario con acceso Shell (SSH)</a>&nbsp;para convertir tu usuario&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027#seguridad">SFTP</a>&nbsp;a un usuario SHELL.</li>
+<li>Sube la copia de respaldo en formato .sql a tu servidor web. Revisa el artículo sobre FTP para obtener más detalles.</li>
+<li>Asegúrate de estar en el mismo directorio en el que subiste el archivo .sql, luego ejecuta el siguiente comando para importar el archivo de base de datos .sql.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql -h mysql.example.com -u username -p dbname &lt; databasefile.sql</span></pre>
+</div>
+<ul>
+<li>Te va a pedir que ingreses la contraseña de tu usuario MySQL.</li>
+<li>Una vez que ejecutes el comando, el programa SSH no responderá ni hará nada por un momento, ya que funciona al importar tu archivo. La importación se completa exitosamente cuando aparece la línea de comandos.</li>
+</ul>
+</li>
+</ol>
+</div>
+<h2>Importar desde tu compañía de alojamiento anterior a DreamHost por medio de SSH</h2>
+<div class="solvvy-solution">
+<p>También puedes ejecutar un solo comando en tu terminal Shell para copiar e importar una base de datos remota:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump -h OLDHOSTNAME -u OLDUSERNAME -pOLDPASSWORD OLDDATABASENAME | mysql -h DREAMHOSTHOSTNAME -u DREAMHOSTUSER -pDREAMHOSTPASSWORD DREAMHOSTDATABASE</span></pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>No hay espacios entre "-p" y la contraseña.</p>
+</div>
+</div>
+<h3>Explicación de las iniciales dentro del comando de importación anterior</h3>
+<dl>
+<dt><strong>mysqldump&nbsp;—</strong>&nbsp;escribe una copia de una base de datos en un solo archivo.</dt>
+<dt><strong>|&nbsp;—&nbsp;</strong>redirige su salida a otra aplicación "mysql"</dt>
+<dt><strong>-h&nbsp;—&nbsp;</strong>especifica el nombre de host/servidor</dt>
+<dt><strong>-u&nbsp;—&nbsp;</strong>especifica el nombre de usuario asociado con la base de datos SQL (este usuario NO es el mismo usuario FTP o Shell)</dt>
+<dt><strong>-p&nbsp;—&nbsp;</strong>especifica es la contraseña del usuario SQL</dt>
+<dt><strong>"DREAMHOSTDATABASE"&nbsp;—&nbsp;</strong>especifica el nombre de la base de datos</dt>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>La base de datos de destino&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221691727-Crear-una-base-de-datos-MySQL" target="_self">ya debe existir</a>;&nbsp;de no ser así, el comando va a fallar.</p>
+<p>Si estás ejecutando este comando desde el shell en tu servidor/host anterior, debes otorgar acceso remoto a tu base de datos en DreamHost al hacer que el servidor remoto sea un "host permitido".</p>
+<p>Para obtener más información, visita el siguiente artículo:</p>
+<ul>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215575787-Administrar-usuarios-de-MySQL-hosts-permitidos-y-privilegios" target="_self">Administrar usuarios MySQL, hosts/servidores permitidos y privilegios</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encuentra tus credenciales para acceder a la base de datos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214395768-phpMyAdmin-C%C3%B3mo-importar-o-restaurar-una-base-de-datos-o-una-tabla" target="_self">phpMyAdmin — Cómo importar o restaurar una base de datos o una tabla</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215039938--C%C3%B3mo-migrar-mi-base-de-datos-a-DreamHost-" target="_self">¿Cómo migrar mi base de datos a DreamHost?</a></li>
+</ul>
+</div>

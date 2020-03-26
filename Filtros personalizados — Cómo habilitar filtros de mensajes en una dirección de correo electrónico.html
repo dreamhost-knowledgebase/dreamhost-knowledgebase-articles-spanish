@@ -1,0 +1,91 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Los filtros de mensajes son reglas especiales que puedes crear que realizan acciones automáticamente en el correo electrónico entrante. Esta es una manera simple de hacer que el correo electrónico entrante sea más fácil de clasificar y organizar. Por ejemplo, puedes etiquetar todos los mensajes de correo electrónico de tu jefe como "Importante". El filtro podría agregar la palabra IMPORTANTE al asunto de los correos electrónicos con jefe@example.com en el campo “De”.</p>
+<p>Los filtros se pueden crear solo para direcciones de correo electrónico que estén totalmente alojadas. Otra opción es habilitar filtros <a href="/hc/es/articles/214984738-Generalidades-sobre-Anti-spam" target="_self">anti-spam</a> en el panel. Si lo haces, los filtros antispam se aplicarán primero, luego se aplicarán los filtros de mensajes personalizados. También puedes agregar filtros directamente desde tu cliente de correo, como Thunderbird, Outlook o Gmail.</p>
+<p>Este artículo describe cómo agregar filtros personalizados en tu panel DreamHost.</p>
+</div>
+<h2>Habilitar filtros de mensajes en el panel</h2>
+<div class="solvvy-solution">
+<p>Puedes crear un filtro personalizado en tu panel. Una lista de todas tus direcciones de correo electrónico totalmente alojadas aparecerá en tu página de Message Filters (Filtros de mensajes).</p>
+<ol>
+<li>Navega a&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.filters&amp;" target="_blank" rel="noopener">Message Filters</a>.</li>
+<li>Al lado derecho de una dirección, haz clic en el botón <strong>Edit</strong> para abrir la página de filtros.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_mail_filters_01.png" alt="01 Message Filters.fw.png" /></dd>
+</dl>
+</li>
+<li>Si aún no has agregado filtros, haz clic en el botón&nbsp;<strong>Add New Filter</strong>.
+<dl>
+<dd><em>Se abre la página add new filter, donde puede configurar un filtro:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_mail_filters_02.png" alt="01 Message Filters.fw.png" /></dd>
+</dl>
+</li>
+<li>Cuando termines de crear tu regla, haz clic en el botón <strong>Add Filter</strong> en la parte inferior.</li>
+</ol>
+</div>
+<h2>Agregar un filtro usando el subdominio de mailboxes</h2>
+<div class="solvvy-solution">
+<p>También puedes usar el subdominio mailboxes.dreamhost.com para crear un filtro:</p>
+<ol>
+<li>Inicia sesión en tu administrador de buzones en https://mailboxes.dreamhost.com.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_mail_filters_03.png" alt="01 Message Filters.fw.png" /></dd>
+</dl>
+</li>
+<li>Haz clic en el enlace 'Email Filters'.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_mail_filters_04.png" alt="01 Message Filters.fw.png" /></dd>
+</dl>
+</li>
+<li>Ingrese la nueva configuración del filtro y haz clic en <strong>Add Filter</strong>.</li>
+</ol>
+</div>
+<h2>¿Cómo funciona la opción 'execute' (ejecutar)?</h2>
+<div class="solvvy-solution">
+<p>La última opción en el filtro es establecer 'execute and continue' (ejecutar y continuar) o 'execute and stop' (ejecutar y detener). Elegir esta configuración afecta el funcionamiento del reenvío. Aquí están algunos ejemplos:</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En estos ejemplos, se envía un correo electrónico a admin@example.com mientras se reenvía a forward@example.com.</p>
+</div>
+</div>
+<h3>Ejemplo #1 execute and stop (ejecutar y detener)</h3>
+<p>Digamos que tienes dos filtros:</p>
+<ul>
+<li>Primero, reenvía correos electrónicos con <strong>Test</strong> en el <strong>asunto</strong> a forward@example.com y luego para.</li>
+<li>Finalmente, agrega <strong>(execute and stop)</strong> al asunto de los correos electrónicos con <strong>Test</strong> en el <strong>asunto</strong> y luego para.</li>
+</ul>
+<p>Cuando el correo electrónico original se envía a admin@example.com, se reenvía correctamente a forward@example.com sin que se agregue ningún texto al asunto.</p>
+<p>La segunda regla nunca se activa, por lo que el correo electrónico nunca llega a admin@example.com.</p>
+<h3>Ejemplo #2 execute and stop (ejecutar y detener)</h3>
+<p>Este ejemplo invierte las dos reglas anteriores:</p>
+<ul>
+<li>Primero, agrega <strong>(execute and stop)</strong> al asunto de los correos electrónicos con <strong>Test</strong> en el <strong>asunto</strong> y luego para.</li>
+<li>Finalmente, reenvía correos electrónicos con <strong>Test</strong> en el <strong>asunto</strong> a forward@example.com y luego para.</li>
+</ul>
+<p>Cuando el correo electrónico original se envía a admin@example.com, <em>no llega</em>, pero el texto del asunto se agrega correctamente.</p>
+<p>La segunda regla luego reenvía a forward@example.com además de agregar el texto (execute and stop) al asunto.</p>
+<h3>Ejemplo #3 execute and continue (ejecutar y continuar)</h3>
+<p>Esto es lo mismo que el ejemplo #1, excepto que la última regla es ahora 'execute and continue'.</p>
+<ul>
+<li>Primero, reenvía una copia de los correos electrónicos con <strong>Test</strong> en el <strong>asunto</strong> a forward@example.com y luego continúa.</li>
+<li>Finalmente, agrega <strong>(execute and continue)</strong> al asunto de los correos electrónicos con <strong>Test</strong> en el <strong>asunto</strong> y luego continúe.</li>
+</ul>
+<p>El correo electrónico llega a la dirección original de admin@example.com <em>con</em> el texto (execute and continue) agregado.</p>
+<p>También llega a la dirección forward@example.com, pero el texto (execute and continue) <em>no se</em> agrega al asunto.</p>
+<h3>Ejemplo #4 execute and continue (ejecutar y continuar)</h3>
+<p>Esto es lo mismo que el ejemplo #2, excepto que la última regla es ahora 'execute and continue'.</p>
+<ul>
+<li>Primero, agrega <strong>(execute and continue)</strong> al asunto de los correos electrónicos con <strong>Test</strong> en el <strong>asunto</strong> y luego continúe.</li>
+<li>Finalmente, reenvía una copia de los correos electrónicos con <strong>Test</strong> en el <strong>asunto</strong> a forward@<em>example.com</em> y luego continúa.</li>
+</ul>
+<p>Cuando el correo electrónico original se envía a admin@example.com, llega con (execute and continue) agregado a la línea de asunto.</p>
+<p>El correo electrónico también llega a forward@example.com con el texto del asunto agregado.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/en-us/articles/215030758-Custom-filters-Explanation-of-the-message-filter-fields" target="_self">Explicación de los campos de los filtros de mensajes</a></li>
+<li><a href="/hc/es/articles/214984738-Generalidades-sobre-Anti-spam" target="_self">Generalidades sobre Anti-spam</a></li>
+</ul>
+</div>
