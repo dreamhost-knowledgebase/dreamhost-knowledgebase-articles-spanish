@@ -1,0 +1,314 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="How-do-I-create-a-form-in-an-Announcement-List?" class="solvvy-hidden">
+<div class="altTitle">Formulario personalizado para suscribirse o cancelar</div>
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#ejemplo">Ejemplo de formulario</a></li>
+<li><a class="reference internal" href="#seccion1">Sección 1 — Agregar los valores de tu lista</a></li>
+<li><a class="reference internal" href="#seccion2">Sección 2 — Name y email</a></li>
+<li><a class="reference internal" href="#seccion3">Sección 3 — Parámetros opcionales</a></li>
+<li><a class="reference internal" href="#seccion4">Sección 4 — Botones Submit</a></li>
+<li><a class="reference internal" href="#imagenes">Uso las imágenes para mis botones de envío de suscripción</a></li>
+<li><a class="reference internal" href="#css_codigo">Código genérico de CSS</a></li>
+<li><a class="reference internal" href="#personalizadas_urls">Crear URL personalizadas</a></li>
+<li><a class="reference internal" href="#wordpress">Una nota para los sitios de WordPress</a></li>
+</ul>
+</div>
+</div>
+<span id="ejemplo"></span>
+<h2>Ejemplo de formulario</h2>
+<div class="solvvy-solution">
+<p>Este artículo te guía a través de la creación un formulario de contacto personalizado para permitir a los usuarios suscribirse a tu Announcement List (lista de anuncios).</p>
+<p>Ten en cuenta que si tienes varias listas de correo, debes tener un formulario de suscripción por separado para cada una.</p>
+</div>
+<span id="seccion1"></span>
+<h2>Sección 1&nbsp;— Agregar los valores de tu lista</h2>
+<div class="solvvy-solution">
+<p>Esta primera sección es responsable de enviar información a tu lista. Debes cambiar los valores <strong>_MailingListName_</strong> y <strong>_DomainName_</strong> correspondientes a los valores específicos de tu lista.</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;form method="post" action="https://scripts.dreamhost.com/add_list.cgi"&gt;
+
+&lt;input type="hidden" name="list" value="<span class="code-highlight">MailingListName"</span>&gt;
+&lt;input type="hidden" name="domain" value="<span class="code-highlight">DomainName"</span>&gt;</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p><strong>Debes</strong> personalizar el texto <strong>MailingListName</strong> y <strong>DomainName</strong> según tus necesidades. Los otros campos pueden permanecer como están, pero estos dos deben actualizarse a los detalles específicos de tu Lista de anuncios. A continuación verás una explicación de estos campos.</p>
+</div>
+</div>
+<h3>Explicación de los parámetros anteriores</h3>
+<table class="wikitable">
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Parámetro</th>
+<th bgcolor="#F2F2F2">Explicación</th>
+</tr>
+<tr>
+<td style="background-color: #effbf8;"><strong>MailingListName</strong></td>
+<td style="background-color: #effbf8;">
+<p>Esta es la parte de su lista de correo "Desde el correo electrónico" que viene antes del signo @. Entonces, si tu lista es <strong>mylist@example.com</strong>, esta sería <strong>mylist</strong>. Por ejemplo:</p>
+<p>&lt;input type="hidden" name="list" value="mylist"&gt;</p>
+<p>Ten en cuenta que las personas no podrán enviar correos electrónicos a listname@example.com a menos que lo configures como una dirección de <a href="/hc/es/articles/217139407-Email-guía-de-inicio-rápido" target="_self">correo electrónico independiente</a> o una <a href="/hc/es/articles/215022298--Cómo-crear-una-autorespuesta-" target="_self">respuesta automática</a> en el panel.</p>
+</td>
+</tr>
+<tr>
+<td style="background-color: #effbf8;"><strong>DomainName</strong></td>
+<td style="background-color: #effbf8;">
+<p>Este es el nombre de dominio del sitio donde reside este formulario. <strong>No</strong> es necesario tener este parámetro, pero tenerlo asegurará una compatibilidad total con todos los navegadores. Por ejemplo:</p>
+<p>&lt;input type="hidden" name="domain" value="<strong>example.com</strong>"&gt;</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<span id="seccion2"></span>
+<h2>Sección 2&nbsp;<span data-sheets-userformat="{\" data-sheets-value="{\">— Parámetros 'name' (nombre) y 'email' (correo electrónico)</span></h2>
+<div class="solvvy-solution">
+<p><span data-sheets-userformat="{\" data-sheets-value="{\">Esta sección agrega un campo de entrada para el nombre del usuario y la dirección de correo electrónico. El segundo parámetro de correo electrónico valida que has ingresado tu correo electrónico correctamente.</span></p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;!--Visible Fields--&gt;
+&lt;div&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name"&gt;
+&lt;/div&gt;
+&lt;!-- Required: --&gt;
+&lt;div&gt;
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="text" name="email" placeholder="Enter a valid email" required&gt;
+&lt;/div&gt;
+
+&lt;!-- Optional: --&gt;
+&lt;div&gt;
+    &lt;label for="confirm-email"&gt;Confirm Email:&lt;/label&gt;
+    &lt;input type="text" name="address2" placeholder="Please verify you email" required&gt;
+    &lt;input type="hidden" name="req_address2" value="1" input name="email" /&gt;
+&lt;/div&gt;</pre>
+</div>
+</div>
+<span id="seccion3"></span>
+<h2>Sección 3&nbsp;— Parámetros opcionales</h2>
+<div class="solvvy-solution">
+<p>Después de agregar parámetros para el nombre y el correo electrónico del usuario, puedes agregar parámetros adicionales para satisfacer las necesidades de tu lista. Los siguientes parámetros son opcionales, pero muestran cómo agregar parámetros adicionales para:</p>
+<ul>
+<li>street (calle)</li>
+<li>city (ciudad)</li>
+<li>state (estado)</li>
+<li>zip (código postal)</li>
+<li>country (país)</li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;div&gt;
+    &lt;label for="street"&gt;Street:&lt;/label&gt;
+    &lt;input type="text" name="street" required &gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;label for="city"&gt;City:&lt;/label&gt;
+    &lt;input type="text" name="city" required&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;label for="state"&gt;State:&lt;/label&gt;
+    &lt;input type="text" name="state"  required&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;label for="zip"&gt;Zipcode:&lt;/label&gt;
+    &lt;input type="text" name="zip"  required&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;label for="zip"&gt;Country:&lt;/label&gt;
+    &lt;input type="text" name="country" required&gt;
+&lt;/div&gt;</pre>
+</div>
+</div>
+<span id="seccion4"></span>
+<h2>Sección 4&nbsp;—&nbsp;Botones 'Submit' (enviar) y 'Unsubscribe' (cancelar suscripción)</h2>
+<div class="solvvy-solution">
+<p>El botón de enviar es obligatorio ya que envía los datos del formulario. También puedes agregar el botón Cancelar suscripción para que sea más fácil para los usuarios eliminarse de tu lista. Deberías cambiar este texto para adaptarlo a tus necesidades.</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;div class="button"&gt;
+    &lt;input type="submit" name="submit" value="<span class="code-highlight">Join Our Announcement List</span>"&gt;
+&lt;/div&gt;
+
+&lt;!-- Optional Unsubscribe Button --&gt;
+&lt;div class="button"&gt;
+    &lt;input type="submit" name="unsub" value="<span class="code-highlight">Remove from list</span>"&gt;
+&lt;/div&gt;</pre>
+</div>
+<h3>Explicación de los parámetros anteriores</h3>
+<table class="wikitable"><colgroup> <col width="30%" /> <col width="75%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Parámetro</th>
+<th bgcolor="#F2F2F2">Explicación</th>
+</tr>
+<tr>
+<td style="background-color: #effbf8;"><strong>Join Our Announcement List (Únete a nuestra lista)</strong></td>
+<td style="background-color: #effbf8;">Esta etiqueta se puede cambiar a cualquier cosa que no contenga las palabras "remove" (eliminar), "out" (eliminar), "unsub" (cancelar suscripción), "leave" (dejar) o "delete" (eliminar), y actuará como botón de suscripción. Además, si eres un experto en HTML, puedes usar una imagen para el botón de envío.</td>
+</tr>
+<tr>
+<td style="background-color: #effbf8;"><strong>Remove from list&nbsp;(Salir de la lista)</strong></td>
+<td style="background-color: #effbf8;">Esta será la etiqueta en su botón "unsubscribe" (darse de baja). No es obligatorio tener este botón, pero es más conveniente si los miembros de su lista pueden darse de baja en la web, sin su intervención. El nombre de este botón debe incluir uno de los siguientes: "remove" (eliminar), "out" (eliminar), "unsub" (cancelar suscripción), "leave" (dejar) o "delete" (eliminar). Si no lo haces, actuará como si fuera un botón de suscripción.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<span id="imagenes"></span>
+<h2>¿Cómo uso las imágenes para mis botones de envío de suscripción y cancelación de suscripción?</h2>
+<div class="solvvy-solution">
+<p>Si no deseas usar los botones de envío estándar, sino que prefieres usar tus propias imágenes, puedes hacerlo con este código:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;input type="image" border="0" name="submit" src="<strong>subscribe.gif</strong>"&gt;
+&lt;input type="image" border="0" name="unsub" src="<strong>unsubscribe.gif</strong>"&gt;</pre>
+</div>
+</div>
+<span id="css_codigo"></span>
+<h2>Código genérico de CSS</h2>
+<div class="solvvy-solution">
+<p>Este es un código CSS genérico que puedes usar para diseñar tu formulario. Lo más probable es que necesites más dependiendo de las necesidades de tu sitio:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/* Centers the form on the page */
+form {
+  margin: 0 auto;
+  width: 400px;
+  /* Add a border */
+  border: 1px solid #CCC;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+/* add space between fields */
+form div {
+  margin-bottom: 15px;
+}
+
+/* Space input fields */
+label {
+  display: inline-block;
+  width: 125px;
+  text-align: left;
+}</pre>
+</div>
+</div>
+<span id="more_fields"></span> <span id="personalizadas_urls"></span>
+<h2>Crear URL personalizadas</h2>
+<div class="solvvy-solution">
+<p>Hay varias páginas predeterminadas que se muestran según la información que el usuario ingrese en tu formulario. Por ejemplo, así es como se ve la página de confirmación predeterminada:</p>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/Announcement_List_Success_add.png" alt="Announcement_List_Success_add.png" /></dd>
+</dl>
+<p>Puedes cambiar estas URL predeterminadas a una URL personalizada que hayas creado. Para cambiar dónde se redirigen las URL, debes agregar tus URL personalizadas en el panel mientras editas la lista.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_announcement_list_custom_pages.png" alt="" /></dd>
+</dl>
+<p>Por ejemplo, los siguientes elementos se pueden ajustar desde la página 'Edit' (Editar) de tu lista:</p>
+<ul>
+<li><em>Unsubscribe URL (URL para Cancelar suscripción)</em></li>
+<li><em>Already Subscribed URL (URL de miembro suscrito)</em></li>
+<li><em>Not Subscribed URL (URL de miembro no suscrito)</em></li>
+<li><em>Invalid Email Address URL (URL de dirección de correo electrónico no válida)</em></li>
+<li><em>Confirmation URL (URL de confirmación)</em></li>
+</ul>
+<h3>Explicación de los parámetros anteriores</h3>
+<table class="wikitable">
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Parámetro</th>
+<th bgcolor="#F2F2F2">Explicación</th>
+</tr>
+<tr>
+<td style="background-color: #effbf8;"><strong>_http://UnsubscribedURL_</strong></td>
+<td style="background-color: #effbf8;">La URL de la página que aparece si alguien canceló la suscripción de la lista. Puedes crear tu propia página .html u omitir este campo del formulario HTML. Si se omite, se utilizará el valor en el parámetro <em>Unsubscribe URL</em> (cancelar suscripción de URL) en la página de edición de la Lista de anuncios.</td>
+</tr>
+<tr>
+<td style="background-color: #effbf8;"><strong>_http://AlreadyOnURL_</strong></td>
+<td style="background-color: #effbf8;">La URL de la página que aparece si alguien que ya está en la lista intenta suscribirse. Puedes crear su propia página .html u omitir este campo del formulario HTML. Si se omite, se utilizará el valor en el parámetro <em>Already Subscribed URL</em> (URL ya suscrito) en la página de edición de la Lista de anuncios.</td>
+</tr>
+<tr>
+<td style="background-color: #effbf8;"><strong>_http://NotOnURL</strong>_</td>
+<td style="background-color: #effbf8;">La URL de la página que aparece si no están en la lista y han intentado cancelar la suscripción. Puedes crear tu propia página .html u omitir este parámetro del formulario HTML. Si se omite, se usará el valor en el campo <em>Not Subscribed URL</em> (URL no suscrito) en la página de edición de la Lista de anuncios.</td>
+</tr>
+<tr>
+<td style="background-color: #effbf8;"><strong>_http://InvalidURL_</strong></td>
+<td style="background-color: #effbf8;">La URL de la página que aparecerá si la dirección de correo electrónico ingresada no es válida. Puedes crear tu propia página .html u omitir este parámetro. Si se omite, se usará el valor en el campo <em>Invalid Email Address URL</em> (URL de dirección de correo electrónico no válido) en la página de edición de la Lista de anuncios.</td>
+</tr>
+<tr>
+<td style="background-color: #effbf8;"><strong>_http://EmailConfirmURL_</strong></td>
+<td style="background-color: #effbf8;">La URL de la página que aparecerá cuando el usuario confirme su aceptación a tu lista haciendo clic en un enlace en un mensaje de correo electrónico que se le acaba de enviar. Si personalizas el parámetro URL, probablemente también debería personalizar este parámetro. Básicamente, necesitas un mensaje que diga algo como "Aún no está suscrito. ¡Por favor revise su correo electrónico ahora para ver el último paso para confirmar su suscripción a nuestra lista!". Puedes crear su propia página .html con este mensaje u omitir este parámetro. Si se omite, se utilizará el parámetro <em>Confirmation URL</em> (URL de confirmación) en la página de edición de la Lista de anuncios.</td>
+</tr>
+<tr>
+<td style="background-color: #effbf8;"><strong>&lt;input type="hidden" name="emailit" value="1" /&gt;</strong></td>
+<td style="background-color: #effbf8;">Si tienes esta entrada oculta en el formulario, recibirás automáticamente un correo electrónico predeterminado enviado a _MailingListName_@example.com. Luego, puedes configurarlo como respuesta automática cada vez que alguien se registre en la lista de correo. Además, también recibirás un correo electrónico predeterminado enviado a unsubbed-_MailingListName_@example.com cada vez que alguien cancele su suscripción.</td>
+</tr>
+</tbody>
+</table>
+<p>Si utilizas tus propias URL personalizadas, aún puedes acceder a algunas partes de la información presentada en el formulario. El script DreamHost redirige tus URL con las siguientes variables:</p>
+<ul>
+<li><strong>address=user@example.com</strong></li>
+<li><strong>name=Their+Name</strong></li>
+</ul>
+<dl>
+<dd></dd>
+</dl>
+<p>El siguiente ejemplo lee el nombre y la dirección ingresados en el formulario en una página personalizada de respuesta a la Subscribe URL (URL de suscripción):</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+$email = $_GET['address'];
+$name = $_GET['name'];
+?&gt;
+Gracias por suscribirte, &lt;?php echo $name; ?&gt; - te enviaremos nuestro próximo boletín a &lt;?php echo $email; ?&gt;!</pre>
+</div>
+<p>En este ejemplo, se supone que estás utilizando un archivo PHP y se requiere el parámetro de formulario de nombre, de lo contrario, necesitaría ser un poco más elegante para mostrar algo más si el parámetro del nombre está en blanco.</p>
+<p>Usa un condicional PHP para verificar datos en el campo de nombre:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+if ($name!="")
+echo "$name"; ?&gt;
+
+Gracias por suscribirte&lt;?php if ($name!="") echo ", $name"; ?&gt; - te enviaremos nuestro próximo boletín a &lt;?php echo $email; ?&gt;!</pre>
+</div>
+<p>De esta manera, el campo de nombre no se imprime si no contiene nada.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si necesitas <strong>suprimir</strong> estas variables de consulta (por ejemplo, si estás utilizando WordPress), puedes hacerlo agregando la variable de consulta nourlvars = 1 al agregar a alguien a la lista.</p>
+</div>
+</div>
+</div>
+<span id="wordpress"></span>
+<h2>Una nota para los sitios de WordPress</h2>
+<div class="solvvy-solution">
+<p>Si tu sitio usa <a href="/hc/es/articles/215525287-Generalidades-sobre-WordPress" target="_self">WordPress</a>, debes enlazar <a href="https://codex.wordpress.org/Using_Permalinks" target="_self">por defecto al permalink "Feo"</a> (del formulario "http://ejemplo.com/?p=N"), incluso si utiliza cualquiera de los enlaces permanentes "Bonitos". Esto se debe a que los scripts de la lista de correo agregan automáticamente parámetros a las URL que no funcionan con enlaces permanentes "bonitos".</p>
+<p>Si editas una publicación o una página, puedes encontrar post ID number (el número de ID) de la publicación en la línea URL después de la post= text (publicación = texto). Por ejemplo, puedes ver algo como:</p>
+<ul>
+<li>http://example.com/wp-admin/post.php?post=3141?action="edit", so the post ID is "3141".</li>
+</ul>
+<p>En este ejemplo, usarías algo como:</p>
+<ul>
+<li>http://example.com/?p=3141</li>
+</ul>
+<p>como la URL de la página, incluso si también tiene un enlace permanente "bonito" como:</p>
+<ul>
+<li>http://example.com/mailing_list_unsubscribed</li>
+</ul>
+<p>También puedes crear estas páginas fuera de WordPress para evitar los problemas con los permalinks.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="/hc/es/articles/215683487--Qué-es-un-Announcement-mailing-list-" target="_self">¿Qué es un Announcement mailing list?</a></li>
+<li><a href="/hc/es/articles/215683497--Cómo-configurar-y-administrar-una-lista-de-anuncios-o-announcement-list-" target="_self">¿Cómo configurar y administrar una lista de anuncios o announcement list?</a></li>
+<li><a href="/hc/es/articles/215683527--Cómo-agregar-usuarios-a-una-lista-de-anuncios-" target="_self">¿Cómo agregar usuarios a una lista de anuncios?</a></li>
+<li><a href="/hc/es/articles/215683577--Cómo-enviar-una-lista-de-anuncios-" target="_self">¿Cómo enviar una lista de anuncios?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214982098-How-do-I-import-export-a-subscriber-list-to-an-Announcement-List-" target="_self">¿Cómo importar/exportar una lista de suscriptores a una Lista de anuncios?</a></li>
+<li><a href="/hc/es/articles/215029188--Cómo-creo-una-lista-de-discusión-" target="_self">¿Cómo creo una lista de discusión?</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
