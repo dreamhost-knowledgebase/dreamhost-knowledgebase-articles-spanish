@@ -1,6 +1,11 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Puedes hacer que DreamHost configure automáticamente un cron job desde el panel, en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.cron&amp;" target="_blank" rel="noopener">Cron Jobs</a>.</p>
+<p>Puedes hacer que DreamHost configure automáticamente un cron job desde el panel, en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.cron&amp;" target="_blank" rel="noopener">Cron Jobs</a>.&nbsp;Este artículo contiene los siguientes contenidos.</p>
+<ul>
+<li><a href="#panel" target="_self">Crear un trabajo cron en el panel</a></li>
+<li><a href="#variables" target="_self">Ejecutar un trabajo cron desde una URL con variables</a></li>
+<li><a href="#rutas-a-programas-comunes" target="_self">Rutas a programas comunes</a></li>
+</ul>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
@@ -9,7 +14,7 @@
 </div>
 </div>
 </div>
-<h2>Crear un cron job en el panel:</h2>
+<h2><span id="panel">Crear un cron job en el panel</span></h2>
 <div class="solvvy-solution">
 <ol>
 <li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.cron&amp;" target="_blank" rel="noopener">Cron Jobs</a>.
@@ -63,7 +68,38 @@
 </li>
 </ol>
 </div>
-<h2>Rutas a programas comunes</h2>
+<h2><span id="variables">Ejecutar un trabajo cron desde una URL con variables</span></h2>
+<div class="solvvy-solution">
+<p>Es común que una URL personalizada en tu sitio use variables. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">https://example.com/script.php<span class="code-highlight">?firstname=john&amp;lastname=doe</span></pre>
+</div>
+<p>El problema es que las variables solo funcionan en un navegador web cuando se visita la URL. No funcionarán cuando se ejecute la URL en el servidor. Hay dos formas de hacer que un trabajo cron ejecute dicha URL.</p>
+<h3>Usar curl o wget</h3>
+<p>Cuando ejecutes curl o wget en una URL con variables, asegúate de encerrar la URL entre comillas simples.</p>
+<div class="preboxcontainer">
+<pre class="prebox">curl 'https://example.com/script.php?firstname=john&amp;lastname=doe'</pre>
+</div>
+<p>Así es como se vería en el panel.</p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/cron-variables-curl.png" alt="cron variables using curl" /></p>
+<h3>Usar php.cgi</h3>
+<p>La otra opción es usar php.cgi en lugar de la ruta a PHP. Al crear la URL, debes cambiar el primer signo de pregunta ? por un espacio, y cada signo &amp; después de eso en un espacio también. Por ejemplo:</p>
+<p><strong>Ruta al archivo original y URL</strong></p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/username/example.com/script.php?firstname=john&amp;lastname=doe</pre>
+</div>
+<p><strong>Ruta editada al archivo y URL</strong></p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/username/example.com/script.php firstname=john lastname=doe</pre>
+</div>
+<p>Finalmente, agrega la ruta al binario php.cgi.</p>
+<div class="preboxcontainer">
+<pre class="prebox">/dh/cgi-system/php74.cgi /home/username/example.com/script.php firstname=john lastname=doe</pre>
+</div>
+<p>Así es como se vería en el panel.</p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/cron-variables-php-cgi.png" alt="cron variables using php.cgi" /></p>
+</div>
+<h2><span id="rutas-a-programas-comunes">Rutas a programas comunes</span></h2>
 <div class="solvvy-hidden">
 <p>A continuación se muestran las rutas a los programas comunes en el servidor. Esta es la ruta que agregarías antes del archivo que deseas ejecutar.</p>
 <table class="wikitable"><colgroup> <col width="38%" /> <col width="62%" /> </colgroup>
