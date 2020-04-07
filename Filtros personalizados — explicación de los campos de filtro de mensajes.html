@@ -1,0 +1,210 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>La siguiente es una lista de campos disponibles que puede agregar en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.filters&amp;" target="_blank" rel="noopener">Message Filters</a> en tu panel.</p>
+<p>Ve el artículo&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215030678-How-do-I-enable-message-filters-on-my-email-address-">Cómo habilito los filtros de mensaje en mi dirección de correo</a>&nbsp;para más detalles.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Se debe tener en cuenta lo siguiente al crear filtros:</p>
+<ul>
+<li>¡El orden importa! Las reglas se verifican una por una, así que asegúrate de tenerlas listadas en el orden en que deseas que se verifiquen o ejecuten.</li>
+<li>La mayoría de las reglas deben terminar con "execute and stop". Solo usa "execute and continue" si deseas realizar múltiples acciones en un solo correo electrónico entrante.</li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Lista de campos para agregar a tu filtro personalizado</h2>
+<div class="solvvy-solution">
+<table class="wikitable"><colgroup> <col width="10%" /> <col width="45%" /> <col width="45%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Campo</th>
+<th bgcolor="#F2F2F2">Explicación</th>
+<th bgcolor="#F2F2F2">Ejemplo</th>
+</tr>
+<tr>
+<td style="width: 15%; text-align: center;">
+<p><strong>Asunto</strong></p>
+</td>
+<td style="width: 55%;">
+<p>Busca en la línea de Asunto del correo electrónico. Se ve en todas partes en la línea de asunto y puede coincidir con parte o todo el Asunto.</p>
+</td>
+<td>
+<ul>
+<li>Coincide con "beber" en "Asunto: ¡Come, bebe y diviértete!"</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><strong>De</strong></p>
+</td>
+<td>Busca en la línea From del correo electrónico y comprueba quién envió el correo electrónico. Se ve en todas partes en la línea De, y puede coincidir con parte o la totalidad de la línea From.</td>
+<td>
+<ul>
+<li>Coincide con "bob" en "From: bob@example.com"</li>
+<li>Coincide con "Jones" en "From: Bob Jones &lt;bob@example.com&gt;"</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><strong>Para</strong></p>
+</td>
+<td>Busca en la línea To del correo electrónico y comprueba a quién se envió el correo electrónico. Comienza a buscar directamente después de "To". Usa. * Antes de tu término para que coincida con cualquier parte del nombre o dirección de correo electrónico en cualquier lugar de la línea.</td>
+<td>
+<ul>
+<li>Coincide con "George" en "To: George de la jungla &lt;george@example.com&gt;"</li>
+</ul>
+<p>Sugerencia: combina esta regla con el uso de '+' para direcciones de correo electrónico ligeramente personalizadas para clasificar fácilmente los correos electrónicos de los sitios web. Dale a Amazon tu dirección de correo electrónico como youamazon@ejemplo.com y luego puedes filtrar fácilmente esos correos electrónicos.</p>
+<ul>
+<li>haz coincidir ".*books" en "To: me+books@example.com"</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><strong>CC</strong></p>
+</td>
+<td>Busca en la(s) línea(s) CC del correo electrónico, buscando otras personas a las que se envió el correo electrónico.</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><strong>Encabezados</strong></p>
+</td>
+<td>Mira al principio de cada línea en el correo electrónico. Diseñado para usar cuando se combinan líneas de encabezado, como "X-Spam: Yes". Tenga en cuenta que esto verifica todo el correo electrónico: el cuerpo del mensaje y los encabezados.</td>
+<td>
+<ul>
+<li>Coincide con "X-Spam: Yes" en los encabezados del correo electrónico</li>
+</ul>
+<p>Consejo: usa. * to coincidir en cualquier lugar de la línea, no solo el comienzo.</p>
+<ul>
+<li>haz coincidir ".*bananas" para que coincida con "bananas" en cualquier lugar de cualquier línea del correo electrónico.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><strong>Responder a</strong></p>
+</td>
+<td>Busca en la línea de respuesta del correo electrónico la dirección de correo electrónico donde se envían las respuestas al correo electrónico.</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><strong>Cuerpo</strong></p>
+</td>
+<td>Busca en la línea de respuesta del correo electrónico la dirección de correo electrónico donde se envían las respuestas al correo electrónico.</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2><span id="Explanation_of_the_.E2.80.98Do_this.E2.80.99_action_option_fields">Explicación de los campos de opción de acción ‘Do this’&nbsp;</span></h2>
+<div class="solvvy-solution">
+<table class="wikitable"><colgroup> <col width="20%" /> <col width="50%" /> <col width="30%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Campo</th>
+<th bgcolor="#F2F2F2">Explicación</th>
+<th bgcolor="#F2F2F2">Ejemplo</th>
+</tr>
+<tr>
+<td style="width: 15%; text-align: center;">
+<p><span class="wysiwyg-color-black"><strong>Move it to folder</strong></span></p>
+</td>
+<td style="width: 55%;">
+<p>Pone el correo electrónico en la carpeta especificada. Esta es posiblemente la acción más útil, pero hay algunas advertencias/restricciones:</p>
+<ul>
+<li>La carpeta ya debe existir – el filtro no puede crear la carpeta por ti.&nbsp;Si ingresa un nombre de carpeta que no existe, los <strong>correos electrónicos se eliminarán en lugar de moverse</strong>.</li>
+<li>¡Los nombres de las carpetas distinguen entre MaYuScUlAs y MiNúScuLas! Verifica la ortografía del nombre de tu carpeta y el uso de la tecla Shift.</li>
+<li>Los filtros no pueden usar nombres de carpetas que tengan espacios en el nombre. Las subcarpetas están bien, pero deben especificarse con la carpeta principal y un '.', Como ParentFolder.SubFolder. Los nombres de las carpetas solo pueden contener letras, números, guiones bajos, puntos y guiones. (¡Pero no hay puntos iniciales, puntos finales o puntos dobles!)</li>
+</ul>
+</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><span class="wysiwyg-color-black"><strong>Add this to the subject</strong></span></p>
+</td>
+<td>Agrega el texto especificado al comienzo de la línea de asunto del correo electrónico.</td>
+<td>"Asunto: correo electrónico de prueba" se convierte en "Asunto: correo electrónico de prueba TEXTO AÑADIDO"</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><span class="wysiwyg-color-black"><strong>Add this header</strong></span></p>
+</td>
+<td>Agrega el texto especificado al área de encabezado del correo electrónico. Este texto agregado no será visible cuando el correo electrónico se muestre normalmente – solo será visible al ver todos los encabezados</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><span class="wysiwyg-color-black"><strong>Forward it to email address</strong></span></p>
+</td>
+<td>Que dice. La dirección de correo electrónico para reenviar el correo electrónico puede ser cualquier dirección, alojada en DreamHost o en cualquier otro lugar.</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><span class="wysiwyg-color-black"><strong>Forward to shell account</strong></span></p>
+</td>
+<td>Reenvíe el correo electrónico al Maildir de un usuario de shell. Esto es lo mismo que reenviar a una dirección de correo electrónico y especificar usuario_de_shell@servidor.dreamhost.com.</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><span class="wysiwyg-color-black"><strong>Delete it</strong></span></p>
+</td>
+<td>Que dice. El correo electrónico no se coloca en la carpeta Papelera y se borra por completo.</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Haciendo más de una acción</h2>
+<div class="solvvy-solution">
+<p>Cada filtro de mensaje individual puede verificar varias cosas, pero solo puede realizar una sola acción. Puedes usar "execute and continue" para realizar múltiples acciones en un solo correo electrónico. Cuando un filtro tiene "execute and continue" se toma la acción del filtro coincidente, y luego se verifica el siguiente filtro y continúa el filtrado. Normalmente, los filtros se hacen con "execute and stop" y la primera regla que coincide es la única acción tomada, y no se verifican más filtros.</p>
+<p>Aquí hay un conjunto de filtros de ejemplo que verifican el spam y también clasifican el correo en carpetas:</p>
+<ul>
+<li>Agrega POSIBLE SPAM al asunto de los correos electrónicos para cualquiera de los siguientes:</li>
+</ul>
+<dl>
+<dd>-contiene viagra en el Asunto</dd>
+<dd>-contiene dieta en el Asunto</dd>
+<dd>-contiene monkey en el Asunto</dd>
+<dd>y luego&nbsp;<strong>continue</strong></dd>
+</dl>
+<ul>
+<li>mover correos electrónicos a Amazon con Amazon en el Asunto</li>
+</ul>
+<dl>
+<dd>y luego&nbsp;<strong>stop</strong>.</dd>
+</dl>
+<ul>
+<li>mover correos electrónicos a Twitter con twitter.com en el De</li>
+</ul>
+<dl>
+<dd>y luego&nbsp;<strong>stop</strong>.</dd>
+</dl>
+</div>
+<h2>Una nota sobre la regla de reenvío</h2>
+<div class="solvvy-solution">
+<p>El reenvío actuará de manera muy diferente dependiendo de la regla final de ‘execute and stop’ o ‘execute and continue’.</p>
+<p>Por ejemplo, un filtro único establecido en:</p>
+<ul>
+<li><strong>forward and continue</strong> – reenvía el correo electrónico, después de lo cual también se coloca una copia en su bandeja de entrada.</li>
+<li><strong>forward and stop</strong> – finaliza la cadena de filtro antes de que llegue al final, por lo que no se colocará ningún mensaje en tu bandeja de entrada.</li>
+</ul>
+</div>
+<h2>Usar filtros de mensajes con filtros de spam de Vade</h2>
+<div class="solvvy-solution">
+<p>Aún puedes usar los filtros de mensajes incluso si el dominio está configurado con filtros de spam de Vade. El correo se filtra primero a través de las máquinas de correo no deseado, luego se enruta a las máquinas de correo entrantes normales donde se aplican los filtros.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/en-us/articles/215030678-Custom-filters-How-to-enable-message-filters-on-an-email-address">¿Cómo habilito los filtros de mensaje en mi correo electrónico?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214984738-Anti-spam-overview">Generalidades Anti-spam</a>&nbsp;</li>
+</ul>
+</div>
