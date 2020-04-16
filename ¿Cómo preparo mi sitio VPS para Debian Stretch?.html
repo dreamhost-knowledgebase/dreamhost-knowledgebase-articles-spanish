@@ -1,9 +1,33 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="ubuntu_bionic" class="solvvy-hidden">
+<div class="altTitle">Debian Stretch</div>
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#que-esperar">¿Qué esperar?</a></li>
+<li><a class="reference internal" href="#admin_sudo">VPS antiguo</a></li>
+<li><a class="reference internal" href="#mysql">MySQL</a></li>
+</ul>
+<span class="toc-sublink"> <a href="#servidor">Cambios de servidor</a> </span> <span class="toc-sublink"> <a href="#reservadas">Palabras reservadas</a> </span>
+<ul class="simple">
+<li><a class="reference internal" href="#servidor-web">Servidor web</a></li>
+</ul>
+<span class="toc-sublink"><a href="#apache">Versión de Apache</a></span> <span class="toc-sublink"><a href="#boto_s3cmd">Boto-rsync y S3cmd</a></span> <span class="toc-sublink"> <a href="#curl">curl</a> </span> <span class="toc-sublink"> <a href="#ffmpeg_libav">FFmpeg y Libav</a></span> <span class="toc-sublink"> <a href="#filterprovider">FilterProvider</a></span> <span class="toc-sublink"> <a href="#java" target="_self">Versión Java</a></span> <span class="toc-sublink"> <a href="#openssl">OpenSSL</a></span> <span class="toc-sublink"> <a href="#passenger">Passenger</a></span> <span class="toc-sublink"> <a href="#perl">Versión Perl</a> </span> <span class="toc-sublink"> <a href="#php-errores" target="_self">Registro PHP</a> </span> <span class="toc-sublink"> <a href="#python">Versión de Python</a> </span> <span class="toc-sublink"> <a href="#django" target="_self">Errores de Django</a></span> <span class="toc-sublink"> <a href="#virtualenv">Entorno virtual de Python</a></span> <span class="toc-sublink"> <a href="#ruby">Versión Ruby</a> </span> <span class="toc-sublink"> <a href="#ssh">Versión SSH</a> </span>
+<ul class="simple">
+<li><a class="reference internal" href="#nginx">Versiones PHP Nginx</a></li>
+<li><a class="reference internal" href="#apoyo">¿Cómo puedo encontrar apoyo?</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 <p>A continuación se proporciona información para ayudarte a preparar tu sitio web para Debian Stretch.</p>
 <h2>¿Qué está cambiando?</h2>
 <div class="solvvy-solution">
 <p>Cualquier servidor privado nuevo comprado después del 9 de marzo de 2020 ejecuta el sistema operativo Debian Stretch. El antiguo sistema operativo era Ubuntu 14 (Trusty).</p>
 </div>
-<h2>Que esperar</h2>
+<h2><span id="que-esperar">Que esperar</span></h2>
 <div class="solvvy-solution">
 <p>DreamHost se comunicará contigo por correo electrónico antes de la actualización.</p>
 <p>El marco de tiempo de una actualización puede variar de un servidor a otro, sin embargo, el tiempo asegura que haya varios ingenieros altamente capacitados disponibles en caso de que surjan problemas importantes. La actualización en sí no debería tardar más de una hora en completarse.</p>
@@ -34,9 +58,9 @@
 <li><a href="https://dev.mysql.com/doc/refman/5.7/en/keywords.html">Palabras clave de MySQL y palabras reservadas</a></li>
 </ul>
 </div>
-<h2>Cambios en el servidor web</h2>
+<h2><span id="servidor-web">Cambios en el servidor web</span></h2>
 <div class="solvvy-solution">
-<h3>Cambio de versión de Apache (de 2.2 a 2.4)</h3>
+<h3><span id="apache">Cambio de versión de Apache (de 2.2 a 2.4)</span></h3>
 <p>Apache se está actualizando a la versión 2.4 (desde 2.2). Aunque esto no debería causar problemas importantes a su entorno de alojamiento, puede ver una lista de cambios en el siguiente artículo:</p>
 <ul>
 <li><a href="https://httpd.apache.org/docs/2.4/upgrading.html" target="_self">Actualizar a 2.4 de 2.2</a></li>
@@ -69,9 +93,11 @@
 <li><a href="/hc/en-us/sections/360003569291-S3cmd">S3cmd</a></li>
 <li><a href="/hc/en-us/sections/360003559251-AWS-Command-Line-Interface" target="_self">Interfaz de línea de comandos de AWS</a></li>
 </ul>
+<h3><span id="curl">La versión de curl cambió a 7.52.1</span></h3>
+<p>La versión de curl cambió de 7.35.0 a 7.52.1.</p>
 <h3><span id="ffmpeg_libav">FFmpeg y Libav</span></h3>
 <p>En Ubuntu 14 (Trusty), Libav reemplazó a FFmpeg, y FFmpeg fue eliminado por completo de Trusty. Con la actualización de Debian Stretch, esto se revierte: FFmpeg está de vuelta y Libav ha sido eliminado. Asegúrate de actualizar la configuración de tu archivo en consecuencia.</p>
-<h3>Cambio de sintaxis de FilterProvider</h3>
+<h3><span id="filterprovider">Cambio de sintaxis de FilterProvider</span></h3>
 <p>En Apache 2.4, la sintaxis de FilterProvider ha cambiado.</p>
 <p>Muestra de versión anterior:</p>
 <div class="preboxcontainer">
@@ -85,27 +111,27 @@
 <ul>
 <li><a href="https://httpd.apache.org/docs/2.4/mod/mod_filter.html" target="_self">https://httpd.apache.org/docs/2.4/mod/mod_filter.html</a></li>
 </ul>
-<h3>Cambio de versión de Java (de 7u151 a 8u242)</h3>
+<h3><span id="java">Cambio de versión de Java (de 7u151 a 8u242)</span></h3>
 <p>Debian Stretch incluye una nueva versión de Java versión 8, 8u242.</p>
 <p>Esta es la primera actualización importante en bastante tiempo, por lo que definitivamente es una buena idea asegurarse de que las dependencias de Java que pueda tener sean compatibles con la versión 8.</p>
 <p>Para obtener más información sobre las últimas versiones de Java, visita el siguiente enlace:</p>
 <ul>
 <li><a href="https://www.java.com/en/download/faq/release_changes.xml" target="_self">Aspectos destacados de la versión Java 8</a></li>
 </ul>
-<h3>Cambio de versión de OpenSSL (1.0.1f a1.1.0l)</h3>
+<h3><span id="openssl">Cambio de versión de OpenSSL (1.0.1f a1.1.0l)</span></h3>
 <p>Debian Stretch incluye la versión 1.1.0l de OpenSSL.</p>
 <h3><span id="passenger">Passenger</span></h3>
 <p>Para habilitar las páginas amigables con los errores de Passenger (que ayuda a solucionar problemas de actualización), agrega lo siguiente a un archivo .htaccess dentro de la aplicación:</p>
 <div class="preboxcontainer">
 <pre class="prebox">PassengerFriendlyErrorPages on</pre>
 </div>
-<h3>Cambio de versión de Perl (de 5.18.4 a 5.24.1)</h3>
+<h3><span id="perl">Cambio de versión de Perl (de 5.18.4 a 5.24.1)</span></h3>
 <p>Debian Stretch incluye una nueva versión de Perl, 5.24.1. Entre los muchos cambios, esta actualización elimina el directorio actual (".") De @INC por razones de seguridad. Puedes leer sobre esto con más detalle&nbsp;<a href="https://metacpan.org/pod/release/XSAWYERX/perl-5.26.0/pod/perldelta.pod#Removal-of-the-current-directory-%28%22.%22%29-from-@INC" target="_self">aquí</a>.</p>
 <p>Para obtener más información sobre cómo actualizar su versión de Perl, visita el siguiente artículo:</p>
 <ul>
 <li><a href="https://metacpan.org/changes/release/XSAWYERX/perl-5.26.0" target="_self">Cambiar documentación entre 5.24 y 5.26</a></li>
 </ul>
-<h3>Registro de errores de PHP</h3>
+<h3><span id="php-errores">Registro de errores de PHP</span></h3>
 <p>Los errores de PHP se registran en el archivo error.log de tu sitio de forma predeterminada. Tú cambia qué errores se informan y la ubicación de dónde se informan actualizando el archivo phprc de tu sitio. Ve el siguiente artículo para más detalles:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214894197--D%C3%B3nde-puedo-ver-errores-y-alertas-de-PHP-" target="_self">¿Dónde puedo ver los errores y advertencias de PHP?</a></li>
@@ -136,7 +162,7 @@
 <li><a href="https://docs.python.org/2/whatsnew/2.7.html" target="_self">Qué hay de nuevo en Python 2.7.15</a></li>
 <li><a href="https://docs.python.org/3/whatsnew/3.6.html" target="_self">¿Qué hay de nuevo en Python 3.6?</a></li>
 </ul>
-<h3>Errores de Python Django</h3>
+<h3><span id="django">Errores de Python Django</span></h3>
 <p>Después de la actualización, es posible que veas errores en su aplicación Django. Por ejemplo.</p>
 <div class="preboxcontainer">
 <pre class="prebox">django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module: libmysqlclient.so.18: cannot open shared object file: No such file or directory.
@@ -144,7 +170,7 @@ Did you install mysqlclient or MySQL-python?</pre>
 </div>
 <h4>Solución</h4>
 <p>Elimina tu directorio pip .cache.</p>
-<h3>Python virtual environment</h3>
+<h3><span id="virtualenv">Python virtual environment</span></h3>
 <p>Si tu sitio web está utilizando un entorno virtual de Python y nota algún error después de la actualización, reinstala tu entorno virtual y todos los módulos. Esto ayuda a garantizar que todo sea compatible con las nuevas bibliotecas del servidor.</p>
 <p>Ejemplos de errores que puede ver son errores/advertencias de Django, Passenger o Python.</p>
 <h3><span id="ruby">Ruby 2.7.0</span></h3>
@@ -159,16 +185,10 @@ Did you install mysqlclient or MySQL-python?</pre>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">touch  tmp/restart.txt</span>
 </pre>
 </div>
-<h3>Cambio de versión de SSH a 7.4p1 (Sin llaves dsa)</h3>
+<h3><span id="ssh">Cambio de versión de SSH a 7.4p1 (Sin llaves dsa)</span></h3>
 <p>La versión de SSH en los servidores Debian es 7.4p1. Ten en cuenta que las claves DSA no están disponibles en esta versión.</p>
-<h3>La versión de curl cambió a 7.52.1</h3>
-<p>La versión de curl cambió de 7.35.0 a 7.52.1.</p>
 </div>
-<h2>¿Cómo puedo encontrar soporte?</h2>
-<div class="solvvy-solution">
-<p>Si tienes alguna pregunta o inquietud, no dudes en&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener">contactar a soporte</a>.</p>
-</div>
-<h2>Versiones PHP Nginx</h2>
+<h2><span id="nginx">Versiones PHP Nginx</span></h2>
 <div class="solvvy-solution">
 <p>Las siguientes versiones de PHP están disponibles en&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216431827-Nginx-overview" target="_self">máquinas Nginx</a>:</p>
 <ul>
@@ -176,4 +196,9 @@ Did you install mysqlclient or MySQL-python?</pre>
 <li>7.3</li>
 <li>7.4</li>
 </ul>
+</div>
+<h2><span id="apoyo">¿Cómo puedo encontrar soporte?</span></h2>
+<div class="solvvy-solution">
+<p>Si tienes alguna pregunta o inquietud, no dudes en&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener">contactar a soporte</a>.</p>
+</div>
 </div>
