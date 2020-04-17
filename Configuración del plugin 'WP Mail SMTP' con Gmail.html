@@ -1,0 +1,84 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica cómo usar el plugin <a href="https://wordpress.org/plugins/wp-mail-smtp/" target="_self">WP Mail SMTP</a> para enviar correos electrónicos desde tu sitio de WordPress, usando tu dirección de correo electrónico de Google.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si no deseas utilizar una dirección de Gmail para enviar desde tu sitio de WordPress, consulta el siguiente artículo.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215526937-Configurar-el-plugin-WP-MAIL-SMTP-" target="_self">Configurar el plugin 'WP Mail SMTP'</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2><span id="WP_Mail_SMTP">WP Mail SMTP</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>En el panel de WordPress, haz clic en 'Plugins &gt; Add New' en el panel izquierdo.</li>
+<li>Busca wp-mail-smtp. También&nbsp;<a href="https://wordpress.org/plugins/wp-mail-smtp/" target="_self">puede encontrase aquí</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2019-03_wordpress_smtp-plugin_01.png" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Install</strong>, luego&nbsp;<strong>Activate.&nbsp;</strong></li>
+<li>Después de que esté instalado y activado, navega a la página 'Plugins' en tu panel de WordPress.
+<dl>
+<dd><img class="solvvy-hidden" src="https://kbimages.dreamhosters.com/images/01_WP_Mail_SMTP.png" alt="01 WP Mail SMTP.png" /></dd>
+</dl>
+</li>
+<li>Haz clic en el enlace 'Settings' debajo del plugin.
+<dl>
+<dd><img class="solvvy-hidden" src="https://kbimages.dreamhosters.com/images/wp-smtp-gmail_01.png" alt="WP Mail SMTP.png" /></dd>
+</dl>
+</li>
+<li>Rellena los siguientes campos:
+<ul>
+<li><strong>From Email</strong> - Ingresa el correo electrónico DE el que deseas enviar</li>
+<li><strong>Force From Email</strong> - Marca esta casilla</li>
+<li><strong>From Name</strong> - Ingresa un nombre que te gustaría aparezca como enviado DE</li>
+<li><strong>Force From Name</strong> - Marca esto si deseas forzar el nombre DE</li>
+<li><strong>Mailer</strong> - Selecciona 'Gmail'</li>
+<li><strong>Return Path</strong> - Marca esta casilla</li>
+</ul>
+<dl>
+<dd><img class="solvvy-hidden" src="https://kbimages.dreamhosters.com/images/wp-smtp-gmail_02.png" /></dd>
+</dl>
+</li>
+<li>Desplázate hacia abajo a la sección 'Gmail'.
+<ul>
+<li><strong>Client ID</strong>&nbsp;- Esta es una cadena de letras y números que crearás en tu cuenta de Google.</li>
+<li><strong>Client Secret</strong>&nbsp;- Esta es una cadena de letras y números que crearás en tu cuenta de Google.</li>
+<li><strong>Authorized redirect URI&nbsp;</strong>- Ingresarás esto en tu cuenta de Google.</li>
+</ul>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Save Settings</strong>.</li>
+</ol>
+<p>Ahora debes configurar tus ajustes dentro de tu cuenta de Google.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El plugin menciona que debes agregar las siguientes líneas a tu archivo wp-config.php.</p>
+<div class="preboxcontainer">
+<pre class="prebox">define( 'WPMS_ON', true );
+define( 'WPMS_SMTP_PASS', 'your_password' );</pre>
+</div>
+<p>No agregues estos. Agregar estos evitará que el plugin envíe.</p>
+</div>
+<h2>Permitir que GMAIL envíe desde tu aplicación de correo</h2>
+<p>Ahora debes permitir que Google envíe correos electrónicos desde tu sitio de WordPress. Puedes hacerlo iniciando sesión en tu cuenta de Google. Tienes dos opciones.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115001719551-Troubleshooting-GMAIL-SMTP-authentication-errors" target="_self">Permitir 'Aplicaciones menos seguras' en Gmail</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360029702631-Enabling-the-OAuth-2-API-to-use-with-your-WordPress-Mail-SMTP-plugin" target="_self">Habilitar autenticación OAuth2&nbsp; (más seguro)</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress">Cómo iniciar sesión en tu sitio WordPress</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-plugins-de-WordPress">Administrar plugins de WordPress</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215527157-Administrar-los-temas-de-WordPress">Administrar Temas de WordPress</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/214831378-Soluci%C3%B3n-de-problemas-de-los-formularios-de-contacto-de-WordPress">Solucionador de problemas de formularios de contacto WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215612887-Protocolos-y-n%C3%BAmeros-de-puerto-para-clientes-de-correo-electr%C3%B3nico">Protocolos de cliente de correo y numeros de puertos</a></li>
+</ul>
+</div>
+</div>
