@@ -1,0 +1,86 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Tumblr es un servicio de&nbsp;<a class="new" title="W:micro-blogging (page does not exist)" href="https://en.wikipedia.org/wiki/Microblogging">micro-blogging</a>&nbsp;que te ofrece la posibilidad de reemplazar tu URL de Tumblr con un dominio externo. Requiere que cambies el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self">registro DNS</a> <a href="https://help.dreamhost.com/hc/es/articles/215414867--C%C3%B3mo-agrego-registros-DNS-personalizados-" target="_self">A</a>&nbsp;de su dominio registrado a la&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/217294917-Direcci%C3%B3n-IP" target="_self">dirección IP de Tumblr</a>.</p>
+<p>Este artículo describe cómo configurar un dominio personalizado registrado con DreamHost para usar con Tumblr, así como configurar registros DNS opcionales para la protección DNS Round Robin.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>Las siguientes instrucciones sólo son necesarias si deseas que tu dominio raíz (o la versión www de tu dominio) apunte a Tumblr.</li>
+<li>Si deseas que un subdominio apunte a Tumblr, solo necesitas agregar un registro DNS personalizado.</li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Configurar Tumblr para un dominio personalizado registrado con DreamHost</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Ve a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a>.
+<dl>
+<dd><em>Se abre la página Manage Domains.</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-07_panel_edit_link.png" alt="" /></dd>
+</dl>
+</li>
+<li>A la derecha de tu dominio, haz clic en el botón <strong>Edit</strong> debajo de la columna 'Web Hosting'.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-07_panel_host_dns_only.png" /></dd>
+</dl>
+</li>
+<li>Desplázate hasta la parte inferior de la página y haz clic en el botón <strong>Host DNS only!</strong></li>
+<li>En la página 'Manage Domains', haz clic en el enlace "DNS" debajo del nombre del dominio.</li>
+<li>Continúa con una de las siguientes secciones en función de cuántos niveles contiene su dominio personalizado:<br />
+<ul>
+<li>Si tu dominio personalizado contiene dos niveles (por ejemplo, example.com), usa el método de registro A.</li>
+<li>Si tu dominio personalizado contiene tres o más niveles (por ejemplo, www.example.com o blog.example.com), usa el método de registro CNAME.</li>
+</ul>
+</li>
+</ol>
+<h3>Usar el método de registro A</h3>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-07_panel_tumblr_01.png" /></dd>
+</dl>
+<dl>
+<dt>Introduce lo siguiente</dt>
+</dl>
+<ul>
+<ul>
+<li><strong>Name:</strong>&nbsp;déjalo en blanco</li>
+<li><strong>Type:</strong> introduce <em>A</em></li>
+<li><strong>Value:</strong>&nbsp;introduce 66.6.44.4 (dirección IP de Tumblr)</li>
+</ul>
+</ul>
+<h3>Usar el método de registro CNAME</h3>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-07_panel_tumblr_02.png" /></dd>
+</dl>
+<dl>
+<dt>Introduce lo siguiente</dt>
+</dl>
+<ul>
+<ul>
+<li><strong>Name:</strong> introduce <em>www</em></li>
+<li><strong>Type:</strong> selecciona <em>CNAME</em></li>
+<li><strong>Value:</strong> introduce <em>domains.tumblr.com</em></li>
+</ul>
+</ul>
+<h3>Finalizar la configuración</h3>
+<ol>
+<li>Haz clic en el botón <strong>Settings</strong> en el menú de la cuenta en la parte superior del tablero.</li>
+<li>Selecciona el blog que deseas actualizar.</li>
+<li>Haz clic en el lápiz a la derecha de la sección Nombre de usuario (la sección URL de Tumblr para blogs secundarios) y luego habilita "Usar un dominio personalizado".</li>
+<li>Ingresa tu dominio (por ejemplo, example.com) o subdominio (por ejemplo, blog.example.com). Luego haz clic en "Probar tu dominio".</li>
+<li>En caso de que la prueba encuentre un problema, corrígelo, y luego haz clic en "Probar tu dominio" hasta que la prueba sea exitosa.</li>
+<li>Haz clic en el botón&nbsp;<strong>Save</strong>.</li>
+</ol>
+<p>Puedes encontrar información adicional en la página de Tumblr:</p>
+<ul>
+<li><a href="https://www.tumblr.com/docs/en/blog_management#customdomain" rel="nofollow">https://www.tumblr.com/docs/en/blog_management#customdomain</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://tumblr.zendesk.com/hc/en-us/articles/231256548-Custom-domains" target="_self">Dominios personalizados de Tumblr</a></li>
+<li><a href="http://baohouse.net/post/9154272995/making-your-custom-domain-tumblr-a-little-more" target="_self">Protección DNS de Round-robin</a></li>
+</ul>
+</div>
