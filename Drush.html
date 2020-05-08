@@ -1,0 +1,114 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p><a href="https://github.com/drush-ops/drush"><strong>Drush</strong></a>&nbsp;es un shell de línea de comandos y una interfaz de secuencias de comandos para&nbsp;<a href="/hc/en-us/articles/216691848-Drupal">Drupal</a>.&nbsp;Para usar, debe tener habilitado un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario de shell</a> y tener conocimiento del&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">shell</a>&nbsp;de Unix.</p>
+</div>
+<h2>Instalación de Drush usando Composer</h2>
+<div class="solvvy-solution">
+<p><a href="https://getcomposer.org/">Composer</a>&nbsp;es una herramienta para la gestión de dependencias en PHP. Te permite declarar las bibliotecas de las que depende tu proyecto y las administrará (instalará / actualizará) por tí.</p>
+<p>Sigue las instrucciones en&nbsp;<a href="https://github.com/drush-ops/drush">https://github.com/drush-ops/drush</a>:</p>
+<ol>
+<li>Inicia sesión en su servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Ve la&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">creación y edición de un archivo a través del artículo SSH</a>&nbsp;para obtener instrucciones sobre cómo editar tu archivo .bash_profile existente. Agrega la siguiente línea si está utilizando PHP 7.2. Cambia el número para una versión diferente.
+<div class="preboxcontainer">
+<pre class="prebox">export PATH=/usr/local/php72/bin:$PATH</pre>
+</div>
+</li>
+<li>Cierra el archivo y regresa a tu shell.</li>
+<li>Activa este archivo ejecutando lo siguiente.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">. ~/.bash_profile</span>
+</pre>
+</div>
+</li>
+<li>Navega al directorio de tu usuario.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li>Luego ejecuta el siguiente comando:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -sS https://getcomposer.org/installer | php</span>
+<span class="cmdoutput">All settings correct for using Composer
+Downloading...
+
+Composer (version 1.8.0) successfully installed to: /home/example_username/composer.phar
+Use it: php composer.phar</span>
+</pre>
+</div>
+</li>
+</ol>
+<h3>Instalar Drush</h3>
+<p>Una vez que hayas instalado Composer, ejecuta los siguientes comandos para instalar Drush.</p>
+<ol>
+<li>Ejecuta el siguiente comando en el directorio de tu usuario:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$</span><span class="command"> php composer.phar require drush/drush</span></pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si está instalando en un servidor compartido, puede alcanzar los límites de memoria de tu usuario durante la instalación. Si es así, debes ponerte en&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">contacta a soporte</a>&nbsp;y solicitar que se eliminen los límites de memoria de tu usuario para que pueda completar la instalación.</p>
+<p>Si obtiene un error de tiempo de espera de conexión, puede verse afectado por&nbsp;<a href="https://github.com/composer/composer/issues/4142" target="_self">este problema</a>.&nbsp;Si tienes un servidor privado, puedes usar la solución alternativa /etc/gai.conf mencionada allí.</p>
+</div>
+</div>
+<p>Ahora debes editar tu .bash_profile nuevamente.</p>
+</li>
+<li>
+<p>Si estás instalando Drush globalmente (bajo tu nombre de usuario para todos los proyectos), agrega lo siguiente a su .bash_profile:</p>
+<div class="preboxcontainer">
+<pre class="prebox">alias drush='~/vendor/drush/drush/drush'</pre>
+</div>
+<p>Si estás instalando localmente (en un solo proyecto), agrega lo siguiente en su lugar:</p>
+<div class="preboxcontainer">
+<pre class="prebox">alias drush='~/&lt;domain&gt;/&lt;project&gt;/vendor/drush/drush/drush'</pre>
+</div>
+</li>
+<li>Asegúrate de actualizar su .bash_profile nuevamente:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">. ~/.bash_profile</span>
+</pre>
+</div>
+</li>
+<li>Ejecuta lo siguiente para inicializar drush. Asegúrate de ingresar 'sí' cuando se te solicite.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">drush init</span>
+ Modify /home/username/.bash_profile to include Drush configuration files? (yes/no) [yes]:
+ &gt; <span class="code-highlight">yes</span></pre>
+</div>
+</li>
+<li>Esto escribe algunas líneas en su .bash_profile y crea una carpeta .drush con tus ajustes de configuración.</li>
+<li>Ejecuta el siguiente comando para confirmar que drush está funcionando:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">drush topic</span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2>Error fatal de PHP: tamaño de memoria permitido de ### bytes agotados</h2>
+<div class="solvvy-solution">
+<p>Si ves este error, lo primero que debes hacer es actualizar su PHP memory_limit.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214893937--C%C3%B3mo-incrementar-el-l%C3%ADmite-de-memoria-PHP-" target="_self">¿Cómo aumento el límite de memoria PHP?</a></li>
+</ul>
+<p>Si continúas viendo este error, es posible que debas ajustar el siguiente archivo en la configuración de tu sitio:</p>
+<p><strong>/sites/default/settings.php</strong></p>
+<p>Hay dos líneas en ese archivo que establecen el límite de memoria PHP. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">ini_set('memory_limit','256M');</pre>
+</div>
+<p>Elevar ese valor debería corregir el error de memoria.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<h3>Vínculos internos</h3>
+<ul>
+<li><a href="/hc/en-us/articles/216691848-Drupal">Drupal</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Creación de un usuario con acceso Shell (SSH)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo a través de SSH</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="https://github.com/drush-ops/drush" target="_self">Drush en GitHub</a></li>
+<li><a href="https://groups.drupal.org/drush/commands" target="_self">Referencia de comandos de Drush</a></li>
+</ul>
+</div>
