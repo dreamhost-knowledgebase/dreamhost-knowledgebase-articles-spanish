@@ -1,112 +1,86 @@
 <h2>Generalidades sobre NPM (Node Package Manager)</h2>
 <div class="solvvy-solution">
-<p>npm es un administrador de paquetes que ayuda a organizar y compartir paquetes y módulos de Node.js. NPM puede descargar paquetes y buscar actualizaciones de los paquetes que ya tiene instalados.</p>
-<p>Este artículo es una descripción rápida de los paquetes de Node.js. Para obtener más información, consulta la siguiente página de docs.npmjs.com:</p>
+<p>npm es un administrador de paquetes que ayuda a organizar y compartir paquetes y módulos de Node.js. NPM puede descargar paquetes y buscar actualizaciones de los paquetes que ya has instalado.</p>
+<p>Este artículo es una descripción general rápida de los paquetes de Node.js. Para más información, vea la siguiente página de docs.npmjs.com:</p>
 <ul>
 <li><a href="https://docs.npmjs.com/getting-started/what-is-npm">https://docs.npmjs.com/getting-started/what-is-npm</a></li>
 </ul>
 </div>
-<h2>Prerrequisitos</h2>
+<h2>Prerequisitos</h2>
 <div class="prereqs">
-<h4><strong>Instalación de Node.js y npm</strong></h4>
-<p>Para garantizar la compatibilidad con los paquetes Node.js, siempre se recomienda instalar una versión personalizada de Node.js con tu nombre de usuario, en lugar de utilizar la versión predeterminada del servidor. Usa el siguiente artículo para instalar una versión personalizada de Node.js:</p>
+<h4><strong>Instalando Node.js y npm</strong></h4>
+<p>Node.js no está instalado de manera predeterminada en los servidores DreamHost más nuevos. Debes instalar manualmente una versión personalizada con el nombre de usuario de tu servidor. Consulte el siguiente artículo para obtener instrucciones sobre cómo instalar una versión personalizada de Node.js.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/en-us/articles/360029083351-Installing-a-custom-version-of-NVM-and-Node-js" target="_self">Instalar una versión personalizada de NVM y Node.js</a></li>
 </ul>
-<p>Una vez instalada, npm también estará instalado y podrás ejecutar los comandos a continuación.</p>
+<p>Una vez instalado, <strong>npm</strong>&nbsp;también está instalado y podrás ejecutar los siguientes comandos.</p>
+</div>
+<h2>Actualizando npm</h2>
+<div class="solvvy-solution">
+<p>Verifica la versión ejecutando el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm -v</span></pre>
+</div>
+<p>Para actualizar npm a la última versión, ejecuta el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm install npm@latest -g</span></pre>
+</div>
+<p>Ejecuta el siguiente comando para verificar el directorio en el que escribe npm.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm config get prefix</span>
+<span class="cmdoutput">/home/exampleuser/.nvm/versions/node/v12.16.3</span>
+</pre>
+</div>
+<p>Si instalaste NVM como se muestra arriba, verás la respuesta del directorio como la carpeta /.nvm bajo tu usuario actual.</p>
 </div>
 <h2>¿Qué son paquetes?</h2>
 <div class="solvvy-solution">
-<p>Un paquete es uno o más archivos .js (módulos) agrupados (o empaquetados) juntos. Los archivos en un paquete son código reutilizable que realiza una función específica para tu aplicación Node.js. Esta página enumera los paquetes más populares.:</p>
+<p>Un paquete es uno o más archivos .js (módulos) agrupados (o empaquetados) juntos. Los archivos en un paquete son código reutilizable que realiza una función específica para tu aplicación Node.js. Esta página enumera los paquetes más populares:</p>
 <ul>
-<li><a href="https://www.npmjs.com/browse/star">Node.js packages</a></li>
+<li><a href="https://www.npmjs.com/browse/star">Paquetes Node.js</a></li>
 </ul>
 <p>Descargar y usar paquetes te permite agregar código y funcionalidad a tu sitio sin tener que construirlo tu mismo.</p>
 </div>
-<h2>¿Dónde encontrar paquetes?</h2>
+<h2>Donde encontrar paquetes</h2>
 <div class="solvvy-solution">
-<p>Puedes buscar paquetes en la página web de Node.js:</p>
+<p>Puede buscar paquetes en el sitio web de Node.js:</p>
 <ul>
-<li><a href="https://www.npmjs.com/browse/star" target="_self">Paquetes Node.js</a></li>
+<li><a href="https://www.npmjs.com/browse/star">Paquetes Node.js</a></li>
 </ul>
 </div>
 <h2>¿Instalación local o global?</h2>
 <div class="solvvy-solution">
 <p>Puedes instalar paquetes local o globalmente. Depende de cómo quieras usar el paquete.</p>
 <h3>Local</h3>
-<p>El comportamiento predeterminado de ejecutar <strong>npm install</strong> es instalarlo localmente. Esto es preferible si vas a utilizar <strong>require</strong> para depender del paquete de tu propio módulo.</p>
-<h3>Globally</h3>
+<p>El comportamiento predeterminado de ejecutar&nbsp;<strong>npm install</strong> es instalarlo localmente. Esto es preferible si vas a utilizar&nbsp;<strong>require</strong> para depender del paquete de tu propio módulo.</p>
+<h3>Globalmente</h3>
 <p>Si deseas usar el paquete como una herramienta de línea de comando.</p>
 </div>
-<h2>Verificar qué paquetes están instalados</h2>
+<h2>Verificando qué paquetes están instalados</h2>
 <div class="solvvy-solution">
 <h3>Paquetes locales</h3>
-<p>Para verificar qué paquetes locales están instalados, ve al directorio de aplicaciones de tu sitio donde reside la carpeta / node_modules. Luego ejecuta lo siguiente:</p>
+<p>Para verificar qué paquetes locales están instalados, ve al directorio de aplicaciones de tu sitio donde reside la carpeta /node_modules. Luego ejecuta lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ls node_modules</span></pre>
 </div>
-<h3>Paquetes globales</h3>
-<p>Corre lo siguiente:</p>
+<h3>Paquetes Globales</h3>
+<p>Ejecuta lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">npm ls -g --depth=0</span></pre>
 </div>
 </div>
-<h2>Instalación de paquetes</h2>
+<h2>Instalando paquetes</h2>
 <div class="solvvy-solution">
-<p>Revisa la siguiente página para obtener instrucciones sobre cómo instalar paquetes local o globalmente:</p>
+<p>Consulta la página siguiente para obtener instrucciones sobre cómo instalar paquetes local o globalmente:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115004415628-Node-js-instalaci%C3%B3n-de-paquetes" target="_self">¿Cómo instalar paquetes?</a></li>
-</ul>
-</div>
-<h2>Actualización de paquetes</h2>
-<div class="solvvy-solution">
-<h3>Actualización de paquetes locales</h3>
-<p>Navega al directorio de aplicaciones de tu sitio donde reside la carpeta local / node_modules.</p>
-<p>Primero, verifica qué paquetes deben actualizarse:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm outdated</span></pre>
-</div>
-<p>Puedes actualizar solo un paquete con:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm update -S &lt;package_name&gt;</span></pre>
-</div>
-<p>Puedes actualizar todos los paquetes locales con:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm update -S</span></pre>
-</div>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
-<p>Es una buena idea usar el indicador -S. Esto guarda la nueva versión como la dependencia mínima requerida en el archivo package.json de tu sitio. Si no utilizas el indicador -S, el paquete se actualizará, pero el archivo package.json para tu sitio no se actualizará.</p>
-<ul>
-<li><a href="https://docs.npmjs.com/cli/update">https://docs.npmjs.com/cli/update</a></li>
-</ul>
-</div>
-</div>
-<h3>Actualización de paquetes globales</h3>
-<p>Primero, revisa qué paquetes necesitan ser actualizados:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm outdated -g --depth=0</span></pre>
-</div>
-<p>Puedes actualizar solo un paquete con:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm outdated -g &lt;package_name&gt;</span></pre>
-</div>
-<p>Puedes actualizar todos los paquetes globales con:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm update -g</span></pre>
-</div>
-<h3>Usar un paquete para actualizar paquetes</h3>
-<p>Hay varios paquetes que pueden ayudar a actualizar los paquetes de tu sitio. Por ejemplo:</p>
-<ul>
-<li><a href="https://www.npmjs.com/package/npm-check-updates">https://www.npmjs.com/package/npm-check-updates</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115004415628-Node-js-installing-packages">Cómo instalar paquetes</a></li>
 </ul>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://docs.npmjs.com/getting-started/what-is-npm" target="_self">Generalidades sobre npm</a></li>
-<li><a href="https://docs.npmjs.com/getting-started/using-a-package.json" target="_self">Usar un archivo package.json</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115004415628-Node-js-instalaci%C3%B3n-de-paquetes" target="_self">Instalación de paquetes Node.js </a></li>
+<li><a href="https://docs.npmjs.com/getting-started/what-is-npm">Generalidades sobre npm</a></li>
+<li><a href="https://docs.npmjs.com/getting-started/using-a-package.json">Usando un archivo package.json</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115004415628-Node-js-installing-packages">Instalar paquetes Node.js</a></li>
 </ul>
 </div>

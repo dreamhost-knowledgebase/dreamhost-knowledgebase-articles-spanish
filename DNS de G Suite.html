@@ -1,0 +1,189 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cuando habilitas G Suite, tus registros DNS de correo deben apuntar a Google. La forma en que esto sucede se basa en dónde está alojado tu DNS actualmente, según lo siguiente:</p>
+<ul>
+<li><a href="#dh-dns" target="_self">Si tu DNS está alojado en DreamHost pero te has registrado en G Suite con Google</a></li>
+<li><a href="#dreamhost-dns" target="_self">Si tu DNS está alojado en DreamHost y te has registrado en G Suite en el panel</a></li>
+<li><a href="#external-dns" target="_self">Si tu DNS NO está alojado en DreamHost pero te ha regsitrado en&nbsp; G Suite en el panel</a></li>
+</ul>
+</div>
+<h2><span id="dh-dns"> Si tu DNS está alojado en DreamHost pero se ha registrado en G Suite en Google </span></h2>
+<div class="solvvy-solution">
+<p>Si tus&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self">nameservers</a> apuntan actualmente a DreamHost, el DNS de tu sitio está alojado en DreamHost. Si compraste una cuenta de G Suite en Google, debes actualizar los registros MX de tu sitio en el panel DreamHost para que apunte a Google.</p>
+<h3>Registros MX&nbsp;</h3>
+<p>Al configurar tu dominio con G Suite, el panel de Google te guiará a través de la configuración de tus registros MX. Dentro del panel de G Suite, se muestran los siguientes registros MX:</p>
+<div class="preboxcontainer">
+<pre class="prebox">1 ASPMX.L.GOOGLE.com
+5 ALT1.ASPMX.L.GOOGLE.com
+5 ALT2.ASPMX.L.GOOGLE.com
+10 ALT3.ASPMX.L.GOOGLE.com
+10 ALT4.ASPMX.L.GOOGLE.com</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Debes ingresar estos registros en tu panel DreamHost como se muestra a continuación. Asegúrate de ingresar la prioridad antes del nombre del registro.</p>
+<p>Puedes copiar y pegar cada registro de la lista anterior.</p>
+</div>
+</div>
+<p><strong>Actualizando tus registros MX</strong></p>
+<ol>
+<li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.mx&amp;" target="_blank" rel="noopener">Custom MX</a>.</li>
+<li>A la derecha de tu dominio, haz clic en el botón&nbsp;<strong>Edit</strong>.</li>
+<li>Ingresa los registros MX de Google al final de esta página.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_google_mx_records.png" alt="Google mx records" /></dd>
+</dl>
+</li>
+</ol>
+<p>Una vez guardado, tardará aproximadamente 6 horas en actualizarse en línea. Tu correo electrónico será alojado con Google.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El&nbsp;<a href="https://support.google.com/a/answer/48090#TTL" target="_self">TTL</a> es el número de segundos antes de que los cambios posteriores en el registro MX entren en vigencia. Una vez que los registros MX están configurados correctamente, se recomienda que cambie el valor TTL de 3600 a 86400, lo que le indica a los servidores en Internet que verifiquen cada 24 horas (en lugar de cada hora) las actualizaciones del registro MX.</p>
+</div>
+</div>
+<h3>Registro SPF</h3>
+<p>También debes actualizar tu registro SPF para apuntar a Google utilizando el siguiente registro:</p>
+<div class="preboxcontainer">
+<pre class="prebox">v=spf1 include:_spf.google.com ~all</pre>
+</div>
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo crear un registro SPF en tu panel:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216106197--C%C3%B3mo-agrego-un-registro-SPF-" target="_self">¿Cómo agrego un registro SPF?</a></li>
+</ul>
+</div>
+<h2><span id="dreamhost-dns">Si tu DNS está alojado en DreamHost y te has registrado en G Suite en el pane</span>l</h2>
+<div class="solvvy-solution">
+<p>Si tus&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self">nameservers</a> apuntan actualmente a DreamHost, el DNS de tu sitio está alojado en DreamHost. En este caso, DreamHost configura tus registros MX, verifica el dominio con un token en un registro TXT y luego actualiza el registro SPF de su sitio. Por ejemplo, los siguientes registros DNS se ajustan automáticamente:</p>
+<h3>Registros MX&nbsp;</h3>
+<pre class="prebox">1 ASPMX.L.GOOGLE.com
+5 ALT1.ASPMX.L.GOOGLE.com
+5 ALT2.ASPMX.L.GOOGLE.com
+10 ALT3.ASPMX.L.GOOGLE.com
+10 ALT4.ASPMX.L.GOOGLE.com</pre>
+<h3>Registro SPF</h3>
+<div class="preboxcontainer">
+<pre class="prebox">v=spf1 include:_spf.google.com ~all</pre>
+</div>
+<h3>CNAME</h3>
+<p>DreamHost crea un CNAME personalizado para el subdominio 'mail' que apunta a <span class="code">ghs.googlehosted.com</span>.</p>
+<h3>Verficación TXT</h3>
+<p>DreamHost utiliza el método de crear un registro TXT con una cadena de verificación. Esta cadena de verificación se agrega automáticamente cuando te registras en G Suite en tu panel DreamHost.&nbsp;Para ver este registro, navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage" target="_blank" rel="noopener">Manage Domains</a> en tu panel. Haz clic en el enlace 'DNS' debajo de tu dominio para ver el registro.</p>
+</div>
+<h2><span id="dns-externo">Si tu DNS no está alojado en DreamHost pero te has registrado en G Suite en el panel</span></h2>
+<div class="solvvy-solution">
+<p>Si tus&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216385467-Nameservers-overview" target="_self">nameservers</a> apuntan a otra compañía, DreamHost te envía un correo electrónico con información sobre cómo actualizar tus registros DNS en esa compañía. Aquí hay algunos enlaces que pueden ser de ayuda para algunos hosts populares:</p>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">GoDaddy</span><span style="font-weight: 400;"> — </span><a href="https://www.godaddy.com/help/change-my-ip-address-20134"><span style="font-weight: 400;">Cambiar mi dirección IP</span></a></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Shopify — </span><a href="https://help.shopify.com/es/manual/domains/managing-domains/advanced-settings" target="_self">Ver o editar el DNS para un dominio</a></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Squarespace </span><span style="font-weight: 400;">— </span><a href="https://support.squarespace.com/hc/en-us/articles/360002101888#toc-mx-records"><span style="font-weight: 400;">Opción 2 para añadir registros personalizados manualmente</span></a></li>
+<li><span style="font-weight: 400;">Wix </span><span style="font-weight: 400;">— </span><a href="https://support.wix.com/es/article/agregando-o-actualizando-los-registros-mx-en-tu-cuenta-wix" target="_self">Agregar regsitros MX</a></li>
+</ul>
+<h3>Registros MX&nbsp;</h3>
+<p>Al configurar tu dominio con G Suite, el panel de Google te guiará a través de la configuración de tus registros MX. Dentro del panel de G Suite, se mostrarán los siguientes registros MX:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_google_gsuite_mx_records.png" alt="Google mx records" /></dd>
+</dl>
+<p>Ve el siguiente enlace para obtener información sobre qué registros MX necesitas actualizar en tu host actual:</p>
+<ul>
+<li><a href="https://support.google.com/a/answer/174125"><span style="font-weight: 400;">https://support.google.com/a/answer/174125</span></a></li>
+</ul>
+<p>Tu empresa de hosting puede usar diferentes etiquetas para los campos de nombre y valor. También es posible que debas agregar el período final al final del nombre del servidor. Asegúrate de seguir las instrucciones específicas para tu host de dominio cuando ingreses los siguientes valores:</p>
+<table class="wikitable"><colgroup> <col width="15%" /> <col width="15%" /> <col width="15%" /> <col width="15%" /> <col width="30%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Nombre/Host/Alias</th>
+<th bgcolor="#F2F2F2">Time to Live (TTL*)</th>
+<th bgcolor="#F2F2F2">Tipo de Registro</th>
+<th bgcolor="#F2F2F2">Prioridad</th>
+<th bgcolor="#F2F2F2">Valor/Respuesta/Destino</th>
+</tr>
+<tr>
+<td>Blank or @</td>
+<td>3600</td>
+<td>MX</td>
+<td>1</td>
+<td>ASPMX.L.GOOGLE.COM.</td>
+</tr>
+<tr>
+<td>Blank or @</td>
+<td>3600</td>
+<td>MX</td>
+<td>5</td>
+<td>ALT1.ASPMX.L.GOOGLE.COM.</td>
+</tr>
+<tr>
+<td>Blank or @</td>
+<td>3600</td>
+<td>MX</td>
+<td>5</td>
+<td>ALT2.ASPMX.L.GOOGLE.COM.</td>
+</tr>
+<tr>
+<td>Blank or @</td>
+<td>3600</td>
+<td>MX</td>
+<td>10</td>
+<td>ALT3.ASPMX.L.GOOGLE.COM.</td>
+</tr>
+<tr>
+<td>Blank or @</td>
+<td>3600</td>
+<td>MX</td>
+<td>10</td>
+<td>ALT4.ASPMX.L.GOOGLE.COM.</td>
+</tr>
+</tbody>
+</table>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El&nbsp;<a href="https://support.google.com/a/answer/48090#TTL" target="_self">TTL</a> es el número de segundos antes de que los cambios posteriores en el registro MX entren en vigencia. Una vez que los registros MX están configurados correctamente, se recomienda que cambies el valor TTL de 3600 a 86400, lo que le indica a los servidores en Internet que verifiquen cada 24 horas (en lugar de cada hora) las actualizaciones del registro MX.</p>
+</div>
+</div>
+<h3>Registro SPF</h3>
+<p>También debes actualizar tu registro SPF en la empresa de alojamiento de tu sitio para apuntar a Google utilizando el siguiente registro:</p>
+<div class="preboxcontainer">
+<pre class="prebox">v=spf1 include:_spf.google.com ~all</pre>
+</div>
+<h3>Verificación de dominio con un registro MX</h3>
+<p><span style="font-weight: 400;">También puedes verificar tu dominio para G Suite con un registro MX. El Asistente de configuración de G Suite proporciona un registro MX único, con una prioridad de 15, para la verificación. Este registro solo está disponible desde el Asistente de configuración que aparece justo después de registrarte en G Suite.</span></p>
+<h3>Registros CNAME opcionales</h3>
+<p><span style="font-weight: 400;">Tambien puedes&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215414867--C%C3%B3mo-agrego-registros-DNS-personalizados-#registro-cname" target="_self">crear los siguientes registros CNAME</a>&nbsp;si los necesitas:</span></p>
+<table class="wikitable"><colgroup> <col width="20%" /> <col width="20%" /> <col width="20%" /> <col width="20%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">CNAME</th>
+<th bgcolor="#F2F2F2">Time to Live (TTL)</th>
+<th bgcolor="#F2F2F2">Tipo de Registro</th>
+<th bgcolor="#F2F2F2">Valor</th>
+</tr>
+<tr>
+<td>mail</td>
+<td>3600</td>
+<td>CNAME</td>
+<td><span style="font-weight: 400;">ghs.googlehosted.com</span></td>
+</tr>
+<tr>
+<td>calendar</td>
+<td>3600</td>
+<td>CNAME</td>
+<td><span style="font-weight: 400;">ghs.googlehosted.com</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>DNS</h2>
+<div class="solvvy-solution">
+<p>G Suite proporciona una API para revendedores. La documentación se puede encontrar en el siguiente enlace:</p>
+<ul>
+<li><a class="external-link" href="https://developers.google.com/admin-sdk/reseller/v1/codelab/end-to-end" rel="nofollow">https://developers.google.com/admin-sdk/reseller/v1/codelab/end-to-end</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://support.google.com/a/answer/33786?hl=en" target="_self">Autorizar remitentes de correo con SPF</a></li>
+</ul>
+</div>

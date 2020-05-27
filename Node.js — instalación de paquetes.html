@@ -1,15 +1,13 @@
-<h2>Instalación de Node.js y npm</h2>
-<div class="solvvy-solution">
-<p>Para garantizar la compatibilidad con los paquetes Node.js, siempre se recomienda instalar una versión personalizada de Node.js con tu nombre de usuario, en lugar de utilizar la versión predeterminada del servidor. Usa el siguiente artículo para instalar una versión personalizada de Node.js:</p>
+<h2>Instalando Node.js y npm</h2>
+<p>Node.js no está instalado de manera predeterminada en los servidores DreamHost más nuevos. Debe instalar manualmente una versión personalizada con el nombre de usuario de su servidor. Consulte el siguiente artículo para obtener instrucciones sobre cómo instalar una versión personalizada de Node.js.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/217185397-Generalidades-sobre-Node-js" target="_self">Generalidades sobre Node.js</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360029083351-Installing-a-custom-version-of-NVM-and-Node-js" target="_self">Instalando una versión personalizada de NVM y Node.js</a></li>
 </ul>
-<p>Una vez instalado, npm también estará instalado y podrás ejecutar los comandos a continuación.</p>
-</div>
-<h2>Instalación del paquete local</h2>
+<p>Una vez instalado, npm también está instalado y podrá ejecutar los comandos a continuación.</p>
+<h2>Instalación local de paquetes</h2>
 <div class="solvvy-solution">
-<p>Solo se recomienda que instales paquetes localmente para cada proyecto individual.</p>
-<p>Para instalar un paquete localmente, navega hasta el directorio de la aplicación de tu sitio (no el directorio / public). El comando para instalar un paquete es:</p>
+<p>Solo se recomienda instalar paquetes localmente para cada proyecto individual.</p>
+<p>Para instalar un paquete localmente, navega hasta el directorio de la aplicación de tu sitio (no el directorio /public). El comando para instalar un paquete es:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">npm install &lt;package_name&gt;</span></pre>
 </div>
@@ -26,14 +24,14 @@ npm WARN example.com No README data
 npm WARN example.com No license field.
 </span></pre>
 </div>
-<p>Esto crea un directorio en el directorio de aplicaciones de tu sitio llamado / node_modules.</p>
-<p>Luego debes verificar para confirmar que se instaló correctamente. Debe estar en el directorio de aplicaciones de tu sitio donde reside el directorio local / node_modules:</p>
+<p>Esto crea un directorio en el directorio de aplicaciones de tu sitio llamado /node_modules.</p>
+<p>Luego debes verificar para confirmar que se instaló correctamente. Debes estar en el directorio de aplicaciones de tu sitio donde reside el directorio local /node_modules:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ls node_modules</span>
 <span class="cmdoutput">lodash</span></pre>
 </div>
-<h3>Prueba tu paquete instalado localmente</h3>
-<p>Este ejemplo se toma de&nbsp;<a href="https://docs.npmjs.com/getting-started/installing-npm-packages-locally">docs.npmjs.com</a>.</p>
+<h3>Probando tu paquete instalado localmente</h3>
+<p>Este ejemplo está tomado de&nbsp;<a href="https://docs.npmjs.com/getting-started/installing-npm-packages-locally">docs.npmjs.com</a>.</p>
 <p>Crea un archivo llamado index.js, con el siguiente código:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="cmdoutput">// index.js 
@@ -43,7 +41,7 @@ var output = lodash.without([1, 2, 3], 1);
 console.log(output);</span>
 </pre>
 </div>
-<p>Corre el archivo usando <strong>node index.js</strong>. Debería resultar en <strong>[2, 3]</strong>.</p>
+<p>Ejecuta el archivo usando&nbsp;<strong>node index.js</strong>. Dbería mostrar la siguiente salida&nbsp;<strong>[2, 3]</strong>.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">node index.js</span>
 <span class="cmdoutput">[ 2, 3 ]</span>
@@ -53,7 +51,7 @@ console.log(output);</span>
 </div>
 <h2>Crear un archivo packages.json para paquetes instalados localmente</h2>
 <div class="solvvy-solution">
-<p>Es una buena idea crear un archivo packages.json local en el directorio de aplicaciones de tu sitio donde reside el directorio / node_modules. Este archivo package.json ayuda a administrar tus paquetes instalados localmente.</p>
+<p>Es una buena idea crear un archivo packages.json local en el directorio de aplicaciones de tu sitio donde reside el directorio /node_modules. Este archivo package.json ayuda a administrar tus paquetes instalados localmente.</p>
 <p>Para ser claros, este archivo package.json es diferente del archivo package.json dentro de cualquier paquete instalado localmente. Por ejemplo:</p>
 <ul>
 <li><strong>Ubicación del archivo local package.json del sitio:</strong> /example.com/package.json</li>
@@ -65,7 +63,7 @@ console.log(output);</span>
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Si tu proyecto depende de un paquete específico, siempre debe instalarse localmente como se muestra arriba. Las instalaciones globales deben reservarse para paquetes de los que tus proyectos no dependen, como las utilidades de CLI.</p>
+<p>Si tu proyecto depende de un paquete específico, siempre debe instalarse localmente como se muestra arriba. Las instalaciones globales deben reservarse para paquetes de los que tus proyectos no dependen, como las utilidades CLI.&nbsp;</p>
 </div>
 </div>
 <p>Usa el indicador -g para instalar un paquete globalmente:</p>
@@ -79,11 +77,55 @@ console.log(output);</span>
 └── npm@6.13.4</span></pre>
 </div>
 </div>
+<h2>Actualizando paquetes</h2>
+<div class="solvvy-solution">
+<h3>Actualizando paquetes locales</h3>
+<p>Navega al directorio de aplicaciones de tu sitio donde reside la carpeta local /node_modules.</p>
+<p>Primero, verifica qué paquetes deben actualizarse:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm outdated</span></pre>
+</div>
+<p>Puedes actualizar un solo paquete con:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm update -S &lt;package_name&gt;</span></pre>
+</div>
+<p>Puede actualizar todos los paquetes locales con:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm update -S</span></pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Es una buena idea usar la bandera -S. Esto guarda la nueva versión como la dependencia mínima requerida en el archivo package.json de tu sitio. Si no utilizas el indicador -S, el paquete se actualizará, pero el archivo package.json para tu sitio no se actualizará.</p>
+<ul>
+<li><a href="https://docs.npmjs.com/cli/update">https://docs.npmjs.com/cli/update</a></li>
+</ul>
+</div>
+</div>
+<h3>Actualizando paquetes globales</h3>
+<p>Primero, verifica qué paquetes deben actualizarse:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm outdated -g --depth=0</span></pre>
+</div>
+<p>Puede actualizar un solo paquete con:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm outdated -g &lt;package_name&gt;</span></pre>
+</div>
+<p>Puede actualizar todos los paquetes globales con:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">npm update -g</span></pre>
+</div>
+<h3>Usando un paquete para actualizar paquetes</h3>
+<p>Hay varios paquetes que pueden ayudar a actualizar los paquetes de tu sitio. Por ejemplo:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/npm-check-updates">https://www.npmjs.com/package/npm-check-updates</a></li>
+</ul>
+</div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/217185397-Generalidades-sobre-Node-js" target="_self">Generalidades sobre Node.js</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115004265527-Paquetes-Node-js-npm-" target="_self">Paquetes Node.js (npm)</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216635318--C%C3%B3mo-habilitar-Node-js-" target="_self">Cómo habilitar Node.js</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/217185397-Node-js-overview">Generalidades sobre Node.js</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115004265527-Node-js-packages-npm-">Paquetes Node.js (npm)</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216635318-How-to-enable-Node-js">Cómo habilitar Node.js</a></li>
 </ul>
 </div>
