@@ -1,0 +1,130 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo te guía a través de la instalación de Node.js usando Node Version Manager (nvm) en un servidor Shared, VPS o Dedicado.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El soporte de DreamHost no puede ayudar con instalaciones personalizadas. Las instrucciones a continuación explicarán cómo instalar Node.js, pero si encuentras que algo no funciona según lo previsto, debes comunicarte con un desarrollador para obtener más ayuda.</p>
+</div>
+</div>
+</div>
+<h2>¿En qué servidores se puede instalar Node.js?</h2>
+<div class="solvvy-solution">
+<p>Node.js puede ser instalado en servidores Shared, VPS, y Dedicated.</p>
+</div>
+<h2>Instalando Node Version Manager (nvm)</h2>
+<div class="solvvy-solution">
+<p>Los siguientes pasos instalan Node Version Manager. Luego, puedes usar nvm para instalar Node.js.</p>
+<ol>
+<li>Visita la siguiente página para determinar que versión de NVM instalar:
+<ul>
+<li><a href="https://github.com/creationix/nvm#install-script">https://github.com/creationix/nvm</a></li>
+</ul>
+</li>
+<li>Asegurate de estar en el directorio de tu usuario.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li>Ejecuta el siguiente comando para descargar NVM. Cambia la versión segun sea necesario:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash</span></pre>
+</div>
+<ul>
+<li>Este comando instala NVM en un nuevo directorio bajo tu usuario llamado /.nvm</li>
+<li>Este comando también agrega lo siguiente a tu archivo .bashrc:</li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox">export NVM_DIR="$HOME/.nvm"<br />[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; \. "$NVM_DIR/nvm.sh" # This loads nvm<br />[ -s "$NVM_DIR/bash_completion" ] &amp;&amp; \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+</pre>
+</div>
+</li>
+<li><strong>Si instalas NVM como usuario en una máquina Shared o Dedicada habilitada para Grsecurity</strong>, asegurate que el script no esté bloqueado ejecutando lo siguiente como tu usuario:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">setfattr -n user.pax.flags -v "mr" $NVM_DIR/nvm.sh</span></pre>
+</div>
+</li>
+<li>Ve el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">creando y editando un archivo a tráves de SSH</a>&nbsp;para instrucciones sobre como editar tu .bash_profile existente. En este archivo, añade la siguiente linea.
+<div class="preboxcontainer">
+<pre class="prebox">source ~/.bashrc</pre>
+</div>
+</li>
+<li>Ejecuta el siguiente comando para permitir que tu shell use esta nueva version de nvm:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">. ~/.bash_profile</span></pre>
+</div>
+</li>
+<li>Para probar si ahora puedes usar NVM, ejecuta lo siguiente que debería responder con la versión que has instalado:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nvm --version</span>
+<span class="cmdoutput">0.35.3</span>
+</pre>
+</div>
+</li>
+</ol>
+</div>
+<h2>Instalando Node.js</h2>
+<div class="solvvy-solution">
+<p>Ahora que se ha instalado nvm, puedes usarlo para instalar Node.js</p>
+<ol>
+<li>Revisa qué versiones de Node.js están disponibles:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nvm ls-remote</span></pre>
+</div>
+</li>
+<li>Instala cualquier version de Node.js que desees:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nvm install v12.16.3</span></pre>
+</div>
+</li>
+<li><strong>Si instalas NVM como usuario en una máquina Shared o Dedicada habilitada para Grsecurity</strong>, puede haber un error como este:
+<div class="preboxcontainer">
+<pre class="prebox">#
+# Fatal error in , line 0
+# Check failed: reservation_.SetPermissions(protect_start, protect_size, permission).
+#
+#
+#
+#FailureMessage Object: 0x3dfe93bb400</pre>
+</div>
+Si es así, deberás actualizar los controles de seguridad en cada archivo binario recién descargado antes de que funcione. Ejecuta el siguiente comando como usuario después de cada nueva versión que descargues:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">setfattr -n user.pax.flags -v "mr" $(find $NVM_DIR -type f -iname "node" -o -iname "npm" -o -iname "npx")</span></pre>
+</div>
+Esto deberá hacerse cada vez que se instale una nueva versión.</li>
+<li>Establece tu versión actual de node a tu nueva versión:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nvm use v12.16.3</span>
+Now using node v12.16.3 (npm v6.14.4)</pre>
+</div>
+</li>
+<li>Comprueba qué versión de Node.js se está ejecutando ingresando lo siguiente:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">node -v</span>
+<span class="cmdoutput">v12.16.3</span>
+</pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="setting-default-version">Establecer la versión predeterminada de Node.js</span></h2>
+<div class="solvvy-solution">
+<p>Después de instalar una nueva versión de Node.js, tu sesión actual de Shell la usará. Sin embargo, si cierras sesión y vuelves a iniciar sesión, volverá a la versión predeterminada. Para establecer la nueva versión como tu versión predeterminada, ejecuta el siguiente comando.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Asegúrate de cambiar el número de versión a la versión que has instalado. Este ejemplo usa v12.14.0.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nvm alias default v12.14.0</span>
+default -&gt; v12.14.0</pre>
+</div>
+</div>
+<h2><span id="Testing_Node.js">Probando Node.js</span></h2>
+<div class="solvvy-solution">
+<p>Ahora que has instalado Node.js, puedes crear algunos scripts de prueba simples para confirmar si está funcionando.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360043547431-Scripts-de-ejemplo-de-Node-js" target="_self">Scripts de ejemplo de Node.js</a></li>
+</ul>
+</div>

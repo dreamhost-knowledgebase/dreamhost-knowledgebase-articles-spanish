@@ -1,0 +1,35 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo enumera algunos pasos que puede seguir para solucionar problemas de instalación de Node.js.</p>
+<h2>Passenger no está utilizando tu versión personalizada de Node.js</h2>
+<p>Si encuentras que la versión personalizada que instalaste no se está utilizando, agrega el siguiente código a un archivo .htaccess en el directorio de tu proyecto:</p>
+<div class="preboxcontainer">
+<pre class="prebox">PassengerNodejs /home/username/.nvm/versions/node/v12.16.3/bin/node</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Asegúrate de cambiar el nombre de usuario y la versión a la versión que has instalado.</p>
+</div>
+</div>
+<p>A continuación, vuelve a cargar Passenger ejecutando el siguiente comando en el directorio de la aplicación:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir tmp &amp;&amp; touch restart.txt</span></pre>
+</div>
+<p>En el futuro, solo necesitas tocar el archivo restart.txt para reiniciar la aplicación.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">touch tmp/restart.txt</span></pre>
+</div>
+<p>Ve la página siguiente para más detalles:</p>
+<ul>
+<li><a href="https://www.phusionpassenger.com/library/config/apache/reference/">https://www.phusionpassenger.com/library/config/apache/reference/</a></li>
+</ul>
+</div>
+<h2>Passenger no está cargando el archivo app.js</h2>
+<div class="solvvy-solution">
+<p>Si has seguido las instrucciones en el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216635318--C%C3%B3mo-habilitar-Node-js-" target="_self">Habilitando Passenger para Node.js</a>, has agregado un archivo app.js y un archivo .htaccess en el directorio de la aplicación. Asegúrate de que tu archivo .htaccess NO contenga la siguiente línea.</p>
+<div class="preboxcontainer">
+<pre class="prebox">PassengerAppType node</pre>
+</div>
+<p>Esto hará que Passenger no cargue tu archivo app.js.</p>
+</div>

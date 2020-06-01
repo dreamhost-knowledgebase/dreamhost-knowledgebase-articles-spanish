@@ -1,0 +1,46 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>WordPress proporciona una herramienta de Debug para ayudar a descubrir cuál puede ser la causa de un error en tu sitio web. Esta herramienta puede mostrar información en tu sitio web en vivo, sin embargo, esto no se recomienda si tu sitio web es en vivo para el público. En cambio, se recomienda crear un archivo de registro de Debug. Luego puedes verificar ese archivo de registro para determinar la causa del problema que está intentando resolver.</p>
+<p>Este artículo le guía sobre cómo habilitar el modo Debug y escribir en un archivo de registro sin alterar tu sitio web en vivo.</p>
+</div>
+<h2>Habilitar el modo DEBUG</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu servidor por medio de&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview" target="_self">SSH</a> o&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/115000675027-FTP-overview-and-credentials" target="_self">FTP</a>.</li>
+<li>Edita el archivo wp-config.php usnado&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH" target="_self">SSH</a> o tu&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/115000098272-Creating-and-editing-a-file-via-FTP" target="_self">cliente FTP</a>.</li>
+<li>Cerca del final del archivo verás lo siguiente:
+<div class="preboxcontainer">
+<pre class="prebox">define('WP_DEBUG', false);</pre>
+</div>
+Ajusta esa linea a estas tres lineas:
+<div class="preboxcontainer">
+<pre class="prebox">define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_DISPLAY', false );
+define( 'WP_DEBUG_LOG', true );</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>No se recomienda cambiar WP_DEBUG_DISPLAY a true (verdadero). Esto se debe a que cualquier error se mostrará en tu sitio web en vivo. Al habilitar WP_DEBUG_LOG, puedes ver los mismos errores en tu archivo /wp-content/debug.log.</p>
+</div>
+</div>
+</li>
+<li>Cuando se produce un error en WordPress, se escribirá en un archivo titulado 'debug.log'. Este archivo se encuentra en tu directorio /wp-content/. Abre este archivo usando&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH" target="_self">SSH</a> o tu&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/115000098272-Creating-and-editing-a-file-via-FTP" target="_self">cliente FTP</a> para ver el informe de debug.</li>
+</ol>
+</div>
+<h2>Ver tu registro Debug usando un plugin</h2>
+<div class="solvvy-solution">
+<p>También hay varios plugins que ayudan a depurar tu sitio y ver tu registro de debug. Consulta el siguiente artículo para obtener información sobre cómo administrar e instalar un plugin.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215300817-Managing-WordPress-plugins" target="_self">Administrar plugins de WordPress</a></li>
+</ul>
+<p>Cuando busque un complemento, intente escribir 'debug' como término de búsqueda. Hay muchas opciones diferentes para elegir.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://wordpress.org/support/article/debugging-in-wordpress/" target="_self">Depurando en WordPress</a></li>
+<li><a href="https://codex.wordpress.org/WP_DEBUG" target="_self">WP DEBUG</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215300817-Managing-WordPress-plugins" target="_self">Administrar plugins de WordPress</a></li>
+</ul>
+</div>
