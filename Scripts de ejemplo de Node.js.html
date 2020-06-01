@@ -1,0 +1,64 @@
+<h2>Generalidades</h2>
+<div class="solvvy-hidden">
+<p>Este artículo enumera algunos ejemplos simples de Node.js que puedes usar para probar tu instalación.</p>
+</div>
+<h2><span id="Simple_.27Hello_World.21.27_script">Ejemplo de línea de comando</span></h2>
+<div class="solvvy-solution">
+<p>Crea y ejecuta este script dentro de tu terminal:</p>
+<ol>
+<li>Crea un archivo llamado HelloWorld.js y luego agrega lo siguiente en el archivo:
+<div class="preboxcontainer">
+<pre class="prebox">console.log('Hello World!');</pre>
+</div>
+</li>
+<li>Ejecuta lo siguiente en tu terminal para ejecutar el script:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">node HelloWorld.js</span>
+<span class="cmdoutput">Hello World!</span>
+</pre>
+</div>
+<p>Si está instalado correctamente, verás que la consola responde con&nbsp;<code>Hello World!</code></p>
+</li>
+</ol>
+</div>
+<h2><span id="Website_example">Ejemplo de Sitio Web</span></h2>
+<div class="solvvy-solution">
+<p>También puedes crear un servidor HTTP básico para cargar un sitio.</p>
+<ol>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crea un archivo</a>&nbsp;en tu directorio web llamado server.js con el siguiente código:
+<div class="preboxcontainer">
+<pre class="prebox">var http = require("http");
+
+http.createServer(function(request, response) {
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.write("Hello World. This page is running Node.js version: ");
+  response.write(process.version);
+  response.end();
+}).listen(8888);
+</pre>
+</div>
+<ul>
+<li>Este servidor HTTP escuchará en el puerto 8888.</li>
+</ul>
+</li>
+<li>Inicia el servidor ejecutando lo siguiente:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">node server.js</span></pre>
+</div>
+</li>
+<li>Visita la página en un navegador con el puerto 8888 agregado al final. Por ejemplo:
+<div class="preboxcontainer">
+<pre class="prebox">http://example.com:8888</pre>
+</div>
+Si se ejecuta correctamente, tu sitio mostrará lo siguiente:
+<div class="preboxcontainer">
+<pre class="prebox">Hello World. This page is running Node.js version: v12.16.3</pre>
+</div>
+</li>
+</ol>
+<h3>Cargando tu aplicación en los puertos 80 y 443</h3>
+<p>Si has habilitado Passenger en tu panel para Node.js, y el archivo para cargar tu aplicación se llama&nbsp;<strong>app.js</strong>, tu sitio Node.js se cargará automáticamente en los puertos 80 y 443 sin necesidad de iniciar manualmente el servidor. Ve el siguiente artículo para más detalles.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216635318--C%C3%B3mo-habilitar-Node-js-" target="_self">Habilitando Passenger para Node.js</a></li>
+</ul>
+</div>

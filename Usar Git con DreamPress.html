@@ -77,7 +77,7 @@
 <h3>Paso 5 — Inicia sesión en tu servidor</h3>
 <p>Inicia sesión en tu servidor usando <a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>. Esto te lleva directamente a la raíz de usuario de su shell. Usando el usuario y el servidor de shell de muestra, parece que:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh wp_ab1cde@wp_123456.dreamhostps.com</span></pre>
+<pre class="prebox"><span class="server">[computer]$ </span><span class="command">ssh wp_ab1cde@wp_123456.dreamhostps.com</span></pre>
 </div>
 <p>La primera vez que haga esto, debes aceptar su servidor como un host válido. Esta información se guarda en un archivo host conocido en tu computadora.</p>
 <h3>Paso 6&nbsp;— Configura tu servidor Git repo</h3>
@@ -146,12 +146,12 @@ GIT_WORK_TREE=/home/shell-username/example.com/wp-content/themes/child-theme-dir
 <ol>
 <li>Asegúrate de estar en el directorio de temas de tu tema hijo:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd $HOME/example.com/wp-content/themes/child-theme-directory</span></pre>
+<pre class="prebox"><span class="server">[computer]$ </span><span class="command">cd $HOME/example.com/wp-content/themes/child-theme-directory</span></pre>
 </div>
 </li>
 <li>Ejecuta lo siguiente para inicializarlo:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">git init</span></pre>
+<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git init</span></pre>
 </div>
 </li>
 </ol>
@@ -165,16 +165,16 @@ GIT_WORK_TREE=/home/shell-username/example.com/wp-content/themes/child-theme-dir
 <ol>
 <li>Asegúrate de estar en el directorio de temas secundarios:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">git remote add myserver ssh://username@server.example.com/~/git/projectname</span></pre>
+<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git remote add myserver ssh://username@server.example.com/~/git/projectname</span></pre>
 </div>
 <p><em>Puedes usar cualquier nombre de servidor que desee en lugar de "myserver". Usando el nombre de usuario y el servidor de ejemplo, el comando es:</em></p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">git remote add myserver ssh://wp_ab1cde@wp_123456.dreamhostps.com/~/git/projectname</span></pre>
+<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git remote add myserver ssh://wp_ab1cde@wp_123456.dreamhostps.com/~/git/projectname</span></pre>
 </div>
 </li>
 <li>Ejecuta lo siguiente para ver si se agregó correctamente:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">git remote -v</span></pre>
+<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git remote -v</span></pre>
 </div>
 </li>
 </ol>
@@ -183,17 +183,17 @@ GIT_WORK_TREE=/home/shell-username/example.com/wp-content/themes/child-theme-dir
 <ol>
 <li>Agrega tus cambios a tu índice git local:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">git add .</span></pre>
+<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git add .</span></pre>
 </div>
 </li>
 <li>Confirma estos cambios, que registran los cambios en el repositorio. Incluye un breve mensaje en el comando de confirmación, que es una nota rápida para recordarte lo que está confirmando. Por ejemplo, podría ser "primer compromiso del tema hijo":
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">git commit -m "message about the commit"</span></pre>
+<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git commit -m "message about the commit"</span></pre>
 </div>
 </li>
 <li>Verifica el estado de tu repositorio git ejecutando lo siguiente. Puedes consultarlo en cualquier momento:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">git status</span></pre>
+<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git status</span></pre>
 </div>
 </li>
 </ol>
@@ -202,14 +202,14 @@ GIT_WORK_TREE=/home/shell-username/example.com/wp-content/themes/child-theme-dir
 <ol>
 <li>En el directorio de temas secundarios, ejecuta el siguiente comando solo una vez:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">git push myserver +master:refs/heads/master</span>
-<span class="server">[server]$ </span><span class="command">git push --set-upstream myserver master</span>
+<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git push myserver +master:refs/heads/master</span>
+<span class="server">[computer]$ </span><span class="command">git push --set-upstream myserver master</span>
 <span class="cmdoutput">Branch master set up to track remote branch master from myserver</span></pre>
 </div>
 </li>
 <li>Cada vez que crees una nueva instantánea en tu repositorio de git local, empújala a su servidor simplemente con este comando:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">git push myserver</span></pre>
+<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git push myserver</span></pre>
 </div>
 </li>
 </ol>
