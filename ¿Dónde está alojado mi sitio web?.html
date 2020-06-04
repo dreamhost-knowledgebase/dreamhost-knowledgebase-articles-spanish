@@ -1,0 +1,139 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Hay dos opciones de DNS para controlar dónde está alojado tu sitio.</p>
+<ul>
+<li>Cambiando los Nameservers (esto debe hacerse en la compañía de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215413857#registrar" target="_self">Registro</a>&nbsp;de tu sitio)</li>
+<li>Cambiando los registros A</li>
+</ul>
+</div>
+<h2>Verificando dónde está alojado tu DNS</h2>
+<div class="solvvy-solution">
+<p>Este artículo te ayuda a determinar dónde está alojado tu&nbsp;<strong>sitio web</strong>.&nbsp;Para resolver esto, primero debes verificar dónde está alojado el <strong>DNS</strong> de tu sitio.</p>
+<p>El siguiente artículo explica cómo ver hacia dónde apuntan tus registros DNS actuales.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360030415072-Verificando-d%C3%B3nde-est%C3%A1-alojado-tu-DNS" target="_self">Verificando dónde está alojado tu DNS</a></li>
+</ul>
+</div>
+<h2>¿Qué sucede cuando cambias tu DNS?</h2>
+<div class="solvvy-solution">
+<h3>Cambiando los Nameservers</h3>
+<p>Todos los registros DNS de tu sitio se controlan en la compañía a la que apuntan los nameservers.</p>
+<p>Cambiar tus nameservers apunta&nbsp;<strong>TODOS</strong> los registros DNS de su sitio a una compañía específica. Esto significa que tu sitio web, correo electrónico, mysql, ftp, ssh y cualquier otro registro se controlan en la nueva compañía.</p>
+<p>Debes iniciar sesión en la empresa donde compraste el registro de tu dominio para cambiar los servidores de nombres. La empresa se llama Registrador de tu dominio.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857#registrar" target="_self">Compañía de Registro de Dominio</a></li>
+</ul>
+<h3>Cambiar los registros A</h3>
+<p>Los registros son solo las direcciones IP de tu sitio web. Esta sería la dirección IP para la versión www y no www de tu sitio. Por ejemplo:</p>
+<ul>
+<li>example.com</li>
+<li>www.example.com</li>
+</ul>
+<p>Si solo apunta tus registros A a una compañía diferente, solo tu sitio web está alojado en la nueva compañía. Todos tus otros registros DNS (correo electrónico, mysql, ftp, ssh) continúan alojados donde apuntan tus servidores de nombres.</p>
+<p>Las siguientes ilustraciones muestran algunas formas en que esto podría implementarse.</p>
+</div>
+<h2>Diferentes formas de apuntar tu DNS</h2>
+<div class="solvvy-solution">
+<h3>Ejemplos Nameservers</h3>
+<table class="wikitable"><colgroup> <col width="15%" /> <col width="20%" /> <col width="20%" /> <col width="15%" /> <col width="60%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Registrar</th>
+<th bgcolor="#F2F2F2">¿A donde están apuntados los Nameservers?</th>
+<th bgcolor="#F2F2F2">¿Dónde están apuntados los registros A?</th>
+<th bgcolor="#F2F2F2">Compañia de Alojamiento</th>
+<th bgcolor="#F2F2F2">Explicación</th>
+</tr>
+<tr>
+<td>DreamHost</td>
+<td>
+<p>Nameservers DreamHost<br /> <br /> ns1.dreamhost.com<br /> ns2.dreamhost.com<br /> ns3.dreamhost.com</p>
+</td>
+<td>Registros A no han sido cambiados</td>
+<td class="table-background-green">DreamHost</td>
+<td>Como los nameservers apuntan a DreamHost y los registros A no se han ajustado, el sitio está alojado en DreamHost</td>
+</tr>
+<tr>
+<td>Otra Compañía</td>
+<td>Nameservers DreamHost<br /> <br /> ns1.dreamhost.com<br /> ns2.dreamhost.com<br /> ns3.dreamhost.com</td>
+<td>Los registros A no se han cambiado</td>
+<td class="table-background-green">DreamHost</td>
+<td>Como los nameservers apuntan a DreamHost y los registros A no se han ajustado, el sitio está alojado en DreamHost.</td>
+</tr>
+<tr>
+<td>Otra Compañía</td>
+<td>
+<p>Nameservers No DreamHost</p>
+<p><br /> ns1.nameserver.com<br /> ns2.nameserver.com</p>
+</td>
+<td>Los registros A no se han cambiado</td>
+<td class="table-background-red">Otra Compañía</td>
+<td>Dado que los servidores de nombres NO apuntan a DreamHost y los registros A no se han ajustado, el sitio NO está alojado en DreamHost</td>
+</tr>
+<tr>
+<td>DreamHost</td>
+<td>
+<p>Nameservers No DreamHost</p>
+<p>&nbsp;<br /> ns1.nameserver.com<br /> ns2.nameserver.com</p>
+</td>
+<td>Los registros A no se han cambiado</td>
+<td class="table-background-red">Otra Compañía</td>
+<td>Dado que los nameservers NO apuntan a DreamHost y los registros A no se han ajustado, el sitio NO está alojado en DreamHost</td>
+</tr>
+</tbody>
+</table>
+<h3>Ejemplos de registros A</h3>
+<table class="wikitable"><colgroup> <col width="15%" /> <col width="20%" /> <col width="20%" /> <col width="15%" /> <col width="60%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Compañía de Registro</th>
+<th bgcolor="#F2F2F2">¿Dónde están apuntados los Nameservers?</th>
+<th bgcolor="#F2F2F2">¿Dónde están apuntados los registros A?</th>
+<th bgcolor="#F2F2F2">Compañía de Alojamiento</th>
+<th bgcolor="#F2F2F2">Explicación</th>
+</tr>
+<tr>
+<td>DreamHost</td>
+<td>
+<p>Nameservers&nbsp;DreamHost<br /> <br /> ns1.dreamhost.com<br /> ns2.dreamhost.com<br /> ns3.dreamhost.com</p>
+</td>
+<td>Los registros A están apuntando a una compañía diferente</td>
+<td class="table-background-red">Otra compañía</td>
+<td>
+<p>Los nameservers apuntan a DreamHost, pero los registros A apuntan a otra compañía, por lo tanto, el sitio está alojado en esa otra compañía.</p>
+<p>Todos los demás registros DNS continúan alojados en DreamHost, ya que es allí donde apuntan los nameservers.</p>
+</td>
+</tr>
+<tr>
+<td>Otra compañía</td>
+<td>Nameservers DreamHost&nbsp;<br /> <br /> ns1.dreamhost.com<br /> ns2.dreamhost.com<br /> ns3.dreamhost.com</td>
+<td>Los registros A están apuntando a otra compañía</td>
+<td class="table-background-red">Otra Compañía</td>
+<td>
+<p>Los nameservers apuntan a DreamHost, pero los registros A apuntan a otra compañía, por lo tanto, el sitio está alojado en esa otra compañía.</p>
+<p>Todos los demás registros DNS continúan alojados en DreamHost, ya que es allí donde apuntan los nameservers.</p>
+</td>
+</tr>
+<tr>
+<td>Otra Compañía</td>
+<td>Nameservers No DreamHost<br /> <br /> ns1.nameserver.com<br /> ns2.nameserver.com</td>
+<td>Registros A apuntan a DreamHost</td>
+<td class="table-background-green">DreamHost</td>
+<td>
+<p>Como los registros A apuntan a DreamHost, el sitio está alojado en DreamHost.</p>
+<p>Sin embargo, todos los demás registros DNS continúan alojados en la otra compañía, ya que es allí donde apuntan los nameservers.</p>
+</td>
+</tr>
+<tr>
+<td>DreamHost</td>
+<td>Nameservers No DreamHost<br /> <br /> ns1.nameserver.com<br /> ns2.nameserver.com</td>
+<td>Registros A apuntan a DreamHost</td>
+<td class="table-background-green">DreamHost</td>
+<td>
+<p>Como los registros A apuntan a DreamHost, el sitio está alojado en DreamHost.</p>
+<p>Sin embargo, todos los demás registros DNS continúan alojados en la otra compañía, ya que es allí donde apuntan los nameservers.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
