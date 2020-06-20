@@ -1,0 +1,154 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="ARTICLE-TITLE-NAME" class="solvvy-hidden">
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#Beneficios">Beneficios</a></li>
+<li><a class="reference internal" href="#Pautas_generales_de_actualización">Pautas generales de actualización</a></li>
+<li><a class="reference internal" href="#Instalaciones_de_1_Click">Instalaciones de 1 Click</a></li>
+<li><a class="reference internal" href="#Problemas_conocidos">PHP 7.3 Problemas conocidos</a></li>
+<li><a class="reference internal" href="#Preguntas_frecuentes">Preguntas Frecuentes</a></li>
+<li><a class="reference internal" href="#Solución_de_problemas">Solución de problemas</a></li>
+<li><a class="reference internal" href="#Ver_también">Ver también</a></li>
+</ul>
+</div>
+</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>PHP 7 es la próxima actualización importante del lenguaje de programación PHP que ofrece varios beneficios sobre las versiones anteriores, como una nueva versión de Zend Engine y un rendimiento más rápido.</p>
+<p>PHP 7 también ha eliminado varias funciones obsoletas de versiones anteriores. Debido a esto, los usuarios no deben actualizar sus sitios hasta que estén seguros de que todo es totalmente compatible con la nueva versión.</p>
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo actualizar la versión PHP de tu sitio:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-">¿Cómo cambio la versión PHP de mi sitio?</a></li>
+</ul>
+</div>
+<h2><span id="Beneficios">Beneficios</span></h2>
+<div class="solvvy-solution">
+<p>La siguiente lista está tomada de <a href="http://php.net/archive/2015.php">php.net</a>:</p>
+<ul>
+<li>Rendimiento mejorado: PHP 7 es hasta dos veces más rápido que PHP 5.6</li>
+<li>Uso de memoria significativamente reducido</li>
+<li>Árbol de sintaxis abstracta</li>
+<li>Soporte consistente de 64 bits</li>
+<li>Jerarquía de excepciones mejorada</li>
+<li>Muchos errores fatales convertidos en excepciones</li>
+<li>Generador seguro de números aleatorios</li>
+<li>Se eliminaron SAPI y extensiones antiguas y no compatibles</li>
+<li>El operador de fusión nulo (??)</li>
+<li>Declaraciones de tipo de retorno y escalar</li>
+<li>Clases anónimas</li>
+<li>Cero costo afirma</li>
+</ul>
+</div>
+<h2><span id="Pautas_generales_de_actualización">Pautas generales de actualización</span></h2>
+<div class="solvvy-solution">
+<ul>
+<li>Puedes actualizar la versión PHP de su sitio <a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-">en tu panel</a>.</li>
+<li>Asegúrate de que tu software y todos los complementos/temas/extensiones sean compatibles con PHP 7 antes de actualizar.</li>
+<li>Asegúrate de que las consultas de su base de datos estén usando mysqli o PDO_MySQL para conectarte, ya que la extensión mysql se ha eliminado. Consulta la sección "Mi sitio no se conectará a mi base de datos después de actualizar a PHP 7" a continuación para obtener detalles.</li>
+</ul>
+</div>
+<h2><span id="Instalaciones_de_1_Click">Instalaciones de 1 Click</span></h2>
+<div class="solvvy-solution">
+<h3><span id="Compatible_Instalaciones_de_1_Click">Compatible Instalaciones de 1 Click</span></h3>
+<ul>
+<li>MediaWiki</li>
+<li>WordPress</li>
+<li>Zen Cart</li>
+</ul>
+<h3><span id="Instalaciones_de_1_Click_incompatibles">Instalaciones de 1 Click incompatibles</span></h3>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>La razón más común de incompatibilidad se debe a los controladores MySQL desactualizados. Consulta la sección "Mi sitio no se conectará a mi base de datos después de actualizar a PHP 7" a continuación para obtener detalles.</p>
+</div>
+</div>
+<ul>
+<li>Concrete5</li>
+<li>Joomla</li>
+<li>phpBB</li>
+</ul>
+</div>
+<h2><span id="Problemas_conocidos">PHP 7.3 Problemas conocidos</span></h2>
+<div class="solvvy-solution">
+<h3>JIT compilation failed: no más errores de memoria</h3>
+<p>Si ves errores de "Error de compilación JIT: no más memoria o JIT compilation failed: no more memory" en tu sitio, esto se debe a un <a href="https://bugs.php.net/bug.php?id=77260">error conocido</a> en PHP 7.3. Para evitar esto, puede deshabilitar el compilador JIT agregando la siguiente línea a su archivo phprc:</p>
+<div class="preboxcontainer">
+<pre class="prebox">pcre.jit = 0</pre>
+</div>
+<p>Si necesita ayuda para crear y/o modificar este archivo, consulta las siguientes instrucciones: ompiler agregando la siguiente línea a su archivo phprc:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214894037--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-FTP-">¿Cómo creo un archivo phprc a través de FTP? (para principiantes)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200668--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-SSH-">¿Cómo creo un archivo phprc a través de SSH? (para usuarios avanzados)</a></li>
+</ul>
+Alternativamente, es posible que desee simplemente volver a PHP 7.2 <a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-">en tu panel DreamHost</a>.</div>
+<h2><span id="Preguntas_frecuentes">Preguntas Frecuentes</span></h2>
+<div class="solvvy-solution">
+<h3><span id="¿Qué_pasó_con_PHP_6.3F">¿Qué pasó con PHP 6?</span></h3>
+<p>Esta era una versión de desarrollo que nunca se convirtió en un lanzamiento oficial. Ve los siguientes enlaces para más información:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/PHP#PHP_6_and_Unicode">https://en.wikipedia.org/wiki/PHP#PHP_6_and_Unicode</a></li>
+<li><a href="https://wiki.php.net/rfc/php6">https://wiki.php.net/rfc/php6</a></li>
+</ul>
+<h3><span id="¿PHP_7_está_disponible_en_máquinas_Nginx?">¿PHP 7 está disponible en máquinas Nginx?</span></h3>
+<p>No. Actualmente solo PHP 5.6 está disponible.</p>
+</div>
+<h2><span id="Solución_de_problemas">Solución de problemas</span></h2>
+<div class="solvvy-solution">
+<h3><span id="Mi_sitio_no_se_conectará_a_mi_base_de_datos_después_de_actualizar_a_PHP_7">Mi sitio no se conectará a mi base de datos después de actualizar a PHP 7</span></h3>
+<p>Las versiones anteriores de PHP ofrecían tres API de PHP para acceder a una base de datos MySQL. Ellos eran:</p>
+<ul>
+<li><a href="http://php.net/manual/en/book.mysql.php">mysql</a></li>
+<li><a href="http://php.net/manual/en/book.mysqli.php">mysqli</a></li>
+<li><a href="http://php.net/manual/en/ref.pdo-mysql.php">PDO_MySQL</a></li>
+</ul>
+<p>PHP 7 ha eliminado el soporte para la extensión mysql y afecta lo siguiente:</p>
+<ul>
+<li>ACualquier consulta que use una función mysql_connect no funcionará.</li>
+<li>PHP 7 solo permite conexiones a una base de datos MySQL usando mysqli o PDO_MySQL.</li>
+</ul>
+<p>Todos los scripts deben actualizarse para continuar funcionando.</p>
+<h3><span id="wp-no-funciona-después-de-actualizar-a-PHP-7">Mi sitio de WordPress no funciona después de actualizar a PHP 7</span></h3>
+<p>Las versiones anteriores de WordPress, así como algunos temas / complementos, no son compatibles con PHP 7. El comando <a href="/hc/en-us/articles/214693248-WordPress-wp-cli-overview" target="_self">wp-cli</a> <span class="code">wp php-compat</span> comprueba la compatibilidad de cualquiera de estos elementos con PHP 7.0 o superior:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp php-compat</span>
+<span class="cmdoutput">
++-----------+--------+---------+---------+--------+-------+
+| nombre      | tipo   | compat  | version | tiempo   | archivos |
++-----------+--------+---------+---------+--------+-------+
+| wordpress | core   | success | 5.3     | cached |       |
+| akismet   | plugin | success | 4.1.3   | 1.25s  | 19    |
+| button    | theme  | success | 1.0.4   | 0.33s  | 23    |
++-----------+--------+---------+---------+--------+-------+
+</span>
+</pre>
+</div>
+<p>Para probar una versión específica de PHP, agrega <span class="code">--php_version=(version.number)</span> hasta el final del comando, reemplazando <span class="code">(version.number)</span> con el número de versión de PHP para probar. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp php-compat --php_version=7.2</span>
+<span class="cmdoutput">
++-----------+--------+---------+---------+--------+-------+
+| nombre      | tipo   | compat  | version | tiempo   | archivos |
++-----------+--------+---------+---------+--------+-------+
+| wordpress | core   | success | 5.3     | cached |       |
+| akismet   | plugin | success | 4.1.3   | 1.25s  | 19    |
+| button    | theme  | success | 1.0.4   | 0.33s  | 23    |
++-----------+--------+---------+---------+--------+-------+ 
+</span>
+</pre>
+</div>
+</div>
+<h2><span id="Ver_también">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-PHP">Generalidades de PHP overview</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214205508-Generalidades-sobre-actualizar-PHP-">Características de la actualización de PHP</a></li>
+<li><a href="http://php.net/manual/en/migration70.new-features.php">PHP 7 nuevas características</a></li>
+<li><a href="https://secure.php.net/releases/">Lanzamientos de PHP</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="clearer">&nbsp;</div>
