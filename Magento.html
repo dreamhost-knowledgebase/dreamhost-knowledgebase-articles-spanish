@@ -12,6 +12,12 @@
 <p>Para un rendimiento óptimo (especialmente para tiendas grandes), se recomienda un servidor dedicado o&nbsp;<a href="https://help.dreamhost.com/hc/es/categories/202115418-Servidores-Cloud-de-DreamCompute">DreamCompute</a>&nbsp;debido a la presencia de una instancia local de MySQL.</p>
 </div>
 </div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Magento actualmente no es compatible con PHP 7.4. Deberá configurar tu dominio en PHP 7.2 o 7.4 para completar la instalación.</p>
+</div>
+</div>
 </div>
 <h2>Antes de instalar Magento</h2>
 <div class="solvvy-solution">
@@ -66,9 +72,9 @@ memory_limit = 756M</pre>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Puedes descargar el archivo .htaccess editado a continuación para el archivo .htaccess del directorio de inicio. NOTA: Este es el archivo Magento .htaccess para la versión 2.3.0.</p>
+<p>Puedes descargar el archivo .htaccess editado a continuación para el archivo .htaccess del directorio de inicio. NOTA: Este es el archivo Magento .htaccess para la versión 2.3.5.</p>
 <ul>
-<li><a href="https://kbimages.dreamhosters.com/files/htaccess" target="_self">Magento 2.3.0 .htaccess</a></li>
+<li><a href="https://kbimages.dreamhosters.com/files/htaccess" target="_self">Magento 2.3.5 .htaccess</a></li>
 </ul>
 </div>
 </div>
@@ -87,7 +93,7 @@ memory_limit = 756M</pre>
 &lt;/Files&gt;</pre>
 </div>
 </li>
-<li>Dado que DreamHost actualmente ejecuta Apache versión 2.2, deberás editar cada bloque de código para eliminar el texto 2.4 y el bloque &lt;IfVersion&gt;. Entonces, el ejemplo anterior se convertiría en esto:
+<li>Edita cada bloque de código para eliminar el texto 2.4 y el &lt;IfVersion&gt; bloque. Entonces, el ejemplo anterior se convertiría en esto:
 <div class="preboxcontainer">
 <pre class="prebox">&lt;Files composer.json&gt;
   order allow,deny

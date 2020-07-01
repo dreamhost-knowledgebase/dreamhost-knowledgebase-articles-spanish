@@ -11,7 +11,10 @@
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
 <p><strong>Usar el panel para proteger con contraseña tu sitio</strong></p>
-<p>La forma más fácil de proteger tu sitio con contraseña es usar la herramienta en el panel DreamHost. Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.webdav&amp;" target="_blank" rel="noopener">Htaccess/WebDAV</a>.&nbsp;Luego puedes configurar la protección con contraseña allí.</p>
+<p>La forma más fácil de proteger con contraseña tu sitio es usar la herramienta en el panel DreamHost. Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.webdav&amp;" target="_blank" rel="noopener">Htaccess/WebDAV</a>&nbsp;Luego puedes configurar la protección con contraseña allí.</p>
+<p><strong>Sin acceso a tus archivos .htaccess y .htpasswd</strong></p>
+<p>Sin embargo, ten en cuenta que si usas la opción de panel, los archivos .htaccess y .htpasswd serán propiedad del servidor. Esto significa que no podrás editar manualmente ninguno de estos archivos si es necesario. Además, estas instrucciones sobrescribirán cualquier archivo .htaccess existente. Asegúrate de hacer una copia de seguridad de tu archivo .htaccess existente antes de comenzar estos pasos.</p>
+<p>Si solo necesitas proteger con contraseña tu sitio y necesitas acceso a tu archivo .htaccess y .htpasswd en cualquier momento en el futuro, debes usar las instrucciones de este artículo para crear manualmente esos archivos.</p>
 </div>
 </div>
 </div>
@@ -19,7 +22,8 @@
 <div class="solvvy-solution">
 <p>Puedes usar un archivo .htaccess para proteger con una contraseña un archivo o carpeta mediante la autenticación básica.</p>
 <ol>
-<li>Crea un archivo .htpasswd en el directorio que deseas proteger con una contraseña, utilizando la utilidad htpasswd. Para el primer usuario, digamosle user1, ejecuta el siguiente comando:<br />
+<li>Inicia sesión en su servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crea un archivo .htpasswd</a> en el directorio que deseas proteger con una contraseña, utilizando la utilidad htpasswd. Para el primer usuario, digamosle user1, ejecuta el siguiente comando:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">htpasswd -c /home/username/example.com/.htpasswd user1</span></pre>
 </div>
