@@ -44,49 +44,49 @@
 </div>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
-// Import PHPMailer classes into the global namespace
-// These must be at the top of your script, not inside a function
+// Importar clases PHPMailer en el espacio de nombres global
+// Deben estar en la parte superior de su script, no dentro de una función
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-//Load composer's autoloader
-require '/home/<span class="code-highlight">username</span>/vendor/autoload.php';
+// Cargar el cargador automático del compositor
+require '/home/<span class="code-highlight">nobredeusuario</span>/vendor/autoload.php';
 
-$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+$mail = new PHPMailer(true);                              // Pasar `true` habilita excepciones
 try {
-    //Server settings
-    $mail-&gt;SMTPDebug = 2;                                 // Enable verbose debug output
-    $mail-&gt;isSMTP();                                      // Set mailer to use SMTP
-    $mail-&gt;Host = '<span class="code-highlight">smtp.dreamhost.com</span>';                   // Specify main and backup SMTP servers
-    $mail-&gt;SMTPAuth = true;                               // Enable SMTP authentication
-    $mail-&gt;Username = '<span class="code-highlight">user@example.com'</span>;                 // SMTP username
-    $mail-&gt;Password = '<span class="code-highlight">secret</span>';                           // SMTP password
-    $mail-&gt;SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-    $mail-&gt;Port = 587;                                    // TCP port to connect to
+    // Configuraciones del servidor
+    $mail-&gt;SMTPDebug = 2;                                 // Habilitar salida de depuración detallada
+    $mail-&gt;isSMTP();                                      // Configurar el remitente para usar SMTP
+    $mail-&gt;Host = '<span class="code-highlight">smtp.dreamhost.com</span>';                  // Especificar servidores SMTP principales y de respaldo
+    $mail-&gt;SMTPAuth = true;                               // Habilitar autenticación SMTP
+    $mail-&gt;Username = '<span class="code-highlight">usuario@example.com'</span>;             // Nombre de usuario SMTP
+    $mail-&gt;Password = '<span class="code-highlight">secreto</span>';                          // Contraseña SMTP
+    $mail-&gt;SMTPSecure = 'tls';                            // Habilitar enciptación TLS, `ssl` también aceptado
+    $mail-&gt;Port = 587;                                    // Puerto TCP para conectarse
 
-    //Recipients
-    $mail-&gt;setFrom('<span class="code-highlight">user@example.com</span>', 'Mailer');
-    $mail-&gt;addAddress('<span class="code-highlight">joe@example.net</span>', '<span class="code-highlight">Joe User</span>');     // Add a recipient
-    //$mail-&gt;addAddress('contact@example.com');               // Name is optional
-    //$mail-&gt;addReplyTo('info@example.com', 'Information');
+    //Destinatarios
+    $mail-&gt;setFrom('<span class="code-highlight">usuario@example.com</span>', 'Mailer');
+    $mail-&gt;addAddress('<span class="code-highlight">joe@example.net</span>', '<span class="code-highlight">Juan Usuario</span>');     // Agregar un destinatario
+    //$mail-&gt;addAddress('contacto@example.com');               // Nombre es opcional
+    //$mail-&gt;addReplyTo('info@example.com', 'Información');
     //$mail-&gt;addCC('cc@example.com');
     //$mail-&gt;addBCC('bcc@example.com');
 
-    //Attachments
-    //$mail-&gt;addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-    //$mail-&gt;addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+    //Archivos adjuntos
+    //$mail-&gt;addAttachment('/var/tmp/archivo.tar.gz');         // Añadir archivos adjuntos
+    //$mail-&gt;addAttachment('/tmp/imagen.jpg', 'nuevo.jpg');    // Nombre es opcional
 
-    //Content
-    $mail-&gt;isHTML(true);                                  // Set email format to HTML
-    $mail-&gt;Subject = '<span class="code-highlight">Subject line goes here</span>';
-    $mail-&gt;Body    = '<span class="code-highlight">Body text goes here</span>';
-    //$mail-&gt;AltBody = 'This is the body in plain text for non-HTML mail clients';
+    //Contenido
+    $mail-&gt;isHTML(true);                                  // Establecer formato de correo electrónico a HTML
+    $mail-&gt;Subject = '<span class="code-highlight">La línea de asunto va aquí</span>';
+    $mail-&gt;Body    = '<span class="code-highlight">El texto del cuerpo va aquí</span>';
+    //$mail-&gt;AltBody = '<span class="code-highlight">Este es el cuerpo en texto plano para clientes de correo no HTML</span>';
 
     $mail-&gt;send();
-    echo 'Message has been sent';
+    echo 'El mensaje ha sido enviado';
 } catch (Exception $e) {
-    echo 'Message could not be sent.';
-    echo 'Mailer Error: ' . $mail-&gt;ErrorInfo;
+    echo '<span class="code-highlight">El mensaje no pudo ser enviado</span>.';
+    echo '<span class="code-highlight">Error de correo</span>: ' . $mail-&gt;ErrorInfo;
 }<br />?&gt;</pre>
 </div>
 </div>
@@ -94,7 +94,7 @@ try {
 <div class="solvvy-solution">
 <p>Si estás utilizando tu dirección de GMAIL para enviar a través de SMTP, primero debes permitir que tu aplicación acceda a tu dirección de GMAIL. Si no haces esto, tu correo electrónico no se autenticará y no se enviará. Ve el siguiente artículo para más detalles:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/115001719551-Troubleshooting-GMAIL-SMTP-authentication-errors">Solucionando problemas de errores de autenticación de SMTP GMAIL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115001719551-Soluci%C3%B3n-de-problemas-de-errores-de-autenticaci%C3%B3n-SMTP-de-GMAIL">Solucionando problemas de errores de autenticación de SMTP GMAIL</a></li>
 </ul>
 </div>
 <h2><span id="See_also">Ver también</span></h2>
