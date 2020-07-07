@@ -1,51 +1,51 @@
-<h2>Overview</h2>
+<h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>PHPMailer allows you to send email from your site via SMTP. Visit <a href="https://github.com/PHPMailer/PHPMailer/blob/master/README.md">PHPMailer’s GitHub page</a> for further details on what it has to offer.</p>
-<p>This article explains how to install PHPMailer on a Shared server. If your website is on a VPS or Dedicated&nbsp; server, view the following article instead.</p>
+<p>PHPMailer&nbsp;te permite enviar correos electrónicos desde tu sitio a través de SMTP. Visita la <a href="https://github.com/PHPMailer/PHPMailer/blob/master/README.md">página de GitHub de PHPMailer</a> para obtener más detalles sobre lo que tiene para ofrecer.</p>
+<p>Este artículo explica cómo instalar PHPMailer en un servidor Shared. Si tu sitio web está en un servidor VPS o Dedicado, visita el siguiente artículo.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/360031176531-PHPMailer-Installing-on-a-VPS-or-Dedicated-server" target="_self">Installing PHPMailer on a VPS or Dedicated server</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360031176531-PHPMailer-Instalaci%C3%B3n-en-un-servidor-VPS-o-Dedicado" target="_self">Instalación de PHPMailer en un servidor VPS o Dedicado</a></li>
 </ul>
 </div>
-<h2><span id="How_to_download_PHPMailer">Installing PHPMailer</span></h2>
+<h2><span id="How_to_download_PHPMailer">Instalando PHPMailer</span></h2>
 <div class="solvvy-solution">
 <ol>
-<li>Log into your server via <a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview" target="_self">SSH</a>.</li>
-<li>Make sure you're in your user's home directory.
+<li>Inicia sesión en tu servidor a tráves de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Asegúrate de estar en el directorio de inicio de tu usuario.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
 </div>
 </li>
-<li>Download the zip file from GitHub.com.
+<li>Descarga el archivo zip de GitHub.com.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://github.com/PHPMailer/PHPMailer/archive/master.zip</span></pre>
 </div>
 </li>
-<li>Unzip the file.
+<li>Descomprime el archivo.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">unzip master.zip</span></pre>
 </div>
-This creates a directory named 'PHPMailer-master'.</li>
-<li>Rename this directory.
+Esto crea un directorio llamado 'PHPMailer-master'.</li>
+<li>Renombra este directorio.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mv PHPMailer-master PHPMailer</span></pre>
 </div>
 </li>
 </ol>
 </div>
-<h2><span id="Basic_code_example">Basic code example for email hosted at DreamHost</span></h2>
+<h2><span id="Basic_code_example">Código básico de ejemplo para correo electrónico alojado en DreamHost</span></h2>
 <div class="solvvy-solution">
-<p>Insert the following code into a PHP file.</p>
+<p>Inserta el siguiente código en un archivo PHP.</p>
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>You only need to update the code in bold.</p>
-<p><strong>username</strong> — Make sure to change the 'username' field to your actual <a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access">shell username</a>. You can also view this by running the following command.</p>
+<p>Solo necesitas acutalizar el código en negrilla.</p>
+<p><strong>nombredeusuario&nbsp;</strong>— Asegurate de cambiar el campo 'username' a tu actual&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">nombre de usuario Shell</a>. También, puedes ver esto ejecutando el siguiente comando.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">echo $USER</span>
 username</pre>
 </div>
-<p><strong>Host&nbsp;</strong>— If you're sending from a DreamHost address, you should only use <strong>smtp.dreamhost.com</strong>. If you are using a Gmail address, use <strong>smtp.gmail.com</strong>.</p>
-<p><strong>Username</strong> and <strong>setFrom</strong> must both be an email on the domain you're sending from.</p>
+<p><strong>Host&nbsp;</strong>— Si estás enviando desde una dirección de DreamHost, debes usar solamente&nbsp;<strong>smtp.dreamhost.com</strong>. Si estás usando una dirección de Gmail, usa&nbsp;<strong>smtp.gmail.com</strong>.</p>
+<p><strong>Username</strong> y&nbsp;<strong>setFrom</strong> ambos deben ser un correo electrónico en el dominio desde el que estás enviando.</p>
 </div>
 </div>
 <div class="preboxcontainer">
@@ -97,25 +97,25 @@ try {
 }<br />?&gt;</pre>
 </div>
 </div>
-<h2>Allowing GMAIL to send from your mail application</h2>
+<h2>Permitir que GMAIL envíe desde tu aplicación de correo</h2>
 <div class="solvvy-solution">
-<p>If you're using your GMAIL address to send via SMTP, you must first allow your application access to your GMAIL address. If you do not do this, your email will not authenticate and not send. View the following article for details:</p>
+<p>Si estás utilizando tu dirección de GMAIL para enviar a través de SMTP, primero debes permitir que tu aplicación acceda a tu dirección de GMAIL. Si no haces esto, tu correo electrónico no se autenticará y no se enviará. Ve el siguiente artículo para más detalles:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115001719551-Soluci%C3%B3n-de-problemas-de-errores-de-autenticaci%C3%B3n-SMTP-de-GMAIL">Troubleshooting GMAIL SMTP authentication errors</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115001719551-Troubleshooting-GMAIL-SMTP-authentication-errors">Solucionando problemas de errores de autenticación de SMTP de GMAIL</a></li>
 </ul>
 </div>
-<h2><span id="See_also">See also</span></h2>
+<h2><span id="See_also">Ver también</span></h2>
 <div class="solvvy-hidden">
-<h3>Internal links</h3>
+<h3>Enlaces internos</h3>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview">SSH overview</a></li>
-<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/en-us/articles/215507058-PHP-mail-overview">PHP mail() overview</a></li>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/216140597-How-do-I-send-PHP-mail-via-SMTP-">How do I send PHP mail via SMTP?</a></li>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/215507068-Troubleshooting-PHP-mail-">Troubleshooting PHP mail()</a></li>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/215730437-SMTP-quota-limits">SMTP quota limits</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215507058-Generalidades-PHP-mail-">Generalidades sobre PHP mail()</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-env%C3%ADo-correo-PHP-v%C3%ADa-SMTP-">¿Cómo envío un correo PHP a tráves SMTP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215507068-Troubleshooting-PHP-mail-">Solucionando problemas de PHP mail()</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215730437-L%C3%ADmites-de-cuota-SMTP">Límites de cuota SMTP</a></li>
 </ul>
-<h3>External links</h3>
+<h3>Enlaces externos</h3>
 <ul>
-<li><a href="https://code.google.com/a/apache-extras.org/p/phpmailer/wiki/UsefulTutorial">PHPMAILER tutorial</a> – Google code</li>
+<li><a href="https://code.google.com/a/apache-extras.org/p/phpmailer/wiki/UsefulTutorial">PHPMAILER tutorial</a> – Código de Google</li>
 </ul>
 </div>
