@@ -61,12 +61,16 @@ memory_limit = 756M</pre>
 <li>Sube el archivo Magento que descargaste en tu servidor web a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a>.</li>
 <li>Inicia sesión en tu servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>, luego&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115002768331-Comandos-UNIX-Descomprimiendo-archivos" target="_self">descomprime el archivo en el servidor</a>.</li>
 <li>Confirma que los archivos de Magento están en el directorio web de tu dominio.</li>
-<li>Cuando visites tu dominio por primera vez, verás que arroja un error 500. Esto se debe al archivo .htaccess del sitio. Ahora debes editar ese archivo para eliminar ciertas líneas.</li>
+<li>Desde el directorio web de tu sitio, ejecuta el siguiente comando para iniciar el proceso de instalación:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">bin/magento setup:install --db-host=mysql.example.com --db-name=example_magento --db-user=magentodb --db-password=example123 --base-url=http://example.com/ --backend-frontname=example_admin --admin-firstname=Admin --admin-lastname=Example --admin-email=magento@example.com --admin-user=admin --admin-password=example123</span></pre>
+</div>
+Asegúrate de reemplazar todo el texto de ejemplo en ese comando con tu base de datos real y la información del sitio.</li>
 </ol>
 </div>
 <h2>Editar tus archivos .htaccess</h2>
 <div class="solvvy-solution">
-<p>Tus archivos .htaccess tienen varias líneas que mencionan <strong>IfVersion</strong>. Esto requiere que 'mod_version' esté instalado en el servidor. Dado que los servidores DreamHost no tienen este módulo instalado, debes eliminar manualmente esas líneas de los archivos .htaccess. Los puedes encontrar en las siguientes dos ubicaciones:</p>
+<p>Tus archivos .htaccess tienen varias líneas que mencionan <strong>IfVersion</strong>. Esto requiere que 'mod_version' esté instalado en el servidor. Los servidores DreamHost que ejecutan Bionic (Ubuntu 18.04) o Stretch (Debian 9) tienen este módulo instalado y no requieren más modificaciones. Si tu servidor web aún no se ha actualizado a ninguna de las versiones, debes eliminar manualmente esas líneas de los archivos .htaccess. Están ubicados en las siguientes dos ubicaciones:</p>
 <p>example.com/.htaccess</p>
 <p>example.com/pub/.htaccess</p>
 <div class="alert alert-note">
@@ -78,36 +82,6 @@ memory_limit = 756M</pre>
 </ul>
 </div>
 </div>
-<ol>
-<li>Abre tu archivo .htaccess usando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200668--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-SSH-">SSH</a>.</li>
-<li>Aquí hay un ejemplo de un bloque que verás.<br />
-<div class="preboxcontainer">
-<pre class="prebox">&lt;Files composer.json&gt;
-  &lt;IfVersion &lt; 2.4&gt;
-    order allow,deny
-    deny from all
-  &lt;/IfVersion&gt;
-  &lt;IfVersion &gt;= 2.4&gt;
-    Require all denied
-  &lt;/IfVersion&gt;
-&lt;/Files&gt;</pre>
-</div>
-</li>
-<li>Edita cada bloque de código para eliminar el texto 2.4 y el &lt;IfVersion&gt; bloque. Entonces, el ejemplo anterior se convertiría en esto:
-<div class="preboxcontainer">
-<pre class="prebox">&lt;Files composer.json&gt;
-  order allow,deny
-  deny from all
-&lt;/Files&gt;</pre>
-</div>
-</li>
-<li>Repite esto para cada bloque que comienza con &lt;IfVersion&gt;.</li>
-<li>Guarda el archivo y visita tu sitio. Ahora debería cargar el asistente de instalación de Magento.</li>
-</ol>
-<p>El resto del asistente de instalación es una configuración a nivel de sitio y se puede hacer referencia en esta página:</p>
-<ul>
-<li><a href="http://devdocs.magento.com/guides/m1x/install/installing_install.html#install-magento" rel="nofollow">Magento devdocs – Installing Magento CE or EE</a></li>
-</ul>
 </div>
 <h2>Solución de problemas</h2>
 <div class="solvvy-solution">
