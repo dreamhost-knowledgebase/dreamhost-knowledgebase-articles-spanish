@@ -58,8 +58,8 @@
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
 RewriteCond&nbsp;%{HTTPS}&nbsp;!=on
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE] 
-</pre>
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+Header always set Content-Security-Policy "upgrade-insecure-requests;"</pre>
 </div>
 <p>Si esto no te funciona, primero revisa las terminaciones de la línea. Copiar/pegar desde tu buscador web a un editor de texto puede no funcionar bien, entonces después de pegar dentro de tu editor de texto tu deberás eliminar cada salto de línea y agregarla de vuelta (salto de línea = tecla de retorno).</p>
 </div>
@@ -79,15 +79,16 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
 RewriteCond&nbsp;%{HTTPS}&nbsp;!=on
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE] 
-</pre>
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+Header always set Content-Security-Policy "upgrade-insecure-requests;"</pre>
 </div>
 <h3>Ejemplo completo incluido el código por defecto de WordPress</h3>
 <p>Abajo es como se verá tu archivo de .htaccess con con el nuevo código HTTPS y el código de WordPress ya existente.</p>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
 RewriteCond&nbsp;%{HTTPS}&nbsp;!=on
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE] 
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+Header always set Content-Security-Policy "upgrade-insecure-requests;"
 
 # BEGIN WordPress
 # The directives (lines) between `BEGIN WordPress` and `END WordPress` are
@@ -108,7 +109,8 @@ RewriteRule . /index.php [L]
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On 
 RewriteCond %{SERVER_PORT} 80 
-RewriteRule ^(.*)$ https://<span class="code-highlight">www.example.com</span>/$1 [R=301,L,NE]</pre>
+RewriteRule ^(.*)$ https://<span class="code-highlight">www.example.com</span>/$1 [R=301,L,NE]
+Header always set Content-Security-Policy "upgrade-insecure-requests;"</pre>
 </div>
 <h3>Ejemplo completo incluido el código por defecto de WordPress</h3>
 <p>Abajo es como se verá tu archivo de .htaccess con con el nuevo código HTTPS y el código de WordPress ya existente.</p>
@@ -116,6 +118,7 @@ RewriteRule ^(.*)$ https://<span class="code-highlight">www.example.com</span>/$
 <pre class="prebox">RewriteEngine On 
 RewriteCond %{SERVER_PORT} 80 
 RewriteRule ^(.*)$ https://<span class="code-highlight">www.example.com</span>/$1 [R=301,L,NE]
+Header always set Content-Security-Policy "upgrade-insecure-requests;"
 
 # BEGIN WordPress
 # The directives (lines) between `BEGIN WordPress` and `END WordPress` are
@@ -138,7 +141,8 @@ RewriteRule . /index.php [L]
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE] </pre>
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+Header always set Content-Security-Policy "upgrade-insecure-requests;"/pre&gt;</pre>
 </div>
 </div>
 <h2><span id="solucion-de-problemas">Solución de problemas</span></h2>

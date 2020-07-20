@@ -1,0 +1,44 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60"></div>
+<div class="alert-content">
+<p>Cualquier certificado de Comodo emitido después de enero de 2019 hace referencia a Sectigo como la autoridad de certificación, mientras que cualquier certificado emitido antes de esta fecha hace referencia a Comodo. Ambos nombres se <a href="https://sectigo.com/comodo" target="_self">refieren a la misma compañía</a>.</p>
+</div>
+</div>
+<p>El proceso de Validación de Control de Dominio (DCV) le permite a Sectigo verificar que tu tienes control sobre un dominio para el que solicitas un certificado. Esto evita que nadie más que tu obtenga acceso a la configuración de seguridad de tu dominio y tome el control de tu sitio.</p>
+</div>
+<h2>¿Cómo valida DreamHost el Control de dominio para los certificados Sectigo?</h2>
+<div class="solvvy-solution">
+<p>DCV se puede verificar mediante uno de los siguientes tres métodos (DNS, HTTP/HTTPS o correo electrónico):</p>
+<h3>DNS</h3>
+<p><strong>Colocando un registro en los nameservers</strong>:&nbsp;DreamHost coloca un registro&nbsp;<a href="https://en.wikipedia.org/wiki/CNAME_record">CNAME</a>&nbsp;en tu zona de archivos con información que Sectigo puede encontrar, y luego valida que tu tienes control sobre el dominio. Una vez que se completa, se elimina el registro CNAME..</p>
+<h3>HTTP/HTTPS</h3>
+<p><strong>Colocando un archivo de acceso público en tu dominio</strong>: DreamHost coloca un archivo con una versión hash de tu Solicitud de firma de certificado (<a href="https://en.wikipedia.org/wiki/Certificate_signing_request">CSR</a>) en tu dominio donde Sectigo puede acceder a ella. Una vez que se verifica que el dominio está bajo tu control, se elimina el archivo.</p>
+<h3>Email</h3>
+<p><strong>Enviando un correo electrónico</strong>: Sectigo envía un correo electrónico a una de una breve lista de direcciones administrativas comunes de correo electrónico asociadas con un dominio (admin @, webmaster @, etc.).</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60"></div>
+<div class="alert-content">
+<p>Asegúrate de que la dirección de correo electrónico que seleccionas cuando compres el certificado Sectigo exista y puedas recibir correos electrónicos antes de seleccionarla. Si es necesario, puedes crear una a través del&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215029918--C%C3%B3mo-agrego-una-direcci%C3%B3n-de-correo-electr%C3%B3nico-">panel</a>. Seleccionar una dirección de confirmación de la lista desplegable no significa que exista, ni DreamHost o Sectigo la crean por ti.</p>
+</div>
+</div>
+<p>Esta es una última opción en el proceso DCV, por lo que es posible que nunca recibas este correo electrónico. Si recibes este correo electrónico de Sectigo, sigue los pasos para completar la verificación de tu dominio.&nbsp;</p>
+</div>
+<h2>¿Qué método se usa?</h2>
+<div class="solvvy-solution">
+<p>Cuando solicitas un certificado de Sectigo Domain Validated (DV), DreamHost intenta validar en el orden que se muestra arriba (DNS, HTTP/HTTPS y luego por correo electrónico). Los dos primeros métodos son preferibles (DNS y HTTP/HTTPS) ya que DreamHost puede automatizarlos en tu nombre con el menor inconveniente posible para ti.</p>
+<p>Si los dos primeros métodos no se completan, DreamHost utilizará el método de correo electrónico si falla el primer intento de validación o si no alojas el dominio en DreamHost.</p>
+</div>
+<h2>¿Cuánto tiempo lleva obtener mi certificado?</h2>
+<div class="solvvy-solution">
+<p>La validación automática a través del método DNS o HTTP/HTTPS generalmente se realiza dentro de las 24 horas. Si el certificado no se obtiene poco después de 24 horas completas, DreamHost utilizará el método de correo electrónico. DreamHost intentará validar enviándote un correo electrónico, utilizando la dirección que seleccionaste como la dirección de correo electrónico de DCV descrita anteriormente.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041537-Generalidades-sobre-certificados-SSL">Generalidades sobre certificados SSL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217298827-Renovar-tu-certificado-SSL-Sectigo">Renovar tu certificado SSL Sectigo</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL">Generalidades sobre agregar un certificado SSL</a>&nbsp;</li>
+</ul>
+</div>
