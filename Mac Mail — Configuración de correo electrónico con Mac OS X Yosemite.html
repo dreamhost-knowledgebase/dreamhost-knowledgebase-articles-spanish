@@ -1,0 +1,144 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/01_MacOSX_yosemite_mail_splash_page.fw.png" alt="01 MacOSX yosemite mail splash page.fw.png" width="224" height="165" /></dd>
+</dl>
+<p>Este artículo te guía a través de los pasos para configurar Apple Mail 8.0 en Mac OS X 10.10 (Yosemite).</p>
+<p>Una vez que completes la configuración, tendrás una conexión IMAP entrante con SSL (sin advertencias) y una conexión SMTP con SSL (sin advertencias).</p>
+</div>
+<h2><span id="Step_one:_Verifying_the_email_user_exists_in_your_web_panel">Paso 1 — Verificando que el usuario de correo electrónico existe en tu panel web</span></h2>
+<div class="solvvy-solution">
+<p>Asegúrate de que tu usuario de correo electrónico ya esté configurado en el panel DreamHost yendo a&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.addresses&amp;" target="_blank" rel="noopener">Manage Email</a>.</p>
+<dl>
+<dd><em>Verás tu usuario de correo en la página:</em></dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-08_panel_email_address_01.png" alt="03 MacOSX web panel email user.fw.png" /></dd>
+</dl>
+</div>
+<h2><span id="Step_two:_Finding_your_email_server">Paso 2 — Encontrar tu servidor de correo electrónico</span></h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En el pasado, era posible usar mail.example.com para conectarte (donde example.com es tu nombre de dominio real). Debido a cómo los clientes de correo modernos manejan la seguridad, esto NO se recomienda ya que puede generar errores de conexión. Asegúrate de utilizar solo el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214918038#nombre-del-servidor">nombre de tu servidor de correo</a> al conectarte.</p>
+</div>
+</div>
+<p>Será uno de los siguientes, dependiendo de si estás utilizando una conexión IMAP o POP:</p>
+<p><strong>Hostname&nbsp;IMAP</strong>: imap.dreamhost.com</p>
+<p><strong>Hostname&nbsp;POP</strong>: pop.dreamhost.com</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Cuando configuras la primera dirección de correo electrónico en un dominio (que está configurado para ser alojado con DreamHost), el sistema DreamHost crea automáticamente los nombres de host y los registros MX necesarios para procesar el correo electrónico para ese dominio. Ten en cuenta también que si esta es tu primera dirección en un dominio, estos correos electrónicos pueden tardar hasta 6 horas en funcionar.</p>
+</div>
+</div>
+</div>
+<h2><span id="Step_three:_Setting_up_a_new_account_in_Mail">Paso 3 — Configurar una nueva cuenta en Mail</span></h2>
+<div class="solvvy-solution">
+<p>Para configurar una nueva cuenta en Mail, sigue estas instrucciones:</p>
+<ol>
+<li>Abre la aplicación Apple Mail haciendo clic en&nbsp;<strong>Mail</strong>&nbsp;en la barra de menú superior.
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/04_MacOSX_mail_new_account.fw.png" alt="04 MacOSX mail new account.fw.png" width="231" height="309" /></dd>
+</dl>
+</li>
+<li>Selecciona la opción&nbsp;<strong>Add Account</strong>.
+<dl>
+<dd><em>La página 'Choose a mail account to add...' se abre:</em></dd>
+</dl>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/05_MacOSX_mail_account_type.fw.png" alt="05 MacOSX mail account type.fw.png" width="428" height="389" /></dd>
+</dl>
+</li>
+<li>Selecciona la opción&nbsp;<strong>Add Other Mail Account…</strong> y haz clic en el botón&nbsp;<strong>Continue</strong>.
+<dl>
+<dd><em>Este ejemplo usa la dirección de correo electrónico "user@dreamhost.com":</em></dd>
+</dl>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/06_MacOSX_new_user_confirm2.fw.png" alt="06 MacOSX new user confirm2.fw.png" width="432" height="329" /></dd>
+</dl>
+</li>
+<li>Ingresa lo siguiente:
+<ul>
+<li><strong>Full Name:</strong> Así es como te gustaría que se muestre tu nombre al enviar un correo electrónico.</li>
+<li><strong>Email Address:</strong> Este campo debe contener la dirección de correo electrónico completa.</li>
+<li><strong>Password:</strong> Esta es la contraseña que configuraste para el correo electrónico al crearla en tu panel.</li>
+</ul>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Create</strong>&nbsp;cuando hayas finalizado.
+<dl>
+<dd><em>Deberías recibir una notificación de que la cuenta debe configurarse manualmente:</em></dd>
+</dl>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Next</strong>&nbsp;para continuar a configurar manualmente tu dirección de correo.
+<dl>
+<dd><em>Luego de hacer click en Next para continuar, la página Incoming Mail Server Info se abre:</em></dd>
+</dl>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/07_MacOSX_new_incoming.fw.png" alt="07 MacOSX new incoming.fw.png" width="440" height="355" /></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En este ejemplo, IMAP se utiliza como conexión, ya que este es el protocolo preferido. Pero, si lo deseas, también puedes usar POP para conectarte.</p>
+</div>
+</div>
+</li>
+<li>Ingresa la siguiente configuración en la página Incoming Mail Server Info page:
+<ul>
+<li><strong>Account Type</strong>: IMAP</li>
+<li><strong>Mail Server</strong>: <a href="https://help.dreamhost.com/hc/es/articles/214918038#nombre-del-servidor">Usa tu nombre de servidor de correo</a>. Esto es imap.dreamhost.com o pop.dreamhost.com.</li>
+<li><strong>User Name</strong>: Tu dirección de correo completa.</li>
+<li><strong>Password</strong>: Esta es la contraseña que configuraste para el correo electrónico al crearla en tu panel.</li>
+</ul>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Next</strong> para continuar.</li>
+<li>Si te pide aceptar el certificado, haz clic en el botón&nbsp;<strong>Connect</strong> para aceptar.
+<dl>
+<dd><em>Una vez conectado, la página Outgoing Mail Server Info se abre:</em></dd>
+</dl>
+<dl>
+<dd><a href="/hc/en-us/articles/222597488-MacMail-How-to-make-changes-to-an-existing-Mail-account"> MacMail — Cómo hacer cambios a una cuenta Mail existente</a></dd>
+</dl>
+</li>
+<li>Ingresa la siguiente configuración en la página Outgoing Mail Server Info:
+<ul>
+<li><strong>SMTP Server</strong>: Este es smtp.dreamhost.com.</li>
+<li><strong>User Name</strong>: Tu dirección de correo completa</li>
+<li><strong>Password</strong>: Esta es la contraseña que configuraste para el correo electrónico al crearla en tu panel.</li>
+</ul>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Create</strong>&nbsp;para crear la dirección de correo.</li>
+</ol>
+<p>Tu nueva dirección de correo electrónico ya está configurada y lista para usar. Puedes enviar un mensaje de prueba para confirmar que funciona correctamente.</p>
+</div>
+<h2>Solución de problemas</h2>
+<div class="solvvy-solution">
+<h3>Errores Certificate mismatch</h3>
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo resolver cualquier error de discrepancia de certificados SSL:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215306748#confiar">Confiar en el certificado en Mac Mail o iPhone</a></li>
+</ul>
+<h3>Solución de problemas de la carpeta de Enviados</h3>
+<p>Si tienes problemas para ver o usar tu carpeta Enviados, revisa el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/228223187-MacMail-How-to-synchronize-the-default-IMAP-folders">Cómo sincronizar las carpetas IMAP por defecto</a></li>
+</ul>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214918038-Generalidades-de-las-configuraciones-del-cliente-de-correo">Generalidades sobre configuración de cliente de correo</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215612887-Protocolos-y-n%C3%BAmeros-de-puerto-para-clientes-de-correo-electr%C3%B3nico">Clientes de correo protocolos y números de puertos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360032739412-Mac-Mail-Configuraci%C3%B3n-de-correo-electr%C3%B3nico-con-macOS-Mojave-y-Catalina">Mac Mail — Configuración de correo electrónico con macOS Mojave y Catalina</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115002335172-Mac-Mail-Configuraci%C3%B3n-de-correo-electr%C3%B3nico-con-Mac-OS-X-El-Capitan-y-macOS-Sierra-High-Sierra" target="_self">Mac Mail — Configuración de correo electrónico con Mac OS X El Capitan y macOS Sierra/High Sierra</a></li>
+<li><a href="/hc/en-us/articles/222597488-Mac-Mail-How-to-make-changes-to-an-existing-Mail-account" target="_self">Mac Mail — Cómo hacer cambios a una cuenta Mail existente</a></li>
+<li><a href="/hc/en-us/articles/228223187-Mac-Mail-How-to-synchronize-the-default-IMAP-folders" target="_self">Cómo sincronizar las carpetas IMAP por defecto</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="http://www.apple.com/support/mac-apps/mail/">http://www.apple.com/support/mac-apps/mail/</a> – Soporte de Apple Mail</li>
+</ul>
+</div>
