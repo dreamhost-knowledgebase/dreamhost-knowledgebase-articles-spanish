@@ -197,14 +197,14 @@ MAILTO="user@example.com"
 El tiempo es basado en eso del servidor que corre el cron.
 <p>Otra manera (gráfica) es viendo estos campos.</p>
 <div class="preboxcontainer">
-<pre class="prebox"> # * * * * *  comando para ejecutar
- # │ │ │ │ │
- # │ │ │ │ │
- # │ │ │ │ └───── día de la semana (0 - 6) (0 a 6 son de domingo a sábado, o usar nombres; 7 es domingo, igual que 0)
- # │ │ │ └────────── mes (1 - 12)
- # │ │ └─────────────── día de la semana (1 - 31)
- # │ └──────────────────── hora (0 - 23)
- # └───────────────────────── min (0 - 59)
+<pre class="prebox"> * * * * *  comando para ejecutar
+ │ │ │ │ │
+ │ │ │ │ │
+ │ │ │ │ └───── día de la semana (0 - 6) (0 a 6 son de domingo a sábado, o usar nombres; 7 es domingo, igual que 0)
+ │ │ │ └────────── mes (1 - 12)
+ │ │ └─────────────── día de la semana (1 - 31)
+ │ └──────────────────── hora (0 - 23)
+ └───────────────────────── min (0 - 59)
 </pre>
 </div>
 <p>Hay varias maneras de especificar múltiples valores en esos campos.</p>
@@ -220,7 +220,14 @@ El tiempo es basado en eso del servidor que corre el cron.
 <li>Esto es equivalente a "1,2,3,4,5,6".</li>
 </ul>
 </li>
-<li>El operador asterisco ('*') (frecuentemente conocido como wildcard) especifica todos los posibles valores para un campo. Por ejemplo, un asterisco en el campo de la hora (segundo) será equivalente a 'cada hora'.</li>
+<li>El operador asterisco ('*') (frecuentemente conocido como wildcard) especifica todos los posibles valores para un campo. Por ejemplo, un asterisco en el campo de la hora (segundo) será equivalente a 'cada hora'.
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si configuras el cron job para que se ejecute en un día específico de la semana, los campos <span class="text-object">mes (month)</span> y <span class="text-object">día del mes seguirán (day of month)</span> apareciendo como un asterisco (*). El valor del día de la semana anulará estos valores, por lo que solo se ejecutará una vez por semana en el día seleccionado.</p>
+</div>
+</div>
+</li>
 <li>El operador barra inclinada ('/') puede ser usado en conjunción con un asterisco para saltar unos valores de números dados. Ejemplo:<br />
 <ul>
 <li>/3</li>
