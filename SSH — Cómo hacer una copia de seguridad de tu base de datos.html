@@ -27,7 +27,7 @@
 </div>
 <p>Una vez allí, ejecuta el siguiente comando. Asegúrate de cambiar el nombre de usuario, la contraseña, tuHostMySQL y nombreBD (base de datos) por las credenciales correctas.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump --opt --user=<span class="code-highlight">username</span> -p --host=<span class="code-highlight">yourMySQLHostname</span> <span class="code-highlight">dbname</span> &gt; nameofyourbackup.sql</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump --opt --user=<span class="code-highlight">usuario</span> -p --host=<span class="code-highlight">tuHostMySQL</span> <span class="code-highlight">nombreBD</span> &gt; <span class="code-highlight">nombredetucopia.sql</span></span></pre>
 </div>
 <ul>
 <li>Luego se te pedirá la contraseña del usuario de tu base de datos.</li>
@@ -53,6 +53,13 @@
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">Generalidades sobre FTP</a></li>
 </ul>
+</div>
+<h2>Hacer una copia de seguridad de tu base de datos en un cron job</h2>
+<div class="solvvy-solution">
+<p>Si deseas hacer una copia de seguridad de tu base de datos en un&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215088668-How-do-I-create-a-cron-job-" target="_self">cron job</a>,&nbsp;deberás especificar la contraseña. Por ejemplo, puedes agregar esta línea a un script de Shell para hacer una copia de seguridad de tu base de datos.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump --opt --user=<span class="code-highlight">usuario</span> --p=<span class="code-highlight">contraseña</span> --host=<span class="code-highlight">tuHostMySQL</span> <span class="code-highlight">nombreBD</span> &gt; <span class="code-highlight">nombredetucopia.sql</span></span></pre>
+</div>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
