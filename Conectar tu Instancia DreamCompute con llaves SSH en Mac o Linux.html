@@ -21,17 +21,17 @@
 <ol>
 <li>Muevela de tu directorio /Descargas a ~/.ssh.<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">macbook$ </span><span class="command">mv ~/Downloads/dashboardkey.pem ~/.ssh</span></pre>
+<pre class="prebox"><span class="server">[macbook]$ </span><span class="command">mv ~/Downloads/dashboardkey.pem ~/.ssh</span></pre>
 </div>
 </li>
 <li>Cambia los permisos a 600:<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">macbook$ </span><span class="command">chmod 600 ~/.ssh/dashboardkey.pem</span></pre>
+<pre class="prebox"><span class="server">[macbook]$ </span><span class="command">chmod 600 ~/.ssh/dashboardkey.pem</span></pre>
 </div>
 </li>
 <li>Ahora puedes iniciar sesión mientras específicas el nombre del archivo:<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">macbook$ </span><span class="command">ssh -i ~/.ssh/dashboardkey.pem USER@IP_ADDRESS</span></pre>
+<pre class="prebox"><span class="server">[macbook]$ </span><span class="command">ssh -i ~/.ssh/dashboardkey.pem USER@IP_ADDRESS</span></pre>
 </div>
 </li>
 </ol>
@@ -40,18 +40,18 @@
 <div class="solvvy-solution">
 <p>Si has creado la llave de emparejamiento en tu computador local, ahora tienes una llave pública y privada en el directorio ~/.ssh. Por ejemplo:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">macbook$ </span><span class="command">ls -la ~/.ssh</span>
+<pre class="prebox"><span class="server">[macbook]$ </span><span class="command">ls -la ~/.ssh</span>
 id_rsa
 id_rsa.pub</pre>
 </div>
 <p>Puedes ahora iniciar sesión corriendo lo siguiente (asegúrate de cambiarla a tu IP como se muestra):</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">macbook$ </span><span class="command">ssh USER@IP_ADDRESS</span></pre>
+<pre class="prebox"><span class="server">[macbook]$ </span><span class="command">ssh USER@IP_ADDRESS</span></pre>
 </div>
 <h3>¿Que pasa si no he creado la llave de emparejamiento id_rsa?</h3>
 <p>Cuando estás creando la llave, puedes llamarla como tu quieras. Por ejemplo, sigamos que la has llamado 'dhc_key'&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/115001736671-Creating-a-new-Key-pair-in-Mac-OS-X-or-Linux" target="_self">en el paso #1</a>&nbsp;corriendo lo siguiente:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh-keygen -t rsa</span></pre>
+<pre class="prebox"><span class="server">[user@server]$ </span><span class="command">ssh-keygen -t rsa</span></pre>
 </div>
 <dl>
 <dd><em>Esto crea una llave de emparejamiento pública/privada del tipo (-t) rsa.</em></dd>
@@ -64,7 +64,7 @@ Enter the file in which you wish to save they key
 </div>
 <p>Debes ahora especificar el nombre de la llave cuando estés iniciando sesión. Por ejemplo:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh -i ~/.ssh/dhc_key USER@IP_ADDRESS</span></pre>
+<pre class="prebox"><span class="server">[user@server]$ </span><span class="command">ssh -i ~/.ssh/dhc_key USER@IP_ADDRESS</span></pre>
 </div>
 </div>
 <h2>Usar un archivo ~.ssh/config para simplificar el inicio de sesión</h2>
@@ -91,7 +91,7 @@ IdentityFile ~/.ssh/dashboardkey.pem</pre>
 </li>
 <li>Ahora puedes iniciar sesión en tu instancia de servidor con el siguiente comando.<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh dhc</span></pre>
+<pre class="prebox"><span class="server">[user@server]$ </span><span class="command">ssh dhc</span></pre>
 </div>
 </li>
 </ol>
