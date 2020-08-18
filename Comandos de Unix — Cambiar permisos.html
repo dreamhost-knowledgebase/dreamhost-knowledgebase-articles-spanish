@@ -7,7 +7,7 @@
 </div>
 <h2>Cambiar permisos vía SSH</h2>
 <div class="solvvy-solution">
-<p>Si has iniciado sesión en tu servidor vía&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>,&nbsp;puedes cambiar los permisos corriendo el comando chmod. Hay dos maneras de establecer permisos usando chmod.</p>
+<p>Si has iniciado sesión en tu servidor vía&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>,&nbsp;puedes cambiar los permisos corriendo el comando <span class="code">chmod</span>. Hay dos maneras de establecer permisos usando <span class="code">chmod</span>.</p>
 <div class="solvvy-solution">
 <ul>
 <li>Modo numérico</li>
@@ -156,7 +156,7 @@
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Mientras que los comandos de arriba sobre chmod son útiles, puede ser entendido si un usuario no quiere tener que iniciar sesión vía SSH solo para cambiar permisos en un archivo. Afortunadamente, muchos clientes FTP como&nbsp;<a href="#filezilla" target="_self">FileZilla</a>&nbsp;tienen la habilidad de cambiar permisos directamente con el cliente.</p>
+<p>Mientras que los comandos de arriba sobre <span class="code">chmod</span> son útiles, puede ser entendido si un usuario no quiere tener que iniciar sesión vía SSH solo para cambiar permisos en un archivo. Afortunadamente, muchos clientes FTP como&nbsp;<a href="#filezilla" target="_self">FileZilla</a>&nbsp;tienen la habilidad de cambiar permisos directamente con el cliente.</p>
 </div>
 </div>
 </div>
@@ -206,23 +206,23 @@
 </table>
 <p>Usar ("+") y ("-") con la información de arriba, te permite combinar permisos de los grupos 'quién' y 'qué' para asignar los permisos exactos que deseas.</p>
 <h3>Ejemplos</h3>
-<p>El formato para usar chmod en los siguientes comandos es:</p>
+<p>El formato para usar <span class="code">chmod</span> en los siguientes comandos es:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod “groups”+”access” file.example</span></pre>
 </div>
-<p>Permite a todo el mundo leer file.txt. En el siguiente ejemplo, 'a' es un bit para 'todos' y el permiso de 'r' (leer) es agregado:</p>
+<p>Permite a todo el mundo leer file.txt. En el siguiente ejemplo, <span class="code">a</span> es un bit para 'todos' y el permiso de <span class="code">r</span> (leer) es agregado:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod a+r file.txt</span></pre>
 </div>
-<p>Elimina todos los permisos de todos, excepto por el dueño que retiene cualquier permiso formal. En el siguiente ejemplo, 'g' es un bit de grupo, 'o' es el bit para 'otros usuarios' y el signo ("-") elimina todos los permisos (rwx):</p>
+<p>Elimina todos los permisos de todos, excepto por el dueño que retiene cualquier permiso formal. En el siguiente ejemplo, <span class="code">g</span> es un bit de grupo, <span class="code">o</span> es el bit para 'otros usuarios' y el signo <span class="code">-</span>elimina todos los permisos (rwx):</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod go-rwx file.txt</span></pre>
 </div>
-<p>El archivo llamado script.cgi ahora es ejecutable por un usuario y un grupo. En el siguiente ejemplo, 'u' es el bit de usuario, 'g' es el bit de 'grupo', y el permiso 'x' es agregado a ambos:</p>
+<p>El archivo llamado script.cgi ahora es ejecutable por un usuario y un grupo. En el siguiente ejemplo, <span class="code">u</span> es el bit de usuario, <span class="code">g</span> es el bit de 'grupo', y el permiso <span class="code">x</span> es agregado a ambos:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod ug+x script.cgi</span></pre>
 </div>
-<p>Todos los archivos creados en el directorio somrdir son propiedad del grupo que posea somedir. En el siguiente ejemplo, 'g' es el bit de grupo y la banderilla 's' es agregada a él.</p>
+<p>Todos los archivos creados en el directorio somrdir son propiedad del grupo que posea somedir. En el siguiente ejemplo, <span class="code">g</span> es el bit de grupo y la banderilla <span class="code">s</span> es agregada a él.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod g+s somedir</span></pre>
 </div>
@@ -231,7 +231,7 @@
 <div class="solvvy-solution">
 <p>Los permisos especiales pueden ser agregados lo cual te permite la habilidad especial de cambiar usuarios o grupo, o especificar un directorio como directorio "temporal".</p>
 <h3>La banderilla 's'</h3>
-<p>Una 's' puede ser agregada al dueño o grupo con permisos de 'leer'. Esto indica el permiso setuid/setgid.</p>
+<p>Una <span class="code">s</span> puede ser agregada al dueño o grupo con permisos de 'leer'. Esto indica el permiso setuid/setgid.</p>
 <ul>
 <li>Si configuras el grupo con el permiso de leer, el configura el bit de setgid. Esto quiere decir que cualquier usuario que cambie en el directorio de plataformas repentinamente todas las acciones como si los dueños del grupo fueran los del grupo por defecto. Esto puede ser útil si quieres que todos los archivos en ese directorio puedan crear/ser propietarios de ese grupo dueño.</li>
 </ul>
@@ -239,7 +239,7 @@
 <li>Si configuras los dueños con permisos de lectura, éste configura el bit de setuid. Esta no es normalmente una buena idea, entonces no lo hagas a menos que sepas realmente lo que estás haciendo.</li>
 </ul>
 <h3>La banderilla 't'</h3>
-<p>La banderilla 't' es básicamente la misma cosa que la 's' para un usuario o grupo, pero es usada cuando aplica para todos los otros. Aquí, el significado es un poco diferente. Quiere decir que cualquiera puede crear un archivo en el directorio, pero solo el propietario es capaz de eliminar ese archivo, no importan los permisos asignados. Este es el permiso al directorio "temporal" y deberá también ser ignorado a menos que sepas lo que estás haciendo.</p>
+<p>La banderilla <span class="code">t</span> es básicamente la misma cosa que la <span class="code">s</span> para un usuario o grupo, pero es usada cuando aplica para todos los otros. Aquí, el significado es un poco diferente. Quiere decir que cualquiera puede crear un archivo en el directorio, pero solo el propietario es capaz de eliminar ese archivo, no importan los permisos asignados. Este es el permiso al directorio "temporal" y deberá también ser ignorado a menos que sepas lo que estás haciendo.</p>
 </div>
 <h2>Cambiar permisos en un cliente FTP</h2>
 <div class="solvvy-solution">
