@@ -39,7 +39,7 @@
 <dt>
 <h3>línea de comando mysql</h3>
 </dt>
-<dd>Agrega el indicador --local-infile a tu declaración de conexión mysql, como:</dd>
+<dd>Agrega el indicador <span class="code">--local-infile</span> a tu declaración de conexión mysql, como:</dd>
 </dl>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql --local-infile -h HOSTNAME -u USERNAME -pPASSWORD DATABASENAME</span></pre>
@@ -48,7 +48,7 @@
 <dt>
 <h3>PHP mysql_connect()</h3>
 </dt>
-<dd>Agrega 2 parámetros adicionales a mysql_connect, uno falso para nuevos enlaces "new link" y luego un indicador de cliente de 128 o CLIENT_LOCAL_FILES:</dd>
+<dd>Agrega 2 parámetros adicionales a mysql_connect, uno <span class="code">false</span> para nuevos enlaces "new link" y luego un indicador de cliente de <span class="code">128</span> o <span class="code">CLIENT_LOCAL_FILES</span>:</dd>
 </dl>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="cmdoutput">mysql_connect('HOSTNAME','USERNAME','PASSWORD', false, 128);</span></pre>
@@ -57,7 +57,7 @@
 <dt>
 <h3>PHP mysqli_connect()</h3>
 </dt>
-<dd>Inicializa mysqli primero a través de mysqli_init y usa mysqli_options () para especificar el archivo local como verdadero antes de conectarte al servidor mysql:</dd>
+<dd>Inicializa mysqli primero a través de <span class="code">mysqli_init</span> y usa <span class="code">mysqli_options ()</span> para especificar el archivo local como verdadero antes de conectarte al servidor mysql:</dd>
 </dl>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="cmdoutput">$link = mysqli_init();
@@ -68,13 +68,11 @@ mysqli_real_connect($link, 'HOSTNAME','USERNAME','PASSWORD','DATABASENAME');</sp
 <dt>
 <h3>PERL DBI</h3>
 </dt>
-<dd>El parámetro mysql_local_infile se puede agregar a la variable de nombre de la fuente de datos o directamente en DBI-&gt; connect:</dd>
+<dd>El parámetro <span class="code">mysql_local_infile</span> se puede agregar a la variable de nombre de la fuente de datos o directamente en <span class="code">DBI-&gt;</span> connect:</dd>
 </dl>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="cmdoutput">$dbh = DBI-&gt;connect("DBI:mysql:database=DATABASENAME;host=HOSTNAME;mysql_local_infile=1", "USERNAME", "PASSWORD");</span></pre>
 </div>
-<h3><span id="mysqldump:_Couldn.27t_execute_.27SET_OPTION_SQL_QUOTE_SHOW_CREATE.3D1.27">mysqldump: Couldn't execute 'SET OPTION SQL_QUOTE_SHOW_CREATE=1'</span></h3>
-<p>Este error es causado por una incompatibilidad con el antiguo sistema operativo Debian de DreamHost en productos VPS dedicados y de servidor web cuando se usa con la versión más reciente del servidor MySQL 5.6.x. Si ves este error, pónte en contacto con el servicio de asistencia para analizar las opciones de actualización del sistema operativo.</p>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">

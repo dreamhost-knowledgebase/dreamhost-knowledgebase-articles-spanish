@@ -28,7 +28,10 @@
 <li>Para generar una respuesta, Rack busca un archivo llamado "config.ru" en el directorio raíz del dominio/subdominio (es decir, el dominio principal del subdirectorio /public).</li>
 <li>Rack requiere que coloques el código apropiado de Ruby en "config.ru" para invocar su marco web o aplicación deseada para manejar la solicitud.</li>
 </ol>
-<p>En circunstancias normales, Ruby on Rails (RoR) creará e inicializará automáticamente todos los archivos y directorios necesarios para interactuar con Passenger / Rack. Al ejecutar una aplicación RoR, los únicos archivos relacionados con Rack que es probable que modifiques será posiblemente agregar información de GEM_PATH a "config.ru" y "tocar" el archivo "tmp/restart.txt".</p>
+<p>En circunstancias normales, Ruby on Rails (RoR) creará e inicializará automáticamente todos los archivos y directorios necesarios para interactuar con Passenger / Rack. Al ejecutar una aplicación RoR, los únicos archivos relacionados con Rack que es probable que modifiques será posiblemente agregar información de <span class="code">GEM_PATH</span> a "config.ru" y <span class="code">touch</span> el archivo restart.txt para reiniciar la aplicación.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">touch tmp/restart.txt</span></pre>
+</div>
 </div>
 <h2>Uso de Passenger vs. FastCGI</h2>
 <div class="solvvy-solution">

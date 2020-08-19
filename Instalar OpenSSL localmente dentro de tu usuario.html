@@ -12,37 +12,37 @@
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Este ejemplo instala la versión 1.1.1b.</p>
+<p>Este ejemplo instala la versión 1.1.1g.</p>
 </div>
 </div>
 <ol>
-<li>Visita&nbsp;<a href="https://www.openssl.org/source/">https://www.openssl.org/source/</a>&nbsp;y localiza la versión que deseas descargar. Da click derecho y selecciona 'Copiar dirección de enlace'.</li>
-<li>Corre 'wget'&nbsp;para descargar el archivo.
+<li>Visita&nbsp;<a href="https://www.openssl.org/source/">https://www.openssl.org/source/</a>&nbsp;y localiza la versión que deseas descargar. Da click derecho y selecciona <span class="text-object">Copiar dirección de enlace</span>.</li>
+<li>Corre <span class="code">wget</span>&nbsp;para descargar el archivo.
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://www.openssl.org/source/openssl-1.1.1b.tar.gz</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz</span></pre>
 </div>
 </li>
-<li>Debes confirmar también la integridad del archivo descargando el archivo SHA256 en la misma página al lado de este.<br />
+<li>Debes confirmar también la integridad del archivo descargando el archivo <span class="text-object">SHA256</span> en la misma página al lado de este.<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://www.openssl.org/source/openssl-1.1.1b.tar.gz.sha256</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz.sha256</span></pre>
 </div>
 </li>
 <li>Una vez ambos archivos se han descargado, ve el checksum para confirmar que la versión que has descargado es segura de usar.<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">sha256sum openssl-1.1.1b.tar.gz</span>
-5c557b023230413dfb0756f3137a13e6d726838ccd1430888ad15bfb2b43ea4b openssl-1.1.1b.tar.gz
-<span class="server">[server]$ </span><span class="command">cat openssl-1.1.1b.tar.gz.sha256</span>
-5c557b023230413dfb0756f3137a13e6d726838ccd1430888ad15bfb2b43ea4b</pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sha256sum openssl-1.1.1g.tar.gz</span>
+ddb04774f1e32f0c49751e21b67216ac87852ceb056b75209af2443400636d46  openssl-1.1.1gb.tar.gz
+<span class="server">[server]$ </span><span class="command">cat openssl-1.1.1g.tar.gz.sha256</span>
+ddb04774f1e32f0c49751e21b67216ac87852ceb056b75209af2443400636d46</pre>
 </div>
 Si son iguales, procede al siguiente paso.</li>
 <li>Descomprime este archivo.<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar zxvf openssl-1.1.1b.tar.gz</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar zxvf openssl-1.1.1g.tar.gz</span></pre>
 </div>
 </li>
-<li>Cambia dentro del nuevo directorio openssl.<br />
+<li>Cambia dentro del nuevo directorio <span class="text-object">openssl</span>.<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd openssl-1.1.1b</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd openssl-1.1.1g</span></pre>
 </div>
 </li>
 <li>Configura el archivo:
@@ -50,7 +50,7 @@ Si son iguales, procede al siguiente paso.</li>
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
 <p>Esto se configurará para ser instalado en un directorio llamado 'openssl' dentro de tu usuario. Asegúrate de cambiar 'username' a tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Usuario Shell</a>.</p>
-<p>Puedes instalarlo donde quieras, solo asegúrate de NO instalarlo dentro del directorio llamado 'openssl-1.1.1'. Este directorio fué ya creado cuando descomprimiste el archivo .tar.gz. Si lo configuras ahí, fallará (pues ya existe).</p>
+<p>Puedes instalarlo donde quieras, solo asegúrate de NO instalarlo dentro del directorio llamado <span class="text-object">openssl-1.1.1g</span>. Este directorio fué ya creado cuando descomprimiste el archivo .tar.gz. Si lo configuras ahí, fallará (pues ya existe).</p>
 <p>Ve la siguiente página de OpenSSL para ver información de opciones de configuración:</p>
 <ul>
 <li><a href="https://wiki.openssl.org/index.php/Compilation_and_Installation#Configuration" target="_self">Recopilación e instalación</a></li>
@@ -58,7 +58,7 @@ Si son iguales, procede al siguiente paso.</li>
 </div>
 </div>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">./config --prefix=/home/username/openssl --openssldir=/home/username/openssl no-ssl2</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">./config --prefix=/home/<span class="code-highlight">username</span>/openssl --openssldir=/home/<span class="code-highlight">username</span>/openssl no-ssl2</span></pre>
 </div>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
@@ -72,7 +72,7 @@ Si son iguales, procede al siguiente paso.</li>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">make</span>
 <span class="server">[server]$ </span><span class="command">make test</span></pre>
 </div>
-Al final deberás ver 'All tests successful'.</li>
+Al final deberás ver <span class="text-object">All tests successful</span>.</li>
 <li>Corre el comando <span class="code">make install</span>.<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">make install</span></pre>
@@ -83,19 +83,19 @@ Al final deberás ver 'All tests successful'.</li>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
 </div>
 </li>
-<li>Agrega las siguientes líneas a tu .bash_profile. Ve&nbsp;'<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo vía SSH</a>' para ver instrucciones.
+<li>Agrega las siguientes líneas a tu <span class="text-object">.bash_profile</span>. Ve&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo vía SSH</a> para ver instrucciones.
 <div class="preboxcontainer">
 <pre class="prebox">export PATH=$HOME/openssl/bin:$PATH
-export LD_LIBRARY_PATH=$HOME/openssl/lib<br />export LC_ALL="en_US.UTF-8"<br />export LDFLAGS="-L/home/<span class="command">username</span>/openssl/lib -Wl,-rpath,/home/<span class="command">username</span>/openssl/lib"</pre>
+export LD_LIBRARY_PATH=$HOME/openssl/lib<br />export LC_ALL="en_US.UTF-8"<br />export LDFLAGS="-L/home/<span class="code-highlight">username</span>/openssl/lib -Wl,-rpath,/home/<span class="code-highlight">username</span>/openssl/lib"</pre>
 </div>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>En la última línea, asegúrate de cambiar 'username' por tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Usuario Shell</a>.</p>
+<p>En la última línea, asegúrate de cambiar <span class="text-object">username</span> por tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Usuario Shell</a>.</p>
 </div>
 </div>
 </li>
-<li>Edita el .bash_profile.<br />
+<li><span class="code">source</span> el <span class="text-object">.bash_profile</span>.<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">. ~/.bash_profile</span></pre>
 </div>
@@ -105,7 +105,7 @@ export LD_LIBRARY_PATH=$HOME/openssl/lib<br />export LC_ALL="en_US.UTF-8"<br />e
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">which openssl</span>
 /home/username/openssl/bin/openssl
 <span class="server">[server]$ </span><span class="command">openssl version</span>
-OpenSSL 1.1.1b  26 Feb 2019</pre>
+OpenSSL 1.1.1g  21 Apr 2020</pre>
 </div>
 </li>
 </ol>
