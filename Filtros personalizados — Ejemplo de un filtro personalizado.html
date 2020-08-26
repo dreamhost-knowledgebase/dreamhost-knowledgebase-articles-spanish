@@ -1,6 +1,6 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este artículo explica cómo crear un filtro simple para mensajes de correo electrónico que mueva un correo electrónico entrante a un directorio específico. Este ejemplo hace referencia a los filtros <a href="/hc/en-us/articles/215686647-Technical-details-on-how-Anti-spam-filters-work" target="_self">Vade</a> de correo electrónico que se utilizan en todas las cuentas de DreamHost.</p>
+<p>Este artículo explica cómo crear un filtro simple para mensajes de correo electrónico que mueva un correo electrónico entrante a un directorio específico.&nbsp;El siguiente ejemplo muestra cómo filtrar los correos electrónicos enviados desde una aplicación de Apple Mail.</p>
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
@@ -8,13 +8,13 @@
 </div>
 </div>
 </div>
-<h2>Encabezados de Vade</h2>
+<h2>Ejemplos de encabezados</h2>
 <div class="solvvy-solution">
-<p>Si los filtros Vade etiquetan un mensaje como SPAM, los encabezados muestran la siguiente línea:</p>
+<p>Este ejemplo muestra cómo filtrar el correo enviado por la aplicación Apple Mail. Cuando esta aplicación envía un correo electrónico, los encabezados mostrarán la siguiente línea:</p>
 <div class="preboxcontainer">
-<pre class="prebox">X-vr-status SPAM</pre>
+<pre class="prebox">X-Mailer: Apple Mail</pre>
 </div>
-<p>Si el encabezado contiene esta línea, el correo electrónico se envía a la carpeta / Spam en Webmail. Sin embargo, si utilizas un cliente de correo electrónico como <a href="/hc/es/articles/216962167-Generalidades-sobre-Mozilla-Thunderbird" target="_self">Thunderbird</a>, es posible que tengas tu propia carpeta basura personalizada. El siguiente ejemplo detecta un correo electrónico etiquetado como SPAM y lo mueve a tu carpeta personalizada de correo no deseado IMAP llamada / OLDJUNK.</p>
+<p>Las instrucciones a continuación capturan cualquier mensaje con la misma línea de encabezado y lo mueven a una carpeta específica.</p>
 </div>
 <h2>Crear el filtro personalizado</h2>
 <div class="solvvy-solution">
@@ -24,26 +24,27 @@
 <li>Si aún no has agregado filtros, haz clic en el botón <strong>Add New Filter</strong>.
 <dl>
 <dd><em>Se abre la página Add New Filter, donde puedes configurar un filtro:</em></dd>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_mail_filters_05.png" alt="Custom_Filter_Example.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/custom-mail-filter.png" alt="Custom_Filter_Example.png" /></dd>
 </dl>
 </li>
-<li>Dado que este ejemplo busca algo en el encabezado, elige 'Headers' y 'contains' de los primeros dos menús desplegables.</li>
-<li>El tercer campo es el contenido exacto que estás buscando. En este ejemplo es X-VR-STATUS: SPAM.
+<li>Dado que este ejemplo busca algo en el encabezado, elige <span class="text-object">Headers</span> y <span class="text-object">contains</span> de los primeros dos menús desplegables.</li>
+<li>El tercer campo es el contenido exacto que estás buscando. En este ejemplo es <span class="text-object">X-Mailer: Apple Mail</span>.
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Para asegurarse de captar el texto, agregue un punto y un asterisco antes del código de esta manera: .*textoaqui</p>
+<p>Para asegurarse de captar el texto, agregue un punto y un asterisco antes del código de esta manera:<br /> <span class="text-object">.*textoaqui</span></p>
 </div>
 </div>
 </li>
-<li>Elige el botón de radio 'Move it to folder:'.</li>
+<li>Elige el botón de radio <span class="text-object">Move it to folder:</span>.</li>
 <li>Justo debajo del botón de radio, escriba el nombre de la carpeta a la que desea que se envíe este correo electrónico.</li>
 <li>Cuando termines de crear tu regla, haz clic en el botón <strong>Add Filter</strong> en la parte inferior.</li>
 </ol>
 </div>
 <h2>Qué esperar</h2>
 <div class="solvvy-solution">
-<p>Si te envían un correo electrónico y Vade lo etiqueta como SPAM, el mensaje ahora se envía a tu carpeta personalizada de correo no deseado IMAP. Esto te permite continuar viendo el Spam en la misma carpeta configurada actualmente en tu cliente de correo.</p>
+<p>Si se te envía un correo electrónico desde una aplicación Apple Mail, ahora se moverá a tu carpeta personalizada <span class="text-object">Apple Mail Messages</span> una vez recibido.</p>
+<p>Puedes crear filtros de encabezado como este para que coincidan con otros correos electrónicos, según los detalles de sus encabezados. Al revisar los encabezados de los mensajes de un correo electrónico que te gustaría filtrar, puedes crear tus propios filtros personalizados basados en encabezados.</p>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
