@@ -16,24 +16,39 @@
 <h2>¿Funciona la redirección para las versiones www y no www del sitio?</h2>
 <div class="solvvy-solution">
 <p>Sí. Si configura una redirección en <strong>example.com</strong>, también funcionará para <strong>www.example.com</strong>.</p>
+</div>
 <h2 class="subheader">¿La redirección cambia los registros MX?</h2>
+<div class="solvvy-solution">
 <p>No. La redirección solo cambia donde está alojado el sitio web. Tus registros MX (correo) no se cambiarán de ninguna manera.</p>
 </div>
-<h2>¿El redireccionamiento funciona con https (certificado SSL)?</h2>
+<h2><span id="redireccionamiento-funciona-con-https">¿El redireccionamiento funciona con https (certificado SSL)? </span></h2>
 <div class="solvvy-solution">
-<p>A continuación se describen algunas formas diferentes en que esto podría configurarse.</p>
-<h3>Redireccionando a la versión segura de un sitio diferente</h3>
+<p>A continuación se describen algunas formas diferentes de configurar esto.</p>
+<h3>Opción 1 — Redirigir a la versión segura de un sitio diferente</h3>
 <p>Solo puedes redirigir a otro sitio que ya esté configurado con un certificado SSL. Por ejemplo:</p>
 <p><strong>http://example.com </strong>a<strong>&nbsp;https://dreamhostexample.com</strong></p>
-<h3>Redireccionando a la versión segura del mismo sitio</h3>
 <div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>No es posible utilizar la opción Redirect del panel (que se describe a continuación) para redirigir al certificado SSL del mismo sitio, ya que esto elimina el alojamiento del dominio. La única opción es crear un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215747748#todas" target="_self">archivo personalizado</a>&nbsp;para redirigir tu sitio a https.</p>
+<p>No puedes utilizar la URL <strong>https</strong> del dominio que se redirige. Esto se debe a que el dominio desde el que estás redirigiendo no está alojado, por lo que no tiene un certificado SSL configurado.</p>
+<p>Solo puede redirigir desde la URL <strong>http</strong> del primer dominio a la URL <strong>https</strong> del segundo dominio.</p>
 </div>
 </div>
-<p>Nunca debes usar la herramienta de redireccionamiento del panel para redirigir a tu propio sitio, ya que no funcionará correctamente. Por ejemplo:</p>
+<h3>Opciónn 2 — Redirigir a la versión segura del mismo sitio</h3>
+<p>No es posible utilizar la opción Redirigir del panel (que se describe a continuación) para redirigir a HTTPS, ya que esto elimina el alojamiento del dominio. Por ejemplo:</p>
 <p><strong>http://example.com </strong>a<strong>&nbsp;https://example.com</strong></p>
+<p>Esto tampoco es necesario, ya que después de haber&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL" target="_self">agregado un certificado SSL a tu dominio</a>,&nbsp;DreamHost redirige automáticamente la URL que usan los visitantes para ver tu sitio de HTTP a HTTPS. La 'S' asegura que tu conexión esté encriptada. Por ejemplo:</p>
+<ul>
+<li><strong>https</strong>://example.com</li>
+</ul>
+<p>No hay nada de tu parte que deba hacer para obligar a tu sitio a utilizar la URL segura. Sin embargo, en algunos casos especiales, puede ser necesario que crees tu propio archivo de configuración personalizado para forzar el redireccionamiento de HTTP a HTTPS.</p>
+<div class="alert-warning">
+<p><strong>Adding custom code is only necessary if your website requires specific code to force the redirect</strong>. If Agregar código personalizado solo es necesario si tu sitio web requiere un código específico para forzar el redireccionamiento. Si es así, primero deberás desactivar la redirección automática en tu panel.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360027022831-Disabling-the-automatic-redirect-to-HTTPS" target="_self">Deshabilitar la redirección automatica a HTTPS</a></li>
+</ul>
+<p>Una vez deshabilitada, puedes proceder a&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115003505112-C%C3%B3mo-forzar-a-su-sitio-a-redireccionar-a-https-SSL-" target="_self">añadir tu archivo personalizado de redirección</a>.</p>
+</div>
 </div>
 <h2>Redireccionando un nuevo dominio o subdominio</h2>
 <div class="solvvy-solution">
