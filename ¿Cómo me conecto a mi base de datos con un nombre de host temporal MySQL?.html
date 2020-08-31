@@ -1,0 +1,63 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Puedes acceder a tu base de datos mientras el DNS de tu sitio principal no está dirigido a DreamHost. Esto requiere tres pasos:</p>
+<ol>
+<li>Crea un nuevo subdominio&nbsp;<a href="/hc/es/articles/360002284771--Que-es-un-subdominio-dreamhosters-com-" target="_self">dreamhosters.com</a> (por ejemplo: example.dreamhosters.com).</li>
+<li>Usando ese subdominio, crea un nombre de host MySQL.</li>
+<li>Usa este nombre de host MySQL para acceder a tu base de datos a través de&nbsp;<a href="/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin" target="_self">phpMyAdmin</a>.</li>
+</ol>
+</div>
+<h2>Paso 1 — Agregar un subdominio dreamhosters.com</h2>
+<div class="solvvy-solution">
+<p>Agrega un subdominio&nbsp;<a href="/hc/es/articles/360002284771--Que-es-un-subdominio-dreamhosters-com-" target="_self">dreamhosters.com</a> (por ejemplo: example.dreamhosters.com) que refleja tu dominio principal en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>.</p>
+<p>Para obtener instrucciones más detalladas sobre este proceso, consulta el siguiente artículo:</p>
+<ul>
+<li><a href="/hc/es/articles/214695758-Ver-tu-sitio-utilizando-un-subdominio-dreamhosters-com-antes-de-cambiar-los-DNS" target="_self">Ver tu sitio utilizando un subdominio dreamhosters.com antes de cambiar los DNS</a></li>
+</ul>
+</div>
+<h2>Paso 2 — Agregar un nombre de host MySQL</h2>
+<div class="solvvy-solution">
+<p>Para agregar un nombre de host para tu nuevo subdominio:</p>
+<ol>
+<li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">Bases de datos MySQL</a>.
+<dl>
+<dd><em>Se abre la página Bases de datos MySQL:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_mysql_add_hostname.png" alt="Accessing your Database add hostname.fw.png" /></dd>
+</dl>
+</li>
+<li>Da click en el botón&nbsp;<strong>Add New Hostname&nbsp;</strong>(a<span style="font-weight: 400;">gregar nuevo nombre de host).</span>
+<dl>
+<dd><em>Se abre la página "Agregar un nombre de host de MySQL":</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_mysql_add_hostname_02.png" alt="Accessing your Database add hostname.fw.png" /></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En el ejemplo anterior:</p>
+<ul>
+<li>El dominio primario es "example.dreamhosters.com".</li>
+<li>El nombre de host de MySQL es "mysql.example.dreamhosters.com".</li>
+</ul>
+</div>
+</div>
+</li>
+<li>Ingresa el prefijo de nombre de host de tu elección (comúnmente "mysql"), y luego selecciona el nuevo subdominio usando el menú desplegable.</li>
+<li>Da click en el botón&nbsp;<strong>Create this MySQL hostname now!</strong> para terminar.</li>
+</ol>
+</div>
+<h2>Paso 3 — Acceder a tu base de datos con phpMyAdmin</h2>
+<div class="solvvy-solution">
+<p>Una vez que los cambios de DNS se propagan (lo que puede demorar entre 4 y 24 horas), puedes acceder a la utilidad de administración MySQL phpMyAdmin utilizando el nombre de host mysql que acaba de crear. En el ejemplo anterior, sería mysql.example.dreamhosters.com.</p>
+<p>Si intentas acceder a phpMyAdmin antes de que se actualicen los registros DNS del nombre de host MySQL, la interfaz phpMyAdmin de DreamHost no podrá reconocer tu información de inicio de sesión.</p>
+<p>Para obtener más información sobre phpMyAdmin y cómo iniciar sesión, consulta el siguiente artículo:</p>
+<ul>
+<li><a href="/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin" target="_self">Generalidades sobre phpMyAdmin</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="/hc/es/articles/215730267--Cómo-accedo-a-mi-base-de-datos-antes-de-un-cambio-de-DNS-" target="_self">¿Cómo accedo a mi base de datos antes de un cambio de DNS?</a></li>
+<li><a href="/hc/es/articles/360002284771--Que-es-un-subdominio-dreamhosters-com-" target="_self">¿Que es un subdominio dreamhosters.com?</a></li>
+</ul>
+</div>
