@@ -1,0 +1,284 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>La interfaz de línea de comandos de WordPress (o, <a href="http://wp-cli.org/">wp-cli </a>)&nbsp;está instalada en todos los servidores de DreamHost. Esta característica te permite ejecutar comandos de WordPress desde tu <a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview">terminal Shell</a>. Por ejemplo, puedes importar una base de datos, crear un nuevo usuario, actualizar temas y plugins, todo usando wp-cli.</p>
+<p>Este artículo es una descripción general rápida de este servicio. Ve los siguientes artículos para obtener información sobre cómo crear un usuario de Shell e iniciar sesión en tu servidor para ejecutar estos comandos.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access">Creando un usuario con acceso Shell (SSH)</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview">Generalidades SSH</a></li>
+</ul>
+</div>
+<h2><span id="Listing_available_commands">Listando comandos disponibles</span></h2>
+<div class="solvvy-solution">
+<p>Inicia sesión en tu servidor a través de&nbsp;<a href="/hc/en-us/articles/216041267-SSH-overview">SSH</a>. Una vez que hayas iniciado sesión, asegúrate de estar en el directorio de tu sitio de WordPress. En ese directorio ejecuta el siguiente comando para imprimir una lista de opciones disponibles:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp</span></pre>
+</div>
+<p>Se muestran los siguientes comandos disponibles:</p>
+<div class="preboxcontainer">
+<pre class="prebox">SUBCOMMANDS
+
+  cache               Adds, removes, fetches, and flushes the WP Object Cache object.
+  cap                 Adds, removes, and lists capabilities of a user role.
+  cli                 Review current WP-CLI info, check for updates, or see defined aliases.
+  comment             Creates, updates, deletes, and moderates comments.
+  config              Generates and reads the wp-config.php file.
+  core                Downloads, installs, updates, and manages a WordPress installation.
+  cron                Tests, runs, and deletes WP-Cron events; manages WP-Cron schedules.
+  db                  Performs basic database operations using credentials stored in wp-config.php.
+  dh-find-check       Combines finding and checking whether the installation is still hosted.
+  doctor              Diagnose what ails WordPress.
+  embed               Inspects oEmbed providers, clears embed cache, and more.
+  eval                Executes arbitrary PHP code.
+  eval-file           Loads and executes a PHP file.
+  export              Exports WordPress content to a WXR file.
+  find                Find WordPress installations on the filesystem.
+  help                Get help on WP-CLI, or on a specific command.
+  host-check          Checks hosting status for WordPress installation.
+  import              Imports content from a given WXR file.
+  language            Installs, activates, and manages language packs.
+  media               Imports files as attachments, regenerates thumbnails, or lists registered image sizes.
+  menu                Lists, creates, assigns, and deletes the active theme's navigation menus.
+  network             Perform network-wide operations.
+  option              Retrieves and sets site options, including plugin and WordPress settings.
+  package             Lists, installs, and removes WP-CLI packages.
+  php-compat          Scan WordPress, plugins and themes for PHP version compatibility.
+  plugin              Manages plugins, including installs, activations, and updates.
+  post                Manages posts, content, and meta.
+  post-type           Retrieves details on the site's registered post types.
+  profile
+  reinstall           Reinstalls WordPress core, themes, and plugins.
+  rewrite             Lists or flushes the site's rewrite rules, updates the permalink structure.
+  role                Manages user roles, including creating new roles and resetting to defaults.
+  scaffold            Generates code for post types, taxonomies, plugins, child themes, etc.
+  search-replace      Searches/replaces strings in the database.
+  server              Launches PHP's built-in web server for a specific WordPress installation.
+  shell               Opens an interactive PHP console for running and testing PHP code.
+  sidebar             Lists registered sidebars.
+  site                Creates, deletes, empties, moderates, and lists one or more sites on a multisite installation.
+  super-admin         Lists, adds, or removes super admin users on a multisite installation.
+  taxonomy            Retrieves information about registered taxonomies.
+  term                Manages taxonomy terms and term meta, with create, delete, and list commands.
+  theme               Manages themes, including installs, activations, and updates.
+  transient           Adds, gets, and deletes entries in the WordPress Transient Cache.
+  user                Manages users, along with their roles, capabilities, and meta.
+  widget              Manages widgets, including adding and moving them within sidebars.</pre>
+</div>
+</div>
+<h2><span id="Finding_more_information_on_a_command">Encontrar más información sobre un comando</span></h2>
+<div class="solvvy-solution">
+<p>Para obtener más información sobre un comando específico, ejecuta la opción <span class="code">--help</span>. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin --help</span></pre>
+</div>
+<p>Esto imprime una lista de subcomandos disponibles. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">SUBCOMMANDS
+
+ activate          Activate a plugin.
+ deactivate        Deactivate a plugin.
+ delete            Delete plugin files.
+ get               Get a plugin.
+ install           Install a plugin.
+ is-installed      Check if the plugin is installed.
+ list              Get a list of plugins.
+ path              Get the path to a plugin or to the plugin directory.
+ search            Search the wordpress.org plugin repository.
+ status            See the status of one or all plugins.
+ toggle            Toggle a plugin's activation state.
+ uninstall         Uninstall a plugin.
+ update            Update one or more plugins.
+</pre>
+</div>
+<p>Luego, puedes combinarlos con el comando principal para realizar una acción. Así es como instalarías un plugin llamado hello-dolly:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin install hello-dolly</span>
+Installing Hello Dolly (1.6)
+Downloading install package from https://downloads.wordpress.org/plugin/hello-dolly.1.6.zip...
+Unpacking the package...
+Installing the plugin...
+Plugin installed successfully.
+</pre>
+</div>
+<p>Si ahora ejecutas <span class="code">wp plugin list</span>, aparecerán todos tus plugins:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin list</span>
++--------------------+----------+--------+---------+
+| name               | status   | update | version |
++--------------------+----------+--------+---------+
+| akismet            | inactive | none   | 3.1.1   |
+| dreamobjects       | inactive | none   | 3.5.2   |
+| hello-dolly        | inactive | none   | 1.6     |
+| hello              | inactive | none   | 1.6     |
+| jetpack            | active   | none   | 3.5.3   |
+| varnish-http-purge | active   | none   | 3.7.2   |
++--------------------+----------+--------+---------+
+</pre>
+</div>
+</div>
+<h2><span id="Common_commands">Comandos comunes</span></h2>
+<p>Estos comandos populares se utilizan con mayor frecuencia al depurar:</p>
+<h2>Plugins</h2>
+<div class="solvvy-solution">
+<dl>
+<dd>
+<h3>Instalando un plugin</h3>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin install PLUGIN_NAME</span></pre>
+</div>
+<h3>Activando un plugin</h3>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin activate PLUGIN_NAME</span></pre>
+</div>
+</dd>
+</dl>
+<dl>
+<dd>
+<h3><span id="Deactivating_a_plugin">Desactivando un plugin</span></h3>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin deactivate PLUGIN_NAME</span></pre>
+</div>
+<dl>
+<dd><em><strong>-o-</strong></em></dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin toggle NAME</span></pre>
+</div>
+<h3><span id="Deactivating_installed_plugins_on_multisite_network">Desactivando plugins instalados en una red de multisite&nbsp;</span></h3>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin toggle NAME --network</span></pre>
+</div>
+</dd>
+</dl>
+</div>
+<h2>Temas</h2>
+<div class="solvvy-solution">
+<dl>
+<dd>
+<h3>Instalando un tema</h3>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp theme install THEME_NAME</span></pre>
+</div>
+</dd>
+</dl>
+<dl>
+<dd>
+<h3><span id="Deactivating_a_theme">Desactivando un tema</span></h3>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp theme deactivate THEME_NAME</span></pre>
+</div>
+<p>Luego debes activar un tema diferente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp theme activate THEME_NAME</span></pre>
+</div>
+</dd>
+</dl>
+</div>
+<h2><span id="users">Usuarios</span></h2>
+<div class="solvvy-solution">
+<dl>
+<dd>
+<h3>Creando usuarios</h3>
+<p>Ver una lista de todos los usuarios actuales:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp user list</span></pre>
+</div>
+<p>Crea un nuevo nombre de usuario mientras asignas tu correo electrónico y función:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp user create newusername support@dreamhost.com --role=administrator</span></pre>
+</div>
+<h3><span id="Changing_a_password">Cambiando una contraseña</span></h3>
+<p>Lista de todos los usuarios para ver tu usuario ID#:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp user list</span></pre>
+</div>
+<p>Utiliza ese ID# de usuario para actualizar su contraseña:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp user update 3 --user_pass=123456</span></pre>
+</div>
+<h3>Eliminando un usuario</h3>
+<p>Ver una lista de todos los usuarios actuales:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp user list</span></pre>
+</div>
+<p>Eliminar al usuario según su nombre:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp user delete username</span>
+--reassign parameter not passed. All associated posts will be deleted. Proceed? [y/n] <span class="command">y</span></pre>
+</div>
+</dd>
+</dl>
+</div>
+<h2><span id="cache">Vaciar tu caché</span></h2>
+<div class="solvvy-solution">
+<dl>
+<dd>
+<p>Ejecuta esto para vaciar tu caché:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp cache flush</span></pre>
+</div>
+<dl>
+<dd></dd>
+</dl>
+</dd>
+</dl>
+</div>
+<h2>Actualizando</h2>
+<div class="solvvy-solution">
+<dl>
+<dd>
+<h3><span id="Re-updating_core_files">Actualizando archivos principales</span></h3>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp core update</span></pre>
+</div>
+<h3><span id="Forcing_the_DB_upgrade_to_run">Forzando la actualización de BD para que se ejecute</span></h3>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp core update-db</span></pre>
+</div>
+<h3>Descargar a la fuerza todos los archivos principales</h3>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp core download --force</span></pre>
+</div>
+<h3>Actualizando la url 'home'</h3>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp option update home http://www.example.com</span></pre>
+</div>
+<h3>Actualizando la url 'siteurl'</h3>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp option update siteurl http://www.example.com</span></pre>
+</div>
+</dd>
+</dl>
+</div>
+<h2>Actualizando la version que usa wp-cli</h2>
+<div class="solvvy-hidden">
+<ol>
+<li>Para cambiar la versión de PHP que usa wp-cli, <a href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH" target="_self">añade la siguiente linea</a>&nbsp;a tu .bash_profile. Cambia la versión según sea necesario.
+<div class="preboxcontainer">
+<pre class="prebox">export WP_CLI_PHP=/usr/local/php72/bin/php wp</pre>
+</div>
+</li>
+<li>A continuación, actualice el .bash_profile ejecutando esto:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">. ~/.bash_profile</span></pre>
+</div>
+</li>
+<li>Finalmente, verifica para confirmar que wp-cli está usando esta nueva versión ejecutando <span class="code">wp --info</span>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp --info</span>
+
+OS:     Linux 4.14.117-grsec-grsec+ #1 SMP Fri May 10 17:15:47 PDT 2019 x86_64
+Shell:  /bin/bash
+PHP binary:     /usr/local/php72/bin/php
+PHP version:    7.2.13</pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="http://wp-cli.org/">http://wp-cli.org/</a> – Sitio Oficial WP CLI</li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360001310966-How-to-log-into-your-WordPress-site">Cómo iniciar sesión en tu sitio WordPress</a></li>
+<li><a href="/hc/en-us/articles/215525287-WordPress-overview">Generalidades sobre WordPress</a></li>
+</ul>
+</div>

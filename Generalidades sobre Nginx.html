@@ -1,0 +1,70 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Nginx (pronunciado engine-x) es un servidor HTTP gratuito, de código abierto, de alto rendimiento y proxy inverso, así como un servidor proxy IMAP / POP3. Es conocido por su alto rendimiento, estabilidad, rico conjunto de características, configuración simple y bajo consumo de recursos.</p>
+<p>Nginx funciona con varios sitios de alta visibilidad, como Netflix, Hulu, Pinterest, Cloudflare, Airbnb, WordPress.com, GitHub, SoundCloud, Zynga, Eventbrite, Zappos, Heroku, RightScale, Engine Yard y MaxCDN</p>
+<p>Ve el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="https://www.nginx.com/resources/wiki/">https://www.nginx.com/resources/wiki/</a></li>
+</ul>
+<p>Nginx está disponible en los&nbsp;<a href="/hc/en-us/articles/215280058-Virtual-Private-Server-overview-VPS-">Servidores Privados</a>&nbsp;de DreamHost como un servidor web opcional para ejecutar tus sitios.</p>
+</div>
+<h2><span id="Nginx_at_DreamHost">Nginx en DreamHost</span></h2>
+<div class="solvvy-solution">
+<p>Todos los&nbsp;<a href="/hc/en-us/articles/215280058-Virtual-Private-Server-overview-VPS-">servidores prvados</a>&nbsp;de DreamHost usan Apache por defecto en lugar de Nginx. Esto se debe a que Apache admite una caja de herramientas más grande de cosas que puede hacer de inmediato y es probablemente el más compatible en todo el software web que existe en la actualidad.</p>
+<p>Sin embargo, Nginx es una muy buena opción en los casos en que tienes un sitio que recibe grandes volúmenes de tráfico y se encuentra con problemas de rendimiento/memoria en un&nbsp;<a href="/hc/en-us/articles/215280058-Virtual-Private-Server-overview-VPS-">VPS</a>. Un servidor que ejecuta Nginx sirve tu sitio más rápido mientras usa menos memoria que Apache. Esto te permite manejar una cantidad mucho mayor de tráfico con más gracia que Apache. Para una visión más detallada de esto, visita la página de comparación de rendimiento del servidor web:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215945987-Web-server-performance-comparison">Comparación de rendimiento de servidor web</a></li>
+</ul>
+</div>
+<h2><span id="Gzip_compression">Compresión Gzip</span></h2>
+<div class="solvvy-solution">
+<p>Por defecto, la compresión gzip está habilitada en su servidor Nginx. Sigue estos pasos para deshabilitar la compresión gzip:</p>
+<ol>
+<li>Visita el artículo <a href="/hc/en-us/articles/216455077-Nginx-configuration-file-locations">archivos locales de configuración</a>&nbsp;para crear tu directorio local&nbsp;&nbsp;<code>/nginx/example.com</code>.</li>
+<li>Crea un archivo llamado settings.conf en este directorio&nbsp;<code>/nginx/example.com</code>.</li>
+<li>Agrega el siguiente contenido:
+<div class="preboxcontainer">
+<pre class="prebox">gzip off;
+</pre>
+</div>
+</li>
+<li>Asegúrate de&nbsp;<a href="/hc/en-us/articles/216454967-How-to-reload-and-restart-Nginx-Dedicated-servers-only-">volver a cargar Nginx</a> para que los cambios surtan efecto.</li>
+</ol>
+<p>Hay opciones de compresión gzip adicionales que puedes configurar que se detallan en el siguiente enlace:</p>
+<ul>
+<li><a href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html">HttpGzipModule</a></li>
+</ul>
+</div>
+<h2>Configuraciones de Nginx para aplicaciones comunes</h2>
+<div class="solvvy-solution">
+<p>Muchas aplicaciones web como WordPress y MediaWiki están configuradas originalmente para funcionar con Apache. Dado que los archivos .htaccess no son compatibles con Nginx, hay algunos ajustes que debes hacer para que tus aplicaciones se ejecuten correctamente.</p>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215945617-Adding-a-private-server-VPS-">Añadir un servidor privado (VPS)</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215833158-PHP-with-Nginx-at-DreamHost">PHP con Nginx en DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216454967-How-to-reload-and-restart-Nginx-Dedicated-servers-only-">Cómo recargar y reiniciar Nginx (servidores Dedicados solamente)</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216455077-Nginx-configuration-file-locations">Ubicación de archivos de configuración de Nginx</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215837528-Password-protecting-directories-with-Nginx">Protegiendo directorios Nginx con contraseña</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216456087-Creating-redirects-with-Nginx">Crear redirecciones con Nginx</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216456127-Blocking-IPs-with-Nginx">Bloquear IPs con Nginx</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214880148-How-to-change-your-web-server-to-Nginx">Cómo cambiar tu servidor web a Nginx</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="http://wiki.nginx.org/">Wiki oficial de Nginx</a></li>
+<li><a href="http://linuxaria.com/pills/how-to-modify-an-url-extension-with-a-nginx-rewrite?lang=en">Cómo modificar la extensión de una URL con una sobrescritura Nginx</a></li>
+</ul>
+<h3><span id="WordPress-related">Relacionados con WordPress</span></h3>
+<ul>
+<li><a href="http://ocaoimh.ie/wordpress-nginx-wp-super-cache/">WordPress, Nginx, y WP Super Cache</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214824958-How-to-make-statistics-and-permalinks-work-with-WordPress-and-Nginx">Cómo hacer que las estadísticas y los permalinks funcionen con WordPress y Nginx</a></li>
+</ul>
+<h3><span id="Drupal-related">Relacionado con Drupal</span></h3>
+<ul>
+<li><a href="http://groups.drupal.org/nginx">Nginx Drupal Group</a></li>
+<li><a href="http://groups.drupal.org/node/39944">Nginx, Multisitio, y reglas de sobrescritura</a></li>
+</ul>
+</div>

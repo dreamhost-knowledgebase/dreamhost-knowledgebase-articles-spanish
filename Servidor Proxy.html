@@ -1,0 +1,47 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>En un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">Servidor Virtual Privado DreamHost</a>&nbsp;(VPS) o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">servidor Dedicado</a>, puedes configurar un servidor proxy.&nbsp;Puedes configurarlo en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.proxy&amp;" target="_blank" rel="noopener">Proxy</a> en el&nbsp;<a href="https://panel.dreamhost.com/">panel DreamHost</a>.</p>
+</div>
+<h2>Detalles técnicos</h2>
+<div class="solvvy-solution">
+<p>La función del servidor proxy es un proxy inverso que usa Apache&nbsp;<a href="http://httpd.apache.org/docs/current/mod/mod_proxy.html">mod_proxy</a>.</p>
+<p><span class="text-product">mod_proxy</span> reenvía las solicitudes que Apache recibe a otro proceso en ejecución a través de un puerto específico. Solo puedes reenviar solicitudes a daemon vinculados a todos los hosts, y solo en puertos superiores a 8000.</p>
+</div>
+<h2>Procesos Daemon</h2>
+<div class="solvvy-solution">
+<p>Un proceso de daemon es un proceso de servidor que escucha la comunicación de clientes remotos. Por ejemplo, el servidor web Apache es un daemon que escucha las conexiones de socket TCP desde las aplicaciones cliente del navegador web. Algunos servidores, como TeamSpeak o servidores de juegos, también pueden escuchar paquetes UDP.</p>
+<p>Una cuenta DreamHost VPS (o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Servidor Dedicado)</a> te permite ejecutar procesos del servidor daemon. Están limitados a los recursos del servidor (CPU/RAM) por los que pagas. Esto difiere de un plan de alojamiento shared, donde estos procesos podrían afectar negativamente a otros usuarios en el mismo servidor.</p>
+<p>Los procesos Daemon que se unen a un puerto (en el que escuchan las conexiones entrantes) son visibles desde Internet. DreamHost no emplea ningún tipo de firewall o bloqueo de puertos en su red.</p>
+</div>
+<h2>Configurar un puerto del servidor</h2>
+<div class="solvvy-solution">
+<p>Ingresa los siguientes valores en el panel DreamHost:</p>
+<ol>
+<li>Inicia tu proceso de daemon, vinculado a un puerto entre 8000 y 65535.</li>
+<li>Visita la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.proxy&amp;" target="_blank" rel="noopener">Proxy</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/proxy-domain.png" alt="proxy domain" /></dd>
+</dl>
+</li>
+<li>Bajo "Set Up A Proxy Server Port"
+<ul>
+<li><strong>URL to set up Proxy under:</strong> Ingresa la porción de tu dominio que tendrá el servicio proxy.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El campo de texto a la derecha del dominio mostrará <span class="text-object">/url/to/proxy/</span> cuando cargues esta página. Asegúrate de borrar ese texto del campo o ingresa un subdirectorio de tu sitio.</p>
+</div>
+</div>
+</li>
+<li><strong>Port Number to Proxy:</strong> Ingresa el número de puerto que configuraste para que tu aplicación use.</li>
+</ul>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Add Proxy Server</strong>.</li>
+</ol>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">Generalidades sobre servidores privados</a></li>
+</ul>
+</div>
