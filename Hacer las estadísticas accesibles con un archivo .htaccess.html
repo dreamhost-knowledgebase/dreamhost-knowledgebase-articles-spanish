@@ -1,0 +1,145 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Las estadísticas del sitio no están disponibles en los planes DreamPress (excluyendo los planes antiguos de DreamPress Legacy). Asegúrate de habilitar&nbsp;<a href="/hc/en-us/articles/115006051887-Using-Jetpack-with-DreamPress">Jetpack</a> si deseas capturar estadísticas del sitio en tu sitio DreamPress.</p>
+</div>
+</div>
+<p>Muchas aplicaciones de blog y CMS generan su propio archivo&nbsp;<a href="/hc/en-us/articles/216456227--htaccess-overview">.htaccess</a> que hace que las estadísticas de DreamHost sean inalcanzables. Para corregir esta situación, debes editar tu archivo .htaccess.</p>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este problema no se aplica a un blog de WordPress instalado en un subdirectorio en tu servidor. Por ejemplo, un blog en example.com/ se verá afectado, pero un blog en example.com/blog/ no se verá afectado.</p>
+</div>
+</div>
+</div>
+<h2><span id="Editing_an_.htaccess_file">Editar un archivo .htaccess</span></h2>
+<div class="solvvy-solution">
+<p>Un archivo .htaccess es un archivo de texto sin formato. Como tal, hay muchas formas diferentes de editar el archivo. La forma más fácil es&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/115000098272-Creating-and-editing-a-file-via-FTP">editar el archivo usando un cliente FTP</a>. En ese cliente, asegúrate de que la capacidad de ver <a href="https://help.dreamhost.com/hc/es/articles/215613037--C%C3%B3mo-muestro-archivos-ocultos-en-mi-cliente-FTP-" target="_self">archivos ocultos esté habilitada</a>. Esto te permite ver archivos que comienzan con un período que luego puedes editar y guardar utilizando tu cliente.</p>
+<p>Una mejor manera de editar un archivo .htaccess es conectarse a su servidor a través de&nbsp;<a href="/hc/en-us/articles/216041267-SSH-overview">SSH</a> y abrir el archivo en un editor de texto. Una buena opción es un editor de texto llamado nano. Luego puedes simplemente hacer tus cambios y volver a guardarlo.</p>
+<p>Consulta el siguiente artículo para obtener detalles sobre cómo editar un archivo mediante SSH:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH">Crear y editar un archivo a través de SSH</a>&nbsp;</li>
+</ul>
+<h3>Otros editores de texto</h3>
+<p>A largo plazo, es posible que desee encontrar un editor de texto que puedas usar para editar archivos en tu propia computadora que te brinde la opción de guardar con finales de línea de 'estilo Unix'. Esto te permite usar FTP para copiar el archivo .htaccess a tu computadora, editarlo con herramientas familiares y luego volver a colocarlo en el servidor (nuevamente a través de FTP).</p>
+<p>Para Macintosh, Bare Bones BBEdit (o el Textwrangler gratuito) se considera el mejor editor de texto para usar:</p>
+<ul>
+<li><a href="http://www.barebones.com/">http://www.barebones.com/</a></li>
+</ul>
+<p>Para PC con Windows, un editor de texto popular que muchos usan es Notepad++:</p>
+<ul>
+<li><a href="https://notepad-plus-plus.org/">https://notepad-plus-plus.org/</a></li>
+</ul>
+<p>Los buenos editores de texto están disponibles para casi cualquier plataforma. Muchos son "gratuitos" y/o de código abierto y se pueden localizar fácilmente a través de una búsqueda en Google.</p>
+</div>
+<h2><span id="What_to_change_in_the_.htaccess_file">Qué cambiar en el archivo .htaccess</span></h2>
+<div class="solvvy-solution">
+<p>Una vez que hayas abierto el archivo en nano (u otro editor de texto), deberás actualizarlo utilizando la información a continuación.</p>
+<p>Tu archivo "estándar" de WordPress .htaccess se parece a esto:</p>
+<div class="preboxcontainer">
+<pre class="prebox"># BEGIN WordPress<br /># The directives (lines) between `BEGIN WordPress` and `END WordPress` are<br /># dynamically generated, and should only be modified via WordPress filters.<br /># Any changes to the directives between these markers will be overwritten.
+&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond&nbsp;%{REQUEST_FILENAME}&nbsp;!-f
+RewriteCond&nbsp;%{REQUEST_FILENAME}&nbsp;!-d
+RewriteRule . /index.php [L]
+&lt;/IfModule&gt;
+# END WordPress 
+</pre>
+</div>
+<p>Para permitir que el directorio "stats" se muestre correctamente en DreamHost, debes agregar las siguientes líneas a tu .htaccess antes de la sección agregada por WordPress:</p>
+<div class="preboxcontainer">
+<pre class="prebox">ErrorDocument 401 "Error"
+ErrorDocument 403 "Error"
+
+&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
+RewriteBase /
+RewriteCond&nbsp;%{REQUEST_URI} ^/(stats|failed_auth\.html).*$ [NC]
+RewriteRule . - [L]
+&lt;/IfModule&gt; 
+</pre>
+</div>
+<ul>
+<li>Las líneas utilizadas en el ejemplo anterior son independientes, por lo que puedes colocarlas al comienzo de cualquier archivo .htaccess para corregir estadísticas y no interferirá con otras operaciones .htaccess.</li>
+<li>Las entradas anteriores también funcionan con Drupal (agregadas sobre el código de archivo estándar de Drupal .htaccess).</li>
+</ul>
+<p>El archivo final .htaccess para WordPress se vería así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">ErrorDocument 401 "Error"
+ErrorDocument 403 "Error"
+
+&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
+RewriteBase /
+RewriteCond&nbsp;%{REQUEST_URI} ^/(stats|failed_auth\.html).*$ [NC]
+RewriteRule . - [L]
+&lt;/IfModule&gt; 
+<br /># BEGIN WordPress<br /># The directives (lines) between `BEGIN WordPress` and `END WordPress` are<br /># dynamically generated, and should only be modified via WordPress filters.<br /># Any changes to the directives between these markers will be overwritten.
+&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond&nbsp;%{REQUEST_FILENAME}&nbsp;!-f
+RewriteCond&nbsp;%{REQUEST_FILENAME}&nbsp;!-d
+RewriteRule . /index.php [L]
+&lt;/IfModule&gt;
+# END WordPress
+</pre>
+</div>
+<p>Si esto no parece funcionar inicialmente para ti, recuerda borrar tu caché. Visita el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="/hc/en-us/articles/216456827-How-to-clear-your-browser-s-cache">Borrar caché</a></li>
+</ul>
+<p>La misma idea básica funciona para Textpattern. Aquí hay una muestra de .htaccess para Textpattern.</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
+# DreamHost stats
+RewriteBase /
+RewriteCond&nbsp;%{REQUEST_URI} ^/(stats|failed_auth\.html).*$ [NC]
+RewriteRule . - [L]
+
+# Textpattern
+RewriteCond&nbsp;%{REQUEST_FILENAME} -f [OR]
+RewriteCond&nbsp;%{REQUEST_FILENAME} -d
+RewriteRule ^(.+) - [PT,L]
+RewriteRule . /index.php
+&lt;/IfModule&gt;
+</pre>
+</div>
+<p>Para que tus estadísticas funcionen en Ruby on Rails o Joomla, agrega lo siguiente en la parte superior del archivo .htaccess (ubicado en el directorio "público" de tu aplicación Rails o directorio raíz de tu sitio web Joomla):</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
+RewriteBase /
+RewriteCond&nbsp;%{REQUEST_URI} ^/(stats|failed_auth\.html).*$ [NC]
+RewriteRule . - [L]
+&lt;/IfModule&gt;
+</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Desafortunadamente, si estás utilizando&nbsp;<a href="/hc/en-us/articles/215769578-Passenger-overview">Phusion Passenger</a> para implementar tu aplicación Ruby on Rails, las estadísticas no están disponibles en la web porque Passenger anula el comportamiento del archivo .htaccess. Se recomienda que uses un paquete de estadísticas de terceros.</p>
+</div>
+</div>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216510258-Habilitar-estad%C3%ADsticas">Habilitar estadísticas</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214824958-How-to-make-statistics-and-permalinks-work-with-WordPress-and-Nginx">Cómo hacer funcionar las estadísticas con WordPress y Nginx</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216456227--htaccess-overview">Generalidades .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH">Crear y editar un archivo a través SSH</a></li>
+</ul>
+</div>
