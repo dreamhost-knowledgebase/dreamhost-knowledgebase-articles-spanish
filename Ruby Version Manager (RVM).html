@@ -1,0 +1,157 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si tu aplicación Ruby no se inicia porque falta un gem, debes instalarlo localmente usando Bundler. Para obtener más información sobre el uso de Bundler, visita la siguiente página:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115001070131-Usar-Bundler-para-instalar-Ruby-gems">Usando Bundler para instalar Ruby gems</a></li>
+</ul>
+</div>
+</div>
+<p>Ruby Version Manager (RVM) es una utilidad que te permite agregar tu propia versión personal de Ruby a un usuario. Te permite agregar, eliminar o tener múltiples versiones de Ruby y sus bibliotecas en tu directorio de usuario.</p>
+<p>Este artículo te explica cómo instalar RVM manualmente, así como una versión personalizada de Ruby y/o Rails. Una vez completado, puedes habilitar Passenger dentro de tu panel y seleccionar qué versión de Ruby deseas usar con tu sitio.</p>
+</div>
+<h2><span id="Installing_RVM">Instalando RVM</span></h2>
+<div class="solvvy-solution">
+<p>Para comenzar, primero deberás instalar RVM en tu usuario de shell y configurarlo para que se cargue automáticamente. Visita el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Creando un usuario con acceso Shell (SSH)</a> para asegurarse de que su usuario sea un usuario de Shell.&nbsp;Luego puedes iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> para ejecutar los siguientes comandos en el directorio de tu usuario.</p>
+<ol>
+<li>Asegúrate de estar en el directorio de inicio de tu usuario:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li><a href="https://rvm.io/rvm/install">Instala las llaves públicas de RVM</a>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB</span></pre>
+</div>
+<p>Esto crea una nueva carpeta bajo tu usuario llamada /.gnupg con la llave pública.</p>
+</li>
+<li>Instale la última versión estable de RVM:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -sSL https://get.rvm.io | bash -s</span></pre>
+</div>
+<p>Este comando hace las siguientes tres cosas:</p>
+<ul>
+<li>Crea una nueva carpeta bajo tu usuario llamada /.rvm</li>
+<li>Añade esta línea a tú .bash_profile</li>
+</ul>
+<dl>
+<dd>
+<div class="preboxcontainer">
+<pre class="prebox">[[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*</pre>
+</div>
+</dd>
+</dl>
+<ul>
+<li>Añade esta línea a tú .bashrc file:</li>
+</ul>
+<dl>
+<dd>
+<div class="preboxcontainer">
+<pre class="prebox"># Add RVM to PATH for scripting. Make sure this is the last PATH variable change.<br />export PATH="$PATH:$HOME/.rvm/bin"</pre>
+</div>
+</dd>
+</dl>
+</li>
+<li>Ejecuta esto para desarmar tu GEM_HOME:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">unset GEM_HOME</span></pre>
+</div>
+</li>
+<li>Ejecuta esto para actualizar su nueva instalación RVM:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">source ~/.rvm/scripts/rvm</span></pre>
+</div>
+</li>
+<li>Ejecuta lo siguiente para deshabilitar autolibs:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rvm autolibs disable</span></pre>
+</div>
+</li>
+<li>Ahora verifica si RVM está instalado y funcionando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rvm --version</span>
+rvm 1.29.10-next (master) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]</pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="Installing_any_version_of_Ruby_you_wish">Instalando cualquier versión de Ruby que desees</span></h2>
+<div class="solvvy-solution">
+<p>Una vez que RVM está configurado, puedes instalar cualquier versión de Ruby que desees.</p>
+<p>Primero debes deshabilitar&nbsp;<a href="https://rvm.io/rvm/autolibs">autolibs</a>. Si autolibs no está deshabilitado, la instalación de Ruby falla debido a problemas de permisos.</p>
+<ol>
+<li>Ejecuta lo siguiente para obtener una lista de versiones disponibles para instalar:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rvm list known</span></pre>
+</div>
+</li>
+<li>Instala la versión exacta de Ruby que necesites. Este ejemplo instala la versión 2.5.1:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rvm install 2.7.1</span></pre>
+</div>
+</li>
+<li>Ahora puedes decirle a tu sistema que use esta versión por defecto:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rvm use 2.7.1 --default</span></pre>
+</div>
+</li>
+<li>Verifica la versión de Ruby para confirmar que se ha actualizado.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ruby -v</span>
+ruby 2.7.1p83 (2020-03-31 revision a0c7c23c9c) [x86_64-linux]</pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="Installing_any_version_of_Rails_you_wish">Instalando cualquier versión de Rails que decidas</span></h2>
+<div class="solvvy-solution">
+<p>Primero debes deshabilitar&nbsp;<a href="https://rvm.io/rvm/autolibs">autolibs</a>. Si autolibs no está deshabilitado, la instalación de Rails falla debido a problemas de permisos.</p>
+<ol>
+<li>Ejecuta este comando para instalar la última versión de Rails:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">gem install rails</span></pre>
+</div>
+</li>
+<li>O puedes instalar una versión específica:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">gem install rails --version 6.0.3.2</span></pre>
+</div>
+</li>
+<li>Ve una lista completa de versiones disponibles en rubygems.org:
+<ul>
+<li><a href="https://rubygems.org/gems/rails/versions">Rails versions</a></li>
+</ul>
+</li>
+</ol>
+</div>
+<h2><span id="Enabling_RVM_using_the_DreamHost_panel">Habilitando RVM usando el panel de DreamHost</span></h2>
+<div class="solvvy-solution">
+<p>Ahora puedes visitar el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/217185437-C%C3%B3mo-habilitar-RVM">Cómo habilitar RVM</a>&nbsp;para especificar la versión de Ruby que instalaste anteriormente para cualquier dominio específico en ejecutando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215769578-Generalidades-sobre-Passenger">Passenger</a>.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El soporte de DreamHost no puede ayudar con las instalaciones de RVM en un servidor compartido. Sin embargo, si has instalado RVM en Shared hosting, no sigas el artículo 'Cómo habilitar RVM'. En su lugar, agrega lo siguiente a un archivo .htaccess en tu aplicación Ruby:</p>
+<div class="preboxcontainer">
+<pre class="prebox">PassengerRuby /home/username/.rvm/wrappers/ruby-2.7.1/ruby</pre>
+</div>
+<p>Solo asegúrate de cambiar la versión de Ruby a la versión de tu aplicación.</p>
+</div>
+</div>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades SSH</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/en-us/articles/217185437-How-to-Enable-RVM">Cómo habilitar RVM</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215769578-Generalidades-sobre-Passenger">Generalidades de Passenger</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a class="new" title="W:Ruby Version Manager (page does not exist)" href="https://en.wikipedia.org/wiki/Ruby_Version_Manager">Artículo de Wikipedia sobre Ruby Version Manager</a></li>
+<li><a href="https://rvm.io/">Ruby Version Manager</a></li>
+<li><a href="http://gembundler.com/">Bundler</a></li>
+</ul>
+</div>

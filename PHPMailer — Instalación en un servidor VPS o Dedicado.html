@@ -61,8 +61,8 @@ try {
     $mail-&gt;SMTPAuth = true;                               // Habilitar autenticación SMTP
     $mail-&gt;Username = '<span class="code-highlight">usuario@example.com'</span>;             // Nombre de usuario SMTP
     $mail-&gt;Password = '<span class="code-highlight">secreto</span>';                          // Contraseña SMTP
-    $mail-&gt;SMTPSecure = 'tls';                            // Habilitar enciptación TLS, `ssl` también aceptado
-    $mail-&gt;Port = 587;                                    // Puerto TCP para conectarse
+    $mail-&gt;SMTPSecure = 'ssl';                            // Habilitar enciptación SSL, TLS también aceptado con el puerto 587
+    $mail-&gt;Port = 465;                                    // Puerto TCP para conectarse
 
     //Destinatarios
     $mail-&gt;setFrom('<span class="code-highlight">usuario@example.com</span>', 'Mailer');
@@ -88,6 +88,13 @@ try {
     echo '<span class="code-highlight">El mensaje no pudo ser enviado</span>.';
     echo '<span class="code-highlight">Error de correo</span>: ' . $mail-&gt;ErrorInfo;
 }<br />?&gt;</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Se recomienda utilizar el puerto 465 con SSL como se muestra arriba.</p>
+<p>Opcionalmente, puedes usar el puerto 587 con TLS.</p>
+</div>
 </div>
 </div>
 <h2>Permitir que GMAIL envíe desde tu aplicación de correo</h2>
