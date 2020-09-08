@@ -1,0 +1,134 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Un Bucket es un mecanismo para agrupar objetos en DreamObjects, similar a una carpeta. A diferencia de una carpeta, los buckets existen en un espacio de nombres global dentro de DreamObjects, lo que significa que los nombres de bucket deben ser únicos, al igual que un nombre de dominio, ya que se utilizan para crear URL públicas para almacenar objetos.</p>
+</div>
+<h2>Creando un Bucket</h2>
+<div class="solvvy-solution">
+<ol class="arabic">
+<li>
+<p class="first">Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener">DreamObjects</a> en tu panel de DreamHost.</p>
+</li>
+<li>
+<p class="first">Haz clic en la pestaña ‘Manage’ arriba.</p>
+<dl>
+<dd><em>Se abre la página DreamObjects con una lista de usuarios:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-10_panel_dho_manage_buckets_01.png" alt="DreamObjects Buckets" /></dd>
+</dl>
+</li>
+<li>
+<dl class="first docutils">
+<dt>Bajo el nombre de tu usuario, haz clic en el botón&nbsp;<strong>Add Bucket</strong>.</dt>
+<dd><em>El campo ‘bucket_name’ aparece:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-10_panel_dho_manage_buckets_02.png" alt="DreamObjects Buckets" /></dd>
+</dl>
+</li>
+<li>
+<p class="first">Ingresa un&nbsp;<a href="/hc/en-us/articles/115001494772-DreamObjects-Bucket-Names">nombre</a>&nbsp;para tu bucket en la caja Bucket Name.</p>
+</li>
+<li>
+<p class="first">Haz clic en el botón&nbsp;<strong>Add Bucket</strong>.</p>
+</li>
+</ol>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los nombres de bucket deben incluir al menos 3 caracteres y solo pueden contener caracteres en minúscula (a – z), números (0–9), guiones (-) y puntos (solo un punto a la vez y no pueden terminar en un punto). Aunque ciertos símbolos, como guiones o puntos, son válidos, <strong>romperán</strong> el DNS en el nombre de tu bucket (reduciendo la funcionalidad del bucket) y no se recomiendan.</p>
+</div>
+</div>
+</div>
+<h2>Configurando permisos de bucket</h2>
+<div class="solvvy-solution">
+<p>Puedes configurar tu nuevo bucket para que tenga permisos públicos o privados. Ve el artículo '<a href="https://help.dreamhost.com/hc/en-us/articles/115000677011-DreamObjects-permissions">Permisos de DreamObjects</a>' para más detalles. Para seleccionar una configuración de permisos, debes editar el bucket:</p>
+<ol class="arabic">
+<li>
+<p class="first">Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener">DreamObjects</a> en tu panel de DreamHost.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-10_panel_dho_manage_buckets_03.png" alt="DreamObjects Buckets" /></dd>
+</dl>
+</li>
+<li>
+<p class="first">Haz clic en el enlace ‘Change Settings’ a la derecha de tu bucket.</p>
+<dl>
+<dd><em>Aparece un cuadro emergente:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-10_panel_dho_manage_buckets_04.png" alt="DreamObjects Buckets" /></dd>
+</dl>
+</li>
+<li>
+<p class="first">Selecciona una configuración de permisos para el contenido de tu bucket haciendo clic en el botón de alternancia 'Permissions'.</p>
+<ul>
+<li>Selecciona Private o Public.</li>
+<li>Puedes cambiar la configuración de permisos en cualquier momento después de crear el bucket.</li>
+</ul>
+</li>
+</ol>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Public significa que es posible ver las propiedades del Bucket y una lista del contenido del Bucket navegando a la URL del Bucket. Aunque podrás ver que un objeto aparece en la lista como parte del contenido de un Bucket, el objeto real no se puede leer a menos que también se haya marcado como Public.</p>
+<p>Los permisos de objeto son privados de forma predeterminada. Si necesitas actualizar todos los permisos de objetos en un bucket, usa el siguiente script de Python:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360022507011#permissions">Cambiar todos los permisos de objeto en un bucket</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Editando un Bucket</h2>
+<div class="solvvy-solution">
+<p>Las opciones para editar un Bucket son limitadas pero puedes:</p>
+<ul class="simple">
+<li>Modificar las configuraciones de permisos en un Bucket existente en cualquier momento.</li>
+<li>Añadir o remover contenido de un Bucket.</li>
+</ul>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>No es posible cambiar el nombre de un bucket o tranferir el bucket a otro usuario.</p>
+</div>
+</div>
+</div>
+<h2>Eliminando un Bucket</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>No es posible eliminar un bucket que contenga objetos. Además, la operación de eliminación del bucket no es reversible. <strong>ASEGÚRATE</strong> de haber realizado una copia de seguridad de todos los datos del bucket antes de eliminarlo. Puedes utilizar este&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/360022654971#deleting" target="_self">comando de AWS CLI</a> para eliminar todo el contenido del bucket.</p>
+</div>
+</div>
+<ol class="arabic">
+<li>
+<p class="first">Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener">DreamObjects</a> en tu panel DreamHost.</p>
+</li>
+<li>
+<p class="first">Haz clic en la pestaña ‘Manage’.</p>
+</li>
+<li>
+<p class="first">Haz clic en tu nombre de usuario.</p>
+<dl>
+<dd><em>La página se expande y muestra tus llaves pares y buckets:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-10_panel_dho_manage_buckets_05.png" alt="DreamObjects Buckets" /></dd>
+</dl>
+</li>
+<li>
+<p class="first">A la derecha de tu bucket, haz clic en el botón&nbsp;<strong>Remove Bucket</strong>.</p>
+<dl>
+<dd><em>Una caja de diálogo de confirmación aparece:</em></dd>
+<dd><img src="https://kbimages.dreamhosters.com/images/2018-10_panel_dho_manage_buckets_06.png" alt="DreamObjects Buckets" /></dd>
+</dl>
+</li>
+<li>
+<p class="first">Haz clic en el botón&nbsp;<strong>Remove</strong>&nbsp;pare eliminar el bucket.</p>
+</li>
+</ol>
+</div>
+<h2>Accediendo objetos en tu bucket</h2>
+<div class="solvvy-solution">
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo acceder a objetos dentro de un bucket:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215986337--Qu%C3%A9-son-los-objetos-en-DreamObjects-">¿Qué son Objetos en DreamObjects?</a></li>
+</ul>
+</div>
+<!--DreamObjects Button-->
+<div class="dream-sign-up">
+<h2>¡Empieza a almacenar tus datos hoy!</h2>
+<div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/storage/">Suscríbete para DreamObjects</a></div>
+</div>
