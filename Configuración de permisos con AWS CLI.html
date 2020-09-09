@@ -1,0 +1,87 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo enumera varios comandos aws-cli que puedes usar para cambiar los permisos en tus datos de DreamObjects. Consulta el siguiente artículo para obtener información sobre cómo instalar y configurar AWS CLI:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216335908-Instalaci%C3%B3n-y-configuraci%C3%B3n-de-AWS-CLI" target="_self">Instalación y configuración de AWS CLI</a></li>
+</ul>
+</div>
+<h2>Establecer TODOS los permisos de objetos en un depósito</h2>
+<div class="solvvy-solution">
+<p>El siguiente comando cambia los permisos para cada objeto en tu depósito. Ten en cuenta que DreamObjects actualmente no admite políticas de depósito, por lo tanto, debes utilizar la siguiente solución alternativa.</p>
+<p>Asegúrate de actualizar lo siguiente:</p>
+<ul>
+<li><strong>--bucket my-bucket</strong>&nbsp;— Cambiar a tu nombre de Bucket</li>
+<li><strong>--acl</strong>&nbsp;— Cambia esto a lectura <span class="code">private</span> o <span class="code">public-read</span></li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api list-objects --bucket my-bucket | grep Key | cut -c 20- | rev | cut -c 3-|rev | awk '{cmd="aws --endpoint https://objects-us-east-1.dream.io s3api put-object-acl --acl public-read --bucket=my-bucket --key "$0; system(cmd)}' </span></pre>
+</div>
+<p>El siguiente ejemplo es el mismo que el anterior, solo divide las líneas para que sea más fácil de leer:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io \ <br />                  s3api list-objects --bucket my-bucket | \<br />                  grep Key | cut -c 20- | rev | cut -c 3-|rev | \<br />                  awk '{cmd="aws --endpoint https://objects-us-east-1.dream.io \ <br />                  s3api put-object-acl --acl public-read \<br />                  --bucket=my-bucket --key "$0; system(cmd)}' </span></pre>
+</div>
+</div>
+<h2>Permisos de objeto único</h2>
+<div class="solvvy-solution">
+<h3>Ver los permisos de un objeto</h3>
+<p>Esto muestra los permisos de un objeto llamado test.txt en un depósito titulado my-bucket. Puedes ver que el usuario del depósito tiene control total, pero no se muestran otros permisos públicos. Esto indica que los permisos en el archivo son <span class="code">private</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api get-object-acl --bucket my-bucket --key test.txt</span>
+{
+    "Owner": {
+        "DisplayName": "my-user",
+        "ID": "my-user"
+    },
+    "Grants": [
+        {
+            "Grantee": {
+                "Type": "CanonicalUser",
+                "DisplayName": "my-user",
+                "ID": "my-user"
+            },
+            "Permission": "FULL_CONTROL"
+        }
+    ]
+}</pre>
+</div>
+<h3>Establecer los permisos de un objeto a PÚBLICO</h3>
+<p>Para establecer los permisos de un Objeto,&nbsp;<a href="https://docs.aws.amazon.com/cli/latest/reference/s3api/put-object-acl.html">put-object-acl</a>.</p>
+<p>Esto establece un objeto llamado test.txt en el depósito titulado my-bucket para los permisos <span class="code">public-read</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api put-object-acl --bucket my-bucket --key test.txt --acl public-read</span></pre>
+</div>
+<p>Verifica los permisos nuevamente y verás una nueva sección de Grantee que muestra que todos los usuarios pueden leer el Objeto.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api get-object-acl --bucket my-user-bucket --key test.txt</span>
+{
+    "Owner": {
+        "DisplayName": "my-east-user",
+        "ID": "my-east-user"
+    },
+    "Grants": [
+        <span class="green">{
+            "Grantee": {
+                "Type": "Group",
+                "URI": "http://acs.amazonaws.com/groups/global/AllUsers"
+            },
+            "Permission": "READ"
+        }</span>,
+        {
+            "Grantee": {
+                "Type": "CanonicalUser",
+                "DisplayName": "my-east-user",
+                "ID": "my-east-user"
+            },
+            "Permission": "FULL_CONTROL"
+        }
+    ]
+}</pre>
+</div>
+<p>Si revisas tu panel de DreamObjects, verás que los permisos en este archivo ahora son PÚBLICOS.</p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/dho-object-public-read.png" /></p>
+<h3>Establecer los permisos de un objeto en PRIVADO</h3>
+<p>Esto establece un objeto llamado test.txt en el depósito titulado my-bucket para permisos PRIVADOS.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api put-object-acl --bucket my-bucket --key test.txt --acl private</span></pre>
+</div>
+</div>

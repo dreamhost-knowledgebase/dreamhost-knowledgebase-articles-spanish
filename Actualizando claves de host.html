@@ -35,14 +35,23 @@ Keyboard-interactive authentication is disabled to avoid man-in-the-middle attac
 <div class="solvvy-solution">
 <p>Hay tres métodos para eliminar este error. Ten en cuenta que la modificación para corregir esto debe realizarse en el lado del cliente SSH, por lo que si obtienes esta conexión desde tu casa/trabajo, debes actualizar esa computadora en específico.</p>
 <h3>Método uno -- Generar una nueva clave de host (MAC o Linux)</h3>
-<p>Ejecuta el siguiente comando en tu shell:</p>
+<p>Si te has conectado a un host en el pasado, la clave de host anterior se almacena en el archivo&nbsp;<span class="text-object">/user/.ssh/known_hosts</span>.&nbsp;Si la clave se ha actualizado en el servidor, ahora debes eliminar la clave anterior en tu computador.</p>
+<p>Ejecuta el siguiente comando en tu shell.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Cambia HOSTNAME al host al que te estás conectando, como&nbsp;<strong>example.com</strong></p>
+</div>
+</div>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local]$ </span><span class="command">ssh-keygen -R HOSTNAME</span>
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">ssh-keygen -R <span class="code-highlight">HOSTNAME</span></span>
 </pre>
 </div>
+<p>La opción&nbsp;<span class="code">-R</span>&nbsp;elimina la clave anterior relacionada con un nombre de host específico.</p>
 <ul>
-<li>Este método simplemente genera la nueva clave de host y lo conecta a tu host/dominio. Este es probablemente el método más simple.</li>
+<li><a href="https://linux.die.net/man/1/ssh-keygen">https://linux.die.net/man/1/ssh-keygen</a></li>
 </ul>
+<p>Ahora puedes conectarte a través de SSH para almacenar una nueva clave.</p>
 <h3>Método dos -- Eliminar tu archivo known_hosts</h3>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
