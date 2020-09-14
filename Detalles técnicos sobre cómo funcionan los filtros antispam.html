@@ -1,0 +1,76 @@
+<h2>Registros MX</h2>
+<div class="solvvy-solution">
+<p>El filtrado antispam se habilita cambiando los registros MX del dominio para enrutar los correos&nbsp; entrantes a los servidores de filtrado primero antes de pasar el mensaje a las máquinas MX para su entrega. Los dominios que utilicen nameservers que no sean DreamHost deberás actualizar manualmente tus registros MX para reflejar el cambio.</p>
+<p>Los registros de filtro son:</p>
+<ul>
+<li>0 mx1.mailchannels.net</li>
+<li>0&nbsp;mx2.mailchannels.net</li>
+</ul>
+</div>
+<h2>Consideraciones especiales para direcciones de reenvío</h2>
+<div class="solvvy-solution">
+<p>Hay ciertas cosas para recordar con el filtrado en relación con el reenvío de direcciones de correo. Los detalles de las cuatro combinaciones con esta configuración se describen a continuación:</p>
+<ul>
+<li>Si se filtra el dominio y la dirección se reenvía a otra dirección de correo electrónico de DreamHost que también se filtra, el correo electrónico se ordena según la configuración de correo del filtro de la dirección del buzón de recepción.</li>
+<li>Si se filtra el dominio y la dirección se reenvía a otra dirección de correo electrónico de DreamHost que no se filtra, el correo electrónico no se filtrará.</li>
+<li>Si se filtra el dominio y la dirección se reenvía a una dirección externa únicamente (como @gmail), se utilizará la configuración del dominio de la dirección de reenvío.</li>
+<li>Si el dominio no se está filtrando y se reenvía a una dirección de correo electrónico de DreamHost que se encuentra en un dominio filtrado, el correo se filtrará.</li>
+</ul>
+<p>La siguiente tabla muestra cómo funciona el filtrado Anti-spam para/con direcciones de solo reenvío. A@example.com es solo de reenvío y envía correos electrónicos a B@example.net, que es una cuenta de correo completamente alojada:</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>A@example.com usa filtrado</th>
+<th>B@example.net usa filtrado</th>
+<th>¿Se filtra el correo entrante?</th>
+<th>¿Qué filtro es usado?</th>
+</tr>
+<tr>
+<td class="table-yes" style="background: #90ff90; color: black;">Sí</td>
+<td class="table-yes" style="background: #90ff90; color: black;">Sí</td>
+<td>Sí</td>
+<td>B@example.net</td>
+</tr>
+<tr>
+<td class="table-yes" style="background: #90ff90; color: black;">Sí</td>
+<td class="table-no" style="background: #ff9090; color: black;">No</td>
+<td>Sí, pero se rechazan los correos electrónicos no deseados que superen el umbral de puntuación. Aquellos entregados tienen encabezados de puntuación agregados.</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td class="table-no" style="background: #ff9090; color: black;">No</td>
+<td class="table-yes" style="background: #90ff90; color: black;">Sí</td>
+<td>Sí</td>
+<td>B@example.net</td>
+</tr>
+<tr>
+<td class="table-no" style="background: #ff9090; color: black;">No</td>
+<td class="table-no" style="background: #ff9090; color: black;">No</td>
+<td>No se hace filtrado</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>El filtrado y lo qué hace</h2>
+<div class="solvvy-solution">
+<p>Actualmente, hay tres servicios configurados para filtrar el spam. A continuación se muestra la descripción de cada una:</p>
+<dl>
+<dt><strong>Vade Secure (pronto será eliminado)</strong></dt>
+<dd>Este es el servicio de filtro que escanea los mensajes entrantes en busca de spam y otras categorías, como correos electrónicos sociales o promocionales. Dependiendo de múltiples factores, el mensaje se etiquetará con un estado (SPAM, SN, etc.) para determinar si el mensaje debe enviarse a la bandeja de entrada del destinatario o filtrarse a la carpeta Spam. Sin embargo, se rechazarán los correos electrónicos no deseados que superen un cierto umbral.</dd>
+<dt><strong>Procmail</strong></dt>
+<dd>Este es el agente de entrega del buzón que realmente coloca el correo electrónico en las carpetas Spam, Social o Promociones cuando detecta los encabezados de Vade Secure. Esto también es responsable de los filtros definidos por el usuario definidos en el panel.</dd>
+</dl>
+<dl>
+<dt><strong>Mailchannels (habilitado desde Sep 2020)</strong></dt>
+<dd>Mailchannels es un filtro de correo basado en la nube. Acepta y evalúa el correo, agrega un encabezado específico para los mensajes de spam y luego transmite los mensajes a los servidores MX.&nbsp;</dd>
+</dl>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214984738-Generalidades-sobre-Anti-spam">Generalidades sobre Anti-spam</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215686667-Soluci%C3%B3n-de-problemas-de-configuraci%C3%B3n-de-Anti-spam">Solución de problemas de configuración Anti-spam</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215686487--C%C3%B3mo-establecer-mi-configuraci%C3%B3n-Anti-spam-">¿Cómo configuro mi configuración Anti-spam?</a></li>
+</ul>
+</div>

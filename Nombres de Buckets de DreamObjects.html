@@ -1,0 +1,38 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Al elegir un nombre para tu bucket, deberás tener cuidado de seleccionar algo único y compatible con DNS. Esto se debe a que los nombres de tu depósito se utilizan como parte del nombre de host en la URL al acceder a tus contenidos.</p>
+</div>
+<h2>Por que los nombres de bucket deben ser únicos</h2>
+<div class="solvvy-solution">
+<p>Los Objetos almacenados en DreamObjects se identifican mediante una URL similar a esta:</p>
+<div class="preboxcontainer">
+<pre class="prebox">https://$BUCKET_NAME.objects-us-east-1.dream.io/$OBJECT_NAME</pre>
+</div>
+<p>Dado que el nombre del bucket es parte del nombre de host (en la URL) y los nombres de host deben ser únicos, el nombre del bucket también debe ser único. Por ejemplo, un bucket llamado "my-bucket" tendría la URL:</p>
+<div class="preboxcontainer">
+<pre class="prebox">https://my-bucket.objects-us-east-1.dream.io</pre>
+</div>
+<p>Esto significa que solo puede haber&nbsp;<strong>un</strong>&nbsp;bucket llamado “my-bucket” en DreamObjects. Por lo tanto, la forma más fácil de crear un nuevo bucket es asignar un nombre aleatorio y crear un alias de dominio para él usando&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects" target="_blank" rel="noopener">DreamHost Control Panel</a>.</p>
+</div>
+<h2>Reglas para nombres de Bucket</h2>
+<div class="solvvy-solution">
+<p>Las siguientes son las nuevas reglas que se aplicarán. Cada nombre de bucket:</p>
+<ul>
+<li>Puede tener entre 3–63 caracteres</li>
+<li>Solo puede tener:</li>
+<ul>
+<li>letras minúsculas ASCII&nbsp;</li>
+<li>números ASCII</li>
+<li>puntos (.)</li>
+<li>guiones (-)</li>
+</ul>
+<li>No puede tener un punto (.) y un guion (-) junto al otro (adyacente)</li>
+<li>No puede incluir caracteres Unicode, emoji, o ASCII no imprimible</li>
+<li>NO debe tener formato de una dirección IP (e.j., 192.168.5.4)</li>
+</ul>
+</div>
+<h2>¿Cómo refuerza esto DreamHost?</h2>
+<div class="solvvy-solution">
+<p>Muchos clientes compatibles con S3 ya han aplicado estas reglas más estrictas al crear nuevos depósitos. Si usas un cliente que no aplica todas estas reglas, DreamObjects devolverá un error indicando que el nombre del depósito no es válido.</p>
+<p>Si tu cliente te muestra la respuesta de error HTTP, verás un código de respuesta&nbsp;<span class="text-object">400 InvalidBucketName</span>, incluyendo un enlace a este artículo.</p>
+</div>
