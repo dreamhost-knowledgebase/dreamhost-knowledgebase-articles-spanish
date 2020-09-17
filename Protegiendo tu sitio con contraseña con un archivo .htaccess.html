@@ -117,6 +117,10 @@ Require valid-user
 </div>
 <h2><span id="forzar_SSL">Forzar SSL (HTTPS) en la solicitud de inicio de sesión</span></h2>
 <div class="solvvy-solution">
+<div class="alert-warning">
+<p>Los siguientes pasos no son necesarios si tu sitio redirige automáticamente a HTTPS. Este es el caso de los certificados SSL agregados a partir de septiembre de 2020.</p>
+<p>Si tienes un SSL anterior que actualmente no se redirige automáticamente (sin agregar ningún código personalizado a tu archivo .htaccess),&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-a-trav%C3%A9s-de-Correo-Electr%C3%B3nico" target="_self">comunícate con el soporte para obtener ayuda</a>.</p>
+</div>
 <p>De manera predeterminada, la solicitud de inicio de sesión que ves no está encriptada. Esto significa que tu contraseña se enviará como texto sin formato a través de http. Para cifrar este inicio de sesión, debes&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL" target="_self">agregar un certificado SSL</a>&nbsp;a tu dominio. Una vez agregues el certificado SSL, agrega el código a continuación para forzar SSL al iniciar sesión.</p>
 <p>Este método evita el envío de una solicitud de contraseña .htaccess en una conexión no cifrada. Si deseas asegurarte de que tu servidor sólo sirve documentos a través de un canal SSL encriptado, entonces debes usar la directiva <span class="code">SSLRequireSSL</span> con la opción + StrictRequire habilitada:</p>
 <h3>Paso 1 — Agregar código a tu archivo .htaccess</h3>

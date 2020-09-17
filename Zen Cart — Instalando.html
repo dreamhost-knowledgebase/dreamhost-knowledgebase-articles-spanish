@@ -1,0 +1,265 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Zen Cart es un software gratuito que se utiliza para ejecutar un sitio web de comercio electrónico. Esto te permite vender tus productos directamente desde tu sitio web como una tienda en línea.</p>
+<p>DreamHost no ofrece Zen Cart como instalación con un clic, sin embargo, puedes instalarlo manualmente siguiendo las siguientes instrucciones de este artículo.</p>
+<ul>
+<li><a href="#paso1" target="_self">Paso 1 — Instala un certificado SSL</a></li>
+<li><a href="#paso2" target="_self">Paso 2 — Crea una cuenta con un procesador de pagos</a></li>
+<li><a href="#paso3" target="_self">Paso 3&nbsp;— Crea una base de datos</a></li>
+<li><a href="#paso4" target="_self">Paso 4 — Descarga el software de Zen Cart</a> (<a href="#ftp" target="_self">FTP</a> o&nbsp;<a href="#ssh" target="_self">SSH</a>)</li>
+<li><a href="#paso5" target="_self">Paso 5 —&nbsp;Instala el software</a></li>
+<li><a href="#paso6" target="_self">Paso 6 — Remueve el directorio zc</a></li>
+<li><a href="#actualizando" target="_self">Actualizando Zen Cart</a></li>
+</ul>
+</div>
+<h2><span id="paso1">Paso 1 — Instala un certificado SSL</span></h2>
+<div class="solvvy-solution">
+<p>Dado que Zen Cart se utiliza para vender productos en tu sitio web, primero debes instalar un certificado SSL en tu sitio. Esto asegura que todas las transacciones hacia y desde tu sitio sean seguras. Hay dos opciones de certificado SSL en el panel DreamHost.</p>
+<ul>
+<li>Let's Encrypt (Gratis)</li>
+<li>Sectigo (Pago)</li>
+</ul>
+<p>Ambos certificados se pueden usar para ejecutar un sitio de comercio electrónico; sin embargo, se recomienda un certificado Sectigo pagado, ya que parecerá más confiable para los clientes potenciales. Consulta el siguiente artículo para obtener más detalles.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001435846#comercio-electronico" target="_blank" rel="noopener">¿Qué tipo de certificado debería usar para mi sitio de comercio electrónico?</a></li>
+</ul>
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo instalar el certificado elegido.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL" target="_blank" rel="noopener">Generalidades sobre como añadir un certificado SSL</a></li>
+</ul>
+</div>
+<h2><span id="paso2">Paso 2 — Crea una cuenta con un procesador de pagos</span></h2>
+<div class="solvvy-solution">
+<p>El certificado SSL solo protege los datos que se transmiten en tu sitio web. También debes crear una cuenta con un procesador de pagos. Este procesador de pagos es la empresa que procesará los datos de la tarjeta de crédito.</p>
+<p>DreamHost no recomienda un procesador de pagos en particular, pero puedes encontrar muchas opciones en línea para elegir.</p>
+</div>
+<h2><span id="paso3">Paso 3 — Crea una base de datos</span></h2>
+<div class="solvvy-solution">
+<p>Zen Cart requiere una base de datos para almacenar y procesar los datos de tu carrito de compras. Ve el siguiente artículo para crear una nueva base de datos en tu panel DreamHost.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221691727-Crear-una-base-de-datos-MySQL" target="_blank" rel="noopener">Crear una base de datos MySQL</a></li>
+</ul>
+</div>
+<h2><span id="paso4">Paso 4 — Descarga el software de Zen Cart</span></h2>
+<div class="solvvy-solution">
+<p>Hay dos opciones para agregar el software Zen Cart a su sitio.</p>
+<ul>
+<li><strong>FTP</strong>&nbsp;(fácil) — Puedes descargar el software a tu computadora y luego cargarlo en tu sitio usando un cliente FTP.</li>
+<li><strong>SSH</strong>&nbsp;(avanzado) — También puede descargar el software directamente a su sitio a través de SSH.</li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Las siguientes instrucciones descargan e instalan la versión 1.5.7.</p>
+</div>
+</div>
+<h3><span id="ftp">Descargando a través de FTP</span></h3>
+<ol>
+<li>Visita la siguiente página para descargar el software Zen Cart.<br />
+<ul>
+<li><a href="https://sourceforge.net/projects/zencart/files/" target="_blank" rel="noopener">Descargar Zen Cart</a></li>
+</ul>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_01.png" alt="zen cart download" /></dd>
+</dl>
+</li>
+<li>Haz clic en el primer enlace titulado&nbsp;<span class="text-link">CURRENT</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_02.png" alt="zen cart download" /></dd>
+</dl>
+</li>
+<li>En la página siguiente, verá varios archivos que puede descargar. Haga clic en el archivo .zip. Esto descarga el archivo a su computadora.</li>
+<li>Busca el archivo que acabas de descargar. Se titulará algo así como&nbsp;<strong>zen-cart-v1.5.7-06232020.zip</strong>. La mayoría de las veces puede encontrarlo en su directorio <span class="text-object"><span class="text-object">/downloads.</span></span>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_03.png" alt="zen cart download" /></dd>
+</dl>
+</li>
+<li>En Windows, haz clic con el botón derecho en el archivo y elige&nbsp;<span class="text-object">Extract All...</span> en el menú emergente
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_04.png" alt="zen cart download" /></dd>
+</dl>
+</li>
+<li>Se abre una nueva ventana. En la nueva ventana, haz clic en el botón&nbsp;<strong>Extract</strong>. Todos los archivos se extraen a una nueva carpeta con el mismo título que el archivo .zip.</li>
+<li>Inicia sesión en tu servidor usando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215613657--C%C3%B3mo-cargo-mi-p%C3%A1gina-web-en-DreamHost-" target="_blank" rel="noopener">un cliente FTP</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_06.png" alt="zen cart download" /></dd>
+</dl>
+</li>
+<li>En el panel izquierdo, navega hasta el directorio de tu computadora donde extrajo el archivo .zip.</li>
+<li>Haz clic en este directorio. Deberías ver una lista de archivos.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_07.png" alt="zen cart download" /></dd>
+</dl>
+</li>
+<li>En el panel derecho, asegúrate de estar en el directorio de tu sitio web. No debería haber ningún archivo aquí que no sea un posible archivo favicon.ico.</li>
+<li>Resalta todos los archivos en el panel izquierdo y arrástralos al panel derecho para subirlos a tu sitio.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Esto puede tardar varios minutos, ya que hay muchos archivos para cargar.</p>
+</div>
+</div>
+</li>
+</ol>
+<h3><span id="ssh">Descarga a través de SSH</span></h3>
+<ol>
+<li>Inicia sesión en tu servidor&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_blank" rel="noopener">a través de SSH</a>.</li>
+<li>Navega en el directorio home de tu usuario
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li>Visita la siguiente página para descargar el software Zen Cart.
+<ul>
+<li><a href="https://sourceforge.net/projects/zencart/files/" target="_blank" rel="noopener">Descargar Zen Cart</a></li>
+</ul>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_01.png" alt="zen cart download" height="" /></dd>
+</dl>
+</li>
+<li>Haz clic en el primer enlace titulado&nbsp;<span class="text-link">CURRENT</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_16.png" alt="zen cart download" height="" /></dd>
+</dl>
+</li>
+<li>En la página siguiente, verás varios archivos que puedes descargar. Haz clic derecho en el archivo .zip. En el menú emergente, elige <span class="text-object">Copy link address</span>.</li>
+<li>En el directorio de tu sitio web, ejecuta el siguiente comando para descargar Zen Cart.&nbsp;
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Cambie la URL por la que copió anteriormente.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://sourceforge.net/projects/zencart/files/CURRENT%20-%20Zen%20Cart%201.5.x%20Series/zen-cart-v1.5.7-06232020.zip/download</span></pre>
+</div>
+</li>
+<li>Esto descarga el software en un nuevo archivo titulado&nbsp;<span class="text-object">download</span>. Ejecuta el siguiente comando para descomprimir el archivo.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">unzip download</span></pre>
+</div>
+</li>
+<li>Los archivos se extraen en un nuevo título directamente&nbsp;<span class="text-object">zen-cart-v1.5.7-06232020</span>.</li>
+<li>Navega a este directorio.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd zen-cart-v1.5.7-06232020</span></pre>
+</div>
+</li>
+<li>Copia todos el contenido en el directorio de tu sitio web.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cp -r ./* /home/user/example.com</span></pre>
+</div>
+</li>
+<li>Verifica el directorio de tu sitio web para confirmar que los archivos se hayan migrado.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la /home/user/example.com</span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="paso5">Paso 5 —&nbsp;Instalar el software</span></h2>
+<div class="solvvy-solution">
+<p>Ahora que los archivos están en el directorio de tu sitio web, puedes completar la instalación.</p>
+<ol>
+<li>Visita tu sitio web en un navegador. Verás la página de inicio de Zen Cart.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_08.png" alt="zen cart download" /></dd>
+</dl>
+</li>
+<li>Haz clic en el enlace para proceder&nbsp;<span class="panel-page">CLICK HERE</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_09.png" alt="zen cart download" /></dd>
+</dl>
+</li>
+<li>La primera página te informa que hay un problema con la base de datos MySQL. Ignora esto y haz clic en el botón&nbsp;<strong>Continue</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_14.png" alt="zen cart download" /></dd>
+</dl>
+</li>
+<li>En la página siguiente, ingrese la información de su tienda y haga clic en&nbsp;<strong>Continue</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_15.png" alt="zen cart download" /></dd>
+</dl>
+</li>
+<li>Ingresa tus&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_blank" rel="noopener">credenciales de base de datos</a>&nbsp;en la siguiente página.&nbsp;
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Deja la opción&nbsp;<span class="text-object">SQL Cache Method</span> estblecida en&nbsp;<span class="text-object">No SQL Caching</span>. Siempre puede ajustar esto más tarde si es necesario.</p>
+</div>
+</div>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Continue</strong>. Esto instala el software en su base de datos.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_10.png" alt="zen cart download" /></dd>
+</dl>
+</li>
+<li>Ingresa tus credenciales de dominio, y luego haz clic en&nbsp;<strong>Continue</strong>.
+<div class="alert-warning">
+<p>Toma nota de la 'Contraseña de administrador' en este momento.</p>
+</div>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_11.png" alt="zen cart download" /></dd>
+</dl>
+</li>
+<li>Aparece un mensaje de confirmación informándote que se ha instalado Zen Cart. Ahora debes eliminar el directorio&nbsp;<span class="text-object">zc_install</span> como se muestra en el siguiente paso.</li>
+</ol>
+</div>
+<h2><span id="paso6">Paso 6 — Remueve el directorio zc_install&nbsp;</span></h2>
+<div class="solvvy-solution">
+<p>Antes de poder utilizar Zen Cart, primero debe eliminar el directorio&nbsp;<span class="text-object">zc_install</span> en el servidor. Una vez más, puedes optar por utilizar un cliente FTP o SSH.</p>
+<h3>Removiendo el directorio&nbsp;<span class="text-object">zc_install</span> a través de FTP</h3>
+<ol>
+<li>En tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215613657--C%C3%B3mo-cargo-mi-p%C3%A1gina-web-en-DreamHost-" target="_blank" rel="noopener">cliente FTP</a>, navega hasta el directorio de tu sitio web. Si previamente cargaste los archivos de Zen Cart, ya está en este directorio.</li>
+<li>Haz clic derecho en el directorio titulado&nbsp;<span class="text-object">zc_install</span>&nbsp;y selecciona&nbsp;<span class="text-object">Delete</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_12.png" alt="zen cart download" /></dd>
+</dl>
+</li>
+<li>Elimina el directorio.</li>
+</ol>
+<p>Visite el enlace de la página de administración desde la página de confirmación. Aquí puede iniciar sesión en el backend de su sitio web y comenzar a cargar su contenido.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_13.png" alt="zen cart download" /></dd>
+</dl>
+<h3>Removiendo el directorio&nbsp;<span class="text-object">zc_install</span>&nbsp;a través de SSH</h3>
+<ol>
+<li>Inicia sesión en tu servidor&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">a través de SSH</a>.</li>
+<li>Navega al directorio de tu sitio web.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/example.com</span></pre>
+</div>
+</li>
+<li>Elimina el directorio&nbsp;<span class="text-object">zc_install</span>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rm -rf zc_install</span></pre>
+</div>
+</li>
+</ol>
+<p>Visita el enlace de la página de administración desde la página de confirmación. Aquí puedes iniciar sesión en el backend de tu sitio web y comenzar a cargar tu contenido.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_13.png" alt="zen cart download" /></dd>
+</dl>
+</div>
+<h2><span id="actualizando">Actualizando Zen Cart</span></h2>
+<div class="solvvy-solution">
+<p>Actualmente, Zen Cart no ofrece una forma sencilla de actualizar a la versión más reciente de su software. La actualización es un proceso manual complejo que requiere la capacidad de leer, comparar y editar código dentro de los archivos de tu sitio web. El proceso implica los siguientes pasos básicos.</p>
+<ol>
+<li>Descargar tu sitio actual a tu computadora.</li>
+<li>Descarga del nuevo software a tu computadora.</li>
+<li>Usar un programa de terceros para comparar tus archivos actuales con los archivos de la nueva versión.</li>
+<li>Ajustar manualmente tus archivos para que funcionen con la versión más reciente.</li>
+<li>Crear una tienda temporal para probar tus nuevos archivos.</li>
+<li>Cambiar tu tienda de prueba a tu tienda en vivo.</li>
+</ol>
+<p>Si no te sientes cómodo con este proceso, te recomendamos que busque un desarrollador que pueda actualizar tu sitio por ti. A continuación se muestran las instrucciones oficiales de Zen Cart sobre cómo realizar este proceso.</p>
+<ul>
+<li><a href="https://docs.zen-cart.com/user/upgrading/detailed_upgrading/" target="_self">Actualización</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://www.zen-cart.com/wiki/index.php/Useful_Tools" target="_self">Herramientas útiles para trabajar con Zen Cart</a></li>
+</ul>
+</div>
