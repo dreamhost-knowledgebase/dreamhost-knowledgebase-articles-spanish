@@ -1,0 +1,208 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Magento es una aplicación web de comercio electrónico (eCommerce) de código abierto. Este artículo proporciona pasos para instalar Magento en un dominio alojado en DreamHost.</p>
+<p>Para obtener más información sobre Magento, visita:</p>
+<ul>
+<li><a href="http://magento.com/" rel="nofollow">http://magento.com/</a></li>
+</ul>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60"></div>
+<div class="alert-content">
+<p>Magento utiliza una gran cantidad de recursos del servidor. Debido a esto, solo se puede instalar y ejecutar Magento en un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a> o en un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">servidor Dedicado</a>. Ejecutarlo en alojamiento compartido hará que el sitio alcance los&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216540488--Por-qu%C3%A9-se-cancelaron-los-procesos-en-mi-servidor-Compartido-" target="_self">límites de memoria</a>&nbsp;lo que puede causar lentitud y tiempo de inactividad.</p>
+<p>Para un rendimiento óptimo (especialmente para tiendas grandes), se recomienda un servidor dedicado o&nbsp;<a href="https://help.dreamhost.com/hc/es/categories/202115418-Servidores-Cloud-de-DreamCompute">DreamCompute</a>&nbsp;debido a la presencia de una instancia local de MySQL.</p>
+</div>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60"></div>
+<div class="alert-content">
+<p>Magento actualmente no es compatible con PHP 7.4. Deberá <a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-" target="_self">configurar tu dominio en PHP 7.2 o 7.3</a> para completar la instalación.</p>
+</div>
+</div>
+</div>
+<h2>Antes de instalar Magento</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Descarga Magento desde su sitio web en:<br>
+<ul>
+<li><a href="https://magento.com/tech-resources/download" rel="nofollow">Magento</a></li>
+</ul>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60"></div>
+<div class="alert-content">
+<p>Magento ofrece la opción de descargar el archivo de instalación en formato .zip, .tar o .tar.bz2. Se recomienda .tar.bz2 ya que es el archivo más pequeño para descargar, pero cualquier formato funcionará.</p>
+</div>
+</div>
+</li>
+<li>Crea un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">archivo phprc</a>&nbsp;bajo tu usuario. Incrementa el&nbsp;<span class="code"><a href="https://help.dreamhost.com/hc/es/articles/214893937--C%C3%B3mo-incrementar-el-l%C3%ADmite-de-memoria-PHP-" target="_self">memory_limit</a></span> a 756MB&nbsp;y luego incrementa el max_execution_time. Así es como debería verse tu archivo phprc:
+<div class="preboxcontainer">
+<pre class="prebox">max_execution_time = 5000
+memory_limit = 756M</pre>
+</div>
+</li>
+<li>Crea una base de datos que será utilizada por Magento. Consulta el siguiente artículo para obtener más información:<br>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221691727-Crear-una-base-de-datos-MySQL" target="_self">Crear una base de datos</a></li>
+</ul>
+</li>
+<li>Configura tu dominio para usar PHP 7.2 o una versión superior. Consulta el siguiente artículo para obtener más información:<br>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-" target="_self">Cambiar versión PHP</a></li>
+</ul>
+</li>
+</ol>
+</div>
+<h2>Instalación</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Sube el archivo Magento que descargaste en tu servidor web a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a>.</li>
+<li>Inicia sesión en tu servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>, luego&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115002768331-Comandos-UNIX-Descomprimiendo-archivos" target="_self">descomprime el archivo en el servidor</a>.</li>
+<li>Confirma que los archivos de Magento están en el directorio web de tu dominio.</li>
+<li>Desde el directorio web de tu sitio, ejecuta el siguiente comando para iniciar el proceso de instalación:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">bin/magento setup:install --db-host=<span class="code-highlight">mysql.example.com</span> --db-name=<span class="code-highlight">example_magento</span> --db-user=<span class="code-highlight">magentodb</span> --db-password=<span class="code-highlight">example123</span> --base-url=<span class="code-highlight">http://example.com/</span> --backend-frontname=<span class="code-highlight">example_admin</span> --admin-firstname=<span class="code-highlight">Admin</span> --admin-lastname=<span class="code-highlight">Example</span> --admin-email=<span class="code-highlight">magento@example.com</span> --admin-user=<span class="code-highlight">admin</span> --admin-password=<span class="code-highlight">example123</span></span></pre>
+</div>
+Asegúrate de reemplazar todo el texto de ejemplo en ese comando con tu base de datos real y la información del sitio.</li>
+</ol>
+</div>
+<h2>Editar tus archivos .htaccess</h2>
+<div class="solvvy-solution">
+<p>Tus archivos .htaccess tienen varias líneas que mencionan <strong>IfVersion</strong>. Esto requiere que 'mod_version' esté instalado en el servidor. Los servidores DreamHost que ejecutan Bionic (Ubuntu 18.04) o Stretch (Debian 9) tienen este módulo instalado y no requieren más modificaciones. Si tu servidor web aún no se ha actualizado a ninguna de las versiones, debes eliminar manualmente esas líneas de los archivos .htaccess. Están ubicados en las siguientes dos ubicaciones:</p>
+<p>example.com/.htaccess</p>
+<p>example.com/pub/.htaccess</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60"></div>
+<div class="alert-content">
+<p>Puedes descargar el archivo .htaccess editado a continuación para el archivo .htaccess del directorio de inicio. NOTA: Este es el archivo Magento .htaccess para la versión 2.3.5.</p>
+<ul>
+<li><a href="https://kbimages.dreamhosters.com/files/htaccess" target="_self">Magento 2.3.5 .htaccess</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Solución de problemas</h2>
+<div class="solvvy-solution">
+<h3>El sitio no se carga después de editar el archivo .htaccess</h3>
+<p>Es posible que después de editar el archivo .htaccess, el sitio muestre un error 500 al visitarlo. Verifica el <a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP" target="_self">archivo error.log</a>&nbsp;de tu dominio y puede que veas lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">mod_fcgid: stderr: PHP Parse error: syntax error, unexpected '?', expecting variable (T_VARIABLE) in /home/username/example.com/vendor/magento/framework/Filesystem/Directory/Write.php on line 35</pre>
+</div>
+<p>Esto se debe a que la versión de Magento no es compatible con la versión de PHP que estás utilizando. Si estás utilizando Magento versión 2.3.0, asegúrate de utilizar PHP 7.2 o una versión superior. Eso resolverá el mensaje de error.</p>
+<h3><span id="I_can.27t_find_the_installation_wizard">No puedo encontrar el asistente de instalación</span></h3>
+<p>Si no puedes cargar el asistente de instalación de Magento, es posible que tengas el archivo de instalación en otra ubicación distinta al directorio raíz del dominio. Verifica que el archivo de instalación no esté en un subdirectorio, y también asegúrate de que todos los archivos, carpetas y subcarpetas tengan el permiso correcto.</p>
+<h3>Los enlaces no redirigen correctamente</h3>
+<p>Si completaste la instalación y haces clic en enlaces como "mi cuenta", "mi lista de deseos", "mi carrito" o "sobre nosotros", y descubres que no funcionan correctamente, probablemente hayas marcado la casilla 'Usar servidor web (Apache) Reescribe' durante el asistente de instalación. Para solucionar esto, crea un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a>&nbsp;en el directorio raíz del sitio web e ingresa lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Options +SymLinksIfOwnerMatch
+RewriteEngine On
+RewriteCond&nbsp;%{REQUEST_FILENAME}&nbsp;!-f
+RewriteCond&nbsp;%{REQUEST_FILENAME}&nbsp;!-d
+RewriteRule . /index.php [L]
+</pre>
+</div>
+<h3>Error de inicio de sesión 'Su sesión actual ha caducado'</h3>
+<p>Al ingresar tu usuario/contraseña de Magento, puedes ver el siguiente error:</p>
+<p><strong>Su sesión actual ha expirado.</strong></p>
+<p>Los siguientes pasos te ayudarán a resolver esto:</p>
+<ol>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Inicia sesión en su base de datos usando phpMyAdmin</a>.</li>
+<li>En el panel izquierdo, haz clic en el nombre de tu base de datos para seleccionarlo.</li>
+<li>En el menú superior, haz clic en la pestaña 'SQL'.</li>
+<li>Ingresa el siguiente comando:<br>
+<div class="preboxcontainer">
+<pre class="prebox">INSERT INTO `core_config_data`(`path`, `value`) VALUES ('admin/security/session_lifetime',864000)</pre>
+</div>
+Se verá así:<br>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-08_magento_phpmyadmin_command.png"></dd>
+</dl>
+</li>
+<li>Haz clic en el botón <strong>Go</strong> para ejecutarlo.</li>
+<li>Inicia sesión en tu servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. Asegúrate de estar en el directorio de tu sitio web.</li>
+<li>Ejecuta los siguientes comandos:<br>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rm -rf var/cache/*</span>
+<span class="server">[server]$ </span><span class="command">rm -rf var/page_cache/*</span>
+<span class="server">[server]$ </span><span class="command">php bin/magento cache:flush</span></pre>
+</div>
+</li>
+<li>Actualiza tu página de inicio de sesión. Después de esto deberías poder iniciar sesión.</li>
+</ol>
+</div>
+<h2>Errores al instalar extensiones</h2>
+<div class="solvvy-solution">
+<p>Es posible que veas el siguiente error al instalar una extensión.</p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/magento-extension-install-failure.png"></p>
+<p>Las secciones a continuación explican cómo resolver estos errores.</p>
+<h3>Comprobar secuencias de comandos de Cron</h3>
+<p>Magento requiere 3 cron jobs diferentes para existir. Consulta el siguiente artículo para obtener instrucciones sobre cómo crear un cron job:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-" target="_self">¿Cómo crear un cron job?</a></li>
+</ul>
+<p>Deberás crear tres cron jobs distintos. En los siguientes ejemplos, cambia la palabra 'username' por tu nombre de usuario de shell y 'example.com' a tu sitio web de Magento.</p>
+<p><strong>Cron Job #1</strong></p>
+<div class="preboxcontainer">
+<pre class="prebox">/usr/local/php72/bin/php /home/username/example.com/bin/magento cron:run | grep
+  -v "Ran jobs by schedule" &gt;&gt; /home/username/example.com/var/log/magento.cron.log</pre>
+</div>
+<p><strong>Cron Job #2</strong></p>
+<div class="preboxcontainer">
+<pre class="prebox">/usr/local/php72/bin/php /home/username/example.com/update/cron.php &gt;&gt;
+  /home/username/example.com/var/log/update.cron.log</pre>
+</div>
+<p><strong>Cron Job #3</strong></p>
+<div class="preboxcontainer">
+<pre class="prebox">/usr/local/php72/bin/php /home/username/example.com/bin/magento setup:cron:run
+  &gt;&gt; /home/username/example.com/var/log/setup.cron.log</pre>
+</div>
+<p>Esto configura correctamente los cron job que Magento necesita. Sin embargo, ahora debes ejecutarlos manualmente para que Magento sepa que existen. Ejecuta los siguientes tres comandos para forzar la actualización de los cron job en Magento:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php72/bin/php /home/username/example.com/bin/magento cron:run | grep
+  -v "Ran jobs by schedule" &gt;&gt; /home/username/example.com/var/log/magento.cron.log</span></pre>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php72/bin/php /home/username/example.com/update/cron.php &gt;&gt;
+  /home/username/example.com/var/log/update.cron.log</span></pre>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php72/bin/php /home/username/example.com/bin/magento setup:cron:run
+  &gt;&gt; /home/username/example.com/var/log/setup.cron.log</span></pre>
+</div>
+<p>Haz clic en el botón <strong>Intentar de nuevo (Try Again)</strong> en Magento. Esta vez, el error cron ya no se mostrará.</p>
+<h3>Comprobar dependencia de componentes</h3>
+<p>Asegúrate de haber configurado <span class="code">memory_limit</span> en tu archivo phprc a 2000M. En adición a esto, actualiza el siguiente archivo .user.ini con el mismo valor:</p>
+<div class="preboxcontainer">
+<pre class="prebox">example.com/.user.ini</pre>
+</div>
+<p>Una vez que ambos archivos tienen configurado <span class="code">memory_limit = 2000M</span>, ejecuta los tres cron jobs anteriores para actualizar esta información.</p>
+<h3>Comprobación de configuración de PHP</h3>
+<p>Establecer <span class="code">memory_limit</span> en 2000 en el PHP debería solucionar este error.</p>
+<h3>Comprobación de extensiones PHP</h3>
+<p>La ejecución de los cron jobs mencionados anteriormente corrige este error.</p>
+</div>
+<h2>Copia de seguridad fallida</h2>
+<div class="solvvy-solution">
+<p>Durante el paso #2, es posible que veas que la copia de seguridad falló.</p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/magento-extension-install-failure_02.png"></p>
+<p>De ser así, ejecuta el siguiente comando en el directorio de tu sitio web.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php72/bin/php bin/magento config:set system/backup/functionality_enabled 1</span></pre>
+</div>
+<p>Haz clic en el botón <strong>Intentar de nuevo (Try Again)</strong> y se creará tu copia de seguridad.</p>
+</div>
+<h2><span id="Updating">Actualizando</span></h2>
+<div class="solvvy-solution">
+<p>Magento Open Source actualmente no ofrece un método para actualizar su software dentro del panel de administración. La actualización requiere el uso de <a href="https://help.dreamhost.com/hc/es/articles/214899037-Generalidades-sobre-la-instalaci%C3%B3n-de-Composer" target="_self">Composer</a> y debe realizarse a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>. A continuación se muestran las instrucciones oficiales de Magento para el proceso.</p>
+<ul>
+<li><a href="https://devdocs.magento.com/guides/v2.4/comp-mgr/cli/cli-upgrade.html" target="_self">Actualizar Magento</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://www.magentocommerce.com/download">https://www.magentocommerce.com/download</a></li>
+</ul>
+</div>
