@@ -1,0 +1,35 @@
+<h2>Crear un archivo .htaccess en tu servidor web DreamHost</h2>
+<div class="solvvy-solution">
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo crear un archivo .htaccess en tu servidor web:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227#crear-un-archivo-htaccess">Creando un archivo .htaccess en tu servidor web DreamHost</a></li>
+</ul>
+<p>Si el archivo ya existe, consulta los siguientes artículos para obtener instrucciones sobre cómo actualizarlo (dependiendo de si estás utilizando un cliente FTP o SSH):</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">Creando y editando un archivo a través de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Creando y editndo un archivo a través de SSH</a></li>
+</ul>
+</div>
+<h2>Forzar la descarga de un archivo</h2>
+<div class="solvvy-solution">
+<p>De forma predeterminada, si se solicita un archivo de texto (.txt), el contenido del archivo se muestra en el navegador y no se descarga. Esto se debe a que el tipo MIME predeterminado para los archivos .txt especifica mostrar los archivos y no descargarlos. Sin embargo, puedes cambiar esto agregando la siguiente línea a tu archivo .htaccess:</p>
+<div class="preboxcontainer">
+<pre class="prebox">AddType application/octet-stream txt
+</pre>
+</div>
+<p>Puedes cambiar la extensión a cualquier cosa que desee, como mp3 o mov. Aquí hay otro ejemplo que hace lo mismo: cualquier archivo que termine en mov, mp3, jpg o pdf se descarga automáticamente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;FilesMatch "\.(mov|mp3|jpg|pdf)$"&gt;
+ForceType application/octet-stream
+Header set Content-Disposition attachment
+&lt;/FilesMatch&gt;
+</pre>
+</div>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">Generalidades sobre .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-">¿Qué puedo hacer con un archivo .htaccess?</a></li>
+</ul>
+</div>
