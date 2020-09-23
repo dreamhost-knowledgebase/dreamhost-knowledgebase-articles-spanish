@@ -1,0 +1,126 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este artículo contiene información/ejemplos sobre usuarios root/sudo/admin. Estos comandos solo se pueden ejecutar en un servidor <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicated</a> con un <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-">usuario admin</a>.</p>
+</div>
+</div>
+<p>Memcached es un sistema de almacenamiento en caché de objetos de memoria distribuida de alto rendimiento, de naturaleza genérica, pero diseñado para acelerar las aplicaciones web dinámicas al aliviar la carga de la base de datos. Muchas aplicaciones web (<a href="https://help.dreamhost.com/hc/es/articles/217292577-MediaWiki-Instalando-y-m%C3%A1s">MediaWiki</a>, <a href="https://help.dreamhost.com/hc/es/articles/216691848-Drupal">Drupal</a>, y etc.) ofrecen soporte para memcached.</p>
+<p>Solo es posible instalar Memcached en un plan de hosting <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicated</a>.</p>
+</div>
+<h2><span id="Installing_the_memcached_server_daemon">Paso 1 — </span><span id="Installing_the_memcached_server_daemon">Instalando el memcached server daemon</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. Asegúrate de iniciar sesión en tu servidor usando un <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-">usuario admin</a> en el servidor Dedicated.</li>
+<li>Ejecuta el siguiente comando para cambiar al usuario root:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo su</span></pre>
+</div>
+</li>
+<li>Ejecuta lo siguiente para instalar el paquete de memcached daemon (basado en servidor):
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">root@server# </span><span class="command">apt-get install memcached</span></pre>
+</div>
+</li>
+<li>Después de instalar memcached daemon, descarga un paquete de cliente para acceder al servidor y extiende PHP para conectarte a tu memcached daemon.</li>
+<li>Ahora puedes escribir <span class="code">exit</span> para salir del usuario 'root' y volver al nombre de usuario en tu sitio.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">root@server# </span><span class="command">exit</span>
+<span class="server">[server]$ </span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="Installing_the_memcached_server_daemon">Paso 2 — </span>Instala la biblioteca <em>libmemcache</em></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Revisa la <a href="http://php.net/manual/en/memcached.installation.php">documentación de instalación de memcached</a> en php.net.</li>
+<li>Asegúrate que estás en el directorio $HOME de tu usuario admin.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd $HOME</span></pre>
+</div>
+</li>
+<li>Obtén el requisito previo libmemcache en <a href="https://launchpad.net/libmemcached">https://launchpad.net/libmemcached</a>. Cambia la versión a continuación según sea necesario.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://launchpad.net/libmemcached/1.0/1.0.18/+download/libmemcached-1.0.18.tar.gz</span>
+<span class="server">[server]$ </span><span class="command">tar -zxvf libmemcached-1.0.18.tar.gz</span>
+<span class="server">[server]$ </span><span class="command">cd libmemcached-1.0.18</span>
+<span class="server">[server]$ </span><span class="command">./configure</span>
+<span class="server">[server]$ </span><span class="command">make</span>
+<span class="server">[server]$ </span><span class="command">make install</span>
+</pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="Installing_the_memcached_server_daemon">Paso 3 —</span><span id="Using_PECL.E2.80.99s_memcache_client">&nbsp;Instala el cliente PECL de memcache</span></h2>
+<div class="solvvy-solution">
+<p>Para usar el cliente PECL de memcache:</p>
+<ol>
+<li>Asegúrate de estar en el directorio $HOME de tu usuario administrador.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd $HOME</span></pre>
+</div>
+</li>
+<li><a href="https://pecl.php.net/package/memcache">Descarga el código fuente</a> y compílalo. Cambia la versión como sea necesario.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget http://pecl.php.net/get/memcache-2.2.7.tgz</span>
+<span class="server">[server]$ </span><span class="command">tar -zxvf memcache-2.2.7.tgz</span>
+<span class="server">[server]$ </span><span class="command">cd memcache-2.2.7</span>
+</pre>
+</div>
+</li>
+<li>Compila para PHP 7.2. Cambia la versión a la versión real de PHP que necesitas usar. Consulta el <a href="https://help.dreamhost.com/hc/es/articles/215082337--Qu%C3%A9-versiones-de-PHP-est%C3%A1n-disponibles-en-DreamHost-">artículo de versiones de PHP</a> para más detalles:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php72/bin/phpize</span>
+<span class="server">[server]$ </span><span class="command">./configure --with-php-config=/usr/local/php72/bin/php-config</span>
+<span class="server">[server]$ </span><span class="command">make</span>
+<span class="server">[server]$ </span><span class="command">make install</span>
+</pre>
+</div>
+<ul>
+<li>El comando <span class="code">make install</span> finaliza con la siguiente respuesta:</li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox">Installing shared extensions: &nbsp; &nbsp; /usr/local/php72/lib/php/extensions/no-debug-non-zts-20170718/</pre>
+</div>
+</li>
+<li>Una vez compilado el objeto compartido, agrégalo a tu configuración de PHP.
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Para obtener más información sobre cómo agregar un archivo phprc bajo el usuario en el que se ejecuta tu dominio, visita la página siguiente:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214894037--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-FTP-">phprc</a></li>
+</ul>
+</div>
+</div>
+</li>
+<li>Añade la siguiente linea a ese archivo phprc:
+<div class="preboxcontainer">
+<pre class="prebox">extension = “/usr/local/php72/lib/php/extensions/no-debug-non-zts-20170718/memcache.so”
+</pre>
+</div>
+</li>
+<li>Elimine todos los procesos PHP en ejecución. Para más información, visita la siguiente página:
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza">Terminando procesos PHP</a></li>
+</ul>
+</li>
+<li>Verifica tu configuración de PHP en un archivo phpinfo.php para confirmar que la extensión se está cargando. Para más información, visita la siguiente página:
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio">Creando un archivo phpinfo.php</a></li>
+</ul>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/01_memcached.png" alt="01 memcached.png" /></dd>
+</dl>
+</li>
+</ol>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216660668-Generalidades-OPcache">Generalidades sobre OPcache</a></li>
+</ul>
+</div>
