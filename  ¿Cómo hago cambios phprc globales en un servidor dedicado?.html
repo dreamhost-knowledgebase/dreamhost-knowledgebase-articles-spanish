@@ -1,0 +1,81 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cada instalación de PHP viene con configuraciones predeterminadas que generalmente están bien para la mayoría de los sitios web. Ocasionalmente, las necesidades de un sitio web hacen que sea necesario ajustar estas configuraciones de PHP. Por ejemplo, es posible que tu sitio deba cargar archivos más grandes de lo que permite el límite de carga de PHP actual. En ese caso, necesitarías crear un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">php.ini (phprc)</a> y actualizar este valor. Si tienes un servidor dedicado, es posible configurar un solo archivo phprc para todo el servidor, en lugar de configurarlos individualmente para cada sitio</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El término estándar para un archivo de configuración PHP es php.ini. Sin embargo, DreamHost utiliza el término archivo "phprc" en su lugar. Esto actúa de la misma manera, solo que el nombre es diferente. En este artículo, solo se usa el término phprc.</p>
+</div>
+</div>
+</div>
+<h2>Cómo habilitar cambios globales</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si tienes la intención de realizar cambios globales en tu configuración de PHP, debes desmarcar la casilla de verificación 'DreamHost Managed' en tu panel. De lo contrario, el servidor sobrescribirá tu configuración personalizada la próxima vez que se ejecute una configuración.</p>
+<p>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=dedicated.dashboard&amp;" target="_blank" rel="noopener">Dedicated Servers Dashboard</a>. A la derecha del servidor haz clic en el botón <strong>Configure</strong>. En la página siguiente, desmarca 'DreamHost Managed'. Finalmente, haga clic en <strong>Save ds#### settings...</strong> en la parte inferior para guardar.</p>
+</div>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si tienes un archivo phprc personalizado configurado con tu usuario, este anulará el archivo php.ini global para ese usuario específico, para la versión de PHP para la que se creó el archivo phprc personalizado.</p>
+</div>
+</div>
+<ol>
+<li>Inicia sesión en tu servidor <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">a través SSH</a>, usando tu usuario admin. Puedes crear un usuario admin en <a class="panel-link" href="https://panel.dreamhost.com/?tree=dedicated.usersdashboard" target="_blank" rel="noopener">Dedicated Admin Users</a>.</li>
+<li>Una vez que inicies sesión en tu servidor, navega hasta el directorio de la versión de PHP que deseas editar:<br /><strong>Para PHP 7.2</strong>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd /etc/php72</span></pre>
+</div>
+<strong>Para PHP 7.3</strong>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd /etc/php73</span></pre>
+</div>
+<strong>Para PHP 7.4</strong>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd /etc/php74</span></pre>
+</div>
+<dl>
+<dd>Una vez que estés en ese directorio, verás el archivo php.ini.</dd>
+</dl>
+</li>
+<li>Ejecuta el siguiente <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">comando para editarlo</a>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo nano php.ini</span></pre>
+</div>
+</li>
+<li>Cuando termines de editar, cierre el archivo y regresa a tu shell.</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza">Elimina</a> cualquier proceso PHP para actualizar el archivo.</li>
+</ol>
+<p>Una vez que termines, el php.ini global ahora se usa para todos los sitios en tu servidor que no tienen un archivo phprc personalizado habilitado.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si tu servidor está ejecutando NGINX, debe detener NGINX antes de matar PHP y luego reiniciarlo. Los siguientes comandos solo se pueden ejecutar en un servidor dedicado con un usuario administrador.</p>
+</div>
+</div>
+<p>Para detener/eliminar/reiniciar NGINX:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo /etc/init.d/nginx stop</span>
+<span class="server">[server]$ </span><span class="command">pkill -9 php</span>
+<span class="server">[server]$ </span><span class="command">sudo /etc/init.d/nginx start</span>
+</pre>
+</div>
+</div>
+<h2>Cargando extensiones PHP en todos los dominios (en VPS o Dedicado)</h2>
+<div class="solvvy-solution">
+<p>En un DreamHost VPS o servidor dedicado, puedes encontrar el directorio en <code>/etc/php#/conf.d/</code> (solo asegúrate de cambiar la carpeta php# a la versión real que está actualizando). Todos los intérpretes de PHP cargan los archivos de este directorio para esta versión de PHP.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">Generalidades sobre php.ini</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/sections/203272338-Custom-Configurations">Configuraciones personalizadas de PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214893957--C%C3%B3mo-habilito-las-extensiones-y-cargadores-PHP-">¿Cómo habilito extensiones PHP extensiones y loaders?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/sections/203275788-Troubleshooting">Artículos de solución de problemas PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a></li>
+</ul>
+</div>

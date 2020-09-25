@@ -1,0 +1,75 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>SQLite ya está instalado en todos los servidores DreamHost, sin embargo, la versión es diferente según la versión de Ubuntu que esté ejecutando tu servidor (Trusty o Bionic). Puedes ver esos detalles aquí:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/217294097-SQLite" target="_self">SQLite</a></li>
+</ul>
+<p>También puedes instalar tu propia versión localmente con tu nombre de usuario. Este artículo te guía a través de este proceso.</p>
+</div>
+<h2>Instalación</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Asegúrate de estar en el directorio de inicio de tu usuario.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li>Visita la&nbsp; <a href="https://sqlite.org/download.html" target="_self">página de descarga de SQLite</a> para descargar la más reciente versión.</li>
+<li>Ejecuta lo siguiente para descargarlo al directorio de tu usuario.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://sqlite.org/2020/sqlite-autoconf-3330000.tar.gz</span></pre>
+</div>
+</li>
+<li>Descomprime el archivo.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar zxvf sqlite-autoconf-3330000.tar.gz</span></pre>
+</div>
+</li>
+<li>Cambia al nuevo directorio.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd sqlite-autoconf-3330000</span></pre>
+</div>
+</li>
+<li>Ejecuta lo siguiente para configurarlo.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">./configure --prefix=$HOME/opt/sqlite</span></pre>
+</div>
+</li>
+<li>Ejecuta <span class="code">make</span> y <span class="code">make install</span> para completar la instalación.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">make</span>
+<span class="server">[server]$ </span><span class="command">make install</span></pre>
+</div>
+</li>
+<li>Añade lo siguiente a tu <span class="text-object">.bash_profile</span>.
+<div class="preboxcontainer">
+<pre class="prebox">export PATH=$HOME/opt/sqlite/bin:$PATH<br />export LD_LIBRARY_PATH=$HOME/opt/sqlite/lib<br />export LD_RUN_PATH=$HOME/opt/sqlite/lib</pre>
+</div>
+</li>
+<li><span class="code">source</span> a tu <span class="text-object">.bash_profile</span>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">source .bash_profile</span></pre>
+</div>
+</li>
+<li>Finalmente, verifiva la versión para confirmar que ahora se está usando.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">which sqlite3</span>
+/home/user/opt/sqlite/bin/sqlite3
+<span class="server">[server]$ </span><span class="command">sqlite3</span>
+SQLite version 3.33.0 2020-08-14 13:23:32</pre>
+</div>
+</li>
+<li>Luego puedes salir del shell sqlite ejecutando lo siguiente.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">sqlite&gt; </span><span class="command">.quit</span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/217294097-SQLite" target="_self">SQLite</a></li>
+</ul>
+</div>
