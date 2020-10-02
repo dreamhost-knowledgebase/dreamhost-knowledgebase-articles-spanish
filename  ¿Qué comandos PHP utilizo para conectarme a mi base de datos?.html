@@ -1,0 +1,84 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>PHP tiene funciones integradas que te permiten conectarse a tu servidor de base de datos para recuperar datos. Este artículo detalla algunos ejemplos de uso de estas funciones.</p>
+</div>
+<h2>Conexiones estándar de mysqli</h2>
+<div class="solvvy-solution">
+<p>El siguiente script crea un recurso MySQL llamado $link. Este recurso se puede utilizar para crear consultas. A continuación se muestra un ejemplo muy simple de un script de conexión PHP. Ve el artículo <a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin">phpMyAdmin</a> para obtener detalles sobre cómo encontrar las credenciales de su base de datos:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+
+$hostname = "mysql.example.com"; // the hostname you created when creating the database
+$username = "yourusername";      // the username specified when setting up the database
+$password = "yourpassword";      // the password specified when setting up the database
+$database = "databasename";      // the database name chosen when setting up the database 
+
+$link = mysqli_connect($hostname, $username, $password, $database);
+if (mysqli_connect_errno()) {
+   die("Connect failed: %s\n" + mysqli_connect_error());
+   exit();
+}
+?&gt;
+</pre>
+</div>
+<p>Es una buena idea poner este script en un archivo separado y luego usar la función include() de PHP para agregarlo al principio de cualquier página web que requiera acceso a la base de datos. Normalmente, no hay razón para tener más de una base de datos para un sitio web (particularmente porque no hay un límite teórico para el número de tablas por base de datos), por lo que rara vez se necesita más de un recurso de conexión. La conexión se cierra una vez que finalizas la ejecución del script o al invocar la función mysqli_close().</p>
+</div>
+<h2>Ejecutando consultas</h2>
+<div class="solvvy-solution">
+<h3>Extrayendo un ResultSet</h3>
+<p>El siguiente ejemplo extrae datos de la tabla especificada y los muestra en una tabla HTML para que los vea. Este script es una adición al script anterior, así que asegúrate de haber creado tu script de conexión. Luego, el recurso $link se usa para extraer los datos.</p>
+<p>En este ejemplo, una tabla MySQL llamada ‘test_data’ contiene lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">+----+---------------+
+| id | test_data     |
++----+---------------+
+|  1 | A value       |
+|  2 | Another value |
+|  3 | Still another |
++----+---------------+
+</pre>
+</div>
+<p>Este script luego extrae los datos de esa tabla:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+
+$sql = "SELECT * FROM test_table";
+$result = mysqli_query($link,$sql) or die("Unable to select: ".mysql_error());
+print "&lt;table&gt;\n";
+while($row = mysqli_fetch_row($result)) {
+   print "&lt;tr&gt;\n";
+   foreach($row as $field) {
+       print "&lt;td&gt;$field&lt;/td&gt;\n";
+   }
+   print "&lt;/tr&gt;\n";
+}
+print "&lt;/table&gt;\n";
+mysqli_close($link);
+
+?&gt;
+</pre>
+</div>
+</div>
+<h2><span id="See_Also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<h3>Información General</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL">Generalidades sobre MySQL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-PHP">Generalidades sobre PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217185277-Ejecuci%C3%B3n-de-scripts-web-en-tu-zona-horaria">Ejecutando scripts web en tu zona horaria</a></li>
+<li><a href="http://php.net/manual/en/ref.mysql.php">Funciones MySQL</a></li>
+</ul>
+<h3>Conectándose a MySQL con PHP</h3>
+<ul>
+<li><a href="http://us2.php.net/manual/en/function.mysql-connect.php">La función mysql_connect()</a></li>
+<li><a href="http://php.net/manual/en/function.mysqli-connect.php">La función mysqli_connect()</a></li>
+</ul>
+<h3>Ejecutando Consultas</h3>
+<ul>
+<li><a href="http://us3.php.net/manual/en/function.mysql-query.php">La función mysql_query()</a></li>
+<li><a href="http://php.net/manual/en/mysqli.query.php">La función mysqli_query()</a></li>
+<li><a href="http://us3.php.net/manual/en/function.mysql-fetch-row.php">La función mysql_fetch_row()</a></li>
+<li><a href="http://php.net/manual/en/mysqli-result.fetch-row.php">La función mysqli_fetch_row()</a></li>
+</ul>
+</div>
