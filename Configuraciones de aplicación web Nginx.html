@@ -1,0 +1,251 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert-warning">
+<p>¡POSIBLE INFORMACIÓN DESACTUALIZADA!<br />DreamHost no admite directamente ninguna de las funciones descritas en esta página y no es responsable de mantener este contenido actualizado o preciso. ¡Úsalo bajo tu propio riesgo!</p>
+</div>
+<p>Muchas aplicaciones web como WordPress y MediaWiki están configuradas originalmente para funcionar con Apache. Dado que los archivos .htaccess no son compatibles con Nginx, existen algunos ajustes que puedes realizar para que tus aplicaciones funcionen correctamente. En todos los ejemplos siguientes, asegúrate de seguir estos pasos.</p>
+</div>
+<h2>Pasos de configuración</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Ve la sección <a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">Configuraciones de archivo local</a> para crear tu directorio <span class="text-object">/nginx/example.com</span>.</li>
+<li>Crea tu archivo .conf en este directorio <span class="text-object">/nginx/example.com</span>.
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El archivo .conf puede tener cualquier nombre. Solo necesita terminar en .conf.</p>
+</div>
+</div>
+</li>
+<li>Agrega contenido al archivo .conf.</li>
+<li>Asegúrate de <a href="https://help.dreamhost.com/hc/es/articles/216454967-Como-recargar-y-reiniciar-Nginx-Solo-para-servidores-dedicados-">recargar Nginx</a> para que los cambios surtan efecto.</li>
+</ol>
+<p>Una lista de ejemplos para varias aplicaciones web pueden ser encontradas aquí:</p>
+<ul>
+<li><a href="http://wiki.nginx.org/Configuration">Ejemplos de configuración Nginx</a></li>
+</ul>
+</div>
+<h2>WordPress</h2>
+<div class="solvvy-solution">
+<p>Crea un archivo <code>wordpress.conf</code> en tu directorio <code>/home/username/nginx/example.com/</code>.</p>
+<p>Aquí es donde pondrás todas tus reglas de configuración de Nginx.</p>
+<p>Si vas a compartir esta configuración de WordPress en varios sitios, crea un archivo predeterminado. Luego, crea enlaces simbólicos para cada uno de tus sitios. Por ejemplo:</p>
+<ol>
+<li>Crea un directorio predeterminado para tu archivo de WordPress:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir -p /home/username/nginx/default-wp/</span>
+</pre>
+</div>
+</li>
+<li>En este directorio /default-wp, crea el archivo <span class="text-object">wordpress.conf</span>. Ve el artículo '<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a>' para más instrucciones sobre crear el archivo.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nano /home/YOURUSER/nginx/default-wp/wordpress.conf</span></pre>
+</div>
+</li>
+<li>Guarda y cierra el archivo para regresar a tu shell.</li>
+<li>Crea enlaces simbólicos o symlinks desde este directorio, para cada uno de los directorios de configuración de tus sitios:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ln -s /home/username/nginx/default-wp/ /home/username/nginx/example.com</span>
+<span class="server">[server]$ </span><span class="command">ln -s /home/username/nginx/default-wp/ /home/username/nginx/example2.com</span>
+</pre>
+</div>
+</li>
+</ol>
+</div>
+<h2>Permalinks o enlaces permanentes</h2>
+<div class="solvvy-solution">
+<p>El conjunto más básico de reglas de WordPress que lo ponen en funcionamiento de inmediato son estos:</p>
+<div class="preboxcontainer">
+<pre class="prebox">#######################
+# Permalinks
+
+if (!-e $request_filename) {
+  rewrite ^.*$ /index.php last;
+}
+</pre>
+</div>
+<p>Esto pone en marcha toda la funcionalidad básica de WordPress en términos de enlaces permanentes.</p>
+<p>Un enfoque alternativo, que no usa 'if', es el siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">#######################
+# Permalinks
+
+try_files $uri $uri/ /index.php?$args;
+</pre>
+</div>
+<h3>Multisite</h3>
+<p>Si usas Multisite, necesitas reglas un poco más avanzadas:</p>
+<div class="preboxcontainer">
+<pre class="prebox">######################
+# Permalinks
+
+if (!-e $request_filename) {
+ rewrite ^/files(.*) /wp-includes/ms-files.php?file=$1 last;
+
+ rewrite ^(/[^/]+)?(/wp-.*) $2 last;
+ rewrite ^(/[^/]+)?(/.*.php) $2 last;
+
+ rewrite ^.*$ /index.php last;
+}
+</pre>
+</div>
+<p>Esto proporciona una funcionalidad básica para Multisite.</p>
+</div>
+<h2>W3 Total Cache</h2>
+<div class="solvvy-solution">
+<p>El plugin W3 Total Cache para WordPress reconoce automáticamente que se está ejecutando bajo Nginx y crea un archivo de configuración Nginx predeterminado que puedes copiar en tu directorio <span class="text-object">/nginx/&lt;domain name&gt;/</span>.</p>
+<dl>
+<dd></dd>
+</dl>
+</div>
+<h2>WP Super Cache</h2>
+<div class="solvvy-solution">
+<p>Si estás utilizando el complemento WP Super Cache, usa lo siguiente en lugar de las reglas de enlace permanente anteriores:</p>
+<div class="preboxcontainer">
+<pre class="prebox">#######################
+# WP Super Cache
+
+# if the requested file exists, return it immediately
+if (-f $request_filename) {
+  break;
+}
+
+set $supercache_file '';
+set $supercache_uri $request_uri;
+
+if ($request_method = POST) {
+  set $supercache_uri '';
+}
+
+# Using pretty permalinks, so bypass the cache for any query string
+if ($query_string) {
+  set $supercache_uri '';
+}
+
+if ($http_cookie ~* "comment_author_|wordpress|wp-postpass_" ) {
+  set $supercache_uri '';
+}
+
+# if we haven't bypassed the cache, specify our supercache file
+if ($supercache_uri ~ ^(.+)$) {
+  set $supercache_file /wp-content/cache/supercache/$http_host$1/index.html;
+}
+
+# only rewrite to the supercache file if it actually exists
+if (-f $document_root$supercache_file) {
+  rewrite ^(.*)$ $supercache_file break;
+}
+
+# all other requests go to Wordpress
+if (!-e $request_filename) {
+  rewrite ^.*$ /index.php last;
+}
+</pre>
+</div>
+</div>
+<h2>FeedBurner</h2>
+<div class="solvvy-solution">
+<p>Si tienes la configuración de la fuente RSS de tu blog utilizando <a href="http://feedburner.google.com/">FeedBurner</a>, entonces agrega las siguientes líneas <strong>sobre</strong> las líneas de enlace permanente o supercaché mencionadas anteriormente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">#######################
+# FeedBurner
+
+if ($http_user_agent&nbsp;!~ FeedBurner) {
+  rewrite ^/comment/feed/ http://feeds.feedburner.com/your-comment-feed last;
+  rewrite ^/feed/ http://feeds.feedburner.com/your-feed last;
+}
+</pre>
+</div>
+<p>Debes reemplazar los bits "your-comment-feed" y "your-feed" con las URL de FeedBurner correspondientes que obtienes cuando agregas tus feeds a su sistema.</p>
+</div>
+<h2>Drupal</h2>
+<div class="solvvy-solution">
+<p>Antes de configurar Drupal, crea un archivo drupal.conf (el nombre realmente no importa, pero generalmente deseas al menos darle una extensión .conf) en la siguiente ubicación:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/YOURUSER/nginx/example.com/</pre>
+</div>
+<p>Ve el artículo '<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a>' para instrucciones sobre cómo crear el archivo.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nano /home/YOURUSER/nginx/example.com/drupal.conf</span></pre>
+</div>
+<p>Aquí es donde pondrás todas tus reglas de configuración de nginx.</p>
+</div>
+<h2>Instalación de dominio de nivel superior</h2>
+<div class="solvvy-solution">
+<p>Si tu Drupal está instalado en el nivel superior de tu dominio (e.j., https://www.example.com/ es tu instalación Drupal), entonces añade estas reglas:</p>
+<div class="preboxcontainer">
+<pre class="prebox">#######################
+# Drupal Clean URLs (Top Level Domain)
+
+if (!-e $request_filename) {
+rewrite ^/(.*)$ /index.php?q=$1 last;
+}</pre>
+</div>
+</div>
+<h2>Instalación de Subdirectorio</h2>
+<div class="solvvy-solution">
+<p>Si tu Drupal está instalado en un subdirectorio (e.j., https://www.example.com/drupal/ es tu instalación Drupal), entonces añade estas reglas:</p>
+<div class="preboxcontainer">
+<pre class="prebox">#######################
+# Drupal Clean URLs (Subdirectory)
+
+if (!-e $request_filename) {
+rewrite ^/drupal$ /drupal/ permanent;
+rewrite ^/drupal/(.*)$ /drupal/index.php?q=$1 last;
+rewrite ^/(.*)$ /index.php?q=$1 last;
+}</pre>
+</div>
+<p>Remplaza las ocurrencias de "drupal" de arriba con cualquiera que sea el nombre de tu subdirectorio.</p>
+</div>
+<h2>Habilita los Clean URLs</h2>
+<div class="solvvy-solution">
+<p>Si aún no lo has hecho, debes iniciar sesión en tu usuario administrador de Drupal e ir al área Administer -&gt; Site Configuration -&gt; Clean URLs y encender Clean URLs. Si tienes problemas para encontrarlo, intenta navegar a http://www.example.com/index.php?q=admin/settings/clean-urls. Si recibes un mensaje de error que dice que las URL limpias no son compatibles, asegúrate de recordar volver a cargar tu configuración de nginx como se discutió anteriormente en el artículo.</p>
+</div>
+<h2>Gotchas</h2>
+<div class="solvvy-solution">
+<p>Desafortunadamente, esta configuración actualmente hace que las búsquedas de sitios que contienen espacios se rompan. Con Apache, cuando buscas "alguna cosa" que se convierte en "search/node/alguna+cosa". Cuando esto es procesado por nginx, el "+" se codifica para que termine con "search/node/alguna%20cosa". Por lo tanto, tu búsqueda termina buscando la cadena "alguna+cosa" en lugar de "Alguna cosa". Actualmente no hay soluciones alternativas conocidas que estén por venir.</p>
+</div>
+<h2>MediaWiki</h2>
+<div class="solvvy-solution">
+<p><a href="https://www.mediawiki.org/wiki/MediaWiki">MediaWiki</a> es un software wiki popular desarrollado por los fundadores de Wikipedia que continúa utilizando y manteniendo el software en la actualidad. Está disponible de forma gratuita y es un proyecto de código abierto. A continuación, se describe un movimiento exitoso del sitio MediaWiki 1.17.0 (usando URL limpias) en Apache a Nginx. Primero, crea un archivo <span class="text-object">mediawiki.conf</span> en el directorio apropiado:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/YOURUSER/nginx/example.com/mediawiki.conf</pre>
+</div>
+<p>En ese archivo agrega el siguiente contenido:</p>
+<div class="preboxcontainer">
+<pre class="prebox">location / {
+        try_files $uri $uri/ /index.php;
+    }
+	
+location /cache {
+        deny  all;
+    }
+location ~* ^.+\.(js|css|png|jpg|jpeg|gif|ico)$ {
+        expires max;
+        log_not_found off;
+        access_log off;
+    }
+location /dumps {
+        root /home/YOURUSER/example.com/local;
+        autoindex on;
+    }
+### Dreamhost analog stats
+if ($request_uri ~* ^/(stats|failed_auth\.html).*$)
+{
+	break;
+}</pre>
+</div>
+</div>
+<h2>phpBB</h2>
+<div class="solvvy-solution">
+<h3>Aumentar el tiempo de espera de FastCGI</h3>
+<p>Pon esto en un archivo .conf como se describe arriba:</p>
+<div class="preboxcontainer">
+<pre class="prebox">fastcgi_read_timeout 120;</pre>
+</div>
+<p>Fuente: <a href="https://www.phpbb.com/community/viewtopic.php?f=46&amp;t=1778165#p10746575">https://www.phpbb.com/community/viewtopic.php?f=46&amp;t=1778165#p10746575</a></p>
+</div>
+<h2>Configuraciones de envío de correos masivos</h2>
+<div class="solvvy-solution">
+<p>Si deseas enviar correos electrónicos masivos con autenticación SMTP, debes utilizar POP-BEFORE-SMTP como el "Método de autenticación para SMTP".</p>
+</div>
