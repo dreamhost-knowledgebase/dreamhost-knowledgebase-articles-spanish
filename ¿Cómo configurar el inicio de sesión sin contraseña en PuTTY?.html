@@ -2,7 +2,7 @@
 <div class="solvvy-solution">
 <p>Este artículo explica cómo configurar el inicio de sesión sin contraseña con PuTTY. Asegúrate de haber&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215464538--C%C3%B3mo-configurar-PuTTY-" target="_self">configurado PuTTY</a>&nbsp;antes de continuar con este artículo.</p>
 </div>
-<h2>Configuración de inicio de sesión sin contraseña</h2>
+<h2>Crear un par de claves</h2>
 <div class="solvvy-solution">
 <ol>
 <li>Abre el archivo puttygen.exe que&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215464538--C%C3%B3mo-configurar-PuTTY-" target="_self">descargaste al configurar PuTTY</a>.&nbsp;Lo usarás para crear tu par de claves privada/pública.</li>
@@ -19,6 +19,8 @@
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/03_pubkey.png" alt="03 pubkey.png" /></dd>
 </dl>
+</li>
+<li>En la parte inferior derecha, hay botones llamados <strong>Save public key</strong> y <strong>Save private key</strong> – guarda ambos en tu computadora
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" /></div>
 <div class="alert-content">
@@ -34,7 +36,26 @@ Haz clic en <strong>Yes</strong> para guardar sin una frase de contraseña.</li>
 </ul>
 </div>
 </div>
+<div class="alert-warning">
+<p><strong>Si estás creando claves para MySQL Workbench</strong></p>
+<p>Si estás creando un par de claves para MySQL Workbench, debes exportar la clave privada en formato OpenSSH.</p>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/mysql-workbench_05.png" alt="convert to openssh key" /></dd>
+</dl>
+<ol>
+<li>Haz clic en la pestaña <span class="text-object">Conversions</span> tab y selecciona <span class="text-object">Export OpenSSH key</span>.</li>
+<li>Guarda esto en tu computadora sin una extensión.</li>
+</ol>
+<dl>
+<dd><em>Ahora puedes usar esta clave para importar a MySQL Workbench.</em></dd>
+</dl>
+</div>
 </li>
+</ol>
+</div>
+<h2>Subiendo la clave pública a tu servidor</h2>
+<div class="solvvy-solution">
+<ol>
 <li>Carga la clave pública que acabas de crear en el directorio de inicio de los usuarios de DreamHost. Para hacer esto, puedes usar un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215613107-Listas-de-clientes-de-software-de-FTP" target="_self">Cliente FTP</a> como Filezilla.</li>
 <li>Inicia sesión en tu servidor web DreamHost a través de PuTTY.</li>
 <li>Navega al directorio del usuario.<br />
