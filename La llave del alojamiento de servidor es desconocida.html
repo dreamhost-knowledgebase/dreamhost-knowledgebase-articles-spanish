@@ -97,7 +97,9 @@ ED25519 key fingerprint is <span class="green">SHA256:q3JfuvuldJy5u/ETWHW7HBQ3Zq
 <p>Primero, descarga la llave pública del servidor.</p>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">Dependiendo de las versión de OpenSSH que estés usando, solo ciertas llaves se descargarán. Versiones menores a 6.8 por defecto serán MD5.</div>
+<div class="alert-content">
+<p>Dependiendo de las versión de OpenSSH que estés usando, solo ciertas llaves se descargarán. Versiones menores a 6.8 por defecto serán MD5.</p>
+</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh-keyscan batroc.dreamhost.com &gt; batrockeys.pub</span></pre>
@@ -108,27 +110,48 @@ ED25519 key fingerprint is <span class="green">SHA256:q3JfuvuldJy5u/ETWHW7HBQ3Zq
 <span class="green">2048 a1:85:cc:7b:06:c9:14:f3:a8:38:7a:95:76:f1:17:eb</span> batroc.dreamhost.com (RSA)
 <span class="green">256 08:88:80:ff:e8:dd:4a:4f:6b:3a:64:cf:8c:84:f2:13</span> batroc.dreamhost.com (ECDSA)</pre>
 </div>
-<h3>Generar un hash de una llave diferente</h3>
-<p>Como está mencionado arriba, solo ciertas llaves se descargarán basadas en la versión de OpenSSH que estás usando. Sin embargo, puedes generar un hash en una llave diferente si necesitas.</p>
-<h4><strong>Generar un hash RSA (SHA256) basado en la llave RSA (MD5)</strong></h4>
-<p>Esto asume que cuando corres ssh-keyscan, solo las llaves MD5 son descargadas. Usa 'cat' para ver las llaves:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat batrockeys.pub</span>
+<!--
+  <h3>Generar un hash de una llave diferente</h3>
+  <p>
+    Como está mencionado arriba, solo ciertas llaves se descargarán basadas en
+    la versión de OpenSSH que estás usando. Sin embargo, puedes generar un hash
+    en una llave diferente si necesitas.
+  </p>
+  <h4>
+    <strong>Generar un hash RSA (SHA256) basado en la llave RSA (MD5)</strong>
+  </h4>
+  <p>
+    Esto asume que cuando corres ssh-keyscan, solo las llaves MD5 son descargadas.
+    Usa 'cat' para ver las llaves:
+  </p>
+  <div class="preboxcontainer">
+    <pre class="prebox"><span class="server">[server]$ </span><span class="command">cat batrockeys.pub</span>
 batroc.dreamhost.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFc4bKkZW+0bb+UYtDZwH/IAT5V4ybLlJWJ4cp7Ny3c4767aQheZr5ifcAEc+itEqnGPWIQ/qxbKZnw6F5dBXggbx+KIZX7JXDfJqNkFuVz3mKsvKxu0qGw2/b40dRiUe0+cAxamR73YNpCeCZuo515lJCw4eVo3BJtnHetT/yF9xtdGPQm334yDHunEtUgKFzqyEDEolFtL5FZcPP137RgfMdp+BWQj8tOiodmcUlA1kEhkN63JRcSsSJhd1FFAA4PoiyvsPm+PGUCIFwzKW13SXEIi0GQ2J8Rl3YW7B/H1HXCDGfT75T1OhP3mGN3H8Es9ieq/1kKTyzscq6C30z
 batroc.dreamhost.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDIXGPnE5gz3j8vzl8LeboCFAkcZ0L76ld5Y4knIghV+tTxOrUW2M3m6bN3qNJK9U8oJLiTafotQ/Js4JUTY8L8=</pre>
-</div>
-<p>Puedes ver que hay dos llaves en este archivo. Tienes que eliminar una de ellas (o más) para que quede una sola llave. Abre un archivo y elimina la segunda línea para que solo una línea quede.</p>
-<p>Ahora puedes correr el siguiente comando para generar un hash SHA256 basado en esa sola llave.</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">awk '{print $3}' batrockeys.pub | base64 -d | sha256sum -b | awk '{print $1}' | xxd -r -p | base64</span>
+  </div>
+  <p>
+    Puedes ver que hay dos llaves en este archivo. Tienes que eliminar una de
+    ellas (o más) para que quede una sola llave. Abre un archivo y elimina la
+    segunda línea para que solo una línea quede.
+  </p>
+  <p>
+    Ahora puedes correr el siguiente comando para generar un hash SHA256 basado
+    en esa sola llave.
+  </p>
+  <div class="preboxcontainer">
+    <pre class="prebox"><span class="server">[server]$ </span><span class="command">awk '{print $3}' batrockeys.pub | base64 -d | sha256sum -b | awk '{print $1}' | xxd -r -p | base64</span>
 <span class="green">mYNdKXseiTyZVeIdXNqy8rJTfrKnBo2QG1XK9DdUSYc=</span></pre>
-</div>
-<p>Como puedes ver, esto imprime la huella digital RSA (SHA256). Si has eliminado la primera llave en vez, la salida puede mostrar la huella digital ECDSA (SHA256).</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">awk '{print $3}' batrockeys.pub | base64 -d | sha256sum -b | awk '{print $1}' | xxd -r -p | base64</span>
+  </div>
+  <p>
+    Como puedes ver, esto imprime la huella digital RSA (SHA256). Si has eliminado
+    la primera llave en vez, la salida puede mostrar la huella digital ECDSA
+    (SHA256).
+  </p>
+  <div class="preboxcontainer">
+    <pre class="prebox"><span class="server">[server]$ </span><span class="command">awk '{print $3}' batrockeys.pub | base64 -d | sha256sum -b | awk '{print $1}' | xxd -r -p | base64</span>
 <span class="green">ijqWGQW20bkvOViujUO5PRknle09aDPUjh25u60T7eQ=</span></pre>
-</div>
-</div>
+  </div>
+--></div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
