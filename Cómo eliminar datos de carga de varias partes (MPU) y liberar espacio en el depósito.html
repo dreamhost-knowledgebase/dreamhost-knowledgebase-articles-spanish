@@ -1,0 +1,87 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Para cargas de archivos más grandes, la mayoría de los clientes de S3 utilizan la función de carga de múltiples partes (MPU) del protocolo S3. Esto permite al cliente dividir archivos grandes en fragmentos más pequeños, cargar estos fragmentos más pequeños y volver a intentar los fragmentos que fallaron sin tener que empezar de nuevo.</p>
+<p>La mayoría de los clientes de S3 son buenos para limpiar los datos de MPU que ya no necesitan, pero si se cae una conexión o el cliente falla, podría dejar estos datos atrás. Por lo general, los datos no se vuelven a utilizar; sin embargo, pueden utilizar silenciosamente espacio adicional en el disco de tu cuenta hasta que se eliminen. Vale la pena verificar y eliminar estos datos de MPU si los costos de almacenamiento en disco parecen mayores de lo esperado.</p>
+<p>La mayoría de los clientes de S3 no tienen una función de purga de datos MPU, por lo que en el siguiente ejemplo, Python y la biblioteca boto se utilizan para verificar y limpiar estos datos.</p>
+</div>
+<h2>Paso 1 — Crea un archivo .boto para almacenar tus claves.</h2>
+<div class="solvvy-solution">
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo crear un archivo de configuración .boto. Esto se utilizará para almacenar tus claves de DreamObjects.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115000376631-Creating-a-boto-file-to-store-your-keys" target="_self">Creando un archivo .boto para almacenar tus claves</a></li>
+</ul>
+<p>Ahora debería haber un archivo llamado .boto en el directorio de inicio de tu usuario que almacena tus claves de DreamObjects.</p>
+</div>
+<h2>Paso 2 — Crea un script de limpieza</h2>
+<div class="solvvy-solution">
+<p>Crea un archivo titulado <strong>mpu.py </strong>a través de SSH. El siguiente artículo explica cómo hacer esto.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a></li>
+</ul>
+<p>Luego puedes agregar el siguiente código a este archivo. Esta secuencia de comandos itera sobre todos los depósitos para verificar los datos de MPU. Si se encuentra alguno, muestra el nombre del archivo, la fecha en que se cargó, su tamaño y luego le pregunta si debe eliminarse.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Una vez que se eliminan los datos de MPU, no se pueden recuperar. Asegúrate de no necesitar los datos antes de eliminarlos.</p>
+</div>
+</div>
+<div id="clean-up-script-code">
+<h3>Código de script de limpieza</h3>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>No necesitas ajustar ninguno de los códigos siguientes, ya que tus claves ya están almacenadas en tu archivo .boto del paso 1 anterior.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">#!/usr/bin/python
+
+import boto<br />from boto.s3.connection import OrdinaryCallingFormat
+
+# Connect to DreamObjects
+c = boto.connect_s3(host='objects-us-east-1.dream.io', calling_format=boto.s3.connection.OrdinaryCallingFormat())
+
+# Iterate over all buckets
+for b in c.get_all_buckets():
+    print '\nBucket: ' + b.name
+
+    # Check for MPU data and calculate the total storage used
+    total_size = 0
+    for mpu in b.get_all_multipart_uploads():
+        ptotalsize = 0
+        for p in mpu.get_all_parts():
+            ptotalsize += p.size
+        print mpu.initiated, mpu.key_name, ptotalsize, str(round(ptotalsize * 1.0 / 1024 ** 3, 2)) + 'GB'
+        total_size += ptotalsize
+
+    print 'Total: ' + str(round(total_size * 1.0 / 1024 ** 3, 2)) + 'GB'
+
+    # If there is any usage, prompt to delete it and do so if requested
+    if total_size &gt; 0 and str(raw_input('Delete MPU data? (y/n) ')) == 'y':
+        for mpu in b.get_all_multipart_uploads():
+            mpu.cancel_upload()
+        print 'MPU data deleted!'
+    else:
+        print 'No changes made to bucket.'</pre>
+</div>
+</div>
+<h3>Ejemplo de salida de secuencia de comandos de limpieza</h3>
+<div class="preboxcontainer">
+<pre class="prebox">Bucket: my-user-bucket<br />2019-02-20T19:36:21.072Z backups/example.com/02-20-2019_example.com.zip 0.1GB<br />Total: 0.1GB<br />Delete MPU data? (y/n) y<br />MPU data deleted!
+
+Bucket: workbackup
+Total: 0.00GB
+No changes made to bucket.</pre>
+</div>
+</div>
+<h2>Paso 3 — Ejecuta el archivo</h2>
+<div class="solvvy-solution">
+<p>Mientras aún estás conectado a tu servidor a través de SSH, ejecuta el archivo usando el siguiente comando.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">python mpy.py</span></pre>
+</div>
+</div>
+<!--DreamObjects Button-->
+<div class="dream-sign-up">
+<h2>¡Comienza a almacenar tus datos hoy!</h2>
+<a href="https://www.dreamhost.com/cloud/storage/">Suscríbete para DreamObjects</a></div>

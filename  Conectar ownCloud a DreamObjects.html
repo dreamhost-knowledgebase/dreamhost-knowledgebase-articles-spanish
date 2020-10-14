@@ -1,0 +1,141 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p><a class="reference external" href="http://owncloud.org">ownCloud</a> es una aplicación de alojamiento de archivos de código abierto y gratuita que proporciona acceso universal a archivos, sincronización y uso compartido de tus datos (utilizando una única interfaz), independientemente de dónde se encuentren los datos. Puedes acceder, sincronizar y compartir casi cualquier cosa, como contactos, calendarios, marcadores y copias de seguridad dentro de ownCloud a través de la web, tu computadora o dispositivos móviles.</p>
+<p>ownCloud te permite usar DreamObjects como una opción de almacenamiento externo, lo que te da total libertad y control sobre tus datos.</p>
+<p>Esta guía describe cómo configurar ownCloud para conectarse al servicio de almacenamiento en la nube DreamObjects de DreamHost.</p>
+<span id="how-to-configure-owncloud-to-work-with-dreamobjects"></span>
+<h2>Cómo configurar ownCloud para funcionar con DreamObjects</h2>
+<p>Antes de que puedas comenzar a usar ownCloud con DreamObjects, debes instalar ownCloud en tu servidor DreamHost siguiendo esta guía paso a paso.</p>
+<ul class="simple">
+<li><a class="reference external" href="216472487-How-to-install-ownCloud">Cómo instalar ownCloud</a></li>
+</ul>
+<p>También debes habilitar DreamObjects en tu cuenta DreamHost. Si no has habilitado DreamObjects ni has creado las claves y buckets necesarios, consulta los siguientes artículos:</p>
+<ul class="simple">
+<li><a class="reference external" href="215986327-What-are-Users-in-DreamObjects-and-How-Do-You-Use-Them-">Crear un usuario de DreamObjects</a></li>
+<li><a class="reference external" href="https://help.dreamhost.com/hc/es/articles/215986357-Llaves-de-DreamObjects">Crear Llaves de DreamObjects</a></li>
+</ul>
+</div>
+<h2>Configurando ownCloud</h2>
+<div class="solvvy-solution">
+<p>Después de instalar ownCloud, puedes configurarlo para que se sincronice con tus buckets de DreamObjects.</p>
+<p>Para configurar:</p>
+<ol>
+<li>Abre ownCloud.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2019-10_ownCloud_01.fw.png" alt="2019-10_ownCloud_01.fw.png" /></dd>
+</dl>
+</li>
+<li>Inicia sesión en tu instalación de ownCloud utilizando tu nombre de usuario y contraseña de administrador de ownCloud.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2019-10_ownCloud_02.fw.png" alt="2019-10_ownCloud_02.fw.png" /></dd>
+</dl>
+</li>
+<li>En la izquierda superior, haz clic en el icono <img src="https://kbimages.dreamhosters.com/images/2019-10_ownCloud_02.1.fw.png" alt="2019-10_ownCloud_02.1.fw.png" /> y luego selecciona 'Market'.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2019-10_ownCloud_03.fw.png" alt="2019-10_ownCloud_03.fw.png" /></dd>
+</dl>
+</li>
+<li>En la página Market, selecciona 'Storage' del menú de la barra izquierda.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2019-10_ownCloud_04.fw.png" alt="2019-10_ownCloud_04.fw.png" /></dd>
+</dl>
+</li>
+<li>Busca la opción 'External Storage: S3' en la siguiente página y haz clic en ella.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2019-10_ownCloud_05.fw.png" alt="2019-10_ownCloud_05.fw.png" /></dd>
+</dl>
+</li>
+<li>Desplázate hacia abajo y haz clic en el botón <strong>Install</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2019-10_ownCloud_06.fw.png" alt="2019-10_ownCloud_06.fw.png" /></dd>
+</dl>
+</li>
+<li>En la derecha arriba, haz clic en tu nombre de usuario y luego selecciona 'Settings'.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2019-10_ownCloud_07.fw.png" alt="2019-10_ownCloud_07.fw.png" /></dd>
+</dl>
+</li>
+<li>En la página Configuración, realiza las siguientes selecciones:
+<ul>
+<li>En el panel izquierdo, selecciona 'Storage'.</li>
+<li>Selecciona la caja llamada 'Enable external storage' para conectarte a DreamObjects.</li>
+</ul>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2019-10_ownCloud_08.fw.png" alt="2019-10_ownCloud_08.fw.png" /></dd>
+</dl>
+</li>
+<li>Haz clic en el menú desplegable llamado 'Add storage' y selecciona 'Amazon S3'.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2019-10_ownCloud_09.fw.png" alt="2019-10_ownCloud_09.fw.png" /></dd>
+</dl>
+</li>
+<li>Configura tus ajustes de almacenamiento en las siguientes secciones de configuración:
+<ul>
+<li>Folder name</li>
+<li>Configuration</li>
+<li>Available for</li>
+</ul>
+<h4>Folder name</h4>
+<ul>
+<li>Bajo 'Folder name', ingresa el nombre de tu carpeta ownCloud. Este será el nombre de la carpeta en el que vas a guardar tus datos y puede tener el nombre que desees.</li>
+</ul>
+<h4>Configuration</h4>
+<ul>
+<li><strong>Bucket name</strong> — El nombre de tu bucket de DreamObjects.</li>
+</ul>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El nombre de tu bucket no puede contener un guion bajo, ya que ownCloud fallará al conectarse.</p>
+</div>
+</div>
+<ul>
+<li><strong>Hostname</strong> — objects-us-east-1.dream.io</li>
+<li><strong>Port</strong> — Déjalo en blanco.</li>
+<li><strong>Region</strong> — us-east-1</li>
+<li><strong>Enable SSL</strong> — Selecciona esta casilla.</li>
+<li><strong>Enable Path Style</strong> — Selecciona esta casilla.</li>
+<li><strong>Access key</strong> —&nbsp; Tu <a href="https://help.dreamhost.com/hc/es/articles/215986357-Llaves-de-DreamObjects">Llave de acceso</a> DreamObjects&nbsp;</li>
+<li><strong>Secret key</strong> — Tu <a href="https://help.dreamhost.com/hc/es/articles/215986357-Llaves-de-DreamObjects">Llave secreta</a> DreamObjects&nbsp;</li>
+</ul>
+<h4>Available for</h4>
+<ul>
+<li>Si tienes multiples usuarios de tu instalación ownCloud, puedes limitar quien puede acceder la carpeta al escribir <span class="code">users</span> o <span class="code">groups</span> en la casilla 'Available for' a la derecha de la información de configuración.</li>
+</ul>
+</li>
+</ol>
+<p>Si ingresaste todo correctamente, aparecerá un círculo verde a la izquierda del nombre de tu carpeta.</p>
+</div>
+<h2>Ver tu carpeta y objetos</h2>
+<div class="solvvy-solution">
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/ownCloudx_06.png" alt="ownCloud.png" /></dd>
+</dl>
+<p>Para ver tus archivos, haz clic en 'Settings' a la derecha arriba, luego haz clic en 'Files'.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/ownCloudx_07.png" alt="ownCloud.png" /></dd>
+</dl>
+<p>En el panel central, verás el nombre de la carpeta que creó. Todo lo que guardes, cargues o crees allí se almacena en DreamObjects. Eliminar un objeto dentro de ownCloud elimina el objeto de DreamObjects.</p>
+<p>Si deseas conectarte a buckets adicionales, simplemente crea una nueva carpeta y conecta este bucket a la carpeta a través de la sección ‘Admin &gt; External Storage’ del panel ownCloud. Puedes conectar tantos buckets como gustes con ownCloud.</p>
+</div>
+<h2>Cargando archivos grandes dentro de ownCloud a DreamObjects</h2>
+<div class="solvvy-solution">
+<p>Si planeas cargar archivos grandes a DreamObjects usando ownCloud, deberás tener en cuenta algunas limitaciones y realizar algunos cambios de configuración, ya que cargar archivos grandes puede consumir mucha memoria.</p>
+<p>Los objetos de DreamObjects tienen un tamaño limitado de 10 TB, pero deben cargarse en fragmentos de 5 GB. ownCloud no admite cargas de archivos de varias partes, por lo que está limitado a cargas de archivos de 5 GB a través de ownCloud.</p>
+<p>ownCloud usa un archivo .htaccess ubicado en la carpeta ownCloud en el servidor para configurar los siguientes parámetros personalizados de PHP:</p>
+<div class="preboxcontainer">
+<pre class="prebox">php_value upload_max_filesize 600M
+php_value post_max_size 650M
+php_value memory_limit 512M
+php_value mbstring.func_overload 0
+php_value always_populate_raw_post_data -1
+</pre>
+</div>
+<p>Si tienes la intención de cargar archivos más grandes que 513M, es sugerido que el dominio esté <a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-">configurado para usar la versión más reciente de PHP</a>. También tendrás que crear <a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">configuraciones personalizadas de PHP</a> para configurar los límites deseados de <a href="https://help.dreamhost.com/hc/en-us/sections/203272338-Custom-Configurations">tamaño de carga, tiempo de ejecución y uso de memoria PHP incrementada</a>.</p>
+</div>
+<div class="footer">&nbsp;</div>
+<!--DreamObjects Button-->
+<div class="dream-sign-up">
+<h2>¡Comienza a almacenar tus datos hoy!</h2>
+<div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/storage/">Suscríbete para DreamObjects</a></div>
+</div>
