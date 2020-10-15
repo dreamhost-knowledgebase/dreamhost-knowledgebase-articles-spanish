@@ -1,0 +1,296 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="connect to database_third-party" class="solvvy-hidden">
+<div class="altTitle">Conectarse mediante un programa de terceros</div>
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#actualizando-el-campo-Allowable-Hosts-en-tu-panel" target="_self" rel="undefined">Actualizando el campo Allowable Hosts en tu panel</a></li>
+<li><a class="reference internal" href="#ssh_tunnel">Conexión mediante un programa de terceros y un túnel SSH seguro</a></li>
+<li><a class="reference internal" href="#sin-contrasena">Conexión mediante inicio de sesión sin contraseña con un programa de terceros</a></li>
+<li><a class="reference internal" href="#conectar_ssh">Conectar usando SSH</a></li>
+<li><a class="reference internal" href="#mac_sequel_pro">Conexión con Sequel Pro (Mac OSX)</a></li>
+<li><a class="reference internal" href="#phpmyadmin">Conexión a tu base de datos MySQL usando phpMyAdmin de DreamHost en tu propio dominio</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>A continuación se describe cómo conectarse a tu(s) base de datos(s) DreamHost utilizando un programa de terceros.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si tienes un plan de <a href="https://help.dreamhost.com/hc/es/articles/214581158-Generalidades-sobre-DreamPress">DreamPress</a> DreamPress, solo puedes acceder a tus bases de datos MySQL asociadas utilizando cualquiera de los siguientes métodos:</p>
+<ul>
+<li><a class="reference internal" href="#ssh_tunnel" target="_self" rel="undefined">Conexión mediante un programa de terceros y un túnel SSH seguro</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin">phpMyAdmin</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2><span id="actualizando-el-campo-Allowable-Hosts-en-tu-panel">Actualizando el campo Allowable Hosts en tu panel</span></h2>
+<div class="solvvy-solution">
+<p>Primero debes dar permiso a tu máquina local para conectarse al servidor de la base de datos. Esto se puede hacer agregando información al campo de Allowable Hosts permitidos en tu panel.</p>
+<p>Para otorgar permiso para cuentas de usuario de MySQL:</p>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">MySQL Databases</a> en el panel.</li>
+<li>Bajo la sección 'Database(s) on this server:', encuentra la sección deseada, luego haz clic en el enlace Users with access para el usuario al que deseas darle acceso.</li>
+<li>Desplázate hacia abajo a la sección 'Allowable Hosts' e ingresa el dominio o subdominio con el que tu máquina local se identifica en el internet público. Debes incluir uno de los siguientes:<br />
+<ul>
+<li>Tu dirección IP publica</li>
+<li>Tu dominio/subdominio de origen público (tal como rr.com, mindspring.com, comcast.com, y demás)</li>
+</ul>
+<div class="alert alert-tip">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-tip-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Para identificar tu dirección IP pública, ve a <a href="http://www.whatismyip.com/">What is My IP?</a>.</p>
+<p>Tu dirección publica también se muestra en el panel después de editar tu usuario MySQL. Najo la sección 'Allowable hosts' dice:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Your current computer is: XXX.XXX.XXX.XXX</pre>
+</div>
+<p>Puedes copiar y pegar esta dirección IP en el campo Allowable Hosts.</p>
+</div>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>Habilitar %.example.com no habilita el nombre de host 'example.com' por sí mismo.</li>
+<li>I recibes un error "access denied to username@xxx.xxx.xxx.xxx-ip.provider.info", intenta añadir un comodín al final de la IP (tal como xxx.xxx.xxx.xxx%).</li>
+</ul>
+</div>
+</div>
+</li>
+<li>Cuando hayas finalizado, haz clic en el botón <strong>Modify [username] now!</strong>.</li>
+<li>Inicia tu programa de terceros e ingresa las credenciales de tu base de datos para conectarte.</li>
+</ol>
+</div>
+<h2><span id="ssh_tunnel"> Conexión mediante un programa de terceros y un túnel SSH seguro </span></h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este ejemplo usa PuTTY y MySQL Workbench para conectarse usando un túnel SSH.</p>
+</div>
+</div>
+<p>Este método se prefiere a los métodos menos seguros, ya que proporciona cifrado de punto a punto y no expone su cuenta MySQL a posibles ataques de redes permitidas.</p>
+<h3>Paso 1 — Habilita SSH en tu cuenta</h3>
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo permitir el acceso SSH al usuario de tu sitio web.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">Crear un usuario con acceso Shell (SSH)</a></li>
+</ul>
+<h3>Paso 2 — Configura un inicio de sesión sin contraseña</h3>
+<p>Ve el siguiente artículo para habilitar el inicio de sesión sin contraseña en PuTTy. Este paso carga la clave pública en tu servidor y descarga la clave privada en formato OpenSSH.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215464758--C%C3%B3mo-configurar-el-inicio-de-sesi%C3%B3n-sin-contrase%C3%B1a-en-PuTTY-" target="_self" rel="undefined">¿Cómo configuro el inicio de sesión sin contraseña en PuTTY?</a></li>
+</ul>
+<h3>Paso 3 — Lanza PuTTY</h3>
+<ol>
+<li><a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/" target="_self" rel="undefined">Descarga</a> y lanza <a href="https://help.dreamhost.com/hc/es/articles/215464538--C%C3%B3mo-configurar-PuTTY-">PuTTy</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/mysql-workbench_06.png" alt="putty configuration" /></dd>
+</dl>
+</li>
+<li>En el árbol de categorías a la izquierda, haz clic en <strong>Connection &gt; SSH &gt; Tunnels</strong>.</li>
+<li>Ingresa <strong>3306</strong> en la casilla source port.</li>
+<li>Ingresa el nombre de host de tu MySQL y puerto en el campo destination (e.j., <strong>mysql.example.com:3306</strong>).</li>
+<li>Deja los botones radiales seleccionados para <strong>Local </strong>y&nbsp; <strong>Auto</strong>.</li>
+<li>Haz clic en el botón <strong>Add</strong> para guardar.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/mysql-workbench_02.png" alt="putty configuration" /></dd>
+</dl>
+</li>
+<li>Haz clic en <strong>Session</strong> en el árbol de categoría.</li>
+<li>Ingresa la <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales#nombre-de-host" target="_self" rel="undefined">URL de tu servidor</a> en el campo <strong>Host Name</strong> (e.j., <strong>servername.dreamhost.com</strong> o <strong>psxxxxxx.dreamhostps.com</strong>).</li>
+<li>Configura el puerto a 22.</li>
+<li>Configura el Connection type a SSH.</li>
+<li>Dale a tu sesión un nombre bajo Saved Sessions.</li>
+<li>Haz clic en <strong>Save</strong>.
+<dl>
+<dd><em>El nombre de la nueva sesión aparece en la lista.</em></dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/mysql-workbench_03.png" alt="putty configuration" /></dd>
+</dl>
+</li>
+<li>Haz clic en el nombre de la nueva sesión para resaltarlo.</li>
+<li>Haz clic en el botón <strong>Open</strong>.
+<dl>
+<dd><em>Ingresa tu usuario shell y contraseña en la terminal para iniciar sesión.</em></dd>
+</dl>
+</li>
+</ol>
+<h3>Paso 4 — Usa una herramienta de terceros para iniciar sesión</h3>
+<p>Abre la herramienta de terceros, como <a href="http://wb.mysql.com/">MySQL WorkBench</a>.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/mysql-workbench_07.png" alt="putty configuration" /></dd>
+</dl>
+<p>Configura lo siguiente:</p>
+<ul>
+<li><strong>Connection Method</strong>: Déjalo como Standard (TCP/IP).</li>
+<li><strong>Hostname</strong>: Deja este conjunto como 127.0.0.1. Esto utilizará la conexión PuTTY que acabas de crear. Si tu aplicación de terceros no permite la URL, prueba con <strong>localhost</strong> en su lugar.</li>
+<li><strong>Port</strong>: 3306.</li>
+<li><strong>Username</strong>: Ingresa el nombre de usuario de tu base de datos.</li>
+<li><strong>Password</strong>: Ingresa la contraseña de tu nombre de usuario de la base de datos.</li>
+<li>Haz clic en <strong>OK</strong> y tú ya deberías haber iniciado sesión en tu base de datos.</li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>Tu sesión de PuTTY debe estar activa y debes iniciar sesión para que el túnel funcione.</li>
+<li>Si estás ejecutando una base de datos MySQL local, puedes especificar un puerto diferente para tu túnel. De lo contrario, no puedes acceder a tu conexión mysql local mientras el túnel está activo.</li>
+</ul>
+<dl>
+<dd>Para especificar un puerto diferente:<br />
+<ol>
+<li>Ingresa un número diferente (por ejemplo, 3307) en el campo del puerto de origen en <strong>Tunnels</strong> en PuTTY.</li>
+<li>Usa el mismo número que tu puerto en el campo Puerto de administrador de MySQL.</li>
+</ol>
+</dd>
+<dd>Tu puerto de destino debe seguir siendo 3306. La idea es que esté enviando datos al puerto 3307 en tu extremo, los datos se envían a través del túnel y luego se desvían al puerto 3306 en el extremo de DreamHost</dd>
+</dl>
+</div>
+</div>
+</div>
+<h2><span id="sin-contrasena"> Conexión mediante inicio de sesión sin contraseña con un programa de terceros </span></h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-content">
+<p>Este método utiliza PuTTY y MySQL Workbench con claves SSH para iniciar sesión en tu base de datos mediante un inicio de sesión sin contraseña.</p>
+</div>
+</div>
+<h3>Paso 1 — Habilita SSH en tu cuenta</h3>
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo permitir el acceso SSH al usuario de tu sitio web.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access" target="_self" rel="undefined">Crear un usuario con acceso Shell (SSH)</a></li>
+</ul>
+<h3>Paso 2 — Configura un inicio de sesión sin contraseña</h3>
+<p>Ve el siguiente artículo para habilitar el inicio de sesión sin contraseña en PuTTy. Este paso carga la clave pública en tu servidor y descarga la clave privada en tu computadora.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215464758-How-do-I-set-up-passwordless-login-in-PuTTY-" target="_self" rel="undefined">¿Cómo configuro el inicio de sesión sin contraseña en PuTTY?</a></li>
+</ul>
+<div class="alert-warning">
+<p>La llave privada que subes a MySQL Workbench debe estar en <a href="https://help.dreamhost.com/hc/en-us/articles/215464758#mysql-workbench" target="_self" rel="undefined">formato OpenSSH</a> o no podrás conectarte. <a href="https://dev.mysql.com/doc/workbench/en/wb-mysql-connections-methods-ssh.html" target="_self">MySQL Workbench</a> dice lo siguiente:</p>
+<div class="text-blockquote">
+<p>MySQL Workbench no acepta directamente las claves PuTTY predeterminadas. Sin embargo, puedes convertir un archivo PuTTY Private Key (ppk) existente a formato OpenSSH utilizando la utilidad PuTTY Key Generator (PuTTYGen).</p>
+</div>
+</div>
+<h3>Paso 3 — Usa una herramienta de terceros para iniciar sesión</h3>
+<p>Abre la herramienta de terceros, como&nbsp; <a href="http://wb.mysql.com/">MySQL WorkBench</a>.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/mysql-workbench_04.png" alt="putty configuration" /></dd>
+</dl>
+<p>Configura lo siguiente:</p>
+<ul>
+<li><strong>Connection Method</strong>: Elige TCP/IP estándar sobre SSH en el menú desplegable.</li>
+<li><strong>SSH Username</strong>: Ingrese el nombre de usuario de shell para el que acaba de habilitar el inicio de sesión sin contraseña.</li>
+<li><strong>SSH Password</strong>: NO ingreses la contraseña de tu usuario SSH.</li>
+<li><strong>SSH Key File</strong>: Carga la clave privada con formato OpenSSH que creaste anteriormente al configurar el inicio de sesión sin contraseña.</li>
+<li><strong>MySQL Hostname</strong>: El nombre de host que usas para iniciar sesión en tu base de datos (e.j., mysql.example.com). Si tu aplicación de terceros no soporta la URL, intenta localhost en su lugar.</li>
+<li><strong>MySQL Server Port</strong>: Ingresar 3306 como el puerto.</li>
+<li><strong>Username</strong>: Ingresa el nombre de usuario de tu base de datos.</li>
+<li><strong>Password</strong>: Ingresa la contraseña de tu nombre de usuario de la base de datos.</li>
+<li>Haz <strong>OK</strong> y debes iniciar sesión en tu base de datos.</li>
+</ul>
+</div>
+<h2><span id="conectar_ssh">Conectar usando SSH</span></h2>
+<div class="solvvy-solution">
+<p>Si estás corriendo un servidor local MySQL en el puerto 3306, debes configurar el reenvío de puerto en tu ~/.ssh/config, de la siguiente manera:</p>
+<ol>
+<li>Ingresa la siguiente configuración:<br />
+<div class="preboxcontainer">
+<pre class="prebox">Host your_nickname_for_your_host
+     HostName        your_dh_host_name.dreamhost.com
+     User            your_shell_account_user_name
+     LocalForward    3307 your_full_db_host_name:3306
+</pre>
+</div>
+</li>
+<li>Ingresa lo siguiente para conectarte:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh your_nickname_for_your_host</span>
+<span class="server">[server]$ </span><span class="command">mysql -h 127.0.0.1 -P 3307 -u db_user_name -p</span></pre>
+</div>
+</li>
+<li>Opcionalmente, usa la siguiente línea de comando:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh -4fNg -L 3307:your_full_db_host_name:3306 your_shell_account_user_name@your_dh_host_name.dreamhost.com </span></pre>
+</div>
+</li>
+<li>Conéctate con mysql de la manera anterior.</li>
+</ol>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>A pesar de agregar localhost como un host válido para tu usuario en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">MySQL Databases</a> puedes encontrar este mensaje de error:</li>
+</ul>
+<dl>
+<dd class="dd-prebox">
+<div class="preboxcontainer">
+<pre class="prebox"><span class="cmdoutput">ERROR 1045 (28000): Access denied for user 'db_user_name'@'localhost' (using password: YES)</span></pre>
+</div>
+</dd>
+<dd>Usa 127.0.0.1 en lugar de localhost (está bloqueado por DreamHost).</dd>
+</dl>
+<ul>
+<li>Si te estás conectando a través de la línea de comando, debes usar el indicador MySQL -P y especificar el puerto 3307 como se muestra a continuación:</li>
+</ul>
+<dl>
+<dd class="dd-prebox">
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql -u username -p -h 127.0.0.1 -P 3307</span></pre>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<h2><span id="mac_sequel_pro">Conexión con Sequel Pro (Mac OSX)</span></h2>
+<div class="solvvy-solution">
+<p>Si estás usando Apple Mac OSX, puedes usar el programa código abierto <a href="http://www.sequelpro.com/">Sequel Pro</a> para conectarte a una base de datos DreamHost MySQL.</p>
+<p>Para conectarte con tu base de datos DreamHost usando Sequel Pro:</p>
+<ol>
+<li>Usa la pestaña de conexión <strong>Standard</strong> e ingresa lo siguiente:<br />
+<ul>
+<li><strong>Name:</strong> [opcional]</li>
+<li><strong>Host:</strong> [Tu nombre de host MySQL: mysql.example.com]</li>
+<li><strong>Username:</strong> [El nombre de usuario de tu base de datos]</li>
+<li><strong>Password:</strong> [La contraseña de usuario de tu base de datos]</li>
+<li><strong>Database:</strong> [opcional]</li>
+<li><strong>Port:</strong> [3306]</li>
+</ul>
+</li>
+<li>Haz clic en <strong>Connect</strong>.</li>
+</ol>
+<p>Una vez que esté conectado, seleccione la base de datos del menú desplegable en la parte superior izquierda.</p>
+<p>Un método más seguro es utilizar la pestaña SSH al crear la conexión/favorito. Primero debes configurar un usuario para el acceso SSH en la página <a href="https://panel.dreamhost.com/index.cgi?tree=users.dashboard#!" target="_blank" rel="noopener"> <span class="panel-link">Manage Users</span> </a> en tu panel DreamHost. Con estos detalles en la mano, puedes configurar las siguientes opciones adicionales:</p>
+<ul>
+<li><strong>SSH Host:</strong> [ <a href="/hc/en-us/articles/216041267-SSH-overview" target="_self" rel="undefined">Nombre de host SSH</a>]</li>
+<li><strong>SSH User:</strong> [Nombre de usuario de un usuario con SSH habilitado]</li>
+<li><strong>SSH Password:</strong> [Contraseña para la cuenta]</li>
+<li><strong>SSH Port:</strong> [22]</li>
+</ul>
+</div>
+<h2><span id="phpmyadmin"> Conexión a tu base de datos MySQL usando phpMyAdmin de DreamHost en tu propio dominio </span></h2>
+<div class="solvvy-solution">
+<p>Visita el artículo <a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin">phpMyAdmin</a> para más detalles.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL" target="_self" rel="undefined">Generalidades MySQL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215100557--C%C3%B3mo-restauro-mi-base-de-datos-en-el-panel-" target="_self" rel="undefined">¿Cómo hago una copia de seguridad y restauro mi base de datos?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221621388-Administrar-bases-de-datos-MySQL-existentes" target="_self" rel="undefined">¿Cómo administro mi base de datos?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214882998--C%C3%B3mo-me-conecto-a-mi-base-de-datos-a-trav%C3%A9s-de-SSH-" target="_self" rel="undefined">¿Cómo me conecto a mi base de datos a través de SSH?</a></li>
+<li><a href="/hc/en-us/articles/215577937-How-do-I-connect-to-my-database-using-SQLyog-" target="_self" rel="undefined">¿Cómo me conecto a mi base de datos usando SQLyog?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215730087-Soluci%C3%B3n-de-problemas-de-tu-base-de-datos-MySQL" target="_self" rel="undefined">Solucionar problemas de tu base de datos MySQL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">Generalidades SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000263911-Limitaciones-de-MySQL-debido-al-alojamiento-compartido" target="_self" rel="undefined">Limitaciones de MySQL debido al Shared hosting</a></li>
+</ul>
+</div>
+<div class="clearer">&nbsp;</div>
