@@ -1,0 +1,131 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>FileZilla es un programa FTP gratuito que puedes utilizar para conectarte a tu sitio web a través de FTP.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115000675027-FTP-overview-and-credentials">Generalidades de FTP y credenciales</a></li>
+</ul>
+<p><a href="https://filezillapro.com/" target="_self">FileZilla Pro</a> es un programa pago que te permite conectarse también a servicios de almacenamiento en la nube como <a href="https://help.dreamhost.com/hc/en-us/categories/202115428-DreamObjects-Cloud-Storage" target="_self">DreamObjects</a>. Este artículo te guía a través de la conexión a tu bucket de DreamObjects.</p>
+<div class="prereqs">
+<p>Este artículo asume que ya has configurado lo siguiente.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214823108-What-is-DreamObjects-" target="_self">Creado una cuenta de DreamObjects</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215986327-DreamObjects-Users" target="_self">Creado un usuario de DreamObjects</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215321178-DreamObjects-Buckets" target="_self">Añadido un bucket a tu usuario</a></li>
+</ul>
+</div>
+</div>
+<h2>Conectarte usando FileZilla Pro</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Compra e instala <a href="https://filezillapro.com/" target="_blank" rel="noopener">FileZilla Pro</a>.</li>
+<li>Lanza FileZilla Pro.
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/filezilla-pro_01.png" alt="filezilla pro" /></dd>
+</dl>
+</li>
+<li>Selecciona <span class="text-object">Edit &gt; Settings...</span> en el menu.
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/filezilla-pro_02.png" alt="filezilla pro" /></dd>
+</dl>
+</li>
+<li>Haz clic en <span class="text-object">S3: Providers</span> en el menú izquierdo
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/filezilla-pro_03.png" alt="filezilla pro" /></dd>
+</dl>
+</li>
+<li>En la sección <span class="text-section">Providers</span>, haz clic en el botón <strong>Add</strong> para añadir un nuevo proveedor llamado <span class="text-object">DreamObjects</span>.
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/filezilla-pro_04.png" alt="filezilla pro" /></dd>
+</dl>
+</li>
+<li>En la sección <span class="text-section">Regions</span>, haz clic en el botón <strong>Add</strong> para añadir un nuevo proveedor.
+<ul>
+<li>Haz clic en el campo <span class="text-object">Name</span> para editar. Escribe <span class="text-object">us-east-1</span>.</li>
+<li>Haz clic en el campo <span class="text-object">Endpoints</span> para editar. Escribe <span class="text-object">objects-us-east-1.dream.io</span>.</li>
+</ul>
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/filezilla-pro_05.png" alt="filezilla pro" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón <strong>OK</strong> en la parte inferior izquierda para guardar tus configuraciones.
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/filezilla-pro_06.png" alt="filezilla pro" /></dd>
+</dl>
+</li>
+<li>Selecciona <span class="text-object">File &gt; Site Manager...</span> para abrir tu ventana de <span class="text-object">Site Manager</span>.
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/filezilla-pro_07.png" alt="filezilla pro" /></dd>
+</dl>
+</li>
+<li>En el panel izquierdo, haz clic en el nombre por defecto existente del sitio. Luego haz clic en el botón <strong>Rename</strong> para cambiarlo a algo que reconocerás, tal como <span class="text-object">DreamObjects</span>. También puedes hacer clic en el botón <strong>New site</strong> para crear un nuevo sitio.
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/filezilla-pro_08.png" alt="filezilla pro" /></dd>
+</dl>
+</li>
+<li>Ingresa lo siguiente en el panel derecho.
+<ul>
+<li><strong>Protocol</strong>: S3 - Amazon Simple Storage Service</li>
+<li><strong>Host</strong>: objects-us-east-1.dream.io</li>
+<li><strong>Logon Type</strong>: Normal</li>
+<li><strong>Access key ID</strong>: La <a href="https://help.dreamhost.com/hc/en-us/articles/215986357-DreamObjects-Keys" target="_self">Llave de Acceso</a> de tu usuario</li>
+<li><strong>Secret Access Key</strong>: La <a href="https://help.dreamhost.com/hc/en-us/articles/215986357-DreamObjects-Keys" target="_self">Llave Secreta</a> de tu usuario</li>
+</ul>
+</li>
+<li>Haz clic en el botón <strong>Connect</strong>.
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si estás en un Mac, se te pide que guardes tu contraseña. Escoge una opción y haz clic en el botón <strong>Ok</strong>.</p>
+</div>
+</div>
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/filezilla-pro_09-2.png" alt="filezilla pro" /></dd>
+</dl>
+<dl>
+<dd><em>Una ventana emergente muestra la información del certificado del servidor.</em></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Las huellas digitales en la captura de pantalla anterior son las que debería ver cuando se conecta. También puede verificar las huellas digitales ejecutando los siguientes comandos a través de <a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview" target="_self">SSH</a>:</p>
+<p>Primero, descarga el certificado.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">openssl s_client -connect objects-us-east-1.dream.io:443 &gt; dho.cert</span></pre>
+</div>
+<p>Esto descarga el certificado en un archivo llamado dho.cert. Luego puedes ejecutar uno de los siguientes comandos para ver tu huella digital.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">openssl x509 -noout -fingerprint -sha256 -inform pem -in dho.cert</span>
+<span class="server">[server]$ </span><span class="command">openssl x509 -noout -fingerprint -sha1 -inform pem -in dho.cert</span></pre>
+</div>
+</div>
+</div>
+</li>
+<li>Selecciona las casillas de <span class="text-object">Always trust this certificate in the future sessions</span> y <span class="text-object">Trust this certificate on the listed alternative hostnames</span>.</li>
+<li>Haz clic en el botón <strong>OK</strong>.
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/filezilla-pro_10.png" alt="filezilla pro" /></dd>
+</dl>
+<dl>
+<dd><em>Estás conectado a tu cuenta de DreamObjects donde se muestra una lista de tus buckets.</em></dd>
+</dl>
+</li>
+<li>Haz clic en el nombre de un bucket para ver su contenido.</li>
+</ol>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/sections/115000059232-DreamObjects-clients" target="_self">Clientes de DreamObjects</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214823108-What-is-DreamObjects-">¿Qué es DreamObjects?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215986327-DreamObjects-Users">Usuarios de DreamObjects</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215986357-DreamObjects-Keys">Llaves de DreamObjects</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215321178-DreamObjects-Buckets">Buckets de DreamObjects</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215986337-What-are-Objects-in-DreamObjects-">¿Qué son Objects en DreamObjects?</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="https://filezillapro.com/" target="_self">FileZilla Pro</a></li>
+<li><a href="https://www.youtube.com/watch?v=A8U29vyeTVU&amp;feature=youtu.be" target="_self" rel="undefined">Video — Cómo conectarte al almacenamiento en la nube usando FileZilla Pro</a></li>
+</ul>
+</div>
