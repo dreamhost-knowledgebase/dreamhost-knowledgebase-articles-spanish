@@ -1,0 +1,196 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Es posible usar <a href="https://help.dreamhost.com/hc/en-us/articles/235817468-Getting-started-with-the-OpenStack-command-line-client">la interfaz de línea de comando de OpenStack</a> en un computador Windows instalando lo siguiente:</p>
+<ul>
+<li>Python</li>
+<li>pip</li>
+<li>C++ Build tools</li>
+<li>Cliente de OpenStack</li>
+</ul>
+<p>A continuación, debes configurar algunas variables de entorno para tu usuario de Windows. Luego podrás usar el símbolo del sistema de Windows o Windows PowerShell para administrar tu proyecto DreamCompute.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Windows PowerShell es una línea de comandos y un entorno de secuencias de comandos. Destaca en la automatización de tareas y la gestión de la configuración.</p>
+<p>Para ayuda instalando/localizando el PowerShell de Windows, ve la documentación de Microsoft <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-windows-powershell?view=powershell-6" target="_self">aquí</a>.</p>
+</div>
+</div>
+</div>
+<h2><span id="Username_and_password">Paso 1 — </span>Instala Python y pip</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Descarga la última versión de Python del sitio web de Python:
+<ul>
+<li><a href="http://python.org/downloads/windows/">http://python.org/downloads/windows/</a></li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este artículo usa Python 3.8.4.</p>
+</div>
+</div>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/dhc-windows_01.png" alt="downloading python3" /></dd>
+</dl>
+</li>
+<li>Después de hacer clic en la versión más reciente de Python 3, elige descargar el instalador ejecutable de Windows X86-64.</li>
+<li>Instala Python al hacer clic en el archivo que acabas de descargar.</li>
+</ol>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/dhc-windows_02.png" alt="downloading python3" /></dd>
+</dl>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Asegúrate de que la casilla de verificación titulada <span class="text-object">Add Python 3.8 to PATH</span> esté marcada antes de continuar con el asistente de instalación.</p>
+</div>
+</div>
+</div>
+<h2 class="subheader"><span id="Username_and_password">Paso 2 — </span>Instala el cliente de OpenStack</h2>
+<div class="solvvy-solution">
+<p>Utiliza el símbolo del sistema para instalar el cliente OpenStack.</p>
+<h3><span id="Windows_8">Windows 10</span></h3>
+<ol>
+<li>En la izquierda inferior, escribe <span class="code">cmd</span> en la barra de búsqueda.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-11_3rdparty_windows_command-prompt_shell_01.png" height="" /></dd>
+</dl>
+</li>
+<li>Haz clic en el icono <span class="text-object">Command Prompt</span> para abrirlo</li>
+<li>En el símbolo del sistema, ingresa lo siguiente:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">C:\Users\username&gt; </span><span class="command">pip3 install python-openstackclient</span>
+</pre>
+</div>
+</li>
+</ol>
+<h4><strong>Mensaje de error</strong></h4>
+<p>Al instalar, puede ver este error.</p>
+<div class="preboxcontainer">
+<pre class="prebox">error: Microsoft Visual C++ 14.0 is required. Get it with "Build Tools for Visual Studio": https://visualstudio.microsoft.com/downloads/</pre>
+</div>
+<p>Para corregirlo:</p>
+<ol>
+<li>Descarga el archivo <a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&amp;rel=16" target="_blank" rel="noopener">vs_buildtools.exe</a>.</li>
+<li>Haz clic en el archivo para ejecutarlo.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/dhc-windows_04.png" height="" /></dd>
+</dl>
+</li>
+<li>Una ventana emergente se muestra.<br />
+<ul>
+<li>Debajo de <span class="text-section">Desktop &amp; Mobile</span> selecciona <span class="text-object">C++ build tools</span>.</li>
+</ul>
+</li>
+<li>Haz clic <strong>Install</strong>.</li>
+</ol>
+<p>Después de que <span class="text-object">C++ Build tools</span> ha sido instalado, ejecuta el comando de nuevo para instalar el cliente de openstack.</p>
+</div>
+<h2 class="subheader"><span id="Username_and_password">Paso 3 — Establecer variables de entorno</span></h2>
+<div class="solvvy-solution">
+<p>Ahora debes establecer variables de entorno para tu usuario de Windows para que los comandos del cliente de OpenStack se autentiquen en tu proyecto. La forma más sencilla de hacer esto es descargar tu archivo <span class="text-object">openrc</span>, modificarlo/volver a guardarlo como un archivo por lotes de Windows y ejecutarlo una vez.</p>
+<h3>Descargando su archivo openrc</h3>
+<p>Ve el siguiente artículo para más instrucciones:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/228047207-How-to-download-your-DreamCompute-openrc-file">Cómo descargar tu archivo openrc DreamCompute</a></li>
+</ul>
+<h3>Modifica el archivo</h3>
+<p>Una vez que hayas descargado tu archivo <span class="text-object">openrc</span>, deberás modificarlo/volver a guardarlo como un archivo por lotes. Abre el archivo en un editor de texto como el Bloc de notas y elimina todo excepto las siguientes líneas</p>
+<div class="preboxcontainer">
+<pre class="prebox">export OS_AUTH_URL=https://iad2.dream.io:5000/v2.0
+export OS_TENANT_ID=<span class="code-highlight">tenantid</span>
+export OS_TENANT_NAME="<span class="code-highlight">tenantname</span>"
+export OS_USERNAME="<span class="code-highlight">username</span>"
+</pre>
+</div>
+<p>Realiza los siguientes ajustes en el archivo:</p>
+<ul>
+<li>Remplaza las instancias de <span class="code">export</span> con <span class="code">setx</span></li>
+<li>Coloca comillas dobles (") alrededor de todos los valores de sus variables (e.g. <span class="text-object">"https://iad2.dream.io:5000/v2.0"</span>, <span class="text-object">"tenantid"</span>, etc.).</li>
+<li>Reemplaza el signo <span class="text-object">=</span> con un espacio</li>
+<li>Añade una línea usando <span class="code">OS_USERNAME</span> para guardar tu <a href="https://help.dreamhost.com/hc/en-us/articles/214442618-Resetting-your-DreamCompute-dashboard-password" target="_self">contraseña de DreamCompute</a></li>
+</ul>
+<p>El archivo ahora debería verse así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">setx OS_AUTH_URL "https://iad2.dream.io:5000/v2.0"
+setx OS_TENANT_ID "<span class="code-highlight">tenantid</span>"
+setx OS_TENANT_NAME "<span class="code-highlight">tenantname</span>"
+setx OS_USERNAME "<span class="code-highlight">username</span>"
+setx OS_PASSWORD "<span class="code-highlight">password</span>"</pre>
+</div>
+<p>Guarda el archivo con la extensión <span class="text-object">.bat</span> (ejemplo: <span class="text-object">dhc-openrc.bat</span>).</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Asegúrate de que el archivo no se guarde con una extensión .txt adicional o Windows no podrás ejecutar el script.</p>
+</div>
+</div>
+<h3>Ejecuta el archivo</h3>
+<p>Ahora debes ejecutar el script como administrador.</p>
+<ol>
+<li>Busca el archivo guardado en el Explorador de Windows.</li>
+<li>Haz clic derecho y selecciona la opción <span class="text-object">Run as administrator</span>.</li>
+</ol>
+<p>Después de ejecutar el script, se deben configurar todas las variables ambientales necesarias. Sin embargo, no están configurados en tu sesión actual de Shell. Ahora debes salir de tu sesión de shell actual y abrir una nueva.</p>
+<h3>Abre un nuevo prompt de cmd</h3>
+<p>Sal de tu sesión de shell actual escribiendo <span class="code">exit</span>. Finalmente, abre un nuevo prompt de <span class="code">cmd</span>.<br />Tus variables ambientales ahora estarán activas. Puedes confirmar mi ejecución del comando <span class="code">set</span>.</p>
+<p>Ahora puedes usar el cliente de línea de comandos de OpenStack para administrar tu proyecto DreamCompute. Para una revisión de algunos de los comandos básicos, ve el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/235817468#basic-commands" target="_self">Comenzando con la línea de comando de cliente de OpenStack</a></li>
+</ul>
+</div>
+<h2>Solución de problemas</h2>
+<div class="solvvy-solution">
+<h3>Revisa las variables de tu entorno</h3>
+<p>Si tienes problemas para conectarse, vuelve a verificar tus variables de entorno. Puedes hacerlo desde el área del panel de <span class="text-section">Sytem Properties</span>, <span class="text-object">Windows PowerShell</span> o el <span class="text-object">símbolo del sistema de Windows</span>. En <span class="text-object">Windows PowerShell</span>, ejecuta este comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">C:\Users\username&gt; </span><span class="command">Get-ChildItem Env:OS_*</span>
+Name                           Value
+----                           -----
+OS_USERNAME                    username
+OS_TENANT_NAME                 tenantname
+OS_AUTH_URL                    https://iad2.dream.io:5000/v2.0
+OS_TENANT_ID                   tenantid
+</pre>
+</div>
+<p>En el <span class="text-object">símbolo del sistema de Windows</span>, ejecuta este comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">C:\Users\username&gt; </span><span class="command">set|findstr OS_</span>
+OS_AUTH_URL=https://iad2.dream.io:5000/v2.0
+OS_TENANT_ID=tenantid
+OS_TENANT_NAME=tenantname
+OS_USERNAME=username
+</pre>
+</div>
+<h3>Vuelve a guardar tu archivo openrc.bat</h3>
+<p>Si encuentras que tus variables <span class="code">OS_</span> no están presentes, ve el Paso #3 arriba para guardar tu archivo <span class="text-object">openrc.bat</span> correctamente. Puedes confirmar si las variables están configuradas correctamente ejecutando manualmente el archivo. Por ejemplo:</p>
+<ol>
+<li>En prompt de comando, navega hasta el directorio donde se encuentra tu archivo <span class="text-object">openrc.bat</span>.</li>
+<li>Ejecuta el archivo escribiendo su nombre y luego presionando la tecla <span class="code">Enter</span>. Deberías ver el siguiente resultado:&nbsp;
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El siguiente comando asume que has nombrado el archivo <span class="text-object">dhc-openrc.bat</span>.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">C:\Users\username\Downloads&gt; </span><span class="command">dhc-openrc.bat</span>
+
+C:\Users\username\Downloads&gt;setx OS_AUTH_URL "https://iad2.dream.io:5000/v2.0"
+SUCCESS: Specified value was saved.
+
+C:\Users\username\Downloads&gt;setx OS_TENANT_ID "################################"
+SUCCESS: Specified value was saved.
+
+C:\Users\username\Downloads&gt;setx OS_TENANT_NAME "#####"
+SUCCESS: Specified value was saved.
+
+C:\Users\username\Downloads&gt;setx OS_USERNAME "########"
+SUCCESS: Specified value was saved.
+
+C:\Users\username\Downloads&gt;setx OS_PASSWORD "################################"
+SUCCESS: Specified value was saved.</pre>
+</div>
+</li>
+</ol>
+</div>
