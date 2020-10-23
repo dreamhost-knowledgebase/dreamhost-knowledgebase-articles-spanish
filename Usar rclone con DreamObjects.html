@@ -1,0 +1,258 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p><a class="reference external" href="https://rclone.org">Rclone</a> es una herramienta similar a rsync para Windows, Mac OS, Linux y otros sistemas operativos diseñados para el almacenamiento en la nube como DreamObjects</p>
+<p>Cuenta con:</p>
+<ul class="simple">
+<li>Hash MD5/SHA1 comprobado en todo momento para la integridad del archivo</li>
+<li>Marcas de tiempo conservadas en archivos</li>
+<li>Sincronizaciones parciales compatibles con archivos completos</li>
+<li>Modo de copia para copiar archivos nuevos/modificados</li>
+<li>Modo de sincronización (unidireccional) para hacer un directorio idéntico</li>
+<li>Verifique el modo para verificar la igualdad de hash del archivo</li>
+<li>Puede sincronizarse desde y hacia la red, por ejemplo, dos cuentas en la nube diferentes</li>
+<li>Cifrado opcional (Crypt)</li>
+<li>Montaje FUSE opcional (rclone mount)</li>
+</ul>
+</div>
+<h2>Configura rclone</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Descarga e instala rclone según el sistema operativo de tu computadora. Puedes descargarlo del sitio de rclone aquí:
+<ul>
+<li><a href="https://rclone.org/downloads/">rclone.org Downloads</a></li>
+</ul>
+</li>
+<li>Una vez descargado, navega al directorio donde el archivo fue descargado. (NOTA: En Windows, puedes navegar al directorio/Descargas y extraer los archivos rclone.) Copia el directorio en la barra del Explorador.</li>
+<li>Luego, debes abrir el símbolo del sistema y navegar al directorio en el que se extrajeron los archivos.</li>
+<li>En tu terminal o símbolo del sistema, ejecuta lo siguiente para comenzar a configurar rclone usando la herramienta de configuración interactiva.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">rclone config</span>
+No remotes found - make a new one
+n) New remote
+s) Set configuration password
+q) Quit config
+n/s/q&gt; <span class="code-highlight">n</span></pre>
+</div>
+</li>
+<li>
+<p>Ingresa <em>'n' </em>para configurar un nuevo perfil de configuración (es decir, un control remoto)</p>
+<div class="preboxcontainer">
+<pre class="prebox">name &gt; <span class="command">dreamobjects</span></pre>
+</div>
+</li>
+<li>
+<p>Elige un nombre que desees asignar a esta conexión. Este ejemplo usa el nombre 'dreamobjects'.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Type of storage to configure.
+Enter a string value. Press Enter for the default ("").
+Choose a number from below, or type in your own value
+ 1 / A stackable unification remote, which can appear to merge the contents of several remotes
+   \ "union"
+ 2 / Alias for a existing remote
+   \ "alias"
+ 3 / Amazon Drive
+   \ "amazon cloud drive"
+ 4 / Amazon S3 Compliant Storage Providers (AWS, Ceph, Dreamhost, IBM COS, Minio)
+   \ "s3"
+ 5 / Backblaze B2
+   \ "b2"
+ 6 / Box
+   \ "box"
+ 7 / Cache a remote
+   \ "cache"
+ 8 / Dropbox
+   \ "dropbox"
+ 9 / Encrypt/Decrypt a remote
+   \ "crypt"
+10 / FTP Connection
+   \ "ftp"
+11 / Google Cloud Storage (this is not Google Drive)
+   \ "google cloud storage"
+12 / Google Drive
+   \ "drive"
+13 / Hubic
+   \ "hubic"
+14 / JottaCloud
+   \ "jottacloud"
+15 / Local Disk
+   \ "local"
+16 / Mega
+   \ "mega"
+17 / Microsoft Azure Blob Storage
+   \ "azureblob"
+18 / Microsoft OneDrive
+   \ "onedrive"
+19 / OpenDrive
+   \ "opendrive"
+20 / Openstack Swift (Rackspace Cloud Files, Memset Memstore, OVH)
+   \ "swift"
+21 / Pcloud
+   \ "pcloud"
+22 / QingCloud Object Storage
+   \ "qingstor"
+23 / SSH/SFTP Connection
+   \ "sftp"
+24 / Webdav
+   \ "webdav"
+25 / Yandex Disk
+   \ "yandex"
+26 / http Connection
+   \ "http"
+Storage&gt; <span class="code-highlight">4</span></pre>
+</div>
+</li>
+<li>Siguiente configura el tipo de almacenamiento como <cite>Amazon S3 (</cite>opción <cite>4).</cite>
+<div class="preboxcontainer">
+<pre class="prebox">Choose your S3 provider.
+Enter a string value. Press Enter for the default ("").
+Choose a number from below, or type in your own value
+ 1 / Amazon Web Services (AWS) S3
+   \ "AWS"
+ 2 / Ceph Object Storage
+   \ "Ceph"
+ 3 / Digital Ocean Spaces
+   \ "DigitalOcean"
+ 4 / Dreamhost DreamObjects
+   \ "Dreamhost"
+ 5 / IBM COS S3
+   \ "IBMCOS"
+ 6 / Minio Object Storage
+   \ "Minio"
+ 7 / Wasabi Object Storage
+   \ "Wasabi"
+ 8 / Any other S3 compatible provider
+   \ "Other"
+provider&gt; <span class="code-highlight">4</span></pre>
+</div>
+</li>
+<li>Escoge el #4 para DreamHost.
+<div class="preboxcontainer">
+<pre class="prebox">Get AWS credentials from runtime (environment variables or EC2/ECS meta data if no env vars).
+Only applies if access_key_id and secret_access_key is blank.
+Enter a boolean value (true or false). Press Enter for the default ("false").
+Choose a number from below, or type in your own value
+ 1 / Enter AWS credentials in the next step
+   \ "false"
+ 2 / Get AWS credentials from the environment (env vars or IAM)
+   \ "true"
+env_auth&gt; <span class="code-highlight">1</span></pre>
+</div>
+</li>
+<li>Selecciona la opción 1.
+<div class="preboxcontainer">
+<pre class="prebox">AWS Access Key ID.<br />Leave blank for anonymous access or runtime credentials.<br />Enter a string value. Press Enter for the default ("").<br />access_key_id&gt; <span class="code-highlight">YOUR_ACCESS_KEY</span><br />AWS Secret Access Key (password)<br />Leave blank for anonymous access or runtime credentials.<br />Enter a string value. Press Enter for the default ("").<br />secret_access_key&gt; <span class="code-highlight">YOUR_SECRET_KEY</span></pre>
+</div>
+</li>
+<li>
+<p>Reemplaza your_access_key y your_secret_key con tu llave de acceso real y tu llave secreta correspondiente. Estas se pueden encontrar en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener">DreamObjects</a>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Region to connect to.<br />Leave blank if you are using an S3 clone and you don't have a region.<br />Enter a string value. Press Enter for the default ("").<br />Choose a number from below, or type in your own value<br /> 1 / Use this if unsure. Will use v4 signatures and an empty region.<br /> \ ""<br /> 2 / Use this only if v4 signatures don't work, eg pre Jewel/v10 CEPH.<br /> \ "other-v2-signature"<br />region&gt;</pre>
+</div>
+</li>
+<li>Presiona la tecla "[Enter]" para continuar.
+<div class="preboxcontainer">
+<pre class="prebox">Endpoint for S3 API.<br />Required when using an S3 clone.<br />Enter a string value. Press Enter for the default ("").<br />Choose a number from below, or type in your own value<br /> 1 / Dream Objects endpoint<br /> \ "objects-us-west-1.dream.io"<br />endpoint&gt; <span class="code-highlight">objects-us-east-1.dream.io</span></pre>
+</div>
+</li>
+<li>Ingresa el nombre de host de DreamObject con el punto final del API de S3.<br />
+<div class="preboxcontainer">
+<pre class="prebox">Location constraint - must be set to match the Region.<br />Leave blank if not sure. Used when creating buckets only.<br />Enter a string value. Press Enter for the default ("").<br />location_constraint&gt;</pre>
+</div>
+</li>
+<li>Al igual que con la Región, deja esta opción en blanco y presione "[Enter]" para continuar.<br />
+<div class="preboxcontainer">
+<pre class="prebox">Canned ACL used when creating buckets and storing or copying objects.
+
+For more info visit https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
+
+Note that this ACL is applied when server side copying objects as S3
+doesn't copy the ACL from the source but rather writes a fresh one.
+Enter a string value. Press Enter for the default ("").
+Choose a number from below, or type in your own value
+ 1 / Owner gets FULL_CONTROL. No one else has access rights (default).
+   \ "private"
+ 2 / Owner gets FULL_CONTROL. The AllUsers group gets READ access.
+   \ "public-read"
+   / Owner gets FULL_CONTROL. The AllUsers group gets READ and WRITE access.
+ 3 | Granting this on a bucket is generally not recommended.
+   \ "public-read-write"
+ 4 / Owner gets FULL_CONTROL. The AuthenticatedUsers group gets READ access.
+   \ "authenticated-read"
+   / Object owner gets FULL_CONTROL. Bucket owner gets READ access.
+ 5 | If you specify this canned ACL when creating a bucket, Amazon S3 ignores it.
+   \ "bucket-owner-read"
+   / Both the object owner and the bucket owner get FULL_CONTROL over the object.
+ 6 | If you specify this canned ACL when creating a bucket, Amazon S3 ignores it.
+   \ "bucket-owner-full-control"
+acl&gt; <span class="code-highlight">private</span></pre>
+</div>
+</li>
+<li>Configura la ACL predefinida según cómo desees utilizar rclone. Este ejemplo usa "private".
+<div class="preboxcontainer">
+<pre class="prebox">Edit advanced config? (y/n)
+y) Yes
+n) No
+y/n&gt; <span class="code-highlight">n</span></pre>
+</div>
+</li>
+<li>Elige si deseas editar la configuración avanzada. Este ejemplo elige no hacerlo.
+<div class="preboxcontainer">
+<pre class="prebox">Remote config<br />--------------------<br />[dreamobjects]<br />type = s3<br />provider = Dreamhost<br />env_auth = false<br />access_key_id = YOUR_ACCESS_KEY<br />secret_access_key = YOUR_SECRETE_KEY<br />endpoint = objects-us-east-1.dream.io<br />acl = private<br />--------------------<br />y) Yes this is OK<br />e) Edit this remote<br />d) Delete this remote<br />y/e/d&gt; <span class="code-highlight">y</span></pre>
+</div>
+</li>
+<li>Escribe 'y'.
+<div class="preboxcontainer">
+<pre class="prebox">Current remotes:
+
+Name                 Type
+====                 ====
+dreamobjects         s3
+
+e) Edit existing remote
+n) New remote
+d) Delete remote
+r) Rename remote
+c) Copy remote
+s) Set configuration password
+q) Quit config
+e/n/d/r/c/s/q&gt; <span class="code-highlight">q</span></pre>
+</div>
+</li>
+<li>Finalmente, revisa el control remoto que configuraste. Si todo parece correcto, guárdalo ingresando <em>y</em> y sal del asistente de configuración ingresando <cite>q</cite>.</li>
+</ol>
+</div>
+<h2>Usar rclone</h2>
+<div class="solvvy-solution">
+<p>Ve lo siguiente para obtener una lista de comandos que puedes usar con rclone:</p>
+<ul>
+<li><a href="https://rclone.org/commands/">comandos de rclone</a></li>
+</ul>
+<p>Con un control remoto configurado, puedes enumerar los depósitos en él con este comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">rclone lsd dreamobjects:</span>
+          -1 2016-03-04 02:19:25        -1 samplebucket
+          -1 2016-05-16 22:06:53        -1 anotherbucket
+          -1 2015-10-15 21:33:25        -1 greatbucket</pre>
+</div>
+<p>Haz un nuevo bucket:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">rclone mkdir dreamobjects:mynewbucket</span></pre>
+</div>
+<p>Sincroniza /home/local/directory al bucket remoto, borrando cualquier archivo excedente en el bucket:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">rclone sync /home/local/directory dreamobjects:mynewbucket</span></pre>
+</div>
+<p>Enumera los contenidos de un bucket:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">rclone ls </span><span class="command">dreamobjects:mynewbucket</span></pre>
+</div>
+<p>Para obtener más ejemplos sobre cómo utilizar el software, consulta la documentación oficial de rclone aquí:</p>
+<ul>
+<li><a href="http://rclone.org/docs/">rclone.org &gt; Docs &gt; Usage</a></li>
+</ul>
+</div>
+<!--DreamObjects Button-->
+<div class="dream-sign-up">
+<h2>¡Comienza a almancenar tus datos hoy!</h2>
+<div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/storage/">Suscríbete en DreamObjects</a></div>
+</div>
