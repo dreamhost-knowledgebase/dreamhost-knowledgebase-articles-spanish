@@ -32,7 +32,7 @@
 <p>Esto se debe a que 'sudo' requiere que se ingrese una contraseña para ejecutar y los trabajos cron (junto con cualquier programa/comando/script que pueda ejecutar desde ellos) no permiten que se especifique ninguna entrada.</p>
 <p>Si necesita permisos de nivel raíz para un script, deberá crear un archivo en formato crontab en el directorio /etc/cron.d/. Por supuesto, asegúrese de mantener una copia de seguridad de ese archivo ya que esa ubicación está fuera del directorio /home y no está incluida en las copias de seguridad internas de DreamHost.</p>
 </div>
-<h2>Requisito variable MAILTO</h2>
+<h2><span id="mailto">Requisito variable MAILTO</span></h2>
 <div class="solvvy-solution">
 <p>Por razones de rendimiento, DreamHost ahora requiere que todos los crontabs tengan un conjunto de variables MAILTO.</p>
 <p>La variable MAILTO se puede establecer en cualquier cosa. Si lo dejas en blanco, no envía por correo electrónico la salida de tus cronjobs. Puedes configurarlo con tu nombre de usuario para que se lo entregue a tu usuario como de costumbre, o puedes especificar una dirección de correo electrónico externa. Ten en cuenta que si especificas una dirección de correo electrónico externa, los correos electrónicos cron que se envían (incluidos los mensajes de notificación de finalización /error) tienen en cuenta la cuota de envío de correo electrónico por hora de tu usuario shell. Para obtener más información sobre ese límite, consulte el&nbsp;<a href="/hc/es/articles/215730437-Límites-de-cuota-SMTP" target="_self">artículo cuota SMTP</a>.</p>
@@ -75,7 +75,6 @@
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">. ~/cron.sh</span></pre>
 </div>
-<p>Asegúrate de revisar la sección del entorno de ejecución anterior para asegurarte de tener en cuenta las variables, rutas y/o declaraciones faltantes.</p>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
