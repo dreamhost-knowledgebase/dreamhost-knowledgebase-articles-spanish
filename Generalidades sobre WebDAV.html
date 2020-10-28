@@ -1,0 +1,124 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>La creación y el control de versiones distribuidos basados ​​en la web (WebDAV) es una extensión del protocolo <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a> que permite a los usuarios editar y administrar archivos en forma colaborativa en servidores web remotos. La World Wide Web, tal como la concibió Tim Berners-Lee, siempre tuvo la intención de ser un medio legible y escribible. Sin embargo, a medida que la web creció, se convirtió en un medio en gran parte de solo lectura. WebDAV ha surgido como una forma de restaurar esa funcionalidad.</p>
+<div class="alert-warning">
+<p><strong>Sin acceso a tus archivos .htaccess y .htpasswd</strong></p>
+<p>Las instrucciones de este artículo crean archivos .htaccess y .htpasswd que serán propiedad del servidor. Esto significa que no podrás editar manualmente ninguno de estos archivos si es necesario. Además, estas instrucciones sobrescribirán cualquier archivo .htaccess existente. Asegúrate de hacer una copia de seguridad de tu archivo .htaccess existente antes de comenzar con estos pasos.</p>
+<p>Si solo necesita proteger con contraseña su sitio y necesitará acceder a su archivo .htaccess y .htpasswd en cualquier momento en el futuro, debe seguir las instrucciones del siguiente artículo.&nbsp;</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216363187-Protegiendo-tu-sitio-con-contrase%C3%B1a-con-un-archivo-htaccess">Protegiendo tu sitio con contraseña con un archivo .htaccess</a></li>
+</ul>
+<p>Estas instrucciones te guían a través de cómo crear manualmente tu archivo .htaccess y .htpasswd.</p>
+</div>
+</div>
+<h2><span id="HTTPS">HTTPS</span></h2>
+<div class="solvvy-solution">
+<p>Si deseas acceder a tu directorio WebDAV a través de una conexión segura, debes <a href="https://help.dreamhost.com/hc/es/articles/215089748-Comprar-un-certificado-SSL-firmado-profesionalmente">comprar un certificado SSL</a>. Visita el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041537-Generalidades-sobre-certificados-SSL">Generalidades sobre SSL</a></li>
+</ul>
+</div>
+<h2><span id="User_access">Acceso de usuario</span></h2>
+<div class="solvvy-solution">
+<p>El panel DreamHost te permite especificar qué usuarios tienen acceso a un directorio habilitado para WebDAV. Sin embargo, de forma predeterminada, cada usuario tiene acceso completo a todos los archivos de todo el directorio. Puede que esto no sea un problema con un directorio WebDAV muy simple, pero a medida que el directorio WebDAV crece en usuarios, pueden surgir ciertos problemas. Por ejemplo:</p>
+<ul>
+<li>No hay seguridad a nivel de archivo.</li>
+</ul>
+<dl>
+<dd>– Los usuarios pueden potencialmente sobrescribir las ediciones de otro usuario e incluso eliminar el archivo de otro usuario.</dd>
+<dd>– Todos los usuarios de la carpeta pueden ver los archivos destinados a ser privados.</dd>
+</dl>
+<ul>
+<li>La administración de usuarios no se puede hacer automáticamente (por ejemplo, no se pueden agregar usuarios a través de scripts PHP).</li>
+</ul>
+<p>La mejor solución es especificar niveles de acceso (Listas de control de acceso) por carpeta (o incluso por archivo). A medida que aumenta el número de usuarios, puedes administrar la lista de usuarios y contraseñas automáticamente utilizando scripts.</p>
+<p>Esto se puede hacer creando/editando un archivo <a href="https://help.dreamhost.com/hc/en-us/articles/216363187-Password-protecting-your-site-with-an-htaccess-file">.htaccess</a> colocado en cada carpeta donde desees hacer una excepción.</p>
+</div>
+<h2><span id="Enabling_WebDAV_on_an_entire_domain.2C_not_just_a_sub-folder">Habilitar WebDAV en un dominio completo, no solo en una subcarpeta</span></h2>
+<div class="solvvy-solution">
+<p>La creación del directorio WebDAV en tu panel DreamHost no te permite aplicar WebDAV a un dominio completo, solo funciona en el subdirectorio específico. Sin embargo, al usar un archivo .htaccess, puedes hacer que WebDAV funcione cuando visite la URL del sitio sin el subdirectorio.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>WebDAV utiliza su propio archivo .htaccess y .htpassword que están controlados por la interfaz WebDAV y pueden no estar siempre visibles. Esto puede causar un comportamiento "anormal" en ciertos casos, como crear un directorio WebDAV fuera del directorio raíz de tu dominio (e.j., <a href="http://example.com/webdav/">http://example.com/webdav/</a>). Se sugiere que si estás creando un directorio WebDAV, te asegures de que el WebDAV de destino (así como la carpeta principal) esté razonablemente aislado de tu sitio principal.</p>
+</div>
+</div>
+<ol>
+<li>Visita la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.webdav&amp;" target="_blank" rel="noopener">Htaccess/WebDAV</a> para configurar un directorio con WebDAV habilitado.
+<ul>
+<li>Para el resto de estos pasos, se asume que el directorio se llama "site".</li>
+</ul>
+</li>
+<li>Si ya tienes datos o directorios que deseas incluir en el nuevo sitio WebDAV, conéctate atsu nuevo recurso compartido WebDAV y subelos. La URL de tu recurso compartido de WebDAV debería ser algo como <a href="http://example.com/site/">http://example.com/site/</a>.
+<ul>
+<li>No te preocupes por modificar los enlaces dentro de tus páginas, seguirán funcionando exactamente de la misma manera que lo hacen actualmente.</li>
+</ul>
+<em>Los pasos restantes te ayudarán a crear un archivo .htaccess para las solicitudes de reescritura en <a href="http://example.com">http://example.com</a> utilicen los datos almacenados en <a href="http://example.com/site/">http://example.com/site/</a>:</em></li>
+<li>En la carpeta principal de tu dominio, crea un archivo llamado ".htaccess". Asegúrate de incluir el punto al principio.</li>
+<li>Pon el siguiente texto en el archivo:
+<div class="preboxcontainer">
+<pre class="prebox">RewriteEngine on
+RewriteCond %{REQUEST_URI} !site/
+RewriteRule ^(.*)$ /site/$1
+</pre>
+</div>
+<ul>
+<li>La primera línea enciende la reescritura.</li>
+<li>La segunda línea le dice al servidor web que no sobreescriba <a href="http://example.com/site/">http://example.com/site/</a>.</li>
+<li>La tercera línea le dice al servidor web que sobre escriba todas las solicitudes a<a href="http://example.com/"> http://example.com/</a> para que use los datos de <a href="http://example.com/site/">http://example.com/site/</a>.</li>
+</ul>
+</li>
+<li>Si tienes directorios que no deseas que estén bajo el control de WebDAV, agrega líneas RewriteCond adicionales como la de "site". Por ejemplo, si no deseas que se reescriban los "scripts" del directorio, agrega lo siguiente:
+<div class="preboxcontainer">
+<pre class="prebox">RewriteCond&nbsp;%{REQUEST_URI}&nbsp;!scripts/
+</pre>
+</div>
+</li>
+</ol>
+<p>Cuando visitas <a href="http://example.com/">http://example.com/</a> deberías de hecho obtener la información de <a href="http://example.com/site/">http://example.com/site/</a>, pero tus URLs se verán igual que antes.</p>
+</div>
+<h2><span id="Troubleshooting">Solución de Problemas</span></h2>
+<div class="solvvy-solution">
+<h3><span id="WebDAV_and_mod_rewrite">WebDAV y mod_rewrite</span></h3>
+<p>Cierto software como WordPress y Joomla colocan las directivas <span class="code">Rewrite</span> en el directorio base de tu sitio, incluso cuando se instalan en un subdirectorio. Esto posiblemente podría interferir con el acceso a WebDAV. Si es así, modifica el .htaccess base de la siguiente manera. Antes de cada RewriteRule agrega:</p>
+<div class="preboxcontainer">
+<pre class="prebox">RewriteCond&nbsp;%{REQUEST_URI}&nbsp;!/<em>webdavdir</em>
+</pre>
+</div>
+<dl>
+<dd>Dónde <em>webdavdir</em> es el directorio al que desea acceder a WebDAV. Para varios directorios, colóquelos entre paréntesis separados por tuberías, así:</dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox">RewriteCond&nbsp;%{REQUEST_URI}&nbsp;!/(<em>webdavdir1</em>|<em>webdavdir2</em>|<em>webdavdir3</em>)
+</pre>
+</div>
+</div>
+<h2><span id="Editing_files_normally_pre-processed_by_the_web_server">Editar archivos normalmente procesados ​​previamente por el servidor web</span></h2>
+<div class="solvvy-solution">
+<p>Un problema con WebDAV es que no te permite editar el origen de los archivos procesados ​​por el servidor, incluidos PHP, shtml, Perl, etc. Esto se debe a que utiliza el mismo comando para "OBTENER" el archivo que tu navegador web. El servidor web no tiene forma de no procesar el archivo PHP y te da la salida en lugar del código fuente.</p>
+<p>Agregar esta línea a tu archivo .htaccess deshabilita todo el procesamiento:</p>
+<div class="preboxcontainer">
+<pre class="prebox">SetHandler default-handler
+</pre>
+</div>
+<p>Esto obliga a los archivos .php a mostrar su fuente, incluidas las contraseñas que hayas codificado. Deberás cambiar los permisos en tu archivo .htaccess para editarlo. Cualquier cambio realizado en este archivo se sobrescribirá si realizas algún cambio en el panel a tus opciones de htaccess/webdav.</p>
+<p>También puedes agregar .txt al final de cualquier archivo para forzar su lectura como un archivo de texto normal. Por ejemplo, cambia test.php por test.php.txt.</p>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<h2>Enlaces internos</h2>
+<ul>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/en-us/articles/216660118-How-to-enable-WebDAV-in-the-panel">Cómo habilitar WebDAV en el panel</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215864738-Generalidades-sobre-acceder-WebDAV">Generalidades sobre acceder WebDAV</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/216473357-Accediendo-a-WebDAV-con-Windows">Acceder WebDAV con Windows</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/216473527-Acceder-a-WebDAV-con-Mac-OS-X-y-Linux">Acceder WebDAV con Mac OS X y Linux</a></li>
+</ul>
+<h3>RFCs</h3>
+<ul>
+<li><a href="http://www.ietf.org/rfc/rfc2291.txt">Requerimientos</a></li>
+<li><a href="http://www.ietf.org/rfc/rfc2518.txt">Extensiones HTTP</a></li>
+<li><a href="http://www.ietf.org/rfc/rfc3253.txt">Extensiones de Versioning</a></li>
+<li><a href="http://www.ietf.org/rfc/rfc3648.txt">Colecciones ordenadas</a></li>
+<li><a href="http://www.ietf.org/rfc/rfc3744.txt">Protocolo de acceso de control</a></li>
+</ul>
+</div>

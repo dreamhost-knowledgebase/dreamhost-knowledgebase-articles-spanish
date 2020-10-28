@@ -1,0 +1,132 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>WordPress usa algo llamado archivo WXR (WordPress eXtended RSS) para importar y exportar el contenido del sitio. Este artículo muestra cómo importar y exportar este archivo en el panel y usar <a href="https://help.dreamhost.com/hc/es/articles/214693248-Generalidades-sobre-WordPress-wp-cli" target="_self">WP CLI</a>.</p>
+<p><strong>Importar</strong></p>
+<ul>
+<li><a href="#importing-in-the-dashboard" target="_self">Importar datos XML en el panel</a></li>
+<li><a href="#importing-via-wp-cli" target="_self">Importar datos XML usando WP CLI</a></li>
+</ul>
+<p><strong>Exportar</strong></p>
+<ul>
+<li><a href="#exporting-in-the-dashboard" target="_self">Exportar datos XML en el panel</a></li>
+<li><a href="#exporting-via-wp-cli" target="_self">Exportar datos XML usando WP CLI</a></li>
+</ul>
+</div>
+<h2><span id="importing-in-the-dashboard">Importar los datos XML de tu sitio en el panel</span></h2>
+<div class="solvvy-solution">
+<p>Los siguientes pasos importan tu sitio desde un archivo XML.&nbsp;</p>
+<ol>
+<li>Inicia sesión en tu sitio WordPress en <strong>example.com/wp-login.php</strong>.
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/wp-import_03.png" alt="wp export" /></dd>
+</dl>
+</li>
+<li>Navega a la página <span class="text-object">Tools &gt; Import</span>.
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/wp-import_04.png" alt="wp export" /></dd>
+</dl>
+</li>
+<li>Haz clic en el enlace <span class="text-link">Run Importer</span>.
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/wp-import_05.png" alt="wp export" /></dd>
+</dl>
+</li>
+<li>Busca en tu computador el archivo XML, luego haz clic en <strong>Upload file and import</strong>.
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/wp-import_06.png" alt="wp export" /></dd>
+</dl>
+</li>
+<li>Elige si te gustaría crear un nuevo usuario WordPress para importar o usar un usuario existente.</li>
+<li>Haz clic en el botón <strong>Submit</strong>.</li>
+</ol>
+<p>Un archivo XML se carga a tu sitio web.</p>
+</div>
+<h2><span id="importing-via-wp-cli">Importar un archivo WXR usando WP-CLI</span></h2>
+<div class="solvvy-solution">
+<p>Si tienes un archivo WXR , lo puedes importar usando el comando <span class="code">wp import</span>. Este comando usa las opciones <span class="code">file</span>, <span class="code">--authors</span>, y <span class="code">--skip</span> sobre las cuales puedes leer, aquí:</p>
+<ul>
+<li><a href="https://developer.wordpress.org/cli/commands/import/">https://developer.wordpress.org/cli/commands/import/</a></li>
+</ul>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En el siguiente ejemplo:</p>
+<ul>
+<li><span class="code">file</span> está configurado como el nombre de archivo al cual estás importando. En este ejemplo es <span class="text-object">my-wordpress-site.xml</span>.</li>
+<li><span class="code">--author</span> está configurado para <span class="code">skip</span></li>
+<li><span class="code">--skip</span> está excluido de este ejemplo</li>
+</ul>
+</div>
+</div>
+<ol>
+<li>Carga tu archivo WXR a tu sitio WordPress usando un <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">cliente FTP</a>. Asegúrate que el archivo XML está en el directorio principal de tu sitio.</li>
+<li>Inicia sesión en tu sitio a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Ejecuta el siguiente comando para importar el archivo XML.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp import <span class="code-highlight">my-wordpress-site.xml</span> --authors=<span class="code-highlight">skip</span></span>
+Error: WordPress Importer needs to be installed. Try 'wp plugin install wordpress-importer --activate'.</pre>
+</div>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Un error se muestra si aún no has instalado el plugin <span class="text-object">WordPress Importer</span>. Si es así, ejecuta el comando mencionado para instalarlo.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin install wordpress-importer --activate</span></pre>
+</div>
+<p>Una vez instalado, ejecuta el comando para importar de nuevo. Si es exitoso, verás el siguiente mensaje:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Success: Finished importing from 'my-wordpress-site.xml' file</pre>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="exporting-in-the-dashboard">Exportar los datos XML en el panel</span></h2>
+<div class="solvvy-solution">
+<p>Los siguientes pasos exportan tu sitio como un archivo XML.&nbsp;</p>
+<ol>
+<li>Inicia sesión en tu sitio WordPress en <strong>example.com/wp-login.php</strong>.
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/wp-import_01.png" alt="wp export" /></dd>
+</dl>
+</li>
+<li>Navega a la página <span class="text-object">Tools &gt; Export</span>.
+<dl>
+<dd><img class="img-border" src="http://kbimages.dreamhosters.com/images/wp-import_02.png" alt="wp export" /></dd>
+</dl>
+</li>
+<li>Selecciona el botón de radio llamado <span class="text-object">All Content</span>.</li>
+<li>Haz clic en el botón <strong>Export</strong>.</li>
+</ol>
+<p>Un archivo XML es descargado a tu computador.</p>
+</div>
+<h2><span id="exporting-via-wp-cli">Exportar un archivo WXR usando WP-CLI</span></h2>
+<div class="solvvy-solution">
+<p>Puedes exportar la información de tu sitio usando el comando <span class="code">wp export</span>. Ve la siguiente página para una lista completa de las opciones que puedes usar con este comando.</p>
+<ul>
+<li><a href="https://developer.wordpress.org/cli/commands/export/" target="_self" rel="undefined">https://developer.wordpress.org/cli/commands/export/</a></li>
+</ul>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El siguiente comando descarga todos los datos de tu sitio.</p>
+</div>
+</div>
+<ol>
+<li>Inicia sesión en tu sitio web a través de <a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview" target="_self">SSH</a>.</li>
+<li>Obtén la ruta completa del archivo a tu directorio actual ejecutando <span class="code">pwd</span>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">pwd</span>
+/home/user/example.com</pre>
+</div>
+</li>
+<li>Añade tu ruta de archivo al siguiente comando para exportar el archivo XML.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp export --dir=<span class="code-highlight">/home/user/example.com</span></span>
+Success: All done with export.</pre>
+</div>
+<p>Los datos de tu sitio se descargan en un archivo llamado algo similar a <span class="text-object">sitename.wordpress.date.time.xml</span>.</p>
+</li>
+</ol>
+</div>
