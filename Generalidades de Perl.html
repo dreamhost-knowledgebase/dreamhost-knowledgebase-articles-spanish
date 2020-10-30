@@ -1,0 +1,98 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Perl es un lenguaje de programación que se usa ampliamente en el mundo de UNIX / Linux para escribir todo, desde scripts rápidos hasta programas potentes y con amplias funciones. La siguiente es una descripción de la página de <a href="http://perldoc.perl.org/perlintro.html" target="_self" rel="undefined">manual de perlintro</a>:</p>
+<div class="text-blockquote">
+<p><strong>¿Qué es Perl?</strong></p>
+<p>Perl es un lenguaje de programación de propósito general desarrollado originalmente para la manipulación de texto y ahora se usa para una amplia gama de tareas, incluida la administración de sistemas, desarrollo web, programación de redes, desarrollo de GUI y más.</p>
+<p>El lenguaje está destinado a ser práctico (fácil de usar, eficiente, completo) en lugar de hermoso (diminuto, elegante, mínimo). Sus características principales son que es fácil de usar, admite programación tanto procedimental como orientada a objetos (OO), tiene un potente soporte integrado para el procesamiento de texto y tiene una de las colecciones de módulos de terceros más impresionantes del mundo.</p>
+<p>Se dan diferentes definiciones de Perl en <a href="http://perldoc.perl.org/perl.html">perl</a>, <a href="http://perldoc.perl.org/perlfaq1.html">perlfaq1</a> y sin duda otros lugares. A partir de esto, podemos determinar que Perl es algo diferente para diferentes personas, pero que mucha gente piensa que al menos vale la pena escribir sobre él.</p>
+</div>
+</div>
+<h2>Historia</h2>
+<div class="solvvy-solution">
+<p><strong>Perl</strong> fue creado a mediados de los 80 por <a href="https://en.wikipedia.org/wiki/Larry_Wall">Larry Wall</a>. Su intención original era llenar la brecha entre los llamados lenguajes de "bajo nivel" como <a href="https://en.wikipedia.org/wiki/C">C</a> y&nbsp;<a href="https://en.wikipedia.org/wiki/C%2B%2B">C++</a>, y los lenguajes de secuencias de comandos de nivel superior como <a href="https://en.wikipedia.org/wiki/AWK"><em>awk</em></a>, <a href="https://en.wikipedia.org/wiki/Sed"><em>sed</em></a>, y scripts de shell. Ha evolucionado considerablemente desde entonces, convirtiéndose en el lenguaje de facto elegido por muchos administradores de sistemas * nix y usuarios avanzados. Ha encontrado un gran atractivo en el Internet (una red basada principalmente en * nix) como el código de fondo detrás de muchos sitios en el World Wide Web. Un ejemplo notable es <a href="http://slashdot.org">Slashdot</a>.</p>
+</div>
+<h2>Perl en DreamHost</h2>
+<div class="solvvy-solution">
+<h3>Camino al intérprete de Perl</h3>
+<p>La ruta a Perl en los servidores de DreamHost se muestra a continuación. Esta ruta es estándar en los sistemas basados en * nix y la mayoría de los scripts no deberían necesitar ser modificados.</p>
+<div class="preboxcontainer">
+<pre class="prebox">/usr/bin/perl</pre>
+</div>
+<p>mod_perl Actualmente no es compatible con DreamHost. Debes usar <a href="/hc/en-us/articles/217298967-FastCGI-overview">FastCGI</a> en vez.</p>
+<h3>Versión Perl de DreamHost</h3>
+<p>Ve los siguientes enlaces para las versiones actuales de Python.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360022178852#perl" target="_self" rel="undefined">Versiones de Ubuntu</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360040638531-How-do-I-prepare-my-VPS-site-for-Debian-Stretch-#perl" target="_self" rel="undefined">Versiones de Debian Stretch version</a></li>
+</ul>
+<p>Como con <a href="/hc/en-us/articles/216137717-Python-overview">Python</a> y <a href="/hc/en-us/articles/214202188-PHP-overview">PHP</a>, puedes crear otra versión en tu directorio personal si es necesario. Sin embargo, la mayoría de los programas de Perl deberían funcionar bien con la versión instalada.</p>
+<h3>Instalación de una versión personalizada de Perl</h3>
+<p>También puedes instalar una versión personalizada de Perl con tu nombre de usuario. Consulta el siguiente artículo para obtener instrucciones:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360028572351-Installing-a-custom-version-of-Perl-locally" target="_self" rel="undefined">Instalación de una versión personalizada de Perl localmente</a></li>
+</ul>
+<h3>Usando módulos de Perl</h3>
+<p>DreamHost tiene casi todos los módulos de Perl comunes instalados, así como muchos poco comunes.</p>
+<p>Para verificar si un módulo de Perl está instalado en los servidores de DreamHost, inicia sesión en tu cuenta de shell y luego escribe lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">perl -M<var>The::Module::Name</var> -e0</span>
+</pre>
+</div>
+<p><span class="code"><var>The::Module::Name</var></span> es el nombre del módulo Perl que está buscando.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El comando no muestra ningún resultado cuando el módulo es encontrado. De no ser encontrado, se muestra un error.</p>
+</div>
+</div>
+<h3>Instalación de módulos personalizados</h3>
+<p>Puede instalar tus propios módulos en su directorio personal directamente. Sigue estas <a href="/hc/en-us/articles/217716877-CPAN">DreamHost specific instructions</a> para instalar módulos CPAN.</p>
+<h3>Perl FastCGI</h3>
+<p>El módulo perl FCGI se instala de forma predeterminada en los servidores DreamHost.</p>
+<p>Para probar si FastCGI está configurado y funcionando correctamente, prueba este sencillo programa "Hola mundo". Pega este texto en un archivo con el final .fcgi.</p>
+<div class="preboxcontainer">
+<pre class="prebox">#!/usr/bin/perl
+
+use lib qw( /home/myhome/lib/perl/5.8.4 );
+use FCGI;
+use Socket qw(&nbsp;:crlf ); # server agnostic line endings in $CRLF
+
+my $counter = 0;
+while ( FCGI::accept() &gt;= 0 ) {
+   $counter++;
+
+   print
+        "Content-Type: text/plain",
+        $CRLF,
+        $CRLF,
+        "Hello World, in Perl FastCGI!",
+        $CRLF,
+        "I am process $$.",
+        $CRLF,
+        "I have served $counter request(s).",
+        $CRLF;
+ }</pre>
+</div>
+<p>El $CRLF es una línea neutral del servidor que termina equivalente a "\015\012". Siempre funcionará. "\n" o incluso "\r\n" a veces no lo harán.</p>
+<p>Si cambias la extensión de este script a .pl o .cgi para que sea manejado por CGI regular, notarás que el PID es diferente en cada solicitud, y el contador de solicitudes permanece en 1.</p>
+</div>
+<h2>Debugging</h2>
+<div class="solvvy-solution">
+<p>DreamHost corre <a href="/hc/en-us/articles/215364578-How-do-I-use-suEXEC-">suexec</a> and <strong>requires</strong> y requiere que todos los scripts cgi y los directorios en los que residen no puedan ser escritos por nadie más que por el propietario (es decir, el usuario). Esto significa que debes cambiar los permisos del script usando chmod (ve el siguiente ejemplo):</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod -R 755 perldir</span>
+</pre>
+</div>
+<p>donde perldir es el directorio en el que reside su CGI de perl.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="/hc/en-us/articles/216041267-SSH-overview" target="_self" rel="undefined">Generalidades de SSH</a></li>
+<li><a href="http://perldoc.perl.org" target="_self" rel="undefined">Las páginas del manual de Perl en línea</a></li>
+<li><a href="http://perl.org/" target="_self" rel="undefined">Página de inicio oficial de Perl</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Perl" target="_self" rel="undefined">Perl en Wikipedia</a></li>
+<li><a href="http://www.cpan.org">CPAN</a></li>
+</ul>
+</div>

@@ -44,24 +44,24 @@
 </li>
 <li>Se muestra tu clave pública. Haz clic en '<strong>Copy To Clipboard</strong>'.</li>
 <li>Abre tu menú de inicio y abre el programa 'Bloc de notas'. Una vez abierto, pega esta clave pública.</li>
-<li>Guarda el archivo y asígnale un nombre similar a 'dreamhost-git-key.pub'. Asegúrate de guardarlo en tu carpeta 'Documentos'.</li>
+<li>Guarda el archivo y asígnale un nombre similar a 'dreamhost-git-key.pub'. Asegúrate de guardarlo en tu carpeta <span class="text-object">Documentos</span>.</li>
 </ol>
 </div>
 <h2>Subir la clave pública a tu servidor DreamHost</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Navega a tu carpeta 'Documentos'.<br />
+<li>Navega a tu carpeta <span class="text-object">Documentos</span>.<br />
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/gitgui_06.png" alt="gitgui.png" /></dd>
 </dl>
 </li>
-<li>Haz clic derecho y seleccione 'Git Bash Here'. Esto abre una terminal. Desde que abriste 'Git Bash' dentro de la carpeta 'Documentos', el indicador del terminal debería verse así:<br />
+<li>Haz clic derecho y seleccione 'Git Bash Here'. Esto abre una terminal. Desde que abriste 'Git Bash' dentro de la carpeta <span class="text-object">Documentos</span>, el indicador del terminal debería verse así:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">user@computer MINGw64 ~/Documents
 $</span></pre>
 </div>
 </li>
-<li>En el terminal, ejecuta el siguiente comando para asegurarte de que el dreamhost-git-key.pub que guardaste anteriormente esté en este directorio 'Documentos'.<br />
+<li>En el terminal, ejecuta el siguiente comando para asegurarte de que el dreamhost-git-key.pub que guardaste anteriormente esté en este directorio <span class="text-object">Documentos</span>.<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la | grep dreamhost</span>
 <span class="cmdoutput">dreamhost-git-key.pub</span></pre>
@@ -95,7 +95,7 @@ $</span></pre>
 <div class="preboxcontainer">
 <pre class="prebox">mkdir: cannot create directory `/home/user/.ssh': File exists</pre>
 </div>
-<p>Esto simplemente significa que el directorio /.ssh ya existe en el servidor web. Si ves esto, elimina la parte del comando que crea el directorio y vuelve a ejecutarlo. Por ejemplo:</p>
+<p>Esto simplemente significa que el directorio <span class="text-object">/.ssh</span> ya existe en el servidor web. Si ves esto, elimina la parte del comando que crea el directorio y vuelve a ejecutarlo. Por ejemplo:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cat ~/Documents/dreamhost-git-key.pub | ssh user@server.dreamhost.com "cat &gt;&gt; ~/.ssh/authorized_keys"</span>
 </pre>
@@ -114,11 +114,11 @@ $</span></pre>
 <pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cat ~/.ssh/authorized_keys</span></pre>
 </div>
 </li>
-<li>Crea un nuevo directorio para tu nuevo repositorio remoto en tu servidor DreamHost. Si este código está destinado a actualizar tu sitio web existente, puedes nombrarlo igual que tu sitio web que termina en .git. Por ejemplo, algo como 'example.com.git'.<br />
+<li>Crea un nuevo directorio para tu nuevo repositorio remoto en tu servidor DreamHost. Si este código está destinado a actualizar tu sitio web existente, puedes nombrarlo igual que tu sitio web que termina en .git. Por ejemplo, algo como <span class="text-object">example.com.git</span>.<br />
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Dado que este es un repositorio remoto y no un repositorio que funcione, el nombre del directorio que cree debe terminar con .git. Luego puedes retirar este repositorio en el futuro para trabajar en él.</p>
+<p>Dado que este es un repositorio remoto y no un repositorio que funcione, el nombre del directorio que cree debe terminar con <span class="text-object">.git</span>. Luego puedes retirar este repositorio en el futuro para trabajar en él.</p>
 </div>
 </div>
 <div class="preboxcontainer">
@@ -183,7 +183,7 @@ $</span></pre>
 <h2>Confirmar que tu repositorio fue enviado correctamente a tu servidor DreamHost</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Inicia sesión en tu servidor DreamHost a través de SSH.<br /> <em>Cuando ejecutes 'git status' en el directorio /example.com.git, recibirás el siguiente error porque es un repositorio 'desnudo':</em><br />
+<li>Inicia sesión en tu servidor DreamHost a través de SSH.<br /><em>Cuando ejecutes 'git status' en el directorio <span class="text-object">/example.com.git</span>, recibirás el siguiente error porque es un repositorio <span class="text-object">bare</span> (desnudo):</em><br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">git status</span>
 <span class="cmdoutput">fatal: This operation must be run in a work tree</span></pre>
