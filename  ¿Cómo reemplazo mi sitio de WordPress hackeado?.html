@@ -1,0 +1,197 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Las siguientes secciones describen los pasos sobre cómo reinstalar manualmente una nueva copia de WordPress en tu sitio hackeado y debe hacerse en el orden en que aparecen.</p>
+<div class="alert alert-tip">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-tip-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si no te sientes cómodo arreglando tu sitio de WordPress por tu cuenta, puedes solicitar una <a href="/hc/en-us/articles/360001395451-TOS-for-DreamHost-s-Hacked-Site-Repair-service">Reparación de Sitio Hackeado</a> (el servicio profesional de eliminación de malware de DreamHost). Por una tarifa única de $199 USD, los expertos de DreamHost accederán a tu cuenta y realizarán las reparaciones necesarias para que vuelvas a estar en línea rápidamente. Por favor <a href="https://panel.dreamhost.com/?tree=support.msg">Contacta Soporte</a> si deseas explorar esta opción.</p>
+</div>
+</div>
+</div>
+<h2><span id="Step_one:_change_your_WordPress_theme">Paso 1 — cambia el tu tema de WordPress</span></h2>
+<div class="solvvy-solution">
+<p>Si es posible, inicies sesión en tu panel de WordPress en ‘example.com/wp-admin’. Una vez que hayas iniciado sesión, navega a&nbsp; ‘Appearance &gt; Themes’ para cambiar tu tema al tema predeterminado actual. Cambiar tu tema ahora te facilita el proceso más adelante.</p>
+</div>
+<h2><span id="Step_two:_change_your_passwords">Paso 2 — cambia tus contraseñas</span></h2>
+<div class="solvvy-solution">
+<p>Hay algunas notas generales sobre las contraseñas que siempre debes seguir:</p>
+<ul>
+<li>No reutilices las contraseñas – la mayoría de las personas usan la misma contraseña en varios lugares. No lo hagas. Debes asegurarte de que tus contraseñas sean únicas entre sí. De esta manera, si una contraseña se ve comprometida, tus otros inicios de sesión permanecerán seguros.</li>
+<li>Usa contraseñas seguras – puedes generarlas desde lugares como <a href="https://strongpasswordgenerator.com/">Strong Password Generator</a>. Como mínimo, tus contraseñas deben tener 8 caracteres y estar formadas por una combinación de números y letras.</li>
+<li>Usa una herramienta de contraseñas – <a href="https://lastpass.com/">LastPass</a> y <a href="https://agilebits.com/onepassword">OnePassword</a> son excelentes para proteger tus contraseñas y generar nuevas.</li>
+</ul>
+<p>Debes cambiar tanto tu contraseña de usuario de FTP como la contraseña de usuario de la base de datos.</p>
+<h3><span id="Changing_the_FTP_user_password">Cambiar la contraseña de usuario FTP</span></h3>
+<p>El siguiente artículo te explica cómo cambiar esta contraseña:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115000675027-FTP-overview-and-credentials">Localizando el usuario FTP correcto</a></li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Para mayor seguridad, si tu usuario es actualmente un usuario solo de FTP, cámbialo a un usuario de <a href="https://help.dreamhost.com/hc/en-us/articles/115000675027#FTP_security">SFTP</a> o <a href="/hc/en-us/articles/216041267-SSH-overview">SSH</a> al mismo tiempo que cambia la contraseña. Ve el artículo <a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access">Creando un usuario con acceso Shell (SSH)</a> para más detalles.</p>
+</div>
+</div>
+<h3><span id="Changing_the_database_user_password">Cambiar la contraseña de usuario de la base de datos</span></h3>
+<p>Ve el artículo <a href="/hc/en-us/articles/221610868-phpMyAdmin-Finding-your-login-credentials">Encontrar tus credenciales MySQL</a>&nbsp; para instrucciones sobre como obtener el nombre de usuario de tu base de datos y su contraseña.</p>
+<h3><span id="Updating_your_wp-config.php_file">Actualizar tu artículo wp-config.php</span></h3>
+<p>Cuando cambies la contraseña del usuario de la base de datos, también deberás editar tu archivo wp-config.php para reflejar esta nueva contraseña. Hay información sobre cómo editar el archivo wp-config.php para cambiar la contraseña de la base de datos en <a href="http://codex.wordpress.org/Editing_wp-config.php#Set_Database_Password">codex.WordPress.org</a>. También puedes ver el artículo <a href="/hc/en-us/articles/214693268-WordPress-wp-config-php-overview">WordPress wp-config</a> para más detalles.</p>
+<p>Si tienes varios usuarios para tu base de datos, asegúrate de cambiar la contraseña de usuario correcta. Puedes verificar qué usuario de la base de datos inicia sesión en tu base de datos para tu instalación de WordPress mirando el archivo wp-config.php.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si hay algo parecido a lo siguiente en su archivo, definitivamente has sido hackeado y DEBES eliminarlo lo antes posible:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php eval(gzinflate(base64_decode('dVRtb6NGE.....')));?&gt;</pre>
+</div>
+<p>Los hacks de Base64 son insidiosos y dejan una puerta trasera que los hackers pueden usar una y otra vez en tu sitio. Elimina esa sección por completo, o mejor aún, simplemente reconstruye el archivo wp-config.php.</p>
+</div>
+</div>
+</div>
+<h2><span id="Step_three:_take_the_hacked_code_offline">Paso 3 — pon el código hackeado fuera de línea</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en el servidor a través de <a href="https://help.dreamhost.com/hc/en-us/articles/115000675027-FTP-overview-and-credentials">FTP</a>.</li>
+<li>Busca el directorio (carpeta) de tu dominio, que probablemente sea una carpeta con el nombre de tu sitio. Si se encuentra en el directorio correcto, verás una lista de archivos y directorios que comienzan con <span class="text-object">wp-</span>. También es posible que hayas instalado WordPress en un subdirectorio como <span class="text-object">/blog</span>.</li>
+<li>Cambia el nombre del directorio (carpeta) donde está instalado WordPress. Si es tu directorio principal, cámbiale el nombre a <span class="text-object">example.com_HACKED</span>. Si está en un subdirectorio, cámbiale el nombre a <span class="text-object">example.com/blog_HACKED</span>.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Cuando cambies el nombre del directorio web, tu sitio se desconectará inmediatamente.</p>
+</div>
+</div>
+</li>
+<li>Crea un nuevo directorio de dominio vacío con el mismo nombre de directorio que el anterior.</li>
+</ol>
+</div>
+<h2><span id="Step_four:_install_a_new_unhacked_copy_of_WordPress">Paso 4 — instala una nueva copia <em>sin hackeos</em> de WordPress</span></h2>
+<div class="solvvy-solution">
+<p>Reinstala WordPress en una de dos maneras:</p>
+<ul>
+<li>Manualmente (usando FTP o wp-cli)</li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215525277-How-to-install-WordPress-using-the-One-Click-Installer" target="_self">Usando el instalador de un solo clic</a></li>
+</ul>
+<h3><span id="Manually_reinstalling_WordPress">Reinstalar WordPress manualmente</span></h3>
+<p>Ve el siguiente artículo para obtener detalles sobre cómo reinstalar WordPress manualmente:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360028822932-Reinstalling-WordPress" target="_self">Reinstalar WordPress</a></li>
+</ul>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Cuando remuevas la instalación de un solo clic, asegúrate de hacer clic en el botón <strong>Remove from List</strong>. NO hagas clic en el botón <strong>Delete all Files</strong> ya que eliminarás permanentemente los archivos de tu sitio web.</p>
+</div>
+</div>
+</div>
+<h2><span id="Step_five:_connect_your_new_install_to_your_old_database">Paso 5 — conecta tu nueva instalación con tu base de datos antigua</span></h2>
+<div class="solvvy-solution">
+<p>Debes conectar los archivos nuevos que has descargado a tu base de datos existente. Para hacer esto, necesitas la siguiente información:</p>
+<ul>
+<li>Nombre de la base de datos</li>
+<li>Nombre de usuario de la base de datos</li>
+<li>Contraseña del usuario de la base de datos</li>
+<li>Hostname</li>
+<li>Prefijo de la tabla</li>
+</ul>
+<p>Esta información se encuentra en tu antiguo archivo wp-config.php:</p>
+<ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/en-us/articles/115000675027-FTP-overview-and-credentials">FTP</a>.</li>
+<li>Navega a tu antiguo directorio hackeado al que le cambiaste el nombre a <span class="text-object">example.com_HACKED</span>.</li>
+<li>Abre el archivo wp-config.php. Encontrarás todos los valores listados arriba.
+<ul>
+<li>La línea del prefijo de la tabla comienza con $table_prefix =.</li>
+<li>Para las instalaciones de DreamHost, el prefijo de la tabla comienza con wp_ y va seguido de una serie de números y letras aleatorios. Por ejemplo: <strong>wp_17Dz9g</strong></li>
+</ul>
+</li>
+<li>Navega a tu nuevo directorio de instalación de WordPress.</li>
+<li>Elimina o cambia el nombre de wp-config.php en esa nueva carpeta.</li>
+<li>Carga tu sitio.
+<dl>
+<dd><em>Se te solicita que seleccione un idioma:</em></dd>
+<dd><img src="https://kbimages.dreamhosters.com/images/01_WP_Hacked_oneclick.fw.png" alt="01 WP Hacked oneclick.fw.png" width="270" height="414" /></dd>
+</dl>
+</li>
+<li>Selecciona tu idioma preferido y luego haz clic en <strong>Continue</strong>.
+<dl>
+<dd><em>La página de configuración de WordPress se abre:</em></dd>
+<dd><img src="https://kbimages.dreamhosters.com/images/02_WP_Hacked_oneclick.fw.png" alt="02 WP Hacked oneclick.fw.png" width="449" height="356" /></dd>
+</dl>
+</li>
+<li>Haz clic en <strong>Let’s go!</strong>
+<dl>
+<dd><em>Aparece la siguiente página pidiéndote que ingreses tus credenciales:</em></dd>
+<dd><img src="https://kbimages.dreamhosters.com/images/03_WP_Hacked_oneclick.fw.png" alt="03 WP Hacked oneclick.fw.png" width="466" height="413" /></dd>
+</dl>
+</li>
+<li>Ingresa la información requerida y luego haz clic en <strong>Submit</strong>.
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/04_WP_Hacked_oneclick.fw.png" alt="04 WP Hacked oneclick.fw.png" width="538" height="213" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón <strong>Run the install</strong>.
+<dl>
+<dd><em>Como ya tienes datos, aparece un mensaje que indica que WordPress ya está instalado, lo que significa que has conectado correctamente tu instalación de WordPress a tu base de datos anterior:</em></dd>
+<dd><img src="https://kbimages.dreamhosters.com/images/05_WP_Hacked_oneclick.fw.png" alt="05 WP Hacked oneclick.fw.png" width="452" height="215" /></dd>
+</dl>
+</li>
+</ol>
+</div>
+<h2><span id="Step_six:_add_your_previous_content">Paso 6 — añade tu contenido anterior</span></h2>
+<div class="solvvy-solution">
+<p>Tu sitio de WordPress ahora está completamente instalado y conectado a tu base de datos anterior. Sin embargo, no está usando tu tema anterior, plugins o imágenes cargadas anteriormente.</p>
+<p>Este paso describe cómo agregar todos tus temas, cargas y plugins anteriores.</p>
+<h3><span id="Installing_your_previous_theme">Instalar tu tema anterior</span></h3>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los temas de WordPress son vulnerables a los hackeos. Siempre descarga e instala una nueva copia de tu tema en lugar de mover los archivos del tema de tu instalación anterior.</p>
+</div>
+</div>
+<p>Si cambiaste tu tema al <a href="https://wordpress.org/themes/twentyseventeen/">tema predeterminado</a> antes de comenzar, tu sitio debería cargar tus publicaciones, pero sin el tema correcto.</p>
+<p>Si tu tema específico no está instalado actualmente, puedes instalarlo a través del panel de WordPress. Consulta la siguiente página para obtener instrucciones sobre cómo instalar un tema diferente:</p>
+<ul>
+<li><a href="http://codex.wordpress.org/Themes#Adding_New_Themes_using_the_Administration_Panel">codex.WordPress.org</a></li>
+</ul>
+<p>Si no cambiaste el tema al <a href="https://wordpress.org/themes/twentyseventeen/">tema predeterminado</a> antes de comenzar, el sitio puede cargar una página en blanco. Esto se debe a que tu base de datos está buscando un tema que ya no está instalado.</p>
+<p>Dado que no puedes acceder al panel de WordPress en este momento, deberás descargar una copia del tema elegido (generalmente entregado en formato ZIP). Puedes cargar e instalar el tema desde el panel de WordPress. También puedes descomprimirlo en tu computadora y luego iniciar sesión en tu servidor usando tu cuenta FTP para cargar el tema en el directorio de temas. Está ubicado en la siguiente carpeta:</p>
+<div class="preboxcontainer">
+<pre class="prebox">example.com/wp-content/themes</pre>
+</div>
+<p>Entonces, si el nombre de tu tema es /my_theme, debería verse así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">example.com/wp-content/themes/my_theme/</pre>
+</div>
+<p>Una vez que tengas el tema elegido instalado y activado, deberías poder cargar tu sitio y ver tus publicaciones.</p>
+<h3>Copiar tus cargas anteriores</h3>
+<p>Tus cargas (imágenes y otros medios) aún se encuentran en el directorio de instalación anterior hackeada. Usando FTP, copia el contenido de la carpeta anterior a la nueva. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">example.com_HACKED/wp-content/uploads</pre>
+</div>
+<dl>
+<dd><em><strong>-a-</strong></em></dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox">example.com/wp-content/uploads</pre>
+</div>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Revisa los archivos que está moviendo y asegúrate de que sean todos tuyos. Si mueves código hackeado a tu nueva instalación, infectará tu nuevo sitio. El directorio <span class="text-object">/uploads</span> contiene principalmente medios, por lo que los archivos deben terminar con extensiones que indiquen qué tipo de archivo son (.jpg para una imagen JPEG, por ejemplo, o .mp3 para un archivo de audio MP3). <strong>TEN MUCHO CUIDADO CON LOS ARCHIVOS QUE TERMINAN EN .PHP EN EL DIRECTORIO <span class="text-object">/uploads</span></strong></p>
+</div>
+</div>
+<h3><span id="Installing_your_former_plugins">Instala tus plugins anteriores</span></h3>
+<p>El último paso es instalar los complementos de WordPress que necesitas para tu sitio. Nuevamente, es muy importante instalar copias nuevas de tus plugins, en lugar de copiar los archivos de la instalación hackeada.</p>
+<p>Puedes instalar los plugins desde tu nuevo panel de WordPress. Solo instala los plugins que sepas que necesitas y usas. Reducir los complementos inactivos limita el acceso de un hacker a tu instalación y hace que WordPress también se ejecute más rápido.</p>
+</div>
+<h2><span id="Step_seven:_finish_successfully">Paso siete: termina exitosamente</span></h2>
+<div class="solvvy-solution">
+<p>Si sale bien, ahora tienes una nueva instalación de WordPress, conectada a tu base de datos anterior y con todo el contenido cargado, el tema elegido y los plugins elegidos.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360001310966-How-to-log-into-your-WordPress-site">Cómo iniciar sesión en tu sitio WordPress</a></li>
+<li><a href="/hc/en-us/articles/215513877-How-to-fix-specific-content-in-a-hacked-WordPress-site">Cómo arreglar contenido específico en un sitio hackeado de WordPress</a></li>
+<li><a href="/hc/en-us/articles/214820158-Hacked-WordPress-site-overview">Generalidades sobre sitios WordPress hackeados</a></li>
+</ul>
+</div>
