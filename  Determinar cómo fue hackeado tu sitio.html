@@ -1,0 +1,118 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-tip">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-tip-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si no te sientes cómodo arreglando tu sitio de WordPress por tu cuenta, puedes solicitar una <a href="/hc/en-us/articles/360001395451-TOS-for-DreamHost-s-Hacked-Site-Repair-service">Reparación de Sitio Hackeado</a> (el servicio profesional de eliminación de malware de DreamHost). Por una tarifa única de $199 USD, los expertos de DreamHost accederán a tu cuenta y realizarán las reparaciones necesarias para que vuelvas a estar en línea rápidamente. Por favor <a href="https://panel.dreamhost.com/?tree=support.msg">Contacta Soporte</a> si deseas explorar esta opción.</p>
+</div>
+</div>
+<p>El primer paso para que todo vuelva a la normalidad es determinar cómo se hackeo la cuenta. En general, casi todos los ataques ocurren a través de tres métodos clasificados en orden de probabilidad:</p>
+<ol>
+<li>Una vulnerabilidad CGI en el software que has subido a tu sitio web ha sido aprovechada y utilizada para escribir/ejecutar código arbitrario en el servidor.</li>
+<li>Tu <a href="https://help.dreamhost.com/hc/es/articles/216479147-Generalidades-sobre-contrase%C3%B1as">contraseña</a> FTP/SSH ha sido comprometido.</li>
+<li>Tienes permisos de directorio de escritura mundial en carpetas accesibles desde la web.</li>
+</ol>
+<p>Quizás de manera contraria a la intuición, los hackeos CGI son más comunes que los hackeos de contraseñas FTP/SSH principalmente debido a la gran proliferación de software preempaquetado que las personas configuran y luego olvidan actualizar con frecuencia. Sin embargo, los hackeos de FTP/SSH son los más fáciles de verificar. Los ataques a carpetas de escritura mundial son posibles cuando el atacante se encuentra en la misma máquina que tu cuenta. Con permisos de escritura mundial (o=w), cualquier persona con una cuenta en la máquina de alojamiento puede colocar archivos allí.</p>
+</div>
+<h2><span id="Looking_for_FTP.2FSSH_hacks">Buscar hackeos FTP/SSH</span></h2>
+<div class="solvvy-solution">
+<p>Dado que los ataques recientes de FTP/SSH son más fáciles de detectar, comienza por eliminar esta opción. Inicia sesión en tu usuario a través de SSH y ejecuta los siguientes comandos.</p>
+<p>Te muestra tu historial de inicio de sesión del mes actual:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -i | grep youruser</span>
+</pre>
+</div>
+<p>Muestra tu historial de inicio de sesión del mes anterior:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -if /var/log/wtmp.1 | grep youruser</span>
+</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los nombres de usuario impresos por <span class="code">last</span> se truncan después de 8 caracteres, por lo que si tienes un nombre de usuario más largo, también querrás truncar el tuyo en la cadena <span class="code">grep</span>.</p>
+</div>
+</div>
+<p>La salida se ve como esto:</p>
+<div class="preboxcontainer">
+<pre class="prebox">youruser pts/4        99.139.XXX.XXX   Wed May 28 06:10 - 07:11  (01:00)    
+youruser pts/5        66.33.XXX.XXX    Sun May 25 09:31 - 12:14  (02:42)    
+youruser ftpd30715    66.33.XXX.XXX    Wed May 21 14:16 - 14:16  (00:00)    
+youruser pts/2        66.33.XXX.XXX    Tue May 20 13:22 - 14:18  (00:56)    
+youruser pts/2        66.33.XXX.XXX    Tue May 20 13:06 - 13:22  (00:15)    
+</pre>
+</div>
+<p>Puedes simplificar estos datos para imprimir solo direcciones IP y recuentos agregando pipes a unos pocos comandos simples:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -if /var/log/wtmp.1 | grep youruser | awk '{print $3}' | sort | uniq -c</span>
+</pre>
+</div>
+<p>La salida se ve más como esto:</p>
+<div class="preboxcontainer">
+<pre class="prebox">4 66.33.XXX.XXX
+1 99.139.XXX.XXX
+</pre>
+</div>
+<p>Puedes encontrar cualquier método útil para determinar quién ha iniciado sesión en tu usuario de FTP/SSH.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los registros de wtmp solo se remontan como máximo de 1 a 2 meses, por lo que si el hackeo es más antiguo que eso, DreamHost no tendrá ningún registro de él.</p>
+</div>
+</div>
+<p>Si has determinado que FTP/SSH es la fuente del hackeo, deberías:</p>
+<ol>
+<li>Cambia tu contraseña. Visita el artículo <a href="https://help.dreamhost.com/hc/es/articles/215877208-Cambio-de-contrase%C3%B1a-Usuarios-Web-" target="_self">Cambiar contraseña</a> para obtener más detalles.</li>
+<li>Deja de usar FTP, la cual envía tu contraseña a través de Internet en texto sin formato, y luego cambia a <a href="https://help.dreamhost.com/hc/es/articles/115000675027#seguridad">SFTP</a> o <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. Puedes desactivar FTP para la cuenta en el panel de control en la misma página en la que cambiaste tu contraseña.</li>
+<li>Asegúrate de que haya un escaneo de virus/malware actualizado en cualquier computadora en la que hayas utilizado la contraseña/usuario en cuestión.</li>
+</ol>
+</div>
+<h2><span id="Looking_for_CGI_hacks">Buscar por hackeos de CGI</span></h2>
+<div class="solvvy-solution">
+<h3><span id="Checking_your_logs_on_a_specific_date">Revisa tus registros en una fecha específica</span></h3>
+<p>Si es posible, comienza por tratar de determinar cuándo ocurrió el ataque. Esto a menudo se puede determinar anotando la fecha de modificación de cualquier archivo que haya sido modificado por el hacker informático. Por lo general, todos compartirán una hora de modificación común. Si se puede determinar ese tiempo, verifica los registros de ese día y hora para ver lo que se solicitó o publicó en tu sitio.</p>
+<p>Un examen cuidadoso de tus archivos de registro a menudo revela exactamente cómo fue hackeado tu sitio. Cada solicitud y publicación en tu sitio se registra y el usuario no puede cambiar los archivos de registro, por lo que el registro del ataque se conserva siempre que el hackeo se descubra dentro de los 30 días aproximadamente que se registran en los registros.</p>
+<h3><span id="Checking_all_of_your_logs">Revisar todos tus registros</span></h3>
+<p>Si no se puede determinar la hora original, los archivos de registro se pueden escanear en masa, aunque es más difícil descubrir la evidencia de la intrusión. Puedes ejecutar el siguiente comando en tu servidor web después de iniciar sesión a través de SSH:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">gunzip -c ~/logs/example.com/http/access.log.* | gawk '{a[$7]++}END{for (i in a) {print a[i]"\t"i}}' | sort -n | more</span>
+</pre>
+</div>
+<p>Esto devuelve un informe de todas las solicitudes a su sitio de todos los registros disponibles ordenados en orden ascendente. Dado que la mayoría de las solicitudes deberían (con suerte) ser legítimas, es más fácil comenzar mirando en la parte superior del informe — las solicitudes menos frecuentes — en busca de evidencia del hackeo:</p>
+<p>No es raro ver muchas solicitudes que no deberían estar allí, ya que esta es la naturaleza de un sitio web, ya que es de acceso público. Estas solicitudes no indican, en sí mismas, una infracción, pero deben investigarse para ver si la solicitud reveló con éxito una vulnerabilidad.</p>
+</div>
+<h2><span id="Looking_for_world-writable_directories">Ver directorios de escritura mundial</span></h2>
+<div class="solvvy-solution">
+<p>Los directorios de escritura mundial permiten la escritura de archivos por cualquier usuario en la máquina, y estos directorios pueden escanearse en masa. Se recomienda que realices este paso siempre que sospeches de una infracción.</p>
+<p>Incluso si estás seguro de que no cometiste ningún error de permiso, algunos proveedores de software o desarrolladores de plugins menos conscientes de la seguridad a menudo usan comandos del sistema o funciones de administración de permisos nativas del idioma para crear algunos directorios (generalmente los que se usan para el almacenamiento en caché y archivos temporales, archivos de sesión, etc.) para facilitar la instalación y administración.</p>
+<p>Para buscar directorios con permisos de escritura mundial, usa la herramienta de búsqueda de UNIX. Ejecuta este comando a través de SSH en el directorio web de tu dominio.</p>
+<p>Este comando busca en todas las carpetas debajo de la carpeta en la que lo ejecutas:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">find . -type d -perm -o=w</span>
+</pre>
+</div>
+<p>Si no se muestran resultados, entonces ninguna carpeta es de escritura mundial.</p>
+<h3><span id="Fixing_world-writable_directories">Arreglar directorios de escritura mundial</span></h3>
+<p>Puedes realizar cambios masivos en todos los permisos de directorios de escritura mundial con la herramienta de búsqueda de UNIX. Ejecuta este comando a través de SSH:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">find . -type d -perm -o=w -print -exec chmod 770 {} \;</span>
+</pre>
+</div>
+<p>Cuando ejecutas este comando en tu directorio web, sucede lo siguiente:</p>
+<ul>
+<li>Se encuentran todos los directorios que tienen permisos 777.</li>
+<li>Aquellos directorios con permisos 777 son cambiados a 770.</li>
+<li>Otros directorios no se tocan.</li>
+</ul>
+<p>Siempre es mejor enumerar todos los directorios de escritura mundial y luego decidir los permisos adecuados. Algunas carpetas requieren una atención especial.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="/hc/en-us/categories/202186727">Lista de artículos de solución de problemas de sitios web</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215604737-Hacked-sites-overview">Generalidades sobre sitios hackeados</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214915258-Limpiar-tu-sitio-despu%C3%A9s-de-un-hack">Limpiar tu sitio después de un hackeo</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215605037-Preventing-future-hacks">Prevenir futuros hackeos</a></li>
+</ul>
+</div>
