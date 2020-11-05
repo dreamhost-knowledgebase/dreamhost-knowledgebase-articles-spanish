@@ -122,6 +122,7 @@ Esto configura el dominio de SPAM como Permitido o Bloqueado para todos los corr
 <li>El límite es de 100 entradas combinadas de lista de permitidos y bloqueados.</li>
 <li>Todas las direcciones deben ingresarse manualmente. No hay importación masiva de direcciones.</li>
 <li>Si el correo se enruta correctamente a través de MailChannels pero no se procesa según la lista Permitir/Bloquear, verifica los encabezados del mensaje. Es posible utilizar un cliente de correo electrónico para modificar los encabezados para mostrar una dirección de remitente cuando el mensaje se envió realmente desde otra dirección. Luego, deberás ajustar tus listas de Permitir/Bloquear de acuerdo con los detalles que se encuentran en el encabezado.</li>
+<li>Los correos electrónicos que no pasen las políticas DMARC, DKIM o SPF del remitente no se enviarán a la Bandeja de entrada, incluso si tu remitente está en la lista de permitidos. Estas políticas le dicen a DreamHost cómo tu remitente quiere que se maneje el correo si no pasa estas verificaciones. Cuando un mensaje no supera estas comprobaciones, las políticas de tu remitente pueden indicarle a DreamHost que anule tu lista de permitidos y prohíba la entrega de este mensaje a la Bandeja de entrada. Tu remitente debe asegurarse de que los correos electrónicos enviados cumplan con las políticas de tu dominio, o se ignorará la lista de Permitidos.</li>
 </ul>
 <h3>Acción</h3>
 <p>Esto es Permitir siempre o Bloquear siempre.</p>

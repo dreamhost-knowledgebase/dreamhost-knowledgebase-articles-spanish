@@ -6,6 +6,7 @@
 <div class="solvvy-solution">
 <ul>
 <li>Configura listas de bloqueo para todo el dominio en lugar de solo el correo electrónico específico que envía el mensaje. De esta forma, bloquearás todos los correos electrónicos de ese dominio.</li>
+<li>Mover manualmente un mensaje de la Bandeja de entrada a la carpeta Spam reportará automáticamente ese correo electrónico al sistema de filtrado. Puedes mover mensajes a la carpeta Spam para ayudar a entrenar el filtro.</li>
 <li>Es posible que el filtro antispam no detecte todos los mensajes basura entrantes debido a cómo se envió o se creó el mensaje. DreamHost ofrece la opción de configurar filtros de mensajes personalizados, y puedes consultar el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215030678-Filtros-personalizados-C%C3%B3mo-habilitar-filtros-de-mensajes-en-una-direcci%C3%B3n-de-correo-electr%C3%B3nico">Filtros de Mensaje</a> (para usuarios avanzados) para obtener más información.</li>
 </ul>
 </div>
@@ -23,7 +24,11 @@
 </div>
 <h2>Los correos de una dirección de lista de permitidos aún se envía a la carpeta Spam</h2>
 <div class="solvvy-solution">
-<p>Es posible que la dirección de remitente del correo no coincida con el lugar desde donde se envió el correo. Intenta&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215466778--C%C3%B3mo-reviso-los-encabezados-de-correo-electr%C3%B3nico-">ver los encabezados de correo</a>&nbsp;y permite la dirección de envío que se muestra allí.&nbsp;</p>
+<ul>
+<li>Es posible que la dirección de remitente del correo no coincida con el lugar desde donde se envió el correo. Intenta&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215466778--C%C3%B3mo-reviso-los-encabezados-de-correo-electr%C3%B3nico-">ver los encabezados de correo</a> y permite la dirección de envío que se muestra allí.</li>
+<li>Si el dominio está en tu lista de Permitidos, verifica la dirección del remitente para ver si se envía desde un subdominio (ejemplo: @notices.domain.com en lugar de @domain.com). Las listas de dominios permitidos no se extienden a los subdominios. Es posible que también deba agregar el subdominio a tu lista de permitidos.</li>
+<li>Es posible que el mensaje haya fallado en las políticas DMARC, DKIM o SPF de tu remitente. Cuando esto ocurre, las políticas de tu remitente pueden indicarle a DreamHost que anule tu lista de permitidos y prohíba la entrega de este mensaje en la Bandeja de entrada. Tu remitente debe asegurarse de que los correos electrónicos enviados cumplan con las políticas de tu dominio, o se ignorará la lista de permitidos.</li>
+</ul>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
