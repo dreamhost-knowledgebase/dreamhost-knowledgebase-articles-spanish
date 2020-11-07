@@ -1,0 +1,52 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert-warning">
+<p>La opción para habilitar la <span class="text-product">seguridad de usuario mejorada</span> se ha eliminado del panel DreamHost, pero los usuarios heredados aún pueden ver esta opción en su página de <span class="panel-page">usuarios</span> anterior. Ahora está habilitado en todos los dominios de forma predeterminada.</p>
+</div>
+<p>La configuración de Seguridad de usuario mejorada evita que otros usuarios accedan a tu directorio personal. Esta configuración está habilitada de forma predeterminada para cada usuario creado. Puedes encontrar esta configuración en la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=users.dashboard" target="_blank" rel="noopener">Administrar usuarios</a> en el panel de DreamHost haciendo clic en el botón <strong>Editar</strong> para el usuario que deseas cambiar.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/01_EnhancedUserSecurity.fw.png" alt="01 EnhancedUserSecurity.fw.png" width="528" height="91" /></dd>
+</dl>
+<p>Como puedes ver, la configuración es solo una casilla que debe marcarse para que esté activa. Asegúrate de hacer clic en el botón <strong>Guardar cambios</strong> en la parte inferior de la página para guardar ese cambio. (El enlace para <span class="text-link">obtener más información</span> dirige a los usuarios a este artículo).</p>
+<p>DreamHost recomienda encarecidamente que mantengas esta configuración de seguridad habilitada para evitar que otros usuarios accedan a sus archivos.</p>
+</div>
+<h2><span id="Enabled">Habilitado</span></h2>
+<div class="solvvy-solution">
+<p>De forma predeterminada, la seguridad de usuario mejorada está habilitada y establece los permisos del directorio de inicio del usuario en '710' y cambia el grupo a 'adm':</p>
+<div class="preboxcontainer">
+<pre class="prebox">drwx--x--- 18 user1 adm 4096 Jan 12 14:05 user1</pre>
+</div>
+<p>Esto tiene los siguientes efectos:</p>
+<ul>
+<li>El usuario y sus scripts tienen el mismo acceso al directorio de inicio que cuando la opción está desactivada.</li>
+<li>Otros usuarios de DreamHost ya no tienen acceso a tu directorio personal. No pueden ingresar a su directorio personal, subdirectorios ni acceder a ningún archivo, sin importar cuán laxos estén los permisos.</li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El usuario de Apache está en el grupo 'adm' y, por lo tanto, todavía tiene acceso al directorio de inicio.</p>
+</div>
+</div>
+</div>
+<h2><span id="Disabled">Deshabilitado</span></h2>
+<div class="solvvy-solution">
+<p>Cuando esta configuración se deshabilita manualmente, los permisos del directorio de inicio del usuario se establecen en '751', y el grupo configurado en el grupo de cuentas del usuario se muestra como 'pgXXXXXXX' (la 'X' son variables para el número de identificación específico del grupo):</p>
+<div class="preboxcontainer">
+<pre class="prebox">drwxr-x--x 6 user2 pgXXXXXXX 4096 Nov 4 2013 user2</pre>
+</div>
+<p><br />Esto tiene los siguientes efectos:</p>
+<ul>
+<li>El usuario tiene acceso completo de lectura/escritura a su propio directorio de inicio, al igual que los scripts de usuario (como PHP) que se ejecutan como el usuario.</li>
+<li>Otros usuarios de la misma cuenta también tienen acceso completo de lectura/ejecución al directorio de inicio, excepto que no pueden cambiar el nombre, eliminar o crear archivos o directorios. Sin embargo, pueden realizar estas acciones en subdirectorios que tienen permiso de grupo + w (p. Ej., Usuarios configurados con permisos "771" (rwxrwx - x)).</li>
+<li>Otros usuarios de DreamHost tienen acceso limitado a tu directorio personal. No pueden leer la lista de nombres de archivos en el directorio de inicio y no pueden cambiar el nombre, eliminar o crear archivos o directorios. Sin embargo, pueden leer cualquier otro archivo o lista de directorios accesible al servidor web, asumiendo que conocen la ruta y el nombre del archivo o pueden adivinar. También pueden leer, y posiblemente escribir, cualquier archivo o directorio que tenga permisos laxos establecidos; por ejemplo, los usuarios configurados con "755" (rwxr-xr-x) o "777" (rwxrwxrwx).</li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215947927--C%C3%B3mo-habilito-Seguridad-Web-Adicional-para-mi-sitio-web-">¿Cómo habilitar la seguridad web adicional para mi sitio web?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215608187-Mantener-tu-panel-DreamHost-seguro">Mantener seguro tu panel DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214916918-Mantener-tu-sitio-web-seguro">Mantener tu sitio web seguro</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214917918-Transport-Layer-Security-TLS-">Seguridad de la capa de transporte (TLS)</a></li>
+</ul>
+</div>
