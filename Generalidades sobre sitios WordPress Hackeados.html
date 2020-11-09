@@ -1,0 +1,73 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Si sospechas que tu sitio web ha sido pirateado, lo mejor que puedes hacer es reinstalar cualquier aplicación de software (como WordPress o Joomla). Los pasos a continuación se aplican principalmente a la reinstalación de WordPress, ya que es el software más comúnmente utilizado (y por lo tanto el más comúnmente hackeado), pero los pasos generales son válidos para muchas instalaciones de CMS.</p>
+<div class="alert alert-tip">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-tip-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si no te sientes cómodo arreglando tu sitio de WordPress por tu cuenta, puedes solicitar una <a href="https://help.dreamhost.com/hc/es/articles/360001395451--TS-para-el-servicio-de-reparaci%C3%B3n-de-sitios-hackeados-de-DreamHost">Reparación de Sitio Hackeado</a> (Servicio de eliminación de malware profesional de DreamHost). Por una tarifa única de $199, los expertos de DreamHost accederán a tu cuenta y realizarán las reparaciones necesarias para que vuelvas a estar en línea rápidamente. Por favor <a href="https://panel.dreamhost.com/?tree=support.msg">Contacta Soporte</a> si te gustaría explorar esta opción.</p>
+</div>
+</div>
+</div>
+<h2><span id="A_note_on_Base64">Una nota sobre Base64</span></h2>
+<div class="solvvy-solution">
+<p>Base64 suele ser malo. Y, sin embargo, hay casos de uso legítimos.</p>
+<p>Ejecutar <strong><span class="code">grep -R "base64_" /home/user/example.com/</span></strong> solo debería darte estos resultados de archivos&nbsp; core de WordPress:</p>
+<div class="preboxcontainer">
+<pre class="prebox">./wp-admin/includes/class-wp-importer.php:	$headers['Authorization'] = 'Basic ' . base64_encode( "$username:$password" );
+./wp-includes/class-smtp.php:        		fputs($this-&gt;smtp_conn, base64_encode("\0".$username."\0".$password) . $this-&gt;CRLF);
+./wp-includes/class-smtp.php:        		fputs($this-&gt;smtp_conn, base64_encode($username) . $this-&gt;CRLF);
+./wp-includes/class-smtp.php:        		fputs($this-&gt;smtp_conn, base64_encode($password) . $this-&gt;CRLF);
+./wp-includes/class-smtp.php:        		fputs($this-&gt;smtp_conn,"AUTH NTLM " . base64_encode($msg1) . $this-&gt;CRLF);
+./wp-includes/class-smtp.php:        		$challenge = base64_decode($challenge);
+./wp-includes/class-smtp.php:        		fputs($this-&gt;smtp_conn, base64_encode($msg3) . $this-&gt;CRLF);
+./wp-includes/ID3/module.audio.ogg.php:		$flac-&gt;setStringMode(base64_decode($ThisFileInfo_ogg_comments_raw[$i]['value']));
+./wp-includes/ID3/module.audio.ogg.php:		$data = base64_decode($ThisFileInfo_ogg_comments_raw[$i]['value']);
+./wp-includes/class-IXR.php:                	$value = base64_decode($this-&gt;_currentTagContents);
+./wp-includes/class-IXR.php:        		return '&lt;base64&gt;'.base64_encode($this-&gt;data).'&lt;/base64&gt;';
+./wp-includes/class-feed.php:			$data = base64_decode( $data );
+./wp-includes/class-phpmailer.php:        	$encoded = chunk_split(base64_encode($str), 76, $this-&gt;LE);
+./wp-includes/class-phpmailer.php:        	$encoded = base64_encode($str);
+./wp-includes/class-phpmailer.php:        	$chunk = base64_encode($chunk);
+./wp-includes/class-phpmailer.php:      	return base64_encode($signature);
+./wp-includes/class-phpmailer.php:    		$DKIMb64  = base64_encode(pack("H*", sha1($body)))&nbsp;; // Base64 of packed binary SHA-1 hash of body
+./wp-includes/SimplePie/Sanitize.php:		$data = base64_decode($data);
+./wp-includes/SimplePie/File.php:		$out .= "Authorization: Basic " . base64_encode("$url_parts[user]:$url_parts[pass]") . "\r\n";
+./wp-includes/class-http.php:			return 'Proxy-Authorization: Basic ' . base64_encode( $this-&gt;authentication() );
+./wp-includes/class-wp-atom-server.php:		explode(':', base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
+./wp-includes/class-wp-atom-server.php:		explode(':', base64_decode(substr($_SERVER['REDIRECT_REMOTE_USER'], 6)));
+./wp-includes/class-snoopy.php:			$headers .= "Authorization: Basic ".base64_encode($this-&gt;user.":".$this-&gt;pass)."\r\n";
+./wp-includes/class-snoopy.php:			$headers .= 'Proxy-Authorization: ' . 'Basic ' . base64_encode($this-&gt;proxy_user . ':' . $this-&gt;proxy_pass)."\r\n";
+./wp-includes/class-snoopy.php:			$headers[] = "Authorization: BASIC ".base64_encode($this-&gt;user.":".$this-&gt;pass);
+</pre>
+</div>
+<p>Dicho esto, lo verás en plugins y (lamentablemente) temas. ¿Son estos seguros? Es difícil de decir, ya que hay miles de plugins solo en la base de datos de WordPress.org. Lo mejor que puedes hacer es eliminar los plugins y volver a instalarlos. Lo mismo ocurre con los temas.</p>
+</div>
+<h2>División de los usuarios de tu sitio web</h2>
+<div class="solvvy-solution">
+<p>Dividir tus cuentas de usuario también es una buena idea para aislar tus sitios. Al asignar un dominio por usuario, se asegura de que si ese usuario es hackeado, solo ese sitio se verá comprometido. Además, asegúrate de que si ese sitio es hackeado, no pueda infectar al otro.</p>
+<p>DreamHost tiene una <a href="https://help.dreamhost.com/hc/es/articles/215562847-Pol%C3%ADtica-de-un-usuario-por-dominio">Política de Un Usuario Por Dominio</a> lo que significa que cada dominio solo puede tener un usuario asignado. Consulta el artículo para obtener más detalles sobre cómo crear un usuario diferente en su dominio.</p>
+</div>
+<h2><span id="One_more_scan">Un escaneo más</span></h2>
+<div class="solvvy-solution">
+<p>Busca 'una carpeta arriba' un archivo <span class="text-object">index.php</span> y&nbsp;<span class="text-object">wp-config.php</span>. A veces, si instalas WordPress en un subdirectorio como <strong>example.com/wp/</strong>, lo ejecutarás fuera desde <strong>example.com</strong>. Cuando eso pasa, tendrás dos archivos en el directorio <strong>example.com</strong>, y de vez en cuando se pierden cuando haces una limpieza.</p>
+<p>Busca archivos con nombres divertidos: cualquier archivo con nombre <span class="text-object">ljkdhsf92328kjhsdfsdf</span> o (eso es mai-one, no correo) probablemente sea sospechoso. Bórralos.</p>
+<p>Si aún recibes anuncios emergentes no deseados de tu sitio, solicita un escaneo de seguridad enviando un ticket. También puedes hacerlo en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener">Contact Support</a>.</p>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<h3>Enlaces Internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress">Cómo iniciar sesión en tu sitio WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215513877--C%C3%B3mo-arreglar-contenido-espec%C3%ADfico-en-un-sitio-de-WordPress-hackeado">Cómo arreglar contenido específico en un sito WordPress hackeado</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214823608--C%C3%B3mo-reemplazo-mi-sitio-de-WordPress-hackeado-">¿Cómo reemplazo mi sitio WordPress hackeado?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214693248-Generalidades-sobre-WordPress-wp-cli">Generalidades WordPress wp-cli</a></li>
+<li><a href="/hc/en-us/sections/203242657-Troubleshooting">Hackeos de WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades SSH</a></li>
+</ul>
+<h3>Enlaces Externos</h3>
+<ul>
+<li><a href="http://codex.WordPress.org/FAQ_My_site_was_hacked">Preguntas Frecuentes: Mi sitio fue hackeado</a></li>
+<li><a href="http://codex.WordPress.org/Hardening_WordPress">Fortaleciendo WordPress</a></li>
+<li><a href="http://wp-cli.org/">Wp-cli</a></li>
+</ul>
+</div>
