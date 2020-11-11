@@ -40,28 +40,30 @@
 <li>Si te preocupa afectar tu sitio existente, puedes agregar un subdominio temporal que termine con&nbsp;<strong>.dream.press</strong>&nbsp;(para los sitios de DreamPress), o&nbsp;<strong>.dreamhosters.com</strong> para todos los demás planes de alojamiento. Ten en cuenta que crear un sitio de prueba temporal creará trabajo adicional al final del proceso, ya que deberás <a href="/hc/es/articles/214580498--Como-cambio-la-URL-de-mi-sitio-WordPress-" target="_self">actualizar tu base de datos a la URL correcta</a>.</li>
 </ul>
 </li>
-<li>Localiza tu clave de migración en el panel de DreamHost:
+<li>Asegúrate de que el usuario asignado a tu dominio es un <a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access" target="_self" rel="undefined">usuario Shell o SFTP</a>. Un usuario de FTP hará que la migración falle.</li>
+<li>Ubica tu clave de migración en el panel DreamHost:<br />
 <ul>
-<li>Planes DreamPress: Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=wordpress.dreampress#!" target="_blank" rel="noopener">Managed WordPress</a>. Haz clic en el botón <strong>Manage</strong> hacia la derecha de tu dominio, haz clic en la pestaña <span class="text-object">Migration</span> en la siguiente página, y luego haz clic en el botón azul <strong>Generate Migration Key</strong>.</li>
-<li>Todos los demás planes: navega a la página de <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!" target="_blank" rel="noopener">Websites</a> y sigue estos pasos:
+<li>Planes DreamPress: Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=wordpress.dreampress#!" target="_blank" rel="noopener">Managed WordPress</a>. Haz clic en el&nbsp;botón&nbsp; <strong>Manage</strong> a la derecha de tu dominio, haz clic en la pestaña Migration en la siguiente página y luego haz clic en el botón&nbsp;<strong>Generate Migration Key</strong>.</li>
+<li>Todos los otros planes: Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!" target="_blank" rel="noopener">Websites</a> y sigue estos pasos:
 <ol>
-<li>Haz clic en uno de los siguientes:</li>
+<li>Haz clic en una de las siguientes:</li>
 <ul>
-<li>Desde la vista de Grid, pasa el mouse sobre la imagen de vista previa de tu dominio y haga clic en el botón <strong>Administrar</strong>.</li>
-<li>Desde la vista de List, haz clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
+<li>Desde la vista de Cuadrícula, pon tu cursor sobre la imagen de vista previa de tu dominio y haz clic en el botón <strong>Manage</strong>.</li>
+<li>Desde la vista de Lista, haz clic en el botón <strong>Manage</strong> a la derecha de tu dominio.</li>
 </ul>
-<li>Cuando se abra la página <span class="panel-page">Manage Websites</span>, haz clic en la pestaña <span class="text-object">Sitio Web</span>.</li>
-<li>Encontrar la <span class="text-section">Migrating this site to DreamHost?</span> sección (en el cuadro de WordPress).</li>
-<li>Haz clic en el botón <strong>Obtener la Llave</strong>.</li>
-</ol>
-</li>
-</ul>
+<li>Cuando la página <span class="panel-page">Manage Websites</span> se abre, haz clic en la pestaña <span class="text-object">Website</span>.</li>
+<li>Encuentra la sección <span class="text-section">Migrating this site to DreamHost?</span> (en la caja de WordPress).</li>
+<li>Haz clic en el botón <strong>Get Key</strong>.<br />
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
 <p>Si la clave de migración de tu sitio no aparece en tu panel, comunícate con el&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener">Contact Support</a>.</p>
 </div>
 </div>
+</li>
+</ol>
+</li>
+</ul>
 </li>
 </ol>
 <h3>Paso 2 — Instalar y activar el plugin</h3>
@@ -81,29 +83,36 @@
 </li>
 <li>Haz clic en el botón <strong>Activate</strong>.
 <dl>
-<dd><em>La página de configuración 'Migrate Your Sites' se abre:</em></dd>
+<dd><em>La página 'Migrate Your Sites to DreamHost' se abre:</em></dd>
 </dl>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2020-04_wp-migration-plugin-token.png" alt="2020-04_wp-migration-plugin-token.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2020-04_wp-migration-plugin-token-UPDATE.png" alt="2020-04_wp-migration-plugin-token.png" height="" /></dd>
 </dl>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
-<p>Si no ves la opción Token de Migración que se muestra arriba, se está utilizando una versión desactualizada del plugin. Actualiza tu complemento antes de continuar o sigue <a href="#h_a00a7ca8-0635-4d8e-8376-f989b2fadb97" target="_self">estos pasos</a> para migrar usando tus credenciales SFTP.</p>
-</div>
-</div>
 </li>
-<li>Ingresa lo siguiente:
+<li>Ingresa lo siguiente:<br />
 <ul>
-<li><strong>Email</strong> — Una dirección de correo electrónico donde te gustaría recibir notificaciones sobre el estado de la migración y la finalización.</li>
-<li><strong>Migration Token&nbsp;</strong>(Token de Migración) — La clave de migración obtenida de tu panel de DreamHost.</li>
-<li>Revisa y acepta (haciendo clic en la casilla de verificación) los Terms of Service (términos del servicio) y la Privacy Policy (política de privacidad) si estás de acuerdo y deseas continuar.</li>
+<li><strong>Email</strong> — Una dirección de correo electrónico donde le gustaría recibir notificaciones sobre el estado y finalización de la migración.</li>
+<li><strong>Migration Token</strong> — El Migration Key obtenida de tu panel DreamHost.</li>
+<li>Revisa y acepta (haciendo clic en la casilla de verificación) los Términos de servicio y la Política de privacidad si estás de acuerdo y deseas continuar.</li>
 </ul>
 </li>
-<li>Haz clic en el botón <strong>Migrate</strong> cuando termines.</li>
-<li>Marca la URL como favorita en tu navegador para verificar el progreso de tu migración y cierra la pestaña o ventana del navegador mientras se está ejecutando.</li>
+<li>Haz clic en el botón <strong>Migrate</strong> cuando hayas finalizado.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/wp-migration-plugin-migration-key.png" alt="2020-04_wp-migration-plugin-token.png" height="" /></dd>
+</dl>
+</li>
+<li><strong>Migration Key</strong>: Ingresa tu token de migración.</li>
+<li>Las cuatro opciones son opcionales y solo deben completarse si es necesario.<br />
+<ul>
+<li><strong>Source Website Password Protected</strong>: ¿Tu sitio web de origen está protegido con contraseña actualmente para simplemente ver la página de inicio? - Generalmente, esto no está protegido por contraseña</li>
+<li><strong>Destination Website Password Protected</strong>: ¿Tu sitio web de origen está protegido con contraseña actualmente para simplemente ver la página de inicio? - Generalmente, esto no está protegido por contraseña</li>
+<li><strong>Advanced Options</strong>: Por lo general, no es necesario completarlo.</li>
+<li><strong>Add folders</strong>: Esta opción te permite seleccionar archivos no específicos del core de WordPress, en caso de que tengas una configuración personalizada.</li>
+</ul>
+</li>
+<li>Marca la URL para verificar el progreso de tu migración y cierra la pestaña o ventana del navegador mientras se está ejecutando.</li>
 </ol>
-<p>La mayoría de las migraciones tardan menos de una hora en completarse, pero si tu sitio es más grande que un par de GB de datos, podría llevar más de una hora. Una vez que se complete, recibirás un correo electrónico de notificación a la dirección que ingresaste durante el paso anterior.</p>
+<p>La mayoría de las migraciones tardan menos de una hora en completarse, pero si tu sitio tiene más de un par de GB de datos, podría tardar más de una hora. Una vez que se complete, recibirás un correo electrónico de notificación a la dirección que ingresaste durante el paso anterior.</p>
 </div>
 <h2>Verifica tu sitio migrado y publícalo en DreamHost</h2>
 <div class="solvvy-solution">
@@ -123,48 +132,66 @@
 <li><strong>Todos los demás planes de alojamiento</strong>: cuando estés listo para publicar tu sitio en DreamHost usando tu nombre de dominio real, <a href="/hc/es/articles/214693138--Cómo-mover-WordPress-a-un-dominio-diferente-en-DreamHost-" target="_self">sigue estas instrucciones</a> para cambiar el nombre de tu dominio.</li>
 </ul>
 </div>
-<h2>Si estás utilizando una versión anterior del plugin de migración automatizada de DreamHost, o si deseas migrar utilizando las credenciales SFTP</h2>
+<h2 class="subheader">Migrando con credenciales FTP, SFTP, o SSH</h2>
 <div class="solvvy-solution">
-<p><span style="font-weight: 400;">La forma más fácil de migrar es asegurarte de que estás utilizando la última versión del complemento en el sitio de WordPress en tu host anterior, lo que puede requerir que actualices el complemento en tu panel de WordPress. Las versiones anteriores del complemento no son compatibles con la clave de migración. Sin embargo, es posible migrar tu sitio de WordPress con una versión anterior del plugin, utilizando las credenciales SFTP en su lugar</span>.</p>
-<p><span style="font-weight: 400;">Los siguientes pasos describen cómo hacerlo</span>.</p>
-<h3 id="h_a00a7ca8-0635-4d8e-8376-f989b2fadb97"><span id="sftp">Paso 1 — Encuentra tus DreamHost credenciales de SFTP</span></h3>
-<p>Busca la siguiente información sobre tu cuenta de DreamHost:</p>
+<p>Los siguientes pasos describen cómo migrar tu sitio usando credenciales FTP, SFTP o SSH.</p>
+<h3>Paso 1 — Ubica tus credenciales de DreamHost</h3>
+<p>Busca la siguiente información sobre tu cuenta DreamHost:</p>
 <ul>
-<li><strong>Usuario FTP/SFTP</strong>: Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage" target="_blank" rel="noopener">Manage Domains</a>. Toma nota de tu usuario a la derecha de tu dominio (se muestra como 'User: name').</li>
-<li><strong>Dirección de Host/Servidor:</strong> Haz clic en el usuario para abrir la página 'Editing User'. El nombre de tu servidor se muestra entre paréntesis junto a tu nombre de usuario en la parte superior (por ejemplo, 'on servername'). Usa el siguiente formato de dirección del servidor según el tipo de plan de alojamiento que tengas:&nbsp;</li>
+<li><strong>FTP/SFTP/SSH User</strong>: Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage" target="_blank" rel="noopener">Manage Domains</a>. Anota tu usuario a la derecha de tu dominio (se muestra como 'User: name').</li>
+<li><strong>Host/Server Address</strong>: Haz clic en el nombre de usuario para abrir la página 'Editing User'. El nombre de su servidor se muestra entre paréntesis junto a su nombre de usuario en la parte superior (por ejemplo 'on servername'). Utilice el siguiente formato de dirección de servidor según el tipo de plan de alojamiento que tenga:</li>
 <ul>
-<li><strong>Shared Hosting plan</strong> — <span class="text-object">servername.dreamhost.com</span></li>
-<li><strong>DreamPress o VPS plan</strong> — <span class="text-object">servername.dreamhostps.com</span></li>
-<li><strong>Dedicated (Servidor Dedicado) plan</strong> — <span class="text-object">servername.dreamservers.com</span></li>
+<li><strong>Shared Hosting plan</strong>&nbsp;—&nbsp;<span class="text-object">servername.dreamhost.com</span></li>
+<li><strong>DreamPress or VPS plan</strong>&nbsp;—&nbsp;<span class="text-object">servername.dreamhostps.com</span></li>
+<li><strong>Dedicated Server plan</strong>&nbsp;—&nbsp;<span class="text-object">servername.dreamservers.com</span></li>
 </ul>
-<li><strong>FTP o SFTP</strong>: Asegúrate de que tu tipo de usuario sea&nbsp;<a href="/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">SFTP</a> or <a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>. Si es FTP, cambia el tipo de usuario a SFTP o SSH (que también da acceso SFTP).</li>
-<li><strong>Contraseña FTP/SFTP</strong>: Configura una contraseña para este usuario y haz clic en <strong>Save Changes</strong>. Mantén esta información lista para ingresar en el siguiente paso.</li>
+<li><strong>FTP, SFTP, o SSH</strong>: Anote el tipo de usuario asignado a tu dominio.</li>
+<li><strong>FTP/SFTP/SSH Password</strong>: Establezce una contraseña para este usuario y haz clic en <strong>Save Changes</strong>. Manten esta información lista para ingresar en el siguiente paso.</li>
 </ul>
-<h3>Paso 2 — Ingresa tus credenciales SFTP de DreamHost en tu host anterior</h3>
+<h3>Paso 2 — Ingresa tus credenciales de DreamHost en tu compañía de alojamiento antigua</h3>
 <ol>
-<li>Visite la página del DreamHost Automated Migration (complemento de migración automatizada de DreamHost) en el sitio de WordPress de tu antiguo host.
+<li>Visita la página de DreamHost Automated Migration plugin en tu sitio WordPress en la compañía de alojamiento antigua.<br />
 <dl>
-<dd><em>La página 'Migrate Your Sites to DreamHost' se abre:</em></dd>
+<dd>La página 'Migrate Your Sites to DreamHost' se abre:</dd>
 </dl>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2020-04_wp-migration-plugin-ftp.png" alt="2020-04_wp-migration-plugin-ftp.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2020-04_wp-migration-plugin-token-UPDATE.png" alt="2020-04_wp-migration-plugin-ftp.png" height="" /></dd>
 </dl>
 </li>
-<li>Ingresa lo siguiente:
+<li>Ingresa una dirección de correo electrónico donde te gustaría recibir notificaciones sobre el estado y finalización de la migración.</li>
+<li>Marca la casilla para aceptar los términos del servicio.</li>
+<li>Haz clic en el botón <strong>Migrate</strong> cuando hayas finalizado.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/wp-migration-plugin-manual-details.png" alt="2020-04_wp-migration-plugin.png" width="586" height="" /></dd>
+</dl>
+</li>
+<li>En la derecha arriba haz clic en el enlace llamado <span class="text-link">Manually Input Host Details</span>.<br />
+<dl>
+<dd><em>La siguiente página aparece</em></dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/wp-migration-plugin-credentials.png" alt="2020-04_wp-migration-plugin.png" width="497" height="" /></dd>
+</dl>
+</li>
+<li>Introduzce lo siguiente:<br />
 <ul>
-<li><strong>Email</strong> — Una dirección de correo electrónico donde te gustaría recibir notificaciones sobre el estado de la migración y la finalización.</li>
-<li><strong>Destination Site URL</strong> — La dirección web (URL del sitio de destino) de tu sitio. Por lo general, esta es la misma dirección de tu sitio en tu host actual. Si estás utilizando un subdominio temporal de DreamHost (<span class="text-object">dream.press</span> or <span class="text-object">dreamhosters.com</span>) o si vas a cambiar el dominio para tu sitio, usa esa dirección en su lugar. Asegúrate de ingresar 'https: //' al comienzo de la dirección web si planeas usar un certificado SSL.</li>
-<li><strong>Type</strong> — Seleciona sFTP. <em>Es lo más recomendable.</em></li>
-<li><strong>Host/Server Address</strong> — La dirección del servidor. Ver <a href="#h_a00a7ca8-0635-4d8e-8376-f989b2fadb97" target="_self">arriba</a> para más detalles.</li>
-<li><strong>FTP/SFTP User</strong> — El nombre de usuario. Ver <a href="#h_a00a7ca8-0635-4d8e-8376-f989b2fadb97" target="_self">arriba</a> para más información.</li>
-<li><strong>FTP/SFTP Password</strong> — La contraseña. Ver <a href="#h_a00a7ca8-0635-4d8e-8376-f989b2fadb97" target="_self">arriba</a> para más detalles.</li>
-<li>Revisa y acepta (haciendo clic en la casilla de verificación) los Terms of Service (términos del servicio) y la Privacy Policy (política de privacidad) si estás de acuerdo y deseas continuar.</li>
+<li><strong>Destination Site URL</strong> — La dirección web de tu sitio. Por lo general, esta es la misma dirección que tu sitio en tu compañía de alojamiento actual. Si estás utilizando un subdominio temporal de DreamHost (dream.press o dreamhosters.com) o si vas a cambiar el dominio de tu sitio, utiliza esa dirección en su lugar. Asegúrate de ingresar <span class="text-object">https://</span> al comienzo de la dirección web si planeas usar un certificado SSL.</li>
+<li><strong>Destination Server FTP IP</strong> — La dirección del servidor. Ve arriba para más detalles.</li>
+<li><strong>FTP Type</strong> — Selecciona FTP para usuarios de FTP. Selecciona SFTP para usuarios de SFTP/SSH.</li>
+<li><strong>FTP Username</strong> — El nombre de usuario. Ve arriba para más detalles.</li>
+<li><strong>FTP Password</strong> — La contraseña. Ve arriba para más detalles.</li>
 </ul>
 </li>
-<li>Haz clic en el botón <strong>Migrate</strong> cuando termines.</li>
-<li>Marca la URL como favorita en tu navegador para verificar el progreso de tu migración y cierra la pestaña o ventana del navegador mientras se está ejecutando.</li>
+<li>Las cuatro opciones son opcionales y solo deben completarse si es necesario.<br />
+<ul>
+<li><strong>Source Website Password Protected</strong>: ¿Tu sitio web de origen está protegido con contraseña actualmente para simplemente ver la página de inicio? - Generalmente, esto no está protegido por contraseña</li>
+<li><strong>Destination Website Password Protected</strong>: ¿Tu sitio web de destino está protegido con contraseña actualmente para ver simplemente la página de inicio? - Generalmente, esto no está protegido por contraseña</li>
+<li><strong>Advanced Options</strong>: Por lo general, no es necesario completarlo.</li>
+<li><strong>Add folders</strong>:&nbsp; Esta opción te permite seleccionar archivos no específicos de core de WordPress, en caso de que tengas una configuración personalizada.</li>
+</ul>
+</li>
+<li>Marca la URL para verificar el progreso de tu migración y cierra la pestaña o ventana del navegador mientras se está ejecutando.</li>
 </ol>
-<p>También puedes migrar utilizando las credenciales SFTP en una versión actualizada del complemento DreamHost Automated Migration. Para hacerlo, haz clic en el enlace <span class="text-link">Manually Input Host Details</span> (Introducir manualmente detalles del host), justo debajo del campo Migration Token (token de migración).</p>
 </div>
 <h2 id="h_ba00405b-9fee-4fa0-b59e-bb7055121a7a"><span id="preguntas_frecuentes">Preguntas Frecuentes</span></h2>
 <div class="solvvy-solution">
