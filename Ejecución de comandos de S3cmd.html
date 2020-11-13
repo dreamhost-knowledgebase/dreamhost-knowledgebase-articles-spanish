@@ -1,0 +1,118 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo enumera varios comandos que puedes usar para administrar tus datos de DreamObjects. Este artículo asume que ya ha instalado S3cmd:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215916627-Installing-S3cmd" target="_self" rel="undefined">Instalar S3cmd</a></li>
+</ul>
+</div>
+<h2>Si estás usando una versión personalizada de Python</h2>
+<div class="solvvy-solution">
+<p>Los siguientes comandos funcionan con la versión de servidor de Python. Sin embargo, es posible que hayas instalado una versión personalizada de Python utilizando uno de los siguientes artículos:</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000218612-Instalar-una-versi%C3%B3n-de-Python-2" target="_self" rel="undefined">Instalación de una versión personalizada de Python 2</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000702772-Instalar-una-versi%C3%B3n-personalizada-de-Python-3" target="_self" rel="undefined">Instalación de una versión personalizada de Python 3</a></li>
+</ul>
+<p>Si es así, es posible que veas el siguiente error al ejecutar los siguientes comandos.</p>
+<div class="preboxcontainer">
+<pre class="prebox">ImportError trying to import dateutil.parser.
+Please install the python dateutil module:
+$ sudo apt-get install python-dateutil
+  or
+$ sudo yum install python-dateutil
+  or
+$ pip install python-dateutil
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</pre>
+</div>
+<p>Si es así, debes crear un entorno virtual para instalar el paquete python-dateutil. A continuación, podrás utilizar los siguientes comandos sin errores.</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/es/articles/215489338-Instalar-y-usar-virtualenv-con-Python-2" target="_self" rel="undefined">Instalación y uso de virtualenv con Python 2</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3" target="_self" rel="undefined">Instalación y uso de virtualenv con Python 3</a></li>
+</ul>
+</div>
+<h2>Crear</h2>
+<div class="solvvy-solution">
+<h4><strong>Hacer un bucket</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd mb s3://my-new-bucket</span>
+Bucket 's3://my-new-bucket/' created</pre>
+</div>
+</div>
+<h2>Enlistar</h2>
+<div class="solvvy-solution">
+<h4><strong>Enlista todos los buckets</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd ls</span>
+2019-02-04 16:28  s3://my-bucket</pre>
+</div>
+<h4><strong>Listado del contenido de un bucket</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd ls s3://my-bucket</span>
+                    DIR s3://my-bucket/backups/<br />2019-02-04 18:09 11 s3://my-bucket/file1.txt</pre>
+</div>
+<h4><strong>Listado el tamaño de un bucket</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd du -H s3://my-bucket</span>
+40G      s3://my-bucket</pre>
+</div>
+</div>
+<h2>Importar</h2>
+<div class="solvvy-solution">
+<h4><strong>Subir un archivo a un bucket</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd put testfile.txt s3://my-bucket</span>
+file.txt -&gt; s3://my-bucket/file.txt  [1 of 1]
+127 of 127   100% in    0s  1522.87 B/s  done</pre>
+</div>
+</div>
+<h2>Descargar</h2>
+<div class="solvvy-solution">
+<h4><strong>Descargar un archivo de un bucket</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd get s3://my-bucket/file.txt</span>
+s3://my-bucket/file.txt -&gt; ./file.txt  [1 of 1]
+127 of 127   100% in    0s     3.46 kB/s  done</pre>
+</div>
+</div>
+<h2>Eliminar</h2>
+<div class="solvvy-solution">
+<h4><strong>Eliminar un archivo en un bucket</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd del s3://my-bucket/file.txt</span>
+File s3://my-bucket/file.txt deleted</pre>
+</div>
+<p><strong>Elimina todos los objetos en un bucket</strong></p>
+<p>Esto eliminará todos los objetos y vaciará el bucket.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd del --recursive s3://my-bucket --force</span></pre>
+</div>
+</div>
+<h2><span id="permisos">Permisos</span></h2>
+<div class="solvvy-solution">
+<h4><strong>Hacer público de forma recursiva todos los objetos de un bucket</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd setacl s3://my-bucket --acl-public --recursive</span></pre>
+</div>
+<h4><strong>Hacer recursivamente cada objeto en un bucket privado</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd setacl s3://my-bucket --acl-private --recursive</span></pre>
+</div>
+<h3>Lista de directorios</h3>
+<p>La lista de directorios controla qué datos se pueden ver al visitar el nivel superior de tu depósito. Si está configurado como privado, no se muestran datos. Si es público, el contenido del depósito se enumera como se muestra a continuación.</p>
+<h4><strong>Deshabilitar la lista de directorios en un bucket</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd setacl s3://my-bucket --acl-private</span></pre>
+</div>
+<p>Si visitas tu depósito en un navegador, solo se mostrará la siguiente información.</p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/dho-directory-listing-01.png" /></p>
+<h4><strong>Habilitar el listado de directorios en un bucket</strong></h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd setacl s3://my-bucket --acl-public</span></pre>
+</div>
+<p>Si visitas tu depósito en un navegador, el contenido del bucket.</p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/dho-directory-listing-02.png" /></p>
+<div class="footer">&nbsp;</div>
+<!--DreamObjects Button--></div>
+<div class="dream-sign-up">
+<h2>Start Storing Your Data Today!</h2>
+<div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/storage/">Sign Up for DreamObjects</a></div>
+</div>
