@@ -66,7 +66,7 @@
 <div class="solvvy-solution">
 <p>A veces, ejecutar una optimización a través de phpMyAdmin tiende a fallar y la página finalmente se agota. Esto posiblemente se deba a que la base de datos es demasiado grande para que phpMyAdmin pueda manejarla. La alternativa es optimizar a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.&nbsp;Como usuario de shell, puedes acceder vía SSH en tu dominio y ejecutar el siguiente comando, que es la misma función que se ejecuta en phpMyAdmin:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql -u <em>username</em> -p<em>password</em> -h <em>hostname</em> <em>databasename</em> -e "show tables" | grep -v Tables_in | grep -v "+" | gawk '{print "optimize table " $1 ";"}' | mysql -u <em>username</em> -p<em>password</em> -h <em>hostname</em> <em>databasename</em> </span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql -u <span class="code-highlight">username</span> -p<span class="code-highlight">password</span> -h <span class="code-highlight">hostname</span> <span class="code-highlight">databasename</span> -e "show tables" | grep -v Tables_in | grep -v "+" | gawk '{print "optimize table " $1 ";"}' | mysql -u <span class="code-highlight">username</span> -p<span class="code-highlight">password</span> -h <span class="code-highlight">hostname</span> <span class="code-highlight">databasename</span> </span></pre>
 </div>
 <p>Reemplaza las variables en el comando arriba con la información correspondiente de tu base de datos:</p>
 <ul>
@@ -83,14 +83,14 @@
 <p>También puedes hacer una limpieza general a través de un script de shell y/o un trabajo cron usando&nbsp;<a href="https://dev.mysql.com/doc/refman/5.7/en/mysqlcheck.html">mysqlcheck</a>&nbsp;que verifica, repara y optimiza las tablas. Es una buena idea ejecutar un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-">cron job</a>&nbsp;mensual para hacer esto por ti. El trabajo cron podría verse así:</p>
 <div class="preboxcontainer">
 <pre class="prebox">#!/bin/sh
-/usr/bin/mysqlcheck -o -v -u USER -p PASSWORD -h MYSQL.EXAMPLE.COM DATABASENAME;
+/usr/bin/mysqlcheck -o -v -u <span class="code-highlight">USER</span> -p <span class="code-highlight">PASSWORD</span> -h <span class="code-highlight">MYSQL.EXAMPLE.COM DATABASENAME</span>;
 </pre>
 </div>
 <p>Reemplaza los elementos en mayúsculas con las&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">credenciales de tu base de datos</a>.</p>
 <h3>Reparar via SSH</h3>
 <p>También puedes ejecutar un comando para reparar una tabla en lugar de optimizarla:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql -u <em>username</em> -p<em>password</em> -h <em>hostname</em> <em>databasename</em> -e "show tables" | grep -v Tables_in | grep -v "+" | gawk '{print "repair table " $1 ";"}' | mysql -u <em>username</em> -p<em>password</em> -h <em>hostname</em> <em>databasename</em> </span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql -u <span class="code-highlight">username</span> -p<span class="code-highlight">password</span> -h <span class="code-highlight">hostname</span> <span class="code-highlight">databasename</span> -e "show tables" | grep -v Tables_in | grep -v "+" | gawk '{print "repair table " $1 ";"}' | mysql -u <span class="code-highlight">username</span> -p<span class="code-highlight">password</span> -h <span class="code-highlight">hostname</span> <span class="code-highlight">databasename</span> </span></pre>
 </div>
 </div>
 <h2>Ver también</h2>

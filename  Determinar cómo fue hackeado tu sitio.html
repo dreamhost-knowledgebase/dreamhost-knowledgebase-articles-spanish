@@ -19,12 +19,12 @@
 <p>Dado que los ataques recientes de FTP/SSH son más fáciles de detectar, comienza por eliminar esta opción. Inicia sesión en tu usuario a través de SSH y ejecuta los siguientes comandos.</p>
 <p>Te muestra tu historial de inicio de sesión del mes actual:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -i | grep youruser</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -i | grep <span class="code-highlight">youruser</span></span>
 </pre>
 </div>
 <p>Muestra tu historial de inicio de sesión del mes anterior:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -if /var/log/wtmp.1 | grep youruser</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -if /var/log/wtmp.1 | grep <span class="code-highlight">youruser</span></span>
 </pre>
 </div>
 <div class="alert alert-note">
@@ -44,7 +44,7 @@ youruser pts/2        66.33.XXX.XXX    Tue May 20 13:06 - 13:22  (00:15)
 </div>
 <p>Puedes simplificar estos datos para imprimir solo direcciones IP y recuentos agregando pipes a unos pocos comandos simples:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -if /var/log/wtmp.1 | grep youruser | awk '{print $3}' | sort | uniq -c</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -if /var/log/wtmp.1 | grep <span class="code-highlight">youruser</span> | awk '{print $3}' | sort | uniq -c</span>
 </pre>
 </div>
 <p>La salida se ve más como esto:</p>
@@ -75,7 +75,7 @@ youruser pts/2        66.33.XXX.XXX    Tue May 20 13:06 - 13:22  (00:15)
 <h3><span id="Checking_all_of_your_logs">Revisar todos tus registros</span></h3>
 <p>Si no se puede determinar la hora original, los archivos de registro se pueden escanear en masa, aunque es más difícil descubrir la evidencia de la intrusión. Puedes ejecutar el siguiente comando en tu servidor web después de iniciar sesión a través de SSH:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">gunzip -c ~/logs/example.com/http/access.log.* | gawk '{a[$7]++}END{for (i in a) {print a[i]"\t"i}}' | sort -n | more</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">gunzip -c ~/logs/<span class="code-highlight">example.com</span>/http/access.log.* | gawk '{a[$7]++}END{for (i in a) {print a[i]"\t"i}}' | sort -n | more</span>
 </pre>
 </div>
 <p>Esto devuelve un informe de todas las solicitudes a su sitio de todos los registros disponibles ordenados en orden ascendente. Dado que la mayoría de las solicitudes deberían (con suerte) ser legítimas, es más fácil comenzar mirando en la parte superior del informe — las solicitudes menos frecuentes — en busca de evidencia del hackeo:</p>

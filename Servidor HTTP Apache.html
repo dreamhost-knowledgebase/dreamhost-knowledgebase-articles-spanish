@@ -13,13 +13,13 @@
 <p>En el pasado, uno podía determinar información sobre el servidor web desde los encabezados de respuesta HTTP a través del encabezado "Server". Sin embargo, por razones de seguridad, se decidió establecer ServerTokens en "Prod" y, como resultado, el valor de este encabezado solo devuelve "Apache". No se puede modificar a través de archivos de configuración por directorio (.htaccess).</p>
 <p>Por ejemplo, en el pasado, ejecutar <span class="code">curl -Is</span> en tu sitio le daba la siguiente respuesta:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -Is http://websitehelp.support | grep Server</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -Is http://<span class="code-highlight">example.com</span> | grep Server</span>
 <span class="cmdoutput">Server: Apache/1.3.37 (Unix) mod_throttle/3.1.2 DAV/1.0.3 mod_fastcgi/2.4.2 mod_gzip/1.3.26.1a PHP/4.4.7  mod_ssl/2.8.22 OpenSSL/0.9.7e</span>
 </pre>
 </div>
 <p>Si ejecutas este mismo comando ahora, la única respuesta es 'Apache':</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -Is http://websitehelp.support |grep Server</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -Is http://<span class="code-highlight">example.com</span> |grep Server</span>
 <span class="cmdoutput">Server: Apache</span>
 </pre>
 </div>

@@ -58,8 +58,8 @@
 <li>Pon el siguiente texto en el archivo:
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine on
-RewriteCond %{REQUEST_URI} !site/
-RewriteRule ^(.*)$ /site/$1
+RewriteCond %{REQUEST_URI} !<span class="code-highlight">site</span>/
+RewriteRule ^(.*)$ /<span class="code-highlight">site</span>/$1
 </pre>
 </div>
 <ul>
@@ -70,7 +70,7 @@ RewriteRule ^(.*)$ /site/$1
 </li>
 <li>Si tienes directorios que no deseas que estén bajo el control de WebDAV, agrega líneas RewriteCond adicionales como la de "site". Por ejemplo, si no deseas que se reescriban los "scripts" del directorio, agrega lo siguiente:
 <div class="preboxcontainer">
-<pre class="prebox">RewriteCond&nbsp;%{REQUEST_URI}&nbsp;!scripts/
+<pre class="prebox">RewriteCond&nbsp;%{REQUEST_URI}&nbsp;!<span class="code-highlight">scripts</span>/
 </pre>
 </div>
 </li>
@@ -82,18 +82,18 @@ RewriteRule ^(.*)$ /site/$1
 <h3><span id="WebDAV_and_mod_rewrite">WebDAV y mod_rewrite</span></h3>
 <p>Cierto software como WordPress y Joomla colocan las directivas <span class="code">Rewrite</span> en el directorio base de tu sitio, incluso cuando se instalan en un subdirectorio. Esto posiblemente podría interferir con el acceso a WebDAV. Si es así, modifica el .htaccess base de la siguiente manera. Antes de cada RewriteRule agrega:</p>
 <div class="preboxcontainer">
-<pre class="prebox">RewriteCond&nbsp;%{REQUEST_URI}&nbsp;!/<em>webdavdir</em>
+<pre class="prebox">RewriteCond&nbsp;%{REQUEST_URI}&nbsp;!/<span class="code-highlight">webdavdir</span>
 </pre>
 </div>
 <dl>
 <dd>Dónde <em>webdavdir</em> es el directorio al que desea acceder a WebDAV. Para varios directorios, colóquelos entre paréntesis separados por tuberías, así:</dd>
 </dl>
 <div class="preboxcontainer">
-<pre class="prebox">RewriteCond&nbsp;%{REQUEST_URI}&nbsp;!/(<em>webdavdir1</em>|<em>webdavdir2</em>|<em>webdavdir3</em>)
+<pre class="prebox">RewriteCond&nbsp;%{REQUEST_URI}&nbsp;!/(<span class="code-highlight">webdavdir1</span>|<span class="code-highlight">webdavdir2</span>|<span class="code-highlight">webdavdir3</span>)
 </pre>
 </div>
 </div>
-<h2><span id="Editing_files_normally_pre-processed_by_the_web_server">Editar archivos normalmente procesados ​​previamente por el servidor web</span></h2>
+<h2><span id="Editing_files_normally_pre-processed_by_the_web_server">Editar archivos normalmente procesados previamente por el servidor web</span></h2>
 <div class="solvvy-solution">
 <p>Un problema con WebDAV es que no te permite editar el origen de los archivos procesados ​​por el servidor, incluidos PHP, shtml, Perl, etc. Esto se debe a que utiliza el mismo comando para "OBTENER" el archivo que tu navegador web. El servidor web no tiene forma de no procesar el archivo PHP y te da la salida en lugar del código fuente.</p>
 <p>Agregar esta línea a tu archivo .htaccess deshabilita todo el procesamiento:</p>

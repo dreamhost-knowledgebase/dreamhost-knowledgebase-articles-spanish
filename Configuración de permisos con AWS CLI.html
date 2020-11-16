@@ -14,11 +14,11 @@
 <li><strong>--acl</strong>&nbsp;— Cambia esto a lectura <span class="code">private</span> o <span class="code">public-read</span></li>
 </ul>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api list-objects --bucket my-bucket | grep Key | cut -c 20- | rev | cut -c 3-|rev | awk '{cmd="aws --endpoint https://objects-us-east-1.dream.io s3api put-object-acl --acl public-read --bucket=my-bucket --key "$0; system(cmd)}' </span></pre>
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api list-objects --bucket <span class="code-highlight">my-bucket</span> | grep Key | cut -c 20- | rev | cut -c 3-|rev | awk '{cmd="aws --endpoint https://objects-us-east-1.dream.io s3api put-object-acl --acl public-read --bucket=<span class="code-highlight">my-bucket</span> --key "$0; system(cmd)}' </span></pre>
 </div>
 <p>El siguiente ejemplo es el mismo que el anterior, solo divide las líneas para que sea más fácil de leer:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io \ <br />                  s3api list-objects --bucket my-bucket | \<br />                  grep Key | cut -c 20- | rev | cut -c 3-|rev | \<br />                  awk '{cmd="aws --endpoint https://objects-us-east-1.dream.io \ <br />                  s3api put-object-acl --acl public-read \<br />                  --bucket=my-bucket --key "$0; system(cmd)}' </span></pre>
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io \ <br />                  s3api list-objects --bucket <span class="code-highlight">my-bucket</span> | \<br />                  grep Key | cut -c 20- | rev | cut -c 3-|rev | \<br />                  awk '{cmd="aws --endpoint https://objects-us-east-1.dream.io \ <br />                  s3api put-object-acl --acl public-read \<br />                  --bucket=<span class="code-highlight">my-bucket</span> --key "$0; system(cmd)}' </span></pre>
 </div>
 </div>
 <h2>Permisos de objeto único</h2>
@@ -26,7 +26,7 @@
 <h3>Ver los permisos de un objeto</h3>
 <p>Esto muestra los permisos de un objeto llamado test.txt en un depósito titulado my-bucket. Puedes ver que el usuario del depósito tiene control total, pero no se muestran otros permisos públicos. Esto indica que los permisos en el archivo son <span class="code">private</span>.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api get-object-acl --bucket my-bucket --key test.txt</span>
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api get-object-acl --bucket <span class="code-highlight">my-bucket</span> --key <span class="code-highlight">test.txt</span></span>
 {
     "Owner": {
         "DisplayName": "my-user",
@@ -48,11 +48,11 @@
 <p>Para establecer los permisos de un Objeto,&nbsp;<a href="https://docs.aws.amazon.com/cli/latest/reference/s3api/put-object-acl.html">put-object-acl</a>.</p>
 <p>Esto establece un objeto llamado test.txt en el depósito titulado my-bucket para los permisos <span class="code">public-read</span>.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api put-object-acl --bucket my-bucket --key test.txt --acl public-read</span></pre>
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api put-object-acl --bucket <span class="code-highlight">my-bucket</span> --key <span class="code-highlight">test.txt</span> --acl public-read</span></pre>
 </div>
 <p>Verifica los permisos nuevamente y verás una nueva sección de <span class="text-section">Grantee</span> que muestra que todos los usuarios pueden leer el Objeto.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api get-object-acl --bucket my-user-bucket --key test.txt</span>
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api get-object-acl --bucket <span class="code-highlight">my-user-bucket</span> --key <span class="code-highlight">test.txt</span></span>
 {
     "Owner": {
         "DisplayName": "my-east-user",
@@ -82,6 +82,6 @@
 <h3>Establecer los permisos de un objeto en PRIVADO</h3>
 <p>Esto establece un objeto llamado test.txt en el depósito titulado my-bucket para permisos PRIVADOS.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api put-object-acl --bucket my-bucket --key test.txt --acl private</span></pre>
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api put-object-acl --bucket <span class="code-highlight">my-bucket</span> --key <span class="code-highlight">test.txt</span> --acl private</span></pre>
 </div>
 </div>
