@@ -8,7 +8,7 @@
 <div class="solvvy-solution">
 <p>Debido a la forma en que suEXEC maneja la seguridad, el directorio en el que reside tu script CGI y el script en sí no deben ser modificables por nadie más que por el usuario. Si se puede escribir, aparece "500 Internal Server Error". El script también debe ser ejecutable y la forma más sencilla de establecer permisos es con <span class="code">chmod</span>:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command"> chmod 755 script.cgi</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command"> chmod 755 <span class="code-highlight">script.cgi</span></span></pre>
 </div>
 </div>
 <h2><span id="Apache_module_mod_env">Modulo de Apache mod_env</span></h2>
@@ -28,11 +28,11 @@ print $ENV{FOOBAR};</pre>
 </div>
 <p>En el directorio de tu primer dominio, agrega un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a> con la directiva:</p>
 <div class="preboxcontainer">
-<pre class="prebox">SetEnv FOOBAR foo</pre>
+<pre class="prebox">SetEnv FOOBAR <span class="code-highlight">foo</span></pre>
 </div>
 <p>y en el directorio de tu segundo dominio, agrega lo siguiente:</p>
 <div class="preboxcontainer">
-<pre class="prebox">SetEnv FOOBAR bar</pre>
+<pre class="prebox">SetEnv FOOBAR <span class="code-highlight">bar</span></pre>
 </div>
 <p>Cuando visitas example.com/foobar.cgi en tu navegador, esperarás que imprima foo, y cuando visites example2.com/foobar.cgi, esperarás bar. En su lugar, el valor predeterminado se imprime en ambas ocasiones.</p>
 <p>Al principio, puedes asumir que mod_env no está instalado o que la directiva&nbsp;<span class="code">SetEnv</span>&nbsp;no es permitida desde el .htaccess. De hecho, <span class="code">SetEnv</span> está funcionando bien. Establece la variable de entorno; suEXEC simplemente no lo pasa a tu script CGI.</p>
@@ -43,7 +43,7 @@ print $ENV{FOOBAR};</pre>
 <h3><span id="Workaround_A:_Prepending_HTTP_to_variable_name">Solución alternativa A: Anteponer HTTP_ al nombre de la variable</span></h3>
 <p>La forma en que DreamHost configura suEXEC, permite cualquier variable de entorno que comience con HTTP_ through. Entonces, si cambias tu .htaccess a:</p>
 <div class="preboxcontainer">
-<pre class="prebox">SetEnv HTTP_FOOBAR foobar </pre>
+<pre class="prebox">SetEnv HTTP_FOOBAR <span class="code-highlight">foobar</span></pre>
 </div>
 <p>y usas:</p>
 <div class="preboxcontainer">
@@ -59,7 +59,7 @@ print $ENV{FOOBAR};</pre>
 <pre class="prebox">#!/bin/sh
 
 export FOOBAR=foo
-exec /home/username/example.com$SCRIPT_URL
+exec /home/<span class="code-highlight">username/example.com</span>$SCRIPT_URL
 </pre>
 </div>
 <ul>
@@ -68,7 +68,7 @@ exec /home/username/example.com$SCRIPT_URL
 <dl>
 <dd>
 <div class="preboxcontainer">
-<pre class="prebox">exec /home/exampleuser/example.com/foobar.cgi</pre>
+<pre class="prebox">exec /home/<span class="code-highlight">exampleuser/example.com</span>/foobar.cgi</pre>
 </div>
 </dd>
 </dl>
