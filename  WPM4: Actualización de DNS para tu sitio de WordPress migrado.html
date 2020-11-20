@@ -1,0 +1,229 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="ARTICLE-TITLE-NAME" class="solvvy-hidden">
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#antes">Antes de que cambies tu dominio</a></li>
+<li><a class="reference internal" href="#email">Correo Electrónico</a></li>
+<li><a class="reference internal" href="#ssl_certs">Certificados SSL y HTTPS</a></li>
+<li><a class="reference internal" href="#dns">DNS (o, como el mundo ve tu dominio)</a></li>
+<li><a class="reference internal" href="#domreg">Registros de Dominio</a></li>
+<li><a class="reference internal" href="#contacto">Formularios de Contacto (u otros formularios/scripts de envío de correo)</a></li>
+<li><a class="reference internal" href="#solucion-de-problemas">Solución de problemas</a></li>
+<li><a class="reference internal" href="#ver-tambien">Ver también</a></li>
+</ul>
+</div>
+</div>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>No utilices estas instrucciones a menos que se lo indique explícitamente el Equipo de Servicios Profesionales de DreamHost. La siguiente información solo se debe utilizar en una fase particular de una migración de WP que ese equipo realiza para usted; de lo contrario, los pasos estarán fuera de contexto y pueden dar lugar a errores si se implementan.</p>
+</div>
+</div>
+<p>Ahora que tu migración está completa, debes realizar acciones específicas para apuntar tu dominio a DreamHost. Es importante tener en cuenta los cambios de DNS, los elementos relacionados con la configuración anterior de tu sitio web (uso de CDN, SSL y redireccionamientos) y cualquier otro elemento específico del servicio que haya seleccionado (es decir, alojamiento compartido o DreamPress).</p>
+<p>La siguiente información le ayuda a realizar los ajustes necesarios para finalizar su migración. También puedes ponerte en <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener">contacto con el Equipo de Soporte</a> si tienes alguna pregunta o problema en el camino.</p>
+<span id="antes"></span>
+<h2>Antes de cambiar tu dominio</h2>
+<div class="solvvy-solution">
+<p>Aquí hay algunas preguntas a considerar antes de realizar cambios para apuntar tu dominio a DreamHost y/o finalizar tus servicios de alojamiento anteriores:</p>
+<ul>
+<li>¿Tienes direcciones de correo electrónico activas (por ejemplo, usuario@example.com)? Si es así, ¿deseas alojar el correo electrónico en DreamHost o mantener el mismo proveedor de correo electrónico?</li>
+<li>¿Quieres utilizar un certificado SSL para los servicios HTTPS? Si es así, ¿deseas un <a href="https://help.dreamhost.com/hc/en-us/articles/215767487-How-do-I-add-a-free-self-signed-SSL-certificate-">certificado autofirmado</a> gratuito (no recomendado), un&nbsp; <a href="https://help.dreamhost.com/hc/en-us/articles/216539548-Adding-a-free-Let-s-Encrypt-certificate">certificado Let’s Encrypt</a>, un <a href="https://help.dreamhost.com/hc/en-us/articles/215089748-How-do-I-purchase-a-professionally-signed-SSL-certificate-">certificado firmado profesionalmente</a> de DreamHost o un certificado existente que ya posees?</li>
+<li>¿Deseas consolidar todos tus servicios, incluido el registro de dominio en DreamHost (por ejemplo, tu propiedad del nombre de dominio en sí)?</li>
+</ul>
+</div>
+<span id="email"></span>
+<h2>Correo Electrónico</h2>
+<div class="solvvy-solution">
+<p>Esta sección se aplica si:</p>
+<ul>
+<li>Tienes direcciones de correo electrónico @example.com actuales en tu dominio que deseas mantener activas</li>
+<li>Actualmente no tienes ninguna dirección @example.com y deseas comenzar a utilizar los servicios de correo electrónico de DreamHost</li>
+</ul>
+<h3>Mantener el proveedor de correo electrónico existente y el proveedor de DNS existente</h3>
+<p>Si deseas conservar tu proveedor de correo electrónico existente Y conservar tu proveedor de DNS existente, cambia el DNS utilizando el <a class="reference internal" href="#method_2">'Método 2'</a> que se describe en las instrucciones de DNS a continuación (editar registros A)..</p>
+<h3>Mantener el proveedor de correo electrónico existente, usando el DNS de DreamHost</h3>
+<p>Puedes mantener tu proveedor de correo electrónico existente mientras DreamHost administra tus registros DNS. Para garantizar un servicio de correo electrónico ininterrumpido, primero debes agregar los registros DNS de correo electrónico de tu proveedor de correo electrónico a DreamHost. Consulta los siguientes artículos para obtener más información:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215035328-How-do-I-change-my-MX-records-">Cómo añadir tus registros MX de proveedor de correo a DreamHost</a></li>
+<li><a href="/hc/en-us/articles/215414867-How-do-I-add-custom-DNS-records-">Cómo añadir otros registros DNS de correo a DreamHost</a> (diferentes de los MX, si es requerido)</li>
+</ul>
+<p>Después de actualizar los registros DNS, usa el <a class="reference internal" href="#method_1">'Método 1'</a> en las instrucciones de DNS a continuación para cambiar nameservers a DreamHost.</p>
+<h3>Usar correo electrónico de DreamHost y DNS</h3>
+<p>Si deseas que DreamHost aloje tus direcciones de correo electrónico, primero debes agregarlas al panel de DreamHost. El siguiente artículo proporciona más información sobre cómo configurar rápidamente el correo electrónico:</p>
+<ul>
+<li><a href="/hc/en-us/articles/217139407-Email-quickstart-guide">Guía de inicio rápido de correo electrónico</a></li>
+</ul>
+<p>Si tienes correos electrónicos archivados en tu antiguo host de correo que deseas conservar, puedes transferir esos correos electrónicos a DreamHost</p>
+<ul>
+<li><a href="/hc/en-us/articles/215730827-How-do-I-import-my-old-host-s-email-to-my-DreamHost-mail-server-">Transferir correos electrónicos</a></li>
+</ul>
+<p>Después de transferir sus correos electrónicos, use el <a class="reference internal" href="#method_1">'Método 1'</a> en las instrucciones de DNS a continuación para cambiar los nameservers a DreamHost.</p>
+<h3>Usar el correo electrónico DreamHost, pero mantener el proveedor de DNS existente</h3>
+<p>Si deseas que DreamHost aloja tus direcciones de correo electrónico pero estás utilizando otro proveedor de DNS (por ejemplo, cloudflare.com), debe seguir las instrucciones anteriores pero usar el <a class="reference internal" href="#method_2">'Método 2'</a> en las instrucciones de DNS a continuación (editar registros A) en su lugar. El siguiente artículo proporciona más información sobre cómo obtener tus registros MX y otros registros DNS de correo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215035818-Locating-your-DreamHost-email-DNS-records">Ubicar tus registros DNS de correo de DreamHost</a></li>
+</ul>
+</div>
+<span id="ssl_certs"></span>
+<h2>Certificados SSL y HTTPS</h2>
+<div class="solvvy-solution">
+<p>Como se indica en la 'Petición de credenciales' que DreamHost te envió para comenzar la migración, el HTTPS y cualquier configuración relacionada de certificados SSL están fuera del alcance del proyecto de migración, pero puedes proceder a agregarlos ahora. Los siguientes artículos proporcionan más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216041537-SSL-certificates-overview">Generalidades sobre certificados SSL</a></li>
+<li><a href="/hc/en-us/articles/215089118-Adding-an-SSL-certificate-overview">Añadir un certificado SSL</a></li>
+</ul>
+<p>Un certificado Let’s Encrypt solo se puede instalar correctamente después de que el DNS apunte a DreamHost, por lo que primero debes realizar el cambio de DNS que se describe a continuación. Si deseas comprar un certificado de <a href="/hc/en-us/articles/360022370112-Comodo-name-change-to-Sectigo">Sectigo</a> en el panel de DreamHost o importar un certificado SSL existente que ya posees, puedes hacerlo antes de cambiar el DNS para que estén listos para usarlo inmediatamente.</p>
+<h3>SSL: Solo DreamPress</h3>
+<p>Si tienes DreamPress, un certificado SSL gratuito Let's Encrypt intenta instalarse automáticamente durante la configuración de DreamPress, sin embargo, esto a menudo falla porque Let’s Encrypt solo funciona cuando el DNS de tu dominio apunta a DreamHost. Si deseas utilizar Let's Encrypt después de haber cambiado el DNS, utiliza el siguiente proceso:</p>
+<ol>
+<li>Remueve el HTTPS del dominio yendo a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a> y haciendo clic en el enlace <span class="text-link">https On</span> a la derecha de tu nombre dominio.</li>
+<li>Ve a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.secure&amp;" target="_blank" rel="noopener">SSL/TLS Certificates</a> y haz clic en el boton <strong>Add</strong> junto a la opción Let's Encrypt SSL.</li>
+<li>Elige tu dominio y marca la casilla para aceptar los términos de Let's Encrypt.</li>
+<li>Cuando hayas finalizado, haz clic en el botón <strong>Add now!</strong>.</li>
+</ol>
+</div>
+<span id="dns"></span>
+<h2>DNS (o cómo el mundo ve tu dominio)</h2>
+<div class="solvvy-solution">
+<h3>Referencia</h3>
+<p>El siguiente artículo proporciona una buena referencia para comprender el Domain Name System (DNS), que es la base de cómo los navegadores web encuentran sitios web:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215413857-DreamHost-DNS-overview">Generalidades del DNS de DreamHost</a></li>
+</ul>
+<h3>Opcional: reducción del retardo de propagación de DNS (TTL)</h3>
+Puedes minimizar el tiempo que los visitantes pueden ver el sitio antiguo después de cambiar los registros DNS reduciendo el valor del tiempo de vida (TTL) en el dominio. Para reducir el TTL, debes solicitarlo a través de tu proveedor de alojamiento actual para establecer el valor en el período de tiempo más breve que puedan proporcionar.
+<ul>
+<li>Si no te importa la posibilidad de que algunos visitantes habituales carguen el sitio del host anterior durante varias horas, puedes dejar el TTL donde está.</li>
+<li>Si bajas el TTL, debes esperar hasta que haya transcurrido el tiempo TTL actual antes de realizar cualquier cambio de DNS. Para ver com funciona esto, por favor viista el artículo <a href="/hc/en-us/articles/215840248#Adjusting_Time_To_Live_.28TTL.29">Generalidades de propagación de DNS</a>.</li>
+</ul>
+<p>Una vez que el DNS se resuelve en DreamHost, debes <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener">contactar al Soporte Técnico</a> para restablecer el TTL en el dominio a 4 horas, lo cual es óptimo. NO se recomienda dejarlo en un TTL más bajo y podría causar problemas de carga del sitio.</p>
+<h3>Cambiar el DNS</h3>
+<p>El cambio de DNS casi siempre se logra de dos formas diferentes:</p>
+<ol>
+<li>Cambiar nameservers en la compañía de registro de tu dominio, o</li>
+<li>Editar los registros A donde existen los nameservers de tu dominio.</li>
+</ol>
+<h3>Método 1: cambiar los nameservers en tu compañía de registro <em>(recomendado)</em></h3>
+<p>Apunta tus nameservers a tu compañía de registro actual a los nameservers de DreamHost:</p>
+<div class="preboxcontainer">
+<pre class="prebox">ns1.dreamhost.com
+ns2.dreamhost.com
+ns3.dreamhost.com</pre>
+</div>
+<h3>Opcional: Cómo alojar el dominio principal en DreamHost mientras mantienes los subdominios alojados en tu host actual</h3>
+<p>Si tienes subdominios (por ejemplo, subdominio.example.com) en tu dominio migrado, cambiar los nameservers hará que ya no funcionen. Si necesitas que los subdominios sigan funcionando en tu host actual, sigue estos pasos:</p>
+<ol>
+<li>Agrega el dominio principal a tu panel DreamHost.</li>
+<li>Crea registros <a href="/hc/en-us/articles/215414867#A_record">DNS personalizados</a> para cada subdominio.</li>
+<li>Al crear el registro de subdominio personalizado, apúntalo a la dirección IP del registro A en tu host actual. Solicita a tu host actual la dirección IP correcta.</li>
+</ol>
+<p>Una vez que esos nuevos registros se actualizan en línea, cualquier visitante que vea el sitio del subdominio es redirigido a tu empresa de alojamiento actual mientras el sitio principal sigue alojado en DreamHost.</p>
+<h3><span id="method_2">Método 2: Edititar registros A</span></h3>
+<p>Los registros A de un dominio siempre apuntan a una dirección IP. La edición de registros A es una forma alternativa de enviar tu tráfico a tu sitio migrado en lugar de cambiar los nameservers del dominio. Consulta con tu host actual o proveedor de DNS si no estás familiarizado con cómo editar tus registros A.</p>
+<p>La desventaja de este enfoque es que debes cambiar manualmente el registro A en el futuro si una dirección IP en DreamHost cambia por cualquier motivo (lo cual es raro). Por lo general, recibes un correo electrónico automatizado de DreamHost si cambia la dirección IP, y tendrás unos días para realizar el cambio antes de que la IP anterior ya no funcione y el sitio deje de funcionar.</p>
+<p>Sigue estos pasos para apuntar tus registros A a tu sitio DreamHost:</p>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a>.</li>
+<li>Haz clic en el enlacer <span class="text-link">DNS</span> bajo el dominio.</li>
+<ul>
+<li>En esta página, aparecen varios <a href="/hc/en-us/articles/215413857-DreamHost-DNS-overview">registros DNS</a> al final de la página.</li>
+</ul>
+<li>Encuentra los registros A para el sitio web. El que tiene 'www' en la primera columna usa la dirección IP correcta.</li>
+<li>Si es necesario, busca otras direcciones IP de cualquier otro servicio DreamHost que desees utilizar. Por ejemplo, el registro A de MySQL es importante si necesitas usar <a href="/hc/en-us/articles/214395638-phpMyAdmin-overview">phpMyAdmin</a> con tu nuevo sitio DreamHost.</li>
+<li>Ingresa estos registros A en tu proveedor de DNS actual que no es de DreamHost.</li>
+</ol>
+</div>
+<span id="domreg"></span>
+<h2>Registros de dominio</h2>
+<div class="solvvy-solution">
+<p>No es necesario que transfieras el registro de tu dominio a DreamHost. Si eliges transferir tu registro, revisa detenidamente el siguiente artículo:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215250318-How-do-I-transfer-my-domain-registration-to-DreamHost-">Cómo transferir tu registro de dominio a DreamHost</a></li>
+</ul>
+<p>DreamHost recomienda iniciar una transferencia de registro al menos <strong>un día después</strong> de haber cambiado el DNS para que apunte a DreamHost.</p>
+</div>
+<span id="contacto"></span>
+<h2>Formularios de contacto (u otros formularios/scripts de envío de correo)</h2>
+<div class="solvvy-solution">
+<p>DreamHost ofrece cuatro plataformas para alojar sitios web:</p>
+<ul>
+<li>Shared</li>
+<li>VPS</li>
+<li>Dedicated</li>
+<li>DreamPress</li>
+</ul>
+<p>En el Shared Hosting, ten en cuenta que DreamHost debe cumplir con las estrictas reglas de spam de Internet y "spoofing" para enviar correos electrónicos desde tus formularios de contacto.</p>
+<h3>Solo planes de Shared hosting</h3>
+<p>Los formularios de contacto a veces envían correos electrónicos <strong>desde</strong> cualquier dirección de visitante que se ingrese en el formulario. Esta funcionalidad no está permitida en servidores Shared ya que viola la 'Política de dominio del remitente' de DreamHost. Si se configura un formulario de contacto de esta manera, no se enviará correo electrónico.</p>
+<p>Para obtener mejores resultados, el valor <strong>de</strong> en tu formulario debe establecerse en una dirección de correo electrónico en el mismo dominio. Por ejemplo, si tu sitio es 'example.com', el campo 'de' en tu formulario debe ser algo como 'admin@example.com'. Para obtener más información, visita el siguiente artículo:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215036058-Sender-domain-policy-and-spoofing-overview">Política de dominio del remitente</a></li>
+</ul>
+<h3>Plugins SMTP (recomendado)</h3>
+<p>La forma más fácil y recomendada de solucionar este problema es utilizar un plugin SMTP. Esto obliga al correo electrónico a enviarse a través del servidor de correo (en lugar del servidor web). Ve el siguiente artículo para ver un ejemplo de cómo configurar un plugin SMTP:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215526937-Configuring-the-WP-Mail-SMTP-plugin" target="_self">Configurar el plugin 'WP Mail SMTP'</a></li>
+</ul>
+<p>Tu plugin de formulario de contacto existente permanece en su lugar, y este plugin simplemente agrega la capacidad SMTP al correo electrónico de tu formulario.</p>
+<h3>Envío de correo electrónico desde un script personalizado</h3>
+<p>Si optas por ejecutar un script que envíe correo electrónico, se recomienda utilizar la autenticación SMTP de esa forma. Ve el siguiente artículo para ver un ejemplo sobre cómo configurar un script usando un formulario PHP:</p>
+<ul>
+<li><a href="/hc/en-us/articles/216140597-How-do-I-send-PHP-mail-via-SMTP-">Autenticación SMTP con PHP mail</a></li>
+</ul>
+<p>También puedes usar <a href="/hc/en-us/articles/215842658-PHPmailer-overview">PHPMailer</a>.</p>
+</div>
+<span id="solucion-de-problemas"></span>
+<h2>Solución de Problemas</h2>
+<div class="solvvy-solution">
+<h3>DNS</h3>
+<p>Si tu sitio no se resuelve varias horas después de actualizar tu DNS, prueba tu sitio para confirmar que el DNS se haya actualizado en línea:</p>
+<ul>
+<li><a href="https://www.whatsmydns.net/">https://www.whatsmydns.net</a></li>
+</ul>
+<p>Si aún no puedes ver el sitio actualizado en tu computadora, intente borrar la memoria caché de tu navegador y vaciar tu DNS:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215680477-Flush-DNS-overview">Vaciar el DNS</a></li>
+<li><a href="/hc/en-us/articles/216456827-How-to-clear-your-browser-s-cache">Limpiar el caché</a></li>
+</ul>
+<h3>Reeditando el archivo de hosts local</h3>
+<p>En los correos electrónicos anteriores de DreamHost, probablemente se te indicó que vieras el sitio migrado mediante la edición de un archivo "hosts" local en la computadora de tu hogar:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115006086308-How-to-view-your-DreamHost-site-using-your-hosts-file">Editar tu archivo hosts</a></li>
+</ul>
+<p>En última instancia, debes deshacer cualquier modificación que haya realizado en este archivo. Si no realizas esta edición y la IP de tu sitio cambia en DreamHost, no podrás ver tu sitio migrado.</p>
+<h3>CDN</h3>
+<p>Si ejecutas una o más redes de entrega de contenido (CDN) en tu sitio para imágenes, es posible que debas volver a configurar la configuración de su CDN para actualizar las imágenes o cargarlas en consecuencia.</p>
+<h3>Conservar o crear redireccionamientos de páginas web</h3>
+<p>Ve los siguientes artículos si has creado redireccionamientos de página en tu sitio usando un archivo .htaccess:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215747748-How-can-I-redirect-and-rewrite-my-URLs-with-an-htaccess-file-">Redirecciones y sobre escribir</a></li>
+<li><a href="http://premium.wpmudev.org/blog/creating-301-redirects-wordpress/">http://premium.wpmudev.org/blog/creating-301-redirects-wordpress/</a></li>
+<li><a href="https://wordpress.org/plugins/search.php?q=seo">https://wordpress.org/plugins/search.php?q=seo</a></li>
+</ul>
+<h3>Caché de DreamPress</h3>
+<p>Lo siguiente se aplica solo si tu sitio utiliza DreamPress.</p>
+<p>Parte de la notable velocidad que proporciona DreamPress se debe a la forma en que almacena en caché el contenido utilizando la memoria caché del servidor incorporada. Aunque DreamPress utiliza almacenamiento en caché avanzado, puedes experimentar un comportamiento inesperado en la forma en que tu sitio muestra contenido actualizado.</p>
+<p>Si realizas cambios y ves un desfase entre el momento en que guarda un cambio y el momento en que aparece, puedes hacer clic en el enlace <span class="text-link">Purge Cache</span> dentro del menú desplegable Caché, ubicado en la barra de herramientas WP-Admin en la parte superior:</p>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/2018-10_wp-admin_proxy_cache_03.fw.png" alt="2018-10_wp-admin_proxy_cache_03.fw.png" /></dd>
+</dl>
+<p>Para obtener más información sobre el uso de DreamPress Cache, consulta el siguiente artículo:</p>
+<ul>
+<li><a href="/hc/en-us/articles/215300647-Managing-the-DreamPress-cache">Administrar el caché de DreamPress</a></li>
+</ul>
+<h3>DreamPress con otras aplicaciones que no son de WordPress</h3>
+<p>Si el equipo migró algún archivo por ti que constituya algún tipo de aplicación que no sea de WordPress que se ejecute bajo el mismo dominio que tu instalación de WordPress migrada, el equipo no puede garantizar que la plataforma DreamPress ejecutará correctamente esa aplicación. Esto se debe a que DreamPress solo está diseñado para ejecutar sitios de WordPress.</p>
+</div>
+<span id="ver-tambien"></span>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115004182807">WPM1: Migración de servicio WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115004353607">WPM2: Cuando inicia la migración de tu sitio WordPress</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
