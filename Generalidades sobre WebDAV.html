@@ -40,7 +40,7 @@
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>WebDAV utiliza su propio archivo .htaccess y .htpassword que están controlados por la interfaz WebDAV y pueden no estar siempre visibles. Esto puede causar un comportamiento "anormal" en ciertos casos, como crear un directorio WebDAV fuera del directorio raíz de tu dominio (e.j., <a href="http://example.com/webdav/">http://example.com/webdav/</a>). Se sugiere que si estás creando un directorio WebDAV, te asegures de que el WebDAV de destino (así como la carpeta principal) esté razonablemente aislado de tu sitio principal.</p>
+<p>WebDAV utiliza su propio archivo .htaccess y .htpassword que están controlados por la interfaz WebDAV y pueden no estar siempre visibles. Esto puede causar un comportamiento "anormal" en ciertos casos, como crear un directorio WebDAV fuera del directorio raíz de tu dominio (e.j., <strong>https://example.com/webdav/</strong>). Se sugiere que si estás creando un directorio WebDAV, te asegures de que el WebDAV de destino (así como la carpeta principal) esté razonablemente aislado de tu sitio principal.</p>
 </div>
 </div>
 <ol>
@@ -49,11 +49,11 @@
 <li>Para el resto de estos pasos, se asume que el directorio se llama "site".</li>
 </ul>
 </li>
-<li>Si ya tienes datos o directorios que deseas incluir en el nuevo sitio WebDAV, conéctate atsu nuevo recurso compartido WebDAV y subelos. La URL de tu recurso compartido de WebDAV debería ser algo como <a href="http://example.com/site/">http://example.com/site/</a>.
+<li>Si ya tienes datos o directorios que deseas incluir en el nuevo sitio WebDAV, conéctate atsu nuevo recurso compartido WebDAV y subelos. La URL de tu recurso compartido de WebDAV debería ser algo como <strong>https://example.com/site/</strong>.
 <ul>
 <li>No te preocupes por modificar los enlaces dentro de tus páginas, seguirán funcionando exactamente de la misma manera que lo hacen actualmente.</li>
 </ul>
-<em>Los pasos restantes te ayudarán a crear un archivo .htaccess para las solicitudes de reescritura en <a href="http://example.com">http://example.com</a> utilicen los datos almacenados en <a href="http://example.com/site/">http://example.com/site/</a>:</em></li>
+<em>Los pasos restantes te ayudarán a crear un archivo .htaccess para las solicitudes de reescritura en <strong>https://example.com</strong> utilicen los datos almacenados en <strong>https://example.com/site/</strong>:</em></li>
 <li>En la carpeta principal de tu dominio, crea un archivo llamado ".htaccess". Asegúrate de incluir el punto al principio.</li>
 <li>Pon el siguiente texto en el archivo:
 <div class="preboxcontainer">
@@ -64,8 +64,8 @@ RewriteRule ^(.*)$ /<span class="code-highlight">site</span>/$1
 </div>
 <ul>
 <li>La primera línea enciende la reescritura.</li>
-<li>La segunda línea le dice al servidor web que no sobreescriba <a href="http://example.com/site/">http://example.com/site/</a>.</li>
-<li>La tercera línea le dice al servidor web que sobre escriba todas las solicitudes a<a href="http://example.com/"> http://example.com/</a> para que use los datos de <a href="http://example.com/site/">http://example.com/site/</a>.</li>
+<li>La segunda línea le dice al servidor web que no sobreescriba <strong>https://example.com/site/</strong>.</li>
+<li>La tercera línea le dice al servidor web que sobre escriba todas las solicitudes a <strong>https://example.com/ </strong>para que use los datos de <strong>https://example.com/site/</strong>.</li>
 </ul>
 </li>
 <li>Si tienes directorios que no deseas que estén bajo el control de WebDAV, agrega líneas RewriteCond adicionales como la de "site". Por ejemplo, si no deseas que se reescriban los "scripts" del directorio, agrega lo siguiente:
@@ -75,7 +75,7 @@ RewriteRule ^(.*)$ /<span class="code-highlight">site</span>/$1
 </div>
 </li>
 </ol>
-<p>Cuando visitas <a href="http://example.com/">http://example.com/</a> deberías de hecho obtener la información de <a href="http://example.com/site/">http://example.com/site/</a>, pero tus URLs se verán igual que antes.</p>
+<p>Cuando visitas <strong>https://example.com/</strong> deberías de hecho obtener la información de <strong>https://example.com/site/</strong>, pero tus URLs se verán igual que antes.</p>
 </div>
 <h2><span id="Troubleshooting">Solución de Problemas</span></h2>
 <div class="solvvy-solution">

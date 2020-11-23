@@ -1,0 +1,151 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este artículo solo explica cómo instalar una versión personalizada de ImageMagick usando una versión personalizada de PHP. No explica cómo usar ImageMagick en sí.</p>
+<p>Visita el siguiente artículo para obtener instrucciones sobre el uso de ImageMagick preinstalado de DreamHost con MediaWiki:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217253627-Generalidades-sobre-ImageMagick">ImageMagick</a></li>
+</ul>
+</div>
+</div>
+<p><a href="https://www.imagemagick.org/script/index.php">ImageMagick</a> es un paquete de software gratuito que se utiliza para convertir y editar imágenes y se instala de forma predeterminada en todos los servidores DreamHost. Para ver la versión actual, inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y luego ejecuta el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">dpkg -l | grep magick
+</span></pre>
+</div>
+<p>Para obtener más detalles sobre ImageMagick, visita el siguiente sitio:</p>
+<ul>
+<li><a href="http://www.imagemagick.org/script/index.php">http://www.imagemagick.org/script/index.php</a></li>
+</ul>
+</div>
+<h2><span id="Preparing_the_environment">Preparar el entorno</span></h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>La instalación de una versión personalizada de ImageMagick solo es posible si está utilizando una versión personalizada de PHP. Esto significa que primero debes instalar una versión personalizada con tu usuario SHELL. Una vez instalado, procede con las siguientes secciones.</p>
+</div>
+</div>
+<ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215074947-C%C3%B3mo-instalar-una-versi%C3%B3n-personalizada-de-PHP">Instala una versión personalizada de PHP</a> bajo tu usuario SHELL.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Asegúrate de haber seguido completamente los pasos para instalar una versión personalizada de PHP. Tu entorno SHELL debe ejecutar esta nueva versión antes de que pueda continuar.</p>
+</div>
+</div>
+</li>
+<li>Asegúrate de estar en el directorio principal de tu usuario y no en el directorio de tu dominio.</li>
+<li>Crea un directorio <span class="text-object">build</span> donde se descargan, configuran y compilan todas las herramientas necesarias:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir build</span></pre>
+</div>
+</li>
+<li>Crea un directorio <span class="text-object">local</span> donde se implementen todas las herramientas necesarias:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir local</span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="Installing_ImageMagick">Instalar ImageMagick</span></h2>
+<div class="solvvy-solution">
+<p>Una vez que hayas creado los directorios /build y /local, proceda con los siguientes comandos. Este ejemplo usa la versión 7.0.7-28.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd build</span>
+<span class="server">[server]$ </span><span class="command">wget "http://www.imagemagick.org/download/ImageMagick.tar.gz"</span>
+<span class="server">[server]$ </span><span class="command">tar zxvf ImageMagick.tar.gz</span>
+<span class="server">[server]$ </span><span class="command">cd ImageMagick-7.0.7-28</span>
+<span class="server">[server]$ </span><span class="command">./configure --prefix=$HOME/local --enable-shared --enable-symbol-prefix</span>
+<span class="server">[server]$ </span><span class="command">make</span> 
+<span class="server">[server]$ </span><span class="command">make install</span></pre>
+</div>
+<p>Si todo funciona sin problemas, los archivos binarios de ImageMagick actualizados, la colección de bibliotecas, la documentación, etc. están disponibles en tu directorio <span class="text-object">local</span> (y subdirectorio).</p>
+<p>Comienza a usar este directorio <span class="text-object">local</span> ejecutando el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">export PATH=$HOME/local/bin:$PATH</span></pre>
+</div>
+<p>Finalmente, verifica la versión:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">convert --version</span>
+Version: ImageMagick 7.0.7-28 Q16 x86_64 2018-04-29 http://www.imagemagick.org</pre>
+</div>
+</div>
+<h2>Construir el módulo PHP de Imagick</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega a tu directorio <span class="text-object">build</span>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd $HOME/build</span>
+</pre>
+</div>
+</li>
+<li>Visita <a href="http://pecl.php.net/package/imagick">http://pecl.php.net/package/imagick</a> y elige la versión que deseas usar.</li>
+<li>Ejecuta los siguientes comandos según la versión que estés usando. Este ejemplo usa 3.4.3:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://pecl.php.net/get/imagick</span>
+<span class="server">[server]$ </span><span class="command">tar zxvf imagick</span>
+<span class="server">[server]$ </span><span class="command">cd imagick-3.4.3</span>
+</pre>
+</div>
+</li>
+<li>Ejecuta lo siguiente para asegurarte de que imagick se compile sin problemas. Asegúrate de cambiar 'username' a tu nombre de usuario SHELL real:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/home/username/local/bin/phpize</span>
+<span class="server">[server]$ </span><span class="command">export PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig</span>
+<span class="server">[server]$ </span><span class="command">ln -s $HOME/local/include/ImageMagick-7 $HOME/local/include/ImageMagick</span>
+<span class="server">[server]$ </span><span class="command">./configure --prefix=$HOME/local --with-imagick=$HOME/local</span>
+<span class="server">[server]$ </span><span class="command">make</span></pre>
+</div>
+<p>Es posible que veas algunas advertencias de compilación, que puedes ignorar con seguridad. Busca lo siguiente que garantiza una instalación exitosa:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Libraries have been installed in:
+  /home/username/build/imagick-3.4.3/modules
+</pre>
+</div>
+</li>
+<li>Para finalizar, ejecuta <span class="code">make install</span> para copiar el módulo a su directorio de extensiones personalizadas:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">make install</span>
+Installing shared extensions:     /home/username/local/lib/php/extensions/no-debug-non-zts-20170718/
+Installing header files:          /home/username/local/include/php/</pre>
+</div>
+</li>
+</ol>
+</div>
+<h2>Configuración de PHP para usar esta extensión</h2>
+<div class="solvvy-solution">
+<p>Ya que <a href="https://help.dreamhost.com/hc/es/articles/215074947-C%C3%B3mo-instalar-una-versi%C3%B3n-personalizada-de-PHP">instalaste una versión personalizada de PHP 7.2.5</a>, no hay ningún archivo php.ini. Créalo en el directorio <span class="text-object">/local/lib</span>. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ <span class="command">touch $HOME/local/lib/php.ini</span></span></pre>
+</div>
+<p>Esto crea el archivo. Luego, elimina cualquier proceso PHP en ejecución para asegurarte de que PHP esté al tanto de este nuevo archivo de configuración:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ <span class="command">killall -9 php-cgi</span></span></pre>
+</div>
+<p>Puedes ver que ahora se está utilizando creando un archivo phpinfo.php:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio">Ver la versión PHP y configuración de tu sitio</a></li>
+</ul>
+<p>Visita tu sitio para ver el archivo. En el primer bloque, 'Loaded Configuration File' apunta al archivo que acabas de crear. En esa página, busca <span class="text-object">extension_dir</span> que apunta a lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/username/local/lib/php/extensions/no-debug-non-zts-20170718</pre>
+</div>
+<p>Finalmente, ejecuta el siguiente comando. Esto agrega una línea a tu archivo php.ini que apunta al módulo imagick.so dentro del directorio <span class="text-object">extensions</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">echo "extension = $HOME/local/lib/php/extensions/no-debug-non-zts-20170718/imagick.so" &gt;&gt; $HOME/local/lib/php.ini</span>
+</pre>
+</div>
+<p>Visita tu archivo phpinfo.php nuevamente donde existe el bloque 'imagick' con tu nueva versión.</p>
+</div>
+<h2><span id="See_also">Ver También</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217253627-Generalidades-sobre-ImageMagick">Generalidades sobre Image Magick</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215075007-GraphicsMagick-and-gmagick-PHP-module-on-Shared-hosting">Módulo GraphicsMagick y gmagick en Shared hosting</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades SSH</a></li>
+</ul>
+</div>

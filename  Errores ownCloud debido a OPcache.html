@@ -1,0 +1,24 @@
+<div class="solvvy-solution">
+<p><a href="/hc/en-us/articles/216660668-OPcache-overview">OPcache</a> está instalado en algunos servidores compartidos, lo que puede hacer que ownCloud arroje un error 500. Si tu sitio se ejecuta 5.6 o superior, DreamHost agrega las siguientes líneas a tu archivo phprc automáticamente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">; {{{ The following lines were automatically added by DreamHost
+zend_extension=opcache.so
+; }}} That's all from DreamHost 
+</pre>
+</div>
+<p>Algunos usuarios han informado errores con OwnCloud después de este cambio. Para resolver los errores, agrega la siguiente línea a tu archivo phprc:</p>
+<div class="preboxcontainer">
+<pre class="prebox">opcache.fast_shutdown = 0 
+</pre>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">Generalidades php.ini</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214205508-Generalidades-sobre-actualizar-PHP-">Generalidades de actualizar PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214894037--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-FTP-">¿Cómo crear un archivo phprc a través de FTP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200668--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-SSH-">¿Cómo creo un archivo phprc a través de SSH?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza">Mi archivo phprc no se está actualizando</a></li>
+</ul>
+</div>
