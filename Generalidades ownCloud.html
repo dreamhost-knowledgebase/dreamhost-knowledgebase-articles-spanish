@@ -1,0 +1,68 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p><a href="https://owncloud.org/">ownCloud</a> es una aplicación web gratuita y de código abierto para la sincronización de datos que:</p>
+<ul>
+<li>proporciona acceso universal a tus archivos a través de la web — tu computadora o tus dispositivos móviles, dondequiera que estés.</li>
+<li>proporciona una plataforma para ver y sincronizar fácilmente tus contactos, calendarios y marcadores en todos tus dispositivos y permite la edición básica directamente desde la web.</li>
+<li>funciona mejor en un servidor <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicado</a>.</li>
+</ul>
+<p>Esta página describe cómo configurar ownCloud en tu sitio web.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Ten en cuenta lo siguiente:</p>
+<ul>
+<li>Al usar este software, puedes estar violando las políticas de DreamHost – asegúrate de revisar la <a href="http://www.dreamhost.com/acceptable-use-policy/">Política general de uso aceptable (copias de seguridad personales)</a> de DreamHost.&nbsp;</li>
+<li>También asegúrate de cumplir con la <a href="https://www.dreamhost.com/legal/unlimited-policy/">Política Ilimitada</a> cuando uses ownCloud.</li>
+</ul>
+</div>
+</div>
+</div>
+<h2><span id="Recommended_settings">Configuraciones recomendadas</span></h2>
+<div class="solvvy-solution">
+<ul>
+<li>Configura tu dominio para usar PHP 7.2 o superior. Ve el artículo <a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-">Cambiar la versión PHP</a> para más detalles.</li>
+<li>Habilita <a href="https://help.dreamhost.com/hc/es/articles/216041537-Generalidades-sobre-certificados-SSL">Secure Hosting</a> que permite una configuración de sitio seguro/SSL. Esto no es obligatorio, pero es muy recomendable para proteger tus datos. Un <a href="https://help.dreamhost.com/hc/es/articles/216539548-A%C3%B1adir-un-certificado-gratuito-de-Let-s-Encrypt">certificado Let's Encrypt</a> también es gratuito cuando es creado en el panel.</li>
+</ul>
+</div>
+<h2>Conexión a DreamObjects</h2>
+<div class="solvvy-solution">
+<p>Puedes usar ownCloud para almacenar todos tus archivos en <a href="/hc/en-us/categories/202115428">DreamObjects</a> y nunca quedarte sin espacio. Esto también te ayuda a evitar entrar en conflicto con los términos y condiciones de DreamHost sobre almacenamiento personal:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215987867--Conectar-ownCloud-a-DreamObjects">Conectar ownCloud a DreamObjects</a></li>
+</ul>
+</div>
+<h2><span id="Android_mobile_clients">Clientes móviles de Android</span></h2>
+<div class="solvvy-solution">
+<p>Todas estas aplicaciones son gratuitas, de código abierto y están disponibles a través del <a href="https://f-droid.org/">administrador F-Droid app</a>.</p>
+<h3><span id="File_sync">Sincronización de Archivos</span></h3>
+<ul>
+<li><a href="https://f-droid.org/packages/com.owncloud.android/">ownCloud</a> – Con esta aplicación puedes acceder al servidor y realizar tareas básicas como mover archivos y cargar multimedia (incluida la carga automática de imágenes por wifi).</li>
+</ul>
+<h3>Transmisión de música</h3>
+<ul>
+<li><a href="https://f-droid.org/packages/com.owncloud.android/">Just player</a> – Reproductor de música completo con características inusuales, como compartir archivos a través de Android Beam (en Android 4). La transmisión desde el servidor ownCloud requiere el complemento Ampache (ver más abajo). Las versiones con una 'b' al final están diseñadas para funcionar en Android 2.1+, mientras que las que no tienen b son solo para Android 4.0+. Ten cuidado de no aceptar una actualización sin verificar el número de versión.</li>
+</ul>
+<ul>
+<li><a href="https://fossdroid.com/a/just-player-plugin-ampache.html">Plugin Just Player: Ampache</a> – Esta aplicación te permite agregar la funcionalidad de transmisión remota a Just Player, utilizando un servidor Ampache (por ejemplo, a través de ownCloud).</li>
+</ul>
+</div>
+<h2><span id="Troubleshooting">Solución de problemas</span></h2>
+<div class="solvvy-solution">
+<p>Aunque la interfaz web funciona después de la instalación, para poder acceder y modificar tus archivos a través de WebDAV, debes realizar algunos cambios en tu archivo .htaccess agregando las siguientes líneas al final del archivo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;IfModule mod_rewrite.c&gt;
+ RewriteEngine on
+ RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+&lt;/IfModule&gt;
+</pre>
+</div>
+<p>Otro problema que puede surgir son las redirecciones de dominio que haya configurado. Por ejemplo, si tiene Cloudflare configurado para el dominio en el que tiene ownCloud instalado, no puede usar las URL que la IU de ownCloud le brinda para conectarse a WebDAV (que generalmente tienen el formato <strong>https://example.com</strong>). En su lugar, tendrás que agregar www. al principio de la URL.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216472487--C%C3%B3mo-instalar-ownCloud">Cómo instalar ownCloud</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216820817--Errores-ownCloud-debido-a-OPcache">Errores de ownCloud debido a OPcache</a></li>
+</ul>
+</div>

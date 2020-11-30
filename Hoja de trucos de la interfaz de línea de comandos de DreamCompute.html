@@ -1,0 +1,193 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo enumera varios comandos comunes para tu referencia.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>Si tienes varias imágenes o volúmenes con el mismo nombre, debes utilizar IDs en lugar de nombres en los siguientes comandos.</li>
+<li>Algunos de los ejemplos siguientes contienen un carácter de barra invertida al final de cada línea. Esta barra invertida continúa el comando en la siguiente línea. Si lo deseas, puedes eliminar este carácter y poner todo el comando en una sola línea.</li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Imágenes</h2>
+<div class="solvvy-solution">
+<p>Lista de imágenes a las que puedes acceder:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack image list</span>
+</pre>
+</div>
+<p>Eliminar imagen especificada:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack image delete <span class="code-highlight">IMAGE</span></span>
+</pre>
+</div>
+<p>Describe una imagen específica:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack image show <span class="code-highlight">IMAGE</span></span>
+</pre>
+</div>
+<p>Crea una nueva imagen a partir de un volumen existente, lo que te permite hacer copias de una instancia existente basada en volumen:&nbsp;</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack image create --volume <span class="code-highlight">VOLUME</span></span>
+</pre>
+</div>
+</div>
+<h2>Compute</h2>
+<div class="solvvy-solution">
+<p>Enumera las instancias y verifica el estado de la instancia:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server list</span>
+</pre>
+</div>
+<p>Lista los flavors:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack flavor list</span>
+</pre>
+</div>
+<p>Inicar una instancia efímera:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server create --image <span class="code-highlight">IMAGE</span> \
+--flavor <span class="code-highlight">FLAVOR</span> --key-name <span class="code-highlight">KEY INSTANCE_NAME</span></span>
+</pre>
+</div>
+<p>Mostrar detalles de la instancia:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server show <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+<p>Ver el registro de la consola de la instancia:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack console log show <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+<p>Generar la URL de la consola, por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack console url show <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+<p>Establecer metadatos en una instancia:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server set --property newmeta='<span class="code-highlight">my meta data</span>' <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+<p>Crea y verifica los detalles de una copia instantánea de instancia:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server image create --name <span class="code-highlight">IMAGE</span> --wait <span class="code-highlight">INSTANCE</span></span>
+<span class="server">[user@localhost]$ </span><span class="command">openstack image show <span class="code-highlight">IMAGE</span></span>
+</pre>
+</div>
+<div id="pause-suspend-stop-resize-rebuild-reboot-an-instance">&nbsp;</div>
+<h3>Pausar, suspender, detener, cambiar el tamaño, reconstruir, reiniciar una instancia</h3>
+<p><strong>Pausa</strong> – almacena el estado de la máquina virtual en la RAM. Una instancia en pausa continúa ejecutándose en un estado congelado. <strong>Pausar las instancias no las hace no facturables:</strong></p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server pause <span class="code-highlight">INSTANCE</span>
+</span></pre>
+</div>
+<p><strong>Reanudar</strong> – devuelve una instancia en pausa a un estado activo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server unpause <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+<p><strong>Suspender</strong> – suspende una instancia. Los usuarios administrativos pueden desear suspender una instancia si se usa con poca frecuencia o realizar un mantenimiento del sistema. Cuando suspende una instancia, su estado de VM se almacena en el disco, toda la memoria se escribe en el disco y la máquina virtual se detiene. <strong>Suspender las instancias no las hace no facturables:</strong></p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server suspend <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+<p><strong>Anular suspensión</strong> – reanuda un servidor suspendido a un estado activo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server resume <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+<p><strong>Bloquear</strong> – bloquea una instancia. Esto evita que los usuarios no administrativos con acceso a tu proyecto DreamCompute modifiquen o manipulen la instancia en sí utilizando el panel de DreamCompute ('https://iad2.dreamcompute.com') o el cliente de línea de comandos de OpenStack</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server lock <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+<p><strong>Desbloquear</strong> – desbloquea una instancia en estado bloqueado para que los usuarios que no sean administradores puedan realizar operaciones adicionales en el servidor. De forma predeterminada, solo el propietario o el administrador pueden desbloquear un servidor:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server unlock <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+<p><strong>Detener</strong>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server stop <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+<p><strong>Comenzar</strong>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server start <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+<p><strong>Redimensionar</strong>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server resize --flavor <span class="code-highlight">FLAVOR INSTANCE</span></span>
+<span class="server">[user@localhost]$ </span><span class="command">openstack server resize --confirm --wait <span class="code-highlight">INSTANCE</span></span>
+<span class="server">[user@localhost]$ </span><span class="command">openstack server resize --revert --wait <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+<p><strong>Reconstruir</strong>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server rebuild --wait <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+<p><strong>Reiniciar</strong>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server reboot --wait --soft <span class="code-highlight">INSTANCE</span></span>
+<span class="server">[user@localhost]$ </span><span class="command">openstack server reboot --hard --wait <span class="code-highlight">INSTANCE</span></span>
+</pre>
+</div>
+</div>
+<h2>Almacenamiento en bloque</h2>
+<div class="solvvy-solution">
+<p>Se utiliza para administrar volúmenes que se adjuntan a instancias y copias instantáneas de volumen.</p>
+<p>Crear un volumen de 6 GB nuevo y vacío:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack volume create --size 6 <span class="code-highlight">VOLUME</span></span>
+</pre>
+</div>
+<p>Iniciar una instancia para adjuntar el nuevo volumen:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server create --image <span class="code-highlight">IMAGE</span> \
+--flavor <span class="code-highlight">FLAVOR</span> --key-name <span class="code-highlight">KEY INSTANCE</span></span>
+</pre>
+</div>
+<p>Enumerar los volúmenes y ve el estado del volumen:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack volume list</span>
+</pre>
+</div>
+<p>Añadir volumen a una instancia después de que una instancia esté activa y el volumen esté disponible:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server add volume <span class="code-highlight">INSTANCE VOLUME</span></span>
+</pre>
+</div>
+</div>
+<h2>Copias de seguridad de almacenamiento en bloque</h2>
+<div class="solvvy-solution">
+<p>Se usa para crear y administrar copias de seguridad de volumen.</p>
+<p>Crear una nueva copia de seguridad de un volumen existente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack volume backup create <span class="code-highlight">VOLUME</span></span>
+<span class="server">[user@localhost]$ </span><span class="command">openstack volume backup create --force <span class="code-highlight">VOLUME</span></span>
+<span class="server">[user@localhost]$ </span><span class="command">openstack volume backup create --force --incremental <span class="code-highlight">VOLUME</span></span>
+</pre>
+</div>
+<p>Eliminar una copia de seguridad de un volumen:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack volume backup delete <span class="code-highlight">VOLUME</span></span>
+<span class="server">[user@localhost]$ </span><span class="command">openstack volume backup delete --force <span class="code-highlight">VOLUME</span></span>
+</pre>
+</div>
+<p>Lista de copias de seguridad de volumen:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack volume backup list</span>
+</pre>
+</div>
+<p>Mostrar detalles de copia de seguridad de volumen:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack volume backup show <span class="code-highlight">VOLUME</span></span>
+</pre>
+</div>
+</div>
