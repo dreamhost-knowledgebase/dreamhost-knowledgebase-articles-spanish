@@ -55,13 +55,13 @@ dreamhost-git-key.pub</pre>
 <dd><em>Si estás usando Linux:</em></dd>
 </dl>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">ssh-copy-id -i ~/.ssh/dreamhost-git-key.pub user@server.dreamhost.com</span></pre>
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">ssh-copy-id -i ~/.ssh/dreamhost-git-key.pub <span class="code-highlight">user@server.dreamhost.com</span></span></pre>
 </div>
 <dl>
 <dd><em>Si estás utilizando Mac OS X (también funciona con Linux):</em></dd>
 </dl>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cat ~/.ssh/dreamhost-git-key.pub | ssh user@server.dreamhost.com "mkdir ~/.ssh; cat &gt;&gt; ~/.ssh/authorized_keys"</span>
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cat ~/.ssh/dreamhost-git-key.pub | ssh <span class="code-highlight">user@server.dreamhost.com</span> "mkdir ~/.ssh; cat &gt;&gt; ~/.ssh/authorized_keys"</span>
 </pre>
 </div>
 <div class="alert alert-note">
@@ -73,7 +73,7 @@ dreamhost-git-key.pub</pre>
 </div>
 <p>Esto simplemente significa que el directorio <span class="text-object">/.ssh</span> ya existe en el servidor web. Si ves esto, elimina la parte del comando que crea el directorio y vuelve a ejecutarlo. Por ejemplo:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cat ~/.ssh/dreamhost-git-key.pub | ssh user@server.dreamhost.com "cat &gt;&gt; ~/.ssh/authorized_keys"</span>
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cat ~/.ssh/dreamhost-git-key.pub | ssh <span class="code-highlight">user@server.dreamhost.com</span> "cat &gt;&gt; ~/.ssh/authorized_keys"</span>
 </pre>
 </div>
 </div>
@@ -81,7 +81,7 @@ dreamhost-git-key.pub</pre>
 </li>
 <li>Inicia sesión en tu servidor DreamHost a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">ssh user@server.dreamhost.com</span>
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">ssh <span class="code-highlight">user@server.dreamhost.com</span></span>
 </pre>
 </div>
 <div class="alert alert-note">
@@ -108,8 +108,8 @@ dreamhost-git-key.pub</pre>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span>
-<span class="server">[server]$ </span><span class="command">mkdir example.com.git</span>
-<span class="server">[server]$ </span><span class="command">cd ~/example.com.git</span>
+<span class="server">[server]$ </span><span class="command">mkdir <span class="code-highlight">example.com.git</span></span>
+<span class="server">[server]$ </span><span class="command">cd <span class="code-highlight">~/example.com.git</span></span>
 <span class="server">[server]$ </span><span class="command">git init --bare</span>
 <span class="server">[server]$ </span><span class="command">exit</span>
 </pre>
@@ -117,7 +117,7 @@ dreamhost-git-key.pub</pre>
 </li>
 <li>Navega a tu repositorio git en tu computadora local, y luego empuja al repositorio remoto en tu servidor DreamHost. Asegúrese de cambiar 'user' y 'server' por tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214694298--Cu%C3%A1les-son-los-diferentes-tipos-de-usuarios-de-DreamHost-" target="_self">Nombre de usuario DreamHost</a>&nbsp;y&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027#nombre-de-host" target="_self">Nombre de servidor real</a>:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git remote add dreamhost ssh://user@server.dreamhost.com/~/example.com.git</span>
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git remote add dreamhost ssh://<span class="code-highlight">user@server.dreamhost.com/~/example.com.git</span></span>
 <span class="server">[local ~]$ </span><span class="command">git push -u dreamhost master</span>
 </pre>
 </div>
@@ -149,11 +149,11 @@ To ssh://username@server.dreamhost.com/~/example.com.git
 <li>Inicie sesión en su servidor DreamHost a través de SSH.</li>
 <li>Clona el repositorio en una nueva ubicación ejecutando lo siguiente en el directorio de tu usuario:<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir ~/cloned.example.com.git</span>
-<span class="server">[server]$ </span><span class="command">git clone ~/example.com.git ~/cloned.example.com.git</span>
-<span class="server">[server]$ </span><span class="command">cd ~/cloned.example.com.git</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir <span class="code-highlight">~/cloned.example.com.git</span></span>
+<span class="server">[server]$ </span><span class="command">git clone <span class="code-highlight">~/example.com.git ~/cloned.example.com.git</span>/span&gt;
+<span class="server">[server]$ </span><span class="command">cd <span class="code-highlight">~/cloned.example.com.git</span></span>
 <span class="server">[server]$ </span><span class="command">ls -la</span>
-</pre>
+</span></pre>
 </div>
 <dl>
 <dd><em>Este directorio clonado ahora contiene todos los archivos que empujaste desde tu máquina local.</em></dd>
