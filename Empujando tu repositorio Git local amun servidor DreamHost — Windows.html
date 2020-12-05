@@ -85,7 +85,7 @@ $</span></pre>
 </li>
 <li>Ejecuta el siguiente comando para cargar tu clave pública en tu servidor DreamHost (asegúrate de usar el nombre de usuario y servidor de tu sitio web):<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cat ~/Documents/dreamhost-git-key.pub | ssh user@server.dreamhost.com "mkdir ~/.ssh; cat &gt;&gt; ~/.ssh/authorized_keys"</span>
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cat ~/Documents/dreamhost-git-key.pub | ssh <span class="code-highlight">user@server.dreamhost.com</span> "mkdir ~/.ssh; cat &gt;&gt; ~/.ssh/authorized_keys"</span>
 </pre>
 </div>
 <div class="alert alert-note">
@@ -97,7 +97,7 @@ $</span></pre>
 </div>
 <p>Esto simplemente significa que el directorio <span class="text-object">/.ssh</span> ya existe en el servidor web. Si ves esto, elimina la parte del comando que crea el directorio y vuelve a ejecutarlo. Por ejemplo:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cat ~/Documents/dreamhost-git-key.pub | ssh user@server.dreamhost.com "cat &gt;&gt; ~/.ssh/authorized_keys"</span>
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cat ~/Documents/dreamhost-git-key.pub | ssh <span class="code-highlight">user@server.dreamhost.com</span> "cat &gt;&gt; ~/.ssh/authorized_keys"</span>
 </pre>
 </div>
 </div>
@@ -105,7 +105,7 @@ $</span></pre>
 </li>
 <li>Inicia sesión en tu servidor DreamHost a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">ssh user@server.dreamhost.com</span>
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">ssh <span class="code-highlight">user@server.dreamhost.com</span></span>
 </pre>
 </div>
 </li>
@@ -123,8 +123,8 @@ $</span></pre>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span>
-<span class="server">[server]$ </span><span class="command">mkdir example.com.git</span>
-<span class="server">[server]$ </span><span class="command">cd ~/example.com.git</span>
+<span class="server">[server]$ </span><span class="command">mkdir <span class="code-highlight">example.com.git</span></span>
+<span class="server">[server]$ </span><span class="command">cd ~/<span class="code-highlight">example.com.git</span></span>
 <span class="server">[server]$ </span><span class="command">git init --bare</span>
 <span class="server">[server]$ </span><span class="command">exit</span>
 </pre>
@@ -150,8 +150,8 @@ $</span></pre>
 </li>
 <li>Ejecuta lo siguiente para crear tu usuario y correo electrónico para usar con Git:<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git config --global user.name "John Doe"</span>
-<span class="server">[local ~]$ </span><span class="command">git config --global user.email johndoe@example.com</span>
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git config --global user.name <span class="code-highlight">"John Doe"</span></span>
+<span class="server">[local ~]$ </span><span class="command">git config --global user.email <span class="code-highlight">johndoe@example.com</span></span>
 </pre>
 </div>
 <dl>
@@ -172,7 +172,7 @@ $</span></pre>
 <li>Cuando inicializas el repositorio, se crea una carpeta titulada .git. Por defecto, no puedes ver esto en Windows. Si deseas ver archivos ocultos (archivos que comienzan con un punto), haz clic en 'Ver' en el menú superior. A la derecha, marca la casilla para archivos ocultos. No necesitas ver esta carpeta .git para continuar con estos pasos. Esta es solo una forma de ver que tus comandos han creado el repositorio local.</li>
 <li>Agrega el repositorio remoto. Asegúrate de usar tu nombre de usuario y servidor.<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git remote add dreamhost ssh://user@server.dreamhost.com/~/example.com.git</span>
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git remote add dreamhost ssh://<span class="code-highlight">user@server.dreamhost.com/~/example.com.git</span></span>
 <span class="server">[local ~]$ </span><span class="command">git push -u dreamhost master</span>
 </pre>
 </div>
@@ -191,9 +191,9 @@ $</span></pre>
 </li>
 <li>Clone el repositorio en una nueva ubicación ejecutando lo siguiente en el directorio de tu usuario:<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir ~/clonedproject.git</span>
-<span class="server">[server]$ </span><span class="command">cd ~/clonedproject.git</span>
-<span class="server">[server]$ </span><span class="command">git clone ~/example.com.git ~/clonedproject.git</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir ~/<span class="code-highlight">clonedproject.git</span></span>
+<span class="server">[server]$ </span><span class="command">cd ~/<span class="code-highlight">clonedproject.git</span></span>
+<span class="server">[server]$ </span><span class="command">git clone <span class="code-highlight">~/example.com.git ~/clonedproject.git</span></span>
 <span class="server">[server]$ </span><span class="command">ls -la</span>
 </pre>
 </div>
