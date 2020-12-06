@@ -91,7 +91,7 @@ gpg: Good signature from "Maxim Dounin &lt;mdounin@mdounin.ru&gt;"
 <h3>Ocultar encabezados de proxy ascendentes</h3>
 <p>Del mismo modo, cuando se utiliza nginx para enviar solicitudes desde un servidor ascendente (como una instancia PHP-FPM), puede ser beneficioso ocultar ciertos encabezados enviados en la respuesta ascendente (por ejemplo, la versión de PHP en ejecución). Por ejemplo, considera la siguiente respuesta de un servidor nginx que ejecuta una aplicación PHP:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">curl -I http://example.com</span>
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">curl -I <span class="code-highlight">http://example.com</span></span>
 HTTP/1.1 200 OK
 Server: nginx
 Content-Type: text/html; charset=UTF-8
@@ -108,7 +108,7 @@ X-Powered-By: PHP/5.3.3
 </div>
 <p>Reenviar la solicitud al mismo servidor ahora tendría este resultado:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">curl -I http://example.com</span>
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">curl -I <span class="code-highlight">http://example.com</span></span>
 HTTP/1.1 200 OK
 Server: nginx
 Content-Type: text/html; charset=UTF-8
@@ -129,12 +129,12 @@ Vary: Accept-Encoding
 <h3>Restringe el acceso por medio de IP</h3>
 <p>Las áreas sensibles de los sitios web, como los paneles de control de administración, deben tener controles de acceso estrictos. nginx facilita incluir en la lista blanca el acceso IP a ciertas ubicaciones de tu sitio web y denegar el tráfico a todas las demás direcciones IP:</p>
 <div class="preboxcontainer">
-<pre class="prebox">location /wp-admin {
+<pre class="prebox">location <span class="code-highlight">/wp-admin</span> {
 
     # allow access from one IP and an additional IP range,
     # and block everything else
-    allow 1.2.3.4;
-    allow 192.168.0.0/24;
+    allow <span class="code-highlight">1.2.3.4</span>;
+    allow <span class="code-highlight">192.168.0.0/24</span>;
     deny all;
 }
 </pre>
@@ -144,7 +144,7 @@ Vary: Accept-Encoding
 <h3>Restringir acceso por contraseña</h3>
 <p>El acceso a ciertas ubicaciones también se puede configurar mediante credenciales basadas en contraseña, utilizando el mismo formato que usan los archivos .htaccess y .htpasswd de Apache:</p>
 <div class="preboxcontainer">
-<pre class="prebox">location /wp-admin {
+<pre class="prebox">location <span class="code-highlight">/wp-admin</span> {
     auth_basic "Admin Area";
     auth_basic_user_file /path/to/.htpasswd;
 }
@@ -153,9 +153,9 @@ Vary: Accept-Encoding
 </div>
 <p>Donde los contenidos de <cite>.htpasswd</cite> se ven algo así:</p>
 <div class="preboxcontainer">
-<pre class="prebox">user1:password1
-user2:password2
-user3:password3
+<pre class="prebox">user1:<span class="code-highlight">password1</span>
+user2:<span class="code-highlight">password2</span>
+user3:<span class="code-highlight">password3</span>
 </pre>
 </div>
 </div>
