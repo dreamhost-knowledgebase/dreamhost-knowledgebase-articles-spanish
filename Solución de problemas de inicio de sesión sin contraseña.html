@@ -4,7 +4,7 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/216499537-C%C3%B3mo-configurar-inicio-de-sesi%C3%B3n-sin-contrase%C3%B1a-en-Mac-OS-y-Linux" target="_self">Crear el keypair</a> en la computadora de tu hogar.</li>
 <li>Si ssh-copy-id no funciona para ti, carga manualmente tu clave pública en tu servidor DreamHost. En la computadora de tu casa, ejecuta este comando con tu nombre de usuario donde creaste tu keypair:<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local]$ </span><span class="command">scp ~/.ssh/id_rsa.pub username@server.dreamhost.com:~/</span>
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">scp ~/.ssh/id_rsa.pub <span class="code-highlight">username@server.dreamhost.com:~/</span></span>
 </pre>
 </div>
 <p>Esto copia el archivo id_rsa.pub en la computadora de tu hogar a tu usuario de DreamHost SHELL.</p>
@@ -45,7 +45,7 @@
 </ol>
 <p>Si todo está configurado correctamente, ahora deberías poder acceder a tu cuenta DreamHost a través de SSH sin una contraseña. Ejecuta este comando en la computadora de tu hogar donde acabas de crear el keypair original.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh username@server.dreamhost.com</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh <span class="code-highlight">username@server.dreamhost.com</span></span>
 </pre>
 </div>
 <div class="alert alert-note">
@@ -103,7 +103,7 @@
 <p>Si no puedes iniciar sesión automáticamente después de cargar tu clave pública, puede deberse a que estás utilizando nombres de keypairs personalizados; es decir, estás utilizando algo distinto de id_rsa / id_rsa.pub. Esto es común cuando uno mantiene múltiples keypairs.</p>
 <p>Ingresa lo siguiente para ejecutar ssh en modo detallado:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local]$ </span><span class="command">ssh -v user@example.com</span>
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">ssh -v <span class="code-highlight">user@example.com</span></span>
 </pre>
 </div>
 <p>Verifica la salida para tu nombre de clave pública. Si el resultado indica que ssh está buscando 'id_rsa' y estás utilizando un nombre de clave personalizado, entonces esto probablemente explica por qué aún no puedes iniciar sesión sin ingresar tu contraseña. Para remediar esto, ingresa lo siguiente para agregar tu nombre de clave personalizado:</p>
