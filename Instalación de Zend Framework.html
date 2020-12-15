@@ -1,0 +1,134 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo proporciona instrucciones sobre cómo implementar Zend Framework en un entorno de alojamiento compartido. Ten en cuenta que esta guía no te enseña sobre Zend Framework en sí.</p>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Para continuar con este artículo, debes tener un usuario de Shell habilitado y tener un conocimiento básico del shell de Unix. Consulta los siguientes artículos para obtener más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Crear un usuario con acceso Shell (SSH)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades SSH</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2><strong><span id="Objectives">Objetivos</span></strong></h2>
+<div class="solvvy-solution">
+<p>Estos son los objetivos:</p>
+<ul>
+<li>Instalación sin hackeo, sin php.ini personalizado o redirección desordenada en tu .htaccess</li>
+<li>Estructura de archivo simple y limpia</li>
+</ul>
+</div>
+<h2><strong><span id="Installing_Zend_Framework_2">Instalar Zend Framework</span></strong></h2>
+<div class="solvvy-solution">&nbsp;</div>
+<h2><span id="Step_one:_creating_a_new_user">Paso 1 — crear un nuevo usuario</span></h2>
+<div class="solvvy-solution">
+<p>Consulta el artículo <a href="https://help.dreamhost.com/hc/es/articles/214694298--Cu%C3%A1les-son-los-diferentes-tipos-de-usuarios-de-DreamHost-">Usuarios</a> para obtener detalles sobre cómo crear un nuevo nombre de usuario. Al crearlo, asegúrate de que esté creado como un usuario <a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access">SSH (Shell)</a>, ya que esto te permite iniciar sesión en tu servidor para ejecutar comandos más adelante.</p>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Por razones de seguridad, es mejor crear una nueva cuenta de usuario para alojar el dominio. ¡Evita alojar varios dominios en la misma cuenta de usuario a toda costa! Si un hackeo compromete tu cuenta, todos los dominios que se ejecutan bajo ese nombre de usuario específico pueden y serán afectados.</p>
+</div>
+</div>
+</div>
+<h2><span id="Step_two:_creating_a_fully_hosted_domain.2Fsubdomain">Paso 2 — crea un dominio/subdominio totalmente alojado</span></h2>
+<div class="solvvy-solution">
+<p>Ve el siguiente artículo que te guía a través de cómo agregar un dominio completamente alojado a tu panel:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215416227-C%C3%B3mo-agrego-un-dominio-">¿Cómo añado un dominio?</a></li>
+</ul>
+<p>Asegúrate de asignar el usuario Shell recién creado al dominio cuando lo agregues.</p>
+</div>
+<h2><span id="Step_three:_downloading_and_extracting_Zend_Framework_through_a_shell_.28terminal.29">Paso 3 — descarga y extrae Zend Framework a través de un shell (terminal)</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Accede por <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> al directorio raíz de tu usuario.</li>
+<li>En ese directorio, ejecuta el siguiente comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://packages.zendframework.com/releases/ZendFramework-1.12.15/ZendFramework-1.12.15.tar.gz</span></pre>
+</div>
+</li>
+<li>Ve la siguiente página para obtener una lista completa de descargas disponibles:
+<ul>
+<li><a href="http://framework.zend.com/downloads/latest">http://framework.zend.com/downloads/latest</a></li>
+</ul>
+</li>
+<li>Una vez descargado, ejecuta el siguiente comando para extraer el contenido en una carpeta llamada ‘ZendFramework-1.12.15’:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar -xvf ZendFramework-1.12.15.tar.gz</span></pre>
+</div>
+</li>
+<li>Ejecuta el siguiente comando para remover el archivo original .tar.gz:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rm ZendFramework-1.12.15.tar.gz</span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="Step_four:_modifying_the_bash_profile">Paso 4 — modificar el perfil bash</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Ve el artículo <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">crear y editar un archivo a través de SSH</a> para instrucciones sobre como editar tú .bash_profile existente. Agrega las siguientes tres líneas al final del archivo:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="cmdoutput">PATH=$PATH:$HOME/ZendFramework-1.12.15
+export PATH
+alias zf=$HOME/ZendFramework-1.12.15/bin/zf.sh</span></pre>
+</div>
+</li>
+<li>Guarda y cierra tu .bash_profile.</li>
+<li>Desconéctate y vuelve a conectarte a tu terminal (SSH) para que los cambios de perfil surtan efecto. También puedes ejecutar el siguiente comando para actualizarlo:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">. ~/.bash_profile</span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="Step_five:_creating_your_Zend_app">Paso 5 — crear tu aplicación Zend</span></h2>
+<div class="solvvy-solution">
+<p>En la terminal (SSH), escribe el siguiente comando (NO nombres tu proyecto como un nombre de dominio todavía):</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">zf create <span class="code-highlight">project yourzendapp</span></span></pre>
+</div>
+<p><em>Una aplicación Zend aparece en una nueva carpeta “yourzendapp”.</em></p>
+</div>
+<h2><span id="Step_six:_deleting_with_Symlink">Paso 6 — eliminar con Symlink</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Ejecuta el siguiente comando a través de una terminal (SSH) donde <strong>example.com</strong> es tu dominio:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mv <span class="code-highlight">example.com example.com_OLD</span></span></pre>
+</div>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Symbolic_link">Symlink</a> al directorio <span class="text-object">public</span> de tu aplicación Zend donde <strong>example.com</strong> es tu dominio:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ln -s <span class="code-highlight">yourzendapp/public example.com</span></span></pre>
+</div>
+</li>
+<li>Symlink la biblioteca Zend a tu aplicación zend:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd <span class="code-highlight">yourzendapp/library</span></span>
+<span class="server">[server]$ </span><span class="command">ln -s ../../ZendFramework-1.12.15/library/Zend</span></pre>
+</div>
+</li>
+<li>Visita tu dominio y deberías ver la página inicial por defecto de Zend.</li>
+</ol>
+</div>
+<h2><strong><span id="See_also">Ver también</span></strong></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-PHP">Generalidades PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">Generalidades php.ini</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Crear un usuario con acceso Shell (SSH)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a></li>
+</ul>
+</div>

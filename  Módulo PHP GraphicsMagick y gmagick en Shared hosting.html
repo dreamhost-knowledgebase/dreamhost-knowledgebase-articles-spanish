@@ -1,0 +1,94 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>GraphicsMagick proporciona una colección completa de utilidades, interfaces de programación y GUI para admitir la conversión de formato de archivo, el procesamiento de imágenes y la representación de vectores 2D. Ver más información en el siguiente enlace:</p>
+<ul>
+<li><a href="http://www.graphicsmagick.org/README.html">http://www.graphicsmagick.org/README.html</a></li>
+</ul>
+</div>
+<h2><span id="Preparing_the_environment">Preparar el entorno</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Asegúrate de estar en el directorio principal de tu usuario, no en el directorio de tu dominio.</li>
+<li>Crea un directorio <span class="text-object">build</span> donde se descargan, configuran y compilan todas las herramientas necesarias:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir build</span></pre>
+</div>
+</li>
+<li>Crea un directorio <span class="text-object">local</span> donde se desplieguen todas las herramientas necesarias:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir local</span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="Installing_GraphicsMagick">Instalar GraphicsMagick</span></h2>
+<div class="solvvy-solution">
+<p>Una vez que hayas creado los directorios /build y /local, procede con los siguientes comandos. Este ejemplo usa la versión 1.3.21.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd build</span>
+<span class="server">[server]$ </span><span class="command">wget "ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/GraphicsMagick-LATEST.tar.gz"</span>
+<span class="server">[server]$ </span><span class="command">tar zxvf GraphicsMagick-LATEST.tar.gz</span>
+<span class="server">[server]$ </span><span class="command">cd GraphicsMagick-1.3.21</span>
+<span class="server">[server]$ </span><span class="command">./configure --prefix=$HOME/local --enable-shared --enable-symbol-prefix</span>
+<span class="server">[server]$ </span><span class="command">make</span>
+<span class="server">[server]$ </span><span class="command">make install</span>
+</pre>
+</div>
+<p>Si todo funciona sin problemas, los archivos binarios de GraphicsMagick actualizados, la colección de bibliotecas, la documentación, etc., están disponibles en su directorio <span class="text-object">local</span> (y subdirectorio).</p>
+<p>Comienza a usar este directorio <span class="text-object">local</span> ejecutando el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">export PATH=$HOME/local/bin:$PATH</span></pre>
+</div>
+</div>
+<h2><span id="Building_the_gmagick_PHP_module">Construir el módulo PHP gmagick</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega a tu directorio <span class="text-object">/build</span>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd $HOME/build</span></pre>
+</div>
+</li>
+<li>Visita <a href="http://pecl.php.net/package/gmagick">http://pecl.php.net/package/gmagick</a> y elige la versión que deseas usar.</li>
+<li>Ejecuta los siguientes comandos según la versión que estés usando. Este ejemplo usa 1.1.7RC3.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget "https://pecl.php.net/get/gmagick-1.1.7RC3.tgz"</span>
+<span class="server">[server]$ </span><span class="command">tar zxvf gmagick-1.1.7RC3.tgz</span>
+<span class="server">[server]$ </span><span class="command">cd gmagick-1.1.7RC3</span></pre>
+</div>
+</li>
+<li>Ejecuta lo siguiente para asegurarte de que imagick se compile con mayor fluidez. Cambia la versión <span class="code">phpize</span> a la versión real de PHP que necesita usar. Ve el <a href="https://help.dreamhost.com/hc/es/articles/215082337--Qu%C3%A9-versiones-de-PHP-est%C3%A1n-disponibles-en-DreamHost-">artículo de versiones PHP</a> para más detalles:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php72/bin/phpize</span>
+<span class="server">[server]$ </span><span class="command">export PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig</span>
+<span class="server">[server]$ </span><span class="command">./configure --prefix=$HOME/local --with-gmagick=$HOME/local --with-php-config=/usr/local/php72/bin/php-config</span>
+<span class="server">[server]$ </span><span class="command">make</span></pre>
+</div>
+<p>Es posible que veas algunas advertencias de compilación. Puedes ignorarlos con seguridad. Busca lo siguiente que garantiza una instalación exitosa:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Libraries have been installed in: <br />&nbsp;&nbsp;/home/&lt;your login&gt;/build/gmagick-1.1.7RC3/modules</pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="Configuring_PHP_to_use_this_extension">Configurar PHP esta extensión</span></h2>
+<div class="solvvy-solution">
+<p>Visita el artículo de <a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">PHP.ini</a> para detalles sobre como crear un archivo phprc.</p>
+<p>En este ejemplo, el dominio se ejecuta bajo PHP 7.2. Entonces tu archivo phprc estaría en este directorio:</p>
+<p>Ejecuta lo siguiente para crear tu directorio <span class="text-object">/extensions</span>, copia el módulo y agrégalo al archivo phprc:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd $HOME/.php/7.2</span>
+<span class="server">[server]$ </span><span class="command">mkdir extensions</span>
+<span class="server">[server]$ </span><span class="command">cp $HOME/build/gmagick-1.1.7RC3/modules/gmagick.so extensions</span>
+<span class="server">[server]$ </span><span class="command">echo "extension = $HOME/.php/7.2/extensions/gmagick.so" &gt;&gt; phprc</span></pre>
+</div>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-PHP">Generalidades PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217253627-Generalidades-sobre-ImageMagick">Generalidades Image Magick</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217253537--Instalaci%C3%B3n-de-ImageMagick-y-el-m%C3%B3dulo-PHP-imagick-en-shared-Hosting">Instalar los módulos PHP ImageMagick y imagick en Shared hosting</a></li>
+</ul>
+</div>

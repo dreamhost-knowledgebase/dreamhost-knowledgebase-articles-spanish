@@ -1,0 +1,89 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Los buckets de DreamObjects no se pueden cambiar de nombre una vez creados. Sin embargo, puedes utilizar la herramienta de migración del panel para copiar un bucket a uno nuevo. De esta manera, puedes cambiar el nombre del bucket creando uno nuevo con el mismo contenido.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este artículo explica como migrar un bucket de DreamObjects a un nuevo bucket de DreamObjects.</p>
+<p>En su lugar, consulta el siguiente artículo si necesitas instrucciones sobre cómo migrar un bucket de S3 de Amazon Web Services a DreamObjects.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115001860231-Migraci%C3%B3n-de-buckets-de-S3-de-terceros-a-DreamObjects">Migrar buckets S3 de terceros a DreamObjects</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Crear una migración</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega a la página de <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener">DreamObjects</a> en tu panel de DreamHost.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/S3_Migration_01.png" alt="" /></dd>
+</dl>
+</li>
+<li>Haz clic en la pestaña <span class="text-object">Migrations</span>.</li>
+<li>Haz clic en el botón <strong>+ Create Migration</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/dho-migration_01.png" alt="" /></dd>
+</dl>
+</li>
+<li>Ingresa las credenciales de tu bucket de DreamHost:
+<ul>
+<li>Type — Configúralo en S3</li>
+<li>Host — objects-us-east-1.dream.io</li>
+<li>Access Key y Secret Key — Estas son tus <a href="https://help.dreamhost.com/hc/es/articles/215986357-Llaves-de-DreamObjects" target="_self">Llaves de DreamObjects</a></li>
+</ul>
+</li>
+<li>Haz clic en el botón <strong>Choose Destination &amp; Buckets</strong>.
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/S3_Migration_03.png" alt="" /></dd>
+</dl>
+</li>
+<li>Ingresa un nombre para su migración. El nombre es solo para tu uso.</li>
+<li>Si tienes más de un usuario de DreamObjects, elige en el que te gustaría crear el nuevo bucket.</li>
+<li>De forma predeterminada, todos los depósitos están resaltados y seleccionados. Haz clic en un bucket para anular la selección. Asegúrate de que el único bucket seleccionado sea el que deseas copiar.</li>
+<li>Haz clic en el botón <strong>Start Migration</strong>.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/dho-migration_02.png" alt="DHO migration error" /></dd>
+</dl>
+<p>Dado que está migrando a un nuevo bucket de DreamObjects, se muestra un error que te notifica que el nombre del bucket ya existe.</p>
+<p>Nombra este bucket como quieras. Este será el bucket renombrado una vez que se complete la migración.</p>
+</div>
+</div>
+</li>
+<li>Haz clic <strong>Resolve Conflicts</strong> para comenzar la migración.
+<dl>
+<dd><em>Se abre la página principal de la pestaña <span class="text-object">Migrations</span> y su migración activa se muestra en la sección <span class="text-section">Active Migrations</span>:</em></dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/dho-migration_03.png" alt="DHO migration error" /></dd>
+</dl>
+</li>
+</ol>
+</div>
+<h2>Conflictos de la convención de nomenclatura de buckets</h2>
+<div class="solvvy-solution">
+<p>Si las convenciones de nomenclatura utilizadas para tus buckets de S3 no son compatibles con las convenciones de nomenclatura de DreamObjects, aparecerá la pantalla 'Bucket Name Conflicts'.&nbsp;</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Actualmente, los nombres de buckets que utilizan letras mayúsculas no se pueden importar porque las letras mayúsculas pueden crear problemas de DNS. Si tiene S3 Buckets que usan letras mayúsculas, se te pedirá que cambies sus nombres. Si lo deseas, puedes utilizar guiones o puntos para separar palabras.</p>
+<p>Los nombres de bucket deben incluir al menos 3 caracteres y solo pueden contener caracteres en minúscula (a – z), números (0–9), guiones (-) y puntos (solo un punto a la vez y no pueden terminar en un punto). Aunque ciertos símbolos, como guiones o puntos, son válidos, romperán el DNS en el nombre de su bucket (reduciendo la funcionalidad del bucket) y no se recomiendan.</p>
+<p>Para evitar problemas, modifica los nombres de los bucket para resolver los conflictos de nombres y luego haz clic en el botón <strong>Resolve Conflicts</strong>.</p>
+</div>
+</div>
+</div>
+<h2>Ver los detalles de migración</h2>
+<div class="solvvy-solution">
+<p>Haza clic en el botón <strong>View Details</strong> para ver información sobre la migración. Por ejemplo, puedes ver el estado actual, cuánto tiempo se ha estado procesando y su estado actual.</p>
+<p>Los buckets migrados y en migración reflejan uno de los cinco estados siguientes:</p>
+<ul>
+<li><strong>Queued</strong> — el Bucket y todos sus objetos se han copiado con éxito en DreamObjects.</li>
+<li><strong>In Progress</strong> — el Bucket está en proceso de copiarse a DreamObjects y aún no ha completado la acción.</li>
+<li><strong>Stopped</strong> — el proceso de migración para el Bucket ha fallado o el usuario que solicitó la migración lo detuvo manualmente.</li>
+<li><strong>Partial</strong> — algunos Buckets y su contenido se han migrado y otros no. Esto puede deberse a una falla durante la sincronización de objetos. Tales fallas pueden deberse a la eliminación de tus Buckets de S3 o al revocar tus credenciales de S3 antes de que se complete la migración.</li>
+<li><strong>Complete</strong> — el Bucket y todos sus objetos se han copiado con éxito en DreamObjects.</li>
+</ul>
+</div>

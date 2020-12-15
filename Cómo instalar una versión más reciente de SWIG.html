@@ -1,0 +1,57 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Para ejecutar los comandos de este artículo, debes iniciar sesión en tu servidor a través de SSH con tu usuario de Shell. Ve los siguientes artículos para obtener más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Crear un usuario con acceso Shell (SSH)</a></li>
+</ul>
+<p>SWIG (el <a href="http://www.swig.org/">Simplified Wrapper and Interface Generator</a>) es usado por algunos paquetes para generar fácilmente enlaces a lenguajes de programación (por ejemplo, Python).</p>
+<p>Estas instrucciones son para instalar SWIG versión 3.0.5 desde la fuente.</p>
+</div>
+</div>
+<h2>Instalación</h2>
+<div class="solvvy-solution">
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir ${HOME}/soft</span>
+<span class="server">[server]$ </span><span class="command">cd ${HOME}/soft</span>
+</pre>
+</div>
+<p>Descarga y extrae el paquete</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget http://prdownloads.sourceforge.net/swig/swig-3.0.5.tar.gz</span>
+<span class="server">[server]$ </span><span class="command">tar xvzf swig-3.0.5.tar.gz</span>
+<span class="server">[server]$ </span><span class="command">cd swig-3.0.5</span></pre>
+</div>
+<p>Suponiendo que has seguido las <a href="https://help.dreamhost.com/hc/es/articles/215489338-Instalar-y-usar-virtualenv-con-Python-2">instrucciones de virtualenv</a>, configura usando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">./configure --prefix=$HOME --with-perl5=/usr/local/bin/perl --with-python=$HOME/opt/python-2.7.7/bin/python  --with-ruby=/usr/bin/ruby</span>
+</pre>
+</div>
+<p>Compila y verifica</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">make</span>
+<span class="server">[server]$ </span><span class="command">make check</span></pre>
+</div>
+<p>Es posible que obtengas algunos errores sobre ocaml. Estos no importan (a menos que tengas la intención de utilizar esta versión de SWIG para generar enlaces ocaml también.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">make install</span></pre>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216137717-Generalidades-sobre-Python">Generalidades sobre Python</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216128557-Pautas-para-configurar-un-archivo-Python-en-DreamHost">Directrices para configurar un archivo Python en DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000218612-Instalar-una-versi%C3%B3n-de-Python-2">Instalar una versión personalizada de Python 2</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000702772-Instalar-una-versi%C3%B3n-personalizada-de-Python-3">Instalar una versión personalizada de Python 3</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215489338-Instalar-y-usar-virtualenv-con-Python-2">Instalar y usar virtualenv con Python 2</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3">Instalar y usar virtualenv con Python 3</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216137637-Pyenv-simple-Python-version-management">Pyenv: simple Python version management</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215503458-Python-setuptools">Python Setuptools</a></li>
+</ul>
+</div>
+</div>

@@ -1,0 +1,121 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo proporciona instrucciones sobre cómo implementar Zend framework 2 en un entorno de Shared hosting. Ten en cuenta que esta guía no te enseña sobre Zend Framework 2 en sí.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Comenzando con Zend Framework 2, ahora puedes instalar usando la herramienta de administración PHP <a href="/hc/en-us/articles/214899037-Installing-Composer-overview">Composer</a>. Esta guía usa Composer para instalar la versión 2.5.</p>
+<p>Ten en cuenta que solo es posible utilizar Composer si tus sitios están en un servidor <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a>&nbsp; o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">Dedicated</a>. Esto se debe a la cantidad de recursos que requiere. Si tus sitios están en un servidor Shared, debes instalarlo directamente desde los archivos de origen.</p>
+<ul>
+<li><a href="https://framework.zend.com/downloads/archives">https://framework.zend.com/downloads/archives</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2><span id="Step_one:_create_a_new_user">Paso 1 — crea un nuevo usuario</span></h2>
+<div class="solvvy-solution">
+<p>Ve el artículo <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">Cómo crear un usuario con acceso Shell (SSH)</a> artículo para obtener detalles sobre cómo crear un nuevo nombre de usuario. &nbsp;Esto te permite iniciar sesión en tu servidor para ejecutar comandos más adelante.</p>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Por razones de seguridad, es mejor <a href="https://help.dreamhost.com/hc/es/articles/360020340732-Agregar-un-usuario-a-un-servidor" target="_self">crear una nueva cuenta de usuario</a> para alojar el dominio. ¡Evita alojar varios dominios en la misma cuenta de usuario a toda costa! Si un hackeo compromete tu cuenta, todos los dominios que se ejecutan bajo ese nombre de usuario específico pueden y serán afectados.</p>
+</div>
+</div>
+</div>
+<h2><span id="Step_two:_create_a_fully_hosted_domain.2Fsubdomain">Paso 2 — crea un dominio/subdominio completamente alojado</span></h2>
+<div class="solvvy-solution">
+<p>Ve el siguiente artículo que te guía a través de cómo agregar un dominio completamente alojado a tu panel:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215416227-C%C3%B3mo-agrego-un-dominio-">Añadir Dominios y Subdominios</a></li>
+</ul>
+<p>Asegúrate de asignar el usuario Shell recién creado al dominio al agregarlo.</p>
+<p>También asegúrate de que el dominio esté ejecutándose en <a href="https://help.dreamhost.com/hc/en-us/articles/214895317-How-do-I-change-the-PHP-version-of-my-site-" target="_self">PHP 7.2 o mayor</a>.</p>
+</div>
+<h2><span id="Step_three:_create_a_phprc_file">Paso 3 — crea un archivo phprc</span></h2>
+<div class="solvvy-solution">
+<p>Ve los siguientes artículos para obtener instrucciones sobre cómo crear un archivo phprc.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200668--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-SSH-">¿Cómo creo un archivo phprc a través de SSH?</a></li>
+</ul>
+<p>Si el archivo ya existe, consulta los siguientes artículos para obtener instrucciones sobre cómo actualizarlo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH">Crear y editar un archivo a través de SSH</a></li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="cmdoutput">memory_limit = 300M</span></pre>
+</div>
+<p>Aumentar el <a href="https://help.dreamhost.com/hc/es/articles/214893937--C%C3%B3mo-incrementar-el-l%C3%ADmite-de-memoria-PHP-">límite de memoria</a> es para el proceso de instalación; de lo contrario, podría quedarse sin memoria y fallar.</p>
+</div>
+<h2><span id="Step_four:_change_the_default_PHP_CLI_your_shell_uses">Paso 4 — cambiar el CLI de PHP predeterminada que usa tu shell</span></h2>
+<div class="solvvy-solution">
+<p>Si deseas que tus comandos sean predeterminados para una versión específica de PHP, ve el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202148--C%C3%B3mo-cambio-la-versi%C3%B3n-de-PHP-que-usa-mi-shell-">Cambiar la versión predeterminada de PHP en el shell</a></li>
+</ul>
+<p>Solo asegúrate de que la versión PHP de tu shell por defecto sea la <a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-">misma versión que está ejecutando tu sitio en el panel</a>:</p>
+</div>
+<h2><span id="Step_five:_download_Zend_Framework_2.5">Paso 5 — descarga Zend Framework 2.5</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Cambia el directorio a tu proyecto. Este ejemplo asume que estás en el directorio <span class="text-object">/example.com</span>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/<span class="code-highlight">example.com</span></span></pre>
+</div>
+</li>
+<li>Cierra el repositorio.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git clone git://github.com/zendframework/ZendSkeletonApplication.git </span></pre>
+</div>
+</li>
+<li>Cambia de directorio.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ZendSkeletonApplication </span></pre>
+</div>
+<dl>
+<dd><em>Las siguientes carpetas y archivos se han creado en este nuevo directorio</em></dd>
+</dl>
+<ul>
+<li>/.git</li>
+<li>.gitignore</li>
+<li>LICENSE.txt</li>
+<li>README.md</li>
+<li>Vagrantfile</li>
+<li>composer.json</li>
+<li>composer.lock</li>
+<li>/config</li>
+<li>/data</li>
+<li>init_autoloader.php</li>
+<li>/module</li>
+<li>/public</li>
+</ul>
+</li>
+<li>Localmente instala <a href="/hc/en-us/articles/214899037-Installing-Composer-overview">Composer</a> en este directorio.</li>
+<li>Ejecuta lo siguiente para instalar ZendFramework 2:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">php composer.phar self-update</span>
+<span class="server">[server]$ </span><span class="command">php composer.phar install</span></pre>
+</div>
+<dl>
+<dd><em>Esto crea un nuevo directorio <span class="text-object">/vendor</span></em></dd>
+</dl>
+</li>
+<li>Cambia el <a href="https://help.dreamhost.com/hc/es/articles/215909407-Generalidades-sobre-el-panel-Dominios">directorio web</a> de tu sitio a <span class="text-object">/example.com/ZendSkeletonApplication/public/</span>.</li>
+<li>Visita tu sitio y verás que ZendFramework 2 se está ejecutando.</li>
+</ol>
+</div>
+<h2><strong><span id="See_also">Ver también</span></strong></h2>
+<div class="solvvy-solution">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-PHP">Generalidades PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">Generalidades php.ini</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Crear un usuario con acceso Shell (SSH)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216445317--C%C3%B3mo-configurar-un-repositorio-Git-">¿Cómo configurar un repositorio Git?</a></li>
+<li><a href="https://github.com/zendframework/ZendSkeletonApplication">https://github.com/zendframework/ZendSkeletonApplication</a></li>
+</ul>
+</div>
