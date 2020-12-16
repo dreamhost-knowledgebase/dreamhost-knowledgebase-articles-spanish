@@ -1,0 +1,77 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este artículo contiene información/ejemplos usando usuarios root/sudo/admin. Si necesitas acceso sudo/admin, debes actualizar a un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">sevidor Dedicated</a>.</p>
+</div>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>PHP 5.6 es la única versión disponible con máquinas VPS compradas antes de marzo de 2020.</p>
+<p>PHP 7.2, 7.3, y 7.4 están disponibles en máquinas VPS compradas después de marzo de 2020. Las versiones anteriores no son compatibles.</p>
+</div>
+</div>
+</div>
+<h2><span id="PHP_processes_per_user">Procesos PHP por usuario</span></h2>
+<div class="solvvy-solution">
+<p>Por motivos de seguridad, generalmente se recomienda asignar un solo usuario a cada dominio. De esta forma, si ese usuario se ve comprometido, ningún otro sitio se verá afectado. Sin embargo, al ejecutar Nginx, se recomienda que consolides tus dominios con un solo nombre de usuario. Esto es por razones de rendimiento.</p>
+<p>Nginx utiliza una cantidad determinada de procesos PHP al iniciarse. Esto sucede para cada usuario, y se inicia el mismo número independientemente de cuántos dominios estén alojados bajo el usuario.</p>
+<p>Sin embargo, si tiene 10 dominios repartidos en 10 usuarios de FTP separados, obtendrá 10 veces más procesos PHP de los que obtendría con un solo usuario.</p>
+<p>Además, ten en cuenta que la cantidad de procesos PHP que se generan por usuario se escala automáticamente con la cantidad de memoria que tu <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a> está configurado para usar.</p>
+</div>
+<h2>Limitar la cantidad de procesos generados por dominio</h2>
+<div class="solvvy-solution">
+<p>A diferencia de Apache o Lighttpd, Nginx no genera automáticamente procesos FCGI. Debes iniciarlos por separado. PHP5 genera automáticamente tantos como establezca en la variable de entorno <span class="code">PHP_FCGI_CHILDREN</span>.</p>
+<p>Ve el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="http://wiki.nginx.org/FcgiExample">http://wiki.nginx.org/FcgiExample</a></li>
+</ul>
+<p>La variable <span class="code">PHP_FCGI_CHILDREN</span> afecta la cantidad de páginas PHP que se pueden procesar simultáneamente. Cuanto menor sea el valor, menos memoria se utilizará. Pero si recibes mucho tráfico, esto ralentiza su tiempo de respuesta. Este valor predeterminado es 9 en los servidores DreamHost Nginx.</p>
+<h3><span id="Globally">Globalmente en un servidor Dedicated</span></h3>
+<ol>
+<li>Usando un <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-">usuario admin</a> en un servidor Dedicated, navega al siguiente directorio:
+<div class="preboxcontainer">
+<pre class="prebox">/dh/nginx/servers/<span class="code-highlight">httpd-ps12345</span>/environ
+</pre>
+</div>
+</li>
+<li>Usa el comando <span class="code">sudo</span> para editar este archivo. Verás las siguientes líneas:
+<div class="preboxcontainer">
+<pre class="prebox">PHP_FCGI_CHILDREN=9
+PHP_FCGI_MAX_REQUESTS=1000
+</pre>
+</div>
+</li>
+</ol>
+<p><span class="code">PHP_FCGI_CHILDREN</span> es el número de procesos deseados por dominio.</p>
+<h3><span id="Per-user">Por-usuario</span></h3>
+<ol>
+<li>Navega al directorio <span class="text-object">$HOME</span> de tu usuario.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li>Crea un archivo .php-launcher con el siguiente contenido:
+<div class="preboxcontainer">
+<pre class="prebox">#!/bin/sh
+export PHP_FCGI_CHILDREN=9
+exec /dh/cgi-system/php5.cgi $*
+</pre>
+</div>
+</li>
+<li>Haz el script ejecutable:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod a+x .php-launcher</span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx">Generalidades sobre Nginx</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214880148-C%C3%B3mo-cambiar-tu-servidor-web-a-Nginx">Cómo cambiar tu servidor web a Nginx</a></li>
+</ul>
+</div>

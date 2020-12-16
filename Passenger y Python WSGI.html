@@ -1,0 +1,217 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>Las instrucciones proporcionadas en la siguiente sección se consideran avanzadas.</li>
+<li>Se espera que estés bien informado sobre el shell de UNIX.</li>
+<li>El soporte técnico para estas instrucciones no está disponible en el soporte técnico de DreamHost.</li>
+<li>Los cambios en el servidor pueden hacer que esto se rompa.</li>
+<li>Está preparado para solucionar este problema tu mismo si esto sucede</li>
+</ul>
+</div>
+</div>
+<p><a href="/hc/en-us/articles/215769578-Passenger-overview">Passenger</a> es mejor conocido por usarse con aplicaciones Ruby on Rails, sin embargo, también puede servir aplicaciones web Python que usan la interfaz <a href="http://www.python.org/dev/peps/pep-3333/">WSGI</a>, incluida cualquier aplicación que use <a href="/hc/en-us/articles/215319598-Django-overview">Django</a> framework. Dado que Passenger permite que tu aplicación resida temporalmente en la memoria mientras se usa activamente, permitirá que tu sitio responda significativamente más rápido de lo que sería posible de otra manera.</p>
+<p>El soporte WSGI de Passenger funciona razonablemente bien, sin embargo, otra opción disponible es Python FastCGI en caso de que tengas problemas.</p>
+</div>
+<h2><span id="Setting_up_Passenger_WSGI">Configurar Passenger WSGI</span></h2>
+<div class="solvvy-solution">
+<p>Para iniciar un sitio de ejemplo de Python usando Passenger WSGI, tu primer paso debe ser configurar el dominio para usar Passenger como se muestra en el <a href="/hc/en-us/articles/216385637-How-do-I-enable-Passenger-on-my-domain-">artículo de Passenger</a>. Ten en cuenta que la raíz del documento debe terminar en <span class="text-object">/public</span> para una aplicación Passenger, ya que este directorio se utilizará para servir medios estáticos.</p>
+<p>Una vez que hayas configurado el dominio para usar Passenger, crea un archivo llamado <span class="text-object">passenger_wsgi.py</span> en la carpeta arriba de la raíz del documento (es decir, si estableces la raíz de tu documento en <span class="text-object">/home/username/example.com/public</span>, pondrías este archivo en <span class="text-object">/home/username/example.com/passenger_wsgi.py</span>). Este archivo debe exportar un servidor WSGI con el nombre <span class="text-object">application</span>. Aquí hay un ejemplo mínimo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">def application(environ, start_response):
+    start_response('200 OK', [('Content-type', 'text/plain')])
+    return ["Hello, world!"]
+</pre>
+</div>
+<p>Esta aplicación devolverá un archivo de texto con el contenido "Hello, world!" para cualquier solicitud.</p>
+</div>
+<h2><span id="Passenger_WSGI_and_Django">Passenger WSGI y Django</span></h2>
+<div class="solvvy-solution">
+<p>Ve los siguientes artículos para obtener instrucciones sobre cómo configurar Passenger para ejecutar Django.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360002341572-Creating-a-Django-project">Crear un proyecto Django</a></li>
+</ul>
+</div>
+<h2><span id="Passenger_WSGI_and_virtualenv">Passenger WSGI y virtualenv</span></h2>
+<div class="solvvy-solution">
+<p>Mientras Passenger carga tú <code>passenger_wsgi.py</code> en un contenedor especial (actualmente <code>/dh/passenger/lib/phusion_passenger/wsgi/request_handler.py</code>, aunque esto puede cambiar), no puedes seleccionar directamente qué intérprete de Python se usa para ejecutar tu aplicación. Sin embargo, puedes cambiar de intérprete mientras se ejecuta agregando el siguiente código al comienzo de tú <code>passenger_wsgi.py</code>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">import sys, os
+INTERP = "<u>/home/<span class="code-highlight">username</span>/local/bin/python</u>"
+#INTERP is present twice so that the new Python interpreter knows the actual executable path
+if sys.executable&nbsp;!= INTERP: os.execl(INTERP, INTERP, *sys.argv)
+</pre>
+</div>
+<p>Establece INTERP en el intérprete de Python que deseas utilizar en lugar del predeterminado.</p>
+</div>
+<h2><span id="Passenger_WSGI_and_Pylons.2FPyramid">Passenger WSGI y Pylons/Pyramid</span></h2>
+<div class="solvvy-solution">
+<p>Si estás utilizando un sitio compatible con Pyramid-framework, lo siguiente debería funcionar para tú <code>passenger_wsgi.py</code>, asumiendo que has configurado el entorno virtual de Python en <code>INTERP</code>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">import sys, os
+INTERP = "/home/<span class="code-highlight">username</span>/local/bin/python"
+#INTERP is present twice so that the new Python interpreter knows the actual executable path
+if sys.executable&nbsp;!= INTERP: os.execl(INTERP, INTERP, *sys.argv)
+
+from paste.deploy import loadapp
+application = loadapp('config:/home/path/to/site/production.ini')
+</pre>
+</div>
+<p>Ten en cuenta que si estás utilizando un sitio creado a partir de una de las plantillas de inicio de Pyramid, el archivo de configuración <code>development.ini</code> envuelve tu sitio en la capa ErrorMiddleware, similar a lo que se hace en la siguiente sección. Sin embargo, ErrorMiddleware no admite entornos en los que <code>wsgi.multiprocess</code> es <code>True</code>, por lo que debes utilizar la configuración de producción o modificar el entorno para establecer <code>wsgi.multiprocess</code> en <code>False</code>. (Nota: esto puede causar problemas si anulas manualmente la configuración). El siguiente enlace puede ofrecer más ayuda:</p>
+<dl>
+<dd><a href="http://www.ricksresources.com/2012/07/pyramid-on-dreamhost/">Pyramid-en-DreamHost</a></dd>
+</dl>
+</div>
+<h2><span id="errores-500">Solución alterna de errores 500 con Passenger WSGI</span></h2>
+<div class="solvvy-solution">
+<p>Passenger WSGI en este momento tiene dificultades para tratar con errores. Es decir, cuando tu aplicación WSGI (por ejemplo, pero sin limitarse a, Django) genera una excepción no detectada, Passenger muere, se muestra una página 500 en el navegador y el mensaje de error no se registra en el archivo home/username/logs/sitename/http/error.log. Esto dificulta la depuración.</p>
+<p>Una solución es utilizar Python Paste como middleware WSGI entre Passenger y tu aplicación:</p>
+<ol>
+<li>Obtén Paste de aquí: <a href="http://pypi.python.org/pypi/Paste">http://pypi.python.org/pypi/Paste</a>.</li>
+<li>Descomprime los archivos. Todo lo que necesitas es el directorio <span class="text-object">paste</span>.</li>
+<li>Ponlo en el directorio de tu aplicación (por ejemplo, <span class="text-object">/home/username/sitename/myapp/paste</span>)</li>
+<li>Edita tu archivo <span class="text-object">passenger_wsgi.py</span> para incluir ese directorio en la ruta de Python y luego carga Paste.</li>
+</ol>
+<dl>
+<dd><em>Así es como podría verse tu archivo <span class="text-object">passenger_wsgi.py</span>:</em></dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox">import sys, os
+ cwd = os.getcwd()
+ myapp_directory = cwd + '/myapp'
+ sys.path.insert(0,myapp_directory)
+ sys.path.append(os.getcwd())
+ os.environ['DJANGO_SETTINGS_MODULE'] = "myapp.settings"
+ from paste.exceptions.errormiddleware import ErrorMiddleware
+ import django.core.handlers.wsgi
+ application = django.core.handlers.wsgi.WSGIHandler()
+ # To cut django out of the loop, comment the above application = ... line ,
+ # and remove "test" from the below function definition.
+ def testapplication(environ, start_response):
+   status = '200 OK'
+   output = 'Hello World! Running Python version ' + sys.version + '\n\n'
+   response_headers = [('Content-type', 'text/plain'),
+                       ('Content-Length', str(len(output)))]
+   # to test paste's error catching prowess, uncomment the following line
+   # while this function is the "application"
+   #raise("error")
+   start_response(status, response_headers)    
+   return [output]
+ application = ErrorMiddleware(application, debug=True)
+</pre>
+</div>
+</div>
+<h2><span id="Local_logging_alternative">Alternativa de depuración local</span></h2>
+<div class="solvvy-solution">
+<div class="preboxcontainer">
+<pre class="prebox">import os, sys
+
+def _get_log():
+    return file('/home/&lt;username&gt;/passengerwsgi.log', 'a')
+
+log = _get_log()
+print &gt;&gt;log, "Running&nbsp;%s"&nbsp;% (sys.executable)
+
+INTERP = "/home/<span class="code-highlight">username</span>/local/bin/python"
+if sys.executable&nbsp;!= INTERP: 
+    print &gt;&gt;log, "Detected wrong interpreter location, swapping to&nbsp;%s"&nbsp;% (INTERP)
+    #swapping interpreters will not flush any files
+    log.flush()
+    log.close()
+    os.execl(INTERP, INTERP, *sys.argv)
+    #Should resume execution from the top of the file
+
+log.flush()
+log.close() 
+
+from paste.deploy import loadapp
+
+def application(environ, start_response):
+    log = _get_log()
+    print &gt;&gt;log, "Application called:"
+    print &gt;&gt;log, "environ:&nbsp;%s"&nbsp;% str(environ)
+    results = []
+    try:
+        app = loadapp('config:/home/path/to/site/production.ini')
+        print &gt;&gt;log, "App loaded, attempting to run"
+        log.flush()
+        results = app(environ, start_response)
+        print &gt;&gt;log, "App executed successfully"
+    except Exception, inst:
+        print &gt;&gt;log, "Error:&nbsp;%s"&nbsp;% str(type(inst))
+        print &gt;&gt;log, inst.args
+        log.flush()
+    finally:
+        log.close()
+    return results
+</pre>
+</div>
+</div>
+<h2><span id="A_slightly_more_robust_local_logging_alternative">Una alternativa de depuración local un poco más robusta</span></h2>
+<div class="solvvy-solution">
+<p>Este ejemplo usa el módulo de registro de Python. No contiene el bit de intérprete alternativo ni carga el archivo ini. Muestra cómo cargar módulos locales usando <code>getcwd()</code>.</p>
+<p>Aparte del nombre <code>myappmodule</code> y <code>myappmodule.application</code>, esto no hace ninguna suposición sobre su aplicación.</p>
+<div class="preboxcontainer">
+<pre class="prebox">import os
+import sys
+import logging
+# append current dir to module path
+cwd = os.getcwd()
+sys.path.append(cwd)
+# assuming this module is in the same dir as passenger_wsgi, this now works!
+import myappmodule
+
+# create a logfile in the current directory
+logfilename = os.path.join(cwd, 'passenger_wsgi.log')
+# configure the logging
+logging.basicConfig(filename=logfilename, level=logging.DEBUG)
+logging.info("Running&nbsp;%s", sys.executable)
+
+def application(environ, start_response):
+    logging.info("Application called:")
+    logging.info("environ:&nbsp;%s", str(environ))
+    results = []
+    try:
+        results = myappmodule.application(environ, start_response)
+        logging.info("App executed successfully")
+    except Exception, inst:
+        logging.exception("Error:&nbsp;%s", str(type(inst)))
+    logging.info("Application call done")
+    return results
+</pre>
+</div>
+</div>
+<h2><span id="Another_solution">Otra solución</span></h2>
+<div class="solvvy-solution">
+<p>Esta solución solo está disponible en un servidor <a href="/hc/en-us/articles/215280058-Virtual-Private-Server-overview-VPS-">VPS</a>.</p>
+<p>Otra solución es iniciar un servidor de desarrollo ejecutando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">./manage.py runserver</span></pre>
+</div>
+<p>Siguiente, abre otro shell <a href="/hc/en-us/articles/216041267-SSH-overview">SSH</a> y ejecuta:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">lynx localhost:8000</span></pre>
+</div>
+<p>Esto abre tu aplicación en el navegador web lynx, sin pasar por Passenger usando el servidor de desarrollo Django. Si tienes suerte, te devolverá algunos comentarios útiles.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Esta solución no ayudará si el problema está en la configuración de Passenger, ya que este método omite a Passenger por completo.</p>
+</div>
+</div>
+</div>
+<h2><span id="Tips_and_tricks">Consejos y trucos</span></h2>
+<div class="solvvy-solution">
+<p>Intenta ejecutar tú <code>passenger_wsgi.py</code> desde tu línea de comando lo que puede señalar cualquier error de Python.</p>
+<p>Passenger parece usar una sesión de Python persistente. Después de actualizar <code>passenger_wsgi.py</code>, asegúrate de ejecutar <code>pkill python</code> para restablecer la sesión y obligar al servidor a usar tus nuevos cambios.</p>
+</div>
+<h2><span id="See also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215769578-Passenger-overview">Generalidades Passenger</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216385637-How-do-I-enable-Passenger-on-my-domain-">¿Cómo habilito Passenger en mi dominio?</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215489338-Installing-virtualenv-and-custom-modules-in-Python">Instalar virtualenv y módulos personalizados en Python</a></li>
+</ul>
+</div>
