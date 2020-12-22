@@ -1,0 +1,58 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Las máquinas virtuales DreamCompute Ubuntu 14.04 (VM) lanzadas antes del 7 de agosto de 2019, incluían un espejo de repositorio apt. Este espejo fue alojado por DreamHost y configurado para proporcionar descargas rápidas de paquetes desde máquinas virtuales y para reducir la carga en los repositorios apt de Canonical.</p>
+<p>Este repositorio apt reflejado ha sido retirado. Después de algunas semanas de monitorear el espejo, DreamHost cree que hay muy pocos clientes que se verán afectados por este trabajo. Sin embargo, si tú eres uno de los pocos que pueden verse afectados, los siguientes son algunos consejos para ayudar a garantizar que tu máquina virtual continúe funcionando como se esperaba.</p>
+</div>
+<h2>¿Quién es afectado?</h2>
+<div class="solvvy-solution">Para determinar si estás afectado, ejecuta el siguiente comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">grep mirrors.dreamcompute.com /etc/apt/sources.list</span>
+</pre>
+</div>
+<p>Si nada regresa de este comando, <strong>NO </strong>te ves afectado y puedes continuar usando tu VM como está. Sin embargo, si te ves afectado por este trabajo, verás un resultado similar al siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">grep mirrors.dreamcompute.com /etc/apt/sources.list</span>
+deb http://mirrors.dreamcompute.com/ubuntu/ trusty main restricted
+deb-src http://mirrors.dreamcompute.com/ubuntu/ trusty main restricted
+deb http://mirrors.dreamcompute.com/ubuntu/ trusty-updates main restricted
+deb-src http://mirrors.dreamcompute.com/ubuntu/ trusty-updates main restricted</pre>
+</div>
+</div>
+<h2>Qué pasa si no estás afectado</h2>
+<div class="solvvy-solution">
+<p>Si te ves afectado por este trabajo de espejo, tienes algunas opciones sobre cómo continuar.</p>
+<h3>Opción uno: construir una nueva VM</h3>
+<p>La solución más disruptiva sería crear una nueva VM y migrar tu carga de trabajo a esta VM. Los detalles sobre cómo hacer esto dependen completamente del software que se esté ejecutando y cuán sensible sea a los cambios, como IP, versiones del sistema operativo, etc.</p>
+<h3>Opción dos: Hacer un espejo de tu VM</h3>
+<p>Aunque DreamHost no alojará un espejo de Ubuntu-14.04, Canonical se ha comprometido a continuar brindando soporte para Ubuntu-14.04 hasta abril de 2022. Como tal, puedes cambiar el espejo que usa tu VM para que apunte al <a href="http://iad-2.clouds.archive.ubuntu.com/ubuntu/">repositorio apt</a> de Canonical.</p>
+<p>Los siguientes son tres métodos diferentes para lograr esto:</p>
+<p><strong>Método #1</strong></p>
+<p>Edita el archivo manualmente usando el comando <span class="code">vim</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo vim /etc/apt/sources.list</span>
+</pre>
+</div>
+<p><strong>Método #2</strong></p>
+<p>Edita el archivo usando el comando <span class="code">sed</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo sed -i 's/mirrors.dreamcompute.com/iad-2.clouds.archive.ubuntu.com/g' /etc/apt/sources.list</span>
+</pre>
+</div>
+<p><strong>Método #3</strong></p>
+<p>Modifica el archivo usando un simple libro de jugadas de Ansible. El siguiente ejemplo es un libro de jugadas simple. Ejecuta <span class="code">ansible-playbook fixit.yml</span> para intercambiar los espejos de apt:</p>
+<div class="preboxcontainer">
+<pre class="prebox">---
+- name: Update apt mirrors
+  hosts: localhost
+  become: true
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Replace old mirror with new mirror
+      replace:
+        path: /etc/apt/sources.list
+        regexp: mirrors.dreamcompute.com
+        replace: iad-2.clouds.archive.ubuntu.com</pre>
+</div>
+</div>

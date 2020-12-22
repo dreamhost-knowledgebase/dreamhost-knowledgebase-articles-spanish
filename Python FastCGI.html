@@ -1,0 +1,185 @@
+<h2>Configurar Bootstrap</h2>
+<div class="solvvy-solution">
+<div class="alert-warning">
+<p><strong>¡INFORMACIÓN POSIBLEMENTE DESACTUALIZADA!</strong><br />Es posible que la información de esta página no funcione o no funcione según lo previsto. El soporte de DreamHost no puede ayudar con ninguna personalización. ¡Úsala bajo tu propio riesgo!</p>
+</div>
+<p>El siguiente es un procedimiento rápido para establecer una aplicación FCGI simple que ejecute Python.</p>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a>.</li>
+<li>Haz clic en el enlace <span class="text-link">Edit</span> debajo del dominio que deseas editar y desplázate hacia abajo hasta la sección <span class="text-section">Web Options</span>.</li>
+<li>Habilita tu dominio para soporte FastCGI.</li>
+<li>Descarga fcgi.py, y guárdalo en tu PYTHONPATH.</li>
+<li>Crea tu controlador de página predeterminado, <span class="text-object">dispatch.fcgi</span>:
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>Debes usar dispatch.fcgi o encontrará que el proceso es <a href="https://help.dreamhost.com/hc/es/articles/216540488--Por-qu%C3%A9-se-cancelaron-los-procesos-en-mi-servidor-Compartido-">terminado</a> en la mitad de la ejecución. Puedes encontrar más información en el artículo <a href="https://help.dreamhost.com/hc/es/articles/215317698-Soluci%C3%B3n-de-Problemas-de-Django">Solución de problemas de Django</a>.</li>
+<li>Asegúrate de usar la ruta <span class="text-object">#!/home/username/bin/python</span> y no <span class="text-object">#!/usr/bin/env python</span> con Pylons.</li>
+</ul>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">#!/usr/bin/env python
+
+def myapp(environ, start_response):
+    start_response('200 OK', [('Content-Type', 'text/plain')])
+    return ['Hello World!\n']
+
+if __name__ == '__main__':
+    from fcgi import WSGIServer
+    WSGIServer(myapp).run()</pre>
+</div>
+</li>
+<li>Haz que dispatch.fcgi sea ejecutable. Asegúrate de que no se pueda escribir en grupo o puede ocurrir un error 500 interno:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 755 dispatch.fcgi</span>
+</pre>
+</div>
+</li>
+<li>Crea un archivo .htaccess para redirigir todas las solicitudes a este script:
+<div class="preboxcontainer">
+<pre class="prebox">RewriteEngine On
+RewriteBase /
+RewriteRule ^dispatch\.fcgi/ - [L]
+RewriteRule ^(.*)$ dispatch.fcgi/$1 [L]</pre>
+</div>
+</li>
+<li>Después de que se actualice, actualiza la página con <span class="code">touch dispatch.fcgi</span>.</li>
+</ol>
+</div>
+<h2>Configuración de ejemplo</h2>
+<div class="solvvy-solution">
+<p>La siguiente es una configuración de muestra para hacer que FCGI y Python trabajen juntos:</p>
+<ol>
+<li>Descarga Virtual Python:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget http://peak.telecommunity.com/dist/virtual-python.py</span>
+</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p><span class="text-object">virtualenv</span> se prefiere en vez de virtual-python, ya que automatiza gran parte de este proceso. Consulta <a href="https://help.dreamhost.com/hc/es/articles/215489338-Instalar-y-usar-virtualenv-con-Python-2">Instalar Python virtualenv</a> para más detalles.</p>
+</div>
+</div>
+</li>
+<li>Crea un directorio llamado <span class="text-object">packages</span> en el cual instalar cosas:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir ~/packages</span>
+</pre>
+</div>
+</li>
+<li>Ve el artículo <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">crear y editar un archivo a través de SSH</a> para instrucciones sobre como editar tu&nbsp; .bash_profile existente. Añádele el siguiente código:
+<div class="preboxcontainer">
+<pre class="prebox">export PYTHONPATH="$HOME/packages/lib/python2.3/site-packages"
+export LD_LIBRARY_PATH="$HOME/packages/lib"
+export PATH="$HOME/packages/bin:$PATH"</pre>
+</div>
+</li>
+<li>Guarda y cierra el archivo y vuelve a tu shell.</li>
+<li>Ejecuta el instalador de python virtual y dile que se instale en "packages" en lugar de en el directorio de inicio:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">python virtual-python.py --prefix packages/</span>
+</pre>
+</div>
+</li>
+<li>Alternativamente, instala <span class="text-object">easy_install</span>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget http://peak.telecommunity.com/dist/ez_setup.py</span>
+<span class="server">[server]$ </span><span class="command">python ez_setup.py</span>
+</pre>
+</div>
+</li>
+<li>Descarga <span class="text-object">fcgi.py</span> y ubícalo en <span class="text-object">~/packages/lib/python2.3/site-packages</span>. Puedes utilizar Flup alternativamente, como se muestra en la siguiente sección.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p><span class="text-object">fcgi.py</span> sirve Tracebacks completos de Python en HTML de forma predeterminada, lo cual es un problema de seguridad. Debes anular el método <span class="text-object">[WSGI]Server.error()</span>.</p>
+</div>
+</div>
+</li>
+<li>Para probar la instalación virtual de python y fcgi, sigue las instrucciones del artículo de <a href="https://help.dreamhost.com/hc/es/articles/215319598-Generalidades-sobre-Django">Django</a>.</li>
+<li>Guarda el siguiente código en un archivo llamado dispatch.fcgi en ~/example.com:
+<div class="preboxcontainer">
+<pre class="prebox">#!/home/my-username/packages/bin/python
+from fcgi import WSGIServer
+def test_app(environ, start_response):
+    start_response('200 OK', [('Content-Type', 'text/plain')])
+    yield 'Hello, world!\n'
+
+WSGIServer(test_app).run()</pre>
+</div>
+</li>
+<li>Hazlo ejecutable y crea un archivo .htaccess en el mismo directorio que dispatch.fcgi:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod a+x ~/example.com/dispatch.fcgi</span>
+</pre>
+</div>
+<dl>
+<dd><em>.htaccess:</em></dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox">RewriteEngine On
+RewriteBase /
+RewriteRule ^dispatch\.fcgi/ - [L]
+RewriteRule ^(.*)$ dispatch.fcgi/$1 [L]</pre>
+</div>
+</li>
+<li>Espera unos minutos y luego prueba http://www.example.com/dispatch.fcgi.</li>
+</ol>
+</div>
+<h2>Usar Flup</h2>
+<div class="solvvy-solution">
+<p>Como alternativa al uso de fcgi.py, puedes ejecutar Flup para usar FastCGI en DreamHost. Si eliges hacerlo, no necesitas descargar ni instalar fcgi.py. En su lugar, simplemente instala Flup con <span class="text-object">easy_install</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">easy_install Flup</span>
+</pre>
+</div>
+<p>Si planeas usar una versión de Python 3 instalada localmente, usa la versión de Flup que sea compatible con Python 3. Simplemente usa Mercurial para buscar la fuente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">hg clone http://hg.saddi.com/flup-py3.0
+cd flup-py3.0
+# make sure setup.py is executed by your local version of Python
+python setup.py install</span>
+</pre>
+</div>
+<p>También debes agregar <span class="code">import sys</span> al archivo de envío. El nuevo archivo dispatch.fcgi debería tener el siguiente aspecto:</p>
+<div class="preboxcontainer">
+<pre class="prebox">#!/home/my-username/packages/bin/python
+
+import sys
+
+from flup.server.fcgi_fork import WSGIServer
+
+def test_app(environ, start_response):
+    start_response('200 OK', [('Content-Type', 'text/plain')])
+    yield 'Hello, world!\n'
+
+WSGIServer(test_app).run()</pre>
+</div>
+<p>No se requieren cambios en tu archivo .htaccess ni en ninguna otra cosa. Una vez que funcione "Hello World", estarás listo para comenzar a usar Python. Simplemente instala lo que necesitas a través de <span class="text-object">easy_install</span> y continúa desde allí.</p>
+</div>
+<h2>Solución de problemas</h2>
+<div class="solvvy-solution">
+<p>Puedes diagnosticar muchos errores ejecutando <span class="text-object">dispatch.fcgi</span> desde la línea de comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">./dispatch.fcgi</span>
+</pre>
+</div>
+<p>Puedes ignorar los errores <span class="text-object">WSGIServer: missing FastCGI param</span>.</p>
+<p>Si ocurre un error interno 500, intenta cambiar los permisos para que dispatch.fcgi no se pueda escribir en grupo. Aquí hay un ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 755 dispatch.fcgi</span>
+</pre>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216137717-Generalidades-sobre-Python">Python</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217298967-Generalidades-sobre-FastCGI">FastCGI</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215319598-Generalidades-sobre-Django">Django</a> — El marco de aplicación web de Python a menudo se implementa a través de FastCGI</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215769578-Generalidades-sobre-Passenger">Passenger WSGI</a> — Una alternativa al uso de FastCGI en DreamHost</li>
+</ul>
+</div>
