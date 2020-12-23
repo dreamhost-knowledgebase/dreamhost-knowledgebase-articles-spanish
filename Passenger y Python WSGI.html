@@ -39,7 +39,7 @@
 <p>Mientras Passenger carga tú <code>passenger_wsgi.py</code> en un contenedor especial (actualmente <code>/dh/passenger/lib/phusion_passenger/wsgi/request_handler.py</code>, aunque esto puede cambiar), no puedes seleccionar directamente qué intérprete de Python se usa para ejecutar tu aplicación. Sin embargo, puedes cambiar de intérprete mientras se ejecuta agregando el siguiente código al comienzo de tú <code>passenger_wsgi.py</code>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">import sys, os
-INTERP = "<u>/home/<span class="code-highlight">username</span>/local/bin/python</u>"
+INTERP = "/home/<span class="code-highlight">username</span>/local/bin/python"
 #INTERP is present twice so that the new Python interpreter knows the actual executable path
 if sys.executable&nbsp;!= INTERP: os.execl(INTERP, INTERP, *sys.argv)
 </pre>
@@ -109,10 +109,10 @@ application = loadapp('config:/home/path/to/site/production.ini')
 <pre class="prebox">import os, sys
 
 def _get_log():
-    return file('/home/&lt;username&gt;/passengerwsgi.log', 'a')
+    return file('/home/<span class="code-highlight">username</span>/passengerwsgi.log', 'a')
 
 log = _get_log()
-print &gt;&gt;log, "Running&nbsp;%s"&nbsp;% (sys.executable)
+print &gt;&gt;log, "Running %s" % (sys.executable)
 
 INTERP = "/home/<span class="code-highlight">username</span>/local/bin/python"
 if sys.executable&nbsp;!= INTERP: 

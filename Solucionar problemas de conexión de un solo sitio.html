@@ -122,31 +122,31 @@
 </ol>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la</span>
-<span class="cmdoutput">drwxr-x--x   16 youruser pg123456    4096 2009-12-10 04:25 ./
+<span class="cmdoutput">drwxr-x--x   16 username pg123456    4096 2009-12-10 04:25 ./
 ...</span>
 </pre>
 </div>
 <p>La primera línea debe verse como la anterior. Observa la&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">cadena de permisos</a>&nbsp;que dice "drwxr-x--x".&nbsp;La primera letra significa "directorio", luego hay tres conjuntos de tres permisos. El primer conjunto son los permisos del propietario, que están configurados para leer/escribir/ejecutar. El segundo conjunto son los permisos de grupo que están configurados para leer/ejecutar. El tercer conjunto son los permisos "otros" (o lo que tienen todos los demás usuarios), que está configurado para ejecutarse únicamente. Si tienes Enhanced Security habilitada para tu usuario, se vería así en su lugar:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la</span>
-<span class="cmdoutput">drwxr-x---   16 youruser  adm    4096 2009-12-10 04:25 ./
+<span class="cmdoutput">drwxr-x---   16 username adm    4096 2009-12-10 04:25 ./
 ...</span>
 </pre>
 </div>
 <p>Lo anterior son configuraciones de permisos correctas. Si en cambio se ven así:</p>
 <div class="preboxcontainer">
-<pre class="prebox">drw-r-----   16 youruser pg123456    4096 2009-12-10 04:25 ./
+<pre class="prebox">drw-r-----   16 <span class="cmdoutput">username </span>pg123456    4096 2009-12-10 04:25 ./
 </pre>
 </div>
 <p>O así:</p>
 <div class="preboxcontainer">
-<pre class="prebox">d---------   16 youruser pg123456    4096 2009-12-10 04:25 ./
+<pre class="prebox">d---------   16 <span class="cmdoutput">username </span>pg123456    4096 2009-12-10 04:25 ./
 </pre>
 </div>
 <p>Entonces eso significa que tu usuario ha sido deshabilitado y debes comunicarte con DreamHost. Si este es el caso, es probable que veas errores como este al intentar iniciar sesión y no podrás obtener la lista del directorio como se describió anteriormente:</p>
 <div class="preboxcontainer">
-<pre class="prebox">Could not chdir to home directory /home/youruser: Permission denied
--bash: /home/youruser/.bash_profile: Permission denied
+<pre class="prebox">Could not chdir to home directory /home/<span class="cmdoutput">username</span>: Permission denied
+-bash: /home/<span class="cmdoutput">username</span>/.bash_profile: Permission denied
 </pre>
 </div>
 <p>Si ves esto,&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">contacta el equipo de soporte de DreamHost</a>&nbsp;para ser asistido.</p>

@@ -1,0 +1,324 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="CPAN" class="solvvy-hidden">
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#configurar">Configurar CPAN</a></li>
+<li><a class="reference internal" href="#instalar">Instalar módulos</a></li>
+<li><a class="reference internal" href="#ver-modulos">Ver módulos</a></li>
+<li><a class="reference internal" href="#cgi">Hacer que tus scripts FastCGI / CGI funcionen</a></li>
+<li><a class="reference internal" href="#module-build">Instalar Module::Build y muchos otros módulos</a></li>
+<li><a class="reference internal" href="#otros-modulos">Otros módulos</a></li>
+<li><a class="reference internal" href="#configurar-cpan">Configurar CPAN</a></li>
+<li><a class="reference internal" href="#minus">Usar CPAN Minus y local::lib</a></li>
+<li><a class="reference internal" href="#terminados">Terminados</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p><strong>¡iNFORMACIÓN POSIBLEMENTE DESACTUALIZADA!</strong></p>
+<ul>
+<li>DreamHost directamente no soporta ninguna de las características descritas en esta página. ¡Usala bajo tu propio riesgo!</li>
+<li>El soporte técnico para estas instrucciones <strong>no está disponible</strong>&nbsp;en el soporte técnico de DreamHost.</li>
+<li>Los cambios del servidor realizados por DreamHost pueden romper tus modificaciones. Tu, como usuario, eres responsable de solucionar problemas y resolver problemas con tus personalizaciones.</li>
+<li>Si necesitas acceso root/sudo para ejecutar un comando, debes actualizar a un servidor Dedicado y agregar un <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-">usuario admin</a>.</li>
+</ul>
+</div>
+</div>
+<p>El Comprehensive Perl Archive Network (CPAN) te permite utilizar una extensa biblioteca de módulos prefabricados disponibles en <a href="http://search.cpan.org/">http://search.cpan.org</a>.</p>
+<p>CPAN normalmente requiere acceso de root, pero este artículo te muestra cómo configurar CPAN como un usuario no root.</p>
+<h2>Configurar CPAN</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Crea los siguientes directorios:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server] </span><span class="command">mkdir ~/perl5/man</span>
+<span class="server">[server] </span><span class="command">mkdir ~/perl5/man/man1</span>
+<span class="server">[server] </span><span class="command">mkdir ~/perl5/man/man3</span></pre>
+</div>
+</li>
+<li>Configura CPAN para instalar los módulos. Si es la primera vez que lo ejecutas, va directamente al modo de configuración:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cpan</span>
+</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p><em>Debes</em> utilizar el comando <span class="code">cpan</span>, en lugar de <span class="code">perl -MCPAN</span>. El último comando no se reconoce como un instalador y está sujeto a límites de memoria más estrictos.</p>
+</div>
+</div>
+</li>
+<li>Si la configuración de CPAN no aparece, ingresa <span class="code">o conf init</span> en el indicador <span class="text-object">cpan&gt;</span>.
+<div class="preboxcontainer">
+<pre class="prebox">CPAN.pm requires configuration, but most of it can be done automatically.
+If you answer 'no' below, then enter an interactive dialog for each
+configuration option instead.
+
+Would you like to configure as much as possible automatically? [yes] <span class="command">yes</span>
+</pre>
+</div>
+</li>
+<li>Escribe <span class="text-object">yes</span> y presiona la tecla <span class="code">Enter</span>.
+<div class="preboxcontainer">
+<pre class="prebox">Warning: You do not have write permission for Perl library directories.
+
+To install modules, you need to configure a local Perl library directory or
+escalate your privileges.  CPAN can help you by bootstrapping the local::lib
+module or by configuring itself to use 'sudo' (if available).  You may also
+resolve this problem manually if you need to customize your setup.
+
+What approach do you want?  (Choose 'local::lib', 'sudo' or 'manual')
+ [local::lib]</pre>
+</div>
+</li>
+<li>Presiona la tecla <span class="code">Enter</span> para aceptar <span class="code">local::lib</span>.
+<div class="preboxcontainer">
+<pre class="prebox">Now you need to choose your CPAN mirror sites.  You can let me
+pick mirrors for you, you can select them from a list or you
+can enter them by hand.
+
+Would you like me to automatically choose some CPAN mirror
+sites for you? (This means connecting to the Internet) [yes] <span class="command">yes</span></pre>
+</div>
+</li>
+<li>Escribe <span class="text-object">yes</span> y luego presiona la tecla <span class="code">Enter</span>. Deja que el script se ejecute hasta que veas lo siguiente:
+<div class="preboxcontainer">
+<pre class="prebox">local::lib is installed. You must now add the following environment variables
+to your shell configuration files (or registry, if you are on Windows) and
+then restart your command line shell and CPAN before installing modules:
+
+export PERL_LOCAL_LIB_ROOT="$PERL_LOCAL_LIB_ROOT:/home/username/perl5";
+export PERL_MB_OPT="--install_base /home/username/perl5";
+export PERL_MM_OPT="INSTALL_BASE=/home/username/perl5";
+export PERL5LIB="/home/username/perl5/lib/perl5:$PERL5LIB";
+export PATH="/home/username/perl5/bin:$PATH";<br />
+Would you like me to append that to /home/username/.bashrc now? [yes] <span class="command">yes</span></pre>
+</div>
+</li>
+<li>Escribe <span class="text-object">yes</span> y luego presiona la tecla <span class="code">Enter</span>.
+<div class="preboxcontainer">
+<pre class="prebox">commit: wrote '/home/username/.cpan/CPAN/MyConfig.pm'
+
+You can re-run configuration any time with 'o conf init' in the CPAN shell</pre>
+</div>
+<em>Tu resultado cambia a lo siguiente:</em>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">cpan[1] </span></pre>
+</div>
+</li>
+<li>Ejecuta lo siguiente. Asegúrate de cambiar el nombre de usuario a tu nombre de usuario real de Shell.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">cpan[1] </span><span class="command">o conf makepl_arg "install_base=/home/username/perl5 \
+    LIB=/home/username/perl5/lib \
+    INSTALLMAN1DIR=/home/username/perl5/man/man1 \
+    INSTALLMAN3DIR=/home/username/perl5/man/man3"</span></pre>
+</div>
+</li>
+<li>Confirma (commit) los cambios:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">cpan[1] </span><span class="command">o conf commit</span></pre>
+</div>
+</li>
+<li>Escribe <span class="text-object">exit</span> para salir de CPAN:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">cpan[1] </span><span class="command">exit</span></pre>
+</div>
+<em>Esto te pone de vuelta en tu shell normal.</em></li>
+</ol>
+</div>
+<h2>Instalar módulos</h2>
+<div class="solvvy-solution">
+<p>Ahora que todo está configurado, puedes instalar los módulos.</p>
+<ol>
+<li>Abre cpan de nuevo:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server] </span><span class="command">cpan</span></pre>
+</div>
+</li>
+<li>Escribe <span class="text-object">install Some::Module</span>, donde Some::Module es el nombre del módulo que estás intentando instalar.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[cpan[1] </span><span class="command">install XML:Simple</span>
+</pre>
+</div>
+</li>
+</ol>
+</div>
+<h2>Ver módulos</h2>
+<div class="solvvy-solution">
+<p>También puedes verificar si los módulos están instalados dentro de CPAN y dónde. Escribe la letra <span class="text-object">i</span> seguida del nombre del módulo. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[cpan[1] </span><span class="command">i XML::Simple</span>
+Module id = XML::Simple
+    CPAN_USERID  GRANTM (Grant McLean &lt;grantm@cpan.org&gt;)
+    CPAN_VERSION 2.24
+    CPAN_FILE    G/GR/GRANTM/XML-Simple-2.24.tar.gz
+    MANPAGE      XML::Simple - An API for simple XML files
+    INST_FILE    /home/username/perl5/lib/perl5/XML/Simple.pm
+    INST_VERSION 2.24</pre>
+</div>
+</div>
+<h2>Hacer que tus scripts FastCGI / CGI funcionen</h2>
+<div class="solvvy-solution">
+<p>Cualquier script CGI o Fast CGI debe tener lo siguiente en la parte superior para poder utilizar los módulos instalados localmente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">use lib qw( /home/<em>username</em>/<em>perlmods</em>/lib/perl/5.x /home/<em>username</em>/<em>perlmods</em>/lib/perl/5.x.x 
+            /home/<em>username</em>/<em>perlmods</em>/share/perl/5.x /home/<em>username</em>/<em>perlmods</em>/share/perl/5.x.x
+            /home/<em>username</em>/<em>perlmods</em>/local/share/perl/5.x.x 
+            /home/<em>username</em>/<em>perlmods</em>/local/lib/perl/5.x.x );</pre>
+</div>
+<p>donde <span class="text-object">username</span> es tu nombre de shell, <span class="text-object">perlmods</span> es lo que eligió arriba como el directorio de instalación local de CPAN, y <span class="text-object">5.x</span> y <span class="text-object">5.x.x</span> se refieren a la versión de Perl actualmente instalada determinada por <span class="code">perl -v</span>.</p>
+<h3>¿Qué pasa si veo un error?</h3>
+<p>Si el comando anterior de <strong>cpan</strong> genera un error como el siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Your configuration suggests that CPAN.pm should use a working
+directory of
+    /root/.cpan
+Unfortunately we could not create the lock file
+    /root/.cpan/.lock
+due to permission problems.
+
+Please make sure that the configuration variable
+    $CPAN::Config-&gt;{cpan_home}
+points to a directory where you can write a .lock file. You can set
+this variable in either
+    /etc/perl/CPAN/Config.pm
+or
+    /home/username/.cpan/CPAN/MyConfig.pm
+
+Could not open &gt;/root/.cpan/.lock: Permission denied</pre>
+</div>
+<p>luego debes crear manualmente un archivo <span class="code">~/.cpan/CPAN/MyConfig.pm</span> <strong>antes</strong> de continuar con el siguiente paso (esto se debe a que root ya configuró cpan en tu host).</p>
+<p>Puedes hacer esto ingresando lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">mkdir -pv ${HOME}/.cpan/CPAN
+cat &gt; ${HOME}/.cpan/CPAN/MyConfig.pm &lt;&lt;eof
+
+\$CPAN::Config = {
+  'auto_commit' =&gt; q[0],
+  'build_cache' =&gt; q[10],
+  'build_dir' =&gt; q[\$ENV{HOME}/.cpan/build],
+  'cache_metadata' =&gt; q[1],
+  'commandnumber_in_prompt' =&gt; q[1],
+  'cpan_home' =&gt; q[\$ENV{HOME}/.cpan],
+  'dontload_hash' =&gt; {  },
+  'ftp' =&gt; q[/usr/bin/ftp],
+  'ftp_passive' =&gt; q[1],
+  'ftp_proxy' =&gt; q[],
+  'getcwd' =&gt; q[cwd],
+  'gpg' =&gt; q[/usr/bin/gpg],
+  'gzip' =&gt; q[/bin/gzip],
+  'histfile' =&gt; q[\$ENV{HOME}/.cpan/histfile],
+  'histsize' =&gt; q[100],
+  'http_proxy' =&gt; q[],
+  'inactivity_timeout' =&gt; q[0],
+  'index_expire' =&gt; q[1],
+  'inhibit_startup_message' =&gt; q[0],
+  'keep_source_where' =&gt; q[\$ENV{HOME}/.cpan/sources],
+  'lynx' =&gt; q[/usr/bin/lynx],
+  'make' =&gt; q[/usr/bin/make],
+  'make_arg' =&gt; q[],
+  'make_install_arg' =&gt; q[],
+  'make_install_make_command' =&gt; q[/usr/bin/make],
+  'makepl_arg' =&gt; q[PREFIX=\$ENV{HOME}/perlmods],
+  'mbuild_arg' =&gt; q[],
+  'mbuild_install_arg' =&gt; q[],
+  'mbuild_install_build_command' =&gt; q[./Build],
+  'mbuildpl_arg' =&gt; q[],
+  'ncftpget' =&gt; q[/usr/bin/ncftpget],
+  'no_proxy' =&gt; q[],
+  'pager' =&gt; q[less],
+  'prerequisites_policy' =&gt; q[follow],
+  'scan_cache' =&gt; q[atstart],
+  'shell' =&gt; q[/bin/bash],
+  'tar' =&gt; q[/bin/tar],
+  'term_is_latin' =&gt; q[0],
+  'term_ornaments' =&gt; q[1],
+  'unzip' =&gt; q[/usr/bin/unzip],
+  'urllist' =&gt; [q[ftp://cpan.cse.msu.edu/], q[ftp://cpan-du.viaverio.com/pub/CPAN/], q[ftp://cpan.mirrors.redwire.net/pub/CPAN/], q[ftp://cpan.hostrack.net/pub/CPAN]],
+  'use_sqlite' =&gt; q[0],
+  'wget' =&gt; q[/usr/bin/wget],
+};
+1;
+__END__
+eof</pre>
+</div>
+</div>
+<h2>Instalar Module::Build y muchos otros módulos</h2>
+<div class="solvvy-solution">
+<p>Si estás instalando Module::Build u otros que usan Module::Build en tu instalación, podría ser útil agregar las líneas PERL5LIB anteriores a tu <span class="text-object">.bash_profile</span>, de lo contrario, cualquier cosa que construyas no sabrá cómo leer el script Module::Build Build.</p>
+</div>
+<h2>Otros módulos</h2>
+<div class="solvvy-solution">
+<p>Ten en cuenta que algunos módulos no se instalan correctamente desde CPAN como no root y en una ruta no estándar. Deben construirse e instalarse manualmente (es decir, utilizando los scripts de construcción proporcionados con los módulos). Dos específicamente son:</p>
+<h3>DateTime</h3>
+<p>DateTime (a partir de 0.68) requiere que el paso de instalación se ejecute así usando la opción <span class="code">--install_base</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">./Build install --install_base ~/perlmods</span>
+</pre>
+</div>
+<h3>IO:Compress</h3>
+<p>IO::Compress (a partir de 2.034) requiere ajustar el Makefile porque una de las rutas de destino ignora la variable de entorno <span class="code">PREFIX</span>.</p>
+<ol>
+<li>Genera el Makefile usando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">perl Makefile.PL PREFIX=~/perlmods</span>
+</pre>
+</div>
+</li>
+<li>Abre el Makefile y busca esta línea:
+<div class="preboxcontainer">
+<pre class="prebox">INSTALLARCHLIB = /usr/lib/perl/5.10</pre>
+</div>
+</li>
+<li>Cámbialo para que diga:
+<div class="preboxcontainer">
+<pre class="prebox">INSTALLARCHLIB = $(SITEPREFIX)/lib/perl/5.10</pre>
+</div>
+</li>
+<li>Corre el siguiente comando uno a la vez: <span class="code">make</span>, <span class="code">make test</span>, y <span class="code">make install</span>.</li>
+</ol>
+</div>
+<h2>Configurar CPAN</h2>
+<div class="solvvy-solution">
+<p>Si necesitas configurar manualmente los ajustes, puedes acceder a tu configuración en el archivo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">~/.cpan/CPAN/MyConfig.pm</pre>
+</div>
+<p>Si especificas <span class="code">PREFIX</span> como arriba, utiliza la ruta completa a tu directorio <span class="text-object">perlmods</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">PREFIX=/home/username/perlmods</pre>
+</div>
+<p>Usa <em>perldoc</em> para obtener una lista de la configuración de CPAN que puedeseditar:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">perldoc CPAN</span>
+</pre>
+</div>
+</div>
+<h2>Usar CPAN Minus y local::lib</h2>
+<div class="solvvy-solution">
+<p>El CPAN Minus de Tatsuhiko Miyagawa (<a href="https://github.com/miyagawa/cpanminus">github</a> <a href="http://search.cpan.org/perldoc?App::cpanminus">cpan</a>) hace que sea aún más fácil agregar soporte para tus propios módulos Perl. Usa</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cpanm -L ~/perlmod <em>module</em> <em>...</em></span>
+</pre>
+</div>
+<p>para instalar módulos en <span class="text-object">~/perlmod</span>. Ingresa lo siguiente en tu script:</p>
+<div class="preboxcontainer">
+<pre class="prebox">use local::lib '~/perlmod';</pre>
+</div>
+<p>para usar estos módulos.</p>
+</div>
+<h2>Terminados</h2>
+<div class="solvvy-solution">
+<p>Hay un servicio de monitor en ejecución que puede acabar con las instalaciones de Perl. Visita el siguiente artículo para obtener más información.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216540488--Por-qu%C3%A9-se-cancelaron-los-procesos-en-mi-servidor-Compartido-">¿Por qué mis procesos fueron terminados en en mi servidor Shared?</a></li>
+</ul>
+</div>

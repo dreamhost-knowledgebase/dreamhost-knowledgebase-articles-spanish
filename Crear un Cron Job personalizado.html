@@ -24,17 +24,21 @@
 <li>Usar un archivo personalizado crontab</li>
 </ul>
 <h3>Si ya has editado el crontab existente</h3>
-<p>Si ya has creado un cron job en tu panel, puedes verlo corriendo crontab -e en tu usuario Shell. Si tu editas el archivo para agregar otro cron job debajo del existente del panel, el cron job del panel continuará funcionando normalmente en adición al nuevo código editado.</p>
+<p>Si ya has creado un cron job en tu panel, puedes verlo corriendo <span class="code">crontab -e</span> en tu usuario Shell. Si tu editas el archivo para agregar otro cron job debajo del existente del panel, el cron job del panel continuará funcionando normalmente en adición al nuevo código editado.</p>
 <p>Cualquier ajuste en el panel no afectará tu código personalizado.</p>
 <h3>Si tu cambias el servidor crontab con tu crontab personalizado</h3>
 <p>Puedes también usar un crontab personalizado que has creado. Si haces esto, el crontab del servidor se sobreescribirá. Puedes también reemplazar el crontab del servidor corriendo lo siguiente:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$</span><span class="command"> crontab <span class="code-highlight">/home/nombre-de-usuario/crontab</span></span></pre>
+<pre class="prebox"><span class="server">[server]$</span><span class="command"> crontab <span class="code-highlight">/home/username/crontab</span></span></pre>
 </div>
 <p>Sin embargo, si tu agregas o editas un cron job en el panel, tu crontab personalizado será sobre escrito. Entonces necesitarás usar el crontab del servidor, o usar tu crontab personalizado.</p>
 </div>
 <h2>Crear manualmente un cron job personalizado</h2>
 <div class="solvvy-solution">
+<p>La siguiente sección está también disponible como video instructivo:</p>
+<dl>
+<dd><iframe src="https://www.youtube.com/embed/Shww5FILMMA" width="560" height="315" frameborder="0" allowfullscreen=""></iframe></dd>
+</dl>
 <p>Las siguientes instrucciones explican cómo agregar un cron job en tu usuario Shell. Estas instrucciones asumen que NO has agregado un cron job en tu panel todavía, entonces el archivo crontab está vacío.</p>
 <ol>
 <li>Inicia sesion en tu servidor vía&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>&nbsp;usando el usuario Shell en el que deseas crear el cron job.</li>
@@ -93,22 +97,22 @@ Choose 1-13 [3]: <span class="code-highlight">6</span>
 </div>
 </div>
 </li>
-<li>Se abre un archivo crontab en blanco. Agrega el código para tu cron job. En la parte inferior, agrega el código para tu cron job. Este ejemplo corre un archivo llamado <span class="text-object">mail.php</span> dentro del usuario "ejemplo_usuario". Esto debe ser llamado de la misma manera que el usuario con el que estás logueado. Este ejemplo corre el cron job a las 8:13 pm.<br />
+<li>Se abre un archivo crontab en blanco. Agrega el código para tu cron job. En la parte inferior, agrega el código para tu cron job. Este ejemplo corre un archivo llamado <span class="text-object">mail.php</span> dentro del usuario "username". Esto debe ser llamado de la misma manera que el usuario con el que estás logueado. Este ejemplo corre el cron job a las 8:13 pm.<br />
 <div class="preboxcontainer">
 <pre class="prebox"># Custom cron job
 MAILTO="user@example.com"
-13 20 * * * php  /home/nombre-de-usuario/mail.php</pre>
+13 20 * * * php  /home/username/mail.php</pre>
 </div>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
 <p>Hay dos partes del comando. La primera debe especificar el camino al programa que deseas usar para correr el cron job. Por ejemplo digamos que tu tienes un archivo PHP llamado <span class="text-object">script.php</span> en tu directorio de dominios:</p>
 <ul>
-<li><span class="text-object">/home/nombre-de-usuario/example.com/script.php</span></li>
+<li><span class="text-object">/home/username/example.com/script.php</span></li>
 </ul>
 <p>Para correr este comando ingresaras el camino que has escogido de la versión de PHP seguido por un espacio, seguido luego por el camino al archivo:</p>
 <ul>
-<li><span class="text-object">/usr/local/php74/bin/php /home/nombre-de-usuario/example.com/script.php</span></li>
+<li><span class="text-object">/usr/local/php74/bin/php /home/username/example.com/script.php</span></li>
 </ul>
 <p>Usarás también la versión por defecto usando “php” en vez del camino completo.</p>
 </div>
@@ -134,7 +138,7 @@ MAILTO="user@example.com"
 </div>
 <h3>Reemplazar tu crontab existente con tu archivo crontab personalizado</h3>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">crontab <span class="code-highlight">/home/nombre-de-usuario/crontab</span></span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">crontab <span class="code-highlight">/home/username/crontab</span></span>
 </pre>
 </div>
 <h3>Editar tu servidor crontab</h3>
@@ -250,37 +254,37 @@ El tiempo es basado en eso del servidor que corre el cron.
 <td style="width: 93px;"><code>@yearly (or @annually)</code></td>
 <td style="width: 201px;">Ejecutar una vez al año a medianoche el 1ro de Enero</td>
 <td style="width: 83px;"><code>0 0 1 1 *</code></td>
-<td style="width: 396.233px;">@yearly php /home/nombre-de-usuario/mail.php</td>
+<td style="width: 396.233px;">@yearly php /home/username/mail.php</td>
 </tr>
 <tr>
 <td style="width: 93px;"><code>@monthly</code></td>
 <td style="width: 201px;">Ejecutar una vez al mes a medianoche el primer día del mes</td>
 <td style="width: 83px;"><code>0 0 1 * * </code></td>
-<td style="width: 396.233px;">@monthly php /home/nombre-de-usuario/mail.php</td>
+<td style="width: 396.233px;">@monthly php /home/username/mail.php</td>
 </tr>
 <tr>
 <td style="width: 93px;"><code>@weekly</code></td>
 <td style="width: 201px;">Ejecutar una vez a la semana a medianoche el Domingo</td>
 <td style="width: 83px;"><code>0 0 * * 0 </code></td>
-<td style="width: 396.233px;">@weekly php /home/nombre-de-usuario/mail.php</td>
+<td style="width: 396.233px;">@weekly php /home/username/mail.php</td>
 </tr>
 <tr>
 <td style="width: 93px;"><code>@daily (or @midnight)</code></td>
 <td style="width: 201px;">Ejecutar una vez al día a medianoche</td>
 <td style="width: 83px;"><code>0 0 * * *</code></td>
-<td style="width: 396.233px;">@daily php /home/nombre-de-usuario/mail.php</td>
+<td style="width: 396.233px;">@daily php /home/username/mail.php</td>
 </tr>
 <tr>
 <td style="width: 93px;"><code>@hourly</code></td>
 <td style="width: 201px;">Ejecutar una vez por hora al inicio de la hora</td>
 <td style="width: 83px;"><code>0 * * * *</code></td>
-<td style="width: 396.233px;">@hourly php /home/nombre-de-usuario/mail.php</td>
+<td style="width: 396.233px;">@hourly php /home/username/mail.php</td>
 </tr>
 <tr>
 <td style="width: 93px;"><code>@reboot</code></td>
 <td style="width: 201px;">Ejecutar al inicio del daemon cron</td>
 <td style="width: 83px;"><code>@reboot</code></td>
-<td style="width: 396.233px;">@reboot php /home/nombre-de-usuario/mail.php</td>
+<td style="width: 396.233px;">@reboot php /home/username/mail.php</td>
 </tr>
 </tbody>
 </table>
@@ -304,28 +308,28 @@ El tiempo es basado en eso del servidor que corre el cron.
 <p>Los siguientes ejemplos muestran lo que tú puedes agregar a un nuevo archivo para crear un cron job.</p>
 <p><strong>Ejemplo 1</strong>: Esto corre el comando a las 4:10 PM PST/PDT, y envía un correo con la salida del error regular al destinatario especificado por MAILTO.</p>
 <div class="preboxcontainer">
-<pre class="prebox">10 16 * * * perl /home/nombre-de-usuario/bin/script.pl
+<pre class="prebox">10 16 * * * perl /home/username/bin/script.pl
 </pre>
 </div>
 <p><strong>Ejemplo 2</strong>: Esto corre el comando a las 2:00 AM PST/PDT el sábado, y la única salida son errores.</p>
 <div class="preboxcontainer">
-<pre class="prebox">0 2 * * 6 sh /home/nombre-de-usuario/semanal/semanal.sh &gt; /dev/null
+<pre class="prebox">0 2 * * 6 sh /home/username/semanal/semanal.sh &gt; /dev/null
 </pre>
 </div>
 <p><strong>Ejemplo 3</strong>: Esto corre a la medianoche del nuevo año (Enero 1) y no hay salida.</p>
 <div class="preboxcontainer">
-<pre class="prebox">0 0 1 1 0 python /home/nombre-de-usuario/script.py &gt;/dev/null 2&gt;&amp;1
+<pre class="prebox">0 0 1 1 0 python /home/username/script.py &gt;/dev/null 2&gt;&amp;1
 </pre>
 </div>
 <p>2&gt;&amp;1 es una redirección especial que envía el error estándar ("2&gt;") al mismo lugar que la salida estándar ("&gt;" o "1&gt;").</p>
 <p><strong>Ejemplo 4</strong>: Esto corre un script de PHP llamado cron.php empezando cada hora.</p>
 <div class="preboxcontainer">
-<pre class="prebox">0 * * * * php /home/nombre-de-usuario/cron.php
+<pre class="prebox">0 * * * * php /home/username/cron.php
 </pre>
 </div>
 <p><strong>Ejemplo 5</strong>: Esto corre el script local (localizado en DreamHost) cada 15 minutos.</p>
 <div class="preboxcontainer">
-<pre class="prebox">*/15 * * * * /usr/local/php74/bin/php /home/nombre-de-usuario/script.php
+<pre class="prebox">*/15 * * * * /usr/local/php74/bin/php /home/username/script.php
 </pre>
 </div>
 <p><strong>Ejemplo 6</strong>: Esto corre un script especial (alojado en otro lugar) cada 30 minutos usando <span class="code">curl</span>.</p>
@@ -337,12 +341,12 @@ El tiempo es basado en eso del servidor que corre el cron.
 <p>Ve&nbsp;<a href="http://unix.stackexchange.com/a/70971">http://unix.stackexchange.com/a/70971</a>&nbsp;para más información.</p>
 <p><strong>Ejemplo 7</strong>: Esto corre el script local (alojado en DreamHost) cada 10 minutos.</p>
 <div class="preboxcontainer">
-<pre class="prebox">*/10 * * * * /usr/local/php74/bin/php /home/nombre-de-usuario/script.php
+<pre class="prebox">*/10 * * * * /usr/local/php74/bin/php /home/username/script.php
 </pre>
 </div>
 <p><strong>Ejemplo 8</strong>: Esto usa <span class="code">wget</span> para descargar un archivo al directorio llamado <span class="text-object">/cronfolder</span>.</p>
 <div class="preboxcontainer">
-<pre class="prebox">*/10 * * * */usr/bin/wget -P /home/nombre-de-usuario/cronfolder/ https://example.com/index.html
+<pre class="prebox">*/10 * * * */usr/bin/wget -P /home/username/cronfolder/ https://example.com/index.html
 </pre>
 </div>
 </div>
@@ -350,7 +354,7 @@ El tiempo es basado en eso del servidor que corre el cron.
 <div class="solvvy-solution">
 <p>Si estás logueado como usuario&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-" target="_self">administrador de servidor Dedicado</a>,&nbsp;tu puedes editar el archivo crontab directamente. Está almacenado aquí.</p>
 <div class="preboxcontainer">
-<pre class="prebox">/var/spool/cron/crontabs/nombre-de-usuario
+<pre class="prebox">/var/spool/cron/crontabs/username
 </pre>
 </div>
 <p>Necesitarás usar&nbsp;<span class="code">sudo</span>&nbsp;en tu servidor Dedicado (o iniciar una sesión interactiva como el usuario root con&nbsp;<span class="code">sudo -i</span>) para acceder al archivo.</p>
@@ -363,7 +367,7 @@ El tiempo es basado en eso del servidor que corre el cron.
 </div>
 <p>Ejemplo (abriendo el archivo con el editor de texto "vi"):</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo vi /var/spool/cron/crontabs/nombre-de-usuario</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo vi /var/spool/cron/crontabs/username</span>
 </pre>
 </div>
 </div>

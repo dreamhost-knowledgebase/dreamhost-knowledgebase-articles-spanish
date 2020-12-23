@@ -19,12 +19,12 @@
 <p>Dado que los ataques recientes de FTP/SSH son más fáciles de detectar, comienza por eliminar esta opción. Inicia sesión en tu usuario a través de SSH y ejecuta los siguientes comandos.</p>
 <p>Te muestra tu historial de inicio de sesión del mes actual:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -i | grep <span class="code-highlight">youruser</span></span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -i | grep username</span>
 </pre>
 </div>
 <p>Muestra tu historial de inicio de sesión del mes anterior:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -if /var/log/wtmp.1 | grep <span class="code-highlight">youruser</span></span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -if /var/log/wtmp.1 | grep username</span>
 </pre>
 </div>
 <div class="alert alert-note">
@@ -35,16 +35,16 @@
 </div>
 <p>La salida se ve como esto:</p>
 <div class="preboxcontainer">
-<pre class="prebox">youruser pts/4        99.139.XXX.XXX   Wed May 28 06:10 - 07:11  (01:00)    
-youruser pts/5        66.33.XXX.XXX    Sun May 25 09:31 - 12:14  (02:42)    
-youruser ftpd30715    66.33.XXX.XXX    Wed May 21 14:16 - 14:16  (00:00)    
-youruser pts/2        66.33.XXX.XXX    Tue May 20 13:22 - 14:18  (00:56)    
-youruser pts/2        66.33.XXX.XXX    Tue May 20 13:06 - 13:22  (00:15)    
+<pre class="prebox"><span class="command">username </span>pts/4        99.139.XXX.XXX   Wed May 28 06:10 - 07:11  (01:00)    
+<span class="command">username </span>pts/5        66.33.XXX.XXX    Sun May 25 09:31 - 12:14  (02:42)    
+<span class="command">username </span>ftpd30715    66.33.XXX.XXX    Wed May 21 14:16 - 14:16  (00:00)    
+<span class="command">username </span>pts/2        66.33.XXX.XXX    Tue May 20 13:22 - 14:18  (00:56)    
+<span class="command">username </span>pts/2        66.33.XXX.XXX    Tue May 20 13:06 - 13:22  (00:15)    
 </pre>
 </div>
 <p>Puedes simplificar estos datos para imprimir solo direcciones IP y recuentos agregando pipes a unos pocos comandos simples:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -if /var/log/wtmp.1 | grep <span class="code-highlight">youruser</span> | awk '{print $3}' | sort | uniq -c</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">last -if /var/log/wtmp.1 | grep username | awk '{print $3}' | sort | uniq -c</span>
 </pre>
 </div>
 <p>La salida se ve más como esto:</p>
