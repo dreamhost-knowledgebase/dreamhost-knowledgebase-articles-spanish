@@ -71,6 +71,12 @@ RewriteRule ^(/)?$ <span class="code-highlight">blog</span>/index.php [L]
 <h2>Mostrar WordPress en el directorio raíz si está instalado en un subdirectorio</h2>
 <div class="solvvy-solution">
 <p>Estos pasos son opuestos a los anteriores. Asumen que has instalado WordPress en un subdirectorio en <strong>example.com/blog</strong>, pero quiero que se muestre al visitar <strong>example.com</strong>.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Estos pasos solo te permiten ver tu sitio de WordPress en <strong>example.com</strong>. Aún debes visitar <strong>example.com/blog/wp-login.php</strong> para iniciar sesión en tu panel de administración. Esto se debe a que la instalación original se instaló en <strong>example.com/blog</strong>, por lo que todas las URL de la base de datos aún apuntan al subdirectorio <strong>/blog</strong> subdirectory.</p>
+</div>
+</div>
 <ol>
 <li>Inicia sesión en tu sitio a través de <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">FTP</a> o <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
 <li>Navega al subdirectorio de tu sitio web. Asegúrate de cambiar el <span class="text-object">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.
@@ -101,6 +107,14 @@ require __DIR__ . '<span class="code-highlight">/blog</span>/wp-blog-header.php'
 </pre>
 </div>
 </li>
+<li>Si ya has configurado los <a href="https://wordpress.org/support/article/using-permalinks/">Permalinks</a>, va a la página Configuración&gt; Permalinks y vuelve a guardarlos.</li>
 </ol>
 <p>Si visitas <strong>example.com</strong> ahora, verás tu sitio WordPress.</p>
+</div>
+<h2>See also</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://wordpress.org/support/article/giving-wordpress-its-own-directory/" target="_self" rel="undefined">WordPress.org — Dar a WordPress su Propio Directorio</a></li>
+<li><a href="https://wordpress.org/support/article/using-permalinks/" target="_self" rel="undefined">WordPress.org — Permalinks</a></li>
+</ul>
 </div>
