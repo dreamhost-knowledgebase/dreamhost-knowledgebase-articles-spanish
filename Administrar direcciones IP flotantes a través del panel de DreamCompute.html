@@ -1,0 +1,134 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este artículo solo es relevante si tienes las <a href="https://help.dreamhost.com/hc/en-us/articles/229789688-Private-networking-overview">redes privadas habilitadas</a>. Si estás utilizando una red pública, solo tendrás direcciones IPv4 e IPv6 públicas.</p>
+</div>
+</div>
+<p>Cuando una instancia está conectada a una red privada, tiene una dirección IP fija privada y también puede tener una dirección IP pública o flotante. Las direcciones IP privadas se utilizan para la comunicación entre instancias y las direcciones públicas se utilizan para la comunicación con redes fuera de la nube, incluida Internet.</p>
+<p>Cuando lanzas una instancia en una red privada, se te asigna automáticamente una dirección IP privada que permanece igual hasta que elimines explícitamente la instancia. Reiniciar una instancia no tiene ningún efecto sobre la dirección IP privada.</p>
+<p>Un grupo de direcciones IP flotantes está disponible en DreamCompute. La cuota de tu proyecto define la cantidad máxima de direcciones IP flotantes que puedes asignar a tu proyecto. Después de asignar una dirección IP flotante a tu proyecto, puedes:</p>
+<ul class="simple">
+<li>Asociar la dirección IP flotante con una de tus instancias (nota: solo se puede asignar una dirección IP flotante a una instancia en un momento dado).</li>
+<li>Desasociar una dirección IP flotante de una de tus instancias</li>
+<li>Libera una dirección IP flotante de tu proyecto (esto borra automáticamente cualquier asociación que tenga esa dirección).</li>
+</ul>
+</div>
+<h2>Lista de información de dirección IP flotante</h2>
+<div class="solvvy-solution">
+<p>Para ver todas las direcciones IP flotantes asignadas a tu proyecto:</p>
+<ol class="arabic">
+<li>Inicia sesión en el <a href="https://iad2.dreamcompute.com/project/">panel DreamCompute</a>.</li>
+<li>En el panel izquierdo, selecciona 'Network &gt; Floating IPs'.</li>
+</ol>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/managing-floating-ip-addresses-using-the-dreamcompute-dashboard_01.png" alt="" height="" /></dd>
+</dl>
+<p>Aquí puedes ver lo siguiente:</p>
+<ul>
+<li>Las direcciones IP flotantes que se asignan a tu proyecto</li>
+<li>La dirección IP fija (o privada) de la instancia a la que se adjunta la dirección IP flotante (si está adjunta)</li>
+<li>El grupo del que proviene la dirección IP flotante</li>
+<li>El estado actual de la dirección IP flotante y las acciones que puedes realizar en la dirección IP flotante.</li>
+<li>Acciones que puedes realizar en la dirección IP flotante</li>
+</ul>
+</div>
+<h2>Asignar direcciones IP flotantes</h2>
+<div class="solvvy-solution">
+<p>Puedes asignar una dirección IP flotante a un proyecto y a una instancia.</p>
+<ol>
+<li>Inicia sesión en tu panel DreamCompute y navega a la pestaña <span class="text-object">Network &gt; Floating IPs</span>.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/managing-floating-ip-addresses-using-the-dreamcompute-dashboard_02.png" alt="" width="762" height="326" /></dd>
+</dl>
+</li>
+<li>Para asignar una dirección IP flotante a tu proyecto, comienza haciendo clic en el botón <strong>Allocate IP To Project</strong> en la pestaña <span class="text-object">Floating IPs</span>.
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si has superado la cuota de direcciones IP flotantes de tu cuenta, deberás ponerte en <a href="/hc/en-us/articles/218084068-Contacting-support-overview">contacto con el equipo de soporte</a> y pedirles que aumenten la cuota de tu cuenta.</p>
+</div>
+</div>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/managing-floating-ip-addresses-using-the-dreamcompute-dashboard_3.png" alt="manage-floating-IP-addresses-using-the-dreamcompute-dashboard_3" width="558" height="263" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón <strong>Allocate IP</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/managing-floating-ip-addresses-using-the-dreamcompute-dashboard_04.png" alt="" width="785" height="379" /></dd>
+</dl>
+</li>
+<li>La nueva dirección IP ahora está visible en la página 'Floating IPs'.</li>
+</ol>
+</div>
+<h2>Asociar direcciones IP flotantes</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu panel de DreamCompute y navega hasta la página 'Floating IPs'.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/managing-floating-ip-addresses-using-the-dreamcompute-dashboard_05.png" alt="" /></dd>
+</dl>
+</li>
+<li>Para asociar una dirección IP con una instancia en el proyecto, comienza haciendo clic en el botón <strong>Associate</strong>&nbsp;junto a la dirección IP que deseas usar.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/managing-floating-ip-addresses-using-the-dreamcompute-dashboard_6.png" alt="manage-floating-IP-addresses-using-the-dreamcompute-dashboard_6" /></dd>
+</dl>
+</li>
+<li>En la caja de menú desplegable <span class="text-object">Port to be associated</span>, selecciona la instancia y la dirección IP fija con la que deseas que se asocie la dirección IP flotante.<br />
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si bien todas las instancias serán visibles, solo tendrás éxito si asocias la dirección IP flotante con una instancia en una red privada. Si eliges una instancia en la red pública, la solicitud fallará con un mensaje de error.</p>
+</div>
+</div>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/managing-floating-ip-addresses-using-the-dreamcompute-dashboard_7.png" alt="manage-floating-IP-addresses-using-the-dreamcompute-dashboard_7" /></dd>
+</dl>
+</li>
+<li>Una vez que hayas seleccionado una instancia, haz clic en el botón <strong>Associate</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/managing-floating-ip-addresses-using-the-dreamcompute-dashboard_08.png" alt="" /></dd>
+</dl>
+</li>
+<li>La dirección IP flotante ahora tendrá la dirección IP fija listada junto a ella e informará un estado de Active en la página 'Floating IPs'.</li>
+</ol>
+</div>
+<h2>Desasociar direcciones IP flotantes</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu panel de DreamCompute y navega hasta la página 'Floating IPs'.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/managing-floating-ip-addresses-using-the-dreamcompute-dashboard_09.png" alt="" /></dd>
+</dl>
+</li>
+<li>Para desvincular una dirección IP flotante de una instancia, haz clic en el botón <strong>Disassociate</strong> en la columna <span class="text-object">Actions</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/managing-floating-ip-addresses-using-the-dreamcompute-dashboard_10.png" alt="manage-floating-IP-addresses-using-the-dreamcompute-dashboard_10" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón <strong>Disassociate</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/managing-floating-ip-addresses-using-the-dreamcompute-dashboard_4.png" alt="manage-floating-IP-addresses-using-the-dreamcompute-dashboard_4" /></dd>
+</dl>
+</li>
+<li>La dirección IP ahora está disponible para su asociación o publicación.</li>
+</ol>
+</div>
+<h2>Liberar direcciones IP flotantes</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu panel de DreamCompute y navega hasta la página 'Floating IPs'.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/managing-floating-ip-addresses-using-the-dreamcompute-dashboard_11.png" alt="" /></dd>
+</dl>
+</li>
+<li>Para liberar una dirección IP flotante de tu proyecto, selecciona 'Release Floating IP' de la caja de menú desplegable <span class="text-object">Actions</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/managing-floating-ip-addresses-using-the-dreamcompute-dashboard_12.png" alt="" /></dd>
+</dl>
+</li>
+<li>Haz clic en 'Release Floating IP'.</li>
+</ol>
+<p>La dirección IP se devuelve al grupo de direcciones IP que está disponible para todos los proyectos. Si la dirección IP todavía está asociada con una instancia en ejecución, se desasocia automáticamente de esa instancia.</p>
+</div>
