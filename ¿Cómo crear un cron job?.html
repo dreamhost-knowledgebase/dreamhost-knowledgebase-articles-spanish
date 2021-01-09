@@ -2,15 +2,15 @@
 <div class="solvvy-solution">
 <p>Puedes hacer que DreamHost configure automáticamente un cron job desde el panel, en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.cron&amp;" target="_blank" rel="noopener">Cron Jobs</a>.&nbsp;Este artículo contiene los siguientes contenidos.</p>
 <ul>
-<li><a href="#panel" target="_self">Crear un trabajo cron en el panel</a></li>
-<li><a href="#variables" target="_self">Ejecutar un trabajo cron desde una URL con variables</a></li>
+<li><a href="#panel" target="_self">Crear un cron job en el panel</a></li>
+<li><a href="#variables" target="_self">Ejecutar un cron job desde una URL con variables</a></li>
 <li><a href="#rutas-a-programas-comunes" target="_self">Rutas a programas comunes</a></li>
 </ul>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
 <p>Al crear el cron job, debes asignarlo a un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario shell</a>&nbsp;en tu panel. Solo los usuarios de shell pueden ejecutar cron job.</p>
-<p>Los Cron job se pueden crear en cualquier plan de alojamiento.</p>
+<p>Los cron job se pueden crear en cualquier plan de alojamiento.</p>
 </div>
 </div>
 </div>
@@ -31,7 +31,7 @@
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_cron_add_01.png" /></dd>
 </dl>
 </li>
-<li>Haz click en el botón <strong>Add New Cron</strong> Job.<br />
+<li>Haz click en el botón <strong>Add New Cron Job</strong>.<br />
 <dl>
 <dd><em>Se abre la página <span class="panel-page">Creating New Cron Job</span> :</em></dd>
 </dl>
@@ -41,14 +41,14 @@
 </li>
 <li>Para crear el cron, completa los siguientes campos:<br />
 <ul>
-<li><strong>Usuario</strong>: en el menú desplegable, elija un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario shell</a>&nbsp;existente en el que desea que se ejecute el trabajo cron.</li>
-<li><strong>Título</strong>: asigne al cron un nombre que recordará.</li>
-<li><strong>Salida de correo electrónico a</strong>: ingresa una dirección de correo electrónico a la que te gustaría recibir la salida cron. También puedes dejar esto en blanco para no recibir correos electrónicos.</li>
-<li><strong>Comando para ejecutar</strong>: ingrese el comando para ejecutar.<br />
+<li><strong>Usuario</strong>: En el menú desplegable, elija un <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario shell</a> existente en el que desea que se ejecute el cron job.</li>
+<li><strong>Título</strong>: Asigna al cron job un nombre que recordarás.</li>
+<li><strong>Salida le correo a</strong>: Ingresa una dirección de correo a la que te gustaría recibir la salida del cron job. También puedes dejar esto en blanco para no recibir correos.</li>
+<li><strong>Comando para ejecutar</strong>: Ingresa el comando para correr.<br />
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>El comando que ingresas generalmente debe primero especificar la ruta al programa que te gustaría usar para ejecutar el trabajo cron. Consulta las '<a href="#paths" target="_self">Rutas a programas comunes</a>'&nbsp;a continuación para ver ejemplos. Por ejemplo, supongamos que tiene un archivo PHP llamado <span class="text-object">script.php</span> en su directorio de dominios:</p>
+<p>El comando que ingresas generalmente debe primero especificar la ruta al programa que te gustaría usar para ejecutar el cron job. Consulta las '<a href="#paths" target="_self">Rutas a programas comunes</a>'&nbsp;a continuación para ver ejemplos. Por ejemplo, supongamos que tiene un archivo PHP llamado <span class="text-object">script.php</span> en tu directorio de dominios:</p>
 <ul>
 <li><span class="text-object">/home/usuario/example.com/script.php</span></li>
 </ul>
@@ -59,14 +59,14 @@
 </div>
 </div>
 </li>
-<li><strong>Usar bloqueo</strong>: habilítalo si deseas evitar que el trabajo se ejecute más de una vez al tiempo.</li>
-<li><strong>Cuándo ejecutarlo</strong>: en el menú desplegable, elija con qué frecuencia desea que se ejecute este trabajo.<br />
+<li><strong>Usar bloqueo</strong>: Habilítalo si deseas evitar que el trabajo se ejecute más de una vez al tiempo.</li>
+<li><strong>Cuándo ejecutarlo</strong>: En el menú desplegable, elige con qué frecuencia deseas que se corra este cron job.<br />
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>El tiempo que elijas debe ser PDT / PST ya que esta es la zona horaria en la que está configurado tu servidor web. Para determinar la hora correcta, puedes iniciar sesión en tu servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y ejecutar la fecha del comando, o puedes consultar un&nbsp;<a href="https://www.worldtimezone.com/" target="_self">sitio web</a>&nbsp;que enumere esta información.</p>
+<p>El tiempo que elijas debe ser PDT/PST ya que esta es la zona horaria en la que está configurado tu servidor web. Para determinar la hora correcta, puedes iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y correr la fecha del comando, o puedes consultar un <a href="https://www.worldtimezone.com/" target="_self">sitio web</a> que enumera esta información.</p>
 <p><strong>Minutos personalizados</strong></p>
-<p>Actualmente solo es posible agregar 12 minutos diferentes en una hora. Puedes organizarlos como desees, pero el cron no puede ejecutarse más de 12 veces en una sola hora.</p>
+<p>Actualmente solo es posible agregar 12 minutos diferentes en una hora. Puedes organizarlos como desees, pero el cron job no puede ejecutarse más de 12 veces en una sola hora.</p>
 </div>
 </div>
 </li>
@@ -83,20 +83,20 @@
 </dl>
 </div>
 <h3>Cuando el campo del 'Día de la Semana' NO anula el 'Día del Mes'</h3>
-<p>El campo del <span class="text-object">Día de la Semana</span> <strong>NO</strong> anulará el campo del <span class="text-object">Día del Mes</span>, si el campo del <span class="text-object">Día del Mes</span> está configurado a día(s) específico(s). En ese caso correrán juntos.</p>
-<p>En el ejemplo a continuación, el campo del <span class="text-object">Día de la Semana</span> está configurado para correr los Jueves a las 3:44 pm. El campo del <span class="text-object">Día del Mes</span> esta también ajustado para el 26 (que es un Miércoles). El Cron Job seguirá corriendo todos los Jueves, pero también el 26 de cada mes.</p>
+<p>El campo del <strong><span class="text-object">Día de la Semana</span> NO</strong> anulará el campo del <strong><span class="text-object">Día del Mes</span></strong>, si el campo del <strong><span class="text-object">Día del Mes</span></strong> está configurado a día(s) específico(s). En ese caso correrán juntos.</p>
+<p>En el ejemplo a continuación, el campo del <strong><span class="text-object">Día de la Semana</span></strong> está configurado para correr los Jueves a las 3:44 pm. El campo del <strong><span class="text-object">Día del Mes</span></strong> esta también ajustado para el 26 (que es un Miércoles). El cron job seguirá corriendo todos los Jueves, pero también el 26 de cada mes.</p>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/cron-day-of-week.png" alt="crontab day of week" /></dd>
 </dl>
-<h2><span id="variables">Ejecutar un trabajo cron desde una URL con variables</span></h2>
+<h2><span id="variables">Ejecutar un cron job desde una URL con variables</span></h2>
 <div class="solvvy-solution">
 <p>Es común que una URL personalizada en tu sitio use variables. Por ejemplo:</p>
 <div class="preboxcontainer">
 <pre class="prebox">https://example.com/script.php<span class="code-highlight">?firstname=john&amp;lastname=doe</span></pre>
 </div>
-<p>El problema es que las variables solo funcionan en un navegador web cuando se visita la URL. No funcionarán cuando se ejecute la URL en el servidor. Hay dos formas de hacer que un trabajo cron ejecute dicha URL.</p>
+<p>El problema es que las variables solo funcionan en un navegador web cuando se visita la URL. No funcionarán cuando se ejecuta la URL en el servidor. Hay dos formas de hacer que un cron job ejecute dicha URL.</p>
 <h3>Usar curl o wget</h3>
-<p>Cuando ejecutes <span class="code">curl</span> o <span class="code">wget</span> en una URL con variables, asegúate de encerrar la URL entre comillas simples.</p>
+<p>Cuando ejecutes <span class="code">curl</span> o <span class="code">wget</span> en una URL con variables, asegúrate de encerrar la URL entre comillas simples.</p>
 <div class="preboxcontainer">
 <pre class="prebox">curl 'https://example.com/script.php?firstname=john&amp;lastname=doe'</pre>
 </div>
@@ -159,9 +159,9 @@
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades sobre SSH</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215088608-Generalidades-sobre-Crontab" target="_self">Generalidades crontab</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215767047-Crear-un-Cron-Job-personalizado" target="_self">Crear un Cron Job personalizado</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215088608-Generalidades-sobre-Crontab" target="_self">Generalidades de crontab</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215767047-Crear-un-Cron-Job-personalizado" target="_self">Crear un cron job personalizado</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215767107-Entorno-de-ejecuci%C3%B3n-de-un-trabajo-cron" target="_self">Entorno de ejecución de un cron job</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360038608892-Soluci%C3%B3n-de-problemas-de-Cron-job" target="_self">Solución de problemas de cron job</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360038608892-Soluci%C3%B3n-de-problemas-de-Cron-job" target="_self">Solución de problemas de un cron job</a></li>
 </ul>
 </div>

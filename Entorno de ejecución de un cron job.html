@@ -1,0 +1,89 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>El cron daemon fue diseñado de tal manera que NO ejecuta comandos dentro de tu entorno de shell normal. Esto significa que no puedes usar comandos desnudos en cron de la misma manera que lo harías desde la línea de comandos del shell SSH. Esto se debe a que la variable de RUTA de entorno es /usr/bin:/bin, y la variable de entorno SHELL se establece en /bin/sh.</p>
+<h3>Ejemplos</h3>
+<p>Este es un ejemplo usando el comando <span class="code">wp</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">* * * * * wp plugin update --all --path=<span class="code-highlight">example.com</span></pre>
+</div>
+<p>El cron daemon no sabe dónde se encuentra el comando 'wp'. Debes especificar la ruta completa a todos los comandos que no están en la RUTA predeterminada y siempre especificar la ruta completa para los archivos. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">* * * * * /usr/bin/wp plugin update --all --path=<span class="code-highlight">example.com</span></pre>
+</div>
+<p>Si tienes problemas para localizar dónde está un comando, puedes usar el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">which command-name</span></pre>
+</div>
+<p>Ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">which wp</span></pre>
+</div>
+<p>Lo siguiente se imprime en su terminal:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/usr/bin/wp</pre>
+</div>
+</div>
+<h2>Usar sudo y cron con un usuario administrador en un servidor dedicado</h2>
+<div class="solvvy-solution">
+<p>Si estás en un servidor dedicado y tienes un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-" target="_self">usuario administrador</a>,&nbsp;no uses <span class="code">sudo</span> en tu crontab. En lugar de que tu script funcione, recibirás un error como este.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo: no tty present and no askpass program specified</span></pre>
+</div>
+<p>Esto se debe a que 'sudo' requiere que se ingrese una contraseña para ejecutar y los cron job (junto con cualquier programa/comando/script que pueda ejecutar desde ellos) no permiten que se especifique ninguna entrada.</p>
+<p>Si necesita permisos de nivel raíz para un script, deberá crear un archivo en formato crontab en el directorio <span class="text-object">/etc/cron.d/</span>. Por supuesto, asegúrese de mantener una copia de seguridad de ese archivo ya que esa ubicación está fuera del directorio <span class="text-object">/home</span> y no está incluida en las copias de seguridad internas de DreamHost.</p>
+</div>
+<h2><span id="mailto">Requisito variable MAILTO</span></h2>
+<div class="solvvy-solution">
+<p>Por razones de rendimiento, DreamHost ahora requiere que todos los crontabs tengan un conjunto de variables MAILTO.</p>
+<p>La variable MAILTO se puede establecer en cualquier cosa. Si lo dejas en blanco, no envía por correo electrónico la salida de tus cronjobs. Puedes configurarlo con tu nombre de usuario para que se lo entregue a tu usuario como de costumbre, o puedes especificar una dirección de correo electrónico externa. Ten en cuenta que si especificas una dirección de correo electrónico externa, los correos electrónicos cron que se envían (incluidos los mensajes de notificación de finalización /error) tienen en cuenta la cuota de envío de correo electrónico por hora de tu usuario shell. Para obtener más información sobre ese límite, consulte el&nbsp;<a href="/hc/es/articles/215730437-Límites-de-cuota-SMTP" target="_self">artículo cuota SMTP</a>.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si su cron job no crea ningún resultado en la línea de comando, no se envía ningún correo electrónico, incluso si el cron job está configurado para enviar correo electrónico.</p>
+</div>
+</div>
+</div>
+<h2>Ejemplos de una configuración MAILTO válida en un archivo crontab</h2>
+<div class="solvvy-solution">
+<p>Para deshabilitar el envío de salida cronjob por correo electrónico:</p>
+<div class="preboxcontainer">
+<pre class="prebox">MAILTO=""</pre>
+</div>
+<p>Para enviar la salida de cronjob a&nbsp;<span class="text-object">someuser@example.com</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">MAILTO=<span class="code-highlight">someuser@example.com</span></pre>
+</div>
+<p>Para enviar la salida de cronjob a la carpeta Maildir de su usuario de shell:</p>
+<div class="preboxcontainer">
+<pre class="prebox">MAILTO=<span class="code-highlight">username</span></pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Como se indicó al ejecutar <span class="code">man 5 crontab</span>, las cadenas no se analizan para sustituciones ambientales o reemplazo de variables. Esto significa que <span class="code">MAILTO=$LOGNAME</span> no funciona.</p>
+</div>
+</div>
+</div>
+<h2>Límite de caracteres de cron job</h2>
+<div class="solvvy-solution">
+<p>Al agregar/modificar un cron job en el panel, el campo 'Comando para ejecutar' especifica un máximo de 1000 caracteres. Este límite no incluye el contenido adicional que DreamHost agrega al cron job (como el bloqueo o la encapsulación sh -c $ ’’). En promedio, ese contenido adicional no debe tener más de 100 caracteres. La violación del límite da como resultado esta advertencia:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/bin/sh: -c: line 1: unexpected EOF while looking for matching `''
+/bin/sh: -c: line 2: syntax error: unexpected end of file</pre>
+</div>
+<p>Si encuentras este error, se recomienda encapsular tus comandos en un script y modificar el cron job para ejecutar el script. Por ejemplo, si colocas el comando (o comandos) que contienen más de 1000 caracteres en un archivo llamado <span class="text-object">cron.sh</span> y colocas ese archivo en el directorio de inicio de tu usuario, puedes configurar el comando de cron job de la siguiente manera.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">. ~/cron.sh</span></pre>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215088608-Generalidades-sobre-Crontab" target="_self">Generalidades sobre Crontab</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215767047-Crear-un-Cron-Job-personalizado" target="_self">Creando un cron job personalizado</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-" target="_self">¿Cómo crear un cron job?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202238-Generalidades-de-l%C3%ADnea-de-comando-PHP" target="_self">Generalidades Sobre la línea de comando PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360038608892-Soluci%C3%B3n-de-problemas-de-Cron-job" target="_self">Solución de problemas de cron job</a></li>
+</ul>
+</div>
