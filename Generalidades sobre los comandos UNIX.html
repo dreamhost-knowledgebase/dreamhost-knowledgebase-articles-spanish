@@ -1,0 +1,73 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Los siguientes son algunos comandos básicos que pueden ser útiles en UNIX/Linux&nbsp;&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216557548-Shell-disponibles-en-DreamHost">Shell</a>.&nbsp;Para obtener más ejemplos sobre cómo trabajar con directorios y archivos, consulta los siguientes artículos:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215465297-Comandos-UNIX-Trabajando-con-directorios" target="_self">Comandos UNIX — Trabajar con directorios</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214750848-Comandos-de-UNIX-Trabajando-con-archivos" target="_self">Commands UNIX — Trabajar con archivos</a></li>
+</ul>
+</div>
+<h2>Uso del Disco</h2>
+<div class="solvvy-solution">
+<p>Para mostrar el uso total del disco de tu VPS o servidor Dedicado, usa&nbsp;<span class="code">df</span>. Esto te mostrará el espacio total, usado y disponible en el disco. Agrega el indicador&nbsp;<span class="code">-h</span>&nbsp;ara mostrar los números en un formato más legible (KB, MB, GB, etc.).</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">df -h</span>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1        24G  4.4G   19G  20% /
+/dev/sda5       2.3G  1.1G  1.2G  49% /tmp
+/dev/sda6        51G  2.0G   48G   4% /var
+/dev/sdb1       3.6T  3.2T  448G  88% /home
+/dev/ram0       3.9M   92K  3.6M   3% /var/dovecot
+</pre>
+</div>
+<p>Ten en cuenta que el resultado anterior se truncó. El resultado real en los servidores de DreamHost puede ser bastante más largo.</p>
+<p>Tu <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-servidor" target="_self">directorio /home</a> y todos tus archivos están en <span class="text-object">/home</span>&nbsp;(no mencionados anteriormente).</p>
+<p>En el ejemplo a continuación, se enumera el directorio de inicio, y puedes ver a partir de esto que se está utilizando el 26% por ciento de una partición de 30 GB.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">df -h /home</span>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdb1       3.6T  3.2T  448G  88% /home
+</pre>
+</div>
+</div>
+<h2>Usuarios</h2>
+<div class="solvvy-solution">
+<p>Para obtener un historial de actividad de inicio de sesión reciente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">last <span class="code-highlight">username</span></span></pre>
+</div>
+</div>
+<h2>Otros comandos comunes</h2>
+<div class="solvvy-solution">
+<h3>Descomprimir archivos ZIP Archive</h3>
+<p>Consulta el siguiente artículo para obtener detalles sobre cómo descomprimir los diferentes tipos de archivos comprimidos.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115002768331-Comandos-UNIX-Descomprimiendo-archivos" target="_self"> Comandos UNIX — Descomprimir archivos</a></li>
+</ul>
+<h3>Verifica si tus archivos están cargados correctamente (verifica la integridad del archivo)</h3>
+<p>Si necesitas cargar algunos archivos grandes en el servidor, es posible que desees verificar que se cargan correctamente sin errores. Para hacer eso, simplemente crea un archivo MD5 y cárgalo en el servidor, en la misma carpeta que los archivos que deseas verificar.</p>
+<p>Un archivo MD5 es un archivo de texto sin formato que contiene sumas de verificación de tus archivos para que luego se pueda verificar su integridad; Para crearlo, puedes usar cualquier herramienta MD5 para tu sistema operativo, o la utilidad de línea de comandos en un sistema similar a UNIX con&nbsp;<span class="code">openssl md5</span>.</p>
+<p>Una vez que cargues el archivo MD5, ve al directorio que contiene los archivos que deseas verificar (y dónde cargaste el archivo MD5) e ingresa el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">md5sum -c <span class="code-highlight">yourfile.md5</span></span>
+list: OK
+of: OK
+uploaded: OK
+files: OK
+being: OK
+verified: OK
+</pre>
+</div>
+<p>Si todos los archivos informan ON, la carga fue completamente exitosa. Si alguno de los informes de archivos muestran FAILED (FALLÓ), la carga no fue exitosa.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215465297-Comandos-UNIX-Trabajando-con-directorios" target="_self">Comandos UNIX — Trabajar con directorios</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214750848-Comandos-de-UNIX-Trabajando-con-archivos" target="_self">Comandos UNIX — Trabajar con archivos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214750918-Comandos-UNIX-Cambiar-propiedad" target="_self">Comandos UNIX — Cambio de titularidad o dueño</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">Comandos UNIX — Cambio de permisos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115002768331-Comandos-UNIX-Descomprimiendo-archivos" target="_self">Comandos UNIX — Descomprimir archivos</a></li>
+</ul>
+</div>

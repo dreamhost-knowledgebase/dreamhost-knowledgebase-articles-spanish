@@ -1,8 +1,8 @@
-<h2>Si ssh-copy-id o el comando Mac OS X no funciona en su máquina Linux</h2>
+<h2>Si ssh-copy-id o el comando Mac OS X no funciona en tu máquina Linux</h2>
 <div class="solvvy-solution">
 <ol>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216499537-C%C3%B3mo-configurar-inicio-de-sesi%C3%B3n-sin-contrase%C3%B1a-en-Mac-OS-y-Linux" target="_self">Crear el keypair</a> en la computadora de tu hogar.</li>
-<li>Si ssh-copy-id no funciona para ti, carga manualmente tu clave pública en tu servidor DreamHost. En la computadora de tu casa, ejecuta este comando con tu nombre de usuario donde creaste tu keypair:<br />
+<li><a href="https://help.dreamhost.com/hc/es/articles/216499537-C%C3%B3mo-configurar-inicio-de-sesi%C3%B3n-sin-contrase%C3%B1a-en-Mac-OS-y-Linux" target="_self">Crear la llave de emparejamiento</a> en la computadora de tu hogar.</li>
+<li>Si ssh-copy-id no funciona para ti, carga manualmente tu clave pública en tu servidor DreamHost. En la computadora de tu casa, corre este comando con tu username donde creaste tu llave de emparejamiento:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local]$ </span><span class="command">scp ~/.ssh/id_rsa.pub <span class="code-highlight">username@server.dreamhost.com:~/</span></span>
 </pre>
@@ -23,7 +23,7 @@
 </pre>
 </div>
 </li>
-<li>Ejecuta el siguiente comando para crear un nuevo archivo llamado <span class="text-object">authorized_keys</span> en la nueva carpeta <span class="text-object">/.ssh</span>. Esto también copiará tu archivo id_rsa.pub en este nuevo archivo authorized_keys:<br />
+<li>Corre el siguiente comando para crear un nuevo archivo llamado <span class="text-object">authorized_keys</span> en la nueva carpeta <span class="text-object">/.ssh</span>. Esto también copiará tu archivo id_rsa.pub en este nuevo archivo authorized_keys:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cat id_rsa.pub &gt;&gt; .ssh/authorized_keys</span>
 </pre>
@@ -43,7 +43,7 @@
 </div>
 </li>
 </ol>
-<p>Si todo está configurado correctamente, ahora deberías poder acceder a tu cuenta DreamHost a través de SSH sin una contraseña. Ejecuta este comando en la computadora de tu hogar donde acabas de crear el keypair original.</p>
+<p>Si todo está configurado correctamente, ahora deberías poder acceder a tu cuenta DreamHost a través de SSH sin una contraseña. Corre este comando en la computadora de tu hogar donde acabas de crear el llave de emparejamiento original.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh <span class="code-highlight">username@server.dreamhost.com</span></span>
 </pre>
@@ -100,8 +100,8 @@
 </div>
 <h2>No es posible iniciar sesión desde Mac OSX después de que la clave pública se haya copiado en tu servidor DreamHost</h2>
 <div class="solvvy-solution">
-<p>Si no puedes iniciar sesión automáticamente después de cargar tu clave pública, puede deberse a que estás utilizando nombres de keypairs personalizados; es decir, estás utilizando algo distinto de id_rsa / id_rsa.pub. Esto es común cuando uno mantiene múltiples keypairs.</p>
-<p>Ingresa lo siguiente para ejecutar ssh en modo detallado:</p>
+<p>Si no puedes iniciar sesión automáticamente después de cargar tu clave pública, puede deberse a que estás utilizando nombres de llaves de emparejamiento personalizados; es decir, estás utilizando algo distinto de id_rsa/id_rsa.pub. Esto es común cuando uno mantiene múltiples llave de emparejamiento.</p>
+<p>Ingresa lo siguiente para correr ssh en modo detallado:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local]$ </span><span class="command">ssh -v <span class="code-highlight">user@example.com</span></span>
 </pre>
@@ -123,4 +123,7 @@
 <li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/216499537-C%C3%B3mo-configurar-inicio-de-sesi%C3%B3n-sin-contrase%C3%B1a-en-Mac-OS-y-Linux" target="_self">Cómo configurar acceso sin contraseña en Mac OS X y Linux</a></li>
 <li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215464758--C%C3%B3mo-configurar-el-inicio-de-sesi%C3%B3n-sin-contrase%C3%B1a-en-PuTTY-" target="_self">¿Cómo configurar acceso sin contraseña en PuTTY?</a></li>
 </ul>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 255px; top: 1819.69px;">
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>
