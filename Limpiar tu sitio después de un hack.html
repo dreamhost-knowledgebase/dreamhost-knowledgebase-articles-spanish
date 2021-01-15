@@ -14,6 +14,12 @@
 <p>Para eliminar un archivo hackeado, debes revisar todos los archivos de la cuenta de usuario comprometida y eliminar todo lo que no hayas colocado allí. Si estás utilizando un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215613107-Listas-de-clientes-de-software-de-FTP">cliente FTP</a>, asegúrate de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215613037--C%C3%B3mo-muestro-archivos-ocultos-en-mi-cliente-FTP-">habilitar la visualización de archivos "ocultos"</a>&nbsp;– y lo mismo para el shell utilizando la opción -a con <span class="code">ls</span>.</p>
 <p>A veces puede ser útil buscar primero los archivos con marcas de tiempo de modificación que ocurrieron desde la última vez que modificaste tu sitio o en el momento en que tuvo lugar el hackeo. Si has identificado un archivo que se modificó definitivamente en el hackeo (como una página de índice desfigurada), puedes identificar los archivos utilizados para modificar el archivo hackeado buscando la marca de tiempo del archivo en tus logs HTTP a través de shell.</p>
 <p>El siguiente es un comando útil para encontrar archivos modificados:</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access" target="_self">ususario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+</div>
+</div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">find /home/<span class="code-highlight">username/www.example.com</span>/ ! -name "log" -mtime -3</span></pre>
 </div>
