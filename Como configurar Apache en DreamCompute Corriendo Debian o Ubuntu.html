@@ -1,0 +1,145 @@
+<h2><strong>Generalidades</strong></h2>
+<p><span style="font-weight: 400;">Apache es el servidor HTTP más utilizado en Internet y DreamHost lo utiliza como servidor HTTP predeterminado para todos los productos de alojamiento.</span></p>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p><span style="font-weight: 400;">Estas instrucciones asumen que has lanzado una instancia que ejecuta Debian o Ubuntu. Consulta el siguiente artículo para obtener instrucciones sobre cómo iniciar una instancia:</span></p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215912848-How-to-launch-an-instance-using-the-DreamCompute-dashboard"><span style="font-weight: 400;">Como lanzar una instancia</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Iniciar sesión en tu instancia como usuario por defecto</h2>
+<p><span style="font-weight: 400;">Inicia sesión en tu nueva instancia usando las Llaves de SSH que has asignaste cuando se creó.</span></p>
+<div class="solvvy-solution">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216201547-Connect-to-your-instance-with-ssh-keys-overview"><span style="font-weight: 400;">Generalidades sobre conectar tu instancia con Llaves SSH</span></a></li>
+</ul>
+<p><span style="font-weight: 400;">Los siguientes comandos requieren privilegios sudo los cuales están asignados al usuario predeterminado de la instancia automáticamente.</span></p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/228377408-How-to-find-the-default-user-of-an-image"><span style="font-weight: 400;">Como encontrar el usuario por defecto de una imagen</span></a></li>
+</ul>
+</div>
+<h2><strong>Instalar Apache</strong></h2>
+<p><span style="font-weight: 400;">Corre los siguientes comandos:</span></p>
+<div class="solvvy-solution">
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo apt-get update</span>
+<span class="server">[user@instance]:$ </span><span class="command">sudo apt-get install -y apache2</span></pre>
+</div>
+<p><span style="font-weight: 400;">Cuando se completa, el servidor HTTP Apache está instalado y se ejecuta con su configuración predeterminada. Si visitas la </span><a href="https://help.dreamhost.com/hc/en-us/articles/115001754711-Locating-the-IP-Address-of-your-instance"><span style="font-weight: 400;">dirección IP pública de tu instancia</span></a><span style="font-weight: 400;"> en tu buscador, verás la página por defecto de Apache.</span></p>
+<img src="https://kbimages.dreamhosters.com/images/Apache_default_page.png" />
+<h2>El directorio /etc/apache2</h2>
+<p><span style="font-weight: 400;">Este directorio contiene todos los archivos de configuración de tu servidor Apache. Si </span><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self" rel="undefined">editas cualquiera de los archivos</a><span style="font-weight: 400;"> encontrarás que muchos incluyen detalles del propósito general en la parte superior.</span></p>
+<h3>Archivo /etc/apache2/apache2.conf</h3>
+<p><span style="font-weight: 400;">Este es el archivo de configuración principal que finalmente controla cómo funciona Apache. Si bien es posible configurar completamente tus sitios y módulos directamente en este archivo, en su lugar se recomienda usar archivos individuales más pequeños para cada uno de tus sitios y módulos para simplificar. Ve el artículo "Agregar un sitio web a DreamCompute" para obtener más instrucciones sobre cómo agregar archivos de configuración del sitio en el directorio </span><strong>/etc/apache2/sites-available</strong><span style="font-weight: 400;">.</span></p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115003441752-Adding-a-website-to-DreamCompute"><span style="font-weight: 400;">Agregar un sitio a DreamCompute</span></a></li>
+</ul>
+<p><span style="font-weight: 400;">Esto es posible gracias a la directiva </span><span style="font-weight: 400;">Include</span><span style="font-weight: 400;"> para insertar otros archivos en apache2.conf en tiempo de ejecución. Algunos de los valores de interés aquí son:</span></p>
+<h4><span style="font-weight: 400;">Timeout</span></h4>
+<p><span style="font-weight: 400;">Tiempo en segundos que Apache intenta completar una solicitud. Predeterminado: 300</span></p>
+<h4><span style="font-weight: 400;">KeepAlive</span></h4>
+<p><span style="font-weight: 400;">Define si se permiten conexiones persistentes, lo que permite más de una solicitud por conexión. Predeterminado: Activado</span></p>
+<h4><span style="font-weight: 400;">MaxKeepAliveRequests</span></h4>
+<p><span style="font-weight: 400;">Define el número máximo de solicitudes permitidas para cada conexión persistente KeepAlive. Predeterminado: 100</span></p>
+<h4><span style="font-weight: 400;">KeepAliveTimeout</span></h4>
+<p><span style="font-weight: 400;">Define la cantidad de segundos para esperar otra solicitud antes de finalizar la conexión persistente KeepAlive. Por defecto: 5</span></p>
+<h2>Configuración MPM</h2>
+<p><span style="font-weight: 400;">Debian y Ubuntu tienen diferentes paquetes de Apache que están optimizados para diferentes situaciones. Cada paquete es un tipo diferente de MPM (módulo de multiprocesamiento) y las configuraciones para cada uno se definen cerca del final de este archivo.</span></p>
+<p><span style="font-weight: 400;">Los paquetes disponibles son:</span></p>
+</div>
+<div class="solvvy-solution">
+<ul>
+<li>mpm-event</li>
+<li>mpm-prefork</li>
+<li>mpm-worker</li>
+</ul>
+<h2><span style="font-weight: 400;">Comprueba qué configuración de MPM está habilitada</span></h2>
+<p><span style="font-weight: 400;">Corre el siguiente comando:</span></p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">apache2ctl -M | grep mpm</span>
+ mpm_event_module (shared)</pre>
+</div>
+<p><span style="font-weight: 400;">Esto muestra que el módulo de eventos está habilitado. Si lo deseas, puedes cambiar eso a mpm-prefork con los siguientes comandos.</span></p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo a2dismod mpm_event</span>
+<span class="server">[user@instance]:$ </span><span class="command">sudo a2enmod mpm_prefork</span>
+<span class="server">[user@instance]:$ </span><span class="command">sudo service apache2 restart</span></pre>
+</div>
+</div>
+<p><span style="font-weight: 400;">Los hosts virtuales definen cada sitio para que Apache sepa qué debe hacer cuando recibe una solicitud. Puedes ver todos los archivos de configuración del host virtual en el directorio </span><strong>/etc/apache2/sites-available</strong><span style="font-weight: 400;">.</span></p>
+<h3><span style="font-weight: 400;">/etc/apache2/sites-available/000-default.conf</span></h3>
+<p><span style="font-weight: 400;">El directorio </span><strong>/etc/apache2-sites-available</strong><span style="font-weight: 400;"> contiene un archivo de configuración predeterminada titulado </span><strong>000-default.conf</strong><span style="font-weight: 400;">. Estos archivos de configuración son responsables de lo siguiente:</span></p>
+<div class="solvvy-solution">
+<ul class="simple">
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Definir que debe hacer Apache cuando tiene una solicitud que no coincide con otos hosts virtuales.</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Si solo esperas tener un sitio en tu instancia de DreamCompute, puedes usar este archivo y ningún otro si lo prefieres.</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Para aquellos con varios sitios, esto se puede utilizar para indicar al visitante que puede haber hecho algo mal o redirigirlo a otro sitio.</span></li>
+</ul>
+<h2><span style="font-weight: 400;">/etc/apache2/sites-available/example.com.conf</span></h2>
+<p><span style="font-weight: 400;">Cualquier sitio agregado a tu instancia de DreamCompute tendría su propio archivo de configuración creado. Si tu sitio era example.com, el archivo de configuración se titularía </span><strong>example.com.conf</strong><span style="font-weight: 400;">.</span></p>
+<ul class="simple">
+<li><span style="font-weight: 400;">Para cada sitio que desees configurar, se recomienda que nombre un archivo similar al nombre de tu sitio en el directorio </span><strong>/etc/apache2/sites-available/</strong><span style="font-weight: 400;">.</span></li>
+<li><span style="font-weight: 400;">Hay muchos ejemplos de hosts virtuales disponibles en la wiki de Apache </span><a href="http://wiki.apache.org/httpd/ExampleVhosts"><span style="font-weight: 400;">página de Hosts de ejemplo</span></a><span style="font-weight: 400;">. A continuación se muestra uno básico para escuchar en el puerto 80 (http) con registro personalizado:</span></li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;VirtualHost *:80&gt;
+ServerName example.com
+ServerAlias www.example.com
+DocumentRoot /var/www/www.example.com
+
+CustomLog /var/log/apache/www.example.com-access.log combined
+ErrorLog /var/log/apache/www.example.com-error.log
+&lt;/VirtualHost&gt;</pre>
+</div>
+<p><span style="font-weight: 400;">Alternativamente, si deseas especificar la IP en lugar de *, puedes usar el siguiente comando reemplazando 1.1.1.1 con tu dirección IP real:</span></p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;VirtualHost 1.1.1.1:80&gt;</pre>
+</div>
+</div>
+<div class="solvvy-solution">
+<div class="preboxcontainer">
+<h2>Agregar el código de tu sitio</h2>
+<p><span style="font-weight: 400;">Ahora que se creó el archivo de configuración, debes agregar el código de tu sitio a la instancia. Lo agregarás en el siguiente directorio:</span></p>
+<pre class="prebox">/var/www/<span class="code-highlight">example.com</span>/index.html</pre>
+</div>
+<div id="managing-virtual-host-files">
+<h2><span style="font-weight: 400;">Administrar archivos de Virtual Host</span></h2>
+<p><span style="font-weight: 400;">Cuando hayas configurado el archivo de host virtual de tu sitio, puedes habilitarlo/deshabilitarlo ingresando los siguientes comandos:</span></p>
+<span class="code">sudo a2ensite</span> — <span style="font-weight: 400;">Proporciona una lista de archivos de sitios que puedes habilitar.</span>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo a2ensite</span></pre>
+</div>
+<span class="code">sudo a2dissite</span> — <span style="font-weight: 400;">Proporciona una lista de archivos de sitios que puedes deshabilitar.</span>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo a2dissite</span></pre>
+</div>
+<span class="code">sudo service apache2 reload</span> — <span style="font-weight: 400;">Recarga Apache para hacer el cambio en vivo luego de habilitar o deshabilitar un sitio.</span>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo service apache2 reload</span></pre>
+</div>
+<p><span style="font-weight: 400;">Este commando crea un enlace simbólico pára los archivos de tu sitio desde /etc/apache2/sites-enabled a su archivo correspondiente en /etc/apache2/sites-available.</span></p>
+<h2>Módulos</h2>
+<p><span style="font-weight: 400;">Los módulos pueden ser habilitados o deshabilitados por los siguientes comandos:</span></p>
+</div>
+</div>
+<div class="solvvy-solution">
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo a2enmod &lt;<span class="code-highlight">module-name</span>&gt;</span>
+<span class="server">[user@instance]:$ </span><span class="command">sudo a2dismod &lt;<span class="code-highlight">module-name</span>&gt;</span></pre>
+</div>
+<p><span style="font-weight: 400;">Si no especificas un nombre de módulo, el comando muestra una lista de módulos disponibles para habilitar o deshabilitar.</span></p>
+<p><span style="font-weight: 400;">Luego de habilitar o deshabilitar un sitio, recarga Apache para hacer un cambio en vivo usando el siguiente comando:</span></p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo service apache2 reload</span></pre>
+</div>
+</div>
+<div class="footer">&nbsp;</div>
+<!--DreamCompute Button-->
+<div class="dream-sign-up">
+<h2>Implementa Tus Aplicaciones en Servidores en la Nube Hoy</h2>
+<div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Regístrate a DreamCompute</a></div>
+</div>

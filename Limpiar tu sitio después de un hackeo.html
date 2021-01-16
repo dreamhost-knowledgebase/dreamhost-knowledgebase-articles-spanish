@@ -1,0 +1,90 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Independientemente del modo de intrusión, querrás limpiar después de un hackeo para garantizar la integridad de tu sitio y para garantizar que no se vuelva a comprometer.</p>
+<p>A continuación se describen los pasos importantes que se deben seguir para reparar y proteger tu sitio web después de un presunto hackeo.</p>
+<div class="alert alert-tip">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-tip-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si no te sientes cómodo arreglando tu sitio de WordPress por tu cuenta, puedes solicitar una <a href="https://help.dreamhost.com/hc/es/articles/360001395451--TS-para-el-servicio-de-reparaci%C3%B3n-de-sitios-hackeados-de-DreamHost">Hacked Site Repair</a> (reparación de sitio pirateado, el servicio profesional de eliminación de malware de DreamHost). Por una tarifa única de $199, los expertos de DreamHost accederán a tu cuenta y realizarán las reparaciones necesarias para que vuelvas a estar en línea rápidamente. Por favor <a href="https://panel.dreamhost.com/?tree=support.msg">contacta a soporte</a>&nbsp;de asistencia si deseas explorar esta opción.</p>
+</div>
+</div>
+</div>
+<h2>Eliminar un archivo hackeado</h2>
+<div class="solvvy-solution">
+<p>Para eliminar un archivo hackeado, debes revisar todos los archivos de la cuenta de usuario comprometida y eliminar todo lo que no hayas colocado allí. Si estás utilizando un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215613107-Listas-de-clientes-de-software-de-FTP">cliente FTP</a>, asegúrate de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215613037--C%C3%B3mo-muestro-archivos-ocultos-en-mi-cliente-FTP-">habilitar la visualización de archivos "ocultos"</a>&nbsp;– y lo mismo para el shell utilizando la opción -a con <span class="code">ls</span>.</p>
+<p>A veces puede ser útil buscar primero los archivos con marcas de tiempo de modificación que ocurrieron desde la última vez que modificaste tu sitio o en el momento en que tuvo lugar el hackeo. Si has identificado un archivo que se modificó definitivamente en el hackeo (como una página de índice desfigurada), puedes identificar los archivos utilizados para modificar el archivo hackeado buscando la marca de tiempo del archivo en tus logs HTTP a través de shell.</p>
+<p>El siguiente es un comando útil para encontrar archivos modificados:</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">find /home/<span class="code-highlight">username/www.example.com</span>/ ! -name "log" -mtime -3</span></pre>
+</div>
+<p>Donde el "-3" es el número de días en el pasado para buscar archivos modificados. Este comando enumera todos los archivos en <span class="text-object">/home/username/example.com</span> que se han modificado en los últimos 3 días.</p>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si el comando anterior no funciona, intenta sin 'www'. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">find /home/<span class="code-highlight">username/example.com</span>/ ! -name "log" -mtime -3</span></pre>
+</div>
+</div>
+</div>
+<p>Los logs HTTPS recientes se encuentran en el siguiente directorio:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/<span class="code-highlight">username/logs/example.com</span>/https/</pre>
+</div>
+</div>
+<h2>Limpiar hackeos de bases de datos</h2>
+<div class="solvvy-solution">
+<p>Ciertos hackeos, particularmente ataques de inyección SQL contra instalaciones Joomla! vulnerables, puede hacer que la base de datos se altere con código malicioso. Dicha modificación puede permitir que el hacker vuelva a entrar incluso si has actualizado a la última versión y has limpiado todos los archivos extraños.</p>
+<p>Por esta razón, es una buena idea, después de un hackeo, inspeccionar la base de datos de la misma manera que revisas tus archivos para ver si se ha cambiado algo que no debería haber sido. Si sabes cuándo ocurrió el hackeo, incluso puedes querer revertir la base de datos a un momento anterior a través de la función de backup disponible en el panel. Ve el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215100557--C%C3%B3mo-restauro-mi-base-de-datos-en-el-panel-">Backup</a> para más detalles.</p>
+</div>
+<h2>Restaurar archivos perdidos/modificados</h2>
+<div class="solvvy-solution">
+<p>Finalmente, para restaurar archivos que han sido modificados o eliminados en el hackeo, consulta el artículo sobre&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215768257--C%C3%B3mo-restauro-mi-sitio-web-">cómo restaurar tu dominio</a>. DreamHost ofrece restauraciones de bases de datos y dominios desde el panel, y cuanto antes las obtengas, mejor, ya que las copias de seguridad solo se conservan durante unos días.</p>
+<p>Ve el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215089918--C%C3%B3mo-crear-una-copia-de-seguridad-de-mi-cuenta-entera-">Backup</a>&nbsp;para más detalles y opciones.</p>
+</div>
+<h2>Eliminar puertas traseras</h2>
+<div class="solvvy-solution">
+<p>El objetivo principal de explotar sitios web inseguros es obtener y mantener el acceso en beneficio del hacker. Por lo tanto, después de descubrir una vulnerabilidad, las puertas traseras casi siempre se instalan para que el hacker pueda volver más tarde. Si no identificas y eliminas estas vulnerabilidades, puede volver a explotar tu sitio.</p>
+<p>Los métodos comunes o la retención de acceso incluyen:</p>
+<ul>
+<li><strong>Instalar un Shell</strong>&nbsp;– Un archivo que se puede solicitar como cualquier otra página en tu sitio, pero que le da al solicitante acceso completo. Estos a menudo están escritos en PHP, pero pueden estar en cualquier idioma. A menudo se les da nombres que suenan inocentes o contienen código ofuscado. También se pueden agregar a archivos legítimos con código adicional agregado para que la funcionalidad solo esté disponible cuando se pasa un parámetro adicional al archivo durante las solicitudes.</li>
+<li><strong>Crear usuarios nuevos</strong>&nbsp;– Estos pueden ser nuevos usuarios de bases de datos o usuarios de aplicaciones web.</li>
+<li><strong>Almacenar cookies autenticadas</strong> – La mayoría de las aplicaciones tienen la opción de recordar quién inició sesión almacenando una cookie en la computadora del usuario. Si un hacker logra modificar/crear un usuario y recibe una cookie autenticada, esta cookie a menudo se puede reutilizar hasta que caduque, incluso si se cambia la contraseña de ese usuario. Para obligar a los titulares de cookies autenticadas a iniciar sesión nuevamente, la&nbsp;<a href="https://en.wikipedia.org/wiki/Salt_(cryptography)">sal</a> utilizada para cifrar las cookies debe cambiarse después de restablecer las contraseñas. Cómo hacerlo depende de tu software.</li>
+<li><strong>Cambiar los permisos de carpetas y archivos a escritura mundial</strong></li>
+<li><strong>Agregar una clave pública a .ssh/authorized_keys</strong></li>
+</ul>
+<p>Desafortunadamente, no hay una forma sencilla e infalible de encontrar y eliminar vulnerabilidades o backdoors. Se necesita tiempo y conocimiento para investigar el modo de entrada y las acciones que ocurrieron después. Hay muchos ejemplos en la web de los tipos de pasos que puedes seguir.</p>
+</div>
+<h2>Después de que hayas limpiado tu sitio</h2>
+<div class="solvvy-solution">
+<p>Después de haber limpiado tu sitio y crees que está limpio, <a href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-a-trav%C3%A9s-de-Correo-Electr%C3%B3nico">contacta a soporte</a> y solicita que se escanee tu sitio nuevamente para asegurarte de que no haya problemas.</p>
+</div>
+<h2>Cambiar la contraseña de tu sitio web</h2>
+<div class="solvvy-solution">
+<p>Algunos sitios web ejecutan software que requiere un inicio de sesión. El archivo de configuración que almacena la contraseña es diferente para cada aplicación, por lo que deberás consultar el manual de la aplicación para obtener instrucciones sobre dónde se encuentra el archivo de configuración. El siguiente artículo enumera algunos enlaces a aplicaciones comunes:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215877258-Cambiar-contrase%C3%B1a-Aplicaciones-de-terceros-" target="_self">Cambiar contraseña (Aplicaciones de terceros)</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/categories/202186727-Soluci%C3%B3n-de-problemas">Lista de artículos de solución de problemas</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215604737-Generalidades-sobre-sitios-hackeados">Generalidades de sitios hackeados</a></li>
+<li><a href="/hc/en-us/articles/215605037-Preventing-future-hacks">Prevenir futuros hackeos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214915728--Determinar-c%C3%B3mo-fue-hackeado-tu-sitio">Determinar como tu sitio fue hackeado</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216105097-Ver-y-examinar-tu-access-log-a-trav%C3%A9s-de-SSH">Ver y examinar tu log de acceso por medio de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP">Ver y examinar tu log de accesso y de errores por medio de SFTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">Generalidades de FTP y credenciales</a></li>
+</ul>
+</div>

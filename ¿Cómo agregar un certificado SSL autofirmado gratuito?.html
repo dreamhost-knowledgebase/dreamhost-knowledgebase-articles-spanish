@@ -1,0 +1,121 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Un certificado autofirmado es un certificado SSL que no ha sido validado por una Autoridad de certificación (CA). Eso es lo que significa que está firmado por uno mismo.</p>
+<p>El nivel de cifrado puede ser el mismo que el de cualquier otro certificado, pero debido a que no está validado por una CA, el navegador mostrará una advertencia cuando se visite el sitio.</p>
+<p>Por esta razón, estos tipos de certificados solo se recomiendan para uso interno en un sitio web donde ningún visitante lo vería o entraría en contacto con el sitio.</p>
+</div>
+<h2><span id="advertencias_autofirmadas">Advertencias del navegador para certificados autofirmados</span></h2>
+<div class="solvvy-solution">
+<p>Debido a que una autoridad confiable no lo firmó, los navegadores no pueden confiar en él. El sitio seguirá funcionando normalmente, pero los visitantes verán una advertencia. A continuación se muestran ejemplos de lo que un visitante vería en Firefox y Chrome.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si deseas atraer visitantes a tu sitio, <strong>NO</strong> uses un certificado autofirmado.</p>
+</div>
+</div>
+<p><strong>Firefox</strong></p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-05_ssl_self_signed_warning_01.png" alt="" width="684" height="456" /></p>
+<p><strong>Chrome</strong></p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-05_ssl_self_signed_warning_02.png" alt="" width="563" height="452" /></p>
+</div>
+<h2>Crear un certificado autofirmado</h2>
+<div class="solvvy-solution">
+<p>En el panel de DreamHost no hay forma de agregar un certificado autofirmado. Tienes dos opciones para crear este tipo de certificado.</p>
+<ul>
+<li>Crearlo a través de la línea de comando SSH</li>
+<li>Sitio web externo</li>
+</ul>
+<h3>Crear un certificado autofirmado a través de SSH</h3>
+<p>Puedes ejecutar estos comandos en una computadora Linux o Mac, sin embargo, estas instrucciones muestran cómo iniciar sesión en tu servidor web DreamHost para correr los comandos.</p>
+<ol>
+<li>Inicia sesión en tu servidor web DreamHost a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Conéctate a tu dominio a través de SSH. Visita el artículo de SSH para obtener instrucciones.</li>
+<li>Una vez que hayas iniciado sesión en tu servidor a través de SSH, asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de tu usuario</a>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li>Usa <span class="code">openssl</span> para crear tu clave privada que usarás para crear el CSR. Escribe lo siguiente para abrir la herramienta de línea de comandos OpenSSL.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">openssl</span></pre>
+</div>
+<dl>
+<dd><em>El símbolo del sistema ahora cambia a <span class="code">OpenSSL&gt;</span>, lo que significa que estás listo para correr los siguientes comandos.</em></dd>
+</dl>
+</li>
+<li>Genera una nueva clave privada RSA ingresando el siguiente comando sin contraseña:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">OpenSSL&gt; </span><span class="command">genrsa -out Private.key 2048</span>
+Generating RSA private key, 2048 bit long modulus
+........................................................+++
+........................................................+++
+e is 65537 (0x10001)</pre>
+</div>
+</li>
+<li>Crea el certificado con esta nueva clave privada.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">OpenSSL&gt; </span><span class="command">req -new -x509 -key Private.key -out Certificate.crt -days 365</span>
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:
+State or Province Name (full name) [Some-State]:
+Locality Name (eg, city) []:
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:
+Email Address []:</pre>
+</div>
+</li>
+<li>El paso anterior te solicita la información de tu sitio para crear una CSR. Puedes hacer clic en estas opciones sin ingresar nada, ya que tu navegador lanzará una advertencia para el certificado autofirmado de forma predeterminada.</li>
+<li>Cierra sesión en OpenSSL
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">OpenSSL&gt;</span><span class="command"> quit</span></pre>
+</div>
+</li>
+<li>Confirmar que tu clave privada y tu certificado han sido creados.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">ls -1</span>
+Certificate.crt
+Private.key</pre>
+</div>
+</li>
+</ol>
+<p>Ahora que se han creado la clave privada y el certificado, puedes instalarlos en tu panel utilizando el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115003505112-C%C3%B3mo-forzar-a-su-sitio-a-redireccionar-a-https-SSL-">¿Cómo instalar un certificado SSL externo?</a></li>
+</ul>
+<p>Con SSH, puedes abrir los archivos para ver su contenido corriendo cat:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">cat Certificate.crt</span>
+<span class="server">[servidor]$ </span><span class="command">cat Private.key</span></pre>
+</div>
+<h3>Crear un certificado autofirmado para un sitio web en línea</h3>
+<p>Existen varios sitios web que te permiten crear un certificado autofirmado, como los siguientes:</p>
+<ul>
+<li><a href="https://getacert.com/index.html" target="_self">https://getacert.com/index.html</a></li>
+</ul>
+</div>
+<h2>Obligar a tu sitio a cargar con HTTPS por defecto</h2>
+<div class="solvvy-solution">
+<p>Incluso después de haber agregado el certificado SSL a tu sitio, los visitantes no podrán usarlo a menos que escriban manualmente 'https' antes del nombre de tu dominio. Esto anula el propósito de agregarlo en primer lugar, ya que el certificado está destinado a proteger todo el tráfico de tu sitio web.</p>
+<p>Hay varias formas de arreglar esto. Consulta el siguiente artículo para obtener instrucciones sobre cómo crear un archivo de configuración para redirigir todo el tráfico de visitantes a la versión segura de tu URL (https).</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115003505112-C%C3%B3mo-forzar-a-su-sitio-a-redireccionar-a-https-SSL-">Cómo forzar tu sitio a redireccionar a https (SSL)</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL">Generalidades sobre el proceso de agregar un certificado SSL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216539558-Generalidades-sobre-certificado-de-seguridad-Let-s-Encrypt">Generalidades sobre certificado de seguridad Let's Encrypt</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041537-Generalidades-sobre-certificados-SSL">Generalidades sobre certificados SSL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089778--Qu%C3%A9-necesito-de-DreamHost-antes-de-comprar-un-certificado-SSL-de-terceros-">¿Qué necesito de DreamHost antes de comprar un certificado SSL externo?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089748--C%C3%B3mo-comprar-un-certificado-SSL-firmado-profesionalmente-">¿Cómo comprar un certificado SSL firmado profesionalmente?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115003505112-C%C3%B3mo-forzar-a-su-sitio-a-redireccionar-a-https-SSL-">¿Cómo instalar un certificado SSL externo?</a></li>
+</ul>
+</div>
