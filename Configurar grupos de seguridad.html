@@ -1,0 +1,91 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p><span style="font-weight: 400;">Los grupos de seguridad son conjuntos de reglas de filtrado de IP que definen el acceso a la red. Las reglas asociadas en cada grupo de seguridad controlan el tráfico a las instancias en el grupo. A todo tráfico entrante que no coincida con una regla se le niega el acceso de forma predeterminada.</span></p>
+<p><span style="font-weight: 400;">Puedes agregar, eliminar o modificar reglas de un grupo de seguridad que hayas creado. También puedes modificar las reglas del grupo de seguridad predeterminado. También puedes modificar las reglas para permitir el acceso a instancias a través de diferentes puertos y protocolos. Por ejemplo, puedes modificar las reglas para permitir que un servicio en una instancia (como un servidor web) sea visible en Internet o para permitir el tráfico UDP (como un servidor DNS que se ejecuta en una instancia).</span></p>
+<p><span style="font-weight: 400;">Antes de lanzar una instancia, debes agregar reglas de grupo de seguridad para permitir que los usuarios interactúen con la instancia. Para hacer esto, puedes </span><a href="https://help.dreamhost.com/hc/es/articles/215912838-Configurar-grupos-de-seguridad#grupos-seguridad-agregar-regla"><span style="font-weight: 400;">agregar reglas al grupo de seguridad predeterminado</span></a><span style="font-weight: 400;"> o </span><a href="https://help.dreamhost.com/hc/es/articles/215912838-Configurar-grupos-de-seguridad#grupos-seguridad-agregar-grupo"><span style="font-weight: 400;">agregar un nuevo grupo de seguridad</span></a><span style="font-weight: 400;"> con reglas.</span></p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p><span style="font-weight: 400;">Puedes asignar tantos grupos de seguridad como desees a una instancia en cualquier momento.</span></p>
+</div>
+</div>
+</div>
+<div id="add-a-rule-to-the-default-security-group"><span id="grupos-seguridad-agregar-regla"></span>
+<h2>Agregar una regla al grupo de seguridad predeterminado</h2>
+<p><span style="font-weight: 400;">Si agregas reglas al grupo de seguridad "predeterminado", se aplicarán a todas las instancias dentro de un proyecto determinado (a menos que elimine explícitamente el grupo "predeterminado" de una instancia). En este ejemplo, se creará una regla para abrir el puerto TCP 8080 a todo el tráfico entrante. Este procedimiento se puede ajustar según sea necesario para agregar reglas de grupo de seguridad adicionales a un proyecto.</span></p>
+<div class="solvvy-solution">
+<ol class="arabic">
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Inicia sesión en tu panel de DreamCompute.</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Selecciona el proyecto apropiado dentro del menú desplegable en la parte superior derecha.</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">En la pestaña Project, abre la pestaña Network y da click en la categoría Security Groups para ver cuales grupos de seguridad están disponibles para este projecto.</span>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/configuring-security-groups_01.png" alt="" width="787" height="355" /></dd>
+</dl>
+</li>
+<li><span style="font-weight: 400;">Da clic en Manage Rules al lado del grupo de seguridad predeterminado.</span><br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/configuring-security-groups_02.png" alt="" width="816" height="282" /></dd>
+</dl>
+</li>
+<li>Da click en <strong>Add Rule</strong>.</li>
+<li><span style="font-weight: 400;">Sigue los </span><a href="https://help.dreamhost.com/hc/es/articles/215912838-Configurar-grupos-de-seguridad#agregar_regla"><span style="font-weight: 400;">pasos de abajo para agregar una nueva regla.</span></a></li>
+</ol>
+</div>
+<span id="grupos-seguridad-agregar-grupo"></span>
+<h2>Agrega un nuevo grupo de seguridad</h2>
+<div class="solvvy-solution">
+<ol class="arabic">
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Inicia sesión en tu panel de DreamCompute.</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Selecciona el proyecto aproipiado del menú desplegable en la parte superior izquierda.</span></li>
+<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">En la pestaña Project, abre la pestaña Network y da click en la categoría Grupos de Seguridad para ver cuales grupos de seguridad están disponibles para este proyecto.</span>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/configuring-security-groups_04.png" alt="" width="772" height="332" /></dd>
+</dl>
+</li>
+<li><span style="font-weight: 400;">Da clic en Create Security Group.</span><br /><br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-add-a-rule-to-a-security-group_5.png" alt="how-to-add-a-rule-to-a-security-group_5" width="644" height="306" /></dd>
+</dl>
+</li>
+<li><span style="font-weight: 400;">Escribe un Nombre (Name) para el nuevo grupo de seguridad, agrega una descripción (opcional), y da click en Create Security Group.</span></li>
+<li><span style="font-weight: 400;">Da clic en Manage Rules al lado del grupo de seguridad y agregale reglas usando los </span><a href="https://help.dreamhost.com/hc/es/articles/215912838-Configurar-grupos-de-seguridad#agregar_regla"><span style="font-weight: 400;">pasos de abajo</span></a><span style="font-weight: 400;">.</span></li>
+</ol>
+</div>
+<h2>Agregar regla</h2>
+<div class="solvvy-solution"><span id="agregar_regla"></span>
+<ol>
+<li><span style="font-weight: 400;">En la ventana emergente de Add Rule, seleccionaq/ingresa los siguientes valores:</span><br />
+<ul>
+<li><strong>Rule</strong>: <code class="docutils literal"><span class="pre">Custom TCP Rule</span></code></li>
+<li><strong>Direction</strong>: <code class="docutils literal"><span class="pre">Ingress</span></code></li>
+<li><strong>Open Port</strong>: <code class="docutils literal"><span class="pre">Port</span></code></li>
+<li><strong>Port</strong>: <code class="docutils literal"><span class="pre">8080</span></code></li>
+<li><strong>Remote</strong>: <code class="docutils literal"><span class="pre">CIDR</span></code></li>
+<li><strong>CIDR</strong>: <code class="docutils literal"><span class="pre">0.0.0.0/0</span></code></li>
+</ul>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p><span style="font-weight: 400;">Para limitar los requerimientos an un rango en particular de direcciones IP, especifica la dirección IP en la casilla CIDR.</span></p>
+</div>
+</div>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-add-a-rule-to-a-security-group_3.png" alt="how-to-add-a-rule-to-a-security-group_3" width="565" height="449" /></dd>
+</dl>
+</li>
+<li>&nbsp;Da clic a <span class="guilabel">Add</span>.
+<p><span style="font-weight: 400;">La instancias tendrán ahora el puerto 8080 abierto para requerimientos de cualquier dirección IP.</span></p>
+</li>
+</ol>
+</div>
+<h2>Cambiar el Grupo de Seguridad</h2>
+<p><span style="font-weight: 400;">Ve el siguiente artículo para ver instrucciones de como cambiar el Grupo de Seguridad de una instancia:</span></p>
+<div class="solvvy-solution">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360000607492-Changing-the-Security-Group-of-an-instance"><span style="font-weight: 400;">Cambiar el Grupo de Seguridad de una instancia</span></a></li>
+</ul>
+</div>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 421px; top: 305.062px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>

@@ -1,0 +1,86 @@
+<h2>Generalidades</h2>
+<p><span style="font-weight: 400;">Las redes privadas son una función útil que quizás desees utilizar para configuraciones avanzadas en la nube. Para obtener una descripción de las redes privadas y cómo habilitarlas en tu cuenta, consulta el artículo aquí:</span></p>
+<div class="solvvy-solution">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/229789688-Descripci%C3%B3n-general-de-las-redes-privadas" target="_self" rel="undefined">Descripción general de redes privadas</a></li>
+</ul>
+</div>
+<h2>Opciones de red privada</h2>
+<p><span style="font-weight: 400;">Una vez que el Soporte haya confirmado que se ha ajustado la cuota de red de tu cuenta, se pueden agregar redes privadas. Revisa las siguientes opciones para determinar la configuración de la red privada.</span></p>
+<h3><span id="network-block" style="font-weight: 400;">Bloque de red</span></h3>
+<p><span style="font-weight: 400;">Hay varios bloques de red privada que están disponibles para su uso con redes privadas que se especifican en formato </span><a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing"><span style="font-weight: 400;">CIDR</span></a><span style="font-weight: 400;">. Ejemplos comunes de esto son 10.0.0.0/24 o 192.168.0.0/24, sin embargo, también hay </span><a href="https://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces"><span style="font-weight: 400;">otras redes</span></a><span style="font-weight: 400;"> para elegir. En el siguiente ejemplo, se utiliza 10.0.0.0/24.</span></p>
+<h3><span id="dhcp" style="font-weight: 400;">DHCP</span></h3>
+<p><span style="font-weight: 400;">Cuando se crea una subred, </span><a href="https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol"><span style="font-weight: 400;">DHCP</span></a><span style="font-weight: 400;"> se puede habilitar o deshabilitar (esto se puede cambiar más adelante si se desea). Cuando DHCP está habilitado, las instancias recién creadas ejecutan cloud-init al inicio y determinan que no es necesario codificar la configuración de red en el sistema operativo. Si está deshabilitado, entonces estos ajustes están codificados. Tener DHCP habilitado puede ayudar a crear capturas y nuevas instancias a partir de esas capturas, ya que las capturas no tendrán configuraciones de red codificadas..</span></p>
+<h2>Agregar la red privada</h2>
+<div class="solvvy-solution">
+<ol class="arabic">
+<li><span style="font-weight: 400;">Correo el siguiente comando para crear una red privada. Este comando crea una nueva red vacía llamada 'NETWORK' que puede aceptar una subred en el futuro.</span><br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack network create <span class="code-highlight">NETWORK</span></span>
+</pre>
+</div>
+</li>
+<li><span style="font-weight: 400;">Corre el siguiente comando para crear una nueva subred en la parte superior de la red que se creó anteriormente. Dependiendo de las decisiones tomadas sobre </span><a href="https://help.dreamhost.com/hc/es/articles/235230887-Crear-y-administrar-redes-privadas-con-OpenStack-CLI#dhcp" target="_self" rel="undefined">DHCP</a><span style="font-weight: 400;"> y el </span><a href="https://help.dreamhost.com/hc/es/articles/235230887-Crear-y-administrar-redes-privadas-con-OpenStack-CLI#network-block" target="_self" rel="undefined">bloque de red</a><span style="font-weight: 400;">, se puede especificar un indicador </span><span style="font-weight: 400;">--subnet-range</span><span style="font-weight: 400;"> and/or the </span><span style="font-weight: 400;">--no-dhcp/--dhcp</span><span style="font-weight: 400;"> diferente. En este ejemplo, la subred se llama 'SUBNET', se han especificado los servidores DNS de Google y DHCP está deshabilitado.</span><br />
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p><span style="font-weight: 400;">El carácter de barra invertida al final de cada línea continúa el comando en la línea siguiente. Si lo deseas, puedes eliminar este carácter y poner el comando completo en una sola línea.</span></p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack subnet create <span class="code-highlight">SUBNET</span> --subnet-range 10.0.0.0/24 \
+--network NETWORK --dns-nameserver 8.8.8.8 \
+--dns-nameserver 8.8.4.4 --no-dhcp</span>
+</pre>
+</div>
+</li>
+<li><span style="font-weight: 400;">Corre lo siguiente para crear un nuevo enrutador llamado 'ROUTER' con una configuración predeterminada.</span><br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack router create <span class="code-highlight">ROUTER</span></span>
+</pre>
+</div>
+</li>
+<li><span style="font-weight: 400;">Corre lo siguiente para crear una interfaz de enrutador que asocie la subred que creaste con tu enrutador.</span><br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack router add subnet <span class="code-highlight">ROUTER SUBNET</span></span>
+</pre>
+</div>
+</li>
+<li>
+<p class="first"><span style="font-weight: 400;">Finalmente, configura la puerta de enlace del enrutador a la red pública. Esto le permite acceder a Internet.</span></p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack router set --external-gateway public <span class="code-highlight">ROUTER</span></span>
+</pre>
+</div>
+</li>
+</ol>
+<p><span style="font-weight: 400;">En este punto, se ha agregado una nueva red privada a tu cuenta.</span></p>
+<h2>Crea una instancia en tu nueva red privada</h2>
+</div>
+<div class="solvvy-solution">
+<ol class="arabic">
+<li><span style="font-weight: 400;">Corre la siguiente serie de comandos para ver el tipo, el grupo de seguridad, la imagen, el par de claves y el ID de red de tu proyecto. Selecciona las opciones necesarias para crear la instancia. Ten en cuenta que para la red, se necesita la identificación larga en lugar del nombre de pila.</span><br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack flavor list</span>
+<span class="server">[user@localhost]$ </span><span class="command">openstack security group list</span>
+<span class="server">[user@localhost]$ </span><span class="command">openstack image list</span>
+<span class="server">[user@localhost]$ </span><span class="command">openstack keypair list</span>
+<span class="server">[user@localhost]$ </span><span class="command">openstack network list</span>
+</pre>
+</div>
+</li>
+<li><span style="font-weight: 400;">Finalmente, crea una instancia. Este comando crea una instancia de tamaño semisónico, utilizando el grupo de seguridad predeterminado y la imagen del sistema operativo Ubuntu 16.04. Los valores restantes son exclusivos de su proyecto y deben especificarse. </span><span style="font-weight: 400;">LONG-NETWORK-UUID-HERE</span><span style="font-weight: 400;"> es el ID proporcionado de </span><span style="font-weight: 400;">la lista de redes de openstack</span><span style="font-weight: 400;">, el </span><span style="font-weight: 400;">KEYNAME</span><span style="font-weight: 400;"> de la </span><span style="font-weight: 400;">lista de pares de claves de openstack</span><span style="font-weight: 400;">, y el nombre de la instancia puede ser el que desees.</span><br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server create --flavor gp1.semisonic \
+--security-group default --image <span class="code-highlight">Ubuntu-16.04</span> \
+--nic net-id=<span class="code-highlight">LONG-NETWORK-UUID-HERE</span> --key-name <span class="code-highlight">KEYNAME INSTANCENAME</span></span>
+</pre>
+</div>
+</li>
+</ol>
+<p><span style="font-weight: 400;">En este punto, se ha creado una nueva instancia en tu red privada.</span></p>
+<p><span style="font-weight: 400;">Si deseas acceder a esta red públicamente, puedes agregar una dirección IP flotante. Para obtener más información sobre cómo administrar direcciones IP flotantes mediante la CLI de OpenStack, consulta este artículo:</span></p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215912768-Administrar-direcciones-IP-flotantes-usando-CLI-de-OpenStack" target="_self" rel="undefined">Administrar direcciones IP flotantes mediante la CLI de OpenStack</a></li>
+</ul>
+</div>
