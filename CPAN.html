@@ -7,7 +7,7 @@
 <li><a class="reference internal" href="#configurar">Configurar CPAN</a></li>
 <li><a class="reference internal" href="#instalar">Instalar módulos</a></li>
 <li><a class="reference internal" href="#ver-modulos">Ver módulos</a></li>
-<li><a class="reference internal" href="#cgi">Hacer que tus scripts FastCGI / CGI funcionen</a></li>
+<li><a class="reference internal" href="#cgi">Hacer que tus scripts FastCGI/CGI funcionen</a></li>
 <li><a class="reference internal" href="#module-build">Instalar Module::Build y muchos otros módulos</a></li>
 <li><a class="reference internal" href="#otros-modulos">Otros módulos</a></li>
 <li><a class="reference internal" href="#configurar-cpan">Configurar CPAN</a></li>
@@ -33,7 +33,13 @@
 </div>
 <p>El Comprehensive Perl Archive Network (CPAN) te permite utilizar una extensa biblioteca de módulos prefabricados disponibles en <a href="http://search.cpan.org/">http://search.cpan.org</a>.</p>
 <p>CPAN normalmente requiere acceso de root, pero este artículo te muestra cómo configurar CPAN como un usuario no root.</p>
-<h2>Configurar CPAN</h2>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access" target="_self">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+</div>
+</div>
+<h2><span id="configurar">Configurar CPAN</span></h2>
 <div class="solvvy-solution">
 <ol>
 <li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
@@ -134,7 +140,7 @@ You can re-run configuration any time with 'o conf init' in the CPAN shell</pre>
 <em>Esto te pone de vuelta en tu shell normal.</em></li>
 </ol>
 </div>
-<h2>Instalar módulos</h2>
+<h2><span id="instalar">Instalar módulos</span></h2>
 <div class="solvvy-solution">
 <p>Ahora que todo está configurado, puedes instalar los módulos.</p>
 <ol>
@@ -151,7 +157,7 @@ You can re-run configuration any time with 'o conf init' in the CPAN shell</pre>
 </li>
 </ol>
 </div>
-<h2>Ver módulos</h2>
+<h2><span id="ver-modulos">Ver módulos</span></h2>
 <div class="solvvy-solution">
 <p>También puedes verificar si los módulos están instalados dentro de CPAN y dónde. Escribe la letra <span class="text-object">i</span> seguida del nombre del módulo. Por ejemplo:</p>
 <div class="preboxcontainer">
@@ -165,7 +171,7 @@ Module id = XML::Simple
     INST_VERSION 2.24</pre>
 </div>
 </div>
-<h2>Hacer que tus scripts FastCGI / CGI funcionen</h2>
+<h2><span id="cgi">Hacer que tus scripts FastCGI/CGI funcionen</span></h2>
 <div class="solvvy-solution">
 <p>Cualquier script CGI o Fast CGI debe tener lo siguiente en la parte superior para poder utilizar los módulos instalados localmente:</p>
 <div class="preboxcontainer">
@@ -251,11 +257,11 @@ __END__
 eof</pre>
 </div>
 </div>
-<h2>Instalar Module::Build y muchos otros módulos</h2>
+<h2><span id="module-build">Instalar Module::Build y muchos otros módulos</span></h2>
 <div class="solvvy-solution">
 <p>Si estás instalando Module::Build u otros que usan Module::Build en tu instalación, podría ser útil agregar las líneas PERL5LIB anteriores a tu <span class="text-object">.bash_profile</span>, de lo contrario, cualquier cosa que construyas no sabrá cómo leer el script Module::Build Build.</p>
 </div>
-<h2>Otros módulos</h2>
+<h2><span id="otros-modulos">Otros módulos</span></h2>
 <div class="solvvy-solution">
 <p>Ten en cuenta que algunos módulos no se instalan correctamente desde CPAN como no root y en una ruta no estándar. Deben construirse e instalarse manualmente (es decir, utilizando los scripts de construcción proporcionados con los módulos). Dos específicamente son:</p>
 <h3>DateTime</h3>
@@ -286,7 +292,7 @@ eof</pre>
 <li>Corre el siguiente comando uno a la vez: <span class="code">make</span>, <span class="code">make test</span>, y <span class="code">make install</span>.</li>
 </ol>
 </div>
-<h2>Configurar CPAN</h2>
+<h2><span id="configurar-cpan">Configurar CPAN</span></h2>
 <div class="solvvy-solution">
 <p>Si necesitas configurar manualmente los ajustes, puedes acceder a tu configuración en el archivo:</p>
 <div class="preboxcontainer">
@@ -294,7 +300,7 @@ eof</pre>
 </div>
 <p>Si especificas <span class="code">PREFIX</span> como arriba, utiliza la ruta completa a tu directorio <span class="text-object">perlmods</span>:</p>
 <div class="preboxcontainer">
-<pre class="prebox">PREFIX=/home/username/perlmods</pre>
+<pre class="prebox">PREFIX=/home/<span class="code-highlight">username</span>/perlmods</pre>
 </div>
 <p>Usa <em>perldoc</em> para obtener una lista de la configuración de CPAN que puedeseditar:</p>
 <div class="preboxcontainer">
@@ -302,7 +308,7 @@ eof</pre>
 </pre>
 </div>
 </div>
-<h2>Usar CPAN Minus y local::lib</h2>
+<h2><span id="minus">Usar CPAN Minus y local::lib</span></h2>
 <div class="solvvy-solution">
 <p>El CPAN Minus de Tatsuhiko Miyagawa (<a href="https://github.com/miyagawa/cpanminus">github</a> <a href="http://search.cpan.org/perldoc?App::cpanminus">cpan</a>) hace que sea aún más fácil agregar soporte para tus propios módulos Perl. Usa</p>
 <div class="preboxcontainer">
@@ -315,7 +321,7 @@ eof</pre>
 </div>
 <p>para usar estos módulos.</p>
 </div>
-<h2>Terminados</h2>
+<h2><span id="terminados">Terminados</span></h2>
 <div class="solvvy-solution">
 <p>Hay un servicio de monitor en ejecución que puede acabar con las instalaciones de Perl. Visita el siguiente artículo para obtener más información.</p>
 <ul>

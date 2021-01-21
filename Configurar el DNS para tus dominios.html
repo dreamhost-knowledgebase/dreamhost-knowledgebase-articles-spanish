@@ -1,0 +1,85 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>DNS es la tecnología que permite que tu dominio apunte a una dirección IP específica y permite que el servidor que lo escucha aloje tu dominio. Hay varios tipos diferentes de registros, pero los más utilizados son:</p>
+<ul class="simple">
+<li>A - Se utiliza para vincular un dominio o subdominio a una dirección IPv4.</li>
+<li>AAAA - Se utiliza para vincular un dominio o subdominio a una dirección IPv6.</li>
+<li>CNAME - Se utiliza para vincular un dominio o subdominio a otro dominio o subdominio.</li>
+</ul>
+<p>Para la mayoría de los propósitos, solo necesitarás usar registros A y AAAA.</p>
+</div>
+<div id="find-your-public-ip-address">
+<h2>Localizar de tu dirección IP pública</h2>
+<div class="solvvy-solution">
+<p>A cada instancia de DreamCompute en el clúster US-East 2 se le asigna una dirección IPv4 e IPv6 pública.</p>
+<p>Puedes ver estas direcciones de dos formas:</p>
+<ul>
+<li>En la página <a class="reference external" href="https://iad2.dreamcompute.com/project/instances/">Instancias</a> del panel de DreamCompute</li>
+<li>Usando el <a href="https://help.dreamhost.com/hc/es/articles/235817468-Introducci%C3%B3n-al-cliente-de-l%C3%ADnea-de-comandos-de-OpenStack" target="_self" rel="undefined">cliente de línea de comando de OpenStack</a></li>
+</ul>
+<h3>Opción del panel de DreamCompute</h3>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/configuring-dns-for-your-domains_01.png" alt="" /></dd>
+</dl>
+<h3>Opciones de línea de comando de OpenStack</h3>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server list</span>
++--------------------------------------+---------+--------+------------+-------------+-------------------------------------------------------------+
+| ID                                   | Name    | Status | Task State | Power State | Networks                                                    |
++--------------------------------------+---------+--------+------------+-------------+-------------------------------------------------------------+
+| 10a3b11b-dc2f-42a2-b5d8-84508a5156a5 | website | ACTIVE | -          | Running     | public=208.113.128.37, 2607:f298:5:101d:f816:3eff:fe79:8c72 |
++--------------------------------------+---------+--------+------------+-------------+-------------------------------------------------------------+
+</pre>
+</div>
+<p>Si tienes varias instancias, tendrás varias direcciones IPv4 e IPv6 públicas. Deberás rastrear qué direcciones alojan qué sitios web u otros servicios.</p>
+</div>
+</div>
+<h2>Agregar direcciones IP a tu dominio en el panel DreamHost</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>.</li>
+<li>Ahora debes configurar tu dominio en 'Solo DNS'. Los pasos son diferentes dependiendo de si tu sitio ya está alojado:
+<ul>
+<li>Si tu dominio está en esta página y ya está alojado, configúralo en <a href="https://help.dreamhost.com/hc/es/articles/115000760591-Configurar-tu-dominio-a-Solo-DNS-DNS-Only-">DSolo DNS</a>.</li>
+<li>Si tu dominio no aparece en esta página, haz clic en el botón <strong>Agregar alojamiento a Dominio/Subdominio</strong>&nbsp;cerca de la parte superior izquierda de la página. Desplázate hacia abajo hasta la sección de alojamiento <span class="text-section">DNS Only</span> hacia la parte inferior e ingresa tu dominio. Luego haz clic en '¡<strong>Alojar como Solo DNS!</strong>'.</li>
+</ul>
+</li>
+<li>De nuevo en la página <span class="panel-page">Administrar Dominis</span>, haz clic en el enlace <span class="text-link">DNS</span> directamente bajo tu nombre de dominio.
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/Cloud_dns_setup_for_a_domain_dns_link.png" alt="" /></dd>
+</dl>
+</li>
+<li>En la sección <span class="text-section">Add a custom DNS record to YOURDOMAIN:</span> ingrese el registro A para el dominio o subdominio que desea alojar (esta es también la entrada que se usa para generar automáticamente un registro PTR para la dirección IP). Este ejemplo muestra cómo agregar un subdominio llamado <strong>www</strong> para un dominio llamado <strong>example.com</strong>:
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/configuring-dns-for-your-domains_03.png" alt="" /></dd>
+</dl>
+<ul>
+<li><strong>Name&nbsp;</strong>— El nombre del subdominio que deseas usar con esta dirección IP en la nube.</li>
+<li><strong>Type&nbsp;</strong>— Selecciona "A" ya que va a agregar un registro A de IPv4.</li>
+<li><strong>Value&nbsp;</strong>— Esta es la dirección IPv4 pública para tu instancia de DreamCompute.</li>
+</ul>
+</li>
+<li>Una vez que hayas ingresado toda esa información, haz clic en "<strong>Add Record Now!</strong>".</li>
+<li>Repite el último paso tantas veces como sea necesario para agregar registros A adicionales para los dominios que deseas alojar en tu instancia.
+<p>Así es como se vería agregar una dirección IPv6:</p>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/configuring-dns-for-your-domains_04.png" alt="" /></dd>
+</dl>
+</li>
+</ol>
+</div>
+<h2>Agregar un registro A que no es www</h2>
+<div class="solvvy-solution">
+<p>Siguiendo los pasos anteriores, también puedes crear un registro A para la versión sin www de la URL de su sitio. Todo lo que necesitas hacer es dejar el campo de nombre en blanco.</p>
+</div>
+<div id="wait-for-dns-propagation">
+<h2>Esperando la propagación de DNS</h2>
+<div class="solvvy-solution">
+<p>Una vez que se guardan las entradas de DNS, el DNS debe <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS">propagarse</a>, lo que puede llevar varias horas. El TTL (tiempo de vida) predeterminado para los servidores de nombres DreamHost es de 4 horas, por lo que cualquier cambio en tus registros DNS debe actualizarse en casi todas partes del mundo durante ese tiempo. Si vas a realizar cambios frecuentes en tu DNS, puedes <a class="reference external" href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">contactar a soporte</a>&nbsp;para que tu TTL sea cambiado a 5 minutos.</p>
+</div>
+<!--DreamCompute Button-->
+<div class="dream-sign-up">
+<h2>Implementa Tus Aplicaciones en Servidores en la Nube Hoy</h2>
+<div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Suscríbete a DreamCompute</a></div>
+</div>
+</div>

@@ -1,0 +1,54 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Con el CLI de OpenStack, puedes generar una nueva llave de emparejamiento o importar una llave pública existente. Este artículo asume que ya has instalado el CLI de OpenStack en tu computadora:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/235817468-Introducci%C3%B3n-al-cliente-de-l%C3%ADnea-de-comandos-de-OpenStack" target="_self" rel="undefined">Comenzar con el CLI de OpenStack</a></li>
+</ul>
+</div>
+<h2>Crear una llave de emparejamiento y añadirla a DreamCompute</h2>
+<div class="solvvy-solution">
+<p>Para generar una llave de emparejamiento, corre el siguiente comando.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack keypair create KEY_NAME &gt; <span class="code-highlight">MY_KEY.pem</span></span>
+</pre>
+</div>
+<p>Este comando genera una llave de emparejamiento con los nombres que especificaste y los escribe en un archivo <span class="text-object">.pem</span>. Luego, la llave de emparejamiento se registra en el panel de DreamCompute. Puedes ver la lista en la página <span class="text-object">Compute &gt; Key Pairs</span>.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/DHC_Key_Pairs_menu.png" alt="" /></dd>
+</dl>
+<p>También puedes ver si está corriendo ejecutando el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack keypair list</span></pre>
+</div>
+</div>
+<div id="import-a-key-pair">&nbsp;</div>
+<h2>Importar una llave de emparejamiento existente</h2>
+<div class="solvvy-solution">
+<p>Si ya <a href="https://help.dreamhost.com/hc/es/articles/115001736671-Crear-un-nuevo-par-de-llaves-en-Mac-OS-X-o-Linux">has generado una llave de emparejamiento en tu computador Linux o Mac</a>, lo más probable es que la llave pública sea llamada <span class="text-object">id_rsa.pub</span> y ubicada en el directorio: <span class="text-object">~/.ssh/</span>.<br />Ejecuta el siguiente comando para generar la nueva llave de emparejamiento en tu panel de DreamCompute.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El carácter de barra invertida <span class="text-object">\</span> se usa al ingresar un comando largo. Cuando ingresas <span class="text-object">\</span>, el comando de terminal continúa a la siguiente línea hasta que termines de ingresarlo.</p>
+<p>También puedes eliminar el carácter <span class="text-object">\</span> y poner cada parámetro en una sola línea.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack keypair create --public-key \
+~/.ssh/id_rsa.pub <span class="code-highlight">MY_KEY_NAME</span></span>
++-------------+-------------------------------------------------+
+| Field       | Value                                           |
++-------------+-------------------------------------------------+
+| fingerprint | f2:fc:4f:ca:1c:b7:ba:43:1f:b8:e5:fc:63:84:79:13 |
+| name        | My_KEY_NAME                                     |
+| user_id     | 29815315c4ce4d48a27e767a63eb8320                |
++-------------+-------------------------------------------------+</pre>
+</div>
+<p>Luego, la llave de emparejamiento se registra en el panel de DreamCompute. Puedes ver la lista en la página <span class="text-object">Compute &gt; Key Pairs</span>.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/DHC_Key_Pairs_menu.png" alt="" /></dd>
+</dl>
+<p>Nombra la nueva llave de emparejamiento con el nombre que especifiques para <span class="code">MY_KEY_NAME</span>. Para asegurarte de que la llave de emparejamiento se haya importado correctamente, ejecuta el siguiente comando para enumerar las llaves de emparejamiento:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack keypair list</span></pre>
+</div>
+</div>

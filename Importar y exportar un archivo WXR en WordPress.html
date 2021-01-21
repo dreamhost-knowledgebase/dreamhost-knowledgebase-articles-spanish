@@ -115,15 +115,20 @@ Error: WordPress Importer needs to be installed. Try 'wp plugin install wordpres
 </div>
 <ol>
 <li>Inicia sesión en tu sitio web a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Navega al <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-de-sitio-web" target="_self">directorio de tu sitio</a>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/<span class="code-highlight">example.com</span></span></pre>
+</div>
+</li>
 <li>Obtén la ruta completa del archivo a tu directorio actual ejecutando <span class="code">pwd</span>.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">pwd</span>
 /home/username/example.com</pre>
 </div>
 </li>
-<li>Añade tu ruta de archivo al siguiente comando para exportar el archivo XML.
+<li>Añade tu ruta de archivo al siguiente comando para exportar el archivo XML. Asegúrate de cambiar el <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> a tu sitio website.
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp export --dir=<span class="code-highlight">/home/username/example.com</span></span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp export --dir=/home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span></span>
 Success: All done with export.</pre>
 </div>
 <p>Los datos de tu sitio se descargan en un archivo llamado algo similar a <span class="text-object">sitename.wordpress.date.time.xml</span>.</p>
