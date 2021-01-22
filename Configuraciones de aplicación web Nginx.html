@@ -4,6 +4,12 @@
 <p>¡POSIBLE INFORMACIÓN DESACTUALIZADA!<br />DreamHost no admite directamente ninguna de las funciones descritas en esta página y no es responsable de mantener este contenido actualizado o preciso. ¡Úsalo bajo tu propio riesgo!</p>
 </div>
 <p>Muchas aplicaciones web como WordPress y MediaWiki están configuradas originalmente para funcionar con Apache. Dado que los archivos .htaccess no son compatibles con Nginx, existen algunos ajustes que puedes realizar para que tus aplicaciones funcionen correctamente. En todos los ejemplos siguientes, asegúrate de seguir estos pasos.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access" target="_self">ususario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+</div>
+</div>
 </div>
 <h2>Pasos de configuración</h2>
 <div class="solvvy-solution">
@@ -39,7 +45,7 @@
 </li>
 <li>En este directorio <span class="text-object">/default-wp</span>, crea el archivo <span class="text-object">wordpress.conf</span>. Ve el artículo '<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a>' para más instrucciones sobre crear el archivo.
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">nano /home/<span class="code-highlight">YOURUSER</span>/nginx/default-wp/wordpress.conf</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nano /home/<span class="code-highlight">username</span>/nginx/default-wp/wordpress.conf</span></pre>
 </div>
 </li>
 <li>Guarda y cierra el archivo para regresar a tu shell.</li>
@@ -162,11 +168,11 @@ if ($http_user_agent&nbsp;!~ FeedBurner) {
 <div class="solvvy-solution">
 <p>Antes de configurar Drupal, crea un archivo drupal.conf (el nombre realmente no importa, pero generalmente deseas al menos darle una extensión .conf) en la siguiente ubicación:</p>
 <div class="preboxcontainer">
-<pre class="prebox">/home/<span class="code-highlight">YOURUSER</span>/nginx/<span class="code-highlight">example.com</span>/</pre>
+<pre class="prebox">/home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/</pre>
 </div>
 <p>Ve el artículo '<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a>' para instrucciones sobre cómo crear el archivo.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">nano /home/<span class="code-highlight">YOURUSER</span>/nginx/<span class="code-highlight">example.com</span>/drupal.conf</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nano /home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/drupal.conf</span></pre>
 </div>
 <p>Aquí es donde pondrás todas tus reglas de configuración de nginx.</p>
 </div>
@@ -209,7 +215,7 @@ rewrite ^/(.*)$ /index.php?q=$1 last;
 <div class="solvvy-solution">
 <p><a href="https://www.mediawiki.org/wiki/MediaWiki">MediaWiki</a> es un software wiki popular desarrollado por los fundadores de Wikipedia que continúa utilizando y manteniendo el software en la actualidad. Está disponible de forma gratuita y es un proyecto de código abierto. A continuación, se describe un movimiento exitoso del sitio MediaWiki 1.17.0 (usando URL limpias) en Apache a Nginx. Primero, crea un archivo <span class="text-object">mediawiki.conf</span> en el directorio apropiado:</p>
 <div class="preboxcontainer">
-<pre class="prebox">/home/<span class="code-highlight">YOURUSER</span>/nginx/<span class="code-highlight">example.com</span>/mediawiki.conf</pre>
+<pre class="prebox">/home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/mediawiki.conf</pre>
 </div>
 <p>En ese archivo agrega el siguiente contenido:</p>
 <div class="preboxcontainer">
@@ -226,7 +232,7 @@ location ~* ^.+\.(js|css|png|jpg|jpeg|gif|ico)$ {
         access_log off;
     }
 location /dumps {
-        root /home/<span class="code-highlight">YOURUSER/example.com</span>/local;
+        root /home/<span class="code-highlight">username/example.com</span>/local;
         autoindex on;
     }
 ### Dreamhost analog stats

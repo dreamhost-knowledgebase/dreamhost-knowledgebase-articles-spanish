@@ -131,9 +131,9 @@ switch(getenv("REDIRECT_STATUS"))
 <li><a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">Ubicación de archivos de configuración Nginx</a></li>
 </ul>
 </li>
-<li>Crea un archivo llamado error.conf en el siguiente directorio:
+<li>Crea un archivo llamado error.conf en el siguiente directorio. Asegúrate de cambiar el <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> a tu sitio website.
 <div class="preboxcontainer">
-<pre class="prebox">/home/username/nginx/example.com/error.conf</pre>
+<pre class="prebox">/home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/error.conf</pre>
 </div>
 Esto asume que tu nombre de usuario es 'username' y que tu sitio es <strong>example.com</strong>.</li>
 <li>En el archivo error.conf, añade lo siguiente:
@@ -146,7 +146,7 @@ location  /404.html {
 </li>
 <li>Seguido, navega al directorio de tu sitio. Por ejemplo:
 <div class="preboxcontainer">
-<pre class="prebox">/home/username/example.com</pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/example.com</span></pre>
 </div>
 </li>
 <li>En ese directorio, crea una página titulada 404.html con cualquier mensaje de error que desees mostrar.</li>

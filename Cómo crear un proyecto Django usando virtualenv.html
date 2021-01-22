@@ -1,6 +1,12 @@
 <h2 class="subheader">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo explica cómo crear un proyecto Django en un virtualenv.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access" target="_self">ususario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+</div>
+</div>
 </div>
 <h2 class="subheader">¿Qué versión de Python es compatible con Django?</h2>
 <div class="solvvy-solution">
@@ -45,8 +51,8 @@
 <ol>
 <li>Ejecute los siguientes comandos para crear tu proyecto Django dentro de este entorno:<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd $HOME/example.com</span>
-<span class="server">[server]$ </span><span class="command">source $HOME/example.com/venv/bin/activate</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/example.com</span>
+<span class="server">[server]$ </span><span class="command">source ~/example.com/venv/bin/activate</span>
 <span class="server">(venv) [server]$ </span><span class="command">python3 venv/bin/django-admin.py startproject <span class="code-highlight">projectname</span></span></pre>
 </div>
 <ul>
@@ -111,7 +117,7 @@ application = get_wsgi_application()
 </li>
 <li>En tu directorio <span class="text-object">home/username/example.com/</span>, asegúrate de crear este directorio <span class="text-object">/static</span>.<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">cd $HOME/example.com/public</span>
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">cd ~/example.com/public</span>
 <span class="server">(venv) [server]$ </span><span class="command">mkdir static</span></pre>
 </div>
 <ul>
@@ -123,7 +129,7 @@ application = get_wsgi_application()
 </li>
 <li>Ejecuta el comando <span class="code">collectstatic</span> para configurar los elementos estáticos para la interfaz de administración:<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">cd $HOME/example.com/<span class="code-highlight">projectname</span>/</span>
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">cd ~/example.com/<span class="code-highlight">projectname</span>/</span>
 <span class="server">(venv) [server]$ </span><span class="command">python3 manage.py collectstatic</span></pre>
 </div>
 <div class="alert alert-note">

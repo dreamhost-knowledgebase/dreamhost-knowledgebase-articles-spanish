@@ -38,9 +38,15 @@
 </div>
 <h2>Paso 2 — Crear el script del backup</h2>
 <div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access" target="_self">ususario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+</div>
+</div>
 <ol>
 <li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
-<li>Crea un nuevo directorio llamado <span class="text-object">backup</span> en el directorio raíz de tu usuario.
+<li>Crea un nuevo directorio llamado <span class="text-object">backup</span> en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio raíz de tu usuario</a>.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir ~/backup</span></pre>
 </div>
@@ -52,7 +58,7 @@
 </li>
 <li>En el siguiente script, debes completar las primeras seis variables que están resaltadas:
 <ul>
-<li><strong>domains</strong> — El script usa este campo para crear un directorio bajo <span class="text-object">$HOME/backups/</span>. Este es el directorio que almacenará tu base de datos y los archivos del sitio web, así que asegúrate de que tenga el mismo nombre que tu nombre de dominio.</li>
+<li><strong>domains</strong> — El script usa este campo para crear un directorio bajo <span class="text-object">/home/username/backup/</span>. Este es el directorio que almacenará tu base de datos y los archivos del sitio web, así que asegúrate de que tenga el mismo nombre que tu nombre de dominio.</li>
 <li><strong>sqldbs</strong> — El nombre de tu <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos">base de datos</a>.</li>
 <li><strong>opath</strong> — El directorio en el que deseas realizar la copia de seguridad</li>
 <li><strong>mysqlhost</strong> — Tu <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos">hostname</a> de base de datos MySQL.</li>
@@ -60,7 +66,7 @@
 <li><strong>password</strong> — Tu <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos">contraseña</a> MySQL.</li>
 <li><strong>webdir&nbsp;</strong>— Esta es la ruta a tu directorio web. Cambia el nombre de dominio a tu sitio</li>
 <li><strong>bucket-name</strong> — El nombre del bucket de DreamObjects en el que realizas la copia de seguridad.</li>
-<li><strong>example.com-backup.sh</strong> — Este es el nombre de tu archivo de copia de seguridad en tu directorio <span class="text-object">$HOME/backup</span>.</li>
+<li><strong>example.com-backup.sh</strong> — Este es el nombre de tu archivo de copia de seguridad en tu directorio <span class="text-object">/home/username/backup</span>.</li>
 </ul>
 </li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Agrega el siguiente código a este archivo</a>. Asegúrate de actualizar cualquier código que esté resaltado
