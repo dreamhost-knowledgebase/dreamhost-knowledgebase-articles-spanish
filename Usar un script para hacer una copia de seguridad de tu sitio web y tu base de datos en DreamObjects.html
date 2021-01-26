@@ -2,11 +2,11 @@
 <div class="solvvy-solution">
 <p>Con un simple script de shell, puedes automatizar las copias de seguridad de sitios web y bases de datos en DreamObjects. Este script hace lo siguiente:</p>
 <ul>
-<li>vuelca una base de datos en el formato "mm-dd-yyyy_db-name_.sql" en el directorio <span class="text-object">/home/username/backup/example.com</span></li>
-<li>carga la base de datos en tu bucket DreamObjects</li>
-<li>comprime el directorio de tu sitio web en el formato "mm-dd-yyyy_example.com.zip" en el directorio <span class="text-object">/home/username/backup/example.com</span></li>
-<li>carga el archivo .zip del sitio web en DreamObjects</li>
-<li>elimina la base de datos y el archivo zip del sitio web en el servidor web para ahorrar espacio</li>
+<li>Vuelca una base de datos en el formato "mm-dd-yyyy_db-name_.sql" en el directorio <span class="text-object">/home/username/backup/example.com</span></li>
+<li>Carga la base de datos en tu bucket DreamObjects</li>
+<li>Comprime el directorio de tu sitio web en el formato "mm-dd-yyyy_example.com.zip" en el directorio <span class="text-object">/home/username/backup/example.com</span></li>
+<li>Carga el archivo .zip del sitio web en DreamObjects</li>
+<li>Elimina la base de datos y el archivo zip del sitio web en el servidor web para ahorrar espacio</li>
 </ul>
 </div>
 <h2>Paso 1 — Configurar tu bucket de DreamObjects</h2>
@@ -41,12 +41,12 @@
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access" target="_self">ususario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
 </div>
 </div>
 <ol>
 <li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
-<li>Crea un nuevo directorio llamado <span class="text-object">backup</span> en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio raíz de tu usuario</a>.
+<li>Crea un nuevo directorio llamado <span class="text-object">backup</span> en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de tu usuario</a>.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir ~/backup</span></pre>
 </div>
@@ -60,11 +60,11 @@
 <ul>
 <li><strong>domains</strong> — El script usa este campo para crear un directorio bajo <span class="text-object">/home/username/backup/</span>. Este es el directorio que almacenará tu base de datos y los archivos del sitio web, así que asegúrate de que tenga el mismo nombre que tu nombre de dominio.</li>
 <li><strong>sqldbs</strong> — El nombre de tu <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos">base de datos</a>.</li>
-<li><strong>opath</strong> — El directorio en el que deseas realizar la copia de seguridad</li>
+<li><strong>opath</strong> — El directorio en el que deseas realizar la copia de seguridad.</li>
 <li><strong>mysqlhost</strong> — Tu <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos">hostname</a> de base de datos MySQL.</li>
 <li><strong>username</strong> — Tu <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos">nombre de usuario</a> MySQL.</li>
 <li><strong>password</strong> — Tu <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos">contraseña</a> MySQL.</li>
-<li><strong>webdir&nbsp;</strong>— Esta es la ruta a tu directorio web. Cambia el nombre de dominio a tu sitio</li>
+<li><strong>webdir&nbsp;</strong>— Esta es la ruta a tu directorio web. Cambia el nombre de dominio a tu sitio.</li>
 <li><strong>bucket-name</strong> — El nombre del bucket de DreamObjects en el que realizas la copia de seguridad.</li>
 <li><strong>example.com-backup.sh</strong> — Este es el nombre de tu archivo de copia de seguridad en tu directorio <span class="text-object">/home/username/backup</span>.</li>
 </ul>
@@ -115,12 +115,12 @@ find $HOME/backup/* -type d -exec rm -rf {} \; 2&gt; /dev/null</pre>
 <h2>Paso 4 — Ejecutar el archivo</h2>
 <div class="solvvy-solution">
 <h3>Ejecutarlo manualmente</h3>
-<p>Después de activar tu entorno virtual, puedes ejecutar el archivo manualmente con el siguiente comando:</p>
+<p>Después de activar tu entorno virtual, puedes correr el archivo manualmente con el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">(my-user-bucket) </span><span class="command">sh ~/backup/example.com-backup.sh</span></pre>
 </div>
-<h3>Ejecutándolo con un cron job</h3>
-<p>También puedes crear un <a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-">cron job</a> para ejecutar esto automáticamente en tiempos específicos. Para hacer esto, crea un nuevo archivo llamado algo así como <span class="text-object">websitebackup.sh</span> con el siguiente código.</p>
+<h3>Corriéndolo con un cron job</h3>
+<p>También puedes crear un <a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-">cron job</a> para correr esto automáticamente en tiempos específicos. Para hacer esto, crea un nuevo archivo llamado algo así como <span class="text-object">websitebackup.sh</span> con el siguiente código.</p>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
@@ -131,7 +131,7 @@ find $HOME/backup/* -type d -exec rm -rf {} \; 2&gt; /dev/null</pre>
 <pre class="prebox">#!/bin/bash
 sh ~/<span class="code-highlight">backup/example.com-backup.sh</span></pre>
 </div>
-<p>Ve el artículo <a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-">¿Cómo creo un cron job?</a> para crear tu cron job. En el cuadro de texto, ingresa el siguiente comando (cambia el nombre de usuario a tu usuario de Shell).</p>
+<p>Ve el artículo <a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-">¿Cómo crear un cron job?</a> para crear tu cron job. En el cuadro de texto, ingresa el siguiente comando (cambia el nombre de usuario a tu usuario de Shell).</p>
 <div class="preboxcontainer">
 <pre class="prebox">/bin/bash /home/<span class="code-highlight">username/websitebackup.sh</span></pre>
 </div>
@@ -153,10 +153,10 @@ sh ~/<span class="code-highlight">backup/example.com-backup.sh</span></pre>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL">Generalidades MySQL</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214395738-phpMyAdmin-C%C3%B3mo-hacer-una-copia-de-seguridad-o-exportar-una-base-de-datos-o-tabla">phpMyAdmin — Cómo hacer una copia de seguridad / exportar una base de datos o tabla</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215100557--C%C3%B3mo-restauro-mi-base-de-datos-en-el-panel-">¿Cómo restauro mi base de datos en el panel?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214395738-phpMyAdmin-C%C3%B3mo-hacer-una-copia-de-seguridad-o-exportar-una-base-de-datos-o-tabla">phpMyAdmin — Cómo hacer una copia de seguridad/exportar una base de datos o tabla</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215100557--C%C3%B3mo-restauro-mi-base-de-datos-en-el-panel-">¿Cómo restaurar mi base de datos en el panel?</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215039758-Generalidades-sobre-copias-de-seguridad-de-bases-de-datos">Generalidades sobre copias de seguridad de bases de datos</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214395768-phpMyAdmin-C%C3%B3mo-importar-o-restaurar-una-base-de-datos-o-una-tabla">phpMyAdmin — Cómo importar /restaurar una base de datos o tabla</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214395768-phpMyAdmin-C%C3%B3mo-importar-o-restaurar-una-base-de-datos-o-una-tabla">phpMyAdmin — Cómo importar</a><a href="https://help.dreamhost.com/hc/es/articles/214395768-phpMyAdmin-C%C3%B3mo-importar-o-restaurar-una-base-de-datos-o-una-tabla">/restaurar una base de datos o tabla</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin">Generalidades sobre phpMyAdmin</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214882998--C%C3%B3mo-me-conecto-a-mi-base-de-datos-a-trav%C3%A9s-de-SSH-">¿Cómo me conecto a mi base de datos a través de SSH?</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>

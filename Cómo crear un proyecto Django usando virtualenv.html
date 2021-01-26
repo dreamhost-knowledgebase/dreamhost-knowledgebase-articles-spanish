@@ -4,7 +4,7 @@
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/en-us/articles/216385837-Creating-a-user-with-Shell-SSH-access" target="_self">ususario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
 </div>
 </div>
 </div>
@@ -39,7 +39,7 @@
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Para ejecutar los comandos en este artículo, debes iniciar sesión en tu servidor a través de SSH con tu usuario de Shell. Visita los siguientes artículos para obtener más información:</p>
+<p>Para correr&nbsp; los comandos en este artículo, debes iniciar sesión en tu servidor a través de SSH con tu usuario de Shell. Visita los siguientes artículos para obtener más información:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades SSH </a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Crear un usuario con acceso Shell (SSH)</a></li>
@@ -49,7 +49,7 @@
 </div>
 <p>Las siguientes instrucciones asumen que has creado un entorno virtual titulado 'venv' usando los enlaces de arriba.</p>
 <ol>
-<li>Ejecute los siguientes comandos para crear tu proyecto Django dentro de este entorno:<br />
+<li>Corre los siguientes comandos para crear tu proyecto Django dentro de este entorno:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/example.com</span>
 <span class="server">[server]$ </span><span class="command">source ~/example.com/venv/bin/activate</span>
@@ -65,7 +65,7 @@
 </div>
 </div>
 </li>
-<li>Para que Passenger pueda recoger tu proyecto, crea un archivo passenger_wsgi.py dentro del directorio de nivel superior de tu sitio (<span class="text-object">/home/username/example.com</span>). Agregua lo siguiente:<br />
+<li>Para que Passenger pueda recoger tu proyecto, crea un archivo passenger_wsgi.py dentro del directorio de nivel superior de tu sitio (<span class="text-object">/home/username/example.com</span>). Agrega lo siguiente:<br />
 <div class="preboxcontainer">
 <pre class="prebox">import sys, os
 INTERP = "<span class="code-highlight">/home/username/example.com/venv/bin/python3</span>"
@@ -104,8 +104,8 @@ application = get_wsgi_application()
 </li>
 <li>Configura los ajustes de archivo estático de Django para servir correctamente las imágenes, CSS y JavaScript, ya que lo necesitarás para que funcione la interfaz de administración. Por ejemplo:<br />
 <ul>
-<li>Abra el archivo settings.py del proyecto que se encuentra en <span class="text-object">example.com/projectname/projectname/settings.py</span>. Desplácese hasta la parte inferior y verá que <span class="code">STATIC_URL</span> probablemente esté configurado en <span class="code">/static/</span>.</li>
-<li>Agrega otra línea para establecer la ubicación en el servidor del directorio estático real. Asegúrate de cambiar el <span class="text-object">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.</li>
+<li>Abre el archivo settings.py del proyecto que se encuentra en <span class="text-object">example.com/projectname/projectname/settings.py</span>. Desplázate hasta la parte inferior y verá que <span class="code">STATIC_URL</span> probablemente esté configurado en <span class="code">/static/</span>.</li>
+<li>Agrega otra línea para establecer la ubicación en el servidor del directorio estático real. Asegúrate de cambiar <span class="text-object">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.</li>
 </ul>
 <dl>
 <dd>
@@ -121,13 +121,13 @@ application = get_wsgi_application()
 <span class="server">(venv) [server]$ </span><span class="command">mkdir static</span></pre>
 </div>
 <ul>
-<li>Esta será la ubicación donde Django colocará todos tus archivos estáticos – no debes colocar cosas aquí manualmente, ya que se sobrescribe. Ver el siguiente enlace para más detalles:</li>
+<li>Esta será la ubicación donde Django colocará todos tus archivos estáticos – no debes colocar cosas aquí manualmente, ya que se sobrescribe. Ve el siguiente enlace para más detalles:</li>
 </ul>
 <dl>
 <dd><a href="https://docs.djangoproject.com/en/1.8/howto/static-files/">https://docs.djangoproject.com/en/1.8/howto/static-files/</a></dd>
 </dl>
 </li>
-<li>Ejecuta el comando <span class="code">collectstatic</span> para configurar los elementos estáticos para la interfaz de administración:<br />
+<li>Corre el comando <span class="code">collectstatic</span> para configurar los elementos estáticos para la interfaz de administración:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">cd ~/example.com/<span class="code-highlight">projectname</span>/</span>
 <span class="server">(venv) [server]$ </span><span class="command">python3 manage.py collectstatic</span></pre>
@@ -135,7 +135,7 @@ application = get_wsgi_application()
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Es posible que cuando ejecute este comando, veas el siguiente error:</p>
+<p>Es posible que cuando corras este comando, veas el siguiente error:</p>
 <div class="preboxcontainer">
 <pre class="prebox">django.core.exceptions.ImproperlyConfigured: SQLite 3.8.3 or later is required (found 3.8.2)</pre>
 </div>
@@ -198,9 +198,9 @@ Actualízalo para incluir tu nombre de dominio.<br />
 </div>
 <p>Este mensaje significa que tu base de datos no tiene el <strong>Strict Mode</strong> habilitado. Puedes continuar a instalar Django con normalidad si quieres; pero si prefieres que tu base de datos use <strong>Strict Mode</strong>, la única opción seria comprar un servidor MySQL privado.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215945927--C%C3%B3mo-agrego-o-elimino-un-VPS-MySQL-" target="_self">Agregando un MySQL VPS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215945927--C%C3%B3mo-agrego-o-elimino-un-VPS-MySQL-" target="_self">Agregar un MySQL VPS</a></li>
 </ul>
-<p>Cuando este agregado,&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-a-trav%C3%A9s-de-Correo-Electr%C3%B3nico" target="_self">contacta al soporte de DreamHost</a>.&nbsp;Te ayudaremos a ajustar esta configuración en el servidor por ti.</p>
+<p>Cuando este agregado,&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-a-trav%C3%A9s-de-Correo-Electr%C3%B3nico" target="_self">contacta a soporte</a>.&nbsp;Te ayudaremos a ajustar esta configuración en el servidor por ti.</p>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">python3 manage.py migrate</span>
