@@ -1,0 +1,58 @@
+<h2>Generalidades</h2>
+<p>Este artículo te guía a través de la instalación de una versión personalizada de Perl localmente con tu nombre de usuario. Si tu servidor está corriendo Ubuntu 18 (Bionic), la versión de Perl es 5.26. Este artículo muestra cómo instalar una versión anterior si tu sitio lo requiere.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Se recomienda encarecidamente que solo utilices una versión de Perl que esté soportada en el momento. Esto significa que no debes utilizar una versión que haya finalizado su vida útil. Puedes ver una lista completa de las versiones y su estado aquí:</p>
+<ul>
+<li><a href="https://www.cpan.org/src/" target="_self">https://www.cpan.org/src/</a></li>
+</ul>
+</div>
+</div>
+<h2>Instalar</h2>
+<ol>
+<li>Inicia sesión en tu servidor vía SSH.</li>
+<li>Visita <a href="https://www.cpan.org/src/">https://www.cpan.org/src/</a>para descargar tu versión de Perl. Corre el comando <span class="code">wget</span> para descargar el archivo tar.gz.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget&nbsp;https://www.cpan.org/src/5.0/perl-5.18.4.tar.gz</span></pre>
+</div>
+</li>
+<li>Descomprime el archivo.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar zxf perl-5.18.4.tar.gz</span></pre>
+</div>
+</li>
+<li>Cambialo al nuevo directorio.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd perl-5.18.4</span></pre>
+</div>
+</li>
+<li>Corre el comando configure para el directorio en el que deseas instalar. Este ejemplo se instala en un directorio llamado <span class="text-object">/opt/perl</span> bajo tu nombre de usuario.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">./Configure -des -Dprefix=$HOME/opt/perl</span></pre>
+</div>
+</li>
+<li>Luego, corre <span class="code">make</span>, <span class="code">make test</span>, y finalmente <span class="code">make install</span>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">make</span>
+<span class="server">[server]$ </span><span class="command">make test</span>
+<span class="server">[server]$ </span><span class="command">make install</span></pre>
+</div>
+</li>
+<li>Agrega código a tu .bash_profile para encontrar la versión local.
+<div class="preboxcontainer">
+<pre class="prebox">export PATH=$HOME/opt/perl/bin:$PATH</pre>
+</div>
+</li>
+<li><span class="code">source</span> el .bash_profile.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ .</span><span class="command"> ~/.bash_profile</span></pre>
+</div>
+</li>
+<li>Finalmente, verifica para confirmar que se está utilizando la nueva versión.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">perl -v</span>
+This is perl 5, version 18, subversion 4 (v5.18.4) built for x86_64-linux</pre>
+</div>
+</li>
+</ol>

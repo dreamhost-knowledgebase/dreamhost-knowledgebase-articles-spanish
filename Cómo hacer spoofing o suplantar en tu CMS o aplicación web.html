@@ -1,0 +1,48 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Primero, asegúrate de que la dirección de correo del administrador esté alojada en DreamHost. Puedes verificar esto haciendo una búsqueda de registros MX en el siguiente sitio:</p>
+<ul>
+<li><a href="https://www.whatsmydns.net">whatsmydns.net</a></li>
+</ul>
+<p>Una vez que hayas confirmado que tu correo está alojado en DreamHost, puedes proceder a falsificar tu dirección de REMITENTE de una manera útil.</p>
+</div>
+<h2><span id="Using_WordPress">Usando WordPress</span></h2>
+<div class="solvvy-solution">
+<p>Algunos formularios de contacto de WordPress creados por complementos o temas tienen configuraciones que te permiten controlar completamente cómo se envían los correos. <a href="http://contactform7.com/">Contact Form 7</a> es un ejemplo. Puedes usar la configuración del complemento en el panel de administración de WordPress para enviar correos con el nombre del visitante del sitio y una dirección de correo de un administrador del sitio, webmaster o cualquier persona asociada con el funcionamiento del sitio:</p>
+<dl>
+<dd><strong>De: [your-name] &lt;admin@example.com&gt;</strong></dd>
+</dl>
+<p>También puedes configurar la cabecera Reply-To para que las respuestas a estos correos vayan directamente al visitante del sitio:</p>
+<dl>
+<dd><strong>Reply-To: [your-name] &lt;[your-email]&gt;</strong></dd>
+</dl>
+<p>Hay un plugin diferente <a href="https://wordpress.org/plugins/configure-smtp/">Configure SMTP</a> que puedes usar para configurar la información de REMITENTE en todos los correos enviados desde WordPress, independientemente del complemento o tema que envía el correo.</p>
+<p>Se puede ver información adicional de WordPress en la <a href="https://help.dreamhost.com/hc/es/articles/214831378-Soluci%C3%B3n-de-problemas-de-los-formularios-de-contacto-de-WordPress" target="_self" rel="undefined">solución de problemas de los formularios de contacto de WordPress</a>. Sin embargo, ten en cuenta que no todos los complementos y temas te permiten controlar esto.</p>
+</div>
+<h2><span id="Using_Drupal">Usando Drupal</span></h2>
+<div class="solvvy-solution">
+<p>El módulo <a href="https://www.drupal.org/project/contact_reply_to">Contact Reply-To</a> cambia el formulario de contacto de Drupal para enviar desde la dirección de correo del sitio web. También establece un encabezado de respuesta para el usuario real, evitando las restricciones discutidas aquí.</p>
+</div>
+<h2><span id="Using_Joomla">Usando Joomla</span></h2>
+<div class="solvvy-solution">
+<p>Joomla tiene una "Respuesta personalizada" que envía correos con la dirección de origen del visitante del sitio. Puedes desactivar eso en la configuración del panel de Joomla. Ve a 'Components -&gt; Contacts -&gt; Options'. En la pestaña <span class="text-object">Form</span>, asegúrate de que "Custom Reply" esté puesto como NO.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si no se haces esto, es posible que Joomla ni siquiera genere el correo y que el formulario no sea funcional.</p>
+</div>
+</div>
+<p>Para las versiones de Joomla 3.1 o superior, puedes acceder a las <a href="https://docs.joomla.org/J3.x:Global_configuration#.E2.80.9CMail_Settings.E2.80.9D_Group" rel="nofollow">configuraciones de autenticación SMTP</a> en el panel de Joomla <span class="text-object">Site -&gt; Global Configuration -&gt; Server tab -&gt; Mail Settings</span>.&nbsp;</p>
+</div>
+<h2><span id="Using_WooCommerce">Usando WooCommerce</span></h2>
+<div class="solvvy-solution">
+<p>WooCommerce incluye la <a href="http://docs.woothemes.com/document/configuring-woocommerce-settings/#section-7">opción de cambiar</a> el nombre del remitente <span class="text-object">de</span> y dirección de correo en la pestaña <span class="text-object">Settings -&gt; Emails</span>. Esto debe configurarse en una cuenta de correo alojada en DreamHost.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215036058-Resumen-de-la-pol%C3%ADtica-de-dominio-del-remitente-y-suplantaci%C3%B3n-de-identidad-o-spoofing" target="_self" rel="undefined">Generalidades de la política de dominio del remitente y suplantación de identidad</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215036118-Preguntas-frecuentes-sobre-la-pol%C3%ADtica-de-dominio-del-remitente" target="_self" rel="undefined">Preguntas frecuentes sobre la política de dominio del remitente</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215730427-What-is-useful-spoofing-">¿Qué es la suplantación de identidad o spoofing útil?</a></li>
+</ul>
+</div>
