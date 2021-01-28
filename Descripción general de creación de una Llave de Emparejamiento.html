@@ -1,0 +1,51 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div id="how-to-upload-an-ssh-key-via-the-web-ui">
+<p>En lugar de utilizar contraseñas, DreamCompute utiliza claves SSH para acceder a tus instancias. Esto se hace para aumentar la seguridad y simplifica la administración de usuarios para OpenStack, ya que la clave pública se inyecta en la instancia durante la creación. Esto significa que no necesitas modificar archivos o contraseñas en el sistema operativo al iniciar.</p>
+<p>Hay varias formas de crear una Llave de Emparejamiento. Elige una de las siguientes opciones.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115001736611--Crear-una-nueva-llave-de-emparejamiento-en-el-panel-de-DreamCompute" target="_self" rel="undefined">Crea una nueva Llave de Emparejamiento en el panel de DreamCompute</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115001736631-Crear-un-nuevo-par-de-llaves-en-Windows" target="_self" rel="undefined">Crea una nueva Llave de Emparejamiento en Windows</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115001736671-Crear-una-nueva-llave-de-emparejamiento-en-Mac-OS-X-o-Linux" target="_self" rel="undefined">Crea una nueva Llave de Emparejamiento en Mac o Linux</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360000738411-Crear-e-importar-llaves-de-emparejamiento-a-trav%C3%A9s-del-CLI-de-OpenStack" target="_self" rel="undefined">Creación e importación de una Llave de Emparejamiento mediante la CLI de OpenStack</a></li>
+</ul>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>A cada instancia solo se le puede asignar una única Llave de Emparejamiento. Cuando lanzas originalmente una instancia, puedes seleccionar el par de claves que te gustaría usar con la nueva instancia.</p>
+<p>No es posible dentro del panel DreamCompute cambiar la Llave de Emparejamiento asignada a una instancia después de que la instancia se ha creado sin sobrescribir/borrar datos. Asegúrate de asignar la Llave de Emparejamiento correcta cuando cree originalmente la instancia.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215912848-How-to-launch-an-instance-using-the-DreamCompute-dashboard">Cómo lanzar una instancia usando el panel de DreamCompute</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216511617-Como-lanzar-una-instancia-usando-el-CLI-de-OpenStack" target="_self" rel="undefined">Cómo lanzar una instancia usando la CLI de OpenStack</a></li>
+</ul>
+</div>
+</div>
+<div id="ssh-key-components">&nbsp;</div>
+<h2>Componentes de la clave SSH</h2>
+<div class="solvvy-solution">
+<div class="solvvy-solution">
+<p>Hay dos partes en una clave SSH:</p>
+<ul>
+<li>a private key</li>
+<li>a public key</li>
+</ul>
+<p>La clave privada es conocida solo por tí y debe protegerse. En sistemas basados en UNIX como Mac y Linux, la clave privada generalmente se almacena en:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/username/.ssh/id_rsa
+</pre>
+</div>
+<p>La clave pública se puede compartir con cualquier servidor al que te gustaría permitir el acceso SSH. En un sistema basado en UNIX, la clave pública generalmente se almacena en:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/username/.ssh/id_rsa.pub
+</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Las claves SSH generadas en sistemas Windows mediante el generador de claves <a class="reference external" href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a> (puttygen.exe) no se almacenan en una ubicación uniforme, sino donde el usuario decide guardarlas.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

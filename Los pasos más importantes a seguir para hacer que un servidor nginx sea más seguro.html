@@ -1,6 +1,6 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>nginx es un servidor web de alto rendimiento diseñado para servir aplicaciones escalables de alto rendimiento de manera eficiente y receptiva. Se puede utilizar para servir contenido estático, equilibrar la carga de solicitudes HTTP, proxy inverso FCGI/PSGI/USWGI y conexiones TCP arbitrarias. Dado esto, es importante poder configurar e implementar de forma segura las instalaciones de nginx para proporcionar una interfaz web segura para tu aplicación y minimizar las superficies de ataque.</p>
+<p>nginx es un servidor web de alto rendimiento diseñado para servir aplicaciones escalables de alto rendimiento de manera eficiente y receptiva. Se puede utilizar para servir contenido estático, equilibrar la carga de solicitudes <span class="text-object">HTTP</span>, proxy inverso FCGI/PSGI/USWGI y conexiones TCP arbitrarias. Dado esto, es importante poder configurar e implementar de forma segura las instalaciones de nginx para proporcionar una interfaz web segura para tu aplicación y minimizar las superficies de ataque.</p>
 </div>
 <h2>Asegurar el binario</h2>
 <div class="solvvy-solution">
@@ -82,7 +82,7 @@ gpg: Good signature from "Maxim Dounin &lt;mdounin@mdounin.ru&gt;"
 </div>
 </div>
 <h3>Deshabilita Server Tokens</h3>
-<p>La especificación HTTP recomienda (pero no requiere) que los servidores web se identifiquen mediante el encabezado del <span class="code">Server</span>. Históricamente, los servidores web han incluido su información de versión como parte de este encabezado. Revelar la versión de nginx en ejecución puede ser indeseable, particularmente en entornos sensibles a la revelación de información. nginx se puede configurar para que no muestre su versión en el encabezado del servidor editando el archivo nginx.conf con lo siguiente:</p>
+<p>La especificación <span class="text-object">HTTP</span> recomienda (pero no requiere) que los servidores web se identifiquen mediante el encabezado del <span class="code">Server</span>. Históricamente, los servidores web han incluido su información de versión como parte de este encabezado. Revelar la versión de nginx en ejecución puede ser indeseable, particularmente en entornos sensibles a la revelación de información. nginx se puede configurar para que no muestre su versión en el encabezado del servidor editando el archivo nginx.conf con lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox">server_tokens off;
 </pre>
@@ -162,7 +162,7 @@ user3:<span class="code-highlight">password3</span>
 <h2>Asegurar SSL/TLS</h2>
 <div class="solvvy-solution">
 <p>nginx sobresale en el servicio de tráfico SSL/TLS. Configurar gu servidor web para proporcionar configuraciones SSL/TLS seguras para los clientes es esencial para mantener una conexión segura.</p>
-<p>Como nota, se recomienda encarecidamente que el tráfico cifrado utilice solo protocolos TLS más nuevos, en lugar de SSL heredado. Ambas versiones de SSL ampliamente disponibles en la actualidad (SSLv2 y SSLv3) tienen fallas de seguridad graves y nunca deben usarse en entornos de producción. Históricamente, las directivas asociadas con la configuración de SSL / TLS en nginx tienen el prefijo ssl. Sin embargo, para promover el uso de protocolos de seguridad modernos, este tutorial usa el término 'TLS' cuando hace referencia al tráfico cifrado (HTTPS) y 'ssl' cuando se aplica a directivas de configuración específicas de nginx.</p>
+<p>Como nota, se recomienda encarecidamente que el tráfico cifrado utilice solo protocolos TLS más nuevos, en lugar de SSL heredado. Ambas versiones de SSL ampliamente disponibles en la actualidad (SSLv2 y SSLv3) tienen fallas de seguridad graves y nunca deben usarse en entornos de producción. Históricamente, las directivas asociadas con la configuración de SSL / TLS en nginx tienen el prefijo ssl. Sin embargo, para promover el uso de protocolos de seguridad modernos, este tutorial usa el término <span class="text-object">TLS</span> cuando hace referencia al tráfico cifrado (<span class="text-object">HTTPS</span>) y <span class="text-object">ssl</span> cuando se aplica a directivas de configuración específicas de nginx.</p>
 <h3>Enciende TLS</h3>
 <p>Para servir tráfico cifrado, SSL/TLS debe estar habilitado para yu servidor. Afortunadamente, las conexiones cifradas se pueden habilitar/deshabilitar por servidor en nginx:</p>
 <div class="preboxcontainer">
@@ -218,7 +218,7 @@ ssl_session_timeout 5m;
 </pre>
 </div>
 </div>
-<p>También puedes configurar nginx para enviar un redireccionamiento 301 para solicitudes HTTP de texto plano a la versión TLS de tu sitio:</p>
+<p>También puedes configurar nginx para enviar un redireccionamiento 301 para solicitudes <span class="text-object">HTTP</span> de texto plano a la versión <span class="text-object">TLS</span> de tu sitio:</p>
 <div class="preboxcontainer">
 <pre class="prebox">server {
     listen 80;
@@ -240,7 +240,7 @@ server {
 <p>Más allá de los conceptos básicos de instalar un binario nginx seguro, bloquear el acceso a áreas sensibles de tu sitio y servir correctamente las conexiones TLS, existen algunos pasos adicionales que se pueden tomar para el usuario más consciente de la seguridad.</p>
 <div id="install-a-waf">
 <h3>Instala un WAF</h3>
-<p>Un WAF (firewall de aplicaciones web) es un software diseñado para inspeccionar el tráfico HTTP/HTTPS, rechazar solicitudes maliciosas y, en general, actuar como una capa adicional de seguridad en tu pila web. Un WAF configurado correctamente puede proteger tu sitio de ataques SQLi, XSS, CSRF y DDoS, además de proporcionar mitigación de ataques de fuerza bruta y parches de amenazas de día cero. Hay algunas opciones WAF de código abierto disponibles para nginx:</p>
+<p>Un WAF (firewall de aplicaciones web) es un software diseñado para inspeccionar el tráfico <span class="text-object">HTTP/HTTPS</span>, rechazar solicitudes maliciosas y, en general, actuar como una capa adicional de seguridad en tu pila web. Un WAF configurado correctamente puede proteger tu sitio de ataques SQLi, XSS, CSRF y DDoS, además de proporcionar mitigación de ataques de fuerza bruta y parches de amenazas de día cero. Hay algunas opciones WAF de código abierto disponibles para nginx:</p>
 <h3>ModSecurity</h3>
 <p>ModSecurity, originalmente escrito como WAF para servidores Apache, es el estándar de facto para las soluciones WAF de código abierto. El trabajo reciente en el proyecto ha cambiado el enfoque hacia el soporte de nginx; Para obtener más información y detalles sobre la instalación y configuración, consulta la página de inicio del proyecto y la página de GitHub aquí:</p>
 <ul>
