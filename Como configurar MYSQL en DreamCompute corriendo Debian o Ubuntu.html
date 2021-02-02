@@ -1,22 +1,24 @@
-<h2><strong>Generalidades</strong></h2>
-<p><span style="font-weight: 400;">MySQL es uno de los motores de base de datos más populares utilizados para sitios web. MySQL es una parte importante de los stack de LAMP (Linux, Apache, MySQL, PHP), así como de otros stack de AMP, y es compatible con muchos paquetes de software web.</span></p>
-<p><span style="font-weight: 400;">MySQL es el único software de base de datos relacional que ofrece DreamHost para sus productos de alojamiento compartido, VPS y dedicado. Este artículo te ayuda a instalarlo y configurarlo en un DreamCompute con Debian o Ubuntu.</span></p>
-<h2>Instalar MySQL</h2>
-<p><span style="font-weight: 400;">Debian y Ubuntu a veces ofrecen múltiples versiones de MySQL en caso de que tus necesidades requieran una versión anterior, sin embargo, generalmente es mejor optar por la versión predeterminada si no se necesitan requisitos específicos.</span></p>
-<p><span style="font-weight: 400;">Para instalar la versión predeterminada de MySQL en tu sistema, corre los siguientes comandos:</span></p>
+<h2>Generalidades</h2>
 <div class="solvvy-solution">
+<p>MySQL es uno de los motores de base de datos más populares utilizados para sitios web. MySQL es una parte importante de los stack de LAMP (Linux, Apache, MySQL, PHP), así como de otros stack de AMP, y es compatible con muchos paquetes de software web.</p>
+<p>MySQL es el único software de base de datos relacional que ofrece DreamHost para sus productos de alojamiento compartido, VPS y dedicado. Este artículo te ayuda a instalarlo y configurarlo en un DreamCompute con Debian o Ubuntu.</p>
+</div>
+<h2>Instalar MySQL</h2>
+<div class="solvvy-solution">
+<p>Debian y Ubuntu a veces ofrecen múltiples versiones de MySQL en caso de que tus necesidades requieran una versión anterior, sin embargo, generalmente es mejor optar por la versión predeterminada si no se necesitan requisitos específicos.</p>
+<p>Para instalar la versión predeterminada de MySQL en tu sistema, corre los siguientes comandos:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo apt-get update</span>
 <span class="server">[user@instance]:$ </span><span class="command">sudo apt-get install -y mysql-server</span></pre>
 </div>
-<p><span style="font-weight: 400;">Antes de que se complete la instalación, aparecerá un cuadro de diálogo que te pedirá que especifiques una contraseña raíz del servidor MySQL.</span></p>
+<p>Antes de que se complete la instalación, aparecerá un cuadro de diálogo que te pedirá que especifiques una contraseña raíz del servidor MySQL.</p>
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/Create_MySQL_Password.png" /></dd>
 </dl>
 </div>
 <h2>Ver los paquetes instalados</h2>
-<p><span style="font-weight: 400;">Puedes verificar cuales paquetes fueron instalados corriendo el siguiente comando:</span></p>
 <div class="solvvy-solution">
+<p>Puedes verificar cuales paquetes fueron instalados corriendo el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">dpkg -l | grep mysql</span>
 
@@ -29,8 +31,8 @@ ii  mysql-server-core-5.7   5.7.21-0ubuntu0.16.04.1   amd64   MySQL database ser
 </div>
 </div>
 <h2>Configurar y usar MySQL</h2>
-<p><span style="font-weight: 400;">La configuración de los archivos están almacenados en el directorio </span><strong>/etc/mysql</strong><span style="font-weight: 400;">.</span></p>
 <div class="solvvy-solution">
+<p>La configuración de los archivos están almacenados en el directorio <span class="text-object">/etc/mysql</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">ls -1 /etc/mysql</span>
 /conf.d
@@ -41,51 +43,51 @@ my.cnf.fallback
 mysql.cnf
 /mysql.conf.d</pre>
 </div>
-<h2><span style="font-weight: 400;">El archivo de configuración /etc/mysql/mysql.conf.d/mysqld.cnf</span></h2>
-<p><span style="font-weight: 400;">Hay algunas configuraciones que tal vez desees cambiar para personalizar MySQL. Se pueden realizar los siguientes cambios en el archivo </span><strong>/etc/mysql/mysql.conf.d/mysqld.cnf</strong><span style="font-weight: 400;">.</span></p>
+<h3>El archivo de configuración /etc/mysql/mysql.conf.d/mysqld.cnf</h3>
+<p>Hay algunas configuraciones que tal vez desees cambiar para personalizar MySQL. Se pueden realizar los siguientes cambios en el archivo <span class="text-object">/etc/mysql/mysql.conf.d/mysqld.cnf</span>.</p>
 <h4><strong>Cambiar la dirección 'bind'.</strong></h4>
-<p><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self" rel="undefined">Edita este archivo</a><span style="font-weight: 400;"> y verás la dirección bind:</span></p>
+<p><a href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH">Edita este archivo</a> y verás la dirección bind:</p>
 <div class="preboxcontainer">
 <pre class="prebox">bind-address   = 127.0.0.1</pre>
 </div>
-<p><span style="font-weight: 400;">Esta es la dirección IP que MySQL está escuchando. Solo puede escuchar una dirección IP en cualquier momento. De forma predeterminada, escuchará 127.0.0.1 (también conocido como localhost), lo que significa que solo se podrá acceder al servicio MySQL desde la instancia en la que está instalado.</span></p>
-<p><span style="font-weight: 400;">Si deseas conectarte a MySQL desde otras instancias de DreamCompute, puedes cambiar esto a la </span><a href="https://help.dreamhost.com/hc/es/articles/115001754711-Localizar-las-direcciones-IP-de-tu-instancia" target="_self" rel="undefined">dirección IPv4 o IPv6 de la instancia</a><span style="font-weight: 400;">. Así es como se vería una dirección bind mysql configurada en IPv6:</span></p>
+<p>Esta es la dirección IP que MySQL está escuchando. Solo puede escuchar una dirección IP en cualquier momento. De forma predeterminada, escuchará 127.0.0.1 (también conocido como localhost), lo que significa que solo se podrá acceder al servicio MySQL desde la instancia en la que está instalado.</p>
+<p>Si deseas conectarte a MySQL desde otras instancias de DreamCompute, puedes cambiar esto a la&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/115001754711-Locating-the-IP-Address-of-your-instance">dirección IPv4 o IPv6 de la instancia</a>. Así es como se vería una dirección bind mysql configurada en IPv6:</p>
 <div class="preboxcontainer">
 <pre class="prebox">bind-address   = 2607:f298:6050:8a28:f816:3eff:fe62:c9c3</pre>
 </div>
 <h4><strong>max_allowed_packet</strong></h4>
-<p><span style="font-weight: 400;">Este valor es el tamaño más grande permitido para un solo paquete, que normalmente solo es relevante para restaurar copias de seguridad. Si se creó una copia de seguridad en una instancia con una configuración alta para este valor, es posible que tenga dificultades para restaurarla en otra máquina con una configuración más baja. El valor predeterminado es 16M.</span></p>
-<h2>Reiniciar el servicio MySQL</h2>
-<p><span style="font-weight: 400;">Si se realizan cambios en tu configuración de mysql, debes reiniciar MySQL para que los lea. Esto se puede hacer corriendo lo siguiente:</span></p>
+<p>Este valor es el tamaño más grande permitido para un solo paquete, que normalmente solo es relevante para restaurar copias de seguridad. Si se creó una copia de seguridad en una instancia con una configuración alta para este valor, es posible que tenga dificultades para restaurarla en otra máquina con una configuración más baja. El valor predeterminado es 16M.</p>
 </div>
+<h2>Reiniciar el servicio MySQL</h2>
 <div class="solvvy-solution">
+<p>Si se realizan cambios en tu configuración de mysql, debes reiniciar MySQL para que los lea. Esto se puede hacer corriendo lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo service mysql restart</span></pre>
 </div>
 </div>
 <h2>Conectar a tu shell MySQL</h2>
-<p><span style="font-weight: 400;">Si necesitas configurar nuevas bases de datos o configurar nuevos usuarios, debes iniciar sesión en tu Shell de MySQL. Ejecuta cualquiera de los siguientes comandos para iniciar sesión.</span></p>
 <div class="solvvy-solution">
+<p>Si necesitas configurar nuevas bases de datos o configurar nuevos usuarios, debes iniciar sesión en tu Shell de MySQL. Ejecuta cualquiera de los siguientes comandos para iniciar sesión.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">mysql -u root -p</span></pre>
 </div>
-<p><span style="font-weight: 400;">El mensaje cambiará a lo siguiente:</span></p>
+<p>El mensaje cambiará a lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">mysql&gt; </span></pre>
 </div>
-<p><span style="font-weight: 400;">Ahora puedes correr comandos mysql para configurar una base de datos.</span></p>
-<h2>MySQL seguro</h2>
-<p><span style="font-weight: 400;">Una vez que se hayas instalado MySQL, es una buena idea proteger tu configuración. Corre el siguiente comando para abrir un cuadro de diálogo de configuración interactivo:</span></p>
+<p>Ahora puedes correr comandos mysql para configurar una base de datos.</p>
 </div>
+<h2>MySQL seguro</h2>
 <div class="solvvy-solution">
+<p>Una vez que se hayas instalado MySQL, es una buena idea proteger tu configuración. Corre el siguiente comando para abrir un cuadro de diálogo de configuración interactivo:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">mysql_secure_installation</span>
 
 Securing the MySQL server deployment.
 Enter password for user root:</pre>
 </div>
-<h2><span style="font-weight: 400;">Establecer un valor para la validación de la contraseña</span></h2>
-<p><span style="font-weight: 400;">Puedes optar por habilitar el 'Complemento de contraseña', que prueba la solidez de tus contraseñas MySQL. Si deseas habilitar esto, escribe la letra 'y'. A continuación, puedes decidir qué tan seguras deseas que sean las nuevas contraseñas.</span></p>
+<h3>Establecer un valor para la validación de la contraseña</h3>
+<p>Puedes optar por habilitar el 'Complemento de contraseña', que prueba la solidez de tus contraseñas MySQL. Si deseas habilitar esto, escribe la letra 'y'. A continuación, puedes decidir qué tan seguras deseas que sean las nuevas contraseñas.</p>
 <div class="preboxcontainer">
 <pre class="prebox">VALIDATE PASSWORD PLUGIN can be used to test passwords
 and improve security. It checks the strength of password
@@ -102,8 +104,8 @@ STRONG Length &gt;= 8, numeric, mixed case, special characters and dictionary   
 
 Please enter 0 = LOW, 1 = MEDIUM and 2 = STRONG: <span class="code-highlight">2</span></pre>
 </div>
-<h2><span style="font-weight: 400;">Cambiar tu contraseña root</span></h2>
-<p><span style="font-weight: 400;">El cuadro de diálogo te preguntará si deseas cambiar tu contraseña de root. Esto no es necesario ya que lo acabas de crear durante la instalación.</span></p>
+<h3>Cambiar tu contraseña root</h3>
+<p>El cuadro de diálogo te preguntará si deseas cambiar tu contraseña de root. Esto no es necesario ya que lo acabas de crear durante la instalación.</p>
 <div class="preboxcontainer">
 <pre class="prebox">Using existing password for root.
 
@@ -113,7 +115,7 @@ Change the password for root ? ((Press y|Y for Yes, any other key for No) : <spa
  ... skipping.</pre>
 </div>
 <h3>Deshabilitar el usuario anonimo</h3>
-<p><span style="font-weight: 400;">Es una buena idea deshabilitar el usuario anonimo.</span></p>
+<p>Es una buena idea deshabilitar el usuario anonimo.</p>
 <div class="preboxcontainer">
 <pre class="prebox">By default, a MySQL installation has an anonymous user,
 allowing anyone to log into MySQL without having to have
@@ -126,7 +128,7 @@ Remove anonymous users? (Press y|Y for Yes, any other key for No) : <span class=
 Success.</pre>
 </div>
 <h3>Deshabilitar el inicio de sesión de root</h3>
-<p><span style="font-weight: 400;">También se recomienda deshabilitar el inicio de sesión de root.</span></p>
+<p>También se recomienda deshabilitar el inicio de sesión de root.</p>
 <div class="preboxcontainer">
 <pre class="prebox">Normally, root should only be allowed to connect from
 'localhost'. This ensures that someone cannot guess at
@@ -136,7 +138,7 @@ Disallow root login remotely? (Press y|Y for Yes, any other key for No) : <span 
 Success.</pre>
 </div>
 <h3>Eliminar la base de datos 'test'</h3>
-<p><span style="font-weight: 400;">Debes eliminar la base de datos 'test' pues no hay necesidad de tenerlo.</span></p>
+<p>Deberías eliminar la base de datos 'test' pues no hay necesidad de tenerlo.</p>
 <div class="preboxcontainer">
 <pre class="prebox">By default, MySQL comes with a database named 'test' that
 anyone can access. This is also intended only for testing,
@@ -152,7 +154,7 @@ Success.
 Success.</pre>
 </div>
 <h3>Recargar</h3>
-<p><span style="font-weight: 400;">Recarga para que las nuevas configuraciones tomen efecto.</span></p>
+<p>Recarga para que las nuevas configuraciones tomen efecto.</p>
 <div class="preboxcontainer">
 <pre class="prebox">Reloading the privilege tables will ensure that all changes
 made so far will take effect immediately.
@@ -166,6 +168,6 @@ All done!</pre>
 <div class="footer">&nbsp;</div>
 <!--DreamCompute Button-->
 <div class="dream-sign-up">
-<h2>Implementa tus Aplicaciones en Servidores en la Nube Hoy</h2>
+<h2>Implementa Tus Aplicaciones en Servidores Cloud Hoy</h2>
 <div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Suscríbete a DreamCompute</a></div>
 </div>

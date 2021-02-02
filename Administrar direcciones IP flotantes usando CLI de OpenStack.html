@@ -1,24 +1,24 @@
-<h2>Generalidades</h2>
+<h2>Overview</h2>
 <div class="solvvy-solution">
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p><span style="font-weight: 400;">Esto solo es relevante si tienes habilitadas las redes privadas. Si estás utilizando una red pública, solo tendrás direcciones IPv4 e IPv6 públicas.</span></p>
+<p>Esto solo es relevante si tienes habilitadas las redes privadas. Si estás utilizando una red pública, solo tendrás direcciones IPv4 e IPv6 públicas.</p>
 </div>
 </div>
-<p><span style="font-weight: 400;">Cuando una instancia está conectada a una red privada, tiene una dirección IP fija privada y también puede tener una dirección IP pública o flotante. Las direcciones IP privadas se utilizan para la comunicación entre instancias y las direcciones públicas se utilizan para la comunicación con redes fuera de la nube, incluida Internet.</span></p>
-<p><span style="font-weight: 400;">Cuando lanzas una instancia, se le asigna automáticamente una dirección IP privada que permanece igual hasta que elimines explícitamente la instancia. Reiniciar una instancia no tiene ningún efecto sobre la dirección IP privada.</span></p>
-<p><span style="font-weight: 400;">Un grupo de direcciones IP flotantes está disponible en DreamCompute. La cuota de tu proyecto define la cantidad máxima de direcciones IP flotantes que puedes asignar a tu proyecto. Después de asignar una dirección IP flotante a tu proyecto, puedes:</span></p>
+<p>Cuando una instancia está conectada a una red privada, tiene una dirección IP fija privada y también puede tener una dirección IP pública o flotante. Las direcciones IP privadas se utilizan para la comunicación entre instancias y las direcciones públicas se utilizan para la comunicación con redes fuera de la nube, incluida Internet.</p>
+<p>Cuando lanzas una instancia, se le asigna automáticamente una dirección IP privada que permanece igual hasta que elimines explícitamente la instancia. Reiniciar una instancia no tiene ningún efecto sobre la dirección IP privada.</p>
+<p>Un grupo de direcciones IP flotantes está disponible en DreamCompute. La cuota de tu proyecto define la cantidad máxima de direcciones IP flotantes que puedes asignar a tu proyecto. Después de asignar una dirección IP flotante a tu proyecto, puedes:</p>
 <ul class="simple">
-<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Asocia la dirección IP flotante con una de tus instancias (nota: solo se puedes asignar una dirección IP flotante a una instancia en un momento dado).</span></li>
-<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Desasocia una dirección IP flotante de una de tus instancias.</span></li>
-<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Libera una dirección IP flotante de tu proyecto (esto borra automáticamente cualquier asociación que tenga esa dirección).</span></li>
+<li>Asocia la dirección IP flotante con una de tus instancias (nota: solo se puedes asignar una dirección IP flotante a una instancia en un momento dado).</li>
+<li>Desasocia una dirección IP flotante de una de tus instancias.</li>
+<li>Libera una dirección IP flotante de tu proyecto (esto borra automáticamente cualquier asociación que tenga esa dirección).</li>
 </ul>
-<p><span style="font-weight: 400;">Usa los comandos de </span><a href="https://docs.openstack.org/python-openstackclient/pike/cli/command-objects/ip-floating.html"><span style="font-weight: 400;">IP flotante de Openstack</span></a><span style="font-weight: 400;"> para administrar las direcciones IP flotantes.</span></p>
+<p>Usa los comandos de <span class="code"><a href="https://docs.openstack.org/python-openstackclient/pike/cli/command-objects/ip-floating.html">IP flotantes de Openstack</a></span>&nbsp;para administrar las direcciones IP flotantes.</p>
 </div>
 <h2>Listar la información de las direcciones IP flotantes</h2>
 <div class="solvvy-solution">
-<p><span style="font-weight: 400;">Para listar todas los grupos de direcciones IP flotante que provee, corre:</span></p>
+<p>Para listar todas los grupos de direcciones IP flotante que provee, corre:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack ip floating pool list</span>
 +--------+
@@ -28,7 +28,7 @@
 +--------+
 </pre>
 </div>
-<p><span style="font-weight: 400;">Para listar todas las direcciones IP flotantes que están alocadas en tu proyecto, corre:</span></p>
+<p>Para listar todas las direcciones IP flotantes que están alocadas en tu proyecto, corre:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack ip floating list</span>
 +-----------------------+---------------------+------------------+-----------------------+
@@ -40,13 +40,13 @@
 +-----------------------+---------------------+------------------+-----------------------+
 </pre>
 </div>
-<p><span style="font-weight: 400;">Para cada dirección IP flotante que se asigna a tu proyecto, el comando genera el ID de la dirección IP flotante, la dirección IP flotante real, la dirección IP privada de la instancia con la que está asociada la dirección IP flotante y la ID del puerto. a la que está conectada la dirección IP flotante.</span></p>
-<h2>Asignar/Asociar direcciones IP flotantes</h2>
-<p><span style="font-weight: 400;">Puedes asignar una dirección IP flotante a un proyecto y a una instancia.</span></p>
+<p>Para cada dirección IP flotante que se asigna a tu proyecto, el comando genera el ID de la dirección IP flotante, la dirección IP flotante real, la dirección IP privada de la instancia con la que está asociada la dirección IP flotante y la ID del puerto. a la que está conectada la dirección IP flotante.</p>
 </div>
+<h2>Asignar/Asociar direcciones IP flotantes</h2>
 <div class="solvvy-solution">
+<p>Puedes asignar una dirección IP flotante a un proyecto y a una instancia.</p>
 <ol>
-<li><span style="font-weight: 400;">Corre el siguiente comando para asignar una dirección IP flotante a tu proyecto. El comando genera la dirección IP asignada:</span><br />
+<li>Corre el siguiente comando para asignar una dirección IP flotante a tu proyecto. El comando genera la dirección IP asignada:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack ip floating create public</span>
 +-------------+------------------------+
@@ -61,7 +61,7 @@
 </pre>
 </div>
 </li>
-<li><span style="font-weight: 400;">Lista todas las instancias del proyecto con la dirección IP con la que puede estar asociada.</span><br />
+<li>Lista todas las instancias del proyecto con la dirección IP con la que puede estar asociada.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server list --ip 10.0.0.</span>
 +-----------------------+------+--------+------------------+
@@ -75,23 +75,23 @@
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p><span style="font-weight: 400;">En el comando anterior, '10 .0.0. ' es un ejemplo. Debes ingresar el valor que coincida con la dirección de red de la subred que utilizaste al crear tu red privada como se describe </span><a href="https://help.dreamhost.com/hc/es/articles/235006728-C%C3%B3mo-crear-y-administrar-redes-privadas-con-el-panel-de-DreamCompute" target="_self" rel="undefined">aquí</a><span style="font-weight: 400;">.</span></p>
+<p>En el comando anterior, '10 .0.0. ' es un ejemplo. Debes ingresar el valor que coincida con la dirección de red de la subred que utilizaste al crear tu red privada como se describe <a href="https://help.dreamhost.com/hc/en-us/articles/235006728-How-to-create-and-manage-private-networks-with-the-DreamCompute-Dashboard">aquí</a>.</p>
 </div>
 </div>
 </li>
-<li><span style="font-weight: 400;">Asociar una dirección IP con una instancia en el proyecto, como sigue:</span><br />
+<li>Asociar una dirección IP con una instancia en el proyecto, como sigue:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack ip floating add <span class="code-highlight">FLOATING_IP_ADDRESS INSTANCE_ID</span></span>
 </pre>
 </div>
-<p><span style="font-weight: 400;">Por ejemplo:</span></p>
+<p>Por ejemplo:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack ip floating add 172.24.4.225 71e499c1-7b9d-42b9...</span>
 </pre>
 </div>
 </li>
 </ol>
-<p><span style="font-weight: 400;">La instancia está ahora asociada con dos direcciones IP:</span></p>
+<p>La instancia está ahora asociada con dos direcciones IP:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server list --ip 10.0.0.</span>
 +-----------------------+------+--------+--------------------------------+
@@ -102,19 +102,19 @@
 +-----------------------+------+--------+--------------------------------+
 </pre>
 </div>
-<p><span style="font-weight: 400;">Después que asocies la dirección IP y configurar las reglas del grupo de seguridad para la instancia, la instancia está disponible públicamente en la dirección IP flotante.</span></p>
-<h2>Desasociar direcciones IP flotantes</h2>
-<p><span style="font-weight: 400;">Para desasociar direcciones IP flotantes de una instancia:</span></p>
+<p>Después que asocies la dirección IP y configurar las reglas del grupo de seguridad para la instancia, la instancia está disponible públicamente en la dirección IP flotante.</p>
 </div>
+<h2>Desasociar direcciones IP flotantes</h2>
 <div class="solvvy-solution">
+<p>Para desasociar direcciones IP flotantes de una instancia:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack ip floating remove <span class="code-highlight">FLOATING_IP_ADDRESS INSTANCE_NAME_OR_ID</span></span>
 </pre>
 </div>
-<p><span style="font-weight: 400;">Para eliminar una dirección IP flotante de tu proyecto:</span></p>
+<p>Para eliminar una dirección IP flotante de tu proyecto:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack ip floating delete <span class="code-highlight">FLOATING_IP_ADDRESS</span></span>
 </pre>
 </div>
-<p><span style="font-weight: 400;">La dirección IP se devuelve al grupo de direcciones IP que está disponible para todos los proyectos. Si la dirección IP aún está asociada con una instancia en ejecución, se desasocia automáticamente de esa instancia.</span></p>
+<p>La dirección IP se devuelve al grupo de direcciones IP que está disponible para todos los proyectos. Si la dirección IP aún está asociada con una instancia en ejecución, se desasocia automáticamente de esa instancia.</p>
 </div>

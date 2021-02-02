@@ -1,36 +1,38 @@
 <h2>Generalidades</h2>
-<p><span style="font-weight: 400;">Este artículo te guía a través del proceso de creación de un certificado Wildcard 'Let's Encrypt' en tu dominio alojado en DreamCompute. Con esta configuración, se configura un solo certificado SSL en tu dominio principal (example.com), pero todos los subdominios bajo (como blog.example.com) también podrán usar el certificado.</span></p>
-<h2>Configurando tu sitio e instancia</h2>
-<p><span style="font-weight: 400;">Este artículo asume que ya has hecho lo siguiente:</span></p>
 <div class="solvvy-solution">
+<p>Este artículo te guía a través del proceso de creación de un certificado Wildcard 'Let's Encrypt' en tu dominio alojado en DreamCompute. Con esta configuración, se configura un solo certificado SSL en tu dominio principal (ejemplo.com), pero todos los subdominios bajo (como blog.ejemplo.com) también podrán usar el certificado.</p>
+</div>
+<h2>Configurando tu sitio e instancia</h2>
+<div class="solvvy-solution">
+<p>Este artículo asume que ya has hecho lo siguiente:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/215912848-How-to-launch-an-instance-using-the-DreamCompute-dashboard" target="_self" rel="undefined">Lanzado una instancia de Ubuntu</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115003441752-Agregar-un-sitio-web-a-DreamCompute" target="_self" rel="undefined">Agregar tu sitio web principal a DreamCompute</a><span style="font-weight: 400;"> (es decir, example.com)</span><br />
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/215912848-How-to-launch-an-instance-using-the-DreamCompute-dashboard" target="_self" rel="undefined">Lanzado una instancia</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115003441752-Adding-a-website-to-DreamCompute">Agregaste tu sitio web principal a DreamCompute</a>&nbsp;(es decir, ejemplo.com)
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p><span style="font-weight: 400;">Este artículo asume que has creado tu sitio en el directorio </span><strong>/var/www</strong><span style="font-weight: 400;"> y no en tu </span><strong>directorio/home/username</strong><span style="font-weight: 400;">.</span></p>
+<p>Este artículo asume que has creado tu sitio en el directorio <span class="text-object">/var/www</span> y no en tu <span class="text-object">/home/username</span>.</p>
 </div>
 </div>
 </li>
-<li><span style="font-weight: 400;">Siguiendo los mismos pasos, agrega los subdominios que desees alojar en DreamCompute (es decir, blog.example.com)</span></li>
+<li>Siguiendo los mismos pasos, agrega los subdominios que desees alojar en DreamCompute (es decir, blog.ejemplo.com)</li>
 </ul>
-<p><span style="font-weight: 400;">Si has seguido esos pasos, tu sitio web y sus subdominios ya se resolverán desde la instancia de DreamCompute. Ahora puedes crear el certificado Wildcard para usar con todos esos dominios.</span></p>
-<h2>Habilitar mod_rewrite y ssl</h2>
-<p><span style="font-weight: 400;">Antes de continuar, asegúrate de que mod_rewrite y ssl estén habilitados en tu instancia. Puedes confirmar corriendo los siguientes comandos:</span></p>
+<p>Si has seguido esos pasos, tu sitio web y sus subdominios ya se resolverán desde la instancia de DreamCompute. Ahora puedes crear el certificado Wildcard para usar con todos esos dominios.</p>
 </div>
+<h2>Habilitar mod_rewrite y ssl</h2>
 <div class="solvvy-solution">
+<p>Antes de continuar, asegúrate de que mod_rewrite y ssl estén habilitados en tu instancia. Puedes confirmar ejecutando los siguientes comandos:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">ls -1 /etc/apache2/mods-enabled | grep rewrite</span>
 <span class="server">[user@instance]$ </span><span class="command">ls -1 /etc/apache2/mods-enabled | grep ssl</span></pre>
 </div>
-<p><span style="font-weight: 400;">Si no aparece nada, habilítalo con los siguientes comandos:</span></p>
+<p>Si no aparece nada, habilítalo con los siguientes comandos:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo a2enmod rewrite</span>
 <span class="server">[user@instance]$ </span><span class="command">sudo a2enmod ssl</span>
 <span class="server">[user@instance]$ </span><span class="command">sudo systemctl reload apache2</span></pre>
 </div>
-<p><span style="font-weight: 400;">Vuelve a verificar y verás que se enumeran reescribir y ssl.</span></p>
+<p>Vuelve a verificar y verás que se enumeran reescribir y ssl.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">ls -1 /etc/apache2/mods-enabled | grep rewrite</span>
 rewrite.load
@@ -38,27 +40,27 @@ rewrite.load
 ssl.conf<br />ssl.load</pre>
 </div>
 </div>
-<h2>Crear el certificado</h2>
-<p><span style="font-weight: 400;">Corre los siguientes comandos para crear tu certificado Wildcard.</span></p>
+<h2>Creando el certificado</h2>
 <div class="solvvy-solution">
+<p>Ejecuta los siguientes comandos para crear tu certificado Wildcard.</p>
 <ol>
-<li style="font-weight: 400;" aria-level="1"><a href="https://help.dreamhost.com/hc/en-us/articles/216201547-Connect-to-your-instance-with-SSH-keys-overview"><span style="font-weight: 400;">Inicia sesión en tu instancia</span></a><span style="font-weight: 400;">.</span></li>
-<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Corre los siguientes comandos para instalar un certificado Let's Encrypt.</span>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216201547-Connect-to-your-instance-with-SSH-keys-overview">Inicia sesión en tu instancia</a>.</li>
+<li>Corre los siguientes comandos para instalar un certificado Let's Encrypt.
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p><span style="font-weight: 400;">Asegúrate de cambiar 'example.com' a tu nombre de dominio real en el siguiente comando.</span></p>
+<p>Asegúrate de cambiar 'example.com' a tu nombre de dominio real en el siguiente comando.</p>
 </div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo apt install certbot python3-certbot-apache -y<br /></span><span class="server">[user@instance]# </span><span class="command">sudo certbot --manual -d "<span class="code-highlight">example.com</span>" -d "*.<span class="code-highlight">example.com</span>" --server https://acme-v02.api.letsencrypt.org/directory certonly</span></pre>
 </div>
 </li>
-<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Cuando se te solicite, ingresa 'y' para continuar con la instalación.</span></li>
-<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Se te pedirá que ingreses una dirección de correo. Ingresa cualquier dirección, pero una que tengas acceso directo para verificar.</span></li>
-<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Ingresa 'A' para aceptar los términos de servicio.</span></li>
-<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Elige si deseas compartir tu correo con Electronic Frontier Foundation.</span></li>
-<li><span style="font-weight: 400;">Finalmente se te hará la siguiente pregunta:</span><br />
+<li>Cuando se te solicite, ingresa 'y' para continuar con la instalación.</li>
+<li>Se te pedirá que ingreses una dirección de correo. Ingresa cualquier dirección, pero una que tengas acceso directo para verificar.</li>
+<li>Ingresa 'A' para aceptar los términos de servicio.</li>
+<li>Elige si deseas compartir tu correo con Electronic Frontier Foundation.</li>
+<li>Finalmente se te hará la siguiente pregunta:
 <div class="preboxcontainer">
 <pre class="prebox">-------------------------------------------------------------------------------
 NOTE: The IP of this machine will be publicly logged as having requested this
@@ -70,8 +72,8 @@ Are you OK with your IP being logged?
 (Y)es/(N)o: <span class="code-highlight">y</span></pre>
 </div>
 </li>
-<li><span style="font-weight: 400;">Ingresa 'y' para continuar.</span></li>
-<li><span style="font-weight: 400;">El siguiente mensaje te informará de un nuevo registro TXT que debes agregar a tu dominio.</span><br />
+<li>Ingresa 'y' para continuar.</li>
+<li>El siguiente mensaje te informará de un nuevo registro TXT que debes agregar a tu dominio.
 <div class="preboxcontainer">
 <pre class="prebox">-------------------------------------------------------------------------------
 Please deploy a DNS TXT record under the name
@@ -85,30 +87,30 @@ Before continuing, verify the record is deployed.
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p><span style="font-weight: 400;">NO presiones la tecla Enter todavía. Primero debes configurar este registro en tu panel DreamHost.</span></p>
-<p><span style="font-weight: 400;">La forma más sencilla de hacer esto es hacer clic en </span><span style="font-weight: 400;">CTRL + C</span><span style="font-weight: 400;"> en tu teclado para abortar el proceso de terminal actual. A continuación, copia el registro TXT largo de tu terminal y pégalo en tu panel DreamHost.</span></p>
+<p>NO presiones la tecla <span class="code">Enter</span> todavía. Primero debes configurar este registro en tu panel DreamHost.</p>
+<p>La forma más sencilla de hacer esto es hacer clic en <span class="code">CTRL + C</span> en tu teclado para abortar el proceso de terminal actual. A continuación, copia el registro TXT largo de tu terminal y pégalo en tu panel DreamHost.</p>
 </div>
 </div>
 </li>
-<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Inicia sesión en tu </span><a href="https://panel.dreamhost.com/"><span style="font-weight: 400;">panel de DreamHost</span></a><span style="font-weight: 400;"> y navega hasta la página </span><a href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;"><span style="font-weight: 400;">Administrar Dominios</span></a><span style="font-weight: 400;">.</span></li>
-<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Da click en el enlace </span><span style="font-weight: 400;">DNS</span><span style="font-weight: 400;"> debajo de tu dominio.</span></li>
-<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Con la información anterior, crea un nuevo registro TXT de la siguiente manera:</span>
+<li>Inicia sesión en tu <a href="https://panel.dreamhost.com">panel de DreamHost</a> y navega hasta la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a></li>
+<li>Da click en el enlace <span class="text-link">DNS</span> debajo de tu dominio.</li>
+<li>Con la información anterior, crea un nuevo registro TXT de la siguiente manera:
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/2018-04_dho_add_wildcard_cert_01.png" alt="" /></dd>
 </dl>
-<span style="font-weight: 400;">Ingresa lo siguiente:</span><br />
+Ingresa lo siguiente:
 <ul>
 <li><strong>Name: </strong>— _acme-challenge</li>
 <li><strong>Type: </strong>— TXT</li>
 <li><strong>Value: </strong>— Tzx6GaeSJHe14C6t_M9wTBDe0s1stDMuq2Y15GLFZPE</li>
 </ul>
-<span style="font-weight: 400;">Da click en el botón <strong>Add Record Now!</strong></span><span style="font-weight: 400;">&nbsp;para guardar.</span></li>
-<li><span style="font-weight: 400;">Un mensaje verde que dice "<strong>¡Éxito!</strong>", notificándote que se ha creado el registro. La instancia ahora requiere unos minutos para actualizar este registro. Espera al menos 15 minutos antes de continuar, o abre otro terminal y ejecuta el siguiente comando para confirmar que el registro se ha actualizado.</span><br />
+Da click en el botón <strong>Add Record Now</strong> para guardar.</li>
+<li>Un mensaje verde que dice "¡Éxito!", notificándote que se ha creado el registro. La instancia ahora requiere unos minutos para actualizar este registro. Espera al menos 15 minutos antes de continuar, o abre otro terminal y ejecuta el siguiente comando para confirmar que el registro se ha actualizado.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">dig _acme-challenge.<span class="code-highlight">example.com</span> +short txt</span></pre>
 </div>
 </li>
-<li><span style="font-weight: 400;">De vuelta en el indicador de tu terminal, corre el comando nuevamente. Esta vez, se te indicará que crees un archivo personalizado para 'Let's Encrypt'. Verás lo siguiente:</span><br />
+<li>De vuelta en el indicador de tu terminal, ejecuta el comando nuevamente. Esta vez, se le indicará que cree un archivo personalizado para 'Let's Encrypt'. Verás lo siguiente:
 <div class="preboxcontainer">
 <pre class="prebox">Create a file containing just this data:
 
@@ -121,18 +123,18 @@ http://example.com/.well-known/acme-challenge/EZdd0CuoMENyxMP20TU9QSuX0VGeqSY7vY
 Press Enter to Continue</pre>
 </div>
 </li>
-<li><span style="font-weight: 400;">No hagas clic en la tecla 'Enter' todavía. Abre una segunda terminal. En esa nueva terminal, corre el siguiente comando para crear estos directorios:</span><br />
+<li>No hagas clic en la tecla 'Enter' todavía. Abre una segunda terminal. En esa nueva terminal, corre el siguiente comando para crear estos directorios:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo mkdir -p /var/www/<span class="code-highlight">example.com</span>/.well-known/acme-challenge</span></pre>
 </div>
 </li>
-<li><span class="code"><span style="font-weight: 400;">A continuación, crea el archivo usando </span>nano</span>.
+<li>A continuación, crea el archivo usando <span class="code">nano</span>.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo nano /var/www/<span class="code-highlight">example.com</span>/.well-known/acme-challenge/EQdd0CuoMENyxMP20TU9QSuX0VGeqSY7vYPPHMeM5_s</span></pre>
 </div>
 </li>
-<li><span style="font-weight: 400;">Agrega el código mencionado anteriormente y luego guarda el archivo.</span></li>
-<li><span style="font-weight: 400;">De vuelta en tu primer terminal, haz clic en la tecla 'Enter' en tu teclado para continuar. Verificará el archivo que acabas de agregar, luego nuevamente te indicará que crees el registro txt. Como ya has creado este registro txt, vuelva a hacer clic en 'Enter.</span><br />
+<li>Agrega el código mencionado anteriormente y luego guarda el archivo.</li>
+<li>De vuelta en tu primer terminal, haz clic en la tecla 'Enter' en tu teclado para continuar. Verificará el archivo que acabas de agregar, luego nuevamente te indicará que crees el registro txt. Como ya has creado este registro txt, vuelva a hacer clic en 'Enter.
 <div class="preboxcontainer">
 <pre class="prebox">-------------------------------------------------------------------------------
 Please deploy a DNS TXT record under the name
@@ -162,12 +164,12 @@ IMPORTANT NOTES:
 </ol>
 </div>
 <h2>Configura tu dominio para usar este certificado</h2>
-<p><span style="font-weight: 400;">Navega hasta el directorio </span><strong>/site-available</strong><span style="font-weight: 400;">.</span></p>
 <div class="solvvy-solution">
+<p>Navega hasta el directorio <span class="text-object">/site-available</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">cd /etc/apache2/sites-available</span></pre>
 </div>
-<p><span style="font-weight: 400;">En este directorio hay un archivo llamado </span><strong>example.com.conf</strong><span style="font-weight: 400;"> que ya creaste al configurar el dominio. Edita este archivo y agrega el siguiente código resaltado. Asegúrate de cambiar </span><strong>example.com</strong><span style="font-weight: 400;"> a tu nombre de dominio real.</span></p>
+<p>En este directorio hay un archivo llamado <span class="text-object">example.com.conf</span> que ya creaste al configurar el dominio. Edita este archivo y agrega el siguiente código resaltado. Asegúrate de cambiar <span class="text-object">example.com</span> a tu nombre de dominio real.</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;VirtualHost *:80&gt;
     ServerName <span class="code-highlight">example.com</span>
@@ -188,16 +190,16 @@ IMPORTANT NOTES:
     RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]</span>
 <br />&lt;/VirtualHost&gt;</pre>
 </div>
-<p><span style="font-weight: 400;">Estas nuevas líneas redirigirán la versión <span class="text-object">http</span> de tu sitio a <span class="text-object">https</span>.</span></p>
-<p><span style="font-weight: 400;">Luego, crea un nuevo archivo .conf para tu certificado Let's Encrypt. El nombre será <strong>example.com-le-ssl.conf</strong>. Asegúrate de cambiar 'example.com' a tu nombre de dominio real.</span></p>
+<p>Estas nuevas líneas redirigirán la versión http de tu sitio a <span class="text-object">https</span>.</p>
+<p>Luego, crea un nuevo archivo .conf para tu certificado Let's Encrypt. El nombre será <strong>example.com-le-ssl.conf</strong>. Asegúrate de cambiar 'example.com'a tu nombre de dominio real.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo vim <span class="code-highlight">example.com</span>-le-ssl.conf</span></pre>
 </div>
-<p><span style="font-weight: 400;">En este archivo agrega el siguiente código.</span></p>
+<p>En este archivo agrega el siguiente código.</p>
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p><span style="font-weight: 400;">Asegúrate de cambiar example.com a tu nombre de dominio real.</span></p>
+<p>Asegúrate de cambiar example.com a tu nombre de dominio real.</p>
 </div>
 </div>
 <div class="preboxcontainer">
@@ -221,26 +223,26 @@ IMPORTANT NOTES:
   &lt;/VirtualHost&gt;
 &lt;/IfModule&gt;</pre>
 </div>
-<p><span style="font-weight: 400;">Asegúrate de habilitar este nuevo archivo.</span></p>
+<p>Asegúrate de habilitar este nuevo archivo.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo a2ensite <span class="code-highlight">example.com</span>-le-ssl</span>
 Enabling site example.com-le-ssl</pre>
 </div>
-<p><span style="font-weight: 400;">Finalmente, vuelve a cargar tu servicio Apache para que lea los cambios.</span></p>
+<p>Finalmente, vuelve a cargar tu servicio Apache para que lea los cambios.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo systemctl reload apache2</span></pre>
 </div>
 </div>
 <h2>Configura tus subdominios para usar este certificado</h2>
-<p><span style="font-weight: 400;">Crea archivos adicionales para cualquier subdominio para el que desees utilizar este mismo certificado. Por ejemplo, si deseas que el subdominio <strong>sub1.example.com</strong> también esté protegido por este certificado Wildcard, agrega los archivos denominados </span><strong>sub1.example.com.conf</strong><span style="font-weight: 400;"> y </span><strong>sub1.example.com-le-ssl.conf</strong><span style="font-weight: 400;"> al archivo </span><strong>/etc/apache2/sites-available</strong><span style="font-weight: 400;"> directorio como se muestra arriba.</span></p>
 <div class="solvvy-solution">
+<p>Crea archivos adicionales para cualquier subdominio para el que desees utilizar este mismo certificado. Por ejemplo, si deseas que el subdominio sub1.example.com también esté protegido por este certificado Wildcard, agrega los archivos denominados <strong>sub1.example.com.conf</strong> y&nbsp;<strong>sub1.example.com-le-ssl.conf</strong>&nbsp;al archivo <span class="text-object">/etc/apache2/sites-available</span> directorio como se muestra arriba.</p>
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p><span style="font-weight: 400;">Al editar el archivo sub1.<strong>example.com</strong>-le-ssl.conf, asegúrate de cambiar 'sub1.<strong>example.com</strong>' a tu nombre real de subdominio, excepto por las últimas 2 líneas:</span></p>
-<p><span style="font-weight: 400;">SSLCertificateFile /etc/letsencrypt/live/</span><strong>example.com</strong><span style="font-weight: 400;">/fullchain.pem</span></p>
-<p><span style="font-weight: 400;">SSLCertificateKeyFile /etc/letsencrypt/live/</span><strong>example.com</strong><span style="font-weight: 400;">/privkey.pem</span></p>
-<p><span style="font-weight: 400;">Estos deben seguir apuntando al nombre de dominio principal.</span></p>
+<p>Al editar el archivo sub1.example.com-le-ssl.conf, asegúrate de cambiar <strong>sub</strong>. a tu nombre real de subdominio, excepto por las últimas 2 líneas:</p>
+<p>SSLCertificateFile /etc/letsencrypt/live/<strong>example.com</strong>/fullchain.pem</p>
+<p>SSLCertificateKeyFile /etc/letsencrypt/live/<strong>example.com</strong>/privkey.pem</p>
+<p>Estos deben seguir apuntando al nombre de dominio principal.</p>
 </div>
 </div>
 <div class="preboxcontainer">
@@ -257,14 +259,14 @@ Enabling site example.com-le-ssl</pre>
 &lt;/IfModule&gt;
 </pre>
 </div>
-<p><span style="font-weight: 400;">Asegúrate de habilitar los dos archivos de configuración de tu subdominio:</span></p>
-<p><span style="font-weight: 400;">Asegúrate de habilitar este nuevo archivo y default-ssl</span></p>
+<p>Asegúrate de habilitar los dos archivos de configuración de tu subdominio:</p>
+<p>Asegúrate de habilitar este nuevo archivo y default-ssl</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo a2ensite sub1.<span class="code-highlight">example.com</span>.conf</span>
 <span class="server">[user@instance]$ </span><span class="command">sudo a2ensite sub1.<span class="code-highlight">example.com</span>-le-ssl</span>
 Enabling site example.com-le-ssl</pre>
 </div>
-<p><span style="font-weight: 400;">Finalmente, vuelve a cargar Apache para que conozca las nuevas configuraciones.</span></p>
+<p>Finalmente, vuelve a cargar Apache para que conozca las nuevas configuraciones.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo systemctl reload apache2</span></pre>
 </div>

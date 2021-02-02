@@ -1,29 +1,29 @@
-<h2><strong>Generalidades</strong></h2>
-<p><span style="font-weight: 400;">PHP es un lenguaje de programación popular del lado del servidor que se utiliza para crear sitios web y otras funciones de backend. PHP es una parte importante de los stack de LAMP (Linux, Apache, MySQL, PHP), así como de otras pilas AMP.</span></p>
-<p><span style="font-weight: 400;">Este artículo asume que estás corriendo una instancia basada en Debian o Ubuntu . Visita el siguiente enlace para ver las versiones actuales de PHP.</span></p>
+<h2>Generalidades</h2>
 <div class="solvvy-solution">
+<p>PHP es un lenguaje de programación popular del lado del servidor que se utiliza para crear sitios web y otras funciones de backend. PHP es una parte importante de los stack de LAMP (Linux, Apache, MySQL, PHP), así como de otras pilas AMP.</p>
+<p>Este artículo asume que estás corriendo una instancia basada en Debian o Ubuntu . Visita el siguiente enlace para ver las versiones actuales de PHP.</p>
 <ul>
 <li><a href="https://php.net/supported-versions.php" target="_self" rel="undefined">php.net/supported-versions.php</a></li>
 </ul>
 </div>
 <h2>Instalar PHP (versión por defecto)</h2>
-<p><span style="font-weight: 400;">PHP viene en diferentes paquetes dependiendo de que necesitas específicamente para usarlo. Puedes escoger instalar uno o más de esos paquetes para que se acomoden a tus necesidades, pero el siguiente comando instala el paquete más común y útil para usar PHP inmediatamente.</span></p>
 <div class="solvvy-solution">
+<p>PHP viene en diferentes paquetes dependiendo de que necesitas específicamente para usarlo. Puedes escoger instalar uno o más de esos paquetes para que se acomoden a tus necesidades, pero el siguiente comando instala el paquete más común y útil para usar PHP inmediatamente.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo apt-get install php libapache2-mod-php php-mysql php-curl</span></pre>
 </div>
 </div>
 <h2>Instalar una versión específica de PHP</h2>
-<p><span style="font-weight: 400;">Los comandos de arriba instalan una versión por defecto de PHP configurada con tu versión de Debian o Ubuntu. Por ejemplo, correr este comendo en Ubuntu 17 podrá instalar PHP 7.1. En Ubuntu 16, podrá instalar PHP 7.0.</span></p>
-<p><span style="font-weight: 400;">Si necesitas una versión diference, espefícala en ese comando. Esto muestra como instalar específicamente PHP 7.0.</span></p>
 <div class="solvvy-solution">
+<p>Los comandos de arriba instalan una versión por defecto de PHP configurada con tu versión de Debian o Ubuntu. Por ejemplo, correr este comendo en Ubuntu 17 podrá instalar PHP 7.1. En Ubuntu 16, podrá instalar PHP 7.0.</p>
+<p>Si necesitas una versión diference, espefícala en ese comando. Esto muestra como instalar específicamente PHP 7.0.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo apt-get install php7.1 libapache2-mod-php7.1 php7.1-mysql</span></pre>
 </div>
 </div>
 <h2>¿Como instalar PHP 7.2?</h2>
-<p><span style="font-weight: 400;">La versión 7.2 es la versión más reciente disponible y no disponible en versiones nuevas de los repositorios de Ubuntu. Para instalar, tienes que agregar el repositorio primero, correr la actualización, luego instalar la versión 7.2.</span></p>
 <div class="solvvy-solution">
+<p>La versión 7.2 es la versión más reciente disponible y no disponible en versiones nuevas de los repositorios de Ubuntu. Para instalar, tienes que agregar el repositorio primero, correr la actualización, luego instalar la versión 7.2.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo apt-add-repository ppa:ondrej/php</span>
 <span class="server">[user@instance]:$ </span><span class="command">sudo apt-get update</span>
@@ -31,126 +31,129 @@
 </div>
 </div>
 <h2>Paquetes comunes</h2>
-<p><span style="font-weight: 400;">Puedes ver todos los paquetes PHP actualmente instalados, corriendo el siguiente comando:</span></p>
 <div class="solvvy-solution">
+<p>Puedes ver todos los paquetes PHP actualmente instalados, corriendo el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">dpkg -l | grep php</span></pre>
 </div>
-<p><span style="font-weight: 400;">Hay unos pocos paquetes comunes que son normalmente instalaos con PHP. El mas común es mostrado abajo:</span></p>
+<p>Hay unos pocos paquetes comunes que son normalmente instalaos con PHP. El mas común es mostrado abajo:</p>
 <h3>libapache2-mod-php</h3>
-<p><span style="font-weight: 400;">Éste paquete provee el módulo de PHP para el Apache 2 webserver. Ve el siguiente enlace para más detalles:</span></p>
+<p>Éste paquete provee el módulo de PHP para el Apache 2 webserver. Ve el siguiente enlace para más detalles:</p>
 <ul>
 <li><a href="https://packages.debian.org/stretch/libapache2-mod-php">https://packages.debian.org/stretch/libapache2-mod-php</a></li>
 </ul>
-<p><span style="font-weight: 400;">Si corriste los comandos de arriba, ésto ya fue instalado. Puedes condirmarlo corriendo el siguiente comando:</span></p>
+<p>Si corriste los comandos de arriba, ésto ya fue instalado. Puedes condirmarlo corriendo el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">dpkg -l | grep apache2-mod-php</span>
 ii  libapache2-mod-php  1:7.2+60+ubuntu17.10.1+deb.sury.org+1  all  server-side, HTML-embedded scripting language (Apache 2 module) (default)</pre>
 </div>
 <h3>php-cli</h3>
-<p><span style="font-weight: 400;">Este paquete proporciona el intérprete de comandos /usr/bin/php que se utiliza para probar scripts PHP desde un shell o realizar tareas generales de script de shell. Este paquete es solo para herramientas de línea de comandos y no se puede utilizar para sitios web que se ejecutan en Apache. php-cli se instala cuando instalas una versión de PHP. Si aún no está instalado, puedes instalar usando el siguiente comando:</span></p>
+<p>Este paquete proporciona el intérprete de comandos /usr/bin/php que se utiliza para probar scripts PHP desde un shell o realizar tareas generales de script de shell. Este paquete es solo para herramientas de línea de comandos y no se puede utilizar para sitios web que se ejecutan en Apache. php-cli se instala cuando instalas una versión de PHP. Si aún no está instalado, puedes instalar usando el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo apt-get install -y php-cli</span></pre>
 </div>
-<p><span style="font-weight: 400;">Esto instalará el binario PHP por defecto en el directorio </span>/usr/bin/<span style="font-weight: 400;">. Puedes ver si este paquete está instalado corriendo lo siguiente:</span></p>
+<p>Esto instalará el binario PHP por defecto en el directorio <span class="text-object">/usr/bin/</span> directory. Puedes ver si este paquete está instalado corriendo lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">dpkg -l | grep php-cli</span></pre>
 </div>
-<p><span style="font-weight: 400;">Ve el siguiente sitio para más detalles:</span></p>
+<p>Ve el siguiente sitio para más detalles:</p>
 <ul>
 <li><a href="https://packages.debian.org/es/sid/php/php-cli">https://packages.debian.org/es/sid/php/php-cli</a></li>
 </ul>
 </div>
 <h2>Módulos/extensiones de PHP</h2>
-<p><span style="font-weight: 400;">Si tienes instalado 'php-cli' puedes ver todos los módulos de PHP instalados en el momento corriendo el siguiente comando:</span></p>
 <div class="solvvy-solution">
+<p>Si tienes instalado 'php-cli' puedes ver todos los módulos de PHP instalados en el momento corriendo el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">php -m</span></pre>
 </div>
-<p><span style="font-weight: 400;">Los módulos comunes están listados a continuación, pero puedes ver módulos adicionales para PHP en los siguientes enlaces:</span></p>
-<p><a href="https://packages.debian.org/"><span style="font-weight: 400;">Paquetes de Debian para PHP</span></a></p>
-<p><a href="http://packages.ubuntu.com/"><span style="font-weight: 400;">Paquetes de Ubuntu para PHP</span></a></p>
+<p>Los módulos comunes están listados a continuación, pero puedes ver módulos adicionales para PHP en los siguientes enlaces:</p>
+<p><a class="reference external" href="https://packages.debian.org">Paquetes de Debian para PHP</a></p>
+<p><a class="reference external" href="http://packages.ubuntu.com">Paquetes de Ubuntu para PHP</a></p>
 <h3>Módulos/extensiones de bases de datos PHP</h3>
-<p><span style="font-weight: 400;">MySQL es una de las bases de datos más comunes usadas con PHP, sin embargo, hay paquetes adicionales disponibles para otros motores de bases de datos.</span></p>
-<h4>mysqlnd</h4>
-<p><span style="font-weight: 400;">Este paquete contiene los módulos mysql, mysqli y PDO mysql para PHP usando el controlador nativo MySQL, que es más nuevo y generalmente más rápido. Este módulo se instala con php-mysql. Puedes comprobar si está instalado corriendo siguiente:</span></p>
+<p>MySQL es una de las bases de datos más comunes usadas con PHP, sin embargo, hay paquetes adicionales disponibles para otros motores de bases de datos.</p>
+<h4><strong>mysqlnd</strong></h4>
+<p>Este paquete contiene los módulos mysql, mysqli y PDO mysql para PHP usando el controlador nativo MySQL, que es más nuevo y generalmente más rápido. Este módulo se instala con php-mysql. Puedes comprobar si está instalado corriendo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">php -m | grep mysqlnd</span></pre>
 </div>
-<p><span style="font-weight: 400;">Ve los siguientes enlaces para más detalles:</span></p>
+<p>Ve los siguientes enlaces para más detalles:</p>
 <ul>
-<li style="font-weight: 400;" aria-level="1"><a href="https://dev.mysql.com/downloads/connector/php-mysqlnd/"><span style="font-weight: 400;">Controlador nativo MySQL para PHP</span></a></li>
-<li style="font-weight: 400;" aria-level="1"><a href="http://php.net/manual/en/intro.mysqlnd.php"><span style="font-weight: 400;">mysqlnd en php.net</span></a></li>
+<li><a href="https://dev.mysql.com/downloads/connector/php-mysqlnd/">Controlador nativo MySQL para PHP</a></li>
+<li><a href="http://php.net/manual/en/intro.mysqlnd.php">mysqlnd en php.net</a></li>
 </ul>
 <h4><strong>pgsql</strong></h4>
-<p><span style="font-weight: 400;">Este paquete contiene los módulos pgsql y pdo_pgsql para usar con PostgreSQL.</span></p>
+<p>Este paquete contiene los módulos pgsql y pdo_pgsql para usar con PostgreSQL.</p>
 <ul>
 <li><a href="https://php.net/manual/en/intro.pgsql.php" target="_self" rel="undefined">php.net/manual/en/intro.pgsql.php</a></li>
 </ul>
 <h4><strong>sqlite</strong></h4>
-<p><span style="font-weight: 400;">Este paquete contiene los módulos sqlite3 y pdo_sqlite para trabajar con SQLite.</span></p>
+<p>Este paquete contiene los módulos sqlite3 y pdo_sqlite para trabajar con SQLite.</p>
 <ul>
 <li><a href="https://php.net/manual/en/intro.sqlite3.php" target="_self" rel="undefined">php.net/manual/en/intro.sqlite3.php</a></li>
 </ul>
 <h3>Módulos PHP opcionales</h3>
-<p><span style="font-weight: 400;">Estos módulos agregan funcionalidades adicionales a PHP.</span></p>
+<p>Estos módulos agregan funcionalidades adicionales a PHP.</p>
 <h3>curl</h3>
-<p><span style="font-weight: 400;">El módulo cURL permite descargar de <span class="text-object">HTTP</span>, <span class="text-object">FTP</span> y otras fuentes. Puedes instalar la versión PHP por defecto usando </span><span style="font-weight: 400;">php-curl</span><span style="font-weight: 400;"> o puedes especificar una versión específica de PHP.</span></p>
+<p>El módulo cURL permite descargar de <span class="text-object">HTTP</span>, <span class="text-object">FTP</span> y otras fuentes. Puedes instalar la versión PHP por defecto usando <span class="code">php-curl</span> o puedes especificar una versión específica de PHP.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo apt-get install php7.1-curl</span></pre>
 </div>
 <h3>JSON</h3>
-<p><span style="font-weight: 400;">php-json se instala cuando instalas una versión PHP. Permite a PHP interactuar con datos JSON.</span></p>
+<p>php-json se instala cuando instalas una versión PHP. Permite a PHP interactuar con datos JSON.</p>
 <ul>
 <li><a href="https://php.net/manual/en/intro.json.php" target="_self" rel="undefined">php.net/manual/en/intro.json.php</a></li>
 </ul>
-<p><span style="font-weight: 400;">Corre lo siguiente para instalar (si ya no está instalado).</span></p>
+<p>Corre lo siguiente para instalar (si ya no está instalado).</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo apt-get install php-json</span>
 </pre>
 </div>
 </div>
 <h2>Librerias multimedia</h2>
-<p><span style="font-weight: 400;">libav y ffmpeg y otras de las librerias multimedia más populares de PHP. Ve el siguiente artículo para ver generalidades de las diferencias.</span></p>
 <div class="solvvy-solution">
+<p>libav y ffmpeg y otras de las librerias multimedia más populares de PHP. Ve el siguiente artículo para ver generalidades de las diferencias:</p>
 <ul>
 <li><a href="https://github.com/haasn/mpvhq-old/wiki/FFmpeg-versus-Libav">FFmpeg versus Libav</a></li>
 </ul>
 <h3>libav</h3>
-<p><span style="font-weight: 400;">Libav se bifurcó de FFmpeg en 2011. Es un programa para manejar datos multimedia. Ve los siguientes enlaces para obtener más detalles:</span></p>
+<p>Libav se bifurcó de FFmpeg en 2011. Es un programa para manejar datos multimedia. Ve los siguientes enlaces para obtener más detalles:</p>
 <ul>
 <li><a href="https://libav.org/avconv.html">Documentación avconv</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Libav">Libav en Wikipedia</a></li>
 </ul>
-<p><span style="font-weight: 400;">Puedes instalarlo corriendo el siguiente comando:</span></p>
+<p>Puedes instalarlo corriendo el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo apt-get install libav-tools</span></pre>
 </div>
 <h3>ffmpeg</h3>
-<p><span style="font-weight: 400;">Las bibliotecas ffmpeg y gd se instalarán con este paquete. Estos permiten recuperar metadatos de videos e imágenes, así como también editar algunos frames de video.</span></p>
-<p><span style="font-weight: 400;">Puede instalarlo corriendo el siguiente comando:</span></p>
+<p>Las bibliotecas ffmpeg y gd se instalarán con este paquete. Estos permiten recuperar metadatos de videos e imágenes, así como también editar algunos frames de video.</p>
+<p>Puede instalarlo corriendo el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo apt-get install ffmpeg</span></pre>
 </div>
 <h3>gd</h3>
-<p><span style="font-weight: 400;">La biblioteca GD proporciona funciones de manipulación de imágenes que pueden resultar útiles para algunas aplicaciones.</span></p>
+<p>La biblioteca GD proporciona funciones de manipulación de imágenes que pueden resultar útiles para algunas aplicaciones.</p>
 <ul>
 <li><a href="https://php.net/manual/en/intro.image.php" target="_self" rel="undefined">php.net/manual/en/intro.image.php</a></li>
 </ul>
 <h3>imagick</h3>
-<p><span style="font-weight: 400;">Imagick es una extensión de PHP para crear o modificar imágenes.</span></p>
+<p>Imagick es una extensión de PHP para crear o modificar imágenes.</p>
 <ul>
 <li><a href="https://php.net/manual/en/intro.imagick.php" target="_self" rel="undefined">php.net/manual/en/intro.imagick.php</a></li>
 </ul>
 </div>
-<h2><strong>Archivos de configuración</strong></h2>
-<p><span style="font-weight: 400;">Hay dos archivos de configuración de PHP que son usados para CLI y para los módulos Apache especificamente Cambia &lt;version&gt; a tu versión específica de PHP.</span></p>
+<h2>Archivos de configuración</h2>
+<div class="solvvy-solution">
+<p>Hay dos archivos de configuración de PHP que son usados para CLI y para los módulos Apache especificamente, &nbsp;Change &lt;version&gt; a tu versión específica de PHP.</p>
 <h3>/etc/php/cli/&lt;version&gt;/php.ini</h3>
-<p><span style="font-weight: 400;">El archivo de configuración primario de PHP cuando es ejecutado desde CLI. No tiene <span class="code">memory_limit</span></span><span style="font-weight: 400;">&nbsp;para nada y permite todas las funciones (incluyendo </span><a href="http://php.net/manual/en/ref.pcntl.php"><span style="font-weight: 400;">funciones PHP POSIX PHP</span></a><span style="font-weight: 400;">).</span></p>
+<p>El archivo de configuración primario de PHP cuando es ejecutado desde CLI. No tiene <span class="code">memory_limit</span> para nada y permite todas las funciones (incluyendo <a class="reference external" href="http://php.net/manual/en/ref.pcntl.php">funciones PHP POSIX PHP</a>).</p>
 <h3>/etc/php/&lt;version&gt;/apache2/php.ini</h3>
-<p><span style="font-weight: 400;">El archivo de configuración de PHP cuando es corrido desde el módulo de Apache. Tiene un </span><span style="font-weight: 400;"><span class="code">memory_limit</span></span><span style="font-weight: 400;">&nbsp;configurado y deshabilita todas las funciones relacionadas con las </span><a href="http://php.net/manual/en/ref.pcntl.php"><span style="font-weight: 400;">funciones PHP POSIX</span></a><span style="font-weight: 400;"> por razones de seguridad.</span></p>
+<p>El archivo de configuración de PHP cuando es corrido desde el módulo de Apache. Tiene un <span class="code">memory_limit</span> configurado y deshabilita todas las funciones relacionadas con las <a class="reference external" href="http://php.net/manual/en/ref.pcntl.php">funciones PHP POSIX</a> por razones de seguridad.</p>
+</div>
+<div class="footer">&nbsp;</div>
 <!--DreamCompute Button-->
 <div class="dream-sign-up">
-<h2>Implementa Tus Aplicaciones en Servidores en la Nube Hoy</h2>
+<h2>Desarrolla Tus Aplicaciones en Servidores en la Nube Hoy</h2>
 <div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Suscríbete a DreamCompute</a></div>
 </div>
