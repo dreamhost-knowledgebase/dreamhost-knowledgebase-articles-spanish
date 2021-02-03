@@ -1,13 +1,13 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este artículo te guía a través del proceso de creación de un certificado Wildcard 'Let's Encrypt' en tu dominio alojado en DreamCompute. Con esta configuración, se configura un solo certificado SSL en tu dominio principal (ejemplo.com), pero todos los subdominios bajo (como blog.ejemplo.com) también podrán usar el certificado.</p>
+<p>Este artículo te guía a través del proceso de creación de un certificado Wildcard 'Let's Encrypt' en tu dominio alojado en DreamCompute. Con esta configuración, se configura un solo certificado SSL en tu dominio principal (<strong>ejemplo.com</strong>), pero todos los subdominios bajo (como <strong>blog.ejemplo.com</strong>) también podrán usar el certificado.</p>
 </div>
 <h2>Configurando tu sitio e instancia</h2>
 <div class="solvvy-solution">
 <p>Este artículo asume que ya has hecho lo siguiente:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/215912848-How-to-launch-an-instance-using-the-DreamCompute-dashboard" target="_self" rel="undefined">Lanzado una instancia</a></li>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/115003441752-Adding-a-website-to-DreamCompute">Agregaste tu sitio web principal a DreamCompute</a>&nbsp;(es decir, ejemplo.com)
+<li><a href="https://help.dreamhost.com/hc/es/articles/215912848-C%C3%B3mo-lanzar-una-instancia-usando-el-panel-de-DreamCompute" target="_self" rel="undefined">Lanzado una instancia</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115003441752-Agregar-un-sitio-web-a-DreamCompute" target="_self" rel="undefined">Agregaste tu sitio web principal a DreamCompute</a>&nbsp;(es decir, <strong>ejemplo.com</strong>)
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
@@ -15,7 +15,7 @@
 </div>
 </div>
 </li>
-<li>Siguiendo los mismos pasos, agrega los subdominios que desees alojar en DreamCompute (es decir, blog.ejemplo.com)</li>
+<li>Siguiendo los mismos pasos, agrega los subdominios que desees alojar en DreamCompute (es decir, <strong>blog.ejemplo.com</strong>)</li>
 </ul>
 <p>Si has seguido esos pasos, tu sitio web y sus subdominios ya se resolverán desde la instancia de DreamCompute. Ahora puedes crear el certificado Wildcard para usar con todos esos dominios.</p>
 </div>
@@ -44,12 +44,12 @@ ssl.conf<br />ssl.load</pre>
 <div class="solvvy-solution">
 <p>Ejecuta los siguientes comandos para crear tu certificado Wildcard.</p>
 <ol>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/216201547-Connect-to-your-instance-with-SSH-keys-overview">Inicia sesión en tu instancia</a>.</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216201547-Generalidades-sobre-la-conexi%C3%B3n-a-tu-instancia-con-las-claves-SSH" target="_self" rel="undefined">Inicia sesión en tu instancia</a>.</li>
 <li>Corre los siguientes comandos para instalar un certificado Let's Encrypt.
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Asegúrate de cambiar 'example.com' a tu nombre de dominio real en el siguiente comando.</p>
+<p>Asegúrate de cambiar <strong>example.com</strong> a tu nombre de dominio real en el siguiente comando.</p>
 </div>
 </div>
 <div class="preboxcontainer">
@@ -169,7 +169,7 @@ IMPORTANT NOTES:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">cd /etc/apache2/sites-available</span></pre>
 </div>
-<p>En este directorio hay un archivo llamado <span class="text-object">example.com.conf</span> que ya creaste al configurar el dominio. Edita este archivo y agrega el siguiente código resaltado. Asegúrate de cambiar <span class="text-object">example.com</span> a tu nombre de dominio real.</p>
+<p>En este directorio hay un archivo llamado <span class="text-object">example.com.conf</span> que ya creaste al configurar el dominio. Edita este archivo y agrega el siguiente código resaltado. Asegúrate de cambiar <strong><span class="text-object">example.com</span></strong> a tu nombre de dominio real.</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;VirtualHost *:80&gt;
     ServerName <span class="code-highlight">example.com</span>
@@ -191,7 +191,7 @@ IMPORTANT NOTES:
 <br />&lt;/VirtualHost&gt;</pre>
 </div>
 <p>Estas nuevas líneas redirigirán la versión http de tu sitio a <span class="text-object">https</span>.</p>
-<p>Luego, crea un nuevo archivo .conf para tu certificado Let's Encrypt. El nombre será <strong>example.com-le-ssl.conf</strong>. Asegúrate de cambiar 'example.com'a tu nombre de dominio real.</p>
+<p>Luego, crea un nuevo archivo .conf para tu certificado Let's Encrypt. El nombre será <span class="text-object">example.com-le-ssl.conf</span>. Asegúrate de cambiar <strong>example.com </strong>a tu nombre de dominio real.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo vim <span class="code-highlight">example.com</span>-le-ssl.conf</span></pre>
 </div>
@@ -199,7 +199,7 @@ IMPORTANT NOTES:
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Asegúrate de cambiar example.com a tu nombre de dominio real.</p>
+<p>Asegúrate de cambiar <strong>example.com</strong> a tu nombre de dominio real.</p>
 </div>
 </div>
 <div class="preboxcontainer">
@@ -235,11 +235,11 @@ Enabling site example.com-le-ssl</pre>
 </div>
 <h2>Configura tus subdominios para usar este certificado</h2>
 <div class="solvvy-solution">
-<p>Crea archivos adicionales para cualquier subdominio para el que desees utilizar este mismo certificado. Por ejemplo, si deseas que el subdominio sub1.example.com también esté protegido por este certificado Wildcard, agrega los archivos denominados <strong>sub1.example.com.conf</strong> y&nbsp;<strong>sub1.example.com-le-ssl.conf</strong>&nbsp;al archivo <span class="text-object">/etc/apache2/sites-available</span> directorio como se muestra arriba.</p>
+<p>Crea archivos adicionales para cualquier subdominio para el que desees utilizar este mismo certificado. Por ejemplo, si deseas que el subdominio <strong>sub1.example.com</strong> también esté protegido por este certificado Wildcard, agrega los archivos denominados <span class="text-object">sub1.example.com.conf</span> y&nbsp;<span class="text-object">sub1.example.com-le-ssl.conf</span>&nbsp;al archivo <span class="text-object">/etc/apache2/sites-available</span> directorio como se muestra arriba.</p>
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Al editar el archivo sub1.example.com-le-ssl.conf, asegúrate de cambiar <strong>sub</strong>. a tu nombre real de subdominio, excepto por las últimas 2 líneas:</p>
+<p>Al editar el archivo <span class="text-object">sub1.example.com-le-ssl.conf</span>, asegúrate de cambiar <strong>sub</strong>. a tu nombre real de subdominio, excepto por las últimas 2 líneas:</p>
 <p>SSLCertificateFile /etc/letsencrypt/live/<strong>example.com</strong>/fullchain.pem</p>
 <p>SSLCertificateKeyFile /etc/letsencrypt/live/<strong>example.com</strong>/privkey.pem</p>
 <p>Estos deben seguir apuntando al nombre de dominio principal.</p>

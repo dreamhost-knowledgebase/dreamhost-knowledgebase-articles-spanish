@@ -1,12 +1,14 @@
 <h2>Generalidades</h2>
-<p><a href="https://www.openstack.org/"><span style="font-weight: 400;">OpenStack</span></a><span style="font-weight: 400;"> es un software de código abierto que te permite crear nubes públicas y privadas. Una </span><a href="https://docs.openstack.org/python-openstackclient/latest/"><span style="font-weight: 400;">herramienta de línea de comandos</span></a><span style="font-weight: 400;"> está disponible, lo que facilita el trabajo. Este artículo explica cómo instalar este cliente en tu instancia en la nube.</span></p>
-<p><a href="https://docs.openstack.org/python-ironicclient/pike/cli/osc_plugin_cli.html"><span style="font-weight: 400;">https://docs.openstack.org/python-ironicclient/pike/cli/osc_plugin_cli.html</span></a></p>
-<h2>Instalación</h2>
-<p><span style="font-weight: 400;">El cliente de línea de comandos de OpenStack se puede instalar de varias formas. Este artículo muestra cómo instalarlo ejecutando pip en un virtualenv y cómo instalarlo globalmente.</span></p>
-<h2><span style="font-weight: 400;">Instalar python-dev</span></h2>
-<p><span style="font-weight: 400;">Instala python-dev para poder crear extensiones de Python. Esto es necesario para instalar el openstackclient usando pip.</span></p>
-<p><strong>Si estás usando Python 2:</strong></p>
 <div class="solvvy-solution">
+<p><a href="https://www.openstack.org/">OpenStack</a> es un software de código abierto que te permite crear nubes públicas y privadas. Una <a href="https://docs.openstack.org/python-openstackclient/latest/">herramienta de línea de comandos</a> está disponible, lo que facilita el trabajo. Este artículo explica cómo instalar este cliente en tu instancia de nube.</p>
+<p><a href="https://docs.openstack.org/python-ironicclient/pike/cli/osc_plugin_cli.html">https://docs.openstack.org/python-ironicclient/pike/cli/osc_plugin_cli.html</a></p>
+</div>
+<h2>Instalación</h2>
+<div class="solvvy-solution">
+<p>El cliente de línea de comandos de OpenStack se puede instalar de varias formas. Este artículo muestra cómo instalarlo ejecutando&nbsp;<span class="code">pip</span> en un virtualenv y cómo instalarlo globalmente.</p>
+<h3>Instalar python-dev</h3>
+<p>Instala python-dev para poder crear extensiones de Python. Esto es necesario para instalar el openstackclient usando <span class="code">pip</span>.</p>
+<p><strong>Si estás usando Python 2:</strong></p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">sudo apt-get install python2.7-dev</span></pre>
 </div>
@@ -15,37 +17,37 @@
 <pre class="prebox"><span class="server"><span class="gp">[user@localhost]$</span> </span><span class="command">sudo apt-get install python3-dev</span></pre>
 </div>
 <h3>Instalar pip</h3>
-<p><span style="font-weight: 400;">Primero, corre lo siguiente para ver si pip está instalado:</span></p>
-<p><strong>Si estás corriendo Python 2</strong></p>
+<p>Primero, ejecuta lo siguiente para ver si pip está instalado:</p>
+<p><strong>Si estás ejecutando Python 2</strong></p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server"><span class="gp">[user@localhost]$</span> </span><span class="command">pip -V</span></pre>
 </div>
-<p><strong>Si estás corriendo Python 3</strong></p>
+<p><strong>Si estás ejecutando Python 3</strong></p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server"><span class="gp">[user@localhost]$</span> </span><span class="command">pip3 -V</span></pre>
 </div>
-<p><span style="font-weight: 400;">Si no, instala con lo siguiente:</span></p>
-<p><strong>Si estás corriendo Python 2</strong></p>
+<p>Si no, instala con lo siguiente:</p>
+<p><strong>Si estás ejecutando Python 2</strong></p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">sudo apt-get install python-pip</span></pre>
 </div>
-<p><strong>Si estás corriendo Python 3</strong></p>
+<p><strong>Si estás ejecutando Python 3</strong></p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">sudo apt-get install python3-pip</span></pre>
 </div>
-<h3><strong>Instalar virtualenv</strong></h3>
-<p><span style="font-weight: 400;">Una forma de instalar OpenStack CLI es en un </span><a href="https://help.dreamhost.com/hc/es/articles/215489338-Instalar-y-usar-virtualenv-con-Python-2" target="_self" rel="undefined">entorno virtual</a><span style="font-weight: 400;">. Ahora que pip está instalado, corre lo siguiente para instalar virtualenv:</span></p>
+<h3>Instalar virtualenv</h3>
+<p>Una forma de instalar OpenStack CLI es en un <a href="https://help.dreamhost.com/hc/es/articles/215489338-Instalar-y-usar-virtualenv-con-Python-2" target="_self" rel="undefined">entorno virtual</a>. Ahora que pip está instalado, ejecuta lo siguiente para instalar virtualenv:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server"><span class="gp">[user@localhost]$</span> </span><span class="command">sudo apt-get install python-virtualenv</span></pre>
 </div>
-<h3><strong>Instalar OpenStack CLI</strong></h3>
+<h3>Instalar OpenStack CLI</h3>
 <p><strong>Instalación dentro de un virtualenv</strong></p>
-<p><span style="font-weight: 400;">Este es un método seguro ya que tu instalación se encuentra dentro de un entorno virtual y no toca nada más en tu sistema. Para hacer esto, crea un </span><a href="https://help.dreamhost.com/hc/es/articles/215489338-Instalar-y-usar-virtualenv-con-Python-2" target="_self" rel="undefined">entorno virtual</a><span style="font-weight: 400;">, actívalo e instala el CLI de OpenStack dentro de él.</span></p>
+<p>Este es un método seguro ya que su instalación se encuentra dentro de un entorno virtual y no toca nada más en tu sistema. Para hacer esto,&nbsp;crea un <a href="https://help.dreamhost.com/hc/es/articles/215489338-Instalar-y-usar-virtualenv-con-Python-2" target="_self" rel="undefined">entorno virtual</a>, actívalo e instala el CLI de OpenStack dentro de él.</p>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p><span style="font-weight: 400;">Si estás usando Python 2, corre el comando </span><span style="font-weight: 400;">pip</span><span style="font-weight: 400;">. Si estás corriendo Python 3, corre el comando</span> <span class="code">pip3</span>.</p>
-<p>Este ejemplo crea un nuevo directorio virtualenv llamado venv en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-" target="_self" rel="undefined">directorio de inicio de tu usuario.</a></p>
+<p>Si estás usando Python 2, ejecuta el comando <span class="code">pip</span>. Si estás corriendo Python 3, corre el comando <span class="code">pip3</span>.</p>
+<p>Ésto instala un nuevo directorio virtualenv llamado <span class="text-object">venv</span> en <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-" target="_self" rel="undefined">el directorio home de tu usuario</a>.</p>
 </div>
 </div>
 <div class="preboxcontainer">
@@ -53,9 +55,9 @@
 <span class="server"><span class="gp">[user@localhost]$</span> </span><span class="command">source ~/venv/bin/activate</span>
 <span class="server">(venv)user@localhost$ </span><span class="command">pip install python-openstackclient</span></pre>
 </div>
-<p><span style="font-weight: 400;">Esto instala el cliente en un entorno virtual separado del resto de tu sistema. Para poder utilizar el cliente, tendrás que activar el entorno virtual utilizando el comando de origen anterior.</span></p>
+<p>Esto instala el cliente en un entorno virtual separado del resto de tu sistema. Para poder utilizar el cliente, tendrás que activar el entorno virtual utilizando el comando <span class="code">source</span> de arriba.</p>
 <p><strong>Instalar globalmente</strong></p>
-<p><span style="font-weight: 400;">También lo puedes instalar en tu sistema globalmente usando </span><span style="font-weight: 400;">pip</span><span style="font-weight: 400;"> para Python 2.</span></p>
+<p>También lo puedes instalar en tu sistema globalmente usando <span class="code">pip</span> para Python 2.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">sudo pip install python-openstackclient</span></pre>
 </div>
@@ -66,11 +68,11 @@
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p><span style="font-weight: 400;">Es posible que veas el siguiente error al instalar.</span></p>
+<p>Es posible que veas el siguiente error al instalar.</p>
 <div class="preboxcontainer">
 <pre class="prebox">Command python setup.py egg_info failed with error code 1</pre>
 </div>
-<p><span style="font-weight: 400;">Si es así, corre lo siguiente:</span></p>
+<p>Si es así, corre lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">pip install --upgrade setuptools</span></pre>
 </div>
@@ -78,17 +80,17 @@
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">pip3 install --upgrade setuptools</span></pre>
 </div>
-<p><span style="font-weight: 400;">Inténtalo de nuevo y podrás instalar sin errores.</span></p>
+<p>Inténtalo de nuevo y podrás instalar sin errores.</p>
 </div>
 </div>
-<h2><strong>Configuración</strong></h2>
-<p><span style="font-weight: 400;">La forma más sencilla de configurar el cliente es utilizar el archivo OpenRC. Consulta el siguiente artículo para obtener instrucciones sobre cómo descargar este archivo:</span></p>
-<ul>
-<li style="font-weight: 400;" aria-level="1"><a href="https://help.dreamhost.com/hc/es/articles/228047207-C%C3%B3mo-descargar-tu-archivo-openrc-de-DreamCompute" target="_self" rel="undefined">Cómo descargar tu archivo openrc de DreamCompute</a></li>
-</ul>
-<p><span style="font-weight: 400;">Para utilizar el archivo OpenRC, corre:</span></p>
 </div>
+<h2>Configuración</h2>
 <div class="solvvy-solution">
+<p>La forma más sencilla de configurar el cliente es utilizar el archivo OpenRC. Consulta el siguiente artículo para obtener instrucciones sobre cómo descargar este archivo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/228047207-C%C3%B3mo-descargar-tu-archivo-openrc-de-DreamCompute" target="_self" rel="undefined">Cómo descargar tu archivo openrc de DreamCompute</a></li>
+</ul>
+<p>Para utilizar el archivo OpenRC, corre:</p>
 <div class="highlight-console">
 <div class="highlight">
 <pre><span class="gp">[user@localhost]$</span> <span class="nb">source</span> openrc.sh
@@ -96,9 +98,9 @@
 </div>
 </div>
 </div>
-<h2>Comandos básicos</h2>
-<p><span style="font-weight: 400;">El cliente de línea de comando de OpenStack combina la funcionalidad de todos los demás clientes de línea de comando específicos del servicio de OpenStack, como el cliente nova y el cliente cinder. A continuación, se muestran algunos comandos básicos que son útiles:</span></p>
+<h2><span id="basic-commands">Comandos básicos</span></h2>
 <div class="solvvy-solution">
+<p>El cliente de línea de comando de OpenStack combina la funcionalidad de todos los demás clientes de línea de comando específicos del servicio de OpenStack, como el cliente nova y el cliente cinder. A continuación, se muestran algunos comandos básicos que son útiles:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server list</span>
 +--------------------------------------+-------------+--------+--------------------------------------------------------------+--------------+
@@ -110,7 +112,7 @@
 | 72c4271b-d447-444c-b5f6-0af401ca14d2 | wordpress   | ACTIVE | public=2607:f298:5:101d:f816:3eff:fe08:54c5, 208.113.133.184 | Ubuntu-16.04 |
 +--------------------------------------+-------------+--------+--------------------------------------------------------------+--------------+</pre>
 </div>
-<p><span style="font-weight: 400;">Esto enumera las instancias que tiene en tu inquilino con información básica sobre ellas.</span></p>
+<p>Esto enumera las instancias que tiene en tu inquilino con información básica sobre ellas.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack image list</span>
 +--------------------------------------+---------------+-------------+
@@ -128,7 +130,7 @@
 | b86ca11c-e7c1-4ae1-8580-62c464b19dfd | Ubuntu-18.04  | active      |
 +--------------------------------------+---------------+-------------+</pre>
 </div>
-<p><span style="font-weight: 400;">Aquí se enumeran las imágenes disponibles para tu inquilino.</span></p>
+<p>Aquí se enumeran las imágenes disponibles para tu inquilino.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack volume list</span>
 +--------------------------------------+-----------------------------+-----------+------+---------------------------------+
@@ -138,7 +140,7 @@
 | 2b3ce54e-7445-4d9e-a153-d03b120f1d1a | Meretricious Nibblet Volume | available |   10 |                                 |
 +--------------------------------------+-----------------------------+-----------+------+---------------------------------+</pre>
 </div>
-<p><span style="font-weight: 400;">Esto enumera los volúmenes que has creado.</span></p>
+<p>Esto enumera los volúmenes que has creado.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server create --key-name <span class="code-highlight">my_key</span> --image <span class="code-highlight">Ubuntu-16.04</span> --flavor <span class="code-highlight">100 awesome_server</span></span>
 +--------------------------------------+-----------------------------------------------------+
@@ -173,7 +175,7 @@
 | user_id                              |                                                     |
 +--------------------------------------+-----------------------------------------------------+</pre>
 </div>
-<p><span style="font-weight: 400;">Esto crea una instancia de Ubuntu 16.04 con el flavor gp1.subsonic (ID 100), y usa la clave llamada</span>&nbsp;<code class="docutils literal"><span class="pre">my_key</span></code>.</p>
+<p>Esto crea una instancia de Ubuntu 16.04 con el flavor gp1.subsonic (ID 100), y usa la clave llamada <code class="docutils literal"><span class="pre">my_key</span></code>.</p>
 </div>
 <div class="clearer">&nbsp;</div>
 <div class="footer">&nbsp;</div>

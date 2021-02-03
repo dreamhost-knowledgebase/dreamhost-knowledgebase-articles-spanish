@@ -1,0 +1,92 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Hay muchas razones para cambiar los Nameservers – puede que necesites alojar tu dominio en otro lugar, o quizá quieras correr tu DNS a través de un CDN (content delivery network) como Cloudflare.</p>
+<p>Este artículo explica cómo actualizar los nameservers para los dominios que están registrados con DreamHost. Si tienes el registro en otro lugar, debes hacer el cambio de nameservers con el registrador actual.</p>
+<p>Puedes actualizar los NameServers a través de dos diferentes páginas en el panel de DreamHost.</p>
+<ul>
+<li><a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!/grid-view" target="_blank" rel="noopener">Websites</a></li>
+<li><a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.registration&amp;" target="\">Registrations</a></li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Cuando cambies tus nameservers, todos los DNS apuntarán a la nueva compañía de alojamiento.</p>
+<p>Si quieres alojar correo en una compañía diferente de las que los Nameservers están apuntando, asegúrate de cambiar también los&nbsp;<a href="https://help.dreamhost.com/hc/es/sections/203272218-Registros-DNS-de-correo" target="_self">registros DNS de correo</a>&nbsp;también.</p>
+</div>
+</div>
+</div>
+<h2><span id="Nameservers">Nameservers</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!/grid-view" target="_blank" rel="noopener">Websites</a>.</li>
+<li>Abre la página <span class="panel-page">Administrar</span> de tu sitio.
+<ul>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366-Usar-la-p%C3%A1gina-Websites-del-panel-#cuadricula_o_lista" target="_self" rel="undefined">vista en Cuadrícula</a>, coloca el cursor sobre tu sitio web y haz clic en el botón <strong>Administrar</strong>.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366-Usar-la-p%C3%A1gina-Websites-del-panel-#cuadricula_o_lista" target="_self" rel="undefined">vista en Lista</a>, haz clic en el botón <strong>Administrar</strong> a la derecha de tu sitio web.</li>
+</ul>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-dns-tab.png" alt="DNS tab" width="245" height="73" /></dd>
+</dl>
+</li>
+<li>Haz clic en la pestaña <span class="text-link">DNS</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-button-add-record.png" alt="Add Record button" width="139" height="43" /></dd>
+</dl>
+</li>
+<li>Da clic en el botón<strong>Add Record</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-dns-ns-record-add_01.png" alt="Add NS Record" width="640" height="102" /></dd>
+</dl>
+</li>
+<li>Pasa el cursor sobre la sección <span class="text-section">Registro NS</span> y haz clic en el enlace <span class="text-link">ADD</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-dns-ns-record-add_02.png" alt="Add NS Record" width="508" height="235" /></dd>
+</dl>
+<ul>
+<li><strong>Host</strong>: Ingresa el subdominio de este servidor de nombres específico. La mayoría de las veces, esto es solo <span class="text-object">ns1</span>, <span class="text-object">ns2</span>, o <span class="text-object">ns3</span>.</li>
+<li><strong>Points to</strong>: Ingresa la URL a la que se resolverá el nameserver. Este es el dominio de la empresa a la que apunta. Por ejemplo, el primer nameserver es <span class="text-object">ns1.dreamhost.com</span>. Por lo tanto, debes ingresar dreamhost.com en este campo. Debes solicitar esta información a tu nuevo proveedor de alojamiento.</li>
+</ul>
+</li>
+<li>Da click en el botón <strong>Add Record</strong>&nbsp;para guardar.</li>
+</ol>
+<p>Después de hacer clic en el botón <strong>Add Record</strong> comienza la propagación del nuevo registro. Esto puede tardar hasta 6 horas antes de que el nuevo registro se actualice en línea.</p>
+</div>
+<h2>Usar la página de Registrations para hacer un cambio</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Cualquier cambio que hagas en tu registro de dominio afectará inmediatamente, incluyendo ediciones a WHOIS, Nameservers e información de registrador.</p>
+</div>
+</div>
+<p>Puedes también editar los Nameservers en la página de&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.registration&amp;" target="_blank" rel="noopener">Registrations</a>.&nbsp;Si tu dominio aparece en esta página, está registrado con DreamHost y los Nameservers pueden ser editados.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>La única excepción son los dominios *.uk. Si quieres hacer cambios de la información WHOIS en el panel, verás este mensaje.</p>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/2018-06_panel_domreg-uk-whois-update.png" alt="" /></dd>
+</dl>
+<p>Dando click al enlace, te llevará a 'secure.nominet.org.uk'. Puedes cambiar la información de WHOIS allí.</p>
+</div>
+</div>
+<ol>
+<li>Da click en el botón <strong>Whois Info</strong> localizado al lado del registro de tu dominio marque la casilla debajo de la columna <span class="text-object">Modify Whois?</span> junto al dominio que desea modificar y luego haga clic en el botón <strong>Modify Whois</strong>).</li>
+<li>En la siguiente página, haz clic en la pestaña <span class="text-object">Nameservers</span> y selecciona la opción 'Use another host’s nameservers' para cambiar tus nameservers a otro host ( o puedes seleccionar los nameservers de DreamHost automáticamente haciendo clic en el círculo 'Use DreamHost’s nameservers').<br />
+<dl>
+<dd><em>Si configuraste tus DNS para que apunten a otro alojamiento en vez de usar los de DreamHost, el siguiente mensaje aparecerá en la página de Nameservers:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_change_nameservers_03.png" /></dd>
+</dl>
+</li>
+<li>En los campos que veas, ingresa los nameservers de la otra compañía de alojamiento.</li>
+</ol>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self">Generalidades de los nameservers</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385067--C%C3%B3mo-puedo-crear-nameservers-personalizados-o-vanity-" target="_self">¿Cómo creo un Nameserver personalizado/vanity?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385447--Cómo-apuntar-mis-nameservers-a-mi-host-actual-" target="_self">¿Cómo cambio mis Nameservers a mi alojamiento actual?</a></li>
+</ul>
+</div>
+</div>
+<div class="solvvy-hidden">&nbsp;</div>
