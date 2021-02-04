@@ -103,7 +103,7 @@ allow from <span class="code-highlight">&lt;YOUR_IP_ADDRESS&gt;</span>
 </div>
 <h2>Negar acceso a un dominio específico</h2>
 <div class="solvvy-solution">
-<p>Esto niega acceso a cualquiera que se conecte a tu sitio desde www.example.com. Si alguien da clic en un enlace en example.com que redireccione a tu sitio, ellos verán un error 403 Forbidden error:</p>
+<p>Esto niega acceso a cualquiera que se conecte a tu sitio desde <strong>www.example.com</strong>. Si alguien da clic en un enlace en <strong>example.com</strong> que redireccione a tu sitio, ellos verán un error 403 Forbidden error:</p>
 <div class="preboxcontainer">
 <pre class="prebox">SetEnvIfNoCase Referer "<span class="code-highlight">example.com</span>" bad_referer
 Order Allow,Deny
@@ -111,14 +111,14 @@ Allow from ALL
 Deny from env=bad_referer
 </pre>
 </div>
-<p>Este ejemplo arroja un error 500 Internal Server Error para cualquiera enlazando de example.com:</p>
+<p>Este ejemplo arroja un error 500 Internal Server Error para cualquiera enlazando de <strong>example.com</strong>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine on
 RewriteCond&nbsp;%{HTTP_REFERER} <span class="code-highlight">example\.com</span> [NC,OR]
 RewriteRule .* - [F]
 </pre>
 </div>
-<p>El siguiente ejemplo redirecciona a cualquier visitante conectando de example.com a google.com:</p>
+<p>El siguiente ejemplo redirecciona a cualquier visitante conectando de <strong>example.com</strong> a <strong>google.com</strong>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
 RewriteCond&nbsp;%{HTTP_REFERER} ^<span class="code-highlight">http://example.com/</span>

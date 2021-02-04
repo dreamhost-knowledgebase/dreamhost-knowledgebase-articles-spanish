@@ -1,6 +1,6 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>La autenticación, informe y conformidad de mensajes basados ​​en dominio (DMARC) es una política de correo electrónico entrante construida sobre registros SPF y DKIM, diseñada para detectar y prevenir correos electrónicos fraudulentos.</p>
+<p>La autenticación, informe y conformidad de mensajes basados ​​en dominio (DMARC) es una política de correo entrante construida sobre registros SPF y DKIM, diseñada para detectar y prevenir correos fraudulentos.</p>
 <p>Cuando agregas una política DMARC a tu dominio, eliges informar al destinatario que tus correos electrónicos están protegidos por registros SPF y/o DKIM, y qué hacer si tu política DMARC no se alinea con esos registros.</p>
 <h3>Ejemplo del proceso de envío de DMARC</h3>
 <ol>
@@ -15,8 +15,8 @@
 </div>
 <h2>¿Qué es la alineación?</h2>
 <div class="solvvy-solution">
-<p>La política DMARC verifica el nombre de dominio que figura en el campo From: del mensaje. Luego compara ese dominio con otros nombres de dominio autenticados que figuran en el encabezado del correo electrónico. Si son idénticos, tu política DMARC está alineada.</p>
-<p>De lo contrario, debes comunicarse con tu servidor de correo electrónico y solicitar instrucciones sobre cómo asegurarte de que tus registros estén alineados.</p>
+<p>La política DMARC verifica el nombre de dominio que figura en el campo De: del mensaje. Luego compara ese dominio con otros nombres de dominio autenticados que figuran en el encabezado del correo. Si son idénticos, tu política DMARC está alineada.</p>
+<p>De lo contrario, debes comunicarse con tu servidor de correo y solicitar instrucciones sobre cómo asegurarte de que tus registros estén alineados.</p>
 <h3>Alineamiento estricto y relajado</h3>
 <p>La alineación en tu política puede establecerse como estricta o relajada.</p>
 <ul>
@@ -42,7 +42,7 @@
 <div class="solvvy-solution">
 <ol>
 <li>Configura un registro&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216107737-Generalidades-sobre-SPF">SPF</a>&nbsp;y/o <a href="https://help.dreamhost.com/hc/es/articles/215029758--Qu%C3%A9-son-los-registros-DKIM-">DKIM</a> en tu dominio.</li>
-<li>Envía un correo electrónico a ti mismo (u otra dirección que poseas). Una vez recibido, veas tus encabezados. Verifica la alineación del dominio identificando el dominio listado como la dirección de envío. Se puede ubicar en los siguientes lugares:
+<li>Envía un correo a ti mismo (u otra dirección que poseas). Una vez recibido, veas tus encabezados. Verifica la alineación del dominio identificando el dominio listado como la dirección de envío. Se puede ubicar en los siguientes lugares:
 <ul>
 <li>El Sobre From dominio —&nbsp; <strong>From: admin@example.com</strong></li>
 <li>El caminio de regreso — <strong>&lt;admin@example.com&gt;</strong></li>
@@ -50,7 +50,7 @@
 </ul>
 Los dominios mencionados en todas estas áreas deben ser idénticos, de lo contrario, DMARC fallará en la alineación.</li>
 <li>
-<p><a href="https://help.dreamhost.com/hc/es/articles/215029918--C%C3%B3mo-agrego-una-direcci%C3%B3n-de-correo-electr%C3%B3nico-">Crea dos direcciones de correo electrónico separadas</a> para recibir informes forenses y agregados diarios de DMARC. Se recomienda que cree dos direcciones de correo electrónico, ya que puede recibir una gran cantidad de informes. Por ejemplo:</p>
+<p><a href="https://help.dreamhost.com/hc/es/articles/215029918--C%C3%B3mo-agrego-una-direcci%C3%B3n-de-correo-electr%C3%B3nico-">Crea dos direcciones de correo separadas</a> para recibir informes forenses y agregados diarios de DMARC. Se recomienda que cree dos direcciones de correo, ya que puede recibir una gran cantidad de informes. Por ejemplo:</p>
 <ul>
 <li><span class="text-object">dmarc_agg@example.com</span></li>
 <li><span class="text-object">dmarc_forensic@example.com</span></li>
@@ -58,7 +58,7 @@ Los dominios mencionados en todas estas áreas deben ser idénticos, de lo contr
 </li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215414867#TXT_record">Crea el registro TXT</a>.
 <ol>
-<li>En tu panel, navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a>.</li>
+<li>En tu panel, navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>.</li>
 <li>Haz clic en el enlace <span class="text-link">DNS</span> debajo de tu dominio.</li>
 <li>Cuando se abra la siguiente página, ingresa un nuevo registro TXT como se muestra en el siguiente ejemplo:
 <dl>
@@ -67,7 +67,7 @@ Los dominios mencionados en todas estas áreas deben ser idénticos, de lo contr
 <ul>
 <li><strong>Name</strong>&nbsp;— _dmarc</li>
 <li><strong>Type</strong>&nbsp;— TXT</li>
-<li><strong>Value</strong>&nbsp;— A continuación se muestra una configuración básica que maneja la mayoría de tus necesidades de DMARC. Solo asegúrate de ajustar las direcciones de correo electrónico a las direcciones que creaste anteriormente para recibir informes entrantes.
+<li><strong>Value</strong> — A continuación se muestra una configuración básica que maneja la mayoría de tus necesidades de DMARC. Solo asegúrate de ajustar las direcciones de correo a las direcciones que creaste anteriormente para recibir informes entrantes.
 <div class="preboxcontainer">
 <pre class="prebox">v=DMARC1; p=none; fo=1; rua=mailto:<span class="code-highlight">dmarc_agg@example.com</span>;ruf=mailto:<span class="code-highlight">dmarc_forensic@example.com</span>;pct=100</pre>
 </div>
@@ -95,15 +95,15 @@ Ve la sección a continuación para obtener más detalles sobre las diferentes o
 </tr>
 <tr>
 <td>p=none</td>
-<td>No se debe realizar ninguna acción para los correos electrónicos que fallan la autenticación DMARC.</td>
+<td>No se debe realizar ninguna acción para los correos que fallan la autenticación DMARC.</td>
 </tr>
 <tr>
 <td>p=quarantine</td>
-<td>Si un correo electrónico falla la autenticación DMARC, debe tratarse como sospechoso. Cómo se maneja esto depende del destinatario, por ejemplo, se puede colocar en una carpeta de SPAM.</td>
+<td>Si un correo falla la autenticación DMARC, debe tratarse como sospechoso. Cómo se maneja esto depende del destinatario, por ejemplo, se puede colocar en una carpeta de SPAM.</td>
 </tr>
 <tr>
 <td>p=reject</td>
-<td>Si un correo electrónico falla la autenticación DMARC, el destinatario debe rechazar el correo electrónico durante la transacción SMTP.</td>
+<td>Si un correo falla la autenticación DMARC, el destinatario debe rechazar el correo durante la transacción SMTP.</td>
 </tr>
 </tbody>
 </table>
@@ -207,4 +207,7 @@ Las siguientes etiquetas usan un valor predeterminado si la etiqueta no está co
 <li><a href="https://dmarc.org/overview/" target="_self">dmarc.org</a></li>
 <li><a href="https://en.wikipedia.org/wiki/DMARC">DMARC (Wikipedia)</a></li>
 </ul>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 244px; top: 2736.76px;">
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>

@@ -1,0 +1,66 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En un esfuerzo por ayudar a mantener tu servidor seguro, Telnet se eliminará de la última versión de Ubuntu (<a href="https://help.dreamhost.com/hc/es/articles/360022178852--C%C3%B3mo-preparar-mi-sitio-para-Ubuntu-Bionic-#telnet" target="_self" rel="undefined">Bionic</a>). Si necesitas Telnet, DreamHost recomienda ejecutarlo en tu computador local.</p>
+</div>
+</div>
+<p>Telnet es un protocolo obsoleto que se utiliza para iniciar sesión de forma remota en otra computador o equipo de comunicación a través de una red. El protocolo Telnet no ofrece seguridad. El uso de Telnet envía todas las comunicaciones, incluidas las contraseñas, a través del cable en texto sin formato. Por esta razón, solo se recomienda utilizar <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">SSH</a> en su lugar para correr cualquier comando con datos seguros. Telnet solo debe usarse para propósitos de prueba muy básicos.</p>
+<p>Como se indicó anteriormente, Telnet nunca debe usarse con contraseñas o datos confidenciales, ya que no es seguro. Sin embargo, puedes usar Telnet para ejecutar algunas pruebas básicas en tus servicios DreamHost.</p>
+</div>
+<h2><span id="Probar_la_conexion_al_grupo_del_correo">Probar una conexión a un servidor de correo</span></h2>
+<div class="solvvy-solution">
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo ubicar tu nombre de servidor de correo correcto.&nbsp;</p>
+<ol>
+<li>
+<p>View the following article for instructions on how to locate your correct mail servername.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214918038-Generalidades-de-las-configuraciones-del-cliente-de-correo#nombre-del-servidor" target="_self" rel="undefined">Cómo encontrar el nombre de tu servidor de correo</a></li>
+</ul>
+</li>
+<li>Corre el siguiente comando a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">SSH</a> o en el símbolo del sistema de Windows para probar tu conexión:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">telnet imap.dreamhost.com 143</span></pre>
+</div>
+<p>Si se conecta correctamente, responde con algo como esto:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Trying 64.90.62.162...
+Connected to imap.dreamhost.com.
+Escape character is '^]'.
+* OK [CAPABILITY IMAP4rev1 LITERAL+ SASL-IR LOGIN-REFERRALS ID ENABLE STARTTLS AUTH=PLAIN AUTH=LOGIN] Dovecot ready.
+</pre>
+</div>
+</li>
+<li>Para salir de la sesión Telnet, escribe <span class="code">Ctrl + ]</span> en tu teclado. Esto cambia el símbolo del sistema para que se muestre como <span class="code">telnet&gt;</span>.
+<p>De vuelta en la terminal, escriba la palabra ‘cerrar’ para cerrar la sesiónn.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">telnet&gt; </span><span class="command">close</span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="Windows">Windows</span></h2>
+<div class="solvvy-solution">
+<p>Telnet también se puede ejecutar en tu computador con Windows (suponiendo que lo hayas habilitado). Ve los siguientes artículos para obtener más detalles.</p>
+<ul>
+<li><a href="https://technet.microsoft.com/en-us/library/Bb491013.aspx">Comandos de Telnet</a></li>
+<li><a href="http://windows.microsoft.com/en-us/windows/telnet-commands#1TC=windows-7">Telnet en Windows</a></li>
+</ul>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216560958-Herramientas-Web" target="_self" rel="undefined">Herramientas web</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217213327-Wget" target="_self" rel="undefined">Wget</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216661778-Rsync">Rsync</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215840708-Traceroute" target="_self" rel="undefined">Traceroute</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Telnet">Telnet en Wikipedia</a></li>
+<li><a href="http://linux.about.com/od/commands/l/blcmdl1_telnet.htm">Comandos de Telnet en Linux</a></li>
+</ul>
+</div>

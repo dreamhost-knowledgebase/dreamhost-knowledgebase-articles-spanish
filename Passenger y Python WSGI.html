@@ -72,10 +72,10 @@ application = loadapp('config:/home/path/to/site/production.ini')
 </div>
 <h2><span id="errores-500">Solución alterna de errores 500 con Passenger WSGI</span></h2>
 <div class="solvvy-solution">
-<p>Passenger WSGI en este momento tiene dificultades para tratar con errores. Es decir, cuando tu aplicación WSGI (por ejemplo, pero sin limitarse a, Django) genera una excepción no detectada, Passenger muere, se muestra una página 500 en el navegador y el mensaje de error no se registra en el archivo home/username/logs/sitename/http/error.log. Esto dificulta la depuración.</p>
+<p>Passenger WSGI en este momento tiene dificultades para tratar con errores. Es decir, cuando tu aplicación WSGI (por ejemplo, pero sin limitarse a, Django) genera una excepción no detectada, Passenger muere, se muestra una página 500 en el navegador y el mensaje de error no se registra en el <a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP" target="_self">archivo error.log</a>. Esto dificulta la depuración.</p>
 <p>Una solución es utilizar Python Paste como middleware WSGI entre Passenger y tu aplicación:</p>
 <ol>
-<li>Obtén Paste de aquí: <a href="http://pypi.python.org/pypi/Paste">http://pypi.python.org/pypi/Paste</a>.</li>
+<li>Obtén Paste de aquí: <a href="https://pypi.python.org/pypi/Paste" target="_self" rel="undefined">pypi.python.org/pypi/Paste</a>.</li>
 <li>Descomprime los archivos. Todo lo que necesitas es el directorio <span class="text-object">paste</span>.</li>
 <li>Ponlo en el directorio de tu aplicación (por ejemplo, <span class="text-object">/home/username/sitename/myapp/paste</span>)</li>
 <li>Edita tu archivo <span class="text-object">passenger_wsgi.py</span> para incluir ese directorio en la ruta de Python y luego carga Paste.</li>
