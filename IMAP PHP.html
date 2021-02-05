@@ -1,6 +1,6 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Con el lenguaje de programación PHP, puedes crear&nbsp; <a href="https://help.dreamhost.com/hc/es/articles/215507058-Generalidades-PHP-mail-">formularios de correo</a> simples para enviar correos electrónicos. PHP también tiene un conjunto de funciones IMAP más avanzadas que puede aprovechar para crear formularios de correo electrónico más avanzados. Esto te permite guardar los correos electrónicos enviados y revisar tu bandeja de entrada para ver si hay nuevos mensajes.</p>
+<p>Con el lenguaje de programación PHP, puedes crear <a href="https://help.dreamhost.com/hc/es/articles/215507058-Generalidades-PHP-mail-">formularios de correo</a> simples para enviar correos. PHP también tiene un conjunto de funciones IMAP más avanzadas que puede aprovechar para crear formularios de correo más avanzados. Esto te permite guardar los correos electrónicos enviados y revisar tu bandeja de entrada para ver si hay nuevos mensajes.</p>
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
@@ -10,19 +10,19 @@
 </div>
 <h2><span id="General_notes_on_website_forms">Notas generales sobre formularios de sitios web</span></h2>
 <div class="solvvy-solution">
-<p>Los ejemplos en esta página muestran un mensaje enviado a través del servidor web DreamHost para la dirección de correo electrónico 'De' que se muestra. Debido a esto, el mensaje está sujeto a la política de dominio del remitente:</p>
+<p>Los ejemplos en esta página muestran un mensaje enviado a través del servidor web DreamHost para la dirección de correo 'De' que se muestra. Debido a esto, el mensaje está sujeto a la política de dominio del remitente:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215036058-Resumen-de-la-pol%C3%ADtica-de-dominio-del-remitente-y-suplantaci%C3%B3n-de-identidad-o-spoofing">Política de envío de dominio y Spoofing</a></li>
 </ul>
-<p>Si necesitas utilizar una dirección de correo electrónico externa para el usuario remitente 'De', es posible que desees considerar la posibilidad de configurar un formulario SMTP para el sitio.</p>
-<p>Ten en cuenta que existen límites estrictos de envío al enviar correo electrónico desde un servidor web. Visita el siguiente artículo para obtener más detalles:</p>
+<p>Si necesitas utilizar una dirección de correo externa para el usuario remitente 'De', es posible que desees considerar la posibilidad de configurar un formulario SMTP para el sitio.</p>
+<p>Ten en cuenta que existen límites estrictos de envío al enviar correo desde un servidor web. Visita el siguiente artículo para obtener más detalles:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215730467-Generalidades-sobre-la-cuota-SMTP">Cuota SMTP</a></li>
 </ul>
 </div>
 <h2><span id="Basic_.27mail.28.29.27_function_replacement">Función básica para reemplazar 'mail()'&nbsp;</span></h2>
 <div class="solvvy-solution">
-<p>La función imap_mail() puede reemplazar la función estándar mail() que se usa normalmente para enviar correo electrónico. Los parámetros para ambas funciones son en su mayoría similares.</p>
+<p>La función imap_mail() puede reemplazar la función estándar mail() que se usa normalmente para enviar correo. Los parámetros para ambas funciones son en su mayoría similares.</p>
 <p>Aquí hay un ejemplo básico usando imap_mail():</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
@@ -48,7 +48,7 @@ imap_mail($to, $subject, $body, $headers, $cc, $bcc, $return_path);
 </dl>
 <dl>
 <dt><strong>La dirección de correo ‘From’ o 'De'&nbsp;</strong></dt>
-<dd>Debe configurarse con la dirección de correo electrónico que envía el mensaje. Si no estás utilizando la autenticación SMTP, esta debe ser una dirección de correo electrónico en el mismo dominio desde el que está enviando y debe estar alojada en DreamHost. Si deseas utilizar cualquier otra dirección como 'De', debes utilizar la autenticación SMTP.</dd>
+<dd>Debe configurarse con la dirección de correo que envía el mensaje. Si no estás utilizando la autenticación SMTP, esta debe ser una dirección de correo en el mismo dominio desde el que está enviando y debe estar alojada en DreamHost. Si deseas utilizar cualquier otra dirección como 'De', debes utilizar la autenticación SMTP.</dd>
 </dl>
 <dl>
 <dt><strong>La dirección de correo ‘Reply-To’ o 'Responder a'&nbsp;&nbsp;</strong></dt>
@@ -61,7 +61,7 @@ imap_mail($to, $subject, $body, $headers, $cc, $bcc, $return_path);
 </div>
 <h2><span id="Saving_sent_emails">Guardando correos enviados</span></h2>
 <div class="solvvy-solution">
-<p>La configuración del formulario anterior le permite enviar el mensaje, pero no lo guarda en la carpeta SENT. Si desea ver un registro de todos los correos electrónicos enviados, puede agregar otra función para almacenar el mensaje en la carpeta SENT</p>
+<p>La configuración del formulario anterior le permite enviar el mensaje, pero no lo guarda en la carpeta SENT. Si desea ver un registro de todos los correos enviados, puede agregar otra función para almacenar el mensaje en la carpeta SENT</p>
 <p>Para almacenar el mensaje enviado en la carpeta 'Sent', agrega esta función al archivo PHP. Asegúrate de utilizar el <a href="https://help.dreamhost.com/hc/en-us/articles/214918038#Server_names">nombre de tu servidor de correo</a> para el nombre de host. En este ejemplo es <strong>imap.dreamhost.com</strong>.</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
@@ -92,7 +92,7 @@ imap_close($mbox);
 <h3>Enlaces internos</h3>
 <ul>
 <li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215507058-Generalidades-PHP-mail-">Generalidades PHP mail()</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-env%C3%ADo-correo-PHP-v%C3%ADa-SMTP-">¿Cómo envío correo PHP a través de SMTP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-env%C3%ADo-correo-PHP-v%C3%ADa-SMTP-">¿Cómo enviar correo PHP a través de SMTP?</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215507068-Soluci%C3%B3n-de-problemas-PHP-mail-">Solución de problemas de PHP mail()</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215730437-L%C3%ADmites-de-cuota-SMTP">Límites de cuota SMTP</a></li>
 </ul>

@@ -1,0 +1,137 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>En <a href="https://help.dreamhost.com/hc/es/articles/215525287-Generalidades-sobre-WordPress">WordPress</a>,&nbsp;el archivo wp-config.php es el archivo más importante que, en texto plano, contiene la información de la base de datos (incluidas las contraseñas). Una configuración incorrecta de este archivo puede hacer que un sitio de WordPress se caiga.</p>
+<p>Si no estás familiarizado con esto, lee el <a href="http://codex.wordpress.org/Editing_wp-config.php" target="_self">artículo de WordPress Codex: Edición de wp-config.php</a>&nbsp;antes de empezar.</p>
+</div>
+<h2>¿Dónde se encuentra el archivo wp-config.php?</h2>
+<div class="solvvy-solution">
+<p>Este archivo se encuentra en el directorio de tu sitio de WordPress. Por ejemplo, si instalaste WordPress en tu sitio llamado <strong>example.com</strong>, el archivo se ubicaría en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-de-sitio-web" target="_self">directorio principal example.com</a>. En esa carpeta verás todos tus archivos de WordPress.</p>
+</div>
+<h2>Contenido estándar</h2>
+<div class="solvvy-solution">
+<p>Ciertas configuraciones se colocan en wp-config.php por defecto. Todos estos deben estar allí para que el archivo funcione.</p>
+<h3>Configuraciones de base de datos</h3>
+<p>Las credenciales de la base de datos se encuentran en el panel DreamHost. Vea el artículo de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">credenciales de MySQL</a>&nbsp;para más detalles.</p>
+<p>Las siguientes líneas se agregan al archivo wp-config.php de manera predeterminada. Estas líneas le indican a su instalación dónde encontrar el contenido de su base de datos que es responsable de cargar sus páginas y publicar contenido:</p>
+<div class="preboxcontainer">
+<pre class="prebox">define('DB_NAME', ‘exampledatabase’);
+define('DB_USER', 'exampledbuser');
+define('DB_PASSWORD', ‘database password here’);
+define('DB_HOST', 'mysql.example.com');
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '');
+</pre>
+</div>
+<h3>Autenticación de claves únicas y salts</h3>
+<p>WordPress utiliza claves de seguridad para proteger a los usuarios registrados. Puede generarlos utilizando la&nbsp;<a href="https://api.wordpress.org/secret-key/1.1/salt/">WordPress.org secret-key API.</a>&nbsp;Si no los ve en el archivo, debes agregarlos. Si ha sido pirateado, puedes reemplazarlos. No se perderán los datos.</p>
+<div class="preboxcontainer">
+<pre class="prebox">define('AUTH_KEY',         'hvKlL_)w&amp;k{ybi{4cHV3G9x3t[]!@y$e*jW?Qt@bqkiRlr.Wy8]t6)/*&lt;y1![S!P');
+define('SECURE_AUTH_KEY',  'O=oxZd%3fks%6ne+w+-A|B.`X-YcTCjD`&lt;aF_H-vbQ[vMd4d?C;u,X$@q|t-dE28');
+define('LOGGED_IN_KEY',    'Gm#l.Z8{j/F$s0UqEbptEIi`Rl{ hmmA4]N$UxDw`6t&gt;`HlgC$UP0&gt;-ix? Zak87');
+define('NONCE_KEY',        'N{_@b|dS-L7~C2r*3LbHyx%r[i+z&gt;j|~jY&lt;SN;rSr#QMhiQ.nwrISn!0y,H&gt;2pUc');
+define('AUTH_SALT',        '5w%BS*,%rZ*|L?3sxCQ@-hFBM3aeN$Z0-^fPU1uU|O672X d|~4/I=5LLr.]*N8M');
+define('SECURE_AUTH_SALT', 'o-O }+zw&gt;[{8OUM)]UBcR_TTtwRtPTx+dN$K=zklG2:gJ!Z-{f,17(|65+odw(&amp;6');
+define('LOGGED_IN_SALT',   'rl45Nq@h|Va3P+ML? -r&amp;7`xay)4$a+Zp (#pw!(4C^WV:7[i#jJ@J|JyZmA-NAX');
+define('NONCE_SALT',       'Vnor?.uqj+/`KS+&lt;r]$G_.)gBmbyxI4S|?1+t&lt;jR|+wh[$i%+vvv|KA)E#g?jn.f');
+</pre>
+</div>
+<p>Ve el siguiente enlace para más detalles:</p>
+<ul>
+<li><a href="https://codex.wordpress.org/Editing_wp-config.php#Security_Keys" target="_self">Llaves de seguridad</a></li>
+</ul>
+<h3>Prefijo de base de datos</h3>
+<p>El valor predeterminado aquí es en realidad solo wp_, pero si usas&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215525277-C%C3%B3mo-instalar-WordPress-usando-el-Instalador-de-un-clic" target="_self">instalación de sólo un clic</a>,&nbsp;el prefijo incluye algunas letras y números aleatorios. Siempre debe terminar con un guión bajo, y es mejor si la última letra es en realidad una letra y no un número. Terminar con un número hace cosas graciosas con&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/215525477-WordPress-Multisite-overview">Multisite</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">$table_prefix = 'wp_2hdy121d_';</pre>
+</div>
+</div>
+<h2>Definiciones de lenguaje</h2>
+<div class="solvvy-solution">
+<p>WordPress está actualmente disponible en muchos idiomas además del inglés. Cuando instalas WordPress, tienes la opción de seleccionar tu idioma. Si necesitas cambiarlo más tarde, puedes editar su idioma cambiando la definición de WPLANG.</p>
+<p>En blanco significa inglés:</p>
+<div class="preboxcontainer">
+<pre class="prebox">define('WPLANG',);</pre>
+</div>
+<p>Por ejemplo, si quisieras usar inglés canadiense, sería este:</p>
+<div class="preboxcontainer">
+<pre class="prebox">define('WPLANG', 'en_CA');</pre>
+</div>
+<p>Puedes encontrar una lista completa en&nbsp;<a href="https://translate.wordpress.org/"><span style="font-weight: 400;">https://translate.wordpress.org/</span></a></p>
+<p>Visita la siguiente página para más información:</p>
+<ul>
+<li><a href="https://codex.wordpress.org/WordPress_in_Your_Language" target="_self">WordPress Codex: WordPress en tu Languaje</a></li>
+</ul>
+</div>
+<h2>Modo de depuración</h2>
+<div class="solvvy-solution">
+<p>El modo de depuración está predeterminado en apagado. Consulta el artículo '<a href="https://help.dreamhost.com/hc/es/articles/360029327771-Habilitar-el-registro-de-Debug-de-WordPress" target="_self">abilitación del registro de depuración de WordPress</a>' para obtener instrucciones sobre cómo habilitar y usar esta función.&nbsp;</p>
+<div class="preboxcontainer">
+<pre class="prebox">define('WP_DEBUG', false);</pre>
+</div>
+</div>
+<h2>Agregar defines extra</h2>
+<div class="solvvy-solution">
+<p>Si necesitas agregar líneas adicionales, busca esto:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/* That's all, stop editing! Happy blogging. */</pre>
+</div>
+<p>NUNCA pongas nada debajo de esa línea. Si bien puede funcionar, tiende a causar problemas.</p>
+<p>Aquí hay algunas definiciones comúnmente utilizadas:</p>
+<ul>
+<li>Impide que cualquiera edite complementos/temas desde el Panel de administración:<br />
+<div class="preboxcontainer">
+<pre class="prebox">define( 'DISALLOW_FILE_EDIT', true );
+</pre>
+</div>
+</li>
+<li>Cambia el intervalo de autoguardado para el contenido:<br />
+<div class="preboxcontainer">
+<pre class="prebox">define('AUTOSAVE_INTERVAL', 160 );
+</pre>
+</div>
+</li>
+<li>Deshabilitar revisiones posteriores:<br />
+<div class="preboxcontainer">
+<pre class="prebox">define('WP_POST_REVISIONS', false );
+</pre>
+</div>
+</li>
+<li>Cambia el número de revisiones (el valor predeterminado es ilimitado):
+<div class="preboxcontainer">
+<pre class="prebox">define('WP_POST_REVISIONS', 3);
+</pre>
+</div>
+</li>
+<li>Le dice a JavaScript que no mezcle todos los archivos:<br />
+<div class="preboxcontainer">
+<pre class="prebox">define('CONCATENATE_SCRIPTS', false);
+</pre>
+</div>
+</li>
+</ul>
+<h3>Los complementos también pueden agregar líneas al wp-config.php</h3>
+<p>Ejemplos:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/** Enable W3 Total Cache */
+define('WP_CACHE', true); // Added by W3 Total Cache
+
+/** Enable W3 Total Cache Edge Mode */
+define('W3TC_EDGE_MODE', true); // Added by W3 Total Cache
+</pre>
+</div>
+</div>
+<h2>Reconstrucción</h2>
+<div class="solvvy-solution">
+<p>Si el archivo wp-config.php se ha perdido, puedes reconstruirlo con bastante facilidad. Toma una copia de la muestra de&nbsp;<a href="https://core.trac.wordpress.org/browser/trunk/wp-config-sample.php">WordPress Core</a>.&nbsp;Simplemente completa la configuración de la base de datos y las claves de autenticación y podrá volver a iniciar sesión.</p>
+<p>No tienes que usar las mismas claves/salts, así que no te preocupes por eso. Puedes encontrar la información de tu base de datos <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">en el panel</a>:</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215525287-Generalidades-sobre-WordPress" target="_self">Generalidades de WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_self">Cómo iniciar sesión en tu sitio WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="http://codex.wordpress.org/Editing_wp-config.php" target="_self">WordPress Codex: Editar wp-config.php</a></li>
+<li><a href="https://codex.wordpress.org/WordPress_in_Your_Language" target="_self">WordPress Codex: WordPress en tu Lenguaje</a></li>
+</ul>
+</div>

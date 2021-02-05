@@ -1,0 +1,74 @@
+<h2><span id="How_to_block_IPs">Cómo bloquear IPs</span></h2>
+<div class="solvvy-solution">
+<p>Sigue estos pasos para bloquear una dirección IP</p>
+<ol>
+<li>Ve el artículo <a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">ubicaciones de archivo de configuración Nginx</a> para crear tu directorio local <span class="text-object">/nginx/example.com</span>.</li>
+<li>Crea un archivo llamado <span class="text-object">access.conf</span> en este directorio <span class="text-object">/nginx/example.com</span>.</li>
+<li>Añade los comentarios de las siguientes secciones.</li>
+<li>Asegurate de <a href="https://help.dreamhost.com/hc/es/articles/216454967-Como-recargar-y-reiniciar-Nginx-Solo-para-servidores-dedicados-">recargar Nginx</a> para que los cambios tomen efecto.</li>
+</ol>
+</div>
+<h2><span id="Blocking_an_IP_from_hitting_your_site">Bloquear una IP para que no alcance tu sitio</span></h2>
+<div class="solvvy-solution">
+<div class="preboxcontainer">
+<pre class="prebox">location / {
+   deny 1.2.3.4;
+ }
+</pre>
+</div>
+<dl>
+<dd><em>Esto bloquea la dirección IP&nbsp; <code>1.2.3.4</code> de acceder tu sitio completamente.</em></dd>
+</dl>
+</div>
+<h2><span id="Blocking_an_IP_from_hitting_a_subdirectory">Bloquear una IP de alcanzar un subdirectorio</span></h2>
+<div class="solvvy-solution">
+<div class="preboxcontainer">
+<pre class="prebox">location /subdirectory/ {
+   deny 1.2.3.4;
+ }
+</pre>
+</div>
+</div>
+<h2><span id="Allowing_a_single_IP_while_blocking_all_others">Permitir solo una IP mientras bloqueas todas las demas</span></h2>
+<div class="solvvy-solution">
+<p>Si deseas bloquear el acceso a todas las IPs mientras permites el acceso de una IP especifica para que acceda a tu sitio, usa esto:</p>
+<div class="preboxcontainer">
+<pre class="prebox">location / {
+   allow 9.8.7.6;
+   deny all;
+ }
+</pre>
+</div>
+<dl>
+<dd><em>Esto puede resultar útil si estás trabajando en tu sitio y no deseas que nadie más que tú lo vea.</em></dd>
+</dl>
+</div>
+<h2><span id="Combining_rules">Combinar reglas</span></h2>
+<div class="solvvy-solution">
+<p>También puedes crear y combinar múltiples reglas en tu archivo <code>access.conf</code>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">location /subdir {
+   allow 1.2.3.4;
+   deny all;
+ }
+
+ location / {
+   deny all;
+ }
+</pre>
+</div>
+<dl>
+<dd><em>Lo de arriba permite <code>1.2.3.4</code> navegar <strong>solo</strong> el subdirectorio llamado <span class="text-object">/subdir</span>. Todas las otras IPs están bloqueadas de cualquier lugar en tu sitio.</em></dd>
+</dl>
+<p>Ve la siguiente página para más detalles:</p>
+<ul>
+<li><a href="https://nginx.org/en/docs/http/ngx_http_core_module.html#location" target="_self" rel="undefined">nginx.org/en/docs/http/ngx_http_core_module.html#location</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx">Generalidades Nginx</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades SSH</a></li>
+</ul>
+</div>

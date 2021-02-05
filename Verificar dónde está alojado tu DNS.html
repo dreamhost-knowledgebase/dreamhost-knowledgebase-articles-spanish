@@ -1,0 +1,57 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica cómo verificar dónde están alojados tus namesrevers y registros A. Para obtener una descripción general de DNS, consulta el siguiente artículo.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self">Generalidades de DNS de DreamHost</a></li>
+</ul>
+</div>
+<h2>Usando herramientas en línea para verificar tu DNS</h2>
+<div class="solvvy-solution">
+<p>Hay muchos sitios web disponibles para que puedas verificar tu DNS. Por ejemplo.</p>
+<h3>Búsquedas generales de registros DNS</h3>
+<ul>
+<li><a href="http://centralops.net/co/">Centralops.net</a>&nbsp;– Varias pruebas de DNS</li>
+<li><a href="http://network-tools.com/">Network-tools.com</a>&nbsp;– Varias pruebas de DNS</li>
+<li><a href="http://itools.subhashbose.com/webtools/nslookup.html">Multiple record lookup</a>&nbsp;– Especifica fácilmente de un rango de registros que deseas buscar</li>
+<li><a href="http://www.internic.net/whois.html">Nameserver lookup</a>&nbsp;– Se usa para verificar los detalles de los registros de nameservers</li>
+</ul>
+<h3>Pruebas de propagación de DNS</h3>
+<p>Si acabas de actualizar tu DNS, usa la siguiente herramienta para verificar qué ubicaciones ha actualizado en línea.</p>
+<ul>
+<li><a href="https://www.whatsmydns.net/">whatsmydns.net</a>&nbsp;– Se usa para verificar si tus registros DNS se han propagado en diferentes ubicaciones.</li>
+</ul>
+</div>
+<h2>Verificando el DNS de tu sitio a través de SSH</h2>
+<div class="solvvy-solution">
+<p>A continuación se enumeran varios comandos que puedes correr para verificar los valores DNS de tu sitio. Para correr estos comandos, debes usar un terminal SSH. Ve el artículo de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a>&nbsp;para más detalles.</p>
+<h3>Comprobación de nameservers</h3>
+<p>Este comando verifica dónde están alojados actualmente los nameservers de tu sitio. La opción +short simplifica la salida para que solo veas los nameservers sin información adicional.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">dig ns <span class="code-highlight">example.com</span> +short</span>
+ns2.dreamhost.com.
+ns1.dreamhost.com.
+ns3.dreamhost.com.
+</pre>
+</div>
+<h3>Comprobación de registros A</h3>
+<p>Esto verifica dónde están alojados los registros A (direcciones IP) de tu sitio.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">dig <span class="code-highlight">example.com</span> +short</span>
+173.236.185.214
+<span class="server">[server]$ </span><span class="command">dig <span class="code-highlight">www.example.com</span> +short</span>
+173.236.185.214
+</pre>
+</div>
+<p>Luego puedes correr el comando <span class="code">host</span> para verificar desde dónde está alojada esa IP.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">host 173.236.185.214</span>
+214.185.236.173.in-addr.arpa domain name pointer apache2-emu.tool.dreamhost.com.
+</pre>
+</div>
+<p>La salida de esto es al revés. Por ejemplo, todo el camino a la derecha muestra que la IP está alojada en <strong>dreamhost.com</strong>.</p>
+<p>A la izquierda está el nombre del servidor en DreamHost. Esto muestra que está alojado en el servidor DreamHost llamado <span class="text-object">tool</span>.</p>
+<p>A la izquierda de eso está la instancia específica de apache en la que se llama el sitio <span class="text-object">apache2-emu</span>.</p>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 209px; top: 1047.15px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>

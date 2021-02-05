@@ -1,0 +1,54 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Git es un excelente recurso para el desarrollo web, ya que te permite optimizar las actualizaciones en vivo además de proporcionar una copia de los archivos de tu sitio web.</p>
+<p>Por ejemplo, puedes crear tu sitio web en la computadora de tu hogar y usar Git para enviar una copia de esos archivos a tu servidor web DreamHost. Si algo le sucede a la computadora de tu hogar, aún tienes una copia completa en el servidor web. Luego puedes configurar este repositorio del servidor web para enviar cambios en vivo a tu sitio web.</p>
+</div>
+<h2>Usando Git para impulsar cambios en vivo a tu sitio web</h2>
+<div class="solvvy-solution">
+<p>Primero, sigue todos los pasos en el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216445197-Empujar-tu-repositorio-Git-local-a-un-servidor-de-DreamHost-Linux-Mac-OS-X">Forzar a tu repositorio Git local a un servidor DreamHost — Linux &amp; Mac OS X</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000732471-Empujando-tu-repositorio-Git-local-amun-servidor-DreamHost-Windows">Forzar a tu repositorio Git local a un servidor DreamHost server — Windows</a></li>
+</ul>
+<p>Si seguiste todos los pasos de ese artículo, tu repositorio Git local en tu computador ahora se copia en tu servidor DreamHost (como un repositorio remoto). Pero, esos cambios sólo están en el repositorio remoto.</p>
+<p>Si deseas que tu sitio web en vivo se actualice cuando insertas código en el servidor, puedes agregar un enlace posterior a la recepción. Este paso crea un archivo para copiar actualizaciones desde el repositorio de tu servidor remoto a tu sitio en vivo. Este ejemplo usa un programa editor de texto llamado nano. Visita el artículo <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo por medio de SSH</a> para más información sobre cómo editar un archivo.</p>
+<ol>
+<li>Inicia sesión en tu servidor web vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Asegúrate de estar en tu directorio de repositorio remoto.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/example.com.git</span></pre>
+</div>
+</li>
+<li>Corre <span class="code">nano</span> y crea un archivo llamado <span class="text-object">post-receive</span>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nano hooks/post-receive</span></pre>
+</div>
+</li>
+<li>Agrega este código al archivo. Indica dónde impulsar estos cambios. En este ejemplo, cambia el <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario real de shell</a>, cambia <strong>example.com</strong> a tu sitio web.
+<div class="preboxcontainer">
+<pre class="prebox">#!/bin/sh
+GIT_WORK_TREE=/home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span> git checkout -f</pre>
+</div>
+</li>
+<li>Guarda y cierra tu archivo para volver a tu shell.</li>
+<li>Otorga al archivo derechos de ejecución en la línea de comando del terminal:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod +x hooks/post-receive</span></pre>
+</div>
+</li>
+</ol>
+<p>Ahora, cuando pasas del repositorio de tu computador local al servidor, esos cambios se agregan automáticamente a tu sitio web en vivo.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000677931--Qu%C3%A9-es-un-Git-">¿Qué es Git?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216445317--C%C3%B3mo-configurar-un-repositorio-Git-">¿Cómo configurar un repositorio Git?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000676991-Empujando-tu-repositorio-DreamHost-Git-a-GitHub">Forzar a tu repositorio Git de DreamHost Git a GitHub</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216445197-Empujar-tu-repositorio-Git-local-a-un-servidor-de-DreamHost-Linux-Mac-OS-X">Forzar a tu repositorio Git local a un servidor DreamHost — Linux &amp; Mac OS X</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000732471-Empujando-tu-repositorio-Git-local-amun-servidor-DreamHost-Windows">Forzar a tu repositorio Git local a un servidor — Windows</a></li>
+</ul>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 103px; top: 1078.81px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>

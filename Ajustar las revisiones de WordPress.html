@@ -1,0 +1,67 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p><a href="https://codex.wordpress.org/Revisions">Post Revisions</a> es una característica de WordPress que ha demostrado ser útil ya que el sistema de revisiones almacena un registro de cada borrador guardado o actualización publicada. Si bien estos son muy agradables, algunas bases de datos pueden aumentar si eres propenso a hacer muchos cambios o pasar mucho tiempo creando una publicación. Para ayudar a mantener el tamaño de tu base de datos bajo, lo que mantiene tu instalación rápida, es posible que desees ajustar la cantidad de revisiones que guarda tu sitio.</p>
+</div>
+<h2>Ejecutar una consulta MySQL</h2>
+<div class="solvvy-solution">
+<p>Si no deseas agregar otro plugin a tu instalación de WordPress, puedes ejecutar una consulta SQL simple para eliminar las revisiones.</p>
+<p>Para configurar una consulta SQL:</p>
+<ol>
+<li>Abre tu panel y navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">Bases de Datos MySQL</a>.</li>
+<li>Inicia sesión en phpMyAdmin. Verás tus tablas listadas a la izquierda.</li>
+<li>Haz clic en el nombre de tu base de datos.</li>
+<li>Toma nota del prefijo de la tabla.
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El prefijo de la tabla puede aparecer como "wp_" pero es muy posible tener una cadena aleatoria de letras como "wp_qch9en_".</p>
+</div>
+</div>
+</li>
+<li>En la parte inferior de phpMyAdmin, haz clic en el icono <span class="text-object">Console</span> para abrir la ventana de comandos SQL.
+<dl>
+<dd><em>Se abre la página de comandos SQL:</em></dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/Wp_finetune3.fw.png" alt="Wp finetune3.fw.png" width="645" height="226" /></dd>
+</dl>
+</li>
+<li>Pega el siguiente comando SQL en la ventana SQL:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="command">DELETE FROM wp_posts WHERE post_type = "revision";</span></pre>
+</div>
+</li>
+<li>Para correr el comando, haz clic en <span class="code">CTRL + ENTER</span>.</li>
+</ol>
+<p>Esto eliminará todas las revisiones almacenadas actualmente en la base de datos. Solo asegúrate de ingresar el prefijo de tabla correcto en la consulta. En el ejemplo anterior, el prefijo es solo wp_.</p>
+</div>
+<h2>Desactivar revisiones</h2>
+<div class="solvvy-solution">
+<p>Para evitar que se creen y almacenen revisiones en primer lugar, agrega esta línea a tu archivo wp-config.php después de la información de la base de datos:</p>
+<div class="preboxcontainer">
+<pre class="prebox">define('WP_POST_REVISIONS', false);</pre>
+</div>
+<p>Puedes encontrar el archivo wp-config.php en tu cuenta FTP. Estará en la carpeta principal de tu dominio.</p>
+<p>Si aún deseas guardar algunas revisiones, puedes usar el siguiente código en lugar del anterior:</p>
+<div class="preboxcontainer">
+<pre class="prebox">define('AUTOSAVE_INTERVAL', 120 ); // Default value is 60 seconds. define('WP_POST_REVISIONS', 3); // Number of revisions to save.</pre>
+</div>
+<p>Eso limita el número de revisiones a 3 y cambia el valor de guardado automático a cada 2 minutos. Puedes cambiar esos valores a algo más alto (o más bajo).</p>
+<p>Puedes leer más sobre las revisiones a través del WordPress codex aquí:</p>
+<ul>
+<li><a href="https://codex.wordpress.org/Revisions" target="_self" rel="undefined">codex.wordpress.org/Revisions</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress">Cómo iniciar sesión en tu sitio WordPress</a>&nbsp;</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215525287-Generalidades-sobre-WordPress">Generealidades sobre WordPress</a>&nbsp;</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-plugins-de-WordPress">Administrar plugins de WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300747-Actualizaciones-autom%C3%A1ticas-para-instalaciones-de-WordPress-de-un-clic">Cómo configurar tu instalación de WordPress de un clic para actualizar automaticamente</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214586458-Ajustando-tu-JavaScript-de-WordPress">Ajustar tu JavaScript de WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214586538-Opciones-de-cach%C3%A9-para-WordPress">Opciones de almacenamiento en caché de WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300907-Plugins-de-SPAM-WordPress-">Plugins de SPAM WordPress SPAM</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300867-T%C3%A9cnicas-generales-de-optimizaci%C3%B3n-en-WordPress">Técnicas generales de optimización de WordPress</a></li>
+</ul>
+</div>
