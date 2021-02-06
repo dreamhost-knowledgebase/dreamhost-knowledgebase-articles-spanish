@@ -1,0 +1,130 @@
+<h2>Generalidades</h2>
+<p>Las máquinas VPS que ejecutan Debian Stretch no pueden ejecutar Passenger si el tipo de servidor está configurado en Nginx (en lugar de Apache). Cualquier aplicación previamente configurada para ejecutarse en Nginx con Passenger ya no funcionará después de la actualización a Debian Stretch.</p>
+<p>Un método alternativo para alojar una aplicación en Nginx sin pasajero sería ejecutarla en un servidor HTTP independiente. Esto también debe ejecutarse en un puerto sin privilegios. El proxy se puede habilitar a través del panel DreamHost.</p>
+<p>Este artículo enumera algunos ejemplos simples de cómo crear un servidor independiente para Node, Python y Ruby.</p>
+<h2>Configuración inicial</h2>
+<h3>Paso 1 — Configurar el directorio público</h3>
+<p>Primero, configura el dominio para usar el subdirectorio público como directorio principal del dominio. Consulta el siguiente artículo para obtener instrucciones sobre cómo ajustar el directorio web de tu sitio en el servidor.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360041534491-Changing-the-web-directory-assigned-to-a-domain" target="_self">Cambiar el directorio web asignado a un dominio</a></li>
+</ul>
+<p>Por ejemplo, lo cambiaría a: <strong>example.com/public</strong></p>
+<h3>Paso 2 — Ejecuta la aplicación en un puerto sin privilegios</h3>
+<p>Utiliza las instrucciones a continuación para configurar el script de su aplicación para que se ejecute en un puerto sin privilegios. Este sería un puerto entre 8000 y 65535.</p>
+<div class="alert-warning">
+<p>Los puertos 80 y 443 no se pueden usar, sin embargo, la página <span class="panel-page">Proxy</span> en el panel permite que la aplicación se ejecute sin el número de puerto vinculado a la URL.</p>
+</div>
+<h3>Paso 3 — Configure el dominio en la página Proxy</h3>
+<p>Este paso te permite ejecutar la aplicación sin vincular el número de puerto a la URL.</p>
+<ol>
+<li>Visita la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.proxy" target="_blank" rel="noopener">Proxy</a> en el panel.</li>
+<li>Agrega el dominio en el que se ejecutará la aplicación.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/proxy-domain.png" alt="proxy domain" /></dd>
+</dl>
+</li>
+<li>Selecciona el número de puerto en el que se ejecutará el servidor autónomo.</li>
+<li>Click <strong>Agragar Proxy Server...</strong>.</li>
+</ol>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En todos los ejemplos siguientes, se utiliza el puerto 8002.</p>
+</div>
+</div>
+<h2>Node.js</h2>
+<ol>
+<li>Instala una <a href="https://help.dreamhost.com/hc/en-us/articles/360029083351-Installing-a-custom-version-of-NVM-and-Node-js" target="_self">custom version of Node.js</a>.</li>
+<li>En el directorio de la aplicación (<span class="text-object">example.com</span>), <a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH" target="_self">cree un archivo</a> named <span class="text-object">app.js</span> llamado app.js con el siguiente código:</li>
+</ol>
+<div class="preboxcontainer">
+<pre class="prebox">var http = require("http");
+
+  var server = http.createServer(function (request, response) {
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.end("Hello World From Node");
+  }).listen(8002);</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>La función <span class="code">listen</span> le dice al nodo en qué puerto debe escuchar la aplicación.</p>
+</div>
+</div>
+<p>Inicia el servidor de nodo predeterminado ejecutando el archivo <span class="text-object">app.js</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">node app.js</span></pre>
+</div>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Esto carga el archivo <span class="text-object">app.js</span> solo mientras su sesión SSH actual aún está activa. También puedes usar un paquete como <a href="https://www.npmjs.com/package/forever" target="_self">Forever</a> que te permitiría salir de la sesión SSH mientras continúas ejecutando la aplicación.</p>
+</div>
+</div>
+<p>Visita el dominio (sin el puerto agregado a la URL) y verás que se ejecuta la aplicación.</p>
+<h2>Python</h2>
+<p>Un servidor independiente común que se utiliza para aplicaciones Python es <a href="https://gunicorn.org/" target="_self">Gunicorn</a> inspirado en el servidor Ruby Unicorn.</p>
+<div class="prereqs">
+<p>Primero debes instalar una versión personalizada de Python. Esto te permite crear un virtualenv e instalar módulos personalizados de Python localmente.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115000702772-Installing-a-custom-version-of-Python-3" target="_self">Instalación de una versión personalizada de Python 3</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115000695551-Installing-and-using-virtualenv-with-Python-3" target="_self">Instalación y uso de virtualenv con Python 3</a></li>
+</ul>
+</div>
+<p>Asegúrate de haber <a href="https://help.dreamhost.com/hc/en-us/articles/115000695551-Installing-and-using-virtualenv-with-Python-3" target="_self">activado tu virtualenv</a>. La primera parte de tu símbolo del sistema cambia al nombre de su virtualenv.</p>
+<p>Luego puedes usar <span class="code"><a href="https://help.dreamhost.com/hc/en-us/articles/115000699011-Using-pip3-to-install-Python3-modules" target="_self">pip</a></span> para instalar Gunicorn.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv)[server]$ </span><span class="command">pip3 install gunicorn</span></pre>
+</div>
+<p>A continuación, <a href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH" target="_self">crea un archivo Python</a> para ejecutar el sitio. Este ejemplo se llama <span class="text-object">myapp.py</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv)[server]$ </span><span class="command">vim myapp.py</span></pre>
+</div>
+<p>Agrega el siguiente código al archivo.</p>
+<div class="preboxcontainer">
+<pre class="prebox">def app(environ, start_response):
+  data = b"Hello, World From Gunicorn!"
+  start_response("200 OK", [
+      ("Content-Type", "text/plain"),
+      ("Content-Length", str(len(data)))
+                           ])
+  return iter([data])</pre>
+</div>
+<p>Inicia Gunicorn pasando el puerto # al comando.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv)[server]$ </span><span class="command">GUNICORN_CMD_ARGS="--bind=localhost:8002" gunicorn myapp:app</span></pre>
+</div>
+<p>Visita el dominio y verás 'Hello, World From Gunicorn!'.</p>
+<h2>Ruby</h2>
+<p>Haz <span class="text-object">.gems</span> el directorio de gemas predeterminado para nuestro usuario. Agrega lo siguiente al archivo <span class="text-object">.bash_profile</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">export PATH=$HOME/.gems/bin:$PATH
+export GEM_PATH=$HOME/.gems/</pre>
+</div>
+<p><span class="code">fuente</span> del archivo para cargar la nueva configuración.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">source ~/.bash_profile</span></pre>
+</div>
+<p>A continuación, instale la gema.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">gem install puma</span></pre>
+</div>
+<p>En el directorio de la aplicación, crea un archivo <span class="text-object">config.rb</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">vi config.rb</span></pre>
+</div>
+<p>Agrega lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">app do |env|
+    body = 'Hello, World From Puma'
+    [200, { 'Content-Type' =&gt; 'text/plain', 'Content-Length' =&gt; body.length.to_s
+}, [body]]
+end
+
+bind 'tcp://127.0.0.1:8002'</pre>
+</div>
+<p>Finalmente, inicia el servidor.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">puma -C config.rb</span></pre>
+</div>
+<p>&nbsp;</p>
