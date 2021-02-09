@@ -53,11 +53,11 @@
 <h3>Usar correo electrónico de DreamHost y DNS</h3>
 <p>Si deseas que DreamHost aloje tus direcciones de correo electrónico, primero debes agregarlas al panel de DreamHost. El siguiente artículo proporciona más información sobre cómo configurar rápidamente el correo electrónico:</p>
 <ul>
-<li><a href="/hc/es/articles/217139407-Email-gu%C3%ADa-de-inicio-r%C3%A1pido">Guía de inicio rápido de correo electrónico</a></li>
+<li><a href="/hc/es/articles/217139407-Email-gu%C3%ADa-de-inicio-r%C3%A1pido">Guía de inicio rápido de correo</a></li>
 </ul>
 <p>Si tienes correos electrónicos archivados en tu antiguo host de correo que deseas conservar, puedes transferir esos correos electrónicos a DreamHost</p>
 <ul>
-<li><a href="/hc/es/articles/215730827--C%C3%B3mo-importo-el-correo-electr%C3%B3nico-de-mi-host-anterior-a-mi-servidor-de-correo-DreamHost-">Transferir correos electrónicos</a></li>
+<li><a href="/hc/es/articles/215730827--C%C3%B3mo-importo-el-correo-electr%C3%B3nico-de-mi-host-anterior-a-mi-servidor-de-correo-DreamHost-">Transferir correos</a></li>
 </ul>
 <p>Después de transferir sus correos electrónicos, use el <a class="reference internal" href="#method_1">'Método 1'</a> en las instrucciones de DNS a continuación para cambiar los nameservers a DreamHost.</p>
 <h3>Usar el correo electrónico DreamHost, pero mantener el proveedor de DNS existente</h3>
@@ -78,7 +78,7 @@
 <h3>SSL: Solo DreamPress</h3>
 <p>Si tienes DreamPress, un certificado SSL gratuito Let's Encrypt intenta instalarse automáticamente durante la configuración de DreamPress, sin embargo, esto a menudo falla porque Let’s Encrypt solo funciona cuando el DNS de tu dominio apunta a DreamHost. Si deseas utilizar Let's Encrypt después de haber cambiado el DNS, utiliza el siguiente proceso:</p>
 <ol>
-<li>Remueve el <span class="text-object">HTTPS</span> del dominio yendo a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a> y haciendo clic en el enlace <span class="text-link">https On</span> a la derecha de tu nombre dominio.</li>
+<li>Remueve el <span class="text-object">HTTPS</span> del dominio yendo a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>&nbsp;y haciendo clic en el enlace <span class="text-link">https On</span> a la derecha de tu nombre dominio.</li>
 <li>Ve a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.secure&amp;" target="_blank" rel="noopener">SSL/TLS Certificates</a> y haz clic en el boton <strong>Add</strong> junto a la opción Let's Encrypt SSL.</li>
 <li>Elige tu dominio y marca la casilla para aceptar los términos de Let's Encrypt.</li>
 <li>Cuando hayas finalizado, haz clic en el botón <strong>Add now!</strong>.</li>
@@ -96,7 +96,7 @@
 Puedes minimizar el tiempo que los visitantes pueden ver el sitio antiguo después de cambiar los registros DNS reduciendo el valor del tiempo de vida (TTL) en el dominio. Para reducir el TTL, debes solicitarlo a través de tu proveedor de alojamiento actual para establecer el valor en el período de tiempo más breve que puedan proporcionar.
 <ul>
 <li>Si no te importa la posibilidad de que algunos visitantes habituales carguen el sitio del host anterior durante varias horas, puedes dejar el TTL donde está.</li>
-<li>Si bajas el TTL, debes esperar hasta que haya transcurrido el tiempo TTL actual antes de realizar cualquier cambio de DNS. Para ver com funciona esto, por favor viista el artículo <a href="/hc/en-us/articles/215840248#Adjusting_Time_To_Live_.28TTL.29">Generalidades de propagación de DNS</a>.</li>
+<li>Si bajas el TTL, debes esperar hasta que haya transcurrido el tiempo TTL actual antes de realizar cualquier cambio de DNS. Para ver com funciona esto, por favor viista el artículo <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS#Adjusting_Time_To_Live_.28TTL.29" target="_self" rel="undefined">Generalidades de propagación de DNS</a>.</li>
 </ul>
 <p>Una vez que el DNS se resuelve en DreamHost, debes <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener">contactar al Soporte Técnico</a> para restablecer el TTL en el dominio a 4 horas, lo cual es óptimo. NO se recomienda dejarlo en un TTL más bajo y podría causar problemas de carga del sitio.</p>
 <h3>Cambiar el DNS</h3>
@@ -116,7 +116,7 @@ ns3.dreamhost.com</pre>
 <p>Si tienes subdominios (por ejemplo, <strong>subdominio.example.com</strong>) en tu dominio migrado, cambiar los nameservers hará que ya no funcionen. Si necesitas que los subdominios sigan funcionando en tu host actual, sigue estos pasos:</p>
 <ol>
 <li>Agrega el dominio principal a tu panel DreamHost.</li>
-<li>Crea registros <a href="/hc/en-us/articles/215414867#A_record">DNS personalizados</a> para cada subdominio.</li>
+<li>Crea registros <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS#Adjusting_Time_To_Live_.28TTL.29" target="_self" rel="undefined">DNS personalizados</a> para cada subdominio.</li>
 <li>Al crear el registro de subdominio personalizado, apúntalo a la dirección IP del registro A en tu host actual. Solicita a tu host actual la dirección IP correcta.</li>
 </ol>
 <p>Una vez que esos nuevos registros se actualizan en línea, cualquier visitante que vea el sitio del subdominio es redirigido a tu empresa de alojamiento actual mientras el sitio principal sigue alojado en DreamHost.</p>
@@ -198,7 +198,7 @@ ns3.dreamhost.com</pre>
 <h3>Conservar o crear redireccionamientos de páginas web</h3>
 <p>Ve los siguientes artículos si has creado redireccionamientos de página en tu sitio usando un archivo .htaccess:</p>
 <ul>
-<li><a href="/hc/en-us/articles/215747748-How-can-I-redirect-and-rewrite-my-URLs-with-an-htaccess-file-">Redirecciones y sobre escribir</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215747748--Como-puedo-redireccionar-y-sobreescribir-mis-URL-con-un-archivo-htaccess-" target="_self" rel="undefined">Redirecciones y sobre escribir</a></li>
 <li><a href="https://premium.wpmudev.org/blog/creating-301-redirects-wordpress/" target="_self" rel="undefined">https://premium.wpmudev.org/blog/creating-301-redirects-wordpress/</a></li>
 <li><a href="https://wordpress.org/plugins/search.php?q=seo">https://wordpress.org/plugins/search.php?q=seo</a></li>
 </ul>

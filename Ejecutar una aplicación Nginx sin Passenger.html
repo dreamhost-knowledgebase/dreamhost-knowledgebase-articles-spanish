@@ -6,7 +6,7 @@
 <h3>Paso 1 — Configurar el directorio público</h3>
 <p>Primero, configura el dominio para usar el subdirectorio público como directorio principal del dominio. Consulta el siguiente artículo para obtener instrucciones sobre cómo ajustar el directorio web de tu sitio en el servidor.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/360041534491-Changing-the-web-directory-assigned-to-a-domain" target="_self">Cambiar el directorio web asignado a un dominio</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360041534491-Cambiar-el-directorio-web-asignado-a-un-dominio" target="_self" rel="undefined">Cambiar el directorio web asignado a un dominio</a></li>
 </ul>
 <p>Por ejemplo, lo cambiaría a: <strong>example.com/public</strong></p>
 <h3>Paso 2 — Ejecuta la aplicación en un puerto sin privilegios</h3>
@@ -34,8 +34,8 @@
 </div>
 <h2>Node.js</h2>
 <ol>
-<li>Instala una <a href="https://help.dreamhost.com/hc/en-us/articles/360029083351-Installing-a-custom-version-of-NVM-and-Node-js" target="_self">custom version of Node.js</a>.</li>
-<li>En el directorio de la aplicación (<span class="text-object">example.com</span>), <a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH" target="_self">cree un archivo</a> named <span class="text-object">app.js</span> llamado app.js con el siguiente código:</li>
+<li>Instala una <a href="https://help.dreamhost.com/hc/es/articles/360029083351-Instalar-una-versi%C3%B3n-personalizada-de-NVM-y-Node-js" target="_self" rel="undefined">version personalizada de Node.js</a>.</li>
+<li>En el directorio de la aplicación (<span class="text-object">example.com</span>), <a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self" rel="undefined">crea un archivo</a> llamado <span class="text-object">app.js</span> llamado app.js con el siguiente código:</li>
 </ol>
 <div class="preboxcontainer">
 <pre class="prebox">var http = require("http");
@@ -51,7 +51,7 @@
 <p>La función <span class="code">listen</span> le dice al nodo en qué puerto debe escuchar la aplicación.</p>
 </div>
 </div>
-<p>Inicia el servidor de nodo predeterminado ejecutando el archivo <span class="text-object">app.js</span>.</p>
+<p>Inicia el servidor de nodo predeterminado corriendo el archivo <span class="text-object">app.js</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">node app.js</span></pre>
 </div>
@@ -67,16 +67,16 @@
 <div class="prereqs">
 <p>Primero debes instalar una versión personalizada de Python. Esto te permite crear un virtualenv e instalar módulos personalizados de Python localmente.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/115000702772-Installing-a-custom-version-of-Python-3" target="_self">Instalación de una versión personalizada de Python 3</a></li>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/115000695551-Installing-and-using-virtualenv-with-Python-3" target="_self">Instalación y uso de virtualenv con Python 3</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000702772-Instalar-una-versi%C3%B3n-personalizada-de-Python-3" target="_self" rel="undefined">Instalación de una versión personalizada de Python 3</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3" target="_self" rel="undefined">Instalación y uso de virtualenv con Python 3</a></li>
 </ul>
 </div>
-<p>Asegúrate de haber <a href="https://help.dreamhost.com/hc/en-us/articles/115000695551-Installing-and-using-virtualenv-with-Python-3" target="_self">activado tu virtualenv</a>. La primera parte de tu símbolo del sistema cambia al nombre de su virtualenv.</p>
-<p>Luego puedes usar <span class="code"><a href="https://help.dreamhost.com/hc/en-us/articles/115000699011-Using-pip3-to-install-Python3-modules" target="_self">pip</a></span> para instalar Gunicorn.</p>
+<p>Asegúrate de haber <a href="https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3" target="_self" rel="undefined">activado tu virtualenv</a>. La primera parte de tu símbolo del sistema cambia al nombre de su virtualenv.</p>
+<p>Luego puedes usar <span class="code"><a href="https://help.dreamhost.com/hc/es/articles/115000699011-Usar-pip3-para-instalar-m%C3%B3dulos-de-Python3" target="_self" rel="undefined">pip</a></span> para instalar Gunicorn.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">(venv)[server]$ </span><span class="command">pip3 install gunicorn</span></pre>
 </div>
-<p>A continuación, <a href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH" target="_self">crea un archivo Python</a> para ejecutar el sitio. Este ejemplo se llama <span class="text-object">myapp.py</span>.</p>
+<p>A continuación, <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self" rel="undefined">crea un archivo Python</a> para ejecutar el sitio. Este ejemplo se llama <span class="text-object">myapp.py</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">(venv)[server]$ </span><span class="command">vim myapp.py</span></pre>
 </div>
@@ -128,3 +128,6 @@ bind 'tcp://127.0.0.1:8002'</pre>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">puma -C config.rb</span></pre>
 </div>
 <p>&nbsp;</p>
+<div id="gtx-trans" style="position: absolute; left: 404px; top: 1535.25px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>
