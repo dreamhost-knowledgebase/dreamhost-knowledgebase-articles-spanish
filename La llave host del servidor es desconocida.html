@@ -1,7 +1,7 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60"></div>
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
 <p>Este artículo explica cómo verificar que estás conectandote a un servidor de DreamHost y que tu conexión es segura. Si sigues los pasos en este artículo y los valores de las huellas digitales no son compatibles con lo que se ve en el panel, NO TE CONECTES al servidor. <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">Pónte en contacto con el soporte de DreamHost</a>&nbsp;para que puedan investigar por qué las huellas digitales son diferentes.</p>
 </div>
@@ -17,7 +17,7 @@
 <h2>Verificar las huellas digitales usando un cliente de FTP</h2>
 <div class="solvvy-solution">
 <div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60"></div>
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
 <p>Los siguientes ejemplos deben ser corridos en una terminal de SSH. Vé los siguientes artículos para más información:</p>
 <ul>
@@ -34,12 +34,12 @@
 </dl>
 <p>Por ejemplo:</p>
 <dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2018-06_panel_server_host_keys_01.png" alt=""></dd>
+<dd><img src="https://kbimages.dreamhosters.com/images/2018-06_panel_server_host_keys_01.png" alt="" /></dd>
 </dl>
 <p>Para confirmar que este es el servidor correcto, navega a la página de&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=users.sshkeys&amp;" target="_blank" rel="noopener">SSH Keys</a>.&nbsp;En esa página, verás tu servidor junto con sus huellas digitales compatibles.</p>
 <p>Por ejemplo:</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_server_host_keys_02.png" alt=""></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_server_host_keys_02.png" alt="" /></dd>
 </dl>
 <p>Compara los dos para confirmar que es el mismo servidor. Puedes luego aceptar la alerta e iniciar sesión normalmente.</p>
 </div>
@@ -51,7 +51,7 @@
 </div>
 <p>Esto responde con el número de versión. Hay algunos comandos que NO funcionan si tu versión es menos que 6.8.</p>
 <p>El siguiente ejemplo va a usar las huellas digitales del servidor Compartido llamado batroc:</p>
-<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-11_panel_ssh-keys_verifying-fingerprints_01.png"></p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-11_panel_ssh-keys_verifying-fingerprints_01.png" /></p>
 <h3>Usar OpenSSH versión 7.6p1</h3>
 <p>Un comando común para correr es: FingerprintHash.</p>
 <h4>Ver la huella digital RSA (MD5)</h4>
@@ -96,7 +96,7 @@ ED25519 key fingerprint is <span class="green">SHA256:q3JfuvuldJy5u/ETWHW7HBQ3Zq
 <p>Como está mencionado arriba, el comando 'FingerprintHash' no funciona en OpenSSH con versiones menores que 6.8. Sin embargo, puedes correr ssh-keyscan para descargar la llave pública, luego ver sus huellas digitales.</p>
 <p>Primero, descarga la llave pública del servidor.</p>
 <div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60"></div>
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
 <p>Dependiendo de las versión de OpenSSH que estés usando, solo ciertas llaves se descargarán. Versiones menores a 6.8 por defecto serán MD5.</p>
 </div>
@@ -104,7 +104,7 @@ ED25519 key fingerprint is <span class="green">SHA256:q3JfuvuldJy5u/ETWHW7HBQ3Zq
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh-keyscan batroc.dreamhost.com &gt; batrockeys.pub</span></pre>
 </div>
-<p>Ahora puedes ver las llaves en ese archivo para las huellas digitales. Solo las huellas digitales de las llaves que descargaste se mostrarán. Esto imprime las huellas digitales RSA (MD5) and ECDSA (MD5).</p>
+<p>Ahora puedes ver las llaves en ese archivo para las huellas digitales. Solo las huellas digitales de las llaves que descargaste se mostrarán. Esto imprime las huellas digitales RSA (MD5) y ECDSA (MD5).</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh-keygen -l -f batrockeys.pub</span>
 <span class="green">2048 a1:85:cc:7b:06:c9:14:f3:a8:38:7a:95:76:f1:17:eb</span> batroc.dreamhost.com (RSA)
