@@ -1,0 +1,43 @@
+<h2>Introducción</h2>
+<div class="solvvy-solution">
+<p>Las instancias de DreamCompute se crean con una llave SSH específica que se utiliza para obtener acceso inicial. Esta guía cubre algunos pasos básicos para intentar recuperar los datos y obtener acceso nuevamente si lo deseas.</p>
+</div>
+<h2>Cosas para tener en cuenta</h2>
+<div class="solvvy-solution">
+<ul>
+<li>
+<p class="first"><strong>La dirección IP cambiará</strong></p>
+<p>Para volver a iniciar sesión en una instancia, es necesario volver a crearla. La nueva instancia recibe nuevas direcciones IPv4 e IPv6.</p>
+</li>
+<li>
+<p class="first"><strong>Conoce el tipo de tu instancia</strong></p>
+<p>En general, se puede averiguar si una instancia utilizó un disco de arranque efímero o de volumen consultando la página 'Instances' en el panel de DreamCompute. Allí puedes ver si el nombre de una imagen personalizada o un sistema operativo aparece en la columna <span class="text-object">Image Name</span>. Si aparece uno, la instancia es efímera. Si no lo es, usó un disco de arranque por volumen.</p>
+</li>
+<li>
+<p class="first"><strong>Instancia iniciada por volumen de respaldo</strong></p>
+<p>Cuando se crea una instancia, hay una opción titulada "Delete Volume on Instance Delete". Desafortunadamente, es difícil verificar en qué se configuró esa opción después de la creación. Si se seleccionó "Yes" los datos del volumen se eliminarán de forma permanente cuando se elimine la instancia.</p>
+Para hacer una copia de seguridad, ve a la página <a href="https://iad2.dreamcompute.com/project/instances/">'Compute &gt; Instances'</a>. A la derecha de la instancia, haz clic en el botón <strong>Create Snapshot</strong>. Este snapshot usa una cuota de almacenamiento de volumen, por lo que es posible que debas agregar almacenamiento adicional en el panel DreamHost para obtener más espacio. Una vez que se completa todo este proceso, se puede eliminar el snapshot y reducir la cuota.</li>
+</ul>
+</div>
+<div id="regain-access-to-volume-based-instance">&nbsp;</div>
+<h2>Recuperar el acceso a la instancia basada en volumen</h2>
+<div class="solvvy-solution">
+<ol class="arabic simple">
+<li>Navega a la <a class="reference external" href="https://iad2.dreamcompute.com/project/instances/">página Instances</a> del panel DreamCompute.</li>
+<li>Si no sabes si "Delete Volume on Instance Delete" se estableció en "Yes" para tu instancia cuando se creó, asegúrate de que se haya creado una instantánea. Un&nbsp; snapshot utiliza tanto espacio en disco como el volumen, por lo que si el volumen es de 80 GB, confirma que hay otros 80 GB libres. Puedes asegurarte de que haya suficiente volumen de almacenamiento en la página <a href="https://iad2.dreamcompute.com/project/">Generalidades</a>.</li>
+<li>Toma nota del tamaño de la instancia, el nombre de la instancia, el UUID y el nombre del volumen, y cualquier otra característica que deba conservarse en la nueva instancia.</li>
+<li>Elimina la instancia (esto dejará un volumen disponible).</li>
+<li>Haz clic en el botón <strong>Launch Instance</strong> para <a href="https://help.dreamhost.com/hc/en-us/articles/215912848-How-to-launch-an-instance-using-the-DreamCompute-dashboard">crear una nueva instancia</a>. En la pestaña <span class="text-object">Source</span>, establece <span class="text-object">Select Boot Source</span> en <span class="text-object">Volume</span> y haz clic en el símbolo de la flecha hacia arriba junto al volumen recién disponible de la instancia anterior.</li>
+<li>En la pestaña <span class="text-object">Key Pair</span>, seleciona la <a href="https://help.dreamhost.com/hc/en-us/articles/115001736691-How-to-create-a-Key-pair-overview">Llave par para ser inyectada por el usuario predeterminado</a>. Si no hay claves válidas disponibles, puedes usar los botones <strong>Create Key Pair</strong> o <strong>Import Key Pair</strong> para asociar un nuevo par de claves con tu proyecto (y esta instancia).</li>
+<li>Cuando hayas terminado de personalizar la instancia, haz clic en el botón <strong>Launch</strong> en la parte inferior derecha.</li>
+<li>Una vez que la nueva instancia se ha reiniciado, intenta iniciar sesión con el <a class="reference external" href="https://help.dreamhost.com/hc/en-us/articles/228377408-How-to-find-the-default-user-of-an-image">nombre de usuario predeterminado</a> y la nueva <a href="https://help.dreamhost.com/hc/en-us/articles/115001754711-Locating-the-IP-Address-of-your-instance">dirección IP</a>.</li>
+<li>Si todo parece correcto y se ha restaurado el acceso, debes eliminar el snapshot de volumen realizado en el paso #2 para recuperar la cuota de almacenamiento de volumen.</li>
+</ol>
+</div>
+<div class="clearer">&nbsp;</div>
+<div class="footer">&nbsp;</div>
+<!--DreamCompute Button-->
+<div class="dream-sign-up">
+<h2>Despliega tus aplicaciones en servidores en la nube hoy</h2>
+<div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Suscríbete para DreamCompute</a></div>
+</div>

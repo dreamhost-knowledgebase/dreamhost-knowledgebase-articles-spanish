@@ -11,7 +11,7 @@
 </div>
 </div>
 </div>
-<h2 class="subheader">Configurando el plugin WP Mail SMTP</h2>
+<h2 class="subheader">Configurar el plugin WP Mail SMTP</h2>
 <div class="solvvy-solution">
 <ol>
 <li>En el panel de WordPress, haz clic en 'Plugins &gt; Add New' en el panel izquierdo.</li>
@@ -53,11 +53,47 @@
 <li>Haz clic en el botón&nbsp;<strong>Save Settings</strong>.</li>
 </ol>
 <p>Ahora debes configurar tus ajustes dentro de tu cuenta de Google.</p>
-<h2>Permitiendo que GMAIL envíe desde tu aplicación de correo</h2>
+<h2>Permitir que GMAIL envíe desde tu aplicación de correo</h2>
 <p>Ahora debes permitir que Google envíe correo desde tu sitio WordPress. Puedes hacer esto al habilitar la autenticación OAuth2 en tu cuenta de Google.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360029702631-Habilitar-el-API-OAuth-2-para-usar-con-tu-plugin-Mail-SMTP-de-WordPress" target="_self">Habilitar el API OAuth 2 para usar con tu plugin Mail SMTP de WordPress</a></li>
 </ul>
+</div>
+<h2 class="subheader">Agregar código para esconder tus credenciales</h2>
+<div class="solvvy-solution">
+<p>Las instrucciones anteriores agregan tus credenciales de Google al panel de WordPress. Para asegurar aún más tus credenciales, el complemento recomienda que agregues código a tu archivo wp-config.php en su lugar. Ve la siguiente página para más detalles.</p>
+<ul>
+<li><a href="https://wpmailsmtp.com/docs/how-to-secure-smtp-settings-by-using-constants/#google" target="_blank" rel="noopener">Cómo proteger las configuraciones SMTP usando constantes</a></li>
+</ul>
+<h3>Agregar las constantes a tu archivo wp-config.php.</h3>
+<ol>
+<li>Inicia sesión en tu servidor via <a href="https://help.dreamhost.com/hc/en-us/articles/115000675027-FTP-overview-and-credentials" target="_self">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview" target="_self">SSH</a>.</li>
+<li>Usa uno de los siguientes artículos para editar tu archivo wp-config.php.
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115000098272-Creating-and-editing-a-file-via-FTP">Crear y editar archivos vía FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH">Crear y editar un archivo vía SSH</a></li>
+</ul>
+</li>
+<li>Baja en este archivo hasta la siguiente línea:
+<p><strong>/* That's all, stop editing! Happy blogging. */</strong></p>
+</li>
+<li>Agrega las siguientes líneas justo arriba de ésta línea.
+<div class="preboxcontainer">
+<pre class="prebox">define( 'WPMS_ON', true );
+define( 'WPMS_GMAIL_CLIENT_ID', '<span class="code-highlight">********************.apps.googleusercontent.com</span>');
+define( 'WPMS_GMAIL_CLIENT_SECRET', '<span class="code-highlight">**********************</span>');
+define( 'WPMS_MAILER', 'gmail' );
+</pre>
+</div>
+</li>
+<li>Las únicas partes que necesitas cambiar son <span class="code">WPMS_GMAIL_CLIENT_ID</span> y <span class="code">WPMS_GMAIL_CLIENT_SECRET</span>.</li>
+<li>Guarda el archivo.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/wp-smtp-gmail_credentials.png" alt="wp mail smtp password" height="" /></dd>
+</dl>
+</li>
+<li>Si ves la página del complemento ahora, verás que no se puede acceder a tus credenciales.</li>
+</ol>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">

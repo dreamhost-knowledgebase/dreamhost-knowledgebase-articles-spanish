@@ -2,7 +2,7 @@
 <div class="solvvy-solution">
 <p>WordPress tiene varios plugins SMTP que puedes usar para forzar cualquier dirección FROM (desde) que desees. Esto es importante por dos motivos principales:</p>
 <ul>
-<li>Te permite enviar correos electrónicos directamente a través de tu servidor de correo, en lugar del servidor web. Esto ayuda a evitar problemas con la&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215036058-Resumen-de-la-pol%C3%ADtica-de-dominio-del-remitente-y-suplantaci%C3%B3n-de-identidad-o-spoofing" target="_self">política de dominio de remitente (SPF) y la suplantación de identidad (Spoofing)</a>.</li>
+<li>Te permite enviar correos directamente a través de tu servidor de correo, en lugar del servidor web. Esto ayuda a evitar problemas con la <a href="https://help.dreamhost.com/hc/es/articles/215036058-Resumen-de-la-pol%C3%ADtica-de-dominio-del-remitente-y-suplantaci%C3%B3n-de-identidad-o-spoofing" target="_self">política de dominio de remitente (SPF) y la suplantación de identidad (Spoofing)</a>.</li>
 <li>Te permite enviar correo electrónico desde otro servidor de correo electrónico. Por ejemplo, puedes usar tu dirección de GMAIL como el correo electrónico FROM en lugar de tu dirección de DreamHost.</li>
 </ul>
 <p>Una opción de plugin popular es WP Mail SMTP. Este artículo te explica como configurar este plugin.</p>
@@ -71,12 +71,14 @@
 </div>
 <h2>Anadir código para esconder tu contraseña</h2>
 <div class="solvvy-solution">
-<p>Las instrucciones de arroba añaden tu contraseña al panel de WordPress y base de datos en texto plano. Esto queire decir que si otr administrador de WordPress tiene acceso a tu panel, ellos podrán ver tu contraseña</p>
-<p>El plugin recomienda que agregues código a tu archivo wp-config.php para proteger tus credenciales. Consulta la página siguiente para obtener más detalles.</p>
+<p>Las instrucciones anteriores agregan tu contraseña al panel de WordPress. Para asegurar aún más tus credenciales, el complemento recomienda que agregues código a tu archivo wp-config.php en su lugar. Ve la página siguiente para más detalles.</p>
+<ul>
 <ul>
 <li><a href="https://wpmailsmtp.com/docs/how-to-secure-smtp-settings-by-using-constants/" target="_blank" rel="noopener">Cómo proteger la configuración de SMTP mediante el uso de constantes</a></li>
 </ul>
-<h3>Agregando las constantes a tu archivo wp-config.php</h3>
+</ul>
+<h3>Agregar las constantes a tu archivo wp-config.php</h3>
+<ul>
 <ol>
 <li>Inicia sesión en tu servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
 <li>Utiliza uno de los siguientes artículos para editar tu archivo wp-config.php.<br />
@@ -90,19 +92,26 @@
 </li>
 <li>Agrega las siguientes líneas justo encima de esta línea.<br />
 <div class="preboxcontainer">
-<pre class="prebox">define( 'WPMS_ON', true ); 
+<pre class="prebox">define( 'WPMS_ON', true );
+define( 'WPMS_SMTP_HOST', 'smtp.dreamhost.com' ); 
+define( 'WPMS_SMTP_PORT', 587 ); 
+define( 'WPMS_SSL', 'tls' ); 
 define( 'WPMS_SMTP_AUTH', true ); 
-define( 'WPMS_SMTP_PASS', '<span class="code-highlight">contraseña_de_tu_correo</span>' );</pre>
+define( 'WPMS_SMTP_USER', '<span class="code-highlight">email@example.com</span>' );
+define( 'WPMS_SMTP_PASS', '<span class="code-highlight">********</span>' );
+define( 'WPMS_SMTP_AUTOTLS', true );
+define( 'WPMS_MAILER', 'smtp' );</pre>
 </div>
 </li>
-<li>La unica parque que necesitas cambiar es&nbsp;contraseña_de_tu_correo.</li>
+<li>La unica parque que necesitas cambiar es <span class="code">WPMS_SMTP_USER</span> y <span class="code">WPMS_SMTP_PASS</span>.</li>
 <li>Guarda el archivo<br />
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/wp-mail-smtp-password.png" alt="wp mail smtp password" /></dd>
 </dl>
 </li>
-<li>Si ves la página del plugin ahora, verás que no se puede acceder a tu contraseña.</li>
+<li>Si ves la página del plugin ahora, verás que las credenciales no son accesibles.</li>
 </ol>
+</ul>
 </div>
 <h2>Probando el plugin</h2>
 <div class="solvvy-solution">
