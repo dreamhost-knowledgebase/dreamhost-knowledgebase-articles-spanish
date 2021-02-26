@@ -1,0 +1,162 @@
+<h2>Crear una imagen de OpenStack a partir de un archivo de imagen ISO</h2>
+<div class="solvvy-solution">
+<p>DreamCompute permite utilizar archivos de imagen ISO en la creación de instancias. El primer paso es importar el archivo .iso al servicio de imágenes Glance. Esto se puede hacer usando el comando <span class="code">creador de imágenes de penstack</span> con los siguientes parámetros.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack image create \
+    --private \
+    --container-format bare \
+    --disk-format iso \
+    --file <span class="code-highlight">ubuntu-17.04-server-amd64.iso</span> \
+    <span class="code-highlight">ubuntu-17.04-server-amd64-iso</span></span>
++------------------+------------------------------------------------------+
+| Field            | Value                                                |
++------------------+------------------------------------------------------+
+| checksum         | 4672ce371fb3c1170a9e71bc4b2810b9                     |
+| container_format | bare                                                 |
+| created_at       | 2017-05-27T13:22:49Z                                 |
+| disk_format      | iso                                                  |
+| file             | /v2/images/b840f7f6-7fd8-47f9-848a-...               |
+| id               | b840f7f6-7fd8-47f9-848a-9e9422925cb2                 |
+| min_disk         | 0                                                    |
+| min_ram          | 0                                                    |
+| name             | ubuntu-17.04-server-amd64-iso                        |
+| owner            | USER_ID                                              |
+| protected        | False                                                |
+| schema           | /v2/schemas/image                                    |
+| size             | 718274560                                            |
+| status           | active                                               |
+| tags             |                                                      |
+| updated_at       | 2017-05-27T13:23:17Z                                 |
+| virtual_size     | None                                                 |
+| visibility       | private                                              |
++------------------+------------------------------------------------------+</pre>
+</div>
+<p>En este comando, <span class="text-object">ubuntu-17.04-server-amd64.iso</span> es la imagen de ISO, y <span class="text-object">ubuntu-17.04-server-amd64-iso</span> es el nombre de la nueva imagen.</p>
+</div>
+<h2>Reiniciar una instancia desde una imagen de Openstack basada en ISO</h2>
+<div class="solvvy-solution">
+<p>El siguiente paso es lanzar una instancia temporal que se utilizará para instalar/configurar el sistema operativo. Haz esto con el comando <span class="code">openstack server create</span> usando los siguientes parámetros.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server create \
+    --image <span class="code-highlight">ubuntu-17.04-server-amd64-iso</span> \
+    --nic net-id = <span class="code-highlight">NETWORK_UUID</span> \
+    --flavor 100 <span class="code-highlight">ubuntu-17.04-server-amd64-installer</span></span>
++--------------------------------------+----------------------------------+
+| Field                                | Value                            |
++--------------------------------------+----------------------------------+
+| OS-DCF:diskConfig                    | MANUAL                           |
+| OS-EXT-AZ:availability_zone          | iad-2                            |
+| OS-EXT-STS:power_state               | 0                                |
+| OS-EXT-STS:task_state                | scheduling                       |
+| OS-EXT-STS:vm_state                  | building                         |
+| OS-SRV-USG:launched_at               | None                             |
+| OS-SRV-USG:terminated_at             | None                             |
+| accessIPv4                           |                                  |
+| accessIPv6                           |                                  |
+| addresses                            |                                  |
+| adminPass                            | SLZV7QgA7ick                     |
+| config_drive                         |                                  |
+| created                              | 2017-05-27T13:27:42Z             |
+| flavor                               | gp1.semisonic (50)               |
+| hostId                               |                                  |
+| id                                   | INSTANCE_ID                      |
+| image                                | ubuntu-17.04-server-amd64-iso    |
+| key_name                             |                                  |
+| name                                 | INSTANCE_NAME                    |
+| os-extended-volumes:volumes_attached | []                               |
+| progress                             | 0                                |
+| project_id                           | PROJECT_ID                       |
+| properties                           |                                  |
+| security_groups                      | [{u'name': u'default'}]          |
+| status                               | BUILD                            |
+| updated                              | 2017-05-27T13:27:42Z             |
+| user_id                              | USER_ID                          |
++--------------------------------------+----------------------------------+</pre>
+</div>
+<p><span class="text-object">ubuntu-17.04-server-amd64-iso</span> es la imagen de Openstack del archivo ISO en el paso anterior y <span class="text-object">NETWORK_UUID</span> es un ID válido de red.</p>
+<p>Una vez que la instancia se haya lanzado correctamente, crea un volumen en blanco para almacenar temporalmente el sistema operativo configurado.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack volume create --size <span class="code-highlight">20 VOLUME_NAME</span></span>
++---------------------+--------------------------------------+
+| Field               | Value                                |
++---------------------+--------------------------------------+
+| attachments         | []                                   |
+| availability_zone   | iad-2                                |
+| bootable            | false                                |
+| consistencygroup_id | None                                 |
+| created_at          | 2017-05-27T13:48:05.568204           |
+| description         | None                                 |
+| encrypted           | False                                |
+| id                  | VOLUME_ID                            |
+| multiattach         | False                                |
+| name                | VOLUME_NAME                          |
+| properties          |                                      |
+| replication_status  | disabled                             |
+| size                | 20                                   |
+| snapshot_id         | None                                 |
+| source_volid        | None                                 |
+| status              | creating                             |
+| type                | None                                 |
+| updated_at          | None                                 |
+| user_id             | USER_ID                              |
++---------------------+--------------------------------------+</pre>
+</div>
+<p>Conecte el volumen a la instancia como dispositivo raíz con el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server add volume <span class="code-highlight">INSTANCE_ID VOLUME_ID</span> --device /dev/vda</span></pre>
+</div>
+<p>Conéctate a la instancia mediante la consola e instale el sistema operativo (como si estuviera usando una imagen ISO en una computadora normal). Cuando finalice la instalación y se reinicie el sistema, la instancia intentará instalar el sistema operativo nuevamente. Esto se espera ya que eso es lo que se indicó a la instancia que hiciera (recuerde, esta instancia solo se está usando para preparar la imagen).</p>
+<p>Si ves problemas con la creación de imágenes, por favor mira la <a class="reference external" href="http://docs.openstack.org/image-guide/create-images-manually.html">Guia Maquinas de Imagen Virtual</a> de Openstack para referenciar.</p>
+<p>El siguiente paso es aislar el volumen adjunto a la instancia temporal para que pueda cargarse en el servicio de imágenes Glance. Para hacer esto, borra la instancia con el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server delete <span class="code-highlight">INSTANCE_ID</span></span></pre>
+</div>
+<p>Con el volumen aislado, su contenido ahora se puede cargar en el servicio de imágenes Glance utilizando lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack image create --volume <span class="code-highlight">VOLUME_ID ubuntu-17.04-server-amd64</span></span></pre>
+</div>
+<p><span class="text-object">ubuntu-17.04-server-amd64</span> ¡ahora se puede usar para lanzar instancias funcionales basadas en el sistema operativo que se acaba de instalar/configurar! Ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server create \
+    --image <span class="code-highlight">ubuntu-17.04-server-amd64</span> \
+    --nic net-id=<span class="code-highlight">NETWORK_UUID</span> \
+    --flavor <span class="code-highlight">50 ubuntu17test</span></span>
++--------------------------------------+--------------------------------------+
+| Field                                | Value                                |
++--------------------------------------+--------------------------------------+
+| OS-DCF:diskConfig                    | MANUAL                               |
+| OS-EXT-AZ:availability_zone          | iad-2                                |
+| OS-EXT-STS:power_state               | 0                                    |
+| OS-EXT-STS:task_state                | scheduling                           |
+| OS-EXT-STS:vm_state                  | building                             |
+| OS-SRV-USG:launched_at               | None                                 |
+| OS-SRV-USG:terminated_at             | None                                 |
+| accessIPv4                           |                                      |
+| accessIPv6                           |                                      |
+| addresses                            |                                      |
+| adminPass                            | DALBYZhdk8f4                         |
+| config_drive                         |                                      |
+| created                              | 2017-05-27T14:26:09Z                 |
+| flavor                               | gp1.semisonic (50)                   |
+| hostId                               |                                      |
+| id                                   | INSTANCE_ID                          |
+| image                                | ubuntu-17.04-server-amd64 (...)      |
+| key_name                             |                                      |
+| name                                 | ubuntu17test                         |
+| os-extended-volumes:volumes_attached | []                                   |
+| progress                             | 0                                    |
+| project_id                           | PROJECT_ID                           |
+| properties                           |                                      |
+| security_groups                      | [{u'name': u'default'}]              |
+| status                               | BUILD                                |
+| updated                              | 2017-05-27T14:26:10Z                 |
+| user_id                              | USER_ID                              |
++--------------------------------------+--------------------------------------+</pre>
+</div>
+<p>Alternativamente, el volumen puede usarse simplemente como fuente de arranque para una nueva instancia. El concepto de "cargar a Glance" es solo en caso de que se desee usar el mismo sistema operativo/configuración en varias instancias.</p>
+<p>Si eliges no subir el volumen, asegúrate de correr el comando <span class="code">openstack volume set --bootable VOLUME_ID</span> para que el volumen pueda ser usado como la fuente de una nueva instancia..</p>
+</div>
+<div class="dream-sign-up">
+<h2>¡Desarrolla Tus Aplicaciones en Servidores en la Nube Hoy!</h2>
+<div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Regístrate a DreamCompute</a></div>
+</div>

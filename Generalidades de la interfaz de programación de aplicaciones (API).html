@@ -1,0 +1,193 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="Application programming interface overview" class="solvvy-hidden">
+<div class="altTitle">Generalidades de API</div>
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#¿Qué_es_un_API?">¿Qué es un API?</a></li>
+<li><a class="reference internal" href="#¿DreamHost_tiene_un_API?">¿DreamHost tiene un API?</a></li>
+<li><a class="reference internal" href="#¿Cómo_funciona_el_API_de_DreamHost?">¿Cómo funciona el API de DreamHost?</a></li>
+<li><a class="reference internal" href="#¿Qué_valores_de_API_usa_DreamHost?">¿Qué valores de API usa DreamHost?</a></li>
+<li><a class="reference internal" href="#Implementación_de_notas">Implementación de notas</a></li>
+<li><a class="reference internal" href="#Lista_de_módulos_de_API">Lista de módulos de API</a></li>
+<li><a class="reference internal" href="#¿Podrías_hacer_que_X_funcionalidad_sea_accesible_vía_API?">¿Podrías hacer que X funcionalidad sea accesible vía API?</a></li>
+<li><a class="reference internal" href="#¿Qué_tipo_de_aplicaciones_usa_API?">¿Qué tip de aplicaciones usa API?</a></li>
+<li><a class="Ver también" href="#Ver_también">Ver también</a></li>
+</ul>
+</div>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si ves que alguna de las instrucciones de este artículo no funciona como se esperaba, es posible que esté desactualizada. En caso de duda, por favor comunícate con el soporte para obtener más ayuda.</p>
+</div>
+</div>
+<h2><span id="¿Qué_es_un_API?">¿Qué es un API?</span></h2>
+<div class="solvvy-solution">
+<p>Una <strong>Interfaz de programación de aplicaciones</strong> (API) es una interfaz de código fuente que proporciona&nbsp; un sistema informático o una biblioteca de programas para respaldar las solicitudes de servicios que debe realizar un programa informático. Una API se diferencia de una interfaz binaria de aplicación en que se especifica en términos de un lenguaje de programación que se puede compilar cuando se crea una aplicación, en lugar de una descripción explícita de bajo nivel de cómo se colocan los datos en la memoria.</p>
+<p>Se dice que el software que proporciona la funcionalidad descrita por una API es una <em>implementación</em> de API. La API en sí es abstracta, ya que especifica una interfaz y no se involucra con los detalles de implementación.</p>
+<p>Un buen ejemplo de API sería una interfaz de servicio web, como la API proporcionada por Google para su servicio de mapas.</p>
+</div>
+<h2><span id="¿DreamHost_tiene_un_API?">¿DreamHost tiene un API?</span></h2>
+<div class="solvvy-solution">
+<p>Sí.</p>
+</div>
+<h2><span id="¿Cómo_funciona_el_API_de_DreamHost?">¿Cómo funciona el API de DreamHost?</span></h2>
+<div class="solvvy-solution">
+<p>El API de DreamHost está disponible en una interfaz "plana" simple, ¡que es fácil de usar!</p>
+<p>Todo lo que tiene que hacer es visitar ("GET" o "POST" a) una URL simple (mediante programación o incluso solo con un navegador web), y el resultado se devuelve como texto sin formato delimitado por tabuladores (u otros formatos si lo deseas) .</p>
+<p>Esta simple URL es:</p>
+<a href="https://api.dreamhost.com/">https://api.dreamhost.com/</a>
+<p>Y el resultado de texto sin formato es algo como:</p>
+<div class="preboxcontainer">
+<pre class="prebox">error
+no_key
+</pre>
+</div>
+<p>O posiblemente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">success
+added_web
+</pre>
+</div>
+</div>
+<h2><span id="¿Qué_valores_de_API_usa_DreamHost?">¿Qué valores de API usa DreamHost?</span></h2>
+<div class="solvvy-solution">
+<h3>Required</h3>
+<dl>
+<dt>key</dt>
+<dd>Una llave de API que necesitas generar <a href="https://panel.dreamhost.com/?tree=home.api">a través del panel web.</a></dd>
+</dl>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Para que una subcuenta pueda crear una clave API, se debe otorgar'&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215413677-Generalidades-de-Account-Privileges" target="_self" rel="undefined">Permisos de Cuenta</a> de Facturación.</p>
+<p>Por favor nota que si una subcuenta crea una llave API, solo será visible en la subcuenta de la página del panel de la&nbsp;<a href="https://panel.dreamhost.com/?tree=home.api">Llave API</a> El propietario de la cuenta principal no podrá ver la clave API de la subcuenta en su panel.</p>
+</div>
+</div>
+<dl>
+<dt>cmd</dt>
+<dd>El comando que te gustaría correr. Cuando creas tu clave, eliges a qué comando(s) puede acceder.</dd>
+<dt>unique_id</dt>
+<dd>Puedes pasar un nuevo unique_id (longitud máxima: 64 caracteres) cuando envías una solicitud, para asegurarte de no enviar accidentalmente el mismo comando dos veces. Ten en cuenta que solo las consultas correctas "utilizan" un unique_id. DreamHost recomienda usar <a href="http://en.wikipedia.org/wiki/UUID">UUIDs</a> para este propósito si lo deseas. El unique_id que usas solo se aplica a tu clave de API específica, por lo que nunca tendrás que preocuparte por otros usuarios que ya estén "usando" un unique_id específico.</dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los comandos individuales pueden tener valores obligatorios adicionales.</p>
+</div>
+</div>
+<h3>Opcional</h3>
+<dl>
+<dt>format</dt>
+<dd>El formato en el que deseas recibir la salida en formatos válidos son:
+<ul>
+<li><a href="https://api.dreamhost.com/?key=6SHU5P2HLDAYECUM&amp;cmd=user-list_users_no_pw&amp;format=tab">tab</a> (predeterminado)</li>
+<li><a href="https://api.dreamhost.com/?key=6SHU5P2HLDAYECUM&amp;cmd=user-list_users_no_pw&amp;format=xml">xml</a></li>
+<li><a href="https://api.dreamhost.com/?key=6SHU5P2HLDAYECUM&amp;cmd=user-list_users_no_pw&amp;format=json">json</a></li>
+<li><a href="https://api.dreamhost.com/?key=6SHU5P2HLDAYECUM&amp;cmd=user-list_users_no_pw&amp;format=perl">perl</a></li>
+<li><a href="https://api.dreamhost.com/?key=6SHU5P2HLDAYECUM&amp;cmd=user-list_users_no_pw&amp;format=php">php</a></li>
+<li><a href="https://api.dreamhost.com/?key=6SHU5P2HLDAYECUM&amp;cmd=user-list_users_no_pw&amp;format=yaml">yaml</a></li>
+<li><a href="https://api.dreamhost.com/?key=6SHU5P2HLDAYECUM&amp;cmd=user-list_users_no_pw&amp;format=html">html</a></li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>account</dt>
+<dd>El número de cuenta para realizar operaciones. El valor por defecto es tu propia cuenta, o la primera cuenta a la que tienes acceso de otra manera.</dd>
+</dl>
+</div>
+<h2><span id="Implementación_de_notas">Implementación de notas</span></h2>
+<div class="solvvy-solution">
+<h3>Sensibilidad a mayúsculas y minúsculas</h3>
+<p>Todos los nombres de <strong>parameter</strong> distinguen entre mayúsculas y minúsculas y deben estar en minúsculas. sin embargo, los <strong>values</strong> que envías al servidor generalmente no distingue entre mayúsculas y minúsculas.</p>
+<h3>Límite de tarifa</h3>
+<p>Para garantizar que los sistemas DreamHost permanezcan estables y con capacidad de respuesta, se ha limitado la velocidad a la que el mismo usuario puede ejecutar ciertos comandos de API o grupos de comandos de API. Estos límites son relativamente generosos y muy pocos usuarios se topan con ellos. Los límites generalmente se establecen por hora o por día, aunque algunos comandos pueden tener límites en períodos de tiempo más cortos, como 10 minutos. Cuando las llamadas a la API fallan por cualquier motivo (por ejemplo, si intentaste crear un usuario que ya existía), <em>no</em> cuenta más allá de sus límites (tenga en cuenta que esto también significa que fallar porque excedió el límite de velocidad <em>tampoco</em> cuenta). Cuando te encuentras con un límite, el error devuelto es:</p>
+<div class="preboxcontainer">
+<pre class="prebox">error
+slow_down_bucko (información detallada sobre el tipo de límite alcanzado después de una pestaña)</pre>
+</div>
+<p>Si te encuentras con este error, debes considerar las formas en que podrías reducir la frecuencia con la que llama al API. Lo más probable es que solo te encuentre con estos límites si tiene un script o un programa automatizado que se repite para realizar llamadas a la API repetidamente. Por lo tanto, puedes simplemente reducir la velocidad a la que se corre tu script o asegurarte de que realiza un seguimiento de cuántos comandos ha emitido en la última hora/día.</p>
+<h3>Cuenta de Prueba</h3>
+<p>Si deseas probar el API de DreamHost sin tener tu propia cuenta, puedes utilizar la siguiente clave de API:</p>
+<div class="preboxcontainer">
+<pre class="prebox">6SHU5P2HLDAYECUM</pre>
+</div>
+<p>Esta cuenta solo tiene acceso a las funciones "list" sin embargo (y solamente <em>user-list_users_no_pw</em>, no <em>user-list_users</em>) , también dreamhost_ps-set_size, dreamhost_ps-set_settings, y dreamhost_ps-reboot a ps7093.</p>
+<h4>Un ejemplo</h4>
+<div class="preboxcontainer">
+<pre class="prebox">https://api.dreamhost.com/?key=6SHU5P2HLDAYECUM&amp;cmd=user-list_users_no_pw&amp;unique_id=4082432&amp;format=perl</pre>
+</div>
+<p>Si estás escribiendo un script bash simple para interactuar con la API de DreamHost, esto puede ayudar como un comienzo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">#!/bin/sh
+####
+#### USE THIS SCRIPT AT YOUR OWN RISK.  
+####
+
+PS=$1
+
+KEY=YOUR-KEY-HERE
+UUID=`uuidgen`
+CMD=user-list_users_no_pw
+ 
+if [ $# -lt 1 ]; then
+ 	echo "usage: `basename $0` [hostname]" 
+	exit 1
+fi
+
+if [ "$PS" = "" ]; then
+	PS=`hostname | cut -f1 -d.`
+fi 
+
+# ARGS='other_http_get_arguments_for_the_DreamHost_cmd_that_you_are_using=4&amp;foo=123'
+LINK="https://api.dreamhost.com/?key=$KEY&amp;unique_id=$UUID&amp;cmd=$CMD&amp;ps=$PS&amp;$ARGS"
+
+RESPONSE=`wget -O- -q "$LINK"`
+
+echo "$LINK"
+echo "$RESPONSE"
+if&nbsp;! (echo $RESPONSE | grep -q 'success'); then
+	exit 1
+fi
+
+# Now use the content of $RESPONSE to do whatever you wish.
+#
+# Rinse, lather, repeat.</pre>
+</div>
+</div>
+<h2><span id="Lista_de_módulos_de_API">Lista de módulos de API</span></h2>
+<div class="solvvy-solution">
+<p>Los comandos del API se agrupan en módulos. Todos los comandos de un módulo comenzarán con <em>module_name-</em></p>
+<p>Se puede encontrar información detallada sobre los comandos de la API, como los valores que necesita enviar y el formato de los resultados, en la página de documentación de cada módulo, que se enumeran en la sección <span class="text-section">Ver también</span> de abajo.</p>
+</div>
+<h2><span id="¿Podrías_hacer_que_X_funcionalidad_sea_accesible_vía_API?">¿Podrías hacer que X funcionalidad sea accesible vía API?</span></h2>
+<div class="solvvy-solution">
+<p>El objetivo de la API es hacer que las tareas que una persona quiera hacer a menudo estén disponibles a través de una interfaz de programación — no para facilitar la reventa de servicios a varias personas. Así es como DreamHost decide si una determinada característica debe incorporarse a la API.</p>
+</div>
+<h2><span id="¿Qué_tipo_de_aplicaciones_usa_API?">¿Qué tipo de aplicaciones usa API?</span></h2>
+<div class="solvvy-solution">
+<p>Una lista corta puede ser encontrada en <a href="https://help.dreamhost.com/hc/es/articles/216944818-Aplicaciones-API" target="_self" rel="undefined">Aplicaciones de API</a>.</p>
+</div>
+<h2><span id="Ver_también">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217077988-Comandos-de-cuentas-de-API" target="_self" rel="undefined">Comandos API de cuenta</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217077998-Comandos-API-de-Listas-de-Anuncios" target="_self" rel="undefined">Comandos API de lista de anuncios</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216944818-Aplicaciones-API" target="_self" rel="undefined">Aplicaciones de API</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217555677-Metacomandos-de-API" target="_self" rel="undefined">Metacomandos de API</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217555707-Comandos-de-DNS-de-API" target="_self" rel="undefined">Comandos API de DNS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217555767-Comandos-API-de-dominio" target="_self" rel="undefined">Comandos API de dominios</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217078088-Comandos-API-de-Jabber" target="_self" rel="undefined">Comandos API de Jabber</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217555827-Comandos-API-de-correos" target="_self" rel="undefined">Comandos API de correo</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217078108-Comandos-API-de-MySQL" target="_self" rel="undefined">Comandos API de MySQL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217078078-Comandos-API-de-un-servidor-Privado" target="_self" rel="undefined">Comandos API de servidores privados (PS)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217560077-Comandos-API-de-recompensas-rewards-" target="_self" rel="undefined">Comandos API de recompensas (Rewards)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217560157-Comandos-API-de-servicios-de-control" target="_self" rel="undefined">Comandos API de control de servicios</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217078398-Comandos-API-de-usuario" target="_self" rel="undefined">Comandos API de usuario</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>

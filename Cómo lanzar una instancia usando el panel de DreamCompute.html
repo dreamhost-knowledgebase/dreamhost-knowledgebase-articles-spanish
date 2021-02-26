@@ -1,0 +1,267 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica cómo lanzar una nueva instancia en DreamCompute dentro de tu panel.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Para julio de 2020, están disponibles las siguientes imágenes:</p>
+<ul>
+<li>CentOS-7</li>
+<li>CoreOS-Stable</li>
+<li>Debian-8</li>
+<li>Debian-9</li>
+<li>Debian-10</li>
+<li>Fedora-25</li>
+<li>Fedora-29</li>
+<li>Fedora-31</li>
+<li>Fedora-32</li>
+<li>Ubuntu-14.04</li>
+<li>Ubuntu-16.04</li>
+<li>Ubuntu-17.10</li>
+<li>Ubuntu-18.04</li>
+<li>Ubuntu-20.04</li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Lanzamiento de una instancia</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega hasta la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener">DreamCompute</a> e inicia sesión en tu panel de DreamCompute.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/Launching_an_instance_01.png" alt="Launching_an_instance_01" /></dd>
+</dl>
+</li>
+<li>En la parte superior izquierda, haz clic en la pestaña <span class="text-object">Compute</span>.</li>
+<li>En la lista expandida, haz clic en '<span class="guilabel">Instances'</span>.
+<p><em>El panel muestra las instancias existentes con tu información.</em></p>
+</li>
+<li>Haz clic en el botón <strong>'</strong><span class="guilabel"><strong>Launch Instance'</strong> en la parte superior derecha.</span>
+<dl>
+<dd><em>Aparecerá un cuadro emergente de 'Launch Instance'.</em></dd>
+</dl>
+</li>
+<li>En el cuadro 'Launch Instance', haz clic en varias pestañas para especificar qué tipo de instancia deseas crear.</li>
+</ol>
+</div>
+<h2>Pestaña de detalles — Información general</h2>
+<div class="solvvy-solution">
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-launch-an-instance-using-the-dreamcompute-dashboard_02.png" alt="" /></dd>
+</dl>
+<dl>
+<dd><strong>Nombre de instancia</strong></dd>
+</dl>
+<dl>
+<dd>
+<p>Asigna un nombre a la máquina virtual.</p>
+</dd>
+</dl>
+<dl>
+<dd>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El nombre que asignes se convierte en el nombre de host inicial de la instancia. Si el nombre tiene más de 63 caracteres, el servicio Compute lo trunca automáticamente para garantizar que dnsmasq funcione correctamente.</p>
+<p>Si cambias el nombre de host directamente después de crear la instancia, el nombre no se actualiza en el panel.</p>
+<p class="last">No se garantiza que los nombres de instancia sean únicos cuando se crean, por lo que es posible que existan dos instancias con el mismo nombre de host.</p>
+</div>
+</div>
+</dd>
+</dl>
+<dl>
+<dd><strong>Zona de disponibilidad</strong></dd>
+</dl>
+<dl>
+<dd>
+<p class="first last">Actualmente, la única zona en la que se pueden lanzar instancias de DreamCompute es iad-2, que se encuentra en el centro de datos de DreamHost en Ashburn, Virginia, EE. UU.</p>
+</dd>
+</dl>
+<dl>
+<dd><strong>Contar</strong></dd>
+</dl>
+<dl>
+<dd>Para lanzar varias instancias, ingresa un valor mayor que el valor predeterminado de 1.</dd>
+</dl>
+</div>
+<h2>Pestaña fuente — seleccionar la plantilla desde la que crear tu instancia</h2>
+<div class="solvvy-solution">
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-launch-an-instance-using-the-dreamcompute-dashboard_03.png" alt="" /></dd>
+</dl>
+<h3>Seleccione Boot Source (4 opciones)</h3>
+<p>Hay cuatro opciones para la fuente de arranque:</p>
+<ul>
+<li>Imagen</li>
+<li>Captura de la Instancia</li>
+<li>Volume</li>
+<li>Captura del Volumen</li>
+</ul>
+<dl>
+<dd>
+<p><strong>Imagen </strong>(selecciona para crear una nueva instancia)</p>
+<p>Selecciona esta opción si deseas utilizar una imagen seleccionada por DreamHost o si has subido tu propia imagen. Una vez seleccionado, aparece una lista de imágenes disponibles en la parte inferior que puedes usar para crear tu nueva instancia. (Por ejemplo, Debian, Fedora, Ubuntu, CentOS, etc.)</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/Image_dropdown.png" alt="" /></dd>
+</dl>
+<p>Da click a botón <img class="img-border" src="https://kbimages.dreamhosters.com/images/up_arrow.png" alt="" /> a la derecha de la imagen para seleccionarla. Si eliges 'Crear nuevo volumen' (que es la opción predeterminada), asegúrate de también:</p>
+<ul>
+<li>Ingresar un 'Tamaño de volumen' (de lo contrario, tu volumen se establecerá por defecto en el tamaño mínimo requerido de la imagen que seleccione).</li>
+<li>Elige si deseas que se elimine el volumen cuando elimine la instancia.</li>
+</ul>
+<p><strong>Captura de la Instancia</strong></p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/Instance_snapshot.png" alt="" /></dd>
+</dl>
+<p>Selecciona esta opción si tienes una 'Captura de instancia' existente de una instancia existente o anterior. Una vez seleccionada, aparece una lista de instantáneas disponibles en la parte inferior que puedes usar para crear una nueva instancia.</p>
+<p>Da click al botón <img class="img-border" src="https://kbimages.dreamhosters.com/images/up_arrow.png" alt="" /> a la derecha de la imagen para seleccionarla. Si eliges 'Crear nuevo volumen' (que es la opción predeterminada), asegúrate de también:</p>
+<ol>
+<li>Ingresar un 'Tamaño de volumen' que coincida con el tamaño de tu 'Captura de instancia'.</li>
+<li>Elige si deseas que se elimine el volumen cuando elimines la instancia.</li>
+</ol>
+<p><strong>Volumen</strong></p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/Volume_dropdown.png" alt="" /></dd>
+</dl>
+<p>Selecciona esta opción si tienes un volumen existente y te gustaría crear un formulario de instancia. Una vez seleccionado, se muestra una lista de volúmenes disponibles. Haz clic en el botón <img class="img-border" src="https://kbimages.dreamhosters.com/images/up_arrow.png" alt="" /> a la derecha del volumen para seleccionarlo. Asegúrate de elegir también si deseas que se elimine el volumen cuando elimines la instancia.</p>
+<p><strong>Captura del Volumen</strong></p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/Volume_snapshot.png" alt="" /></dd>
+</dl>
+<p>Selecciona esta opción si tienes una "Captura del Volumen" existente desde la que te gustaría crear una instancia. Una vez seleccionado, se muestra una lista de Capturas de volumen disponibles. Haz clic en el botón <img class="img-border" src="https://kbimages.dreamhosters.com/images/up_arrow.png" alt="" /> a la derecha de la instantánea de volumen para seleccionarla. Asegúrate de elegir también si deseas que se elimine el volumen cuando elimines la instancia.</p>
+</dd>
+</dl>
+<h3>3 opciones de configuración</h3>
+<p>Según cuál de estas opciones desplegables selecciones, puedes ver hasta tres opciones adicionales para administrar la fuente de arranque de tu instancia:</p>
+<ul>
+<li>Crear Nuevo Volumen</li>
+<li>Tamaño del Volumen (GB)</li>
+<li>Eliminar Volumen en Instancia Eliminar</li>
+</ul>
+<dl>
+<dd>
+<p><strong>Crear Nuevo Volumen</strong></p>
+<p>La opción "Crear Nuevo Volumen" determina si tu instancia utiliza un disco de arranque efímero de 80 GB o un disco de arranque de volumen del tamaño elegido. Consulta el siguiente artículo para obtener más detalles.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217701757--Cu%C3%A1l-es-la-diferencia-entre-los-discos-de-arranque-ef%C3%ADmeros-y-por-volumen-" target="_self" rel="undefined">¿Cuál es la diferencia entre los discos de arranque efímeros y por volumen?</a></li>
+</ul>
+<p><strong>Tamaño del Volumen</strong></p>
+<p>La opción "Tamaño de volumen (GB)" determina el tamaño de tu disco de arranque de volumen.</p>
+<p><strong>Eliminar Volumen en Instancia Eliminar</strong></p>
+<p>La opción "Eliminar volumen al eliminar la instancia" determina si el disco de arranque del volumen se elimina o no al eliminar la instancia. De forma predeterminada, se establece en "No" (que se recomienda). Esto te permite eliminar la instancia y usar el volumen existente como fuente de arranque de una nueva instancia.</p>
+</dd>
+</dl>
+</div>
+<h2>Pestaña de Flavor — asignar recursos de CPU virtual y RAM a tu instancia</h2>
+<div class="solvvy-solution">
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-launch-an-instance-using-the-dreamcompute-dashboard_05.png" alt="" /></dd>
+</dl>
+<dl>
+<dd>Especifica el tamaño de la instancia para lanzar. Haz clic en el símbolo <img class="img-border" src="https://kbimages.dreamhosters.com/images/up_arrow.png" alt="" /> a la derecha para agregarlo.</dd>
+</dl>
+<dl>
+<dd>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El valor de <strong>'Total Disk'</strong> de 80 GB solo se aplica si no creas un volumen nuevo.</p>
+<p>Puedes cambiar el tipo de una instancia después de lanzarla para aumentar o disminuir los recursos disponibles para la instancia. Para obtener más información, consulta el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215912748-Como-cambiar-los-l%C3%ADmites-de-recursos-de-una-instancia-de-DreamCompute" target="_self" rel="undefined">Cómo cambiar los límites de recursos de una instancia de DreamCompute</a></li>
+</ul>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+<h2>Pestaña redes — how your instance connects to the Internet</h2>
+<div class="solvvy-solution">
+<dl>
+<dd>Si has habilitado <a href="https://help.dreamhost.com/hc/es/articles/229789688-Descripci%C3%B3n-general-de-las-redes-privadas" target="_self" rel="undefined">'Private Networking'</a>, debes especificar a qué red deseas asociar la instancia. Si no has habilitado la red privada, tu instancia usa la red pública de forma predeterminada y esta pestaña puede ignorarse.</dd>
+</dl>
+</div>
+<h2>Pestaña Grupos de Seguridad — que puertos estan abiertos</h2>
+<div class="solvvy-solution">
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-launch-an-instance-using-the-dreamcompute-dashboard_06.png" alt="how-to-launch-an-instance-using-the-dreamcompute-dashboard_06" width="614" height="510" /></dd>
+</dl>
+<dl>
+<dd>El grupo de seguridad predeterminado se asigna automáticamente a la instancia, pero si deseas eliminar el grupo de seguridad predeterminado y agregar otros grupos, puedes hacerlo utilizando los símbolos de flecha hacia arriba y hacia abajo.</dd>
+</dl>
+<dl>
+<dd>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Puedes cambiar qué grupos de seguridad están asociados con una instancia después de lanzarla para modificar la accesibilidad de la red a la instancia. Consulta el siguiente artículo para obtener más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215912838-Configurar-grupos-de-seguridad" target="_self" rel="undefined">Configurar grupos de seguridad</a></li>
+</ul>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+<h2>Pestaña de Llaves de Emparejamiento — Autenticación SSH para el usuario predeterminado de tu instancia</h2>
+<div class="solvvy-solution">
+<dl>
+<dd>
+<p>A cada instancia solo se le puede asignar un único par de claves. Cuando lanzas originalmente una instancia, puedes seleccionar el par de claves que deseas utilizar con la nueva instancia.</p>
+</dd>
+</dl>
+<dl>
+<dd>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p><em>No es posible</em> dentro del panel DreamCompute cambiar las Llaves de Emparejamiento asignado a una instancia después de que se crea la instancia. Asegúrate de asignar las Llaves de Emparejamiento correctas cuando crees originalmente la instancia.</p>
+</div>
+</div>
+</dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-launch-an-instance-using-the-dreamcompute-dashboard_07.png" alt="how-to-launch-an-instance-using-the-dreamcompute-dashboard_07" /></dd>
+</dl>
+<dl>
+<dd>Si ya has creado y agregado tu clave SSH pública, se muestra aquí. De lo contrario, puedes elegir <strong>'Create Key Pair'</strong> o <strong>'Import Key Pair'</strong>. Cada instancia que lances es accesible por SSH a través de autenticación basada en claves. Una vez que cargue tu clave pública, puedes usar inicios de sesión sin contraseña con el usuario predeterminado para tu imagen.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si aún no tienes una clave SSH, consulta el siguiente artículo para obtener ayuda para crear/importar una:</p>
+<ul>
+<li><a class="reference external" href="https://help.dreamhost.com/hc/es/articles/115001736691-Descripci%C3%B3n-general-de-creaci%C3%B3n-de-una-Llave-de-Emparejamiento" target="_self" rel="undefined">Cómo crear una Llave de Emparejamiento</a></li>
+</ul>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+<h2>Lanzar una nueva instancia</h2>
+<div class="solvvy-solution">
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-launch-an-instance-using-the-dreamcompute-dashboard_08.png" alt="how-to-launch-an-instance-using-the-dreamcompute-dashboard_08" /></dd>
+</dl>
+<dl>
+<dd>Cuando termines de ingresar todas tus configuraciones, haz clic en el botón <strong>Launch Instance</strong> en la parte inferior derecha.
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si alguna de las pestañas mencionadas anteriormente todavía contiene un símbolo * junto a ellas, no se puede hacer clic en el botón "Launch Instance".</p>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+<h2>Conectarte a tu instancia</h2>
+<div class="solvvy-solution">
+<p>Cuando se crea la instancia, puedes conectarse a ella mediante tu par de claves SSH. Consulta el siguiente artículo para obtener instrucciones sobre cómo conectarte:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216201547-Generalidades-sobre-la-conexi%C3%B3n-a-tu-instancia-con-las-claves-SSH" target="_self" rel="undefined">Descripción general sobre la conexión a tu instancia con llaves SSH</a></li>
+</ul>
+<div class="footer">&nbsp;</div>
+<!--DreamCompute Button--></div>
+<div class="dream-sign-up">
+<h2>Implementa Tus Aplicaciones en Servidores Cloud Hoy</h2>
+<div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Suscríbete a DreamCompute</a></div>
+</div>

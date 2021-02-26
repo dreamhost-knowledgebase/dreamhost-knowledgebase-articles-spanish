@@ -1,0 +1,146 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="account-api-commands" class="solvvy-hidden">
+<div class="altTitle">API de cuenta</div>
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#account-domain_usage">account-domain_usage</a></li>
+<li><a class="reference internal" href="#account-list_keys">account-list_keys</a></li>
+<li><a class="reference internal" href="#account-status">account-status</a></li>
+<li><a class="reference internal" href="#account-user_usage">account-user_usage</a></li>
+<li><a class="Ver también" href="#Ver_también">Ver también</a></li>
+</ul>
+</div>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si ves que alguna de las instrucciones de este artículo no funciona como se esperaba, es posible que esté desactualizada. En caso de duda, por favor comunícate con soporte para obtener más ayuda.</p>
+</div>
+</div>
+<p>El módulo <strong>cuenta</strong> de API contiene comandos para verificar el estado o el uso de tu cuenta.</p>
+<h2>Comandos</h2>
+<div class="solvvy-solution">
+<h3><span id="account-domain_usage">account-domain_usage</span></h3>
+<p>Enumera el uso de ancho de banda para todos los servicios de dominio visibles. El uso del ancho de banda está en bytes desde el comienzo del ciclo de facturación actual (que se puede determinar usando el estado de la cuenta).</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>account-domain_usage</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />domain type bw<br />example.com http 1048576</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="account-list_keys">account-list_keys</span></h3>
+<p>Muestra todas las claves públicas SSH de esta cuenta. Las claves SSH se pueden utilizar para proporcionar acceso de root a cualquiera de sus VPS o Servidores Dedicados.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>account-list_keys</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />key_name key_val<br />Test ssh-rsa ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz/+..........== DreamHost Managed Key</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="account-status">account-status</span></h3>
+<p>Devuelve el estado de la cuenta corriente. Todos los resultados de esta función deben tratarse solo como advertencia.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>account-status</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />key value<br />balance -10.00<br />delinquent 0<br />delinquent_date 2009-10-02<br />due 0<br />lastrebill_date 2009-12-02<br />nextrebill_date 2010-01-02<br />past_due 0<br />pastdue_date 2009-11-02<br />today 2009-12-23</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores </strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="account-user_usage">account-user_usage</span></h3>
+<p>Enumera el uso del ancho de banda y del disco para todos los usuarios visibles. El uso del disco está en kilobytes; el uso del ancho de banda está en bytes desde el inicio del ciclo de facturación (consulta el estado de la cuenta para determinar cuándo es). En la mayoría de los casos, el uso de ancho de banda aparece como cero aquí. Consulta account-domain_usage para conocer el ancho de banda del dominio.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>account-user_usage</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />user disk disk_as_of bw<br />username 4700.56 2009-12-22 9.412</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores </strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2><span id="Ver_también">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="/hc/en-us/articles/217560167-Application-programming-interface-overview">Descripción general de la interfaz de programación de aplicaciones</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>

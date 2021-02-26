@@ -1,0 +1,119 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="DNS API commands">
+<div class="altTitle">API de DNS</div>
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#dns-list_records">dns-list_records</a></li>
+<li><a class="reference internal" href="#dns-add_record">dns-add_record</a></li>
+<li><a class="reference internal" href="#dns-remove_record">dns-remove_record</a></li>
+<li><a class="Ver_también" href="#Ver_también">Ver también</a></li>
+</ul>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si ves que alguna de las instrucciones de este artículo no funciona como se esperaba, es posible que esté desactualizada. En caso de duda, por favor comunícate con soporte para obtener más ayuda.</p>
+</div>
+</div>
+<p>El módulo de API de DNS te permite administrar los registros del Servicio de nombres de dominio.</p>
+<h2>Comandos</h2>
+<div class="solvvy-solution">
+<h3><span id="dns-list_records">dns-list_records</span></h3>
+<p>Vuelca una lista de todos los registros DNS para todos los dominios (sin incluir los registros) en todas las cuentas a las que tiene acceso. Ten en cuenta que esto omite las zonas dreamhosters.com, dreamhost.com, dreamhostps.com y newdream.net.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>dns-list_records</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>(ninguno)</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />account_id zone record type value comment editable<br />1 718apts.com 718apts.com A 1.2.3.4 0<br />1 718apts.com 718apts.com MX 0 mx1.balanced.dreamhost.com. 0<br />1 718apts.com 718apts.com MX 0 mx2.balanced.dreamhost.com. 0<br />1 718apts.com 718apts.com NS ns1.dreamhost.com. 0<br />1 718apts.com 718apts.com NS ns2.dreamhost.com. 0<br />1 718apts.com 718apts.com NS ns3.dreamhost.com. 0<br />1 718apts.com test.718apts.com CNAME ghs.google.com. A test I did. 1</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td><strong>type</strong>&nbsp;: A,MX,NS,CNAME,PTR,NAPTR,TXT,SRV,AAAA, or A6
+<p><strong>editable</strong>&nbsp;: 0 or 1</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>(ninguno)</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="dns-add_record">dns-add_record</span></h3>
+<p>Agrega un nuevo registro DNS a un dominio que ya ha alojado con DreamHost. Sin embargo, no puedes agregar registros de dreamhosters.com. Ten en cuenta que los cambios de DNS pueden tardar un tiempo en realizarse.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>dns-add_record</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td><strong>record</strong>&nbsp;: El nombre completo del registro que deseas agregar, ejemplo: testing.groo.com
+<p><strong>type</strong>&nbsp;: A,CNAME,NS,PTR,NAPTR,SRV,TXT, oo AAAA <strong>value</strong>&nbsp;: El valor del registro DNS <strong>comment</strong>&nbsp;: Comentario opcional para este registro.</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />record_added</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>no_record<br />no_type<br />no_value<br />invalid_record (may have specifics after a tab)<br />invalid_type (may have specifics after a tab)<br />invalid_value (may have specifics after a tab)<br />no_such_zone<br />CNAME_must_be_only_record<br />CNAME_already_on_record<br />record_already_exists_not_editable<br />record_already_exists_remove_first<br />internal_error_updating_zone<br />internal_error_could_not_load_zone<br />internal_error_could_not_add_record</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="dns-remove_record">dns-remove_record</span></h3>
+<p>Elimina un registro DNS editable existente que tiene con DreamHost. Sin embargo, no puedes eliminar los registros de dreamhosters.com. Ten en cuenta que los cambios de DNS pueden tardar un poco en propagarse.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>dns-remove_record</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p><strong>record</strong>&nbsp;: El nombre completo del registro que deseas eliminar, ejemplo: testing.groo.com<br /><strong>type</strong>&nbsp;: El tipo (mira dns-add_record) del registro que deseas eliminar.<br /><strong>value</strong>&nbsp;: El valor (mira dns-add_record) del registro que deseas eliminar.</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />record_removed</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>no_record<br />no_type<br />no_value<br />no_such_record<br />no_such_type<br />no_such_value<br />not_editable<br />internal_error_could_not_destroy_record<br />internal_error_could_not_update_zone</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2><span id="Ver_también">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="/hc/en-us/articles/217560167-Application-programming-interface-overview">Generalidades de la interfaz de programación de aplicaciones</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>

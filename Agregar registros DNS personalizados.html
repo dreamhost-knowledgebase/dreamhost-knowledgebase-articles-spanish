@@ -18,14 +18,10 @@
 <li><a href="#registro_A">Registro A</a></li>
 <li><a href="#registro_AAAA">Registro AAAA</a></li>
 <li><a href="#registro_ALIAS">Registro ALIAS</a></li>
-<li><a href="#registro_CAME">Registro CNAME</a></li>
-<li><a href="#registro_M">Registro MX</a></li>
+<li><a href="#registro_CNAME">Registro CNAME</a></li>
+<li><a href="#registro_MX">Registro MX</a></li>
 <li><a href="#registro_TXT">Registro TXT</a></li>
-<!--
-      <li>
-      <a href="#registro_NAPTR">Registro NAPTR</a>
-    </li>
-    -->
+<li><a href="#registro_NAPTR">Registro NAPTR</a></li>
 <li><a href="#registro_SRV">Registro SRV</a></li>
 <li><a href="#Registro_CAA">Registro CAA</a></li>
 <li><a href="#Nameservers">Registro Nameservers</a></li>
@@ -601,116 +597,58 @@
 </ul>
 </div>
 <p>&nbsp;</p>
-<!--
-<h2>
-  <span id="registro_NAPTR">Registro NAPTR</span>
-</h2>
+<h2><span id="registro_NAPTR">Registro NAPTR</span></h2>
 <div class="solvvy-solution">
-  <p>
-    Los registros de puntero de autoridad de nombre (NAPTR) se utilizan con mayor frecuencia para telefonía por Internet. Estos registros admiten el uso de expresiones regulares. Aquí hay un ejemplo de registro NAPTR:
-  </p>
-  <div class="preboxcontainer">
-    <pre class="prebox">$ORIGIN 4.3.2.1.5.5.5.0.0.8.1.e164.arpa.
+<p>Los registros de puntero de autoridad de nombre (NAPTR) se utilizan con mayor frecuencia para telefonía por Internet. Estos registros admiten el uso de expresiones regulares. Aquí hay un ejemplo de registro NAPTR:</p>
+<div class="preboxcontainer">
+<pre class="prebox">$ORIGIN 4.3.2.1.5.5.5.0.0.8.1.e164.arpa.
 IN NAPTR 100 10 "U" "E2U+sip" "!^.*$!sip:customer-service@example.com!" .
 IN NAPTR 102 10 "U" "E2U+email" "!^.*$!mailto:information@example.com!" .</pre>
-  </div>
-  <p>
-    Ve el siguiente enlace para obtener información detallada sobre este tipo de registro.
-  </p>
-  <ul>
-    <li>
-      <a href="https://tools.ietf.org/html/rfc2915">https://tools.ietf.org/html/rfc2915</a>
-    </li>
-  </ul>
-  <h4>
-    <strong>Agregar</strong>
-  </h4>
-  <ol>
-    <li>
-      Navega a la página
-      <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!/grid-view" target="_blank" rel="noopener">Websites</a>.
-    </li>
-    <li>
-      Abre la página <span class="panel-page">Administrar</span> de tu sitio.
-      <ul>
-        <li>
-          Si estás en la 
-          <a href="https://help.dreamhost.com/hc/es/articles/360001294366-Usar-la-p%C3%A1gina-Websites-del-panel-#cuadricula_o_lista" target="_self">vista en cuadrícula</a>,
-          coloca el cursor sobre tu sitio web y haz clic en el botón <strong>Administrar</strong>
-        </li>
-        <li>
-          Si estás en la
-          <a href="https://help.dreamhost.com/hc/es/articles/360001294366-Usar-la-p%C3%A1gina-Websites-del-panel-#cuadricula_o_lista" target="_self">vista en Lista</a>,
-          haz clic en el botón <strong>Administrar</strong> a la derecha de tu sitio web.
-        </li>
-      </ul>
-      <dl>
-        <dd>
-          <img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-dns-tab.png" alt="DNS tab" width="245" height="73">
-        </dd>
-      </dl>
-    </li>
-    <li>
-      Haz clic en la pestaña <span class="text-link">DNS</span>.
-      <dl>
-        <dd>
-          <img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-button-add-record.png" alt="Add Record button" width="139" height="43">
-        </dd>
-      </dl>
-    </li>
-    <li>
-      Da clic en el botón <strong>Add Record</strong>.
-      <dl>
-        <dd>
-          <img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-dns-naptr-record-add-01.png" alt="Add NAPTR Record" width="640" height="102">
-        </dd>
-      </dl>
-    </li>
-    <li>
-     Pasa el cursor sobre la sección <span class="text-section">Registro NAPTR</span> y haz clic en el enlace <span class="text-link">ADD</span>.
-      <dl>
-        <dd>
-          <img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-dns-naptr-record-add-02.png" alt="Add NAPTR Record" width="520" height="426">
-        </dd>
-      </dl>
-      <ul>
-        <li>
-          <strong>Host</strong>: Ingresa el nombre de host para habilitar este registro o déjalo en blanco.
-        </li>
-        <li>
-          <strong>Order</strong>: Un número (de 0 a 65535) que especifica el orden en el que se procesan varios registros NAPTR. Los valores más bajos se procesan antes que los valores más altos.
-        </li>
-        <li>
-          <strong>Preference</strong>:&nbsp;  Un número (de 0 a 65535)
-          que especifica el orden en el que se procesan varios registros NAPTR,
-          <span class="wysiwyg-underline">con valores de Order iguales </span>,
-          Los valores más bajos se procesan antes que los valores más altos.
-        </li>
-        <li>
-          <strong>Flags</strong>: Una cadena en minúsculas que contiene indicadores para controlar aspectos de la reescritura y la interpretación de los campos del registro. En este momento solo cuatro banderas son definidas
-          <span class="code">s</span>, <span class="code">a</span>,
-          <span class="code">u</span>, and <span class="code">p</span>.
-        </li>
-        <li>
-          <strong>Service</strong>: Especifica los servicios disponibles en esta ruta de reescritura. También puedes especificar el protocolo particular que se utiliza para hablar con un servicio.
-        </li>
-        <li>
-          <strong>Regex</strong>: Una cadena que contiene una expresión de sustitución que se aplica a la cadena original que tiene el cliente para construir el siguiente nombre de dominio a buscar.
-        </li>
-        <li>
-          <strong>Replacement</strong>:&nbsp; El siguiente nombre de dominio completamente calificado para consultar registros NAPTR según los valores encontrados en el campo de banderas. Este campo solo se usa si el campo de expresión regular está vacío. Si el campo Regex contiene un valor, este campo no se utiliza.
-        </li>
-      </ul>
-    </li>
-    <li>
-      Da clic en el botón <strong>Add Record</strong>&nbsp;para guardar.
-    </li>
-  </ol>
-  <p>
-    Después de hacer clic en el botón <strong>Add Record</strong> comienza la propagación del nuevo registro. Esto puede tardar hasta 6 horas antes de que el nuevo registro se actualice en línea.
-  </p>
 </div>
--->
+<p>Ve el siguiente enlace para obtener información detallada sobre este tipo de registro.</p>
+<ul>
+<li><a href="https://tools.ietf.org/html/rfc2915">https://tools.ietf.org/html/rfc2915</a></li>
+</ul>
+<h4><strong>Agregar</strong></h4>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!/grid-view" target="_blank" rel="noopener">Websites</a>.</li>
+<li>Abre la página <span class="panel-page">Administrar</span> de tu sitio.
+<ul>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366-Usar-la-p%C3%A1gina-Websites-del-panel-#cuadricula_o_lista" target="_self">vista en cuadrícula</a>, coloca el cursor sobre tu sitio web y haz clic en el botón <strong>Administrar</strong></li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366-Usar-la-p%C3%A1gina-Websites-del-panel-#cuadricula_o_lista" target="_self">vista en Lista</a>, haz clic en el botón <strong>Administrar</strong> a la derecha de tu sitio web.</li>
+</ul>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-dns-tab.png" alt="DNS tab" width="245" height="73" /></dd>
+</dl>
+</li>
+<li>Haz clic en la pestaña <span class="text-link">DNS</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-button-add-record.png" alt="Add Record button" width="139" height="43" /></dd>
+</dl>
+</li>
+<li>Da clic en el botón <strong>Add Record</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-dns-naptr-record-add-01.png" alt="Add NAPTR Record" width="640" height="102" /></dd>
+</dl>
+</li>
+<li>Pasa el cursor sobre la sección <span class="text-section">Registro NAPTR</span> y haz clic en el enlace <span class="text-link">ADD</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-dns-naptr-record-add-02.png" alt="Add NAPTR Record" width="520" height="426" /></dd>
+</dl>
+<ul>
+<li><strong>Host</strong>: Ingresa el nombre de host para habilitar este registro o déjalo en blanco.</li>
+<li><strong>Order</strong>: Un número (de 0 a 65535) que especifica el orden en el que se procesan varios registros NAPTR. Los valores más bajos se procesan antes que los valores más altos.</li>
+<li><strong>Preference</strong>:&nbsp; Un número (de 0 a 65535) que especifica el orden en el que se procesan varios registros NAPTR, <span class="wysiwyg-underline">con valores de Order iguales </span>, Los valores más bajos se procesan antes que los valores más altos.</li>
+<li><strong>Flags</strong>: Una cadena en minúsculas que contiene indicadores para controlar aspectos de la reescritura y la interpretación de los campos del registro. En este momento solo cuatro banderas son definidas <span class="code">s</span>, <span class="code">a</span>, <span class="code">u</span>, and <span class="code">p</span>.</li>
+<li><strong>Service</strong>: Especifica los servicios disponibles en esta ruta de reescritura. También puedes especificar el protocolo particular que se utiliza para hablar con un servicio.</li>
+<li><strong>Regex</strong>: Una cadena que contiene una expresión de sustitución que se aplica a la cadena original que tiene el cliente para construir el siguiente nombre de dominio a buscar.</li>
+<li><strong>Replacement</strong>:&nbsp; El siguiente nombre de dominio completamente calificado para consultar registros NAPTR según los valores encontrados en el campo de banderas. Este campo solo se usa si el campo de expresión regular está vacío. Si el campo Regex contiene un valor, este campo no se utiliza.</li>
+</ul>
+</li>
+<li>Da clic en el botón <strong>Add Record</strong>&nbsp;para guardar.</li>
+</ol>
+<p>Después de hacer clic en el botón <strong>Add Record</strong> comienza la propagación del nuevo registro. Esto puede tardar hasta 6 horas antes de que el nuevo registro se actualice en línea.</p>
+</div>
 <h2><span id="Nameservers">Nameservers</span></h2>
 <div class="solvvy-solution">
 <p>Para obtener detalles sobre cómo configurar nameservers personalizados/vanidad, visita el siguiente artículo.</p>

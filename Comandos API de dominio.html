@@ -1,0 +1,129 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="Domain API commands">
+<div class="altTitle">API de dominio</div>
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#domain-list_domains">domain-list_domains</a></li>
+<li><a class="reference internal" href="#domain-list_registrations">domain-list_registrations</a></li>
+<li><a class="reference internal" href="#domain-registration_available">domain-registration_available</a></li>
+<li><a class="Ver_también" href="#Ver_también">Vertambién</a></li>
+</ul>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si ves que alguna de las instrucciones de este artículo no funciona como se esperaba, es posible que esté desactualizada. En caso de duda, por favor comunícate con soporte para obtener más ayuda.</p>
+</div>
+</div>
+<p>El módulo de comandos de <strong>domain</strong> de API administra los dominios y los registros de dominio.</p>
+<h2>Commandos</h2>
+<div class="solvvy-solution">
+<h3><span id="domain-list_domains">domain-list_domains</span></h3>
+<p>Vuelca una lista de todos los dominios alojados (sin incluir los registros) en todas las cuentas a las que tienes acceso.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>domain-list_domains</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />account_id domain home type unique_ip hosting_type user path outside_url www_or_not php security fastcgi php_fcgid passenger<br />1 718apts.com machine.dreamhost.com http 1.2.3.4 full groo 718apts.com remove_www mod_php 0 0 1 0 0<br />1 filesforever.com machine.dreamhost.com http redirect <a href="https://files.dreamhost.com/">https://files.dreamhost.com/</a> both_work pcgi4 0 0 1 0 0<br />1 groo.com ps1234.dreamhost.com http full groo groo.com add_www pcgi5 0 0 1 0 0<br />1 test.groo.com ps5678.dreamhost.com http mirror <a href="http://www.groo.com/">http://www.groo.com/</a> both_work pcgi5 0 0 1 0 0</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles valores</strong></td>
+<td>
+<p><strong>type</strong>&nbsp;: http o https<br /><strong>hosting_type</strong>&nbsp;: Completamente alojado, redirección, parqueo o modo espejo<br /><strong>www_or_not</strong>&nbsp;: Both_work, add_www o remove_www<br /><strong>php&nbsp;: pcgi4,</strong> pcgi5, o mod_php<br /><strong>security</strong>&nbsp;: 0 o 1<br /><strong>fastcgi</strong>&nbsp;: 0 o 1<br /><strong>php_fcgid</strong>&nbsp;: 0 o 1<br /><strong>passenger</strong>&nbsp;: 0 o 1</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="domain-list_registrations">domain-list_registrations</span></h3>
+<p>Descarga una lista de todos los registros de dominio que has registrado con DreamHost, incluidos los que han expirado recientemente para que puedas renovarlos desde el panel.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>domain-list_registrations</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />account_id domain expires created modified autorenew locked expired ns1 ns2 ns3 ns4 registrant registrant_org registrant_street1 registrant_street2 registrant_city registrant_state registrant_zip registrant_country registrant_phone registrant_fax registrant_email tech tech_org tech_street1 tech_street2 tech_city tech_state tech_zip tech_country tech_phone tech_fax tech_email billing billing_org billing_street1 billing_street2 billing_city billing_state billing_zip billing_country billing_phone billing_fax billing_email admin admin_org admin_street1 admin_street2 admin_city admin_state admin_zip admin_country admin_phone admin_fax admin_email<br />1 718apts.com 2010-02-05 17:25:06 2009-02-05 17:25:06 2009-02-05 17:25:06 no no no ns1.dreamhost.com ns2.dreamhost.com ns3.dreamhost.com 718apts.com Private Registrant A Happy DreamHost Customer 417 Associated Rd #324 Brea CA 92821 US +1.2139471032 718apts.com@proxy.dreamhost.com 718apts.com Private Registrant A Happy DreamHost Customer 417 Associated Rd #324 Brea CA 92821 US +1.2139471032 718apts.com@proxy.dreamhost.com 718apts.com Private Registrant A Happy DreamHost Customer 417 Associated Rd #324 Brea CA 92821 US +1.2139471032 718apts.com@proxy.dreamhost.com A Happy DreamHost Customer 417 Associated Rd #324 Brea CA 92821 US +1.2139471032 718apts.com@proxy.dreamhost.com<br /><br />1 example.com 2020-06-15 21:00:00 1997-04-22 21:00:00 2008-04-25 00:04:52 yes no no ns1.dreamhost.com ns2.dreamhost.com ns3.dreamhost.com Example User1 Example User2 1234 Main St Los Angeles CA 12345 US +1.2135551234 example@example.com Example User DreamHost Web Hosting 1234 Main St Los Angeles CA 12345 US +1.2135551234 example@example.com Example User DreamHost Web Hosting 1234 Main St Los Angeles CA 12345 US +1.2135551234 example@example.com DreamHost Web Hosting 1234 Main St CA 12345 US +1.2135551234 example@example.com<br /><br />1 thebesthostever.com 2009-09-19 15:24:39 2007-09-19 15:24:39 2007-09-19 15:24:39 yes no no ns1.dreamhost.com ns2.dreamhost.com ns3.dreamhost.com thebesthostever.com Private Registrant DreamHost Web Hosting 417 Associated Rd #324 Brea CA 92821 US +1.2139471032 thebesthostever.com@proxy.dreamhost.com thebesthostever.com Private Registrant DreamHost Web Hosting 417 Associated Rd #324 Brea CA 92821 US +1.2139471032 thebesthostever.com@proxy.dreamhost.com thebesthostever.com Private Registrant DreamHost Web Hosting 417 Associated Rd #324 Brea CA 92821 US +1.2139471032 thebesthostever.com@proxy.dreamhost.com DreamHost Web Hosting 417 Associated Rd #324 Brea CA 92821 US +1.2139471032 thebesthostever.com@proxy.dreamhost.com</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles valores</strong></td>
+<td>
+<p><strong>autorenew</strong>&nbsp;: yes, no, o ask<br /><strong>locked</strong>&nbsp;: yes o no<br /><strong>expired</strong>&nbsp;: yes o no</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="domain-registration_available">domain-registration_available</span></h3>
+<p>Comprueba si un nombre de dominio está disponible para registrarse. Debe ser un dominio .com, .net .org o .info (y no un subdominio).</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>domain-registration_available</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>domain</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultad</strong></td>
+<td>
+<p>success<br />available<br />yes<br /><br />or<br /><br />success<br />available<br />no</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>invalid_domain&nbsp;: The domain is not valid or it is a subdomain<br />invalid_tld&nbsp;: The top level domain is not .com, .net, .org, or .info</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2><span id="Ver_también">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="/hc/en-us/articles/217560167-Application-programming-interface-overview">Generalidades de la interfaz de programación de aplicaciones</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
