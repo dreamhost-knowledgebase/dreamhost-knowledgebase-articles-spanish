@@ -1,0 +1,159 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>DreamCompute ofrece múltiples clústeres (también llamados a menudo zonas de disponibilidad) que son instalaciones independientes de OpenStack con sus propios servidores, almacenamiento y panel de control. Algunos clústeres tienen características diferentes, como almacenamiento SSD o hardware diferente que es útil para una tarea determinada. La migración de instancias y datos entre clústeres no está automatizada en este momento, pero esta guía te muestra cómo lograrlo tú mismo.</p>
+<p>Esta guía asume que te sientes cómodo trabajando con SSH, así como con algunas utilidades de línea de comando como <span class="code">dd</span> y la CLI de OpenStack. Para obtener más información sobre esas utilidades, consulta los siguientes artículos.</p>
+<ul>
+<li><a class="reference internal" href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview">Generalidades de SSH</a></li>
+<li><a class="reference external" href="https://man7.org/linux/man-pages/man1/dd.1.html" target="_self" rel="undefined">man7.org/linux/man-pages/man1/dd.1.html</a></li>
+<li><a class="reference internal" href="https://help.dreamhost.com/hc/en-us/articles/235817468-Getting-started-with-the-OpenStack-command-line-client">Introducción al cliente de línea de comandos de OpenStack</a></li>
+</ul>
+</div>
+<h2>Cosas a tener en cuenta</h2>
+<div class="solvvy-solution">
+<p>A continuación, se incluyen algunas cosas que debe tener en cuenta y planificar antes de una migración.</p>
+<h3>Las direcciones IP cambiarán</h3>
+<p>Cada clúster tiene bloques asignados de direcciones IP, por lo tanto, las direcciones IP flotantes, IPv4 públicas y IPv6 públicas no se pueden transferir entre clústeres. Si estás usando redes privadas (opcional en US-East 2), la dirección específica asignada 10.x.x.x también puede cambiar.</p>
+<h3>Llaves de SSH</h3>
+<p>Cada clúster administra sus claves SSH por separado, por lo que si ya tienes tus claves configuradas en el clúster de origen, debes configurar las mismas claves (o nuevas) en el clúster de destino. Puedes obtener la clave pública de cualquier par de claves en tu proyecto desde la página(<a href="https://iad2.dreamcompute.com/project/key_pairs/">'Project' &gt; 'Compute' &gt; 'Key Pairs'</a>) del panel de DreamCompute.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/migrate-instances-between-clusters_01.png" alt="" /></dd>
+</dl>
+<dl>
+<dd>Para acceder a esa página, solo haz clic en el nombre de la llave de emparejamiento.</dd>
+</dl>
+<h3>Planifica una ventana de mantenimiento</h3>
+<p>Para evitar que los archivos abiertos causen daños u otro comportamiento extraño, es más seguro mover los datos cuando la instancia no se está ejecutando. La copia de los datos suele ser bastante rápida para volúmenes más pequeños, pero para volúmenes más grandes puede llevar algún tiempo. Recuerda, la copia debe completarse antes de que se pueda restaurar el servicio.</p>
+<p>Además, el DNS debe actualizarse de las antiguas IP públicas a las nuevas. Dependiendo del tiempo de vida (TTL) de tu proveedor de DNS, este proceso puede tardar desde unos minutos hasta 24 horas. Las zonas DNS administradas por DreamHost pueden cambiar el TTL de 4 horas a 5 minutos si <a href="https://help.dreamhost.com/hc/en-us/articles/218084068-Contacting-support-overview">contactas a soporte</a> al menos 24 horas antes de tus cambios. Esto puede ayudar a minimizar el tiempo de propagación.</p>
+<h3>Instancias Efímeras</h3>
+<p>Las instancias efímeras no pueden tener acceso a sus datos por otras instancias cuando están apagadas. Estas instancias solo se pueden migrar mientras se ejecutan, por lo que es mejor cerrar tantos servicios como sea posible para limitar la posibilidad de daños. Por favor mira la última sección a continuación para ver <a class="reference external" href="#migrating-an-ephemeral-instance-using-the-openstack-cli">instrucciones sobre la migración de instancias en ejecución</a>.</p>
+</div>
+<h2>Migrar una instancia respaldada por volumen mediante la CLI de OpenStack</h2>
+<div class="solvvy-solution">
+<p>Para este tipo de movimiento, es necesario eliminar la instancia para que deje un volumen para migrar.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este método requiere que no selecciones "Sí" para la opción "Eliminar volumen al eliminar la instancia" cuando creaste tu instancia. Si lo hiciste, pasa a la última sección para <a class="reference external" href="#migrating-an-ephemeral-instance-using-the-openstack-cli">instrucciones sobre la migración de instancias en ejecución</a>. Si continúas, puedes destruir permanentemente y perder tus datos.</p>
+</div>
+</div>
+<p>Como descripción general, estos son los componentes involucrados en la realización de esta tarea:</p>
+<div class="code highlight-python">
+<pre> SOURCE CLUSTER         DESTINATION CLUSTER
+
++---------------+     +----------------------+     +-------------------+
+| Temp Instance |----&gt;| Glance Image Service |----&gt;| Migrated Instance |
++---------------+     +----------------------+     +-------------------+
+        |(mount)
++----------------+
+| Volume To Copy |
++----------------+
+</pre>
+</div>
+<h3>Migration procedure</h3>
+<ol class="arabic simple">
+<li>Crea una "fotocopiadora" temporal lanzando una nueva instancia utilizando el flavor más pequeño disponible. Esta guía usa Ubuntu 14.04, pero los comandos deben ser similares en cualquier sistema Ubuntu. También se recomienda que hagas que la instancia sea efímera, ya que no será necesaria una vez que se complete la migración.</li>
+<li>Instala el software necesario para acceder al servicio de imágenes Glance en esta nueva instancia:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo -i</span>
+<span class="server">[root@instance]# </span><span class="command">apt-get install python-dev python-pip</span>
+<span class="server">[root@instance]# </span><span class="command">pip install python-openstackclient</span>
+</pre>
+</div>
+</li>
+<li>Corre <span class="code">openstack help</span> y compruebe si faltan otros módulos. Instálalos con:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">pip install MODULENAME</span>
+</pre>
+</div>
+</li>
+<li>Configura tu archivo openstack.rc para el clúster DESTINATION en esta nueva instancia. Consulta el siguiente artículo para obtener instrucciones sobre cómo descargar este archivo:
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/228047207-How-to-download-your-DreamCompute-openrc-file">Cómo descargar tu archivo openrc de DreamCompute</a></li>
+</ul>
+</li>
+<li>Después de descargar el archivo, cárgalo en su instancia o copia/pega su contenido en un archivo en la instancia. En el siguiente ejemplo, el contenido se ha guardado en un archivo llamado <span class="text-object">dreamcompute-CLUSTER.sh</span>, pero puedes nombrarlo como quieras. Una vez que termine, corre el archivo:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">. dreamcompute-CLUSTER.sh</span>
+</pre>
+</div>
+</li>
+<li>Ingresa tu contraseña de DreamCompute en el mensaje "Ingresa tu contraseña de OpenStack". Esta es la misma contraseña que usas para iniciar sesión en el panel de DreamCompute.</li>
+<li>Ahora que tu sesión de shell tiene las credenciales de autenticación necesarias para conectarte al clúster de DESTINO, corre el siguiente comando para ver las imágenes de OpenStack actualmente en el clúster de DESTINO:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">openstack image list</span>
+</pre>
+</div>
+</li>
+<li>Elimina la instancia que deseas mover, liberando su volumen para que pueda adjuntarse a la instancia recién creada.</li>
+<li>Para adjuntar el volumen a la nueva instancia, ve al menú Volúmenes, haz clic en el cuadro desplegable en la columna <span class="text-object">Acciones</span> en el lado derecho, luego haz clic en 'Editar archivos adjuntos'.</li>
+<li>
+<p>Determina la letra de unidad del nuevo volumen. Generalmente /dev/vda será la unidad de arranque de tu instancia, por lo que puede ser /dev/vdb o /dev/vdc. Una forma de verificarlo es con el comando fdisk:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">fdisk -l /dev/vdb | grep Disk</span>
+<span class="server">[root@instance]# </span><span class="command">fdisk -l /dev/vdc | grep Disk</span>
+</pre>
+</div>
+<p>El que coincide con el tamaño del nuevo volumen es el que se va a utilizar. Toma nota de la letra de la unidad (la parte /dev/vdX).</p>
+</li>
+<li>Usa <span class="code">dd</span> para canalizar los datos directamente al servicio de imágenes del glance. No olvides cambiar la letra de la unidad en el ejemplo a continuación por la que encontraste arriba. También puedes cambiar cualquier texto en MAYÚSCULAS para adaptarse a tu gusto.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">dd if=/dev/vdX | openstack image create \
+<span class="command">               --private --container-format bare \</span>
+<span class="command">               --disk-format raw "INSTANCENAME"</span>
+</span></pre>
+</div>
+</li>
+<li>Espera a que este comando termine de correrse. Si tienes éxito, debería mostrar la información sobre la nueva imagen que se creó.</li>
+</ol>
+<p>Ahora estás listo para ir al clúster de DESTINO para iniciar una nueva instancia y seleccionar la imagen que se acaba de cargar como fuente. Si los datos están destinados a ser persistentes, es mejor especificar que desea crear un nuevo volumen la pestaña <span class="text-object">Source</span> cuando lances la nueva instancia.</p>
+</div>
+<h2>Migrar una instancia efímera con la CLI de OpenStack</h2>
+<div class="solvvy-solution">
+<p>No se recomienda este tipo de migración. Sin embargo, puede ser necesario en algunas situaciones, por lo que se incluye aquí.</p>
+<ol>
+<li>Cierra tantos servicios en la instancia como sea posible (como servidores de bases de datos, <span class="text-object">http</span> servidores, etc.), idealmente dejando solo las herramientas del sistema predeterminadas y sshd en ejecución.</li>
+<li>Instala el software necesario para acceder al servicio de imágenes del glance en la instancia:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo -i</span>
+<span class="server">[root@instance]# </span><span class="command">apt-get install python-dev python-pip</span>
+<span class="server">[root@instance]# </span><span class="command">pip install python-openstackclient</span>
+</pre>
+</div>
+</li>
+<li>Corre <span class="code">openstack help</span> y comprueba si faltan otros módulos. Instálalos con:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">pip install MODULENAME</span>
+</pre>
+</div>
+</li>
+<li>Configura tu archivo openstack.rc para el clúster de DESTINO en esta nueva instancia. Consult el siguiente artículo para obtener instrucciones sobre cómo descargar este archivo:
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/228047207-How-to-download-your-DreamCompute-openrc-file">Cómo descargar tu archivo openrc de DreamCompute</a></li>
+</ul>
+</li>
+<li>Después de descargar el archivo, cárgal en tu instancia o copia/pega tu contenido en un archivo en la instancia. En el siguiente ejemplo, el contenido se ha guardado en un archivo llamado <span class="text-object">dreamcompute-CLUSTER.sh</span>, pero puedes nombrarlo como quieras. Una vez que termine, corre el archivo:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">. dreamcompute-CLUSTER.sh</span>
+</pre>
+</div>
+</li>
+<li>Ingresa tu contraseña de DreamCompute en el mensaje "Ingresa tu contraseña de OpenStack". Esta es la misma contraseña que usa para iniciar sesión en el panel de DreamCompute.</li>
+<li>Ahora que tu sesión de shell tiene las credenciales de autenticación necesarias para conectarte al clúster de DESTINO, corre el siguiente comando para ver las imágenes de OpenStack actualmente en el clúster de DESTINO:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">openstack image list</span>
+</pre>
+</div>
+</li>
+<li>Determina la letra de la unidad examinando la salida de <span class="code">df -h</span> para el sistema de archivos root (/). Generalmente esto es /dev/vda1.</li>
+<li>Usa <span class="code">dd</span> para canalizar los datos desde el disco directamente al servicio de imágenes de vistazo. Cambie cualquier texto en MAYÚSCULAS para adaptarse a tu gusto.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">dd if=/dev/vda | openstack image create \
+<span class="command">               --private --container-format bare \</span>
+<span class="command">               --disk-format raw "INSTANCENAME"</span>
+</span></pre>
+</div>
+</li>
+<li>Espera a que el comando termine de correrse. Si tiene éxito, debería mostrar la información sobre la nueva imagen que se creó.</li>
+</ol>
+<p>Ahora estás listo para ir al clúster de DESTINO para iniciar una nueva instancia y seleccionar la imagen que se acaba de cargar como fuente. Si los datos están destinados a ser persistentes, es mejor especificar que desea crear un nuevo volumen en la pestaña <span class="text-object">Source</span> cuando lances la nueva instancia.</p>
+</div>

@@ -1,0 +1,237 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Ansible es una herramienta de gestión de la configuración con compatibilidad integrada con OpenStack. Con Ansible, puedes implementar y administrar instancias en DreamCompute. Este tutorial explica cómo instalar Ansible y usarlo para lanzar una instancia en DreamCompute.</p>
+</div>
+<h2>Configuración</h2>
+<div class="solvvy-solution">
+<p>Este tutorial utiliza Ubuntu 16.04 (Xenial Xerus) como host para ejecutar <a href="http://docs.ansible.com/ansible/latest/playbooks.html">Ansible playbooks</a>. Primero, instala algunos paquetes usando el siguiente comando.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">sudo apt-get install -y ansible python2.7 python-virtualenv python-pip</span></pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si no estás utilizando Ubuntu 16.04, puedes leer <a class="reference external" href="https://docs.ansible.com/ansible/latest/installation_guide/index.html" target="_self" rel="undefined">docs.ansible.com/ansible/latest/installation_guide</a> para averiguar cómo instalar ansible en tu sistema</p>
+</div>
+</div>
+<p>Ansible depende den '<a href="https://pypi.python.org/pypi/shade">shade</a>' que es una biblioteca cliente de Python para interactuar con OpenStack. Crea un entorno virtual y usa <span class="code">pip</span> para instalar 'shade'.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">virtualenv venv -p /usr/bin/python</span>
+<span class="server">[user@localhost]$ </span><span class="command">source venv/bin/activate</span>
+<span class="server">(venv)user@localhost]$ </span><span class="command">pip install shade</span>
+</pre>
+</div>
+<p>Ahora tienes 'shade' instalado y listo para comenzar a escribir los playbooks de Ansible.</p>
+</div>
+<h2>¿Qué son los Playbooks?</h2>
+<div class="solvvy-solution">
+<p>Los <a href="http://docs.ansible.com/ansible/latest/playbooks.html">Playbooks</a> son el lenguaje de configuración, implementación y orquestación de Ansible. En un nivel básico, los libros de jugadas se pueden usar para administrar configuraciones e implementaciones en máquinas remotas. Los libros de jugadas están diseñados para ser legibles por humanos y están desarrollados en un lenguaje de texto básico.</p>
+</div>
+<h2>Writing a Ansible Playbook to launch an instance</h2>
+<div class="solvvy-solution">
+<p><a href="https://help.dreamhost.com/hc/en-us/articles/115006413028-Creating-and-editing-a-file-via-SSH">Create a file</a> named <strong>launch-server.yaml</strong> and enter the following lines into it.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los siguientes ejemplos se suman al ejemplo anterior. Solo necesitas actualizar el código en texto verde cada vez.</p>
+<p>Asegúrate de aplicar una sangría como se describe a continuación. Un espaciado incorrecto hará que el archivo no se ejecute.</p>
+</div>
+</div>
+<ol>
+<li>The first part of your playbook is a list of hosts that your playbook will run on. In this case there is one, localhost.
+<div class="preboxcontainer">
+<pre class="prebox"># hosts the playbook runs on
+<span class="green">- hosts: localhost</span></pre>
+</div>
+</li>
+<li>Dado que 'shade' se ha instalado en el virtualenv, debes decirle a Ansible que use este virtualenv. Ve a la siguiente línea, haz una sangría de 2 espacios y luego agrega estas líneas.
+<div class="preboxcontainer">
+<pre class="prebox"># hosts the playbook runs on
+- hosts: localhost
+<span class="green">  vars:
+    ansible_python_interpreter: "/usr/bin/env python"</span></pre>
+</div>
+</li>
+<li>Define una lista de tareas para realizar en este manual. Ve a la siguiente línea, haz una sangría de 2 espacios y luego agrega estas líneas.
+<div class="preboxcontainer">
+<pre class="prebox"># hosts the playbook runs on
+- hosts: localhost
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+
+  # List of tasks
+  <span class="green">tasks:
+  - name: launch an Ubuntu server</span></pre>
+</div>
+</li>
+<li>Usa el <a href="https://docs.ansible.com/ansible/latest/modules/os_server_module.html" target="_self">os_server</a> módulo para crear una instancia de OpenStack. Ve a la línea siguiente, haz una sangría de 2 espacios y agregz esta línea.
+<div class="preboxcontainer">
+<pre class="prebox"># hosts the playbook runs on
+- hosts: localhost
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+
+  # List of tasks
+  tasks:
+  - name: launch an Ubuntu server
+
+    # Define a server
+    <span class="green">os_server:</span></pre>
+</div>
+</li>
+<li>Agrega la autenticación DreamCompute para que se pueda crear una instancia. En el siguiente ejemplo, sustituye lo siguiente:
+<ul>
+<li><strong>{username}</strong> — tu nombre de usuario del panel de DreamCompute.</li>
+<li><strong>{password}</strong> — tu contraseña del panel de DreamCompute.</li>
+<li><strong>{project}</strong> — tu proyecto DreamCompute. Esto se puede encontrar en el tablero en la parte superior izquierda.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/dhc-dashboard-project.png" /></dd>
+</dl>
+</li>
+</ul>
+Ve a la siguiente línea, haz una sangría de 2 espacios y luego agrega estas líneas.
+<div class="preboxcontainer">
+<pre class="prebox"># hosts the playbook runs on
+- hosts: localhost
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+
+  # List of tasks
+  tasks:
+  - name: launch an Ubuntu server
+
+    # Define a server
+    os_server:
+
+    # Cloud authentication information
+    <span class="green">auth: 
+      auth_url: https://iad2.dream.io:5000 
+      username: {username} 
+      password: {password} 
+      project_name: {project}</span></pre>
+</div>
+</li>
+<li>Finalmente, define cómo debería verse la instancia.
+<div class="preboxcontainer">
+<pre class="prebox"># hosts the playbook runs on
+- hosts: localhost
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+
+  # List of tasks
+  tasks:
+  - name: launch an Ubuntu server
+
+    # Define a server
+    os_server:
+
+      # Cloud authentication information
+      auth:
+        auth_url: https://iad2.dream.io:5000
+        username: {username} 
+        password: {password} 
+        project_name: {project}
+
+      # VM details
+      <span class="green">state: present
+      name: ansible-vm1
+      image: Ubuntu-16.04
+      key_name: myKey
+      flavor: 50
+      network: public
+      wait: yes</span>
+</pre>
+</div>
+</li>
+</ol>
+<p>Explicación de las últimas líneas</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>state</strong></td>
+<td>El estado de la instancia, los valores posibles son:
+<ul>
+<li>present</li>
+<li>absent</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td>El nombre de la instancia a crear</td>
+</tr>
+<tr>
+<td><strong>image</strong></td>
+<td>La imagen desde la que arrancar la instancia, los valores posibles son:
+<ul>
+<li>Name of an image: Ubuntu-16.04, CentOS-7, etc</li>
+<li>ID of an image: 12f6a911-00a2-42eb-8712-d930da2da81f</li>
+<li>La lista de imágenes públicas se puede encontrar en el panel en <a class="reference external" href="https://iad2.dreamcompute.com/project/images/">https://iad2.dreamcompute.com/project/images/</a></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><strong>key_name</strong></td>
+<td>La clave pública para agregar a la instancia una vez creada. Esto puede ser <a href="https://help.dreamhost.com/hc/es/articles/115001736691-Descripci%C3%B3n-general-de-creaci%C3%B3n-de-una-Llave-de-Emparejamiento" target="_self" rel="undefined">cualquier clave que hayas agregado a DreamCompute</a>.</td>
+</tr>
+<tr>
+<td><strong>flavor</strong></td>
+<td>Esto define cuánta RAM y CPU tendrá tu instancia. Puedes ver todos los sabores cuando estés <a href="https://help.dreamhost.com/hc/es/articles/215912848-C%C3%B3mo-lanzar-una-instancia-usando-el-panel-de-DreamCompute" target="_self" rel="undefined">creando una instancia en el pael</a> o al correr un <a href="https://help.dreamhost.com/hc/es/articles/216511617-Como-lanzar-una-instancia-usando-el-CLI-de-OpenStack#Lista_de_Flavors" target="_self" rel="undefined">comado de OpenStack</a>. Algunos valores posibles son:
+<ul>
+<li>Nombre del flavor: gp1.semisonic, gp1.supersonic, etc</li>
+<li>ID del flavor: 50, 100, 200, etc</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><strong>network</strong></td>
+<td>La red para poner tu instancia. En este caso, es la red "public", pero si tienes habilitada la red privada, podría ser diferente
+<ul>
+<li>Nombre de la red: public</li>
+<li>ID de la network: e098d02f-bb35-4085-ae12-664aad3d9c52</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><strong>wait</strong></td>
+<td>Si esperar o no a que se cree la instancia antes de continuar. Los posibles valores son:
+<ul>
+<li>yes</li>
+<li>no</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Correr la Playbook de Ansible</h2>
+<div class="solvvy-solution">
+<p>El playbook de Ansible se puede ejecutar con el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">ansible-playbook launch-server.yaml</span></pre>
+</div>
+<p>Deberías ver una salida como</p>
+<div class="preboxcontainer">
+<pre class="prebox">PLAY [localhost]
+***************************************************************************
+
+TASK [Gathering Facts]
+***************************************************************************
+ok: [localhost]
+
+TASK [launch an Ubuntu server]
+***************************************************************************
+changed: [localhost]
+
+PLAY RECAP
+***************************************************************************
+localhost                  : ok=2    changed=1    unreachable=0    failed=0
+</pre>
+</div>
+<p>Ahora si ves el <a class="reference external" href="https://iad2.dreamcompute.com/project/instances/">panel de DreamCompute</a> verás la nueva instancia llamada “ansible-vm1”</p>
+</div>
+<!--DreamCompute Button-->
+<div class="dream-sign-up">
+<h2>¡Desarolla tus Aplicaciones en Servidores en la Nube Hoy!</h2>
+<div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Suscríbete a DreamCompute</a></div>
+</div>
