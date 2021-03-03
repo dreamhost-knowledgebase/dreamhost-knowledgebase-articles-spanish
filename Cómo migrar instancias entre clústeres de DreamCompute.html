@@ -3,9 +3,9 @@
 <p>DreamCompute ofrece múltiples clústeres (también llamados a menudo zonas de disponibilidad) que son instalaciones independientes de OpenStack con sus propios servidores, almacenamiento y panel de control. Algunos clústeres tienen características diferentes, como almacenamiento SSD o hardware diferente que es útil para una tarea determinada. La migración de instancias y datos entre clústeres no está automatizada en este momento, pero esta guía te muestra cómo lograrlo tú mismo.</p>
 <p>Esta guía asume que te sientes cómodo trabajando con SSH, así como con algunas utilidades de línea de comando como <span class="code">dd</span> y la CLI de OpenStack. Para obtener más información sobre esas utilidades, consulta los siguientes artículos.</p>
 <ul>
-<li><a class="reference internal" href="https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview">Generalidades de SSH</a></li>
+<li><a class="reference internal" href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">Generalidades de SSH</a></li>
 <li><a class="reference external" href="https://man7.org/linux/man-pages/man1/dd.1.html" target="_self" rel="undefined">man7.org/linux/man-pages/man1/dd.1.html</a></li>
-<li><a class="reference internal" href="https://help.dreamhost.com/hc/en-us/articles/235817468-Getting-started-with-the-OpenStack-command-line-client">Introducción al cliente de línea de comandos de OpenStack</a></li>
+<li><a class="reference internal" href="https://help.dreamhost.com/hc/es/articles/235817468-Introducci%C3%B3n-al-cliente-de-l%C3%ADnea-de-comandos-de-OpenStack" target="_self" rel="undefined">Introducción al cliente de línea de comandos de OpenStack</a></li>
 </ul>
 </div>
 <h2>Cosas a tener en cuenta</h2>
@@ -14,7 +14,7 @@
 <h3>Las direcciones IP cambiarán</h3>
 <p>Cada clúster tiene bloques asignados de direcciones IP, por lo tanto, las direcciones IP flotantes, IPv4 públicas y IPv6 públicas no se pueden transferir entre clústeres. Si estás usando redes privadas (opcional en US-East 2), la dirección específica asignada 10.x.x.x también puede cambiar.</p>
 <h3>Llaves de SSH</h3>
-<p>Cada clúster administra sus claves SSH por separado, por lo que si ya tienes tus claves configuradas en el clúster de origen, debes configurar las mismas claves (o nuevas) en el clúster de destino. Puedes obtener la clave pública de cualquier par de claves en tu proyecto desde la página(<a href="https://iad2.dreamcompute.com/project/key_pairs/">'Project' &gt; 'Compute' &gt; 'Key Pairs'</a>) del panel de DreamCompute.</p>
+<p>Cada clúster administra sus claves SSH por separado, por lo que si ya tienes tus claves configuradas en el clúster de origen, debes configurar las mismas claves (o nuevas) en el clúster de destino. Puedes obtener la clave pública de cualquier par de claves en tu proyecto desde la página (<a href="https://iad2.dreamcompute.com/project/key_pairs/">'Project' &gt; 'Compute' &gt; 'Key Pairs'</a>) del panel de DreamCompute.</p>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/migrate-instances-between-clusters_01.png" alt="" /></dd>
 </dl>
@@ -23,9 +23,9 @@
 </dl>
 <h3>Planifica una ventana de mantenimiento</h3>
 <p>Para evitar que los archivos abiertos causen daños u otro comportamiento extraño, es más seguro mover los datos cuando la instancia no se está ejecutando. La copia de los datos suele ser bastante rápida para volúmenes más pequeños, pero para volúmenes más grandes puede llevar algún tiempo. Recuerda, la copia debe completarse antes de que se pueda restaurar el servicio.</p>
-<p>Además, el DNS debe actualizarse de las antiguas IP públicas a las nuevas. Dependiendo del tiempo de vida (TTL) de tu proveedor de DNS, este proceso puede tardar desde unos minutos hasta 24 horas. Las zonas DNS administradas por DreamHost pueden cambiar el TTL de 4 horas a 5 minutos si <a href="https://help.dreamhost.com/hc/en-us/articles/218084068-Contacting-support-overview">contactas a soporte</a> al menos 24 horas antes de tus cambios. Esto puede ayudar a minimizar el tiempo de propagación.</p>
+<p>Además, el DNS debe actualizarse de las antiguas IP públicas a las nuevas. Dependiendo del tiempo de vida (TTL) de tu proveedor de DNS, este proceso puede tardar desde unos minutos hasta 24 horas. Las zonas DNS administradas por DreamHost pueden tener el TTL de 5 minutos.</p>
 <h3>Instancias Efímeras</h3>
-<p>Las instancias efímeras no pueden tener acceso a sus datos por otras instancias cuando están apagadas. Estas instancias solo se pueden migrar mientras se ejecutan, por lo que es mejor cerrar tantos servicios como sea posible para limitar la posibilidad de daños. Por favor mira la última sección a continuación para ver <a class="reference external" href="#migrating-an-ephemeral-instance-using-the-openstack-cli">instrucciones sobre la migración de instancias en ejecución</a>.</p>
+<p>Las instancias efímeras no pueden tener acceso a sus datos por otras instancias cuando están apagadas. Estas instancias solo se pueden migrar mientras se ejecutan, por lo que es mejor cerrar tantos servicios como sea posible para limitar la posibilidad de daños. Por favor mira la última sección a continuación para ver <a class="reference external" href="https://help.dreamhost.com/hc/es/articles/218501427-C%C3%B3mo-migrar-instancias-entre-cl%C3%BAsteres-de-DreamCompute" target="_self" rel="undefined">instrucciones sobre la migración de instancias en ejecución</a>.</p>
 </div>
 <h2>Migrar una instancia respaldada por volumen mediante la CLI de OpenStack</h2>
 <div class="solvvy-solution">
@@ -33,7 +33,7 @@
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Este método requiere que no selecciones "Sí" para la opción "Eliminar volumen al eliminar la instancia" cuando creaste tu instancia. Si lo hiciste, pasa a la última sección para <a class="reference external" href="#migrating-an-ephemeral-instance-using-the-openstack-cli">instrucciones sobre la migración de instancias en ejecución</a>. Si continúas, puedes destruir permanentemente y perder tus datos.</p>
+<p>Este método requiere que no selecciones "Sí" para la opción "Eliminar volumen al eliminar la instancia" cuando creaste tu instancia. Si lo hiciste, pasa a la última sección para <a class="reference external" href="https://help.dreamhost.com/hc/es/articles/218501427-C%C3%B3mo-migrar-instancias-entre-cl%C3%BAsteres-de-DreamCompute" target="_self" rel="undefined">instrucciones sobre la migración de instancias en ejecución</a>. Si continúas, puedes destruir permanentemente y perder tus datos.</p>
 </div>
 </div>
 <p>Como descripción general, estos son los componentes involucrados en la realización de esta tarea:</p>
@@ -68,7 +68,7 @@
 </li>
 <li>Configura tu archivo openstack.rc para el clúster DESTINATION en esta nueva instancia. Consulta el siguiente artículo para obtener instrucciones sobre cómo descargar este archivo:
 <ul>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/228047207-How-to-download-your-DreamCompute-openrc-file">Cómo descargar tu archivo openrc de DreamCompute</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/228047207-C%C3%B3mo-descargar-tu-archivo-openrc-de-DreamCompute" target="_self" rel="undefined">Cómo descargar tu archivo openrc de DreamCompute</a></li>
 </ul>
 </li>
 <li>Después de descargar el archivo, cárgalo en su instancia o copia/pega su contenido en un archivo en la instancia. En el siguiente ejemplo, el contenido se ha guardado en un archivo llamado <span class="text-object">dreamcompute-CLUSTER.sh</span>, pero puedes nombrarlo como quieras. Una vez que termine, corre el archivo:
@@ -128,7 +128,7 @@
 </li>
 <li>Configura tu archivo openstack.rc para el clúster de DESTINO en esta nueva instancia. Consult el siguiente artículo para obtener instrucciones sobre cómo descargar este archivo:
 <ul>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/228047207-How-to-download-your-DreamCompute-openrc-file">Cómo descargar tu archivo openrc de DreamCompute</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/228047207-C%C3%B3mo-descargar-tu-archivo-openrc-de-DreamCompute" target="_self" rel="undefined">Cómo descargar tu archivo openrc de DreamCompute</a></li>
 </ul>
 </li>
 <li>Después de descargar el archivo, cárgal en tu instancia o copia/pega tu contenido en un archivo en la instancia. En el siguiente ejemplo, el contenido se ha guardado en un archivo llamado <span class="text-object">dreamcompute-CLUSTER.sh</span>, pero puedes nombrarlo como quieras. Una vez que termine, corre el archivo:

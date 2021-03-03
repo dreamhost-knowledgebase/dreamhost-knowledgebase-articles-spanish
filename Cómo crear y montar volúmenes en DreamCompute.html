@@ -1,0 +1,163 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>DreamCompute, al igual que otras nubes OpenStack, tiene varios tipos de almacenamiento disponibles para su uso. Este artículo trabaja con el almacenamiento de 'Volumen' que se recomienda para almacenar datos críticos e importantes. Para obtener más información sobre los tipos de almacenamiento, visita el artículo sobre <a class="reference external" href="https://help.dreamhost.com/hc/es/articles/217701757--Cu%C3%A1l-es-la-diferencia-entre-los-discos-de-arranque-ef%C3%ADmeros-y-por-volumen-" target="_self" rel="undefined">diferencias entre almacenamiento efímero y volumétrico</a>.</p>
+</div>
+<h2>¿Qué es el almacenamiento de volumen?</h2>
+<div class="solvvy-solution">
+<p>Los volúmenes se pueden considerar como un disco duro de intercambio en caliente, ya que puede extraerlo de un sistema (desconectarlo), conectarlo a otro sistema (adjuntarlo) y los datos permanecerán en él mientras se reutilizan.</p>
+<p>Hay varias formas de realizar los pasos iniciales para crear y adjuntar el volumen, así que selecciona el método que deseas utilizar:</p>
+<ul>
+<li><a class="reference external" href="https://help.dreamhost.com/hc/es/articles/221778268-How-to-create-and-mount-volumes-on-DreamCompute" target="_self" rel="undefined">Panel de DreamCompute</a></li>
+<li><a class="reference external" href="https://help.dreamhost.com/hc/es/articles/221778268-C%C3%B3mo-crear-y-montar-vol%C3%BAmenes-en-DreamCompute" target="_self" rel="undefined">Línea de comando a través de OpenStack CLI</a></li>
+</ul>
+<h2>Crea y adjunta un volumen usando el panel</h2>
+<div class="solvvy-solution">
+<h3>Verficar tu capacidad de almacenamiento</h3>
+<p>El primer paso es asegurarse de tener suficiente volumen de almacenamiento para agregar un nuevo volumen. Consulta la página del panel de DreamCompute <a class="reference external" href="https://iad2.dreamcompute.com/project/">project overview</a>. En esta página, mira el gráfico circular 'Volume Storage'.</p>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/how-to-create-and-mount-volumes-on-dreamcompute_01.png" alt="how-to-create-and-mount-volumes-on-dreamcompute_01" /></dd>
+</dl>
+<p>Si necesitas almacenamiento adicional, puedes agregar más en el <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener">panel de control</a> de DreamHost.</p>
+<h3>Crear un Volúmen</h3>
+<ol>
+<li>Navega hasta la página del panel de DreamCompute <a class="reference external" href="https://iad2.dreamcompute.com/project/volumes/?tab=volumes_and_snapshots__volumes_tab">volumes</a>.</li>
+<li>Da clic en el botón <strong>Create Volume</strong> en la parte superior derecha.</li>
+<li>Asigna al volumen un tamaño requerido en GB, y un nombre y descripción opcionales, mientras deja las otras opciones configuradas con los valores predeterminados.</li>
+</ol>
+<h3>Usar el Volúmen</h3>
+<ol>
+<li>Para usar tu volumen, debe estar adjunto a una instancia en ejecución. Si no tienes instancias, crees una primero.</li>
+<li>Navega a la página del panel de DreamCompute <a class="reference external" style="background-color: #ffffff;" href="https://iad2.dreamcompute.com/project/volumes/?tab=volumes_and_snapshots__volumes_tab">volumes</a>.</li>
+<li>Da clic en el menú desplegable y selecciona <strong>Manage Attachments</strong>:
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-create-and-mount-volumes-on-dreamcompute_02.png" alt="how-to-create-and-mount-volumes-on-dreamcompute_02" /></dd>
+</dl>
+</li>
+<li>La nueva ventana no mostrará archivos adjuntos en este momento. También muestra un menú desplegable con una lista de tus instancias. Haz clic en la lista y selecciona el nombre de tu instancia, luego haz clic en <strong>Attach Volume</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-create-and-mount-volumes-on-dreamcompute_03.png" alt="how-to-create-and-mount-volumes-on-dreamcompute_03" /></dd>
+</dl>
+</li>
+</ol>
+<p>Esto completa la creación del volumen. Haz clic a continuación para continuar con la creación de tu sistema de archivos y el montaje del volumen.</p>
+<ul>
+<li><a href="#Crear_un_Sistema_de_Archivos">Crear un Sistema de Archivos</a></li>
+</ul>
+</div>
+<h2>Crea y adjunta un volumen usando la CLI de OpenStack</h2>
+<div class="solvvy-solution">
+<p>El primer paso es asegurarse de tener suficiente volumen de almacenamiento para agregar un nuevo volumen. Consulta el panel de DreamCompute <a class="reference external" href="https://iad2.dreamcompute.com/project/">project overview</a>. En esta página, mira el gráfico circular 'Volume Storage'.</p>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/how-to-create-and-mount-volumes-on-dreamcompute_01.png" alt="how-to-create-and-mount-volumes-on-dreamcompute_01" /></dd>
+</dl>
+<p>Si necesita almacenamiento adicional, se puede agregar más en la página del <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener">panel de control</a>.</p>
+<h3>Crear un Volumen</h3>
+<p>Para crear un nuevo volune, corre este comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack volume create --size SIZE_IN_GB VOLUME_NAME</span>
+</pre>
+</div>
+<p>El volumen ahora debería aparecer en el tablero y en la línea de comando.</p>
+<h3>Usar el Volumen</h3>
+<p>Para usar tu volumen, ahora debe estar adjunto a una instancia en ejecución.</p>
+<ol>
+<li>Si no tienes instancias, deberás crear una. El uso de la CLI requiere el nombre de la instancia y el UUID del volumen. Encuentra los detalles del volumen corriendo:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack volume list</span>
++-----------------------+--------------+-----------+------------+-----------------------+
+| ID                    | Display Name | Status    | Size       | Attached to           |
++-----------------------+--------------+-----------+------------+-----------------------+
+| 26c25d21-cff5-4154... | -            | in-use    | 50         | b781a709-27d7-4d7a... |
+| 8edfb18b-6b4b-424e... | VOLUME_NAME  | available | SIZE_IN_GB |                       |
++-----------------------+--------------+-----------+------------+-----------------------+
+</pre>
+</div>
+En este ejemplo, la instancia se llama 'VOLUME_NAME' y solo hay un volumen 'disponible' que es el que se acaba de crear.</li>
+<li>Una vez que tengas tus valores, adjunta el volumen con el siguiente comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server add volume mysql VOLUME_NAME</span>
+</pre>
+</div>
+</li>
+</ol>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Es posible que el nombre del dispositivo que aparece en la lista no siempre sea exacto, por lo que debes verificarlo antes de usar un dispositivo nuevo.</p>
+</div>
+</div>
+<div id="Crear_un_Sistema_de_Archivos">&nbsp;</div>
+<h2>Crear un Sistema de Archivos</h2>
+<div class="solvvy-solution">
+<p>La nueva unidad ahora necesita un sistema de archivos para poder almacenar datos. Hay muchas opciones cuando se trata de sistemas de archivos, pero para este ejemplo, se usa un valor predeterminado seguro de ext4.</p>
+<p>Ahora conéctate a tu instancia con el usuario predeterminado para tu imagen.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined">Cómo encontrar el usuario predeterminado de una imagen</a></li>
+</ul>
+<p>Primero, busca el nombre del dispositivo para el nuevo volumen. Puedes ver qué dispositivos están disponibles comprobando los archivos de dispositivo /dev/vd*:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">ls /dev/vd*</span>
+/dev/vda  /dev/vda1  /dev/vdb</pre>
+</div>
+<p>Generalmente /dev/vda será la unidad de arranque y, en este caso, /dev/vdb parece ser el nuevo volumen. Puedes verificar las coincidencias de tamaño con el comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">sudo fdisk -l /dev/vdb</span>
+Disk /dev/vdb: 1 GiB, 1073741824 bytes, 2097152 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes</pre>
+</div>
+<p>Esto coincide con el tamaño de 1 GB del volumen creado. A continuación, crea un sistema de archivos en la unidad corriendo el comando mkfs.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>¡Este comando es destructivo! Si se corre en el dispositivo incorrecto, lo borrará, así que por favor asegúrate de tenerlo correcto.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">sudo mkfs.ext4 /dev/vdb</span>
+mke2fs 1.42.13 (17-May-2015)
+Creating filesystem with 262144 4k blocks and 65536 inodes
+Filesystem UUID: 51751b87-a583-42b3-8d61-27ed586ba8da
+Superblock backups stored on blocks:
+        32768, 98304, 163840, 229376
+
+Allocating group tables: done
+Writing inode tables: done
+Creating journal (8192 blocks): done
+Writing superblocks and filesystem accounting information: done</pre>
+</div>
+<p>The file system is now created.</p>
+</div>
+<div id="Montar_el_Sistema_de_Archivos">&nbsp;</div>
+<h2>Montar el Sistema de Archivos</h2>
+<div class="solvvy-solution">
+<p>Como se mencionó anteriormente, el dispositivo de la unidad puede cambiar en caso de que ocurran cambios udev u otros, y tal error puede evitar que tu instancia se inicie correctamente. Para evitar esto, inicia a través de UUID. Puedes encontrar el UUID de las unidades corriendo el comando blkid:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">sudo blkid /dev/vdb</span>
+/dev/vdb: UUID="51751b87-a583-42b3-8d61-27ed586ba8da" TYPE="ext4"</pre>
+</div>
+<p>Si deseas montar este volumen en una ubicación que no existe, sigue adelante y crea el directorio con mkdir:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">sudo mkdir -p /mnt/backups</span></pre>
+</div>
+<p>Con esta información, ahora puedes modificar /etc/fstab para que se monte automáticamente. <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self" rel="undefined">Edítalo con tu editor preferido</a>, y agrega una línea hacia la parte inferior así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">UUID=51751b87-a583-42b3-8d61-27ed586ba8da   /mnt/backups   ext4   defaults   0   2</pre>
+</div>
+<p>Una vez que se agrega, puedes probar tu configuración con lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">sudo mount -a</span>
+</pre>
+</div>
+<p>Si todo tuviste éxito, no deberías ver ninguna salida o solo una salida sobre el Sistema de Archivos. Puedes comprobar que todo va bien con <span class="code">df</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">df -h /mnt/backups</span>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vdb        976M  1.3M  908M   1% /mnt/backups</pre>
+</div>
+<p>Comprobar específicamente el dispositivo /dev/vdb en la parte delantera.</p>
+<p>Eso es todo. Cuando reinicies tu instancia, tu volumen se volverá a montar y estará listo para usar.</p>
+</div>
+</div>
+</div>

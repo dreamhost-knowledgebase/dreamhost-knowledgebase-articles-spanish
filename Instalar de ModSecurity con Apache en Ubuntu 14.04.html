@@ -1,0 +1,75 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>ModSecurity es un firewall de aplicaciones web de código abierto (WAF) diseñado como un módulo para servidores web Apache. ModSecurity proporciona un motor de reglas flexible, que permite a los usuarios escribir (o utilizar reglas de terceros) para proteger sitios web de ataques como XSS, SQLi, CSRF, DDoS e inicio de sesión por fuerza bruta (así como una serie de otras vulnerabilidades). Este tutorial describe los conceptos básicos de la instalación y configuración de ModSecurity para un servidor web Apache. Este tutorial asume que <a href="https://help.dreamhost.com/hc/es/articles/215879457-Como-configurar-Apache-en-DreamCompute-Corriendo-Debian-o-Ubuntu" target="_self" rel="undefined">Apache ya está instalado</a> y corriendo.</p>
+</div>
+<h2>Instalar ModSecurity</h2>
+<div class="solvvy-solution">
+<p>Inicia sesión y cambia a tu usuario root.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo su -</span></pre>
+</div>
+<p>Asegúrate de que las fuentes del paquete del sistema estén actualizadas:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">apt-get update</span></pre>
+</div>
+<p>Luego, instala ModSecurity:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">apt-get install libapache2-mod-security2</span></pre>
+</div>
+<p>Esto instala y activa ModSecurity automáticamente. Para comenzar a utilizar ModSecurity, se debe colocar un archivo de configuración utilizable. El paquete ModSecurity proporcionado para Ubuntu contiene un archivo de configuración recomendado predeterminado que se puede usar como punto de partida:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">mv /etc/modsecurity/modsecurity.conf-recommended \
+/etc/modsecurity/modsecurity.conf</span></pre>
+</div>
+<p>Una vez que esto esté en su lugar, vuelva a cargar Apache para que el archivo de configuración predeterminado de ModSecurity surta efecto:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">service apache2 reload</span></pre>
+</div>
+</div>
+<h2>Configurar ModSecurity</h2>
+<div class="solvvy-solution">
+<p>El archivo de configuración predeterminado recomendado proporcionado para ModSecurity tiene muy pocas reglas de protección reales configuradas, pero es un buen punto de partida. En este tutorial, el conjunto de reglas básicas de OWASP (CRS) se utiliza para proporcionar protección adicional.</p>
+<h3>Habilitar conjuntos de reglas de CRS</h3>
+<p>El paquete de Ubuntu para ModSecurity recomienda un paquete separado que contiene los conjuntos de reglas de CRS, que se pueden usar como una fuente adicional de reglas para WAF. Configura ModSecurity para leer archivos de reglas del directorio <span class="text-object">activated_rules</span> agregando las siguientes directivas al archivo <span class="text-object">/etc/apache2/mods-enabled/security2.conf</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">IncludeOptional "/usr/share/modsecurity-crs/*.conf"
+IncludeOptional "/usr/share/modsecurity-crs/activated_rules/*.conf"</pre>
+</div>
+<p>Esto indica a ModSecurity que intente utilizar cualquier archivo que termine en <span class="text-object">conf</span> como archivos de configuración. Más información está disponible en el archivo README en el directorio <span class="text-object">activated_rules</span>.</p>
+<p>Una vez hecho esto, vincula los conjuntos de reglas deseados en las ubicaciones recién incluidas. Por ejemplo, para agregar reglas diseñadas para proteger contra ataques de inyección de SQL, enlaza en el archivo <span class="text-object">sql_injection_attacks</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">cd /usr/share/modsecurity-crs/</span>
+<span class="server">[root@instance]# </span><span class="command">ln -s ./base_rules/modsecurity_crs_41_sql_injection_attacks.conf \
+./activated_rules/</span></pre>
+</div>
+<p>Por supuesto, es posible vincular solo ciertos conjuntos de reglas o grupos completos, según tus necesidades. El CRS también se distribuye con conjuntos de reglas experimentales y personalizados para detectar y mitigar una amplia variedad de amenazas emergentes. Los conjuntos de reglas para instalaciones específicas de CMS/aplicaciones, como WordPress y Joomla, también están disponibles en el directorio <span class="text-object">slr_rules</span> (aunque como una oferta de conjunto de reglas WAF gratuita, estos conjuntos de reglas no siempre están actualizados con las últimas amenazas).</p>
+<p>Cada vez que se ajusta la configuración de ModSecurity, Apache debe volver a cargarse para que las reglas surtan efecto:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">service apache2 reload</span></pre>
+</div>
+<h3>Activar ModSecurity</h3>
+<p>ModSecurity corre inicialmente en modo <cite>DetectionOnly</cite>, en el que WAF examina el tráfico HTTP (S), pero en realidad no bloquea las solicitudes maliciosas. Esto debe ajustarse para que ModSecurity denegue el tráfico de ataque. En el archivo <span class="text-object">/etc/modsecurity/modsecurity.conf</span>, busca la directiva <span class="code">SecRuleEngine</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">SecRuleEngine DetectionOnly</pre>
+</div>
+<p>Y configura sus valores como <cite>On</cite>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">SecRuleEngine On</pre>
+</div>
+<p>Y claramente, recarga Apache para efectuar los cambios:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">service apache2 restart</span></pre>
+</div>
+</div>
+<h2>Configuración Adicional</h2>
+<div class="solvvy-solution">
+<p>Los entornos WAF pueden ser complejos y requerir mucho tiempo para sintonizar y ajustar en función de las necesidades de tu instancia, que es en gran parte la razón por la que se creó el CRS. Si necesitas escribir o cambiar reglas personalizadas, se recomienda leer el <a class="reference external" href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual">manual de servicio de ModSecurity</a>.</p>
+<p>Adicionalmente, la lista de correo <cite>modsecurity-users</cite> y <cite>#modsecurity</cite> room en Freenode IRC son excelentes recursos para usuarios y desarrolladores experimentados de ModSecurity.</p>
+</div>
+<div class="clearer">&nbsp;</div>
+<div class="footer">&nbsp;</div>
+<!--DreamCompute Button-->
+<div class="dream-sign-up">
+<h2>¡Desarrolla Tus Aplicaciones en Servidores en la Nube Hoy!</h2>
+<div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Suscríbete a DreamCompute</a></div>
+</div>
