@@ -1,0 +1,251 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica cómo instalar Nextcloud en dos instancias de DreamCompute. Una instancia es para la propia aplicación y la otra instancia para la base de datos que utiliza.</p>
+</div>
+<h2>Paso 1 —&nbsp;Agregar un grupo de seguridad</h2>
+<div class="solvvy-solution">
+<p>Primero, crea un grupo de seguridad para la instancia de la base de datos. Esto es para que permita TCP en el puerto 3306, el puerto MySQL/MariaDB. Consulta los dos artículos siguientes para obtener más instrucciones:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215912838-Configurar-grupos-de-seguridad" target="_self" rel="undefined">Configurar grupos de seguridad</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360000717692-Managing-Security-Groups-using-the-OpenStack-CLI">Administrar los Grupos de Seguridad usando el CLI OpenStack</a></li>
+</ul>
+</div>
+<h2>Paso 2 — Lanzar una instancia</h2>
+<div class="solvvy-solution">
+<p>A continuación, inicia dos instancias de Ubuntu 16.04 LTS.</p>
+<ul>
+<li>La primera instancia será solo para la base de datos.</li>
+<li>La segunda instancia es para el servidor web en el que se ejecutará NextCloud.</li>
+</ul>
+<p>Ve la siguiente categoría de artículos para conocer las diferentes formas de hacer esto:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/sections/115000240012-Lanzar" target="_self" rel="undefined">Lanzar una instancia</a></li>
+</ul>
+<p>Al iniciar la instancia de la base de datos, asegúrate de asignar el Grupo de Seguridad que acaba de crear en el paso 1 anterior. Si olvidaste agregarlo mientras creabas la instancia, aún puedes agregarlo más tarde.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360000607492-Cambiar-el-Grupo-de-Seguridad-de-una-instancia" target="_self" rel="undefined">Cambiar el Grupo de Seguridad de una instancia</a></li>
+</ul>
+<h3>Usar una instancia basada en volumen</h3>
+<p>Se recomienda reiniciar una <a href="https://help.dreamhost.com/hc/es/articles/217701757--Cu%C3%A1l-es-la-diferencia-entre-los-discos-de-arranque-ef%C3%ADmeros-y-por-volumen-" target="_self" rel="undefined">instancia respaldada por volumen</a> ya que son permanentes en contraposición a los <a href="https://help.dreamhost.com/hc/es/articles/217701757--Cu%C3%A1l-es-la-diferencia-entre-los-discos-de-arranque-ef%C3%ADmeros-y-por-volumen-" target="_self" rel="undefined">discos efímeros</a> y puede tener un tamaño superior a 80 GB si se almacenan grandes cantidades de datos. Esto se puede hacer en el <a class="reference external" href="https://help.dreamhost.com/hc/es/articles/215912848-C%C3%B3mo-lanzar-una-instancia-usando-el-panel-de-DreamCompute" target="_self" rel="undefined">panel de DreamCompute</a> o con el <a href="https://help.dreamhost.com/hc/es/articles/216511617-Como-lanzar-una-instancia-usando-el-CLI-de-OpenStack" target="_self" rel="undefined">cliente de línea de comandos de OpenStack</a>.</p>
+<div id="installing-mariadb">&nbsp;</div>
+<h2>Paso 3 — Instalar MariaDB en la instancia #1</h2>
+<div class="solvvy-solution">
+<p>Para instalar MariaDB en tu instancia de base de datos, primero, inicia sesión en la instancia con tu <a href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined">usuario predeterminado</a> y la <a href="https://help.dreamhost.com/hc/es/articles/115001736691-Descripci%C3%B3n-general-de-creaci%C3%B3n-de-una-Llave-de-Emparejamiento" target="_self" rel="undefined">llave de seguridad</a>:</p>
+<p>A continuación, cambia a tu usuario root para que pueda instalar MariaDB:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@dbinstance]$ </span><span class="command">sudo su - </span>
+<span class="server">[root@dbinstance]# </span>
+</pre>
+</div>
+<p>Como tu usuario root, instala mariadb corriendo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@dbinstance]# </span><span class="command">apt update</span>
+<span class="server">[root@dbinstance]# </span><span class="command">apt install mariadb-server</span>
+</pre>
+</div>
+<p>Durante la instalación, el usuario raíz de la base de datos se configurará sin contraseña, pero un complemento de autenticación evitará el inicio de sesión de cualquier persona que no sea el usuario raíz del sistema operativo. Se puede establecer una contraseña si se desea.</p>
+</div>
+<div id="configuring-mariadb">&nbsp;</div>
+<h2>Paso 4 —&nbsp;Configurar MariaDB</h2>
+<div class="solvvy-solution">
+<div id="changing-the-bind-address">
+<h3>Cambiar la dirección de enlace</h3>
+<p><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self" rel="undefined">Editar el archivo the 50-server.cnf</a> localizado en <span class="text-object">/etc/mysql/mariadb.conf.d/50-server.cnf</span>. Mostrará lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@dbinstance]$ </span><span class="command">vim /etc/mysql/mariadb.conf.d/50-server.cnf</span>
+
+bind-address            = 127.0.0.1
+</pre>
+</div>
+<p>Edita esto para cambiar la IP de la base datos de tu instancia.</p>
+<div class="preboxcontainer">
+<pre class="prebox">bind-address            = $IP
+</pre>
+</div>
+<p>donde <strong>$IP</strong> es la <a href="https://help.dreamhost.com/hc/es/articles/115001754711-Localizar-las-direcciones-IP-de-tu-instancia" target="_self" rel="undefined">dirección IP</a> de la base de datos de la instancia.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si tienes una <a href="https://help.dreamhost.com/hc/es/articles/229789688-Descripci%C3%B3n-general-de-las-redes-privadas" target="_self" rel="undefined">red privada</a> habilitado, esta será la dirección IP privada y no la IP flotante si tu instancia de base de datos tiene una.</p>
+</div>
+</div>
+<p>Esto hace que la base de datos escuche las conexiones desde su dirección IP en lugar de solo escuchar en 127.0.0.1 (el localhost).</p>
+</div>
+<div id="allowing-root-login-from-a-foreign-ip-address">
+<h3>Permitir el inicio de sesión de root desde una dirección IP extranjera</h3>
+<p>La base de datos ahora escuchará las conexiones de otras instancias, pero debes permitir que los usuarios inicien sesión desde otra dirección IP. Haz esto iniciando sesión en la base de datos como root.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@dbinstance]# </span><span class="command">mysql -u root</span>
+</pre>
+</div>
+</div>
+<p>Luego corre los siguientes comandos para crear una base de datos llamada 'nextcloud'.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">MariaDB [(none)]&gt; </span><span class="command">create database <span class="code-highlight">nextcloud</span>;</span></pre>
+</div>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En el siguiente comando, cambia $IP a la dirección IP de la segunda instancia que creaste para el servidor web.</p>
+<p>No agregues la dirección IP de la instancia de la base de datos, ya que esto provocará que no se conecte.</p>
+</div>
+</div>
+<p>Asegúrate de dejar las comillas simples alrededor del nombre de usuario, IP y contraseña. Por ejemplo, si tu contraseña es Xhd379s, ingrésala así</p>
+<ul>
+<li>'Xhd379s'</li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">MariaDB [(none)]&gt; </span><span class="command">GRANT ALL ON <span class="code-highlight">nextcloud</span>.* TO '<span class="code-highlight">nextclouduser</span>'@'<span class="code-highlight">$IP</span>' IDENTIFIED BY '<span class="code-highlight">$PASSWORD</span>';</span></pre>
+</div>
+<p>Marca para confirmar que se agregó el usuario:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">MariaDB [(none)]&gt; </span><span class="command">selecciona el usuario de la mysql.db donde db='<span class="code-highlight">nextcloud</span>';</span>
++---------------+
+| user          |
++---------------+
+| nextclouduser |
++---------------+</pre>
+</div>
+<p>Elimina todos los privilegios cuando hayas terminado.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">MariaDB [(none)]&gt; </span><span class="command">flush privileges;</span></pre>
+</div>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si deseas permitir el inicio de sesión de root desde cualquier dirección IP, puedes cambiar $IP a '%'. Sin embargo, esto no se recomienda, especialmente si la instancia de tu base de datos tiene una dirección IP pública (porque entonces cualquiera puede intentar acceder a ella).</p>
+</div>
+</div>
+<p>Cierra sesión de la base de datos:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">MariaDB [(none)]&gt; </span><span class="command">quit</span>
+Bye</pre>
+</div>
+<p>A continuación, reinicia el servicio mariadb para que las nuevas configuraciones se carguen corriendo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@dbinstance]# </span><span class="command">service mysql restart</span>
+</pre>
+</div>
+</div>
+<p>Esto completa la instalación de la instancia de la base de datos.</p>
+<div id="installing-the-nextcloud-application">&nbsp;</div>
+<h2>Paso 5 —&nbsp;Instalar la aplicación Nextcloud en la instancia #2</h2>
+<div class="solvvy-solution">
+<div id="installing-dependencies">
+<h3>Instalar dependencias</h3>
+<p>Ahora debes implementar la aplicación frontend. Inicia sesión en la segunda instancia que craste. Esta es la instancia en la que instalarás Nextcloud. Una vez que hayas iniciado sesión, cambia de nuevo al shell raíz corriendo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo su - </span>
+<span class="server">[root@instance]# </span>
+</pre>
+</div>
+<p>Luego, corre los siguientes comandos para instalar Nextcloud y sus dependencias.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">apt update</span>
+<span class="server">[root@instance]# </span><span class="command">apt-get install apache2 libapache2-mod-php7.0 unzip</span>
+<span class="server">[root@instance]# </span><span class="command">apt-get install php7.0-gd php7.0-json php7.0-mysql php7.0-curl \
+php7.0-mbstring php7.0-intl php7.0-mcrypt php-imagick php7.0-xml php7.0-zip</span></pre>
+</div>
+</div>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El carácter de barra invertida \ se usa al ingresar un comando largo. Cuando ingresas \, el comando de terminal continúa a la siguiente línea hasta que termine de ingresarlo.</p>
+<p>También puedes eliminar el carácter \ y poner cada parámetro en una sola línea.</p>
+</div>
+</div>
+<div id="downloading-nextcloud">&nbsp;</div>
+<h2>Paso 6 — Descargar Nextcloud</h2>
+<div class="solvvy-solution">
+<p>Ahora necesitamos descargar la aplicación Nextcloud real.</p>
+<ol>
+<li>Navega a <a class="reference external" href="https://nextcloud.com/install/#instructions-server">https://nextcloud.com/install/#instructions-server</a> en un buscador.</li>
+<li>Da clic derecho en el botón <strong><em>Download Nextcloud</em></strong>. Del menú desplegable da clic en <span class="text-object">copy link address</span>.</li>
+<li>En tu shell raíz, corre lo siguiente (cambia la versión al enlace que acabas de copiar).
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">wget https://download.nextcloud.com/server/releases/nextcloud-12.0.4.zip</span>
+</pre>
+</div>
+</li>
+Esto descargará una copia comprimida de la aplicación Nextcloud.
+<li>Descomprime el archivo corriendo lo siguiente (cambie el número de versión a la versión que estás usando).
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">unzip nextcloud-12.0.3.zip</span>
+</pre>
+</div>
+</li>
+</ol>
+</div>
+This creates a directory called <span class="text-object"><span class="text-object">nextcloud in your current directory.</span></span>
+<div id="setting-up-the-nextcloud-directory">
+<h3>Configurar el directorio nextcloud</h3>
+<p>Ahora debe copiar Nextcloud al directorio <span class="text-object">/var/www/nextcloud</span>. Corre lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">cp -R nextcloud /var/www/</span>
+</pre>
+</div>
+</div>
+<p>Cambia los permisos del directorio nextcloud para que el usuario web, www-data en este caso, pueda acceder a él. Corre lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">chown -R www-data:www-data /var/www/nextcloud</span></pre>
+</div>
+</div>
+<div id="configuring-apache">&nbsp;</div>
+<h2>Paso 7 — Configurar Apache</h2>
+<div class="solvvy-solution">
+<p>Ahora debes configurar Apache para usar Nextcloud. Crea un archivo en el directorio<span class="text-object">/etc/apache2/sites-available</span> llamado <span class="text-object">nextcloud.conf</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">touch /etc/apache2/sites-available/<span class="code-highlight">nextcloud.conf</span></span></pre>
+</div>
+<p><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self" rel="undefined">Agrega el siguiente contenido a este archivo</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Alias /nextcloud "/var/www/nextcloud/"
+
+&lt;Directory /var/www/nextcloud/&gt;
+  Options +FollowSymlinks
+  AllowOverride All
+
+ &lt;IfModule mod_dav.c&gt;
+  Dav off
+ &lt;/IfModule&gt;
+
+ SetEnv HOME /var/www/nextcloud
+ SetEnv HTTP_HOME /var/www/nextcloud
+
+&lt;/Directory&gt;
+</pre>
+</div>
+</div>
+<p>Luego, enlace simbólico <span class="text-object">/etc/apache2/sites-enabled/nextcloud.conf</span> a <span class="text-object">/etc/apache2/sites-available/nextcloud.conf</span> corriendo lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">ln -s /etc/apache2/sites-available/nextcloud.conf \
+/etc/apache2/sites-enabled/nextcloud.conf</span>
+</pre>
+</div>
+<p>Nextcloud también necesita ciertos módulos de Apache para funcionar correctamente. Habilítalos corriendo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">a2enmod rewrite
+</span></pre>
+</div>
+<p>También debes usar SSL con Nextcloud para proteger la información y los datos de inicio de sesión. Apache instalado en Ubuntu viene con un certificado autofirmado. Para habilitar SSL con ese certificado, corre:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]# </span><span class="command">a2enmod ssl</span>
+<span class="server">[root@instance]# </span><span class="command">a2ensite default-ssl</span>
+<span class="server">[root@instance]# </span><span class="command">service apache2 restart</span>
+</pre>
+</div>
+<div id="finishing-the-installation">&nbsp;</div>
+<h2>Paso 8 —&nbsp;Finalizar la Instalación</h2>
+<div class="solvvy-solution">
+<p>Ahora que todo está configurado en la instancia, abre un navegador y visita <a class="reference external" href="https://IP/nextcloud">https://IP/nextcloud</a> donde <strong>IP</strong> es la dirección IP de tu instancia de aplicación.</p>
+<p>Ingrese un usuario y contraseña de administrador para esta instalación.</p>
+<p>Luego, desplázate hacia abajo e ingresa las credenciales de tu base de datos:</p>
+<ul>
+<li>El usuario de la base de datos es 'nextclouduser'</li>
+<li>La contraseña es la contraseña configurada para ese usuario</li>
+<li>El nombre de la base de datos que creaste está en el Paso#4 arriba</li>
+<li>El host es la dirección IP de la instancia de tu base de datos con :3306 al final</li>
+</ul>
+<p>Da clic en <strong>Finish Installation</strong> y tienes una instalación funcional de Nextcloud.</p>
+</div>
+</div>
