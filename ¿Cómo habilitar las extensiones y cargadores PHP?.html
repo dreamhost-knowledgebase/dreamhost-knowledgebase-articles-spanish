@@ -1,0 +1,146 @@
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El término estándar para un archivo de configuración de PHP es php.ini. Sin embargo, DreamHost utiliza el término archivo "phprc" en su lugar. Esto actúa de la misma manera: solo el nombre es diferente. En este artículo, solo se usa el término phprc.</p>
+</div>
+</div>
+<h2>Cargadores y Extensiones</h2>
+<div class="solvvy-solution">
+<h3>Cargadores</h3>
+<p>Los cargadores de PHP son extensiones de PHP que cargan tipos especiales de archivos PHP que han sido codificados con un producto de codificación como ionCube Loader.</p>
+<p>Para activar el cargador, debes agregar una línea a tu archivo phprc. A continuación hay enlaces a páginas que proporcionan más instrucciones sobre cómo instalar y usar los distintos cargadores de PHP:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214897027-Habilitaci%C3%B3n-del-cargador-ionCube" target="_self">Cómo habilitar el cargador de ionCube</a></li>
+</ul>
+<h3>Extensiones</h3>
+<p>Las extensiones PHP son bibliotecas de código preconstruido. Te permiten usar funciones específicas ya creadas para simplificar tu código. La siguiente es una lista actual de extensiones PHP:</p>
+<ul>
+<li><a href="https://php.net/manual/en/extensions.alphabetical.php" target="_self" rel="undefined">php.net/manual/en/extensions.alphabetical.php</a></li>
+</ul>
+<p>Algunas extensiones ya están activadas por defecto (como Phar). Otros no lo están, pero se pueden activar agregando una línea a su archivo phprc.</p>
+</div>
+<h2>Comprueba si una extensión ya está activa</h2>
+<div class="solvvy-solution">
+<p>Antes de agregar una extensión, asegúrate de que no esté activada de manera predeterminada. Por ejemplo, la extensión Phar ya está activada con cualquier versión de PHP en DreamHost. Si luego agregas la extensión phar.so a su archivo phprc, tu sitio generará un error, por lo que es importante agregar solo una extensión si es necesario.</p>
+<p>Puedes ver cualquier extensión que esté activa actualmente agregando un archivo phpinfo.php a tu sitio.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">Ver la versión y la configuración de PHP de tu sitio</a></li>
+</ul>
+<p>Si una extensión ya está activa, verás su bloque correspondiente cuando visites el archivo phpinfo.php. Por ejemplo, esto muestra que la extensión Phar está activa.</p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/phar.png" alt="phar extension" /></p>
+</div>
+<h2>Agregar una extensión</h2>
+<div class="solvvy-solution">
+<h3>Paso 1 — Crear un archivo phprc</h3>
+<p>Consulta los siguientes artículos para obtener instrucciones sobre cómo crear un archivo phprc.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214894037--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-FTP-" target="_self">¿Cómo creo un archivo phprc a través de FTP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200668--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-SSH-" target="_self">¿Cómo creo un archivo phprc a través de SSH?</a></li>
+</ul>
+<p>Si el archivo ya existe, mira los siguientes artículos para obtener instrucciones sobre cómo actualizarlo (dependiendo de si estás utilizando un cliente FTP o SSH):</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar un archivo vía FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo via SSH</a></li>
+</ul>
+<h3>Paso 2 — Cargar la extensión</h3>
+<p>Para cargar una extensión, agrega la siguiente línea a tu archivo phprc (asegúrate de cambiar 'extension_nombre' a la extensión real):</p>
+<dl>
+<dd>extension = <strong>extension_name</strong>.so</dd>
+</dl>
+<p>Por ejemplo, esto es lo que agregarías para habilitar la extensión intl.</p>
+<div class="preboxcontainer">
+<pre class="prebox">extension = intl.so</pre>
+</div>
+<p>A continuación se muestra una lista de extensiones comunes que puedes necesitar agregar a tu archivo phprc.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Extensión</th>
+<th bgcolor="#F2F2F2">Linia en el archivo phprc</th>
+</tr>
+<tr>
+<td style="width: 50%;">curl&nbsp;</td>
+<td style="width: 50%;">extension = curl.so</td>
+</tr>
+<tr>
+<td style="width: 50%;">fileinfo&nbsp;</td>
+<td style="width: 50%;"><a href="https://help.dreamhost.com/hc/es/articles/214205858-fileinfo" target="_self" rel="undefined">Ya habilitada por defecto</a></td>
+</tr>
+<tr>
+<td style="width: 50%;">imagick&nbsp;</td>
+<td style="width: 50%;">extension = imagick.so</td>
+</tr>
+<tr>
+<td style="width: 50%;">intl&nbsp;</td>
+<td style="width: 50%;">extension = intl.so</td>
+</tr>
+<tr>
+<td style="width: 50%;">mysqli</td>
+<td style="width: 50%;">extension = mysqli.so</td>
+</tr>
+<tr>
+<td style="width: 50%;">phar</td>
+<td style="width: 50%;">Ya habilitada por defecto</td>
+</tr>
+<tr>
+<td style="width: 50%;">zip</td>
+<td style="width: 50%;">extension = zip.so</td>
+</tr>
+</tbody>
+</table>
+<h3>Paso 3 — eliminar todos los procesos php en ejecución</h3>
+<p>Asegúrate de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">eliminar los procesos php en ejecución</a>&nbsp;para garantizar que la nueva configuración surta efecto.</p>
+<h3>Paso 4 — Confirmar tus cambios</h3>
+<p>Después de editar el archivo y eliminar todos los procesos de PHP, verifica que la extensión se haya habilitado. Puedes hacer esto creando un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">phpinfo.php</a>. Deberías ver lo siguiente:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-05_php_extension_intl.png" alt="" /></dd>
+</dl>
+<p>Si no ves que los cambios se han actualizado, intenta eliminar sus procesos PHP nuevamente:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no se actualiza</a></li>
+</ul>
+</div>
+<h2>Compilar extensiones PHP</h2>
+<div class="solvvy-solution">
+<p>Algunas extensiones no se cumplen con PHP. En estos casos, debes descargar la extensión y compilarla manualmente.</p>
+<p>Visita los siguientes enlaces para obtener una lista de extensiones disponibles:</p>
+<ul>
+<li><a href="http://php.net/manual/en/extensions.php" target="_self">Extensiones php.net</a></li>
+<li><a href="https://pecl.php.net/" target="_self">Extensiones pecl</a></li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si alguna instalación requiere privilegios de sudo, debes actualizar a un servidor&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">Dedicado</a>.</p>
+<p>Si alguna instalación requiere que ejecute <span class="code">phpize</span>, simplemente especifica la ruta completa a la versión deseada de PHP. Por ejemplo, para PHP 7.4 ejecuta lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php74/bin/phpize</span></pre>
+</div>
+<p>Puedes usar diferentes versiones de PHP si es necesario. Por ejemplo.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php72/bin/phpize</span>
+<span class="server">[server]$ </span><span class="command">/usr/local/php73/bin/phpize</span>
+<span class="server">[server]$ </span><span class="command">/usr/local/php74/bin/phpize</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<h2>hash.so</h2>
+<div class="solvvy-solution">
+<p>A partir de PHP 7.2.11, hash.so está integrado en PHP. Si estás utilizando esta versión o superior, ya no deberías llamarla desde tu <a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">archivo phprc</a>.</p>
+</div>
+<h2>mcrypt.so</h2>
+<div class="solvvy-solution">
+<p>El soporte para mcrypt se ha eliminado a partir de PHP 7.2.0. Cualquier script que dependa de mcrypt deberá actualizarse para usar&nbsp;<a href="https://www.php.net/manual/en/book.openssl.php">OpenSSL</a> o&nbsp;<a href="https://www.php.net/manual/en/book.sodium.php#book.sodium">Sodium</a>.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">Generalidades de php.ini</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no se actualiza</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/sections/203272338-Configuraciones-personalizadas" target="_self">Configuraciones PHP personalizadas</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/sections/203275788-Soluci%C3%B3n-del-problemas" target="_self">Artículos sobre solución de problemas en PHP</a></li>
+</ul>
+</div>

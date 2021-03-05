@@ -1,0 +1,123 @@
+<h2>Overview</h2>
+<div class="solvvy-solution">
+<p>Los Multisitios de WordPress es una característica de <a href="https://help.dreamhost.com/hc/es/articles/215525287-Generalidades-sobre-WordPress" target="_self" rel="undefined">WordPress</a> que te permite crear múltiples sitios virtuales que comparten una sola instalación de WordPress. Esto permite a los usuarios crear sus propios sitios como subdominios de su sitio principal. Por ejemplo:</p>
+<ul>
+<li><strong>example.com/site1</strong></li>
+<li><strong>example.com/site2</strong></li>
+<li><strong>example.com/site3</strong></li>
+</ul>
+<p>También puedes configurar tu multisitio para permitir que solo el administrador cree nuevos sitios. Esto puede resultar útil para una empresa con diferentes departamentos. Por ejemplo:</p>
+<ul>
+<li><strong>example.com/sales</strong></li>
+<li><strong>example.com/products</strong></li>
+<li><strong>example.com/support</strong></li>
+</ul>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>El soporte de Multisitios de WordPress <strong>NO ES PROVISIONADO POR DREAMHOST.</strong></li>
+<li>Si algo en tu instalación de varios sitios no funciona, debes solucionarlo tú mismo o contratar a un desarrollador.</li>
+<li>Multisitio no es para principiantes de WordPress. Ya deberías saber cómo usar WordPress antes de considerar el uso de Multisitios.</li>
+<li>Los usuarios deben tener conocimientos básicos de PHP, MySQL, cómo editar archivos en el servidor y cómo revisar los registros de errores en caso de que debas solucionarlos tú mismo.</li>
+</ul>
+</div>
+</div>
+</div>
+<h2><span id="¿Deberías_usar_Multisitios_de_WordPress?">¿Deberías usar Multisitios de WordPress?</span></h2>
+<div class="solvvy-solution">
+<p>Mira el artículo <a href="http://codex.wordpress.org/Before_You_Create_A_Network">antes de crear una red</a> de WordPress para más información.</p>
+<h3><span id="Cuando_NO_usar_Multisitios">Cuando NO usar Multisitios</span></h3>
+<p>Los Multisitios <em>no son</em> una buena opción si quieres:</p>
+<ul>
+<li>Varios usuarios para colaborar en un solo proyecto</li>
+<li>Varios usuarios para bloguear juntos</li>
+<li>Un sitio donde se comparten datos o usuarios</li>
+<li>Diferentes usuarios para ver diferentes páginas (se puede usar un complemento en su lugar)</li>
+<li>Diferentes páginas para que se vean diferentes (se puede usar un complemento en su lugar)</li>
+</ul>
+<h3><span id="Cuando_usar_Multisitios">Cuando usar Multisitios</span></h3>
+<p>Los Multisistios puede ser una buena opción si tu:</p>
+<ul>
+<li>Quieres crear sitios virtuales que sean independientes entre sí</li>
+<li>Quieres que cada usuario tenga control sobre cómo se presentan sus datos</li>
+<li>Quieres permitir a los usuarios crear su propio sitio</li>
+<li>Eres competente en PHP, MySQL y revisas los registros en busca de errores</li>
+<li>Te sientes cómodo en brindar soporte a (potencialmente) muchos usuarios</li>
+<li>Quieres dar a cada blog un subdominio o subdirectorio</li>
+<li>Deseas ser el único administrador de red sobre todos los sitios en una red</li>
+<li>Deseas actualizar todos los sitios en un solo paso</li>
+</ul>
+</div>
+<h2><span id="Tipos_de_Multisitios">Tipos de Multisitios</span></h2>
+<div class="solvvy-solution">
+<p>Hay dos formas en las que puedes configurar tu Multisitio:</p>
+<ul>
+<li>Subdominios, o</li>
+<li>Subdirectorios</li>
+</ul>
+<h3><span id="Subdirectorios_en_Multisitios">Subdirectorios en Multisitios</span></h3>
+<p>Esta opción crea subdirectorios en el siguiente formato:</p>
+<ul>
+<li><strong>example.com/site1</strong></li>
+<li><strong>example.com/site2</strong></li>
+<li><strong>example.com/site3</strong></li>
+</ul>
+<h3><span id="Subdominios_en_Multisite">Subdominios en Multisite</span></h3>
+<p>Esta opción crea subdominios en el siguiente formato:</p>
+<ul>
+<li><strong>site1.example.com</strong></li>
+<li><strong>site2.example.com</strong></li>
+<li><strong>site3.example.com</strong></li>
+</ul>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>La opción de subdominio solo está disponible en un servidor <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-" target="_self" rel="undefined">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self" rel="undefined">Dedicated</a>. Esto es por que el <a href="https://help.dreamhost.com/hc/es/articles/217113237-DNS-Wildcard" target="_self" rel="undefined"> DNS de Wildcard</a> es necesario para esta configuración. Si deseas utilizar Multisitios en un servidor compartido, debes usar la opción de subdirectorio.</li>
+<li><strong>NO</strong> uses el panel para ingresar un asterisco * como un registro CNAME. Esto no funciona y causará problemas en el futuro.</li>
+</ul>
+</div>
+</div>
+<h3><span id="Tercera_opción_para_usuarios_avanzados">Tercera opción para usuarios avanzados</span></h3>
+<p>También es posible hacer un para separar un dominio de tu red. Por ejemplo, en vez de tener <strong>example.com</strong> y <strong>example.com/site1</strong> tienes <strong>example.com</strong> y <strong>site1example.com</strong>.</p>
+<p>Para hacer esto, necesitas un complemento llamado <a href="http://wordpress.org/extend/plugins/wordpress-mu-domain-mapping/">WordPress MU Domain Mapping</a>.</p>
+</div>
+<h2><span id="Solución_de_Problemas">Solución de Problemas</span></h2>
+<div class="solvvy-solution">
+<ul>
+<li>Si esto sale mal, trata de buscar tu problema en el <a href="http://wordpress.org/support/forum/multisite">Foro de Soporte para Multisitios de WordPress</a>. Si no puedes encontrar una respuesta, pregúntala allí. Asegúrate de anotar cualquier información de depuración antes de publicar en los foros.</li>
+<li>Asegúrate de haber creado el dominio para que funcione <strong>sin</strong> 'www', lo cual puedes hacer en la página de <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>.</li>
+<li>Asegúrate de instgalar un softwar sin el <span class="text-object">https://www</span> en el nombre de dominio si estás usando subdominios.</li>
+<li>¿Has creado accidentalmente una instalación de subdominio (en un <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-" target="_self" rel="undefined">VPS</a> o servidor <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self" rel="undefined">Dedicado</a> sin intención y sin haber contactado a soporte para crear un wildcard? Si es así, vuelva tu base de datos, e inicia de nuevo. O, <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self" rel="undefined">contacta a soporte</a> y pregunta por los wildcards para ponerlos en su lugar.</li>
+<li>Si tiene problemas, el primer lugar para buscar es dentro del <a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP" target="_self" rel="undefined">registro de errores</a> del servidor.</li>
+<li>Asegúrate de <a href="http://wordpress.org/support/search.php">buscar</a> los foros con palabras clave que cubren tu problema. Es probable que alguien ya se haya encontrado con el problema que tienes.</li>
+<li>Si estás usando <a href="http://wordpress.org/extend/plugins/wordpress-mu-domain-mapping">domain mapping</a>, necesitas configurar una <a href="https://help.dreamhost.com/hc/es/articles/216109647-Generalidades-de-las-IP-%C3%9Anicas" target="_self" rel="undefined">IP Única</a>; si no, Apache no reconocerá el requerimiento..</li>
+</ul>
+</div>
+<h2><span id="Ver_también">Ver también</span></h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="/hc/en-us/articles/214829638-How-do-I-configure-WordPress-Multisite-">¿Cómo configurar un Multisitio de WordPress?</a></li>
+<li><a href="/hc/en-us/articles/214829528-How-do-I-add-users-to-WordPress-Multisite-">¿Cómo configurar usuarios para Multisitios de WordPress?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217897468--C%C3%B3mo-agregar-sitios-a-un-Multisitio-de-WordPress-" target="_self" rel="undefined">¿Cómo agregar sitios a un Multisitio de WordPress?</a></li>
+</ul>
+<h3>Enlaces Externos</h3>
+<ul>
+<li><a href="http://codex.wordpress.org/Before_You_Create_A_Network">Antes de crear una red</a></li>
+<li><a href="http://codex.wordpress.org/Create_A_Network">Crear una red</a></li>
+<li><a href="http://wordpress.org/">Sitio Oficial de WordPress</a></li>
+<li><a href="https://en.wikipedia.org/wiki/WordPress">WordPress en Wikipedia</a></li>
+<li><a href="http://wpmututorials.com">Tutoriales de WPMu</a></li>
+<li><a href="http://halfelf.org/ebooks/wordpress-multisite-101/">Básicos de Multisitios de WordPress</a></li>
+</ul>
+</div>
