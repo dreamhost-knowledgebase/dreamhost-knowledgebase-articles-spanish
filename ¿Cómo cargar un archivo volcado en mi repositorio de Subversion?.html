@@ -1,0 +1,32 @@
+<div class="alert-warning">
+<p>Subversion se ha eliminado del panel DreamHost. Si previamente habías configurado Subversion en tu dominio, seguirá funcionando normalmente.</p>
+</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Si tienes un repositorio SVN que deseas migrar a un nuevo servidor, primero debes <a href="https://help.dreamhost.com/hc/en-us/articles/115001693831-Backing-up-your-SVN-repository">crear un archivo volcado</a>. Una vez creado, procede con los pasos a continuación para importarlo a tu nuevo repositorio en tu nuevo servidor.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los siguientes comandos asumen que el repositorio SVN del que realizaste una copia de seguridad anteriormente se llama <span class="text-object">dumpfile.gz</span>. La ruta del archivo para el comando svnadmin load asume que tu nuevo repositorio SVN está en el directorio <span class="text-object">/home/username/svn/</span> en tu nuevo servidor y que se llama <span class="text-object">New_Repo</span>.</p>
+</div>
+</div>
+</div>
+<h2>Cargar un archivo</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Localiza el repositorio SVN con copia de seguridad para el que habías <a href="https://help.dreamhost.com/hc/en-us/articles/115001693831-Backing-up-your-SVN-repository">creado un archivo volcado</a>.</li>
+<li>Carga <span class="text-object">dumpfile.gz</span> a tu nuevo servidor en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self" rel="undefined">directorio home del usuario</a> vía <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self" rel="undefined">FTP</a>.</li>
+<li>Corre lo siguiente para descomprimir el archivo, mientras lo importas a tu nuevo repositorio:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">gunzip -c dumpfile.gz | svnadmin load ~/svn/<span class="code-highlight">New_Repo</span></span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215466058-Descripci%C3%B3n-general-de-la-Subversion" target="_self" rel="undefined">Generalidades de Subversion</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">Generalidades de SSH</a></li>
+</ul>
+</div>

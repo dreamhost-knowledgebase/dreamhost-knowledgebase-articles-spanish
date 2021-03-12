@@ -1,0 +1,94 @@
+<div class="alert-warning">
+<p>Subversion se ha eliminado del panel DreamHost. Si previamente habías configurado Subversion en tu dominio, seguirá funcionando normalmente.</p>
+</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo enumera varias formas en las que puede conectarse a tu repositorio SVN.</p>
+</div>
+<h2><span id="Conectar_con_tu_navegador">Conectar con tu navegador</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.svn&amp;" target="_blank" rel="noopener">Subversion</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_svn_03.png" /></dd>
+</dl>
+</li>
+<li>Debajo de la lista de proyectos actuales, haz clic en el enlace de tu repositorio.
+<dl>
+<dd><em>A continuación, aparece un cuadro emergente de autenticación:</em></dd>
+<dd><img src="https://kbimages.dreamhosters.com/images/2018-06_panel_svn_04.png" /></dd>
+</dl>
+</li>
+<li>Utiliza el nombre de usuario y la contraseña que creaste al configurar el repositorio.</li>
+</ol>
+<p>Esto carga tu repositorio dentro de tu navegador para ver.</p>
+</div>
+<h2><span id="Conectar_con_un_cliente">Conectar con un cliente</span></h2>
+<div class="solvvy-solution">
+<p>También puede conectarse con un cliente de terceros. <a href="http://tortoisesvn.net/downloads.html">TortoiseSVN</a> es una opción muy popular.</p>
+<ul>
+<li><a href="/hc/en-us/articles/216658708-TortoiseSVN">TortoiseSVN</a></li>
+</ul>
+</div>
+<h2><span id="Conexión_a_través_de_SSH.28línea_de_comando.29">Conexión a través de SSH (línea de comando)</span></h2>
+<div class="solvvy-solution">
+<p>Hay muchos comandos que puedes correr vía <a class="new" title="SSH (page does not exist)" href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">SSH</a> para conectarte y administrar tu repositorio. A continuación se muestran algunos de los comandos más comunes.</p>
+<h3><span id="Verificación">Verificación</span></h3>
+<p>Este comando realiza una verificación de tu repositorio:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">svn co <span class="code-highlight">https://example.com/exampleProjectID/</span></span></pre>
+</div>
+<p>Si corres esto en el directorio de tu usuario, se crea una nueva carpeta. Tiene el mismo nombre que tu projectID, y ahora has creado una 'Copia de trabajo' de tu repositorio en tu máquina local. Para obtener más información, por favor visite la siguiente página:</p>
+<ul>
+<li><a href="http://svnbook.red-bean.com/en/1.6/svn.tour.initial.html">Crear una copia de trabajo</a></li>
+</ul>
+<h3><span id="Importar">Importar</span></h3>
+<p>Una vez que se crea el repositorio, puedes agregar carpetas y archivos que tenga en otra ubicación. Es mejor usar este método para mantener el número de revisiones bajo al crear el repositorio por primera vez. Asegúrate de cambiar <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a>, y <span class="code">path/to/source</span> fuente a la ubicación de tu archivo.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">svn import /home/<span class="code-highlight">username/path/to/source</span> file:///home/<span class="code-highlight">username/path/to/repository --message="Importing Project"</span></span>
+</pre>
+</div>
+<h3><span id="Actualizar">Actualizar</span></h3>
+<p>Para asegurarte de que tu Copia de Trabajo esté usando la revisión más reciente, corre svn update:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">svn update</span></pre>
+</div>
+<p>Para más detalles, por favor visita la siguiente página:</p>
+<ul>
+<li><a href="http://svnbook.red-bean.com/en/1.6/svn.tour.cycle.html">Ciclo de Trabajo Básico</a></li>
+</ul>
+<h3><span id="Agregar">Agregar</span></h3>
+<p>Una vez que tengas una copia de trabajo, ahora puedes agregarle archivos o directorios. Por ejemplo, si agregas un archivo llamado <span class="text-object">myfile.txt</span> al directorio de la copia de trabajo, debes correr 'svn add' para agregarlo realmente a la copia de trabajo.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">svn add <span class="code-highlight">myfile.txt</span></span></pre>
+</div>
+<p>Una vez que se agrega, ahora puedes confirmar tus cambios en el repositorio.</p>
+<h3><span id="Confirmar">Confirmar</span></h3>
+<p>Una vez que hayas realizado todos los ajustes, deberás confirmar los cambios en el repositorio.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">svn commit -m <span class="code-highlight">"log messages"</span></span></pre>
+</div>
+<p>Este comando confirma todos los cambios. La bandera <span class="code">-m</span> te permite dejar un mensaje sobre qué y por qué se has comprometido en esta revisión específica.</p>
+<h3><span id="Enlistar">Enlistar</span></h3>
+<p>Correr el comando list con la banderilla <span class="code">--verbose</span> se muestra la siguiente información:</p>
+<dl>
+<dd>
+<ul>
+<li>Número de revisión de la última confirmación</li>
+<li>Autor de la última confirmación</li>
+<li>Tamaño (en bytes)</li>
+<li>Fecha y hora de la última confirmación</li>
+</ul>
+</dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">svn list --verbose</span></pre>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215466058-Descripci%C3%B3n-general-de-la-Subversion" target="_self" rel="undefined">Descripción general de Subversion</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">Descripción general de SSH</a></li>
+</ul>
+</div>

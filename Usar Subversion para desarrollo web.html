@@ -1,0 +1,80 @@
+<div class="alert-warning">
+<p>Subversion se ha eliminado del panel DreamHost. Si habías configurado Subversion en tu dominio previamente, seguirá funcionando normalmente.</p>
+</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Ahora que has importado tus archivos al repositorio, es posible que te preguntes cómo aprovechar el control de versiones para tu beneficio. Lo primero que debes hacer es configurar un área de desarrollo y un área en vivo.</p>
+<p>Por ejemplo:</p>
+<dl>
+<dd>
+<ul>
+<li><a href="https://dev.example.com/" target="_self" rel="undefined">https://dev.example.com/</a> sería tu área de desarrollo.</li>
+<li><a href="http://www.example.com/">http://www.example.com/</a> sería tu área en vivo.</li>
+</ul>
+</dd>
+</dl>
+<ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">SSH</a>.</li>
+<li>Haz una copia de seguridad de tu sitio corriendo el siguiente comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar -cvf <span class="code-highlight">yourwebsite.tar example.com/</span></span></pre>
+</div>
+</li>
+<li>Consulta tu repositorio en tu área de desarrollo:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">svn checkout <span class="code-highlight">https://example.com/yourProject ~/dev.example.com</span></span></pre>
+</div>
+</li>
+<li>Consulta tu repositorio en tu área en vivo:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">svn checkout <span class="code-highlight">https://example.com/yourProject ~/example.com</span></span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="Publicar_de_Desarrollo_a_en_Vivo">Publicar de Desarrollo a en Vivo</span></h2>
+<div class="solvvy-solution">
+<p>Usando tu sitio de desarrollo <strong>dev.example.com</strong>, ahora puedes hacer los cambios necesarios. Una vez que se hayan completado todos los cambios en tu área de desarrollo, podrás ponerlos en vivo.</p>
+<ol>
+<li>Ve a tu directorio dev:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd <span class="code-highlight">dev.example.com</span></span></pre>
+</div>
+</li>
+<li>Confirma los cambios:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">svn commit -m "<span class="code-highlight">Your change log notes</span>"</span></pre>
+</div>
+</li>
+<li>Ve a tu directorio en vivo:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd <span class="code-highlight">~/example.com</span></span></pre>
+</div>
+</li>
+<li>Actualiza tu sitio en vivo:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">svn update</span></pre>
+</div>
+</li>
+</ol>
+<p>Es posible que veas el siguiente error al actualizar desde tu sitio de desarrollo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Conflict discovered in &lt;filename&gt;
+Select: (p) postpone, (df) diff-full, (e) edit,
+        (mc) mine-conflict, (tc) theirs-conflict,
+        (s) show all options:
+</pre>
+</div>
+<p>Si escribes las letras <strong>tc</strong> haces clic en 'Enter' en tu teclado, todos los cambios realizados en tu sitio de desarrollo se actualizan en tu sitio en vivo. Consulta la siguiente página para más detalles:</p>
+<ul>
+<li><a href="http://svnbook.red-bean.com/en/1.7/svn.ref.svn.c.update.html">Actualizar SVN</a></li>
+</ul>
+<p>Tus cambios ahora están ahora en vivo.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215466058-Descripci%C3%B3n-general-de-la-Subversion" target="_self" rel="undefined">Generalidades de Subversion</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">Generalidades de SSH</a></li>
+</ul>
+</div>
