@@ -16,7 +16,7 @@
 <div class="solvvy-solution">
 <p>En el caso más simple, sin ningún filtro, así es como se ve un comando rsync "push out to webhost":</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync -e "/usr/bin/ssh"  --bwlimit=2000 -av <span class="code-highlight">username@server.dreamhost.com:remote_directory local_directory</span></span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync -e "/usr/bin/ssh"  --bwlimit=2000 -av <span class="code-highlight">local_directory username@server.dreamhost.com:remote_directory</span></span></pre>
 </div>
 <p><strong>Explicación de campos</strong></p>
 <ul>
@@ -42,7 +42,7 @@
 <div class="alert-content">
 <p>Para evitar errores, se recomienda utilizar la ruta completa para los directorios locales y remotos. Aquí hay un ejemplo completo (excluyendo la banderilla <span class="code">--bwlimit</span>).:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync -e "/usr/bin/ssh" -av <span class="code-highlight">username@server.dreamhost.com:/home/username/example.com /home/username/documents/mybackups</span></span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync -e "/usr/bin/ssh" -av <span class="code-highlight">/home/username/documents/mybackups username@server.dreamhost.com:/home/username/example.com </span></span></pre>
 </div>
 </div>
 </div>
@@ -59,7 +59,7 @@
 <div class="solvvy-solution">
 <p>La forma más sencilla de agregar un filtro es agregarlo a la línea de comando <span class="code">rsync</span>. Por ejemplo, RoR, puedes hacer lo siguiente para filtrar archivos .pyc y directorios /.git:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync <strong>--filter '- *.pyc' --filter '- /.git' </strong> -e "/usr/bin/ssh" --bwlimit=2000 -av local_directory <span class="code-highlight">username@server.dreamhost.com:remote_directory</span></span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync <strong>--filter '- *.pyc' --filter '- /.git' </strong> -e "/usr/bin/ssh" --bwlimit=2000 -av <span class="code-highlight">local_directory username@server.dreamhost.com:remote_directory</span></span>
 </pre>
 </div>
 <p>Consulta la siguiente página para obtener más detalles:</p>
