@@ -1,0 +1,77 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Puedes haber varias razones por las que un sitio web no responde tan rápido como debería. Este artículo detalla algunas herramientas de línea de comandos que puede utilizar para solucionar problemas de tu sitio web y servidor web. Todos los comandos siguientes deben correrse en el servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</p>
+</div>
+<h2>Tiempo de actividad</h2>
+<div class="solvvy-solution">
+<p>El comando 'uptime' verifica la carga actual del servidor y cuánto tiempo ha estado funcionando. La carga debe permanecer en la mayoría de los casos en un solo dígito, pero un pico no es infrecuente. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">uptime</span>
+<span class="cmdoutput">11:29:09 up 557 days, 12:30,  2 users,  load average: 2.25, 2.49, 2.62</span></pre>
+</div>
+<p>Esto muestra lo siguiente:</p>
+<ul>
+<li>Hora en que se ejecutó el comando</li>
+<li>Cuántos días ha estado funcionando el servidor</li>
+<li>Cuántos usuarios han iniciado sesión (esto es 2, tú y 'root')</li>
+<li>Carga promedio durante los últimos 1, 5 y 15 minutos</li>
+</ul>
+<p>Lo que busca es la carga 'a lo largo del tiempo', no necesariamente la carga en un solo instante.</p>
+</div>
+<h2><span id="TOP">TOP</span></h2>
+<div class="solvvy-solution">
+<p>El comando "top" te permite ver las tareas del sistema que se ejecutan en tiempo real. Ve el siguiente artículo para ver ejemplos sobre cómo usar este comando:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000683852-Usando-el-comando-top-para-solucionar-problemas-de-tu-sitio-web">Usar el comando 'top'</a></li>
+</ul>
+</div>
+<h2>lsof</h2>
+<div class="solvvy-solution">
+<p>Suponiendo que estás ejecutando un sitio PHP, corre el siguiente comando. Si no estás usando PHP, simplemente cambia la sección <span class="code">grep php</span> al idioma que estás usando:</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Cambia lo siguiente cuando corras el comando:</p>
+<ul>
+<li>username — cambia tu <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">usuario SSH</a></li>
+<li>php — cambiar al tipo de proceso que está buscando</li>
+</ul>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">lsof -u <span class="code-highlight">username</span> | grep php | grep /home</span>
+<span class="cmdoutput">php72.cgi 14963 username  cwd       DIR   8,17      4096 15115680565 /home/username/example.com/</span></pre>
+</div>
+<p>Ignora los errores que veas en la respuesta. Lo que buscas es la lista de archivos abiertos para tus procesos PHP. Luego, puedes mirar más de cerca esos archivos para ver cuál puede ser el problema.</p>
+<h3>Solución de problemas del comando 'lsof'</h3>
+<p>Un problema con la ejecución de 'lsof' es que puede no haber una salida útil con la que trabajar cuando se ejecuta una vez. El siguiente ejemplo usa el comando <span class="code">watch</span> para ejecutar el comando <span class="code">lsof</span> cada dos segundos mientras envía los resultados a un archivo llamado <span class="text-object">results.txt</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command"> watch "lsof -u <span class="code-highlight">username</span> | grep php | grep /home | tee -a results.txt"</span></pre>
+</div>
+<p>Puedes ver la salida en vivo en tu terminal mientras se ejecuta. Cuando hayas terminado, haz clic en <span class="code">Ctrl + C</span> para detenerlo. Luego puedes ver el resultado completo en el archivo results.txt corriendo el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat results.txt</span></pre>
+</div>
+<p>Si no hay nada en el archivo 'results.txt', correlo nuevamente. Continúa ejecutándolo hasta que tengas una línea de salida que muestre qué dominio o archivo se está utilizando actualmente. Puedes ver la salida en vivo en tu terminal mientras se ejecuta.</p>
+</div>
+<h2>ps</h2>
+<div class="solvvy-solution">
+<p>El comando 'ps' muestra una instantánea de los procesos en ejecución en el servidor. Ve el siguiente artículo para ver ejemplos sobre cómo usar este comando:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214880098-Usando-el-comando-ps-para-solucionar-problemas-de-tu-sitio-web">Usar el comando 'ps' para solucionar problemas en tu sitio</a></li>
+</ul>
+</div>
+<h2>Examina tu archivo access.log</h2>
+<div class="solvvy-solution">
+<p>Cada sitio web de DreamHost almacena información de access.log sobre el sitio. Estos registros pueden volverse muy grandes y difíciles de leer, por lo que hay algunos comandos que puedes correr para saber rápidamente qué sitio está recibiendo más tráfico. Consulta el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216105097-Ver-y-examinar-tu-access-log-a-trav%C3%A9s-de-SSH">Ver y examinar tu registro de acceso a través de SSH</a></li>
+</ul>
+</div>
+<h2>Problemas para iniciar sesión</h2>
+<div class="solvvy-solution">
+<p>Si tienes problemas para iniciar sesión en tu sitio o servidor, consulta los siguientes artículos para obtener instrucciones sobre cómo restablecer diferentes tipos de contraseñas:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/en-us/sections/203242417-Passwords">Contraseñas</a></li>
+</ul>
+</div>

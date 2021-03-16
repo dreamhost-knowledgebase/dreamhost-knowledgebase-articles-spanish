@@ -24,6 +24,7 @@
 <li><strong>-e</strong> - Especifica el programa de shell remoto que se utilizará. Esto siempre puede permanecer como /usr/bin/ssh.</li>
 <li><strong>bwlimit</strong> - (Opcional) Te permite especificar una tasa de transferencia máxima en kb/sec.</li>
 <li><strong>-av</strong> - Modo de archivo y detallado.</li>
+<li><strong>local_directory</strong> - Este es el directorio local en tu compurador donde almacenas la información para ser subida. Por ejemplo: <span class="text-object">/home/username/documents/mybackups</span></li>
 <li><strong>username</strong> - Este es tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> de DreamHost asignado a tu sitio.</li>
 <li><strong>server</strong> - Este es el nombre del servidor al que está cargando contenido. Consulta el artículo <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self" rel="undefined">Cómo encontrar tu nombre de host</a> para obtener instrucciones sobre cómo ubicar este nombre.</li>
 <li><strong>remote_directory</strong> - Este es el directorio en el servidor al que desea cargar contenido. Por ejemplo, si deseas descargar todo el contenido de tu directorio <span class="text-object">/example.com</span> agrega la ruta completa del archivo en el serviror: <span class="text-object">/home/username/example.com/</span>.
@@ -35,7 +36,6 @@
 </div>
 </div>
 </li>
-<li><strong>local_directory</strong> - Este es el directorio local de tu computadora donde almacena los datos que se cargarán. Por ejemplo: <span class="text-object">/home/username/documents/mybackups</span></li>
 </ul>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
@@ -57,7 +57,7 @@
 </div>
 <h2><span id="Ejemplo_de_filtro">Ejemplo de filtro</span></h2>
 <div class="solvvy-solution">
-<p>La forma más sencilla de agregar un filtro es agregarlo a la línea de comando <span class="code">rsync</span>. Por ejemplo, RoR, puedes hacer lo siguiente para filtrar archivos .pyc y directorios /.git:</p>
+<p>La forma más sencilla de agregar un filtro es agregarlo a la línea de comando <span class="code">rsync</span>. Puedes hacer lo siguiente para filtrar archivos .pyc y directorios /.git:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync <strong>--filter '- *.pyc' --filter '- /.git' </strong> -e "/usr/bin/ssh" --bwlimit=2000 -av <span class="code-highlight">local_directory username@server.dreamhost.com:remote_directory</span></span>
 </pre>
@@ -86,4 +86,7 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/215840708-Traceroute" target="_self" rel="undefined">Traceroute</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216606088-Telnet" target="_self" rel="undefined">Telnet</a></li>
 </ul>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 94px; top: 992.688px;">
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>
