@@ -1,21 +1,20 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>Para editar el archivo httpd.conf o apache2.config, debes tener un servidor&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicado</a>&nbsp;con un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-">usuario admin</a>.</p>
-<p>El acceso de <a href="https://help.dreamhost.com/hc/en-us/articles/216994417-Is-root-sudo-access-available-" target="_self">root/sudo</a> no está disponible en las maquinas <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a>.</p>
+<p>El acceso de <a href="https://help.dreamhost.com/hc/es/articles/216994417--Est%C3%A1-disponible-el-acceso-root-sudo-" target="_self" rel="undefined">root/sudo</a> no está disponible en las maquinas <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a>.</p>
 </div>
-<h2><span id="version">Comprobando la versión de Ubuntu</span></h2>
+<h2><span id="versión">Ver la versión del sistema operativo</span></h2>
 <div class="solvvy-solution">
-<p>La ubicación del archivo de configuración del servidor es diferente según la versión de Ubuntu que se esté ejecutando. Puedes verificar manualmente qué versión se está ejecutando a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.&nbsp;</p>
-<p>El siguiente comando confirma que el servidor aún está ejecutando Ubuntu 14.</p>
+<p>La ubicación del archivo de configuración del servidor es diferente dependiente de cual sistema operativo está corriendo. Para ver la versión, inicia sesión en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">SSH</a> y corre el siguiente comando.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat /etc/issue</span>
-Ubuntu 14.04.5 LTS \n \l</pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">lsb_release -a</span>
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 18.04.4 LTS
+Release:        18.04
+Codename:       bionic</pre>
 </div>
-<p>Y este muestra un servidor ejecutando Ubuntu 18.</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat /etc/issue</span>
-Ubuntu 18.04.1 LTS \n \l</pre>
-</div>
+<p>This output shows Ubuntu 18 is currently running.</p>
 </div>
 <h2>Ubicación del archivo httpd.conf (Solo máquinas Ubuntu 14 (Trusty))</h2>
 <div class="solvvy-solution">

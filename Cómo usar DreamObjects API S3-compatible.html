@@ -395,7 +395,7 @@ Authorization: AWS {access-key}:{hash-of-header-and-secret}</pre>
 <ol class="arabic simple">
 <li>Obtiene el valor de la cadena de encabezado.</li>
 <li>Normaliza la cadena del encabezado de la solicitud en forma canónica.</li>
-<li>Genere un HMAC utilizando un algoritmo hash SHA-1. Mira <a class="reference external" href="http://www.ietf.org/rfc/rfc2104.txt">RFC 2104</a> y <a class="reference external" href="http://en.wikipedia.org/wiki/HMAC">HMAC</a> para más detalles.</li>
+<li>Genera un HMAC utilizando un algoritmo hash SHA-1. Mira <a class="reference external" href="http://www.ietf.org/rfc/rfc2104.txt">RFC 2104</a> y <a class="reference external" href="http://en.wikipedia.org/wiki/HMAC">HMAC</a> para más detalles.</li>
 <li>Codifica el resultado <code class="docutils literal"><span class="pre">hmac</span></code> como base-64.</li>
 </ol>
 <p>Para normalizar el encabezado en forma canónica:</p>
@@ -409,7 +409,7 @@ Authorization: AWS {access-key}:{hash-of-header-and-secret}</pre>
 <li>Agrega una nueva línea después de cada campo.</li>
 <li>Vuelve a fusionar los campos en el encabezado.</li>
 </ol>
-<p>Reemplaza el <code class="docutils literal"><span class="pre">{hash-of-header-and-secret}</span></code> con la cadena HMAC codificada en base 64.</p>
+<p>Reemplaza <code class="docutils literal"><span class="pre">{hash-of-header-and-secret}</span></code> con la cadena HMAC codificada en base 64.</p>
 </div>
 <div id="understanding-dreamobjects-s3-compatible-access-control-list"><span id="Entender_la_lista_de_Control_de_Acceso_de_DreamObjects_S3-compatible"></span>
 <h2>Entender la Lista de Control de Acceso de DreamObjects S3-compatible</h2>
@@ -726,7 +726,7 @@ Host: objects-us-east-1.dream.io</pre>
 <tr class="row-even">
 <td><code class="docutils literal"><span class="pre">IsTruncated</span></code></td>
 <td>Booleano</td>
-<td>Si <code class="docutils literal"><span class="pre">true</span></code>, solo se devuelve un subconjunto del contenido del bucket.</td>
+<td>Si es <code class="docutils literal"><span class="pre">true</span></code>, solo se devuelve un subconjunto del contenido del bucket.</td>
 </tr>
 <tr class="row-odd">
 <td><code class="docutils literal"><span class="pre">CommonPrefixes</span></code></td>
@@ -784,7 +784,7 @@ Host: objects-us-east-1.dream.io</pre>
 <p>Devuelve la lista de control de acceso al bucket. El usuario debe ser el dueño del bucket o tener <code class="docutils literal"><span class="pre">READ_ACP</span></code> permiso del bucket.</p>
 <div id="id7">&nbsp;</div>
 <h4>Sintaxis</h4>
-<p>Agrega lae <code class="docutils literal"><span class="pre">acl</span></code> subfuente al requerimiento del bucket como se muestra abajo.</p>
+<p>Agrega la subfuente <code class="docutils literal"><span class="pre">acl</span></code> al requerimiento del bucket como se muestra abajo.</p>
 <div class="preboxcontainer">
 <pre class="prebox">GET /{bucket}?acl HTTP/1.1
 Host: objects-us-east-1.dream.io
@@ -923,7 +923,7 @@ Authorization: AWS {access-key}:{hash-of-header-and-secret}</pre>
 <tr class="row-odd">
 <th class="head">Nombre</th>
 <th class="head">Tipo</th>
-<th class="head">Descripció</th>
+<th class="head">Descripción</th>
 </tr>
 </thead>
 <tbody valign="top">
@@ -1165,25 +1165,25 @@ x-amz-copy-source: {source-bucket}/{source-object}</pre>
 <tr class="row-even" style="height: 44px;">
 <td style="height: 44px; width: 199px;"><strong>x-amz-copy-if-modified-since</strong></td>
 <td style="height: 44px; width: 260px;">Copia solo si se modifica desde la marca de tiempo.</td>
-<td style="height: 44px; width: 128px;">Timestamp</td>
+<td style="height: 44px; width: 128px;">Marca de tiempo</td>
 <td style="height: 44px; width: 68px;">No</td>
 </tr>
 <tr class="row-odd" style="height: 44px;">
 <td style="height: 44px; width: 199px;"><strong>x-amz-copy-if-unmodified-since</strong></td>
 <td style="height: 44px; width: 260px;">Copia solo si se modifica desde la marca de tiempo.</td>
-<td style="height: 44px; width: 128px;">Timestamp</td>
+<td style="height: 44px; width: 128px;">Marca de tiempo</td>
 <td style="height: 44px; width: 68px;">No</td>
 </tr>
 <tr class="row-even" style="height: 44px;">
 <td style="height: 44px; width: 199px;"><strong>x-amz-copy-if-match</strong></td>
 <td style="height: 44px; width: 260px;">Copia solo si el ETag del object coincide con ETag.</td>
-<td style="height: 44px; width: 128px;">Entity tag</td>
+<td style="height: 44px; width: 128px;">Etiqueta de identidad</td>
 <td style="height: 44px; width: 68px;">No</td>
 </tr>
 <tr class="row-odd" style="height: 44px;">
 <td style="height: 44px; width: 199px;"><strong>x-amz-copy-if-none-match</strong></td>
 <td style="height: 44px; width: 260px;">Copia solo si el ETag object no coincide.</td>
-<td style="height: 44px; width: 128px;">Entity tag</td>
+<td style="height: 44px; width: 128px;">Etiqueta de identidad</td>
 <td style="height: 44px; width: 68px;">No</td>
 </tr>
 </tbody>
@@ -1255,25 +1255,25 @@ x-amz-copy-source: {source-bucket}/{source-object}</pre>
 <tr class="row-odd">
 <td><strong>if-modified-since</strong></td>
 <td>Solo se obtiene si se modifica desde la marca de tiempo.</td>
-<td>Timestamp</td>
+<td>Marca de tiempo</td>
 <td>No</td>
 </tr>
 <tr class="row-even">
 <td><strong>if-unmodified-since</strong></td>
 <td>Solo se obtiene si se modifica desde la marca de tiempo.</td>
-<td>Timestamp</td>
+<td>Marca de tiempo</td>
 <td>No</td>
 </tr>
 <tr class="row-odd">
 <td><strong>if-match</strong></td>
 <td>Solo se obtiene si el object ETag coincide con ETag.</td>
-<td>Entity Tag</td>
+<td>Etiqueta de identidad</td>
 <td>No</td>
 </tr>
 <tr class="row-even">
 <td><strong>if-none-match</strong></td>
 <td>Solo se obtiene si el object ETag coincide con ETag.</td>
-<td>Entity Tag</td>
+<td>Etiqueta de identidad</td>
 <td>No</td>
 </tr>
 </tbody>
@@ -1308,41 +1308,41 @@ x-amz-copy-source: {source-bucket}/{source-object}</pre>
 <table class="docutils" style="height: 257px;" border="1"><colgroup> <col width="23%" /> <col width="40%" /> <col width="27%" /> <col width="10%" /> </colgroup>
 <thead valign="bottom">
 <tr class="row-odd" style="height: 20px;">
-<th class="head" style="height: 20px; width: 155.799px;">Name</th>
-<th class="head" style="height: 20px; width: 274.688px;">Description</th>
-<th class="head" style="height: 20px; width: 184.688px;">Valid Values</th>
-<th class="head" style="height: 20px; width: 71.3542px;">Required</th>
+<th class="head" style="height: 20px; width: 155.799px;">Nombre</th>
+<th class="head" style="height: 20px; width: 274.688px;">Descripción</th>
+<th class="head" style="height: 20px; width: 184.688px;">Valores Válidos</th>
+<th class="head" style="height: 20px; width: 71.3542px;">Requerido</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even" style="height: 65px;">
 <td style="height: 65px; width: 147.778px;"><strong>range</strong></td>
 <td style="height: 65px; width: 266.667px;">El rango del object a recuperar.</td>
-<td style="height: 65px; width: 176.667px;">Range: bytes=beginbyte-endbyte</td>
+<td style="height: 65px; width: 176.667px;">Rango: bytes=beginbyte-endbyte</td>
 <td style="height: 65px; width: 63.3333px;">No</td>
 </tr>
 <tr class="row-odd" style="height: 43px;">
 <td style="height: 43px; width: 147.778px;"><strong>if-modified-since</strong></td>
 <td style="height: 43px; width: 266.667px;">Solo se obtiene si se modifica desde la marca de tiempo.</td>
-<td style="height: 43px; width: 176.667px;">Timestamp</td>
+<td style="height: 43px; width: 176.667px;">Marca de tiempo</td>
 <td style="height: 43px; width: 63.3333px;">No</td>
 </tr>
 <tr class="row-even" style="height: 43px;">
 <td style="height: 43px; width: 147.778px;"><strong>if-unmodified-since</strong></td>
 <td style="height: 43px; width: 266.667px;">Solo se obtiene si se modifica desde la marca de tiempo.</td>
-<td style="height: 43px; width: 176.667px;">Timestamp</td>
+<td style="height: 43px; width: 176.667px;">Marca de tiempo</td>
 <td style="height: 43px; width: 63.3333px;">No</td>
 </tr>
 <tr class="row-odd" style="height: 43px;">
 <td style="height: 43px; width: 147.778px;"><strong>if-match</strong></td>
 <td style="height: 43px; width: 266.667px;">Solo se obtiene si el object ETag coincide con ETag.</td>
-<td style="height: 43px; width: 176.667px;">Entity Tag</td>
+<td style="height: 43px; width: 176.667px;">Etiqueta de Identidad</td>
 <td style="height: 43px; width: 63.3333px;">No</td>
 </tr>
 <tr class="row-even" style="height: 43px;">
 <td style="height: 43px; width: 147.778px;"><strong>if-none-match</strong></td>
 <td style="height: 43px; width: 266.667px;">Solo se obtiene si el object ETag coincide con ETag.</td>
-<td style="height: 43px; width: 176.667px;">Entity Tag</td>
+<td style="height: 43px; width: 176.667px;">Etiqueta de Identidad</td>
 <td style="height: 43px; width: 63.3333px;">No</td>
 </tr>
 </tbody>
@@ -1521,9 +1521,9 @@ x-amz-copy-source: {source-bucket}/{source-object}</pre>
 <table class="docutils" border="1"><colgroup> <col width="26%" /> <col width="8%" /> <col width="66%" /> </colgroup>
 <thead valign="bottom">
 <tr class="row-odd">
-<th class="head" style="width: 263px;">Name</th>
-<th class="head" style="width: 90px;">Type</th>
-<th class="head" style="width: 337px;">Description</th>
+<th class="head" style="width: 263px;">Nombre</th>
+<th class="head" style="width: 90px;">Tipo</th>
+<th class="head" style="width: 337px;">Descripción</th>
 </tr>
 </thead>
 <tbody valign="top">
@@ -1724,7 +1724,7 @@ x-amz-copy-source: {source-bucket}/{source-object}</pre>
 <tr class="row-odd">
 <td><code class="docutils literal"><span class="pre">ETag</span></code></td>
 <td>Cadena</td>
-<td>La parte de la entity tag.</td>
+<td>La parte de la etiqueta de identidad.</td>
 <td>Sí</td>
 </tr>
 </tbody>
@@ -1748,7 +1748,7 @@ x-amz-copy-source: {source-bucket}/{source-object}</pre>
 <tr class="row-odd">
 <td><strong>Location</strong></td>
 <td>URI</td>
-<td>El identificador del recurso (path) del nueov.</td>
+<td>El identificador del recurso (path) del nuevo object.</td>
 </tr>
 <tr class="row-even">
 <td><strong>Bucket</strong></td>
@@ -1763,7 +1763,7 @@ x-amz-copy-source: {source-bucket}/{source-object}</pre>
 <tr class="row-even">
 <td><strong>ETag</strong></td>
 <td>Cadena</td>
-<td>La entity tag del nuevo object.</td>
+<td>La Entidad de Identidad del nuevo object.</td>
 </tr>
 </tbody>
 </table>
