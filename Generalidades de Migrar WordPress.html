@@ -37,11 +37,19 @@
 </ul>
 <h3>Opción de DreamPress para migrar tu sitio a un nuevo dominio</h3>
 <p>Si tienes problemas para migrar un sitio de WordPress usando las instrucciones anteriores o si deseas una forma más rápida, puedes actualizar tu nuevo dominio a DreamPress, que ofrece una opción de importación. <a href="https://help.dreamhost.com/hc/es/articles/214581158-Generalidades-sobre-DreamPress">DreamPress</a> es el alojamiento de WordPress administrado de DreamHost. Es un servicio escalable que permite a los usuarios administrar sus sitios de WordPress con precios simples y beneficios adicionales de robustez en el servidor, almacenamiento en caché y memoria.</p>
-<p>Si tu sitio actual de WordPress fue instalado y administrado por el instalador de un clic de DreamHost, puedes configurar DreamPress en el nuevo nombre de dominio e importar el contenido del sitio actual de WordPress al nuevo dominio de DreamPress. Puedes agregar DreamPress en un nuevo dominio en tu panel DreamHost en <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=wordpress.dreampress&amp;" target="_blank" rel="noopener">Managed WordPress</a>. Por favor, visita la siguiente guía sobre cómo importar contenido en DreamPress:</p>
+<p>Si tu sitio actual de WordPress fue instalado y administrado por el instalador de un clic de DreamHost, puedes configurar DreamPress en el nuevo nombre de dominio e importar el contenido del sitio actual de WordPress al nuevo dominio de DreamPress. Puedes agregar DreamPress en un nuevo dominio en tu panel DreamHost en <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=wordpress.dreampress&amp;" target="_blank" rel="noopener">WordPress Administrado</a>. Por favor, visita la siguiente guía sobre cómo importar contenido en DreamPress:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215300597-Importar-una-instalaci%C3%B3n-de-WordPress-existente-en-DreamPress">Importar una instalación de WordPress existente a DreamPress</a></li>
 </ul>
 <p>Si tu sitio actual de WordPress no es administrado por el <a href="https://help.dreamhost.com/hc/es/articles/215525277-C%C3%B3mo-instalar-WordPress-usando-el-Instalador-de-un-clic" target="_self">Instalador de un clic</a>, puedes <a href="https://panel.dreamhost.com/?tree=support.msg">enviar un ticket</a> para solicitar que tu sitio se convierta en una Instalación de un clic.</p>
+</div>
+<h2>Descargar de archivos PHP después de una migración</h2>
+<div class="solvvy-solution">
+<p>En algunas circunstancias, un sitio migrado a DreamHost desde otro proveedor de alojamiento no carga correctamente. Cuando accedas al sitio, el buscador descargará un archivo PHP en vez de mostrar el sitio web. Esto es causado típicamente por código que sobre del anterior alojador, muy comunmente por la prescencia de una entrada <span class="code">AddHandler</span> en el archivo <span class="text-object">.htaccess</span> del sitio como el ejemplo de abajo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="code-highlight">AddHandler</span> application/x-httpd-php70 .php</pre>
+</div>
+<p>Este código no es necesario en los servidores de DreamHost y debería ser <a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self" rel="undefined">eliminado del archivo .htaccess de WordPress</a> luego de que el sitio se haya migrado.</p>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
