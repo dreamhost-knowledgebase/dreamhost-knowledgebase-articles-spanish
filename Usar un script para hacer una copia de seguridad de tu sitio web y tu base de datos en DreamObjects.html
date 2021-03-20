@@ -36,7 +36,7 @@
 <li>Haz clic en el enlace <span class="text-link">Add Folder</span> y añade un nuevo directorio llamado <span class="text-object">backups</span>. Esta carpeta se utilizará para cargar las copias de seguridad de tu sitio web y de tu base de datos.</li>
 </ol>
 </div>
-<h2>Paso 2 — Crear el script del backup</h2>
+<h2>Paso 2 — Crea el cron job en tu panel</h2>
 <div class="solvvy-solution">
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
@@ -104,23 +104,19 @@ find $HOME/backup/* -type d -exec rm -rf {} \; 2&gt; /dev/null</pre>
 </ol>
 <p>El código anterior hace una copia de seguridad de los archivos de tu base de datos y sitio web en tu bucket DreamObjects dentro de una carpeta llamada <span class="text-object">/backups</span>.</p>
 </div>
-<h2>Paso 3 — Instala aws-cli</h2>
+<h2>Paso 3 — Correr el archivo</h2>
 <div class="solvvy-solution">
-<p>aws-cli es un cliente de línea de comandos que te permite administrar tus datos de DreamObjects. La mayoría de los servidores de DreamHost lo han instalado de forma predeterminada, por lo que no hay nada que instalar. Sin embargo, si tu servidor está ejecutando una versión anterior de Ubuntu 14, deberás instalar esto manualmente.&nbsp;</p>
-<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo comprobar si necesitas instalarlo.</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216335908-Instalaci%C3%B3n-y-configuraci%C3%B3n-de-AWS-CLI" target="_self">¿Necesito instalar manualmente AWS?</a></li>
-</ul>
-</div>
-<h2>Paso 4 — Ejecutar el archivo</h2>
-<div class="solvvy-solution">
-<h3>Ejecutarlo manualmente</h3>
-<p>Después de activar tu entorno virtual, puedes correr el archivo manualmente con el siguiente comando:</p>
+<h3>Opción 1 — Correrlo manualmente</h3>
+<p>Corre el archivo manualmente con el siguiente comando:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">(my-user-bucket) </span><span class="command">sh ~/backup/example.com-backup.sh</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sh ~/backup/example.com-backup.sh</span></pre>
 </div>
-<h3>Corriéndolo con un cron job</h3>
-<p>También puedes crear un <a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-">cron job</a> para correr esto automáticamente en tiempos específicos. Para hacer esto, crea un nuevo archivo llamado algo así como <span class="text-object">websitebackup.sh</span> con el siguiente código.</p>
+<h3>Opción 2 — Correrlo desde un a cron job</h3>
+<p>Puedes crear también un <a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-" target="_self" rel="undefined">cron job</a> para correr esto automáticamente en momentos específicos. Esto requerirá que crees un archivo con los comandos a correr y luego crear un cron job en tu panel.</p>
+<dl>
+<dd>
+<h3>Paso 1 — Crear un archivo para correr el comando</h3>
+<p>Crea un archivo llamado algo como <span class="text-object">websitebackup.sh</span> con el siguiente código.</p>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
@@ -135,20 +131,8 @@ sh ~/<span class="code-highlight">backup/example.com-backup.sh</span></pre>
 <div class="preboxcontainer">
 <pre class="prebox">/bin/bash /home/<span class="code-highlight">username/websitebackup.sh</span></pre>
 </div>
-</div>
-<h3>Si instalaste AWS en un virtualenv</h3>
-<p>Si tu servidor ejecuta Ubuntu 14, debes crear un virtualenv e instalar AWS manualmente como se detalla en el paso #3 arriba. Si es así, añade la línea <span class="code">source</span> a tu cron job para activar tu virtualenv.</p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
-<p>Asegúrare de cambiar <span class="text-object">my-user-bucket</span> por el nombre de tu entorno virtual.</p>
-</div>
-</div>
-<div class="preboxcontainer">
-<pre class="prebox">#!/bin/bash
-source ~/<span class="code-highlight">my-user-bucket/bin/activate</span>
-sh ~/<span class="code-highlight">backup/example.com-backup.sh</span></pre>
-</div>
+</dd>
+</dl>
 <h2><span id="See_also">Ver también</span></h2>
 <div class="solvvy-hidden">
 <ul>
@@ -167,4 +151,5 @@ sh ~/<span class="code-highlight">backup/example.com-backup.sh</span></pre>
 <ul>
 <li><a href="http://dev.mysql.com/doc/refman/5.0/en/mysqldump.html">MySQL 5.0 Reference Manual: mysqldump</a></li>
 </ul>
+</div>
 </div>
