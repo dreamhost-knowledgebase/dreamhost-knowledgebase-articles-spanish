@@ -1,21 +1,21 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Las máquinas virtuales que se ejecutan dentro de la nube se denominan instancias. &nbsp;Antes de poder lanzar una instancia, recopila los siguientes parámetros:</p>
+<p>Las máquinas virtuales que se ejecutan dentro de la nube se denominan instancias. Antes de poder lanzar una instancia, recopila los siguientes parámetros:</p>
 <ul class="simple">
-<li><strong>Origen de la instancia</strong> — Puede ser una imagen, una instantánea o un volumen de almacenamiento en bloque que contenga una imagen o una instantánea.</li>
+<li><strong>Origen de la instancia</strong> — Puede ser una imagen, un snapshot o un volumen de almacenamiento en bloque que contenga una imagen o un snapshot.</li>
 <li><strong>Nombre de la instancia</strong> — El nombre de tu instancia.</li>
 <li><strong>Flavor</strong>&nbsp;— El flavor de tu instancia define los límites de memoria RAM y vCPU para una instancia.</li>
 <li><strong>Datos del usuario</strong>&nbsp;(no requerido) — Cualquier archivo de datos de usuario. Un archivo de datos de usuario es una clave especial en el servicio de metadatos que contiene un archivo al que pueden acceder las aplicaciones compatibles con la nube en la instancia de invitado. Por ejemplo, una aplicación que usa datos de usuario es el sistema <a class="reference external" href="https://help.ubuntu.com/community/CloudInit">cloud-init</a>, que es un paquete de código abierto de Ubuntu que está disponible en varias distribuciones de Linux y que maneja la inicialización temprana de una instancia en la nube.</li>
 <li><strong>Credenciales de acceso y seguridad</strong>&nbsp;— Esto incluye una o ambas de las siguientes credenciales:
 <ul style="list-style-type: square;">
-<li><strong>Llave de emparejamiento</strong> — Estas son credenciales SSH que se inyectan en las imágenes cuando se lanzan. Para que el par de claves se inyecte correctamente, la imagen debe contener el paquete <code class="docutils literal"><span class="pre">cloud-init</span></code>. Crea al menos un par de claves para cada proyecto. Si ya has generado un par de claves con una herramienta externa, puedes importarlo a DreamCompute. Puedes utilizar el par de claves para varias instancias que pertenecen a ese proyecto.</li>
+<li><strong>Llave de emparejamiento</strong> — Estas son credenciales SSH que se inyectan en las imágenes cuando se lanzan. Para que el par de claves se inyecte correctamente, la imagen debe contener el paquete <code class="docutils literal"><span class="pre">cloud-init</span></code>. Crea al menos un par de claves para cada proyecto. Si ya has generado un par de claves con una herramienta externa, puedes importarlas a DreamCompute. Puedes utilizar el par de claves para varias instancias que pertenecen a ese proyecto.</li>
 <li><strong>Grupo de Seguridad</strong> — Define qué tráfico de red entrante y saliente se reenvía hacia y desde las instancias. Los grupos de seguridad tienen un conjunto de políticas de firewall, conocidas como <em>reglas de grupo de seguridad</em>.</li>
 </ul>
 </li>
 <li><strong>Direcciones IP</strong> — Si es necesario, puedes asignar una dirección IP flotante (pública) a una instancia en ejecución.</li>
 <li><strong>Volumen</strong> — También puedes adjuntar un dispositivo de almacenamiento en bloque, o volumen, para almacenamiento persistente.</li>
 </ul>
-<p>Puedes lanzar una instancia directamente desde una de las imágenes de OpenStack disponibles o desde una imagen que haya copiado en un volumen persistente. El servicio OpenStack Image proporciona un conjunto de imágenes a las que pueden acceder los miembros de diferentes proyectos.</p>
+<p>Puedes lanzar una instancia directamente desde una de las imágenes de OpenStack disponibles o desde una imagen que hayas copiado en un volumen persistente. El servicio OpenStack Image proporciona un conjunto de imágenes a las que pueden acceder los miembros de diferentes proyectos.</p>
 </div>
 <h2>Reúne parámetros para lanzar una instancia</h2>
 <div class="solvvy-solution">
@@ -151,7 +151,7 @@
 | volumes_attached            |                                                 |
 +-----------------------------+-------------------------------------------------+</pre>
 </div>
-<p>Un estado de<strong>BUILD&nbsp;</strong> indica que la instancia se ha iniciado, pero aún no está en línea.&nbsp; Un estado de <strong>ACTIVE&nbsp;</strong>indica que la instancia está activa.&nbsp;Copia el valor de la contraseña administrativa del campo <code class="docutils literal"><span class="pre">adminPass</span></code>. Puedes utilizar esta contraseña más tarde para iniciar sesión en tu instancia.</p>
+<p>Un estado <strong>BUILD </strong>indica que la instancia se ha iniciado, pero aún no está en línea. Un estado <strong>ACTIVE&nbsp;</strong>indica que la instancia está activa.&nbsp;Copia el valor de la contraseña administrativa del campo <code class="docutils literal"><span class="pre">adminPass</span></code>. Puedes utilizar esta contraseña más tarde para iniciar sesión en tu instancia.</p>
 <p>También podrás ver la nueva instancia en tu <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener">panel de DreamCompute</a>.</p>
 <p>Para obtener más opciones, usa el siguiente comando o ve la documentación de OpenStack a continuación.</p>
 <div class="preboxcontainer">
@@ -164,7 +164,7 @@
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>También puedes colocar archivos locales arbitrarios en el sistema de archivos de la instancia en el momento de la creación mediante el parámetro <strong>--file &lt;dest-filename=source-filename&gt;</strong>. Puedea almacenar hasta cinco archivos.</p>
+<p>También puedes colocar archivos locales arbitrarios en el sistema de archivos de la instancia en el momento de la creación mediante el parámetro <strong>--file &lt;dest-filename=source-filename&gt;</strong>. Puedes almacenar hasta cinco archivos.</p>
 <p>Por ejemplo, si tienes un archivo de claves autorizadas especiales llamado <span class="text-object">special_authorized_keysfile</span> que deseas colocar en la instancia en lugar de usar la inyección de clave SSH normal, puedes agregar la opción <strong>–file</strong> como se muestra en el siguiente ejemplo.</p>
 <div class="preboxcontainer">
 <pre class="prebox">--file /root/.ssh/authorized_keys=special_authorized_keysfile</pre>
@@ -196,4 +196,7 @@
 <div class="dream-sign-up">
 <h2>Implementa Tus Aplicaciones en Servidores en la Nube Hoy</h2>
 <div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Suscríbete a DreamCompute</a></div>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 729px; top: 3900.01px;">
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>
