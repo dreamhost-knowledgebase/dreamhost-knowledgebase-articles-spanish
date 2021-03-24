@@ -8,19 +8,19 @@
 <p>Por ejemplo, <a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self" rel="undefined">crea un archivo</a> llamado myfile.test con el siguiente código:</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
-echo ‘testing an extension using PHP’;
+echo 'testing an extension using PHP';
 ?&gt;</pre>
 </div>
 <p>La extensión .test no existe. Pero, puedes forzar que se ejecute como PHP agregando este código a tu <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self" rel="undefined">archivo .htaccess</a>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">AddHandler fcgid-script .test
-FcgidWrapper "/dh/cgi-system/php72.cgi" .test</pre>
+FcgidWrapper "/dh/cgi-system/php74.cgi" .test</pre>
 </div>
 <p>Si cargas el archivo en un navegador, ahora se cargará como un archivo PHP normal.</p>
 </div>
 <h2>CGI y FCGI</h2>
 <div class="solvvy-solution">
-<p>En el ejemplo anterior, los archivos con la extensión .test utilizan PHP 7.2 con FastCGI.</p>
+<p>En el ejemplo anterior, los archivos con la extensión .test utilizan PHP 7.4 con FastCGI.</p>
 <p>Si no deseas cambiar la versión de PHP pero deseas que PHP use CGI (en lugar de FastCGI), usa esta línea en tu archivo .htaccess:</p>
 <div class="preboxcontainer">
 <pre class="prebox">AddHandler php-cgi .test</pre>
