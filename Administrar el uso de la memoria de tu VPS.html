@@ -6,7 +6,7 @@
 <h2><span id="Ejemplo_de_cómo_los_procesos_utilizan_la_memoria">Ejemplo de cómo los procesos utilizan la memoria</span></h2>
 <div class="solvvy-solution">
 <p>Cada vez que alguien ve tu sitio web, el archivo PHP de la página que ve se analiza y ejecuta mediante un proceso PHP CGI. Al mismo tiempo, será necesario ejecutar un proceso de Apache para entregar la salida HTML resultante del script al navegador.</p>
-<p>La cantidad de estos procesos que se ejecutan es proporcional a la cantidad de tráfico que tiene. Por ejemplo, si tienes una gran afluencia de tráfico, se generarán procesos PHP y Apache adicionales para facilitar ese tráfico. De hecho, Apache y PHP continuarán generando procesos según lo solicitado hasta que su VPS esté completamente sin memoria.</p>
+<p>La cantidad de estos procesos que se ejecutan es proporcional a la cantidad de tráfico que tiene. Por ejemplo, si tienes una gran afluencia de tráfico, se generarán procesos PHP y Apache adicionales para facilitar ese tráfico. De hecho, Apache y PHP continuarán generando procesos según lo solicitado hasta que tu VPS esté completamente sin memoria.</p>
 <p>Deberás tener cuidado con la forma en que configuras las cosas para evitar tales problemas. Esto a menudo conduce a problemas en los que los sitios web en un VPS dejarán de funcionar debido a la saturación de la memoria durante las horas pico y luego comenzarán a funcionar normalmente nuevamente una vez que el tráfico disminuya a niveles más manejables.</p>
 </div>
 <h2><span id="Verificar_tu_uso_de_memoria">Verificar tu uso de memoria</span></h2>
@@ -34,7 +34,7 @@
 <p>Una vez que estés dentro, las herramientas principales que utilizará son <span class="code">top -c</span>, <span class="code">free -m</span>, y <span class="code">ps aux</span>.</p>
 <h3><span id="Usar_el_comando_top">Usar el comando top</span></h3>
 <p>El comando <span class="code">top</span> muestra los procesos activos actuales, el porcentaje de CPU que están usando, cuánta memoria, qué usuario la está ejecutando, etc. Una vez que <span class="code">top</span> esté corriendo, puedes presionar <span class="code">Shift + m</span> para ordenar los procesos por uso de memoria en lugar de por uso de CPU.</p>
-<p>Mientras examinas tu salida principal, es importante saber qué información necesita mirar. La asignación de memoria que configuró en su panel se relaciona con la memoria física que se está utilizando (a diferencia de la memoria virtual). Esa memoria corresponde a la columna <span class="text-object">RES</span> en el comando <span class="code">top</span>. Abajo de <span class="code">top</span> ordernado por la memoria (<span class="code">Shift + m</span>) podría verse así (los procesos reales probablemente serán diferentes en tu VPS):</p>
+<p>Mientras examinas tu salida principal, es importante saber qué información necesitas mirar. La asignación de memoria que configuraste en tu panel se relaciona con la memoria física que se está utilizando (a diferencia de la memoria virtual). Esa memoria corresponde a la columna <span class="text-object">RES</span> en el comando <span class="code">top</span>. Abajo de <span class="code">top</span> ordernado por la memoria (<span class="code">Shift + m</span>) podría verse así (los procesos reales probablemente serán diferentes en tu VPS):</p>
 <div class="preboxcontainer">
 <pre class="prebox">PID   USER     PR NI   VIRT  RES SHR   S &nbsp;%CPU &nbsp;%MEM    TIME+   COMMAND
 14871 exampleu  20   0  250m  14m 8340  S  5     1.3   0:04.12  php74.cgi
@@ -47,7 +47,7 @@
 </div>
 <p>En el ejemplo anterior, verás una serie de procesos php74.cgi en ejecución, lo que significa que el sitio que genera estos procesos se ejecuta bajo PHP 7.4. En la columna <span class="text-object">RES</span>, puedes ver cuánta memoria está usando cada uno. En este caso, todos utilizan entre 12 y 15 MB de memoria. En un VPS ocupado, es probable que tenga varios procesos de Apache en ejecución. Esos promedian alrededor de 9-11 MB de memoria cada uno. Los procesos de Apache y PHP se multiplican a medida que tus sitios comienzan a atender más solicitudes, por lo que puede ver que el uso de memoria puede dispararse fácilmente si comienzas a recibir mucho tráfico.</p>
 <h3><span id="Usando_el_comando_libre">Usando el comando libre</span></h3>
-<p>En tu otra ventana, puedes correr <span class="code">free -m</span>. Este comando muestra el uso de memoria actual en tu VPS y debería verse así: like this:</p>
+<p>En tu otra ventana, puedes correr <span class="code">free -m</span>. Este comando muestra el uso de memoria actual en tu VPS y debería verse así:</p>
 <div class="preboxcontainer">
 <pre class="prebox">                    total        used        free     shared    buffers     cached
  Mem:               4049        3941        107            0        123       1639
@@ -65,7 +65,7 @@
 <li><a href="https://www.linuxatemyram.com/" target="_self" rel="undefined">linuxatemyram.com</a></li>
 </ul>
 <h3><span id="Usar_el_comando_ps_aux">Usar el comando ps aux</span></h3>
-<p>El <span class="code">ps</span> te proporciona información similar a <span class="code">top</span>, pero simplemente toma una captura de los procesos activos y tu uso y la muestra en tu pantalla. Esto es útil si solo deseas ver un proceso en particular. Por ejemplo, si solo deseas ver la ejecución de procesos de Apache, corre el siguiente comando:</p>
+<p><span class="code">ps</span> te proporciona información similar a <span class="code">top</span>, pero simplemente toma una captura de los procesos activos y tu uso y la muestra en tu pantalla. Esto es útil si solo deseas ver un proceso en particular. Por ejemplo, si solo deseas ver la ejecución de procesos de Apache, corre el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ps aux | grep apache</span>
 </pre>
