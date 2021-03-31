@@ -54,7 +54,7 @@ if sys.executable&nbsp;!= INTERP: os.execl(INTERP, INTERP, *sys.argv)
 </div>
 <h2><span id="Passenger_WSGI_and_Pylons.2FPyramid">Passenger WSGI y Pylons/Pyramid</span></h2>
 <div class="solvvy-solution">
-<p>Si estás utilizando un sitio compatible con Pyramid-framework, lo siguiente debería funcionar para tú <code>passenger_wsgi.py</code>, asumiendo que has configurado el entorno virtual de Python en <code>INTERP</code>:</p>
+<p>Si estás usando un sitio compatible con Pyramid-framework, lo siguiente debería funcionar para tú <code>passenger_wsgi.py</code>, asumiendo que has configurado el entorno virtual de Python en <code>INTERP</code>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">import sys, os
 INTERP = "/home/<span class="code-highlight">username</span>/local/bin/python"
@@ -75,7 +75,7 @@ application = loadapp('config:/home/path/to/site/production.ini')
 <p>Passenger WSGI en este momento tiene dificultades para tratar con errores. Es decir, cuando tu aplicación WSGI (por ejemplo, pero sin limitarse a, Django) genera una excepción no detectada, Passenger muere, se muestra una página 500 en el navegador y el mensaje de error no se registra en el <a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP" target="_self">archivo error.log</a>. Esto dificulta la depuración.</p>
 <p>Una solución es utilizar Python Paste como middleware WSGI entre Passenger y tu aplicación:</p>
 <ol>
-<li>Obtén Paste de aquí: <a href="https://pypi.python.org/pypi/Paste" target="_self" rel="undefined">pypi.python.org/pypi/Paste</a>.</li>
+<li>Obtén Paste aquí: <a href="https://pypi.python.org/pypi/Paste" target="_self" rel="undefined">pypi.python.org/pypi/Paste</a>.</li>
 <li>Descomprime los archivos. Todo lo que necesitas es el directorio <span class="text-object">paste</span>.</li>
 <li>Ponlo en el directorio de tu aplicación (por ejemplo, <span class="text-object">/home/username/sitename/myapp/paste</span>)</li>
 <li>Edita tu archivo <span class="text-object">passenger_wsgi.py</span> para incluir ese directorio en la ruta de Python y luego carga Paste.</li>
@@ -158,7 +158,7 @@ def application(environ, start_response):
 <h2><span id="A_slightly_more_robust_local_logging_alternative">Una alternativa de depuración local un poco más robusta</span></h2>
 <div class="solvvy-solution">
 <p>Este ejemplo usa el módulo de registro de Python. No contiene el bit de intérprete alternativo ni carga el archivo ini. Muestra cómo cargar módulos locales usando <code>getcwd()</code>.</p>
-<p>Aparte del nombre <code>myappmodule</code> y <code>myappmodule.application</code>, esto no hace ninguna suposición sobre su aplicación.</p>
+<p>Aparte del nombre <code>myappmodule</code> y <code>myappmodule.application</code>, esto no hace ninguna suposición sobre tu aplicación.</p>
 <div class="preboxcontainer">
 <pre class="prebox">import os
 import sys
@@ -196,7 +196,7 @@ def application(environ, start_response):
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">./manage.py runserver</span></pre>
 </div>
-<p>Siguiente, abre otro shell <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y ejecuta:</p>
+<p>Siguiente, abre otro shell <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y corre:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">lynx localhost:8000</span></pre>
 </div>
@@ -220,4 +220,7 @@ def application(environ, start_response):
 <li><a href="https://help.dreamhost.com/hc/es/articles/216385637--C%C3%B3mo-habilito-Passenger-en-mi-dominio-">¿Cómo habilitar Passenger en mi dominio?</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215489338-Instalar-y-usar-virtualenv-con-Python-2">Instalar virtualenv y módulos personalizados en Python</a></li>
 </ul>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 214px; top: 4361.55px;">
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>

@@ -1,0 +1,68 @@
+<div class="alert-warning">
+<p>Subversion se ha eliminado del panel DreamHost. Si previamente habías configurado Subversion en tu dominio, seguirá funcionando normalmente.</p>
+</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Puedes configurar tu sitio para verificar automáticamente las fuentes actuales de tu repositorio usando los "<a href="http://svnbook.red-bean.com/en/1.1/ch05s02.html#svn-ch-5-sect-2.1">hook scripts</a>" de Subversion. En resumen, el servidor web corre el script llamado 'post-commit' cada vez que se registran nuevas fuentes en tu repositorio.</p>
+<p>Ten en cuenta que cuando el servidor web corre este script, se ejecuta en el contexto de seguridad del usuario dhapache. Este usuario no tiene ni debe (por razones de seguridad) tener los permisos necesarios para modificar los archivos en el directorio de tu sitio web. Como tal, debes hacer arreglos para que el script posterior a la confirmación ejecute la actualización en el contexto de seguridad de un usuario con los privilegios necesarios para actualizar tu sitio.</p>
+</div>
+<h2><span id="Using_post-commit.tmpl">Usar post-commit.tmpl</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu servidor vía SSH.</li>
+<li>Navega hasta el siguiente archivo. Cambia <span class="code">repository_name</span> por el nombre de tu repositorio en tu panel.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/svn/<span class="code-highlight">repository_name</span>/hooks/post-commit.tmpl</span></pre>
+</div>
+</li>
+<li>Abre el archivo post-commit.tmpl en un editor de texto. Los siguientes contenidos están configurados por defecto:
+<div class="preboxcontainer">
+<pre class="prebox">#!/bin/sh
+
+REPOS="$1"
+REV="$2"
+
+"$REPOS"/hooks/mailer.py commit "$REPOS" $REV "$REPOS"/mailer.conf
+</pre>
+</div>
+</li>
+<li>Cámbialo a lo siguiente asegurándote de actualizar las dos direcciones de correo a la tuya:
+<div class="preboxcontainer">
+<pre class="prebox">#!/bin/sh
+
+REPOS="$1"
+REV="$2"
+
+/usr/share/subversion/hook-scripts/commit-email.pl --from <span class="code-highlight">svnaddress@example.com</span> "$REPOS" "$REV" <span class="code-highlight">youremail@example.com</span>
+</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>La dirección <strong>--from</strong> es crucial porque el script fallará si no tiene una dirección "de". Cualquier dirección de correo servirá. También puedes cambiar la segunda dirección para enviar a cualquier correo que desees.</p>
+</div>
+</div>
+</li>
+<li>Guarda el archivo como <strong>post-commit</strong> (eliminando la extensión de archivo 'tmpl').
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Cuando guardas esto como el nuevo nombre de archivo en tu editor de texto, los permisos cambian de dhapache a tu usuario, que es lo que deseas. Confirma que el nuevo archivo posterior a la confirmación es ahora propiedad de tu usuario antes de continuar.</p>
+</div>
+</div>
+</li>
+<li>Como el nuevo archivo ahora debería ser propiedad de tu usuario (<em>NO dhapache</em>), corre el siguiente comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod a+x post-commit</span></pre>
+</div>
+</li>
+<li>Intenta una confirmación con tu repositorio svn. Ahora deberías recibir una notificación de confirmación en tu dirección de correo.</li>
+</ol>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215466058-Descripci%C3%B3n-general-de-la-Subversion" target="_self" rel="undefined">Generalidades de la Subversion</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">Generalidades de SSH</a></li>
+</ul>
+</div>
