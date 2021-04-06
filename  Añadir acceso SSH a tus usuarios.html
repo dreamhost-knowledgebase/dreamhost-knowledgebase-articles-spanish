@@ -9,14 +9,14 @@
 <h2>Habilitar SSH</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Inicia sesión en tu instancia usando la <a href="https://help.dreamhost.com/hc/es/articles/216201547-Generalidades-sobre-la-conexi%C3%B3n-a-tu-instancia-con-las-claves-SSH" target="_self" rel="undefined">Llave par asignada</a> y el <a href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined">usuario por defecto asginado</a>.</li>
-<li>Una vez que hayas iniciado sesión, ejecuta lo siguiente para editar tu archivo <span class="text-object">sshd_config</span>:
+<li>Inicia sesión en tu instancia usando la <a href="https://help.dreamhost.com/hc/es/articles/216201547-Generalidades-sobre-la-conexi%C3%B3n-a-tu-instancia-con-las-claves-SSH" target="_self" rel="undefined">Llave de emparejamiendo asignada</a> y el <a href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined">usuario por defecto asginado</a>.</li>
+<li>Una vez que hayas iniciado sesión, corre lo siguiente para editar tu archivo <span class="text-object">sshd_config</span>:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo vim /etc/ssh/sshd_config</span>
 </pre>
 </div>
 </li>
-<li>En el archivo, busca la configuración llamada <span class="code">PasswordAuthentication</span>. A la derecha, cambia <span class="code">no</span> a <span class="code">yes</span>.</li>
+<li>En el archivo, busca la configuración llamada <span class="code">PasswordAuthentication</span>. A la derecha, cambia '<span class="code">no'</span> a '<span class="code">yes'</span>.</li>
 <li>Guarda el archivo, y luego reinicia el SSHD con el siguiente comando:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo service sshd restart</span>
