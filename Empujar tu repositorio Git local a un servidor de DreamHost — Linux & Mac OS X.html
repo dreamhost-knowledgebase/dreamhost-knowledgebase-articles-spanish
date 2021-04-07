@@ -15,8 +15,7 @@
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cd ~/.ssh</span></pre>
 </div>
-</li>
-<li>Si el directorio no existe, créelo:<br />
+Si el directorio no existe, créelo:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local ~]$ </span><span class="command">mkdir ~/.ssh</span></pre>
 </div>
@@ -27,8 +26,8 @@
 </pre>
 </div>
 </li>
-<li>Ingresa un nombre para el archivo cuando se te solicite, como 'dreamhost-git-key'.</li>
-<li>Cuando se te solicite ingresar una contraseña, haz clic en 'Enter' dos veces para omitir.<br />
+<li>Ingresa un nombre para el archivo cuando se te solicite, como <span class="code">dreamhost-git-key</span>.</li>
+<li>Cuando se te solicite ingresar una contraseña, haz clic en <span class="code">Enter</span> dos veces para omitir.<br />
 <dl>
 <dd><em>Se crean dos archivos nuevos en el directorio <span class="text-object">.ssh</span> de tu usuario:</em></dd>
 </dl>
@@ -39,7 +38,7 @@ dreamhost-git-key
 dreamhost-git-key.pub</pre>
 </div>
 </li>
-<li>Utiliza las siguientes instrucciones para copiar tu clave pública en el archivo 'key_keys' del servidor DreamHost.<br />
+<li>Utiliza las siguientes instrucciones para copiar tu clave pública en el archivo <span class="text-object">authorized_keys</span> del servidor DreamHost.<br />
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
@@ -99,11 +98,11 @@ dreamhost-git-key.pub</pre>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cat ~/.ssh/authorized_keys</span></pre>
 </div>
 </li>
-<li>Crea un nuevo directorio para tu nuevo repositorio remoto en tu servidor DreamHost. Si este código está destinado a reemplazar tu sitio web existente, puede nombrarlo igual que tu sitio web que termina en .git.<br />
+<li>Crea un nuevo directorio para tu nuevo repositorio remoto en tu servidor DreamHost. Si este código está destinado a reemplazar tu sitio web existente, puede nombrarlo igual que tu sitio web que termina en <span class="text-object">.git</span>.<br />
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Dado que este es un repositorio remoto y no un repositorio que funcione, el nombre del directorio que crees debe terminar con .git. Luego puedes retirar este repositorio en el futuro para trabajar en él.</p>
+<p>Dado que este es un repositorio remoto y no un repositorio que funcione, el nombre del directorio que crees debe terminar con <span class="text-object">.git</span>. Luego puedes retirar este repositorio en el futuro para trabajar en él.</p>
 </div>
 </div>
 <div class="preboxcontainer">
@@ -115,7 +114,7 @@ dreamhost-git-key.pub</pre>
 </pre>
 </div>
 </li>
-<li>Navega a tu repositorio git en tu computadora local, y luego empuja al repositorio remoto en tu servidor DreamHost. Asegúrese de cambiar 'user' y 'server' por tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214694298--Cu%C3%A1les-son-los-diferentes-tipos-de-usuarios-de-DreamHost-" target="_self">Nombre de usuario DreamHost</a> y&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027#nombre-de-host" target="_self">nombre de servidor real</a>:
+<li>Navega a tu repositorio git en tu computadora local, y luego empuja al repositorio remoto en tu servidor DreamHost. Asegúrese de cambiar <span class="code">user</span> y <span class="code">server</span> por tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214694298--Cu%C3%A1les-son-los-diferentes-tipos-de-usuarios-de-DreamHost-" target="_self">Nombre de usuario DreamHost</a> y&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027#nombre-de-host" target="_self">nombre de servidor real</a>:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git remote add dreamhost ssh://<span class="code-highlight">user@server.dreamhost.com/~/example.com.git</span></span>
 <span class="server">[local ~]$ </span><span class="command">git push -u dreamhost master</span>
@@ -139,7 +138,7 @@ To ssh://username@server.dreamhost.com/~/example.com.git
 </div>
 <h2>¿Cómo puedo confirmar que mi repositorio se envió correctamente a mi servidor DreamHost?</h2>
 <div class="solvvy-solution">
-<p>Si ejecutas 'git status' en el directorio <span class="text-object">~/example.com.git</span>, aparece el siguiente error:</p>
+<p>Si ejecutas <span class="code">git status</span> en el directorio <span class="text-object">~/example.com.git</span>, aparece el siguiente error:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">git status</span>
 <span class="cmdoutput">fatal: This operation must be run in a work tree</span></pre>
@@ -147,7 +146,7 @@ To ssh://username@server.dreamhost.com/~/example.com.git
 <p>Esto se debe a que es un repositorio 'desnudo', no un directorio de trabajo que puede usar. Podrías clonar este repositorio remoto en un repositorio Git que funcione. Esto te permite ver los archivos que se enviaron al servidor.</p>
 <ol>
 <li>Inicie sesión en su servidor DreamHost a través de SSH.</li>
-<li>Clona el repositorio en una nueva ubicación ejecutando lo siguiente en el directorio de tu usuario:<br />
+<li>Clona el repositorio en una nueva ubicación ejecutando lo siguiente en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-" target="_self">directorio de tu usuario</a>:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir <span class="code-highlight">~/cloned.example.com.git</span></span>
 <span class="server">[server]$ </span><span class="command">git clone <span class="code-highlight">~/example.com.git ~/cloned.example.com.git</span>/span&gt;
