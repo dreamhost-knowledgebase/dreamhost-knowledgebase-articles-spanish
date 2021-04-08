@@ -1,4 +1,4 @@
-<h2>Cómo cifrar sus datos</h2>
+<h2>Cómo cifrar tus datos</h2>
 <div class="solvvy-solution">
 <p>S3cmd puede cifrar tus datos mientras los carga en DreamObjects. Para utilizar esta funcionalidad, primero debes configurar tu archivo .s3cfg como se muestra en este artículo:</p>
 <ul>
@@ -9,7 +9,7 @@
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">nano ~/.s3cfg</span></pre>
 </div>
-<p>Agrega las siguientes líneas para que pueda usar el cifrado. Asegúrate de crear tu propia contraseña para 'gpg_passphrase':</p>
+<p>Agrega las siguientes líneas para que puedas usar el cifrado. Asegúrate de crear tu propia contraseña para 'gpg_passphrase':</p>
 <div class="preboxcontainer">
 <pre class="prebox">check_ssl_certificate = True
 check_ssl_hostname = True
@@ -20,20 +20,20 @@ gpg_passphrase = <span class="code-highlight">yourpassword</span></pre>
 </div>
 <p>Tu configuración ahora está configurada para encriptar datos.</p>
 <h3>Cifrar datos mientras se cargan</h3>
-<p>Para cifrar tus datos durante la carga, usa la marca -e. En el siguiente ejemplo, 'bucket-name' es el nombre del depósito al que está cargando contenido. textfile.txt es el nombre del único archivo que está cargando:</p>
+<p>Para cifrar tus datos durante la carga, usa la marca -e. En el siguiente ejemplo, 'bucket-name' es el nombre del bucket al que estás cargando contenido. textfile.txt es el nombre del único archivo que estás cargando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command"> s3cmd -e put <span class="code-highlight">testfile.txt</span> s3://<span class="code-highlight">bucket-name</span></span>
 
 upload: '/tmp/tmpfile-zFGwbLHMVEINdHh3615n' -&gt; 's3://bucket-name/testfile.txt'  [1 of 1]
  63 of 63   100% in    0s   129.96 B/s  done</pre>
 </div>
-<p>Para confirmar que está encriptado, navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener">DreamObjects</a>. Haz clic en el botón 'Ver objetos' debajo de tu nombre de usuario. Se abre un mensaje para que puedas ver los objetos en su depósito.</p>
+<p>Para confirmar que está encriptado, navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener">DreamObjects</a>. Haz clic en el botón 'Ver objetos' debajo de tu nombre de usuario. Se abre un mensaje para que puedas ver los objetos en tu bucket.</p>
 <p><img src="https://kbimages.dreamhosters.com/images/2018-06_panel_dho-viewing-object.png" /></p>
 <p>Haz clic en el objeto, copie la URL y luego pégalo en un navegador.</p>
 <p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_dho-viewing-encrypted-object.png" /></p>
 <p>Verás que los datos del archivo están cifrados.</p>
 <h3>Descifrar un archivo</h3>
-<p>Cuando usa s3cmd para descargar un archivo cifrado, se descifra automáticamente:</p>
+<p>Cuando usas s3cmd para descargar un archivo cifrado, se descifra automáticamente:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd get s3://<span class="code-highlight">bucket-name/encrypted-file.txt</span></span>
 download: 's3://bucket-name/encrypted-file.txt' -&gt; './encrypted-file.txt'  [1 of 1]
@@ -49,17 +49,17 @@ Testing a file</pre>
 <div class="solvvy-solution">
 <p>Puedes establecer manualmente una fecha de vencimiento para acceder a un archivo. Para hacer esto, primero debes convertir la fecha en una marca de tiempo de Unix Epoch.</p>
 <ol>
-<li>Decide la fecha en la que deseas permitir que se firme/acceda a la URL hasta.</li>
+<li>Decide la fecha límite en la que deseas permitir que se firme/acceda a la URL.</li>
 <li>Visita <a href="https://www.epochconverter.com/">Epoch Converter</a> para convertir tu fecha en una marca de tiempo de la época. Se verá como una cadena de números. Por ejemplo: 1540232086</li>
-<li>Ejecuta el siguiente comando para firmar la URL hasta esta marca de tiempo. (Asegúrate de cambiar el nombre del depósito y el nombre del archivo por tu información real).<br />
+<li>Corre el siguiente comando para firmar la URL hasta esta marca de tiempo. (Asegúrate de cambiar el nombre del bucket y el nombre del archivo por tu información real).<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd signurl s3://<span class="code-highlight">my_bucket/my_file.png 1540232086</span></span>
 http://my-bucket.objects-us-east-1.dream.io/my_file.png?AWSAccessKeyId=DHDPTCQ3WFGHPSS5FAXG&amp;Expires=1540232086&amp;Signature=9nf8f9kG%2FqDa76rmET4R%2FpbtaGM%3D</pre>
 </div>
 </li>
-<li>Esto genera la URL firmada. Ahora puede compartir esta URL para que cualquiera pueda acceder a ese archivo hasta la fecha que haya especificado.</li>
+<li>Esto genera la URL firmada. Ahora puedes compartir esta URL para que cualquiera pueda acceder a ese archivo hasta la fecha que hayas especificado.</li>
 </ol>
-<p>También puedes firmarlo por 1 semana usando este formato:</p>
+<p>También puedes firmarlo por una semana usando este formato:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd signurl s3://<span class="code-highlight">my_bucket/my_file.png</span> $(echo "`date +%s` + 3600 * 24 * 7" | bc)</span></pre>
 </div>

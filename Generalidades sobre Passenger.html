@@ -1,112 +1,128 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
+<p>Passenger es un servidor web y de aplicaciones de código abierto que simplifica enormemente la implementación de aplicaciones Ruby, Python y Node.js.</p>
+<p>En DreamHost, Passenger se integra con un servicor Apache o Nginx. <a href="https://www.phusionpassenger.com/docs/tutorials/fundamental_concepts/ruby/" target="_blank" rel="noopener">Sitio web de Passenger</a> lo explica de la siguiente manera:</p>
+<div class="text-blockquote">
+<h4>Nginx y Apache</h4>
+<p>Nginx y Apache son servidores web. Proporcionan manejo de transacciones HTTP y sirven archivos estáticos. Sin embargo, no son servidores de aplicaciones Ruby y no pueden ejecutar aplicaciones Ruby directamente. Es por eso que Nginx y Apache se utilizan en combinación con un servidor de aplicaciones, como Passenger.</p>
+<p>Los servidores de aplicaciones hacen posible que las aplicaciones Ruby hablen HTTP. Las aplicaciones Ruby (y los frameworks como Rails) no pueden hacer eso por sí mismos. Por otro lado, los servidores de aplicaciones generalmente no son tan buenos como Nginx y Apache en el manejo de solicitudes HTTP. Lo difícil está en los detalles: Nginx y Apache manejan mejor la seguridad de E/S, la administración de concurrencia HTTP, los tiempos de espera de conexión, etc. Por eso, en entornos de producción, los servidores de aplicaciones se utilizan en combinación con Nginx o Apache.</p>
+</div>
+</div>
+<h2>Límites de memoria</h2>
+<div class="solvvy-solution">
+<p>Los servidores compartidos matarán el script si está usando mucha memoria.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216540488--Por-qu%C3%A9-se-cancelaron-los-procesos-en-mi-servidor-Compartido-">¿Por qué fueron matados mis procesos en mi servidor compartido?</a></li>
+</ul>
+<p>Dado que las aplicaciones Ruby on Rails y Python pueden usar mucha memoria, los sitios que ejecutan dichas aplicaciones con Passenger solo deben ejecutarse en un servidor <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicado</a>.</p>
+</div>
+<h2>Ruby on Rails</h2>
+<div class="solvvy-solution">
+<p>Passenger es la forma preferida de implementar y alojar aplicaciones Ruby on Rails en todos los servidores DreamHost y es gratuita en todos los planes de alojamiento de DreamHost.</p>
+<p>Las siguientes son las acciones básicas que tienen lugar una vez que se solicita un archivo desde un dominio que ejecuta Passenger y Ruby on Rails:</p>
+<ol>
+<li>Cuando un requerimieneto es hecho en un dominio/subdominio, el <a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache">Servidor HTTP de Apache</a> pasa el requerimiento a Passenger.</li>
+<li>Passenger primero busca un HTML llamado apropiadamente o un archivo <a href="https://help.dreamhost.com/hc/es/articles/217297307-Generalidades-sobre-CGI">CGI</a> en el subdirectorio <span class="text-object">/public</span> del dominio/subdominio (<strong>example.com/public</strong>).</li>
+<li>Si no se encuentra ningún archivo coincidente, la solicitud se pasa a la interfaz de Rack de Passenger.
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Esta es la misma forma que Ruby on Railshace uso del subdirectorio <span class="text-object">/public</span>.</p>
+</div>
+</div>
+</li>
+<li>Rack busca el archivo llamado <span class="text-object">config.ru</span> en el directorio root del dominio/subdominio (<strong>example.com</strong>) para generar una respuesta..
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Si tu aplicación Ruby no se inicia debido a una gema faltante, entonces debes instalarla localmente usando Bundler. Para obtener más información sobre el uso de Bundler, visita la siguiente página:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115001070131-Usar-Bundler-para-instalar-Ruby-gems" target="_self">Usar Bundler para instalar gemas Ruby</a></li>
-</ul>
+<p>Rack requiere que pongas el código de Ruby apropíado dentro del archivo <span class="text-object">config.ru</span> para invocar el framework/aplicación deseada para manejar el requerimiento.</p>
 </div>
 </div>
-<p>Passenger es un servidor de aplicaciones y web de código abierto que simplifica enormemente la implementación de aplicaciones Ruby, Python y Node.js. Passenger es la forma preferida de implementar y alojar aplicaciones Ruby on Rails en todos los servidores DreamHost y es gratuito en todos los planes de alojamiento de DreamHost.</p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
-<p>Dado que las aplicaciones de Ruby on Rails y Python pueden usar mucha memoria, los sitios que ejecutan dichas aplicaciones con Passenger solo deben ejecutarse en un servidor&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicated</a>. <a href="https://help.dreamhost.com/hc/es/articles/217185397-Generalidades-sobre-Node-js">Node.js</a>&nbsp;no está disponible en servidores compartidos en absoluto.</p>
-</div>
-</div>
-</div>
-<h2>Operación básica</h2>
-<div class="solvvy-solution">
-<p>Las siguientes son las acciones básicas que tienen lugar una vez que se solicita un archivo de un dominio que ejecuta Passenger y Ruby on Rails:</p>
-<ol>
-<li>Cuando se realiza una solicitud a un dominio/subdominio, el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache" target="_self">servidor HTTP de Apache</a>&nbsp;pasa la solicitud a Passenger.</li>
-<li>Passenger primero busca un archivo HTML o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/217297307-Generalidades-sobre-CGI">CGI</a>&nbsp;con el nombre apropiado en el subdirectorio <span class="text-object">/public</span> del dominio/subdominio.</li>
-<li>Si no se encuentra ningún archivo que coincida, la solicitud se pasa a la interfaz de Rack de Passenger.</li>
-<li>Ten en cuenta que este uso del subdirectorio <span class="text-object">/public</span> coincide exactamente con la forma en que Ruby on Rails utiliza el mismo subdirectorio.</li>
-<li>Para generar una respuesta, Rack busca un archivo llamado <span class="text-object">config.ru</span> en el directorio raíz del dominio/subdominio (es decir, el dominio principal del subdirectorio <span class="text-object">/public</span>).</li>
-<li>Rack requiere que coloques el código apropiado de Ruby en "config.ru" para invocar tu marco web o aplicación deseada para manejar la solicitud.</li>
+</li>
 </ol>
-<p>En circunstancias normales, Ruby on Rails (RoR) creará e inicializará automáticamente todos los archivos y directorios necesarios para interactuar con Passenger/Rack. Al correr una aplicación RoR, los únicos archivos relacionados con Rack que es probable que modifiques será posiblemente agregar información de <span class="code">GEM_PATH</span> a "config.ru" y <span class="code">touch</span> el archivo restart.txt para reiniciar la aplicación.</p>
+<p>En circunstancias normales, Ruby on Rails (RoR) crea e inicia automáticamente todos los archivos y directorios necesarios para interactuar con Passenger/Rack.</p>
+<p>Al ejecutar una aplicación RoR, los únicos archivos relacionados con Rack que probablemente modificará son los siguientes:</p>
+<ul>
+<li>Agregando posiblemente información de <span class="code">GEM_PATH</span> a <span class="text-object">config.ru</span></li>
+<li>Correrg <span class="code">touch</span> en el archivo <span class="text-object">restart.txt</span> para reiniciar la aplicación. Por ejemplo:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">touch tmp/restart.txt</span></pre>
 </div>
+</li>
+</ul>
 </div>
-<h2>Uso de Passenger vs. FastCGI</h2>
+<h2><span id="Passenger_vs._FastCGI">Passenger vs. FastCGI</span></h2>
 <div class="solvvy-solution">
-<p>Passenger solo debe habilitarse si tienes la intención de correr Ruby on Rails (RoR) u otro programa basado en Ruby/Python como la única aplicación para todo el dominio o subdominio. Passenger dirige todas las solicitudes para el dominio/subdominio designado a la aplicación compatible asociada con Rack. Por lo tanto, es mejor dejar a Passenger deshabilitado si en realidad no lo necesitas.</p>
-<p>En otras palabras, solo debes habilitar Passenger si deseas acceder a tu aplicación a través de las siguientes tres URL:</p>
-<dl>
-<dd>
+<p>Passenger solo debe habilitarse si tiene la intención de ejecutar una aplicación basada en Ruby/Python/Node.js como la única aplicación para todo el dominio/subdominio.</p>
+<p>Passenger dirige todas las solicitudes para el dominio/subdominio designado a la aplicación compatible con Rack asociada, por lo que es mejor dejar a Passenger deshabilitado si no lo necesitas.</p>
+<h3>Cuando habilitar Passenger</h3>
+<p>Solo debes habilitar Passenger si deseas acceder a tu aplicación a través de las siguientes tres URL:</p>
 <ul>
 <li><strong>myapp.example.com</strong></li>
 <li><strong>www.example.com</strong></li>
 <li><strong>www.myapp.example.com</strong></li>
 </ul>
-</dd>
-</dl>
-<p>Si deseas acceder a tu aplicación a través de <strong>www.example.com/path-to-myapp</strong>, usa FastCGI en lugar de Passenger.</p>
+<p>Si quieres acceder a tu aplicación en un subdirectorio (<strong>www.example.com/path-to-myapp</strong>), entocnes usa FastCGI en vez de Passenger.</p>
 </div>
-<h2>Un par de notas técnicas</h2>
+<h2><span id="Notas_técnicas">Notas técnicas</span></h2>
 <div class="solvvy-solution">
-<ul>
-<li>El resultado en STDERR para los procesos ejecutados a través de la interfaz Rack se dirige al archivo maestro de registro de errores de Apache en lugar del archivo de registro específico del dominio/subdominio. No tienes acceso directo al archivo de registro maestro. Esta limitación puede hacer que los errores de inicialización de depuración (en particular errores de sintaxis y problemas de resolución de gemas) sean difíciles. Passenger a menudo producirá una página web de salida de error que incluye un seguimiento de pila. Sin embargo, en algunos casos no lo hace. Si tienes un problema persistente y Passenger no produce una salida de error lo suficientemente útil, puedes intentar ponerte en contacto con el personal de soporte de DreamHost y pedirles que examinen el archivo de registro maestro por ti. Una vez que un marco (como RoR) está en funcionamiento, su salida de error generalmente se maneja mediante el propio mecanismo de registro de errores del marco. Por ejemplo, RoR registra su salida de error en un archivo llamado <span class="text-object">log/production.log</span>.</li>
-</ul>
-<ul>
-<li>Passenger usa Ruby 2.5.1 en todos los servidores compartidos de DreamHost. Para usar una versión diferente de Ruby (y para obtener el control total de la operación de tu sistema), debes usar un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a>&nbsp;e instalar&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/217185247-Ruby-Version-Manager-RVM-">RVM</a>.</li>
-</ul>
-<ul>
-<li>La activación de Passenger en un dominio afectará la interfaz phpMyAdmin en cualquier subdominio bajo el dominio. Para usar phpMyAdmin y Passenger, debes tener un dominio que no tenga Passenger habilitado con un phpMyAdmin activo.</li>
-</ul>
-<ul>
-<li>En aras de la facilidad de uso y la funcionalidad 'Cargar y listo', Passenger deshabilita algunas funciones mod_rewrite. Eso significa que anulará automáticamente la configuración existente de 'dispatch.fcgi' que tengas instalada. Esto no es un problema para tu aplicación Rails, pero puede tener otros efectos secundarios (como romper otras reglas mod_rewrite que hayas configurado). Si esto causa un problema para tu sitio web, intenta usar el método FastCGI.</li>
-</ul>
-<ul>
-<li>Passenger inicia automáticamente las aplicaciones y las deja en ejecución siempre que no estén inactivas. También almacena en caché el código de Ruby on Rails para acelerar el inicio de la aplicación.</li>
-</ul>
-<ul>
-<li>Puedes usar tu repositorio de gemas local si usas lo siguiente en el archivo <span class="text-object">config/environment.rb</span>. Asegúrate de cambiar el <span class="text-object">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.</li>
-</ul>
+<h3>Registro de errores</h3>
+<p>La salida a STDERR para los procesos que se ejecutan a través de la interfaz de Rack se dirige automáticamente al archivo de registro de errores maestro del servidor en lugar del archivo de registro específico del dominio/subdominio.</p>
+<h4>Solicionar problemas del registro de errores</h4>
+<div class="alert-warning">
+<p>Los clientes de DreamHost no tienen acceso al archivo de registro de errores maestro.</p>
+</div>
+<p>Esta limitación puede dificultar la depuración de errores de iniciación (en particular, errores de sintaxis y problemas de resolución de gemas). Passenger a menudo producirá una página web de salida de error que incluye un seguimiento de pila, pero a veces no es así.</p>
+<p><a href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-a-trav%C3%A9s-de-Correo-Electr%C3%B3nico" target="_self">Contactar al soporte de DreamHost</a> si Passenger no produce una salida de error útil. El equipo de soporte examinará el archivo de registro maestro por ti.</p>
+<p>Una vez que un framework (como RoR) está en funcionamiento, su salida de error generalmente es manejada por el propio mecanismo de registro de errores del marco. Por ejemplo, RoR registra su salida de error en un archivo llamado <span class="text-object">log/production.log</span>.</p>
+<h3>Versión de Ruby</h3>
+<p>Los servidores de DreamHost corren una <a href="https://help.dreamhost.com/hc/es/articles/360003836911-Ruby-en-DreamHost" target="_self">versión predeterminada de Ruby</a>. También puedes instalar <a href="https://help.dreamhost.com/hc/es/articles/217185247-Administrador-de-versiones-de-Ruby-Ruby-Version-Manager-RVM-">RVM</a> para usar una versión de Ruby diferente.</p>
+<h3>phpMyAdmin</h3>
+<p>Activar Passenger en un dominio (<strong>example.com</strong>) rompe la interfaz <a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin" target="_self">phpMyAdmin</a> de cualquir subdominio (<strong>blog.</strong><strong>example.com</strong>) dentro del dominio.</p>
+<p>Para usar phpMyAdmin y Passenger, debes agregar un dominio que no esté corriendo Passenger en tu panel. Puedes agregar un subdominio <a href="https://help.dreamhost.com/hc/es/articles/360002284771--Que-es-un-subdominio-dreamhosters-com-" target="_self">dreamhosters.com</a> gratuitamente y usar tus <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">credenciales de inicio de sesión</a>&nbsp;para este propósito.</p>
+<h3>ModRewrite</h3>
+<p>Passenger deshabilita algunas funcionalidades <a href="https://httpd.apache.org/docs/current/mod/mod_rewrite.html" target="_self">mod_rewrite</a>. Esto quiere decir que va a sobreescribir automáticamente una configuración <span class="text-object">dispatch.fcgi</span> que tengas en su lugar. Esto no es un problema para tu aplicación Rails, pero puede tener otros efectos secundarios (como romper otras reglas mod_rewrite que hayas configurado). Si esto causa un problema para tu sitio web, intenta utilizar el método FastCGI en su lugar.</p>
+<h3>Gemas</h3>
+<p>Puedes usar tu gema de repositorio local si estás usando lo siguiente en el archivo <span class="text-object">config/environment.rb</span>. Asegúrate de cambiar <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shellr</a> y la versión de Ruby a la que tu sitio está usando.</p>
 <div class="preboxcontainer">
 <pre class="prebox">if ENV['RAILS_ENV'] == 'production'  # don't bother on dev
-  ENV['GEM_PATH'] = '/home/<span class="code-highlight">username</span>/.gems' #+ ':/usr/lib/ruby/gems/1.8'  # Need this or Passenger fails to start
+  ENV['GEM_PATH'] = '/home/<span class="code-highlight">username</span>/.gems' #+ ':<span class="code-highlight">/usr/lib/ruby/gems/2.5.0</span>'  # Need this or Passenger fails to start
 end
 
 require File.join(File.dirname(__FILE__), 'boot')
 </pre>
 </div>
-<p>La misma ruta debe establecerse en las variables de entorno de tu shell GEM_HOME y GEM_PATH para que puedas usar el programa de gemas para instalar/actualizar tus propias gemas. Puedes volver a cargar el archivo de configuración ejecutando "touch tmp/restart.txt" en tu directorio base.</p>
+<p>El mismo camino debe ser configurado en las variables del ambiente de shell <span class="code">GEM_HOME</span> and <span class="code">GEM_PATH</span> para que puedas usar el programa de gemas para instalar/actualizar tus propias gemas. Puedes volver a cargar el archivo de configuración corriendo <span class="code">touch tmp/restart.txt</span> en tu directorio base.</p>
 </div>
-<h2>Solución de problemas</h2>
+<h2><span id="Solución_de_problemas">Solución de problemas</span></h2>
 <div class="solvvy-solution">
-<p>Para información común sobre solución de problemas, por favor vista el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216635268-Soluci%C3%B3n-de-Problemas-de-Passenger">Solución de problemas de Passenger</a>.</p>
+<p>Para solución de problemas comunes, por favor visita el artículo <a href="https://help.dreamhost.com/hc/es/articles/216635268-Soluci%C3%B3n-de-Problemas-de-Passenger">Solución de problemas de Passenger</a>.</p>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
 <h3>Passenger</h3>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216385637--C%C3%B3mo-habilito-Passenger-en-mi-dominio-" target="_self">¿Cómo habilitar Passenger en mi dominio?</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215769548-Passenger-y-Python-WSGI" target="_self">Passenger y Python WSGI</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216635268-Soluci%C3%B3n-de-Problemas-de-Passenger" target="_self">Solución de problemas de Passenger</a></li>
-<li><a href="https://www.phusionpassenger.com/documentation_and_support" target="_self">Documentación sobre Passenger</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Phusion_Passenger" target="_self">Passenger en Wikipedia</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385637--C%C3%B3mo-habilito-Passenger-en-mi-dominio-">¿Cómo habiliatar Passenger en mi dominio?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215769548-Passenger-y-Python-WSGI">WSGI de Passenger y Python</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216635268-Soluci%C3%B3n-de-Problemas-de-Passenger">Solución de problemas de Passenger</a></li>
+<li><a href="https://www.phusionpassenger.com/docs/tutorials/what_is_passenger/" target="_self" rel="undefined">Documentación de Passenger</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Phusion_Passenger">Passenger en Wikipedia</a></li>
 </ul>
 <h3>Ruby</h3>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/217185247-Ruby-Version-Manager-RVM-">RVM</a></li>
-<li><a href="/hc/es/articles/217185437-Cómo-habilitar-RVM" target="_self">Cómo habilitar RVM</a></li>
-<li><a href="https://rvm.io/">Ruby Version Manager</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217185247-Administrador-de-versiones-de-Ruby-Ruby-Version-Manager-RVM-">RVM</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217185437-C%C3%B3mo-habilitar-RVM">Como habiliatar RVM</a></li>
+<li><a href="https://rvm.io/">Administrador de la versión de Rubyr</a></li>
 </ul>
 <h3>Python</h3>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216137717-Generalidades-sobre-Python" target="_self">Generalidades sobre Python</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216137717-Generalidades-sobre-Python">Generalidades de Python</a></li>
 <li><a href="http://www.python.org/dev/peps/pep-3333/">WSGI</a></li>
 </ul>
 <h3>Node.js</h3>
 <div class="solvvy-solution">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/217185397-Generalidades-sobre-Node-js" target="_self">Generalidades sobre Node.js</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217185397-Generalidades-sobre-Node-js">Generalidades de Node.js</a></li>
 <li><a href="https://nodejs.org/">nodejs.org</a></li>
 </ul>
 </div>
