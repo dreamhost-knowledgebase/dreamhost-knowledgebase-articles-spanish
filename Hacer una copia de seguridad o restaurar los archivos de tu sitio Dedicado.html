@@ -1,6 +1,6 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Los servidores dedicados no tienen la opción de que los clientes restauren una copia de seguridad del sitio web desde el panel de control. Todas las restauraciones deben hacerse con un <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-">usuario administrador</a>, utilizando las técnicas siguientes.</p>
+<p>Los servidores dedicados no tienen la opción de que los clientes restauren una copia de seguridad del sitio web desde el panel de control. Todas las restauraciones deben hacerse con un <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-">usuario administrador</a>, usando las siguientes técnicas.</p>
 <dl>
 <dd></dd>
 <dd></dd>
@@ -8,7 +8,7 @@
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Los siguientes comandos requieren <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">acceso SSH</a> usando un <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-">usuario Administrador</a>. Debes cambiar al usuario root usando <span class="code">sudo -s</span> o <span class="code">sudo -i</span> antes de poder ejecutar los siguientes comandos.</p>
+<p>Los siguientes comandos requieren <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">acceso SSH</a> usando un <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-">usuario Administrador</a>. Debes cambiar al usuario root usando <span class="code">sudo -s</span> o <span class="code">sudo -i</span> antes de poder correr los siguientes comandos.</p>
 </div>
 </div>
 <div class="alert alert-note">
@@ -38,7 +38,7 @@
 </div>
 <h2>Restaurar copias de seguridad antiguas</h2>
 <div class="solvvy-solution">
-<p>Si necesitas copias de seguridad anteriores, las instantáneas se pueden encontrar en el directorio <span class="text-object">.zfs</span> y <span class="text-object">snapshot</span>:</p>
+<p>Si necesitas copias de seguridad anteriores, los snapshots se pueden encontrar en el directorio <span class="text-object">.zfs</span> y <span class="text-object">snapshot</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">/mnt/backup/.zfs/snapshot# ls</span>
 <span class="cmdoutput">zfs-auto-snap_daily-2016-03-11-16h18  zfs-auto-snap_daily-2016-03-15-16h18  zfs-auto-snap_daily-2016-03-18-16h18
@@ -46,7 +46,7 @@ zfs-auto-snap_daily-2016-03-12-16h19  zfs-auto-snap_daily-2016-03-16-16h18  zfs-
 zfs-auto-snap_daily-2016-03-14-16h18  zfs-auto-snap_daily-2016-03-17-16h18  zfs-auto-snap_weekly-2016-03-13-16h18</span>
 </pre>
 </div>
-<p>Para restaurar algo de una instantánea, cambia el nombre del directorio del sitio web que deseas restaurar como se mencionó anteriormente, crea un nuevo directorio en blanco y luego ejecuta <span class="code">rsync</span>:</p>
+<p>Para restaurar algo de un snapshot, cambia el nombre del directorio del sitio web que deseas restaurar como se mencionó anteriormente, crea un nuevo directorio en blanco y luego ejecuta <span class="code">rsync</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync -av /mnt/backup/.zfs/snapshot/<span class="code-highlight">SNAPSHOTDIR</span>/home/<span class="code-highlight">username/example.com</span>/   /home/<span class="code-highlight">username/example.com</span>/</span>
 </pre>
@@ -61,6 +61,6 @@ zfs-auto-snap_daily-2016-03-14-16h18  zfs-auto-snap_daily-2016-03-17-16h18  zfs-
 <li><a href="https://help.dreamhost.com/hc/es/articles/215089888-Herramientas-de-copia-de-seguridad-en-WordPress">Herramientas de respaldo de WordPress</a></li>
 </ul>
 </div>
-<div id="gtx-trans" style="position: absolute; left: 678px; top: 696.635px;">
+<div id="gtx-trans" style="position: absolute; left: 284px; top: 707.188px;">
 <div class="gtx-trans-icon">&nbsp;</div>
 </div>
