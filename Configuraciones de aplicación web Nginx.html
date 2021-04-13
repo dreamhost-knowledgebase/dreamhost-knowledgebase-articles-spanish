@@ -79,8 +79,8 @@ if (!-e $request_filename) {
 try_files $uri $uri/ /index.php?$args;
 </pre>
 </div>
-<h3>Multisite</h3>
-<p>Si usas Multisite, necesitas reglas un poco más avanzadas:</p>
+<h3>Multisitio</h3>
+<p>Si usas Multisitios, necesitas reglas un poco más avanzadas:</p>
 <div class="preboxcontainer">
 <pre class="prebox">######################
 # Permalinks
@@ -106,7 +106,7 @@ if (!-e $request_filename) {
 </div>
 <h2>WP Super Cache</h2>
 <div class="solvvy-solution">
-<p>Si estás utilizando el complemento WP Super Cache, usa lo siguiente en lugar de las reglas de enlace permanente anteriores:</p>
+<p>Si estás usando el plugin WP Super Cache, usa lo siguiente en lugar de las reglas de enlace permanente anteriores:</p>
 <div class="preboxcontainer">
 <pre class="prebox">#######################
 # WP Super Cache
@@ -162,7 +162,7 @@ if ($http_user_agent&nbsp;!~ FeedBurner) {
 }
 </pre>
 </div>
-<p>Debes reemplazar los bits "your-comment-feed" y "your-feed" con las URL de FeedBurner correspondientes que obtienes cuando agregas tus feeds a su sistema.</p>
+<p>Debes reemplazar los bits "your-comment-feed" y "your-feed" con las URL de FeedBurner correspondientes que obtienes cuando agregas tus feeds a tu sistema.</p>
 </div>
 <h2>Drupal</h2>
 <div class="solvvy-solution">
@@ -170,7 +170,7 @@ if ($http_user_agent&nbsp;!~ FeedBurner) {
 <div class="preboxcontainer">
 <pre class="prebox">/home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/</pre>
 </div>
-<p>Ve el artículo '<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a>' para instrucciones sobre cómo crear el archivo.</p>
+<p>Mira el artículo '<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a>' para instrucciones sobre cómo crear el archivo.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">nano /home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/drupal.conf</span></pre>
 </div>
@@ -178,7 +178,7 @@ if ($http_user_agent&nbsp;!~ FeedBurner) {
 </div>
 <h2>Instalación de dominio de nivel superior</h2>
 <div class="solvvy-solution">
-<p>Si tu Drupal está instalado en el nivel superior de tu dominio (e.j., <strong>https://www.example.com/</strong> es tu instalación Drupal), entonces añade estas reglas:</p>
+<p>Si tu Drupal está instalado en el nivel superior de tu dominio (e.j., <strong>https://www.example.com/</strong> es tu instalación Drupal), entonces agrega estas reglas:</p>
 <div class="preboxcontainer">
 <pre class="prebox">#######################
 # Drupal Clean URLs (Top Level Domain)
@@ -205,7 +205,7 @@ rewrite ^/(.*)$ /index.php?q=$1 last;
 </div>
 <h2>Habilita los Clean URLs</h2>
 <div class="solvvy-solution">
-<p>Si aún no lo has hecho, debes iniciar sesión en tu usuario administrador de Drupal e ir al área Administer -&gt; Site Configuration -&gt; Clean URLs y encender Clean URLs. Si tienes problemas para encontrarlo, intenta navegar a <strong>https://www.example.com/index.php?q=admin/settings/clean-urls</strong>. Si recibes un mensaje de error que dice que las URL limpias no son compatibles, asegúrate de recordar volver a cargar tu configuración de nginx como se discutió anteriormente en el artículo.</p>
+<p>Si aún no lo has hecho, debes iniciar sesión en tu usuario administrador de Drupal e ir al área Administer -&gt; Site Configuration -&gt; Clean URLs y encender Clean URLs. Si tienes problemas para encontrarlo, intenta navegar a <strong>https://www.example.com/index.php?q=admin/settings/clean-urls</strong>. Si recibes un mensaje de error que dice que las URL limpias no son compatibles, asegúrate de recordar volver a cargar tu configuración de Nginx como se discutió anteriormente en el artículo.</p>
 </div>
 <h2>Gotchas</h2>
 <div class="solvvy-solution">
@@ -251,5 +251,5 @@ if ($request_uri ~* ^/(stats|failed_auth\.html).*$)
 </div>
 <h2>Configuraciones de envío de correos masivos</h2>
 <div class="solvvy-solution">
-<p>Si deseas enviar correos electrónicos masivos con autenticación SMTP, debes utilizar POP-BEFORE-SMTP como el "Método de autenticación para SMTP".</p>
+<p>Si deseas enviar correos masivos con autenticación SMTP, debes utilizar POP-BEFORE-SMTP como el "Método de autenticación para SMTP".</p>
 </div>

@@ -1,0 +1,64 @@
+<h2>Conectandote desde una cuenta shell</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Para iniciar sesión en tu base de datos MySQL, necesitarás las credenciales de tu base de datos. Consulta el artículo <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encontrar las credenciales de tu base de datos</a> para obtener instrucciones. También puedes encontrarlas en el panel bajo <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">Bases de Datos MySQL</a>.</li>
+<li>A continuación, necesitarás una terminal para ejecutar el siguiente comando. Puedes hacer esto en una computadora Mac o Linux utilizando el terminal nativo, o simplemente podrías iniciar sesión en tu servidor web DreamHost a través de SSH. Si estás en Windows, usa PuTTY para conectarte a tu servidor DreamHost, luego ejecuta el siguiente comando.</li>
+<li>Asegúrete de usar tus credenciales correctos para las siguientes variables:<br />
+<ul>
+<li>hostname - Tu URL de nombre de host mysql. Aparecerá como <strong>mysql.example.com</strong></li>
+<li>user - Tu nombre de usuario de la base de datos</li>
+<li>password - La contraseña de tu nombre de usuario de la base de datos</li>
+<li>database - El nombre de la base de datos</li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql -h <span class="code-highlight">hostname</span> -u <span class="code-highlight">user</span> -p <span class="code-highlight">database</span></span></pre>
+</div>
+</li>
+<li>A continuación, se te solicitará tu contraseña para iniciar sesión.</li>
+<li>Una vez que hayas iniciado sesión, tu símbolo del sistema cambiará al siguiente:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">mysql&gt;</span></pre>
+</div>
+</li>
+</ol>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>No puedes usar "localhost" para conectarte a tu base de datos, ya que los servidores MySQL de DreamHost están separados de los servidores de sitios web normales.</p>
+</div>
+</div>
+</div>
+<h2><span id="mariadb">Cliente mysql MariaDB usado en Servidores Privados (VPS)</span></h2>
+<div class="solvvy-solution">
+<p>Si tienes un <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-" target="_self">VPS</a>, MariaDB se usa como cliente mysql cuando se conecta. Todos los comandos de MySQL continúan funcionando igual, la única diferencia es el texto que aparece cuando se conecta originalmente al servidor de la base de datos. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql -h <span class="code-highlight">hostname</span> -u <span class="code-highlight">username</span> -p<span class="code-highlight">password</span> <span class="code-highlight">database</span></span>
+        
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 38309156
+Server version: 5.7.28-log Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+<span class="server">MySQL [database]&gt;</span></pre>
+</div>
+</div>
+<h2>Ver tembién</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL" target="_self">Generalidades de MySQL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encontrar las credenciales para inciar sesión en tu base de datos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215100557--C%C3%B3mo-restauro-mi-base-de-datos-en-el-panel-" target="_self">¿Cómo restaurar mi base de datos en el panel?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221621388-Administrar-bases-de-datos-MySQL-existentes" target="_self">¿Cómo administrar mi base de datos?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214883058-Conectarse-a-una-base-de-datos-mediante-un-programa-de-terceros" target="_self">¿Cómo conectarme a mi base de datos utilizando un aplicativo de terceros?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215577937-Usando-SQLyog-para-conectarte-a-tu-base-de-datos" target="_self">¿Cómo conectarme a mi base de datos utilizando SQLyog?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215730087-Soluci%C3%B3n-de-problemas-de-tu-base-de-datos-MySQL" target="_self">Solución de problemas de tu base de datos MySQL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000263911-Limitaciones-de-MySQL-debido-al-alojamiento-compartido" target="_self">Limitaciones de MySQL debido al Shared Hosting</a></li>
+</ul>
+</div>

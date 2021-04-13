@@ -12,7 +12,7 @@
 </div>
 <p>En lugar de ingresar estas credenciales en cada script, una alternativa es crear un archivo .boto en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-de-inicio-home-#el-directorio-home-del-usuario" target="_self">directorio de inicio de tu usuario</a>. Luego, puedes hacer referencia a este archivo en cualquier secuencia de comandos para usar tus credenciales.</p>
 </div>
-<h2>Creando un archivo de configuración .boto</h2>
+<h2>Crear un archivo de configuración .boto</h2>
 <div class="solvvy-solution">
 <ol>
 <li>En tu <a href="https://panel.dreamhost.com/" target="_self" rel="undefined">panel de DreamHost</a>, navega hasta la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener">DreamObjects</a>.</li>
@@ -34,7 +34,7 @@
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">touch .boto</span></pre>
 </div>
 </li>
-<li>Toma el Acceso y el par de claves Secreto que copió anteriormente e introdúcelas en los comandos a continuación. Estos comandos agregan las claves a tu archivo .boto.<br />
+<li>Toma el la Llave de Emparejamiento y Acceso Secreto que copiaste anteriormente e introdúcelas en los comandos a continuación. Estos comandos agregan las claves a tu archivo .boto.<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">echo [Credentials] &gt;&gt; ~/.boto</span>
 <span class="server">[server]$ </span><span class="command">echo aws_access_key_id = <span class="code-highlight">98F3n8qUtWEJ6ZdBYyQy</span> &gt;&gt; ~/.boto</span>
@@ -51,12 +51,15 @@ aws_access_key_id = <span class="code-highlight">98F3n8qUtWEJ6ZdBYyQy</span>
 aws_secret_access_key = <span class="code-highlight">p5kptXKQrsQtTNJTYtG7emGYooXkN6Kaza1OV</span>
 </pre>
 </div>
-<h3>Usando el archivo .boto en tus scripts</h3>
+<h3>Usar el archivo .boto en tus scripts</h3>
 <p>Ahora que se creó el archivo .boto, puedes crear una conexión a DreamObjects usando lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox">connection = boto.connect_s3(
   host='objects-us-east-1.dream.io',
 )</pre>
 </div>
-<p>Solo necesita esta línea porque las claves de acceso y las llaves secretas ya están en el archivo .boto.</p>
+<p>Solo necesitas esta línea porque las claves de acceso y las llaves secretas ya están en el archivo .boto.</p>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 62px; top: 1141.72px;">
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>
