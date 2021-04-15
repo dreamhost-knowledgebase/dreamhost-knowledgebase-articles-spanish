@@ -1,0 +1,258 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo enumera varios comandos que puedes usar para ver la versión de un software diferente en DreamHost. Todos los comandos enlistados en este artículo deben ejecutarse en un servidor DreamHost después de iniciar sesión vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</p>
+<p>Se cubren los siguiente temas en este artículo:</p>
+<ul>
+<li><a href="#Sitema operativo" target="_self">Sitema operativo</a></li>
+<li><a href="#Linux_Kernel" target="_self">Kernel de Linux</a></li>
+<li><a href="#Apache" target="_self">Apache</a></li>
+<li><a href="#Nginx" target="_self">Nginx</a></li>
+<li><a href="#Varios_software" target="_self">Varios software</a></li>
+</ul>
+</div>
+<h2><span id="Sitema operativo">Ver la versión del sistema operativo del servidor</span></h2>
+<div class="solvvy-solution">
+<p>Los siguientes dos comandos muestran la versión del sistema operativo del servidor.</p>
+<div class="solvvy-solution">
+<h3>El comando lsb_release</h3>
+<p>Corre el comando LSB (Linux Standard Base) con la banderilla <span class="code">-a</span> para ver la versión del sistema operativo de tu servidor.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">lsb_release -a</span>
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 18.04.4 LTS
+Release:        18.04
+Codename:       bionic</pre>
+</div>
+<h3>Ver el archivo /etc/issue</h3>
+<p>Corre el siguiente comando para ver los contenidos del archivo <span class="text-object">/etc/issue</span> el cual muestra la versión del sistema operativo de tu servidor.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat /etc/issue</span>
+Ubuntu 18.04.4 LTS \n \l</pre>
+</div>
+</div>
+</div>
+<h2><span id="Linux_Kernel">Ver la versión de Linux kernel del servidor</span></h2>
+<div class="solvvy-solution">
+<h3>El comando uname</h3>
+<p>Corre el comando <span class="code">uname</span> con la banderilla <span class="code">-a</span> para ver lo siguiente:</p>
+<ul>
+<li>El nombre de Kernel</li>
+<li>El nombre del servidor</li>
+<li>El lanzamiento de Kernel</li>
+<li>La versión del Kernel</li>
+<li>La arquitectura del hardware del servidor</li>
+<li>Sistema operativo</li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">uname -a</span>
+Linux gervais 4.14.117-grsec-grsec+ #1 SMP Fri May 10 17:15:47 PDT 2019 x86_64 GNU/Linux</pre>
+</div>
+<h3>Ver el archivo /proc/version</h3>
+<p>El archivo <span class="text-object">/proc/version</span> file displays the kernel version as well as information about the GCC compiler used to build the kernel.</p>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat /proc/version</span>
+Linux version 3.14.52-vs2.3.6.15-1 (root@ksplice-build2.us.oracle.com) <br />(gcc version 4.9.2 (Debian 4.9.2-10) ) #1 SMP Wed Nov 2 10:45:38 UTC 2016</pre>
+</div>
+<h2><span id="Apache">La versión y el estado de Apache</span></h2>
+<div class="solvvy-solution">
+<p>Corre lo siguiente para ver la versión de <a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache" target="_self">Apache</a> instalada.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/sbin/apache2 -v</span>
+Server version: Apache/2.4.29 (Ubuntu)
+Server built:   2020-08-12T21:33:25</pre>
+</div>
+<h3>Mira si Apache está corriendo en un VPS o servidor Dedicado</h3>
+<p>Los servidores VPS y Dedicados pueden ejecutar Apache o Nginx. Corre el siguiente comando para verificar si Apache se está ejecutando.</p>
+<ul>
+<li>Si Apache se está ejecutando, verás el siguiente resultado.</li>
+<li>Si no hay salida, Apache no se está ejecutando. Corre el comando de Nginx a continuación para confirmar que se está ejecutando en su lugar.</li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ps -acx | grep apache</span>
+17513 ?        SNs    1:06 apache2
+24668 ?        SN     0:00 apache2
+24769 ?        SNl    0:16 apache2</pre>
+</div>
+</div>
+<h2><span id="Nginx">Version y estado de Nginx</span></h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Nginx solo está disponible en servidores VPS y Dedicados.</p>
+<p>Este comando solo muestra la versión de Nginx instalada en un VPS o servidor Dedicado. No confirma si Nginx se está ejecutando. Consulta el siguiente artículo para ver instrucciones sobre cómo configurar tu servidor privado para que ejecute Nginx en lugar de Apache.</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/es/articles/214880148-C%C3%B3mo-cambiar-tu-servidor-web-a-Nginx">Como cambiar tu servidor web a Nginx</a></li>
+</ul>
+</div>
+</div>
+<p>Corre lo siguiente para ver la versión de <a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx" target="_self">Nginx</a> instalada.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/sbin/nginx -v</span>
+nginx version: nginx/1.14.1</pre>
+</div>
+<h3>Mira si Nginx está corriendo en un servidor VPS o Dedicado</h3>
+<p>Corre el siguiente comando para ver si Nginx está corriendo.</p>
+<ul>
+<li>Si Nginx está corriendo verás la siguiente salida.</li>
+<li>Si no hay salida, Nginx no se está ejecutando. Corre el comando de Apache anterior para confirmar que se está ejecutando en su lugar.</li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ps -acx | grep nginx</span>
+12708 ?        Ss     0:02 nginx
+26797 ?        S      0:00 nginx
+26798 ?        S      0:00 nginx</pre>
+</div>
+</div>
+<h2><span id="Varios_software">Versiones de software</span></h2>
+<div class="solvvy-solution">
+<p>Puede ver las versiones del siguiente software después de iniciar sesión en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> y correr el comando correspondiente.</p>
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<tbody>
+<tr>
+<th style="width: 30%;">Software</th>
+<th style="width: 70%;">Comando</th>
+</tr>
+<tr>
+<td><strong>curl</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl --version</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Django</strong></p>
+<p><br />Debes <a href="https://help.dreamhost.com/hc/es/articles/215317948-C%C3%B3mo-instalar-Django-usando-virtualenv" target="_self">instalar Django en un virtualenv</a> y activarlo antes de correr este comando.</p>
+</td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) </span><span class="server">[server]$ </span><span class="command">python -c "import django; print(django.get_version())"</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>gcc</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">gcc --version</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>git</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git --version</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>Java</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">java -version</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>MySQL</strong></p>
+<p><br />Inicia sesión en tu servidor MySQL vía <a href="https://help.dreamhost.com/hc/es/articles/214882998--C%C3%B3mo-conectarme-a-mi-base-de-datos-a-trav%C3%A9s-de-SSH-" target="_self" rel="undefined">SSH</a> y corre el siguiente comando.</p>
+</td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">select version();</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>Node.js</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">node -v</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>OpenSSL</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">openssl version</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>Passenger</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">dpkg -l | grep passenger</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>Perl</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">perl -v</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>PHP</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">php -v</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">python -V</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>Ruby</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ruby -v</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>SSH</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh -V</span></pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>sqlite</strong>
+<p><br />Corre el comando <span class="code">sqlite</span> para entrar a su Shell. Escribe <span class="code">.quit</span> para salir el Shell de sqlite.</p>
+</td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sqlite</span>
+SQLite version 2.8.17
+Enter ".help" for instructions
+<span class="server">sqlite&gt;</span><span class="command"> .quit</span>
+</pre>
+</div>
+</td>
+</tr>
+<tr>
+<td><strong>sqlite3</strong></td>
+<td>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sqlite3 --version</span></pre>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
