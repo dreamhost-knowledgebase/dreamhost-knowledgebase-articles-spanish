@@ -1,0 +1,119 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Si tu dominio no está usando los <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self" rel="undefined">nameservers</a> de DreamHost, los registros DNS relacionados con el correo no se activarán automáticamente para el dominio. Deberás configurar manualmente esos registros en el host donde el <a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self" rel="undefined">DNS</a> del dominio. Puedes verificar donde están apuntados en <a href="https://whoisweb.dreamhost.com" target="_self" rel="undefined">whoisweb.dreamhost.com</a>.</p>
+<ul>
+<li>Cuando un dominio tiene direcciones de correo electrónico configuradas en el panel de DreamHost, todos los registros DNS relacionados con el correo se crean automáticamente en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>.</li>
+<li>Puedes encontrar tus registros DNS de Correo usando la pestaña <span class="text-link">DNS</span> en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!/grid-view" target="_blank" rel="noopener">Administrar Sitios Web</a>. Mira el artículo <a href="https://help.dreamhost.com/hc/es/articles/360053106191-Agregar-DNS" target="_blank" rel="noopener">Agregar DNS</a> para más información.</li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si buscas información sobre cómo configurar tu correo electrónico en un cliente de correo, mira los siguientes artículos:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214918038-Generalidades-de-las-configuraciones-del-cliente-de-correo" target="_self">Generalidades de las configuraciones del cliente de correo</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215612887-Protocolos-y-n%C3%BAmeros-de-puerto-para-clientes-de-correo-electr%C3%B3nico" target="_self">Protocolos y números de puerto para clientes de correo</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Encontrar tus registros DNS de correo</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Da click en la pestaña de <span class="text-link">DNS</span> de Sitios Web en la pestaña <a href="https://help.dreamhost.com/hc/es/articles/360053106191-Agregar-DNS" target="_blank" rel="noopener">Administrar Sitios Web</a> para ver tus registros.
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Por favor recuerda que los registros de abajo son solo ejemplos. Tus registros DNS específicos serán diferentes. Puedes leer más sobre DNS en el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self">Generalidades de los DNS de DreamHost</a></li>
+</ul>
+</div>
+</div>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-websites-dns-email-values_01.1.fw.png" alt="panel-websites-dns-email-values_01.1.fw.png" width="703" height="650" /></dd>
+</dl>
+Hay dos tipos de registros DNS relacionados con el correo.<br />
+<dl>
+<dt><strong>Registros MX</strong></dt>
+<dd>Le dice a los remitentes a dónde deben enviarse los correos.</dd>
+<dd></dd>
+</dl>
+<dl>
+<dd>Si el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215686487--C%C3%B3mo-establecer-mi-configuraci%C3%B3n-Anti-spam-" target="_self">filtro de spam está habilitado</a>&nbsp;tus registros MX serán los siguientes:</dd>
+<dd>
+<ul>
+<li><span class="wysiwyg-color-black">mx1.mailchannels.net</span></li>
+<li><span class="wysiwyg-color-black">mx2.mailchannels.net<br /></span></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Registros A</strong> Los utiliza tu programa de correo cuando se conecta al servidor de correo para ver tu bandeja de entrada o enviar correos electrónicos. Hay varios registros de correo A para tu dominio.</p>
+</li>
+<li>Encuentra los siguientes registros:<br />
+<table class="wikitable"><colgroup> <col width="25%" /> <col width="75%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Registros DNS</th>
+<th bgcolor="#F2F2F2">Ejemplo de los valores</th>
+</tr>
+<tr>
+<td>_domainkey</td>
+<td>Los <a href="https://help.dreamhost.com/hc/es/articles/215029758--Qu%C3%A9-son-los-registros-DKIM-" target="_self">Registros DKIM</a>&nbsp;firman los correo electrónicos para ayudar a la validación del remitente.</td>
+</tr>
+<tr>
+<td>_autodiscover._tcp (SRV)</td>
+<td>5 0 443 autoconfig.dreamhost.com —&nbsp;Este es un registro SRV que ayuda a las aplicaciones de correo electrónico a aplicar la configuración correcta automáticamente.</td>
+</tr>
+<tr>
+<td>autoconfig (CNAME)</td>
+<td>autoconfig.dreamhost.com —&nbsp;Este es un registro CNAME que ayuda a las aplicaciones de correo electrónico a aplicar la configuración correcta automáticamente.</td>
+</tr>
+<tr>
+<td>*mail. (A)</td>
+<td>64.90.62.162 —&nbsp;Este es un subdominio estándar que se puede utilizar para conectar su cliente o programa al servidor de correo.</td>
+</tr>
+<tr>
+<td>*mail. (MX)</td>
+<td>
+<p>Este dominio ha&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215686487--C%C3%B3mo-establecer-mi-configuraci%C3%B3n-Anti-spam-" target="_self">habilitado el filtro de spam</a>, entonces los registros MX aparecen así:</p>
+<p><strong>mx1.mailchannels.net</strong></p>
+<p><strong>mx2.mailchannels.net<br /></strong></p>
+<p>Si el filtro de spam no se ha habilitado, verás:&nbsp;<strong>mx1.dreamhost.com</strong>&nbsp;y&nbsp;<strong>mx2.dreamhost.com</strong>.<br /><br /><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_mail_cluster_mx_records.png" /></p>
+</td>
+</tr>
+<tr>
+<td>*mailboxes. (A)</td>
+<td>66.33.205.233&nbsp;—&nbsp;Esto se usa para iniciar sesión en la&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/217133137-La-interfaz-de-los-buzones-de-correo" target="_self">Interfaz Mailboxes</a>&nbsp;de DreamHost.</td>
+</tr>
+<tr>
+<td>*www.mailboxes. (A)</td>
+<td>66.33.205.233&nbsp;— Esto se usa para iniciar sesión en la&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/217133137-La-interfaz-de-los-buzones-de-correo" target="_self">Interfaz Mailboxes</a>&nbsp;de DreamHost.</td>
+</tr>
+<tr>
+<td>*webmail. (A)</td>
+<td>69.163.136.138 —&nbsp;Esto se usa para iniciar sesión en el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216540008-Generalidades-sobre-Webmail" target="_self">panel de webmail</a>.</td>
+</tr>
+<tr>
+<td>*www.webmail. (A)</td>
+<td>69.163.136.138 —&nbsp;Esto se usa para iniciar sesión en el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216540008-Generalidades-sobre-Webmail" target="_self">panel de webmail</a>.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>Ingresa todos esos registros en el sistema donde se alojan y administran los DNS del dominio.</li>
+</ol>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Después de realizar el ajuste de DNS, los cambios tardarán varias horas en actualizarse en línea debido a&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">propagación de los DNS</a>.</p>
+</div>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215032408--Qu%C3%A9-es-un-registro-MX-" target="_self">¿Qué es un registro MX?</a></li>
+<li><a href="/hc/es/articles/215035328--Cómo-cambio-mis-registros-MX-" target="_self">¿Cómo cambio mis registros MX?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215035868--C%C3%B3mo-puedo-ver-mi-correo-electr%C3%B3nico-DreamHost-si-mis-registros-MX-no-apuntan-a-DreamHost-" target="_self">¿Cómo puedo ver mi correo electrónico de DreamHost si mis registros MX no apuntan a DreamHost?</a></li>
+</ul>
+</div>

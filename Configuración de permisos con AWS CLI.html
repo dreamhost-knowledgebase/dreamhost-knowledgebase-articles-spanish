@@ -5,13 +5,13 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/216335908-Instalaci%C3%B3n-y-configuraci%C3%B3n-de-AWS-CLI" target="_self">Instalación y configuración de AWS CLI</a></li>
 </ul>
 </div>
-<h2>Establecer TODOS los permisos de objetos en un depósito</h2>
+<h2>Establecer TODOS los permisos de objects en un bucket</h2>
 <div class="solvvy-solution">
-<p>El siguiente comando cambia los permisos para cada objeto en tu depósito. Ten en cuenta que DreamObjects actualmente no admite políticas de depósito, por lo tanto, debes utilizar la siguiente solución alternativa.</p>
+<p>El siguiente comando cambia los permisos para cada object en tu bucket. Ten en cuenta que DreamObjects actualmente no admite políticas de bucket, por lo tanto, debes utilizar la siguiente solución alternativa.</p>
 <p>Asegúrate de actualizar lo siguiente:</p>
 <ul>
-<li><strong>--bucket my-bucket</strong>&nbsp;— Cambiar a tu nombre de Bucket</li>
-<li><strong>--acl</strong>&nbsp;— Cambia esto a lectura <span class="code">private</span> o <span class="code">public-read</span></li>
+<li><strong>--bucket my-bucket</strong> — Cambiar a tu nombre de Bucket.</li>
+<li><strong>--acl</strong>&nbsp;— Cambia esto a lectura <span class="code">private</span> o <span class="code">public-read.</span></li>
 </ul>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api list-objects --bucket <span class="code-highlight">my-bucket</span> | grep Key | cut -c 20- | rev | cut -c 3-|rev | awk '{cmd="aws --endpoint https://objects-us-east-1.dream.io s3api put-object-acl --acl <span class="code-highlight">public-read</span> --bucket=<span class="code-highlight">my-bucket</span> --key "$0; system(cmd)}' </span></pre>
@@ -21,10 +21,10 @@
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io \ <br />                  s3api list-objects --bucket <span class="code-highlight">my-bucket</span> | \<br />                  grep Key | cut -c 20- | rev | cut -c 3-|rev | \<br />                  awk '{cmd="aws --endpoint https://objects-us-east-1.dream.io \ <br />                  s3api put-object-acl --acl <span class="code-highlight">public-read</span> \<br />                  --bucket=<span class="code-highlight">my-bucket</span> --key "$0; system(cmd)}' </span></pre>
 </div>
 </div>
-<h2>Permisos de objeto único</h2>
+<h2>Permisos de object único</h2>
 <div class="solvvy-solution">
-<h3>Ver los permisos de un objeto</h3>
-<p>Esto muestra los permisos de un objeto llamado test.txt en un depósito titulado my-bucket. Puedes ver que el usuario del depósito tiene control total, pero no se muestran otros permisos públicos. Esto indica que los permisos en el archivo son <span class="code">private</span>.</p>
+<h3>Ver los permisos de un object</h3>
+<p>Esto muestra los permisos de un object llamado test.txt en un bucket titulado my-bucket. Puedes ver que el usuario del bucket tiene control total, pero no se muestran otros permisos públicos. Esto indica que los permisos en el archivo son <span class="code">private</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api get-object-acl --bucket <span class="code-highlight">my-bucket</span> --key <span class="code-highlight">test.txt</span></span>
 {
@@ -44,13 +44,13 @@
     ]
 }</pre>
 </div>
-<h3>Establecer los permisos de un objeto a PÚBLICO</h3>
-<p>Para establecer los permisos de un Objeto,&nbsp;<a href="https://docs.aws.amazon.com/cli/latest/reference/s3api/put-object-acl.html">put-object-acl</a>.</p>
-<p>Esto establece un objeto llamado test.txt en el depósito titulado my-bucket para los permisos <span class="code">public-read</span>.</p>
+<h3>Establecer los permisos de un object a PÚBLICO</h3>
+<p>Para establecer los permisos de un Object, <a href="https://docs.aws.amazon.com/cli/latest/reference/s3api/put-object-acl.html">put-object-acl</a>.</p>
+<p>Esto establece un object llamado test.txt en el bucket titulado my-bucket para los permisos <span class="code">public-read</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api put-object-acl --bucket <span class="code-highlight">my-bucket</span> --key <span class="code-highlight">test.txt</span> --acl public-read</span></pre>
 </div>
-<p>Verifica los permisos nuevamente y verás una nueva sección de <span class="text-section">Grantee</span> que muestra que todos los usuarios pueden leer el Objeto.</p>
+<p>Verifica los permisos nuevamente y verás una nueva sección de <span class="text-section">Grantee</span> que muestra que todos los usuarios pueden leer el Object.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api get-object-acl --bucket <span class="code-highlight">my-user-bucket</span> --key <span class="code-highlight">test.txt</span></span>
 {
@@ -79,9 +79,12 @@
 </div>
 <p>Si revisas tu panel de DreamObjects, verás que los permisos en este archivo ahora son PÚBLICOS.</p>
 <p><img class="img-border" src="https://kbimages.dreamhosters.com/images/dho-object-public-read.png" /></p>
-<h3>Establecer los permisos de un objeto en PRIVADO</h3>
-<p>Esto establece un objeto llamado test.txt en el depósito titulado my-bucket para permisos PRIVADOS.</p>
+<h3>Establecer los permisos de un object en PRIVADO</h3>
+<p>Esto establece un objeto llamado test.txt en el bucket titulado my-bucket para permisos PRIVADOS.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">aws --endpoint-url https://objects-us-east-1.dream.io s3api put-object-acl --bucket <span class="code-highlight">my-bucket</span> --key <span class="code-highlight">test.txt</span> --acl private</span></pre>
 </div>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 152px; top: 1337.28px;">
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>

@@ -11,14 +11,14 @@
 </div>
 <h2>Preparando tu dominio para la migración</h2>
 <div class="solvvy-solution">
-<p>Confirma lo siguiente para el dominio al que estás migrando. Si alguno de los siguientes elementos no está configurado, tu sitio no se conectará después de migrarlo.</p>
+<p>Confirma lo siguiente para el dominio al que estás moviendo. Si alguno de los siguientes elementos no está configurado, tu sitio no se conectará después de moverlo.</p>
 <h3>Eliminar alojamiento</h3>
-<p>El dominio al que migras no se puede alojar. Si es así, debes eliminar el alojamiento del dominio antes de continuar. Puede hacer esto configurando el dominio como <a href="/hc/es/articles/115000760591-Configurar-tu-dominio-a-Solo-DNS-DNS-Only-" target="_self">Solo DNS</a>. Esto es para que el dominio se pueda migrar de forma segura sin romper un sitio en vivo.</p>
+<p>El dominio al que mueves no se puede alojar. Si es así, debes eliminar el alojamiento del dominio antes de continuar. Puede hacer esto configurando el dominio como <a href="/hc/es/articles/115000760591-Configurar-tu-dominio-a-Solo-DNS-DNS-Only-" target="_self">Solo DNS</a>. Esto es para que el dominio se pueda mover de forma segura sin romper un sitio en vivo.</p>
 <h3>Elimina cualquier nombre de host mysql 'previamente existente'</h3>
 <div class="alert-warning">
 <p>Este paso es extremadamente importante.</p>
 </div>
-<p>Si ya existe un nombre de host mysql en tu panel para el nuevo dominio, primero debes eliminarlo. Por ejemplo, navega hasta la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">Bases de datos MySQL</a>. Si tienes bases de datos, verá los nombres de host enumerados bajo el nombre del servidor MySQL. Este servidor MySQL tendrá un nombre de servidor compartido o un nombre de VPS. Este ejemplo muestra un servidor MySQL compartido llamado 'bowl' en el que el nombre de host ya existe:</p>
+<p>Si ya existe un nombre de host mysql en tu panel para el nuevo dominio, primero debes eliminarlo. Por ejemplo, navega hasta la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">Bases de Datos MySQL</a>. Si tienes bases de datos, verá los nombres de host enumerados bajo el nombre del servidor MySQL. Este servidor MySQL tendrá un nombre de servidor compartido o un nombre de VPS. Este ejemplo muestra un servidor MySQL compartido llamado 'bowl' en el que el nombre de host ya existe:</p>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-05_panel_dreampress_changing_a_plan_02.png" alt="" /></dd>
 </dl>
@@ -30,7 +30,7 @@
 </dl>
 <p>Si esto ya existe para tu sitio, déjalo como está.</p>
 <h3>Eliminar DNS personalizado</h3>
-<p>Asegúrate de que no haya <a href="/hc/es/articles/215414867--Cómo-agrego-registros-DNS-personalizados-" target="_self">Registros DNS personalizados</a> registros <strong>A</strong> o <strong>CNAME</strong> en el dominio al que estás migrando (si existe alguno que apunte a un host web diferente). Si los hay, elimina los registros personalizados. Otros registros DNS personalizados están bien para dejarlos en su lugar.</p>
+<p>Asegúrate de que no haya <a href="/hc/es/articles/215414867--Cómo-agrego-registros-DNS-personalizados-" target="_self">Registros DNS personalizados</a> registros <strong>A</strong> o <strong>CNAME</strong> en el dominio al que estás moviendo (si existe alguno que apunte a un host web diferente). Si los hay, elimina los registros personalizados. Otros registros DNS personalizados están bien para dejarlos en su lugar.</p>
 </div>
 <h2><span id="cambiar_domino">Paso 1 — Cambiar tu dominio</span></h2>
 <div class="solvvy-solution">
@@ -78,14 +78,14 @@ Esta opción te permite elegir un dominio que ya has agregado a tu panel.</li>
 <p>Como se indicó anteriormente, el DNS puede tardar entre 4 y 6 horas en actualizarse en DreamHost. Si apuntas tu DNS en su host actual a DreamHost antes de que el DNS se haya actualizado en los servidores de DreamHost, el sitio no se conectará.</p>
 <p>Se recomienda que espere de 4 a 6 horas antes de actualizar su DNS en su host actual.</p>
 </div>
-<h2>Paso 3 — Actualización de tu DNS en tu host actual</h2>
+<h2>Paso 3 — Actualización de tu DNS en tu hosting actual</h2>
 <div class="solvvy-solution">
 <p>Finalmente, inicia sesión en su registrador actual y <a href="/hc/es/articles/214694378--A-qué-registros-DNS-apunto-mi-sitio-" target="_self">apunta tu DNS a DreamHost</a>. Después de que el DNS <a href="/hc/es/articles/215840248-Generalidades-de-la-propagación-de-DNS" target="_self">propague</a>, tu sitio estará alojado con DreamPress.</p>
 </div>
 <h2>Error al establecer una conexión de base de datos</h2>
 <div class="solvvy-solution">
 <p>Lo más probable es que este error se haya producido porque no eliminaste el antiguo nombre de host como se mencionó anteriormente en la sección titulada <span class="text-section">Remove any mysql hostnames</span>.</p>
-<p>La razón es porque el panel todavía tiene el antiguo nombre de host para el sitio 'DNS Only' todavía configurado en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">Bases de datos MySQL</a>. Como esto no se eliminó, el panel no pudo mover el antiguo nombre de host a la base de datos DreamPress.</p>
+<p>La razón es que el panel todavía tiene el antiguo nombre de host para el sitio 'DNS Only' todavía configurado en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">Bases de datos MySQL</a>. Como esto no se eliminó, el panel no pudo mover el antiguo nombre de host a la base de datos DreamPress.</p>
 <p>Para solucionarlo, debes actualizar su archivo wp-config.php con el antiguo nombre de host. Navega a la página de bases de datos MySQL. Busca su base de datos DreamPress. Anote el nombre de host.</p>
 <p>Inicie sesión en tu servidor a través de <a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> y <a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">edita tu archivo wp-config.php</a>. En ese archivo, actualiza la línea de nombre de host con este antiguo nombre de host (el que aún se muestra en el panel junto a tu base de datos DreamPress).</p>
 </div>
@@ -95,4 +95,7 @@ Esta opción te permite elegir un dominio que ya has agregado a tu panel.</li>
 <li><a href="/hc/es/articles/214581158-Generalidades-sobre-DreamPress" target="_self">Generalidades sobre DreamPress</a></li>
 <li><a href="/hc/es/articles/214583258--Cómo-agrego-DreamPress-a-un-dominio-nuevo-" target="_self">¿Cómo agregar DreamPress a un dominio nuevo?</a></li>
 </ul>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 82px; top: 3757.67px;">
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>
