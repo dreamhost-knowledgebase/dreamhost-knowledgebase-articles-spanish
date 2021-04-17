@@ -1,0 +1,109 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Si tienes un servidor&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS </a>o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicado</a>, es posible que te interese conocer el estado de ese servidor sin tener que esperar en una ventana de terminal. En su lugar, puedes ejecutar un script que te envíe por correo electrónico esta información sobre el estado de tu servidor.</p>
+<p>Funciona generando contenido HTML contiene información en tu servidor, incluyendo:</p>
+<ul>
+<li>Promedio de carga.</li>
+<li>Uso de memoria.</li>
+<li>Conexiones de red abiertas.</li>
+<li>10 procesos de memoria principales.</li>
+<li>10 procesos de CPU principales.</li>
+<li>Resultados netstat.</li>
+<li>Snapshot superior de todos los procesos en ejecución.</li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Esto solo se aplica a tu servidor web. El acceso de shell a <a href="https://help.dreamhost.com/hc/es/articles/215945917-Generalidades-de-MySQL-VPS">VPS MySQL</a>&nbsp;no está disponible.</p>
+</div>
+</div>
+</div>
+<h2><span id="Installing_a_server_script">Instalarun script de servidor</span></h2>
+<div class="solvvy-solution">
+<p>Esto solo se aplica a tu servidor web. El acceso de shell a VPS MySQL no está disponible:</p>
+<ul>
+<li>Visita la URL del script. Luego puedes descargarlo en tu navegador:
+<ul>
+<li><a href="https://cdn.rawgit.com/watsonian/server-status-report/master/status.rb">https://cdn.rawgit.com/watsonian/server-status-report/master/status.rb</a></li>
+</ul>
+<dl>
+<dd><em>Si descargas el archivo visitando la URL, aún debes cargar el archivo a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a>.</em></dd>
+</dl>
+</li>
+<li>Si puedes acceder por&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> en tu VPS, simplemente puedes correr:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -s -o status.rb https://cdn.rawgit.com/watsonian/server-status-report/master/status.rb</span></pre>
+</div>
+<dl>
+<dd>
+<p>El script se llama status.rb, y el propio script está escrito en Ruby para aprovechar el sistema de plantillas ERB para producir el contenido HTM.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<h2><span id="Confirming_if_mailx_is_installed">Confirmar si mailx está instalado</span></h2>
+<div class="solvvy-solution">
+<p>Una vez que hayas descargado el script correctamente, debes asegurarte de que el paquete mailx esté instalado en tu PS.</p>
+<p>Para averiguarlo, corre este comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">dpkg -l | grep mailx</span></pre>
+</div>
+<p>Si ves un resultado como este:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="cmdoutput">ii  bsd-mailx        8.1.2-0.20100314cvs-1        simple mail user agent</span>
+</pre>
+</div>
+<p>Significa que está instalado.</p>
+<p>Si en cambio ves un resultado como este:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="cmdoutput">rc  mailx        8.1.2-0.20050715cvs-1        A simple mail user agent</span>
+</pre>
+</div>
+<p>Entonces eso significa que necesitas instalarlo.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Solo puedes instalar mailx en un servidor dedicado con un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-">usuario administrador</a>. Esto se debe a que requiere <span class="code">sudo</span>. Una vez que hayas iniciado sesión, corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo apt-get install mailx</span></pre>
+</div>
+</div>
+</div>
+</div>
+<h2><span id="Creating_a_cron_job">Crear un cron job</span></h2>
+<div class="solvvy-solution">
+<p>Mira el artículo <a href="https://help.dreamhost.com/hc/es/articles/215088608-Generalidades-sobre-Crontab">Crontab</a> para ver detalles sobre como crear un cron job bajo tu usuario shell. Ingresa el siguiente comando en el panel al crear el cron job:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/bin/ruby /<span class="code-highlight">path/to/script/status.rb</span> | /usr/bin/mail -a "Content-type: text/html;" -s "Status Report: $HOSTNAME" "<span class="code-highlight">some@example.com</span>"</span></pre>
+</div>
+<p>Si el comando anterior no funciona, intenta modificar '/usr/bin/ruby' con '/usr/bin/ruby1.8'.</p>
+<ul>
+<li>Puedes cambiar el tema a lo que quieras.</li>
+</ul>
+<ul>
+<li>También puedes cambiar el correo a cualquier dirección a la que desees que se envíe el cron del correo.</li>
+</ul>
+<ul>
+<li>Si deseas enviar el correo a más direcciones de correo, puedes usar la marca <span class="code">-c</span> y pasarle una lista de direcciones de correo separadas por comas.</li>
+</ul>
+<ul>
+<li>Ejecutarlo una vez por hora probablemente no sea una mala idea, pero puedes correrlo con la frecuencia que desees.</li>
+</ul>
+</div>
+<h2><span id="Conclusion">Conclusión</span></h2>
+<div class="solvvy-solution">
+<p>Si configuras todo correctamente, deberías comenzar a recibir correos que se parezcan más o menos a este:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/Server_status_script_preview.png" alt="Server status script preview.png" /></dd>
+</dl>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214879308-Generalidades-sobre-optimizaci%C3%B3n-de-un-VPS">Generalidades sobre optimización de VPS</a></li>
+</ul>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 490px; top: 1860.31px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>
