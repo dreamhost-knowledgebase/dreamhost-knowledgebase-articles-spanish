@@ -1,0 +1,77 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cuando <a href="https://help.dreamhost.com/hc/es/articles/215912848-C%C3%B3mo-lanzar-una-instancia-usando-el-panel-de-DreamCompute" target="_self" rel="undefined">creas una instancia</a>, se crea un usuario predeterminado. Puedes usar esto para iniciar sesión y configurar la instancia.</p>
+<p>Si está agregandos sitios web a tu instancia, se recomienda crear usuarios separados para cada sitio para asegurar aún más cada uno. Por ejemplo, tener un usuario que solo tiene acceso a un sitio web limitará el caos que podría causar si ese usuario se ve comprometido. Esto también limita el peligro que podrían causar los complementos o temas no autorizados. La instancia en sí estará segura, conteniendo el daño solo a esa cuenta de usuario.</p>
+</div>
+<h2>Crear un nuevo usuario</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu instancia utilizando la <a href="https://help.dreamhost.com/hc/es/articles/216201547-Generalidades-sobre-la-conexi%C3%B3n-a-tu-instancia-con-las-claves-SSH" target="_self" rel="undefined">Llave de Emparejamiento</a>&nbsp;y el <a href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined">usuario predeterminado asignado</a>.</li>
+<li>Una vez que hayas iniciado sesión, crea el nuevo usuario.
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este ejemplo asume una instancia de Ubuntu con un usuario predeterminado llamado 'ubuntu'.</p>
+<p>En el siguiente ejemplo, el nuevo usuario se llama 'newuser'.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">ubuntu@instance:~$ </span><span class="command">sudo adduser newuser</span>
+</pre>
+</div>
+</li>
+<li>Se te solicita una contraseña junto con detalles adicionales sobre el usuario.</li>
+<li>Ahora puedes verificar para confirmar que el usuario existe.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">ubuntu@instance:~$ </span><span class="command">ls -la /home</span></pre>
+</div>
+</li>
+<li>Cambia al nuevo usuario.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">ubuntu@instance:~$ </span><span class="command">sudo su newuser</span></pre>
+</div>
+</li>
+<li>Tu mensaje de terminal ahora cambia al nuevo usuario.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">newuser@instance:~$ </span></pre>
+</div>
+</li>
+</ol>
+<p>Ahora puedes ejecutar comandos y administrar tu sitio web con este nuevo usuario.</p>
+</div>
+<h2>Asignar privilegios 'sudo' al nuevo usuario</h2>
+<div class="solvvy-solution">
+<p>Dependiendo de las necesidades de tu usuario, es posible que debas asignarles privilegios 'sudo' para instalar software. Esto solo debe hacerse si confías en el usuario.</p>
+<ol>
+<li>Asegúrate de haber iniciado sesión como usuario predeterminado de tu instancia. Para una instancia de Ubuntu, el usuario predeterminado es 'ubuntu'. Si todavía estás conectado como el nuevo usuario, simplemente escribe 'exit' hasta que el usuario de shell vuelva al usuario predeterminado:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">newuser@instance:~$ </span><span class="command">exit</span>
+<span class="server">ubuntu@instance:~$ </span>
+</pre>
+</div>
+</li>
+<li>Corre el siguiente comando para otorgarle privilegios de sudo a tu nuevo usuario:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">ubuntu@instance:~$ </span><span class="command">sudo usermod -aG sudo newuser</span></pre>
+</div>
+</li>
+<li>Para confirmar los nuevos privilegios, cambia al nuevo usuario.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">ubuntu@instance:~$ </span><span class="command">sudo su newuser</span></pre>
+</div>
+</li>
+<li>Corre el comando 'grupos' para ver a qué grupos tiene acceso este usuario:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">newuser@instance:~$ </span><span class="command">groups</span>
+newuser sudo</pre>
+</div>
+</li>
+<li>Dado que 'sudo' está en la lista, ahora puedes correr comandos <span class="code">sudo</span> con este nuevo usuario.</li>
+</ol>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360000281572--A%C3%B1adir-acceso-SSH-a-tus-usuarios" target="_self" rel="undefined">Agregar acceso SSH a tus usuarios</a></li>
+</ul>
+</div>

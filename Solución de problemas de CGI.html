@@ -1,0 +1,67 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Si encuentras que tu script .cgi arroja un error, primero ve el <a href="https://help.dreamhost.com/hc/es/articles/217297307-Generalidades-sobre-CGI">artículo de generalidades sobre CGI</a>. En ese artículo hay una sección titulada <span class="text-section">Ejecutar un script CGI en DreamHost</span>. También puedes consultar el archivo de registro de errores de tu sitio. Consulta el siguiente artículo para obtener más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP">Registro de errores</a></li>
+</ul>
+</div>
+<h2>Depuración de CGIs</h2>
+<div class="solvvy-solution">
+<p>La mejor forma de depurar cualquier CGI es ejecutarlo directamente en el servidor. Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y luego correlo con el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">./<span class="code-highlight">cgi_name.cgi</span></span>
+</pre>
+</div>
+<p>Tu terminal devolverá todo lo que deba enviarse al navegador web del usuario.</p>
+<p>A menudo recibirás un mensaje que indica el problema general y el número de línea en el que ocurre. Por lo general, es mejor corregir el primer error que aparece, ya que a menudo ayudará con los errores que ocurren más adelante en el script.</p>
+</div>
+<h2>Retorno de carro en scripts Perl</h2>
+<div class="solvvy-solution">
+<p>Los scripts de Perl en particular ocasionalmente mencionarán un problema causado por retornos de carro dentro del script. Perl tiene problemas para ejecutar archivos con retornos de carro, que generalmente son causados ​​por scripts que se editan en muchos editores de texto basados ​​en Mac o Windows PC (que usan de forma nativa retornos de carro para marcar finales de línea).</p>
+<p>Solo debes usar un editor de texto que te brinde la opción de guardar con terminaciones de línea 'estilo Unix'. Notepad++ es una buena opción:</p>
+<ul>
+<li><a href="https://notepad-plus-plus.org/">Notepad++</a></li>
+</ul>
+</div>
+<h2>¿Qué sucede si no quiero que los archivos .pl, .py o .cgi se ejecuten como scripts CGI?</h2>
+<div class="solvvy-solution">
+<p>Si prefieres que los archivos .pl, .py o .cgi se muestren en el navegador en lugar de correrlos como scripts, simplemente crea un archivo .htaccess en el directorio correspondiente con el siguiente contenido:</p>
+<div class="preboxcontainer">
+<pre class="prebox">RemoveHandler cgi-script .pl .py .cgi</pre>
+</div>
+<p>Si estás utilizando SSH para conectarte, puedes crear el archivo .htaccess corriendo el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">echo "RemoveHandler cgi-script .pl .py .cgi" &gt; .htaccess</span>
+</pre>
+</div>
+</div>
+<h2>Buenos recursos para scripters CGI de Perl</h2>
+<div class="solvvy-solution">
+<p>Perl es, por mucho, el lenguaje más utilizado para escribir scripts CGI. Una curva de aprendizaje bastante fácil, junto con toneladas de código fuente disponible gratuitamente, lo convierten en una opción perfecta para el codificador web principiante (y avanzado). Una de sus mayores fortalezas es que el lenguaje se escribió teniendo en cuenta el procesamiento de texto. Dado que la web es casi nada más que texto, es una combinación perfecta.</p>
+<p>Puedes descargar la última versión de Perl en el sitio oficial de Perl:</p>
+<ul>
+<li><a href="https://www.perl.com" target="_self" rel="undefined">www.perl.com</a></li>
+</ul>
+<p>Este sitio también contiene mucha información general excelente sobre la escritura de scripts CGI de Perl y Perl. También hay numerosos tutoriales y libros en línea disponibles para ayudarte a comenzar.</p>
+<p>Los sitios a continuación ofrecen numerosos scripts que puedes usar con una cuenta DreamHost habilitada para CGI. Algunos son mejores que otros, por lo que debes comparar precios antes de decidirte por un script determinado.</p>
+<ul>
+<li><a href="http://WebsiteHelpers.com/perl/">¿Por qué no se ejecuta mi script de Perl?</a> Cómo arreglar problemas comunes,</li>
+<li><a href="http://www.cgi-resources.com/">El índice de recursos CGI</a></li>
+<li><a href="http://www.extropia.com/tutorials/perl_cgi/">Extropia</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217297307-Generalidades-sobre-CGI">Generalidades sobre CGI</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217298967-Generalidades-sobre-FastCGI">Generalidades sobre FastCGI</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215364578--C%C3%B3mo-uso-suEXEC-">¿Cómo usar suEXEC?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">Generalidades .htaccess</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="http://httpd.apache.org/docs/2.2/mod/mod_cgi.html">Apache Module mod_cgi</a></li>
+<li><a href="http://httpd.apache.org/docs/2.2/howto/cgi.html">Apache Tutorial: Dynamic Content con CGI</a></li>
+</ul>
+</div>

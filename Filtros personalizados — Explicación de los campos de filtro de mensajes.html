@@ -1,0 +1,270 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>La siguiente es una lista de campos disponibles que puede agregar en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.filters&amp;" target="_blank" rel="noopener">Filtros de Mensajes</a>&nbsp;en tu panel.</p>
+<p>Ve el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215030678-Filtros-personalizados-C%C3%B3mo-habilitar-filtros-de-mensajes-en-una-direcci%C3%B3n-de-correo-electr%C3%B3nico">Cómo habilitar los filtros de mensaje en mi dirección de correo</a>&nbsp;para más detalles.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Se debe tener en cuenta lo siguiente al crear filtros:</p>
+<ul>
+<li>¡El orden importa! Las reglas se verifican una por una, así que asegúrate de tenerlas listadas en el orden en que deseas que se verifiquen o ejecuten.</li>
+<li>La mayoría de las reglas deben terminar con <span class="text-object">execute and stop</span>. Solo usa <span class="text-object">execute and continue</span> si deseas realizar múltiples acciones en un solo correo entrante.</li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Cómo ejecutar y parar las funciones</h2>
+<div class="solvvy-solution">
+<p>La regla 'execute and stop' solo aplica a una regla que realiza una acción de entrega como:</p>
+<ul>
+<li>Mover corre a otra carpeta</li>
+<li>Reenviar el correo</li>
+</ul>
+<p>Si la regla está configurada para agregar solo texto al ENCABEZADO o Asunto, no se aplicará, 'ejecutar y parar'. En este caso, el filtro continuará con la siguiente regla hasta que ejecute una regla con una acción de entrega. Los siguientes ejemplos explican esto con más detalle.</p>
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<tbody>
+<tr>
+<th style="width: 35%;">Regla</th>
+<th style="width: 30%;">Resultado</th>
+<th style="width: 35%;">Explicación</th>
+</tr>
+<tr>
+<td>
+<p>Primero, agrega <strong>FILTRADO</strong> al asunto de los correos con <strong>prueba</strong> en el <strong>asunto</strong> y luego parar</p>
+<p><br />Finalmente, mueve los correos con <strong>example.com</strong> en el <strong>de</strong> a <em>carpetafiltrada</em> y luego parar.</p>
+</td>
+<td>
+<p>El texto FILTRADO se agrega al asunto, pero el filtro continúa con la segunda regla.</p>
+<p>&nbsp;</p>
+<p>El correo entonces se mueve a la carpeta.</p>
+</td>
+<td>Dado que la primera regla no realizó una acción de entrega, el filtro continuó con la segunda regla que sí lo hizo.</td>
+</tr>
+<tr>
+<td>
+<p>Primero, agrega <strong>FILTRADO</strong> al asunto de lso correos con <strong>prueba</strong> en el <strong>asunto</strong> y luego para.</p>
+<p><br />Luego, mueve los correos con <strong>example.com</strong> en el "de" a <em>carpetafiltrada</em> y luego para.</p>
+<p><br />Fnalmente, agrega el encabezado <strong>Prueba-encabezado:&nbsp;FILTRADO</strong> a correos con <strong>*example.com</strong> en los <strong>encabezados</strong> y luego parar.</p>
+</td>
+<td>
+<p>El texto FILTRADO es agregado al asunto, pero el filtro continua con la segunda regla.</p>
+<p>&nbsp;</p>
+<p>El correo es movido a la carpeta.</p>
+<p>&nbsp;</p>
+<p>La regla final no se aplica.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</td>
+<td>
+<p>Dado que la primera regla no realizó una acción de entrega, el filtro continuó con la segunda regla.</p>
+<p>&nbsp;</p>
+<p>Dado que la segunda regla realizó una acción de entrega, el filtro se ejecutó y se detuvo.</p>
+<p>&nbsp;</p>
+<p>La regla final no se ejecutó ya que la segunda regla realizó la acción de entrega.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Lista de campos para agregar a tu filtro personalizado</h2>
+<div class="solvvy-solution">
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<tbody>
+<tr>
+<th style="width: 10%;">Campo</th>
+<th style="width: 40%;">Explicación</th>
+<th style="width: 50%;">Ejemplo</th>
+</tr>
+<tr>
+<td style="width: 15%; text-align: center;">
+<p><strong>Asunto</strong></p>
+</td>
+<td style="width: 55%;">
+<p>Busca en la línea de <strong>Asunto</strong> del correo. Se ve en todas partes en la línea de asunto y puede coincidir con parte o todo el Asunto.</p>
+</td>
+<td>
+<p>Coincide con <span class="text-object">bebe</span> en <strong>Asunto: ¡Come, bebe y diviértete!</strong></p>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><strong>De</strong></p>
+</td>
+<td>Busca en la línea <strong>De</strong> del correo y comprueba quién envió el correo. Se ve en todas partes en la línea De, y puede coincidir con parte o la totalidad de la línea From.</td>
+<td>
+<p>Coincide con <span class="text-object">bob</span> en "De: <strong>bob@example.com</strong></p>
+<p>Coincide con <span class="text-object">Jones</span> en <strong>De: Bob Jones &lt;<span class="text-object">bob@example.com</span>&gt;</strong></p>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><strong>Destinatario</strong></p>
+</td>
+<td>Busca en la línea <strong>Para</strong> del correo y comprueba a quién se envió el correo. Comienza a buscar directamente después de <strong>Para</strong>. Usa <span class="wysiwyg-font-size-large"><strong>*</strong></span> Antes de tu término para que coincida con cualquier parte del nombre o dirección de correo en cualquier lugar de la línea.
+<p>Sugerencia: combina esta regla con el uso de <span class="wysiwyg-font-size-large"><strong>+</strong></span> para direcciones de correo ligeramente personalizadas para clasificar fácilmente los correos de los sitios web. Dale a Amazon tu dirección de correo como <strong>you+amazon@example.com</strong> y luego puedes filtrar fácilmente esos correos .</p>
+</td>
+<td>
+<p>Coincide con <span class="text-object">George</span> en <strong>Para: George de la Jungla <strong>&lt;george@example.com</strong>&gt;</strong></p>
+<p>haz coincidir <span class="text-object">*books</span> en <strong>Para: me+books@example.com</strong></p>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><strong>CC</strong></p>
+</td>
+<td>Busca en la(s) línea(s) CC del correo, buscando otras personas a las que se envió el correo.</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><strong>Encabezados</strong></p>
+</td>
+<td>Mira al principio de cada línea en el correo electrónico. Diseñado para su uso al hacer coincidir líneas de encabezado, como <strong><span class="text-object">X-Spam:Sí</span></strong>. Ten en cuenta que esto solo verifica los encabezados. No verifica el cuerpo del mensaje.
+<p>Consejo: usa. <span class="wysiwyg-font-size-large"><strong>*</strong></span> para coincidir en cualquier lugar de la línea, no solo el comienzo.</p>
+</td>
+<td>
+<p>Coincide con <span class="text-object">X-Spam: Yes</span> en los encabezados del correo.</p>
+<p>Coincide <span class="text-object">*bananas</span> para que coincida con <strong>bananas</strong> en cualquier lugar de cualquier línea del encabezado.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><strong>Responder a</strong></p>
+</td>
+<td>Busca en la línea <strong>Reply-To</strong>&nbsp;del correo la dirección de correo donde se envían las respuestas al correo.</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<p><strong>Cuerpo</strong></p>
+</td>
+<td>Busca en la línea de respuesta del correo la dirección de correo donde se envían las respuestas al correo.</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2><span id="Explanation_of_the_.E2.80.98Do_this.E2.80.99_action_option_fields">Explicación de los campos de opción de acción ‘Hacer esto’&nbsp;</span></h2>
+<div class="solvvy-solution">
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<tbody>
+<tr>
+<th style="width: 10%;">Campo</th>
+<th style="width: 40%;">Explicación</th>
+<th style="width: 50%;">Ejemplo</th>
+</tr>
+<tr>
+<td style="width: 94px; text-align: center;">
+<p><span class="wysiwyg-color-black"><strong>Moverlo a carpeta</strong></span></p>
+</td>
+<td style="width: 298px;">
+<p>Coloca el correo en la carpeta especificada. Esta es posiblemente la acción más útil, pero hay algunas advertencias/restricciones:</p>
+<p>¡Los nombres de las carpetas distinguen entre MaYuScUlAs y MiNúScuLas! Verifica la ortografía del nombre de tu carpeta y el uso de la tecla <span class="code">Shift</span>.</p>
+<p>Los filtros no pueden usar nombres de carpetas que tengan espacios en el nombre. Las subcarpetas están bien, pero deben especificarse con la carpeta principal y un punto (ejemplo: <span class="text-object">ParentFolder.SubFolder)</span>. Los nombres de las carpetas solo pueden contener letras, números, guiones bajos, puntos y guiones. (¡Pero no hay puntos iniciales, puntos finales o puntos dobles!)</p>
+</td>
+<td style="text-align: center; width: 429px;">N/A</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 94px;">
+<p><span class="wysiwyg-color-black"><strong>Agrega esto al asunto</strong></span></p>
+</td>
+<td style="width: 298px;">Agrega el texto especificado al comienzo de la línea de asunto del correo.</td>
+<td style="width: 429px;">
+<p><span class="text-object">Asunto: correo de prueba</span></p>
+<p>se convierte en</p>
+<p><span class="text-object">Asunto: correo de prueba TEXTO AÑADIDO</span></p>
+</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 94px;">
+<p><span class="wysiwyg-color-black"><strong>Agrega esto al encabezado</strong></span></p>
+</td>
+<td style="width: 298px;">Agrega el texto especificado al área de encabezado del correo. Este texto agregado no será visible cuando el correo se muestre normalmente – solo será visible al ver todos los encabezados</td>
+<td style="text-align: center; width: 429px;">N/A</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 94px;">
+<p><span class="wysiwyg-color-black"><strong>Reenvíalo a ésta dirección</strong></span></p>
+</td>
+<td style="width: 298px;">La dirección de correo para reenviar el correo puede ser cualquier dirección, alojada en DreamHost o en cualquier otro lugar.</td>
+<td style="text-align: center; width: 429px;">N/A</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 94px;">
+<p><span class="wysiwyg-color-black"><strong>Reenvíalo a una cuenta shell</strong></span></p>
+</td>
+<td style="width: 298px;">
+<p>Reenvía el correo al directorio <span class="text-object">/Maildir</span> de un usuario de shell. Esto es lo mismo que reenviar a shell_user@server_name.dreamhost.com. Puedes controlar lo que sucede con el correo recibido por el usuario de shell creando un archivo <strong>.forward.postfix</strong> en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de tu usuario</a>. Asegúrate de cambiar <span class="text-object">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.</p>
+<p><strong>Permisos</strong></p>
+<p>El archivo <span class="text-object">.forward.postfix</span> puede tener permisos <a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">644</a>.<br />El archivo que desea ejecutar debe tener permisos <a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">755</a>.</p>
+</td>
+<td style="text-align: center; width: 429px;">
+<p>Estos ejemplos muestran qué poner en el archivo <span class="text-object">.forward.postfix</span> para ejecutar un archivo cuando se recibe el correo. Asegúrate de cambiar el <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.</p>
+<p>Para correr un script bash:</p>
+<div class="preboxcontainer">
+<pre class="prebox">"| /home/<span class="code-highlight">username</span>/myscript.sh"</pre>
+</div>
+<p>Para correr un script de archivo PHP:</p>
+<div class="preboxcontainer">
+<pre class="prebox">"| /usr/local/php74/bin/php /home/<span class="code-highlight">username</span>/myscript.php"</pre>
+</div>
+</td>
+</tr>
+<tr>
+<td style="text-align: center; width: 94px;">
+<p><span class="wysiwyg-color-black"><strong>Elimínalo</strong></span></p>
+</td>
+<td style="width: 298px;">El correo no se coloca en la carpeta Papelera y se borra por completo.</td>
+<td style="text-align: center; width: 429px;">N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Haciendo más de una acción</h2>
+<div class="solvvy-solution">
+<p>Cada filtro de mensaje individual puede verificar varias cosas, pero solo puede realizar una sola acción. Puedes usar "ejecutar y continuar" para realizar múltiples acciones en un solo correo. Cuando un filtro tiene "ejecutar y continuar" se toma la acción del filtro coincidente, y luego se verifica el siguiente filtro y continúa el filtrado. Normalmente, los filtros se hacen con "ejecutar y parar" y la primera regla que coincide es la única acción tomada, y no se verifican más filtros.</p>
+<p>Aquí hay un conjunto de filtros de ejemplo que verifican el spam y también clasifican el correo en carpetas:</p>
+<ul>
+<li>Agrega POSIBLE SPAM al asunto de los correos para cualquiera de los siguientes:</li>
+</ul>
+<dl>
+<dd>-contiene viagra en el Asunto</dd>
+<dd>-contiene dieta en el Asunto</dd>
+<dd>-contiene monkey en el Asunto</dd>
+<dd>y luego&nbsp;<strong>continuar</strong></dd>
+</dl>
+<ul>
+<li>mover correos a Amazon con Amazon en el Asunto</li>
+</ul>
+<dl>
+<dd>y luego <strong>parar</strong>.</dd>
+</dl>
+<ul>
+<li>mover correos a Twitter con twitter.com en el De</li>
+</ul>
+<dl>
+<dd>y luego <strong>parar</strong>.</dd>
+</dl>
+</div>
+<h2>Una nota sobre la regla de reenvío</h2>
+<div class="solvvy-solution">
+<p>El reenvío actuará de manera muy diferente dependiendo de la regla final de ‘ejecutar y parar’ o ‘ejecutar y continuar’.</p>
+<p>Por ejemplo, un filtro único establecido en:</p>
+<ul>
+<li><strong>reenviar y continuar</strong> – reenvía el correo, después de lo cual también se coloca una copia en su bandeja de entrada.</li>
+<li><strong>reenviar y parar</strong>&nbsp;– finaliza la cadena de filtro antes de que llegue al final, por lo que no se colocará ningún mensaje en tu bandeja de entrada.</li>
+</ul>
+</div>
+<h2>Usar filtros de mensajes con filtros de spam de DreamHost</h2>
+<div class="solvvy-solution">
+<p>Aún puedes usar los filtros de mensajes incluso si el dominio está configurado con filtros de spam de MailChannels. El correo se filtra primero a través de las máquinas de correo no deseado, luego se enruta a las máquinas de correo entrantes normales donde se aplican los filtros.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215030678-Filtros-personalizados-C%C3%B3mo-habilitar-filtros-de-mensajes-en-una-direcci%C3%B3n-de-correo-electr%C3%B3nico">¿Cómo habilitar los filtros de mensaje en mi correo?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214984738-Generalidades-sobre-Anti-spam">Generalidades Anti-spam</a></li>
+<li><a href="https://regex101.com/">regex101.com</a>&nbsp;– Probador de expresiones regulares que puedes usar al crear filtros de mensajes personalizados en tu panel</li>
+</ul>
+</div>

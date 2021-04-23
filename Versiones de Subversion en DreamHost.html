@@ -1,0 +1,48 @@
+<div class="alert-warning">
+<p>Subversion se ha eliminado del panel DreamHost. Si habías configurado Subversion en tu dominio previamente, seguirá funcionando normalmente.</p>
+</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Para saber qué versión de Subversion tienes en tu servidor, inicia sesión en el servidor a través de <a class="new" title="SSH (page does not exist)" href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">SSH</a> y corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">svn --version</span></pre>
+</div>
+<p>Si deseas instalar una versión más reciente de subversion (por ejemplo, para la sincronización del repositorio), deberás visitar esta página y descargar el archivo subversion-x.x.x.tar.bz2:</p>
+<ul>
+<li><a href="https://subversion.apache.org/download/" target="_self" rel="undefined">subversion.apache.org/download/</a></li>
+</ul>
+</div>
+<h2><span id="Actualizar_a_la_última_versión_de_Subversion">Actualizar a la última versión de Subversion</span></h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Advertencia: Las siguientes instrucciones no funcionan actualmente porque falla en el paso ./configure debido a la versión de servidor de APR. Los administradores de DreamHost están trabajando para resolver esto. Tan pronto como se resuelva este problema, este artículo se actualizará.</p>
+<p>Sin embargo, aún puedes instalar tu propio paquete APR localmente y apuntar tu instalación de SVN para usar el paquete local. Pero ten en cuenta que el soporte de DreamHost no puede ayudar con tales instalaciones personalizadas.</p>
+</div>
+</div>
+<p>Compilar subversion es bastante sencillo, pero puedes encontrar algunos errores de compilación dependiendo de la versión. En general, sigue estos pasos para compilar e instalar subversion localmente. Asegúrate de cambiar el <span class="text-object">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir tmpwork</span>
+<span class="server">[server]$ </span><span class="command">cd tmpwork</span>
+<span class="server">[server]$ </span><span class="command">wget https://apache.spinellicreations.com/subversion/subversion-x.x.x.tar.bz2</span>
+<span class="server">[server]$ </span><span class="command">tar -xjf subversion-x.x.x.tar.bz2</span>
+<span class="server">[server]$ </span><span class="command">cd subversion-x.x.x</span>
+<span class="server">[server]$ </span><span class="command">./configure --prefix=/home/<span class="code-highlight">username</span> --with-ssl</span>
+<span class="server">[server]$ </span><span class="command">make</span>
+<span class="server">[server]$ </span><span class="command">make install</span>
+</pre>
+</div>
+<p>Esto instala la nueva subversión en tu directorio de usuario. Deberás cambiar la ruta para incluir tu directorio <span class="text-object">~/bin</span> para usar los nuevos binarios. Para hacer eso, corre el siguiente comando en tu terminal:</p>
+<div class="preboxcontainer">
+<pre class="prebox">alias svn='/home/<span class="code-highlight">username</span>/bin/svn'
+</pre>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215466058-Descripci%C3%B3n-general-de-la-Subversion" target="_self" rel="undefined">Generalidades de Subversion</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">Generalidades de SSH</a></li>
+</ul>
+</div>

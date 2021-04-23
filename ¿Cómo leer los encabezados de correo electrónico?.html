@@ -1,0 +1,105 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Ver los encabezados de tus mensajes es como mirar el mapa que toma tu correo cuando lo envían a tu buzón. Es comprensible que este mapa sea muy útil para descubrir las causas de muchos problemas de correo que se pueden experimentar en cualquier sistema. Desde el correo retrasado hasta los rebotes de correo, los encabezados son la pista número uno en la resolución de problemas de entrega que pueden ocurrir.</p>
+</div>
+<h2>Comprender los encabezados de los mensajes recibidos</h2>
+<div class="solvvy-solution">
+<p>De manera predeterminada, los clientes de correo solo te mostrarán los encabezados básicos de un mensaje, como el remitente y el destinatario. Esta información es útil, pero no es toda la información a la que realmente tienes acceso. En tu programa de correo, puedes seleccionar un mensaje y luego elegir&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215466778--C%C3%B3mo-reviso-los-encabezados-de-correo-electr%C3%B3nico-">ver los detalles completos del encabezado del mensaje</a>:</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Debes leer los detalles del encabezado de abajo hacia arriba para ver la ruta del mensaje.</p>
+</div>
+</div>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/03_Atmail.png" alt="Headers6.fw.png" width="741" height="556" /></dd>
+</dl>
+<p>Esta información tiene una especie de rasgo extraño. Debes leerlo de abajo hacia arriba para ver la ruta del mensaje. En el ejemplo anterior, la primera línea, que se muestra como ‘Return-Path’, muestra desde dónde se creó y se envió originalmente el correo. Cada línea 'Received' es un servidor por el que el correo electrónico pasó en su camino hacia el destinatario.</p>
+<p>La siguiente es una descripción general rápida de los campos básicos que verás:</p>
+<dl>
+<dt><strong>Return-Path</strong></dt>
+<dd>Si el mensaje es rechazado, se enviará de vuelta a la dirección de correo que figura aquí, que también es el remitente del mensaje.</dd>
+</dl>
+<dl>
+<dt><strong>X-Original-To</strong></dt>
+<dd>La dirección de correo que figura aquí es el destinatario original del correo que se recibió.</dd>
+</dl>
+<dl>
+<dt><strong>Delivered-To</strong></dt>
+<dd>En el ejemplo mencionado anteriormente, verás una dirección de correo de aspecto extraño aquí:</dd>
+</dl>
+<dl>
+<dd>Delivered-To: x15975942@homiemail-mx33.g.dreamhost.com</dd>
+</dl>
+<dl>
+<dd>El usuario de correo que aparece en la lista (a la izquierda del símbolo ‘@’) es el ID de usuario de la dirección de correo del destinatario alojada con DreamHost. El servidor que aparece (a la derecha del símbolo ‘@’) es el servidor de correo DreamHost que recibió este mensaje en particular.</dd>
+</dl>
+<dl>
+<dt><strong>Received</strong></dt>
+<dd>Hay detalles de ‘Received by’ y ‘Received from’ en los encabezados. Al verificar tus encabezados, el ‘Received by’ indica que fue recibido por la IP o el nombre del servidor cuando se envió el mensaje originalmente.</dd>
+</dl>
+<dl>
+<dd>El ‘Received from’ sería el servidor que envió o retransmitió el correo electrónico en cualquier punto específico del encabezado.</dd>
+</dl>
+<dl>
+<dt><strong>DKIM-Signature</strong></dt>
+<dd>Esto muestra la firma&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215029758--Qu%C3%A9-son-los-registros-DKIM-">DKIM</a>, si el correo tiene una. Todos los correos enviados desde cuentas de correo alojadas en DreamHost están firmados con DKIM. Puedes leer más sobre la firma de DKIM en el artículo de DKIM.</dd>
+</dl>
+<dl>
+<dt><strong>MIME-Version</strong></dt>
+<dd>1.0: Esto solo muestra la versión MIME en 1.0, que no tiene relevancia en la solución de problemas de entrega de correo.</dd>
+</dl>
+<dl>
+<dt><strong>X-Received</strong></dt>
+<dd>Esto muestra el mensaje que se recibe en el primer servidor. Luego se le aplica una identificación para que se pueda rastrear el mensaje.</dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los encabezados de ejemplo utilizados son un conjunto muy básico de encabezados para un mensaje. El mensaje de prueba enviado para generar el ejemplo fue lo más simple posible. Al implementar otras opciones como el filtrado de mensajes y/o el filtrado de spam, los encabezados contendrán otros detalles adicionales relacionados con esas configuraciones adicionales.</p>
+</div>
+</div>
+</div>
+<h2>Seguimiento de la entrega del mensaje a través de los encabezados</h2>
+<div class="solvvy-solution">
+<p>Como se señaló anteriormente, los encabezados se leen comenzando desde abajo. En el mismo ejemplo de arriba, el mensaje se envió originalmente el:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Received: by 10.176.80.232 with HTTP; Thu, 22 Sep 2016 14:19:22 -0700 (PDT)
+</pre>
+</div>
+<p>Esto muestra el mensaje que se recibe con la marca de tiempo indicada anteriormente. Una vez recibido, el estado 'X-recibido' aplicó la ID SMTP para ese mensaje, que también se realizó al mismo tiempo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">X-Received: by 10.176.4.72 with SMTP id 66mr1541980uav.133.1474579162566; Thu, 22 Sep 2016 14:19:22 -0700 (PDT)
+</pre>
+</div>
+<p>El mensaje fue enviado por un usuario de prueba de Google. Los detalles a continuación muestran a Google buscando pasar el mensaje al destinatario final:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Received: by mail-pa0-f52.google.com with SMTP id eu11so9302323pac.11 for &lt;user@thunderbird.dreamhosters.com&gt;; <br />Wed, 07 Jan 2015 20:50:12 -0800 (PST)
+
+from mail-ua0-f172.google.com (mail-ua0-f172.google.com [209.85.217.172]) <br />(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits)) <br />(No client certificate requested) by homiemail-mx33.g.dreamhost.com (Postfix) <br />with ESMTPS id 7C9F08009A15 for &lt;user@dreamhostexample.com&gt;; Thu, 22 Sep 2016 14:19:23 -0700 (PDT)
+</pre>
+</div>
+<p>A partir de ahí, pasó de Google a tu servidor entrante DreamHost en 'homiemail-mx18'. Ese servidor MX luego entregó el mensaje al destinatario final.</p>
+<p>Como puedes ver, todo el proceso de entrega solo tardó 1 segundo desde el punto en que se envió hasta el punto en que se recibió.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Existen herramientas que ayudan a evaluar los encabezados de los mensajes:&nbsp;</p>
+<ul>
+<li>Google tiene uno, aquí: <a href="https://toolbox.googleapps.com/apps/messageheader/analyzeheader" target="_self" rel="undefined">toolbox.googleapps.com/apps/messageheader/analyzeheader</a></li>
+<li>Aquí hay otro más: <a href="https://mxtoolbox.com/EmailHeaders.aspx" target="_self" rel="undefined">mxtoolbox.com/EmailHeaders.aspx</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Ver También</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215466588--C%C3%B3mo-leo-los-encabezados-de-correo-electr%C3%B3nico-enviados-y-devueltos-">¿Cómo leer los encabezados de correo envíados y devueltos?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215466778--C%C3%B3mo-reviso-los-encabezados-de-correo-electr%C3%B3nico-">¿Cómo puedo ver los encabezados de los correos?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217114867-Ver-encabezados-de-correo-electr%C3%B3nico-usando-webmail">Ver encabezados de correo usando Webmail</a></li>
+</ul>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 387px; top: 3011.47px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>

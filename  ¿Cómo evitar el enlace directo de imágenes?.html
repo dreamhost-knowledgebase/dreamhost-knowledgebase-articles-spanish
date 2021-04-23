@@ -1,0 +1,81 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>La vinculación activa o el robo de ancho de banda es un problema común. Ocurre cuando las personas se vinculan a archivos e imágenes en un servidor diferente y los muestran en su propio sitio web; esto usa el ancho de banda del propietario original a su cargo.</p>
+</div>
+<h2>Crear un archivo .htaccess en tu servidor web DreamHost</h2>
+<div class="solvvy-solution">
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo crear un archivo .htaccess en tu servidor web:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227#crear-un-archivo-htaccess">Crear un archivo .htaccess en tu servidor web DreamHost</a></li>
+</ul>
+<p>Si el archivo ya existe, consulta los siguientes artículos para obtener instrucciones sobre cómo actualizarlo (dependiendo de si estás utilizando un cliente FTP o SSH):</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">Crear y editar un archivo a través de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a></li>
+</ul>
+</div>
+<h2>¿Qué cambiar en los ejemplos siguientes?</h2>
+<div class="solvvy-solution">
+<p>Los ejemplos a continuación se pueden ingresar en tu archivo .htaccess exactamente como se muestra.</p>
+<p>Solo si el ejemplo contiene una URL en negrita, debes cambiarla a tu URL real. Por ejemplo, si ves el dominio <strong>example.com</strong>, cámbialo a tu propio nombre de dominio.</p>
+</div>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los siguientes ejemplos usan <span class="text-object">http</span>. Si has agregado un certificado SSL a tu sitio, asegúrate de ajustar el código para usar <span class="text-object">https</span> en su lugar.</p>
+</div>
+</div>
+<h2>Agregar código a tu archivo .htaccess</h2>
+<div class="solvvy-solution">
+<p>Al ingresar las siguientes líneas a un <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">archivo .htaccess</a>, puedes prevenir el enlace directo de imágenes a tu sitio web:</p>
+<div class="preboxcontainer">
+<pre class="prebox">RewriteEngine On
+RewriteCond&nbsp;%{HTTP_REFERER}&nbsp;!^$
+RewriteCond&nbsp;%{HTTP_REFERER}&nbsp;!^http://(www\.)?<span class="code-highlight">example.com</span>/.*$ [NC] 
+RewriteRule \.(gif|jpg)$ http://<span class="code-highlight">www.example.com/hotlink.gif</span> [R,L]
+</pre>
+</div>
+<p>En el ejemplo anterior, cambia <strong>example.com</strong> por la URL de tu sitio web. Esto hace que no se cargue ninguna imagen vinculada. Puedes cambiar la última línea para que apunte a cualquier imagen que desees. Esta imagen debería explicar que los enlaces activos están deshabilitados en tu servidor.</p>
+<p>Aquí hay otro ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">RewriteEngine on
+RewriteCond&nbsp;%{HTTP_REFERER}&nbsp;!^http://<span class="code-highlight">example.com</span>.*$ [NC] 
+RewriteCond&nbsp;%{HTTP_REFERER}&nbsp;!^http://<span class="code-highlight">www.example.com</span>.*$ [NC] 
+RewriteRule .*\.(gif|jpg|jpeg|bmp)$ http://<span class="code-highlight">www.example.com/stophotlinking.jpg</span> [R,NC] 
+</pre>
+</div>
+<p>Puedes cambiar la última línea para que apunte a cualquier imagen que desees. Esta imagen debería explicar que los enlaces activos están deshabilitados en tu servidor.</p>
+<p>Si no deseas adoptar el enfoque manual, puedes evitar el enlace directo de imágenes habilitándolo en el panel. Para habilitarlo, ve a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.webdav&amp;" target="_blank" rel="noopener">Htaccess/WebDAV</a>. Haz clic en tu dominio y continúa con los pasos para habilitar esta función.</p>
+</div>
+<h2>Bloquear dominios específicos</h2>
+<div class="solvvy-solution">
+<p>El siguiente código no puede cargar un archivo vinculado, pero no se genera ningún error. Por lo tanto, si el sitio <strong>example.com</strong> contiene una imagen vinculada a tu sitio, no se cargará en tu sitio:</p>
+<div class="preboxcontainer">
+<pre class="prebox">RewriteEngine On
+RewriteCond&nbsp;%{HTTP_REFERER} ^http://(www\.)?<span class="code-highlight">example\.com</span>(/.*)*$ [NC,OR]
+RewriteRule \.(jpeg|JPEG|jpe|JPE|jpg|JPG|gif|GIF|png|PNG|mng|MNG)$ - [F]
+</pre>
+</div>
+<p>Para proteger otros recursos, como archivos de video y audio, agrega extensiones adicionales al bloque de paréntesis <span class="code">RewriteRule</span>.</p>
+</div>
+<h2>Permitir solo dominios específicos</h2>
+<div class="solvvy-solution">
+<p>El siguiente código solo permite que sitios específicos carguen contenido. Por ejemplo, el sitio <strong>example.com</strong> tiene todo el contenido. El siguiente código permite que solo <strong>example.com</strong> y <strong>dreamhost.com</strong> carguen el contenido. Todos los demás sitios que intentan solicitar cualquier recurso no pueden cargar el recurso, pero no se generan errores:</p>
+<div class="preboxcontainer">
+<pre class="prebox">RewriteEngine On
+RewriteCond&nbsp;%{HTTP_REFERER}&nbsp;!^http://<span class="code-highlight">(www\.)?dreamhost\.com</span>(/.*)*$ [NC]
+RewriteCond&nbsp;%{HTTP_REFERER}&nbsp;!^http://<span class="code-highlight">(www\.)?example\.com</span>(/.*)*$ [NC]
+RewriteCond&nbsp;%{HTTP_REFERER}&nbsp;!^$
+RewriteRule \.(jpeg|gif|png)$ - [F]
+</pre>
+</div>
+<p>Además, dado que un agente de usuario no siempre puede especificar un valor <span class="code">HTTP_REFERER</span>, la línea <span class="code">RewriteCond&nbsp;%{HTTP_REFERER}&nbsp;!^$</span> permite que la solicitud pase si el valor <span class="code">HTTP_REFERER</span> consta de una cadena en blanco.</p>
+<p>Para obtener más ejemplos sobre cómo bloquear el tráfico por IP o dominio, consulta el artículo <a href="https://help.dreamhost.com/hc/es/articles/216363167--C%C3%B3mo-niego-el-acceso-a-mi-sitio-con-un-archivo-htaccess-">Negar el acceso</a>.</p>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">Generalidades sobre .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-">¿Qué puedo hacer con un archivo .htaccess?</a></li>
+</ul>
+</div>

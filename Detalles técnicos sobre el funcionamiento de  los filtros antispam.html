@@ -1,0 +1,74 @@
+<h2>Registros MX</h2>
+<div class="solvvy-solution">
+<p>El filtrado antispam se habilita cambiando los registros MX del dominio para enrutar los correos&nbsp; entrantes a los servidores de filtrado primero antes de pasar el mensaje a las máquinas MX para su entrega. Los dominios que utilicen nameservers que no sean DreamHost deberás actualizar manualmente tus registros MX para reflejar el cambio.</p>
+<p>Los registros de filtro son:</p>
+<ul>
+<li>0 mx1.mailchannels.net</li>
+<li>0&nbsp;mx2.mailchannels.net</li>
+</ul>
+</div>
+<h2>Consideraciones especiales para direcciones de reenvío</h2>
+<div class="solvvy-solution">
+<p>Hay ciertas cosas para recordar con el filtrado en relación con el reenvío de direcciones de correo. Los detalles de las cuatro combinaciones con esta configuración se describen a continuación:</p>
+<ul>
+<li>Si se filtra el dominio y la dirección se reenvía a otra dirección de correo de DreamHost que también se filtra, el correo se clasifica según la configuración de correo del filtro de la dirección de reenvío original.</li>
+<li>Si se está filtrando el dominio y la dirección se reenvía a otra dirección de correo de DreamHost que no está filtrada, se filtrará el correo.</li>
+<li>Si se está filtrando el dominio y la dirección se reenvía a una dirección externa únicamente (como @gmail), se utilizará la configuración del filtro para la dirección externa.</li>
+<li>Si el dominio no se filtra y se reenvía a una dirección de correo de DreamHost que se encuentra en un dominio filtrado, el correo no se filtrará.</li>
+</ul>
+<p>La siguiente tabla muestra cómo funciona el filtrado Anti-spam para/con direcciones de solo reenvío. <span class="text-object">A@example.com</span> es solo de reenvío y envía correos a <span class="text-object">B@example.net</span>, que es una cuenta de correo completamente alojada:</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th>A@example.com usa filtrado</th>
+<th>B@example.net usa filtrado</th>
+<th>¿Se filtra el correo entrante?</th>
+<th>¿Qué filtro es usado?</th>
+</tr>
+<tr>
+<td class="table-yes" style="background: #90ff90; color: black;">Sí</td>
+<td class="table-yes" style="background: #90ff90; color: black;">Sí</td>
+<td>Sí</td>
+<td>A@example.com</td>
+</tr>
+<tr>
+<td class="table-yes" style="background: #90ff90; color: black;">Sí</td>
+<td class="table-no" style="background: #ff9090; color: black;">No</td>
+<td>Sí</td>
+<td>A@example.com</td>
+</tr>
+<tr>
+<td class="table-no" style="background: #ff9090; color: black;">No</td>
+<td class="table-yes" style="background: #90ff90; color: black;">Sí</td>
+<td>No</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td class="table-no" style="background: #ff9090; color: black;">No</td>
+<td class="table-no" style="background: #ff9090; color: black;">No</td>
+<td>No se hace filtrado</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>El filtrado y lo qué hace</h2>
+<div class="solvvy-solution">
+<p>Hay dos servicios configurados para filtrar el spam. A continuación se muestra la descripción de cada una:</p>
+<dl>
+<dt><strong>MailChannels (habilitado desde Septiembre de 2020)</strong></dt>
+<dd>MailChannels es el filtro de correo basado en la nube de DreamHost. Acepta y evalúa el correo, agrega un encabezado específico para los mensajes de spam y luego transmite los mensajes a los servidores MX.</dd>
+<dt><strong>Procmail</strong></dt>
+<dd>Este es el agente de entrega del buzón, que solo coloca el correo en la carpeta Spam y rechaza a los remitentes bloqueados cuando detecta los encabezados de MailChannels. Esto también es responsable de los filtros definidos por el usuario definidos en el panel.&nbsp;</dd>
+<dt><strong>Vade (pronto será eliminado)</strong></dt>
+<dd>Vade es el filtro de correo de DreamHost que pronto será antiguo. Vade dejará de funcionar después del 23 de marzo de 2021.</dd>
+</dl>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214984738-Generalidades-sobre-Anti-spam">Generalidades sobre Anti-spam</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215686667-Soluci%C3%B3n-de-problemas-de-configuraci%C3%B3n-de-Anti-spam">Solución de problemas de configuraciones Anti-spam</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215686487--C%C3%B3mo-establecer-mi-configuraci%C3%B3n-Anti-spam-">¿Cómo configurar mi configuración Anti-spam?</a></li>
+</ul>
+</div>

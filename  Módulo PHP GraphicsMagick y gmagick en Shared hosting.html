@@ -36,7 +36,7 @@
 </pre>
 </div>
 <p>Si todo funciona sin problemas, los archivos binarios de GraphicsMagick actualizados, la colección de bibliotecas, la documentación, etc., están disponibles en su directorio <span class="text-object">local</span> (y subdirectorio).</p>
-<p>Comienza a usar este directorio <span class="text-object">local</span> ejecutando el siguiente comando:</p>
+<p>Comienza a usar este directorio <span class="text-object">local</span> corriendo el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">export PATH=$HOME/local/bin:$PATH</span></pre>
 </div>
@@ -59,9 +59,9 @@
 </li>
 <li>Corre lo siguiente para asegurarte de que imagick se compile con mayor fluidez. Cambia la versión <span class="code">phpize</span> a la versión real de PHP que necesita usar. Ve el <a href="https://help.dreamhost.com/hc/es/articles/215082337--Qu%C3%A9-versiones-de-PHP-est%C3%A1n-disponibles-en-DreamHost-">artículo de versiones PHP</a> para más detalles:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php72/bin/phpize</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php74/bin/phpize</span>
 <span class="server">[server]$ </span><span class="command">export PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig</span>
-<span class="server">[server]$ </span><span class="command">./configure --prefix=$HOME/local --with-gmagick=$HOME/local --with-php-config=/usr/local/php72/bin/php-config</span>
+<span class="server">[server]$ </span><span class="command">./configure --prefix=$HOME/local --with-gmagick=$HOME/local --with-php-config=/usr/local/php74/bin/php-config</span>
 <span class="server">[server]$ </span><span class="command">make</span></pre>
 </div>
 <p>Es posible que veas algunas advertencias de compilación. Puedes ignorarlos con seguridad. Busca lo siguiente que garantiza una instalación exitosa:</p>
@@ -74,13 +74,13 @@
 <h2><span id="Configuring_PHP_to_use_this_extension">Configurar PHP esta extensión</span></h2>
 <div class="solvvy-solution">
 <p>Visita el artículo de <a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">PHP.ini</a> para detalles sobre como crear un archivo phprc.</p>
-<p>En este ejemplo, el dominio se ejecuta bajo PHP 7.2. Entonces tu archivo phprc estaría en este directorio:</p>
+<p>En este ejemplo, el dominio se ejecuta bajo PHP 7.4. Entonces tu archivo phprc estaría en este directorio:</p>
 <p>Corre lo siguiente para crear tu directorio <span class="text-object">/extensions</span>, copia el módulo y agrégalo al archivo phprc:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/.php/7.2</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/.php/7.4</span>
 <span class="server">[server]$ </span><span class="command">mkdir extensions</span>
 <span class="server">[server]$ </span><span class="command">cp ~/build/gmagick-1.1.7RC3/modules/gmagick.so extensions</span>
-<span class="server">[server]$ </span><span class="command">echo "extension = ~/.php/7.2/extensions/gmagick.so" &gt;&gt; phprc</span></pre>
+<span class="server">[server]$ </span><span class="command">echo "extension = ~/.php/7.4/extensions/gmagick.so" &gt;&gt; phprc</span></pre>
 </div>
 </div>
 <h2><span id="See_also">Ver también</span></h2>
@@ -92,6 +92,6 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/217253537--Instalaci%C3%B3n-de-ImageMagick-y-el-m%C3%B3dulo-PHP-imagick-en-shared-Hosting">Instalar los módulos PHP ImageMagick y imagick en Shared hosting</a></li>
 </ul>
 </div>
-<div id="gtx-trans" style="position: absolute; left: 101px; top: 1431.95px;">
+<div id="gtx-trans" style="position: absolute; left: 276px; top: 696.609px;">
 <div class="gtx-trans-icon">&nbsp;</div>
 </div>

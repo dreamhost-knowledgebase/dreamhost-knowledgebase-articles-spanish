@@ -1,0 +1,123 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Usando el <a href="https://help.dreamhost.com/hc/es/articles/235817468-Introducci%C3%B3n-al-cliente-de-l%C3%ADnea-de-comandos-de-OpenStack" target="_self" rel="undefined">cliente de línea de comando de OpenStack</a> o el panel de DreamCompute puedes pausar, suspender, detener e iniciar una instancia.</p>
+<p>Elige a continuación '<a href="#dashboard_examples">Ejemplos de Panel</a>' o '<a href="#command_line_examples">Ejemplos de línea de comando</a>' dependiendo de con cual te sientes más comodo.</p>
+</div>
+<h2><span id="dashboard_examples">Ejemplos de Panel</span></h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Todas estas acciones se&nbsp; pueden realizar desde la página 'Compute' &gt; 'Instances' del panel de DreamCompute.</p>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener">DreamCompute</a> e inicia sesión en tu panel DreamCompute.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-pause-suspend-stop-and-start-an-instance_01.png" alt="" /></dd>
+</dl>
+</li>
+<li>En el lado izquierdo superior, haz clic en la pestaña <span class="text-object">Compute</span>.</li>
+<li>En la lista expandida, haz clic en '<span class="guilabel">Instances'</span>.</li>
+</ol>
+</div>
+</div>
+<h3>Pausar y reanudar una instancia</h3>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-pause-suspend-stop-and-start-an-instance_02.png" alt="" /></dd>
+</dl>
+<p>Para pausar tu instancia, haz clic en el menú desplegable debajo de la columna <span class="text-object">Action</span> junto a tu instancia. En el menú, selecciona <span class="text-object">Pause Instance</span>.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-pause-suspend-stop-and-start-an-instance_03.png" alt="" /></dd>
+</dl>
+<p>Para reanudar la instancia, haz clic en la opción <span class="text-object">Resume Instance</span> en el menú desplegable.</p>
+<h3>Suspender y reanudar una instancia</h3>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-pause-suspend-stop-and-start-an-instance_04.png" alt="" /></dd>
+</dl>
+<p>Para suspender tu instancia, haz clic en el menú desplegable debajo de la columna <span class="text-object">Action</span> junto a tu instancia. En el menú, selecciona 'Suspend Instance'.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-pause-suspend-stop-and-start-an-instance_03.png" alt="" /></dd>
+</dl>
+<p>Para reanudar la instancia, haz clic en la opción <span class="text-object">Resume Instance</span> en el menú desplegable.</p>
+<h3>Detener e iniciar una instancia</h3>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-pause-suspend-stop-and-start-an-instance_06.png" alt="" /></dd>
+</dl>
+<p>Para detener tu instancia, haz clic en el menú desplegable debajo de la columna 'Action' junto a tu instancia. En el menú, selecciona <span class="text-object">Shut Off Instance</span>.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-pause-suspend-stop-and-start-an-instance_07.png" alt="" /></dd>
+</dl>
+<p>Inicia la instancia nuevamente haciendo clic en la opción 'Start Instance'.</p>
+</div>
+<h2><span id="command_line_examples">Ejemplos de línea de comando</span></h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>En los siguientes ejemplos, 'myInstance' es el nombre de tu instancia. Puedes ver el nombre de tu instancia en el <a href="https://iad2.dreamcompute.com/project/instances/">panel de DreamCompute</a>. Debes instalar el <a href="https://help.dreamhost.com/hc/es/articles/235817468-Introducci%C3%B3n-al-cliente-de-l%C3%ADnea-de-comandos-de-OpenStack" target="_self" rel="undefined">cliente de línea de comando de OpenStack</a> para ejecutar los siguientes comandos.</p>
+</div>
+</div>
+<h3>Pausa y reanuda una instancia</h3>
+<p>Para <a href="https://docs.openstack.org/python-openstackclient/pike/cli/command-objects/server.html#server-pause">pausar una instancia</a>, corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server pause myInstance</span></pre>
+</div>
+<p>Este comando almacena el estado de la VM en RAM. Una instancia en pausa continúa ejecutándose en un estado congelado.</p>
+<p>Para <a href="https://docs.openstack.org/python-openstackclient/pike/cli/command-objects/server.html#server-unpause">reanudar una instancia</a>, corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server unpause myInstance</span></pre>
+</div>
+<h3>Suspender y reanudar una instancia</h3>
+<p>Para <a href="https://docs.openstack.org/python-openstackclient/pike/cli/command-objects/server.html#server-suspend">suspender una instancia</a>, corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server suspend myInstance</span></pre>
+</div>
+<p>Para <a href="https://docs.openstack.org/python-openstackclient/pike/cli/command-objects/server.html#server-resume">reanudar una instancia suspendida</a>, corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server resume myInstance</span></pre>
+</div>
+<h3>Detener e iniciar una instancia</h3>
+<p>Para <a href="https://docs.openstack.org/python-openstackclient/pike/cli/command-objects/server.html#server-stop">detener una instancia</a>, corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server stop myInstance</span></pre>
+</div>
+<p>Para <a href="https://docs.openstack.org/python-openstackclient/pike/cli/command-objects/server.html#server-start">iniciar una instancia detenida</a>, ejecuta el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server start myInstance</span></pre>
+</div>
+<h3>Revisar el estado de tu instancia</h3>
+<p>Después de ejecutar cualquiera de los comandos anteriores, puedes verificar el estado de tu instancia para confirmar tu estado. Utiliza el comando <span class="code">show</span> para ver tu estado actual. En el siguiente ejemplo, la instancia ha sido suspendida:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server show myInstance</span>
++-----------------------------+------------------------------------------------------------+
+| Field                       | Value                                                      |
++-----------------------------+------------------------------------------------------------+
+| OS-DCF:diskConfig           | AUTO                                                       |
+| OS-EXT-AZ:availability_zone | iad-2                                                      |
+| OS-EXT-STS:power_state      | Shutdown                                                   |
+| OS-EXT-STS:task_state       | None                                                       |
+| OS-EXT-STS:vm_state         | suspended                                                  |
+| OS-SRV-USG:launched_at      | 2017-10-04T23:11:23.000000                                 |
+| OS-SRV-USG:terminated_at    | None                                                       |
+| accessIPv4                  |                                                            |
+| accessIPv6                  |                                                            |
+| config_drive                | True                                                       |
+| created                     | 2017-10-04T23:10:55Z                                       |
+| flavor                      | gp1.subsonic (100)                                         |
+| hostId                      | 570ede2f2db7b70562c4dezfc408c77c99883c0f48f0b9cbf50414a3   |
+| id                          | cda78s8c-702d-4117-87bc-b34de0b28554                       |
+| image                       |                                                            |
+| key_name                    | myKey                                                      |
+| name                        | myInstance                                                 |
+| project_id                  | e52ede2a460548cf950ba86497300079                           |
+| properties                  |                                                            |
+| security_groups             | name='default'                                             |
+| <span class="green"><span class="wysiwyg-font-size-large">status</span>                     | <span class="wysiwyg-font-size-large">SUSPENDED</span></span>                                                 |
+| updated                     | 2017-10-09T23:08:19Z                                       |
+| user_id                     | 2981541bcc4be4d49a23787a63eb8320                           |
+| volumes_attached            | id='4acc41d7-6zb9-4fdf-8ac0-d45c4452ed0d'                  |
++-----------------------------+------------------------------------------------------------+</pre>
+</div>
+</div>
+<!--DreamCompute Button-->
+<h2>Implementa Tus Aplicaciones en Servidores en La Nube Hoy</h2>
+<div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Suscribete a DreamCompute</a></div>

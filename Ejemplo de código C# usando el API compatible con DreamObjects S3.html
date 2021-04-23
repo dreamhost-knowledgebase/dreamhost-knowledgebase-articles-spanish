@@ -1,0 +1,217 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="sample-c-code-using-dreamobjects-s3-compatible-api" class="solvvy-hidden">
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#s3-c-Crear_una_Conexión">Crear una Conexión</a></li>
+<li><a class="reference internal" href="#s3-c-Enlistar_Buckets_Propios">Enlistar Buckets Propios</a></li>
+<li><a class="reference internal" href="#s3-c-Crear_un_Bucket">Crear un Bucket</a></li>
+<li><a class="reference internal" href="#s3-c-Enlistar_Contenido_de_un_Bucket">Enlistar Contenido de un Bucket</a></li>
+<li><a class="reference internal" href="#s3-c-Eliminar_un_Bucket">Eliminar un Bucket</a></li>
+<li><a class="reference internal" href="#s3-c-Forzar_Eliminación_para_Buckets_No_vacíos">Forzar Eliminación para Buckets No vacíos</a></li>
+<li><a class="reference internal" href="#s3-c-Crear_un_Object">Crear un Object</a></li>
+<li><a class="reference internal" href="#s3-c-Cambiar_el_ACL_de_un_Object">Cambiar el ACL de un Object</a></li>
+<li><a class="reference internal" href="#s3-c-Descargar_un_Object">Descargar un Object (a un archivo)</a></li>
+<li><a class="reference internal" href="#s3-c-Eliminar_un_Object">Eliminar un Object</a></li>
+<li><a class="reference internal" href="#s3-c-Generar_URL_de_Descarga_de_un_Object">Generar URL de Descarga de un Object (firmado y sin firmar)</a></li>
+</ul>
+</div>
+</div>
+<p>Este artículo enlista muchos códigos de C# para interactuar con DreamObjects.</p>
+<div id="creating-a-connection">&nbsp;</div>
+<span id="s3-c-Crear_una_Conexión"></span>
+<h2>Crear una Conexión</h2>
+<div class="solvvy-solution">
+<p>Crea una conexión para que puedas interactuar con el servidor.</p>
+<div class="preboxcontainer">
+<pre class="prebox">using System;
+using Amazon;
+using Amazon.S3;
+using Amazon.S3.Model;
+
+string accessKey = "put your access key here!";
+string secretKey = "put your secret key here!";
+
+AmazonS3Config config = new AmazonS3Config();
+config.ServiceURL = "objects-us-east-1.dream.io";
+
+AmazonS3 client = Amazon.AWSClientFactory.CreateAmazonS3Client(
+        accessKey,
+        secretKey,
+        config
+        );</pre>
+</div>
+</div>
+<div id="listing-owned-buckets">&nbsp;</div>
+<span id="s3-c-Enlistar_Buckets_Propios"></span>
+<h2>Enlistar Buckets Propios</h2>
+<div class="solvvy-solution">
+<p>Obtiene una lista de Buckets que posees. Esto también imprime el nombre del Bucket y la fecha de creación de cada uno.</p>
+<div class="preboxcontainer">
+<pre class="prebox">ListBucketResponse response = client.ListBuckets();
+foreach (S3Bucket b in response.Buckets)
+{
+        Console.WriteLine("{0}\t{1}", b.BucketName, b.CreationDate);
+}</pre>
+</div>
+<p>La salida se verá más o menos así</p>
+<div class="preboxcontainer">
+<pre class="prebox">mahbuckat1   2011-04-21T18:05:39.000Z
+mahbuckat2   2011-04-21T18:05:48.000Z
+mahbuckat3   2011-04-21T18:07:18.000Z</pre>
+</div>
+</div>
+<div id="creating-a-bucket">&nbsp;</div>
+<span id="s3-c-Crear_un_Bucket"></span>
+<h2>Crear un Bucket</h2>
+<div class="solvvy-solution">
+<p>Crea un nuevo Bucket llamado <code class="docutils literal"><span class="pre">my-new-bucket.</span></code></p>
+<div class="preboxcontainer">
+<pre class="prebox">PutBucketRequest request = new PutBucketRequest();
+request.BucketName = "my-new-bucket";
+client.PutBucket(request);</pre>
+</div>
+</div>
+<div id="listing-a-bucket-s-content">&nbsp;</div>
+<span id="s3-c-Enlistar_Contenido_de_un_Bucket"></span>
+<h2>Enlistar Contenido de un Bucket</h2>
+<div class="solvvy-solution">
+<p>Obtiene una lista de los objetos en el bucket. Esto también imprime el nombre del object, el tamaño del archivo, y la última fecha de modificación.</p>
+<div class="preboxcontainer">
+<pre class="prebox">ListObjectsRequest request = new ListObjectsRequest();
+request.BucketName = "my-new-bucket";
+ListObjectsResponse response = client.ListObjects(request);
+foreach (S3Object o in response.S3Objects)
+{
+        Console.WriteLine("{0}\t{1}\t{2}", o.Key, o.Size, o.LastModified);
+}</pre>
+</div>
+<p>La salida se vería más o menos así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">myphoto1.jpg 251262  2011-08-08T21:35:48.000Z
+myphoto2.jpg 262518  2011-08-08T21:38:01.000Z</pre>
+</div>
+</div>
+<div id="deleting-a-bucket">&nbsp;</div>
+<span id="s3-c-Eliminar_un_Bucket"></span>
+<h2>Eliminar un Bucket</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El bucket debe estar vacío, si no, no funcionará.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">DeleteBucketRequest request = new DeleteBucketRequest();
+request.BucketName = "my-new-bucket";
+client.DeleteBucket(request);</pre>
+</div>
+</div>
+<div id="forced-delete-for-non-empty-buckets">&nbsp;</div>
+<span id="s3-c-Forzar_Eliminación_para_Buckets_No_vacíos"></span>
+<h2>Forzar Eliminación para Buckets No vacíos</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>no disponible</p>
+</div>
+</div>
+</div>
+<div id="creating-an-object">&nbsp;</div>
+<span id="s3-c-Crear_un_Object"></span>
+<h2>Crear un Object</h2>
+<div class="solvvy-solution">
+<p>Crea un archivo <code class="docutils literal"><span class="pre">hello.txt</span></code> con la cadena <code class="docutils literal"><span class="pre">"Hello</span> <span class="pre">World!"</span></code></p>
+<div class="preboxcontainer">
+<pre class="prebox">PutObjectRequest request = new PutObjectRequest();
+request.Bucket      = "my-new-bucket";
+request.Key         = "hello.txt";
+request.ContentType = "text/plain";
+request.ContentBody = "Hello World!";
+client.PutObject(request);</pre>
+</div>
+</div>
+<div id="change-an-object-s-acl">&nbsp;</div>
+<span id="s3-c-Cambiar_el_ACL_de_un_Object"></span>
+<h2>Cambiar el ACL de un Object</h2>
+<div class="solvvy-solution">
+<p>Hace al object <code class="docutils literal"><span class="pre">hello.txt</span></code> legíble para el público y <code class="docutils literal"><span class="pre">secret_plans.txt</span></code> que sea privado.</p>
+<div class="preboxcontainer">
+<pre class="prebox">SetACLRequest request = new SetACLRequest();
+request.BucketName = "my-new-bucket";
+request.Key        = "hello.txt";
+request.CannedACL  = S3CannedACL.PublicRead;
+client.SetACL(request);
+
+SetACLRequest request2 = new SetACLRequest();
+request2.BucketName = "my-new-bucket";
+request2.Key        = "secret_plans.txt";
+request2.CannedACL  = S3CannedACL.Private;
+client.SetACL(request2);</pre>
+</div>
+</div>
+<div id="download-an-object-to-a-file">&nbsp;</div>
+<span id="s3-c-Descarga_un_Object"></span>
+<h2>Descargar un Object (a un archivo)</h2>
+<div class="solvvy-solution">
+<p>Descarga el object <code class="docutils literal"><span class="pre">perl_poetry.pdf</span></code> y lo guarda en <code class="docutils literal"><span class="pre">C:\Users\larry\Documents.</span></code></p>
+<div class="preboxcontainer">
+<pre class="prebox">GetObjectRequest request = new GetObjectRequest();
+request.BucketName = "my-new-bucket";
+request.Key        = "perl_poetry.pdf"
+GetObjectResponse response = client.GetObject(request);
+response.WriteResponseStreamToFile("C:\\Users\\larry\\Documents\\perl_poetry.pdf");</pre>
+</div>
+</div>
+<div id="delete-an-object">&nbsp;</div>
+<span id="s3-c-Eliminar_un_Object"></span>
+<h2>Eliminar un Object</h2>
+<div class="solvvy-solution">
+<p>Elimina el object <code class="docutils literal"><span class="pre">goodbye.txt.</span></code></p>
+<div class="preboxcontainer">
+<pre class="prebox">DeleteObjectRequest request = new DeleteObjectRequest();
+request.BucketName = "my-new-bucket";
+request.Key        = "goodbye.txt";
+client.DeleteObject(request);</pre>
+</div>
+</div>
+<div id="generate-object-download-urls-signed-and-unsigned">&nbsp;</div>
+<span id="s3-c-Generar_URL_de_Descarga_de_un_Object"></span>
+<h2>Generar URL de Descarga de un Object (firmado y sin firmar)</h2>
+<div class="solvvy-solution">
+<p>Esto genera una URL de descarga sin firmar para <code class="docutils literal"><span class="pre">hello.txt</span></code>. Esto funciona por que <code class="docutils literal"><span class="pre">hello.txt</span></code> fue hecho público por la confuguración de ACL de arriba. Esto entonces genera una URL de descarga firmada para <code class="docutils literal"><span class="pre">secret_plans.txt</span></code> que funcionará por 1 hora. URL de descarga funcionarán por el periodo de tiempo aún si el object es privado (cuando el periodo se acaba, la URL dejará de funcionar).</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>La biblioteca C# S3 no tiene un método para generar URL sin firmar, por lo que el siguiente ejemplo solo muestra la generación de URL firmadas.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">GetPreSignedUrlRequest request = new GetPreSignedUrlRequest();
+request.BucketName = "my-bucket-name";
+request.Key        = "secret_plans.txt";
+request.Expires    = DateTime.Now.AddHours(1);
+request.Protocol   = Protocol.HTTP;
+string url = client.GetPreSignedURL(request);
+Console.WriteLine(url);</pre>
+</div>
+<p>La salida de esto se verá más o menos así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">https://objects-us-east-1.dream.io/my-bucket-name/secret_plans.txt?Signature=XXXXXXXXXXXXXXXXXXXXXXXXXXX&amp;Expires=1316027075&amp;AWSAccessKeyId=XXXXXXXXXXXXXXXXXXX</pre>
+</div>
+</div>
+<div class="footer">&nbsp;</div>
+<!--DreamObjects Button-->
+<div class="dream-sign-up">
+<h2>¡Empieza a Almacenar Tus Datos Hoy!</h2>
+<div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/storage/">Suscríbete a DreamObjects</a></div>
+</div>
+</div>
+</div>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 505px; top: 3270.76px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>

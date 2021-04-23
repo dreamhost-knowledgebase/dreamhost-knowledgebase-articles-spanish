@@ -1,0 +1,252 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="mysql-api-commands" class="solvvy-hidden">
+<div class="altTitle">API de MySQL</div>
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#mysql-list_dbs">mysql-list_dbs</a></li>
+<li><a class="reference internal" href="#mysql-list_hostnames">mysql-list_hostnames</a></li>
+<li><a class="reference internal" href="#mysql-add_hostname">mysql-add_hostname</a></li>
+<li><a class="reference internal" href="#mysql-remove_hostname">mysql-remove_hostname</a></li>
+<li><a class="reference internal" href="#mysql-list_users">mysql-list_users</a></li>
+<li><a class="reference internal" href="#mysql-add_user">mysql-add_user</a></li>
+<li><a class="reference internal" href="#mysql-remove_user">mysql-remove_user</a></li>
+<li><a class="Ver también" href="#Ver_también">Ver también</a></li>
+</ul>
+</div>
+</div>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si ves que alguna de las instrucciones de este artículo no funciona como se esperaba, es posible que esté desactualizada. En caso de duda, por favor comunícate con soporte para obtener más ayuda.</p>
+</div>
+</div>
+<p>El módulo <strong>mysql</strong> de API te permite administrar bases de datos y usuarios.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>No es posible crear una base de datos usando API. Las bases de datos solo se pueden crear desde el <a href="https://panel.dreamhost.com">panel de DreamHost</a>.</p>
+</div>
+</div>
+<h2>Comandos</h2>
+<span id="mysql-list_dbs"></span>
+<div class="solvvy-solution">
+<h3>mysql-list_dbs</h3>
+<p>Descarga una lista de todas las bases de datos activas en todas las cuentas a las que tienes acceso.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comandos</strong></td>
+<td>mysql-list_dbs</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />account_id db description home disk_usage_mb<br />1234 yourdb_db1 Database 1 haass.tuna.dreamhost.com 0.0078125<br />1234 betterdb2435 This one's better haass.tuna.dreamhost.com 0.0078125</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<span id="mysql-list_hostnames"></span>
+<h3>mysql-list_hostnames</h3>
+<p>Descarga una lista de todos los nombres de host de base de datos activos y los servidores de base de datos a los que hacen referencia para todas las cuentas a las que tienes acceso.</p>
+<table>
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>mysql-list_hostnames</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />account_id domain home<br />1234 mysql.site.dreamhosters.com haass.tuna.dreamhost.com<br />1234 mysql2.site.dreamhosters.com haass.tuna.dreamhost.com</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<span id="mysql-add_hostname"></span>
+<h3>mysql-add_hostname</h3>
+<p>Agrega un hostname de la base de datos.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>mysql-add_hostname</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p><strong>hostname</strong>&nbsp;: El hostname completo que deseas utilizar como hostname de la base de datos. A menos que el dominio siga al primero. está alojado con DreamHost, no podrás acceder a phpMyAdmin desde este nombre de host.</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />hostname_added</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>no_hostname<br />invalid_domain<br />taken_subdomain<br />internal_error_adding_hostname<br />internal_error_could_not_load_domain</p>
+</td>
+</tr>
+</tbody>
+</table>
+<span id="mysql-remove_hostname"></span>
+<h3>mysql-remove_hostname</h3>
+<p>Elimina un hostname de la base de datos.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>mysql-remove_hostname</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p><strong>hostname</strong>&nbsp;: El hostname completo que deseas utilizar como hostname de la base de datos.</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />hostname_removed</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>no_hostname<br />invalid_hostname<br />internal_error_removing_hostname</p>
+</td>
+</tr>
+</tbody>
+</table>
+<span id="mysql-list_users"></span>
+<h3>mysql-list_users</h3>
+<p>Descarga una lista de usuarios de la base de datos y sus privilegios para todas las bases de datos en todas las cuentas a las que tienes acceso.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>mysql-list_users</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />account_id db home username host select_priv insert_priv update_priv delete_priv create_priv drop_priv index_priv alter_priv<br />1234 yourdb_db1 haass.tuna.dreamhost.com randomuser1 Y Y Y Y Y Y Y Y<br />1234 betterdb2435 haass.tuna.dreamhost.com randomuser2 Y Y Y Y Y Y Y Y</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p><strong>*_priv</strong> : Y o N</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<span id="mysql-add_user"></span>
+<h3>mysql-add_user</h3>
+<p>Agrega un nuevo usuario de la base de datos a una base de datos.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>mysql-add_user</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p><br /><strong>db</strong>: La base de datos a la que se debe agregar el usuario.<br /><strong>user</strong>: El nombre de usuario del nuevo usuario.<br /><strong>password</strong>: La contraseña del nuevo usuario.<br /><strong>select</strong>: Y o N (opcional, por defecto es Y).<br /><strong>insert</strong>: Y o N (opcional, por defecto es Y).<br /><strong>update</strong>: Y o N (opcional, por defecto es Y).<br /><strong>delete</strong>: Y o N (opcional, por defecto es Y).<br /><strong>create</strong>: Y o N (opcional, por defecto es Y).<br /><strong>drop</strong>: Y o N (opcional, por defecto es Y).<br /><strong>index</strong>: Y o N (opcional, por defecto es Y).<br /><strong>alter</strong>: Y o N (opcional, por defecto es Y).<br /><strong>hostnames</strong>: Una lista de hosts separados por líneas nuevas en los que % es un wildcard. De esta lista, el usuario puede acceder a las bases de datos (opcional, por defecto es %.dreamhost.com).</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />user_added</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>no_db<br />no_such_db<br />no_user<br />invalid_user: reason<br />user_exists<br />user_not_lowercase<br />user_already_on_db<br />no_password<br />invalid_password: reason<br />invalid_select<br />invalid_insert<br />invalid_update<br />invalid_delete<br />invalid_create<br />invalid_drop<br />invalid_index<br />invalid_alter<br />internal_error_could_not_load_db<br />internal_error_adding_user</p>
+</td>
+</tr>
+</tbody>
+</table>
+<span id="mysql-remove_user"></span>
+<h3>mysql-remove_user</h3>
+<p>Eliminar una base de datos de una base de datos.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>mysql-remove_user</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p><strong>db</strong>: La base de datos de la cual el usuario debería ser eliminado.<br /><strong>user</strong>: El usuario para el nuevo usuario.<br /><strong>select</strong>: Y o N<br /><strong>insert</strong>: Y o N<br /><strong>update</strong>: Y o N<br /><strong>delete</strong>: Y o N<br /><strong>create</strong>: Y o N<br /><strong>drop</strong>: Y o N<br /><strong>index</strong>: Y o N<br /><strong>alter</strong>: Y o N</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />user_removed</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>no_db<br />no_such_db<br />no_user<br />no_such_user<br />no_select<br />invalid_select<br />no_insert<br />invalid_insert<br />no_update<br />invalid_update<br />no_delete<br />invalid_delete<br />no_create<br />invalid_create<br />no_drop<br />invalid_drop<br />no_index<br />invalid_index<br />no_alter<br />invalid_alter<br />internal_error_removing_user</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2><span id="Ver_también">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217560167-Generalidades-de-la-interfaz-de-programaci%C3%B3n-de-aplicaciones-API-" target="_self" rel="undefined">Generalidades de la interfaz de programación de aplicaciones</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>

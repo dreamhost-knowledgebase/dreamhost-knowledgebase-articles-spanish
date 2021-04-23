@@ -1,0 +1,45 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cuando usas la <a href="https://help.dreamhost.com/hc/es/articles/216511617-Como-lanzar-una-instancia-usando-el-CLI-de-OpenStack" target="_self" rel="undefined">línea de comando Openstack para crear una instancia</a>, puedes proporcionar un archivo de datos de usuario durante el arranque para configurar tu instancia. Esto te permite establecer variables del sistema o instalar paquetes durante el arranque.</p>
+<p>Esto es posible debido a un <a class="reference external" href="https://help.ubuntu.com/community/CloudInit">cloud-init</a> el cual está instalado en varios sistemas Linux de forma predeterminada. Esta descripción es del sitio web de cloud-init:</p>
+<dl>
+<dd>"cloud-init es el paquete de Ubuntu que maneja la inicialización temprana de una instancia en la nube. Está instalado en las imágenes de la nube de Ubuntu y también en las imágenes oficiales de Ubuntu disponibles en EC2."</dd>
+</dl>
+</div>
+<h2>¿Qué es un archivo de datos de usuario?</h2>
+<div class="solvvy-solution">
+<p>Un archivo de datos de usuario es un archivo de texto que puedes incluir al correr el comando <span class="code">OpenStack server create</span>. Este archivo se usa para personalizar tu instancia durante el arranque. Mira la siguiente página para obtener una lista de 'Formatos de entrada de datos de usuario'.</p>
+<ul>
+<li><a href="https://help.ubuntu.com/community/CloudInit">https://help.ubuntu.com/community/CloudInit&nbsp;</a></li>
+</ul>
+<p>Puedes colocar datos en un archivo local y pasarlos usando el parámetro <span class="code">--user-data &lt;user-data-file&gt;</span> en la creación de la instancia. Esto muestra como pasar un archivo llamado <span class="text-object">my-script.sh</span> a una imagen Ubuntu-16.04.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server create --flavor 300 \
+                        --image 23f77038-51dc-40f3-8714-50612b0efb24 \
+                        --key-name myKey \
+                        --security-group 29afef85-b89f-43a0-babf-6a5bb5cc7bed \
+                        --user-data my-script.sh \
+                        myNewServer</span></pre>
+</div>
+</div>
+<h2>Ejemplo de script de shell</h2>
+<div class="solvvy-solution">
+<p>Este sencillo ejemplo muestra cómo instalar pip3 durante la creación de la instancia.</p>
+<div class="preboxcontainer">
+<pre class="prebox">#!/bin/sh
+
+# Example script to run at boot
+# This installs pip3
+apt update
+apt -y install python3-pip
+pip3 install --upgrade pip</pre>
+</div>
+<p>Ahora, cuando inicies sesión en la instancia, pip3 ya está instalado.</p>
+<!--DreamCompute Button--></div>
+<div class="dream-sign-up">
+<h2>¡Desarrolla Tus Aplicaciones en Servidores en la Nube Hoy!</h2>
+<div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Suscríbete a DreamCompute</a></div>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 349px; top: 102.065px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>

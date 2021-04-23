@@ -1,0 +1,57 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cuando ya no necesites una instancia, puedes eliminarla usando el <a href="https://help.dreamhost.com/hc/es/articles/235817468-Introducci%C3%B3n-al-cliente-de-l%C3%ADnea-de-comandos-de-OpenStack" target="_self" rel="undefined">cliente de linea de comandos de OpenStack</a> o dentro del panel de DreamCompute.</p>
+</div>
+<h2><span id="dashboard_examples">Eliminar desde el panel</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener">DreamCompute</a> e inicia sesión en tu panel de DreamCompute.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-pause-suspend-stop-and-start-an-instance_01.png" alt="" /></dd>
+</dl>
+</li>
+<li>En la izquierda superior, haz clic en la pestaña <span class="text-object">Compute</span>.</li>
+<li>En la lista expandida, haz clic en <span class="text-object">Instances</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-delete-a-dreamcompute-instance_01.png" alt="" /></dd>
+</dl>
+</li>
+<li>Para eliminar tu instancia, haz clic en el menú desplegable debajo de la columna <span class="text-object">Action</span> junto a tu instancia. En el menú, selecciona <span class="text-object">Delete Instance</span>.</li>
+</ol>
+</div>
+<h2>eliminar usando la línea de comando</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Debes instalar el <a href="https://help.dreamhost.com/hc/es/articles/235817468-Introducci%C3%B3n-al-cliente-de-l%C3%ADnea-de-comandos-de-OpenStack" target="_self" rel="undefined">cliente de línea de comandos de OpenStack</a> para ejecutar los siguientes comandos.</p>
+</div>
+</div>
+<h3>Ver todas las instancias</h3>
+<p>Lista todas las instancias con el comando <span class="code">list</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server list</span>
++-------------+----------------------+--------+------------+-------------+------------------+
+| ID          | Name                 | Status | Task State | Power State | Networks         |
++-------------+----------------------+--------+------------+-------------+------------------+
+| 8a99547e... | myInstanceFromVolume | ACTIVE | None       | Running     | private=10.0.0.4 |
+| d7efd3e4... | newInstance          | ERROR  | None       | NOSTATE     |                  |
++-------------+----------------------+--------+------------+-------------+------------------+
+</pre>
+</div>
+<h3>Eliminar la instancia</h3>
+<p>Ejecuta el <a href="https://docs.openstack.org/python-openstackclient/pike/cli/command-objects/server.html#server-delete">comando <span class="code">delete</span></a> para eliminar la instancia. El siguiente ejemplo elimina la instancia de <span class="text-object">newInstance</span> que está en estado ERROR:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server delete <span class="code-highlight">newInstance</span></span></pre>
+</div>
+<p>El comando no te notifica que tu instancia fue eliminada, pero puedes agregar el parámetro <span class="code">--wait</span> para evitar que se realicen más acciones en la instancia mientras se elimina.</p>
+<h3>Verifica que fue eliminada</h3>
+<p>Para verificar que la instancia fue eliminada, ejecuta el comando <span class="code">list</span> como se muestra arriba, o actualiza la página <span class="text-object">Compute &gt; Instances</span> del panel de DreamCompute. La instancia ya no debería aparecer en la lista.</p>
+<!--DreamCompute Button--></div>
+<div class="dream-sign-up">
+<h2>Implementa Tus Aplicaciones En Servidores en la Nube Hoy</h2>
+<div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Suscríbete a DreamCompute</a></div>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 81px; top: 1712.39px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>

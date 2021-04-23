@@ -1,0 +1,109 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="Service control API commands" class="solvvy-hidden">
+<div class="altTitle">API de control de servicios</div>
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#services-progress">services-progress</a></li>
+<li><a class="reference internal" href="#services-flvencoder">services-flvencoder</a></li>
+<li><a class="Ver también" href="#Ver_también">Ver también</a></li>
+</ul>
+</div>
+</div>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si ves que alguna de las instrucciones de este artículo no funciona como se esperaba, es posible que esté desactualizada. En caso de duda, por favor comunícate con el soporte para obtener más ayuda.</p>
+</div>
+</div>
+<p>Cualquier cambio a tu cuenta que requiera tiempo para configuarse, se corre como un servicio, El API de <strong>services</strong> te permite ver el estado de esos servicios. Cuando un comando API necesita correr un servicio, retorna un <em>token</em> único para intentificar el servicio.</p>
+</div>
+<h2>Comandos relacionados</h2>
+<div class="solvvy-solution">
+<p>Los siguientes comandos devuelven un "token" en caso de éxito, que se puede usar para verificar el estado:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217078088-Comandos-Jabber-de-API" target="_self" rel="undefined">jabber-add_user</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217078088-Comandos-Jabber-de-API" target="_self" rel="undefined">jabber-remove_user</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217078088-Comandos-Jabber-de-API" target="_self" rel="undefined">jabber-reactivate_user</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217078088-Comandos-Jabber-de-API" target="_self" rel="undefined">jabber-deactivate_user</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217078398-Comandos-de-usuario-de-API" target="_self" rel="undefined">user-add_user</a></li>
+<li><a class="reference internal" href="#services-flvencoder">services-flvencoder</a></li>
+</ul>
+</div>
+<h2>Comandos</h2>
+<div class="solvvy-solution">
+<h3><span id="services-progress">services-progress</span></h3>
+<p>Usa este comando para obtener un informe de estado del trabajo que se está programando. Si el token es para un servicio que se completó hace más de varios días, puede devolver el error 'too_old'.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>services-progress</td>
+</tr>
+<tr>
+<td><strong>Valor requerido</strong></td>
+<td>
+<p>token</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />status scheduled executed finished<br />success 2010-01-15 14:47:05 2010-01-15 14:47:16 2010-01-15 14:47:17</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>invalid_token<br />too_old</p>
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>scheduled</strong> es el momento en el que este comando fue agregado a la cola del servicio.</li>
+<li><strong>executed</strong> es el momento en el que el comando empezó a correr</li>
+<li><strong>finished</strong> es el momento en el que el comando terminó.</li>
+<li><strong>status</strong> puede ser:</li>
+<ul>
+<li>"waiting": este comando está programado para correrse y actualmente está esperando su turno para ejecutarse.</li>
+<li>"running": este comando se está corriendo actualmente.</li>
+<li>"success": este comando se completó con éxito.</li>
+<li>"failure": este comando se completó sin éxito.</li>
+</ul>
+</ul>
+<h3><span id="services-flvencoder">services-flvencoder</span></h3>
+<p>Inicia el conversor de Flash Video en un video especificado por una URL.</p>
+<table class="wikitable" style="height: 215px;">
+<tbody>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 135px;"><strong>Comando</strong></td>
+<td style="height: 21px; width: 542.5px;">services-flvencoder</td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 135px;"><strong>Valor requerido</strong></td>
+<td style="height: 21px; width: 542.5px;">
+<p>url (URL completa de un vídeo o directorio a convertir).</p>
+</td>
+</tr>
+<tr style="height: 173px;">
+<td style="height: 173px; width: 135px;"><strong>Valores opcionales</strong></td>
+<td style="height: 173px; width: 542.5px;">
+<p>dim (tamaño del vídeo en formato "400x300").<br />snap (número de seguntos dentro del vídeo para generar una vista previa).<br />ab (tasa de bits de audio).<br />ar (frecuencia de muestreo de audio).<br />batch (establecer si pasa una ruta a un directorio para convertir todos los archivos).<br />quiet (solo envía un correo para una conversión por lotes).<br />noemail (no envía correos).</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Devuelve un token de cola de servicio, se puede usar con services-progress.</p>
+</div>
+<h2><span id="Ver_también">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217560167-Generalidades-de-la-interfaz-de-programaci%C3%B3n-de-aplicaciones-API-" target="_self" rel="undefined">Generalidades de la interfaz de programación de aplicaciones</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>

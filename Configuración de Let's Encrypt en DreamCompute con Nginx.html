@@ -1,0 +1,57 @@
+<h2>¿Qué es Let’s Encrypt?</h2>
+<div class="solvvy-solution">
+<p><a class="reference external" href="https://letsencrypt.org">Let’s Encrypt</a> es una nueva autoridad de certificación que proporciona certificados seguros gratuitos para ayudar a que Internet sea 100% <span class="text-object">HTTPS</span>. Ve el siguiente enlace para obtener más información sobre Let's Encrypt.</p>
+<ul>
+<li><a href="https://letsencrypt.org/" target="_blank" rel="noopener">https://letsencrypt.org</a></li>
+</ul>
+<p>DreamHost ha integrado el soporte de Let's Encrypt en el <a href="https://panel.dreamhost.com">panel</a> para los servicios alojados, pero si deseas configurar certificados de renovación automática para los dominios que alojas en una instancia de DreamCompute, deberás realizar un poco de instalación manual. Pero la buena noticia es que no tarda mucho y, una vez que finaliza la configuración, ¡no deberías tener que preocuparte nunca más por renovar un certificado!.</p>
+</div>
+<h2>Obtener el código</h2>
+<div class="solvvy-solution">
+<p>Primero, <a href="https://help.dreamhost.com/hc/es/articles/216201547-Generalidades-sobre-la-conexi%C3%B3n-a-tu-instancia-con-las-claves-SSH" target="_self" rel="undefined">inicia sesión en tu instancia de DreamCompute</a>. No debería importar demasiado qué distribución de Linux estés corriendo, pero asegúrate de tener el paquete <code class="docutils literal"><span class="pre">git</span></code> instalado para que puedas clonar el repositorio de Let's Encrypt, así:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo -s</span>
+<span class="server">[root@instance]# </span><span class="command">cd /opt</span>
+<span class="server">[root@instance]# </span><span class="command">git clone git://github.com/certbot/certbot</span></pre>
+</div>
+</div>
+<h2>Obtener tu primer certificado</h2>
+<div class="solvvy-solution">
+<p>Antes de hacer esto, deberás asegurarte de que tu dominio esté realmente apuntando a la dirección IP de tu instancia de DreamCompute y que tu servidor web esté configurado para responder a las solicitudes de tu nombre de dominio. Esto es necesario porque "Let's Encrypt" realiza comprobaciones para asegurarse de que tu controlas los nombres de dominio para los que solicita certificados. Si aún no lo has hecho, consulta el artículo de DreamHost a continuación para obtener ayuda.</p>
+<ul>
+<li><a class="reference external" href="https://help.dreamhost.com/hc/es/articles/218672058-Configurar-el-DNS-de-tus-dominios" target="_self" rel="undefined">Configurar el DNS para tus dominios</a></li>
+</ul>
+<p>Digamos que tienes <strong>example.com</strong> configurado con un registro DNS A que apunta a la dirección IP de tu instancia, y tienes nginx configurado correctamente para responder a las solicitudes de <strong>example.com</strong>. (La configuración de tu servidor web está fuera del alcance de esta guía, pero hay <a class="reference external" href="https://www.nginx.com/resources/wiki/start/">una variedad de tutoriales</a> allá afuera).</p>
+<p>Si no estás usando <code class="docutils literal"><span class="pre">nginx</span></code> en una instancia Debian o Ubuntu, puedes usar el complemento nginx para certbot-auto como se muestra a continuación.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]$ </span><span class="command">/opt/certbot/certbot-auto --nginx -d <span class="code-highlight">example.com</span></span></pre>
+</div>
+<p>Esto te pedirá cierta información, incluida tu dirección de correo. Lénalo con información válida y deberías obtener un nuevo certificado. Ni siquiera deberías necesitar reiniciar tu servidor web o modificar un archivo de configuración, ya que el complemento nginx para certbot-auto fue diseñado para manejar eso por ti.</p>
+<p><span style="font-size: 1.5em;">Agregar un subdominio a un certificado existente</span></p>
+</div>
+<div class="solvvy-solution">
+<p>Si después de correr ese script te das cuenta de que también necesitas un certificado para un subdominio relacionado, puedes correr el comando certbot-auto nuevamente con parámetros adicionales.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[root@instance]$ </span><span class="command">/opt/certbot/certbot-auto --nginx -d <span class="code-highlight">example.com</span> -d <span class="code-highlight">sub.example.com</span></span></pre>
+</div>
+</div>
+<h2>Renovación Automática</h2>
+<div class="solvvy-solution">
+<p>Puedes hacer que tu sistema renueve automáticamente todos los certificados por ti usando un pequeño script de shell que se ve así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">#!/bin/bash 
+
+/opt/certbot/certbot-auto renew</pre>
+</div>
+<p>Si guardas ese script en el <span class="text-object">/usr/local/bin</span> directorio como algo así <span class="text-object">update_certs</span>, puedes programar el script para que se corra una vez a la semana con cron así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">30 0 * * 0 /usr/local/bin/update_certs</pre>
+</div>
+<p>Ahora, tu sistema intenta renovar todos tus certificados una vez a la semana. Si no hay certificados en peligro de caducar pronto, no pasa nada malo. Pero si alguno hubiera expirado, entonces se renueva automáticamente.</p>
+</div>
+<div class="footer">&nbsp;</div>
+<!--DreamCompute Button-->
+<div class="dream-sign-up">
+<h2>¡Desarrolla Tus Aplicaciones en Servidores en la Nube Hoy!</h2>
+<div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Suscríbete a DreamCompute</a></div>
+</div>

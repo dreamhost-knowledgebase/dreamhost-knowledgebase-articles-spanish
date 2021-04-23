@@ -1,0 +1,288 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo trata sobre el registro SPF predeterminado de DreamHost y cómo puedes ajustarlo..</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si no estás usando los <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers">nameservers</a> de DreamHost, debes configurar los registros SPF con el proveedor DNS de correo actual.</p>
+</div>
+</div>
+</div>
+<h2>¿Necesito agregar el registro SPF manualmente?</h2>
+<div class="solvvy-solution">
+<p>DreamHost agrega automáticamente los registros SPF de DreamHost a tu sitio. Solo necesitas agregar manualmente un registro SPF si también estás enviando un correo a través de un tercero. Por ejemplo, también puedes enviar correo a través de Google o Mailchimp. Si estás enviando correo a través de servicios como esos y también estás enviando correo desde DreamHost, deberás agregar un registro SPF personalizado que contenga ambos servidores de correo.</p>
+<p>Revisa el siguiente artículo para más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216107737-Generalidades-sobre-SPF#Registros_SPF_de_DreamHost">Generalidades sobre SPF</a></li>
+</ul>
+</div>
+<h2>Agregar un registro SPF</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Solo puedes tener un único registro SPF. Si necesitas enviar desde múltiples servidores, asegúrate de combinarlos todos dentro del mismo registro SPF.</p>
+</div>
+</div>
+<p>El siguiente ejemplo supone que estás enviando un correo desde Google y DreamHost, donde se agregan el registro personalizado de Google Y el SPF de DreamHost.</p>
+<div class="preboxcontainer">
+<pre class="prebox">v=spf1 mx include:netblocks.dreamhost.com include:relay.mailchannels.net -all</pre>
+</div>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a>&nbsp;.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/01_SPF.fw.png" alt="01 SPF.fw.png" /></dd>
+</dl>
+</li>
+<li>Haz clic en el enlace <span class="text-link">DNS</span> que está debajo del dominio.
+<dl>
+<dd><em>Se abre la página <span class="panel-page">Manage Domains</span> para este dominio.</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/02_DNS_edit_screen.fw.png" alt="02 DNS edit screen.fw.png" /></dd>
+<dd><em>Descripción de los campos:</em></dd>
+</dl>
+<ul>
+<li><strong>Name</strong> (nombre): Este espacio está designado para el subdominio. Si se aplica al dominio principal, deja este campo en blanco.</li>
+<li><strong>Type</strong> (tipo): En el menú desplegable, selecciona TXT.</li>
+<li><strong>Value </strong>(valor): Ingresa el registro SPF.</li>
+<li><strong>Comment </strong>(comentario): Este campo es opcional. Puedes incluir 'SPF' aquí si lo deseas o puedes dejarlo en blanco.</li>
+</ul>
+</li>
+<li>Haz clic en el botón <strong>Add Record Now!</strong> para guardar el registro.</li>
+</ol>
+<p>Después de guardar el registro, espera alrededor de 6 horas para que el registro DNS se <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS">propague</a>.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>Ten en cuenta que el registro SPF trata los subdominios (como <strong>sub.example.com</strong>) por separado, por lo que es posible que quieras especificar registros SPF tanto para <strong>example.com</strong> como para cualquier host como <strong>tuhost.example.com</strong>. Consulta las preguntas frecuentes sobre SPF en subdominios para obtener más información.</li>
+<li>Wildcard para registros TXT no son compatibles con DreamHost. Esto generalmente no se aconseja, como se indica en el siguiente artículo: <a href="https://tools.ietf.org/html/rfc4408#section-3.1.5">RFC 4408 §3.1.5</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+<h2><span id="SPF_Avanzado">SPF Avanzado</span></h2>
+<div class="solvvy-solution">
+<p>Un registro SPF avanzado incluye más que solo los servidores de correo predeterminados: también tiene información sobre todos los demás servidores que envían correo para el dominio. El siguiente es un ejemplo de un registro SPF avanzado:</p>
+<div class="preboxcontainer">
+<pre class="prebox">v=spf1 <span style="color: red;">ip4:321.321.321.321</span> <span style="color: blue;">include:_spf.google.com</span> <span style="color: green;">include:shaw.ca</span> <span style="color: brown;">mx</span> ~<span style="color: purple;">all</span>
+</pre>
+</div>
+<table class="wikitable">
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Indicador</th>
+<th bgcolor="#F2F2F2">Descripción</th>
+</tr>
+<tr>
+<td style="width: 25%;">
+<dl>
+<dd>v=spf1</dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>Identifica este registro DNS como un registro SPF versión 1.</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td>
+<dl>
+<dd><span style="color: red;">ip4:321.321.321.321</span></dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>Dirección IP de un servidor específico, por ejemplo tu servidor web para secuencias de comandos que envían correo directamente desde ese servidor. Puedes obtener la IP de tu servidor web desde la página <span class="panel-page">Administrar Dominios</span>. Mira el <a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">artículo de DNS</a> para más detalles.</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td>
+<dl>
+<dd><span style="color: blue;">include:_spf.google.com</span></dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>Incluye todos los registros SPF de Google, que en este ejemplo, es donde se aloja el servicio de correo del dominio.</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td>
+<dl>
+<dd><span style="color: green;">include:shaw.ca</span></dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>Incluye todos los registros SPF para Shaw Cable en Canadá, un proveedor de servicios de internet. En este ejemplo, el correo del dominio a veces se envía a través del servidor SMTP del proveedor de servicios de internet.</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td>
+<dl>
+<dd><span style="color: brown;">mx</span></dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>Incluye todos los servidores MX que usa el dominio, enumerados en los registros MX DNS del dominio.</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td>
+<dl>
+<dd><span style="color: purple;">-all</span></dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>Dice que todos los demás servidores no están autorizados y que solo se 'pasará' el correo enviado desde los servidores enumerados.</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<dl>
+<dt>
+<h3>?all (signo de interrogación), -all (guión), o ~all (virgulilla)</h3>
+</dt>
+</dl>
+<p>El <a href="https://en.wikipedia.org/wiki/Sender_Policy_Framework">símbolo</a> antes de "all" (todos) indica cuán estricto es el modo en el que el registro SPF que se está aplicando.</p>
+<ul>
+<li>?, el signo de interrogación hace que todo el registro esté inactivo, como si el dominio no tuviera ningún registro SPF.</li>
+<li>-, guión, hace que el registro sea estricto, y cualquier correo de los servidores que no figuran en la lista se marcará como "fallido" y puede marcarse como spam o rechazado por completo.</li>
+<li>~, virgulilla, está entre las otras dos opciones en rigor. Cualquier correo de servidores que no figuran en la lista se marcará "softfail" (significa que la dirección IP puede o no estar autorizada para enviar desde el dominio). Si bien está destinado a las pruebas, se recomienda su uso para evitar problemas de entrega como se indica en <a href="https://support.google.com/a/answer/178723?hl=en">este</a> artículo.</li>
+</ul>
+<p>La siguiente tabla muestra información SPF de varios proveedores de correo de uso popular:</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Proveedor</th>
+<th bgcolor="#F2F2F2">Información SPF</th>
+</tr>
+<tr>
+<td style="width: 25%;">
+<dl>
+<dd><a href="https://help.campaignmonitor.com/topic.aspx?t=88">Campaign Monitor</a></dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>include:cmail1.com</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td>
+<dl>
+<dd><a href="https://knowledgebase.constantcontact.com/articles/KnowledgeBase/5865-overview-of-what-is-involved-in-the-authentication-process">Constant Contact</a></dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>include:spf.constantcontact.com</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td>
+<dl>
+<dd>Freshbooks</dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>include:_spf.freshbooks.com</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td>
+<dl>
+<dd><a href="https://support.google.com/a/answer/178723?hl=en">Google</a></dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>include:_spf.google.com</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td>
+<dl>
+<dd>Hostgator</dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>include:websitewelcome.com</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td>
+<dl>
+<dd><a href="https://kb.mailchimp.com/accounts/email-authentication/set-up-custom-domain-authentication-dkim-and-spf">MailChimp</a></dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>include:servers.mcsv.net</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td>
+<dl>
+<dd>Microsoft/Hotmail</dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>N/A (uses SenderID)</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td>
+<dl>
+<dd>Shaw Communications Ltd.</dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>include:shaw.ca</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td>
+<dl>
+<dd>Telus</dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>include:telus.net</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/216107737-Generalidades-sobre-SPF">Generalidades sobre SPF</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214694348-Registros-DNS-b%C3%A1sicos">Registros DNS básicos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS">Generalidades de la propagación de DNS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">Generalidades de los DNS de DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215414867--C%C3%B3mo-agrego-registros-DNS-personalizados-">¿Cómo agregar registros DNS personalizados?</a></li>
+</ul>
+</div>

@@ -5,8 +5,8 @@
 </div>
 <p>El siguiente es un procedimiento rápido para establecer una aplicación FCGI simple que ejecute Python.</p>
 <ol>
-<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a>.</li>
-<li>Haz clic en el enlace <span class="text-link">Edit</span> debajo del dominio que deseas editar y desplázate hacia abajo hasta la sección <span class="text-section">Web Options</span>.</li>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>.</li>
+<li>Haz clic en el enlace <span class="text-link">Editar</span> debajo del dominio que deseas editar y desplázate hacia abajo hasta la sección <span class="text-section">Web Options</span>.</li>
 <li>Habilita tu dominio para soporte FastCGI.</li>
 <li>Descarga fcgi.py, y guárdalo en tu PYTHONPATH.</li>
 <li>Crea tu controlador de página predeterminado, <span class="text-object">dispatch.fcgi</span>:
@@ -54,7 +54,7 @@ RewriteRule ^(.*)$ dispatch.fcgi/$1 [L]</pre>
 <ol>
 <li>Descarga Virtual Python:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget http://peak.telecommunity.com/dist/virtual-python.py</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://peak.telecommunity.com/dist/virtual-python.py</span>
 </pre>
 </div>
 <div class="alert alert-note">
@@ -86,7 +86,7 @@ export PATH="$HOME/packages/bin:$PATH"</pre>
 </li>
 <li>Alternativamente, instala <span class="text-object">easy_install</span>:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget http://peak.telecommunity.com/dist/ez_setup.py</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://peak.telecommunity.com/dist/ez_setup.py</span>
 <span class="server">[server]$ </span><span class="command">python ez_setup.py</span>
 </pre>
 </div>
@@ -100,7 +100,7 @@ export PATH="$HOME/packages/bin:$PATH"</pre>
 </div>
 </li>
 <li>Para probar la instalación virtual de python y fcgi, sigue las instrucciones del artículo de <a href="https://help.dreamhost.com/hc/es/articles/215319598-Generalidades-sobre-Django">Django</a>.</li>
-<li>Guarda el siguiente código en un archivo llamado dispatch.fcgi en ~/example.com:
+<li>Guarda el siguiente código en un archivo llamado <span class="text-object">dispatch.fcgi</span> en <span class="text-object">~/example.com</span>:
 <div class="preboxcontainer">
 <pre class="prebox">#!/home/my-username/packages/bin/python
 from fcgi import WSGIServer
@@ -126,7 +126,7 @@ RewriteRule ^dispatch\.fcgi/ - [L]
 RewriteRule ^(.*)$ dispatch.fcgi/$1 [L]</pre>
 </div>
 </li>
-<li>Espera unos minutos y luego prueba http://www.example.com/dispatch.fcgi.</li>
+<li>Espera unos minutos y luego prueba <strong>https://www.example.com/dispatch.fcgi</strong>.</li>
 </ol>
 </div>
 <h2>Usar Flup</h2>
@@ -138,7 +138,7 @@ RewriteRule ^(.*)$ dispatch.fcgi/$1 [L]</pre>
 </div>
 <p>Si planeas usar una versión de Python 3 instalada localmente, usa la versión de Flup que sea compatible con Python 3. Simplemente usa Mercurial para buscar la fuente:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">hg clone http://hg.saddi.com/flup-py3.0
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">hg clone https://hg.saddi.com/flup-py3.0
 cd flup-py3.0
 # make sure setup.py is executed by your local version of Python
 python setup.py install</span>

@@ -12,7 +12,7 @@
 </div>
 <h2>¿Que cambiar en los ejemplos de abajo?</h2>
 <div class="solvvy-solution">
-<p>Los ejemplos a continuación pueden ser ingresados dentro de tu archivo de .htaccess como se muestran. Solo asegurate de ajustar el camino al archivo para que el .htaccess sepa donde está localizado. También, si ves el dominio “ejemplo.com” cambialo por tu nombre de dominio.</p>
+<p>Los ejemplos a continuación pueden ser ingresados dentro de tu archivo de .htaccess como se muestran. Solo asegurate de ajustar el camino al archivo para que el .htaccess sepa donde está localizado. También, si ves el dominio <strong>example.com</strong> cambialo por tu nombre de dominio.</p>
 </div>
 <h2><span id="todas">Redireccionar todas las URL</span></h2>
 <div class="solvvy-solution">
@@ -30,10 +30,10 @@
 </div>
 <p><strong>Redireccionar a un archivo de un sitio externo</strong></p>
 <div class="preboxcontainer">
-<pre class="prebox">Redirect /camino/al/viejo/archivo/viejo.html http://www.example.com/nuevo/archivo/nuevo.html</pre>
+<pre class="prebox">Redirect /camino/al/viejo/archivo/viejo.html https://www.example.com/nuevo/archivo/nuevo.html</pre>
 </div>
 <h3>El primer camino</h3>
-<p>El primer camino al viejo archivo tiene que ser un camino local UNIX, NO el camino completo. Entonces, si tu archivo .htaccess está en el directorio <span class="text-object">/example.com</span>, no incluyas <span class="text-object">/home/usuarioejemplo/example.com</span> en el camino local UNIX. El primer <span class="text-object">/</span> representa el directorio <span class="text-object">example.com</span>. Si el archivo viejo estaba en este directorio, seguirás el <span class="text-object">/</span> con el nombre del viejo archivo.</p>
+<p>El primer camino al viejo archivo tiene que ser un camino local UNIX, NO el camino completo. Entonces, si tu archivo .htaccess está en el directorio<span class="text-object">/example.com</span>, no incluyas <span class="text-object">/home/username/example.com</span> en el camino local UNIX. El primer <span class="text-object">/ </span>representa el directorio <span class="text-object">example.com</span>. Si el archivo viejo estaba en este directorio, seguirás el <span class="text-object">/</span> con el nombre del viejo archivo.</p>
 <h3>El segundo camino</h3>
 <p>El segundo camino al nuevo archivo puede ser un camino local UNIX, pero también ser una URL completa enlazada a una página de un servidor diferente o el mismo servidor.</p>
 </div>
@@ -53,28 +53,28 @@
 </div>
 <h3>Redireccionar de un directorio local /privado a otro directorio privado del sitio</h3>
 <div class="preboxcontainer">
-<pre class="prebox">Redirect /private/ http://<span class="code-highlight">www.example.com/private/</span></pre>
+<pre class="prebox">Redirect /private/ https://<span class="code-highlight">www.example.com/private/</span></pre>
 </div>
 <h3>Cargar un archivo .gif de un sitio diferente</h3>
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Asegúrate que el otro sitio sea tuyo. Nunca hagas&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216363197--C%C3%B3mo-evito-el-enlace-directo-de-im%C3%A1genes-" target="_self">enlaces calientes</a>&nbsp;de otros sitios web.</p>
+<p>Asegúrate que el otro sitio sea tuyo. Nunca hagas <a href="https://help.dreamhost.com/hc/es/articles/216363197--C%C3%B3mo-evito-el-enlace-directo-de-im%C3%A1genes-" target="_self">redirecciones (hot links)</a>&nbsp;de otros sitios web.</p>
 </div>
 </div>
 <div class="preboxcontainer">
-<pre class="prebox">Redirect /img/logo.gif http://<span class="code-highlight">www.example.com/images/logo.gif</span>
+<pre class="prebox">Redirect /img/logo.gif https://<span class="code-highlight">www.example.com/images/logo.gif</span>
 </pre>
 </div>
 <h3>Usar Expresiones Regulares</h3>
 <p>Si quieres usar una Expresión Regular para redirigir algo, usa la directríz <span class="code"><a href="https://httpd.apache.org/docs/2.4/mod/mod_alias.html#redirectmatch">RedirectMatch</a></span>:</p>
 <div class="preboxcontainer">
-<pre class="prebox">RedirectMatch "^/oldfile\.html/?$" "http://<span class="code-highlight">example.com/newfile.php</span>"</pre>
+<pre class="prebox">RedirectMatch "^/oldfile\.html/?$" "https://<span class="code-highlight">example.com/newfile.php</span>"</pre>
 </div>
 <h3>Redirigir mensajes de error</h3>
 <p>Puedes también redirigir errores 404. En vez de lanzar una página 404, este redirecciona a la página principal del sitio.</p>
 <div class="preboxcontainer">
-<pre class="prebox">ErrorDocument 404 http://<span class="code-highlight">example.com</span>/</pre>
+<pre class="prebox">ErrorDocument 404 https://<span class="code-highlight">example.com</span>/</pre>
 </div>
 <h3>Redirigir un directorio viejo a un nuevo directorio</h3>
 <p>Estos archivos redirigen de un directorio viejo (<span class="text-object">/blog/archivados</span>) a un nuevo directorio (<span class="text-object">/archivados</span>). Este archivo debe existir en el nuevo directorio para que funcione.</p>
@@ -97,7 +97,7 @@ RewriteRule . /index.php [L]
 </div>
 <h2>Cargar un subdirectorio automáticamente</h2>
 <div class="solvvy-solution">
-<p>Este ejemplo redirige la URL del dominio ROOT a cualquier subdirectorio. En este ejemplo, éste automáticamente carga example.com/subdir1:</p>
+<p>Este ejemplo redirige la URL del dominio ROOT a cualquier subdirectorio. En este ejemplo, éste automáticamente carga <span class="text-object">example.com/subdir1</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine on
 RewriteRule ^$ /subdir1/ [L]
@@ -109,7 +109,7 @@ RewriteRule ^$ /subdir1/ [L]
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
 RewriteCond&nbsp;%{HTTP_HOST} ^<span class="code-highlight">example.com</span>
-RewriteRule (.*) http://<span class="code-highlight">www.example.com</span>/$1 [R=301,L]
+RewriteRule (.*) https://<span class="code-highlight">www.example.com</span>/$1 [R=301,L]
 </pre>
 </div>
 </div>
@@ -118,12 +118,12 @@ RewriteRule (.*) http://<span class="code-highlight">www.example.com</span>/$1 [
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
 RewriteCond&nbsp;%{HTTP_HOST} ^<span class="code-highlight">www.example.com</span>
-RewriteRule (.*) http://<span class="code-highlight">example.com</span>/$1 [R=301,L]</pre>
+RewriteRule (.*) https://<span class="code-highlight">example.com</span>/$1 [R=301,L]</pre>
 </div>
 </div>
 <h2>Sobrescribir una URL</h2>
 <div class="solvvy-solution">
-<p>Este ejemplo sobrescribe una URL a otra URL. Este ejemplo de sobreescritura example.com/1.html a example.com/abc.php?id=1</p>
+<p>Este ejemplo sobrescribe una URL a otra URL. Este ejemplo de sobreescritura <strong>example.com/1.html</strong> a <strong>example.com/abc.php?id=1</strong>.</p>
 <div class="preboxcontainer">
 <pre class="prebox">Options +FollowSymLinks
 RewriteEngine On
@@ -145,7 +145,7 @@ RewriteRule ^<span class="code-highlight">([0-9]+).html /abc.php</span>?id=$1 [Q
 <dd>agrega esto a tu línea de query del script interno, y hará que la última regla sea ejecutada.</dd>
 </dl>
 <p>Después de usar este método, puedes abrir la página con cualquier tipo de dirección. Ésto es útil para retro equipar un sitio web que no fué diseñado con una mentalidad de mod_rewrite. Esto es bueno por que no destruye ningún favorito guardado en los computadores de los usuarios.</p>
-<p>Vé el siguiente link para más información y ejemplos sobre mod_rewrite:</p>
+<p>Vé el siguiente enlace para más información y ejemplos sobre mod_rewrite:</p>
 <ul>
 <li><a href="http://www.cheatography.com/davechild/cheat-sheets/mod-rewrite/" target="_self">archivo de trucos de mod-rewrite</a></li>
 </ul>
@@ -167,7 +167,7 @@ RewriteRule . /<span class="code-highlight">index.php</span> [L]
 </div>
 <h2>Redirigir HTTP o HTTPS para tu sitio</h2>
 <div class="solvvy-solution">
-<p>Ve el siguiente artículo para ver instrucciones de como forzar tu sitio a cargar con HTTPS:</p>
+<p>Ve el siguiente artículo para ver instrucciones de como forzar tu sitio a cargar con <span class="text-object">HTTPS</span>:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215747758-Forzar-tu-sitio-a-cargar-de-forma-segura-con-un-archivo-htaccess" target="_self">Forzar tu sitio a cargar de forma segura con tu archivo .htaccess</a></li>
 </ul>

@@ -1,0 +1,76 @@
+<div class="alert-warning">
+<p>Subversion se ha eliminado del panel DreamHost. Si habías configurado Subversion en tu dominio previamente, seguirá funcionando normalmente.</p>
+</div>
+<h2><span id="Los_repositorios_creados_apresuradamente_a_menudo_no_funcionan">Los repositorios creados apresuradamente a menudo no funcionan</span></h2>
+<div class="solvvy-solution">
+<p>Si creas tu repositorio antes de que se haya creado tu URL y se esté resolviendo en línea, es posible que tengas un repositorio inaccesible. Suponiendo que aún no contiene ninguna información, solo elimínalo y vuelve a crearlo.</p>
+<p>Alternativamente, puedes experimentar un retraso en la propagación de DNS si puedes acceder a tu repositorio a través de <span class="text-object">http</span> dentro del sistema DreamHost, pero ve un directorio vacío desde fuera de DreamHost. Si no puedes esperar, intenta consultar los servidores DNS de DreamHost para tu IP y usa un <a href="https://help.dreamhost.com/hc/es/articles/115006086308-C%C3%B3mo-ver-tu-sitio-DreamHost-usando-tu-archivo-de-hosts" target="_self" rel="undefined">archivo de local host</a> o NetInfo para resolver temporalmente tu host svn. Recuerda deshacer esto cuando los registros DNS se hayan propagado.</p>
+</div>
+<h2><span id="Alojar_más_de_un_dominio_de_Subversion">Alojar más de un dominio de Subversion</span></h2>
+<div class="solvvy-solution">
+<p>Puedes alojar varios dominios y subdominios svn en una cuenta DreamHost, pero no son completamente independientes. En particular, todos los repositorios creados con el mismo usuario de FTP comparten el mismo espacio de nombres, incluso si se encuentran en diferentes URL. Con un solo usuario FTP, un nombre de repositorio determinado solo se puede usar una vez para todos los dominios svn.</p>
+<p>Si creas <strong>https://svn1.example.com/repo</strong>, no puedes tener un segundo repositorio llamado <strong>https://svn2.example.com/repo</strong>. Si configuras <strong>https://svn2.example.com/repo</strong>, es un segundo nombre para el mismo repositorio, con un conjunto de permisos separado. Si debes crear dos repositorios con el mismo nombre, crea un segundo usuario FTP.</p>
+</div>
+<h2><span id="Alojamiento_de_Subversion_para_un_dominio_que_no_está_en_DreamHost">Alojamiento de Subversion para un dominio que no está en DreamHost</span></h2>
+<div class="solvvy-solution">
+<p>Si tienes un dominio que no está alojado en DreamHost y deseas configurar Subversion en un subdominio de ese dominio, no funcionará con una configuración normal.</p>
+<p>Debes configurar un subdominio como <strong>realsvn.ejemploENDreamHost.com</strong>, luego crear un subdominio para <strong>svn.ejemploNOenDreamHost.com</strong>.</p>
+<p>Finalmente, crea un <a href="https://help.dreamhost.com/hc/es/articles/215416417-Generalidades-del-reflejo-de-un-dominio" target="_self" rel="undefined">espejo o mirror</a> para ese dominio a partir del dominio que desees. Asegúrate de esperar a que pase la propagación de DNS antes de probar todo.</p>
+</div>
+<h2><span id="Los_repositorios_hechos_a_mano_son_de_solo_lectura">Los repositorios hechos a mano son de solo lectura</span></h2>
+<div class="solvvy-solution">
+<p>Si encuentras que tienes que modificar y volver a cargar tu archivo de volcado varias veces, puede ser útil usar las herramientas CLI (por ejemplo, rm -rf y svnadmin create) para limpiar y volver a crear tu repositorio hasta que lo hagas bien. Pero luego querrás usar el panel para eliminar y volver a crear tu repositorio. Tus repositorios de prueba no funcionarán correctamente en producción ya que no permitirán ningún cambio.</p>
+<p>El panel crea el repositorio con dhapache como propietario, y los archivos reponame.access y reponame.passwd con dhapache como grupo. Intentar crear tu propio repositorio de producción con svnadmin create es inútil porque no tienes autorización para cambiar esas propiedades y membresías de grupo (y no tienes un usuario sudo).</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>No sobrescribas los archivos de dhapache. Sobrescribir archivos hace que tengan su grupo de usuarios en lugar de dhapache. Si tu repositorio es relativamente maduro cuando cometes este error y no tienes una copia de seguridad, no tendrás ninguna opción.</p>
+</div>
+</div>
+</div>
+<h2><span id="Algunos_clientes_requieren_contraseñas_MD5">Algunos clientes requieren contraseñas MD5</span></h2>
+<div class="solvvy-solution">
+<p>Si recibes advertencias de "access denied", es posible que debas usar contraseñas MD5 en lugar de la variedad estándar creada por el panel DreamHost. Usa htpasswd -nm username para generar la entrada (ala username: passwd-hash) para tu archivo reponame.passwd, luego usa un editor para reemplazar tu entrada de contraseña estándar.</p>
+<p>No sobrescribas tus archivos reponame.access&gt; y reponame.passwd con echo "username: passwd-hash"&gt; reponame.passwd. Sobrescribir archivos hace que tengan su grupo de usuarios en lugar de dhapache, dejando tu repositorio en un estado de solo lectura o inaccesible.</p>
+</div>
+<h2><span id="Interfaz_con_Subversion_desde_PHP">Interfaz con Subversion desde PHP</span></h2>
+<div class="solvvy-solution">
+<p>Deberás instalar la extensión SVN de PECL:</p>
+<ul>
+<li><a href="https://pecl.php.net/package/svn">Descargar de la extensión svn PECL</a></li>
+</ul>
+</div>
+<h2><span id="Seguridad_de_.htaccess">Seguridad de .htaccess</span></h2>
+<div class="solvvy-solution">
+<p>Subversion puede ser una herramienta muy útil para desarrollar sitios web o aplicaciones basadas en web. Sin embargo, es posible que te preguntes cómo funcionaría. Después de confirmar los cambios en tu repositorio, ¿cómo se reflejan en tu sitio? El método más fácil es tener el directorio de tu sitio en el servidor configurado como una copia de trabajo extraída de tu repositorio de Subversion. Si eliges hacer esto, asegúrate de modificar el .htaccess de tu sitio para evitar que los usuarios naveguen por los archivos de control de Subversion. Algo simple en la raíz de tu sitio como lo siguiente debería ser suficiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">RedirectMatch 403 /\.svn
+</pre>
+</div>
+</div>
+<h2><span id="Usar_la_autenticación_básica_de_Apache">Usar la autenticación básica de Apache</span></h2>
+<div class="solvvy-solution">
+<p>Los pasos de la sección anterior requieren que cada usuario tenga una cuenta Unix con acceso de shell para que puedan iniciar sesión a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">SSH</a>. Sin embargo, el panel DreamHost proporciona una forma de crear cuentas de usuario solo para Subversion.</p>
+<p>Pero para esas cuentas, si deseas especificar quién tiene acceso de lectura versus lectura y escritura y/o por directorio de tu repositorio, debes editar manualmente el archivo .access como se describe en el último manual de Subversion sobre "Acceso por directorio control "y la implementación de DreamHost de esta función. Puedes agregar y administrar manualmente los nombres de usuario y contraseñas de Subversion utilizando htpasswd para agregar/editar usuarios al archivo .passwd de tu repositorio.</p>
+<h3><span id="Nota_después_de_editar_manualmente_los_archivos_.access_o_.passwd">Nota después de editar manualmente los archivos .access o .passwd</span></h3>
+<dl>
+<dd>
+<ul>
+<li>El grupo de archivos cambia de dhapache a cualquiera que sea el grupo generado automáticamente para tu cuenta, lo que evita que el módulo de Apache pueda leer los archivos, por lo que debes cambiar los permisos para que Apache pueda leerlos (haz <span class="code">chmod 644</span>).</li>
+<li>También deberás estar preparado para que si ahora usas el panel de control de DreamHost para cambiar la configuración (al menos si haces cambios en la lista de usuarios), el panel no solo revierte los permisos de archivo a dhapache sino que también sobrescribe ambos archivos, sobrescribiendo cualquier cambio que les hayas hecho. Por lo tanto, siempre debes tener una copia de seguridad para reconstruir cualquier cosa importante que pueda sobrescribirse.</li>
+</ul>
+</dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p><span class="code">chmod 644</span> proporciona acceso de lectura "mundial" a aquellos archivos que pueden ser un riesgo para la seguridad. Si bien estos archivos no serán accesibles vía <span class="text-object">http</span> (a menos que también publiques tu svn/lo cual probablemente no sería prudente), estos archivos son accesibles para otros usuarios de shell en tu cuenta y QUIZÁS por otros titulares de cuentas DreamHost en tu host compartido. Por lo tanto, para una seguridad real, no debes usar http, sino <span class="text-object">https</span> (que también es la única opción si accedes a través de WebDAV) o SSH.</p>
+</div>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215466058-Descripci%C3%B3n-general-de-la-Subversion" target="_self" rel="undefined">Generalidades sobre Subversion</a></li>
+</ul>
+</div>

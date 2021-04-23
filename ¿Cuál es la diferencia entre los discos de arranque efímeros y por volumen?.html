@@ -1,0 +1,35 @@
+<h2>Diferentes fuentes de arranque</h2>
+<div class="solvvy-solution">
+<p>Hay varios tipos diferentes de fuentes para arrancar en el panel de DreamCompute, pero todas necesitan crear algún tipo de disco virtual para que arranque la máquina virtual. El disco virtual puede usar almacenamiento <em>efímero</em> o almacenamiento en bloque de <em>volumen</em>. Al lanzar una instancia, tienes varias opciones de fuentes de arranque:</p>
+<ul class="simple">
+<li><strong>Image</strong>: Lanza una instancia a partir de la imagen que elijas en un disco efímero o en un disco de volumen nuevo.</li>
+<li><strong>Instance Snapshot</strong>: Lanza una instancia desde el snapshot de instancia que eliges en un disco efímero o en un disco de volumen nuevo.</li>
+<li><strong>Volume</strong>: Lanza una instancia desde un volumen de arranque existente.</li>
+<li><strong>Volume Snapshot</strong>: Crea un volumen a partir del snapshot de volumen que elijas y luego lanza una instancia usando ese nuevo volumen de arranque.</li>
+</ul>
+</div>
+<div id="ephemeral-boot-disks">
+<h2>Discos de arranque efímeros</h2>
+<div class="solvvy-solution">
+<p>Los discos efímeros son discos virtuales que se crean con el único propósito de arrancar una máquina virtual y deben considerarse temporales.</p>
+<p>Los discos efímeros son útiles si no te preocupa tener que duplicar una instancia o destruir una instancia y guardar los datos. Aún puedes montar un volumen en una instancia que se inicia desde un disco efímero y colocar los datos que deben guardarse en él, en lugar de usar el volumen como raíz de tu sistema operativo.</p>
+<ul class="simple">
+<li><strong>Se puede tomar un snapshot</strong>: Útil para duplicar instancias o tener una copia de una instancia en un momento determinado. Los snapshots de los discos de arranque efímeros se almacenan como imágenes y cuentan para la cuota de imágenes de DreamCompute.</li>
+<li><strong>No agotan la cuota de volumen</strong>: Si tienes más cuota de instancia, siempre puedes arrancarla desde un disco efímero, incluso si no te queda ninguna cuota de volumen.</li>
+<li><strong>Se destruyen cuando se termina la instancia</strong>: Esto significa que perderás tus datos si deseas eliminar una instancia para liberar parte de la cuota de instancias.</li>
+</ul>
+</div>
+</div>
+<h2>Discos de arranque por volumen</h2>
+<div class="solvvy-solution">
+<p>Los volúmenes son una forma de almacenamiento más permanente que los discos efímeros y se pueden utilizar para arrancar desde un dispositivo de bloque montable.</p>
+<p>Los discos de arranque por volumen son útiles si necesitas una forma sencilla de duplicar instancias y realizar copias de seguridad de ellas con snapshots, o si necesitas una solución de almacenamiento más confiable para tu instancia que un disco efímero. Si los usas, debes planificar con anticipación para tener suficiente cuota para todas las instancias que deseas iniciar.</p>
+<ul class="simple">
+<li><strong>Se puede tomar un snapshot</strong>: Útil para duplicar instancias o tener una copia de una instancia en un momento determinado.</li>
+<li><strong>No se destruye cuando eliminas la instancia (a menos que selecciones la opción "Delete Volume on Instance Delete")</strong>: Puedes eliminar la instancia y tus datos seguirán existiendo como un volumen desde el que puedes iniciar más adelante.</li>
+<li><strong>Usa tu cuota de volumen</strong>: Esto puede ser caro si tienes muchas instancias o toma muchos snapshots.</li>
+</ul>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 272px; top: 878.188px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>

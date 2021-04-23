@@ -1,0 +1,233 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="Jabber API commands" class="solvvy-hidden">
+<div class="altTitle">API de Jabber</div>
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#jabber-list_users">jabber-list_users</a></li>
+<li><a class="reference internal" href="#jabber-list_users_no_pw">jabber-list_users_no_pw</a></li>
+<li><a class="reference internal" href="#jabber-list_valid_domains">jabber-list_valid_domains</a></li>
+<li><a class="reference internal" href="#jabber-add_user">jabber-add_user</a></li>
+<li><a class="reference internal" href="#jabber-remove_user">jabber-remove_user</a></li>
+<li><a class="reference internal" href="#jabber-reactivate_user">jabber-reactivate_user</a></li>
+<li><a class="reference internal" href="#jabber-deactivate_user">jabber-deactivate_user</a></li>
+<li><a class="Ver también" href="#Ver_también">Ver también</a></li>
+</ul>
+</div>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si ves que alguna de las instrucciones de este artículo no funciona como se esperaba, es posible que esté desactualizada. En caso de duda, por favor comunícate con soporte para obtener más ayuda.</p>
+</div>
+</div>
+<p>El módulo API <strong>jabber</strong> te permite administrar lo usuarios de Jabber para tus dominios.</p>
+<h2>Comandos</h2>
+<div class="solvvy-solution">
+<h3><span id="jabber-list_users">jabber-list_users</span></h3>
+<p>Enumera todos los usuarios de Jabber en esta cuenta e incluye las contraseñas y el estado de los usuarios. El estado es uno de los siguientes: active, inactive, pending-active, pending-inactive, pending-delete</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>jabber-list_users</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />username domain password status<br />testuser example.com abc123 active<br />testuser2 example.com 12345 active</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="jabber-list_users_no_pw">jabber-list_users_no_pw</span></h3>
+<p>Igual que jabber-list_users, pero omite las contraseñas. Las contraseñas se muestran como ********.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>jabber-list_users_no_pw</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />username domain password status<br />testuser example.com ******** active<br />testuser2 example.com ******** active</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="jabber-list_valid_domains">jabber-list_valid_domains</span></h3>
+<p>Enumera los dominios de tu cuenta que pueden tener usuarios de Jabber.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>jabber-list_valid_domains</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />domain<br />example.com<br />sub.example.com</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>(ninguno)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="jabber-add_user">jabber-add_user</span></h3>
+<p>Crea un nuevo usuario de Jabber. Esto devuelve un token de servicio (consulta Comandos de control de servicio). Esto puede devolver el mismo token de cola de servicio que las llamadas anteriores a la API de Jabber. Si este es el caso, todos los cambios pendientes se aplican juntos.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>jabber-add_user</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p><strong>username</strong> : El usuario Jabber deseado.<br /><strong>domain</strong> : El dominio para el nuevo usuario.<br /><strong>password</strong> : La contraseña para el nuevo usuario.</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />token<br />gcnaBcD12eFgH34iJkL</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>no_username<br />no_domain<br />no_password<br />invalid_username<br />invalid_domain<br />invalid_password<br />user_exists</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="jabber-remove_user">jabber-remove_user</span></h3>
+<p>Elimina un usuario de Jabber. Esto devuelve un token de servicio (consulta los Comandos de Control de Servicio). Esto puede devolver el mismo token de cola de servicio que las llamadas anteriores a la API de Jabber. Si este es el caso, todos los cambios pendientes se aplican juntos.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>jabber-remove_user</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>username<br />domain</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />token<br />gcnaBcD12eFgH34iJkL</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>no_username<br />no_domain<br />invalid_domain<br />user_does_not_exist<br />change_already_pending</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="jabber-reactivate_user">jabber-reactivate_user</span></h3>
+<p>Reactiva un usuario de Jabber que se había desactivado. Esto devuelve un token de servicio (consulta los&nbsp; Comandos de Control de Servicio). Esto puede devolver el mismo token de cola de servicio que las llamadas anteriores a la API de Jabber. Si este es el caso, todos los cambios pendientes se aplican juntos.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>jabber-reactivate_user</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>username<br />domain</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />token<br />gcnaBcD12eFgH34iJkL</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>no_username<br />no_domain<br />invalid_domain<br />user_does_not_exist<br />user_already_active<br />change_already_pending</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="jabber-deactivate_user">jabber-deactivate_user</span></h3>
+<p>Desactiva un usuario de Jabber. Esto devuelve un token de servicio (consulta Comandos de control de servicio). Esto puede devolver el mismo token de cola de servicio que las llamadas anteriores a la API de Jabber. Si este es el caso, todos los cambios pendientes se aplican juntos.</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>jabber-deactivate_user</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p>username<br />domain</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />token<br />gcnaBcD12eFgH34iJkL</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>no_username<br />no_domain<br />invalid_domain<br />user_does_not_exist<br />user_already_inactive<br />change_already_pending</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2><span id="Ver_también">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217560167-Generalidades-de-la-interfaz-de-programaci%C3%B3n-de-aplicaciones-API-" target="_self" rel="undefined">Generalidades de la interfaz de programación de aplicaciones</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>

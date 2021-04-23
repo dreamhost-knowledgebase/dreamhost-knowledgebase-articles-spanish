@@ -1,8 +1,8 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Un Bucket es un mecanismo para agrupar objetos en DreamObjects, similar a una carpeta. A diferencia de una carpeta, los buckets existen en un espacio de nombres global dentro de DreamObjects, lo que significa que los nombres de bucket deben ser únicos, al igual que un nombre de dominio, ya que se utilizan para crear URL públicas para almacenar objetos.</p>
+<p>Un Bucket es un mecanismo para agrupar objects en DreamObjects, similar a una carpeta. A diferencia de una carpeta, los buckets existen en un espacio de nombres global dentro de DreamObjects, lo que significa que los nombres de bucket deben ser únicos, al igual que un nombre de dominio, ya que se utilizan para crear URL públicas para almacenar objects.</p>
 </div>
-<h2>Creando un Bucket</h2>
+<h2>Crear un Bucket</h2>
 <div class="solvvy-solution">
 <ol class="arabic">
 <li>
@@ -36,7 +36,7 @@
 </div>
 </div>
 </div>
-<h2>Configurando permisos de bucket</h2>
+<h2>Configurar permisos de bucket</h2>
 <div class="solvvy-solution">
 <p>Puedes configurar tu nuevo bucket para que tenga permisos públicos o privados. Ve el artículo <a href="https://help.dreamhost.com/hc/es/articles/360022507011-Ejecuci%C3%B3n-de-comandos-de-S3cmd">Permisos de DreamObjects</a> para más detalles. Para seleccionar una configuración de permisos, debes editar el bucket:</p>
 <ol class="arabic">
@@ -64,34 +64,37 @@
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Public significa que es posible ver las propiedades del Bucket y una lista del contenido del Bucket navegando a la URL del Bucket. Aunque podrás ver que un objeto aparece en la lista como parte del contenido de un Bucket, el objeto real no se puede leer a menos que también se haya marcado como Public.</p>
-<p>Los permisos de objeto son privados de forma predeterminada. Si necesitas actualizar todos los permisos de objetos en un bucket, usa el siguiente script de Python:</p>
+<p>Public significa que es posible ver las propiedades del Bucket y una lista del contenido del Bucket navegando a la URL del Bucket. Aunque podrás ver que un object aparece en la lista como parte del contenido de un Bucket, el objeto real no se puede leer a menos que también se haya marcado como Public.</p>
+<p>Los permisos de object son privados de forma predeterminada. Si necesitas actualizar todos los permisos de object en un bucket, usa el siguiente script de Python:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360022507011#permisos">Cambiar todos los permisos de objeto en un bucket</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360022507011#permisos">Cambiar todos los permisos de object en un bucket</a></li>
 </ul>
 </div>
 </div>
 </div>
-<h2>Editando un Bucket</h2>
+<h2>Editar&nbsp;un Bucket</h2>
 <div class="solvvy-solution">
 <p>Las opciones para editar un Bucket son limitadas pero puedes:</p>
 <ul class="simple">
 <li>Modificar las configuraciones de permisos en un Bucket existente en cualquier momento.</li>
-<li>Añadir o remover contenido de un Bucket.</li>
+<li>Añadir o eliminar contenido de un Bucket.</li>
 </ul>
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>No es posible cambiar el nombre de un bucket o tranferir el bucket a otro usuario.</p>
+<p>No es posible cambiar directamente el nombre de un bucket o transferir el bucket a otro cliente de DreamHost. Sin embargo, puedes migrar el contenido de un bucket existente a un bucket nuevo que sea propiedad de cualquiera de tus usuarios de DreamObjects. Para obtener más información sobre este método, consulta el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360052395291--Cambiar-el-nombre-de-un-bucket-con-la-herramienta-de-migraci%C3%B3n-del-panel">Renombrar un bucket usando la herramienta de migración del panel</a></li>
+</ul>
 </div>
 </div>
 </div>
-<h2>Eliminando un Bucket</h2>
+<h2>Eliminar un Bucket</h2>
 <div class="solvvy-solution">
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>No es posible eliminar un bucket que contenga objetos. Además, la operación de eliminación del bucket no es reversible. <strong>ASEGÚRATE</strong> de haber realizado una copia de seguridad de todos los datos del bucket antes de eliminarlo. Puedes utilizar este&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360022654971#borrando" target="_self">comando de AWS CLI</a> para eliminar todo el contenido del bucket.</p>
+<p>No es posible eliminar un bucket que contenga un object. Además, la operación de eliminación del bucket no es reversible. <strong>ASEGÚRATE</strong> de haber realizado una copia de seguridad de todos los datos del bucket antes de eliminarlo. Puedes utilizar este&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360022654971#borrando" target="_self">comando de AWS CLI</a> para eliminar todo el contenido del bucket.</p>
 </div>
 </div>
 <ol class="arabic">
@@ -120,15 +123,15 @@
 </li>
 </ol>
 </div>
-<h2>Accediendo objetos en tu bucket</h2>
+<h2>Acceder objects en tu bucket</h2>
 <div class="solvvy-solution">
-<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo acceder a objetos dentro de un bucket:</p>
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo acceder a un object dentro de un bucket:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215986337--Qu%C3%A9-son-los-objetos-en-DreamObjects-">¿Qué son Objetos en DreamObjects?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215986337--Qu%C3%A9-son-los-objetos-en-DreamObjects-">¿Qué son objects en DreamObjects?</a></li>
 </ul>
 </div>
 <!--DreamObjects Button-->
 <div class="dream-sign-up">
-<h2>¡Empieza a almacenar tus datos hoy!</h2>
-<div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/storage/">Suscríbete para DreamObjects</a></div>
+<h2>¡Empieza a Almacenar Tus Datos Hoy!</h2>
+<div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/storage/">Suscríbete a DreamObjects</a></div>
 </div>

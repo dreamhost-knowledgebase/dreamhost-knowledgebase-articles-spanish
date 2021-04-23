@@ -1,0 +1,141 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Una imagen es un archivo único que contiene un sistema operativo de arranque. Las imágenes se utilizan para crear instancias dentro de DreamCompute. Para obtener información sobre la creación de archivos de imagen, mira la <a class="reference external" href="http://docs.openstack.org/image-guide/">guía de Imágenes de máquinas virtuales de OpenStack</a>. Luego puedes usar el panel de DreamCompute para cargar y administrar imágenes en tu proyecto.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>También puedes usar el <a href="https://help.dreamhost.com/hc/es/articles/235817468-Introducci%C3%B3n-al-cliente-de-l%C3%ADnea-de-comandos-de-OpenStack" target="_self" rel="undefined">cliente de comando de línea de OpenStack</a> para subir y administrar imágenes. Para ejemplos, ve estos artículos:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215912758-Hoja-de-trucos-de-la-interfaz-de-l%C3%ADnea-de-comandos-de-DreamCompute">Hoja de trucos de la interfaz de línea de comandos de DreamCompute</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215912788-Lanzar-una-instancia-usando-un-archivo-de-imagen-ISO-con-la-CLI-de-OpenStack" target="_self" rel="undefined">Lanzar una instancia usando un archivo de imagen ISO con la CLI de OpenStack</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Subir una imagen</h2>
+<div class="solvvy-solution">
+<p>Para subir una imagen a un proyecto:</p>
+<ol class="arabic">
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener">DreamCompute</a>.</li>
+<li>Haz clic en el botón <strong>View Dashboard </strong>para iniciar sesión en tu panel de DreamCompute.</li>
+<li>En el panel izquierdo, haz clic en la pestaña <span class="text-object">Project</span> para expandir el menú.</li>
+<li>En este menú haz clic en la pestaña <span class="text-object">Compute</span> para expandir el menú.</li>
+<li>De la lista, haz clic en <span class="text-object">Images</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-upload-and-manage-images-with-the-dreamcompute-dashboard_01.png" alt="how-to-upload-and-manage-images-with-the-dreamcompute-dashboard_01" width="613" height="392" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón <strong>Create Image</strong>. La caja de diálogo Create Image aparece.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-upload-and-manage-images-with-the-dreamcompute-dashboard_02.png" alt="" width="608" height="568" /></dd>
+</dl>
+</li>
+<li>
+<p class="first">En la caja de diálogo Create Image, ingresa los siguientes valores:</p>
+<table class="docutils" style="height: 485px;" border="1"><colgroup> <col width="48%" /> <col width="52%" /> </colgroup>
+<tbody>
+<tr style="height: 44px;">
+<td style="height: 44px; width: 306px;">Image Name</td>
+<td style="height: 44px; width: 332.4px;">Ingresa un nombre para la imagen.</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 306px;">Image Description</td>
+<td style="height: 22px; width: 332.4px;">Ingresa una breve descripción de la imagen.</td>
+</tr>
+<tr style="height: 44px;">
+<td style="height: 44px; width: 306px;">Source Type</td>
+<td style="height: 44px; width: 332.4px;">DreamCompute solo soporta cargas de "Archivo" de tu computador local.</td>
+</tr>
+<tr style="height: 44px;">
+<td style="height: 44px; width: 306px;">File</td>
+<td style="height: 44px; width: 332.4px;">Busca el archivo de imagen en tu computador local y agrégalo.</td>
+</tr>
+<tr style="height: 44px;">
+<td style="height: 44px; width: 306px;">Format</td>
+<td style="height: 44px; width: 332.4px;">DreamCompute solo soporta imágenes RAW e ISO.</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 306px;">Kernel</td>
+<td style="height: 22px; width: 332.4px;">No soportado; dejar en blanco.</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 306px;">Ramdisk</td>
+<td style="height: 22px; width: 332.4px;">No soportado; dejar en blanco.</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 306px;">Architecture</td>
+<td style="height: 22px; width: 332.4px;">No soportado; dejar en blanco.</td>
+</tr>
+<tr style="height: 66px;">
+<td style="height: 66px; width: 306px;">Minimum Disk (GB)</td>
+<td style="height: 66px; width: 332.4px;">Si deseas que los volúmenes basados en esta imagen sean siempre mayores que un tamaño específico, ingresa ese tamaño aquí.</td>
+</tr>
+<tr style="height: 66px;">
+<td style="height: 66px; width: 306px;">Minimum RAM (MB)</td>
+<td style="height: 66px; width: 332.4px;">Si deseas que las instancias que usan esta imagen usen al menos una cantidad particular de memoria RAM, ingresa esa cantidad aquí.</td>
+</tr>
+<tr style="height: 89px;">
+<td style="height: 89px; width: 306px;">Protected</td>
+<td style="height: 89px; width: 332.4px;">Selecciona si deseas o no que esta imagen sea borrable (Nota: esta configuración puede ser ajustada más tarde por cualquier persona con acceso a tu proyecto).</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p class="first">Haz clic en el botón <strong>Create Image</strong>.</p>
+<p>El proceso de carga de imagen comienza. Cuando está completo, la caja de diálogo Create Image dialog se cerrará automáticamente.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si cierras el cuadro de diálogo manualmente, la carga se cancelará.</p>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<h2>Actualizar una imagen</h2>
+<div class="solvvy-solution">
+<p>Para actualizar las propiedades de una imagen existente:</p>
+<ol class="arabic simple">
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener">DreamCompute</a>.</li>
+<li>Haz clic en el botón <strong>View Dashboard</strong> para iniciar sesión en tu panel de DreamCompute.</li>
+<li>En el panel izquierdo, haz clic en la pestaña <span class="text-object">Project</span> para expandir el menú.</li>
+<li>En este menú haz clic en la pestaña <span class="text-object">Compute</span> para expandir el menú.</li>
+<li>De la lista, haz clic en <span class="text-object">Images</span>.</li>
+<li>Junto a la imagen que deseas editar, haz clic en el botón de menú debajo de la columna <span class="text-object">Actions</span>.</li>
+<li>De la lista, selecciona <span class="text-object">Edit Image</span>. La caja de diálogo Edit Image aparece.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-upload-and-manage-images-with-the-dreamcompute-dashboard_03.png" alt="how-to-upload-and-manage-images-with-the-dreamcompute-dashboard_03" width="722" height="527" /></dd>
+</dl>
+</li>
+<li>En la caja de diálogo Edit Image, puedes realizar varias acciones. Por ejemplo:
+<ul>
+<li>Cambia el nombre de la imagen.</li>
+<li>Provee una descripción para la imagen.</li>
+<li>Establece requisitos mínimos de disco o RAM.</li>
+<li>Especifica si deseas o no que cualquier persona con acceso a tu proyecto pueda eliminar la instancia.</li>
+</ul>
+</li>
+<li>Cuando hayas finalizado de hacer cambios, haz clic en <strong>Update Image</strong> para guardar tus cambios.</li>
+</ol>
+</div>
+<h2>Eliminar una imagen</h2>
+<div class="solvvy-solution">
+<p>Solo puedes eliminar una imagen si seleccionaste 'No' al elegir una opción 'Protected'. La eliminación de imágenes es permanente y <strong>no</strong> se puede revertir.</p>
+<ol class="arabic simple">
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener">DreamCompute</a>.</li>
+<li>Haz clic en el botón <strong>View Dashboard </strong>para iniciar sesión en tu panel de DreamCompute.</li>
+<li>En el panel izquierdo, haz clic en la pestaña <span class="text-object">Project</span> para expandir el menú.</li>
+<li>En este menú haz clic en la pestaña <span class="text-object">Compute</span> para expandir el menú.</li>
+<li>De la lista, haz clic en <span class="text-object">Images</span>.</li>
+<li>Junto a la imagen que deseas eliminar, haz clic en el botón de menú debajo de la columna <span class="text-object">Actions</span>.</li>
+<li>De la lista, selecciona <span class="text-object">Delete Image</span>.</li>
+<li>En el cuadro de diálogo <span class="text-object">Confirm Delete Image</span>, haz clic en <strong>Delete Images</strong> para confirmar la eliminación.</li>
+</ol>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si deseas eliminar varias imágenes a la vez, selecciona las imágenes usando la casilla de verificación junto a ellas. Luego haz clic en el botón <strong>Delete Images</strong>.</p>
+</div>
+</div>
+</div>

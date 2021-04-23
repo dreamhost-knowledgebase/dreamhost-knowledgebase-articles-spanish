@@ -1,0 +1,78 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>A continuación se describe cómo crear una secuencia de comandos y un cron job que te envíe correos rechazados desde el servidor.</p>
+</div>
+<h2>Antecedentes</h2>
+<div class="solvvy-solution">
+<p>Cuando se envía un correo desde tu servidor web y luego se bloquea o rechaza, se almacena en el siguiente directorio:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/username/Maildir/new</pre>
+</div>
+<p>Para ver los correos bloqueados o rechazados, debes iniciar sesión manualmente en tu servidor y verificar este directorio. Una opción más simple es crear un cron job que active un script de shell. El script luego le dice al servidor que te envíe por correo cualquier correo bloqueado o rechazado cuando ocurra.</p>
+<p>Para obtener más información sobre correos bloqueados o rechazados, consulta el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215036118-Preguntas-frecuentes-sobre-la-pol%C3%ADtica-de-dominio-del-remitente" target="_self">Preguntas frecuentes sobre la política de dominio del remitente</a></li>
+</ul>
+</div>
+<h2>Crear el script de shell</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de tu usuario</a>:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span>
+<span class="server">[server]$ </span><span class="command">pwd</span>
+/home/username</pre>
+</div>
+</li>
+<li>Crea&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">un nuevo archivo por medio de SSH</a>,&nbsp;y luego nombrarlo algo así como <span class="text-object">mailrejections.sh</span>.</li>
+<li>Agrega el siguiente código a este archivo:<br />
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>Solo necesitas cambiar los campos resaltados.</li>
+<li>Puedes cambiar el mensaje a lo que quieras.</li>
+</ul>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">#!/bin/bash
+
+#Check ~/Maildir/new for any files created within the last 15 min
+files=$(find ~/Maildir/new -type f -mmin -15)
+
+for emailFileName in $files; do
+  #open each email individually and assign to new variable
+  emailContent=$(cat $emailFileName)<br />  printf '%s\n' "${emailContent[*]}" | mail -s "<span class="code-highlight">These emails were rejected" admin@example.com</span>
+done<br />exit 0</pre>
+</div>
+</li>
+<li>Asegúrate de cambiar el correo a la dirección de la que deseas recibir estas notificaciones.</li>
+</ol>
+</div>
+<h2>Creando el cron job</h2>
+<div class="solvvy-solution">
+<p>Después de crear el script, debes crear un nuevo cron job para que se ejecute cada 15 minutos. El cron job luego ejecuta el archivo que acabas de crear.</p>
+<ol>
+<li>Crea un nuevo cron job&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-" target="_self">en tu panel</a>:
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-09_panel_cron_emailrejection.png" alt="" /></dd>
+</dl>
+</li>
+<li>Asegúrate de ajustar el nombre de usuario al usuario de Shell correcto para el que creaste el script.</li>
+<li>Selecciona 'Every 15 minutes' para el marco de tiempo.<br />
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Puedes cambiar el período de tiempo a lo que desees, pero solo asegúrate de actualizar el mismo período de tiempo en tu secuencia de comandos para que coincida.</p>
+</div>
+</div>
+</li>
+<li>Haz clic en el botón <strong>Add</strong> para guardar.</li>
+</ol>
+<p>El cron job ejecuta tu script cada 15 minutos. Si se rechaza un correo, se envía una copia a la dirección que especificó en el script.</p>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 562px; top: 1897.77px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>

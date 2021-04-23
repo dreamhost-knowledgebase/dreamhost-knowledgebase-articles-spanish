@@ -1,0 +1,200 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="sample-perl-code-using-dreamobjects-s3-compatible-api" class="solvvy-hidden">
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#s3-perl-Crear_una_conexión">Crear una conexión</a></li>
+<li><a class="reference internal" href="#s3-perl-Enlistar_Buckets_Propios">Enlistar Buckets Propios</a></li>
+<li><a class="reference internal" href="#s3-perl-Crear_un_Bucket">Crear un Bucket</a></li>
+<li><a class="reference internal" href="#s3-perl-Enlistar_el_Contenido_de_un_Bucket">Enlistar el Contenido de un Bucket</a></li>
+<li><a class="reference internal" href="#s3-perl-Eliminar_un_Bucket">Eliminar un Bucket</a></li>
+<li><a class="reference internal" href="#s3-perl-Forzar_la_Eliminación_para_Buckets_No_vacíos">Forzar la Eliminación para Buckets No vacíos</a></li>
+<li><a class="reference internal" href="#s3-perl-Crear_un_Object">Crear un Object</a></li>
+<li><a class="reference internal" href="#s3-perl-Cambiar_el_ACL_de_un_Object">Cambiar el ACL de un Object</a></li>
+<li><a class="reference internal" href="#s3-perl-Descargar_un_Object">Descargar un Object (a un archivo)</a></li>
+<li><a class="reference internal" href="#s3-perl-Eliminar_un_Object">Eliminar un Object</a></li>
+<li><a class="reference internal" href="#s3-perl-Generar_URL_de_descarga_de_un_Object">Generar URL de descarga de un Object (firmar y sin firmar)</a></li>
+</ul>
+</div>
+</div>
+<p>Este artículo enlista muchos ejemplos de código de Perl para interactuar con DreamObjects.</p>
+<span id="s3-perl-Crear_una_conexión"></span>
+<h2>Crear una Conexión</h2>
+<p>Crear una conexión para que puedas interactuar con el servidor.</p>
+<div class="preboxcontainer">
+<pre class="prebox">use Amazon::S3;
+my $access_key = 'put your access key here!';
+my $secret_key = 'put your secret key here!';
+
+my $conn = Amazon::S3-&gt;new({
+        aws_access_key_id     =&gt; $access_key,
+        aws_secret_access_key =&gt; $secret_key,
+        host                  =&gt; 'objects-us-east-1.dream.io',
+        secure                =&gt; 1,
+        retry                 =&gt; 1,
+});</pre>
+</div>
+<div id="listing-owned-buckets">&nbsp;</div>
+<span id="s3-perl-Enlistar_Buckets_Propios"></span>
+<h2>Enlistar Buckets Propios</h2>
+<div class="solvvy-solution">
+<p>Obtiene una lista de objects de Amazon::S3::Bucket que posees e imprime el nombre del bucket y la fecha de creación de cada bucket.</p>
+<div class="preboxcontainer">
+<pre class="prebox">my @buckets = @{$conn-&gt;buckets-&gt;{buckets} || []};
+foreach my $bucket (@buckets) {
+        print $bucket-&gt;bucket . "\t" . $bucket-&gt;creation_date . "\n";
+}</pre>
+</div>
+<p>La salida se verá más o menos así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">mahbuckat1   2011-04-21T18:05:39.000Z
+mahbuckat2   2011-04-21T18:05:48.000Z
+mahbuckat3   2011-04-21T18:07:18.000Z</pre>
+</div>
+</div>
+<div id="creating-a-bucket">&nbsp;</div>
+<span id="s3-perl-Crear_un_Bucket"></span>
+<h2>Crear un Bucket</h2>
+<div class="solvvy-solution">
+<p>Crea un bucket llamado <code class="docutils literal"><span class="pre">my-new-bucket.</span></code></p>
+<div class="preboxcontainer">
+<pre class="prebox">my $bucket = $conn-&gt;add_bucket({ bucket =&gt; 'my-new-bucket' });</pre>
+</div>
+</div>
+<div id="listing-a-bucket-s-content">&nbsp;</div>
+<span id="s3-perl-Enlistar_el_Contenido_de_un_Bucket"></span>
+<h2>Elistar el Contenido de un Bucket</h2>
+<div class="solvvy-solution">
+<p>Obtiene una lista de hashes con información sobre cada object en el bucket e imprime cada nombre del object, el tamaño del archivo, y la última fecha de modificación.</p>
+<div class="preboxcontainer">
+<pre class="prebox">my @keys = @{$bucket-&gt;list_all-&gt;{keys} || []};
+foreach my $key (@keys) {
+        print "$key-&gt;{key}\t$key-&gt;{size}\t$key-&gt;{last_modified}\n";
+}</pre>
+</div>
+<p>La salida se verá más o menos así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">myphoto1.jpg 251262  2011-08-08T21:35:48.000Z
+myphoto2.jpg 262518  2011-08-08T21:38:01.000Z</pre>
+</div>
+</div>
+<div id="deleting-a-bucket">&nbsp;</div>
+<span id="s3-perl-Eliminar_un_Bucket"></span>
+<h2>Eliminar un Bucket</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El Bucket debe estar vacío, si no, no funcionará.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">$conn-&gt;delete_bucket($bucket);</pre>
+</div>
+</div>
+<div id="forced-delete-for-non-empty-buckets">&nbsp;</div>
+<span id="s3-perl-Forzar_la_Eliminación_para_Buckets_No_vacíos"></span>
+<h2>Forzar la Eliminación para Bucker No vacíos</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>No disponible en el módulo <a href="http://search.cpan.org/~tima/Amazon-S3-0.441/lib/Amazon/S3.pm">Amazon::S3</a> perl</p>
+</div>
+</div>
+</div>
+<div id="creating-an-object">&nbsp;</div>
+<span id="s3-perl-Crear_un_Object"></span>
+<h2>Crear un Object</h2>
+<div class="solvvy-solution">
+<p>Crea un archivo <code class="docutils literal"><span class="pre">hello.txt</span></code> con la cadena <code class="docutils literal"><span class="pre">"Hello</span> <span class="pre">World!"</span></code></p>
+<div class="preboxcontainer">
+<pre class="prebox">$bucket-&gt;add_key(
+        'hello.txt', 'Hello World!',
+        { content_type =&gt; 'text/plain' },
+);</pre>
+</div>
+</div>
+<div id="change-an-object-s-acl">&nbsp;</div>
+<span id="s3-perl-Cambiar_el_ACL_de_un_Object"></span>
+<h2>Cambiar el ACL de un Object</h2>
+<div class="solvvy-solution">
+<p>Hace el object <code class="docutils literal"><span class="pre">hello.txt</span></code> legible para el público y <code class="docutils literal"><span class="pre">secret_plans.txt</span></code> que sea privado.</p>
+<div class="preboxcontainer">
+<pre class="prebox">$bucket-&gt;set_acl({
+        key       =&gt; 'hello.txt',
+        acl_short =&gt; 'public-read',
+});
+$bucket-&gt;set_acl({
+        key       =&gt; 'secret_plans.txt',
+        acl_short =&gt; 'private',
+});</pre>
+</div>
+</div>
+<div id="download-an-object-to-a-file">&nbsp;</div>
+<span id="s3-perl-Descargar_un_Object"></span>
+<h2>Descargar un Object (a un archivo)</h2>
+<div class="solvvy-solution">
+<p>Descarga un object <span class="text-object">perl_poetry.pdf</span> y lo guarda en <span class="text-object">/home/username/documents/.</span> Asegúrate de cambiar <span class="code">username</span> a tu usuario Shell.</p>
+<div class="preboxcontainer">
+<pre class="prebox">$bucket-&gt;get_key_filename('perl_poetry.pdf', undef,
+        '/home/<span class="code-highlight">username</span>/documents/perl_poetry.pdf');</pre>
+</div>
+</div>
+<div id="delete-an-object">&nbsp;</div>
+<span id="s3-perl-Eliminar_un_Object"></span>
+<h2>Eliminar un Object</h2>
+<div class="solvvy-solution">
+<p>Elimina el object <code class="docutils literal"><span class="pre">goodbye.txt.</span></code></p>
+<div class="preboxcontainer">
+<pre class="prebox">$bucket-&gt;delete_key('goodbye.txt');</pre>
+</div>
+</div>
+<div id="generate-object-download-urls-signed-and-unsigned">&nbsp;</div>
+<span id="s3-perl-Generar_URL_de_descarga_de_un_Object"></span>
+<h2>Generar URL de Descarga de un Objeto (firmar y sin firmar)</h2>
+<div class="solvvy-solution">
+<p>Esto fenera una URL de descarga sin firma para <code class="docutils literal"><span class="pre">hello.txt</span></code>. Esto funciona por que <code class="docutils literal"><span class="pre">hello.txt</span></code> fue hecho público por la configuración ACL de arriba. Luego esto genera una URL de descarga firmada para <code class="docutils literal"><span class="pre">secret_plans.txt</span></code> esto funcionará por 1 hora. URL de descarga firmadas funcionarán por un periodo de tiempo aun si el object es privado (cuando el periodo se acaba, la URL dejará de funcionar.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El <a class="reference external" href="http://search.cpan.org/~tima/Amazon-S3-0.441/lib/Amazon/S3.pm">Amazon::S3</a> módulo no tiene ninguna manera de generar URL de descarga, entonces estos ejemplos usan otro módulo en vez. Desafortunadamente, muchos módulos para generar estas URL asumen que estás usando Amazon. Por esta razón, un módulo más obscuro, <a class="reference external" href="http://search.cpan.org/~mike/Muck-0.02/">Muck::FS::S3</a> es usado. Esto debe ser lo mismo que módulo perl de ejemplo S3 de Amazon, pero este módulo de ejemplo no es un CPAN. Entonces, puedes o usar CPAN para instalar <a class="reference external" href="http://search.cpan.org/~mike/Muck-0.02/">Muck::FS::S3</a>, o instalar un módulo de Amazon S3 de ejemplo manualmente. Si vas a la ruta del manual, puedes eliminar <code class="docutils literal"><span class="pre">Muck::FS::</span></code> del ejemplo a continuación.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">use Muck::FS::S3::QueryStringAuthGenerator;
+my $generator = Muck::FS::S3::QueryStringAuthGenerator-&gt;new(
+        $access_key,
+        $secret_key,
+        0, # 0 means use 'http'. set this to 1 for 'https'
+        'objects-us-east-1.dream.io',
+);
+
+my $hello_url = $generator-&gt;make_bare_url($bucket-&gt;bucket, 'hello.txt');
+print $hello_url . "\n";
+
+$generator-&gt;expires_in(3600); # 1 hour = 3600 seconds
+my $plans_url = $generator-&gt;get($bucket-&gt;bucket, 'secret_plans.txt');
+print $plans_url . "\n";</pre>
+</div>
+<p>La salida se verá más o menos así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">https://objects-us-east-1.dream.io:80/my-bucket-name/hello.txt
+https://objects-us-east-1.dream.io:80/my-bucket-name/secret_plans.txt?Signature=XXXXXXXXXXXXXXXXXXXXXXXXXXX&amp;Expires=1316027075&amp;AWSAccessKeyId=XXXXXXXXXXXXXXXXXXX
+</pre>
+</div>
+</div>
+<div class="clearer">&nbsp;</div>
+<div class="footer">&nbsp;</div>
+<!--DreamObjects Button-->
+<div class="dream-sign-up">
+<h2>¡Empieza a Almacenar Tus Datos Hoy!</h2>
+<div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/storage/">Suscríbete a DreamObjects</a></div>
+</div>
+</div>
+</div>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 117px; top: 2065.48px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>

@@ -1,11 +1,11 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Dependiendo de cómo tu sitio está construido, puede ser necesario redireccionar requerimientos de la URL primaria a un subdirectorio. Por ejemplo, requerimientos a ejemplo.com pueden ir a ejempli.com/blog. Esto es normalmente necesario con <a href="https://help.dreamhost.com/hc/es/articles/215525277-C%C3%B3mo-instalar-WordPress-usando-el-Instalador-de-un-clic" target="_self">WordPress instalación de un-clic</a>.</p>
+<p>Dependiendo de cómo tu sitio está construido, puede ser necesario redireccionar requerimientos de la URL primaria a un subdirectorio. Por ejemplo, requerimientos a <strong>example.com</strong> pueden ir a <strong>example.com/blog</strong>. Esto es normalmente necesario con la <a href="https://help.dreamhost.com/hc/es/articles/215525277-C%C3%B3mo-instalar-WordPress-usando-el-Instalador-de-un-clic" target="_self">instalación a un clic de WordPress</a>.</p>
 <p>Cuando estés instalando WordPress:</p>
 <ul>
 <li>El directorio de destino debe estar completamente vacío para que funcione.</li>
-<li>Por ejemplo, si quieres poner la instalación en el directorio /ejemplo.com, este directorio tiene que estar vacío y no contener ningún archivo.</li>
-<li>Otra solución es instalar un software dentro del subdirectorio vacío como ejemplo.com/blog; luego, puedes crear reglas en un archivo <span class="text-object">.htaccess</span> para que automáticamente redireccione los requerimientos de ejemplo.com a ejemplo.com/blog.</li>
+<li>Por ejemplo, si quieres poner la instalación en el directorio <span class="text-object">/example.com</span>, este directorio tiene que estar vacío y no contener ningún archivo.</li>
+<li>Otra solución es instalar un software dentro del subdirectorio vacío como <strong>example.com/blog</strong>; luego, puedes crear reglas en un archivo <span class="text-object">.htaccess</span> para que automáticamente redireccione los requerimientos de <strong>example.com</strong> a <strong>example.com/blog</strong>.</li>
 </ul>
 </div>
 <h2>Crear un archivo .htaccess en tu servidor web de DreamHost</h2>
@@ -23,7 +23,7 @@
 <h2>¿Quieres cambiarlos en los siguientes ejemplos?</h2>
 <div class="solvvy-solution">
 <p>Los siguientes ejemplos pueden ser ingresados en tu archivo <span class="text-object">.htaccess</span> exactamente como se muestra.</p>
-<p>Solo si el ejemplo contiene una URL en negrita tu debes cambiarla por tu URL. Por ejemplo, si tu ves el dominio 'ejemplo.com', cambialo por tu nombre de dominio.</p>
+<p>Solo si el ejemplo contiene una URL en negrita tu debes cambiarla por tu URL. Por ejemplo, si tu ves el dominio example, cambialo por tu nombre de dominio.</p>
 </div>
 <h2>Redireccionar requerimientos con .htaccess</h2>
 <div class="solvvy-solution">
@@ -32,30 +32,30 @@
 <ol>
 <li>Visita la página de FTP para ver instrucciones de cómo subir archivos.</li>
 <li>Una vez conectado, sube (o crea) un archivo de texto llamado <span class="text-object">.htaccess</span> (sin extensión).</li>
-<li>Asegúrate de que ha sido subido al directorio del dominio por ejemplo ejemplo.com.</li>
+<li>Asegúrate de que ha sido subido al directorio del dominio por ejemplo <strong>example.com</strong>.</li>
 <li>Agrega el siguiente contenido al archivo <span class="text-object">.htaccess</span>.</li>
 </ol>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine on
 RewriteBase /
 <br /># Rewrites all URLS without blog in them
-RewriteCond&nbsp;%{REQUEST_URI}&nbsp;!^/blog/
+RewriteCond&nbsp;%{REQUEST_URI}&nbsp;!^/<span class="code-highlight">blog</span>/
 
 # Rewrites all URLS [Replace "example" with the actual domain, without the TLD (.com, .net, .biz, etc)]
-RewriteCond&nbsp;%{HTTP_HOST} ^(www\.)?<span class="command">example</span>\.
+RewriteCond&nbsp;%{HTTP_HOST} ^(www\.)?<span class="code-highlight">example</span>\.
 
 # Rewrite all those to insert /folder
 RewriteRule ^(.*)$ /<span class="command">blog/</span>$1 [L]
 </pre>
 </div>
-<p>Este ejemplo redirecciona todos los requerimientos de un subdirectorio llamado /blog. Si necesitas redireccionar otro directorio, solo cambia las dos referencias de /blog a tu subdirectorio.</p>
+<p>Este ejemplo redirecciona todos los requerimientos de un subdirectorio llamado <span class="text-object">/blog</span>. Si necesitas redireccionar otro directorio, solo cambia las dos referencias de <span class="text-object">/blog</span> a tu subdirectorio.</p>
 <h3>Redireccionar 'SOLO' la URL root del dominio a un subdirectorio</h3>
-<p>El siguiente ejemplo te da un método alternativo de redireccionamiento transparente. Funciona con cualquier dominio (incluyendo dominios root/naked) y solo redirecciona transparentemente requerimientos de root, mientras permite que requerimientos directos a subdirectorios como ejemplo.com/otro sean accesados.</p>
+<p>El siguiente ejemplo te da un método alternativo de redireccionamiento transparente. Funciona con cualquier dominio (incluyendo dominios root/naked) y solo redirecciona transparentemente requerimientos de root, mientras permite que requerimientos directos a subdirectorios como <strong>example.com/otro</strong> sean accesados.</p>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine on
-RewriteCond&nbsp;%{HTTP_HOST} <span class="command">example\.com</span> [NC]
+RewriteCond&nbsp;%{HTTP_HOST} <span class="code-highlight">example\.com</span> [NC]
 RewriteCond&nbsp;%{REQUEST_URI} ^/$
-RewriteRule ^(.*)$ <span class="command">/blog/</span>$1 [L]
+RewriteRule ^(.*)$ <span class="code-highlight">/blog/</span>$1 [L]
 </pre>
 </div>
 </div>

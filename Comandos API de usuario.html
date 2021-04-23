@@ -1,0 +1,129 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="User API commands" class="solvvy-hidden">
+<div class="altTitle">API de usuario</div>
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#user-add_user">user-add_user</a></li>
+<li><a class="reference internal" href="#user-list_users">user-list_users</a></li>
+<li><a class="reference internal" href="#user-remove_user">user-remove_user</a></li>
+<li><a class="Ver_también" href="#Ver_también">Ver también</a></li>
+</ul>
+</div>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si ves que alguna de las instrucciones de este artículo no funciona como se esperaba, es posible que esté desactualizada. En caso de duda, por favor comunícate con soporte para obtener más ayuda.</p>
+</div>
+</div>
+<p>El módulo <strong>user</strong> de API administra usuarios de Shell y FTP.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El comando user-list_users también enumera los usuarios de correo.</p>
+</div>
+</div>
+<h2>Comandos</h2>
+<div class="solvvy-solution">
+<h3><span id="user-add_user">user-add_user</span></h3>
+<p>Agrega un usuario (de tipo ftp, sftp o shell). Si no especificas una contraseña, se genera una contraseña aleatoriamente y se muestra en el resultado. De lo contrario, el resultado muestra ******** para la contraseña. También se devuelve un token de servicio (consulta Comandos de control de servicio).</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comando</strong></td>
+<td>user-add_user</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p><strong>type</strong> : El tipo de usuario; puede ser ftp, sftp, o shell.<br /><strong>username</strong> : El usuario deseado para el nuevo usuario.<br /><strong>gecos</strong> : EL Nombre Completo para este usuario, como John Smith (este campo no puede ir en blanco).<br /><strong>server</strong> : El home para el usuario (el servidor compartido o VPS). Esto es requerido.<br /><strong>shell_type</strong> : El tipo de shell para el usuario (bash, tcsh, ksh, o zsh). Solo es requerido si el tipo es shell.<br /><strong>password</strong> : (opcional) La contraseña para el nuevo usuario. Generado aleatoriamente si no se especifical<br /><strong>enhanced_security</strong>&nbsp;: (opcional) Configurado como 1 para habiliatar la Seguridad del Usuario Mejorada (Enhanced User Security. Ponlo en 0 o déjalo en blanco para deshabiliatarlo)</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success<br />username password token<br />testuser123 ******** gcnaBcD12eFgH34iJkL</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>no_type<br />no_username<br />no_gecos<br />no_server<br />no_shell_type<br />invalid_type<br />invalid_shell_type<br />invalid_server<br />invalid_username (specific error after a tab)<br />user_exists<br />invalid_gecos (specific error after a tab)<br />invalid_password (specific error after a tab)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="user-list_users">user-list_users</span></h3>
+<p>Vuelca una lista de todos los usuarios (incluidos ftp, shell, ftp anónimo, copias de seguridad y buzones de correo) en todas las cuentas a las que tienes acceso. Las contraseñas ya no están disponibles a través de este comando de API.</p>
+<table class="wikitable" style="height: 323px;">
+<tbody>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 115px;"><strong>Comando</strong></td>
+<td style="height: 21px; width: 562.5px;">user-list_users</td>
+</tr>
+<tr style="height: 21px;">
+<td style="height: 21px; width: 115px;"><strong>Valores</strong></td>
+<td style="height: 21px; width: 562.5px;">
+<p>(ninguno)</p>
+</td>
+</tr>
+<tr style="height: 195px;">
+<td style="height: 195px; width: 115px;"><strong>Resultado</strong></td>
+<td style="height: 195px; width: 562.5px;">
+<p>success<br />account_id username type shell home password disk_used_mb quota_mb gecos<br />1 anftp ftp /etc/ftponly machine.dreamhost.com 0 671744 An FTP user<br />1 b1 backup /usr/bin/rssh backup.dreamhost.com 0 671744 Account #1 Backup User<br />1 blah shell /bin/bash machine.dreamhost.com 0 671744 Blah Shell<br />1 josh@blah.com mail /etc/poponly smaug.dreamhost.com 0 671744 Josh Email User!</p>
+</td>
+</tr>
+<tr style="height: 43px;">
+<td style="height: 43px; width: 115px;"><strong>Posibles errores</strong></td>
+<td style="height: 43px; width: 562.5px;">
+<p><strong>type</strong>&nbsp;: normalmente ftp, sftp, shell, mail, o backup</p>
+</td>
+</tr>
+<tr style="height: 43px;">
+<td style="height: 43px; width: 115px;"><strong>Posibles errores</strong></td>
+<td style="height: 43px; width: 562.5px;">
+<p>(ninguno)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="user-remove_user">user-remove_user</span></h3>
+<p>Elimina un usuario especificado por el usuario. Opcionalmente, se puede especificar el tipo de usuario o home para distinguir el usuario que se eliminará (si el usuario existe en múltiples hogares/tipos). Para especificar el home, establece el usuario en <strong>username@home</strong>. Si el usuario tiene más de un tipo/home, puedes configurar remove_all para eliminar todas las instancias del usuario (nota: si remove_all está configurado <em>y</em> se especifica el tipo u home, elimina todas las instancias del <em>usuario</em> con ese tipo o en ese home).</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<td><strong>Comand</strong></td>
+<td>user-remove_user</td>
+</tr>
+<tr>
+<td><strong>Valores</strong></td>
+<td>
+<p><strong>username</strong>&nbsp;: el usuario a eliminar, como testuser42. Opcionalmente usa username@home para especificar un hogar, como testuser42@riga<br /><strong>type</strong> : (Opcional) el tipo de usuario, como ftp, shell, etc.<br /><strong>remove_all</strong> : (Opcional) Configuralo como 1 para eliminar todas las intancias de este usuario (si el usuario tiene múltiples tipos o está en multiples hogar).</p>
+</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>
+<p>success</p>
+</td>
+</tr>
+<tr>
+<td><strong>Posibles errores</strong></td>
+<td>
+<p>invalid_user (specific error after tab).<br />multiple_user_services (error específico después de la pestaña, como que el usuario tiene más de un tipo/hogar y el tipo/home y remove_all no se establecieron)<br />cannot_remove_user (error específico después de la pestaña)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2><span id="Ver_también">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217560167-Generalidades-de-la-interfaz-de-programaci%C3%B3n-de-aplicaciones-API-" target="_self" rel="undefined">Generalidades de la interfaz de programación de aplicaciones</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>

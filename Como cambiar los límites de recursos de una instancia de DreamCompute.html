@@ -1,0 +1,150 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Para cambiar los límites de recursos (vCPU/RAM) de una instancia específica, debes cambiar tu 'Flavor'. Esto se puede hacer dentro del panel de DreamCompute o usando la CLI de OpenStack. Utiliza la opción con la que te sientas más cómodo.</p>
+<ul>
+<li><a href="#Dashboard">Cambiar límites en el tablero</a></li>
+<li><a href="#OpenStackCLI">Cambio de límites usando la CLI de OpenStack</a></li>
+</ul>
+</div>
+<h2><span id="Dashboard">Cambiar los límites de recursos en el panel</span></h2>
+<div class="solvvy-solution">
+<ol>
+<ol>
+<li>Navega hasta la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener">DreamCompute</a>.</li>
+<li>Haz clic en el botón <strong>'Ver Panel' </strong>.</li>
+<li>En el menú de la izquierda, haz clic en 'Calcular'.</li>
+<li>En el menú desplegable, haz clic en <span class="text-object">Instancias</span>.</li>
+<li>A la derecha de tu instancia, debajo de la columna <span class="text-object">Acciones</span> hay un botón <strong>Crear Captura</strong>. Haz clic en la pequeña flecha al lado para ver el menú desplegable.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/Resize_Instance_dropdown.png" alt="" /></dd>
+</dl>
+</li>
+<li>En el menú, selecciona "Resize Instance".
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/Resize_Instance_popup.png" alt="" /></dd>
+</dl>
+</li>
+<li>En la ventana emergente, selecciona el nuevo flavor que desees del menú desplegable, luego haz clic en el botón <strong>Resize</strong>.</li>
+<li>Después de unos momentos, la instancia informará que está en un estado Cambiar tamaño/Migrar y te pedirá que "Confirmes o Revertir Cambiar tamaño/Migrar".
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/Resize_Instance_confirm.png" alt="" /></dd>
+</dl>
+</li>
+<li>Puedes hacer esto haciendo clic en el botón Confirmar cambio de tamaño/migrar debajo de la columna <span class="text-object">Actions</span>.</li>
+</ol>
+</ol>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>También puedes cancelar el cambio de tamaño haciendo clic en la flecha desplegable y seleccionando la acción <span class="text-object">Revert Resize/Migrate</span>.</p>
+</div>
+</div>
+<p>Después de confirmar o revertir el cambio de tamaño/migración, el estado de la instancia volverá a Activo.</p>
+</div>
+<h2><span id="OpenStackCLI">Cambiar el límite de recursos usando OpenStackCLI</span></h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Para ejecutar los siguientes comandos, asegúrate de haber instalado el <a href="https://help.dreamhost.com/hc/es/articles/235817468-Introducci%C3%B3n-al-cliente-de-l%C3%ADnea-de-comandos-de-OpenStack" target="_self" rel="undefined">cliente de línea de comandos de OpenStack</a>.</p>
+<p>En los siguientes ejemplos, myInstance es el nombre de tu instancia. Puedes ver el nombre de tu instancia en el <a href="https://iad2.dreamcompute.com/project/instances/">panel de DreamCompute</a>.</p>
+</div>
+</div>
+<ol>
+<li>Primero, usa el comando <span class="code">openstack server show SERVER</span> para mostrar la información sobre una instancia. Esto incluye su tamaño, que se muestra como el valor de la propiedad de flavor:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server show myInstance</span>
++-----------------------------+--------------------------------------------------------------+
+| Field                       | Value                                                        |
++-----------------------------+--------------------------------------------------------------+
+| OS-DCF:diskConfig           | AUTO                                                         |
+| OS-EXT-AZ:availability_zone | iad-2                                                        |
+| OS-EXT-STS:power_state      | Running                                                      |
+| OS-EXT-STS:task_state       | None                                                         |
+| OS-EXT-STS:vm_state         | active                                                       |
+| OS-SRV-USG:launched_at      | 2017-10-06T01:23:41.000000                                   |
+| OS-SRV-USG:terminated_at    | None                                                         |
+| accessIPv4                  |                                                              |
+| accessIPv6                  |                                                              |
+| config_drive                | True                                                         |
+| created                     | 2017-10-06T01:23:12Z                                         |
+| flavor                      | <span class="green">gp1.subsonic (100)</span>                                           |
+| hostId                      | 9d915ea664129303798621bb83cb3b2ac04c445cae6fc9e58e90b5d6     |
+| id                          | 246e50c8-22fa-4310-b972-a71cd0df43bf                         |
+| image                       |                                                              |
+| key_name                    | myKey                                                        |
+| name                        | myInstance                                                   |
+| progress                    | 0                                                            |
+| project_id                  | e52edb2a460548zf950ba86497300079                             |
+| properties                  |                                                              |
+| security_groups             | name='default'                                               |
+| status                      | ACTIVE                                                       |
+| updated                     | 2017-10-06T01:23:41Z                                         |
+| user_id                     | 29815515c3be4d49a27e787a63eb8320                             |
+| volumes_attached            | id='e6b7qecc-8be2-4199-a4ad-9905b5591fed'                    |
++-----------------------------+--------------------------------------------------------------+
+</pre>
+</div>
+<p>En ese ejemplo, el tamaño (flavor) de la instancia es <code class="docutils literal"><span class="pre">gp1.subsonic</span> <span class="pre">(100)</span></code>.</p>
+</li>
+<li>
+<p class="first">Enumera los sabores disponibles con el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack flavor list</span>
++-----+----------------+-------+------+-----------+-------+-----------+
+| ID  | Name           |   RAM | Disk | Ephemeral | VCPUs | Is Public |
++-----+----------------+-------+------+-----------+-------+-----------+
+| 100 | gp1.subsonic   |  1024 |   80 |         0 |     1 | True      |
+| 200 | gp1.supersonic |  2048 |   80 |         0 |     1 | True      |
+| 300 | gp1.lightspeed |  4096 |   80 |         0 |     2 | True      |
+| 400 | gp1.warpspeed  |  8192 |   80 |         0 |     4 | True      |
+| 50  | gp1.semisonic  |   512 |   80 |         0 |     1 | True      |
+| 500 | gp1.hyperspeed | 16384 |   80 |         0 |     8 | True      |
++-----+----------------+-------+------+-----------+-------+-----------+
+</pre>
+</div>
+</li>
+<li>
+<p class="first">Para cambiar el tamaño de la instancia, usa el comando de <span class="code">openstack <a href="https://docs.openstack.org/python-openstackclient/pike/cli/command-objects/server.html#server-resize">server resize</a></span> especificando el ID/nombre de la instancia y el nuevo flavor. Incluye el parámetro <cite>–-wait</cite> para mostrar el progreso del cambio de tamaño. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server resize --flavor 200 --wait myInstance</span>
+Complete
+</pre>
+</div>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Por defecto, el comando <span class="code">openstack server resize</span> le da al sistema operativo invitado 60 segundos para realizar un apagado controlado antes de que la instancia se apague y se cambie el tamaño de la instancia.</p>
+<p>El valor de timeout se puede anular por imagen mediante <span class="code">os_shutdown_timeout</span> que es una configuración de metadatos de imagen que permite que diferentes tipos de sistemas operativos especifican cuánto tiempo necesitan para apagarlo limpiamente.</p>
+</div>
+</div>
+</li>
+<li>
+<p class="first">Muestra el estado de la instancia.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server show INSTANCE_NAME -c status</span>
++--------+----------------+<br />| Field  | Value          |<br />+--------+----------------+<br />| status | VERIFY_RESIZE  |<br />+--------+----------------+
+</pre>
+</div>
+<p>Cuando se completa el cambio de tamaño, el estado pasa a ser VERIFY_RESIZE.</p>
+</li>
+<li>
+<p class="first">Confirma el cambio de tamaño, por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server resize --confirm myInstance</span></pre>
+</div>
+<p>Corre <span class="code">openstack server show INSTANCE_NAME -c status</span>&nbsp;nuevamente y verás que el estado ahora es ACTIVO.</p>
+</li>
+<li>
+<p class="first">Si el cambio de tamaño falla o no funciona como se esperaba, revierte el cambio de tamaño. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server resize --revert myInstance</span></pre>
+</div>
+<p>El estado de la instancia se vuelve ACTIVO.</p>
+</li>
+</ol>
+<!--DreamCompute Button--></div>
+<div class="dream-sign-up">
+<h2>Implementa Tus Aplicaciones en Servidores en la Nube Hoy</h2>
+<div class="solvvy-hidden"><a href="http://www.dreamhost.com/cloud/computing">Suscríbete a DreamCompute</a></div>
+</div>

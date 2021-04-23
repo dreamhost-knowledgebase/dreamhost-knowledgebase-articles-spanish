@@ -1,0 +1,320 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="sample-c-code-using-dreamobjects-s3-compatible-api"><span id="cpp"></span>
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#s3-cpp-Configuración">Configuración</a></li>
+<li><a class="reference internal" href="#s3-cpp-Crear_una_Conexión">Crear (y Cerrar) una Conexión</a></li>
+<li><a class="reference internal" href="#s3-cpp-Enlistar_Buckets_Propios">Enlistar Buckets Propios</a></li>
+<li><a class="reference internal" href="#s3-cpp-Crear_un_Bucket">Crear un Bucket</a></li>
+<li><a class="reference internal" href="#s3-cpp-Enlistar_Contenido_de_un_Bucket">Enlistar Contenido de un Bucket</a></li>
+<li><a class="reference internal" href="#s3-cpp-Eliminar_un_Bucket">Eliminar un Bucket</a></li>
+<li><a class="reference internal" href="#s3-cpp-Crear_un_Object">Crear un Object (desde un archivo)</a></li>
+<li><a class="reference internal" href="#s3-cpp-Descargar_un_Object">Descargar un Object (a un archivo)</a></li>
+<li><a class="reference internal" href="#s3-cpp-Eliminar_un_Object">Eliminar un Object</a></li>
+<li><a class="reference internal" href="#s3-cpp-Cambiar_el_ACL_de_un_Object">Cambiar el ACL de un Object</a></li>
+<li><a class="reference internal" href="#s3-cpp-Generar_URL_de_Descarga_de_un_Object">Generar URL de Descarga de un Object (firmado)</a></li>
+</ul>
+</div>
+Este artículo enlista muchos ejemplos de código de C++ para interactuar con DreamObjects.
+<div id="setup"><span id="s3-cpp-Configuración"></span>
+<h2>Configuración</h2>
+<p>Lo siguiente contiene 'includes' y 'globals' que serán usados en los siguientes ejemplos:</p>
+<div class="preboxcontainer">
+<pre class="prebox">#include "libs3.h"
+#include 
+#include 
+#include 
+
+const char access_key[] = "ACCESS_KEY";
+const char secret_key[] = "SECRET_KEY";
+const char host[] = "HOST";
+const char sample_bucket[] = "sample_bucket";
+const char sample_key[] = "hello.txt";
+const char sample_file[] = "resource/hello.txt";
+
+S3BucketContext bucketContext =
+{
+        host,
+        sample_bucket,
+        S3ProtocolHTTP,
+        S3UriStylePath,
+        access_key,
+        secret_key
+};
+
+S3Status responsePropertiesCallback(
+                const S3ResponseProperties *properties,
+                void *callbackData)
+{
+        return S3StatusOK;
+}
+
+static void responseCompleteCallback(
+                S3Status status,
+                const S3ErrorDetails *error,
+                void *callbackData)
+{
+        return;
+}
+
+S3ResponseHandler responseHandler =
+{
+        &amp;responsePropertiesCallback,
+        &amp;responseCompleteCallback
+};</pre>
+</div>
+<div id="Creating_and_closing_a_connection"><span id="s3-cpp-Crear_una_Conexión"></span>
+<h2>Crear (y Cerrar) una Conexión</h2>
+<p>Crea una conexión para que puedas interactuar con el servidor.</p>
+<div class="preboxcontainer">
+<pre class="prebox">S3_initialize("s3", S3_INIT_ALL, host);
+// Do stuff...
+S3_deinitialize();</pre>
+</div>
+</div>
+<div id="listing-owned-buckets"><span id="s3-cpp-Enlistar_Buckets_Propios"></span>
+<h2>Enlistar Buckets Propios</h2>
+<p>Obtiene una lista de Bucket que posees. Esto también imprimer el nombre del bucket, ID del propietario, y muestra el nombdre de cada bucket.</p>
+<div class="preboxcontainer">
+<pre class="prebox">static S3Status listServiceCallback(
+                const char *ownerId,
+                const char *ownerDisplayName,
+                const char *bucketName,
+                int64_t creationDate, void *callbackData)
+{
+        bool *header_printed = (bool*) callbackData;
+        if (!*header_printed) {
+                *header_printed = true;
+                printf("%-22s", "       Bucket");
+                printf("  %-20s  %-12s", "     Owner ID", "Display Name");
+                printf("\n");
+                printf("----------------------");
+                printf("  --------------------" "  ------------");
+                printf("\n");
+        }
+
+        printf("%-22s", bucketName);
+        printf("  %-20s  %-12s", ownerId ? ownerId : "", ownerDisplayName ? ownerDisplayName : "");
+        printf("\n");
+
+        return S3StatusOK;
+}
+
+S3ListServiceHandler listServiceHandler =
+{
+        responseHandler,
+        &amp;listServiceCallback
+};
+bool header_printed = false;
+S3_list_service(S3ProtocolHTTP, access_key, secret_key, host, 0, &amp;listServiceHandler, &amp;header_printed);</pre>
+</div>
+<span id="s3-cpp-Crear_un_Bucket"></span>
+<h2>Crear un Bucket</h2>
+<p>Crea un nuevo bucket.</p>
+<div class="preboxcontainer">
+<pre class="prebox">S3_create_bucket(S3ProtocolHTTP, access_key, secret_key, host, sample_bucket, S3CannedAclPrivate, NULL, NULL, &amp;responseHandler, NULL);</pre>
+</div>
+<div id="listing-a-bucket-s-content"><span id="s3-cpp-Enlistar_Contenido_de_un_Bucket"></span>
+<h2>Enlistar Contenido de un Bucket</h2>
+<p>Obtiene una lista de objects en un bucket. Esto también imprime cada nombre de los objetos, el tamaño del archivo, y la última fecha de modificación.</p>
+<div class="preboxcontainer">
+<pre class="prebox">static S3Status listBucketCallback(
+                int isTruncated,
+                const char *nextMarker,
+                int contentsCount,
+                const S3ListBucketContent *contents,
+                int commonPrefixesCount,
+                const char **commonPrefixes,
+                void *callbackData)
+{
+        printf("%-22s",     "      Object Name");
+        printf("  %-5s  %-20s", "Size", "   Last Modified");
+        printf("\n");
+        printf("----------------------");
+        printf("  -----" "  --------------------");
+        printf("\n");
+
+    for (int i = 0; i &lt; contentsCount; i++) {
+        char timebuf[256];
+                char sizebuf[16];
+        const S3ListBucketContent *content = &amp;(contents[i]);
+                time_t t = (time_t) content-&gt;lastModified;
+
+                strftime(timebuf, sizeof(timebuf), "%Y-%m-%dT%H:%M:%SZ", gmtime(&amp;t));
+                sprintf(sizebuf, "%5llu", (unsigned long long) content-&gt;size);
+                printf("%-22s  %s  %s\n", content-&gt;key, sizebuf, timebuf);
+    }
+
+    return S3StatusOK;
+}
+
+S3ListBucketHandler listBucketHandler =
+{
+        responseHandler,
+        &amp;listBucketCallback
+};
+S3_list_bucket(&amp;bucketContext, NULL, NULL, NULL, 0, NULL, &amp;listBucketHandler, NULL);</pre>
+</div>
+<p>La salida se ve más o menos así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">myphoto1.jpg 251262  2011-08-08T21:35:48.000Z
+myphoto2.jpg 262518  2011-08-08T21:38:01.000Z</pre>
+</div>
+<div id="deleting-a-bucket"><span id="s3-cpp-Eliminar_un_Bucket"></span>
+<h2>Eliminar un Bucket</h2>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El Bucket debe estar vacío, si no no funcionará.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">S3_delete_bucket(S3ProtocolHTTP, S3UriStylePath, access_key, secret_key, host, sample_bucket, NULL, &amp;responseHandler, NULL);</pre>
+</div>
+<div id="creating-an-object-from-a-file"><span id="s3-cpp-Crear_un_Object"></span>
+<h2>Crear un Object (desde un archivo)</h2>
+<p>Crea un archivo <code class="docutils literal"><span class="pre">hello.txt</span></code>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">#include &lt;sys/stat.h&gt;
+typedef struct put_object_callback_data
+{
+    FILE *infile;
+    uint64_t contentLength;
+} put_object_callback_data;
+
+
+static int putObjectDataCallback(int bufferSize, char *buffer, void *callbackData)
+{
+    put_object_callback_data *data = (put_object_callback_data *) callbackData;
+
+    int ret = 0;
+
+    if (data-&gt;contentLength) {
+        int toRead = ((data-&gt;contentLength &gt; (unsigned) bufferSize) ? (unsigned) bufferSize : data-&gt;contentLength);
+                ret = fread(buffer, 1, toRead, data-&gt;infile);
+    }
+    data-&gt;contentLength -= ret;
+    return ret;
+}
+
+put_object_callback_data data;
+struct stat statbuf;
+if (stat(sample_file, &amp;statbuf) == -1) {
+        fprintf(stderr, "\nERROR: Failed to stat file %s: ", sample_file);
+        perror(0);
+        exit(-1);
+}
+
+int contentLength = statbuf.st_size;
+data.contentLength = contentLength;
+
+if (!(data.infile = fopen(sample_file, "r"))) {
+        fprintf(stderr, "\nERROR: Failed to open input file %s: ", sample_file);
+        perror(0);
+        exit(-1);
+}
+
+S3PutObjectHandler putObjectHandler =
+{
+        responseHandler,
+        &amp;putObjectDataCallback
+};
+
+S3_put_object(&amp;bucketContext, sample_key, contentLength, NULL, NULL, &amp;putObjectHandler, &amp;data);</pre>
+</div>
+<div id="download-an-object-to-a-file"><span id="s3-cpp-Descargar_un_Object"></span>
+<h2>Descargar un Object (a un archivo)</h2>
+<p>Descarga un archivo e imprime el contenido.</p>
+<div class="preboxcontainer">
+<pre class="prebox">static S3Status getObjectDataCallback(int bufferSize, const char *buffer, void *callbackData)
+{
+        FILE *outfile = (FILE *) callbackData;
+        size_t wrote = fwrite(buffer, 1, bufferSize, outfile);
+        return ((wrote &lt; (size_t) bufferSize) ? S3StatusAbortedByCallback : S3StatusOK);
+}
+
+S3GetObjectHandler getObjectHandler =
+{
+        responseHandler,
+        &amp;getObjectDataCallback
+};
+FILE *outfile = stdout;
+S3_get_object(&amp;bucketContext, sample_key, NULL, 0, 0, NULL, &amp;getObjectHandler, outfile);</pre>
+</div>
+<div id="delete-an-object"><span id="s3-cpp-Eliminar_un_Object"></span>
+<h2>Eliminar un Object</h2>
+<p>Elimina un object.</p>
+<div class="preboxcontainer">
+<pre class="prebox">S3ResponseHandler deleteResponseHandler =
+{
+        0,
+        &amp;responseCompleteCallback
+};
+S3_delete_object(&amp;bucketContext, sample_key, 0, &amp;deleteResponseHandler, 0);</pre>
+</div>
+<div id="change-an-object-s-acl"><span id="s3-cpp-Cambiar_el_ACL_de_un_Object"></span>
+<h2>Cambiar el ACL de un Object</h2>
+<p>Cambiar el ACL de un object para dar control completo a otro usuario.</p>
+<div class="preboxcontainer">
+<pre class="prebox">#include 
+char ownerId[] = "owner";
+char ownerDisplayName[] = "owner";
+char granteeId[] = "grantee";
+char granteeDisplayName[] = "grantee";
+
+S3AclGrant grants[] = {
+        {
+                S3GranteeTypeCanonicalUser,
+                {{}},
+                S3PermissionFullControl
+        },
+        {
+                S3GranteeTypeCanonicalUser,
+                {{}},
+                S3PermissionReadACP
+        },
+        {
+                S3GranteeTypeAllUsers,
+                {{}},
+                S3PermissionRead
+        }
+};
+
+strncpy(grants[0].grantee.canonicalUser.id, ownerId, S3_MAX_GRANTEE_USER_ID_SIZE);
+strncpy(grants[0].grantee.canonicalUser.displayName, ownerDisplayName, S3_MAX_GRANTEE_DISPLAY_NAME_SIZE);
+
+strncpy(grants[1].grantee.canonicalUser.id, granteeId, S3_MAX_GRANTEE_USER_ID_SIZE);
+strncpy(grants[1].grantee.canonicalUser.displayName, granteeDisplayName, S3_MAX_GRANTEE_DISPLAY_NAME_SIZE);
+
+S3_set_acl(&amp;bucketContext, sample_key, ownerId, ownerDisplayName, 3, grants, 0, &amp;responseHandler, 0);</pre>
+</div>
+<div id="generate-object-download-url-signed"><span id="s3-cpp-Generar_URL_de_Descarga_de_un_Object"></span>
+<h2>Generar URL de Descarga de un Object (firmado)</h2>
+<p>Genera una URL de descarga firmado que será válido por 5 minutos.</p>
+<div class="preboxcontainer">
+<pre class="prebox">#include 
+char buffer[S3_MAX_AUTHENTICATED_QUERY_STRING_SIZE];
+int64_t expires = time(NULL) + 60 * 5; // Current time + 5 minutes
+
+S3_generate_authenticated_query_string(buffer, &amp;bucketContext, sample_key, expires, NULL);</pre>
+</div>
+</div>
+<div class="footer">&nbsp;</div>
+<!--DreamObjects Button-->
+<div class="dream-sign-up">
+<h2>¡Empieza a Almacenar Tus Datos Hoy!</h2>
+<a href="https://www.dreamhost.com/cloud/storage/">Suscríbete a DreamObjects</a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

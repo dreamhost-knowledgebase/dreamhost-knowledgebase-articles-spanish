@@ -1,0 +1,372 @@
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="sample-ruby-code-using-dreamobjects-s3-compatible-api" class="solvvy-hidden">
+<div class="table-of-content container">
+<ul class="simple">
+<li>Ejemplos de Ruby AWS::SDK (gema aws-sdk-v1)
+<ul>
+<li><a class="reference internal" href="#s3-aws-Crear_una_Conexión">Crear una Conexión</a></li>
+<li><a class="reference internal" href="#s3-aws-Enlistar_los_Buckets_Propios">Enlistar los Buckets Propios</a></li>
+<li><a class="reference internal" href="#s3-aws-Crear_un_Bucket">Crear un Bucket</a></li>
+<li><a class="reference internal" href="#s3-aws-Enlistar_un_Contenido_de_un_Bucket">Enlistar un Contenido de un Bucket</a></li>
+<li><a class="reference internal" href="#s3-aws-Eliminar_un_Bucket">Eliminar un Bucket</a></li>
+<li><a class="reference internal" href="#s3-aws-Forzar_la_eliminación_de_Buckets_que_no_están_vacíos">Forzar la eliminación de Buckets que no están vacíos</a></li>
+<li><a class="reference internal" href="#s3-aws-Crear_un_Object">Crear un Object</a></li>
+<li><a class="reference internal" href="#s3-aws-Cambiar_el_ACL_de_un_Object">Cambiar el ACL de un Object</a></li>
+<li><a class="reference internal" href="#s3-aws-Descargar_un_Object">Descargar un Object (a un archivo)</a></li>
+<li><a class="reference internal" href="#s3-aws-Eliminar_un_Object">Eliminar un Object</a></li>
+<li><a class="reference internal" href="#s3-aws-Generar_URL_de_descarga_de_Objects">Generar URL de descarga de Objects (firmados y sin firmar)</a></li>
+</ul>
+</li>
+<li>Ejemplos de Ruby AWS::S3 (gema aws-s3)
+<ul>
+<li><a class="reference internal" href="#s3-ruby-Crear_una_Conexión">Crear una Conexión</a></li>
+<li><a class="reference internal" href="#s3-ruby-Enlistar_Buckets_Propios">Enlistar Buckets Propios</a></li>
+<li><a class="reference internal" href="#s3-ruby-Crear_un_Bucket">Crear un Bucket</a></li>
+<li><a class="reference internal" href="#s3-ruby-Enlistar_el_Contenido_de_un_Bucket">Enlistar el Contenido de un Bucket</a></li>
+<li><a class="reference internal" href="#s3-ruby-Eliminar_un_Bucket">Eliminar un Bucket</a></li>
+<li><a class="reference internal" href="#s3-ruby-Forzar_la_Eliminación_de_Buckets_no_vacíos">Forzar la Eliminación de Buckets no vacíos</a></li>
+<li><a class="reference internal" href="#s3-ruby-Crear_un_Object">Crear un Object</a></li>
+<li><a class="reference internal" href="#s3-ruby-Cambiar_el_ACL_de_un_Object">Cambiar el ACL de un Object</a></li>
+<li><a class="reference internal" href="#s3-ruby-Descargar_un_Object">Descargar un Object (a un archivo)</a></li>
+<li><a class="reference internal" href="#s3-ruby-Eliminar_un_Object">Eliminar un Object</a></li>
+<li><a class="reference internal" href="#s3-ruby-Generar_URL_de_Descarga_de_un_Object">Generar URL de Descarga de un Object (firmado y sin firmar)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<h2>Ejemplos de Ruby <a class="reference external" href="https://github.com/aws/aws-sdk-ruby" target="_self">AWS::SDK</a> (gema aws-sdk-v1)</h2>
+<p>Este artículo enlista muchos ejemplos de código de Ruby para interactuar con DreamObjects.</p>
+<div id="creating-a-connection">&nbsp;</div>
+<span id="s3-aws-Crear_una_Conexión"></span>
+<h2>Crear una Conexión</h2>
+<div class="solvvy-solution">
+<p>Crea una conexión para que puedas interactuar con DreamObjects.</p>
+<div class="preboxcontainer">
+<pre class="prebox">AWS.config(
+    :s3_endpoint        =&gt; 'objects-us-east-1.dream.io',
+    :access_key_id      =&gt; 'my-access-key',
+    :secret_access_key  =&gt; 'my-secret-key'
+)</pre>
+</div>
+<p>Crear una instancia de un Object de Cliente.</p>
+<div class="preboxcontainer">
+<pre class="prebox">s3 = AWS::S3.new</pre>
+</div>
+</div>
+<div id="listing-owned-buckets">&nbsp;</div>
+<span id="s3-aws-Enlistar_los_Buckets_Propios"></span>
+<h2>Enlistar Buckets Propios</h2>
+<div class="solvvy-solution">
+<p>Obtiene una lista de Buckets que posees e imprime el nombre.</p>
+<div class="preboxcontainer">
+<pre class="prebox">s3.buckets.each do |bucket|
+        puts bucket.name
+end</pre>
+</div>
+<p>La salida va a verse más o menos así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">mahbuckat1
+mahbuckat2
+mahbuckat3</pre>
+</div>
+</div>
+<div id="creating-a-bucket">&nbsp;</div>
+<span id="s3-aws-Crear_un_Bucket"></span>
+<h2>Crear un Bucket</h2>
+<div class="solvvy-solution">
+<p>Crea un nuevo bucket llamado <code class="docutils literal"><span class="pre">my-new-bucket.</span></code></p>
+<div class="preboxcontainer">
+<pre class="prebox">s3.buckets.create('my-new-bucket')</pre>
+</div>
+</div>
+<div id="listing-a-bucket-s-content">&nbsp;</div>
+<span id="s3-aws-Enlistar_un_Contenido_de_un_Bucket"></span>
+<h2>Enlista un Contenido de un Bucket</h2>
+<div class="solvvy-solution">
+<p>Obtiene una lista de hashes con el contenido de cada Object. Esto también imprime el nombre de cada Object, el tamaño del archivo y la fecha de la última modificación.</p>
+<div class="preboxcontainer">
+<pre class="prebox">new_bucket = s3.buckets['my-new-bucket']
+new_bucket.objects.each do |obj|
+        puts "#{obj.key}\t#{obj.content_length}\t#{obj.last_modified}"
+end</pre>
+</div>
+<p>La salida se verá más o menos así si el bucket tiene algunos archivos:</p>
+<div class="preboxcontainer">
+<pre class="prebox">myphoto1.jpg 251262  2011-08-08 21:35:48 -0400
+myphoto2.jpg 262518  2011-08-08 21:38:01 -0400
+</pre>
+</div>
+</div>
+<div id="deleting-a-bucket">&nbsp;</div>
+<span id="s3-aws-Eliminar_un_Bucket"></span>
+<h2>Eliminar un Bucket</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El Bucket debe estar vacío, si no, no funcionará.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">bucket = s3.buckets['my-new-bucket']
+bucket.delete</pre>
+</div>
+</div>
+<div id="forced-delete-for-non-empty-buckets">&nbsp;</div>
+<span id="s3-aws-Forzar_la_eliminación_de_Buckets_que_no_están_vacíos"></span>
+<h2>Forzar la Eliminación de Buckets que no están vacíos</h2>
+<div class="solvvy-solution">
+<div class="preboxcontainer">
+<pre class="prebox">bucket = s3.buckets['my-new-bucket']
+bucket.delete!</pre>
+</div>
+</div>
+<div id="creating-an-object">&nbsp;</div>
+<span id="s3-aws-Crear_un_Object"></span>
+<h2>Crear un Object</h2>
+<div class="solvvy-solution">
+<p>Crear un archivo <code class="docutils literal"><span class="pre">hello.txt</span></code> con la cadena <code class="docutils literal"><span class="pre">"Hello</span> <span class="pre">World!"</span></code></p>
+<div class="preboxcontainer">
+<pre class="prebox">bucket = s3.buckets['my-new-bucket']
+obj = bucket.objects.create(
+    'hello.txt',
+    'Hello World!',
+)</pre>
+</div>
+<p>Sube un archivo <code class="docutils literal"><span class="pre">test.txt</span></code>, configura el tipo de contenido, y lo hace legible al público.</p>
+<div class="preboxcontainer">
+<pre class="prebox">obj = s3.buckets['my-new-bucket'].objects['test.txt']
+obj.write(File.open('path/to/test.txt', 'rb')
+    :content_type =&gt; 'text/plain',
+    :acl          =&gt; 'public_read',
+)</pre>
+</div>
+</div>
+<div id="change-an-object-s-acl">&nbsp;</div>
+<span id="s3-aws-Cambiar_el_ACL_de_un_Object"></span>
+<h2>Cambiar el ACL de un Object</h2>
+<div class="solvvy-solution">
+<p>Hace al object <code class="docutils literal"><span class="pre">hello.txt</span></code> legible al público y <code class="docutils literal"><span class="pre">secret_plans.txt</span></code> para ser privado.</p>
+<div class="preboxcontainer">
+<pre class="prebox">bucket = s3.buckets['my-new-bucket']
+
+bucket.objects['hello.txt'].acl = :public_read
+bucket.objects['secret_plans.txt'].acl = :private</pre>
+</div>
+</div>
+<div id="download-an-object-to-a-file">&nbsp;</div>
+<span id="s3-aws-Descargar_un_Object"></span>
+<h2>Descargar un Object (a un archivo)</h2>
+<div class="solvvy-solution">
+<p>Descarga un archivo <code class="docutils literal"><span class="pre">poetry.pdf</span></code> y lo guarda en <code class="docutils literal"><span class="pre">/home/username/documents/.</span></code> Asegúrate de cambiar <span class="code">username</span> a tu usuario Shell.</p>
+<div class="preboxcontainer">
+<pre class="prebox">bucket = s3.buckets['my-new-bucket']
+
+File.open('/home/username/documents/poetry.pdf', 'w') do |file|
+        bucket.objects['poetry.pdf'].read do |chunk|
+                file.write(chunk)
+        end
+end</pre>
+</div>
+</div>
+<div id="delete-an-object">&nbsp;</div>
+<span id="s3-aws-Eliminar_un_Object"></span>
+<h2>Eliminar un Object</h2>
+<div class="solvvy-solution">
+<p>Elimina el object <code class="docutils literal"><span class="pre">goodbye.txt.</span></code></p>
+<div class="preboxcontainer">
+<pre class="prebox">bucket = s3.buckets['my-new-bucket']
+bucket.objects.delete('goodbye.txt')</pre>
+</div>
+</div>
+<div id="generate-object-download-urls-signed-and-unsigned">&nbsp;</div>
+<span id="s3-aws-Generar_URL_de_descarga_de_Objects"></span>
+<h2>Generar URL de Descarga de un Object (firmado y sin firmar)</h2>
+<div class="solvvy-solution">
+<p>Esto genera una URL de descarga sin asignar para <code class="docutils literal"><span class="pre">hello.txt</span></code>. Esto funciona por que <code class="docutils literal"><span class="pre">hello.txt</span></code> fue hecho público configurando el ACL de arriba. Esto genera entonces una URL firmada para <code class="docutils literal"><span class="pre">secret_plans.txt</span></code> que funcionará durante 1 hora. Las URL de descarga firmadas funcionarán durante el período de tiempo, incluso si el objeto es privado (cuando finalice el período de tiempo, la URL dejará de funcionar).</p>
+<div class="preboxcontainer">
+<pre class="prebox">puts s3.buckets['my-new-bucket'].objects['hello.txt'].public_url
+
+puts s3.buckets['my-new-bucket'].objects['secret_plans.txt'].url_for(
+    :read,
+    :expires =&gt; 60 * 60
+)</pre>
+</div>
+<p>La salida de esto se verá más o menos así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">https://objects-us-east-1.dream.io/my-bucket-name/hello.txt
+https://objects-us-east-1.dream.io/my-bucket-name/secret_plans.txt?Signature=XXXXXXXXXXXXXXXXXXXXXXXXXXX&amp;Expires=1316027075&amp;AWSAccessKeyId=XXXXXXXXXXXXXXXXXXX
+</pre>
+</div>
+</div>
+<div id="ruby-aws-s3-examples-aws-s3-gem">&nbsp;</div>
+<span id="s3-ruby-aws-s3-gem"></span>
+<h1>Ejemplos de Ruby AWS::S3 (gema aws-s3)</h1>
+<div id="s3-ruby-Crear_una_Conexión">&nbsp;</div>
+<span id="s3-ruby-Crear_una_Conexión"></span>
+<h2>Crear una Conexión</h2>
+<div class="solvvy-solution">
+<p>Crear una conexión para que puedas interactuar con el servidor.</p>
+<div class="preboxcontainer">
+<pre class="prebox">AWS::S3::Base.establish_connection!(
+        :server            =&gt; 'objects-us-east-1.dream.io',
+        :use_ssl           =&gt; true,
+        :access_key_id     =&gt; 'my-access-key',
+        :secret_access_key =&gt; 'my-secret-key'
+)</pre>
+</div>
+</div>
+<div id="s3-ruby-listing-owned-buckets">&nbsp;</div>
+<span id="s3-ruby-Enlistar_Buckets_Propios"></span>
+<h2>Enlistar Buckets Propios</h2>
+<div class="solvvy-solution">
+<p>Obtiene una lista de los objects AWS::S3::Bucket que posees. Esto también imprime el nombre del bucket y la fecha de creación de cada bucket.</p>
+<div class="preboxcontainer">
+<pre class="prebox">AWS::S3::Service.buckets.each do |bucket|
+        puts "#{bucket.name}\t#{bucket.creation_date}"
+end</pre>
+</div>
+<p>La salida se verá mas o menos así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">mahbuckat1   2011-04-21T18:05:39.000Z
+mahbuckat2   2011-04-21T18:05:48.000Z
+mahbuckat3   2011-04-21T18:07:18.000Z
+</pre>
+</div>
+</div>
+<div id="s3-ruby-creating-a-bucket">&nbsp;</div>
+<span id="s3-ruby-Crear_un_Bucket"></span>
+<h2>Crear un Bucket</h2>
+<div class="solvvy-solution">
+<p>Crea un bucket llamado <code class="docutils literal"><span class="pre">my-new-bucket.</span></code></p>
+<div class="preboxcontainer">
+<pre class="prebox">AWS::S3::Bucket.create('my-new-bucket')</pre>
+</div>
+</div>
+<div id="s3-ruby-listing-a-buckets-content">&nbsp;</div>
+<span id="s3-ruby-Enlistar_el_Contenido_de_un_Bucket"></span>
+<h2>Enlistar el Contenido de un Bucket</h2>
+<div class="solvvy-solution">
+<p>Obtiene una lista de hashes con el contenido de cada object. Esto también imprime el nombre de cada object, el tamaño del archivo y la fecha de la última modificación.</p>
+<div class="preboxcontainer">
+<pre class="prebox">new_bucket = AWS::S3::Bucket.find('my-new-bucket')
+new_bucket.each do |object|
+        puts "#{object.key}\t#{object.about['content-length']}\t#{object.about['last-modified']}"
+end</pre>
+</div>
+<p>La salida se verá más o menos así si el bucket tiene algunos archivos:</p>
+<div class="preboxcontainer">
+<pre class="prebox">myphoto1.jpg 251262  2011-08-08T21:35:48.000Z
+myphoto2.jpg 262518  2011-08-08T21:38:01.000Z</pre>
+</div>
+</div>
+<div id="s3-ruby-deleting-a-bucket">&nbsp;</div>
+<span id="s3-ruby-Eliminar_un_Bucket"></span>
+<h2>Eliminar un Bucket</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El Bucket debe estar vacío, si no, no funcionará.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">AWS::S3::Bucket.delete('my-new-bucket')</pre>
+</div>
+</div>
+<div id="s3-ruby-forced-delete-for-non-empty-buckets">&nbsp;</div>
+<span id="s3-aws-Forzar_la_eliminación_de_Buckets_que_no_están_vacíos"></span>
+<h2>Forzar la Eliminación de Buckets no vacíos</h2>
+<div class="solvvy-solution">
+<div class="preboxcontainer">
+<pre class="prebox">AWS::S3::Bucket.delete('my-new-bucket', :force =&gt; true)</pre>
+</div>
+</div>
+<div id="s3-ruby-creating-an-object">&nbsp;</div>
+<span id="s3-ruby-Crear_un_Object"></span>
+<h2>Crear un Object</h2>
+<div class="solvvy-solution">
+<p>Crea un archivo <code class="docutils literal"><span class="pre">hello.txt</span></code> con la cadena <code class="docutils literal"><span class="pre">"Hello</span> <span class="pre">World!"</span></code></p>
+<div class="preboxcontainer">
+<pre class="prebox">AWS::S3::S3Object.store(
+        'hello.txt',
+        'Hello World!',
+        'my-new-bucket',
+        :content_type =&gt; 'text/plain'
+)</pre>
+</div>
+</div>
+<div id="s3-ruby-change-an-objects-acl">&nbsp;</div>
+<span id="s3-ruby-Cambiar_el_ACL_de_un_Object"></span>
+<h2>Cambiar el ACL de un Object</h2>
+<div class="solvvy-solution">
+<p>Hace al objeto <code class="docutils literal"><span class="pre">hello.txt</span></code> legible paga el público y <code class="docutils literal"><span class="pre">secret_plans.txt</span></code> para ser privado.</p>
+<div class="preboxcontainer">
+<pre class="prebox">policy = AWS::S3::S3Object.acl('hello.txt', 'my-new-bucket')
+policy.grants = [ AWS::S3::ACL::Grant.grant(:public_read) ]
+AWS::S3::S3Object.acl('hello.txt', 'my-new-bucket', policy)
+
+policy = AWS::S3::S3Object.acl('secret_plans.txt', 'my-new-bucket')
+policy.grants = []
+AWS::S3::S3Object.acl('secret_plans.txt', 'my-new-bucket', policy)</pre>
+</div>
+</div>
+<div id="s3-ruby-download-an-object">&nbsp;</div>
+<span id="s3-ruby-Descargar_un_Object"></span>
+<h2>Descargar un Object (a un archivo)</h2>
+<div class="solvvy-solution">
+<p>Descarga el object <code class="docutils literal"><span class="pre">poetry.pdf</span></code> y lo guarda en <code class="docutils literal"><span class="pre">/home/username/documents/.</span></code> Asegúrate de cambiar <span class="code">username</span> a tu usuario Shell.</p>
+<div class="preboxcontainer">
+<pre class="prebox">open('/home/username/documents/poetry.pdf', 'w') do |file|
+        AWS::S3::S3Object.stream('poetry.pdf', 'my-new-bucket') do |chunk|
+                file.write(chunk)
+        end
+end</pre>
+</div>
+</div>
+<div id="s3-ruby-delete-an-object">&nbsp;</div>
+<span id="s3-ruby-Eliminar_un_Object"></span>
+<h2>Eliminar un Object</h2>
+<div class="solvvy-solution">
+<p>Elimina el object <code class="docutils literal"><span class="pre">goodbye.txt.</span></code></p>
+<div class="preboxcontainer">
+<pre class="prebox">AWS::S3::S3Object.delete('goodbye.txt', 'my-new-bucket')</pre>
+</div>
+</div>
+<div id="s3-ruby-generate-object-download-urls">&nbsp;</div>
+<span id="s3-ruby-Generar_URL_de_Descarga_de_un_Object"></span>
+<h2>Generar URL de Descarga de un Object (firmado y sin firmar)</h2>
+<div class="solvvy-solution">
+<p>Esto genera una URL de descarga sin asignar para <code class="docutils literal"><span class="pre">hello.txt</span></code>. Esto funciona por que <code class="docutils literal"><span class="pre">hello.txt</span></code> fue hecho público configurando el ACL de arriba. Esto genera entonces una URL de descarga firmada para <code class="docutils literal"><span class="pre">secret_plans.txt</span></code> que funcionará durante 1 hora. Las URL de descarga firmadas funcionarán durante el período de tiempo, incluso si el object es privado (cuando finalice el período de tiempo, la URL dejará de funcionar).</p>
+<div class="preboxcontainer">
+<pre class="prebox">puts AWS::S3::S3Object.url_for(
+        'hello.txt',
+        'my-new-bucket',
+        :authenticated =&gt; false
+)
+
+puts AWS::S3::S3Object.url_for(
+        'secret_plans.txt',
+        'my-new-bucket',
+        :expires_in =&gt; 60 * 60
+)</pre>
+</div>
+<p>La salida se verá más o menos así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">https://objects-us-east-1.dream.io/my-bucket-name/hello.txt
+https://objects-us-east-1.dream.io/my-bucket-name/secret_plans.txt?Signature=XXXXXXXXXXXXXXXXXXXXXXXXXXX&amp;Expires=1316027075&amp;AWSAccessKeyId=XXXXXXXXXXXXXXXXXXX
+</pre>
+</div>
+</div>
+<div class="footer">&nbsp;</div>
+<!--DreamObjects Button-->
+<div class="dream-sign-up">
+<h2>¡Empieza a Guardar Tus Datos Hoy!</h2>
+<div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/storage/">Suscríbete a DreamObjects</a></div>
+</div>
+</div>
+</div>
+</div>

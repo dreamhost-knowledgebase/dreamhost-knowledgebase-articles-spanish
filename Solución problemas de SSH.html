@@ -1,6 +1,6 @@
 <h2><span id="Private_key_doesn.27t_work">El Private key no funciona</span></h2>
 <div class="solvvy-solution">
-<p>El caso más común para un private key que no funciona es que los permisos están configurados incorrectamente en tu directorio <span class="text-object">.ssh</span>. En particular, el directorio <span class="text-object">.ssh</span>,&nbsp;así como tu archivo de <span class="text-object">authorized_keys</span>&nbsp;, deben <strong>ambos</strong> deben estar configurados para que solo tu usuario pueda leerlos. Si tienes problemas, intenta ejecutar lo siguiente:</p>
+<p>El caso más común para un private key que no funciona es que los permisos están configurados incorrectamente en tu directorio <span class="text-object">.ssh</span>. En particular, el directorio <span class="text-object">.ssh</span>,&nbsp;así como tu archivo de <span class="text-object">authorized_keys</span>&nbsp;, deben <strong>ambos</strong> deben estar configurados para que solo tu usuario pueda leerlos. Si tienes problemas, intenta correr lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 700 ~/.ssh</span>
 <span class="server">[server]$ </span><span class="command">chmod 600 ~/.ssh/authorized_keys</span></pre>
@@ -10,7 +10,7 @@
 <div class="solvvy-solution">
 <p>Si recibes el error 'too many failed attempts' cuando intentas iniciar sesión en tu servidor a través de SSH, intenta agregar el indicador <span class="code">-v</span> para ver la salida de la conexión. Por ejemplo:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">macbook$ </span><span class="command">ssh -v user@server.dreamhost.com</span></pre>
+<pre class="prebox"><span class="server">macbook$ </span><span class="command">ssh -v <span class="code-highlight">user@server.dreamhost.com</span></span></pre>
 </div>
 <p>En la salida, busca líneas con el texto 'Trying private key' para ver cuántas claves se están utilizando para conectarse. Con el tiempo, es posible que se hayan agregado demasiados a tu configuración de SSH, lo que hace que el agente de SSH intente demasiadas claves antes de establecer de forma predeterminada la autenticación de contraseña. Puedes ver y eliminar cualquier clave desactualizada en tu computador en el directorio <span class="text-object">.ssh</span>.</p>
 </div>
@@ -40,11 +40,11 @@ export G_FILENAME_ENCODING=UTF-8\
 <li><a href="https://help.dreamhost.com/hc/es/articles/215464538--C%C3%B3mo-configurar-PuTTY-">PuTTY</a></li>
 </ul>
 </div>
-<h2><span id="Server_unexpectedly_closed_network_connection">Server unexpectedly closed network connection</span></h2>
+<h2>Conexión de red cerrada inesperadamente del servidor</h2>
 <div class="solvvy-solution">
 <p>Si recibes este error al intentar SSH, esto puede significar que tu IP ha sido bloqueada. Contacta a soporte para ver si tu IP está bloqueada. Si es así, el soporte puede incluirte en la lista blanca. Si no conoces tu IP, visita <a href="http://www.whatismyipaddress.com/">whatismyipaddress.com</a>.</p>
 </div>
-<h2><span id=".5BUser.5D_is_not_in_the_sudoers_group">[User] is not in the sudoers group</span></h2>
+<h2>[Usuario] no está en el grupo de sudoers</h2>
 <div class="solvvy-solution">
 <p>DreamHost no permite a los usuarios regulares de shell acceso sudo en servidores compartidos por motivos de seguridad.&nbsp;Si bien se pueden realizar muchas tareas sin el uso de <span class="code">sudo</span>, si necesitas acceso sudo, debes mejorar tu plan a un servidor <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicado</a>&nbsp;y crear un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-">usuario administrador</a>.</p>
 </div>
@@ -77,4 +77,7 @@ export G_FILENAME_ENCODING=UTF-8\
 <li><a href="https://help.dreamhost.com/hc/es/articles/215360828-Software-de-cliente-SSH">Sofware de cliente SSH</a></li>
 </ul>
 <p>&nbsp;</p>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 68px; top: 1564.23px;">
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>
