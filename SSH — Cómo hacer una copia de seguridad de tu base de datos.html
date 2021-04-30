@@ -54,6 +54,33 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">Generalidades sobre FTP</a></li>
 </ul>
 </div>
+<h2>Copiar TODAS las bases de datos bajo un solo usuario</h2>
+<div class="solvvy-solution">
+<p>El siguiente script copia todas las bases de datos en un solo usuario. En el pasado esto era posible de usar la banderilla <span class="code">--all-databases</span>, pero esto ya no funciona debido a una actualizacion de MySQL. Asegúrate de <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">obtener el hostname, username. y password</a> antes de proceder.</p>
+<ol>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear un archivo</a> en tu computador Mac, Linux, o en tu servidor DreamHost. Nombrálo algo así como <span class="text-object">db-export.sh</span>.</li>
+<li>Agregale el siguiente código. Asegúratede actualizar los campos <span class="code">host</span>, <span class="code">username</span>, and <span class="code">password</span>.
+<div class="preboxcontainer">
+<pre class="prebox">#!/bin/sh
+
+host="<span class="code-highlight">yourMySQLHostname</span>"
+username="<span class="code-highlight">username</span>"
+password="<span class="code-highlight">password</span>"
+
+for DB in $(mysql --host="$host" --user="$username" -p"$password" -e"show databases" --skip-column-names -s | grep -v information_schema); 
+do 
+  mysqldump --opt --host="$host" --user="$username" -p"$password" $DB &gt; ./$DB.sql; 
+done</pre>
+</div>
+</li>
+<li>Corre el archivo.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sh db-export.sh</span></pre>
+</div>
+</li>
+</ol>
+<p>Todas las bases de datos dentro de este usuario ahora están descargadas en tu directorio actual.</p>
+</div>
 <h2>Hacer una copia de seguridad de tu base de datos en un cron job</h2>
 <div class="solvvy-solution">
 <p>Si deseas hacer una copia de seguridad de tu base de datos en un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-" target="_self">cron job</a>,&nbsp;deberás especificar la contraseña. Por ejemplo, puedes agregar esta línea a un script de Shell para hacer una copia de seguridad de tu base de datos.</p>
