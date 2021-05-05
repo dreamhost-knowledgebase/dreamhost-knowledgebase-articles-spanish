@@ -4,13 +4,13 @@
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Si eliminas las entradas de known_host como se recomienda aquí, vas a estar vulnerable a un ataque de 'hombre en el medio'.</p>
+<p>Si eliminas las entradas de <span class="text-object">known_host</span> como se recomienda aquí, vas a estar vulnerable a un ataque de 'hombre en el medio'.</p>
 </div>
 </div>
 </div>
 <h2>El mensaje de error</h2>
 <div class="solvvy-solution">
-<p>Si ves la siguiente advertencia al acceder a tu dominio o servidor web a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>, generalmente significa que la clave de host no coincide con la clave en tu archivo known_host.</p>
+<p>Si ves la siguiente advertencia al acceder a tu dominio o servidor web a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>, generalmente significa que la clave de host no coincide con la clave en tu archivo <span class="text-object">known_host</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @
@@ -61,7 +61,7 @@ Keyboard-interactive authentication is disabled to avoid man-in-the-middle attac
 </div>
 <p>Elimine archivo <span class="text-object">known_hosts</span> por completo (en tu computadora local) si tienes varios hosts que necesitan ser actualizados. En el primer inicio de sesión, este va a confirmar la nueva clave.</p>
 <ul>
-<li><strong>En una máquina Mac o Linux</strong> -- el archivo <span class="text-object">known_hosts</span> se encuentra en el directorio <span class="text-object">.ssh/known_hosts</span>. Simplemente debes ejecutar este comando en una terminal para eliminar el archivo known_host:</li>
+<li><strong>En una máquina Mac o Linux</strong> -- el archivo <span class="text-object">known_hosts</span> se encuentra en el directorio <span class="text-object">.ssh/known_hosts</span>. Simplemente debes ejecutar este comando en una terminal para eliminar el archivo <span class="text-object">known_host</span>:</li>
 </ul>
 <dl>
 <dd>
@@ -72,7 +72,7 @@ Keyboard-interactive authentication is disabled to avoid man-in-the-middle attac
 </dd>
 </dl>
 <ul>
-<li><strong>En una máquina con Windows que utiliza&nbsp;<a href="/hc/es/articles/215464538--Cómo-configurar-PuTTY-">PuTTY</a></strong> –&nbsp;debes acceder al registro para eliminar el known_hosts:</li>
+<li><strong>En una máquina con Windows que utiliza&nbsp;<a href="/hc/es/articles/215464538--Cómo-configurar-PuTTY-">PuTTY</a></strong> –&nbsp;debes acceder al registro para eliminar el <span class="text-object">known_hosts</span>:</li>
 </ul>
 <ol>
 <li>Abre 'regedit.exe' haciendo una búsqueda.</li>
@@ -82,7 +82,7 @@ Keyboard-interactive authentication is disabled to avoid man-in-the-middle attac
 <h3>Método Tres - Editar el archivo known_hosts</h3>
 <p>Edita el archivo <span class="text-object">known_hosts</span>. En el caso anterior, abre el archivo <span class="text-object">/home/username/.ssh/known_hosts</span> en el editor de texto preferido y luego elimina la línea que está causando el problema. Asegúrate de cambiar el <span class="code">username</span> a tu usuario Shell.</p>
 <ul>
-<li>Esto es similar al método dos, pero en lugar de eliminar todo el archivo .known_hosts, eliminas la línea de host específica en el archivo.</li>
+<li>Esto es similar al método dos, pero en lugar de eliminar todo el archivo <span class="text-object">known_hosts</span>, eliminas la línea de host específica en el archivo.</li>
 <li>El mensaje de advertencia enumera el número de línea; Se puede encontrar después del nombre del archivo en el error. En el mensaje de error anterior, el número de línea es 10,278. Si estás usando una máquina Mac o Linux y estás&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">usando el editor "vi"</a>,&nbsp;simplemente puedes escribir el siguiente comando para saltar a esa línea:</li>
 </ul>
 <dl>
