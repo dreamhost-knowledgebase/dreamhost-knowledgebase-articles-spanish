@@ -5,8 +5,8 @@
 <h2>Crear un par de claves</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Abre el archivo puttygen.exe que&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215464538--C%C3%B3mo-configurar-PuTTY-" target="_self">descargaste al configurar PuTTY</a>.&nbsp;Lo usarás para crear tu par de claves privada/pública.</li>
-<li>En el cuadro Generador de claves PuTTY, asegúrate de que el botón de opción en la parte inferior esté seleccionado para 'RSA'.<br />
+<li>Abre el archivo <span class="text-object">puttygen.exe</span> que&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215464538--C%C3%B3mo-configurar-PuTTY-" target="_self">descargaste al configurar PuTTY</a>.&nbsp;Lo usarás para crear tu par de claves privada/pública.</li>
+<li>En el cuadro Generador de claves PuTTY, asegúrate de que el botón de opción en la parte inferior esté seleccionado para <span class="text-object">RSA</span>.<br />
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/02_putty_keygen.png" alt="02 putty keygen.png" /></dd>
 </dl>
@@ -25,9 +25,8 @@
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" /></div>
 <div class="alert-content">
 <ul>
-<li>En la parte inferior derecha, hay botones <strong>Save public key</strong> y <strong>Save private key</strong>&nbsp;– guarda ambos en tu computadora.</li>
 <li>Cuando guardes la clave pública, asígnale un nombre similar a <span class="text-object">dreamhostpublickey</span>. No agregues manualmente la extensión, ya que no es necesario.</li>
-<li>Cuando guardes la clave privada, asígnale un nombre similar a "dreamhostprivatekey" y asegúrate de guardarla en una ubicación segura en su computadora. Nuevamente, no agregues manualmente la extensión, ya que no es necesario.</li>
+<li>Cuando guardes la clave privada, asígnale un nombre similar a <span class="text-object">dreamhostprivatekey</span> y asegúrate de guardarla en una ubicación segura en su computadora. Nuevamente, no agregues manualmente la extensión, ya que no es necesario.</li>
 <li>Al guardar, aparece un mensaje sobre una frase de contraseña.<br />
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/putty_passphrase.png" alt="putty_passphrase" /></dd>
@@ -77,36 +76,36 @@ Haz clic en <strong>Yes</strong> para guardar sin una frase de contraseña.</li>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh-keygen -i -f <span class="code-highlight">dreamhostpublickey</span> &gt;&gt; ~/.ssh/authorized_keys</span></pre>
 </div>
-<p>Esto agrega el dreamhostpublickey que cargó desde tu computadora a un nuevo archivo llamado <span class="text-object">authorized_keys</span>. Solo asegúrate de que el nombre del archivo de clave pública, en el comando, sea el nombre del archivo que cargaste.</p>
+<p>Esto agrega el <span class="text-object">dreamhostpublickey</span> que cargó desde tu computadora a un nuevo archivo llamado <span class="text-object">authorized_keys</span>. Solo asegúrate de que el nombre del archivo de clave pública, en el comando, sea el nombre del archivo que cargaste.</p>
 </li>
 <li>Ajusta los permisos ejecutando este comando:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 600 ~/.ssh/authorized_keys</span></pre>
 </div>
-<p>Luego, elimina el archivo original dreamhostkey.pub:</p>
+<p>Luego, elimina el archivo original <span class="text-object">dreamhostkey.pub</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">rm <span class="code-highlight">dreamhostpublickey</span></span></pre>
 </div>
 <p>Ahora la clave se encuentra en el servidor (protegida del acceso de otros)</p>
 </li>
 <li>Sal de PuTTY y vuelve a iniciar el programa.</li>
-<li>Cuando el programa se reinicie, abre el cuadro de configuración y haz clic en la categoría 'Conexión &gt; Datos' a la izquierda.<br />
+<li>Cuando el programa se reinicie, abre el cuadro de configuración y haz clic en la categoría <span class="text-object">Conexión &gt; Datos</span> a la izquierda.<br />
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/04_username.png" alt="04 username.png" /></dd>
 </dl>
 </li>
-<li>Ingresa tu nombre de usuario SHELL en el primer campo que se llama usuario 'Auto-login'.<br />
+<li>Ingresa tu nombre de usuario SHELL en el primer campo que se llama usuario <span class="text-object">Auto-login</span>.<br />
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/05_auth.png" alt="05 auth.png" /></dd>
 </dl>
 </li>
-<li>En el mismo cuadro de configuración, haz clic en 'Conexión' &gt; 'SSH &gt; Auth'.</li>
-<li>Haz clic en el botón <strong>Browse</strong> y navega hasta la ubicación en tu computadora donde guardaste el archivo de dreamhostprivatekey.<br />
+<li>En el mismo cuadro de configuración, haz clic en <span class="text-object">Conexión &gt; SSH &gt; Auth</span>.</li>
+<li>Haz clic en el botón <strong>Browse</strong> y navega hasta la ubicación en tu computadora donde guardaste el archivo de <span class="text-object">dreamhostprivatekey</span>.<br />
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/06_sessions.png" alt="06_sessions.png" /></dd>
 </dl>
 </li>
-<li>En el cuadro de configuración, haz clic en la categoría 'Sesión' e ingresa la siguiente información:<br />
+<li>En el cuadro de configuración, haz clic en la categoría <span class="text-object">Sesión</span> e ingresa la siguiente información:<br />
 <ul>
 <li><strong>Host Name</strong>: Tu servidor.dreamhost.com (<a href="https://help.dreamhost.com/hc/es/articles/115000675027#nombre-de-host" target="_self">Este es el nombre de tu servidor DreamHost</a>)</li>
 <li><strong>Port</strong>: 22</li>
@@ -124,7 +123,7 @@ Haz clic en <strong>Yes</strong> para guardar sin una frase de contraseña.</li>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" /></div>
 <div class="alert-content">
-<p>Si la consola PuTTY responde con "Servidor rechazó nuestra clave", esto puede indicar que la clave pública que PuTTY generaste no está en una forma que el sistema remoto reconozca o pueda usar para autenticar tu acceso. Consulta el siguiente enlace para obtener instrucciones sobre cómo editar el archivo de clave pública en un formato que el servidor remoto reconozca:</p>
+<p>Si la consola PuTTY responde con <span class="text-object">Servidor rechazó nuestra clave</span>, esto puede indicar que la clave pública que PuTTY generaste no está en una forma que el sistema remoto reconozca o pueda usar para autenticar tu acceso. Consulta el siguiente enlace para obtener instrucciones sobre cómo editar el archivo de clave pública en un formato que el servidor remoto reconozca:</p>
 <ul>
 <li><a href="https://www.walkernews.net/2009/03/22/how-to-fix-server-refused-our-key-error-that-caused-by-putty-generated-rsa-public-key/" target="_self" rel="undefined">walkernews.net/2009/03/22/how-to-fix-server-refused-our-key-error-that-caused-by-putty-generated-rsa-public-key/</a></li>
 </ul>

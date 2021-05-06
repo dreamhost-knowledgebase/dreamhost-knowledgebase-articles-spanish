@@ -6,7 +6,7 @@
 </div>
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Cuando se hacen cambios de PHP en tu sitio (usualmente provenientes de <a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-">la actualización de la versión PHP</a>), es posible que PHP arroje errores y advertencias. En el pasado, estos se mostraban en tu sitio web y podías desactivarlos usando un archivo phprc.</p>
+<p>Cuando se hacen cambios de PHP en tu sitio (usualmente provenientes de <a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-">la actualización de la versión PHP</a>), es posible que PHP arroje errores y advertencias. En el pasado, estos se mostraban en tu sitio web y podías desactivarlos usando un archivo <span class="text-object">phprc</span>.</p>
 <p>DreamHost ahora desactiva todas las advertencias de PHP de forma predeterminada. Esto significa que nunca deberías verlos en tu sitio web al realizar cambios en PHP.</p>
 </div>
 <ul><!--
@@ -91,12 +91,12 @@
 </div>
 <h2><span id="Usar_registro_personalizado_de_errores_PHP">Configurar reportes de error en tu script</span></h2>
 <div class="solvvy-solution">
-<p>Como se mencionó anteriormente, el archivo phprc controla qué errores se muestran. Como tal, las siguientes líneas no funcionarán en tu script PHP para mostrar errores:</p>
+<p>Como se mencionó anteriormente, el archivo <span class="text-object">phprc</span> controla qué errores se muestran. Como tal, las siguientes líneas no funcionarán en tu script PHP para mostrar errores:</p>
 <div class="preboxcontainer">
 <pre class="prebox">ini_set('display_errors',1);
 error_reporting(E_ALL);</pre>
 </div>
-<p>La única forma de mostrar errores es editar tu archivo phprc.</p>
+<p>La única forma de mostrar errores es editar tu archivo <span class="text-object">phprc</span>.</p>
 </div>
 <!--
 <h2>
@@ -132,18 +132,18 @@ error_reporting(E_ALL);</pre>
 <div class="solvvy-solution">
 <p>Puedes agregar código a tu archivo <span class="text-object">phprc</span> en el servidor para registrar todos los errores de PHP en un nuevo archivo llamado <span class="text-object">php.log</span>.</p>
 <h3>Decide dónde debe ir el archivo php.log</h3>
-<p>Primero debes decidir dónde deseas que se cree tu archivo php.log. Esto puede estar en cualquier directorio que desees siempre que tu usuario pueda escribir en ese directorio. La ubicación más simple sería en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self" rel="undefined">directorio principal de tu usuario</a>. Por ejemplo:</p>
+<p>Primero debes decidir dónde deseas que se cree tu archivo <span class="text-object">php.log</span>. Esto puede estar en cualquier directorio que desees siempre que tu usuario pueda escribir en ese directorio. La ubicación más simple sería en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self" rel="undefined">directorio principal de tu usuario</a>. Por ejemplo:</p>
 <div class="preboxcontainer">
 <pre class="prebox">/home/username/php.log</pre>
 </div>
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>No es posible crear tu archivo php.log en su directorio <span class="text-object">/home/username/logs</span>. Este directorio es creado por DreamHost y es propiedad de dhapache, por lo tanto, tu usuario no puede escribir en este directorio.</p>
+<p>No es posible crear tu archivo <span class="text-object">php.log</span> en su directorio <span class="text-object">/home/username/logs</span>. Este directorio es creado por DreamHost y es propiedad de dhapache, por lo tanto, tu usuario no puede escribir en este directorio.</p>
 </div>
 </div>
 <h3>Editar el archivo phprc</h3>
-<p>Añade estas líneas a tu archivo phprc:</p>
+<p>Añade estas líneas a tu archivo <span class="text-object">phprc</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">log_errors = 1 <br />error_log = /home/<span class="code-highlight">username</span>/php.log</pre>
 </div>
@@ -159,20 +159,20 @@ error_reporting(E_ALL);</pre>
 </div>
 <h3>Prueba el archivo php.log</h3>
 <div class="solvvy-solution">
-<p>Para probar el archivo php.log, crea un archivo PHP que arroje un error. Por ejemplo, crea un archivo llamado error.php con el siguiente contenido y súbelo a tu sitio.</p>
+<p>Para probar el archivo <span class="text-object">php.log</span>, crea un archivo PHP que arroje un error. Por ejemplo, crea un archivo llamado error.php con el siguiente contenido y súbelo a tu sitio.</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php 
 $file=fopen("welcome.txt","r");
 ?&gt;&nbsp;</pre>
 </div>
-<p>Visita la página <strong>example.com/error.php</strong> desde un navegador. Se lanza un error. Si luego revisas el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self" rel="undefined">directorio principal de tu usuario</a>, verás que se ha creado el archivo php.log y que registraste este error de PHP. Corre lo siguiente para comprobarlo:</p>
+<p>Visita la página <strong>example.com/error.php</strong> desde un navegador. Se lanza un error. Si luego revisas el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self" rel="undefined">directorio principal de tu usuario</a>, verás que se ha creado el archivo <span class="text-object">php.log</span> y que registraste este error de PHP. Corre lo siguiente para comprobarlo:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cat ~/php.log</span></pre>
 </div>
 </div>
 <h3>Resumen</h3>
 <div class="solvvy-solution">
-<p>Al principio, el nuevo archivo php.log no existirá. Solo después de que se arroja un error de PHP, el archivo php.log se crea automáticamente. Este archivo continuará registrando futuros errores de PHP.</p>
+<p>Al principio, el nuevo archivo <span class="text-object">php.log</span> no existirá. Solo después de que se arroja un error de PHP, el archivo <span class="text-object">php.log</span> se crea automáticamente. Este archivo continuará registrando futuros errores de PHP.</p>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">

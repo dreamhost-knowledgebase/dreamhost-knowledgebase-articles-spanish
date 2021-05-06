@@ -1,0 +1,29 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Si has <a href="https://help.dreamhost.com/hc/es/articles/360000274451-Crear-un-nuevo-usuario-en-una-instancia" target="_self" rel="undefined">creado un nuevo usuario</a> para administrar tu sitio web, puede ser una buena idea habilitar el acceso SSH para ese usuario. Esto suele ser necesario para sitios como WordPress que requieren que el usuario realice configuraciones adicionales.</p>
+<p>Para habilitarlo, deberás editar tu archivo <span class="text-object">sshd_config</span>. Para obtener información sobre cómo editar un archivo a través de SSH, consulta el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a></li>
+</ul>
+</div>
+<h2>Habilitar SSH</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu instancia usando la <a href="https://help.dreamhost.com/hc/es/articles/216201547-Generalidades-sobre-la-conexi%C3%B3n-a-tu-instancia-con-las-claves-SSH" target="_self" rel="undefined">Llave de emparejamiendo asignada</a> y el <a href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined">usuario por defecto asginado</a>.</li>
+<li>Una vez que hayas iniciado sesión, corre lo siguiente para editar tu archivo <span class="text-object">sshd_config</span>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo vim /etc/ssh/sshd_config</span>
+</pre>
+</div>
+</li>
+<li>En el archivo, busca la configuración llamada <span class="code">PasswordAuthentication</span>. A la derecha, cambia '<span class="code">no'</span> a '<span class="code">yes'</span>.</li>
+<li>Guarda el archivo, y luego reinicia el SSHD con el siguiente comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo service sshd restart</span>
+</pre>
+</div>
+</li>
+</ol>
+<p>Ahora puedes iniciar sesión en la instancia a través de SSH con este nuevo usuario.</p>
+<p>¿Esto hará que tu instancia sea menos segura? No significativamente. Dado que este nuevo usuario solo tiene acceso a sus propios archivos, el daño que podría causar si estuviera comprometido es mínimo.</p>
+</div>

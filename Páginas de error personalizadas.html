@@ -19,7 +19,7 @@
 <pre class="prebox">ErrorDocument 404 /error.php
 </pre>
 </div>
-<p>Esto redirige los navegadores que experimentan un error 404 (No encontrado) al archivo <span class="text-object">error.php</span> ubicado en el mismo directorio que tu archivo .htaccess. Alternativamente, puedes usar la línea anterior como plantilla para crear páginas de error personalizadas separadas para cada error.</p>
+<p>Esto redirige los navegadores que experimentan un error 404 (No encontrado) al archivo <span class="text-object">error.php</span> ubicado en el mismo directorio que tu archivo <span class="text-object">.htaccess</span>. Alternativamente, puedes usar la línea anterior como plantilla para crear páginas de error personalizadas separadas para cada error.</p>
 <h3><span id="Status_codes">Códigos de estado</span></h3>
 <p>La lista completa (y muy larga) de errores está disponible aquí:</p>
 <ul>
@@ -32,7 +32,7 @@
 <li>403 – Forbidden</li>
 <li>404 – Not Found</li>
 </ul>
-<p>Por ejemplo, para detectar esos errores, agregarías lo siguiente a tu archivo .htaccess para el dominio que deseas configurar:</p>
+<p>Por ejemplo, para detectar esos errores, agregarías lo siguiente a tu archivo <span class="text-object">.htaccess</span> para el dominio que deseas configurar:</p>
 <div class="preboxcontainer">
 <pre class="prebox">ErrorDocument 400 /error.php
 ErrorDocument 401 /error.php
@@ -40,7 +40,7 @@ ErrorDocument 403 /error.php
 ErrorDocument 404 /error.php
 </pre>
 </div>
-<p>Esto obliga al navegador a redirigir al archivo /error.php si encuentra alguno de los códigos de estado anteriores.</p>
+<p>Esto obliga al navegador a redirigir al archivo <span class="text-object">/error.php</span> si encuentra alguno de los códigos de estado anteriores.</p>
 </div>
 <h2>Configurar el archivo error.php</h2>
 <div class="solvvy-solution">
@@ -131,12 +131,12 @@ switch(getenv("REDIRECT_STATUS"))
 <li><a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">Ubicación de archivos de configuración Nginx</a></li>
 </ul>
 </li>
-<li>Crea un archivo llamado error.conf en el siguiente directorio. Asegúrate de cambiar el <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> a tu sitio website.
+<li>Crea un archivo llamado <span class="text-object">error.conf</span> en el siguiente directorio. Asegúrate de cambiar el <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> a tu sitio website.
 <div class="preboxcontainer">
 <pre class="prebox">/home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/error.conf</pre>
 </div>
 Esto asume que tu nombre de usuario es 'username' y que tu sitio es <strong>example.com</strong>.</li>
-<li>En el archivo error.conf, añade lo siguiente:
+<li>En el archivo <span class="text-object">error.conf</span>, añade lo siguiente:
 <div class="preboxcontainer">
 <pre class="prebox">error_page 404 /404.html;
 location  /404.html {
@@ -149,7 +149,7 @@ location  /404.html {
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/example.com</span></pre>
 </div>
 </li>
-<li>En ese directorio, crea una página titulada 404.html con cualquier mensaje de error que desees mostrar.</li>
+<li>En ese directorio, crea una página titulada <span class="text-object">404.html</span> con cualquier mensaje de error que desees mostrar.</li>
 <li>Reinicia tu servidor (si estás en un VPS). Si estás en Dedicado, puedes <a href="https://help.dreamhost.com/hc/es/articles/216454967-Como-recargar-y-reiniciar-Nginx-Solo-para-servidores-dedicados-">recargar Nginx tu mismo</a>.</li>
 <li>Si ahora visitas una página de tu sitio que no existe, se mostrará tu página de error personalizada.</li>
 </ol>
