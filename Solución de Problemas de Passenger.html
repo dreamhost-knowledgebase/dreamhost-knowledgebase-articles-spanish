@@ -31,8 +31,8 @@
 </div>
 <h2><span id="La_Aplicación_no_se_reinicia">La Aplicación no se reinicia</span></h2>
 <div class="solvvy-solution">
-<p>Por lo general, esto no es un problema. Solo se percibe como un problema. En Passenger 2.1, el comportamiento del mecanismo de reinicio cambió. Ahora Passenger simplemente verifica la marca de tiempo de la modificación en el archivo restart.txt. Si es más reciente que la última vez que lo comprobaste, se reinicia. El archivo no se elimina. Esto se hizo para que el reinicio de las aplicaciones funcionara sin problemas en los recursos compartidos de NFS.</p>
-<p>En sitios de menor tráfico, por lo general, aún puedes ver visualmente que la aplicación se reinicia "preparando" una página (cargándola un par de veces en tu navegador), tocando el archivo restart.txt y luego cargando esa página nuevamente. Debería tardar un tiempo notablemente más largo en cargarse que el par de veces anteriores. Sin embargo, esto realmente no funcionará en sitios en vivo que están recibiendo tráfico, ya que es muy posible que la solicitud de otra persona reinicie la aplicación en el momento en que la pruebes tu mismo.</p>
+<p>Por lo general, esto no es un problema. Solo se percibe como un problema. En Passenger 2.1, el comportamiento del mecanismo de reinicio cambió. Ahora Passenger simplemente verifica la marca de tiempo de la modificación en el archivo <span class="text-object">restart.txt</span>. Si es más reciente que la última vez que lo comprobaste, se reinicia. El archivo no se elimina. Esto se hizo para que el reinicio de las aplicaciones funcionara sin problemas en los recursos compartidos de NFS.</p>
+<p>En sitios de menor tráfico, por lo general, aún puedes ver visualmente que la aplicación se reinicia "preparando" una página (cargándola un par de veces en tu navegador), tocando el archivo <span class="text-object">restart.txt</span> y luego cargando esa página nuevamente. Debería tardar un tiempo notablemente más largo en cargarse que el par de veces anteriores. Sin embargo, esto realmente no funcionará en sitios en vivo que están recibiendo tráfico, ya que es muy posible que la solicitud de otra persona reinicie la aplicación en el momento en que la pruebes tu mismo.</p>
 </div>
 <h2><span id="Error_broken_pipe">Error Broken pipe</span></h2>
 <div class="solvvy-solution">
@@ -43,11 +43,11 @@
 </div>
 <h2><span id="El_registro_de_producción_no_está_siendo_escrito">El registro de producción no se está escribiendo</span></h2>
 <div class="solvvy-solution">
-<p>Esto suele deberse a un archivo database.yml mal configurado. Si tu archivo database.yml no está configurado correctamente, Passenger muere antes de que se cargue tu aplicación. Como tal, no recibe mensajes de error útiles de Passenger y tu archivo production.log no se toca.</p>
+<p>Esto suele deberse a un archivo <span class="text-object">database.yml</span> mal configurado. Si tu archivo <span class="text-object">database.yml</span> no está configurado correctamente, Passenger muere antes de que se cargue tu aplicación. Como tal, no recibe mensajes de error útiles de Passenger y tu archivo <span class="text-object">production.log</span> no se toca.</p>
 </div>
 <h2><span id="Configuraciones_de_conexión_faltantes">Configuraciones de conexión faltantes</span></h2>
 <div class="solvvy-solution">
-<p>A algunas versiones de Passenger realmente no les gusta si tu archivo database.yml no incluye al menos configuraciones (pueden estar en blanco) para todos los entornos. El síntoma de que esto sucede es que tu aplicación se carga sin cesar sin salida al archivo production.log. Por lo tanto, asegúrate de dejar la información de conexión para todos los entornos en tu archivo database.yml -- incluso si solo estás utilizando la configuración de producción.</p>
+<p>A algunas versiones de Passenger realmente no les gusta si tu archivo <span class="text-object">database.yml</span> no incluye al menos configuraciones (pueden estar en blanco) para todos los entornos. El síntoma de que esto sucede es que tu aplicación se carga sin cesar sin salida al archivo <span class="text-object">production.log</span>. Por lo tanto, asegúrate de dejar la información de conexión para todos los entornos en tu archivo <span class="text-object">database.yml</span> -- incluso si solo estás utilizando la configuración de producción.</p>
 </div>
 <h2><span id="Usar_una_conexión_socket_en_lugar_de_un_host">Usar una conexión socket en lugar de un host</span></h2>
 <div class="solvvy-solution">
@@ -80,7 +80,7 @@
 </div>
 <h2><span id="Nombres_erróneos_de_parametros">Nombres erróneos de parámetros</span></h2>
 <div class="solvvy-solution">
-<p>Otro error común es simplemente tener un parámetro necesario mal nombrado. Esto puede suceder más fácil de lo que parece porque cuando generas una aplicación Rails, esta genera de forma predeterminada un archivo de configuración sqlite3 database.yml. Debes especificar manualmente que deseas un archivo MySQL (rails --database mysql &lt;nombre de proyecto&gt;) o tendrás que cambiarlo manualmente. Dado que mucha gente no se da cuenta de esto, terminan cambiándolo después del hecho y los archivos de configuración sqlite3 no tienen nombre de usuario o parámetros de host. Así es como se ve una sección sqlite3 predeterminada:</p>
+<p>Otro error común es simplemente tener un parámetro necesario mal nombrado. Esto puede suceder más fácil de lo que parece porque cuando generas una aplicación Rails, esta genera de forma predeterminada un archivo de configuración sqlite3 <span class="text-object">database.yml</span>. Debes especificar manualmente que deseas un archivo MySQL (rails --database mysql &lt;nombre de proyecto&gt;) o tendrás que cambiarlo manualmente. Dado que mucha gente no se da cuenta de esto, terminan cambiándolo después del hecho y los archivos de configuración sqlite3 no tienen nombre de usuario o parámetros de host. Así es como se ve una sección sqlite3 predeterminada:</p>
 <div class="preboxcontainer">
 <pre class="prebox">production:
   adapter: sqlite3
@@ -138,7 +138,7 @@
 </div>
 <h2><span id="Habilitar_las_páginas_amigables_de_errores_de_Passenger">Habilitar las páginas amigables de errores</span></h2>
 <div class="solvvy-solution">
-<p>Las páginas amigables de errores de Passenger te ayudan a solucionar problemas de actualización. Para habilitarlas, agrega lo siguiente a un archivo .htaccess dentro de la aplicación:</p>
+<p>Las páginas amigables de errores de Passenger te ayudan a solucionar problemas de actualización. Para habilitarlas, agrega lo siguiente a un archivo <span class="text-object">.htaccess</span> dentro de la aplicación:</p>
 <div class="preboxcontainer">
 <pre class="prebox">PassengerFriendlyErrorPages on</pre>
 </div>
