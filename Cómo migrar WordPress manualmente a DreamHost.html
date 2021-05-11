@@ -32,7 +32,7 @@
 <div class="solvvy-solution">
 <p>Para poder migrar manualmente sus datos, deberás hacer los siguiente:</p>
 <ol>
-<li>Realiza una copia de seguridad de tu base de datos con formato .sql desde tu compañía de hospedaje anterior.</li>
+<li>Realiza una copia de seguridad de tu base de datos con formato <span class="text-object">.sql</span> desde tu compañía de hospedaje anterior.</li>
 <li>Realiza una copia de seguridad de los archivos web vía FTP desde tu compañía de hospedaje anterior.</li>
 <li>Crea un nombre de host SQL (hostname) y una base de datos en DreamHost para la nueva instalación.</li>
 <li>Sube estos archivos a través de FTP/SFTP/SSH a tu servidor en DreamHost.</li>
@@ -43,7 +43,7 @@
 <h2><span id="Step_one_.E2.80.93_Backing_up_your_database">Paso 1 — Crear una copia de seguridad de tu base de datos</span></h2>
 <div class="solvvy-solution">
 <p>Antes de hacer cualquier otra cosa, crea una copia de seguridad de tu base de datos MySQL con tu compañía de alojamiento actual. La manera en que se crea una copia de seguridad varía de un host a otro. El método más sencillo es usar <a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin" target="_self">phpMyAdmin</a>, una herramienta web que está disponible con la mayoría de compañías de hospedaje.</p>
-<p>Para obtener más información, consulta con tu compañía de hospedaje actual sobre cómo hacer una copia de seguridad de tu base de datos con formato o tipo de archivo .sql.</p>
+<p>Para obtener más información, consulta con tu compañía de hospedaje actual sobre cómo hacer una copia de seguridad de tu base de datos con formato o tipo de archivo <span class="text-object">.sql</span>.</p>
 </div>
 <h2><span id="Step_two_.E2.80.93_Backing_up_your_web_files_via_FTP">Paso 2 — Crear una copia de seguridad de tus archivos web a través de FTP</span></h2>
 <div class="solvvy-solution">
@@ -80,7 +80,7 @@
 <div class="alert alert-tip">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-tip-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Si creas el nombre de host (hostname), usa el nombre de la base de datos, el usuario y la contraseña tal como la tenías con tu antiguo nombre de host y la base de datos, y así puedes evitar editar tu archivo wp_config.php en el paso#5 a continuación.</p>
+<p>Si creas el nombre de host (hostname), usa el nombre de la base de datos, el usuario y la contraseña tal como la tenías con tu antiguo nombre de host y la base de datos, y así puedes evitar editar tu archivo <span class="text-object">wp_config.php</span> en el paso#5 a continuación.</p>
 </div>
 </div>
 </div>
@@ -109,7 +109,7 @@
 <h2><span id="paso-cinco">Paso 5 — Editar el archivo wp-config.php</span></h2>
 <div class="solvvy-solution">
 <p>Es probable que el nombre de host, la base de datos, el nombre de usuario y la contraseña que creaste en su panel de DreamHost sean diferentes a los que tenías con tu compañía de hospedaje anterior. Si este es el caso, deberás actualizar tu archivo wp-config.php para asegurarte de que la información coincida con las credenciales de inicio de sesión de tu nueva base de datos en el panel de DreamHost.</p>
-<p>Abra el archivo wp-config.php y va a ver la siguiente información:</p>
+<p>Abra el archivo <span class="text-object">wp-config.php</span> y va a ver la siguiente información:</p>
 <div class="preboxcontainer">
 <pre class="prebox">define('DB_NAME', '<span class="code-highlight">exampledatabase</span>');
 define('DB_USER', '<span class="code-highlight">exampledbuser</span>');
@@ -123,7 +123,7 @@ $table_prefix = '<span class="code-highlight">wp_2hdy121d_</span>';</pre>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Asegúrate de que la configuración en table_prefix del wp-config.php coincida con el prefijo de la tabla de tu copia de seguridad, de lo contrario, WordPress te pedirá que instale desde cero.</p>
+<p>Asegúrate de que la configuración en table_prefix del <span class="text-object">wp-config.php</span> coincida con el prefijo de la tabla de tu copia de seguridad, de lo contrario, WordPress te pedirá que instale desde cero.</p>
 </div>
 </div>
 <p>Para confirmar el prefijo de la tabla, usa&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos">phpMyAdmin</a>&nbsp;para iniciar sesión en la base de datos en DreamHost a la cual le acabas de importar la información en el Paso#4.</p>
@@ -132,13 +132,13 @@ $table_prefix = '<span class="code-highlight">wp_2hdy121d_</span>';</pre>
 </dl>
 <ul>
 <li>Una vez que hayas iniciado sesión, haz clic en el nombre de tu base de datos a la izquierda. Van a aparecer las tablas debajo del nombre.</li>
-<li>La primera parte de la tabla es el prefijo. En el ejemplo anterior, el prefijo es wp_q2e97u_.</li>
+<li>La primera parte de la tabla es el prefijo. En el ejemplo anterior, el prefijo es <span class="text-object">wp_q2e97u_</span>.</li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Actualice el campo de prefijo del archivo wp-config.php</a>&nbsp;para que coincida con el prefijo que tiene la tabla.</li>
 </ul>
 </div>
 <h2>Cómo ver tu sitio y actualizar los DNS</h2>
 <div class="solvvy-solution">
-<p>Si sus DNS no apuntan a DreamHost, visita el siguiente artículo para ver tu sitio usando un archivo 'hosts'.</p>
+<p>Si sus DNS no apuntan a DreamHost, visita el siguiente artículo para ver tu sitio usando un archivo <span class="text-object">hosts</span>.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115006086308-Cómo-ver-tu-sitio-DreamHost-usando-su-archivo-de-hosts" target="_self">Cómo ver tu sitio DreamHost utilizando tu archivo 'hosts'</a></li>
 </ul>

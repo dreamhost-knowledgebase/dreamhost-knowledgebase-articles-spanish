@@ -56,12 +56,12 @@ ServerTokens ProductOnly;</pre>
 </div>
 <div id="disable-htaccess-files">
 <h3>Deshabilitar los archivos .htaccess</h3>
-<p>Los archivos <em>.htaccess</em> son una característica poderosa que permite a Apache extender su configuración fuera de su archivo de configuración principal. Si bien esto puede ser conveniente, presenta un riesgo de seguridad, ya que Apache leerá cualquier archivo .htaccess en su ruta — incluso los colocados por un atacante que podrían comprometer el servidor. Puede ser conveniente bloquear la configuración de Apache desactivando los archivos .htaccess por completo. Esto se puede hacer al editar la directiva <span class="code"><a href="https://httpd.apache.org/docs/2.4/mod/core.html">AllowOverride</a></span> en el archivo <span class="text-object">/etc/apache2/apache2.conf:</span></p>
+<p>Los archivos <span class="text-object">.htaccess</span> son una característica poderosa que permite a Apache extender su configuración fuera de su archivo de configuración principal. Si bien esto puede ser conveniente, presenta un riesgo de seguridad, ya que Apache leerá cualquier archivo <span class="text-object">.htaccess</span> en su ruta — incluso los colocados por un atacante que podrían comprometer el servidor. Puede ser conveniente bloquear la configuración de Apache desactivando los archivos <span class="text-object">.htaccess</span> por completo. Esto se puede hacer al editar la directiva <span class="code"><a href="https://httpd.apache.org/docs/2.4/mod/core.html">AllowOverride</a></span> en el archivo <span class="text-object">/etc/apache2/apache2.conf:</span></p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo vim /etc/apache2/apache2.conf</span>
 AllowOverride None</pre>
 </div>
-<p>Además, el control detallado de qué directivas de Apache se pueden usar dentro de los archivos .htaccess también puede ser controlado por <span class="code">AllowOverride</span>:</p>
+<p>Además, el control detallado de qué directivas de Apache se pueden usar dentro de los archivos <span class="text-object">.htaccess</span> también puede ser controlado por <span class="code">AllowOverride</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">AllowOverride AuthConfig Indexes</pre>
 </div>

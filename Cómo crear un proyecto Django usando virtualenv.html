@@ -47,7 +47,7 @@
 </ul>
 </div>
 </div>
-<p>Las siguientes instrucciones asumen que has creado un entorno virtual titulado 'venv' usando los enlaces de arriba.</p>
+<p>Las siguientes instrucciones asumen que has creado un entorno virtual titulado <span class="text-object">venv</span> usando los enlaces de arriba.</p>
 <ol>
 <li>Corre los siguientes comandos para crear tu proyecto Django dentro de este entorno:<br />
 <div class="preboxcontainer">
@@ -65,7 +65,7 @@
 </div>
 </div>
 </li>
-<li>Para que Passenger pueda recoger tu proyecto, crea un archivo passenger_wsgi.py dentro del directorio de nivel superior de tu sitio (<span class="text-object">/home/username/example.com</span>). Agrega lo siguiente:<br />
+<li>Para que Passenger pueda recoger tu proyecto, crea un archivo <span class="text-object">passenger_wsgi.py</span> dentro del directorio de nivel superior de tu sitio (<span class="text-object">/home/username/example.com</span>). Agrega lo siguiente:<br />
 <div class="preboxcontainer">
 <pre class="prebox">import sys, os
 INTERP = "<span class="code-highlight">/home/username/example.com/venv/bin/python3</span>"
@@ -87,7 +87,7 @@ application = get_wsgi_application()
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Asegúrate de reemplazar lo siguiente en el archivo passenger_wsgi.py:</p>
+<p>Asegúrate de reemplazar lo siguiente en el archivo <span class="text-object">passenger_wsgi.py</span>:</p>
 <ul>
 <li>La ruta a tu versión local de Python en la línea # 2. Ejecuta <span class="code">which python3</span> para confirmar:<br />
 <div class="preboxcontainer">
@@ -104,7 +104,7 @@ application = get_wsgi_application()
 </li>
 <li>Configura los ajustes de archivo estático de Django para servir correctamente las imágenes, CSS y JavaScript, ya que lo necesitarás para que funcione la interfaz de administración. Por ejemplo:<br />
 <ul>
-<li>Abre el archivo settings.py del proyecto que se encuentra en <span class="text-object">example.com/projectname/projectname/settings.py</span>. Desplázate hasta la parte inferior y verá que <span class="code">STATIC_URL</span> probablemente esté configurado en <span class="code">/static/</span>.</li>
+<li>Abre el archivo <span class="text-object">settings.py</span> del proyecto que se encuentra en <span class="text-object">example.com/projectname/projectname/settings.py</span>. Desplázate hasta la parte inferior y verá que <span class="code">STATIC_URL</span> probablemente esté configurado en <span class="code">/static/</span>.</li>
 <li>Agrega otra línea para establecer la ubicación en el servidor del directorio estático real. Asegúrate de cambiar <span class="text-object">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.</li>
 </ul>
 <dl>
@@ -133,7 +133,7 @@ application = get_wsgi_application()
 <span class="server">(venv) [server]$ </span><span class="command">python3 manage.py collectstatic</span></pre>
 </div>
 </li>
-<li>Configura tu base de datos según sea necesario dentro del archivo settings.py. La sección del archivo settings.py originalmente se ve así:<br />
+<li>Configura tu base de datos según sea necesario dentro del archivo <span class="text-object">settings.py</span>. La sección del archivo <span class="text-object">settings.py</span> originalmente se ve así:<br />
 <div class="preboxcontainer">
 <pre class="prebox">DATABASES = {
     'default': {
@@ -160,7 +160,7 @@ application = get_wsgi_application()
 </div>
 </li>
 <li>El valor predeterminado es usar sqlite3, que puede ser adecuado para los sitios más pequeños, pero es probable que desees configurar una base de datos mysql.</li>
-<li>También en tu archivo settings.py, actualiza el campo <span class="code">ALLOWED_HOSTS</span> con tu nombre de dominio. Al principio, parece así:<br />
+<li>También en tu archivo <span class="text-object">settings.py</span>, actualiza el campo <span class="code">ALLOWED_HOSTS</span> con tu nombre de dominio. Al principio, parece así:<br />
 <div class="preboxcontainer">
 <pre class="prebox">ALLOWED_HOSTS = []</pre>
 </div>
@@ -235,9 +235,9 @@ Superuser created successfully.</span></pre>
 </div>
 <h2>Solución de problemas</h2>
 <div class="solvvy-solution">
-<p>Si observas algún error después de la instalación, verifica si tienes un archivo .htaccess en los directorios de tu sitio. Es posible que el código en él pueda causar problemas con tu instalación.</p>
+<p>Si observas algún error después de la instalación, verifica si tienes un archivo <span class="text-object">.htaccess</span> en los directorios de tu sitio. Es posible que el código en él pueda causar problemas con tu instalación.</p>
 <h3>ModuleNotFoundError: No module named 'django'</h3>
-<p>Si ves este error cuando visitas tu sitio, verifica tu archivo passenger_wsgi.py. Confirma los siguientes puntos de línea a tu versión personalizada de Python. Por ejemplo, debería ser 3.6 o 3.7 si instalaste una de esas versiones.</p>
+<p>Si ves este error cuando visitas tu sitio, verifica tu archivo <span class="text-object">passenger_wsgi.py</span>. Confirma los siguientes puntos de línea a tu versión personalizada de Python. Por ejemplo, debería ser 3.6 o 3.7 si instalaste una de esas versiones.</p>
 <div class="preboxcontainer">
 <pre class="prebox">sys.path.insert(0,cwd+'/venv/lib/python3.7/site-packages')</pre>
 </div>

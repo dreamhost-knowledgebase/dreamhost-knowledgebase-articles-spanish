@@ -1,17 +1,17 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este artículo explica cómo forzar a PHP a cargar un archivo que no termina con la extensión .php.</p>
+<p>Este artículo explica cómo forzar a PHP a cargar un archivo que no termina con la extensión <span class="text-object">.php</span>.</p>
 </div>
 <h2>Usando un archivo .htaccess</h2>
 <div class="solvvy-solution">
-<p>Para procesar archivos con PHP cuyos nombres no terminan en ".php", puedes usar una directiva en .htaccess.</p>
-<p>Por ejemplo, <a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self" rel="undefined">crea un archivo</a> llamado myfile.test con el siguiente código:</p>
+<p>Para procesar archivos con PHP cuyos nombres no terminan en <span class="text-object">.php</span>, puedes usar una directiva en <span class="text-object">.htaccess</span>.</p>
+<p>Por ejemplo, <a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self" rel="undefined">crea un archivo</a> llamado <span class="text-object">myfile.test</span> con el siguiente código:</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
 echo 'testing an extension using PHP';
 ?&gt;</pre>
 </div>
-<p>La extensión .test no existe. Pero, puedes forzar que se corra como PHP agregando este código a tu <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self" rel="undefined">archivo .htaccess</a>:</p>
+<p>La extensión <span class="text-object">.test</span> no existe. Pero, puedes forzar que se corra como PHP agregando este código a tu <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self" rel="undefined">archivo .htaccess</a>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">AddHandler fcgid-script .test
 FcgidWrapper "/dh/cgi-system/php74.cgi" .test</pre>
@@ -20,8 +20,8 @@ FcgidWrapper "/dh/cgi-system/php74.cgi" .test</pre>
 </div>
 <h2>CGI y FCGI</h2>
 <div class="solvvy-solution">
-<p>En el ejemplo anterior, los archivos con la extensión .test utilizan PHP 7.4 con FastCGI.</p>
-<p>Si no deseas cambiar la versión de PHP pero deseas que PHP use CGI (en lugar de FastCGI), usa esta línea en tu archivo .htaccess:</p>
+<p>En el ejemplo anterior, los archivos con la extensión <span class="text-object">.test</span> utilizan PHP 7.4 con FastCGI.</p>
+<p>Si no deseas cambiar la versión de PHP pero deseas que PHP use CGI (en lugar de FastCGI), usa esta línea en tu archivo <span class="text-object">.htaccess</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">AddHandler php-cgi .test</pre>
 </div>

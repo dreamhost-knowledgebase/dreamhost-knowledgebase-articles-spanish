@@ -1,6 +1,6 @@
 <h2>Cómo cifrar tus datos</h2>
 <div class="solvvy-solution">
-<p>S3cmd puede cifrar tus datos mientras los carga en DreamObjects. Para utilizar esta funcionalidad, primero debes configurar tu archivo .s3cfg como se muestra en este artículo:</p>
+<p>S3cmd puede cifrar tus datos mientras los carga en DreamObjects. Para utilizar esta funcionalidad, primero debes configurar tu archivo <span class="text-object">.s3cfg</span> como se muestra en este artículo:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215916627-Instalar-S3cmd" target="_self" rel="undefined">Instalar S3cmd</a></li>
 </ul>
@@ -9,7 +9,7 @@
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">nano ~/.s3cfg</span></pre>
 </div>
-<p>Agrega las siguientes líneas para que puedas usar el cifrado. Asegúrate de crear tu propia contraseña para 'gpg_passphrase':</p>
+<p>Agrega las siguientes líneas para que puedas usar el cifrado. Asegúrate de crear tu propia contraseña para <span class="text-object">gpg_passphrase</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">check_ssl_certificate = True
 check_ssl_hostname = True
@@ -20,14 +20,14 @@ gpg_passphrase = <span class="code-highlight">yourpassword</span></pre>
 </div>
 <p>Tu configuración ahora está configurada para encriptar datos.</p>
 <h3>Cifrar datos mientras se cargan</h3>
-<p>Para cifrar tus datos durante la carga, usa la marca -e. En el siguiente ejemplo, 'bucket-name' es el nombre del bucket al que estás cargando contenido. textfile.txt es el nombre del único archivo que estás cargando:</p>
+<p>Para cifrar tus datos durante la carga, usa la marca <span class="code">-e</span>. En el siguiente ejemplo, <span class="text-object">bucket-name</span> es el nombre del bucket al que estás cargando contenido. <span class="text-object">textfile.txt</span> es el nombre del único archivo que estás cargando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command"> s3cmd -e put <span class="code-highlight">testfile.txt</span> s3://<span class="code-highlight">bucket-name</span></span>
 
 upload: '/tmp/tmpfile-zFGwbLHMVEINdHh3615n' -&gt; 's3://bucket-name/testfile.txt'  [1 of 1]
  63 of 63   100% in    0s   129.96 B/s  done</pre>
 </div>
-<p>Para confirmar que está encriptado, navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener">DreamObjects</a>. Haz clic en el botón 'Ver objetos' debajo de tu nombre de usuario. Se abre un mensaje para que puedas ver los objetos en tu bucket.</p>
+<p>Para confirmar que está encriptado, navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener">DreamObjects</a>. Haz clic en el botón <strong>View Objects</strong> debajo de tu nombre de usuario. Se abre un mensaje para que puedas ver los objetos en tu bucket.</p>
 <p><img src="https://kbimages.dreamhosters.com/images/2018-06_panel_dho-viewing-object.png" /></p>
 <p>Haz clic en el objeto, copie la URL y luego pégalo en un navegador.</p>
 <p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_dho-viewing-encrypted-object.png" /></p>
