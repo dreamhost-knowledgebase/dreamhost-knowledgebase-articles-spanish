@@ -72,7 +72,7 @@ gpg: Good signature from "Maxim Dounin &lt;mdounin@mdounin.ru&gt;"
 <div id="run-as-an-unprivileged-user">
 <h3>Ejecutar como un usuario sin privilegios</h3>
 <p>En seguridad, el principio de privilegio mínimo establece que a una entidad no se le debe otorgar más permiso de lo necesario para lograr tus objetivos dentro de un sistema dado. En el contexto de tu servidor web Nginx, esto significa bloquear Nginx para que se ejecute solo con los permisos necesarios para ejecutar.</p>
-<p>Primero, <a href="https://help.dreamhost.com/hc/es/articles/360000274451-Crear-un-nuevo-usuario-en-una-instancia">crea un nuevo usuario</a> sin privilegios sudo. Luego, puedes configurar Nginx para que se ejecute como un usuario del sistema sin privilegios (por ejemplo, no el usuario root o un usuario con privilegios de sudo). Esto se hace mediante la directiva de <span class="code">user</span> en el archivo de configuración /etc/nginx/nginx.conf. Al principio puede parecer comentado:</p>
+<p>Primero, <a href="https://help.dreamhost.com/hc/es/articles/360000274451-Crear-un-nuevo-usuario-en-una-instancia">crea un nuevo usuario</a> sin privilegios sudo. Luego, puedes configurar Nginx para que se ejecute como un usuario del sistema sin privilegios (por ejemplo, no el usuario root o un usuario con privilegios de sudo). Esto se hace mediante la directiva de <span class="code">user</span> en el archivo de configuración <span class="text-object">/etc/nginx/nginx.conf</span>. Al principio puede parecer comentado:</p>
 <div class="preboxcontainer">
 <pre class="prebox">#user nobody;</pre>
 </div>
@@ -82,7 +82,7 @@ gpg: Good signature from "Maxim Dounin &lt;mdounin@mdounin.ru&gt;"
 </div>
 </div>
 <h3>Deshabilitar Server Tokens</h3>
-<p>La especificación <span class="text-object">HTTP</span> recomienda (pero no requiere) que los servidores web se identifiquen mediante el encabezado del <span class="code">Server</span>. Históricamente, los servidores web han incluido su información de versión como parte de este encabezado. Revelar la versión de Nginx en ejecución puede ser indeseable, particularmente en entornos sensibles a la revelación de información. Nginx se puede configurar para que no muestre su versión en el encabezado del servidor editando el archivo Nginx.conf con lo siguiente:</p>
+<p>La especificación <span class="text-object">HTTP</span> recomienda (pero no requiere) que los servidores web se identifiquen mediante el encabezado del <span class="code">Server</span>. Históricamente, los servidores web han incluido su información de versión como parte de este encabezado. Revelar la versión de Nginx en ejecución puede ser indeseable, particularmente en entornos sensibles a la revelación de información. Nginx se puede configurar para que no muestre su versión en el encabezado del servidor editando el archivo <span class="text-object">Nginx.conf</span> con lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox">server_tokens off;
 </pre>
@@ -142,7 +142,7 @@ Vary: Accept-Encoding
 </div>
 <div id="restrict-access-by-password">
 <h3>Restringir acceso por contraseña</h3>
-<p>El acceso a ciertas ubicaciones también se puede configurar mediante credenciales basadas en contraseña, utilizando el mismo formato que usan los archivos .htaccess y .htpasswd de Apache:</p>
+<p>El acceso a ciertas ubicaciones también se puede configurar mediante credenciales basadas en contraseña, utilizando el mismo formato que usan los archivos <span class="text-object">.htaccess</span> y <span class="text-object">.htpasswd</span> de Apache:</p>
 <div class="preboxcontainer">
 <pre class="prebox">location <span class="code-highlight">/wp-admin</span> {
     auth_basic "Admin Area";
@@ -151,7 +151,7 @@ Vary: Accept-Encoding
 </pre>
 </div>
 </div>
-<p>Donde los contenidos de <cite>.htpasswd</cite> se ven algo así:</p>
+<p>Donde los contenidos de <span class="text-object">.htpasswd</span> se ven algo así:</p>
 <div class="preboxcontainer">
 <pre class="prebox">user1:<span class="code-highlight">password1</span>
 user2:<span class="code-highlight">password2</span>

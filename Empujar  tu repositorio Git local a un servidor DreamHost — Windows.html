@@ -1,0 +1,222 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>En este artículo se supone que has creado tu aplicación (sitio web) en la computadora de tu hogar. Los pasos a continuación te guían a través de cómo poner este código de aplicación bajo el control de versión de Git y enviarlo a tu servidor DreamHost.</p>
+</div>
+<h2>Crear un Llave de Emparejamiento SSH</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Descarga e instala Git para Windows:<br />
+<ul>
+<li><a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></li>
+</ul>
+<dl>
+<dd><em>Este ejemplo usa 2.14.1.</em></dd>
+</dl>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Selecciona todas las opciones predeterminadas durante la instalación. Por ejemplo, debes dejar el botón de opción seleccionado para <span class="text-object">Usar Git solo desde Git Bash</span> y todas las opciones para <span class="text-object">OpenSSL</span>.</p>
+</div>
+</div>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/gitgui_01.png" alt="gitgui.png" /></dd>
+</dl>
+</li>
+<li>Debes crear claves SSH para interactuar con tu servidor DreamHost. Desde el menú de inicio, busca el programa que acabas de instalar. Estás buscando <span class="text-object">Git Gui</span>.<br />
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/gitgui_02.png" alt="gitgui.png" /></dd>
+</dl>
+</li>
+<li>Haz clic en el menú <span class="text-object">Help</span> y selecciona <span class="text-object">Show SSH Key</span>.<br />
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/gitgui_03.png" alt="gitgui.png" /></dd>
+</dl>
+</li>
+<li>En la ventana emergente, haz clic en <strong>Generate Key</strong> en la esquina superior derecha.<br />
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/gitgui_04.png" alt="gitgui.png" /></dd>
+</dl>
+</li>
+<li>Se te pide una frase de contraseña. Deja el campo de entrada vacío y haz clic en <strong>OK</strong>&nbsp;dos veces.<br />
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/gitgui_05.png" alt="gitgui.png" /></dd>
+</dl>
+</li>
+<li>Se muestra tu clave pública. Haz clic en <strong>Copy To Clipboard</strong>.</li>
+<li>Abre tu menú de inicio y abre el programa <span class="text-object">Notepad</span>. Una vez abierto, pega esta clave pública.</li>
+<li>Guarda el archivo y asígnale un nombre similar a <span class="text-object">dreamhost-git-key.pub</span>. Asegúrate de guardarlo en tu carpeta <span class="text-object">Documentos</span>.</li>
+</ol>
+</div>
+<h2>Subir la clave pública a tu servidor DreamHost</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega a tu carpeta <span class="text-object">Documentos</span>.<br />
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/gitgui_06.png" alt="gitgui.png" /></dd>
+</dl>
+</li>
+<li>Haz clic derecho y seleccione <span class="text-object">Git Bash Here</span>. Esto abre una terminal. Desde que abriste <span class="text-object">Git Bash</span> dentro de la carpeta <span class="text-object">Documentos</span>, el indicador del terminal debería verse así:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">user@computer MINGw64 ~/Documents
+$</span></pre>
+</div>
+</li>
+<li>En el terminal, ejecuta el siguiente comando para asegurarte de que el dreamhost-git-key.pub que guardaste anteriormente esté en este directorio <span class="text-object">Documentos</span>.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la | grep dreamhost</span>
+<span class="cmdoutput">dreamhost-git-key.pub</span></pre>
+</div>
+<em>El terminal muestra el nombre del archivo de clave pública que guardaste.</em><br />
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Para ejecutar los siguientes comandos, necesitas el nombre de tu servidor DreamHost y el usuario/contraseña de tu sitio web. Visita los siguientes artículos para ubicar esta información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027#nombre-de-servidor" target="_self">Localizar el nombre de tu servidor </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027#nombre-de-host" target="_self">Localizar tu nombre de usuario</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027#contraseña" target="_self">Reestablecer tu contraseña de usuario (si es necesario)</a></li>
+</ul>
+<p>Además, el nombre de usuario del sitio web DreamHost con el que estás ejecutando el comando debe configurarse como usuario de Shell. Mira el siguiente artículo con instrucciones sobre cómo configurar esto:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Crear un usuario con acceso Shell</a></li>
+</ul>
+</div>
+</div>
+</li>
+<li>Ejecuta el siguiente comando para cargar tu clave pública en tu servidor DreamHost (asegúrate de usar el nombre de usuario y servidor de tu sitio web):<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cat ~/Documents/dreamhost-git-key.pub | ssh <span class="code-highlight">user@server.dreamhost.com</span> "mkdir ~/.ssh; cat &gt;&gt; ~/.ssh/authorized_keys"</span>
+</pre>
+</div>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Puedes recibir el siguiente error al ejecutar este comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox">mkdir: cannot create directory `/home/username/.ssh': File exists</pre>
+</div>
+<p>Esto simplemente significa que el directorio <span class="text-object">/.ssh</span> ya existe en el servidor web. Si ves esto, elimina la parte del comando que crea el directorio y vuelve a ejecutarlo. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cat ~/Documents/dreamhost-git-key.pub | ssh <span class="code-highlight">user@server.dreamhost.com</span> "cat &gt;&gt; ~/.ssh/authorized_keys"</span>
+</pre>
+</div>
+</div>
+</div>
+</li>
+<li>Inicia sesión en tu servidor DreamHost a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">ssh <span class="code-highlight">user@server.dreamhost.com</span></span>
+</pre>
+</div>
+</li>
+<li>Confirma que tu clave se ha agregado al servidor DreamHost ejecutando lo siguiente (esto debería generar tu clave):<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">cat ~/.ssh/authorized_keys</span></pre>
+</div>
+</li>
+<li>Crea un nuevo directorio para tu nuevo repositorio remoto en tu servidor DreamHost. Si este código está destinado a actualizar tu sitio web existente, puedes nombrarlo igual que tu sitio web que termina en <span class="text-object">.git</span>. Por ejemplo, algo como <span class="text-object">example.com.git</span>.<br />
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Dado que este es un repositorio remoto y no un repositorio que funcione, el nombre del directorio que cree debe terminar con <span class="text-object">.git</span>. Luego puedes retirar este repositorio en el futuro para trabajar en él.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span>
+<span class="server">[server]$ </span><span class="command">mkdir <span class="code-highlight">example.com.git</span></span>
+<span class="server">[server]$ </span><span class="command">cd ~/<span class="code-highlight">example.com.git</span></span>
+<span class="server">[server]$ </span><span class="command">git init --bare</span>
+<span class="server">[server]$ </span><span class="command">exit</span>
+</pre>
+</div>
+</li>
+</ol>
+</div>
+<h2>Crear un repositorio Git en tu computador</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega a la carpeta de tu proyecto.<br />
+<dl>
+<dd></dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/01_Git_on_Windows.png" alt="01 Git on Windows.png" width="485" height="405" /></dd>
+</dl>
+</li>
+<li>Haz clic derecho y luego selecciona <span class="text-object">Git Bash Here</span>.<br />
+<dl>
+<dd><em>Esto abre una terminal que ya ejecuta Git.</em></dd>
+</dl>
+</li>
+<li>Ejecuta lo siguiente para crear tu usuario y correo electrónico para usar con Git:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git config --global user.name <span class="code-highlight">"John Doe"</span></span>
+<span class="server">[local ~]$ </span><span class="command">git config --global user.email <span class="code-highlight">johndoe@example.com</span></span>
+</pre>
+</div>
+<dl>
+<dd><em>Esto crea un archivo <span class="text-object">.gitconfig</span> con tu nombre de usuario.</em></dd>
+</dl>
+</li>
+<li>Ejecuta lo siguiente en el directorio de tu proyecto para inicializar el repositorio y crear tu primera confirmación:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git init</span>
+<span class="server">[server]$ </span><span class="command">git add .</span>
+<span class="server">[server]$ </span><span class="command">git commit -m "First Commit"</span>
+</pre>
+</div>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/git_hidden_files.png" alt="01 Git on Windows.png" /></dd>
+</dl>
+</li>
+<li>Cuando inicializas el repositorio, se crea un directorio llamado <span class="text-object">.git</span>. Por defecto, no puedes ver esto en Windows. Si deseas ver archivos ocultos (archivos que comienzan con un punto), haz clic en <span class="text-object">View</span> en el menú superior. A la derecha, marca la casilla para archivos ocultos. No necesitas ver esta carpeta <span class="text-object">.git</span> para continuar con estos pasos. Esta es solo una forma de ver que tus comandos han creado el repositorio local.</li>
+<li>Agrega el repositorio remoto. Asegúrate de usar tu nombre de usuario y servidor.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git remote add dreamhost ssh://<span class="code-highlight">user@server.dreamhost.com/~/example.com.git</span></span>
+<span class="server">[local ~]$ </span><span class="command">git push -u dreamhost master</span>
+</pre>
+</div>
+</li>
+<li>Verifica tu servidor DreamHost para confirmar que el repositorio fue enviado correctamente siguiendo las instrucciones en la siguiente sección.</li>
+</ol>
+</div>
+<h2>Confirmar que tu repositorio fue enviado correctamente a tu servidor DreamHost</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu servidor DreamHost a través de SSH.<br /><em>Cuando ejecutes <span class="code">git status</span> en el directorio <span class="text-object">/example.com.git</span>, recibirás el siguiente error porque es un repositorio <span class="text-object">bare</span> (desnudo):</em><br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git status</span>
+<span class="cmdoutput">fatal: This operation must be run in a work tree</span></pre>
+</div>
+</li>
+<li>Clona el repositorio en una nueva ubicación corriendo lo siguiente en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio de tu usuario</a>:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir ~/<span class="code-highlight">clonedproject.git</span></span>
+<span class="server">[server]$ </span><span class="command">cd ~/<span class="code-highlight">clonedproject.git</span></span>
+<span class="server">[server]$ </span><span class="command">git clone <span class="code-highlight">~/example.com.git ~/clonedproject.git</span></span>
+<span class="server">[server]$ </span><span class="command">ls -la</span>
+</pre>
+</div>
+<dl>
+<dd><em>Este directorio contiene todos los archivos que empujaste desde tu máquina local.</em></dd>
+</dl>
+</li>
+</ol>
+</div>
+<h2>¿Cómo puedo usar Git para el desarrollo web?</h2>
+<div class="solvvy-solution">
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo enviar los cambios en tu computadora local a tu sitio web en vivo.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000684492-Usando-Git-para-el-desarrollo-web" target="_self">Usando Git para desarrollo We</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000677931--Qu%C3%A9-es-un-Git-" target="_self">¿Qué es Git?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216445317--C%C3%B3mo-configurar-un-repositorio-Git-" target="_self">¿Cómo configurar un repositorio Git?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000676991-Empujando-tu-repositorio-DreamHost-Git-a-GitHub" target="_self">Empujando tu repositorio Git de DreamHost a GitHub</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216445197-Empujar-tu-repositorio-Git-local-a-un-servidor-de-DreamHost-Linux-Mac-OS-X" target="_self">Empujando tu repositorio local Git a un servidor DreamHost — Linux &amp; Mac OS X</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000684492-Usando-Git-para-el-desarrollo-web" target="_self">Usando Git para desarrollo</a></li>
+</ul>
+</div>
