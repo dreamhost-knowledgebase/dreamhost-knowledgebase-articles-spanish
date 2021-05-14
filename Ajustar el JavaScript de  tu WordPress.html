@@ -1,0 +1,62 @@
+<div class="alert alert-tip">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-tip-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si te encuentras en una situación que requiere cambios en tu sitio y tu desarrollador no está disponible para ayudarte, el equipo de soporte calificado de DreamHost puede ayudarte por una pequeña tarifa. Puedes encontrar más información sobre los servicios admitidos y los costos asociados en el artículo de <a href="https://help.dreamhost.com/hc/es/articles/360042256912-Generalidades-sobre-Servicios-Profesionales-">DreamHost Professional Services</a>.</p>
+</div>
+</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>JavaScript puede agregar mucha interactividad y contenido remoto interesante a un sitio. Sin embargo, si se usa generosamente, también puede hacer que las páginas se carguen más lentamente. Hay algunas cosas que puedes hacer para acelerar tus comandos de JavaScript.</p>
+</div>
+<h2>Usa una herramienta en línea para analizar tu sitio</h2>
+<div class="solvvy-solution">
+<p>Primero, usa una herramienta en línea para analizar tu sitio web. Recibirás un desglose de lo que puede estar causando que tu sitio cargue más lento de lo esperado y te brindará información para resolver problemas.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216560958-#Herramientas-de-carga-de-sitios-web" target="_self">Herramientas para verificar velocidad de carga de sitios web</a></li>
+</ul>
+</div>
+<h2>Bloqueo de renderizado de JavaScript</h2>
+<div class="solvvy-solution">
+<p>JavaScript se renderiza cuando el navegador lee la página web (de arriba hacia abajo). Cuando se encuentra un archivo JavaScript, el navegador deja de mostrar la página hasta que el archivo JavaScript se haya leído completamente. Esto se conoce como '<a href="https://developers.google.com/speed/docs/insights/BlockingJS" target="_self">Bloqueo de renderizado de JavaScript</a>'&nbsp;y podría causar un retraso a medida que se carga la página.</p>
+</div>
+<h2>JavaScript remoto</h2>
+<div class="solvvy-solution">
+<p>En lugar de insertar JavaScript remoto en la parte superior de tu página, como sugieren muchas instrucciones para la inserción, es completamente aceptable agregarlo justo antes de la etiqueta&nbsp;<strong>&lt;/body&gt;&nbsp;</strong>en tu tema. Debido a la forma en que se maneja el orden de carga de la página en el navegador, esto permitirá que tu contenido comience a mostrarse y mostrarse antes de tener que esperar los archivos remotos (que se cargarían primero si estuvieran en el encabezado).</p>
+<p>También hay plugins disponibles que se encargan de esto por ti los cuales puedes buscar en el&nbsp;<a href="https://wordpress.org/plugins/" target="_self">directorio de plugins</a>.</p>
+</div>
+<h2>JavaScript local</h2>
+<div class="solvvy-solution">
+<p>Al presionar JavaScript local en la parte inferior de la página también parecerá acelerar el tiempo de carga, por lo que es posible que desees lanzar una pequeña edición en tu tema para migrar cualquier JavaScript local de&nbsp;<strong>header.php</strong>&nbsp;a&nbsp;<strong>footer.php</strong>.</p>
+</div>
+<h2>Compresión</h2>
+<div class="solvvy-solution">
+<p>Además, si bien mod_deflate debe comprimir JavaScript, puedes cortar un poco de sobrecarga apagando previamente la compresión. Todo lo que necesitas hacer es guardar copias comprimidas del JavaScript de tu tema en el mismo directorio que tus archivos actuales. Nuevamente, necesitarás iniciar sesión en tu servidor por medio de&nbsp;<a class="new" title="SSH (page does not exist)" href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>&nbsp;para hacer esto.</p>
+<p>La ubicación de JavaScript varía de un tema a otro, pero el tema en sí siempre se puede encontrar en el directorio <span class="text-object">wp-content/themes/</span>. Una vez que hayas encontrado el JavaScript para tu sitio, simplemente ejecuta:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">gzip javascript.js</span></pre>
+</div>
+<p>Siempre que reemplaces <span class="text-object">javascript.js</span> con el nombre del archivo real que deseas comprimir y repitas el proceso para todos tus archivos, se creará una versión comprimida de tus archivos <span class="text-object">.js</span>. El beneficio de esto es que una vez que está hecho, no tienes que hacer nada más.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Algunos temas intentan comprimir JavaScript y CSS agregando un <span class="text-object">.php</span> al final del nombre del archivo. En realidad, esto procesa el archivo a través de PHP innecesariamente y puede causar una gran cantidad de sobrecarga. Si notas que tu tema está haciendo esto, modifícalo y usa el método gzip descrito anteriormente.</p>
+</div>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_self">Cómo iniciar sesión en tu sitio WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215525287-Generalidades-sobre-WordPress" target="_self">Generalidades sobre WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-plugins-de-WordPress" target="_self">Administrar plugins de WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300747-Actualizaciones-autom%C3%A1ticas-para-instalaciones-de-WordPress-de-un-clic" target="_self">¿Cómo configurar las actualizaciones automáticas en tu instalación de WordPress con un clic?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214586538-Opciones-de-cach%C3%A9-para-WordPress" target="_self">Opciones de caché para WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214586518-Afinando-las-revisiones-de-WordPress" target="_self">Ajustando las revisiones de WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300907-Plugins-de-SPAM-WordPress-" target="_self">Plugins para SPAM en WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300867-T%C3%A9cnicas-generales-de-optimizaci%C3%B3n-en-WordPress" target="_self">Técnicas generales de optimización en WordPress</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="https://codex.wordpress.org/Using_Javascript" target="_self">WordPress.org JavaScript Codex</a></li>
+</ul>
+</div>

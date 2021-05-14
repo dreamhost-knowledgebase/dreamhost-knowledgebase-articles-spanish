@@ -8,7 +8,7 @@
 <div class="preboxcontainer">
 <pre class="prebox">/home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span>/cgi-bin</pre>
 </div>
-<p>Cambia <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> a tu sitio website. No tienes que poner tus scripts CGI en un directorio cgi-bin, ya que los scripts CGI pueden ejecutarse desde cualquier directorio dentro de tu dominio en DreamHost. El servidor comprende varias extensiones de archivo (por ejemplo, .pl), pero si ves el código fuente de tu script en lugar del resultado de su ejecución, intenta usar la extensión genérica .cgi.</p>
+<p>Cambia <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> a tu sitio website. No tienes que poner tus scripts CGI en un directorio cgi-bin, ya que los scripts CGI pueden ejecutarse desde cualquier directorio dentro de tu dominio en DreamHost. El servidor comprende varias extensiones de archivo (por ejemplo, <span class="text-object">.pl</span>), pero si ves el código fuente de tu script en lugar del resultado de su ejecución, intenta usar la extensión genérica <span class="text-object">.cgi</span>.</p>
 <p>Si obtienes un "500 Internal Server Error", puede que necesites cambiar los permisos del archivo:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 755 script.cgi</span>
@@ -17,7 +17,7 @@
 </div>
 <h2>Ejecutar un script CGI sin una extensión .cgi</h2>
 <div class="solvvy-solution">
-<p>Si deseas instalar un script CGI sin la extensión .cgi, simplemente usa una directiva <span class="code">&lt;Files&gt;</span> en tu <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a>. Por ejemplo, si deseas tener un directorio cgi-bin, crea un archivo llamado <span class="text-object">.htaccess</span> dentro de él y luego inserta lo siguiente:</p>
+<p>Si deseas instalar un script CGI sin la extensión <span class="text-object">.cgi</span>, simplemente usa una directiva <span class="code">&lt;Files&gt;</span> en tu <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a>. Por ejemplo, si deseas tener un directorio cgi-bin, crea un archivo llamado <span class="text-object">.htaccess</span> dentro de él y luego inserta lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;Files *&gt;
   SetHandler cgi-script
@@ -71,7 +71,7 @@ echo "Hello, world!"
 </div>
 <h2>suEXEC</h2>
 <div class="solvvy-solution">
-<p><span class="text-object">suEXEC</span> está habilitado para todos los usuarios de DreamHost y no se puede deshabilitar. Debido a esto, algunas características, como la directiva <span class="code">SetEnv</span> en archivos .htaccess, no funcionarán como se esperaba. Consulta la página de <a href="https://help.dreamhost.com/hc/es/articles/215364578--C%C3%B3mo-uso-suEXEC-">suEXEC</a> para obtener soluciones y más detalles.</p>
+<p><span class="text-object">suEXEC</span> está habilitado para todos los usuarios de DreamHost y no se puede deshabilitar. Debido a esto, algunas características, como la directiva <span class="code">SetEnv</span> en archivos <span class="text-object">.htaccess</span>, no funcionarán como se esperaba. Consulta la página de <a href="https://help.dreamhost.com/hc/es/articles/215364578--C%C3%B3mo-uso-suEXEC-">suEXEC</a> para obtener soluciones y más detalles.</p>
 </div>
 <h2>Solucionar problemas CGI</h2>
 <div class="solvvy-solution">

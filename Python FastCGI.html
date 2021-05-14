@@ -8,13 +8,13 @@
 <li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>.</li>
 <li>Haz clic en el enlace <span class="text-link">Editar</span> debajo del dominio que deseas editar y desplázate hacia abajo hasta la sección <span class="text-section">Web Options</span>.</li>
 <li>Habilita tu dominio para soporte FastCGI.</li>
-<li>Descarga fcgi.py, y guárdalo en tu PYTHONPATH.</li>
+<li>Descarga <span class="text-object">fcgi.py</span>, y guárdalo en tu PYTHONPATH.</li>
 <li>Crea tu controlador de página predeterminado, <span class="text-object">dispatch.fcgi</span>:
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
 <ul>
-<li>Debes usar dispatch.fcgi o encontrará que el proceso es <a href="https://help.dreamhost.com/hc/es/articles/216540488--Por-qu%C3%A9-se-cancelaron-los-procesos-en-mi-servidor-Compartido-">terminado</a> en la mitad de la ejecución. Puedes encontrar más información en el artículo <a href="https://help.dreamhost.com/hc/es/articles/215317698-Soluci%C3%B3n-de-Problemas-de-Django">Solución de problemas de Django</a>.</li>
+<li>Debes usar <span class="text-object">dispatch.fcgi</span> o encontrará que el proceso es <a href="https://help.dreamhost.com/hc/es/articles/216540488--Por-qu%C3%A9-se-cancelaron-los-procesos-en-mi-servidor-Compartido-">terminado</a> en la mitad de la ejecución. Puedes encontrar más información en el artículo <a href="https://help.dreamhost.com/hc/es/articles/215317698-Soluci%C3%B3n-de-Problemas-de-Django">Solución de problemas de Django</a>.</li>
 <li>Asegúrate de usar la ruta <span class="text-object">#!/home/username/bin/python</span> y no <span class="text-object">#!/usr/bin/env python</span> con Pylons.</li>
 </ul>
 </div>
@@ -37,7 +37,7 @@ if __name__ == '__main__':
 </pre>
 </div>
 </li>
-<li>Crea un archivo .htaccess para redirigir todas las solicitudes a este script:
+<li>Crea un archivo <span class="text-object">.htaccess</span> para redirigir todas las solicitudes a este script:
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
 RewriteBase /
@@ -70,7 +70,7 @@ RewriteRule ^(.*)$ dispatch.fcgi/$1 [L]</pre>
 </pre>
 </div>
 </li>
-<li>Ve el artículo <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">crear y editar un archivo a través de SSH</a> para instrucciones sobre como editar tu&nbsp; .bash_profile existente. Añádele el siguiente código:
+<li>Ve el artículo <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">crear y editar un archivo a través de SSH</a> para instrucciones sobre como editar tu&nbsp; <span class="text-object">.bash_profile</span> existente. Añádele el siguiente código:
 <div class="preboxcontainer">
 <pre class="prebox">export PYTHONPATH="$HOME/packages/lib/python2.3/site-packages"
 export LD_LIBRARY_PATH="$HOME/packages/lib"
@@ -111,13 +111,13 @@ def test_app(environ, start_response):
 WSGIServer(test_app).run()</pre>
 </div>
 </li>
-<li>Hazlo ejecutable y crea un archivo .htaccess en el mismo directorio que dispatch.fcgi:
+<li>Hazlo ejecutable y crea un archivo <span class="text-object">.htaccess</span> en el mismo directorio que dispatch.fcgi:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod a+x ~/example.com/dispatch.fcgi</span>
 </pre>
 </div>
 <dl>
-<dd><em>.htaccess:</em></dd>
+<dd><em><span class="text-object">.htaccess</span>:</em></dd>
 </dl>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
@@ -158,7 +158,7 @@ def test_app(environ, start_response):
 
 WSGIServer(test_app).run()</pre>
 </div>
-<p>No se requieren cambios en tu archivo .htaccess ni en ninguna otra cosa. Una vez que funcione "Hello World", estarás listo para comenzar a usar Python. Simplemente instala lo que necesitas a través de <span class="text-object">easy_install</span> y continúa desde allí.</p>
+<p>No se requieren cambios en tu archivo <span class="text-object">.htaccess</span> ni en ninguna otra cosa. Una vez que funcione "Hello World", estarás listo para comenzar a usar Python. Simplemente instala lo que necesitas a través de <span class="text-object">easy_install</span> y continúa desde allí.</p>
 </div>
 <h2>Solución de problemas</h2>
 <div class="solvvy-solution">

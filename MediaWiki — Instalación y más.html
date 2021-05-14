@@ -72,7 +72,7 @@
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>El archivo LocalSettings.php contiene los ajustes de configuración para tu nueva instalación de MediaWiki, como las credenciales de la base de datos y los permisos de usuario.</p>
+<p>El archivo <span class="text-object">LocalSettings.php</span> contiene los ajustes de configuración para tu nueva instalación de MediaWiki, como las credenciales de la base de datos y los permisos de usuario.</p>
 </div>
 </div>
 </div>
@@ -93,7 +93,7 @@
 <div class="solvvy-solution">
 <h3>Problemas de miniaturas/thumbnails</h3>
 <p>MediaWiki ocasionalmente puede tener problemas para generar miniaturas de imágenes, como devolver imágenes corruptas o el mensaje de error "Error creating thumbnail". Una causa común de esto es que no hay suficiente memoria.</p>
-<p>Si cargas una imagen grande y ves "Error creating thumbnail" donde debería estar una miniatura, intenta agregar lo siguiente a tu archivo LocalSettings.php en el directorio primario de tu sitio:</p>
+<p>Si cargas una imagen grande y ves "Error creating thumbnail" donde debería estar una miniatura, intenta agregar lo siguiente a tu archivo <span class="text-object">LocalSettings.php</span> en el directorio primario de tu sitio:</p>
 <div class="preboxcontainer">
 <pre class="prebox">$wgMaxShellMemory = 524288;
 </pre>
@@ -113,7 +113,7 @@
 <h2><span id="correo-electronico">Email y spam</span></h2>
 <div class="solvvy-solution">
 <h3>Suplantación de dominio</h3>
-<p>Añade lo siguiente a tu archivo LocalSettings.php:</p>
+<p>Añade lo siguiente a tu archivo <span class="text-object">LocalSettings.php</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">$wgUserEmailUseReplyTo = true;
 </pre>
@@ -158,7 +158,7 @@
 <div class="solvvy-solution">
 <h3>Scripts de mantenimiento</h3>
 <p>En la instalación root de MediaWiki, hay un subdirectorio llamado <span class="text-object">/maintenance</span> que incluye varios scripts que puedes ejecutar en tu instalación de MediaWiki. Para ejecutar los scripts PHP, debes <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">crear un usuario Shell (SSH)</a> en tu dominio.</p>
-<p>Para ejecutar los scripts, debes ingresar ‘php’ antes del nombre del archivo. Por ejemplo, corre el siguiente comando si deseas ejecutar el script eval.php en el directorio de mantenimiento:</p>
+<p>Para ejecutar los scripts, debes ingresar <span class="text-object">php</span> antes del nombre del archivo. Por ejemplo, corre el siguiente comando si deseas ejecutar el script <span class="text-object">eval.php</span> en el directorio de mantenimiento:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">php eval.php</span></pre>
 </div>
@@ -203,7 +203,7 @@
 <h3>Contraseñas y HTTPS</h3>
 <p>MediaWiki utiliza un formulario en una página web <span class="text-object">HTTP</span> para tomar tu contraseña. Esto significa que tu contraseña se transmite a través de la red en texto claro. Para usar <span class="text-object">HTTPS</span>, debes añadir un <a href="https://help.dreamhost.com/hc/es/articles/216041537-Generalidades-sobre-certificados-SSL">certificado SSL</a>.</p>
 <h3>Permisos LocalSettings.php</h3>
-<p>El archivo LocalSettings.php almacena la información de inicio de sesión de tu base de datos, incluido el nombre de usuario y la contraseña de la base de datos. Después de mover el archivo LocalSettings.php a tu directorio root, puedes revisar tus permisos.</p>
+<p>El archivo <span class="text-object">LocalSettings.php</span> almacena la información de inicio de sesión de tu base de datos, incluido el nombre de usuario y la contraseña de la base de datos. Después de mover el archivo <span class="text-object">LocalSettings.php</span> a tu directorio root, puedes revisar tus permisos.</p>
 <p>Debes actualizar los permisos en ese archivo a 640 o 600. Esto se puede hacer ejecutando el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 640 LocalSettings.php</span>
@@ -219,10 +219,10 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/214750848-Comandos-de-UNIX-Trabajando-con-archivos">Permisos de archivo Unix</a></li>
 </ul>
 <h3>Mover las credenciales de la base de datos a otro archivo</h3>
-<p>Otra buena práctica de seguridad es configurar un archivo PHP separado almacenado en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio de tu usuario</a>. Este archivo almacena tus credenciales y las pasa como variables. La siguiente configuración describe cómo vincular tu archivo LocalSettings.php a este nuevo archivo:</p>
+<p>Otra buena práctica de seguridad es configurar un archivo PHP separado almacenado en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio de tu usuario</a>. Este archivo almacena tus credenciales y las pasa como variables. La siguiente configuración describe cómo vincular tu archivo <span class="text-object">LocalSettings.php</span> a este nuevo archivo:</p>
 <ol>
-<li>En el directorio de tu usuario (no el directorio del dominio), crea un nuevo directorio llamado "external_includes".</li>
-<li>En esta nueva carpeta, crea un archivo llamado "database_info.php".
+<li>En el directorio de tu usuario (no el directorio del dominio), crea un nuevo directorio llamado <span class="text-object">external_includes</span>.</li>
+<li>En esta nueva carpeta, crea un archivo llamado <span class="text-object">database_info.php</span>.
 <dl>
 <dd>La ruta completa a este nuevo archivo es:</dd>
 </dl>
@@ -242,7 +242,7 @@
 </pre>
 </div>
 </li>
-<li>Remueve las credenciales de la base de datos actual en tu archivo LocalSettings.php.</li>
+<li>Remueve las credenciales de la base de datos actual en tu archivo <span class="text-object">LocalSettings.php</span>.</li>
 <li>Reemplaza esas lineas con lo siguiente:<br />
 <div class="preboxcontainer">
 <pre class="prebox"># enhanced DB security
@@ -260,7 +260,7 @@
 </div>
 </li>
 </ol>
-<p>Con esta configuración, tus credenciales en el archivo LocalSettings ahora están ocultas de forma segura.</p>
+<p>Con esta configuración, tus credenciales en el archivo <span class="text-object">LocalSettings</span> ahora están ocultas de forma segura.</p>
 </div>
 <h2><span id="licencia">Configuraciones de licencia</span></h2>
 <div class="solvvy-solution">

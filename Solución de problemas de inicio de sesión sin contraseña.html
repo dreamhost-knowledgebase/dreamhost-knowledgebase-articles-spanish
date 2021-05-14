@@ -7,7 +7,7 @@
 <pre class="prebox"><span class="server">[local]$ </span><span class="command">scp ~/.ssh/id_rsa.pub <span class="code-highlight">username@server.dreamhost.com:~/</span></span>
 </pre>
 </div>
-<p>Esto copia el archivo id_rsa.pub en la computadora de tu hogar a tu usuario de DreamHost SHELL.</p>
+<p>Esto copia el archivo <span class="text-object">id_rsa.pub</span> en la computadora de tu hogar a tu usuario de DreamHost SHELL.</p>
 </li>
 <li>Inicia sesión en tu servidor DreamHost a través de tu usuario SHELL.</li>
 <li>Una vez que hayas iniciado sesión en tu servidor DreamHost, deberás agregar la clave pública que acabas de cargar en tu archivo de claves autorizadas. Para hacer esto, primero asegúrate de estar en <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">tu directorio de usuarios</a>. Asegúrate de cambiar el <span class="text-object">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.<br />
@@ -23,13 +23,13 @@
 </pre>
 </div>
 </li>
-<li>Corre el siguiente comando para crear un nuevo archivo llamado <span class="text-object">authorized_keys</span> en la nueva carpeta <span class="text-object">/.ssh</span>. Esto también copiará tu archivo id_rsa.pub en este nuevo archivo authorized_keys:<br />
+<li>Corre el siguiente comando para crear un nuevo archivo llamado <span class="text-object">authorized_keys</span> en la nueva carpeta <span class="text-object">/.ssh</span>. Esto también copiará tu archivo <span class="text-object">id_rsa.pub</span> en este nuevo archivo <span class="text-object">authorized_keys</span>:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cat id_rsa.pub &gt;&gt; .ssh/authorized_keys</span>
 </pre>
 </div>
 </li>
-<li>Elimina el archivo id_rsa.pub original en el directorio de usuario de SHELL:<br />
+<li>Elimina el archivo <span class="text-object">id_rsa.pub</span> original en el directorio de usuario de SHELL:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">rm id_rsa.pub</span>
 </pre>
@@ -89,7 +89,7 @@
 </div>
 </li>
 <li>Ingresa tu contraseña de clave privada (si creaste una).</li>
-<li>Ingresa lo siguiente en tu archivo .bash_profile o .bashrc para eliminar el agente ssh al cerrar sesión.<br />
+<li>Ingresa lo siguiente en tu archivo <span class="text-object">.bash_profile</span> o <span class="text-object">.bashrc</span> para eliminar el agente ssh al cerrar sesión.<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local]$ </span><span class="command">kill $SSH_AGENT_PID</span>
 </pre>
@@ -100,13 +100,13 @@
 </div>
 <h2>No es posible iniciar sesión desde Mac OSX después de que la clave pública se haya copiado en tu servidor DreamHost</h2>
 <div class="solvvy-solution">
-<p>Si no puedes iniciar sesión automáticamente después de cargar tu clave pública, puede deberse a que estás utilizando nombres de llaves de emparejamiento personalizados; es decir, estás utilizando algo distinto de id_rsa/id_rsa.pub. Esto es común cuando uno mantiene múltiples llave de emparejamiento.</p>
+<p>Si no puedes iniciar sesión automáticamente después de cargar tu clave pública, puede deberse a que estás utilizando nombres de llaves de emparejamiento personalizados; es decir, estás utilizando algo distinto de <span class="text-object">id_rsa/id_rsa.pub</span>. Esto es común cuando uno mantiene múltiples llave de emparejamiento.</p>
 <p>Ingresa lo siguiente para correr ssh en modo detallado:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local]$ </span><span class="command">ssh -v <span class="code-highlight">user@example.com</span></span>
 </pre>
 </div>
-<p>Verifica la salida para tu nombre de clave pública. Si el resultado indica que ssh está buscando 'id_rsa' y estás utilizando un nombre de clave personalizado, entonces esto probablemente explica por qué aún no puedes iniciar sesión sin ingresar tu contraseña. Para remediar esto, ingresa lo siguiente para agregar tu nombre de clave personalizado:</p>
+<p>Verifica la salida para tu nombre de clave pública. Si el resultado indica que ssh está buscando <span class="text-object">id_rsa</span> y estás utilizando un nombre de clave personalizado, entonces esto probablemente explica por qué aún no puedes iniciar sesión sin ingresar tu contraseña. Para remediar esto, ingresa lo siguiente para agregar tu nombre de clave personalizado:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local]$ </span><span class="command">ssh-add ~/.ssh/customkey_rsa</span>
 </pre>
