@@ -5,36 +5,36 @@
 <p>La versión de Passenger que se corre en los servidores DreamHost no funciona actualmente con las versiones 14+ de Node.js.</p>
 </div>
 </div>
-<h2><span id="Simple_.27Hello_World.21.27_script">Ejemplo de línea de comando</span></h2>
+<h2><span id="Probar_si_node_funciona">Probar si Node funciona</span></h2>
 <div class="solvvy-solution">
-<p>Crea y ejecuta este script dentro de tu terminal:</p>
+<p>Crea y ejecuta este script dentro de tu terminal para determinar si Node.js fue instalado correctamente.</p>
 <ol>
-<li>Crea un archivo llamado <span class="text-object">HolaMundo.js</span> y luego agrega lo siguiente en el archivo:
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crea un archivo</a> llamado <span class="text-object">HelloWorld.js</span> con la siguiente línea:
 <div class="preboxcontainer">
-<pre class="prebox">console.log('Hola Mundo!');</pre>
+<pre class="prebox">console.log('Hello World!');</pre>
 </div>
 </li>
-<li>Ejecuta lo siguiente en tu terminal para ejecutar el script:
+<li>Corre el script usando el comando <span class="code">node</span>.
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">node HolaMundo.js</span>
-Hola Mundo<span class="cmdoutput">!</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">node HelloWorld.js</span>
+<span class="cmdoutput">Hello World!</span>
 </pre>
 </div>
-<p>Si está instalado correctamente, verás que la consola responde con&nbsp;<code>Hello World!</code></p>
+<p>Si Node.js está instalado correctamente, verás que la consola responde con <span class="code">Hello World!</span></p>
 </li>
 </ol>
 </div>
-<h2><span id="Website_example">Ejemplo de Sitio Web</span></h2>
+<h2><span id="Website_example">Ejemplo de script de Node.js</span></h2>
 <div class="solvvy-solution">
 <p>También puedes crear un servidor HTTP básico para cargar un sitio.</p>
 <ol>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crea un archivo</a>&nbsp;en tu directorio web (example.com/public) llamado <span class="text-object">app.js</span> con el siguiente código:
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crea un archivo</a> en tu directorio de aplicación (example.com) llamado <span class="text-object">app.js</span> con el siguiente código:
 <div class="preboxcontainer">
-<pre class="prebox">var http = require("http");
+<pre class="prebox">        var http = require("http");
 
 http.createServer(function(request, response) {
   response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("Hola Mundo. Esta página está ejecutando Node.js versión: ");
+  response.write("Hello World. This page is running Node.js version: ");
   response.write(process.version);
   response.end();
 }).listen(8888);
@@ -49,19 +49,32 @@ http.createServer(function(request, response) {
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">node app.js</span></pre>
 </div>
 </li>
-<li>Visita la página en un navegador con el puerto 8888 agregado al final. Por ejemplo:
+<li>
+<div class="alert-warning">
+<p>Ver tu dominio con un puerto vinculado a él solo funciona con VPS y Servidores Dedicados.</p>
+</div>
+Visita la página en un navegador con el puerto 8888 agregado al final. Por ejemplo:
 <div class="preboxcontainer">
 <pre class="prebox">http://example.com:8888</pre>
 </div>
 Si se ejecuta correctamente, tu sitio mostrará lo siguiente:
 <div class="preboxcontainer">
-<pre class="prebox">Hola Mundo. Esta página está ejecutando Node.js versión: v12.16.3</pre>
+<pre class="prebox">Hello World. This page is running Node.js version: v12.16.3
+</pre>
 </div>
 </li>
 </ol>
-<h3>Cargando tu aplicación en los puertos 80 y 443</h3>
+<h3>Cargar tu aplicación en los puertos 80 y 443</h3>
 <p>Si has habilitado Passenger en tu panel para Node.js, y el archivo para cargar tu aplicación se llama&nbsp;<span class="text-object">app.js</span>, tu sitio Node.js se cargará automáticamente en los puertos 80 y 443 sin necesidad de iniciar manualmente el servidor. Ve el siguiente artículo para más detalles.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216635318--C%C3%B3mo-habilitar-Node-js-" target="_self">Habilitando Passenger para Node.js</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216635318--C%C3%B3mo-habilitar-Node-js-" target="_self">Habilitar Passenger para Node.js</a></li>
 </ul>
+</div>
+<h2>Solución de problemas</h2>
+<p>Mira el siguiente artículo si ves que tu secuencia de comandos no usa tu versión personalizada de Node.js o si las actualizaciones de la secuencia de comandos no se muestran.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360043107192-Soluci%C3%B3n-de-problemas-de-Node-js">Solución de problemas de Node.jss</a></li>
+</ul>
+<div id="gtx-trans" style="position: absolute; left: 83px; top: 904.986px;">
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>
