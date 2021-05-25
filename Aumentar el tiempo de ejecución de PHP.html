@@ -1,0 +1,60 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cada instalación de PHP viene con configuraciones predeterminadas que generalmente están bien para la mayoría de los sitios web. Ocasionalmente, las necesidades de un sitio web hacen que sea necesario ajustar esta configuración de PHP. Por ejemplo, tu sitio puede necesitar cargar archivos más grandes de lo que permite el límite actual de carga de PHP. En ese caso, necesitaría crear un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">php.ini (phprc)</a> y actualiza este valor.</p>
+</div>
+<h2>El archivo phprc de DreamHost</h2>
+<div class="solvvy-solution">
+<p>El término estándar para un archivo de configuración de PHP es&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">php.ini</a>.&nbsp;Sin embargo, DreamHost utiliza el término archivo <span class="text-object">phprc</span> en su lugar. Esto actúa de la misma manera: solo el nombre es diferente. En este artículo, solo se usa el término <span class="text-object">phprc</span>.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Algunas variables (en particular, <span class="code">memory_limit</span>, <span class="code">post_max_size</span>&nbsp;y&nbsp;<span class="code">upload_max_filesize</span>)&nbsp;están sujetos a limitaciones internas; aumentarlos significativamente más allá de los valores predeterminados no funcionará correctamente y causará problemas con tu sitio.</p>
+</div>
+</div>
+</div>
+<h2>Diferencia entre max_execution_time y max_input_time</h2>
+<div class="solvvy-solution">
+<p><span class="code">max_execution_time</span> y <span class="code">max_input_time</span> controlar lo siguiente:</p>
+<ul>
+<li><a href="https://www.php.net/manual/en/info.configuration.php#ini.max-execution-time" target="_self">max_execution_time</a>&nbsp;—&nbsp;Esto establece el tiempo máximo en segundos que un script puede ejecutarse antes de que finalice. El valor predeterminado es 30 segundos.</li>
+<li><a href="https://www.php.net/manual/en/info.configuration.php#ini.max-input-time" target="_self">max_input_time</a>&nbsp;—&nbsp;Esto establece el tiempo máximo en segundos que un script puede analizar datos de entrada, como POST y GET. Esto generalmente se incrementa para permitir cargas de archivos más grandes. La configuración predeterminada es -1, lo que significa que max_execution_time se usa en tu lugar. Establecer en 0 para permitir tiempo ilimitado.</li>
+</ul>
+</div>
+<h2>Incrementar el tiempo de ejecución</h2>
+<div class="solvvy-solution">
+<p>El tiempo de ejecución predeterminado es de 30 segundos, que puede ser demasiado pequeño para tus necesidades. Si necesitas aumentar este límite, debe crear un archivo <span class="text-object">phprc</span>. Mira los siguientes artículos para obtener instrucciones sobre cómo crear un archivo <span class="text-object">phprc</span>.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214894037--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-FTP-" target="_self">¿Cómo crear un archivo phprc a través de FTP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200668--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-SSH-" target="_self">¿Cómo crear un archivo phprc a través de SSH?</a></li>
+</ul>
+<p>Si el archivo ya existe, ve los siguientes artículos para obtener instrucciones sobre cómo actualizarlo (dependiendo de si estás utilizando un cliente FTP o SSH):</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar un archivo a través de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo a través de SSH</a></li>
+</ul>
+<p>Para aumentar este límite a 500 segundos, agrega lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">max_execution_time = 500</pre>
+</div>
+</div>
+<h2>Eliminar todos los procesos de php en ejecución</h2>
+<div class="solvvy-solution">
+<p>Asegúrate de matar&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">ejecución de procesos php</a>&nbsp;para garantizar que tu nueva configuración surta efecto.</p>
+</div>
+<h2>Confirmar tus cambios</h2>
+<div class="solvvy-solution">
+<p>Después de editar el archivo y eliminar todos los procesos PHP, debes verificar para confirmar que los valores se hayan actualizado. Puede hacer esto creando un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">phpinfo.php</a>.</p>
+<p>Si no ves que tus cambios se han actualizado, intenta eliminar tus procesos de PHP nuevamente:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no se actualiza</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">Generalidades de php.ini</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/sections/203272338-Configuraciones-personalizadas" target="_self">Configuraciones personalizadas de PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/sections/203275788-Soluci%C3%B3n-del-problemas" target="_self">Artículos de solución de problemas de PHP</a></li>
+</ul>
+</div>

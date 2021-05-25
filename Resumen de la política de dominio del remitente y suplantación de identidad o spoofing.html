@@ -1,26 +1,26 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Cuando se envían correos electrónicos, el programa o script de correo electrónico puede decir que el remitente es "de" cualquier dirección que desee. La suplantación de correo electrónico ocurre cuando el correo electrónico se envía con una dirección DE falsificada. Por ejemplo, puede enviar correos electrónicos desde tu sitio web <strong>example.com</strong> que son "de" <span class="text-object">FakeFromAddress@example.com</span>. Por lo tanto, siempre es posible cambiar la dirección FROM o DE al enviar un correo electrónico.</p>
-<p>Este artículo detalla la falsificación buena y mala y explica la política de dominio de remitente de DreamHost que protege el correo electrónico legítimo.</p>
+<p>Cuando se envían correos el programa o script de correo puede decir que el remitente es "de" cualquier dirección que desee. La suplantación de correo ocurre cuando el correo se envía con una dirección DE falsificada. Por ejemplo, puede enviar correos desde tu sitio web <strong>example.com</strong> que son "de" <span class="text-object">FakeFromAddress@example.com</span>. Por lo tanto, siempre es posible cambiar la dirección FROM o DE al enviar un correo.</p>
+<p>Este artículo detalla la falsificación buena y mala y explica la política de dominio de remitente de DreamHost que protege el correo legítimo.</p>
 </div>
 <h2>¿Qué es la suplantación de identidad útil?</h2>
 <div class="solvvy-solution">
-<p>Sin falsificaciones, cualquier correo electrónico enviado desde tu sitio web se enviará "desde" tuusuario@tuservidor.dreamhost.com. Si bien eso es exacto, no es muy agradable de ver, y puede ser confuso para los usuarios del sitio o los clientes que esperan ver el correo electrónico proveniente del mismo nombre de dominio que tu sitio web. Entonces, en cierto sentido, el correo electrónico es falso para mostrar claramente que se origina en tu sitio web.</p>
+<p>Sin falsificaciones, cualquier correo enviado desde tu sitio web se enviará "desde" tuusuario@tuservidor.dreamhost.com. Si bien eso es exacto, no es muy agradable de ver, y puede ser confuso para los usuarios del sitio o los clientes que esperan ver el correo proveniente del mismo nombre de dominio que tu sitio web. Entonces, en cierto sentido, el correo es falso para mostrar claramente que se origina en tu sitio web.</p>
 </div>
 <h2>¿Qué es mala suplantación de identidad o spoofing?</h2>
 <div class="solvvy-solution">
-<p>Los spammers a menudo usan suplantación de correo electrónico para esconderse desde donde se envían sus correos electrónicos no deseados. Hacen esto para poder enviar cientos de correos electrónicos que parecen ser originarios de tu sitio web. Si recibe correos electrónicos devueltos "imposibles de entregar" (undeliverable) que nunca enviaste, un spammer podría estar falsificando tu dominio.</p>
+<p>Los spammers a menudo usan suplantación de correo para esconderse desde donde se envían sus correos no deseados. Hacen esto para poder enviar cientos de correos que parecen ser originarios de tu sitio web. Si recibe correos devueltos "imposibles de entregar" (undeliverable) que nunca enviaste, un spammer podría estar falsificando tu dominio.</p>
 </div>
 <h2>Protección contra la mala suplantación de identidad o spoofing</h2>
 <div class="solvvy-solution">
-<p>Los registros DKIM pueden hacer que los correos electrónicos falsificados sean más fácilmente reconocibles como sospechosos y, con suerte, desalienten a los spammers de falsificar tu dominio:</p>
+<p>Los registros DKIM pueden hacer que los correos falsificados sean más fácilmente reconocibles como sospechosos y, con suerte, desalienten a los spammers de falsificar tu dominio:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215029758--Qu%C3%A9-son-los-registros-DKIM-">DKIM</a>&nbsp;es un método de autenticación de correo electrónico que se habilita automáticamente para todas las cuentas de correo de DreamHost.</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215029758--Qu%C3%A9-son-los-registros-DKIM-">DKIM</a> es un método de autenticación de correo que se habilita automáticamente para todas las cuentas de correo de DreamHost.</li>
 </ul>
 </div>
 <h2>Código PHP</h2>
 <div class="solvvy-solution">
-<p>Este código básico envía correos electrónicos de formulario de contacto utilizando tu dirección de correo electrónico como remitente. los $visitor_name, $visitor_email, y $message son establecidos por el formulario de contacto:</p>
+<p>Este código básico envía correos de formulario de contacto utilizando tu dirección de correo como remitente. los $visitor_name, $visitor_email, y $message son establecidos por el formulario de contacto:</p>
 <div class="preboxcontainer">
 <pre class="prebox">//establecer la dirección de correo electrónico del destinatario, a dónde enviar correos electrónicos
 $to_email = <span class="code-highlight">incoming@example.com</span>;
@@ -50,7 +50,7 @@ mail($to_email, $subject, $emailMessage, $header);
 <p>Este código solo falsificó el encabezado FROM (el que se ve en un programa de cliente de correo). Cualquier rebote o mensaje de error del servidor de correo se envía al&nbsp;<a href="https://en.wikipedia.org/wiki/Bounce_address" target="_self">envelope sender o remitente del sobre</a>,&nbsp;que se dejó sin escribir y seguirá siendo la dirección predeterminada username@server.dreamhost.com address.</p>
 </div>
 </div>
-<p>Para falsificar el remitente del sobre y recibir correos electrónicos devueltos, ve a esa dirección de correo electrónico en lugar del directorio <span class="text-object">Maildir/new</span> en el servidor web, use la&nbsp;<a href="http://php.net/manual/en/function.mail.php" target="_self">función de correo -f parámetro adicional</a>&nbsp;como en el siguiente:</p>
+<p>Para falsificar el remitente del sobre y recibir correos devueltos, ve a esa dirección de correo en lugar del directorio <span class="text-object">Maildir/new</span> en el servidor web, use la&nbsp;<a href="http://php.net/manual/en/function.mail.php" target="_self">función de correo -f parámetro adicional</a>&nbsp;como en el siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox">mail($to_email, $subject, $emailMessage, $header, "<span class="code-highlight">-f$your_email"</span>);</pre>
 </div>
@@ -61,23 +61,23 @@ mail($to_email, $subject, $emailMessage, $header);
 </div>
 <h2>¿Qué sucede si mi dominio no utiliza el servicio de correo alojado en DreamHost? (SMTP)</h2>
 <div class="solvvy-solution">
-<p>Si tu dominio no utiliza el servicio de correo regular alojado en DreamHost, entonces tu dominio puede tener servicio de correo de otro proveedor como Google Suite. Para estos dominios, tu sitio web debe usar SMTP para conectarse directamente al servidor de correo de tu dominio. De esta manera, tu sitio web inicia sesión en su cuenta de correo en ese host y envía correos electrónicos a través de tu servidor en lugar de hacerlo a través de los servidores de correo de DreamHost.</p>
+<p>Si tu dominio no utiliza el servicio de correo regular alojado en DreamHost, entonces tu dominio puede tener servicio de correo de otro proveedor como Google Suite. Para estos dominios, tu sitio web debe usar SMTP para conectarse directamente al servidor de correo de tu dominio. De esta manera, tu sitio web inicia sesión en su cuenta de correo en ese host y envía correos a través de tu servidor en lugar de hacerlo a través de los servidores de correo de DreamHost.</p>
 <ul>
-<li>WordPress tiene soporte SMTP a través de un complemento. Hay muchos complementos SMTP para elegir,&nbsp;<a href="http://wordpress.org/extend/plugins/configure-smtp/">Configure SMTP</a>&nbsp;es uno</li>
+<li>WordPress tiene soporte SMTP a través de un complemento. Hay muchos complementos SMTP para elegir,&nbsp;<a href="http://wordpress.org/extend/plugins/configure-smtp/">Configurar SMTP</a>&nbsp;es uno</li>
 <li>Joomla tiene incorporado&nbsp;<a href="https://docs.joomla.org/J3.1:Global_configuration#.E2.80.9CMail_Settings.E2.80.9D_Group" target="_self" rel="nofollow">SMTP suporta (versión 3.1)</a></li>
 <li>phpBB tiene incorporado&nbsp;<a href="https://www.phpbb.com/support/docs/en/3.0/ug/adminguide/general_client/" target="_self">soporte de SMTP</a></li>
 <li>ZenCart&nbsp;tiene incorporado&nbsp;<a href="http://www.zen-cart.com/wiki/index.php/Admin_-_Configuration_-_E-Mail_Options" target="_self">soporte de SMTP</a></li>
 </ul>
-<p>Si tu sitio web fue creado por usted u otra persona a mano y está escrito en PHP, puede agregar soporte SMTP usando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer">PHPMailer</a>.&nbsp;Solo usa el host/servidor SMTP que te proporciona tu proveedor de correo electrónico y su nombre de usuario y contraseña en su sistema. Otra opción es usar el paquete PEAR Mail para enviar a través de SMTP. Ver el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-env%C3%ADo-correo-PHP-v%C3%ADa-SMTP-" target="_self">Envío de correo SMTP</a>&nbsp;artículo para un ejemplo.</p>
+<p>Si tu sitio web fue creado por tí u otra persona a mano y está escrito en PHP, puedes agregar soporte SMTP usando <a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer">PHPMailer</a>. Solo usa el host/servidor SMTP que te proporciona tu proveedor de correo y tu&nbsp; usuario y contraseña en tu sistema. Otra opción es usar el paquete PEAR Mail para enviar a través de SMTP. Mira el artículo <a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-env%C3%ADo-correo-PHP-v%C3%ADa-SMTP-" target="_self">Envío de correo SMTP</a> para un ejemplo.</p>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
 <h3>Enlaces internos</h3>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215035988-C%C3%B3mo-hacer-spoofing-o-suplantar-en-tu-CMS-o-aplicaci%C3%B3n-web" target="_self" rel="undefined">Cómo falsificar su CMS o aplicación web</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215035988-C%C3%B3mo-hacer-spoofing-o-suplantar-en-tu-CMS-o-aplicaci%C3%B3n-web" target="_self" rel="undefined">Cómo falsificar tu CMS o aplicación web</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215036118-Preguntas-frecuentes-sobre-la-pol%C3%ADtica-de-dominio-del-remitente" target="_self">Preguntas frecuentes sobre la política de dominio del remitente</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215730427--Qu%C3%A9-es-la-suplantaci%C3%B3n-de-identidad-%C3%BAtil-o-spoofing-" target="_self" rel="undefined">¿Qué es la suplantación de identidad útil o spoofing?</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-env%C3%ADo-correo-PHP-v%C3%ADa-SMTP-" target="_self">¿Cómo envío correo PHP a través de SMTP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-env%C3%ADo-correo-PHP-v%C3%ADa-SMTP-" target="_self">¿Cómo enviar correo PHP a través de SMTP?</a></li>
 </ul>
 <h3>Enlaces externos</h3>
 <ul>
