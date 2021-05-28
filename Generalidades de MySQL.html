@@ -9,14 +9,17 @@
 </div>
 <h2>Versión de MySQL</h2>
 <div class="solvvy-solution">
-<p>Los servidores MySQL compartidos ejecutan la versión 5.7 de MySQL. Los&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945917-Generalidades-de-MySQL-VPS" target="_self">servidores MySQL privados</a>&nbsp;creados después de diciembre de 2018 también ejecutan 5.7.</p>
-<p>Otros servidores de bases de datos como&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214581158-Generalidades-sobre-DreamPress">DreamPress</a>, <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">Dedicados</a>, y servidores&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945917-Generalidades-de-MySQL-VPS" target="_self">MySQL privados</a>&nbsp;más antiguos ejecutan 5.6.</p>
-<h3>Usar palabras reservadas en MySQL 5.7</h3>
-<p>MySQL 5.7 incluye una lista de "palabras reservadas" (como 'SELECT', 'DELETE', 'BIGINT', y 'VIRTUAL') que no pueden usarse como nombre de base de datos. Estas palabras pueden usarse como un nombre de <em>tabla</em> de base de datos, pero deben escaparse en las consultas de la base de datos. Las palabras reservadas en MySQL 5.7 requieren un tratamiento especial para su uso como identificadores, como nombres de tabla y columna.</p>
-<p>Consulta el siguiente artículo para obtener más información sobre cómo usar palabras reservadas en MySQL 5.7:</p>
+<p>Los servidores MySQL compartidos ejecutan la versión 8.</p>
+<p>Otros servidores de bases de datos como <a href="https://help.dreamhost.com/hc/es/articles/215945917-Generalidades-de-MySQL-VPS">MySQL Privado</a>, <a href="https://help.dreamhost.com/hc/es/articles/214581158-Generalidades-sobre-DreamPress">DreamPress</a>, y <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">Dedicados</a>más antiguos ejecutan 5.6.</p>
+<h3>Usar palabras reservadas en MySQL 8</h3>
+<p>MySQL 8 incluye una nueva lista de "palabras reservadas" (como 'GROUPS', 'EMPTY', 'RANK', y 'SYSTEM'). Estas palabras se pueden usar como nombres de tablas y columnas, pero requieren un tratamiento especial para su uso como identificadores y deben escaparse en las consultas de la base de datos.</p>
+<p>Consulta el siguiente artículo para obtener más información sobre cómo usar palabras reservadas en MySQL 8:</p>
 <ul>
-<li><a href="https://dev.mysql.com/doc/refman/5.7/en/keywords.html">Palabras clave de MySQL y palabras reservadas</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/keywords.html">Palabras clave de MySQL y palabras reservadas</a></li>
 </ul>
+<h3>Modificaciones personalizadas de DreamHost para usuarios de WordPress</h3>
+<p>MySQL 8 presenta un nuevo plugin de cifrado predeterminado, 'caching_sha2_password'. Este plugin puede provocar que se muestren errores en los sitios de WordPress que usan una versión de PHP inferior a la 7.4.</p>
+<p>Para evitar que ocurran estos errores, hemos modificado nuestra versión de MySQL 8 para usar el plugin de cifrado original, 'mysql_native_password', que es compatible con los sitios de WordPress que utilizan versiones anteriores de PHP.</p>
 </div>
 <h2>Motores de almacenamiento</h2>
 <div class="solvvy-solution">
