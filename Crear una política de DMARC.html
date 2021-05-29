@@ -1,0 +1,210 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>La autenticación, informe y conformidad de mensajes basados ​​en dominio (DMARC) es una política de correo entrante construida sobre registros SPF y DKIM, diseñada para detectar y prevenir correos fraudulentos.</p>
+<p>Cuando agregas una política DMARC a tu dominio, eliges informar al destinatario que tus correos están protegidos por registros SPF y/o DKIM, y qué hacer si tu política DMARC no se alinea con esos registros.</p>
+<h3>Ejemplo del proceso de envío de DMARC</h3>
+<ol>
+<li>El remitente agrega una política DMARC a tu dominio.</li>
+<li>Un correo es enviado.</li>
+<li>El destinatario verifica si el correo contiene una política DMARC.</li>
+<li>Si es así, los registros SPF/DKIM mencionados en la política DMARC del remitente se validan.</li>
+<li>Si los registros SPF/DKIM pasan la validación, deben pasar algo llamado 'alineación'.</li>
+<li>Si la 'alineación' se pasa, se recibe el correo.</li>
+</ol>
+<p>Si no se pasa la 'alineación' (incluso si se pasa la verificación SPF/DKIM), el mensaje falla. Esto ayuda a garantizar que la actividad fraudulenta que parece provenir del dominio esté bloqueada.</p>
+</div>
+<h2>¿Qué es la alineación?</h2>
+<div class="solvvy-solution">
+<p>La política DMARC verifica el nombre de dominio que figura en el campo Remitente: del mensaje. Luego compara ese dominio con otros nombres de dominio autenticados que figuran en el encabezado del correo. Si son idénticos, tu política DMARC está alineada.</p>
+<p>De lo contrario, debes comunicarse con tu servidor de correo y solicitar instrucciones sobre cómo asegurarte de que tus registros estén alineados.</p>
+<h3>Alineamiento estricto y relajado</h3>
+<p>La alineación en tu política puede establecerse como estricta o relajada.</p>
+<ul>
+<li><strong>Alineación estricta</strong> — los dominios deben ser idénticos.</li>
+<li><strong>Alineación relajada</strong> — el "dominio organizacional" de nivel superior debe coincidir.</li>
+</ul>
+<p>El 'Dominio organizacional' es tu nombre de dominio seguido de su sufijo. Por ejemplo:</p>
+<ul>
+<li><strong>example.com</strong></li>
+<li><strong>example.net</strong></li>
+<li><strong>example.com.au</strong></li>
+</ul>
+</div>
+<h2>¿Qué pasa si el mensaje falla la alineación?</h2>
+<div class="solvvy-solution">
+<p>La política DMARC del remitente contiene información sobre cómo manejar los correos que fallan en la autenticación. Se pueden crear dos tipos de informes:</p>
+<ul>
+<li><strong>Reportes agregados</strong>&nbsp;— enviado como formato XML una vez al día, que consiste en datos agregados de todas las fallas de DMARC</li>
+<li><strong>Reportes forenses</strong> (aka informes de falla) — generado de inmediato y consiste en correos individuales que fallaron</li>
+</ul>
+</div>
+<h2>Configurar una política DMARC</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Configura un registro&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216107737-Generalidades-sobre-SPF">SPF</a>&nbsp;y/o <a href="https://help.dreamhost.com/hc/es/articles/215029758--Qu%C3%A9-son-los-registros-DKIM-">DKIM</a> en tu dominio.</li>
+<li>Envía un correo a ti mismo (u otra dirección que poseas). Una vez recibido, veas tus encabezados. Verifica la alineación del dominio identificando el dominio listado como la dirección de envío. Se puede ubicar en los siguientes lugares:
+<ul>
+<li>El Sobre From dominio —&nbsp; <strong>From: admin@example.com</strong></li>
+<li>El caminio de regreso — <strong>&lt;admin@example.com&gt;</strong></li>
+<li>El d=dominio en la firma DKIM —&nbsp;DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; <strong>d=example.com</strong>;</li>
+</ul>
+Los dominios mencionados en todas estas áreas deben ser idénticos, de lo contrario, DMARC fallará en la alineación.</li>
+<li>
+<p><a href="https://help.dreamhost.com/hc/es/articles/215029918--C%C3%B3mo-agrego-una-direcci%C3%B3n-de-correo-electr%C3%B3nico-">Crea dos direcciones de correo separadas</a> para recibir informes forenses y agregados diarios de DMARC. Se recomienda que cree dos direcciones de correo, ya que puede recibir una gran cantidad de informes. Por ejemplo:</p>
+<ul>
+<li><span class="text-object">dmarc_agg@example.com</span></li>
+<li><span class="text-object">dmarc_forensic@example.com</span></li>
+</ul>
+</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215414867#TXT_record">Crea el registro TXT</a>.
+<ol>
+<li>En tu panel, navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>.</li>
+<li>Haz clic en el enlace <span class="text-link">DNS</span> debajo de tu dominio.</li>
+<li>Cuando se abra la siguiente página, ingresa un nuevo registro TXT como se muestra en el siguiente ejemplo:
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/dmarc-record.png" /></dd>
+</dl>
+<ul>
+<li><strong>Name</strong>&nbsp;— _dmarc</li>
+<li><strong>Type</strong>&nbsp;— TXT</li>
+<li><strong>Value</strong> — A continuación se muestra una configuración básica que maneja la mayoría de tus necesidades de DMARC. Solo asegúrate de ajustar las direcciones de correo a las direcciones que creaste anteriormente para recibir informes entrantes.
+<div class="preboxcontainer">
+<pre class="prebox">v=DMARC1; p=none; fo=1; rua=mailto:<span class="code-highlight">dmarc_agg@example.com</span>;ruf=mailto:<span class="code-highlight">dmarc_forensic@example.com</span>;pct=100</pre>
+</div>
+Ve la sección a continuación para obtener más detalles sobre las diferentes opciones que puedes usar.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p>Dentro de 4-6 horas, el registro se actualizará en línea.</p>
+</div>
+<h2>Etiquetas que puedes usar en tu registro DMARC</h2>
+<div class="solvvy-solution">
+<h3>Etiquetas requeridas</h3>
+<p>Hay 2 etiquetas requeridas, <span class="code">v</span> y&nbsp;<span class="code">p</span>.</p>
+<h4><strong>La etiqueta v</strong></h4>
+<p>La etiqueta <span class="code">v</span> identifica el registro de texto como un registro DMARC. Esta debe ser la primera etiqueta y tener un valor de DMARC1.</p>
+<h4><strong>La etiqueta p</strong></h4>
+<p>La etiqueta <span class="code">p</span> identifica la acción que el propietario del dominio solicita al destinatario que tome para los mensajes fallidos. Las opciones son:</p>
+<table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Etiqueta</th>
+<th bgcolor="#F2F2F2">Descripción</th>
+</tr>
+<tr>
+<td>p=none</td>
+<td>No se debe realizar ninguna acción para los correos que fallan la autenticación DMARC.</td>
+</tr>
+<tr>
+<td>p=quarantine</td>
+<td>Si un correo falla la autenticación DMARC, debe tratarse como sospechoso. Cómo se maneja esto depende del destinatario, por ejemplo, se puede colocar en una carpeta de SPAM.</td>
+</tr>
+<tr>
+<td>p=reject</td>
+<td>Si un correo falla la autenticación DMARC, el destinatario debe rechazar el correo durante la transacción SMTP.</td>
+</tr>
+</tbody>
+</table>
+<h3>Etiquetas de correo</h3>
+<p>Estos indican dónde se envían los informes.</p>
+<table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Etiqueta</th>
+<th bgcolor="#F2F2F2">Descripción</th>
+</tr>
+<tr>
+<td>rua=mailto:dmarc_agg@example.com</td>
+<td>Esta dirección es donde se deben enviar los informes agregados de DMARC.</td>
+</tr>
+<tr>
+<td>ruf=mailto:dmarc_forensic@example.com</td>
+<td>Indica a dónde se deben enviar los informes forenses de DMARC.</td>
+</tr>
+</tbody>
+</table>
+<h3>Etiqueta de informe</h3>
+<p><strong>fo</strong> controla cuando se crea un informe de falla.</p>
+<table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Etiqueta</th>
+<th bgcolor="#F2F2F2">Descripción</th>
+</tr>
+<tr>
+<td>0</td>
+<td>Crea un informe si todos los pasos de autenticación fallan. (Defecto)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Crea un informe si alguno de los pasos de autenticación falla.</td>
+</tr>
+<tr>
+<td>d</td>
+<td>Crea un informe de falla DKIM si el mensaje tenía una firma que falló la evaluación.</td>
+</tr>
+<tr>
+<td>s</td>
+<td>Crea un informe de fallas SPF si el mensaje falló en la autenticación SPF.</td>
+</tr>
+</tbody>
+</table>
+<p>Se recomienda una configuración de fo=1 ya que proporciona la mayor cantidad de datos sobre cualquier falla.</p>
+<h3>Etiquetas opcionales</h3>
+Las siguientes etiquetas usan un valor predeterminado si la etiqueta no está configurada:<br />
+<table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Etiqueta</th>
+<th bgcolor="#F2F2F2">Descripción</th>
+</tr>
+<tr>
+<td>adkim</td>
+<td>Establece una alineación de identificador DKIM estricta o relajada. (El valor predeterminado es relajado).</td>
+</tr>
+<tr>
+<td>aspf</td>
+<td>Establece una alineación de identificador SPF estricta o relajada. (El valor predeterminado es relajado).</td>
+</tr>
+<tr>
+<td>rf</td>
+<td>Formato para informes de fallas. (El valor predeterminado es Formato de informe de falla de autenticación, o 'AFRF').</td>
+</tr>
+<tr>
+<td>ri</td>
+<td>Establece el número de segundos entre el envío de informes agregados. (El valor predeterminado es 86,400 segundos, o un día).</td>
+</tr>
+<tr>
+<td>pct</td>
+<td>Establece el porcentaje de mensajes a los que se aplica DMARC. Establecer esto en 100 se aplicaría a cada correo y se recomienda.</td>
+</tr>
+</tbody>
+</table>
+<h3>Etiqueta de subdominio</h3>
+<p>La etiqueta sp se usa para establecer una política de informes diferente para un subdominio. Por ejemplo, puede configurar el dominio primario para usar <strong>p=reject</strong> mientras configura todos los subdominios bajo este dominio para usar <strong>sp=quarantine</strong>.</p>
+<table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Etiqueta</th>
+<th bgcolor="#F2F2F2">Descripción</th>
+</tr>
+<tr>
+<td>sp</td>
+<td>Establece una política de informes para el subdominio, diferente del dominio principal. Por ejemplo:<br />
+<div class="preboxcontainer">
+<pre class="prebox">v=DMARC1; p=none; <span class="code-highlight">sp=quarantine;</span>fo=1; rua=mailto:dmarc_agg@example.com;ruf=mailto:dmarc_forensic@example.com;pct=100&lt;</pre>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://dmarc.org/overview/" target="_self">dmarc.org</a></li>
+<li><a href="https://en.wikipedia.org/wiki/DMARC">DMARC (Wikipedia)</a></li>
+</ul>
+</div>

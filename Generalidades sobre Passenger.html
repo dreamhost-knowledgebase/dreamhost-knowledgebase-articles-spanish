@@ -10,9 +10,9 @@
 </div>
 <h2>Límites de memoria</h2>
 <div class="solvvy-solution">
-<p>Los servidores compartidos matarán el script si está usando mucha memoria.</p>
+<p>Los servidores compartidos pararían el script si está usando mucha memoria.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216540488--Por-qu%C3%A9-se-cancelaron-los-procesos-en-mi-servidor-Compartido-">¿Por qué fueron matados mis procesos en mi servidor compartido?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216540488--Por-qu%C3%A9-se-cancelaron-los-procesos-en-mi-servidor-Compartido-">¿Por qué fueron parados mis procesos en mi servidor compartido?</a></li>
 </ul>
 <p>Dado que las aplicaciones Ruby on Rails y Python pueden usar mucha memoria, los sitios que ejecutan dichas aplicaciones con Passenger solo deben ejecutarse en un servidor <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicado</a>.</p>
 </div>
@@ -44,7 +44,7 @@
 <p>Al ejecutar una aplicación RoR, los únicos archivos relacionados con Rack que probablemente modificará son los siguientes:</p>
 <ul>
 <li>Agregando posiblemente información de <span class="code">GEM_PATH</span> a <span class="text-object">config.ru</span></li>
-<li>Correrg <span class="code">touch</span> en el archivo <span class="text-object">restart.txt</span> para reiniciar la aplicación. Por ejemplo:
+<li>Correr <span class="code">touch</span> en el archivo <span class="text-object">restart.txt</span> para reiniciar la aplicación. Por ejemplo:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">touch tmp/restart.txt</span></pre>
 </div>
@@ -83,7 +83,7 @@
 <h3>ModRewrite</h3>
 <p>Passenger deshabilita algunas funcionalidades <a href="https://httpd.apache.org/docs/current/mod/mod_rewrite.html" target="_self">mod_rewrite</a>. Esto quiere decir que va a sobreescribir automáticamente una configuración <span class="text-object">dispatch.fcgi</span> que tengas en su lugar. Esto no es un problema para tu aplicación Rails, pero puede tener otros efectos secundarios (como romper otras reglas mod_rewrite que hayas configurado). Si esto causa un problema para tu sitio web, intenta utilizar el método FastCGI en su lugar.</p>
 <h3>Gemas</h3>
-<p>Puedes usar tu gema de repositorio local si estás usando lo siguiente en el archivo <span class="text-object">config/environment.rb</span>. Asegúrate de cambiar <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shellr</a> y la versión de Ruby a la que tu sitio está usando.</p>
+<p>Puedes usar tu gema de repositorio local si estás usando lo siguiente en el archivo <span class="text-object">config/environment.rb</span>. Asegúrate de cambiar <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y la versión de Ruby a la que tu sitio está usando.</p>
 <div class="preboxcontainer">
 <pre class="prebox">if ENV['RAILS_ENV'] == 'production'  # don't bother on dev
   ENV['GEM_PATH'] = '/home/<span class="code-highlight">username</span>/.gems' #+ ':<span class="code-highlight">/usr/lib/ruby/gems/2.5.0</span>'  # Need this or Passenger fails to start
@@ -126,7 +126,4 @@ require File.join(File.dirname(__FILE__), 'boot')
 <li><a href="https://nodejs.org/">nodejs.org</a></li>
 </ul>
 </div>
-</div>
-<div id="gtx-trans" style="position: absolute; left: 587px; top: 2963.19px;">
-<div class="gtx-trans-icon">&nbsp;</div>
 </div>
