@@ -10,7 +10,19 @@
 <div class="solvvy-solution">
 <p>Un programa común para ssh en windows es <a class="reference external" href="http://www.chiark.greenend.org.uk/~sgtatham/putty/?">PuTTY</a> o <a class="reference external" href="http://sourceforge.net/projects/putty-nd/">putty-nd</a>. Si seguiste las instrucciones para <a href="https://help.dreamhost.com/hc/es/articles/214843617--C%C3%B3mo-cargar-una-llave-SSH-a-trav%C3%A9s-del-panel-de-DreamCompute" target="_self" rel="undefined">crear una Llave de emparejamiento en el panel de DreamCompute</a>, ya has descargado un archivo <span class="text-object">.pem</span>. PuTTY requiere que uses este archivo <span class="text-object">.pem</span> para convertir tu clave privada en un archivo <span class="text-object">.ppk</span> antes de que pueda usarse para conectarse a través de ssh.</p>
 <ol>
-<li>Abre el programa de <a href="https://help.dreamhost.com/hc/es/articles/216109837-Archivos-binarios-PuTTY">puttygen</a>. Si no lo tienes, <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">descárgalo aquí</a>.
+<li>Abre el programa de <a href="https://help.dreamhost.com/hc/es/articles/216109837-Archivos-binarios-PuTTY">puttygen</a>. Si no lo tienes, <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">descárgalo aquí</a>.</li>
+<li>Primero debes establecer la versión del archivo PPK en 2. Haz clic en el menú <span class="text-object">Key</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/3rd-puttygen-key-params-01.png" alt="puttgen key param" /></dd>
+</dl>
+</li>
+<li>Del menú desplegable selecciona <span class="text-object">Parameters for saving key files...</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/3rd-puttygen-key-params-02.png" alt="puttgen key param" /></dd>
+</dl>
+</li>
+<li>Al lado de <span class="text-object">PPK file version</span>, selecciona el número <span class="text-object">2</span>.</li>
+<li>Da clic en el botón <strong>OK</strong> para guardar.
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/Connect_with_ssh_keys_01.png" alt="Connect_with_ssh_keys" /></dd>
 </dl>
@@ -22,7 +34,18 @@
 <dd><img src="https://kbimages.dreamhosters.com/images/Connect_with_ssh_keys_02.png" alt="Connect_with_ssh_keys" /></dd>
 </dl>
 </li>
-<li>Cuando termines, haz clic en el botón <strong>Save private key</strong> para guardarla en un archivo <span class="text-object">.ppk</span>.</li>
+<li>Cuando termines, haz clic en el botón <strong>Save private key</strong> para guardarla en un archivo <span class="text-object">.ppk</span>.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Una ventana emergente aparece mostrando el siguiente texto:</p>
+<div class="text-blockquote">
+<p>Are you sure you want to save this key without a passphrase to protect it?</p>
+</div>
+<p>Da clic en el botón <strong>Yes</strong> para guardar sin una contraseña.</p>
+</div>
+</div>
+</li>
 <li>Abre PuTTY y navega a <span class="text-section">Connection &gt; SSH &gt; Auth</span>.
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/Connect_with_ssh_keys_03.png" alt="Connect_with_ssh_keys" /></dd>
@@ -48,4 +71,19 @@
 </li>
 <li>Ingresa tu <a href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined">usuario</a> y presiona <span class="code">Enter</span>. Ahora has iniciado sesión en la instancia.</li>
 </ol>
+</div>
+<h2>Solución de problemas</h2>
+<div class="solvvy-solution">
+<p>Es posible que veas el siguiente texto en tu terminal cuando intentes conectarte.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Unable to load key file "C:\Users\username\Documents\dhc-private-key.ppk" <br />(PuTTY key format too new)
+login as:</pre>
+</div>
+<p>Si ingresas el usuario predeterminado, verás este error:</p>
+<dl>
+<dd>
+<p><strong>No supported authentication methods available (server sent: publickey)</strong></p>
+</dd>
+</dl>
+<p>Este error significa que tu clave privada se guardó como versión 3. Debe guardarse como versión 2 como se muestra en el paso #2 de arriba.</p>
 </div>
