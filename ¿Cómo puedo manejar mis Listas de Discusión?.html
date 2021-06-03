@@ -1,0 +1,164 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica cómo hacer cambios a una lista de discusión.</p>
+</div>
+<h2>Iniciar Sesión</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.discussion&amp;" target="_blank" rel="noopener">Listas de Discusión</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-08_panel_discussion_list_manage_01.png" /></dd>
+</dl>
+</li>
+<li>Hacia la derecha de tu lista, haz clic en el botón <strong>Admin</strong>.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-08_panel_discussion_list_manage_02.png" /></dd>
+</dl>
+</li>
+<li>Ingresa la contraseña del administrador que estableciste cuando creaste la lista originalmente.</li>
+<li>Haz clic en el botón <strong>Let me in..</strong>.<br />
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si olvidaste la contraseña para iniciar sesión en tu panel de Discussion List, debes comunicarte con&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-a-trav%C3%A9s-de-Correo-Electr%C3%B3nico" target="_self">el área de soporte de DreamHost vía correo</a>&nbsp;y solicitar que se restablezca por ti.</p>
+<p>Por razones de seguridad, la contraseña solo se puede restablecer si estás escribiendo desde la dirección de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115001898171-Actualizar-tu-informaci%C3%B3n-de-contacto" target="_self">correo principal vinculada a tu cuenta</a>.</p>
+</div>
+</div>
+<dl>
+<dd><em>La siguiente captura de pantalla muestra la página de administración de la lista de discusión donde puedes configurar la lista como desees:</em></dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-08_panel_discussion_list_manage_03.png" /></dd>
+</dl>
+</li>
+</ol>
+</div>
+<h2>Archivos guardados de listas de discusión</h2>
+<div class="solvvy-solution">
+<p>Los archivos de la listas de discusión se controlan desde el área Administrator de la lista. Están habilitados de forma predeterminada y se pueden configurar como privados (accesibles solo para los suscriptores de la lista) o públicos (cualquiera puede verlos).</p>
+<p>Las listas de discusión y los archivos no se almacenan en tu servidor web, sino que se almacenan en un servidor separado dedicado a las listas de discusión. Si necesitas eliminar algo de un archivo, debes comunicarte con&nbsp;<a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-a-trav%C3%A9s-de-Correo-Electr%C3%B3nico" target="_self">el área de soporte de DreamHost</a>.&nbsp;No hay forma de eliminar esta información desde el panel de administración.</p>
+</div>
+<h2>Configuración from_is_list</h2>
+<div class="solvvy-solution">
+<p>Mailman tiene una opción de configuración <span class="text-object">from_is_list</span> que puede ayudar a abordar algunos correos devueltos debido a la política DMARC implementada por otros proveedores de correo.</p>
+<p>Tu lista puede beneficiarse al usar esto si algunos de tus miembros tienen servicio de correo de dominios o proveedores que usan DMARC, claves de dominio u otras formas de firmar y autenticar correo. Cuando se envía un correo de esos remitentes desde una lista de discusión, estos métodos de autenticación pueden fallar los chequeos de verificación y pueden hacer que el correo parezca falso o engañoso.</p>
+<p>Para habilitar esta característica:</p>
+<ol>
+<li>Dirígete a la página <span class="panel-page">General Options</span> después de iniciar sesión.<br />
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/2018-08_panel_discussion_list_manage_04.png" /></dd>
+</dl>
+</li>
+<li>Asegúrate de seleccionar la opción 'Mung From'.<br />
+<dl>
+<dt><em>La configuración predeterminada para esta opción es "No". Las otras dos opciones son:</em></dt>
+</dl>
+<dl>
+<dt><strong>Mung From</strong></dt>
+<dd>Reescribe (Mungs) el encabezado De: para que el correo se envíe 'desde' el nombre del remitente con la dirección de correo de la lista de discusión.</dd>
+<dt><strong>Wrap Message</strong></dt>
+<dd>Ajusta el mensaje, similar a reenviar un correo. El correo enviado a la lista está encerrado en un nuevo correo enviado desde la lista y la dirección de correo de la lista es el remitente.</dd>
+</dl>
+</li>
+</ol>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p><strong>NO</strong> habilites la opción 'Wrap Message', ya que actualmente no funciona y evita la entrega de tus correos a la lista. El "Mung From" es la única opción que debes habilitar.</p>
+</div>
+</div>
+</div>
+<h2>Direcciones de correo para acciones de lista</h2>
+<div class="solvvy-solution">
+<p>Cada lista de discusión tiene un conjunto de direcciones de correo configuradas automáticamente para enviar correos a los suscriptores de la lista y realizar otras acciones. Las direcciones de correo no figuran en la página <span class="panel-page">Administrar Correo</span>&nbsp;del panel, pero se crean para cada lista de discusión automáticamente.</p>
+<dl>
+<dt><strong>listname@lists.example.com</strong></dt>
+<dd>Dirección de correo principal para la lista de discusión. El correo enviado a esta dirección se envía a los suscriptores de la lista.</dd>
+<dt><strong>listname-admin@lists.example.com</strong></dt>
+<dd>Un alias para la dirección <span class="text-object">listname-bounces@lists.example.com</span>. Este usuario es obsoleto, pero se mantiene por compatibilidad con versiones anteriores.</dd>
+<dt><strong>listname-bounces@lists.example.com</strong></dt>
+<dd>La dirección <span class="text-object">listname-bounces@lists.example.com</span> es el destinatario de los mensajes devueltos en la lista de correo y generalmente aparece como el remitente de los correos enviados desde la lista de discusión. Los correos enviados directamente a <span class="text-object">listname-bounces@lists.example.com</span> generalmente se tratan como un rebote no reconocido.</dd>
+</dl>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/2018-08_panel_discussion_list_manage_05.png" /></dd>
+</dl>
+<dl>
+<dd>Los mensajes devueltos se pueden reenviar a <span class="text-object">listname-owner@lists.example.com</span> si has configurado las opciones correspondientes que se encuentran en&nbsp;<span class="text-section">Bounce processing &gt; Notifications</span>&nbsp;en el panel de la lista de discusión. Aunque estas notificaciones también pueden provenir de <span class="text-object">mailman-bounces@lists.example.com</span>.</dd>
+</dl>
+<dl>
+<dt><strong>listname-confirm@lists.example.com</strong></dt>
+<dd>La dirección <span class="text-object">listname-confirm@lists.example.com</span> solo se utiliza como destinatario de los mensajes de confirmación. Las acciones que pueden requerir confirmación incluyen suscribirse y darse de baja..</dd>
+</dl>
+<dl>
+<dt><strong>listname-join@lists.example.com</strong></dt>
+<dd>Un alias para la dirección de correo <span class="text-object">listname-subscribe@lists.example.com</span>.</dd>
+<dt><strong>listname-leave@lists.example.com</strong></dt>
+<dd>Un alias para la dirección de correo <span class="text-object">listname-unsubscribe@lists.example.com</span>.</dd>
+<dt><strong>listname-owner@lists.example.com</strong></dt>
+<dd>El correo enviado a <span class="text-object">listname-owner@lists.example.com</span> se envía a todas las direcciones en los campos "owner" y "moderador". Puedes ver estos campos en la página <span class="panel-page">General Options</span> en la sección <span class="text-section">General list personality</span>.</dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-08_panel_discussion_list_manage_06.png" /></dd>
+</dl>
+<dl>
+<dt><strong>listname-request@lists.example.com</strong></dt>
+<dd>La dirección <span class="text-object">listname-request@lists.example.com</span> permite que los comandos se ejecuten en la lista de correo por correo enviando los comandos como el cuerpo del correo a la dirección <span class="text-object">listname-request@lists.example.com</span>. Envía solo la palabra 'help' en el cuerpo para recibir todos los comandos válidos y su uso.</dd>
+</dl>
+<dl>
+<dt><strong>listname-subscribe@lists.example.com</strong></dt>
+<dd>El correo enviado a <span class="text-object">listname-subscribe@lists.example.com</span> activa una acción de suscripción para el remitente. Dependiendo de la política de suscripción de tu lista de correo, el remitente debe confirmar una solicitud de suscripción, aprobada por un administrador/moderador de la lista, o ambos. Puedes ver esta configuración en la página <span class="text-section">Privacy options... &gt; [Subscription rules]</span>. En la sección <span class="text-section">Subscribing</span>, puedes ver la opción 'subscribe_policy'.</dd>
+</dl>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/2018-08_panel_discussion_list_manage_07.png" /></dd>
+</dl>
+<dl>
+<dt><strong>listname-unsubscribe@lists.example.com</strong></dt>
+<dd>El correo enviado a <span class="text-object">listname-unsubscribe@lists.example.com</span> desencadena una acción de cancelación de suscripción para el remitente. Dependiendo de la política de cancelación de suscripción de tu lista de correo, es posible que una solicitud de cancelación de suscripción deba ser aprobada por un administrador/moderador de la lista. Puedes ver esta configuración en la página <span class="text-section">Privacy options... &gt; [Subscription rules]</span>. En la sección <span class="text-section">Subscribing</span>, puedes ver la opción 'unsubscribe_policy'.</dd>
+</dl>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/2018-08_panel_discussion_list_manage_08.png" /></dd>
+</dl>
+</div>
+<h2>Agregar usuarios nuevos a la lista</h2>
+<div class="solvvy-solution">
+<ol>
+<li>En la parte superior derecha, haz clic en '<strong>Membership Management...</strong>'. Tres opciones más se muestran debajo.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-08_panel_discussion_list_manage_09.png" /></dd>
+</dl>
+</li>
+<li>Bajo 'Membership Management...', haz clic en '<strong>Mass Subscription</strong>'.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-08_panel_discussion_list_manage_10.png" /></dd>
+</dl>
+</li>
+<li>Agrega una lista de correos (una por línea), o sube un archivo con la lista de todos los correos.<br />
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los siguientes tipos de archivos son compatibles con la suscripción masiva o la eliminación masiva:</p>
+<ul>
+<li>.xml</li>
+<li>.txt</li>
+<li>.json</li>
+<li>.csv (sin comas, en líneas separadas)</li>
+</ul>
+<p>También puedes agregar direcciones junto con nombres reales. Mira&nbsp;<a href="https://wiki.list.org/DOC/How%20can%20I%20Mass%20Subscribe%20a%20list%20with%20real%20names" target="_self">este artículo</a>&nbsp;para más información. Desafortunadamente, los formatos .rtf y .docx no se importan correctamente con la suscripción / eliminación masiva.</p>
+</div>
+</div>
+</li>
+<li>Guarda los cambios haciendo clic al final en <strong>Submit Your Changes</strong>.</li>
+</ol>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215029188--C%C3%B3mo-creo-una-lista-de-discusi%C3%B3n-" target="_self">¿Cómo crear una Lista de Discusión?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215029508--Qu%C3%A9-son-las-direcciones-de-conveniencia-" target="_self" rel="undefined">¿Qué son direcciones de conveniencia?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215029608--C%C3%B3mo-elimino-una-lista-de-discusi%C3%B3n-" target="_self">¿Cómo eliminar una Lista de Discusión?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413677-Generalidades-de-Account-Privileges" target="_self">Generalidades sobre Privilegios de Cuenta</a></li>
+</ul>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 262px; top: 4878.58px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>

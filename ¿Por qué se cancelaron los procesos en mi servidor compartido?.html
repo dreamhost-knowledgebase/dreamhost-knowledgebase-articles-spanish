@@ -1,0 +1,62 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Los servidores web compartidos DreamHost ejecutan un servicio de monitoreo que cancela los procesos usando demasiada potencia de procesador y/o memoria. Esto puede provocar que un sitio web funcione lento o se caiga por completo.</p>
+<p>Este servicio de monitoreo es necesario, ya que ayuda a identificar y detener procesos/programas, tanto malos como buenos, que acaparan inesperadamente recursos que pueden afectar directa y negativamente a otros usuarios en el mismo servidor.</p>
+<p>Este servicio mantiene los archivos de registro, pero no hay acceso al registro para los clientes de DreamHost. Si deseas confirmar si tus scripts están siendo cancelados, comunícate con el soporte en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener">Contactar a Soporte</a>:</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este artículo solo se aplica a los <a href="https://help.dreamhost.com/hc/es/articles/215560437-Qu%C3%A9-tipos-de-planes-de-alojamiento-est%C3%A1n-disponibles-">planes de alojamiento compartido</a>. El alojamiento VPS, Dedicado y DreamPress no comparte estas limitaciones de memoria.</p>
+<p>El texto que puedes ver cuando sucede esto es: <strong>killed for excessive resource usage</strong></p>
+</div>
+</div>
+</div>
+<h2>Funcionamiento de este servicio</h2>
+<div class="solvvy-solution">
+<p>Cada usuario y cuenta tiene una cantidad específica de recursos asignados. Cuando se alcanzan estos límites, se cancelan tus scripts. Esto puede provocar que un sitio web funcione lento o se caiga por completo.</p>
+<p>Todos los procesos ejecutados por un usuario <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Shell</a>&nbsp;o <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a> se cuentan juntos. Esto incluye:</p>
+<ul>
+<li>Actividad del sitio web.</li>
+<li>Scripts siendo ejecutados.</li>
+<li>Comandos de shell.</li>
+<li>etc.</li>
+</ul>
+<p>Además, todos los procesos ejecutados por todos los usuarios en el servidor desde la misma cuenta DreamHost también se cuentan juntos. Cuando se cancela un proceso, generalmente no está usando&nbsp; demasiada memoria por sí solo, fue el solo proceso que llevó el uso total por encima del límite.</p>
+</div>
+<h2>Resolución de problemas</h2>
+<div class="solvvy-solution">
+<h3>Comprobar tu error.log</h3>
+<p>Si estás ejecutando un script desde una línea de comandos (por ejemplo, ejecutando un script de instalación), tu script puede cerrarse prematuramente. Tu archivo de registro de error puede mostrar "killed" o puedes ver el error "Premature end of script headers". Verifica el archivo de <a href="https://help.dreamhost.com/hc/es/articles/216512217-Ver-y-examinar-un-log-de-errores-v%C3%ADa-SSH">registro de errores</a> del sitio para confirmar.</p>
+<h3>Verificación del consumo de memoria</h3>
+<p>Los siguientes artículos ayudan a reducir el consumo de memoria y así evitar alcanzar los límites de recursos en el futuro:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216105077--C%C3%B3mo-puedo-controlar-bots-ara%C3%B1as-y-rastreadores-">¿Cómo puedo controlar bots, spiders y crawlers?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216363197--C%C3%B3mo-evito-el-enlace-directo-de-im%C3%A1genes-">Prevenir hotlinking</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000683852-Usando-el-comando-top-para-solucionar-problemas-de-tu-sitio-web">Uso del comando 'top' para solucionar problemas de tu sitio web</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214880098-Usando-el-comando-ps-para-solucionar-problemas-de-tu-sitio-web">Uso del comando 'ps' para solucionar problemas de tu sitio web</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216349808-Razones-comunes-para-el-bajo-rendimiento-de-sitios-web">Razones comunes para el bajo rendimiento del sitio web</a></li>
+</ul>
+<p>La forma más fácil de evitar que tus procesos se cancelen por el uso excesivo de memoria es hacer que usen menos memoria. El servicio de monitoreo rastrea el uso de memoria en todos los procesos que está ejecutando, no solo en un proceso individual. Debido a esto, puedes encontrar límites de memoria prematuramente si tienes varios procesos PHP ejecutándose al mismo tiempo. La desactivación temporal de sitios con bastante tráfico bajo el mismo usuario también puede ayudar.</p>
+</div>
+<h2><span id="Si_la_resolución_de_problemas_no_ayuda_a_bajar_el_uso_de_la_memoria">Si la resolución de problemas no ayuda a bajar el uso de la memoria</span></h2>
+<div class="solvvy-solution">
+<p>Si has realizado todas las sugerencias de solución de problemas y encuentras que el consumo de memoria todavía está alcanzando los límites del servidor compartido, la única opción es actualizar tu plan de alojamiento.</p>
+<p>El primer paso es actualizar a un <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a>.</p>
+</div>
+<h2>¿Cómo hacer que tu sitio vuelva a funcionar?</h2>
+<div class="solvvy-solution">
+<p>Cuando alcanzas tus límites de memoria en un servidor compartido, tus procesos se anulan. Esto puede causar lentitud en tu sitio, o podría hacer que tu sitio se caiga momentáneamente.</p>
+<p>Una vez que se cancelan los scripts, estos pueden comenzar a ejecutarse de nuevo normalmente. Mientras no vuelvan a alcanzar los límites de memoria, tu sitio comenzará a funcionar automáticamente nuevamente.</p>
+<p>Solo si tus procesos alcanzan continuamente los límites, tu sitio permanecerá inactivo. Pónte en <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">contacto con el soporte técnico</a> si esto le sucede a tu sitio.</p>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/categories/202186727-Soluci%C3%B3n-de-problemas">Lista de artículos para solucionar problemas con páginas</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">Generalidades del .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216349808-Razones-comunes-para-el-bajo-rendimiento-de-sitios-web">Las razones más comunes para un rendimiento deficiente de un sitio web</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP">Ver tu registro de acceso y errores vía de SFTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216105097-Ver-y-examinar-tu-access-log-a-trav%C3%A9s-de-SSH">Ver y examinar tu access.log vía SSH</a></li>
+</ul>
+</div>
