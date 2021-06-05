@@ -1,6 +1,6 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Los sitios web creados en PHP pueden aprovechar la función de correo PHP que crea la capacidad de enviar correos electrónicos directamente desde tu sitio web. Puedes leer más sobre esta función en el sitio web de PHP:</p>
+<p>Los sitios web creados en PHP pueden aprovechar la función de correo PHP que crea la capacidad de enviar correos directamente desde tu sitio web. Puedes leer más sobre esta función en el sitio web de PHP:</p>
 <ul>
 <li><a href="https://php.net/manual/en/function.mail.php" target="_self" rel="undefined">php.net/manual/en/function.mail.php</a></li>
 </ul>
@@ -8,7 +8,7 @@
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Nunca uses la entrada de formulario (como nombres o direcciones de correo electrónico) en la sección <span class="text-section">Additional headers</span> del comando PHP mail(). Esto puede conducir a exploits de inyección de encabezado de correo que permiten a los spammers secuestrar tus formularios de correo electrónico. Visita la siguiente página para obtener información adicional sobre cómo funcionan estos ataques y cómo prevenirlos:</p>
+<p>Nunca uses la entrada de formulario (como nombres o direcciones de correo) en la sección <span class="text-section">Additional headers</span> del comando PHP mail(). Esto puede conducir a exploits de inyección de encabezado de correo que permiten a los spammers secuestrar tus formularios de correo. Visita la siguiente página para obtener información adicional sobre cómo funcionan estos ataques y cómo prevenirlos:</p>
 <ul>
 <li><a href="http://www.damonkohler.com/2008/12/email-injection.html" target="_self">Inyección de correo Electrónico</a></li>
 </ul>
@@ -21,7 +21,7 @@
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Asegúrate de cambiar la dirección FROM a un correo electrónico en el dominio de tu sitio. Por ejemplo, si su sitio es <strong>example.com</strong>, la dirección FROM debería ser algo como <span class="text-object">admin@example.com</span>. Esto es para evitar cualquier problema con la <a href="https://help.dreamhost.com/hc/es/articles/215036118-Preguntas-frecuentes-sobre-la-pol%C3%ADtica-de-dominio-del-remitente" target="_self">Política de dominio del remitente</a>.</p>
+<p>Asegúrate de cambiar la dirección FROM a un correo en el dominio de tu sitio. Por ejemplo, si tu sitio es <strong>example.com</strong>, la dirección FROM debería ser algo como <span class="text-object">admin@example.com</span>. Esto es para evitar cualquier problema con la <a href="https://help.dreamhost.com/hc/es/articles/215036118-Preguntas-frecuentes-sobre-la-pol%C3%ADtica-de-dominio-del-remitente" target="_self">Política de dominio del remitente</a>.</p>
 </div>
 </div>
 <div class="preboxcontainer">
@@ -31,7 +31,7 @@ mail('<span class="code-highlight">user@example.com</span>', '<span class="code-
 ?&gt;
 </pre>
 </div>
-<p>Cuando visites esta página en un navegador, aparecerá como una página en blanco en blanco. Pero al visitarlo, invoca la función de correo PHP para enviar un correo electrónico a la dirección ingresada.</p>
+<p>Cuando visites esta página en un navegador, aparecerá como una página en blanco en blanco. Pero al visitarlo, invoca la función de correo PHP para enviar un correo a la dirección ingresada.</p>
 </div>
 <h2>Ejemplo básico con variables</h2>
 <div class="solvvy-solution">
@@ -84,7 +84,7 @@ mail($to, $subject, $message, $headers);
 </div>
 <h2>Envío de correo HTML</h2>
 <div class="solvvy-solution">
-<p>Este ejemplo te permite agregar código HTML a tu correo electrónico. Pon el siguiente contenido en un archivo con una extensión <span class="text-object">.php</span>:</p>
+<p>Este ejemplo te permite agregar código HTML a tu correo. Agrega el siguiente contenido en un archivo con una extensión <span class="text-object">.php</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
 
@@ -125,7 +125,7 @@ mail($to, $subject, $message, $headers);
 </div>
 <h2>Inyección de encabezado de correo</h2>
 <div class="solvvy-solution">
-<p>El siguiente código se puede colocar en la parte superior de tu script PHP para disuadir las inyecciones de encabezado más comunes. Ten en cuenta que este código no permite el acceso directo a la página, así que solo agrega a una página de "proceso" accesible mediante una acción Enviar. Filtrará cualquier encabezado CC o BCC que se esté inyectando, así como cualquier nueva línea o etiquetas de retorno de carro inyectadas en el encabezado del correo electrónico.</p>
+<p>El siguiente código se puede colocar en la parte superior de tu script PHP para disuadir las inyecciones de encabezado más comunes. Ten en cuenta que este código no permite el acceso directo a la página, así que solo agrega a una página de "proceso" accesible mediante una acción Enviar. Filtrará cualquier encabezado CC o BCC que se esté inyectando, así como cualquier nueva línea o etiquetas de retorno de carro inyectadas en el encabezado del correo.</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
 if (!isset($_POST['submit'])) {
@@ -148,10 +148,10 @@ if (preg_match($find, $name) || preg_match($find, $email) || preg_match($find, $
 </div>
 <h2>Script avanzado de correo PHP</h2>
 <div class="solvvy-solution">
-<p>Ve los siguientes artículos para ver ejemplos completos sobre cómo enviar correo SMTP a través de un script PHP.</p>
+<p>Revisa los siguientes artículos para ver ejemplos completos sobre cómo enviar correo SMTP a través de un script PHP.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer" target="_self">Generalidades PHPmailer </a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-env%C3%ADo-correo-PHP-v%C3%ADa-SMTP-" target="_self">¿Cómo envío correo PHP por medio de SMTP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-env%C3%ADo-correo-PHP-v%C3%ADa-SMTP-" target="_self">¿Cómo enviar correo PHP por medio de SMTP?</a></li>
 </ul>
 </div>
 <h2>Ver También</h2>
@@ -164,6 +164,6 @@ if (preg_match($find, $name) || preg_match($find, $email) || preg_match($find, $
 </ul>
 <h3>Enlaces externos</h3>
 <ul>
-<li><a href="http://www.php.net/manual/en/function.mail.php" target="_self">Documentación de función PHP.net mail()</a></li>
+<li><a href="http://www.php.net/manual/es/function.mail.php" target="_self" rel="undefined">Documentación de función PHP.net mail()</a></li>
 </ul>
 </div>
