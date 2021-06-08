@@ -1,0 +1,77 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo describe cómo habilitar Passenger en tu dominio dentro del panel de DreamHost.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si tu aplicación Ruby no se inicia debido a una gema faltante, entonces debes instalarla localmente usando Bundler. Para obtener más información sobre el uso de Bundler, visita la siguiente página:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115001070131-Usar-Bundler-para-instalar-Ruby-gems" target="_self">Usar Bundler para instalar Ruby gems</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Habilitar Passenger</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>.</li>
+<li>Haz clic en el botón&nbsp;<strong>Edit</strong>&nbsp;hacia la derecha de tu dominio bajo la columna <span class="text-object">Web Hosting</span>.
+<dl>
+<dd><em>La página de configuración de <span class="panel-page">Manage Domains</span> se abre:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-07_panel_enable_rvm_01.png" /></dd>
+</dl>
+</li>
+<li>Desplázate hacia abajo hasta la sección <span class="text-section">Web Options</span> y selecciona la casilla <span class="text-object">Passenger (Ruby/NodeJS/Python apps only):</span>.<br />
+<dl>
+<dd><em>Aparece un cuadro de diálogo de ADVERTENCIA:</em></dd>
+</dl>
+<img class="img-border" src="https://kbimages.dreamhosters.com/images/01_Passenger.png" /></li>
+<li>Haz clic en el botón&nbsp;<strong>OK</strong>.&nbsp;El panel agrega el subdirectorio <span class="text-object">/public</span> por ti.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si ya tienes un directorio <span class="text-object">/public</span> en el directorio web actual, al hacer clic en OK solo cambiará el <span class="text-object">Web directory</span> a esta nueva carpeta <span class="text-object">/public</span>. Nada en él se elimina.</p>
+<p>Si aún no tienes un directorio <span class="text-object">/public</span>, el panel lo crea por ti con una página que dice próximamente. Los archivos en tu <span class="text-object">Web directory</span> actual permanecen intactos.</p>
+</div>
+</div>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Change settings</strong>&nbsp;para guardar los cambios.</li>
+</ol>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<ul>
+<li>Siempre que se modifique el código o los archivos de configuración de tu aplicación, debes crear o actualizar la fecha de modificación del archivo <span class="text-object">tmp/restart.txt</span> en el árbol del directorio raíz de la aplicación para que Passenger reinicie la aplicación. Passenger almacena en caché muchos recursos para que los cambios no se reconozcan a menos que se modifique la fecha de modificación de <span class="text-object">tmp/restart.txt</span>.</li>
+<li>El método más común para hacer este cambio es correr el siguiente comando vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">"touch tmp/restart.txt" . </span>
+</pre>
+</div>
+(Ruby on Rails crea automáticamente un directorio llamado <span class="text-object">tmp</span>. Si estás creando una aplicación no RoR, es posible que necesites crear el directorio <span class="text-object">tmp</span> manualmente.</li>
+</ul>
+</div>
+</div>
+</div>
+<h2>El subdirectorio "public"</h2>
+<div class="solvvy-solution">
+<ul>
+<li>Passenger asigna el directorio llamado <span class="text-object">public</span> para que sea la raíz del documento para tu dominio / subdominio.</li>
+<li>Si existe un archivo HTML estático llamado <span class="text-object">public/index.html</span>, se usa como respuesta a las solicitudes del documento raíz (es decir, "/").</li>
+<li>Si deseas que tu aplicación maneje las solicitudes del documento raíz, primero debes eliminar <span class="text-object">public/index.html</span> (si existe).</li>
+<li>Por defecto, Ruby on Rails crea un archivo estático <span class="text-object">public/index.html</span>.</li>
+</ul>
+<p>Del mismo modo, un archivo dentro del subdirectorio <span class="text-object">public</span> que se nombra con uno de los sufijos reconocidos por Apache (por ejemplo, <span class="text-object">public/foo.cgi</span> o <span class="text-object">public/foo.pl</span>) se tratará como un script CGI ejecutable en el Apache habitual. (Ver CGI <a href="https://help.dreamhost.com/hc/es/articles/217297307-Generalidades-sobre-CGI">CGI</a>&nbsp;para más información).</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215769578-Generalidades-sobre-Passenger" target="_self">Generalidades sobre Passenger</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215769548-Passenger-y-Python-WSGI" target="_self">Passenger y Python WSGI</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216635318--C%C3%B3mo-habilitar-Node-js-" target="_self">¿Cómo habilitar Node.js?</a></li>
+<li><a href="/hc/es/articles/217185437-Cómo-habilitar-RVM" target="_self">Cómo habilitar RVM</a></li>
+</ul>
+</div>
