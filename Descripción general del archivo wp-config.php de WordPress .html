@@ -11,8 +11,8 @@
 <div class="solvvy-solution">
 <p>Ciertas configuraciones se colocan en <span class="text-object">wp-config.php</span> por defecto. Todos estos deben estar allí para que el archivo funcione.</p>
 <h3>Configuraciones de base de datos</h3>
-<p>Las credenciales de la base de datos se encuentran en el panel DreamHost. Vea el artículo de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">credenciales de MySQL</a>&nbsp;para más detalles.</p>
-<p>Las siguientes líneas se agregan al archivo <span class="text-object">wp-config.php</span> de manera predeterminada. Estas líneas le indican a su instalación dónde encontrar el contenido de su base de datos que es responsable de cargar sus páginas y publicar contenido:</p>
+<p>Las credenciales de la base de datos se encuentran en el panel DreamHost. Mira el artículo de <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">credenciales de MySQL</a>&nbsp;para más detalles.</p>
+<p>Las siguientes líneas se agregan al archivo <span class="text-object">wp-config.php</span> de manera predeterminada. Estas líneas le indican a tu instalación dónde encontrar el contenido de tu base de datos que es responsable de cargar tus páginas y publicar contenido:</p>
 <div class="preboxcontainer">
 <pre class="prebox">define('DB_NAME', ‘exampledatabase’);
 define('DB_USER', 'exampledbuser');
@@ -23,7 +23,7 @@ define('DB_COLLATE', '');
 </pre>
 </div>
 <h3>Autenticación de claves únicas y salts</h3>
-<p>WordPress utiliza claves de seguridad para proteger a los usuarios registrados. Puede generarlos utilizando la&nbsp;<a href="https://api.wordpress.org/secret-key/1.1/salt/">WordPress.org secret-key API.</a>&nbsp;Si no los ve en el archivo, debes agregarlos. Si ha sido pirateado, puedes reemplazarlos. No se perderán los datos.</p>
+<p>WordPress utiliza claves de seguridad para proteger a los usuarios registrados. Puedes generarlos usando la <a href="https://api.wordpress.org/secret-key/1.1/salt/">WordPress.org secret-key API.</a> Si no los ves en el archivo, debes agregarlos. Si has sido hackeado, puedes reemplazarlos. No se perderán los datos.</p>
 <div class="preboxcontainer">
 <pre class="prebox">define('AUTH_KEY',         'hvKlL_)w&amp;k{ybi{4cHV3G9x3t[]!@y$e*jW?Qt@bqkiRlr.Wy8]t6)/*&lt;y1![S!P');
 define('SECURE_AUTH_KEY',  'O=oxZd%3fks%6ne+w+-A|B.`X-YcTCjD`&lt;aF_H-vbQ[vMd4d?C;u,X$@q|t-dE28');
@@ -35,12 +35,12 @@ define('LOGGED_IN_SALT',   'rl45Nq@h|Va3P+ML? -r&amp;7`xay)4$a+Zp (#pw!(4C^WV:7[
 define('NONCE_SALT',       'Vnor?.uqj+/`KS+&lt;r]$G_.)gBmbyxI4S|?1+t&lt;jR|+wh[$i%+vvv|KA)E#g?jn.f');
 </pre>
 </div>
-<p>Ve el siguiente enlace para más detalles:</p>
+<p>Mira el siguiente enlace para más detalles:</p>
 <ul>
 <li><a href="https://codex.wordpress.org/Editing_wp-config.php#Security_Keys" target="_self">Llaves de seguridad</a></li>
 </ul>
 <h3>Prefijo de base de datos</h3>
-<p>El valor predeterminado aquí es en realidad solo wp_, pero si usas&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215525277-C%C3%B3mo-instalar-WordPress-usando-el-Instalador-de-un-clic" target="_self">instalación de sólo un clic</a>,&nbsp;el prefijo incluye algunas letras y números aleatorios. Siempre debe terminar con un guión bajo, y es mejor si la última letra es en realidad una letra y no un número. Terminar con un número hace cosas graciosas con&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215525477-Generalidades-de-los-Multisitios-de-WordPress">Multisite</a>:</p>
+<p>El valor predeterminado aquí es en realidad solo wp_, pero si usas&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215525277-C%C3%B3mo-instalar-WordPress-usando-el-Instalador-de-un-clic" target="_self">instalación de Un-Clic</a>, el prefijo incluye algunas letras y números aleatorios. Siempre debe terminar con un guión bajo, y es mejor si la última letra es en realidad una letra y no un número. Terminar con un número hace cosas extrañas con los <a href="https://help.dreamhost.com/hc/es/articles/215525477-Generalidades-de-los-Multisitios-de-WordPress">Multisitios</a>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">$table_prefix = 'wp_2hdy121d_';</pre>
 </div>
@@ -64,7 +64,7 @@ define('NONCE_SALT',       'Vnor?.uqj+/`KS+&lt;r]$G_.)gBmbyxI4S|?1+t&lt;jR|+wh[$
 </div>
 <h2>Modo de depuración</h2>
 <div class="solvvy-solution">
-<p>El modo de depuración está predeterminado en apagado. Consulta el artículo '<a href="https://help.dreamhost.com/hc/es/articles/360029327771-Habilitar-el-registro-de-Debug-de-WordPress" target="_self">abilitación del registro de depuración de WordPress</a>' para obtener instrucciones sobre cómo habilitar y usar esta función.&nbsp;</p>
+<p>El modo de depuración está predeterminado en apagado. Consulta el artículo '<a href="https://help.dreamhost.com/hc/es/articles/360029327771-Habilitar-el-registro-de-Debug-de-WordPress" target="_self">habilitación del registro de depuración de WordPress</a>' para obtener instrucciones sobre cómo habilitar y usar esta función.&nbsp;</p>
 <div class="preboxcontainer">
 <pre class="prebox">define('WP_DEBUG', false);</pre>
 </div>
@@ -109,7 +109,7 @@ define('NONCE_SALT',       'Vnor?.uqj+/`KS+&lt;r]$G_.)gBmbyxI4S|?1+t&lt;jR|+wh[$
 </div>
 </li>
 </ul>
-<h3>Los complementos también pueden agregar líneas al wp-config.php</h3>
+<h3>Los plugins también pueden agregar líneas al wp-config.php</h3>
 <p>Ejemplos:</p>
 <div class="preboxcontainer">
 <pre class="prebox">/** Enable W3 Total Cache */

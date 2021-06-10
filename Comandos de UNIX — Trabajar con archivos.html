@@ -1,0 +1,119 @@
+<h2>Crear archivos</h2>
+<div class="solvvy-solution">
+<p>Para crear un nuevo archivo, puedes guardarlo desde un editor de texto (u otro programa), o puedes usar el comando&nbsp;<span class="code">touch</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">touch filename</span></pre>
+</div>
+<p>Esto crea un archivo vacío llamado&nbsp;<span class="text-object">filename</span> en el directorio de trabajo actual.</p>
+</div>
+<h2>Mover archivos</h2>
+<div class="solvvy-solution">
+<p>Para mover un archivo a otro lugar:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mv /old/location/filename /new/location/filename</span></pre>
+</div>
+<p>Ten en cuenta que también puedes usar rutas relativas:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mv filename ../directory/filename</span></pre>
+</div>
+</div>
+<h2>Copiar documentos</h2>
+<div class="solvvy-solution">
+<p>Para copiar un archivo a otro lugar:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cp /existing/location/filename /new/location/filename</span></pre>
+</div>
+</div>
+<h2>Renombrar archivos</h2>
+<div class="solvvy-solution">
+<p><span class="code">mv</span> también se usa para cambiar el nombre de un archivo a otra cosa:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mv oldfilename newfilename</span></pre>
+</div>
+<p><span class="code">mv</span> también se puede usar para mover un archivo a un nuevo directorio al cambiarle el nombre:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mv oldfilename ../directory/newfilename </span></pre>
+</div>
+<p>También puedes cambiar el nombre de un archivo mientras usa el comando&nbsp;<code>cp</code>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cp /existing/location/filename /new/location/newfilename </span></pre>
+</div>
+</div>
+<h2>Eliminar archivos</h2>
+<div class="solvvy-solution">
+<p>Para eliminar un archivo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rm filename </span></pre>
+</div>
+<p>Puedes usar comodines para eliminar varios archivos con nombres similares. Para eliminar todos los archivos que comienzan con "pic" (eg, <span class="text-object">pic01.jpg</span>, <span class="text-object">pic02.jpg</span>, etc):</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rm pic*</span></pre>
+</div>
+<p>El wildcard puede aparecer en cualquier parte de la cadena. Para eliminar todos los archivos <span class="text-object">.jpg</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rm *.jpg</span></pre>
+</div>
+<p>Ten cuidado al usar comodines, ya que puedes eliminar archivos inadvertidamente de esta manera. Como medida de seguridad, puedes usar la bandera&nbsp;<span class="code">-i</span>; Luego se te pedirá que confirmes todas las eliminaciones. Escribe y o n cuando se te solicite para confirmar si deseas o no eliminar cada archivo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rm -i *.jpg</span>
+<span class="cmdoutput">rm: remove 'example1.jpg'? y
+rm: remove 'example2.jpg'? y</span></pre>
+</div>
+<p>Para eliminar permanentemente un directorio y todo su contenido, usa los indicadores&nbsp;<span class="code">-rf</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rm -rf directoryname</span></pre>
+</div>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>El comando <span class="code">rm -rf</span> elimina por completo todo en esa carpeta y no habrá forma de recuperar los datos. Ten cuidado al usar este comando.</p>
+</div>
+</div>
+</div>
+<h2>Ubicar archivos</h2>
+<div class="solvvy-solution">
+<p>Para ubicar todos los archivos en un árbol de directorios que contienen algún patrón en su nombre:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">find directory -name &lt;regexp&gt; -print</span>
+<span class="cmdoutput">list
+of
+results</span></pre>
+</div>
+<p>Ten en cuenta que este comando usa una expresión regular (&lt;regexp&gt;) para describir el nombre del archivo. También puedes escribir el nombre de archivo exacto.</p>
+<p>Por ejemplo, para buscar todos los archivos que terminan con&nbsp;<code>htm</code> en el directorio actual y cualquier subdirectorio:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">find . -name *.htm -print</span></pre>
+</div>
+<p>Ten en cuenta que las búsquedas que contienen comodines ("*", ".", "?") Deben estar delimitadas por comillas para que el shell no intente interpretarlas como expresiones regulares:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">find . -name "*.htm" -print</span></pre>
+</div>
+<p>Además, <code>-print</code> es el valor predeterminado en la mayoría de los sistemas Unix / Linux, por lo que puede omitirse en la mayoría de los casos:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">find . -name "*.htm"</span></pre>
+</div>
+<p>El comando de búsqueda es extremadamente poderoso. Otro uso útil es eliminar todas las subcarpetas vacías en un árbol en particular. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">find . -depth -type d -empty -exec rmdir {} ';'</span></pre>
+</div>
+<p>Solo asegúrate de incluir el indicador&nbsp;<span class="code">-empty</span> dentro del comando anterior.</p>
+<p>Este comando busca en el directorio actual y en todos los subdirectorios. Todos los archivos que contienen la cadena tendrán su ruta impresa en la salida estándar:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">find . -exec grep "<var>some_string</var>" '{}' \; -print</span></pre>
+</div>
+<p>Para buscar todos los archivos que se han modificado en los últimos 7 días y enviarlos a un archivo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">find . -mtime -7 &gt; mod.txt<br /></span></pre>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214750888-Generalidades-sobre-comandos-UNIX" target="_self">Generalidades de los comandos de UNIX</a></li>
+<li><a href="/hc/es/articles/215465297-Comandos-UNIX-Trabajando-con-directorios" target="_self">Comandos UNIX — Trabajando con directorios</a></li>
+<li><a href="/hc/es/articles/214750918-Comandos-UNIX-Cambiar-propiedad" target="_self">Comandos UNIX — Cambiar propiedad</a></li>
+<li><a href="/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">Comandos de Unix — Cambiar permisos</a></li>
+<li><a href="/hc/es/articles/115002768331-Comandos-UNIX-Descomprimiendo-archivos" target="_self">Comandos UNIX — Descomprir archivos</a></li>
+</ul>
+</div>
