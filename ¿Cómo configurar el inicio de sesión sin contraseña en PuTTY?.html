@@ -4,35 +4,35 @@
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Estas instrucciones también se pueden usar para crear y asignar claves SSH a un <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-" target="_self">usuario admin/root</a> en un servidor Dedicado.</p>
+<p>Estas instrucciones también se pueden usar para crear y asignar Llaves de SSH a un <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-" target="_self">usuario admin/root</a> en un servidor Dedicado.</p>
 </div>
 </div>
 </div>
 <h2>Crear una Llave de Emparejamiento</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Abre el archivo <span class="text-object">puttygen.exe</span> que&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215464538--C%C3%B3mo-configurar-PuTTY-" target="_self">descargaste al configurar PuTTY</a>.&nbsp;Lo usarás para crear tu par de claves privada/pública.</li>
-<li>En el cuadro Generador de claves PuTTY, asegúrate de que el botón de opción en la parte inferior esté seleccionado para <span class="text-object">RSA</span>.<br />
+<li>Abre el archivo <span class="text-object">puttygen.exe</span> que&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215464538--C%C3%B3mo-configurar-PuTTY-" target="_self">descargaste al configurar PuTTY</a>. Lo usarás para crear tu Llave de Emparejamiento privada/pública.</li>
+<li>En el cuadro Generador de Llaves de PuTTY, asegúrate de que el botón de opción en la parte inferior esté seleccionado para <span class="text-object">RSA</span>.<br />
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/02_putty_keygen.png" alt="02 putty keygen.png" /></dd>
 </dl>
 </li>
 <li>Haz clic en el botón <strong>Generar</strong>.</li>
-<li>Mueve el mouse alrededor de la caja para ayudar a generar las claves.<br />
+<li>Mueve el mouse alrededor de la caja para ayudar a generar las Llaves.<br />
 <dl>
-<dd><em>Una vez que se crea la clave, aparece un nuevo cuadro emergente:</em></dd>
+<dd><em>Una vez que se crea la Llave, aparece un nuevo cuadro emergente:</em></dd>
 </dl>
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/03_pubkey.png" alt="03 pubkey.png" /></dd>
 </dl>
 </li>
-<li>En la parte inferior derecha, hay botones llamados <strong>Save public key</strong> y <strong>Save private key</strong> – guarda ambos en tu computadora
+<li>En la parte inferior derecha, hay botones llamados <strong>Save public key</strong> y <strong>Save private key</strong> – guarda ambos en tu computador
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" /></div>
 <div class="alert-content">
 <ul>
-<li>Cuando guardes la clave pública, asígnale un nombre similar a <span class="text-object">dreamhostpublickey</span>. No agregues manualmente la extensión, ya que no es necesario.</li>
-<li>Cuando guardes la clave privada, asígnale un nombre similar a <span class="text-object">dreamhostprivatekey</span> y asegúrate de guardarla en una ubicación segura en su computadora. Nuevamente, no agregues manualmente la extensión, ya que no es necesario.</li>
+<li>Cuando guardes la Llave pública, asígnale un nombre similar a <span class="text-object">dreamhostpublickey</span>. No agregues manualmente la extensión, ya que no es necesario.</li>
+<li>Cuando guardes la Llave privada, asígnale un nombre similar a <span class="text-object">dreamhostprivatekey</span> y asegúrate de guardarla en una ubicación segura en tu computador. Nuevamente, no agregues manualmente la extensión, ya que no es necesario.</li>
 <li>Al guardar, aparece un mensaje sobre una frase de contraseña.<br />
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/putty_passphrase.png" alt="putty_passphrase" /></dd>
@@ -42,26 +42,26 @@ Haz clic en <strong>Yes</strong> para guardar sin una frase de contraseña.</li>
 </div>
 </div>
 <div class="alert-warning">
-<p><strong><span id="mysql-workbench">Si estás creando claves para MySQL Workbench</span></strong></p>
-<p>Si estás creando un par de claves para MySQL Workbench, debes exportar la clave privada en formato OpenSSH.</p>
+<p><strong><span id="mysql-workbench">Si estás creando Llaves para MySQL Workbench</span></strong></p>
+<p>Si estás creando una Llave de Emparejamiento para MySQL Workbench, debes exportar la Llave privada en formato OpenSSH.</p>
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/mysql-workbench_05.png" alt="convert to openssh key" /></dd>
 </dl>
 <ol>
 <li>Haz clic en la pestaña <span class="text-object">Conversions</span> tab y selecciona <span class="text-object">Export OpenSSH key</span>.</li>
-<li>Guarda esto en tu computadora sin una extensión.</li>
+<li>Guarda esto en tu computador sin una extensión.</li>
 </ol>
 <dl>
-<dd><em>Ahora puedes usar esta clave para importar a MySQL Workbench.</em></dd>
+<dd><em>Ahora puedes usar esta Llave para importar a MySQL Workbench.</em></dd>
 </dl>
 </div>
 </li>
 </ol>
 </div>
-<h2>Subiendo la clave pública a tu servidor</h2>
+<h2>Subir la Llave pública a tu servidor</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Carga la clave pública que acabas de crear en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de los usuarios</a> de DreamHost. Para hacer esto, puedes usar un <a href="https://help.dreamhost.com/hc/es/articles/215613107-Listas-de-clientes-de-software-de-FTP" target="_self">Cliente FTP</a> como Filezilla.</li>
+<li>Carga la Llave pública que acabas de crear en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de los usuarios</a> de DreamHost. Para hacer esto, puedes usar un <a href="https://help.dreamhost.com/hc/es/articles/215613107-Listas-de-clientes-de-software-de-FTP" target="_self">Cliente FTP</a> como Filezilla.</li>
 <li>Inicia sesión en tu servidor web DreamHost a través de PuTTY.</li>
 <li>Navega al directorio del usuario.<br />
 <div class="preboxcontainer">
@@ -73,16 +73,16 @@ Haz clic en <strong>Yes</strong> para guardar sin una frase de contraseña.</li>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir .ssh</span></pre>
 </div>
 </li>
-<li>Cambie los permisos en este directorio a 700.
+<li>Cambia los permisos en este directorio a 700.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 700 .ssh</span></pre>
 </div>
 </li>
-<li>Mientras todavía está en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de usuario</a>, agregue la clave pública que acaba de cargar a un nuevo archivo llamado <span class="text-object">authorized_keys</span> que se encuentra en el directorio <span class="text-object">/.ssh</span> ejecutando este comando:<br />
+<li>Mientras todavía estás en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de usuario</a>, agrega la Llave pública que acabas de cargar a un nuevo archivo llamado <span class="text-object">authorized_keys</span> que se encuentra en el directorio <span class="text-object">/.ssh</span> ejecutando este comando:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh-keygen -i -f <span class="code-highlight">dreamhostpublickey</span> &gt;&gt; ~/.ssh/authorized_keys</span></pre>
 </div>
-<p>Esto agrega el <span class="text-object">dreamhostpublickey</span> que cargó desde tu computadora a un nuevo archivo llamado <span class="text-object">authorized_keys</span>. Solo asegúrate de que el nombre del archivo de clave pública, en el comando, sea el nombre del archivo que cargaste.</p>
+<p>Esto agrega el <span class="text-object">dreamhostpublickey</span> que cargó desde tu computador a un nuevo archivo llamado <span class="text-object">authorized_keys</span>. Solo asegúrate de que el nombre del archivo de Llave pública, en el comando, sea el nombre del archivo que cargaste.</p>
 </li>
 <li>Ajusta los permisos ejecutando este comando:<br />
 <div class="preboxcontainer">
@@ -92,7 +92,7 @@ Haz clic en <strong>Yes</strong> para guardar sin una frase de contraseña.</li>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">rm <span class="code-highlight">dreamhostpublickey</span></span></pre>
 </div>
-<p>Ahora la clave se encuentra en el servidor (protegida del acceso de otros)</p>
+<p>Ahora la Llave se encuentra en el servidor (protegida del acceso de otros)</p>
 </li>
 <li>Sal de PuTTY y vuelve a iniciar el programa.</li>
 <li>Cuando el programa se reinicie, abre el cuadro de configuración y haz clic en la categoría <span class="text-object">Conexión &gt; Datos</span> a la izquierda.<br />
@@ -106,7 +106,7 @@ Haz clic en <strong>Yes</strong> para guardar sin una frase de contraseña.</li>
 </dl>
 </li>
 <li>En el mismo cuadro de configuración, haz clic en <span class="text-object">Conexión &gt; SSH &gt; Auth</span>.</li>
-<li>Haz clic en el botón <strong>Browse</strong> y navega hasta la ubicación en tu computadora donde guardaste el archivo de <span class="text-object">dreamhostprivatekey</span>.<br />
+<li>Haz clic en el botón <strong>Browse</strong> y navega hasta la ubicación en tu computador donde guardaste el archivo de <span class="text-object">dreamhostprivatekey</span>.<br />
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/06_sessions.png" alt="06_sessions.png" /></dd>
 </dl>
@@ -129,7 +129,7 @@ Haz clic en <strong>Yes</strong> para guardar sin una frase de contraseña.</li>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" /></div>
 <div class="alert-content">
-<p>Si la consola PuTTY responde con <span class="text-object">Servidor rechazó nuestra clave</span>, esto puede indicar que la clave pública que PuTTY generaste no está en una forma que el sistema remoto reconozca o pueda usar para autenticar tu acceso. Consulta el siguiente enlace para obtener instrucciones sobre cómo editar el archivo de clave pública en un formato que el servidor remoto reconozca:</p>
+<p>Si la consola PuTTY responde con <span class="text-object">Servidor rechazó nuestra Llave</span>, esto puede indicar que la Llave pública que PuTTY generaste no está en una forma que el sistema remoto reconozca o pueda usar para autenticar tu acceso. Consulta el siguiente enlace para obtener instrucciones sobre cómo editar el archivo de Llave pública en un formato que el servidor remoto reconozca:</p>
 <ul>
 <li><a href="https://www.walkernews.net/2009/03/22/how-to-fix-server-refused-our-key-error-that-caused-by-putty-generated-rsa-public-key/" target="_self" rel="undefined">walkernews.net/2009/03/22/how-to-fix-server-refused-our-key-error-that-caused-by-putty-generated-rsa-public-key/</a></li>
 </ul>
@@ -144,4 +144,7 @@ Haz clic en <strong>Yes</strong> para guardar sin una frase de contraseña.</li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215466658-Soluci%C3%B3n-de-problemas-de-PuTTY" target="_self">Solución de Problemas en PuTTY</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216499537-C%C3%B3mo-configurar-inicio-de-sesi%C3%B3n-sin-contrase%C3%B1a-en-Mac-OS-y-Linux" target="_self">Cómo configurar el inicio de sesión sin contraseña en Mac OS X y Linux</a></li>
 </ul>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 642px; top: 2576.12px;">
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>

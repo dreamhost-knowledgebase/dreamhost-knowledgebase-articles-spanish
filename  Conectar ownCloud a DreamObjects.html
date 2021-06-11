@@ -100,7 +100,7 @@
 </ul>
 <h4>Available for</h4>
 <ul>
-<li>Si tienes multiples usuarios de tu instalación ownCloud, puedes limitar quien puede acceder la carpeta al escribir <span class="code">users</span> o <span class="code">groups</span> en la casilla 'Available for' a la derecha de la información de configuración.</li>
+<li>Si tienes multiples usuarios de tu instalación ownCloud, puedes limitar quien puede acceder la carpeta al escribir <span class="code">users</span> o <span class="code">groups</span> en la caja <span class="text-object">Available for</span>a la derecha de la información de configuración.</li>
 </ul>
 </li>
 </ol>
@@ -122,20 +122,23 @@
 <div class="solvvy-solution">
 <p>Si planeas cargar archivos grandes a DreamObjects usando ownCloud, deberás tener en cuenta algunas limitaciones y realizar algunos cambios de configuración, ya que cargar archivos grandes puede consumir mucha memoria.</p>
 <p>Los objetos de DreamObjects tienen un tamaño limitado de 10 TB, pero deben cargarse en fragmentos de 5 GB. ownCloud no admite cargas de archivos de varias partes, por lo que está limitado a cargas de archivos de 5 GB a través de ownCloud.</p>
-<p>ownCloud usa un archivo .htaccess ubicado en la carpeta ownCloud en el servidor para configurar los siguientes parámetros personalizados de PHP:</p>
+<p>ownCloud usa un archivo <span class="text-object">.user.ini</span> ubicado en la carpeta <span class="text-object">owncloud</span> en el servidor para configurar los siguientes parámetros personalizados de PHP:</p>
 <div class="preboxcontainer">
-<pre class="prebox">php_value upload_max_filesize 600M
-php_value post_max_size 650M
-php_value memory_limit 512M
-php_value mbstring.func_overload 0
-php_value always_populate_raw_post_data -1
-</pre>
+<pre class="prebox">upload_max_filesize=513M<br />post_max_size=513M<br />memory_limit=512M<br />mbstring.func_overload=0<br />always_populate_raw_post_data=-1<br />default_charset='UTF-8'<br />output_buffering=0
+
+  </pre>
 </div>
-<p>Si tienes la intención de cargar archivos más grandes que 513M, es sugerido que el dominio esté <a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-">configurado para usar la versión más reciente de PHP</a>. También tendrás que crear <a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">configuraciones personalizadas de PHP</a> para configurar los límites deseados de <a href="https://help.dreamhost.com/hc/es/sections/203272338-Configuraciones-personalizadas" target="_self" rel="undefined">tamaño de carga, tiempo de ejecución y uso de memoria PHP incrementada</a>.</p>
+<p>Haz ajustes en este archivo <span class="text-object">.user.ini</span> para personalizar tus configuraciones de PHP. Mira el siguiente artículo si ves que tu nueva configuración no se ha actualizado.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza">Mi archivo phprc no se actualiza </a></li>
+</ul>
 </div>
 <div class="footer">&nbsp;</div>
 <!--DreamObjects Button-->
 <div class="dream-sign-up">
 <h2>¡Comienza a Amacenar Tus Datos Hoy!</h2>
 <div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/storage/">Suscríbete a DreamObjects</a></div>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 439px; top: 5695.8px;">
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>
