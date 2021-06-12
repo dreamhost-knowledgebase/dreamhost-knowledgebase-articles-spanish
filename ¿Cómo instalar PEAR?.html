@@ -13,7 +13,7 @@
 </div>
 <h2>PEAR MAIL comparado con PHPMailer</h2>
 <div class="solvvy-solution">
-<p>Ambos PEAR MAIL y <a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer">PHPMailer</a> te permiten enviar correos electrónicos utilizando SMTP. Pero hay algunas razones por las que PHPMailer puede ser una mejor opción. Por ejemplo:</p>
+<p>Ambos PEAR MAIL y <a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer">PHPMailer</a> te permiten enviar correos usando SMTP. Pero hay algunas razones por las que PHPMailer puede ser una mejor opción. Por ejemplo:</p>
 <ul>
 <li>El PEAR MAIL realiza un ciclo de conexión de socket para cada mensaje. Esto podría hacer que los servidores de DreamHost capturen la conexión como un intento de fuerza bruta.</li>
 <li>PHPMailer abre un socket solo una vez. El socket se mantiene abierto mientras procesa los mensajes.</li>
@@ -27,7 +27,7 @@
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>PEAR no está instalado de manera predeterminada en los servidores DreamHost. Si necesitas algún paquete PEAR para operar en su sitio, debe instalarse manualmente siguiendo estos pasos.</p>
+<p>PEAR no está instalado de manera predeterminada en los servidores DreamHost. Si necesitas algún paquete PEAR para operar en tu sitio, debe instalarse manualmente siguiendo estos pasos.</p>
 </div>
 </div>
 <ol>
@@ -36,12 +36,12 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Habilitar acceso Shell</a></li>
 </ul>
 </li>
-<li>Una vez que el usuario sea SHELL, inicia sesión en el servidor web a través de SSH. Visita el artículo de SSH para obtener instrucciones sobre cómo iniciar sesión en tu servidor según el sistema operativo que estés utilizando:
+<li>Una vez que el usuario sea SHELL, inicia sesión en el servidor web a través de SSH. Revisa el artículo de SSH para obtener instrucciones sobre cómo iniciar sesión en tu servidor según el sistema operativo que estés usando:
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
 </ul>
 </li>
-<li>Una vez que hayas iniciado sesión en tu servidor, asegúrate de estar en tu <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio de usuario</a>. Ejecute los siguientes comandos en tu terminal SHELL:
+<li>Una vez que hayas iniciado sesión en tu servidor, asegúrate de estar en tu <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio de usuario</a>. Corre los siguientes comandos en tu terminal SHELL:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span>
 <span class="server">[server]$ </span><span class="command">pwd</span> <br /><span class="cmdoutput">/home/username</span></pre>
@@ -56,7 +56,7 @@
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir -p pear/tmp/pear/install</span></pre>
 </div>
 </li>
-<li>Ejecuta el siguiente comando <span class="code"><a href="https://help.dreamhost.com/hc/es/articles/217213327-Wget">wget</a></span> para descargar el archivo <span class="text-object">go-pear.phar</span> en tu directorio de usuarios:
+<li>Corre el siguiente comando <span class="code"><a href="https://help.dreamhost.com/hc/es/articles/217213327-Wget">wget</a></span> para descargar el archivo <span class="text-object">go-pear.phar</span> en tu directorio de usuarios:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://pear.php.net/go-pear.phar</span></pre>
 </div>
@@ -150,7 +150,7 @@ Thanks for using go-pear!</pre>
 <dd><em>La ruta de <span class="code">include_path</span> en los siguientes pasos.</em></dd>
 </dl>
 </li>
-<li>Visita el artículo <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">creando y editando archivos por medio de SSH</a> para obtener instrucciones sobre cómo editar tu <span class="text-object">.bash_profile</span> existente. Verás estas líneas ya en ese archivo:
+<li>Visita el artículo <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">crear y editar archivos vía SSH</a> para obtener instrucciones sobre cómo editar tu <span class="text-object">.bash_profile</span> existente. Verás estas líneas ya en ese archivo:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="cmdoutput"># ~/.bash_profile: executed by bash(1) for login shells. <br /> <br />umask 002 <br />PS1='[\h]$ '</span></pre>
 </div>
@@ -162,7 +162,7 @@ export PATH=${HOME}/pear/bin:/usr/local/php74/bin:${PATH}</span></pre>
 </div>
 </li>
 <li>Guarda y cierra el archivo y regrese a tu shell.</li>
-<li><span class="x x-first x-last">Ejecuta el siguiente comando para permitir que tu sesión actual de Shell use PEAR</span>:<br />
+<li><span class="x x-first x-last">Corre el siguiente comando para permitir que tu sesión actual de Shell use PEAR</span>:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">. ~/.bash_profile</span></pre>
 </div>
@@ -170,7 +170,7 @@ export PATH=${HOME}/pear/bin:/usr/local/php74/bin:${PATH}</span></pre>
 </ol>
 <p>Ahora has instalado PEAR, pero para que tu entorno sepa dónde encontrar esta instalación, debes configurar <span class="code">include_path</span> dentro de tu archivo <span class="text-object">phprc</span>.</p>
 </div>
-<h2><span id="Establecer_el_include_path_en_su_archivo_phprc">Establecer el include_path en su archivo phprc</span></h2>
+<h2><span id="Establecer_el_include_path_en_su_archivo_phprc">Establecer el include_path en tu archivo phprc</span></h2>
 <div class="solvvy-solution">
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
@@ -181,11 +181,11 @@ export PATH=${HOME}/pear/bin:/usr/local/php74/bin:${PATH}</span></pre>
 <ol>
 <li>Actualiza tu archivo <span class="text-object">phprc</span> para permitir que PHP sepa dónde buscar la instalación de PEAR. Visita los siguientes artículos para obtener instrucciones sobre cómo crear un archivo <span class="text-object">phprc</span>.
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214200668--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-SSH-">¿Cómo creo un archivo phprc por medio de SSH?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200668--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-SSH-">¿Cómo crear un archivo phprc por medio de SSH?</a></li>
 </ul>
 Si el archivo ya existe, consulta el siguiente artículo para obtener instrucciones sobre cómo actualizarlo:
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Creando y editando un archivo por medio de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo vía SSH</a></li>
 </ul>
 </li>
 <li>Actualiza el archivo <span class="text-object">phprc</span> con el siguiente comando:
@@ -221,7 +221,7 @@ XML_Util         1.2.3   stable
 <h2><span id="Cambiar_el_directorio_de_caché_/tmp">Cambiar el directorio de caché /tmp</span></h2>
 <div class="solvvy-solution">
 <p>Cuando instalaste PEAR arriba, configuraste manualmente la ubicación de los directorios tmp. También debes actualizar la ubicación del directorio de caché a esta ubicación temporal.</p>
-<p>Ejecuta lo siguiente para ver los directorios actuales <span class="text-object">/tmp</span>:</p>
+<p>Corre lo siguiente para ver los directorios actuales <span class="text-object">/tmp</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">pear config-show | grep cache_dir</span>
 <span class="cmdoutput">PEAR Installer cache directory cache_dir        /tmp/pear/cache</span>
@@ -255,7 +255,7 @@ XML_Util         1.2.3   stable
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">which php</span></pre>
 </div>
-<h3>Para determinar qué versión de PHP se está utilizando:</h3>
+<h3>Para determinar qué versión de PHP se está usando:</h3>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">php -v</span></pre>
 </div>
@@ -263,7 +263,7 @@ XML_Util         1.2.3   stable
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">which pear</span></pre>
 </div>
-<h3>Para determinar qué versión de PEAR se está utilizando:</h3>
+<h3>Para determinar qué versión de PEAR se está usando:</h3>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">pear -V</span></pre>
 </div>
@@ -274,7 +274,7 @@ XML_Util         1.2.3   stable
 </div>
 <h2>Solución de problemas</h2>
 <div class="solvvy-solution">
-<p>Consulta el siguiente artículo para ver ejemplos de solución de problemas:</p>
+<p>Revisa el siguiente artículo para ver ejemplos de solución de problemas:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214395118-Soluci%C3%B3n-de-problemas-de-errores-PEAR">Solución de errores PEAR</a></li>
 </ul>
@@ -283,7 +283,7 @@ XML_Util         1.2.3   stable
 <div class="solvvy-solution">
 <p>Visita el siguiente artículo para ver un ejemplo de cómo enviar correo PHP a través de SMTP</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-env%C3%ADo-correo-PHP-v%C3%ADa-SMTP-">¿Cómo envío un correo PHP por medio de SMTP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-env%C3%ADo-correo-PHP-v%C3%ADa-SMTP-">¿Cómo enviar un correo PHP por medio de SMTP?</a></li>
 </ul>
 </div>
 <h2><span id="See_also">Ver también</span></h2>
@@ -294,12 +294,15 @@ XML_Util         1.2.3   stable
 <li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">Generalidades php.ini</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades SSH</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214395118-Soluci%C3%B3n-de-problemas-de-errores-PEAR">Solución de errores PEAR</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Creando y editando un archivo vía SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo vía SSH</a></li>
 </ul>
 <h3>Enlaces Externos</h3>
 <ul>
-<li><a href="https://pear.php.net/">Sitio Oficial PEAR</a></li>
-<li><a href="https://pear.php.net/manual/en/installation.checking.php">Revisando si PEAR funciona (y tips para arreglar problemas comunes)</a></li>
+<li><a href="https://pear.php.net/">Sitio Oficial de PEAR</a></li>
+<li><a href="https://pear.php.net/manual/en/installation.checking.php">Revisar si PEAR funciona (y tips para arreglar problemas comunes)</a></li>
 </ul>
 </div>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 285px; top: 2873.69px;">
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>

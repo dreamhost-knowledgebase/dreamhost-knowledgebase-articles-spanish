@@ -122,13 +122,28 @@
 <div class="solvvy-solution">
 <p>Si planeas cargar archivos grandes a DreamObjects usando ownCloud, deberás tener en cuenta algunas limitaciones y realizar algunos cambios de configuración, ya que cargar archivos grandes puede consumir mucha memoria.</p>
 <p>Los objetos de DreamObjects tienen un tamaño limitado de 10 TB, pero deben cargarse en fragmentos de 5 GB. ownCloud no admite cargas de archivos de varias partes, por lo que está limitado a cargas de archivos de 5 GB a través de ownCloud.</p>
-<p>ownCloud usa un archivo <span class="text-object">.user.ini</span> ubicado en la carpeta <span class="text-object">owncloud</span> en el servidor para configurar los siguientes parámetros personalizados de PHP:</p>
+<h3>Personalizar las configuraciones de PHP</h3>
+<p>ownCloud usa <a href="https://doc.owncloud.com/server/admin_manual/installation/configuration_notes_and_tips.html" target="_self">diferentes archivos de configuración de PHP</a> dependiendo de dónde se ejecute el comando PHP.</p>
+<ul>
+<li><strong>phprc</strong> - El <a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">arcivo phprc</a> es el archivo DreamHost estándar que se usa para personalizar la configuración de PHP. Este archivo ajusta la configuración de PHP para los comandos de Shell que se ejecutan en el servidor. Esto incluiría servicios como cron jobs. Mira los siguientes artículos para obtener instrucciones sobre cómo editar este archivo.
+<dl>
+<dd>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214894037--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-FTP-">¿Cómo crear un archivo phprc a través de FTP? (más fácil para principiantes)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200668--C%C3%B3mo-crear-un-archivo-phprc-a-trav%C3%A9s-de-SSH-">¿Cómo crear un archivo phprc a través de SSH? (para usuarios avanzados)</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><strong>.user.ini</strong> - El archivo <span class="text-object">.user.ini</span> es un archivo ownCloud que controla la configuración de PHP usada dentro del panel de control de tu sitio web. Esto incluiría la carga de archivos y los límites de tiempo de ejecución al interactuar con tu sitio. Este archivo se encuentra en la carpeta <span class="text-object">owncloud</span> en el servidor y configura los siguiente paraámetros de PHP:
 <div class="preboxcontainer">
 <pre class="prebox">upload_max_filesize=513M<br />post_max_size=513M<br />memory_limit=512M<br />mbstring.func_overload=0<br />always_populate_raw_post_data=-1<br />default_charset='UTF-8'<br />output_buffering=0
 
   </pre>
 </div>
-<p>Haz ajustes en este archivo <span class="text-object">.user.ini</span> para personalizar tus configuraciones de PHP. Mira el siguiente artículo si ves que tu nueva configuración no se ha actualizado.</p>
+</li>
+</ul>
+<p>Mira el siguiente artículo si ves que tu nueva configuración no se ha actualizado.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza">Mi archivo phprc no se actualiza </a></li>
 </ul>
