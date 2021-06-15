@@ -1,0 +1,105 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Si necesitas mover el alojamiento de tu sitio web a otro proveedor de alojamiento, hay varios pasos que debes hacer para asegurarte que tu información ha sido copiada correctamente y tu DNS está ajustado. La siguiente información describe los pasos necesarios que debes tomar para transferir el alojamiento del sitio web.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este artículo explica cómo transferir el alojamiento, no el registro. Si también quieres transferir tu registro fuera de DreamHost, revisa el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215249878--C%C3%B3mo-transfiero-mi-registro-de-dominio-fuera-de-DreamHost-" target="_self">¿Cómo transferir el registro de mi dominio fuera de DreamHost?</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2><span id="Backing_up_your_data">Hacer una copia de seguridad de tu información</span></h2>
+<div class="solvvy-solution">
+<p>La primera cosa que debes hacer antes de hacer cualquier cambio en tu cuenta es hacer una copia de seguridad. Visita el siguiente artículo para más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089918--C%C3%B3mo-crear-una-copia-de-seguridad-de-mi-cuenta-entera-" target="_self">¿Cómo hacer una copia de seguridad de mi cuenta completa?</a></li>
+</ul>
+<p>Los detalles de cómo hacer una copia de seguridad son tres.</p>
+<ul>
+<li>Archivos del sitio web.</li>
+<li>Bases de datos.</li>
+<li>Correo electrónico.</li>
+</ul>
+</div>
+<h2><span id="Finding_your_DNS_records">Encontrar los registros DNS</span></h2>
+<div class="solvvy-solution">
+<p>Es importante obtener una copia textual de los registros DNS para tus dominios en caso de que el nuevo alojamiento los necesite.</p>
+<p>Para obtener los registros DNS:</p>
+<ol>
+<li>Navega hasta la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>.</li>
+<li>Da clic en el enlace <span class="text-link">DNS</span> debajo del dominio.</li>
+<li>Baja hasta la página 'Administrar Dominio' que aparece para ver todos los registros de DNS de DreamHost no editables y también cualquier registro personalizado de DNS que puedas haber creado.</li>
+<li>Copia todos los registros DNS en caso que tu nueva compañía de alojamiento requiera que los repliques en tus servidores.</li>
+</ol>
+<p>Puedes ver los siguientes artículos para ver más detalles de los DNS en DreamHost:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">DNS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215414867--C%C3%B3mo-agrego-registros-DNS-personalizados-" target="_self">DNS personalizados</a></li>
+</ul>
+</div>
+<h2>Confirmar que todo tiene una copia de seguridad</h2>
+<div class="solvvy-solution">
+<p>Antes de apuntar tu DNS a la nueva compañía de alojamiento, asegúrate que tienes copias de seguridad de lo siguiente:</p>
+<ul>
+<li>Los archivos del sitio web vía&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215089918--C%C3%B3mo-crear-una-copia-de-seguridad-de-mi-cuenta-entera-" target="_self">Copias de seguridad</a>&nbsp;de la cuenta o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a></li>
+<li>Base de datos vía&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215089918--C%C3%B3mo-crear-una-copia-de-seguridad-de-mi-cuenta-entera-" target="_self">Copias de seguridad</a>, <a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin">phpMyAdmin</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221686207-SSH-C%C3%B3mo-hacer-una-copia-de-seguridad-de-tu-base-de-datos" target="_self">Líneas de Comando</a></li>
+<li>Correos electrónicos vía&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215089918--C%C3%B3mo-crear-una-copia-de-seguridad-de-mi-cuenta-entera-" target="_self">Copias de seguridad</a></li>
+<li>Copia de tus registros DNS</li>
+</ul>
+</div>
+<h2>Subir tu información al tu nueva compañía de alojamiento</h2>
+<div class="solvvy-solution">
+<p>Ahora que todo está guardado, debes iniciar sesión en el panel de tu nueva compañía de alojamiento web y cargar toda la información de tu sitio. Mira con tu nuevo alojador instrucciones de como subir la información dentro de sus sistemas.</p>
+</div>
+<h2>Apuntar tu DNS a tu nueva compañía de alojamiento</h2>
+<div class="solvvy-solution">
+<h3>Opción #1 — Si tu dominio está registrado con DreamHost y quieres TODOS los registros alojados en tu nueva compañía</h3>
+<p>Si tu dominio está registrado con DreamHost, lo que necesitas hacer es actualizar tus Nameservers a que apunten a tu nuevo proveedor de alojamiento. Actualizando los Nameservers apunta TODOS tus registros DNS a la nueva compañía de alojamiento. Esto quiere decir que todo el correo, sitio web, y registros DNS personalizados serán alojados en la nueva compañía. Vé el siguiente artículo para ver instrucciones de cómo cambiar tus nameservers:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385417--Como-cambio-mis-nameservers-en-DreamHost-" target="_self">¿Cómo cambiar mis nameservers en DreamHost?</a></li>
+</ul>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si éste es tu único dominio en tu cuenta, NO tienes que tener un plan de alojamiento. Un plan de alojamiento solo es necesario si deseas alojar un dominio y su contenido en los servidores de DreamHost. Si este es tu único dominio, asegúrate de&nbsp;<a href="https://help.dreamhost.com/hc/es/sections/203372007-Cancelaci%C3%B3n-de-la-cuenta" target="_self">cancelar tu plan de alojamiento</a>.&nbsp;Tus DNS continuarán apuntando a tu nueva compañía de alojamiento.</p>
+</div>
+</div>
+<h4>Tiempo de propagación de DNS</h4>
+<p>Cada registro creado requiere su propio tiempo para que el DNS resuelva. Puedes ver el progreso de un registro de un sitio como este:</p>
+<ul>
+<li><a href="https://www.whatsmydns.net/">https://www.whatsmydns.net/</a></li>
+</ul>
+<p>El siguiente artículo provee detalles de la propagación de DNS también si quieres leer más sobre esto:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">Propagación de DNS</a></li>
+</ul>
+<h3>Opción #2 — Si tu dominio está registrado con DreamHost y solo quieres el alojamiento en la nueva compañía teniendo el correo alojado en DreamHost</h3>
+<p>Si quieres que tu sitio web apunte fuera de DreamHost mientras tienes tu correo alojado con DreamHost, debes crear un registro DNS personalizado. Contacta el nuevo alojamiento para obtener las direcciones IP correctas a donde apuntar. Luego, ve el siguiente artículo para ver instrucciones de cómo crear un registro A para tu sitio.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215414867--C%C3%B3mo-agrego-registros-DNS-personalizados-" target="_self">¿Cómo agregar un registro de DNS personalizado?</a></li>
+</ul>
+<h4>Tiempo de propagación de DNS</h4>
+<p>Cada registro requiere su propio tiempo para que el DNS resuelva. Puedes ver el progreso del registro en sitios como este:</p>
+<ul>
+<li><a href="https://www.whatsmydns.net/">https://www.whatsmydns.net/</a></li>
+</ul>
+<p>El siguiente artículo te da detalles de la propagación de DNS como también más información si quieres leer más sobre ese tema:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">Propagación de DNS</a></li>
+</ul>
+<h3>Opción #3 — Si tu dominio NO está registrado con DreamHost</h3>
+<p>Si tu dominio NO está registrado con DreamHost, debes iniciar sesión dónde está registrado y ajustar los Nameservers desde allí.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089918--C%C3%B3mo-crear-una-copia-de-seguridad-de-mi-cuenta-entera-" target="_self">¿Cómo hacer una copia de seguridad de mi cuenta completa?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">Generalidades de FTP</a></li>
+<li><a href="/hc/es/articles/215039758-Generalidades-sobre-copias-de-seguridad-de-bases-de-datos" target="_self">Generalidades sobre copias de seguridad de bases de datos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215730637--C%C3%B3mo-hago-una-copia-de-seguridad-de-mi-correo-electr%C3%B3nico-" target="_self">¿Cómo hacer una copia de seguridad de mi correo electrónico?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214694348-Registros-DNS-b%C3%A1sicos" target="_self">Registros básicos de DNS</a></li>
+</ul>
+</div>

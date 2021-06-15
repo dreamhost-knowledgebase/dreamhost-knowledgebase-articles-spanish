@@ -1,0 +1,77 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica cómo mover un dominio entre los servidores web de DreamHost. Estas instrucciones solo mueven los archivos del sitio web, los archivos de la base de datos permanecerán en el mismo servidor MySQL.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Si solo deseas cambiar el nombre de usuario asignado a un dominio pero no migrarlo a un servidor diferente, mira el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360020605511-Cambiar-el-usuario-asignado-a-un-dominio" target="_self">Cambiar el usuario asignado a un dominio</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2>Mover un solo dominio a un servidor diferente</h2>
+<div class="solvvy-solution">
+<p>Edita el dominio en tu panel para seleccionar un nuevo nombre de usuario en un servidor diferente:</p>
+<ol>
+<li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-07_panel_edit_link.png" alt="01 Domains Control Panel.fw.png" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón <strong>Edit&nbsp;</strong>a la derecha del dominio debajo de la columna <span class="text-object">Web Hosting</span>.</li>
+<li>Desplázate hacia abajo hasta la sección <span class="text-section">Users, Files, and Paths</span>.
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Las capturas de pantalla a continuación muestran cómo se vería al pasar a un servidor compartido o privado.</p>
+</div>
+</div>
+<br /><strong>Migrar a un servidor Compartido</strong>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-05_domains_migrate_site_01.png" alt="" /></dd>
+</dl>
+<strong>Migrar a un VPS</strong>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-05_domains_migrate_site_02.png" alt="" /></dd>
+</dl>
+</li>
+<li>A la derecha de ‘Run this domain under the user:',<br />ingresa lo siguiente:
+<ul>
+<li>Haz clic en el menú desplegable y selecciona <span class="text-object">Create a New User</span> (recomendado).</li>
+<li>Ingresa el nuevo nombre de usuario.</li>
+<li>Asegúrate que el servidor correcto está seleccionado.</li>
+<li>Deja la casilla <span class="text-object">Move files to the new user?</span> seleccionada.</li>
+</ul>
+</li>
+<li>Baja y da click al botón <strong>Change Settings</strong> para guardar los cambios.
+<dl>
+<dd><em>Se abrirá una página de confirmación que indica que los cambios se guardaron correctamente.</em></dd>
+</dl>
+<ul>
+<li>En 15 minutos, el nuevo usuario está listo para usar.</li>
+<li>Según la cantidad de datos que se muevan, puede llevar varias horas completar la migración al nuevo usuario.</li>
+<li>Para verificar el estado de la migración de un solo dominio, consulta la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>. A la derecha de tu dominio, puedes ver un icono de <span class="text-object">reloj</span> y un texto que indica que los datos se están moviendo al nuevo usuario. Una vez completado, el icono y el texto ya no aparecerán.</li>
+</ul>
+</li>
+</ol>
+</div>
+<h2>Propagación de DNS después de migrar</h2>
+<div class="solvvy-solution">
+<p>No hay tiempo de inactividad durante el movimiento ya que los datos se copian mientras el servidor anterior continúa sirviendo al sitio web. Sin embargo, no debes trabajar en tu sitio durante este período de 4 a 6 horas. Esto se debe a que es posible que tus cambios se realicen en el sitio anterior, no en el nuevo. Debes esperar hasta que el DNS se haya actualizado completamente para continuar trabajando en tu sitio web.</p>
+<p>Cuando migras tu dominio a un servidor diferente, la IP de tu sitio cambia. Si tu dominio usa los nameservers de DreamHost, la IP del dominio se actualiza automáticamente.</p>
+<p>Si tu dominio no está usando los <a href="/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self">nameservers</a> de DreamHost, deberás actualizar tus registros DNS manualmente en la compañía donde están alojados tus nameservers.</p>
+<p>Puedes ver todos los registros DNS configurados para cualquier sitio que aloje en DreamHost en tu panel. Ten en cuenta que después de cualquier cambio de DNS, los registros deben propagarse en línea.</p>
+<p>Visita los siguientes artículos para más información:</p>
+<ul>
+<li><a href="/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self">Generalidades de los DNS de DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">Generalidades de la propagación de DNS</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">Generalidades de la propagación de DNS</a></li>
+</ul>
+</div>
