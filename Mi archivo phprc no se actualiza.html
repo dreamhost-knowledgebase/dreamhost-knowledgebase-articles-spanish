@@ -1,7 +1,7 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>Es posible que aunque hayas agregado el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">archivo phprc</a>,&nbsp;correctamente, puede que te des cuentas de los cambios no se vean aplicados en línea. Es posible que debas eliminar todos los procesos PHP en ejecución para garantizar que la configuración nueva surta efecto.</p>
-<p>A continuación se describen los pasos para impulsar los cambios que realices en el archivo <span class="text-object">phprc</span>.</p>
+<p>A continuación se describen los pasos para enviar los cambios que hagas en el archivo <span class="text-object">phprc</span>.</p>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
@@ -16,8 +16,8 @@
 <div class="solvvy-solution">
 <ol>
 <ol>
-<li>Conectate a tu servidor usando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
-<li>Una vez conectado, corre el siguiente comando teniendo en cuenta la versión PHP de tu sitio, para eliminar los procesos PHP que se estén ejecutando en el momento:</li>
+<li>Conéctate a tu servidor usando <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Una vez conectado, corre el siguiente comando teniendo en cuenta la versión PHP de tu sitio, para parar los procesos PHP que se estén ejecutando en el momento:</li>
 </ol>
 </ol>
 <div class="alert alert-important">
@@ -38,15 +38,15 @@
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">killall -9 php80.cgi -u <span class="code-highlight">usuarioshell</span></span></pre>
 </div>
-<p>Eliminar los procesos PHP de esta manera actualiza tu archivo <span class="text-object">phprc</span>.</p>
+<p>Elimina los procesos PHP de esta manera actualiza tu archivo <span class="text-object">phprc</span>.</p>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Si después de ejecutar el comando killall ves <strong>php##.cgi: no process found</strong> (no se encontró ningún proceso), esto significa que no hay procesos PHP en ejecución. Realiza una&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216456827#forzar" target="_self">actualización completa en su navegador</a>&nbsp;para ver tu página phpinfo.php actualizada. Ahora deberías ver que tu configuración se ha actualizado.</p>
+<p>Si después de ejecutar el comando killall ves <strong>php##.cgi: no process found</strong> (no se encontró ningún proceso), esto significa que no hay procesos PHP en ejecución. Haz una <a href="https://help.dreamhost.com/hc/es/articles/216456827#forzar" target="_self">actualización completa en tu navegador</a>&nbsp;para ver tu página phpinfo.php actualizada. Ahora deberías ver que tu configuración se ha actualizado.</p>
 </div>
 </div>
 </div>
-<h2>Actualizando el archivo phprc en el panel</h2>
+<h2>Actualizar el archivo phprc en el panel</h2>
 <div class="solvvy-solution">
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
@@ -56,23 +56,23 @@
 </div>
 <p>También puedes actualizar tu archivo <span class="text-object">phprc</span> guardando la configuración de tu dominio en el panel.</p>
 <ol>
-<li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Manage Domains</a>.</li>
-<li>Haz click en el botón <strong>Edit</strong> a la derecha de tu dominio en la columna <span class="text-object">Web Hosting</span>.<br />
+<li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>.</li>
+<li>Haz clic en el botón <strong>Edit</strong> a la derecha de tu dominio en la columna <span class="text-object">Web Hosting</span>.<br />
 <ul>
-<li><em>Se abre la página de configuración <span class="panel-page">Manage Domains</span>:</em></li>
+<li><em>Se abre la página de configuración <span class="panel-page">Administrar Dominios</span>:</em></li>
 </ul>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/change-settings.png" /></dd>
 </dl>
 </li>
-<li>En la primera sección, haz click en el botón <strong>Change settings</strong>.<br />
+<li>En la primera sección, haz clic en el botón <strong>Change settings</strong>.<br />
 <ul>
 <li><em>Esto actualizará el archivo <span class="text-object">phprc</span> en 10 minutos.</em></li>
 </ul>
 </li>
 </ol>
 </div>
-<h2>Actualización del archivo phprc en un servidor Nginx</h2>
+<h2>Actualizar del archivo phprc en un servidor Nginx</h2>
 <div class="solvvy-solution">
 <p>Si tu servidor ejecuta Nginx, puedes actualizar los procesos PHP al <a href="https://help.dreamhost.com/hc/es/articles/214200748#actualizando" target="_self">guardar tu configuración en el panel como se menciona anteriormente</a></p>
 <p>Si estás en un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">Servidor Dedicado</a> con un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-" target="_self">usuario administrador</a>,&nbsp;también puedes volver a cargar y reiniciar Nginx. Consulta el siguiente artículo para más instrucciones:</p>
@@ -93,10 +93,7 @@
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">Generalidades sobre php.ini</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214205508-Generalidades-sobre-actualizar-PHP-" target="_self">Generalidades sobre actualización de PHP</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214894037--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-FTP-" target="_self">¿Cómo crear un archivo phprc por FTP?</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214200668--Cómo-creo-un-archivo-phprc-a-través-de-SSH-" target="_self">¿Cómo crear un archivo phprc por SSH?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214894037--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-FTP-" target="_self">¿Cómo crear un archivo phprc vía FTP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200668--Cómo-creo-un-archivo-phprc-a-través-de-SSH-" target="_self">¿Cómo crear un archivo phprc vía SSH?</a></li>
 </ul>
-</div>
-<div id="gtx-trans" style="position: absolute; left: 220px; top: 411.456px;">
-<div class="gtx-trans-icon">&nbsp;</div>
 </div>
