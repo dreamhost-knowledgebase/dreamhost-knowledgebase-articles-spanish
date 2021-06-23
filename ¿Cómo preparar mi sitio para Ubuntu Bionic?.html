@@ -6,7 +6,7 @@
 <div class="table-of-content container">
 <ul class="simple">
 <li><a class="reference internal" href="#que-esperar">¿Qué esperar?</a></li>
-<li><a class="reference internal" href="#version">Comprobar la versión de Ubuntu</a></li>
+<li><a class="reference internal" href="#version">Verificar la versión de Ubuntu</a></li>
 <li><a class="reference internal" href="#mysql">MySQL</a></li>
 </ul>
 <span class="toc-sublink"> <a href="#servidor">Cambios de servidor</a> </span> <span class="toc-sublink"> <a href="#reservadas">Palabras reservadas</a> </span>
@@ -24,13 +24,13 @@
 <p>A continuación te proporcionamos información para ayudarte a preparar tu sitio para la actualización de Ubuntu de Trusty Tahr a la versión 18.04.1 LTS (también conocida como Bionic).</p>
 <h2><span id="que-esperar">¿Qué esperar?</span></h2>
 <div class="solvvy-solution">
-<p>DreamHost se comunicará contigo por correo electrónico antes de la actualización.</p>
+<p>DreamHost se comunicará contigo por correo antes de la actualización.</p>
 <p>El período de tiempo de una actualización puede variar de un servidor a otro, sin embargo, este tiempo garantiza que haya varios ingenieros altamente capacitados disponibles en caso de que surjan problemas importantes. La actualización en sí no debería tardar más de una hora en completarse.</p>
 <p>No se podrá acceder a ningún servicio que dependa de la disponibilidad de tu servidor MySQL (WordPress o cualquier otro sitio web basado en bases de datos, aplicaciones, etc.) hasta que se complete la actualización. Esto NO afectará a la nube o servicios de correo electrónico.</p>
 </div>
 <h2><span id="version">Comprobar la versión de Ubuntu</span></h2>
 <div class="solvvy-solution">
-<p>Como se mencionó anteriormente, recibirás un correo electrónico informándote de la actualización de tu servidor. Sin embargo, esto puedes verificar manualmente a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</p>
+<p>Como se mencionó anteriormente, recibirás un correo informándote de la actualización de tu servidor. Sin embargo, esto puedes verificar manualmente a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</p>
 <p>El siguiente comando confirma que el servidor todavía está ejecutando Ubuntu 14.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cat /etc/issue</span>
@@ -61,7 +61,7 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 <li><a href="https://httpd.apache.org/docs/2.4/upgrading.html" target="_self">Actualización a 2.4 desde 2.2</a></li>
 </ul>
 <p><strong>require valid-user</strong></p>
-<p>Si estás utilizando un archivo <span class="text-object">.htaccess</span> para proteger con contraseña tu sitio, asegúrate de agregar esta línea a tu archivo <span class="text-object">.htaccess</span>:</p>
+<p>Si estás usando un archivo <span class="text-object">.htaccess</span> para proteger con contraseña tu sitio, asegúrate de agregar esta línea a tu archivo <span class="text-object">.htaccess</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">require valid-user</pre>
 </div>
@@ -88,13 +88,13 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 <li><a href="https://help.dreamhost.com/hc/es/sections/360003569291-S3cmd" target="_self" rel="undefined">S3cmd</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/sections/360003559251-AWS-CLI" target="_self" rel="undefined">Interfaz de línea de comandos de AWS</a></li>
 </ul>
-<h3><span id="curl">Cambio de versión curl a 7.58.0</span></h3>
+<h3><span id="curl">Cambiar la versión curl a 7.58.0</span></h3>
 <p>La versión de curl cambió de 7.35.0 a 7.58.0.</p>
 </div>
 <h3><span id="ffmpeg_libav">FFmpeg y Libav</span></h3>
 <p>Ambas bibliotecas están cambiando en la actualización Bionic de Ubuntu.</p>
 <p>En Ubuntu Trusty, Libav reemplazó a FFmpeg, y FFmpeg fue eliminado de Trusty por completo. Con la actualización de Bionic, esto se está revirtiendo: FFmpeg está de vuelta y Libav se ha eliminado. Por favor, asegúrate de actualizar la configuración de tu archivo en consecuencia.</p>
-<h3><span id="filterprovider">Cambio de sintaxis de FilterProvider</span></h3>
+<h3><span id="filterprovider">Cambiar la sintaxis de FilterProvider</span></h3>
 <p>En Apache 2.4, la sintaxis de FilterProvider ha cambiado.</p>
 <p>Ejemplo de la antigua versión:</p>
 <div class="preboxcontainer">
@@ -108,7 +108,7 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 <ul>
 <li><a href="https://httpd.apache.org/docs/2.4/mod/mod_filter.html" target="_self">https://httpd.apache.org/docs/2.4/mod/mod_filter.html</a></li>
 </ul>
-<h3><span id="gcc">Cambio de versión de GCC a 7</span></h3>
+<h3><span id="gcc">Cambiar la versión de GCC a 7</span></h3>
 <p>Bionic incluye gcc-7, lo que significa que las versiones de Ruby anteriores a 2.4 ya no son compatibles, ya que requieren gcc-6.</p>
 <ul>
 <li><a href="https://gcc.gnu.org/install/index.html">https://gcc.gnu.org/install/index.html</a></li>
@@ -119,26 +119,26 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 <p>Los sitios que se basan en versiones de Ruby anteriores a Ruby 2.4 deben migrarse a una versión más reciente.</p>
 </div>
 </div>
-<h3><span id="java">Cambio de versión de Java (de 7u151 a 8u171)</span></h3>
+<h3><span id="java">Cambiar la versión de Java (de 7u151 a 8u171)</span></h3>
 <p>Ubuntu Bionic incluye una nueva versión de Java versión 8, 8u171.</p>
 <p>Esta es la primera actualización importante en bastante tiempo, por lo que definitivamente es una buena idea asegurarse de que las dependencias de Java que tengas sean compatibles con la versión 8.</p>
 <p>Para obtener más información sobre las últimas versiones de Java, visita el siguiente enlace:</p>
 <ul>
-<li><a href="https://www.java.com/en/download/help/release_changes.html" target="_self">Aspectos destacados de la versión de Java 8</a></li>
+<li><a href="https://www.java.com/es/download/help/release_changes.html" target="_self" rel="undefined">Aspectos destacados de la versión de Java 8</a></li>
 </ul>
 <h3><span id="node">Node / NVM</span></h3>
-<p>Al instalar una versión personalizada de Node.js/NVM, la instalación quedará atrapada por grsec. Debes ejecutar un comando para cambiar las <span class="code">pax flags</span> para que grsec ignore los archivos. Ve el siguiente artículo para obtener instrucciones completas:</p>
+<p>Al instalar una versión personalizada de Node.js/NVM, la instalación quedará atrapada por grsec. Debes ejecutar un comando para cambiar las <span class="code">pax flags</span> para que grsec ignore los archivos. Revisa el siguiente artículo para obtener instrucciones completas:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360029083351-Instalar-una-versi%C3%B3n-personalizada-de-NVM-y-Node-js" target="_self">Instalar una versión personalizada de NVM y Node.js</a></li>
 </ul>
-<h3><span id="openssl">Cambio de versión de OpenSSL (1.0.1f a 1.1.0g)</span></h3>
+<h3><span id="openssl">Cambiar la versión de OpenSSL (1.0.1f a 1.1.0g)</span></h3>
 <p>Bionic incluye la versión 1.1.0g de OpenSSL.</p>
 <h3><span id="passenger">Passenger</span></h3>
 <p>Para habilitar las páginas amigables con errores de Passenger (que ayudan a solucionar problemas de actualización), agrega lo siguiente a un archivo <span class="text-object">.htaccess</span> dentro de la aplicación:</p>
 <div class="preboxcontainer">
 <pre class="prebox">PassengerFriendlyErrorPages on</pre>
 </div>
-<h3><span id="perl">Cambio de versión de Perl (de 5.18.4 a 5.26)</span></h3>
+<h3><span id="perl">Cambiar la versión de Perl (de 5.18.4 a 5.26)</span></h3>
 <p>Ubuntu Bionic incluye una nueva versión de Perl, 5.26. Entre los muchos cambios, esta actualización elimina el directorio actual (".") De @INC por razones de seguridad. Puedes leer sobre esto con más detalle <a href="https://metacpan.org/pod/release/XSAWYERX/perl-5.26.0/pod/perldelta.pod#Removal-of-the-current-directory-%28%22.%22%29-from-@INC" target="_self">aquí</a>.</p>
 <p>Para obtener más información sobre la actualización de tu versión de Perl, visita el siguiente artículo:</p>
 <ul>
@@ -187,9 +187,9 @@ Did you install mysqlclient or MySQL-python?</pre>
 <h3><span id="virtualenv">Entorno virtual de Python</span></h3>
 <p>Si tu sitio web utiliza un entorno virtual Python y observas algún error después de la actualización, vuelve a instalar tu entorno virtual y todos los módulos. Esto ayuda a garantizar que todo sea compatible con las nuevas bibliotecas en el servidor.</p>
 <p>Algunos ejemplos de errores que puedes ver son los errores o advertencias de Django, Passenger o Python.</p>
-<h3><span id="ruby">Cambio de versión de Ruby (de 1.9.3.4 a 2.5.1)</span></h3>
+<h3><span id="ruby">Cambiar la versión de Ruby (de 1.9.3.4 a 2.5.1)</span></h3>
 <p>La versión de Ruby en el servidor está cambiando a 2.5.1. Si deseas más control sobre esto, DreamHost recomienda el uso de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/217185247-Ruby-Version-Manager-RVM-">RVM</a>.</p>
-<p>Si estás utilizando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115001070131-Usar-Bundler-para-instalar-Ruby-gems">Bundler</a>,&nbsp;solo necesitas ejecutar:</p>
+<p>Si estás usando <a href="https://help.dreamhost.com/hc/es/articles/115001070131-Usar-Bundler-para-instalar-Ruby-gems">Bundler</a>,&nbsp;solo necesitas ejecutar:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">bundle exec gem pristine</span>
 </pre>
@@ -199,10 +199,10 @@ Did you install mysqlclient or MySQL-python?</pre>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">touch  tmp/restart.txt</span>
 </pre>
 </div>
-<h3><span id="ssh">Cambio de versión SSH a 7.6p1</span></h3>
+<h3><span id="ssh">Cambiar la versión SSH a 7.6p1</span></h3>
 <p>La versión de SSH en los servidores Bionic es 7.6p1. Ten en cuenta que las claves DSA no están disponibles en esta versión.</p>
 <h3><span id="telnet">Telnet</span></h3>
-<p>Debido a que Telnet es un protocolo obsoleto, se elimina de la última versión de Ubuntu Bionic para ayudar a mantener tu servidor seguro. Si necesitas Telnet, DreamHost recomienda que lo ejecutes en tu computadora local.</p>
+<p>Debido a que Telnet es un protocolo obsoleto, se elimina de la última versión de Ubuntu Bionic para ayudar a mantener tu servidor seguro. Si necesitas Telnet, DreamHost recomienda que lo ejecutes en tu computador local.</p>
 <h2><span id="apoyo">¿Cómo puedo encontrar apoyo?</span></h2>
 <div class="solvvy-solution">
 <p>Si tienes alguna pregunta o inquietud, no dudes en ponerse en contacto el&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener">Equipo de Soporte</a>.</p>
