@@ -12,7 +12,7 @@
 </ul>
 </div>
 </div>
-<p><a href="https://help.dreamhost.com/hc/es/articles/215769578-Generalidades-sobre-Passenger">Passenger</a> es mejor conocido por usarse con aplicaciones Ruby on Rails, sin embargo, también puede servir aplicaciones web Python que usan la interfaz <a href="http://www.python.org/dev/peps/pep-3333/">WSGI</a>, incluida cualquier aplicación que use <a href="https://help.dreamhost.com/hc/es/articles/215319598-Generalidades-sobre-Django">Django</a> framework. Dado que Passenger permite que tu aplicación resida temporalmente en la memoria mientras se usa activamente, permitirá que tu sitio responda significativamente más rápido de lo que sería posible de otra manera.</p>
+<p><a href="https://help.dreamhost.com/hc/es/articles/215769578-Generalidades-sobre-Passenger">Passenger</a> es mejor conocido por usarse con aplicaciones Ruby on Rails, sin embargo, también puede servir aplicaciones web Python que usan la interfaz <a href="https://www.python.org/dev/peps/pep-3333/">WSGI</a>, incluida cualquier aplicación que use <a href="https://help.dreamhost.com/hc/es/articles/215319598-Generalidades-sobre-Django">Django</a> framework. Dado que Passenger permite que tu aplicación resida temporalmente en la memoria mientras se usa activamente, permitirá que tu sitio responda significativamente más rápido de lo que sería posible de otra manera.</p>
 <p>El soporte WSGI de Passenger funciona razonablemente bien, sin embargo, otra opción disponible es Python FastCGI en caso de que tengas problemas.</p>
 <div class="alert alert-note">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
@@ -75,7 +75,7 @@ application = loadapp('config:/home/path/to/site/production.ini')
 <p>Passenger WSGI en este momento tiene dificultades para tratar con errores. Es decir, cuando tu aplicación WSGI (por ejemplo, pero sin limitarse a, Django) genera una excepción no detectada, Passenger muere, se muestra una página 500 en el navegador y el mensaje de error no se registra en el <a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP" target="_self">archivo error.log</a>. Esto dificulta la depuración.</p>
 <p>Una solución es utilizar Python Paste como middleware WSGI entre Passenger y tu aplicación:</p>
 <ol>
-<li>Obtén Paste aquí: <a href="https://pypi.python.org/pypi/Paste" target="_self" rel="undefined">pypi.python.org/pypi/Paste</a>.</li>
+<li>Obtén Paste aquí: <a href="https://pypi.org/project/Paste/" target="_self" rel="undefined">pypi.org/project/Paste/</a>.</li>
 <li>Descomprime los archivos. Todo lo que necesitas es el directorio <span class="text-object">paste</span>.</li>
 <li>Ponlo en el directorio de tu aplicación (por ejemplo, <span class="text-object">/home/username/sitename/myapp/paste</span>)</li>
 <li>Edita tu archivo <span class="text-object">passenger_wsgi.py</span> para incluir ese directorio en la ruta de Python y luego carga Paste.</li>

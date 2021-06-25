@@ -1,0 +1,162 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este artículo explica cómo verificar que estás conectandote a un servidor de DreamHost y que tu conexión es segura. Si sigues los pasos en este artículo y los valores de las huellas digitales no son compatibles con lo que se ve en el panel, NO TE CONECTES al servidor. <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">Pónte en contacto con el soporte de DreamHost</a>&nbsp;para que puedan investigar por qué las huellas digitales son diferentes.</p>
+</div>
+</div>
+<p>Cada servidor DreamHost tiene varias claves SSH únicas asignadas. Estas claves se utilizan para identificar el servidor y garantizar que tu conexión sea segura y confiable. Cuando usas por primera vez un programa o terminal SSH para conectarte a tu servidor, verifica las claves. Como actualmente no están almacenados en tu computadora, verás la siguiente advertencia:</p>
+<dl>
+<dd>
+<p><span class="wysiwyg-color-black"><strong>The server's host key is unknown. You have no guarantee that the server is the computer you think it is.</strong></span></p>
+</dd>
+</dl>
+<p>Este artículo explica cómo verificar que la clave que estás viendo es correcta. Luego puedes continuar iniciando sesión en el servidor de forma segura.</p>
+</div>
+<h2>Verificar las huellas digitales usando un cliente de FTP</h2>
+<div class="solvvy-solution">
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Los siguientes ejemplos deben ser corridos en una terminal de SSH. Revisa los siguientes artículos para más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215360828-Software-de-cliente-SSH" target="_self">Clientes de SSH</a></li>
+</ul>
+</div>
+</div>
+<p>Cuando originalmente inicies sesión en un servidor de DreamHost, puede que veas la siguiente alerta:</p>
+<dl>
+<dd>
+<p><strong>The server's host key is unknown. You have no guarantee that the server is the computer you think it is.</strong></p>
+</dd>
+</dl>
+<p>Por ejemplo:</p>
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/2018-06_panel_server_host_keys_01.png" alt="" /></dd>
+</dl>
+<p>Para confirmar que este es el servidor correcto, navega a la página de&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=users.sshkeys&amp;" target="_blank" rel="noopener">Llaves de SSH</a>.&nbsp;En esa página, verás tu servidor junto con sus huellas digitales compatibles.</p>
+<p>Por ejemplo:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_server_host_keys_02.png" alt="" /></dd>
+</dl>
+<p>Compara los dos para confirmar que es el mismo servidor. Puedes luego aceptar la alerta e iniciar sesión normalmente.</p>
+</div>
+<h2>Usar SSH para verificar la huella digital del servidor</h2>
+<div class="solvvy-solution">
+<p>Puedes usar SSH para verificar la huella del servidor usando unos pocos comandos. Por favor recuerda que algunos comandos sólo funcionan en versiones específicas de OpenSSH. Para verificar tu versión actual, corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh -V</span></pre>
+</div>
+<p>Esto responde con el número de versión. Hay algunos comandos que NO funcionan si tu versión es menos que 6.8.</p>
+<p>El siguiente ejemplo va a usar las huellas digitales del servidor Compartido llamado batroc:</p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-11_panel_ssh-keys_verifying-fingerprints_01.png" /></p>
+<h3>Usar OpenSSH versión 7.6p1</h3>
+<p>Un comando común para correr es: FingerprintHash.</p>
+<h4>Ver la huella digital RSA (MD5)</h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh -o HostKeyAlgorithms=ssh-rsa -o FingerprintHash=md5 batroc.dreamhost.com</span>
+The authenticity of host 'batroc.dreamhost.com (67.205.12.21)' can't be established.
+RSA key fingerprint is <span class="green">MD5:a1:85:cc:7b:06:c9:14:f3:a8:38:7a:95:76:f1:17:eb</span>.</pre>
+</div>
+<h4>Ver la huella digital RSA (SHA256)</h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh -o HostKeyAlgorithms=ssh-rsa -o FingerprintHash=sha256  batroc.dreamhost.com</span>
+The authenticity of host 'batroc.dreamhost.com (67.205.12.21)' can't be established.
+RSA key fingerprint is <span class="green">SHA256:mYNdKXseiTyZVeIdXNqy8rJTfrKnBo2QG1XK9DdUSYc</span>.</pre>
+</div>
+<h4>Ver la huella digital ECDSA (MD5)</h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh -o HostKeyAlgorithms=ecdsa-sha2-nistp256 -o FingerprintHash=md5 batroc.dreamhost.com</span>
+The authenticity of host 'batroc.dreamhost.com (67.205.12.21)' can't be established.
+ECDSA key fingerprint is <span class="green">MD5:08:88:80:ff:e8:dd:4a:4f:6b:3a:64:cf:8c:84:f2:13</span>.</pre>
+</div>
+<h4>Ver la huella digital ECDSA (SHA256)</h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh -o HostKeyAlgorithms=ecdsa-sha2-nistp256 -o FingerprintHash=sha256 batroc.dreamhost.com</span>
+The authenticity of host 'batroc.dreamhost.com (67.205.12.21)' can't be established.
+ECDSA key fingerprint is <span class="green">SHA256:ijqWGQW20bkvOViujUO5PRknle09aDPUjh25u60T7eQ</span>.</pre>
+</div>
+<h4>Ver la huella digital ED25519 (MD5)</h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh -o HostKeyAlgorithms=ssh-ed25519 -o FingerprintHash=md5  batroc.dreamhost.com</span>
+The authenticity of host 'batroc.dreamhost.com (67.205.12.21)' can't be established.
+ED25519 key fingerprint is <span class="green">MD5:c9:aa:b8:02:0c:ca:46:59:63:17:16:0a:7c:26:c6:24</span>.</pre>
+</div>
+<h4>Ver la huella digital ED25519 (SH256)</h4>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh -o HostKeyAlgorithms=ssh-ed25519 -o FingerprintHash=sha256  batroc.dreamhost.com</span>
+The authenticity of host 'batroc.dreamhost.com (67.205.12.21)' can't be established.
+ED25519 key fingerprint is <span class="green">SHA256:q3JfuvuldJy5u/ETWHW7HBQ3Zqn763z/CWlumFuOH3s</span>.</pre>
+</div>
+</div>
+<h2>Usar OpenSSH menor que 6.8</h2>
+<div class="solvvy-solution">
+<p>Como está mencionado arriba, el comando 'FingerprintHash' no funciona en OpenSSH con versiones menores que 6.8. Sin embargo, puedes correr ssh-keyscan para descargar la llave pública, luego ver sus huellas digitales.</p>
+<p>Primero, descarga la llave pública del servidor.</p>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Dependiendo de las versión de OpenSSH que estés usando, solo ciertas llaves se descargarán. Versiones menores a 6.8 por defecto serán MD5.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh-keyscan batroc.dreamhost.com &gt; batrockeys.pub</span></pre>
+</div>
+<p>Ahora puedes ver las llaves en ese archivo para las huellas digitales. Solo las huellas digitales de las llaves que descargaste se mostrarán. Esto imprime las huellas digitales RSA (MD5) y ECDSA (MD5).</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh-keygen -l -f batrockeys.pub</span>
+<span class="green">2048 a1:85:cc:7b:06:c9:14:f3:a8:38:7a:95:76:f1:17:eb</span> batroc.dreamhost.com (RSA)
+<span class="green">256 08:88:80:ff:e8:dd:4a:4f:6b:3a:64:cf:8c:84:f2:13</span> batroc.dreamhost.com (ECDSA)</pre>
+</div>
+<!--
+  <h3>Generar un hash de una llave diferente</h3>
+  <p>
+    Como está mencionado arriba, solo ciertas llaves se descargarán basadas en
+    la versión de OpenSSH que estás usando. Sin embargo, puedes generar un hash
+    en una llave diferente si necesitas.
+  </p>
+  <h4>
+    <strong>Generar un hash RSA (SHA256) basado en la llave RSA (MD5)</strong>
+  </h4>
+  <p>
+    Esto asume que cuando corres ssh-keyscan, solo las llaves MD5 son descargadas.
+    Usa 'cat' para ver las llaves:
+  </p>
+  <div class="preboxcontainer">
+    <pre class="prebox"><span class="server">[server]$ </span><span class="command">cat batrockeys.pub</span>
+batroc.dreamhost.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFc4bKkZW+0bb+UYtDZwH/IAT5V4ybLlJWJ4cp7Ny3c4767aQheZr5ifcAEc+itEqnGPWIQ/qxbKZnw6F5dBXggbx+KIZX7JXDfJqNkFuVz3mKsvKxu0qGw2/b40dRiUe0+cAxamR73YNpCeCZuo515lJCw4eVo3BJtnHetT/yF9xtdGPQm334yDHunEtUgKFzqyEDEolFtL5FZcPP137RgfMdp+BWQj8tOiodmcUlA1kEhkN63JRcSsSJhd1FFAA4PoiyvsPm+PGUCIFwzKW13SXEIi0GQ2J8Rl3YW7B/H1HXCDGfT75T1OhP3mGN3H8Es9ieq/1kKTyzscq6C30z
+batroc.dreamhost.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDIXGPnE5gz3j8vzl8LeboCFAkcZ0L76ld5Y4knIghV+tTxOrUW2M3m6bN3qNJK9U8oJLiTafotQ/Js4JUTY8L8=</pre>
+  </div>
+  <p>
+    Puedes ver que hay dos llaves en este archivo. Tienes que eliminar una de
+    ellas (o más) para que quede una sola llave. Abre un archivo y elimina la
+    segunda línea para que solo una línea quede.
+  </p>
+  <p>
+    Ahora puedes correr el siguiente comando para generar un hash SHA256 basado
+    en esa sola llave.
+  </p>
+  <div class="preboxcontainer">
+    <pre class="prebox"><span class="server">[server]$ </span><span class="command">awk '{print $3}' batrockeys.pub | base64 -d | sha256sum -b | awk '{print $1}' | xxd -r -p | base64</span>
+<span class="green">mYNdKXseiTyZVeIdXNqy8rJTfrKnBo2QG1XK9DdUSYc=</span></pre>
+  </div>
+  <p>
+    Como puedes ver, esto imprime la huella digital RSA (SHA256). Si has eliminado
+    la primera llave en vez, la salida puede mostrar la huella digital ECDSA
+    (SHA256).
+  </p>
+  <div class="preboxcontainer">
+    <pre class="prebox"><span class="server">[server]$ </span><span class="command">awk '{print $3}' batrockeys.pub | base64 -d | sha256sum -b | awk '{print $1}' | xxd -r -p | base64</span>
+<span class="green">ijqWGQW20bkvOViujUO5PRknle09aDPUjh25u60T7eQ=</span></pre>
+  </div>
+--></div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215613107-Listas-de-clientes-de-software-de-FTP" target="_self">Lista de clientes de software de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214920778--D%C3%B3nde-pongo-mis-archivos-una-vez-conectado-v%C3%ADa-FTP-" target="_self">¿Dónde debo poner mis archivos una vez conectado a FTP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215613037--C%C3%B3mo-muestro-archivos-ocultos-en-mi-cliente-FTP-" target="_self">¿Cómo mostrar los archivos escondidos en mi cliente de FTP?</a></li>
+</ul>
+</div>
