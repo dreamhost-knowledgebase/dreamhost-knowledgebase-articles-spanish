@@ -1,0 +1,297 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Concrete CMS es un software gratuito de Content Management System (CMS) que puedes utilizar para crear un sitio web. Una vez instalado, podrás iniciar sesión en el backend de tu sitio para comenzar a personalizarlo como desees. Concrete CMStambién proporciona un <a href="https://www.concrete5.org/marketplace/" target="_blank" rel="noopener">Marketplace</a> donde puedes descargar nuevos temas y plugins para personalizar aún más.</p>
+<p>Mira el siguiente enlace para una muestra de los sitios web de conrete5.</p>
+<ul>
+<li><a href="https://www.concrete5.org/about/showcase/community" target="_blank" rel="noopener">Muestra de sitios Concrete CMS</a></li>
+</ul>
+<p>Este artículo contiene los siguientes pasos para instalar este software en tu sitio.</p>
+<ul>
+<li><a href="#paso1" target="_self">Paso 1 — Instala un certificado SSL</a></li>
+<li><a href="#paso2" target="_self">Paso 2&nbsp;— Crea una base de datos</a></li>
+<li><a href="#paso3" target="_self">Paso 3 — Descarga el software de Concrete CMS</a>&nbsp;(<a href="#ftp">FTP</a> o&nbsp;<a href="#ssh">SSH</a>)</li>
+<li><a href="#paso4" target="_self">Paso 4 —&nbsp;Instala el software</a></li>
+<li><a href="#composer">Descarga alterna e instalación usando Composer</a></li>
+</ul>
+</div>
+<h2><span id="paso1">Paso 1 — Instalar un certificado SSL&nbsp;</span></h2>
+<div class="solvvy-solution">
+<p>Todos los sitios web modernos deben estar protegidos con un certificado SSL. Esto asegura que todo el tráfico hacia y desde tu sitio sea seguro. Hay dos opciones de certificado SSL en el panel DreamHost.</p>
+<ul>
+<li>Let's Encrypt (Gratuito).</li>
+<li>Sectigo (Pago).</li>
+</ul>
+<p>Ambos certificados se pueden usar para proteger tu sitio. Sin embargo, si vas a vender productos en tu sitio, se recomienda un certificado Sectigo pagado, ya que parecerá más confiable para los clientes potenciales. Consulta el siguiente artículo para obtener más detalles.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001435846#comercio-electronico" target="_blank" rel="noopener">¿Qué tipo de certificado debería usar para mi sitio de comercio electrónico?</a></li>
+</ul>
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo instalar el certificado elegido.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL" target="_blank" rel="noopener">Generalidades sobre añadir un certificado SSL</a></li>
+</ul>
+</div>
+<h2><span id="paso2">Paso 2 — Crear una base de datos</span></h2>
+<div class="solvvy-solution">
+<p>Concrete CMS requiere una base de datos para correr tu sitio. Mira el siguiente artículo para crear una nueva base de datos en tu panel DreamHost.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221691727-Crear-una-base-de-datos-MySQL" target="_blank" rel="noopener">Crear una base de datos MySQL</a></li>
+</ul>
+</div>
+<h2><span id="paso3">Paso 3 — Descargar el software</span></h2>
+<div class="solvvy-solution">
+<p>Hay dos opciones para descargar el software Concrete CMS en tu sitio.</p>
+<ul>
+<li><strong>FTP</strong> (facil) — Descarga el software en tu computador, luego cárgalo en tu sitio usando un cliente FTP.</li>
+<li><strong>SSH </strong>(avanzado) — Descarga el software directamente en tu sitio a través de SSH.</li>
+</ul>
+<dl>
+<dd>
+<div class="alert alert-note">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>También hay una opción para instalar a través de SSH usando Composer, sin embargo, esto solo está disponible si tu sitio se ejecuta en un VPS (Servidor Privado) o en un Servidor Dedicado. Consulta la sección <a href="#composer" target="_self">Composer</a> a continuación para obtener más detalles.</p>
+</div>
+</div>
+</dd>
+</dl>
+<h3><span id="ftp">Descargar a través de FTP</span></h3>
+<ol>
+<li>Visita la siguiente página para descargar el software de Concrete CMS.
+<ul>
+<li><a href="https://www.concrete5.org/download" target="_blank" rel="noopener">Descargar Concrete CMS</a></li>
+</ul>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-concretecms-01.png" alt="Concrete CMS download" width="400" height="205" /></dd>
+</dl>
+</li>
+<li>Haz clic en el enlace para descargar el archivo <span class="text-object">.zip</span> a tu computador.</li>
+<li>Busca el archivo que acabas de descargar. La mayoría de las veces puedes encontrarlo en tu directorio <span class="text-object">/downloads</span>. Se titulará algo como <span class="text-object">concrete5-8.5.5.zip</span>.&nbsp;
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-concretecms-02.png" alt="concrete5 download" width="400" height="103" /></dd>
+</dl>
+</li>
+<li>En Windows, haz clic derecho en el archivo y elige&nbsp;<span class="text-object">Extract All...</span> en el menú emergente.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-concretecms-03.png" alt="concrete5 download" width="400" height="329" /></dd>
+</dl>
+</li>
+<li>Se abre una nueva ventana. En la nueva ventana, haz clic en el botón&nbsp;<strong>Extract</strong>. Todos los archivos se extraen a una nueva carpeta con el mismo título que el archivo <span class="text-object">.zip</span>.</li>
+<li>Inicia sesión en tu servidor usando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215613657--C%C3%B3mo-cargo-mi-p%C3%A1gina-web-en-DreamHost-" target="_blank" rel="noopener">un cliente FTP</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-concretecms-12.png" alt="Concrete CMS download" width="250" height="270" /></dd>
+</dl>
+</li>
+<li>En el panel izquierdo, navega hasta el directorio de tu computador donde extrajiste el archivo <span class="text-object">.zip</span>. Deberías ver una lista de archivos.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/zencart_07.png" alt="Concrete CMS download" /></dd>
+</dl>
+</li>
+<li>En el panel derecho, asegúrate de estar en el directorio de tu sitio web. No debería haber ningún archivo aquí que no sea un posible archivo <span class="text-object">favicon.ico</span>.</li>
+<li>Resalta todos los archivos en el panel izquierdo y arrástralos al panel derecho para subirlos a tu sitio.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Esto puede tardar varios minutos, ya que hay muchos archivos para cargar.</p>
+</div>
+</div>
+</li>
+</ol>
+<h3><span id="ssh">Descargar a través de SSH</span></h3>
+<ol>
+<li>Inicia sesión en tu servidor&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_blank" rel="noopener">a través de SSH</a>.</li>
+<li>Navega al <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de tu usuario</a>.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li>Visita la siguiente página para descargar el software Concrete CMS.
+<ul>
+<li><a href="https://www.concrete5.org/download" target="_blank" rel="noopener">Descargar Concrete CMS</a></li>
+</ul>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-concretecms-04.png" alt="Concrete CMS download" width="400" height="183" /></dd>
+</dl>
+</li>
+<li>Haz clic derecho en el botón de <strong>Download</strong>. En el menú emergente, elige <span class="text-object">Copy link address</span>.</li>
+<li>Corre el siguiente comando para descargar Concrete CMS.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Cambia la URL por la que copiaste anteriormente.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://www.ConcreteCMS.org/download_file/-/view/113632/</span></pre>
+</div>
+<dl>
+<dd><em>Esto descarga el software en un nuevo archivo titulado&nbsp;<span class="text-object">index.html</span>.</em></dd>
+</dl>
+</li>
+<li>Corre el siguiente comando para descomprimir el archivo.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">unzip index.html</span></pre>
+</div>
+</li>
+<li>Los archivos se extraen en un nuevo título directamente Concrete CMS<span class="text-object">-8.5.4</span>.</li>
+<li>Navega a este directorio.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd Concrete CMS-8.5.4</span></pre>
+</div>
+</li>
+<li>Copia todo el contenido en el directorio de tu sitio web.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Asegúrate de cambiar el <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> a tu sitio website.</p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cp -r ./* /home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span></span></pre>
+</div>
+</li>
+<li>Verifica el directorio de tu sitio web para confirmar que los archivos se hayan migrado.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la /home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span></span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2><span id="paso4">Paso 4 — Instalar el software</span></h2>
+<div class="solvvy-solution">
+<p>Ahora que los archivos están en el directorio de tu sitio web, puedes completar la instalación.</p>
+<ol>
+<li>Visita tu sitio web en un navegador. Verás la página de inicio de Concrete CMS.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/concrete5_05.png" alt="Concrete CMS install" width="301" height="36" /></dd>
+</dl>
+</li>
+<li>Selecciona tu idioma y haz clic en el botón de flecha para continuar.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-concretecms-06.png" alt="Concrete CMS install" width="253" height="43" /></dd>
+</dl>
+</li>
+<li>La siguiente página comprueba la configuración del servidor. Todo debería aparecer como marcas de verificación verdes. Haz clic en el botón&nbsp;<strong>Continue to Installation</strong> en la parte inferior derecha.&nbsp;
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-concretecms-07.png" alt="Concrete CMS install" width="401" height="302" /></dd>
+</dl>
+</li>
+<li>En la página siguiente, ingresa la información de tu tienda y las <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">credenciales de la base de datos</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-concretecms-08.png" alt="Concrete CMS install" width="253" height="55" /></dd>
+</dl>
+</li>
+<li>Cuando termines haz clic en el botón <strong>Install Concrete CMS</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-concretecms-09.png" alt="Concrete CMS install" width="400" height="58" /></dd>
+</dl>
+</li>
+<li>Comenzará la instalación. Puedes ver tu progreso en la parte superior izquierda.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-concretecms-10.png" alt="Concrete CMS install" width="401" height="139" /></dd>
+</dl>
+</li>
+<li>Cuando se completa la instalación, aparece un mensaje de confirmación.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-concretecms-11.png" alt="Concrete CMS install" width="248" height="61" /></dd>
+</dl>
+</li>
+<li>Haz clic en el botón&nbsp;<strong>Edit Your Site</strong> en la parte inferior izquierda para comenzar a trabajar en tu sitio. También puedes iniciar sesión en&nbsp;<span class="text-object">example.com/index.php/login</span>.</li>
+</ol>
+</div>
+<h2><span id="composer">Descargar a través de SSH usando Composer</span></h2>
+<div class="solvvy-solution">
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Debes utilizar un servidor&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">Dedicado</a>&nbsp;para ejecutar Composer debido a la cantidad de recursos que requiere.</p>
+</div>
+</div>
+<ol>
+<li>Inicia sesión en tu servidor por&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Instala Composer usando el siguiente artículo.
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214899037-Generalidades-sobre-la-instalaci%C3%B3n-de-Composer" target="_self">Generalidades sobre instalar Composer</a></li>
+</ul>
+</li>
+<li>Navega al directorio de tu sitio web.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/<span class="code-highlight">example.com</span></span></pre>
+</div>
+</li>
+<li>Corre el siguiente comando para crear un nuevo proyecto de Concrete CMS. Puedes nombrarlo como quieras. Este comando lo nombra 'mysite'.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">composer create-project -n /composer <span class="code-highlight">mysite</span></span></pre>
+</div>
+</li>
+<li>Navega a este nuevo directorio.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd <span class="code-highlight">mysite</span></span></pre>
+</div>
+</li>
+<li>Corre el siguiente comando para instalar.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">./vendor/bin/concrete5 c5:install -i</span></pre>
+</div>
+</li>
+<li>Durante el proceso de instalación, se te solicitarán las <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">credenciales de tu base de datos</a>&nbsp;y detalles del sitio.
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>La URL canónica debe ser la URL completa de tu sitio (incluido el directorio del proyecto) y terminar con /. Por ejemplo.</p>
+<p><strong>https://example.com/mysite/</strong></p>
+</div>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">Location of database server? [127.0.0.1]: <span class="code-highlight">mysql.example.com</span>
+Database name?: <span class="code-highlight">database</span>
+Database username?: <span class="code-highlight">user</span>
+Database password?: 
+The system time zone, compatible with the database one? [America/Los_Angeles]:
+Name of the site? [concrete5 Site]: <span class="code-highlight">name your site</span>
+Canonical URL?: <span class="code-highlight">https://example.com/mysite/</span>
+Alternative canonical URL?: <span class="code-highlight">https://example.com/mysite/</span>
+Starting point to use? [elemental_blank]:
+  [0] elemental_blank
+  [1] elemental_full
+ &gt; <span class="code-highlight">1</span>
+Email of the admin user of the install? [admin@example.com]: <span class="code-highlight">admin@example.com</span>
+Password of the admin user of the install?:
+Additional user username?: <span class="code-highlight">admin2</span>
+Additional user email? [demo@example.com]: <span class="code-highlight">admin2@example.com</span>
+Additional user password?:
+The default concrete5 interface language (eg en_US)? [en_US]:
+The default site locale (eg en_US)? [en_US]:
+Use configuration file for installation? [none]:</pre>
+</div>
+</li>
+<li>A continuación, se te preguntará si deseas instalar el sitio con esta configuración.
+<div class="preboxcontainer">
+<pre class="prebox">Would you like to install with these settings? [Y]es / [N]o / [E]dit: <span class="code-highlight">Y</span></pre>
+</div>
+Escribe&nbsp;<span class="text-object">Y</span> para continuar.</li>
+<li>Se instala la base de datos. Se te notifica una vez que se completa.</li>
+</ol>
+<h3>Actualizar tu directorio web</h3>
+<p>Ahora debes actualizar tu directorio web en tu panel, ya que el sitio solo se cargará en la siguiente URL que termina en <span class="text-object">/public</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">https://example.com/mysite/public</pre>
+</div>
+<p>Mira el siguiente artículo para obtener instrucciones sobre cómo hacer esto.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360041534491-Cambiar-el-directorio-web-asignado-a-un-dominio">Cambiar el directorio web asignado a un dominio</a></li>
+</ul>
+<p>En el campo&nbsp;<span class="text-object">Web directory</span> ingresa lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">example.com/mysite/public</pre>
+</div>
+<p>Asegúrate de hacer clic en el botón&nbsp;<strong>Change settings</strong> para guardar. En 10 minutos, tu sitio cargará tu nueva instalación de Concrete CMS. A continuación, puedes iniciar sesión en&nbsp;<span class="text-object">example.com/index.php/login</span>.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://documentation.concrete5.org/developers/introduction/installation/upgrading-concrete5#:~:text=Move%20the%20concrete5.,update%20to%20the%20latest%20version." target="_self">Actualizar Concrete CMS</a></li>
+</ul>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 453px; top: 1628.75px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>
