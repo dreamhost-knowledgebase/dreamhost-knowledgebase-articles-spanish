@@ -17,10 +17,6 @@
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo apt-get update</span>
 <span class="server">[user@instance]:$ </span><span class="command">sudo apt-get install -y mysql-server</span></pre>
 </div>
-<p>Antes de que se complete la instalación, aparecerá un cuadro de diálogo que te pedirá que especifiques una contraseña raíz del servidor MySQL.</p>
-<dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/Create_MySQL_Password.png" /></dd>
-</dl>
 </div>
 <h2>Ver los paquetes instalados</h2>
 <div class="solvvy-solution">
@@ -28,12 +24,7 @@
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">dpkg -l | grep mysql</span>
 
-ii  mysql-client-5.7        5.7.21-0ubuntu0.16.04.1   amd64   MySQL database client binaries
-ii  mysql-client-core-5.7   5.7.21-0ubuntu0.16.04.1   amd64   MySQL database core client binaries
-ii  mysql-common            5.7.21-0ubuntu0.16.04.1   all     MySQL database common files, e.g. /etc/mysql/my.cnf
-ii  mysql-server            5.7.21-0ubuntu0.16.04.1   all     MySQL database server (metapackage depending on the latest version)
-ii  mysql-server-5.7        5.7.21-0ubuntu0.16.04.1   amd64   MySQL database server binaries and system database setup
-ii  mysql-server-core-5.7   5.7.21-0ubuntu0.16.04.1   amd64   MySQL database server binaries</pre>
+ii libaprutil1-dbd-sqlite3:amd64 1.6.1-4ubuntu2          amd64 Apache Portable Runtime Utility Library - SQLite3 Driver<br />ii libsqlite3-0:amd64            3.31.1-4                amd64 SQLite 3 shared library<br />ii mysql-client-8.0              8.0.26-0ubuntu0.20.04.2 amd64 MySQL database client binaries<br />ii mysql-client-core-8.0         8.0.26-0ubuntu0.20.04.2 amd64 MySQL database core client binaries<br />ii mysql-common                  5.8+1.0.5ubuntu2        all   MySQL database common files, e.g. /etc/mysql/my.cnf<br />ii mysql-server                  8.0.26-0ubuntu0.20.04.2 all   MySQL database server (metapackage depending on the latest version)<br />ii mysql-server-8.0              8.0.26-0ubuntu0.20.04.2 amd64 MySQL database server binaries and system database setup<br />ii mysql-server-core-8.0         8.0.26-0ubuntu0.20.04.2 amd64 MySQL database server binaries<br />ii php-mysql                     2:7.4+75                all   MySQL module for PHP [default]<br />ii php7.4-mysql                  7.4.3-4ubuntu2.5        amd64 MySQL module for PHP<br /><br /></pre>
 </div>
 </div>
 <h2>Configurar y usar MySQL</h2>
@@ -75,7 +66,7 @@ mysql.cnf
 <div class="solvvy-solution">
 <p>Si necesitas configurar nuevas bases de datos o configurar nuevos usuarios, debes iniciar sesión en tu Shell de MySQL. Ejecuta cualquiera de los siguientes comandos para iniciar sesión.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">mysql -u root -p</span></pre>
+<pre class="prebox"><span class="server">[user@instance]:$ sudo </span><span class="command">mysql -u root -p</span></pre>
 </div>
 <p>El mensaje cambiará a lo siguiente:</p>
 <div class="preboxcontainer">
@@ -83,22 +74,23 @@ mysql.cnf
 </div>
 <p>Ahora puedes correr comandos mysql para configurar una base de datos.</p>
 </div>
-<h2>MySQL seguro</h2>
+<h2><span id="MySQL_seguro">MySQL seguro</span></h2>
 <div class="solvvy-solution">
 <p>Una vez que se hayas instalado MySQL, es una buena idea proteger tu configuración. Corre el siguiente comando para abrir un cuadro de diálogo de configuración interactivo:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">mysql_secure_installation</span>
-
-Securing the MySQL server deployment.
-Enter password for user root:</pre>
+<pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo mysql_secure_installation</span></pre>
 </div>
 <h3>Establecer un valor para la validación de la contraseña</h3>
-<p>Puedes optar por habilitar el 'Complemento de contraseña', que prueba la solidez de tus contraseñas MySQL. Si deseas habilitar esto, escribe la letra 'y'. A continuación, puedes decidir qué tan seguras deseas que sean las nuevas contraseñas.</p>
+<p>Puedes optar por habilitar el 'Validate Password Component', que prueba la solidez de tus contraseñas MySQL. Si deseas habilitar esto, escribe la letra 'y'. A continuación, puedes decidir qué tan seguras deseas que sean las nuevas contraseñas. <span class="text-object">2</span> es recomendado.</p>
 <div class="preboxcontainer">
-<pre class="prebox">VALIDATE PASSWORD PLUGIN can be used to test passwords
+<pre class="prebox">Securing the MySQL server deployment.
+
+Connecting to MySQL using a blank password.
+
+VALIDATE PASSWORD COMPONENT can be used to test passwords
 and improve security. It checks the strength of password
 and allows the users to set only those passwords which are
-secure enough. Would you like to setup VALIDATE PASSWORD plugin?
+secure enough. Would you like to setup VALIDATE PASSWORD component?
 
 Press y|Y for Yes, any other key for No: <span class="code-highlight">y</span>
 
@@ -110,16 +102,19 @@ STRONG Length &gt;= 8, numeric, mixed case, special characters and dictionary   
 
 Please enter 0 = LOW, 1 = MEDIUM and 2 = STRONG: <span class="code-highlight">2</span></pre>
 </div>
-<h3>Cambiar tu contraseña root</h3>
-<p>El cuadro de diálogo te preguntará si deseas cambiar tu contraseña de root. Esto no es necesario ya que lo acabas de crear durante la instalación.</p>
+<h3>Crear una contraseña root</h3>
+<p>El cuadro de diálogo te pedirá que establezcas la contraseña de root.</p>
 <div class="preboxcontainer">
-<pre class="prebox">Using existing password for root.
+<pre class="prebox">Please set the password for root here
 
-Estimated strength of the password: 50
-Change the password for root ? ((Press y|Y for Yes, any other key for No) : <span class="code-highlight">n</span>
+New password:
 
- ... skipping.</pre>
+Re-enter new password:
+
+Estimated strength of the password: 100
+Do you wish to continue with the password provided?(Press y|Y for Yes, any other key for No) : <span class="code-highlight">y</span></pre>
 </div>
+<p>A continuación, se te solicitarán varias configuraciones de seguridad. Ingresa <span class="text-object">Yes</span> para todos, a menos que tengas una razón específica para dejar ciertas configuraciones como están.</p>
 <h3>Deshabilitar el usuario anónimo</h3>
 <p>Es una buena idea deshabilitar el usuario anónimo.</p>
 <div class="preboxcontainer">
