@@ -1,0 +1,72 @@
+<h2>¿Qué es Let's Encrypt?</h2>
+<div class="solvvy-solution">
+<p><a class="reference external" href="https://letsencrypt.org">Let’s Encrypt</a> es una nueva autoridad de certificación que proporciona certificados seguros absolutamente gratuitos para ayudar a que Internet sea 100% HTTPS en Internet.</p>
+<p>DreamHost ha integrado la compatibilidad con Let's Encrypt en tu panel para servicios alojados, pero si deseas configurar certificados de renovación automática para los dominios que alojas en una instancia de DreamCompute, deberás realizar un poco de instalación manual. Pero la buena noticia es que no tardará mucho y una vez que termines la configuración, no tendrás que preocuparte nunca más por renovar un certificado.</p>
+</div>
+<h2>Obtener los paquetes</h2>
+<div class="solvvy-solution">
+<p>Empieza por iniciar sesión en tu instancia de DreamCompute. Estas instrucciones son para Ubuntu y los comandos pueden cambiar dependiendo de la distribución de Linux que estés ejecutando. Instala el paquete <code class="docutils literal"><span class="pre">certbot</span></code> así:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo apt install certbot python3-certbot-apache -y</span></pre>
+</div>
+</div>
+<h2>Obtén tu primer certificado</h2>
+<div class="solvvy-solution">
+<p>Antes de hacer esto, deberás asegurarte de que tu dominio esté apuntando a la dirección IP de tu instancia de DreamCompute y que tu instancia esté configurada para responder a las solicitudes de tu nombre de dominio. Esto es necesario porque 'Let's Encrypt' realiza comprobaciones para asegurarse de que tú controlas los nombres de dominio para los que solicitas certificados. Si aún no lo has hecho, consulta el artículo a continuación para obtener ayuda:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/218672058-Configurando-DNS-para-tus-dominios">Configurar el DNS de tus dominios</a></li>
+</ul>
+<p>También debes asegurarte de tener Apache ya configurado correctamente para responder a las solicitudes de <strong>example.com</strong>.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215879457-Como-configurar-Apache-en-DreamCompute-Corriendo-Debian-o-Ubuntu" target="_blank" rel="noopener">Cómo configurar Apache en DreamCompute corriendo Debian o Ubuntu</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115003441752-Agregar-un-sitio-web-a-DreamCompute" target="_self" rel="undefined">Añadir un sitio web a DreamCompute</a></li>
+</ul>
+<p>Una vez que tu sitio esté configurado y respondiendo a la página Apache predeterminada, procede con el pedido del certificado así:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo certbot --apache -d <span class="code-highlight">example.com</span></span></pre>
+</div>
+<p>Esto te pedirá cierta información, incluida tu dirección de correo. La última pregunta que se te hace es si deseas redirigir todo el tráfico a la versión https de la URL de tu sitio. Se recomienda que elijas hacer esto. Escribe el número '2' para elegir esta opción. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Please choose whether or not to redirect HTTP traffic to HTTPS, removing HTTP access.
+-------------------------------------------------------------------------------
+1: No redirect - Make no further changes to the webserver configuration.
+2: Redirect - Make all requests redirect to secure HTTPS access. Choose this for
+new sites, or if you're confident your site works on HTTPS. You can undo this
+change by editing your web server's configuration.
+-------------------------------------------------------------------------------
+Select the appropriate number [1-2] then [enter] (press 'c' to cancel): <span class="code-highlight">2</span>
+Enabled Apache rewrite module
+Redirecting vhost in /etc/apache2/sites-enabled/example.com.conf to ssl vhost in /etc/apache2/sites-available/example.com-le-ssl.conf</pre>
+</div>
+<p>Esto finalizará tu nuevo certificado. Ni siquiera deberías necesitar reiniciar tu instancia o modificar un archivo de configuración, ya que el plugin de Apache para certbot fue diseñado para manejar esto por ti.</p>
+</div>
+<h2>Agregar un subdominio a un certificado existente</h2>
+<div class="solvvy-solution">
+<p>Si después de ejecutar ese script te das cuenta de que también necesitas un certificado para un subdominio relacionado, puedes ejecutar el comando certbot nuevamente con parámetros adicionales.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[user@instance]$ &nbsp;sudo certbot --apache -d example.com -d <a class="waffle-rich-text-link" href="http://sub.example.com/">sub.example.com</a></span></pre>
+</div>
+</div>
+<h2>Renovación Automática</h2>
+<div class="solvvy-solution">
+<p>Puedes hacer que tu sistema renueve automáticamente todos los certificados por ti usando un pequeño script de shell que se ve así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">#!/bin/bash
+
+certbot renew</pre>
+</div>
+<p>Si guardas ese script en el directorio <span class="text-object">/usr/local/bin</span> como algo así como <span class="text-object">update_certs</span>, puedes programar el script para que se ejecute una vez a la semana con un <a href="https://help.dreamhost.com/hc/es/articles/215767047-Crear-un-Cron-Job-personalizado" target="_self">cron job</a> así:</p>
+<div class="preboxcontainer">
+<pre class="prebox">30 0 * * 0 /usr/local/bin/<span class="code-highlight">update_certs</span></pre>
+</div>
+<p>Ahora, tu sistema intenta renovar todos tus certificados una vez por semana. Si no hay certificados en peligro de caducar pronto, no pasa nada malo. Pero si alguno hubiera expirado de otra manera, se renueva automáticamente.</p>
+</div>
+<div class="footer">&nbsp;</div>
+<!--DreamCompute Button-->
+<div class="dream-sign-up">
+<h2 id="h_849006449121518042594193">Implementa Tus Aplicaciones en Servidores en la Nube Hoy</h2>
+<div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/computing">Suscríbete a DreamCompute</a></div>
+</div>
+<div id="gtx-trans" style="position: absolute; left: 498px; top: -25px;">
+<div class="gtx-trans-icon">&nbsp;</div>
+</div>
