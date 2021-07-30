@@ -1,0 +1,132 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Los sitios de WordPress se componen de dos componentes principales: los archivos del sitio web y la base de datos. Los archivos del servidor web contienen cosas como imágenes, plugins y archivos de temas, y los archivos principales de WordPress. La base de datos contiene cosas como el núcleo, el plugin y las opciones de tema, el contenido de la publicación, el contenido del usuario y las metatablas. Las herramientas en línea no pueden acceder a la base de datos, y es posible tener una puntuación alta en estas herramientas con un bajo rendimiento de la base de datos. El siguiente artículo detalla varios métodos para optimizar la base de datos de un sitio de WordPress.</p>
+<div class="notebox-important">
+<p>Este artículo usará <a href="https://help.dreamhost.com/hc/es/articles/214693248-Generalidades-sobre-WordPress-wp-cli">wp-cli</a> para optimizar la base de datos. Necesitarás iniciar sesión en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y navegar al directorio WordPress de tu sitio web para correr esos comandos.</p>
+<p>Adicionalmente, asegúrate de <a href="https://help.dreamhost.com/hc/es/articles/215039758-Generalidades-sobre-copias-de-seguridad-de-bases-de-datos" target="_self">hacer una copia de seguridad de tu base de datos</a> antes de hacer una acción destructiva.</p>
+</div>
+</div>
+<h2 id="options" class="header-section">La tabla de options</h2>
+<div class="solvvy-solution">
+<p>La tabla <span class="text-object">options</span> contiene datos importantes del sitio de WordPress, como la URL del sitio, la ruta y la configuración guardada. También contiene configuraciones de plugins y temas, junto con datos transitorios (temporales). Con el tiempo, esta tabla puede llenarse de datos transitorios con temporizadores de vencimiento prolongados y configuraciones sobrantes de plugins desinstalados.</p>
+<h2>Eliminar transients</h2>
+<ol>
+<li>Elimina cualquier transients en la base de datos de WordPress con el siguiente comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp transient delete --all</span></pre>
+</div>
+</li>
+<li>Optimiza las tablas restantes en la base de datos con el siguiente comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db optimize</span></pre>
+</div>
+</li>
+</ol>
+<div class="notebox-note">
+<p>Si deseas automatizar estos comandos en el futuro, puedes <a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-" target="_self">crea un cron job</a> usando el panel de DreamHost.</p>
+</div>
+<p>Si tu tabla de opciones es de 10 MB o más después de la optimización, considera usar <a href="https://help.dreamhost.com/hc/es/articles/360048755671-Microservicios-profesionales" target="_self">el servicio de optimización de base de datos de DreamHost</a>, o comunícate con otro desarrollador profesional de WordPress para obtener más ayuda.</p>
+<h2>Autoload</h2>
+<p>Los datos de Autoload es un conjunto de datos que se carga con cada solicitud a la tabla de opciones. Grandes cantidades de datos de autoload pueden causar un rendimiento deficiente de /wp-admin y también pueden afectar al sitio público. Ejecuta el siguiente comando para averiguar cuántos datos de autoload tiene tu sitio:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SELECT SUM(LENGTH(option_value)/1048576) as 'Autoload(MB)' FROM $(wp config get table_prefix)options WHERE autoload='yes' ;"</span></pre>
+</div>
+<p>Menos de 600 KB es bueno para la mayoría de los servidores, pero los servidores de mayor rendimiento como DreamPress pueden manejar grandes cantidades de datos de autoload.</p>
+<p>Si el tamaño de autoload es más grande de lo esperado, corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SELECT option_name, LENGTH(option_value)/1048576 AS "Size" FROM $(wp config get table_prefix)options WHERE autoload='yes' ORDER BY "Size" DESC LIMIT 25 ;"</span></pre>
+</div>
+<p>Esto devolverá las 25 filas más grandes en una tabla de opciones que se están cargando automáticamente. A partir de aquí, deberás examinar las filas y determinar qué datos se necesitan realmente. Los datos de autoload pueden estar relacionados con tu tema o plugins, y deberás investigar las entradas que no reconoce antes de eliminarlas. Si encuentra filas que se pueden eliminar de forma segura, usa el siguiente comando para hacerlo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "DELETE FROM $(wp config get table_prefix)options WHERE option_name LIKE <span class="code-highlight">'%example_%'</span> ;"</span>
+  </pre>
+</div>
+<div class="notebox-important">
+<p>Recuerda reemplazar <span class="code">%example_%</span> con el prefijo en la fila que queires eliminar.</p>
+</div>
+<p>Una vez que se elimina una fila, corre <span class="code">wp db optimize</span> nuevamente y prueba tu sitio para asegurarte de que no haya efectos adversos.</p>
+<h2>Indexar</h2>
+<p>Indexar ayuda al servidor de la base de datos a encontrar y devolver consultas rápidamente. Puedes verificar si tu tabla de opciones ya tiene un indexx usando el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SHOW INDEX FROM $(wp config get table_prefix)options ;"</span></pre>
+</div>
+<p>Generalmente, debes agregar un index cuando tu base de datos tenga entre 60% y 80% de datos no autocargados. Puedes comparar estos valores usando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SELECT COUNT(CASE WHEN autoload = 'yes' THEN 1 END) FROM $(wp config get table_prefix)options ;" ; wp db query "SELECT COUNT(CASE WHEN autoload = 'no' THEN 1 END) FROM $(wp config get table_prefix)options ;"</span></pre>
+</div>
+<p>Puedes agregar un index a tu tabla de opciones usando el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "CREATE INDEX autoload ON $(wp db config get table_prefix)options(autoload, option_name) ;"</span></pre>
+</div>
+<p>Si necesitas eliminar un index, usa el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "DROP INDEX autoload ON $(wp db config get table_prefix)options ;"</span></pre>
+</div>
+</div>
+<h2 id="postmeta" class="header-section">The postmeta table</h2>
+<div class="solvvy-solution">
+<p>La tabla <span class="text-object">postmeta</span> contiene metadatos diversos vinculados a una publicación en tu sitio, como los agregados por plugins y temas, o metadatos para el contenido de la biblioteca de medios. Si tu tabla postmeta es más grande que tu tabla post, es posible que se necesite más optimización. Necesitarás usar dos comandos para buscar en la tabla postmeta, ya que la columna mate_key usa un encabezado <span class="code">_</span> para configuraciones ocultas y sin guía <span class="code">_</span> para las configuraciones user-accessible.</p>
+<p>Corre los siguientes comandos:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SELECT SUBSTRING_INDEX(meta_key, '_', 1) AS "Meta",(SUM(LENGTH(meta_id)+LENGTH(post_id)+LENGTH(meta_key)+LENGTH(meta_value)))/1048567 AS "Size", COUNT(*) AS "Count" FROM $(wp config get table_prefix)postmeta WHERE meta_key NOT LIKE '\_%' GROUP BY "Meta" ORDER BY "Size" DESC ;"</span></pre>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SELECT SUBSTRING_INDEX(meta_key, '_', 2) AS "Meta",(SUM(LENGTH(meta_id)+LENGTH(post_id)+LENGTH(meta_key)+LENGTH(meta_value)))/1048567 AS "Size", COUNT(*) AS "Count" FROM $(wp config get table_prefix)postmeta WHERE meta_key LIKE '\_%' GROUP BY "Meta" ORDER BY "Size" DESC ;"</span></pre>
+</div>
+<p>El primer comando enumerará todas las configuraciones accesibles para el usuario, ordenadas en orden descendente por tamaño de fila. El segundo hace lo mismo, pero para configuraciones ocultas.</p>
+<p>Examina los resultados para determinar qué se puede eliminar, si es que hay algo. Los siguientes dos comandos pueden resultar útiles:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SELECT MAX(t1.post_id) AS "post_id", MAX(t2.post_date) AS "Date", SUBSTRING_INDEX(t1.meta_key, '_', 1) AS "Meta", (SUM(LENGTH(meta_id)+LENGTH(post_id)+LENGTH(meta_key)+LENGTH(meta_value)))/1048567 AS "Size", COUNT(*) AS "Count" FROM $(wp config get table_prefix)postmeta AS t1 JOIN $(wp config get table_prefix)posts AS t2 ON t1.post_id = t2.ID WHERE meta_key NOT LIKE '\_%' GROUP BY "Meta" ORDER BY "Date" DESC ;"</span></pre>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SELECT MAX(t1.post_id) AS "post_id", MAX(t2.post_date) AS "Date", SUBSTRING_INDEX(t1.meta_key, '_', 2) AS "Meta", (SUM(LENGTH(meta_id)+LENGTH(post_id)+LENGTH(meta_key)+LENGTH(meta_value)))/1048567 AS "Size", COUNT(*) AS "Count" FROM $(wp config get table_prefix)postmeta AS t1 JOIN $(wp config get table_prefix)posts AS t2 ON t1.post_id = t2.ID WHERE meta_key LIKE '\_%' GROUP BY "Meta" ORDER BY "Date" DESC ;"</span></pre>
+</div>
+<p>Estos imprimirán dos tablas (una con un _ inicial y otra sin) que muestran la cadena meta_key, el tamaño que ocupa en la base de datos, la cantidad de filas que la contienen y, lo que es más importante, la fecha y el post_id de la última vez se utilizó. Las entradas de valor de meta_key se pueden usar para identificar filas para plugins o temas que ya no están en uso.</p>
+<p>Si se encuentran filas innecesarias, corre el siguiente comando para eliminarlas:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "DELETE FROM $(wp config get table_prefix)options WHERE option_name LIKE <span class="code-highlight">'%example_%'</span> ;"</span></pre>
+</div>
+<div class="notebox-important">
+<p>Recuerda reeemplazar <span class="code">%example_%</span> con el prefijo de la fila que deseas eliminar.</p>
+</div>
+<p>Además, puede haber metadatos en tu tabla postmeta que ya no están asociados con una publicación. Corre el siguiente comando para buscar y eliminar metadatos de publicaciones eliminadas:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SELECT * FROM $(wp config get table_prefix)postmeta pm LEFT JOIN $(wp config get table_prefix)posts wp ON wp.ID = pm.post_id WHERE wp.ID IS NULL ; DELETE pm FROM $(wp config get table_prefix)postmeta pm LEFT JOIN $(wp config get table_prefix)posts wp ON wp.ID = pm.post_id WHERE wp.ID IS NULL ;"
+</span></pre>
+</div>
+</div>
+<h2 id="commentmeta" class="header-section">La tabla commentmeta</h2>
+<div class="solvvy-solution">
+<p>La tabla <span class="text-object">commentmeta</span> puede saturarse con el tiempo con metadatos para comentarios eliminados, como los eliminados por un plugin de detección de comentarios de spam.</p>
+<p>Para enumerar las filas que se eliminan antes de eliminarlas por completo, usa el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SELECT * FROM $(wp config get table_prefix)commentmeta WHERE comment_id NOT IN (SELECT comment_id FROM $(wp config get table_prefix)comments) ; DELETE FROM $(wp config get table_prefix)commentmeta WHERE comment_id NOT IN (SELECT comment_id FROM $(wp config get table_prefix)comments) ;"</span></pre>
+</div>
+<h2>Revisiones posteriores</h2>
+<p>Las revisiones de publicaciones de WordPress son versiones históricas o guardadas automáticamente de las publicaciones de tu sitio. WordPress limita el recuento de revisiones a 10 de forma predeterminada, pero pueden hacerlo a medida que aumenta el recuento de publicaciones de tu sitio. Utiliza los siguientes comandos para limpiar las revisiones en la base de datos de tu sitio.</p>
+<p>Corre el siguiente comando para obtener un recuento de las revisiones totales en tu sitio:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp post list --post_type='revision' --format=ids | wc -w</span></pre>
+</div>
+<p>Corre el siguiente comando para eliminar cualquier revisión existente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp post delete $(wp post list --post_type='revision' --format=ids) --force --quiet</span></pre>
+</div>
+<p>Agrega la siguiente directiva a tu archivo <span class="text-object">wp-config.php</span> para limitar el número máximo de revisiones:</p>
+<div class="preboxcontainer">
+<pre class="prebox">define('WP_POST_REVISIONS', 1);
+</pre>
+</div>
+<div class="notebox-important">
+<p>Asegúrate que cualquier adición a tu <span class="text-object">wp-config.php</span> se hacen por encima de la línea que dice <span class="code">/* That's all, stop editing! Happy blogging. */</span>.</p>
+</div>
+</div>
+<h2><span id="Ver_tambien">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215036388--C%C3%B3mo-optimizar-mi-base-de-datos-" target="_self">¿Cómo optimizar mi base de datos? </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300867-T%C3%A9cnicas-generales-de-optimizaci%C3%B3n-en-WordPress" target="_self">Técnicas generales de optimización en WordPress </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL">Generalidades de MySQL </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin">Generalidades de phpMyAdmin </a></li>
+</ul>
+</div>
