@@ -1,6 +1,6 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>DreamCompute, al igual que otras nubes OpenStack, tiene varios tipos de almacenamiento disponibles para su uso. Este artículo trabaja con el almacenamiento de 'Volumen' que se recomienda para almacenar datos críticos e importantes. Para obtener más información sobre los tipos de almacenamiento, visita el artículo sobre <a class="reference external" href="https://help.dreamhost.com/hc/es/articles/217701757--Cu%C3%A1l-es-la-diferencia-entre-los-discos-de-arranque-ef%C3%ADmeros-y-por-volumen-" target="_self" rel="undefined">diferencias entre almacenamiento efímero y volumétrico</a>.</p>
+<p>DreamCompute, al igual que otras nubes OpenStack, tiene varios tipos de almacenamiento disponibles para su uso. Este artículo trabaja con el almacenamiento de 'Volumen' que se recomienda para almacenar datos críticos e importantes. Para obtener más información sobre los tipos de almacenamiento, visita el artículo sobre las <a class="reference external" href="https://help.dreamhost.com/hc/es/articles/217701757--Cu%C3%A1l-es-la-diferencia-entre-los-discos-de-arranque-ef%C3%ADmeros-y-por-volumen-" target="_self" rel="undefined">diferencias entre almacenamiento efímero y volumétrico</a>.</p>
 </div>
 <h2>¿Qué es el almacenamiento de volumen?</h2>
 <div class="solvvy-solution">
@@ -57,7 +57,7 @@
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack volume create --size SIZE_IN_GB VOLUME_NAME</span>
 </pre>
 </div>
-<p>El volumen ahora debería aparecer en el tablero y en la línea de comando.</p>
+<p>El volumen ahora debería aparecer en el tablero, y en la línea de comando.</p>
 <h3>Usar el Volumen</h3>
 <p>Para usar tu volumen, ahora debe estar adjunto a una instancia en ejecución.</p>
 <ol>
@@ -86,8 +86,9 @@ En este ejemplo, la instancia se llama 'VOLUME_NAME' y solo hay un volumen 'disp
 <p>Es posible que el nombre del dispositivo que aparece en la lista no siempre sea exacto, por lo que debes verificarlo antes de usar un dispositivo nuevo.</p>
 </div>
 </div>
-<div id="Crear_un_Sistema_de_Archivos">&nbsp;</div>
+<div id="Crear_un_Sistema_de_Archivos">
 <h2>Crear un Sistema de Archivos</h2>
+</div>
 <div class="solvvy-solution">
 <p>La nueva unidad ahora necesita un sistema de archivos para poder almacenar datos. Hay muchas opciones cuando se trata de sistemas de archivos, pero para este ejemplo, se usa un valor predeterminado seguro de ext4.</p>
 <p>Ahora conéctate a tu instancia con el usuario predeterminado para tu imagen.</p>
@@ -129,8 +130,9 @@ Writing superblocks and filesystem accounting information: done</pre>
 </div>
 <p>El archivo del sistema está creado ahora.</p>
 </div>
-<div id="Montar_el_Sistema_de_Archivos">&nbsp;</div>
+<div id="Montar_el_Sistema_de_Archivos">
 <h2>Montar el Sistema de Archivos</h2>
+</div>
 <div class="solvvy-solution">
 <p>Como se mencionó anteriormente, el dispositivo de la unidad puede cambiar en caso de que ocurran cambios udev u otros, y tal error puede evitar que tu instancia se inicie correctamente. Para evitar esto, inicia a través de UUID. Puedes encontrar el UUID de las unidades corriendo el comando blkid:</p>
 <div class="preboxcontainer">
@@ -160,4 +162,24 @@ Filesystem      Size  Used Avail Use% Mounted on
 <p>Eso es todo. Cuando reinicies tu instancia, tu volumen se volverá a montar y estará listo para usar.</p>
 </div>
 </div>
+</div>
+<h2>Eliminar un Volumen</h2>
+<div class="solvvy-solution">
+<p>Si necesitas eliminar un volumen, primero deberás desconectarlo de una instancia a la que esté conectado.</p>
+<ol>
+<li>Navega hasta la página del panel de DreamCompute <a href="https://iad2.dreamcompute.com/project/volumes/">volumes</a>.</li>
+<li>Haz clic en el menú desplegable y selecciona <strong>Manage Attachments</strong>:
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-create-and-mount-volumes-on-dreamcompute_02.png" alt="how-to-create-and-mount-volumes-on-dreamcompute_02" /></dd>
+</dl>
+</li>
+<li>Da clic en el botón <strong>Detach Volume</strong> a la derecha de tu instancia.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-dhc-deletevolume-01.png" alt="how-to-delete-volumes-on-dreamcompute_03" width="351" height="48" /></dd>
+</dl>
+</li>
+<li>Da clic en el botón <strong>Detach Volume</strong> en la ventana que aparece para confirmar la acción.</li>
+<li>Da clic en el menú desplegable y selecciona <strong>Delete Volume</strong>.</li>
+<li>Da clic en el botón <strong>Delete Volume</strong> en la ventana que aparece para confirmar la acción.</li>
+</ol>
 </div>
