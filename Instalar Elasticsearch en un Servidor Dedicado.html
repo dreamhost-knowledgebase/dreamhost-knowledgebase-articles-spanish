@@ -1,0 +1,55 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p><a href="https://www.elastic.co/" target="_blank" rel="noopener">Elasticsearch</a> es un software de motor de búsqueda que puedes instalar en tu sitio web.</p>
+<p>Al instalarlo en un Servidor Dedicado, te encontrarás con errores relacionados con Grsecurity. Esto se debe a que Elasticsearch viene con su propio binario de Java que se actualiza y utiliza después de cada actualización o nueva instalación de Elasticsearch.</p>
+<p>Dado que estas configuraciones se reemplazan en la instalación, las configuraciones de Grsec se sobrescriben. Para resolver este problema, deberás instalar un kernel diferente que no sea grsec en tu Servidor Dedicado.</p>
+<div class="alert alert-important">
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
+<div class="alert-content">
+<p>Este artículo solo explica cómo actualizar tu kernel para instalar Elasticsearch en un Servidor Dedicado. No explica cómo instalar Elasticsearch.</p>
+</div>
+</div>
+<div class="prereqs">
+<p><strong>Prerequisitos</strong></p>
+<p>Asegúrate de haber creado un <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-" target="_self">usuario admin</a> en tu Servidor Dedicado. Necesitarás este tipo de usuario para instalar un nuevo kernel.</p>
+</div>
+</div>
+<h2>¿A qué servidores aplica esto?</h2>
+<div class="solvvy-solution">
+<p>Esto solo se aplica a los Servidores Dedicados que ejecutan Ubuntu Bionic 18 con un kernel grsec. Puedes verificar esto corriendo los siguientes comandos a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>:</p>
+<p>Comprueba si el servidor ejecuta Ubuntu 18.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">lsb_release -c</span>
+Codename:       bionic</pre>
+</div>
+<p>Comprueba si el servidor está ejecutando un kernel grsec.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">uname -r</span>
+5.4.32-grsec-grsec.virt+</pre>
+</div>
+</div>
+<h2>Instalar un nuevo kernel</h2>
+<div class="solvvy-solution">
+<p>Como se mencionó anteriormente, para resolver los problemas de instalación, debes instalar un nuevo kernel sobre el kernel 5.4.32-grsec-grsec.virt +.</p>
+<ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> como tu <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-" target="_self">usuario admin</a>. Tu intento debería mostrar root como usuario.</li>
+<li>Corre el siguiente comando.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">root@[server]# </span><span class="command">apt-get update; apt-get install linux-headers-5.4.32-generic.virt linux-image-5.4.32-generic.virt; sed -i 's/5.4.32-grsec-grsec.virt+/5.4.32-generic.virt/' /etc/default/grub; update-grub</span>
+</pre>
+</div>
+</li>
+<li>Reinicia tu servidor. Puedes hacer esto al navegar al <a class="panel-link" href="https://panel.dreamhost.com/?tree=dedicated.dashboard" target="_blank" rel="noopener">Panel Dedicado</a>&nbsp;en tu panel y haciendo clic en el botón <strong>Powercycle</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/powercycle.png" alt="powercycle" /></dd>
+</dl>
+</li>
+</ol>
+<p>Ahora puedes instalar Elasticsearch sin errores.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-" target="_self">Añadir un usuario admin a un Servidor Dedicado</a></li>
+</ul>
+</div>
