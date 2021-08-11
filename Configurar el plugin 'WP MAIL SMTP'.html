@@ -1,14 +1,12 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>WordPress tiene varios plugins SMTP que puedes usar para forzar cualquier dirección FROM que desees. Esto es importante por dos motivos principales:</p>
+<p>WordPress tiene varios plugins de SMTP que puedes usar para forzar cualquier dirección FROM que desees. Esto es importante por dos motivos principales:</p>
 <ul>
 <li>Te permite enviar correos directamente a través de tu servidor de correo, en lugar del servidor web. Esto ayuda a evitar problemas con la <a href="https://help.dreamhost.com/hc/es/articles/215036058-Resumen-de-la-pol%C3%ADtica-de-dominio-del-remitente-y-suplantaci%C3%B3n-de-identidad-o-spoofing" target="_self">política de dominio de remitente (SPF) y la suplantación de identidad (Spoofing)</a>.</li>
 <li>Te permite enviar correo electrónico desde otro servidor de correo. Por ejemplo, puedes usar tu dirección de GMAIL como el correo FROM en lugar de tu dirección de DreamHost.</li>
 </ul>
 <p>Una opción de plugin popular es WP Mail SMTP. Este artículo te explica como configurar este plugin.</p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p><strong>Correo de DreamHost</strong></p>
 <p>Este artículo explica cómo configurar este plugin usando una dirección de correo de DreamHost creada en el panel usando el siguiente artículo:</p>
 <ul>
@@ -23,7 +21,6 @@
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360029770912-Configuraci%C3%B3n-del-plugin-WP-Mail-SMTP-con-Gmail" target="_self">Configurar el plugin 'WP Mail SMTP' con Gmail</a></li>
 </ul>
-</div>
 </div>
 </div>
 <h2>3 maneras diferences de configurar el plugin</h2>
@@ -141,7 +138,7 @@
 <ol>
 <li>Navega a la página <span class="text-section">WP MAIL SMTP &gt; Settings</span>.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/wp-plugin-wp-mail-smtp-10.png" alt="wp mail smtp plugin" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/wp-plugin-wp-mail-smtp-10.png" alt="wp mail smtp plugin" width="652" height="387" /></dd>
 </dl>
 </li>
 <li>Rellena los siguientes campos:<br />
@@ -167,25 +164,26 @@
 <li><strong>Servidor SMTP</strong> - smtp.dreamhost.com</li>
 <li><strong>Cifrado</strong> - Usar cifrado TLS</li>
 <li><strong>Puerto SMTP</strong> - 587
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>En este ejemplo, se utiliza el puerto 587 con TLS. Si prefieres usar el puerto 465, asegúrate de usar la opción SSL en su lugar.</p>
 </div>
-</div>
+</li>
+</ul>
+</li>
+</ol>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/wp-plugin-wp-mail-smtp-13.png" alt="wp mail smtp plugin" width="510" height="128" /></dd>
 </dl>
-</li>
+<ul>
 <li><strong>Nombre de usuario de SMTP</strong> - Ingresa tu dirección de correo electrónico de DreamHost</li>
 <li><strong>Contraseña SMTP</strong> - Ingresa la contraseña de tu dirección de correo electrónico</li>
 </ul>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/wp-plugin-wp-mail-smtp-14.png" alt="wp mail smtp plugin" width="138" height="62" /></dd>
 </dl>
-</li>
+<ul>
 <li>Haz clic en el botón&nbsp;<strong>Save Settings</strong>.</li>
-</ol>
+</ul>
 <p>Tu formulario ahora se enviará DESDE el correo que ingresaste anteriormente, pero debe agregar el siguiente código para proteger aún más sus credenciales.</p>
 </div>
 <h2><span id="opcion3">Opción 3 - Agregar código a tu archivo wp-config.php</span></h2>
@@ -201,7 +199,7 @@
 <div class="alert alert-important">
 <div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>Si eliges esta opción, no necesitasingresar ninguna credencial en tu panel de WordPress. Se actualizarán automáticamente cuando los agregas a tu archivo <span class="text-object">wp-config.php</span>.</p>
+<p>Si elijes esta opción, no necesitasingresar ninguna credencial en tu panel de WordPress. Se actualizarán automáticamente cuando los agregas a tu archivo <span class="text-object">wp-config.php</span>.</p>
 </div>
 </div>
 <h3>Agregar las constantes a tu archivo wp-config.php</h3>
@@ -264,13 +262,10 @@ define( 'WPMS_MAILER', 'smtp' );</pre>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-Cómo-iniciar-sesión-en-tu-sitio-WordPress" target="_self">Cómo iniciar sesión en tu sitio de WordPress</a></li>
-<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-plugins-de-WordPress" target="_self">Administrar Plugins de WordPress</a></li>
-<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215527157-Administrar-los-temas-de-WordPress" target="_self">Administrar temas de WordPress</a></li>
-<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/214831378-Solución-de-problemas-de-los-formularios-de-contacto-de-WordPress" target="_self">Solucionar problemas con formularios de contacto en WordPress</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-plugins-de-WordPress">Administrar Plugins de WordPress</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215527157-Administrar-los-temas-de-WordPress">Administrar temas de WordPress</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/214831378-Solución-de-problemas-de-los-formularios-de-contacto-de-WordPress">Solucionar problemas con formularios de contacto en WordPress</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215612887-Protocolos-y-n%C3%BAmeros-de-puerto-para-clientes-de-correo-electr%C3%B3nico" target="_self">Protocolos para el cliente de correo y números de puerto</a></li>
 </ul>
 </div>
-</div>
-<div id="gtx-trans" style="position: absolute; left: 289px; top: 8850.61px;">
-<div class="gtx-trans-icon">&nbsp;</div>
 </div>
