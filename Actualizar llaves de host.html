@@ -37,11 +37,8 @@ Keyboard-interactive authentication is disabled to avoid man-in-the-middle attac
 <h3>Método uno -- Generar una nueva clave de host (MAC o Linux)</h3>
 <p>Si te has conectado a un host en el pasado, la clave de host anterior se almacena en el archivo&nbsp;<span class="text-object">/user/.ssh/known_hosts</span>.&nbsp;Si la clave se ha actualizado en el servidor, ahora debes eliminar la clave anterior en tu computador.</p>
 <p>Corre el siguiente comando en tu shell.</p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Cambia <span class="code">HOSTNAME</span> al host al que te estás conectando, como&nbsp;<strong>example.com</strong></p>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local]$ </span><span class="command">ssh-keygen -R <span class="code-highlight">HOSTNAME</span></span>
@@ -53,11 +50,8 @@ Keyboard-interactive authentication is disabled to avoid man-in-the-middle attac
 </ul>
 <p>Ahora puedes conectarte a través de SSH para almacenar una nueva clave.</p>
 <h3>Método dos -- Eliminar tu archivo known_hosts</h3>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Si inicias sesión en otros servidores, no elimines el archivo <span class="text-object">known_hosts</span> o no tendrás forma de saber si tus claves SSH han cambiado.</p>
-</div>
 </div>
 <p>Elimine archivo <span class="text-object">known_hosts</span> por completo (en tu computador local) si tienes varios hosts que necesitan ser actualizados. En el primer inicio de sesión, este va a confirmar la nueva clave.</p>
 <ul>
