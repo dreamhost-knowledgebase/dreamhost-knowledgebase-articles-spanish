@@ -7,7 +7,6 @@
 </ul>
 <p>Si tienes problemas para migrar tu sitio web desde otro alojamiento, o simplemente no tienes tiempo, DreamHost actualmente ofrece un servicio que se encarga de eso por tí. Puede encontrar más información en el artículo de <a href="/hc/es/articles/360027686731-Servicios-de-migración-de-sitios-web">los servicios de migración del sitio web DreamHost</a>.</p>
 </div>
-</div>
 <p>Este artículo detalla el proceso de cómo mover tu sitio de WordPress desde tu compañía de alojamiento actual a DreamHost.</p>
 <p>Si estás moviendo tu sitio de WordPress desde otra cuenta de DreamHost, se requieren algunos pasos adicionales para garantizar que los elementos adicionales (como el correo electrónico) se muevan correctamente. Consulta el siguiente artículo para obtener más detalles:</p>
 <ul>
@@ -17,6 +16,7 @@
 <ul>
 <li><a href="https://wordpress.com/support/moving-a-blog/#moving-to-wordpress-org" target="_self">Mover desde WordPress.com a otro host</a></li>
 </ul>
+</div>
 <h2>Crear una copia de seguridad de tus datos</h2>
 <div class="solvvy-solution">
 <p>Antes de realizar cambios en tu sitio web, DreamHost recomienda realizar una copia de seguridad de tu base de datos. Las instrucciones se pueden encontrar en el siguiente artículo:</p>
@@ -96,11 +96,8 @@
 </ul>
 </li>
 </ol>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Suponiendo que hayas creado la base de datos en tu panel de DreamHost con el mismo hostname, nombre de usuario, contraseña, y nombre de base de datos que se configuró en tu compañía de alojamiento anterior, es posible que tu sitio ya aparezca en línea. Si no es así, ve al paso # 5 a continuación.</p>
-</div>
 </div>
 </div>
 <h2><span id="Paso_cinco_.E2.80.93_Editar_el_archivo_wpconfig.php">Paso 5 — Editar el archivo wpconfig.php</span></h2>
@@ -117,11 +114,8 @@ define('DB_COLLATE', '');
 
 $table_prefix = '<span class="code-highlight">wp_2hdy121d_</span>';</pre>
 </div>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Asegúrate de que la configuración en table_prefix del <span class="text-object">wp-config.php</span> coincida con el prefijo de la tabla de tu copia de seguridad, de lo contrario, WordPress te pedirá que instale desde cero.</p>
-</div>
 </div>
 <p>Para confirmar el prefijo de la tabla, usa&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos">phpMyAdmin</a>&nbsp;para iniciar sesión en la base de datos en DreamHost a la cual le acabas de importar la información en el Paso#4.</p>
 <dl>
