@@ -2,11 +2,8 @@
 <div class="solvvy-solution">
 <p>Este artículo muestra cómo crear manualmente un cron job usando tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>. Esto envuelve iniciar sesión dentro del servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>&nbsp;para correr varios comandos.</p>
 <p>Estas instrucciones pueden ser usadas también para editar un cron job existente creado en el panel, sin embargo por simplicidad, es recomendado que si lo has creado en el panel, seguirlo editando desde el panel.&nbsp;Esto es importante ya que agregar un cron job en el panel sobrescribirá tu archivo crontab personalizado como se menciona a continuación.</p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
-</div>
 </div>
 </div>
 <h2>Detalles básicos</h2>
@@ -108,9 +105,7 @@ Deberás escoger un editor para ver este archivo #6 usa un programa <span class=
 MAILTO="user@example.com"
 13 20 * * * php  /home/username/mail.php</pre>
 </div>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Hay dos partes del comando. La primera debe especificar el camino al programa que deseas usar para correr el cron job. Por ejemplo digamos que tu tienes un archivo PHP llamado <span class="text-object">script.php</span> en tu directorio de dominios:</p>
 <ul>
 <li><span class="text-object">/home/username/example.com/script.php</span></li>
@@ -120,7 +115,6 @@ MAILTO="user@example.com"
 <li><span class="text-object">/usr/local/php74/bin/php /home/username/example.com/script.php</span></li>
 </ul>
 <p>Usarás también la versión por defecto usando “php” en vez del camino completo.</p>
-</div>
 </div>
 </li>
 <li>Guarda el archivo. Verás la siguiente respuesta:<br />
@@ -199,11 +193,8 @@ MAILTO="user@example.com"
 </tr>
 </tbody>
 </table>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Nota: Para el día de la semana, ambos 0 y 7 son considerados domingo.</p>
-</div>
 </div>
 El tiempo es basado en eso del servidor que corre el cron.
 <p>Otra manera (gráfica) es viendo estos campos.</p>
@@ -232,11 +223,8 @@ El tiempo es basado en eso del servidor que corre el cron.
 </ul>
 </li>
 <li>El operador asterisco ('*') (frecuentemente conocido como wildcard) especifica todos los posibles valores para un campo. Por ejemplo, un asterisco en el campo de la hora (segundo) será equivalente a 'cada hora'.
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Si configuras el cron job para que se ejecute en un día específico de la semana, los campos <span class="text-object">mes (month)</span> y <span class="text-object">día del mes seguirán (day of month)</span> apareciendo como un asterisco (*). El valor del día de la semana anulará estos valores, por lo que solo se ejecutará una vez por semana en el día seleccionado.</p>
-</div>
 </div>
 </li>
 <li>El operador barra inclinada ('/') puede ser usado en conjunción con un asterisco para saltar unos valores de números dados. Ejemplo:<br />
@@ -297,7 +285,6 @@ El tiempo es basado en eso del servidor que corre el cron.
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Cron#Nonstandard_predefined_scheduling_definitions" target="_self">Cron – Definiciones de horarios predefinidos no estandarizados</a></li>
 </ul>
-</div>
 <h2>Salida</h2>
 <div class="solvvy-solution">
 <p>La salida del cron job es determinado por lo que es enviado al terminal como resultado de los comandos/scripts que son ejecutados. Por defecto, todas las salidas son enviadas por correo a la variable&nbsp;MAILTO&nbsp;(ver la artículo del requerimiento de la variable <a href="https://help.dreamhost.com/hc/es/articles/215767107#mailto" target="_self">MAILTO</a> para más información). Como se ve arriba, si un comando de cron job no crea ninguna salida en el comando entonces ningún correo es enviado.</p>
@@ -387,5 +374,6 @@ El tiempo es basado en eso del servidor que corre el cron.
 <li><a href="https://help.dreamhost.com/hc/es/articles/214202238-Generalidades-de-l%C3%ADnea-de-comando-PHP" target="_self">Generalidades de las líneas de comando de PHP</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360038608892-Soluci%C3%B3n-de-problemas-de-Cron-job" target="_self">Solución de problemas de cron job</a></li>
 </ul>
+</div>
 </div>
 </div>

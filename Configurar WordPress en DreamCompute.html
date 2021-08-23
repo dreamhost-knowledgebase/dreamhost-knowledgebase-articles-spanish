@@ -11,6 +11,7 @@
 </ul>
 <p>Este ejemplo usará Ubuntu 20, pero puedes usar cualquier versión de Linux que prefieras. Siempre que puedas instalar Apache, PHP y el software de base de datos, WordPress podrá ejecutarse.</p>
 <p>Cualquiera que sea la imagen que elijas, recuerda que es mejor usar instancias con un disco de arranque de volumen, ya que son permanentes (en lugar de instancias con <a href="https://help.dreamhost.com/hc/es/articles/217701757--Cu%C3%A1l-es-la-diferencia-entre-los-discos-de-arranque-ef%C3%ADmeros-y-por-volumen-">discos de reinicio efímero</a>).</p>
+</div>
 <h2>Paso 1 — Apuntar el DNS de tu instancia</h2>
 <div class="solvvy-solution">
 <p>Primero, deberás apuntar el DNS de tu dominio a la instancia. Revisa el siguiente artículo para obtener más detalles:</p>
@@ -31,11 +32,8 @@
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360000274451-Crear-un-nuevo-usuario-en-una-instancia">Crear un nuevo usuario en una instancia</a></li>
 </ul>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Este artículo asume que tu nuevo usuario se llama <span class="text-object">exampleuser</span>.&nbsp;</p>
-</div>
 </div>
 <p>Después de crear el usuario, asígnale privilegios sudo. Luego, inicia sesión en tu instancia con el usuario predeterminado. Una vez que hayas iniciado sesión, cambia al nuevo usuario antes de continuar.</p>
 </div>
@@ -68,10 +66,12 @@
 </ul>
 </div>
 <h2>Paso 5 — Configurar el servidor MySQL</h2>
+<div class="solvvy-solution">
 <p>Ahora debes configurar y asegurar el servidor MySQL agregando una contraseña y eligiendo qué funciones te gustaría deshabilitar. Mira el siguiente enlace para obtener instrucciones.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215879487-Como-configurar-MYSQL-en-DreamCompute-corriendo-Debian-o-Ubuntu#MySQL_seguro" target="_blank" rel="noopener">Asegurar MySQL</a></li>
 </ul>
+</div>
 <h2>Paso 6 — Crear una carpeta para tu sitio web</h2>
 <div class="solvvy-solution">
 <p>Create a folder for the website.</p>
@@ -114,11 +114,8 @@
 </pre>
 </div>
 <p>Una vez que se agregas VirtualHost, el sitio deberá habilitarse con el comando <span class="code">a2ensite</span>.</p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Si quieres deshabilitar un siio, necesitarás usar el comando <span class="code">a2dissite</span>.</p>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[exampleuser@instance]$ </span><span class="command">sudo a2ensite</span>
@@ -271,7 +268,7 @@ Success: WordPress installed successfully.
 </div>
 <p>Modifica los permisos de <span class="text-object">wp-config.php</span> para que solo los usuarios de tu instancia puedan acceder a él.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[exampleuser@instance]$ </span><span class="command ">chmod -v 640 wp-config.php</span>
+<pre class="prebox"><span class="server">[exampleuser@instance]$ </span><span class="command">chmod -v 640 wp-config.php</span>
 mode of 'wp-config.php' changed from 0644 (rw-r--r--) to 0640 (rw-r-----)
 </pre>
 </div>
@@ -282,7 +279,6 @@ mode of 'wp-config.php' changed from 0644 (rw-r--r--) to 0640 (rw-r-----)
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[exampleuser@instance]$ </span><span class="command">sudo chown -R <span class="code-highlight">exampleuser</span>:www-data /var/www/<span class="code-highlight">example.com</span></span>
 </pre>
-</div>
 </div>
 </div>
 <h2>Paso 12 — Edita el archivo wp-config.php</h2>
