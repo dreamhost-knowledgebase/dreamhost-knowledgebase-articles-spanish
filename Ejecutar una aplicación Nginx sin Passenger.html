@@ -1,8 +1,11 @@
 <h2>Generalidades</h2>
+<div class="solvvy-solution">
 <p>Las máquinas VPS que ejecutan Debian Stretch no pueden ejecutar Passenger si el tipo de servidor está configurado en Nginx (en lugar de Apache). Cualquier aplicación previamente configurada para ejecutarse en Nginx con Passenger ya no funcionará después de la actualización a Debian Stretch.</p>
 <p>Un método alternativo para alojar una aplicación en Nginx sin pasajero sería ejecutarla en un servidor HTTP independiente. Esto también debe ejecutarse en un puerto sin privilegios. El proxy se puede habilitar a través del panel DreamHost.</p>
 <p>Este artículo enumera algunos ejemplos simples de cómo crear un servidor independiente para Node, Python y Ruby.</p>
+</div>
 <h2>Configuración inicial</h2>
+<div class="solvvy-solution">
 <h3>Paso 1 — Configurar el directorio público</h3>
 <p>Primero, configura el dominio para usar el subdirectorio público como directorio principal del dominio. Consulta el siguiente artículo para obtener instrucciones sobre cómo ajustar el directorio web de tu sitio en el servidor.</p>
 <ul>
@@ -26,13 +29,12 @@
 <li>Selecciona el número de puerto en el que se ejecutará el servidor autónomo.</li>
 <li>Click <strong>Agregar un servidor proxy</strong>.</li>
 </ol>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>En todos los ejemplos siguientes, se utiliza el puerto 8002.</p>
 </div>
 </div>
 <h2>Node.js</h2>
+<div class="solvvy-solution">
 <ol>
 <li>Instala una <a href="https://help.dreamhost.com/hc/es/articles/360029083351-Instalar-una-versi%C3%B3n-personalizada-de-NVM-y-Node-js" target="_self" rel="undefined">versión personalizada de Node.js</a>.</li>
 <li>En el directorio de la aplicación (<span class="text-object">example.com</span>), <a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self" rel="undefined">crea un archivo</a> llamado <span class="text-object">app.js</span> llamado app.js con el siguiente código:</li>
@@ -45,11 +47,8 @@
   response.end("Hello World From Node");
   }).listen(8002);</pre>
 </div>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>La función <span class="code">listen</span> le dice al nodo en qué puerto debe escuchar la aplicación.</p>
-</div>
 </div>
 <p>Inicia el servidor de nodo predeterminado corriendo el archivo <span class="text-object">app.js</span>.</p>
 <div class="preboxcontainer">
@@ -62,7 +61,9 @@
 </div>
 </div>
 <p>Visita el dominio (sin el puerto agregado a la URL) y verás que se ejecuta la aplicación.</p>
+</div>
 <h2>Python</h2>
+<div class="solvvy-solution">
 <p>Un servidor independiente común que se utiliza para aplicaciones Python es <a href="https://gunicorn.org/" target="_self">Gunicorn</a> inspirado en el servidor Ruby Unicorn.</p>
 <div class="prereqs">
 <p>Primero debes instalar una versión personalizada de Python. Esto te permite crear un virtualenv e instalar módulos personalizados de Python localmente.</p>
@@ -95,7 +96,9 @@
 <pre class="prebox"><span class="server">(venv)[server]$ </span><span class="command">GUNICORN_CMD_ARGS="--bind=localhost:8002" gunicorn myapp:app</span></pre>
 </div>
 <p>Visita el dominio y verás 'Hello, World From Gunicorn!'.</p>
+</div>
 <h2>Ruby</h2>
+<div class="solvvy-solution">
 <p>Haz <span class="text-object">.gems</span> el directorio de gemas predeterminado para nuestro usuario. Agrega lo siguiente al archivo <span class="text-object">.bash_profile</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox">export PATH=$HOME/.gems/bin:$PATH
@@ -128,3 +131,4 @@ bind 'tcp://127.0.0.1:8002'</pre>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">puma -C config.rb</span></pre>
 </div>
 <p>&nbsp;</p>
+</div>
