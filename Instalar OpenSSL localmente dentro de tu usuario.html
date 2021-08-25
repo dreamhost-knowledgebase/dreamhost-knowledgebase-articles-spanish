@@ -9,11 +9,8 @@
 </div>
 <h2>Instalar OpenSSL</h2>
 <div class="solvvy-solution">
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Este ejemplo instala la versión 1.1.1g.</p>
-</div>
 </div>
 <ol>
 <li>Inicia sesión en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
@@ -47,9 +44,7 @@ Si son iguales, procede al siguiente paso.</li>
 </div>
 </li>
 <li>Configura el archivo:
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Esto se configurará para ser instalado en un directorio llamado <span class="text-object">openssl</span> dentro de tu usuario. Asegúrate de cambiar <span class="text-object">username</span> a tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Usuario Shell</a>.</p>
 <p>Puedes instalarlo donde quieras, solo asegúrate de NO instalarlo dentro del directorio llamado <span class="text-object">openssl-1.1.1g</span>. Este directorio fué ya creado cuando descomprimiste el archivo <span class="text-object">.tar.gz</span>. Si lo configuras ahí, fallará (pues ya existe).</p>
 <p>Mira la siguiente página de OpenSSL para ver información de opciones de configuración:</p>
@@ -57,15 +52,11 @@ Si son iguales, procede al siguiente paso.</li>
 <li><a href="https://wiki.openssl.org/index.php/Compilation_and_Installation#Configuration" target="_self">Recopilación e instalación</a></li>
 </ul>
 </div>
-</div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">./config --prefix=/home/<span class="code-highlight">username</span>/openssl --openssldir=/home/<span class="code-highlight">username</span>/openssl no-ssl2</span></pre>
 </div>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Asegúrate de cambiar 'username' por tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Usuario Shell</a>.</p>
-</div>
 </div>
 </li>
 <li>Corre el comando <span class="code">make</span>, seguido por <span class="code">make test</span>.<br />
@@ -89,11 +80,8 @@ Al final deberás ver <span class="text-object">All tests successful</span>.</li
 <pre class="prebox">export PATH=$HOME/openssl/bin:$PATH
 export LD_LIBRARY_PATH=$HOME/openssl/lib<br />export LC_ALL="en_US.UTF-8"<br />export LDFLAGS="-L/home/<span class="code-highlight">username</span>/openssl/lib -Wl,-rpath,/home/<span class="code-highlight">username</span>/openssl/lib"</pre>
 </div>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>En la última línea, asegúrate de cambiar <span class="text-object">username</span> por tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Usuario Shell</a>.</p>
-</div>
 </div>
 </li>
 <li><span class="code">source</span> el <span class="text-object">.bash_profile</span>.<br />

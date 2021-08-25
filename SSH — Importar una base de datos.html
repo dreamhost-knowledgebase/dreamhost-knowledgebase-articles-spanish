@@ -1,7 +1,6 @@
 <div class="notebox-tip">
 <p>Si te encuentras en una situación que requiere cambios en tu sitio y tu desarrollador no está disponible para ayudarte, el equipo de soporte calificado de DreamHost puede ayudarte por una pequeña tarifa. Puedes encontrar más información sobre los servicios admitidos y los costos asociados en el artículo de <a href="https://help.dreamhost.com/hc/es/articles/360042256912-Generalidades-sobre-Servicios-Profesionales-">Servicios Profesionales de DreamHost</a>.</p>
 </div>
-
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo explica cómo importar el contenido de la base de datos a través de SSH.</p>
@@ -12,17 +11,17 @@
 </div>
 <h2>Ubicar las credenciales de tu base de datos</h2>
 <div class="solvvy-solution">
-<p>Este artículo asume que ya tienes una <a href="https://help.dreamhost.com/hc/es/articles/215039758-Generalidades-sobre-copias-de-seguridad-de-bases-de-datos" target="_self">copia de seguridad de tu base de datos MySQL</a>. Para importar el archivo de respaldo, necesitarás las credenciales de tu base de datos. Mira el siguiente artículo para encontrar las credenciales de tu base de datos:</p>
+<p>Este artículo asume que ya tienes una&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215039758-Generalidades-sobre-copias-de-seguridad-de-bases-de-datos" target="_self">copia de seguridad de tu base de datos MySQL</a>.&nbsp;Para importar el archivo de respaldo, necesitarás las credenciales de tu base de datos. Mira el siguiente artículo para encontrar las credenciales de tu base de datos:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" style="background-color: #ffffff;" target="_self">Encuentra tus credenciales para acceder a la base de datos</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encuentra tus credenciales para acceder a la base de datos</a></li>
 </ul>
 </div>
-<h2>Importar una copia de respaldo de base de datos en formato .sql creado a través de SSH</h2>
+<h2><span id="importar-base-de-datos-ssh"> Importar una copia de seguridad de base de datos .sql vía SSH</span></h2>
 <div class="solvvy-solution">
 <ol>
-<li>Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Cómo crear un usuario con acceso Shell (SSH)</a> para convertir tu usuario <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a> o <a href="https://help.dreamhost.com/hc/es/articles/115000675027#seguridad">SFTP</a> a un usuario SHELL.</li>
+<li>Revisa el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Cómo crear un usuario con acceso Shell (SSH)</a>&nbsp;para convertir tu usuario&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027#seguridad">SFTP</a>&nbsp;a un usuario SHELL.</li>
 <li>Sube la copia de respaldo en formato <span class="text-object">.sql</span> a tu servidor web. Revisa el artículo sobre FTP para obtener más detalles.</li>
-<li>Asegúrate de estar en el mismo directorio en el que subiste el archivo <span class="text-object">.sql</span>, luego CORRE el siguiente comando para importar el archivo de base de datos <span class="text-object">.sql</span>.<br/>
+<li>Asegúrate de estar en el mismo directorio en el que subiste el archivo <span class="text-object">.sql</span>, luego CORRE el siguiente comando para importar el archivo de base de datos <span class="text-object">.sql</span>.<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql -h <span class="code-highlight">mysql.example.com</span> -u <span class="code-highlight">username</span> -p <span class="code-highlight">dbname</span> &lt; <span class="code-highlight">databasefile.sql</span></span></pre>
 </div>
@@ -40,28 +39,28 @@
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump -h <span class="code-highlight">OLDHOSTNAME</span> -u <span class="code-highlight">OLDUSERNAME</span> -p<span class="code-highlight">OLDPASSWORD OLDDATABASENAME</span> | mysql -h <span class="code-highlight">DREAMHOSTHOSTNAME</span> -u <span class="code-highlight">DREAMHOSTUSER</span> -p<span class="code-highlight">DREAMHOSTPASSWORD DREAMHOSTDATABASE</span></span></pre>
 </div>
 <div class="alert alert-note">
-<div class="alert-icon"><img alt="" height="60" src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60"/></div>
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
 <div class="alert-content">
 <p>No hay espacios entre <span class="code">-p</span> y la contraseña.</p>
 </div>
 </div>
 <h3>Explicación de las iniciales dentro del comando de importación anterior</h3>
 <dl>
-<dt><span class="code">mysqldump</span> — escribe una copia de una base de datos en un solo archivo.</dt>
-<dt><span class="code">|</span> — redirige su salida a otra aplicación "mysql".</dt>
-<dt><span class="code">-h</span> — especifica el nombre de host/servidor.</dt>
-<dt><span class="code">-u</span> — especifica el nombre de usuario asociado con la base de datos SQL (este usuario NO es el mismo usuario FTP o Shell).</dt>
-<dt><span class="code">-p</span> — especifica es la contraseña del usuario SQL.</dt>
-<dt><span class="code">DREAMHOSTDATABASE</span> — especifica el nombre de la base de datos.</dt>
+<dt><span class="code">mysqldump</span>&nbsp;—&nbsp;escribe una copia de una base de datos en un solo archivo.</dt>
+<dt><span class="code">|</span> —&nbsp;redirige su salida a otra aplicación "mysql".</dt>
+<dt><span class="code">-h</span> —&nbsp;especifica el nombre de host/servidor.</dt>
+<dt><span class="code">-u</span> —&nbsp;especifica el nombre de usuario asociado con la base de datos SQL (este usuario NO es el mismo usuario FTP o Shell).</dt>
+<dt><span class="code">-p</span> —&nbsp;especifica es la contraseña del usuario SQL.</dt>
+<dt><span class="code">DREAMHOSTDATABASE</span> —&nbsp;especifica el nombre de la base de datos.</dt>
 </dl>
 <div class="alert alert-note">
-<div class="alert-icon"><img height="60" src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60"/></div>
+<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
 <div class="alert-content">
-<p>La base de datos de destino <a href="https://help.dreamhost.com/hc/es/articles/221691727-Crear-una-base-de-datos-MySQL" target="_self">ya debe existir</a>; de no ser así, el comando va a fallar.</p>
+<p>La base de datos de destino&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221691727-Crear-una-base-de-datos-MySQL" target="_self">ya debe existir</a>;&nbsp;de no ser así, el comando va a fallar.</p>
 <p>Si estás corriendo este comando desde el shell en tu servidor/host anterior, debes otorgar acceso remoto a tu base de datos en DreamHost al hacer que el servidor remoto sea un "host permitido".</p>
 <p>Para obtener más información, visita el siguiente artículo:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215575787-Administrar-usuarios-de-MySQL-hosts-permitidos-y-privilegios" style="background-color: #ffffff;" target="_self">Administrar usuarios MySQL, hosts/servidores permitidos y privilegios</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215575787-Administrar-usuarios-de-MySQL-hosts-permitidos-y-privilegios" target="_self">Administrar usuarios MySQL, hosts/servidores permitidos y privilegios</a></li>
 </ul>
 </div>
 </div>
@@ -70,10 +69,10 @@
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encuontrar tus credenciales para acceder a la base de datos</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214395768-phpMyAdmin-C%C3%B3mo-importar-una-base-de-datos-o-una-tabla" rel="undefined" target="_self">phpMyAdmin — Cómo importar una base de datos o una tabla</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214395768-phpMyAdmin-C%C3%B3mo-importar-una-base-de-datos-o-una-tabla" target="_self" rel="undefined">phpMyAdmin — Cómo importar una base de datos o una tabla</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215039938--C%C3%B3mo-migrar-mi-base-de-datos-a-DreamHost-" target="_self">¿Cómo migrar mi base de datos a DreamHost?</a></li>
 </ul>
 </div>
 <div id="gtx-trans" style="position: absolute; left: 80px; top: 1321.69px;">
-<div class="gtx-trans-icon"> </div>
+<div class="gtx-trans-icon">&nbsp;</div>
 </div>
