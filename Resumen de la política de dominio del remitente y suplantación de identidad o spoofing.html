@@ -40,15 +40,8 @@ $emailMessage .= "Mensaje: " $message . "\r\n";
 mail($to_email, $subject, $emailMessage, $header);
 </pre>
 </div>
-<dl>
-<dd></dd>
-<dd></dd>
-</dl>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Este código solo falsificó el encabezado FROM (el que se ve en un programa de cliente de correo). Cualquier rebote o mensaje de error del servidor de correo se envía al&nbsp;<a href="https://en.wikipedia.org/wiki/Bounce_address" target="_self">envelope sender o remitente del sobre</a>,&nbsp;que se dejó sin escribir y seguirá siendo la dirección predeterminada username@server.dreamhost.com address.</p>
-</div>
 </div>
 <p>Para falsificar el remitente del sobre y recibir correos devueltos, ve a esa dirección de correo en lugar del directorio <span class="text-object">Maildir/new</span> en el servidor web, use la&nbsp;<a href="https://www.php.net/manual/es/function.mail.php" target="_self" rel="undefined">función de correo -f parámetro adicional</a>&nbsp;como en el siguiente:</p>
 <div class="preboxcontainer">

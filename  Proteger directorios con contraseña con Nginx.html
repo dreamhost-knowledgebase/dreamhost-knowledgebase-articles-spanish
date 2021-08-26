@@ -2,11 +2,8 @@
 <div class="solvvy-solution">
 <p>En un servidor Apache, es posible proteger con contraseña un directorio usando archivos <span class="text-object">.htaccess</span> y <span class="text-object">.htpasswd</span>. Sin embargo, los archivos <span class="text-object">.htaccess</span> no son compatibles con Nginx.</p>
 <p>Aún puedes proteger con contraseña tus directorios, pero necesitas usar un archivo <span class="text-object">basic_auth.conf</span> en su lugar.</p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
-</div>
 </div>
 </div>
 <h2>Creando el archivo</h2>
@@ -32,9 +29,7 @@
 <li>El parámetro <span class="code">auth_basic</span> es solo el título del mensaje que el usuario ve cuando visita este directorio.</li>
 <li>El parámetro <span class="code">auth_basic_user_file</span> especifica dónde está el archivo de contraseña. Observa cómo su ruta se establece en el directorio <span class="text-object">/nginx</span>.</li>
 </ul>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <ul>
 <li>En este ejemplo, la directiva <span class="code">location</span> protege con contraseña el dominio entero, ya que está apuntando a <span class="text-object">/</span>.</li>
 <li>Si quieres que un subdirectorio esté protegido con contraseña, cambia la directiva <span class="code">location</span> de la siguiente manera:</li>
@@ -42,7 +37,6 @@
 <div class="preboxcontainer">
 <pre class="prebox">location /subdirectory/
 </pre>
-</div>
 </div>
 </div>
 </li>
@@ -65,19 +59,13 @@ Adding password for user LOGIN
 </li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216454967-Como-recargar-y-reiniciar-Nginx-Solo-para-servidores-dedicados-">Recarga el archivo de configuración de Nginx</a>.</li>
 <li>En tu navegador, carga el directorio al que apunta <span class="text-object">/home/username/nginx/example.com/basic_auth.conf</span>.
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>En el ejemplo arriba, esto sería el directorio raíz de tu dominio ya que la directiva <span class="code">location</span> apunta a <span class="text-object">/</span>.</p>
-</div>
 </div>
 </li>
 <li>Ingresa un usuario/contraseña cuando se te solicite iniciar sesión.
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>En este ejemplo, tu nombre de usuario es <span class="code">LOGIN</span> y la contraseña es la que creó anteriormente.</p>
-</div>
 </div>
 </li>
 </ol>

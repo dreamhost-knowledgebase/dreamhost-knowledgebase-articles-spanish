@@ -1,14 +1,11 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>En este artículo se explican en detalle las configuraciones de puertos que puedes utilizar para configurar un cliente de correo. Asegúrate de consultar el artículo de "configuración de cliente de correo" para un resumen general de cómo configurar tu correo en tu cliente de correo preferido:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214918038-Generalidades-de-las-configuraciones-del-cliente-de-correo" target="_self">Resumen de configuración de cliente de correo</a></li>
 </ul>
 <p>La mayoría de las veces, tu cliente de correo establecerá automáticamente los valores de puerto seguro por ti. Sin embargo, si tu cliente te hace ingresar estos valores de puerto manualmente, mira la información a continuación para determinar los valores correctos:</p>
-</div>
 </div>
 <p>Los números de puerto que establezcas determinarán al protocolo (IMAP o POP3) que utilizará tu cliente de correo. Existen cuatro opciones básicas. IMAP seguro es la configuración recomendada:</p>
 <ul>
@@ -18,9 +15,7 @@
 <li>POP3 (inseguro).</li>
 </ul>
 <p>Sigue los pasos indicados a continuación para elegir el protocolo y números de puerto que te gustaría usar para conectarte a tu servidor de correo.</p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Para encontrar rápidamente tu configuración de correo en el panel, abre la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=mail.addresses" target="_blank" rel="noopener">Administrar Correo</a>&nbsp;y busca el enlace <img class="text-icon" src="https://kbimages.dreamhosters.com/images/email-setup-info.png" alt="Email Setup Info" /> en la esquina superior derecha. Haz clic en el texto para abrir las instrucciones de acceso rápido para tu dirección de correo:</p>
 <dl>
 <dt><strong>Entrante</strong></dt>
@@ -31,18 +26,14 @@
 </dl>
 </div>
 </div>
-</div>
 <h2>Paso 1 — Decidir entre POP3 o IMAP</h2>
 <div class="solvvy-solution">
 <p>POP3 e IMAP son dos maneras diferentes de revisar tu correo. Un programa de cliente de correo se conecta al servidor de correo usando o POP3 o IMAP. Todas las cuentas de correo de DreamHost soportan automáticamente tanto conexiones POP3 como conexiones IMAP.</p>
 <h3>¿Qué es POP3?</h3>
 <p>POP3 descarga todo el correo desde el servidor de la bandeja de entrada y lo almacena en tu computador. De esta manera, los correos están disponibles incluso cuando no estás conectado a internet.</p>
 <p>También tienes la opción (en tu cliente de correo) de conservar tu correo en el servidor. Si eliges no activar esta configuración en tu cliente de correo, los correos se eliminan del servidor y solamente se almacenan localmente en tu programa de cliente de correo</p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>La configuración de POP solamente descargará el correo de la carpeta de bandeja de entrada. Cualquier otro (u otros) correo en carpetas o subcarpetas (como Papelera, Borradores y Enviados) debe ser movido a la bandeja de entrada para poder verlo o descargarlo usando POP.</p>
-</div>
 </div>
 <h3>¿Qué es IMAP?</h3>
 <p>IMAP sincroniza tu programa de cliente de correo con el servidor. Los correos permanecen en el servidor, y tu puedes crear y ver carpetas de correo en el servidor, además de en la Bandeja de entrada. La mayoría de los programas de cliente de correo tienen una funcionalidad para sincronizar inicialmente solo los encabezados de los correos, para que tu puedas ver rápidamente qué correos tiene, y descargar el cuerpo del mensaje cuando desees leer el mensaje entero. Como los correos permanecen en el servidor, puedes ver todos tus correos desde cualquier programa o dispositivo de cliente de correo. El correo web usa IMAP.</p>
@@ -84,12 +75,9 @@
 <ul>
 <li style="font-weight: 400;"><strong>SMTP | Port 25</strong><span style="font-weight: 400;"> (Desactualizado y no recomendado. La autenticación con usuario y contraseña TIENE que estar habilitada si se quiere utilizar esta opción).</span></li>
 </ul>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Se recomienda el puerto 465 con SSL; sin embargo, algunos clientes de correo no pueden usar este puerto.</p>
 <p>Si no puedes usar el puerto 465, la siguiente mejor opción es el puerto 587 usando STARTTLS.</p>
-</div>
 </div>
 </div>
 <h2>Resumen de seguridad en la conexión</h2>
@@ -105,11 +93,8 @@
 <ul>
 <li><strong>https</strong>://webmail.example.com</li>
 </ul>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Algunos clientes establecen automáticamente el puerto cuando seleccionas TLS/SSL, o seleccionan TLS/SSL automáticamente cuando seleccionas el puerto adecuado. Otros clientes necesariamente requieren que tu hagas ambas elecciones para poder configurar completamente el SSL para el servicio apropiado.</p>
-</div>
 </div>
 <h3>¿Qué es la conexión tipo STARTTLS?</h3>
 <p>Existe otro método que usa STARTTLS. El método STARTTLS se conecta al puerto usual SMTP/IMAP/POP3, y después mejora la conexión a TLS enviando una solicitud de STARTTLS. Algunos clientes de correo llaman a esto "TLS", y llaman "SSL" al método de usar directamente la encriptación en un puerto diferente. ¡Esta distinción es técnicamente incorrecta!</p>
@@ -122,15 +107,12 @@
 </dl>
 <p>La imagen de arriba muestra una configuración segurad de IMAP.</p>
 <p>Esto es seguro pues el puerto 993 (entrada) y 465 (salida) son números de puerto seguros. <span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">SSL también esta habilitado lo cual te fuerza a usar estos puertos seguros.</span></p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <ul>
 <li>La configuración del puerto y la opción SSL deben coincidir. Es decir, si estás usando SSL/TLS, debes usar también puertos seguros.</li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041537-Generalidades-sobre-certificados-SSL">El habilitar SSL</a> (Transporte Seguro) requerirá de un paso adicional de confirmación y aceptación del certificado para conexión segura, tanto para correo entrante como saliente.</li>
 <li>Es normal recibir una advertencia de certificados al intentar conectarse usando una conexión segura. Revisa el artículo de <a href="https://help.dreamhost.com/hc/es/articles/215306748-Error-Certificate-domain-mismatch-conectando-a-un-servidor-de-correo-de-DreamHost" target="_self" rel="undefined">Error 'Certificate domain mismatch' conectando a un servidor de correo de DreamHost</a> para más soluciones.</li>
 </ul>
-</div>
 </div>
 </div>
 <h2>Ver también</h2>

@@ -1,26 +1,19 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo cubre algunos problemas comunes y pasos de solución de problemas que puede seguir para arreglar tus cron jobs.</p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
-</div>
 </div>
 </div>
 <h2>Pasos de solución de problemas</h2>
 <div class="solvvy-solution">
 <h3>Establecer una dirección de correo electrónico</h3>
 <p>Cuando pruebes tu nuevo cron job, asegúrate de establecer una dirección de correo para informar los resultados. Esto te brinda información importante sobre lo que puede estar yendo mal si la línea de comando no ejecuta el cron job como se desea.</p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Solo recibirás un correo si el cron falla, o si el cron job crea la salida para ver.</p>
-</div>
 </div>
 <h3>Establecer los permisos de archivo correctos</h3>
 <p>Si planeas utilizar software externo con un cron job, asegúrate de haber configurado 'write' y otros permisos para los archivos en tus carpetas remotas. Si recibes un mensaje de error sobre "permiso denegado", significa que tus permisos no están configurados correctamente. También especificar la ruta completa del archivo en el que estás escribiendo puede evitar problemas con el entorno del cron job ejecutándose desde un directorio diferente.</p>
-</div>
 <h3>Usar rutas de archivo completas</h3>
 <p>El crontab del servidor necesita saber exactamente dónde leer y escribir archivos. Por ejemplo, si ejecutas manualmente el siguiente archivo llamado <span class="text-object">file.sh</span>, creará un nuevo archivo llamado <span class="text-object">output.txt</span> en el directorio en el que ejecuta el comando.</p>
 <div class="preboxcontainer">
@@ -29,6 +22,7 @@
 <p>Sin embargo, un cron job no podría localizar ninguno de estos archivos. En cambio, tu cron job necesitaría especificar las rutas completas como esta:</p>
 <div class="preboxcontainer">
 <pre class="prebox">0 12 * * * sh /home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span>/file.sh &gt; /home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span>/output.txt</pre>
+</div>
 </div>
 <h2>Mensajes de Error</h2>
 <div class="solvvy-solution">
