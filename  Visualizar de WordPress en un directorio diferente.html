@@ -11,11 +11,8 @@
 <p>Mucha gente quiere que WordPress alimente el root de su sitio web (por ejemplo. <code>http://example.com</code>) pero no quieren que todos los archivos de WordPress llenen su directorio root. WordPress te permite instalarlo en un subdirectorio, pero tu sitio web se sirve desde el root del sitio web.</p>
 </div>
 <p>Este artículo explica cómo mostrar WordPress desde el director raíz o desde el subdirectorio cuando se ha instalado en otro lugar.</p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Los pasos a continuación muestran cómo hacer esto a través de SSH, pero debe crear el subdirectorio y mover los archivos de la misma manera en un cliente FTP.</p>
-</div>
 </div>
 </div>
 <h2>Mostrar WordPress en un subdirectorio si está instalado en el directorio root</h2>
@@ -29,11 +26,8 @@
 </div>
 </li>
 <li>Crea el subdirectorio.
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Este ejemplo crea un subdirectorio llamado <span class="text-object">blog</span></p>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir blog</span></pre>
@@ -46,11 +40,8 @@
 </div>
 </li>
 <li>Crea un archivo <span class="text-object">.htaccess</span> a través de <a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">FTP</a> o <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">SSH</a> en el directorio raíz (<strong>example.com</strong>). Agrega los siguientes contenidos al archivo.
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Solo necesitas actualizar el texto resaltado que es tu nombre de dominio y el subdirectorio que creaste.</p>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;IfModule mod_rewrite.c&gt;
@@ -95,20 +86,19 @@ RewriteRule ^(/)?$ <span class="code-highlight">blog</span>/index.php [L]
 </div>
 </li>
 <li>Edita el archivo <span class="text-object">index.php</span> a través de <a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">SSH</a>. Agrega el nombre del subdirectorio justo antes de&nbsp; <span class="text-object">/wp-blog-header.php</span>. Por ejemplo:
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Solo necesitas actualizar el texto resaltado que es el subdirectorio que creaste.</p>
 </div>
-</div>
+</li>
+</ol>
 <div class="preboxcontainer">
 <pre class="prebox">/** Loads the WordPress Environment and Template */
 require __DIR__ . '<span class="code-highlight">/blog</span>/wp-blog-header.php';
 </pre>
 </div>
-</li>
+<ul>
 <li>Si ya has configurado los <a href="https://wordpress.org/support/article/using-permalinks/">Permalinks</a>, va a la página Configuración&gt; Permalinks y vuelve a guardarlos.</li>
-</ol>
+</ul>
 <p>Si visitas <strong>example.com</strong> ahora, verás tu sitio WordPress.</p>
 </div>
 <h2>See also</h2>
@@ -117,7 +107,4 @@ require __DIR__ . '<span class="code-highlight">/blog</span>/wp-blog-header.php'
 <li><a href="https://wordpress.org/support/article/giving-wordpress-its-own-directory/" target="_self" rel="undefined">WordPress.org — Dar a WordPress su Propio Directorio</a></li>
 <li><a href="https://wordpress.org/support/article/using-permalinks/" target="_self" rel="undefined">WordPress.org — Permalinks</a></li>
 </ul>
-</div>
-<div id="gtx-trans" style="position: absolute; left: 362px; top: 1908.19px;">
-<div class="gtx-trans-icon">&nbsp;</div>
 </div>

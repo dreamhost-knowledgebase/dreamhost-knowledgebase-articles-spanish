@@ -16,15 +16,12 @@
 </div>
 <h2>Verificar las huellas digitales usando un cliente de FTP</h2>
 <div class="solvvy-solution">
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Los siguientes ejemplos deben ser corridos en una terminal de SSH. Revisa los siguientes artículos para más información:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215360828-Software-de-cliente-SSH" target="_self">Clientes de SSH</a></li>
 </ul>
-</div>
 </div>
 <p>Cuando originalmente inicies sesión en un servidor de DreamHost, puede que veas la siguiente alerta:</p>
 <dl>
@@ -95,11 +92,8 @@ ED25519 key fingerprint is <span class="green">SHA256:q3JfuvuldJy5u/ETWHW7HBQ3Zq
 <div class="solvvy-solution">
 <p>Como está mencionado arriba, el comando 'FingerprintHash' no funciona en OpenSSH con versiones menores que 6.8. Sin embargo, puedes correr ssh-keyscan para descargar la llave pública, luego ver sus huellas digitales.</p>
 <p>Primero, descarga la llave pública del servidor.</p>
-<div class="alert alert-note">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-note-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-note">
 <p>Dependiendo de las versión de OpenSSH que estés usando, solo ciertas llaves se descargarán. Versiones menores a 6.8 por defecto serán MD5.</p>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh-keyscan batroc.dreamhost.com &gt; batrockeys.pub</span></pre>
