@@ -1,13 +1,10 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>Si tu aplicación Ruby no se inicia porque falta un gema, debes instalarlo localmente usando Bundler. Para obtener más información sobre el uso de Bundler, visita la siguiente página:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115001070131-Usar-Bundler-para-instalar-Ruby-gems">Usar Bundler para instalar gemas Ruby</a></li>
 </ul>
-</div>
 </div>
 <p>El Administrador de versiones de Ruby (RVM) es una utilidad que te permite agregar tu propia versión personal de Ruby a un usuario. Te permite agregar, eliminar o tener múltiples versiones de Ruby y sus bibliotecas en tu directorio de usuario.</p>
 <p>Este artículo te explica cómo instalar RVM manualmente, así como una versión personalizada de Ruby y/o Rails. Una vez completado, puedes habilitar Passenger dentro de tu panel y seleccionar qué versión de Ruby deseas usar con tu sitio.</p>
@@ -86,9 +83,7 @@ rvm 1.29.12-next (master) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [htt
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">rvm list known</span></pre>
 </div>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>Se enumerarán varios intérpretes, como MRI, JRuby, Rubinius, etc. Debes instalar una versión en la sección MRI. Por ejemplo:</p>
 <div class="preboxcontainer">
 <pre class="prebox"># MRI Rubies
@@ -106,7 +101,6 @@ rvm 1.29.12-next (master) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [htt
 [ruby-]2.6[.7]
 [ruby-]2.7[.3]
 [ruby-]3[.0.1]</pre>
-</div>
 </div>
 </div>
 </li>
@@ -152,16 +146,13 @@ ruby <span class="x x-first x-last">3.0.1p64 (2021-04-05</span> revision <span c
 <h2><span id="Enabling_RVM_using_the_DreamHost_panel">Habilitar RVM usando el panel de DreamHost</span></h2>
 <div class="solvvy-solution">
 <p>Ahora puedes visitar el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/217185437-C%C3%B3mo-habilitar-RVM">Cómo habilitar RVM</a>&nbsp;para especificar la versión de Ruby que instalaste anteriormente para cualquier dominio específico en ejecutando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215769578-Generalidades-sobre-Passenger">Passenger</a>.</p>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p><strong>Servidores compartidos</strong></p>
 <p>El soporte de DreamHost no puede ayudar con las instalaciones de RVM en un servidor compartido. Sin embargo, si has instalado RVM en un alojamiento Shared, no sigas el artículo 'Cómo habilitar RVM'. En su lugar, agrega lo siguiente a un archivo <span class="text-object">.htaccess</span> en tu aplicación Ruby:</p>
 <div class="preboxcontainer">
 <pre class="prebox">PassengerRuby /home/<span class="code-highlight">username</span>/.rvm/wrappers/<span class="code-highlight">ruby-2.7.1</span>/ruby</pre>
 </div>
 <p>Asegúrate de cambiar el <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y la versión de Ruby a la versión de tu aplicación.</p>
-</div>
 </div>
 </div>
 <h2><span id="See_also">Ver también</span></h2>

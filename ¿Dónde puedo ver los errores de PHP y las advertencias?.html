@@ -5,13 +5,13 @@
 <div class="solvvy-solution">
 <p>Cuando se hacen cambios de PHP en tu sitio (usualmente provenientes de <a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-">la actualización de la versión PHP</a>), es posible que PHP arroje errores y advertencias. En el pasado, estos se mostraban en tu sitio web y podías desactivarlos usando un archivo <span class="text-object">phprc</span>.</p>
 <p>DreamHost ahora desactiva todas las advertencias de PHP de forma predeterminada. Esto significa que nunca deberías verlos en tu sitio web al realizar cambios en PHP.</p>
-</div>
 <ul>
 <li><a href="#Cómo_puedo_mostrar_las_advertencias_en_mi_sitio" target="_self">¿Cómo puedo mostrar las advertencias en mi sitio?</a></li>
 <li><a href="#Controlar_qué_tipos_de_errores_se_muestran" target="_self">Controlar qué tipos de errores se muestran</a></li>
 <li><a href="#Usar_registro_personalizado_de_errores_PHP" target="_self">Usar un registro personalizado de errores PHP</a></li>
 <li><a href="#Configurar_el_registro_de_errores_personalizado" target="_self">Configurar el registro de errores personalizado</a></li>
 </ul>
+</div>
 <h2><span id="Cómo_puedo_mostrar_las_advertencias_en_mi_sitio">¿Cómo puedo mostrar las advertencias en mi sitio?</span></h2>
 <div class="solvvy-solution">
 <p>Para mostrar las advertencias en tu sitio, solo debes <a href="https://help.dreamhost.com/hc/es/articles/214894037--C%C3%B3mo-creo-un-archivo-phprc-a-trav%C3%A9s-de-FTP-">agregar la siguiente línea a tu archivo phprc</a>:</p>
@@ -19,11 +19,8 @@
 <pre class="prebox">display_errors = on</pre>
 </div>
 <p>Si se producen errores de PHP, ahora se mostrarán en tu sitio.</p>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>Esto <strong>NO</strong> se recomienda en un sitio web activo, ya que los visitantes verán los errores. La mejor opción es especificar qué tipos de errores te gustaría registrar y habilitar el registro de errores de PHP como se describe a continuación.</p>
-</div>
 </div>
 </div>
 <h2><span id="Controlar_qué_tipos_de_errores_se_muestran">Controlar qué tipo de errores se muestran</span></h2>
@@ -79,11 +76,8 @@ error_reporting(E_ALL);</pre>
 <div class="preboxcontainer">
 <pre class="prebox">/home/username/php.log</pre>
 </div>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>No es posible crear tu archivo <span class="text-object">php.log</span> en tu directorio <span class="text-object">/home/username/logs</span>. Este directorio es creado por DreamHost y es propiedad de dhapache, por lo tanto, tu usuario no puede escribir en este directorio.</p>
-</div>
 </div>
 <h3>Editar el archivo phprc</h3>
 <p>Agrega estas líneas a tu archivo <span class="text-object">phprc</span>:</p>

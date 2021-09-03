@@ -12,9 +12,7 @@
 </div>
 <h2><span id="GZIP">GZIP</span></h2>
 <div class="solvvy-solution">
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>DreamHost habilita la compresión GZIP de forma predeterminada en todos los planes de alojamiento web, por lo que no es necesario que hagas más pasos para activarla en tu sitio.</p>
 <p>Sin embargo, ten en cuenta que&nbsp;<span class="code">SSLCompression</span>&nbsp;está deshabilitado por defecto en los servidores de DreamHost debido a una&nbsp;<a href="http://breachattack.com/">vulnerabilidad de seguridad</a>&nbsp;cuando la compresión es combinada con&nbsp;<span class="text-object">HTTPS</span>&nbsp;(usando un Certificado TLS/<a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL">SSL</a>).</p>
 <p>Puedes leer más sobre la compresión GZIP y las alternativas a usar para HTTPS en el siguiente artículo:</p>
@@ -22,11 +20,9 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/360005040932--C%C3%B3mo-habilito-la-compresi%C3%B3n-GZIP-" target="_self">¿Cómo habilitar la compresión de GZIP?</a></li>
 </ul>
 </div>
-</div>
 <p>DEFLATE es un algoritmo de compresión de datos sin pérdidas similar a gzip, pero funciona en Apache 2. En el pasado, mod_gzip era una herramienta recomendada. Pero DreamHost usa Apache 2 y mod_deflate, que llama a gzip en el back-end automáticamente.</p>
 <div class="notebox-note">
 <p>Las siguientes son configuraciones predeterminadas en los servidores DreamHost y no es necesario habilitarlas. Sin embargo, puedes ajustar estos valores en tu archivo <span class="text-object">.htaccess</span> según sea necesario:</p>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;ifmodule mod_deflate.c&gt;
@@ -63,12 +59,12 @@
 <ul>
 <li><a href="http://httpd.apache.org/docs/2.2/mod/mod_deflate.html">mod_deflate</a></li>
 </ul>
+</div>
 <h2>Almacenamiento en caché del navegador</h2>
 <div class="solvvy-solution">
 <p>Usando <a href="http://httpd.apache.org/docs/2.2/mod/mod_expires.html">mod_expires</a>, puedes decirle a los navegadores visitantes que retengan ciertos archivos por más tiempo (le gustan las imágenes, que rara vez se cambian).</p>
 <div class="notebox-note">
 <p>Las siguientes son configuraciones predeterminadas en los servidores DreamHost y no es necesario habilitarlas. Sin embargo, puedes ajustar estos valores en tu archivo <span class="text-object">.htaccess</span> según sea necesario:</p>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox"># BEGIN Expire headers  
@@ -93,18 +89,16 @@
 # END Expire headers  
 </pre>
 </div>
+</div>
 <h2>Deshabilitar el almacenamiento en caché</h2>
 <div class="solvvy-solution">
 <p>Los ejemplos anteriores muestran la configuración predeterminada del servidor de DreamHost. Sin embargo, a veces puede ser necesario deshabilitar el almacenamiento en caché por completo. Esto se puede lograr agregando las siguientes reglas a tu archivo <span class="text-object">.htaccess</span>.</p>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>Deshabilitar la memoria caché podría afectar significativamente la velocidad de tu sitio y los puntajes de optimización del sitio.&nbsp;Es muy recomendable que dejes el almacenamiento en caché activo en tu sitio para asegurarte de que responda lo más rápido posible.</p>
 <p>Solo continúa agregando las siguientes reglas si estás absolutamente seguro de saber lo que estás haciendo y comprendes las consecuencias. Puedes probar la velocidad de tu sitio utilizando algunos de los sitios web mencionados aquí:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216560958-#Herramientas-de-carga-de-sitios-web" target="_self">Herramientas de carga de sitios web</a></li>
 </ul>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox">#Disables GZIP

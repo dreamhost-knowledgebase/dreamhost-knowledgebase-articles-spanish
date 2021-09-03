@@ -8,11 +8,8 @@
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215912848-C%C3%B3mo-lanzar-una-instancia-usando-el-panel-de-DreamCompute" target="_self" rel="undefined">Lanzado una instancia</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115003441752-Agregar-un-sitio-web-a-DreamCompute" target="_self" rel="undefined">Agregaste tu sitio web principal a DreamCompute</a> (es decir, <strong>example.com)</strong>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>Este artículo asume que has creado tu sitio en el directorio <span class="text-object">/var/www</span> y no en tu <span class="text-object">/home/username</span>.</p>
-</div>
 </div>
 </li>
 <li>Siguiendo los mismos pasos, agrega los subdominios que desees alojar en DreamCompute (es decir, <strong>blog.example.com</strong>)</li>
@@ -46,11 +43,8 @@ ssl.conf<br />ssl.load</pre>
 <ol>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216201547-Generalidades-sobre-la-conexi%C3%B3n-a-tu-instancia-con-las-claves-SSH" target="_self" rel="undefined">Inicia sesión en tu instancia</a>.</li>
 <li>Corre los siguientes comandos para instalar un certificado Let's Encrypt.
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>Asegúrate de cambiar <strong>example.com</strong> a tu nombre de dominio real en el siguiente comando.</p>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo apt install certbot python3-certbot-apache -y<br /></span><span class="server">[user@instance]# </span><span class="command">sudo certbot --manual -d "<span class="code-highlight">example.com</span>" -d "*.<span class="code-highlight">example.com</span>" --server https://acme-v02.api.letsencrypt.org/directory certonly</span></pre>
@@ -84,12 +78,9 @@ Tzx6GaeSJHe14C6t_M9wTBDe0s1stDMuq2Y15GLFZPE
 Before continuing, verify the record is deployed.
 -------------------------------------------------------------------------------</pre>
 </div>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>NO presiones la tecla <span class="code">Enter</span> todavía. Primero debes configurar este registro en tu panel DreamHost.</p>
 <p>La forma más sencilla de hacer esto es hacer clic en <span class="code">CTRL + C</span> en tu teclado para abortar el proceso de terminal actual. A continuación, copia el registro TXT largo de tu terminal y pégalo en tu panel DreamHost.</p>
-</div>
 </div>
 </li>
 <li>Inicia sesión en tu <a href="https://panel.dreamhost.com">panel de DreamHost</a> y navega hasta la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a></li>
@@ -196,11 +187,8 @@ IMPORTANT NOTES:
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo vim <span class="code-highlight">example.com</span>-le-ssl.conf</span></pre>
 </div>
 <p>En este archivo agrega el siguiente código.</p>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>Asegúrate de cambiar <strong>example.com</strong> a tu nombre de dominio real.</p>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;IfModule mod_ssl.c&gt;
@@ -236,14 +224,11 @@ Enabling site example.com-le-ssl</pre>
 <h2>Configura tus subdominios para usar este certificado</h2>
 <div class="solvvy-solution">
 <p>Crea archivos adicionales para cualquier subdominio para el que desees utilizar este mismo certificado. Por ejemplo, si deseas que el subdominio <strong>sub1.example.com</strong> también esté protegido por este certificado Wildcard, agrega los archivos denominados <strong><span class="text-object">sub1.example.com.conf</span></strong> y&nbsp;<span class="text-object"><strong>sub1.example.com-le-ssl.conf</strong></span> al directorio <strong><span class="text-object">/etc/apache2/sites-available</span></strong> como se muestra arriba.</p>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>Al editar el archivo <strong><span class="text-object">sub1.example.com-le-ssl.conf</span></strong>, asegúrate de cambiar <strong>sub</strong>. a tu nombre real de subdominio, excepto por las últimas 2 líneas:</p>
 <p>SSLCertificateFile /etc/letsencrypt/live/<strong>example.com</strong>/fullchain.pem</p>
 <p>SSLCertificateKeyFile /etc/letsencrypt/live/<strong>example.com</strong>/privkey.pem</p>
 <p>Estos deben seguir apuntando al nombre de dominio principal.</p>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;IfModule mod_ssl.c&gt;
@@ -270,7 +255,4 @@ Enabling site example.com-le-ssl</pre>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo systemctl reload apache2</span></pre>
 </div>
-</div>
-<div id="gtx-trans" style="position: absolute; left: 286px; top: 3037.64px;">
-<div class="gtx-trans-icon">&nbsp;</div>
 </div>
