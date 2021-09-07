@@ -12,15 +12,13 @@
 </div>
 <h2>Estadísticas WordPress y Nginx</h2>
 <div class="solvvy-solution">
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
-<p>Luego de hacer cualquier ajuste a un archivo <span class="text-object">.conf</span>, debes <a href="https://help.dreamhost.com/hc/es/articles/216454967-Como-recargar-y-reiniciar-Nginx-Solo-para-servidores-dedicados-" target="_self" rel="undefined">reiniciar tu VPS Servidor Dedicado</a>.</p>
+<div class="notebox-important">
+<p>Luego de hacer cualquier ajuste a un archivo <span class="text-object">.conf</span>, debes <a href="https://help.dreamhost.com/hc/es/articles/216454967-Como-recargar-y-reiniciar-Nginx-Solo-para-servidores-dedicados-" rel="undefined" target="_self">reiniciar tu VPS Servidor Dedicado</a>.</p>
 </div>
 </div>
 <p>Cuando usas Nginx, tu archivo <span class="text-object">.htaccess</span> no funciona. Por lo tanto, debes agregar código a otro archivo para ver tus estadísticas. Tu sitio de Nginx WordPress tiene dos directorios:</p>
 <div class="notebox-note">
-<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" rel="undefined" target="_self">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
 </div>
 <p><strong>Tu directorio web (conocido también como root)</strong></p>
 <p>Este es el directorio donde se encuentran todos los archivos de tu sitio web.</p>
@@ -45,7 +43,7 @@ if ($request_uri ~* ^/(stats|failed_auth\.html).*$)
 </pre>
 </div>
 <p>Ahora, cuando visites <strong>example.com/stats</strong>, aparecerá un mensaje de inicio de sesión que te permitirá iniciar sesión y ver las estadísticas de tu sitio.</p>
-</div>
+
 <h2>Habilitar de estadísticas y enlaces permanentes (permalinks)</h2>
 <div class="solvvy-solution">
 <p>WordPress usa algo llamado 'permalinks' o enlaces permanentes para facilitar la lectura de las URL. Cuando ejecutes Nginx, agrega las siguientes dos secciones para que funcionen las estadísticas del sitio y los enlaces permanentes.</p>
@@ -64,7 +62,7 @@ if (!-e $request_filename) {
 </div>
 <h2>Solución de problemas</h2>
 <div class="solvvy-solution">
-<p>Si has habilitado un usuario con estadísticas en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.stats&amp;" target="_blank" rel="noopener">Estadísticas del Sitio</a>&nbsp;pero encuentras que las estadísticas aún no están disponibles, por favor <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">contacta a soporte</a>.</p>
+<p>Si has habilitado un usuario con estadísticas en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.stats&amp;" rel="noopener" target="_blank">Estadísticas del Sitio</a> pero encuentras que las estadísticas aún no están disponibles, por favor <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">contacta a soporte</a>.</p>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
