@@ -21,11 +21,8 @@
 <div class="solvvy-solution">
 <p>Si encuentras que tienes que modificar y volver a cargar tu archivo de volcado varias veces, puede ser útil usar las herramientas CLI (por ejemplo, rm -rf y svnadmin create) para limpiar y volver a crear tu repositorio hasta que lo hagas bien. Pero luego querrás usar el panel para eliminar y volver a crear tu repositorio. Tus repositorios de prueba no funcionarán correctamente en producción ya que no permitirán ningún cambio.</p>
 <p>El panel crea el repositorio con dhapache como propietario, y los archivos reponame.access y reponame.passwd con dhapache como grupo. Intentar crear tu propio repositorio de producción con svnadmin create es inútil porque no tienes autorización para cambiar esas propiedades y membresías de grupo (y no tienes un usuario sudo).</p>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>No sobrescribas los archivos de dhapache. Sobrescribir archivos hace que tengan su grupo de usuarios en lugar de dhapache. Si tu repositorio es relativamente maduro cuando cometes este error y no tienes una copia de seguridad, no tendrás ninguna opción.</p>
-</div>
 </div>
 </div>
 <h2><span id="Algunos_clientes_requieren_contraseñas_MD5">Algunos clientes requieren contraseñas MD5</span></h2>

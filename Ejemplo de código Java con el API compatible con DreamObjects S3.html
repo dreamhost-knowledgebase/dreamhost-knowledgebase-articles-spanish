@@ -111,11 +111,8 @@ myphoto2.jpg 262518  2011-08-08T21:38:01.000Z</pre>
 <span id="s3-java-Eliminar_un_Bucket"></span>
 <h2>Eliminar un Bucket</h2>
 <div class="solvvy-solution">
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>El bucket debe estar vacío, si no no funciona.</p>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox">conn.deleteBucket(bucket.getName());</pre>
@@ -125,11 +122,8 @@ myphoto2.jpg 262518  2011-08-08T21:38:01.000Z</pre>
 <span id="s3-java-Forzar_Eliminación_para_Buckets_No_vacíos"></span>
 <h2>Forzar Elmiminación para Buckets No vacíos</h2>
 <div class="solvvy-solution">
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>no disponible</p>
-</div>
 </div>
 </div>
 <div id="creating-an-object">&nbsp;</div>
@@ -178,11 +172,8 @@ conn.setObjectAcl(bucket.getName(), "secret_plans.txt", CannedAccessControlList.
 <h2>Generar URL de Descarga de Objects (firmado y sin firmar)</h2>
 <div class="solvvy-solution">
 <p>Generar una URL sin firmar para <code class="docutils literal"><span class="pre">hello.txt</span></code>. Esto funciona por que <code class="docutils literal"><span class="pre">hello.txt</span></code> fue hecho público por la configuración de ACL de arriba. Esto genera una URL de descarga para <code class="docutils literal"><span class="pre">secret_plans.txt</span></code> que funcionará por 1 hora. URL de descarga firmadas funcionarán por un periodo de tiempo aún si el objeto es privado (cuando el tiempo se termina, la URL deja de funcionar).</p>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>La librería de Java no tiene un método para generar URL sin firmar, por lo que el siguiente ejemplo solo genera una URL firmada.</p>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox">GeneratePresignedUrlRequest request = new GeneratePresignedUrlRequest(bucket.getName(), "secret_plans.txt");

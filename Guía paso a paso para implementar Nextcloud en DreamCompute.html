@@ -27,6 +27,7 @@
 </ul>
 <h3>Usar una instancia basada en volumen</h3>
 <p>Se recomienda reiniciar una <a href="https://help.dreamhost.com/hc/es/articles/217701757--Cu%C3%A1l-es-la-diferencia-entre-los-discos-de-arranque-ef%C3%ADmeros-y-por-volumen-" target="_self" rel="undefined">instancia respaldada por volumen</a> ya que son permanentes en contraposición a los <a href="https://help.dreamhost.com/hc/es/articles/217701757--Cu%C3%A1l-es-la-diferencia-entre-los-discos-de-arranque-ef%C3%ADmeros-y-por-volumen-" target="_self" rel="undefined">discos efímeros</a> y puede tener un tamaño superior a 80 GB si se almacenan grandes cantidades de datos. Esto se puede hacer en el <a class="reference external" href="https://help.dreamhost.com/hc/es/articles/215912848-C%C3%B3mo-lanzar-una-instancia-usando-el-panel-de-DreamCompute" target="_self" rel="undefined">panel de DreamCompute</a> o con el <a href="https://help.dreamhost.com/hc/es/articles/216511617-Como-lanzar-una-instancia-usando-el-CLI-de-OpenStack" target="_self" rel="undefined">cliente de línea de comandos de OpenStack</a>.</p>
+</div>
 <div id="installing-mariadb">&nbsp;</div>
 <h2>Paso 3 — Instalar MariaDB en la instancia #1</h2>
 <div class="solvvy-solution">
@@ -63,11 +64,8 @@ bind-address            = 127.0.0.1
 </pre>
 </div>
 <p>donde <strong>$IP</strong> es la <a href="https://help.dreamhost.com/hc/es/articles/115001754711-Localizar-las-direcciones-IP-de-tu-instancia" target="_self" rel="undefined">dirección IP</a> de la base de datos de la instancia.</p>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>Si tienes una <a href="https://help.dreamhost.com/hc/es/articles/229789688-Descripci%C3%B3n-general-de-las-redes-privadas" target="_self" rel="undefined">red privada</a> habilitada, esta será la dirección IP privada y no la IP flotante si tu instancia de base de datos tiene una.</p>
-</div>
 </div>
 <p>Esto hace que la base de datos escuche las conexiones desde su dirección IP en lugar de solo escuchar en 127.0.0.1 (el localhost).</p>
 </div>
@@ -83,12 +81,9 @@ bind-address            = 127.0.0.1
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">MariaDB [(none)]&gt; </span><span class="command">create database <span class="code-highlight">nextcloud</span>;</span></pre>
 </div>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>En el siguiente comando, cambia $IP a la dirección IP de la segunda instancia que creaste para el servidor web.</p>
 <p>No agregues la dirección IP de la instancia de la base de datos, ya que esto provocará que no se conecte.</p>
-</div>
 </div>
 <p>Asegúrate de dejar las comillas simples alrededor del nombre de usuario, IP y contraseña. Por ejemplo, si tu contraseña es Xhd379s, ingrésala así</p>
 <ul>
@@ -110,11 +105,8 @@ bind-address            = 127.0.0.1
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">MariaDB [(none)]&gt; </span><span class="command">flush privileges;</span></pre>
 </div>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>Si deseas permitir el inicio de sesión de root desde cualquier dirección IP, puedes cambiar $IP a '%'. Sin embargo, esto no se recomienda, especialmente si la instancia de tu base de datos tiene una dirección IP pública (porque entonces cualquiera puede intentar acceder a ella).</p>
-</div>
 </div>
 <p>Cierra sesión de la base de datos:</p>
 <div class="preboxcontainer">
@@ -126,8 +118,8 @@ Bye</pre>
 <pre class="prebox"><span class="server">[root@dbinstance]# </span><span class="command">service mysql restart</span>
 </pre>
 </div>
-</div>
 <p>Esto completa la instalación de la instancia de la base de datos.</p>
+</div>
 <div id="installing-the-nextcloud-application">&nbsp;</div>
 <h2>Paso 5 —&nbsp;Instalar la aplicación Nextcloud en la instancia #2</h2>
 <div class="solvvy-solution">
@@ -147,9 +139,7 @@ Bye</pre>
 php7.0-mbstring php7.0-intl php7.0-mcrypt php-imagick php7.0-xml php7.0-zip</span></pre>
 </div>
 </div>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>El carácter de barra invertida \ se usa al ingresar un comando largo. Cuando ingresas \, el comando de terminal continúa a la siguiente línea hasta que termine de ingresarlo.</p>
 <p>También puedes eliminar el carácter \ y poner cada parámetro en una sola línea.</p>
 </div>
@@ -176,7 +166,7 @@ Esto descargará una copia comprimida de la aplicación Nextcloud.
 </li>
 </ol>
 </div>
-Esto crea un directorio llamado <span class="text-object"><span class="text-object">nextcloud en tu directorio actual.</span></span>
+<p>Esto crea un directorio llamado <span class="text-object"><span class="text-object">nextcloud en tu directorio actual.</span></span></p>
 <div id="setting-up-the-nextcloud-directory">
 <h3>Configurar el directorio nextcloud</h3>
 <p>Ahora debes copiar Nextcloud al directorio <span class="text-object">/var/www/nextcloud</span>. Corre lo siguiente:</p>
@@ -188,7 +178,6 @@ Esto crea un directorio llamado <span class="text-object"><span class="text-obje
 <p>Cambia los permisos del directorio nextcloud para que el usuario web, www-data en este caso, pueda acceder a él. Corre lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[root@instance]# </span><span class="command">chown -R www-data:www-data /var/www/nextcloud</span></pre>
-</div>
 </div>
 <div id="configuring-apache">&nbsp;</div>
 <h2>Paso 7 — Configurar Apache</h2>
@@ -247,5 +236,4 @@ Esto crea un directorio llamado <span class="text-object"><span class="text-obje
 <li>El host es la dirección IP de la instancia de tu base de datos con :3306 al final</li>
 </ul>
 <p>Da clic en <strong>Finish Installation</strong> y tienes una instalación funcional de Nextcloud.</p>
-</div>
 </div>
