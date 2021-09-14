@@ -10,14 +10,11 @@
 <li>Habilita tu dominio para soporte FastCGI.</li>
 <li>Descarga <span class="text-object">fcgi.py</span>, y guárdalo en tu PYTHONPATH.</li>
 <li>Crea tu controlador de página predeterminado, <span class="text-object">dispatch.fcgi</span>:
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <ul>
 <li>Debes usar <span class="text-object">dispatch.fcgi</span> o encontrará que el proceso es <a href="https://help.dreamhost.com/hc/es/articles/216540488--Por-qu%C3%A9-se-cancelaron-los-procesos-en-mi-servidor-Compartido-">terminado</a> en la mitad de la ejecución. Puedes encontrar más información en el artículo <a href="https://help.dreamhost.com/hc/es/articles/215317698-Soluci%C3%B3n-de-Problemas-de-Django">Solución de problemas de Django</a>.</li>
 <li>Asegúrate de usar la ruta <span class="text-object">#!/home/username/bin/python</span> y no <span class="text-object">#!/usr/bin/env python</span> con Pylons.</li>
 </ul>
-</div>
 </div>
 <div class="preboxcontainer">
 <pre class="prebox">#!/usr/bin/env python
@@ -89,11 +86,8 @@ export PATH="$HOME/packages/bin:$PATH"</pre>
 </div>
 </li>
 <li>Descarga <span class="text-object">fcgi.py</span> y ubícalo en <span class="text-object">~/packages/lib/python2.3/site-packages</span>. Puedes utilizar Flup alternativamente, como se muestra en la siguiente sección.
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" alt="" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p><span class="text-object">fcgi.py</span> sirve Tracebacks completos de Python en HTML de forma predeterminada, lo cual es un problema de seguridad. Debes anular el método <span class="text-object">[WSGI]Server.error()</span>.</p>
-</div>
 </div>
 </li>
 <li>Para probar la instalación virtual de python y fcgi, sigue las instrucciones del artículo de <a href="https://help.dreamhost.com/hc/es/articles/215319598-Generalidades-sobre-Django">Django</a>.</li>
