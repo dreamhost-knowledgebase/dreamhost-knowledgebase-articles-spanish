@@ -11,6 +11,30 @@
 </ul>
 <p>Una vez que hayas iniciado sesión, continúa con los pasos a continuación.</p>
 </div>
+<h2>Ver el tamaño de tu base de datos</h2>
+<div class="solvvy-solution">
+<p>Antes de optimizar tu base de datos, debes verificar el tamaño actual de la misma. Puedes verificar el tamaño de tu base de datos usando phpMyAdmin o SSH.</p>
+<h3>Usando phpMyAdmin</h3>
+<p>Usando las instrucciones a continuación, puedes ver el tamaño de tu base de datos dentro de phpMyAdmin.</p>
+<ol>
+<li>Haz clic en el nombre de la base de datos cuyo tamaño estás verificando en el menú del lado izquierdo.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-phpmyadmin-database-size.png" alt="phpMyAdmin database size" width="584" height="16" /></dd>
+</dl>
+</li>
+<li>En el extremo derecho de la fila inferior del panel principal, puedes ver el tamaño completo de la base de datos.</li>
+</ol>
+<h3>Usando SSH</h3>
+<p>También puedes usar SSH para conectarte e iniciar sesión en tu base de datos y seguir los pasos a continuación para encontrar el tamaño de ella. Revisa el siguiente artículo para obtener instrucciones sobre cómo conectarte a través de SSH:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214882998--C%C3%B3mo-conectarme-a-mi-base-de-datos-a-trav%C3%A9s-de-SSH-" target="_self">¿Cómo conectarme a mi base de datos a través de SSH? </a></li>
+</ul>
+<p>Corre la siguiente consulta para ver el tamaño de la base de datos en MB (no reemplaces ningún texto ni agregues saltos de línea):</p>
+<div class="preboxcontainer">
+<pre class="prebox">      <span class="command">SELECT table_schema "database", sum(data_length + index_length)/1024/1024 "size in MB" FROM information_schema.TABLES GROUP BY table_schema;</span>
+      </pre>
+</div>
+</div>
 <h2>Optimizar tu base de datos</h2>
 <div class="solvvy-solution">
 <p>En el lado izquierdo de phpMyAdmin, verás una lista de bases de datos:</p>
