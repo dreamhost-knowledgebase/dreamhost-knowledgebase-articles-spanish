@@ -86,15 +86,20 @@
 <div class="solvvy-solution">
 <p>A veces, ejecutar una optimización a través de phpMyAdmin tiende a fallar y la página finalmente se agota. Esto posiblemente se deba a que la base de datos es demasiado grande para que phpMyAdmin pueda manejarla. La alternativa es optimizar a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.&nbsp;Como usuario de shell, puedes acceder vía SSH en tu dominio y ejecutar el siguiente comando, que es la misma función que se ejecuta en phpMyAdmin:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql -u <span class="code-highlight">username</span> -p<span class="code-highlight">password</span> -h <span class="code-highlight">hostname</span> <span class="code-highlight">databasename</span> -e "show tables" | grep -v Tables_in | grep -v "+" | gawk '{print "optimize table " $1 ";"}' | mysql -u <span class="code-highlight">username</span> -p<span class="code-highlight">password</span> -h <span class="code-highlight">hostname</span> <span class="code-highlight">databasename</span> </span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqlcheck -h <span class="code-highlight">HOSTNAME</span> -u <span class="code-highlight">USERNAME</span> -p -o <span class="code-highlight">DATABASE</span></span></pre>
 </div>
 <p>Reemplaza las variables en el comando arriba con la información correspondiente de tu base de datos:</p>
 <ul>
-<li><strong>username</strong> – nombre de usuario de la base de datos.</li>
-<li><strong>password</strong> – contraseña del usuario.</li>
-<li><strong>hostname</strong> – nombre de host de la base de datos que configuraste y está activo.</li>
-<li><strong>databasename</strong> – nombre de la base de datos en la que estás ejecutando el comando.</li>
+<li><strong>USERNAME</strong> – el usuario de la base de datos.</li>
+<li><strong>HOSTNAME</strong> – el hostname de la base de datos que configuras y está activo.</li>
+<li><strong>DATABASE</strong> – el nombre de la base de datos en la cual estás coriendo este comando.</li>
 </ul>
+<p><span class="code">-p</span> te pedirá que ingreses tu contraseña de base de datos, que evitará que la contraseña se guarde en la historia de Bash de tu usuario SSH.</p>
+<div class="notebox-note">
+<p>Puedes ver la siguiente nota en la salida del comando:</p>
+<span class="code">Table does not support optimize, doing recreate + analyze instead</span>
+<p>Este mensaje ocurre cuando el motor de almacenamiento INNODB de MySQL realiza un conjunto diferente de operaciones para optimizar la tabla y puede ser ignorada de manera segura.</p>
+</div>
 <p>Puedes generar el registro del comando en un archivo para verlo agregando lo siguiente al final del comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox">&gt;&gt; results.txt</pre>

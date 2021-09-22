@@ -8,6 +8,17 @@
 <li>Carga el archivo <span class="text-object">.zip</span> del sitio web en DreamObjects</li>
 <li>Elimina la base de datos y el archivo <span class="text-object">zip</span> del sitio web en el servidor web para ahorrar espacio</li>
 </ul>
+<div class="prereqs">
+<p><strong>Prerequisitos</strong></p>
+<p>Se requiere la siguiente información para completar los pasos en este artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214823108--Qu%C3%A9-es-DreamObjects-" target="_self">Cuenta de DreamObjects con un usuario y bucket</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Usuario Shel del sitio web</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">Credenciales de usuario del sitio web</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encontrar-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Credenciales de la base de datos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216335908-Instalaci%C3%B3n-y-configuraci%C3%B3n-de-AWS-CLI" target="_self" rel="undefined">Credenciales de AWS CLI configuradas</a></li>
+</ul>
+</div>
 </div>
 <h2>Paso 1 — Configurar tu bucket de DreamObjects</h2>
 <div class="solvvy-solution">
@@ -101,7 +112,14 @@ find $HOME/backup/* -type d -exec rm -rf {} \; 2&gt; /dev/null</pre>
 </ol>
 <p>El código anterior hace una copia de seguridad de los archivos de tu base de datos y sitio web en tu bucket DreamObjects dentro de una carpeta llamada <span class="text-object">/backups</span>.</p>
 </div>
-<h2>Paso 3 — Correr el archivo</h2>
+<h2>Paso 3 — Configurar las credenciales de AWS CLI</h2>
+<div class="solvvy-solution">
+<p>El script de arriba usa AWS CLI para conectarse a DreamObjects. Debes configurar AWS CLI antes de ejecutar el script o no podrás conectarte. Revisa el siguiente artículo para más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216335908-Instalaci%C3%B3n-y-configuraci%C3%B3n-de-AWS-CLI">Instalación y configuración de AWS CLI </a></li>
+</ul>
+</div>
+<h2>Paso 4 — Correr el archivo</h2>
 <div class="solvvy-solution">
 <h3>Opción 1 — Correrlo manualmente</h3>
 <p>Corre el archivo manualmente con el siguiente comando:</p>
