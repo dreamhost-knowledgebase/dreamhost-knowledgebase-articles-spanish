@@ -27,7 +27,7 @@
 </div>
 <p>Una vez allí, ejecuta el siguiente comando. Asegúrate de cambiar el nombre de usuario, la contraseña, tu HostMySQL y nombreBD (base de datos) por las credenciales correctas.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump --opt --user=<span class="code-highlight">usuario</span> -p --host=<span class="code-highlight">tuHostMySQL</span> <span class="code-highlight">nombreBD</span> &gt; <span class="code-highlight">nombredetucopia.sql</span></span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump --opt --user=<span class="code-highlight">usuario</span> -p --host=<span class="code-highlight">tuHostMySQL</span> --no-tablespaces <span class="code-highlight">nombreBD</span> &gt; <span class="code-highlight">nombredetucopia.sql</span></span></pre>
 </div>
 <ul>
 <li>Luego se te pedirá la contraseña del usuario de tu base de datos.</li>
@@ -62,7 +62,7 @@ password="<span class="code-highlight">password</span>"
 
 for DB in $(mysql --host="$host" --user="$username" -p"$password" -e"show databases" --skip-column-names -s | grep -v information_schema); 
 do 
-  mysqldump --opt --host="$host" --user="$username" -p"$password" $DB &gt; ./$DB.sql; 
+  mysqldump --opt --host="$host" --user="$username" -p"$password" --no-tablespaces $DB &gt; ./$DB.sql; 
 done</pre>
 </div>
 </li>
@@ -81,7 +81,7 @@ done</pre>
 <p>Asegúrate de agregar comillas simples antes y después de tu contraseña para asegurarte de que el comando lo lea correctamente.</p>
 </div>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump --opt --user=<span class="code-highlight">usuario</span> --password='<span class="code-highlight">contraseña</span>' --host=<span class="code-highlight">tuHostMySQL</span> <span class="code-highlight">nombreBD</span> &gt; <span class="code-highlight">nombredetucopia.sql</span></span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump --opt --user=<span class="code-highlight">usuario</span> --password='<span class="code-highlight">contraseña</span>' --host=<span class="code-highlight">tuHostMySQL</span> --no-tablespaces <span class="code-highlight">nombreBD</span> &gt; <span class="code-highlight">nombredetucopia.sql</span></span></pre>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
