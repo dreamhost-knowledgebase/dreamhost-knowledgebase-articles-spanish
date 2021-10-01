@@ -1,116 +1,58 @@
-<div class="document">
-<div class="documentwrapper">
-<div class="body">
-<div id="DNS API commands">
-<div class="altTitle">API de DNS</div>
-<div class="table-of-content container">
-<ul class="simple">
-<li><a class="reference internal" href="#dns-list_records">dns-list_records</a></li>
-<li><a class="reference internal" href="#dns-add_record">dns-add_record</a></li>
-<li><a class="reference internal" href="#dns-remove_record">dns-remove_record</a></li>
-<li><a class="Ver_también" href="#Ver_también">Ver también</a></li>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>El módulo DNS API te permite administrar los registros DNS de tu dominio. Las siguientes opciones están disponibles.</p>
+<ul>
+<li>Enumera todos los registros (<a href="#dns-list_records" target="_self">dns-list_records</a>)</li>
+<li>Agrega un registro (<a href="#dns-add_record" target="_self">dns-add_record</a>)</li>
+<li>Elimina un registro (<a href="#dns-remove_record" target="_self">dns-remove_record</a>)</li>
+</ul>
+<p>Revisa el siguiente artículo para obtener instrucciones sobre cómo conectarst a la API de DreamHost. Usarás las instrucciones de este artículo para construir tu llamada API.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/4407354972692-Conectarse-con-un-API-de-DreamHost" target="_blank" rel="noopener">Conectarse con una API de DreamHost</a></li>
 </ul>
 </div>
-<div class="notebox-note">
-<p>Si ves que alguna de las instrucciones de este artículo no funciona como se esperaba, es posible que esté desactualizada. En caso de duda, por favor comunícate con soporte para obtener más ayuda.</p>
-</div>
-<p>El módulo de API de DNS te permite administrar los registros del Servicio de nombres de dominio.</p>
-<h2>Comandos</h2>
+<h2><span id="dns-list_records">dns-list_records</span></h2>
 <div class="solvvy-solution">
-<h3><span id="dns-list_records">dns-list_records</span></h3>
-<p>Vuelca una lista de todos los registros DNS para todos los dominios (sin incluir los registros) en todas las cuentas a las que tienes acceso. Ten en cuenta que esto omite las zonas dreamhosters.com, dreamhost.com, dreamhostps.com y newdream.net.</p>
-<table class="wikitable">
-<tbody>
-<tr>
-<td><strong>Comando</strong></td>
-<td>dns-list_records</td>
-</tr>
-<tr>
-<td><strong>Valores</strong></td>
-<td>(ninguno)</td>
-</tr>
-<tr>
-<td><strong>Resultado</strong></td>
-<td>
-<p>success<br />account_id zone record type value comment editable<br />1 718apts.com 718apts.com A 1.2.3.4 0<br />1 718apts.com 718apts.com MX 0 mx1.balanced.dreamhost.com. 0<br />1 718apts.com 718apts.com MX 0 mx2.balanced.dreamhost.com. 0<br />1 718apts.com 718apts.com NS ns1.dreamhost.com. 0<br />1 718apts.com 718apts.com NS ns2.dreamhost.com. 0<br />1 718apts.com 718apts.com NS ns3.dreamhost.com. 0<br />1 718apts.com test.718apts.com CNAME ghs.google.com. A test I did. 1</p>
-</td>
-</tr>
-<tr>
-<td><strong>Posibles errores</strong></td>
-<td><strong>type</strong> : A,MX,NS,CNAME,PTR,NAPTR,TXT,SRV,AAAA, o A6
-<p><strong>editable</strong> : 0 o 1</p>
-</td>
-</tr>
-<tr>
-<td><strong>Posibles errores</strong></td>
-<td>(ninguno)</td>
-</tr>
-</tbody>
-</table>
-<h3><span id="dns-add_record">dns-add_record</span></h3>
-<p>Agrega un nuevo registro DNS a un dominio que ya ha alojado con DreamHost. Sin embargo, no puedes agregar registros de dreamhosters.com. Ten en cuenta que los cambios de DNS pueden tardar un tiempo en realizarse.</p>
-<table class="wikitable">
-<tbody>
-<tr>
-<td><strong>Comando</strong></td>
-<td>dns-add_record</td>
-</tr>
-<tr>
-<td><strong>Valores</strong></td>
-<td><strong>record</strong>&nbsp;: El nombre completo del registro que deseas agregar, ejemplo: testing.groo.com
-<p><strong>type</strong>&nbsp;: A,CNAME,NS,PTR,NAPTR,SRV,TXT, oo AAAA <strong>value</strong>&nbsp;: El valor del registro DNS <strong>comment</strong>&nbsp;: Comentario opcional para este registro.</p>
-</td>
-</tr>
-<tr>
-<td><strong>Resultado</strong></td>
-<td>
-<p>success<br />record_added</p>
-</td>
-</tr>
-<tr>
-<td><strong>Posibles errores</strong></td>
-<td>
-<p>no_record<br />no_type<br />no_value<br />invalid_record (puede tener detalles después de una pestaña)<br />invalid_type (puede tener detalles después de una pestaña)<br />invalid_value (puede tener detalles después de una pestaña)<br />no_such_zone<br />CNAME_must_be_only_record<br />CNAME_already_on_record<br />record_already_exists_not_editable<br />record_already_exists_remove_first<br />internal_error_updating_zone<br />internal_error_could_not_load_zone<br />internal_error_could_not_add_record</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3><span id="dns-remove_record">dns-remove_record</span></h3>
-<p>Elimina un registro DNS editable existente que tiene con DreamHost. Sin embargo, no puedes eliminar los registros de dreamhosters.com. Ten en cuenta que los cambios de DNS pueden tardar un poco en propagarse.</p>
-<table class="wikitable">
-<tbody>
-<tr>
-<td><strong>Comando</strong></td>
-<td>dns-remove_record</td>
-</tr>
-<tr>
-<td><strong>Valores</strong></td>
-<td>
-<p><strong>record</strong>&nbsp;: El nombre completo del registro que deseas eliminar, ejemplo: testing.groo.com<br /><strong>type</strong>&nbsp;: El tipo (mira dns-add_record) del registro que deseas eliminar.<br /><strong>value</strong>&nbsp;: El valor (mira dns-add_record) del registro que deseas eliminar.</p>
-</td>
-</tr>
-<tr>
-<td><strong>Resultado</strong></td>
-<td>
-<p>success<br />record_removed</p>
-</td>
-</tr>
-<tr>
-<td><strong>Posibles errores</strong></td>
-<td>
-<p>no_record<br />no_type<br />no_value<br />no_such_record<br />no_such_type<br />no_such_value<br />not_editable<br />internal_error_could_not_destroy_record<br />internal_error_could_not_update_zone</p>
-</td>
-</tr>
-</tbody>
-</table>
+<p>El comando <span class="code">dns-list_records</span> enumera todos los registros DNS para todos los dominios en todas las cuentas a las que tienes acceso. Este comando no listará registros en los siguientes casos:</p>
+<ul>
+<li>Dominios de solo registro</li>
+<li>subdominio <a href="https://help.dreamhost.com/hc/es/articles/360002284771--Que-es-un-subdominio-dreamhosters-com-" target="_blank" rel="noopener">dreamhosters.com</a></li>
+</ul>
+<h3>Correr el comando</h3>
+<p>El siguiente comando enumera todos los registros DNS de todos los dominios de tu cuenta.</p>
+<div class="preboxcontainer">
+<pre class="prebox">https://api.dreamhost.com/?key=1A2B3C4D5E6F7G8H<span class="code-highlight">&amp;cmd=dns-list_records</span></pre>
+</div>
+</div>
+<h2><span id="dns-add_record">dns-add_record</span></h2>
+<div class="solvvy-solution">
+<p>El <span class="code">dns-add_record</span> te permite agregar un nuevo registro DNS a un dominio (excluyendo los subdominios <a href="https://help.dreamhost.com/hc/es/articles/360002284771--Que-es-un-subdominio-dreamhosters-com-" target="_self">dreamhosters.com</a>).</p>
+<div class="notebox-note">
+<p>Después de agregar un registro, aún tardará varias horas en <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">propagar online</a>.</p>
+</div>
+<h3>Correr el comando</h3>
+<p>Debes especificar los siguientes valores al ejecutar este comando.</p>
+<ul>
+<li><strong>record</strong> : El nombre de dominio al que estáa agregando el registro (<strong>example.com</strong>)</li>
+<li><strong>type</strong>&nbsp;: A,CNAME,NS,NAPTR,SRV,TXT, o AAAA</li>
+<li><strong>value</strong>&nbsp;: El valor del registro de DNS.</li>
+<li><strong>comment</strong>&nbsp;: Comentario opcional para este registro.</li>
+</ul>
+<p>El siguiente comando agrega un registro <span class="text-object">TXT</span> con el valor de <span class="code">test123</span> al dominio <strong>example.com</strong>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">https://api.dreamhost.com/?key=1A2B3C4D5E6F7G8H<span class="code-highlight">&amp;cmd=dns-add_record&amp;record=example.com&amp;type=TXT&amp;value=test123"</span></pre>
+</div>
+<h2><span id="dns-remove_record">dns-remove_record</span></h2>
+<div class="solvvy-solution">
+<p>Esto es el opuesto a <span class="code">dns-add_record</span>. Los mismos valores deben especificarse al ejecutar el comando. El siguiente comando elimina un registro <span class="text-object">TXT</span> con el valor de <span class="code">test123</span> del dominio <strong>example.com</strong>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">https://api.dreamhost.com/?key=1A2B3C4D5E6F7G8H<span class="code-highlight">&amp;cmd=dns-remove_record&amp;record=example.com&amp;type=TXT&amp;value=test123"</span></pre>
+</div>
 </div>
 <h2><span id="Ver_también">Ver también</span></h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/217560167-Generalidades-de-la-interfaz-de-programaci%C3%B3n-de-aplicaciones-API-" target="_self" rel="undefined">Generalidades de la interfaz de programación de aplicaciones</a></li>
 </ul>
-</div>
-</div>
-</div>
 </div>
 </div>
