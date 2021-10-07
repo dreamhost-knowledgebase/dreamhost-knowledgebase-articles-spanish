@@ -1,6 +1,6 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Si observas que los correos enviados o recibidos, especialmente dentro del mismo dominio, están llegando a una carpeta de correo no deseado, puede deberse a la dirección IP de tu proveedor de servicios de Internet (ISP) que está en la lista negra. Los filtros antispam de DreamHost están diseñados para marcar el correo como spam cuando se originan en una dirección IP en la lista negra.</p>
+<p>Si observas que los correos enviados o recibidos, especialmente dentro del mismo dominio, están llegando a una carpeta de correo no deseado, puede deberse a la dirección IP de tu proveedor de servicios de Internet (ISP) que está en la lista negra. Los filtros antispam de DreamHost están diseñados para marcar los correos como spam cuando se originan en una dirección IP en la lista negra.</p>
 <p>A continuación se proporcionan los pasos que puedes seguir para determinar si tu dirección IP está en una lista negra.</p>
 </div>
 <h2>Buscar tu dirección IP</h2>
@@ -24,8 +24,18 @@
 </ul>
 <p>Asegúrate de explicar el problema que está experimentando para que el soporte pueda ayudarte más.</p>
 </div>
-<h2>Cómo hacer que tu correo parezca menos a Spam</h2>
+<h2>Solución de problemas adicionale</h2>
 <div class="solvvy-solution">
+<h3>Proveedores de correo de terceros</h3>
+<p>Si tu dominio usa un proveedor de correo tercero pero usa el DNS de DreamHost, asegúrate de haber configurado los <a href="https://help.dreamhost.com/hc/es/articles/216106197--C%C3%B3mo-agregar-un-registro-SPF-" target="_self">registros SPF personalizados</a>.</p>
+<h3>Enviar correo desde tu sitio web</h3>
+<p>Si estás enviando un correo desde tu sitio web y esos mensajes se van a spam, asegúrate de que el correo esté autenticado vía SMTP:</p>
+<ul>
+<li><strong>WordPress:</strong> Puedes usar un plugin tal como '<a href="https://help.dreamhost.com/hc/es/articles/215526937-Configurar-el-plugin-WP-MAIL-SMTP-" target="_self">WP Mail SMTP</a>' para enviar correos de SMTP autenticados.</li>
+<li><strong>PHP:</strong> Si tu sitio usa una funcion de correo de PHP, puedes configurarlo para usar SMTP a través de paquetes como <a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer" target="_self">PHPMailer</a> o <a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-enviar-correo-PHP-v%C3%ADa-SMTP-" target="_self">PEAR</a>.</li>
+<li><strong>Otros CMS:</strong> Si tu sitio tiene un CMS instalado que no sea WordPress, es posible que tengas soporte integrado para la autenticación de SMTP. Revisa la documentación de soporte de tu software para obtener más información.</li>
+</ul>
+<h3>Como hacer que tu correo se vea menos como Spam</h3>
 <p>Hay varias cosas que puedes hacer al crear un correo para que sea menos parecido a Spam. Los siguientes artículos te dan algunas ideas sobre qué hacer o qué evitar al enviar un correo.</p>
 <ul>
 <li><a href="https://www.linkedin.com/pulse/7-tips-stop-your-emails-from-getting-marked-spam-gandhar-kulkarni">7 Tips para evitar que tus correos sean marcados como Spam</a></li>
