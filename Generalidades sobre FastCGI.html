@@ -54,7 +54,7 @@ while ( FCGI::accept() &gt;= 0 ) {
 }
 </pre>
 </div>
-<p>Si bien puedes pensar que necesitas imprimir el encabezado solo una vez, de hecho el encabezado debe estar incluido en la sección <span class="text-section">RUNS EVERY TIME</span>.</p>
+<p>Si bien puedes pensar que necesitas imprimir el encabezado solo una vez, de hecho, el encabezado debe estar incluido en la sección <span class="text-section">RUNS EVERY TIME</span>.</p>
 </div>
 <h2><span id="No_exits">Sin exits</span></h2>
 <div class="solvvy-solution">
@@ -124,7 +124,7 @@ while ( FCGI::accept() &gt;= 0 ) {
 <h2><span id="Errors_and_troubleshooting">Errores y solución de problemas</span></h2>
 <div class="solvvy-solution">
 <p>Los scripts incorrectos no devolverán un error de inmediato; debes esperar un par de minutos hasta que se agote el tiempo de espera del script. Si la secuencia de comandos está en una página web, parece que la página se bloquea, e incluso cuando se agota el tiempo de espera de la secuencia de comandos, es posible que no se registre el mensaje de error real y que solo vea un error 500. Esto significa que las pruebas con FastCGI no son prácticas. El desarrollo debe realizarse con CGI estándar o en tu computador local. El FastCGI debe agregarse después de que el script ya haya sido depurado.</p>
-<p>Además, si bien es tentador desarrollar en un servidor en vivo, es peligroso y lo convierte en un mal vecino para el alojamiento compartido.</p>
+<p>Además, si bien es tentador desarrollar en un servidor en vivo, es peligroso y lo convierte en un mal vecino para el Shared Hosting.</p>
 <p>Para ver inmediatamente si un script falla (no verificará todos los casos porque % ENV es diferente), pruébalo desde la línea de comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">perl ~/<span class="code-highlight">example.com/myscript.fcgi</span></span>
