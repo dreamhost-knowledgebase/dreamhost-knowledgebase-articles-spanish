@@ -1,5 +1,5 @@
 <h2>Generalidades</h2>
-<p>Este artículo explica cómo deshabilitar el filtrado de spam de DreamHost en tu dominio.</p>
+<p>Este artículo explica cómo deshabilitar el filtrado de spam de DreamHost y actualizar los registros MX en tu dominio.</p>
 <div class="notebox-note">
 <p>La desactivación de la carpeta de correo no deseado no desactiva el filtrado de salida. Si el algoritmo del sistema de filtrado de DreamHost detecta spam potencial de tu dirección de correo electrónico, se te devolverá como imposible de entregar. Después de revisar el mensaje, <a href="https://help.dreamhost.com/hc/es/articles/360032561551--Informar-de-correo-no-deseado-falso-positivo-en-MailChannels" target="_self">marcalo como falso positivo</a>. Si notas que esto sucede con regularidad, puede haber formas de prevenirlo. Consulta el siguiente artículo para obtener más información:</p>
 <ul>
@@ -36,6 +36,52 @@
 </li>
 <li>Aparece una advertencia final. Haz clic en <strong>Deshabilitar Filtros y Listas de</strong><strong> Permitir/Bloquear</strong>.</li>
 </ol>
+</div>
+<h2>Actualizar los registros MX</h2>
+<div class="solvvy-solution">
+<h3>Si tus nameservers están apuntando a DreamHost</h3>
+<p>Si tus nameservers apuntan a DreamHost, no necesitas hacer nada. <span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">Tus registros MX se actualizarán automáticamente a los registros no filtrados después de eliminar el filtro de Spam.</span></p>
+<h3>Si tus nameservers NO están apuntando a DreamHost</h3>
+<p>Si tus nameservers NO apuntan a DreamHost, debes actualizar tus registros MX para que apunten a los nuevos registros MX no filtrados. <span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">Si no lo haces, tu correo no será entregado.</span></p>
+<h3>Confirma a dónde apuntan tus nameservers</h3>
+<p>Revisa el siguiente artículo para confirmar dónde apuntan tus nameservers.</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/es/articles/360030114711-Verificar-hacia-d%C3%B3nde-apuntan-tus-nameservers">Verificar hacia dónde apuntan tus nameservers</a></li>
+</ul>
+<p>Los siguientes son los nameservers de DreamHost:</p>
+<ul>
+<li><strong>ns1.dreamhost.com</strong></li>
+<li><strong>ns2.dreamhost.com</strong></li>
+<li><strong>ns3.dreamhost.com</strong></li>
+</ul>
+<p>Si ves algo más, debes actualizar tus registros MX en la empresa donde están alojados tus nameservers.</p>
+<h3>¿Qué registros MX necesito cambiar?</h3>
+<p>Actualiza los siguientes registros MX en la empresa que aloja tus nameservers. Esto asegura que tu correo seguirá funcionando.</p>
+<table style="border-collapse: collapse; width: 50%;" border="1">
+<tbody>
+<tr>
+<th style="width: 30%;">Host</th>
+<th style="width: 60%;">Valor</th>
+</tr>
+<tr>
+<td>@</td>
+<td>0 mx1.mailchannels.net.</td>
+</tr>
+<tr>
+<td>@</td>
+<td>0 mx2.mailchannels.net.</td>
+</tr>
+<tr>
+<td>mail</td>
+<td>0 mx1.mailchannels.net.</td>
+</tr>
+<tr>
+<td>mail</td>
+<td>0 mx2.mailchannels.net.</td>
+</tr>
+</tbody>
+</table>
+<div>&nbsp;</div>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">

@@ -61,13 +61,23 @@
 <h2><span id="Notas_técnicas">Notas técnicas</span></h2>
 <div class="solvvy-solution">
 <h3>Registro de errores</h3>
-<p>La salida a STDERR para los procesos que se ejecutan a través de la interfaz de Rack se dirige automáticamente al archivo de registro de errores maestro del servidor en lugar del archivo de registro específico del dominio/subdominio.</p>
-<h4>Solicionar problemas del registro de errores</h4>
-<div class="alert-warning">
-<p>Los clientes de DreamHost no tienen acceso al archivo de registro de errores maestro.</p>
+<p>La salida a STDERR para los procesos que se ejecutan a través de la interfaz de Rack se dirige automáticamente al archivo de registro específico del dominio/subdominio.</p>
+<ul>
+<li>/home/user/logs/domain.com/http/</li>
+</ul>
+<p>O:</p>
+<ul>
+<li>/home/user/logs/domain.com/https/</li>
+</ul>
+<div class="notebox-note">
+<p>Este artículo explica cómo ver tu registro de errores a través de SSH, lo que requiere algunos conocimientos básicos de un terminal de shell. Para una opción más fácil usando FTP, revisa el siguiente artículo en su lugar:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216512217-Ver-y-examinar-un-registro-de-errores-v%C3%ADa-SSH" target="_self">Ver y examinar un registro de errores vía SSH </a></li>
+</ul>
 </div>
+<h4>Solución de problemos del registro de errores</h4>
 <p>Esta limitación puede dificultar la depuración de errores de iniciación (en particular, errores de sintaxis y problemas de resolución de gemas). Passenger a menudo producirá una página web de salida de error que incluye un seguimiento de pila, pero a veces no es así.</p>
-<p><a href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-a-trav%C3%A9s-de-Correo-Electr%C3%B3nico" target="_self">Contactar al soporte de DreamHost</a> si Passenger no produce una salida de error útil. El equipo de soporte examinará el archivo de registro maestro por ti.</p>
+<p><a href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-a-trav%C3%A9s-de-Correo-Electr%C3%B3nico" target="_self">Contacta al soporte de DreamHost</a> si tienes problemas con Passenger que no produce una salida de error útil. Nuestro equipo de soporte estará encantado de echar un vistazo para ver qué puede estar causando el problema.</p>
 <p>Una vez que un framework (como RoR) está en funcionamiento, su salida de error generalmente es manejada por el propio mecanismo de registro de errores del marco. Por ejemplo, RoR registra su salida de error en un archivo llamado <span class="text-object">log/production.log</span>.</p>
 <h3>Versión de Ruby</h3>
 <p>Los servidores de DreamHost corren una <a href="https://help.dreamhost.com/hc/es/articles/360003836911-Ruby-en-DreamHost" target="_self">versión predeterminada de Ruby</a>. También puedes instalar <a href="https://help.dreamhost.com/hc/es/articles/217185247-Administrador-de-versiones-de-Ruby-Ruby-Version-Manager-RVM-">RVM</a> para usar una versión de Ruby diferente.</p>
