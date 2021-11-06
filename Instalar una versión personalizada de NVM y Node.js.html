@@ -11,7 +11,7 @@
 </div>
 <h2>¿Es posible ejecutar Node.js en los puertos 80 o 443?</h2>
 <div class="solvvy-solution">
-<p>Sí, pero solo si has habilitado Passenger en el panel y el archivo para cargar tu aplicación se llama app.js. Ve el siguiente artículo para más detalles.</p>
+<p>Sí, pero solo si has habilitado Passenger en el panel y el archivo para cargar tu aplicación se llama <span class="text-object">app.js</span>. Revisa el siguiente artículo para más detalles.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216635318--C%C3%B3mo-habilitar-Node-js-" target="_self">Habilitar Passenger para Node.js</a></li>
 </ul>
@@ -36,10 +36,10 @@
 </li>
 <li>Corre el siguiente comando para descargar NVM. Cambia la versión según sea necesario:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash</span></pre>
 </div>
 <ul>
-<li>Este comando instala NVM en un nuevo directorio bajo tu usuario llamado <span class="text-object">/.nvm</span>.</li>
+<li>Este comando instala nvm en un nuevo directorio bajo tu usuario llamado <span class="text-object">/.nvm</span>.</li>
 <li>Este comando también agrega lo siguiente a tu archivo <span class="text-object">.bashrc</span>:</li>
 </ul>
 <div class="preboxcontainer">
@@ -47,17 +47,39 @@
 </pre>
 </div>
 </li>
-<li><strong>Si instalas NVM como usuario en un Servidor Shared o Dedicado</strong>, asegúrate que el script no esté bloqueado corriendo lo siguiente como tu usuario:
+<li>Actualiza tu archivo <span class="text-object">.bashrc</span> para usar estas nuevas configuraciones.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">source .bashrc</span></pre>
+</div>
+<p>Luego corre lo siguiente para confirmar la configuración del directorio local <span class="text-object">.nvm</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">echo $NVM_DIR</span>
+/home/username/.nvm</pre>
+</div>
+</li>
+<li>
+<div class="notebox-important">
+<p>Este paso solo aplica para servidores Compartidos y Dedicados.</p>
+</div>
+<p><strong>Si instalas NVM como usuario en un servidor Compartido o Dedicado</strong>, asegúrate de que el script no esté bloqueado corriendo lo siguiente como tu usuario:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">setfattr -n user.pax.flags -v "mr" $NVM_DIR/nvm.sh</span></pre>
 </div>
+<div class="notebox-note">
+<p>Este comando no devuelve nada. Si ves un error como así como <span class="code">setfattr: /nvm.sh: No such file or directory</span>, algo no está instalado correctamente. Intenta corriendo el siguiente comando.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">echo $NVM_DIR</span>
+/home/username/.nvm</pre>
+</div>
+<p>Deberías ver el camino a tu directorio local <span class="text-object">.nvm</span>. Si no lo ves, asegúrate de que el archivo <span class="text-object">.bashrc</span> fue actualizado en el paso 5 de abajo. Luego intenta correr este comando nuevamente.</p>
+</div>
 </li>
-<li>Mira el artículo <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">crear y editar un archivo a través de SSH</a>&nbsp;para instrucciones sobre como editar tu <span class="text-object">.bash_profile</span> existente. En este archivo, añade la siguiente linea.
+<li id="bash_profile">Mira el artículo <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">crear y editar un archivo a través de SSH</a>&nbsp;para instrucciones sobre como editar tu <span class="text-object">.bash_profile</span> existente. En este archivo, añade la siguiente linea.
 <div class="preboxcontainer">
 <pre class="prebox">source ~/.bashrc</pre>
 </div>
 </li>
-<li>Corre el siguiente comando para permitir que tu shell use esta nueva versión de NVM:
+<li>Corre el siguiente comando para permitir que tu shell use esta nueva versión de nvm:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">. ~/.bash_profile</span></pre>
 </div>
@@ -65,7 +87,7 @@
 <li>Para probar si ahora puedes usar NVM, corre lo siguiente que debería responder con la versión que has instalado:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">nvm --version</span>
-<span class="cmdoutput">0.35.3</span>
+<span class="cmdoutput">0.39.0</span>
 </pre>
 </div>
 </li>
@@ -82,10 +104,10 @@
 </li>
 <li>Instala cualquier versión de Node.js que desees:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">nvm install v12.18.3</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nvm install v12.22.7</span></pre>
 </div>
-</li>
-<li><strong>Si instalas NVM como usuario en un Servidor Shared o Dedicado</strong>, puede haber un error como este:
+<div class="notebox-important">
+<p><strong>Si instalas NVM como usuario en un Servidor Shared o Dedicado</strong>, puede haber un error como este:</p>
 <div class="preboxcontainer">
 <pre class="prebox">#
 # Fatal error in , line 0
@@ -95,15 +117,17 @@
 #
 #FailureMessage Object: 0x3dfe93bb400</pre>
 </div>
-Si es así, deberás actualizar los controles de seguridad en cada archivo binario recién descargado antes de que funcione. Corre el siguiente comando como usuario después de cada nueva versión que descargues:
+<p>Si es así, deberás actualizar los controles de seguridad en cada archivo binario recién descargado antes de que funcione. Corre el siguiente comando como usuario después de cada nueva versión que descargues:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">setfattr -n user.pax.flags -v "mr" $(find $NVM_DIR -type f -iname "node" -o -iname "npm" -o -iname "npx")</span></pre>
 </div>
-Esto deberá hacerse cada vez que se instale una nueva versión.</li>
+<p>Esto deberá hacerse cada vez que se instale una nueva versión.</p>
+</div>
+</li>
 <li>Establece tu versión actual de node a tu nueva versión:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">nvm use v12.18.3</span>
-Now using node v12.18.3 (npm v6.14.6)</pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nvm use v12.22.7</span>
+Now using node v12.22.7 (npm v)</pre>
 </div>
 </li>
 <li>Comprueba qué versión de Node.js se está ejecutando ingresando lo siguiente:
@@ -117,13 +141,13 @@ Now using node v12.18.3 (npm v6.14.6)</pre>
 </div>
 <h2><span id="setting-default-version">Establecer la versión predeterminada de Node.js</span></h2>
 <div class="solvvy-solution">
-<p>Después de instalar una nueva versión de Node.js, tu sesión actual de Shell la usará. Sin embargo, si cierras sesión y vuelves a iniciar sesión, volverá a la versión predeterminada. Para establecer la nueva versión como tu versión predeterminada, corre el siguiente comando.</p>
+<p>Después de instalar una nueva versión de Node.js, tu sesión actual de Shell debería usarla automáticamente cuando vuelvas a iniciar sesión. Si notas que la versión no es correcta, es posible que debas revisar las <a href="#bash_profile">instrucciones de .bash_profile</a> de arriba. También puedes configurar la nueva versión como tu versión predeterminada corriendo el siguiente comando.</p>
 <div class="notebox-note">
-<p>Asegúrate de cambiar el número de versión a la versión que has instalado. Este ejemplo usa v12.18.3.</p>
+<p>Asegúrate de cambiar el número de versión a la versión que has instalado. Este ejemplo usa v12.22.7.</p>
 </div>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">nvm alias default v12.18.3</span>
-default -&gt; v12.18.3</pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nvm alias default v12.22.7</span>
+default -&gt; v12.22.7</pre>
 </div>
 </div>
 <h2><span id="Testing_Node.js">Probar Node.js</span></h2>
