@@ -26,6 +26,10 @@
 </div>
 <p>Este artículo describe errores comunes que puedes encontrar al usar Passenger.</p>
 </div>
+<h2>La aplicación de Node.js no está funcionando</h2>
+<div class="solvvy-solution">
+<p>El uso de Passenger con Node.js te permite cargar tu sitio en el puerto 80 o 443. Sin embargo, esto solo funciona si tu aplicación tiene un nombre <strong>app.js</strong>.</p>
+</div>
 <h2><span id="La_Aplicación_no_se_reinicia">La Aplicación no se reinicia</span></h2>
 <div class="solvvy-solution">
 <p>Por lo general, esto no es un problema. Solo se percibe como un problema. En Passenger 2.1, el comportamiento del mecanismo de reinicio cambió. Ahora Passenger simplemente verifica la marca de tiempo de la modificación en el archivo <span class="text-object">restart.txt</span>. Si es más reciente que la última vez que lo comprobaste, se reinicia. El archivo no se elimina. Esto se hizo para que el reinicio de las aplicaciones funcionara sin problemas en los recursos compartidos de NFS.</p>
