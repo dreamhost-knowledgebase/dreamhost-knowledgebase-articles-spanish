@@ -25,11 +25,50 @@
 <div class="solvvy-solution">
 <p>Debido a la naturaleza del alojamiento compartido de MySQL, no es posible reiniciar tu servidor MySQL. La única forma en que esto sería posible es si estuviera en un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self" rel="undefined">plan de Alojamiento Dedicado</a>.&nbsp;En un plan dedicado, el servidor MySQL está alojado en la misma máquina, lo que te permite acceso completo a la raíz.</p>
 </div>
-<h2>Mensajes de Error</h2>
+<h2><span id="Mensajes_de_Error">Mensajes de Error</span></h2>
 <div class="solvvy-solution">
-<h3>"<em>Loading local data is disabled; this must be enabled on both the client and server sides</em>"</h3>
-<p>Este error puede ocurrir al usar la declaración <span class="code">LOAD DATA LOCAL INFILE</span> para cargar datos en una base de datos MySQL 8. Un cambio en la configuración predeterminada introducido en MySQL 8 ya no permite que se carguen datos locales, por motivos de seguridad.</p>
-<p>Es posible cargar datos usando un método alternativo. Revisa la página <a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL#configuracion-local-infile-mysql-8" target="_blank" rel="noopener">Generalidades de MySQL</a> para más detalles.</p>
+<h3>"<em>The used command is not allowed with this MySQL version</em>"</h3>
+<p>Este error puede ocurrir cuando usas la declaración <span class="code">LOAD DATA LOCAL INFILE</span> en los servidores web Ubuntu 12.04. Un cambio en la biblioteca mysql de Debian a Ubuntu requiere cambios de código para solucionar este error y permitir que se ejecute tu declaración.</p>
+<dl>
+<dt>
+<h3>mysql command line</h3>
+</dt>
+<dd>Agrega la banderilla <span class="code">--local-infile</span> a tu declaración de conexión de mysql, como:</dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql --local-infile -h <span class="code-highlight">HOSTNAME</span> -u <span class="code-highlight">USERNAME</span> -p<span class="code-highlight">PASSWORD DATABASENAME</span></span></pre>
+</div>
+<dl>
+<dt>
+<h3>PHP mysql_connect()</h3>
+</dt>
+<dd>Agrega 2 parámetros extra a mysql_connect, un <span class="code">false</span> para "new link" y luego una banderilla de cliente de <span class="code">128</span> o <span class="code">CLIENT_LOCAL_FILES</span>:</dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="cmdoutput">mysql_connect('HOSTNAME','USERNAME','PASSWORD', <span class="green">false, 128</span>);</span></pre>
+</div>
+<dl>
+<dt>
+<h3>PHP mysqli_connect()</h3>
+</dt>
+<dd>Inicia mysqli primero vía <span class="code">mysqli_init</span>, y usa <span class="code">mysqli_options()</span> para especificar el archivo local como <span class="code">true</span> antes de conectar con el servidor mysql:</dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="cmdoutput">$link = mysqli_init();
+<span class="green">mysqli_options</span>($link, MYSQLI_OPT_LOCAL_INFILE, <span class="green">true</span>);
+mysqli_real_connect($link, 'HOSTNAME','USERNAME','PASSWORD','DATABASENAME');</span></pre>
+</div>
+<dl>
+<dt>
+<h3>PERL DBI</h3>
+</dt>
+<dd>El parámetro <span class="code">mysql_local_infile</span> puede ser agregado al nombre de la variable de tu fuente de datos, o directamente en <span class="code">DBI-&gt;connect</span>:</dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="cmdoutput">$dbh = DBI-&gt;connect("DBI:mysql:database=DATABASENAME;host=HOSTNAME;<span class="green">mysql_local_infile=1</span>", "USERNAME", "PASSWORD");</span></pre>
+</div>
+<h3>Errores importando una base de datos con mysqlimport</h3>
+<p>DreamHost ha implementado algunas características más nuevas en MySQL 8, lo que puede causar un error al usar el programa de línea de comandos. <span class="code">mysqlimport</span>. Para más detalles, revisa la página <a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL#errores_importando_una-base_de_datos" target="_self">Generalidades de MySQL</a>.</p>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">

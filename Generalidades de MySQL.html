@@ -17,13 +17,26 @@
 <ul>
 <li><a href="https://dev.mysql.com/doc/refman/8.0/en/keywords.html">Palabras clave de MySQL y palabras reservadas</a></li>
 </ul>
-<h3><span id="configuracion-local-infile-mysql-8">Cambios en la configuración local_infile en MySQL 8</span></h3>
-<p>MySQL 8 introduce un cambio en la configuración predeterminada <span class="code">local_infile</span>, que ya no te permite cargar datos locales. Debido a este cambio, ya no es posible usar la declaración <span class="code">LOAD DATA LOCAL INFILE</span> para cargar datos en una base de datos MySQL 8.</p>
-<p>Sin embargo, es posible cargar datos en una base de datos MySQL 8 usando uno de los métodos que se describen a continuación:</p>
-<ul>
-<li><a href="https://docs.phpmyadmin.net/en/release_4_8_5/import_export.html#import">Importación de phpMyAdmin</a>&nbsp;— Ten en cuenta que "CSV usando LOAD DATA" no funcionará.</li>
-<li><a href="https://help.dreamhost.com/hc/en-us/articles/221614988#import-db-ssh">Ingresar datos de un SQL volcado a través de SSH</a> — Sigue estos pasos si tienes un SQL volcado para importar.</li>
-</ul>
+<h3><span id="errores_importando_una-base_de_datos">Errores importando una base de datos con mysqlimport</span></h3>
+<p>DreamHost ha implementado algunas características más nuevas en MySQL 8, lo que puede causar un error al usar el programa de línea de comandos<span class="code">mysqlimport</span>:</p>
+<div class="text-blockquote">
+<p>mysqlimport: Error: 1227 Access denied; you need (at least one of) the SUPER, SYSTEM_VARIABLES_ADMIN or SESSION_VARIABLES_ADMIN privilege(s) for this operation</p>
+</div>
+<p>El comando <span class="code">mysqlimport</span> causando el error puede verse mas o menos así::</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/bin/mysqlimport --host <span class="code-highlight">hostname</span> --user <span class="code-highlight">user</span> --password <span class="code-highlight">password</span> --local --fields-terminated-by='|' <span class="code-highlight">database /path/to/file</span></span></pre>
+</div>
+<p>También puedes usar un archivo de opciones (recomendado) en su lugar, que se vería así:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/bin/mysqlimport --defaults-extra-file=<span class="code-highlight">/path/to/file</span> --local --fields-terminated-by='|' <span class="code-highlight">database /path/to/file</span></span></pre>
+</div>
+<p>Si se produce este error, existe una posible solución. Usando el cliente <span class="code">mysql</span> en vez de <span class="code">mysqlimport</span> permitirá que esta característica funcione. A continuación, se muestra un ejemplo de los comandos anteriores. Ten en cuenta que se debe especificar el nombre de la tabla, donde anteriormente <span class="code">mysqlimport</span> determinó eso a partir del nombre del archivo.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">echo "LOAD DATA LOCAL INFILE '/PATH/TO/FILE' into table <span class="code-highlight">tablename</span> fields-terminated-by='|' mysql --host <span class="code-highlight">hostname</span> --user <span class="code-highlight">username</span> --password <span class="code-highlight">password</span> <span class="code-highlight">database</span></span></pre>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">echo "LOAD DATA LOCAL INFILE '/PATH/TO/FILE' into table <span class="code-highlight">tablename</span> fields-terminated-by='|' mysql --defaults-extra-file=<span class="code-highlight">/path/to/file</span></span></pre>
+</div>
 <h3>Modificaciones personalizadas de DreamHost para usuarios de WordPress</h3>
 <p>DreamHost ha realizado modificaciones en tu configuración de MySQL 8 para proporcionar un soporte más amplio para la mayoría de sitios y software. Las siguientes son configuraciones predeterminadas en MySQL 8 que se han modificado en la configuración de DreamHost:</p>
 <table style="border-collapse: collapse; width: 86.4286%;" border="1">
