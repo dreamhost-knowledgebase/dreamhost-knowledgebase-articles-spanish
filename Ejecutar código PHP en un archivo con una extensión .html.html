@@ -1,25 +1,29 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Normalmente, cuando PHP y HTML se combinan en el mismo archivo, el archivo usa una extensión <span class="text-object">.php</span> y muestra datos en el navegador.</p>
-<p>Sin embargo, si necesitas colocar código PHP en un archivo con una extensión <span class="text-object">.html</span>, debes agregar un controlador a tu archivo <span class="text-object">.htaccess</span>.</p>
+<p>Normalmente, cuando PHP y HTML se combinan en el mismo archivo, el archivo usa una extensión <span class="text-object">.php</span> y muestra datos en el navegador. Por ejemeplo, este archivo se llama <span class="text-object">hello.php</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;html
+&lt;body&gt;
+
+&lt;?php
+  echo "hello";
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>Sin embargo, si necesitas agregar código PHP en un archivo con una extensión <span class="text-object">.html</span>, debes agregar un Handler a tu archivo <span class="text-object">.htaccess</span>. Por ejemplo, el mismo código de arriba puede ser agregado en un archivo llamado <span class="text-object">hello.html</span>.</p>
 </div>
 <h2>Código para agregar a tu archivo .htaccess</h2>
 <div class="solvvy-solution">
 <p>Consulta los siguientes artículos para obtener instrucciones sobre cómo editar archivos con un cliente FTP o SSH.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar archivos via FTP</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar archivos via SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar archivos vía FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar archivos vía SSH</a></li>
 </ul>
-<p>El archivo al que necesitas agregar código se llama <span class="text-object">.htaccess</span>. Si este no existe en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-de-sitio-web" target="_self">directorio principal de tu sitio web</a>, usa los artículos anteriores para crearlo. Agrega la siguiente línea al archivo <span class="text-object">.htaccess</span>, dependiendo de la <a href="https://help.dreamhost.com/hc/es/articles/360059767631-Ver-las-versiones-del-software-de-tu-servidor" target="_self">versión de Linux</a> en la que se esté ejecutando tu sitio.</p>
-<p><strong>Si tu sitio está en un servidor que ejecuta Ubuntu 18</strong></p>
-<p>Puedes agregar cualquiera de los siguientes.</p>
-<div class="preboxcontainer">
-<pre class="prebox">AddHandler php-cgi .html<br />AddHandler php5-cgi .html</pre>
-</div>
-<p><strong>Si tu sitio está en un servidor que ejecuta Ubuntu 14</strong></p>
-<p>Solo lo siguiente funcionará</p>
+<p>El archivo al que necesitas agregar código se llama <span class="text-object">.htaccess</span>. Si este no existe en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-de-sitio-web" target="_self">directorio principal de tu sitio web</a>, usa los artículos anteriores para crearlo. Agrega la siguiente línea al archivo <span class="text-object">.htaccess</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox">AddHandler php5-cgi .html</pre>
 </div>
-<p>Esta línea de código permite que los archivos con extensiones .html ejecuten código PHP en tu navegador.</p>
+<p>Esta línea de código permite que los archivos con extensiones <span class="text-object">.html</span> ejecuten código PHP en tu navegador.</p>
 </div>
