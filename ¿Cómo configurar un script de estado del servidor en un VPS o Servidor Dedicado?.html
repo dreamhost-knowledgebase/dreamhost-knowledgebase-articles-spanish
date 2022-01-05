@@ -15,84 +15,71 @@
 <p>Esto solo se aplica a tu servidor web. El acceso de shell a <a href="https://help.dreamhost.com/hc/es/articles/215945917-Generalidades-de-MySQL-VPS">VPS MySQL</a>&nbsp;no está disponible.</p>
 </div>
 </div>
-<h2><span id="Installing_a_server_script">Instalarun script de servidor</span></h2>
+<h2><span id="Instalar_un_script_de_servidor">Instalarun script de servidor</span></h2>
 <div class="solvvy-solution">
-<p>Esto solo se aplica a tu servidor web. El acceso de shell a VPS MySQL no está disponible:</p>
-<ul>
-<li>Visita la URL del script. Luego puedes descargarlo en tu navegador:
+<p>Descarga una copia del script de una de las dos maneras:</p>
+<div class="notebox-note">
+<p>Se recomienda que agregues el script dentro del <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio home del usuario</a>.</p>
+</div>
+<h3>FTP</h3>
+<p>Da clic al siguiente enlace para descargar el script a tu computador:</p>
 <ul>
 <li><a href="https://cdn.jsdelivr.net/gh/watsonian/server-status-report@master/status.rb">https://cdn.jsdelivr.net/gh/watsonian/server-status-report@master/status.rb</a></li>
 </ul>
-<dl>
-<dd><em>Si descargas el archivo visitando la URL, aún debes cargar el archivo a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a>.</em></dd>
-</dl>
-</li>
-<li>Si puedes acceder por&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> en tu VPS, simplemente puedes correr:
+<p>Debes entonces cargar el archivo vía <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales">FTP</a>.</p>
+<h3>SSH</h3>
+Inicia sesión en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. Luego puedes simplemente correr el siguiente comando para descargar el script:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -s -o status.rb https://cdn.jsdelivr.net/gh/watsonian/server-status-report@master/status.rb</span></pre>
 </div>
-<dl>
-<dd>
-<p>El script se llama status.rb, y el propio script está escrito en Ruby para aprovechar el sistema de plantillas ERB para producir el contenido HTM.</p>
-</dd>
-</dl>
-</li>
-</ul>
 </div>
-<h2><span id="Confirming_if_mailx_is_installed">Confirmar si mailx está instalado</span></h2>
+<h2><span id="Confirmar_si_mailx_esta_instalado">Confirmar si mailx está instalado</span></h2>
 <div class="solvvy-solution">
-<p>Una vez que hayas descargado el script correctamente, debes asegurarte de que el paquete mailx esté instalado en tu PS.</p>
+<p>Una vez que hayas descargado el script correctamente, debes asegurarte de que el paquete mailx esté instalado. Para averiguarlo, corre el siguiente comando:</p>
 <p>Para averiguarlo, corre este comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">dpkg -l | grep mailx</span></pre>
 </div>
-<p>Si ves un resultado como este:</p>
+<p>Si está instalado, verás la siguinete salida.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="cmdoutput">ii  bsd-mailx        8.1.2-0.20100314cvs-1        simple mail user agent</span>
+<pre class="prebox"><span class="cmdoutput">ii  bsd-mailx     8.1.2-0.20180807cvs-1     simple mail user agent</span>
 </pre>
 </div>
-<p>Significa que está instalado.</p>
-<p>Si en cambio ves un resultado como este:</p>
+<p>Si, en cambio, ves el siguiente resultado, debes instalarlo.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="cmdoutput">rc  mailx        8.1.2-0.20050715cvs-1        A simple mail user agent</span>
+<pre class="prebox"><span class="cmdoutput">rc  mailx     8.1.2-0.20050715cvs-1     A simple mail user agent</span>
 </pre>
 </div>
-<p>Entonces eso significa que necesitas instalarlo.</p>
+<p><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">Puedes instalar solamente mailx en un Servidor Dedicado con un </span><a style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;" href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-Servidor-Dedicado-">usuario administrador</a><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">. Esto es por que esto requiere </span><span class="code" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">sudo</span><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">. Habiendo iniciado sesión, corre el siguiente comando:</span></p>
 <div class="notebox-important">
-<p>Solo puedes instalar mailx en un Servidor Dedicado con un <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-">usuario administrador</a>. Esto se debe a que requiere <span class="code">sudo</span>. Una vez que hayas iniciado sesión, corre el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo apt-get install mailx</span></pre>
 </div>
 </div>
 </div>
-<h2><span id="Creating_a_cron_job">Crear un cron job</span></h2>
+<h2><span id="Crear_un_cron_job">Crear un cron job</span></h2>
 <div class="solvvy-solution">
 <p>Mira el artículo <a href="https://help.dreamhost.com/hc/es/articles/215088608-Generalidades-sobre-Crontab">Crontab</a> para ver detalles sobre como crear un cron job bajo tu usuario shell. Ingresa el siguiente comando en el panel al crear el cron job:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/bin/ruby /<span class="code-highlight">path/to/script/status.rb</span> | /usr/bin/mail -a "Content-type: text/html;" -s "Status Report: $HOSTNAME" "<span class="code-highlight">some@example.com</span>"</span></pre>
 </div>
-<p>Si el comando anterior no funciona, intenta modificar '/usr/bin/ruby' con '/usr/bin/ruby1.8'.</p>
+<div class="notebox-note">
 <ul>
+<li>Si agregaste el script en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio home del usuario</a>, puedes cambiar el camino a <span class="code">~/status.rb</span>.</li>
+<li>Cambia el correo a donde quieres que el cron job envíe el correo.</li>
 <li>Puedes cambiar el tema a lo que quieras.</li>
-</ul>
-<ul>
-<li>También puedes cambiar el correo a cualquier dirección a la que desees que se envíe el cron del correo.</li>
-</ul>
-<ul>
 <li>Si deseas enviar el correo a más direcciones de correo, puedes usar la marca <span class="code">-c</span> y pasarle una lista de direcciones de correo separadas por comas.</li>
 </ul>
-<ul>
-<li>Ejecutarlo una vez por hora probablemente no sea una mala idea, pero puedes correrlo con la frecuencia que desees.</li>
-</ul>
 </div>
-<h2><span id="Conclusion">Conclusión</span></h2>
+</div>
+<h2><span id="Conclusion">Correo</span></h2>
 <div class="solvvy-solution">
 <p>Si configuras todo correctamente, deberías comenzar a recibir correos que se parezcan más o menos a este:</p>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/Server_status_script_preview.png" alt="Server status script preview.png" /></dd>
 </dl>
 </div>
-<h2><span id="See_also">Ver también</span></h2>
+<h2><span id="Ver_tambien">Ver también</span></h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214879308-Generalidades-sobre-optimizaci%C3%B3n-de-un-VPS">Generalidades sobre optimización de VPS</a></li>
