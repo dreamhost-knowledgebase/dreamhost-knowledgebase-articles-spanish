@@ -1,0 +1,43 @@
+<h2>Introducción</h2>
+<div class="solvvy-solution">
+<p>Las instancias de DreamCompute se crean con una llave SSH específica que se utiliza para obtener acceso inicial. Esta guía cubre algunos pasos básicos para intentar recuperar los datos y obtener acceso nuevamente si lo deseas.</p>
+</div>
+<h2>Cosas para tener en cuenta</h2>
+<div class="solvvy-solution">
+<ul>
+<li>
+<p class="first"><strong>La dirección IP cambiará</strong></p>
+<p>Para volver a iniciar sesión en una instancia, es necesario volver a crearla. La nueva instancia recibe nuevas direcciones IPv4 e IPv6.</p>
+</li>
+<li>
+<p class="first"><strong>Conoce el tipo de tu instancia</strong></p>
+<p>En general, se puede averiguar si una instancia utilizó un disco de arranque efímero o de volumen consultando la página 'Instancias' en el panel de DreamCompute. Allí puedes ver si el nombre de una imagen personalizada o un sistema operativo aparece en la columna <span class="text-object">Nombre de Imagen</span>. Si aparece uno, la instancia es efímera. Si no lo es, usó un disco de arranque por volumen.</p>
+</li>
+<li>
+<p class="first"><strong>Instancia iniciada por volumen de respaldo</strong></p>
+<p>Cuando se crea una instancia, hay una opción titulada "Eliminar Volumen o Eliminar Instancia". Desafortunadamente, es difícil verificar en qué se configuró esa opción después de la creación. Si se seleccionaste "Sí" los datos del volumen se eliminarán de forma permanente cuando se elimine la instancia.</p>
+Para hacer una copia de seguridad, ve a la página <a href="https://iad2.dreamcompute.com/project/instances/">'Compute &gt; Instancias'</a>. A la derecha de la instancia, haz clic en el botón <strong>Crear Captura</strong>. Esta captura usa una cuota de almacenamiento de volumen, por lo que es posible que debas agregar almacenamiento adicional en el panel DreamHost para obtener más espacio. Una vez que se completa todo este proceso, se puede eliminar la captura y reducir la cuota.</li>
+</ul>
+</div>
+<div id="regain-access-to-volume-based-instance">&nbsp;</div>
+<h2>Recuperar el acceso a la instancia basada en volumen</h2>
+<div class="solvvy-solution">
+<ol class="arabic simple">
+<li>Navega a la <a class="reference external" href="https://iad2.dreamcompute.com/project/instances/">página Instancias</a>&nbsp;del panel DreamCompute.</li>
+<li>Si no sabes si "Eliminar el Volumen o Eliminar la Intancia" se estableció en "Sí" para tu instancia cuando se creó, asegúrate de que se haya creado una captura. Una captura utiliza tanto espacio en disco como el volumen, por lo que si el volumen es de 80 GB, confirma que hay otros 80 GB libres. Puedes asegurarte de que haya suficiente volumen de almacenamiento en la página <a href="https://iad2.dreamcompute.com/project/">Generalidades</a>.</li>
+<li>Toma nota del tamaño de la instancia, el nombre de la instancia, el UUID y el nombre del volumen, y cualquier otra característica que deba conservarse en la nueva instancia.</li>
+<li>Elimina la instancia (esto dejará un volumen disponible).</li>
+<li>Haz clic en el botón <strong>Lanzar Intancia</strong>&nbsp;para <a href="https://help.dreamhost.com/hc/es/articles/215912848-C%C3%B3mo-lanzar-una-instancia-usando-el-panel-de-DreamCompute" target="_self" rel="undefined">crear una nueva instancia</a>. En la pestaña <span class="text-object">Fuente</span>, establece <span class="text-object">Seleccionar Fuente de Reinicio</span>&nbsp;en <span class="text-object">Volumen</span> y haz clic en el símbolo de la flecha hacia arriba junto al volumen recién disponible de la instancia anterior.</li>
+<li>En la pestaña Llave de Emparejamiento, seleciona la <a href="https://help.dreamhost.com/hc/es/articles/115001736691-Descripci%C3%B3n-general-de-creaci%C3%B3n-de-una-Llave-de-Emparejamiento" target="_self">Llave de emparejamiento para ser inyectada por el usuario predeterminado</a>. Si no hay claves válidas disponibles, puedes usar los botones <strong>Crear Llave de Emparejamiento</strong>&nbsp;o <strong>Importar Llave de Emparejamiento</strong>&nbsp;para asociar un nuevo par de claves con tu proyecto (y esta instancia).</li>
+<li>Cuando hayas terminado de personalizar la instancia, haz clic en el botón <strong>Lanzar </strong>en la parte inferior derecha.</li>
+<li>Una vez que la nueva instancia se ha reiniciado, intenta iniciar sesión con el <a class="reference external" href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined">nombre de usuario predeterminado</a> y la nueva <a href="https://help.dreamhost.com/hc/es/articles/115001754711-Localizar-las-direcciones-IP-de-tu-instancia" target="_self" rel="undefined">dirección IP</a>.</li>
+<li>Si todo parece correcto y se ha restaurado el acceso, debes eliminar la captura del volumen realizado en el paso #2 para recuperar la cuota de almacenamiento de volumen.</li>
+</ol>
+</div>
+<div class="clearer">&nbsp;</div>
+<div class="footer">&nbsp;</div>
+<!--DreamCompute Button-->
+<div class="dream-sign-up">
+<h2>Implementa Tus Aplicaciones en Servidores en la Nube Hoy</h2>
+<div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/computing/" target="_self" rel="undefined">Suscríbete a DreamCompute</a></div>
+</div>
