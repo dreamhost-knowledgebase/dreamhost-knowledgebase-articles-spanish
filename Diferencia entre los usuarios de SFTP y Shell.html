@@ -1,47 +1,79 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>Los nuevos usuarios se crean como usuarios de SFTP o Shell. A continuación se explica la diferencia entre estos tipos de usuarios.</p>
-<h3><span id="Usuarios_FTP">Usuarios FTP</span></h3>
-<div class="notebox-important">
+<div class="alert-warning">
+<p><strong>Usuarios de FTP</strong></p>
 <p>FTP no se considera un protocolo seguro, ya que todo tu tráfico (incluida tu información de inicio de sesión) se transfiere a través de Internet en texto plano, donde cualquiera podría escuchar a escondidas.</p>
 <p>Por esta razón, DreamHost recomienda que solo uses un usuario de SFTP o Shell. Si necesitas usar FTP por algún motivo, mira el artículo <a href="https://help.dreamhost.com/hc/es/articles/115001051531-Seguridad-FTP#configuracion" target="_self">Seguridad FTP</a> para obtener instrucciones sobre cómo cambiar el protocolo a FTP.</p>
 </div>
 </div>
-<h3><span id="Usuarios_SFTP">Usuarios SFTP</span></h3>
-<p>Se requiere un usuario de SFTP para cargar un sitio web que hayas creado en los servidores de DreamHost o para realizar cambios en un sitio web existente.</p>
+<h2>Tabla de comparación</h2>
+<p>El siguiente cuadro muestra las principales diferencias entre los usuarios de SFTP y Shell. Ambos protocolos son igualmente seguros de usar.</p>
+<table style="border-collapse: collapse; width: 90%;" border="1">
+<tbody>
+<tr>
+<th style="width: 10%;">Protocolo</th>
+<th style="width: 30%;">Iniciar sesión usando un cliente de FTP</th>
+<th style="width: 30%;">Acceso de línea de comando</th>
+<th style="width: 30%;">Seguro</th>
+</tr>
+<tr>
+<td><strong>SFTP</strong></td>
+<td class="table-background-green">Si</td>
+<td class="table-background-red">No</td>
+<td class="table-background-green">Si</td>
+</tr>
+<tr>
+<td><strong>SSH</strong></td>
+<td class="table-background-green">Si</td>
+<td class="table-background-green">Si</td>
+<td class="table-background-green">Si</td>
+</tr>
+</tbody>
+</table>
+<h2><span id="Usuarios_de_SFTP">Usuarios de SFTP</span></h2>
+<p>Se requiere un usuario de SFTP para cargar un sitio web que hayas creado en los servidores de DreamHost o para hacer cambios en un sitio web existente.</p>
+<div class="notebox-note">
 <p>Los usuarios <a href="https://help.dreamhost.com/hc/es/articles/115000675027#seguridad">SFTP</a>&nbsp;son similares a los usuarios de FTP, excepto que el protocolo SFTP utiliza una conexión cifrada para acceder a un servidor. El puerto 22 se usa en tu cliente para conectarse al servidor a través de SFTP.</p>
+</div>
 <p>La página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/?tree=users.dashboard" target="_self" rel="undefined">Archivos</a> muestra el nombre de usuario y el tipo de usuario con el que está configurado.&nbsp;</p>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-files-users-show-info.png" alt="manage users show info button" width="598" height="96" /></dd>
 </dl>
-<p>En el siguiente ejemplo, el nombre de usuario es 'dh_test_user'. Haz clic en el botón <strong>Mostrar Info</strong> al lado de tu usuario:</p>
+<p>En el siguiente ejemplo, el nombre de usuario es <span class="text-object">dh_test_user</span>. Haz clic en el botón <strong>Mostrar Info</strong> al lado de tu usuario:</p>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-files-user-info.png" alt="manage users edit access settings" width="562" height="257" /></dd>
 </dl>
 <p>Aquí puedes ver que el usuario está configurado como usuario SFTP.</p>
-<h3><span id="usuarios_shell">Usuarios Shell</span></h3>
-<p>Los usuarios de Shell son usuarios que pueden conectarse a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>, <a href="https://help.dreamhost.com/hc/es/articles/115000675027#seguridad">SFTP</a>, y (opcionalmente) FTP. El "Shell" es la línea de comandos de Linux en tu servidor de alojamiento, una alternativa útil para usuarios avanzados.</p>
+<h2><span id="usuarios_shell">Usuarios Shell</span></h2>
+<p>Los usuarios de Shell son usuarios que pueden conectarse a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y <a href="https://help.dreamhost.com/hc/es/articles/115000675027#seguridad">SFTP</a>. El "Shell" es la línea de comandos de Linux en tu servidor de alojamiento que puedes usar para correr comandos.</p>
 <p><strong>Cambiar a un usuario Shell</strong></p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-files-users-show-info.png" alt="manage users show info button" width="598" height="96" /></dd>
-</dl>
-<p>Desde la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/?tree=users.dashboard" target="_self">Archivos</a>, haz clic en el botón <strong>Mostrar Info</strong>&nbsp;al lado de tu usuario.</p>
+<dd>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-files-user-info.png" alt="manage users edit access settings" width="562" height="257" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-manage_users_show-info.png" alt="manage users show info button" width="573" height="133" /></dd>
 </dl>
-<p>Aquí puedes ver que el usuario está configurado como usuario SFTP. Puedes cambiar el usuario a un usuario Shell para que tengas acceso SSH haciendo clic en el enlace <span class="text-link">Editar configuración de Acceso</span>.</p>
+</dd>
+</dl>
+<ol>
+<li>Desde la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=users.dashboard" target="_self" rel="undefined">Archivos</a>, da clic al botón <strong>Mostrar Info</strong> al lado de tu usuario.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-files-user-change-protocol.png" alt="manage users select ssh" width="600" height="320" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-manage-users-edit-access-settings.png" alt="manage users edit access settings" width="567" height="275" /></dd>
 </dl>
-<p>En el menú desplegable, selecciona <span class="text-object">SSH</span>.</p>
+</li>
+<li>En la parte inferior izquierda, puedes ver el <span class="code">Protocolo SFTP</span> que confirma que el usuario está configurado como usuario SFTP. Tu puedes cambiar el usuario a un usuario Shell para que tenga accesso a SSH dando clic al enlace <span class="text-link">Editar Configuración de Acceso</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-manage-users-change-to-ssh.png" alt="manage users select ssh" width="558" height="201" /></dd>
+</dl>
+</li>
+<li>Del menú desplegable, selecciona <span class="text-object">SSH encendido</span>.
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-files-user-change-shell-type.png" alt="manage users select ssh" width="601" height="244" /></dd>
 </dl>
-<p>Selecciona el tipo de Shell que deseas usar. Bash es el tipo de Shell predeterminado. Haz clic en <strong>Guardar Cambios</strong>.</p>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-files-user-changed-settings.png" alt="manage users changed settings" width="602" height="115" /></dd>
-</dl>
-<p>Cuando estás&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">creando un usuario Shell</a>,&nbsp;también tienes 4 opciones de shell para la línea de comando:</p>
+</li>
+<li>Selecciona el tipo de Shell que deseas usar.
+<div class="notebox-note">
+<p>Cuando estás&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">creando un usuario Shell</a>, también tienes 4 opciones de shell para la línea de comando:&nbsp;</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216557548-Shell-disponibles-en-DreamHost">Bash</a> – significa Bourne-again shell, y es el shell predeterminado en sistemas basados ​​en Linux y Mac OS.</li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216557548-Shell-disponibles-en-DreamHost">Tcsh</a> – es una versión mejorada del shell Berkeley UNIX C. Es un intérprete de lenguaje de comandos que se puede usar como un shell de inicio de sesión interactivo y un procesador de comandos de script de shell.</li>
@@ -52,3 +84,11 @@
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216557548-Shell-disponibles-en-DreamHost" target="_self">Shells disponibles en DreamHost</a></li>
 </ul>
+</div>
+<p>Bash es el tipo de Shell predeterminado. Haz clic en <strong>Guardar Cambios</strong>.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel_new_manage_users_09.fw.png" alt="2019-11_panel_new_manage_users_09.fw.png" /></dd>
+</dl>
+</li>
+<li>Ahora puedes ver que el <span class="code">Protocolo SSH</span> está configurado como el tipo de usuario.</li>
+</ol>
