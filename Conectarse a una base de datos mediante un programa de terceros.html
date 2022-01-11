@@ -9,7 +9,7 @@
 <li><a class="reference internal" href="#Conectarse_usando_un_tunel_de_SSH_seguro" target="_self" rel="undefined">Conectarse usando un túnel de SSH seguro</a></li>
 <li><a class="reference internal" href="#Conectarse_usando_un_inicio_de_sesion_sin_contrasena" target="_self" rel="undefined">Conectarse usando un inicio de sesión sin contraseña</a></li>
 <li><a class="reference internal" href="#Conectarse_usando_SSH">Conectarse usando SSH</a></li>
-<li><a class="reference internal" href="#Conectarse_usando_Sequel_Pro">Conectarse usando Sequel Pro (Mac OSX)</a></li>
+<li><a class="reference internal" href="#mac_sequel_ace" target="_self" rel="undefined">Conectarse usando Sequel Ace (Mac OSX)</a></li>
 <li><a class="reference internal" href="#Conectarse_usando_tu_base_de_datos_phpMyAdmin" target="_self" rel="undefined">Conectarse usando tu base de datos phpMyAdmin</a></li>
 </ul>
 </div>
@@ -72,6 +72,7 @@
 <ul>
 <li>Habilitar <span class="text-object">%.example.com</span> no habilita el hostname <strong>example.com</strong> en si.</li>
 <li>Si recibes un error <span class="text-object">"access denied to username@xxx.xxx.xxx.xxx-ip.provider.info"</span>, intenta agregar un wildcard al final de tu IP (como <span class="text-object">xxx.xxx.xxx.xxx%</span>).</li>
+<li>Si eso no funciona, agrega la URL completa de tu proveedor en el mensaje.</li>
 </ul>
 </div>
 <dl>
@@ -258,31 +259,58 @@
 </dl>
 </div>
 </div>
-<h2><span id="Conectarse_usando_Sequel_Pro">Conectarse usando Sequel Pro (Mac OSX)</span></h2>
+<h2><span id="mac_sequel_ace">Conectarse usando Sequel Ace (Mac OSX)</span></h2>
 <div class="solvvy-solution">
-<p>Si estás usando Apple Mac OSX, puedes usar el programa código abierto <a href="https://www.sequelpro.com/">Sequel Pro</a> para conectarte a una base de datos DreamHost MySQL.</p>
-<p>Para conectarte con tu base de datos DreamHost usando Sequel Pro:</p>
+<p>Si estás usando Apple Mac OSX, puedes usar el software de fuente abierta <a href="https://apps.apple.com/us/app/sequel-ace/id1518036000?ls=1" target="_self">Sequel Ace</a> para conectarte a una base de MySQL de DreamHost.</p>
+<dl>
+<dd><img class="img-borde" src="https://kbimages.dreamhosters.com/images/2x/3rd-mysql-ace-01.png" width="391" height="407" /></dd>
+</dl>
+<p>Para conectarte a tu base de datos de DreamHost usando Sequel Ace:</p>
 <ol>
-<li>Usa la pestaña de conexión <span class="text-object">Standard</span> e ingresa lo siguiente:<br />
+<li>Usa la pestaña de conexión <span class="text-object">TCP/IP</span> e ingresa lo siguiente:
 <ul>
-<li><strong>Name:</strong> [opcional].</li>
-<li><strong>Host:</strong> [Tu nombre de host MySQL: <strong>mysql.example.com</strong>].</li>
-<li><strong>Username:</strong> [El nombre de usuario de tu base de datos].</li>
-<li><strong>Password:</strong> [La contraseña de usuario de tu base de datos].</li>
-<li><strong>Database:</strong> [opcional].</li>
-<li><strong>Port:</strong> [3306].</li>
+<li><strong>Name:</strong> opcional.</li>
+<li><strong>Host:</strong> Tu nombre de host MySQL: <strong>mysql.example.com</strong>.</li>
+<li><strong>Username:</strong> El nombre de usuario de tu base de datos.</li>
+<li><strong>Password:</strong> La contraseña de usuario de tu base de datos.</li>
+<li><strong>Database:</strong> opcional.</li>
+<li><strong>Port:</strong> 3306.</li>
 </ul>
 </li>
 <li>Haz clic en <strong>Connect</strong>.</li>
 </ol>
+<div class="alert-warning">
+<p>Es posible que veas el siguiente error al conectarte.</p>
+<dl>
+<dd><img class="img-borde" src="https://kbimages.dreamhosters.com/images/2x/3rd-mysql-ace-02.png" width="246" height="154" /></dd>
+</dl>
+<p>Si es así, asegúrate de haber agregado tu IP o el nombre de host de tu ISP al campo <span class="text-object">Hosts Permitidos</span> como se mencionó anteriormente.</p>
+<ul>
+<li><a class="reference internal" href="#third_party" target="_self" rel="undefined">Actualizar el campo de los Hosts Permitidos en el panel</a></li>
+</ul>
+</div>
 <p>Una vez que esté conectado, seleccione la base de datos del menú desplegable en la parte superior izquierda.</p>
-<p>Un método más seguro es utilizar la pestaña <span class="text-object">SSH</span> al crear la conexión/favorito. Primero debes configurar un usuario para el acceso SSH en la página <a href="https://panel.dreamhost.com/index.cgi?tree=users.dashboard#!" target="_blank" rel="noopener"><span class="panel-link">Administrar Usuarios</span></a> en tu panel DreamHost. Con estos detalles en la mano, puedes configurar las siguientes opciones adicionales:</p>
+<h3>Conectarse con SSH</h3>
+<p>Un método más seguro es usar la pestaña <span class="text-object">SSH</span> cuando crees la conexión/favorito. Primero debes <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">configurar un usuario para accesso de SSH</a> en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=users.dashboard#!" target="_blank" rel="noopener">Archivos &amp; Usuarios</a>. Con esos detalles a la mano, puedes configurar las siguientes opciones adicionales:</p>
 <ul>
 <li><strong>SSH Host:</strong> [ <a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">Nombre de host SSH</a>]</li>
-<li><strong>SSH User:</strong> [Nombre de usuario de un usuario con SSH habilitado]</li>
-<li><strong>SSH Password:</strong> [Contraseña para la cuenta]</li>
-<li><strong>SSH Port:</strong> [22]</li>
+<li><strong>SSH User:</strong> Usuario SSH</li>
+<li><strong>SSH Password:</strong> La contraseña del usuario SSH</li>
+<li><strong>SSH Port:</strong> 22</li>
 </ul>
+<p>Cuando te conectes puede que veas el siguiente error:</p>
+<div class="preboxcontainer">
+<pre class="prebox">The authenticity of host 'example.com' can't be established. 
+ED25519 key fingerprint is
+SH256:#########
+This key is not known by any other names
+</pre>
+</div>
+<p>Si es así, revisa el siguiente artículo para confirmar que la llave a la que te estás conectando es correcta.</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/es/articles/360004634231-The-server-s-host-key-is-unknown-La-llave-host-del-servidor-es-desconocida-">The server's host key is unknown (La llave host del servidor es desconocida)</a></li>
+</ul>
+<p>Una vez confirmado, puedes dar clic en el botón <strong>Yes</strong>.</p>
 </div>
 <h2><span id="Conectarse_usando_tu_base_de_datos_phpMyAdmin">Conectarse usando tu base de datos phpMyAdmin</span></h2>
 <div class="solvvy-solution">
