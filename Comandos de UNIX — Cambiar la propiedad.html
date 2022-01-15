@@ -1,0 +1,41 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo es un breve resumen de los permisos que se pueden asignar a archivos y carpetas en DreamHost. Si es necesario, consulta el artículo de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>&nbsp;para obtener instrucciones sobre cómo iniciar sesión en tu servidor según tu sistema operativo.</p>
+</div>
+<h2>Usuario y Grupo</h2>
+<div class="solvvy-solution">
+<p>Cada archivo en un sistema Unix tiene asignado un usuario y un grupo. Las siguientes secciones detallan la propiedad de cada uno.</p>
+<h3><span id="User">Usuario</span></h3>
+<p>Cada archivo en Unix tiene asignado un usuario.</p>
+<p>Este usuario:</p>
+<ul>
+<li>Es el dueño del archivo.</li>
+<li>Tiene permiso para cambiar el grupo y el modo del archivo.</li>
+</ul>
+<p>Nadie más (excepto el administrador) puede realizar estos cambios, y solo el administrador puede cambiar el propietario de un archivo.</p>
+<p>El comando para cambiar el propietario es <span class="code">chown</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chown <span class="code-highlight">exampleuser file.txt</span></span></pre>
+</div>
+<p>El usuario llamado "exampleuser" ahora posee <span class="text-object">file.txt</span>. Esto solo funciona si eres el superusuario.</p>
+<p>La solución para cambiar el propietario del archivo para los que no son superusuarios es copiar los archivos a una nueva ubicación donde, como usuario, deseas poseer los archivos. Los archivos son propiedad de este usuario en la nueva ubicación. No es una solución alternativa, pero ocasionalmente es útil.</p>
+<p>Se puede encontrar más información sobre el comando <span class="code">chown</span>&nbsp;<a href="https://en.wikipedia.org/wiki/Chown" target="_self">aquí</a>.</p>
+<h3>Grupo</h3>
+<p>Cada archivo en Unix tiene asignado un grupo. Este es el "propietario del grupo" del archivo. Los grupos Unix te permiten otorgar acceso a varios usuarios. El comando para modificar el grupo es chgrp. Solo puedes modificar el grupo de archivos que posees, y sólo puedes configurar el propietario del grupo con el nombre de un grupo del que eres miembro:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chgrp <span class="code-highlight">examplegroup file.txt</span></span></pre>
+</div>
+<p>El grupo llamado "examplegroup" ahora posee <span class="text-object">file.txt</span>.<br />Para más información, visita&nbsp;<a style="background-color: #ffffff;" href="https://en.wikipedia.org/wiki/Chgrp">Chgrp</a>.</p>
+</div>
+<h2>Ver También</h2>
+<div class="solvvy-hidden">
+<h3>Links internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214750888-Generalidades-sobre-comandos-UNIX" target="_self">Generalidades sobre los Comandos UNIX</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">Comandos UNIX — Cambiar permisos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215465297-Comandos-UNIX-Trabajando-con-directorios" target="_self">Comandos UNIX — Trabajar con directorios</a></li>
+<li><a href="/hc/es/articles/214750848-Comandos-de-UNIX-Trabajando-con-archivos" target="_self">Comandos UNIX — Trabajar con archivos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115002768331-Comandos-UNIX-Descomprimiendo-archivos" target="_self">Comandos UNIX — Descomprimir archivos</a></li>
+</ul>
+</div>

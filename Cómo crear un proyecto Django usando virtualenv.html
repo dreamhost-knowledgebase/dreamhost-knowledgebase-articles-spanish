@@ -50,11 +50,8 @@
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/example.com</span>
 <span class="server">[server]$ </span><span class="command">source ~/example.com/venv/bin/activate</span>
-<span class="server">(venv) [server]$ </span><span class="command">python3 venv/bin/django-admin.py startproject <span class="code-highlight">projectname</span></span></pre>
+<span class="server">(venv) [server]$ </span><span class="command">python3 venv/bin/django-admin startproject <span class="code-highlight">projectname</span></span></pre>
 </div>
-<ul>
-<li>Reemplaza <strong>example.com</strong> con tu nombre de dominio.</li>
-</ul>
 <div class="notebox-note">
 <p>Cuando ejecutas el comando <span class="code">startproject</span>, crea una nueva carpeta en el directorio de tu sitio llamada cualquiera que sea el nombre de tu proyecto Django.</p>
 </div>
@@ -68,12 +65,12 @@ if sys.executable != INTERP: os.execl(INTERP, INTERP, *sys.argv)
 
 cwd = os.getcwd()
 sys.path.append(cwd)
-sys.path.append(cwd + '/<span class="code-highlight">djangoprojectname</span>')  #You must add your project here
+sys.path.append(cwd + '/<span class="code-highlight">projectname</span>')  #You must add your project here
 
 sys.path.insert(0,cwd+'<span class="code-highlight">/venv/bin</span>')
-sys.path.insert(0,cwd+'<span class="code-highlight">/venv/lib/python3.6/site-packages</span>')
+sys.path.insert(0,cwd+'<span class="code-highlight">/venv/lib/python3.10.1/site-packages</span>')
 
-os.environ['DJANGO_SETTINGS_MODULE'] = "<span class="code-highlight">djangoprojectname</span>.settings"
+os.environ['DJANGO_SETTINGS_MODULE'] = "<span class="code-highlight">projectname</span>.settings"
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 </pre>
@@ -149,8 +146,10 @@ application = get_wsgi_application()
 }
 </pre>
 </div>
+<div class="notebox-note">
+<p>El valor predeterminado es usar sqlite3, que puede ser adecuado para los sitios más pequeños, pero es probable que desees configurar una base de datos mysql.</p>
+</div>
 </li>
-<li>El valor predeterminado es usar sqlite3, que puede ser adecuado para los sitios más pequeños, pero es probable que desees configurar una base de datos mysql.</li>
 <li>También en tu archivo <span class="text-object">settings.py</span>, actualiza el campo <span class="code">ALLOWED_HOSTS</span> con tu nombre de dominio. Al principio, parece así:<br />
 <div class="preboxcontainer">
 <pre class="prebox">ALLOWED_HOSTS = []</pre>
@@ -160,17 +159,24 @@ Actualízalo para incluir tu nombre de dominio.<br />
 <pre class="prebox">ALLOWED_HOSTS = [<span class="code-highlight">'example.com' , 'www.example.com'</span>]</pre>
 </div>
 </li>
-<li>Asegúrate de estar en el directorio de tu proyecto:<br />
+<li>Navega al directorio de tu proyecto:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">cd ~/example.com/<span class="code-highlight">projectname</span></span></pre>
 </div>
 </li>
-<li>Asegúrate de que mysqlclient esté instalado.<br />
+<li>
+<div class="notebox-important">
+<p>Si seguiste las instrucciones para <a href="https://help.dreamhost.com/hc/es/articles/215317948-C%C3%B3mo-instalar-Django-usando-virtualenv" target="_self">crear un proyecto Django en un virtualenv</a>, <span class="text-object">mysqlclient</span> ya está instalado. Confírmalo ejecutando <span class="code">pip3 list</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">pip3 list</span></pre>
+</div>
+<p><span class="text-object">mysqlclient</span> should display. If not run the following to install.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">pip3 install mysqlclient</span></pre>
 </div>
+</div>
 </li>
-<li>Una vez configurado, ejecuta migrate en el directorio de tu proyecto:<br />
+<li>Corre <span class="code">migrate</span> en el directorio de tu proyecto:<br />
 <div class="alert-warning">
 <p>Al correr el siguiente comando, verás el siguiente mensaje de advertencia:</p>
 <div class="preboxcontainer">
@@ -185,14 +191,35 @@ Actualízalo para incluir tu nombre de dominio.<br />
 </div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">python3 manage.py migrate</span>
-Operations to perform:<br /> Apply all migrations: admin, auth, contenttypes, sessions<br />Running migrations:<br /> Applying contenttypes.0001_initial... OK<br /> Applying auth.0001_initial... OK<br /> Applying admin.0001_initial... OK<br /> Applying admin.0002_logentry_remove_auto_add... OK<br /> Applying contenttypes.0002_remove_content_type_name... OK<br /> Applying auth.0002_alter_permission_name_max_length... OK<br /> Applying auth.0003_alter_user_email_max_length... OK<br /> Applying auth.0004_alter_user_username_opts... OK<br /> Applying auth.0005_alter_user_last_login_null... OK<br /> Applying auth.0006_require_contenttypes_0002... OK<br /> Applying auth.0007_alter_validators_add_error_messages... OK<br /> Applying auth.0008_alter_user_username_max_length... OK<br /> Applying sessions.0001_initial... OK</pre>
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying sessions.0001_initial... OK
+</pre>
 </div>
 </li>
 <li>Crea un superusuario:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">python3 manage.py createsuperuser</span>
-<span class="cmdoutput">Username (leave blank to use 'username'): my_django_user
-Email address: email@example.com
+<span class="cmdoutput">Username (leave blank to use 'username'): <span class="code-highlight">my_django_user</span>
+Email address: <span class="code-highlight">email@example.com</span>
 Password:
 Password (again):
 Superuser created successfully.</span></pre>
@@ -208,10 +235,10 @@ Superuser created successfully.</span></pre>
 <pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">mkdir tmp</span>
 <span class="server">(venv) [server]$ </span><span class="command">touch tmp/restart.txt</span></pre>
 </div>
-</li>
-<li>Cada vez que realices un cambio en tu configuración, asegúrate de ejecutar lo siguiente en el directorio de tu sitio para notificar a Passenger del cambio:<br />
+<div class="notebox-note">Cada vez que realices un cambio en tu configuración, asegúrate de ejecutar lo siguiente en el directorio de tu sitio para notificar a Passenger del cambio:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">(venv) [server]$ </span><span class="command">touch tmp/restart.txt</span></pre>
+</div>
 </div>
 </li>
 </ol>

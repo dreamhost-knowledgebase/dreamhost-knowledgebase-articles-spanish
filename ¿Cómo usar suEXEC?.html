@@ -1,23 +1,27 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>suEXEC (que significa "ejecución de cambio de usuario") proporciona a los usuarios de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache">Apache</a>&nbsp;la capacidad de ejecutar programas <a href="https://help.dreamhost.com/hc/es/articles/217297307-Generalidades-sobre-CGI">CGI</a>&nbsp;y SSI con ID de usuario diferentes al ID de usuario del servidor web que realiza la llamada. Normalmente, cuando se ejecuta un programa CGI o SSI, se ejecuta como el mismo usuario que ejecuta el servidor web.</p>
-<p>Como medida de seguridad, suEXEC REQUIERE que todos los scripts CGI y los directorios en los que residen no sean modificables por nadie más que por el usuario propietario. suEXEC realiza comprobaciones en el CGI ejecutado para garantizar la seguridad del servidor. Tiene una comprobación de permisos estricta que da como resultado un "500 Internal Server Error" si los permisos del script no están configurados correctamente. También limpia el entorno pasando únicamente por aquellas variables de entorno que se consideran seguras.</p>
-<p>Cuando se usa correctamente, esta función puede reducir considerablemente los riesgos de seguridad que implica permitir a los usuarios desarrollar y ejecutar programas CGI o SSI privados.</p>
-<div class="notebox-note">
-<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
-</div>
-</div>
-<h2><span id="Script_permissions">Permisos de Script</span></h2>
+<p>suEXEC (que quiere decir "switch user execution" o "cambiar la ejecución del usuario") permitte que los usuarios de <a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache">Apache</a> corran <a href="https://help.dreamhost.com/hc/es/articles/217297307-Generalidades-sobre-CGI">CGI</a> y programas SSI en diferentes usuarios. Cuando se usa correctamente, reduce considerablemente los riesgos de seguridad relacionados con permitir que los usuarios desarrollen y ejecuten programas CGI o SSI privados.</p>
+<h2>Seguridad</h2>
+<h3><span id="Permisos_de_Script">Permisos de Script</span></h3>
 <div class="solvvy-solution">
-<p>Debido a la forma en que suEXEC maneja la seguridad, el directorio en el que reside tu script CGI y el script en sí no deben ser modificables por nadie más que por el usuario. Si se puede escribir, aparece "500 Internal Server Error". El script también debe ser ejecutable y la forma más sencilla de establecer permisos es con <span class="code">chmod</span>:</p>
+<p>suEXEC requiere que todos los scripts CGI y los directorios en los que residen solo puedan ser escritos por el propietario. Si los permisos no están configurados correctamente, ser mostrará <span class="text-object">500 Internal Server Error</span>.</p>
+<p>El script también debe ser ejecutable. Puedes establecer permisos iniciando sesión en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> y corriendo el comando <span class="code">chmod</span>. Por ejemplo:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command"> chmod 755 <span class="code-highlight">script.cgi</span></span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 755 <span class="code-highlight">script.cgi</span></span></pre>
+</div>
+<h3>Verificación de variables de entorno</h3>
+<p>suEXEC solo pasa a través de variables de entorno que se consideran seguras.</p>
+<div class="notebox-note">
+<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
 </div>
 </div>
-<h2><span id="Apache_module_mod_env">Modulo de Apache mod_env</span></h2>
+</div>
+<h2 class="header-section">Ejemplo de suEXEC</h2>
 <div class="solvvy-solution">
-<p>Debido a que suEXEC limpia el entorno eliminando todas las variables de entorno, excepto aquellas consideradas seguras por la configuración del servidor, las directivas proporcionadas por&nbsp;<a href="http://httpd.apache.org/docs/2.2/mod/mod_env.html">mod_env</a> como <span class="code">SetEnv</span>, <span class="code">PassEnv</span> y <span class="code">SetEnvIf</span> no funcionan como se esperaba.</p>
-<p>Digamos que tienes <span class="text-object">foobar.cgi</span> instalado en ambos <span class="text-object">/home/username/example.com</span> y <span class="text-object">/home/username/example2.com</span>:</p>
+<p>Debido a que suEXEC solo permite variables consideradas seguras por la configuración del servidor, las directivas proporcionadas por <a href="https://httpd.apache.org/docs/2.4/mod/mod_env.html" target="_self" rel="undefined">mod_env</a> como <span class="code">SetEnv</span>, <span class="code">PassEnv</span>, y <span class="code">SetEnvIf</span> no funcionan como se espera.</p>
+<p>Los siguientes pasos crean un ejemplo simple de cómo funciona suEXEC en DreamHost.</p>
+<h3>Paso 1 — Agregar un archivo a tu sitio</h3>
+<p><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crea un archivo</a> llamado <span class="text-object">foobar.cgi</span> con el siguiente contenido.</p>
 <div class="preboxcontainer">
 <pre class="prebox">#!/usr/bin/perl
 
@@ -29,83 +33,120 @@ my $q = CGI-&gt;new;
 print $q-&gt;header();
 print $ENV{FOOBAR};</pre>
 </div>
-<p>En el directorio de tu primer dominio, agrega un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a> con la directiva:</p>
+<p>Coloca este archivo en dos sitios web diferentes con el mismo nombre de usuario. Por ejemplo:</p>
+<ul>
+<li><span class="text-object">/home/username/example.com</span></li>
+<li><span class="text-object">/home/username/example2.com</span></li>
+</ul>
+<h3>Paso 2 — Agrega un archivo .htaccess para cada directorio</h3>
+<p>En el directorio <strong>example.com</strong>, agrega un <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a> con la siguiente directiva:</p>
 <div class="preboxcontainer">
 <pre class="prebox">SetEnv FOOBAR <span class="code-highlight">foo</span></pre>
 </div>
-<p>y en el directorio de tu segundo dominio, agrega lo siguiente:</p>
+<p>En el directorio <strong>example2.com</strong>, agrega un <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a> con la siguiente directiva:</p>
 <div class="preboxcontainer">
 <pre class="prebox">SetEnv FOOBAR <span class="code-highlight">bar</span></pre>
 </div>
-<p>Cuando visitas <strong>example.com/foobar.cgi</strong> en tu navegador, esperarás que imprima foo, y cuando visites <strong>example2.com/foobar.cgi</strong>, esperarás bar. En su lugar, el valor predeterminado se imprime en ambas ocasiones.</p>
-<p>Al principio, puedes asumir que <span class="code">mod_env</span> no está instalado o que la directiva&nbsp;<span class="code">SetEnv</span>&nbsp;no es permitida desde el un archivo <span class="text-object">.htaccess</span>. De hecho, <span class="code">SetEnv</span> está funcionando bien. Establece la variable de entorno; suEXEC simplemente no lo pasa a tu script CGI.</p>
-<p>Por un lado, si estás desarrollando tu propia aplicación, puedes tener esto en cuenta mientras la desarrollas y no diseñar tu aplicación para utilizar variables ambientales no estándar. Si, por otro lado, estás utilizando una aplicación de terceros y modificar el código fuente sería prohibitivamente difícil y/o consumirías mucho tiempo (o si solo necesitas tener esas variables de entorno personalizadas en la aplicación que estás desarrollando tu mismo), hay algunas soluciones que se describen en la siguiente sección.</p>
+<h3>Paso 3 — Visita los archivos en un buscador</h3>
+<p>Visita <strong>example.com/foobar.cgi</strong> en tu buscador. Esperarías que se mostrara <span class="code">foo</span>.</p>
+<p>Visita <strong>example2.com/foobar.cgi</strong> en tu buscador. Esperarías que se mostrara <span class="code">bar</span>.</p>
+<p>En vez, <span class="code">default</span> se muestra en ambas páginas.</p>
+<h3>Explicación</h3>
+<p><span class="code">SetEnv</span> está funcionando correctamente para establecer la variable de entorno. El problema es que suEXEC no lo está pasando a tu script CGI.</p>
 </div>
-<h2><span id="Workarounds">Soluciones alternativas</span></h2>
+<h2 class="header-section">Soluciones alternativas</h2>
+<p>The following sections offer you a few ways to get your environment variables working as intended.</p>
 <div class="solvvy-solution">
-<h3><span id="Workaround_A:_Prepending_HTTP_to_variable_name">Solución alternativa A: Anteponer HTTP_ al nombre de la variable</span></h3>
-<p>La forma en que DreamHost configura suEXEC, permite cualquier variable de entorno que comience con <span class="code">HTTP_</span>. Entonces, si cambias tu <span class="text-object">.htaccess</span> a:</p>
+<h3><span id="Solucion_A:_Anteponer_HTTP_a_la_variable_del_nombre&lt;">Opción 1: Anteponer HTTP_ a la variable del nombre</span></h3>
+<p>La configuración de DreamHost de suEXEC permite cualquier variable de entorno que comience con <span class="code">HTTP_</span> pase.</p>
+<p>Cambia tu archivo <span class="text-object">.htaccess</span> a lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox">SetEnv HTTP_FOOBAR <span class="code-highlight">foobar</span></pre>
 </div>
-<p>y usas:</p>
+<p>luego usa lo siguiente en tu script de CGI.</p>
 <div class="preboxcontainer">
 <pre class="prebox">$ENV{HTTP_FOOBAR} </pre>
 </div>
-<p>en tu script CGI, funciona como se esperaba.</p>
-<p>Esta solución alternativa probablemente sea la más adecuada para las aplicaciones que estás desarrollando tu mismo. Examinar el código fuente de aplicaciones de terceros (especialmente aplicaciones grandes, que pueden tener cientos de miles de líneas) y cambiar cada instancia de&nbsp;<span class="code">$ENV{FOOBAR}</span>&nbsp;a&nbsp;<span class="code">$ENV{HTTP_FOOBAR}</span> sería prohibitivamente complejo y consumiría mucho tiempo, sin mencionar que tendrías que rehacer todo ese trabajo cada vez que actualice la aplicación. Esta solución es un poco hacky, pero funciona.</p>
-<h3><span id="Workaround_B:_Editing_the_CGI_script_to_set_the_variable_itself">Solución alternativa B: Editando el script CGI para configurar la propia variable</span></h3>
-<p>Puedes colocar&nbsp;<span class="code">$ENV{FOOBAR} = 'foo';</span> en la parte superior de tu guión. Al igual que la Solución alternativa A, esta solución se adapta mejor a las aplicaciones que estás desarrollando tu mismo. Sin embargo, su utilidad es limitada: el propósito de usar variables de entorno es alterar el comportamiento de tu script en función del contexto (o entorno) desde el que se ejecuta. Si configuras la variable desde el propio script, el comportamiento del script es el mismo independientemente del contexto desde el que se ejecuta.</p>
-<h3><span id="Workaround_C:_Creating_a_wrapper_script">Solución alternativa C: Crear un script de wrapper<br /></span></h3>
-<p>Crea <span class="text-object">wrapper.cgi</span>:</p>
+<p>Esto te permite funcionar como se esperaba.</p>
+<div class="notebox-note">
+<p><strong>Cuando usar esta opción</strong></p>
+<p>Esta solución se adapta mejor a las aplicaciones que estás desarrollando tú mismo.</p>
+<p>Explorar el código fuente de las aplicaciones de terceros (especialmente las aplicaciones grandes, que pueden tener cientos de miles de líneas) y cambiar cada instancia de <span class="code">$ENV{FOOBAR}</span> a <span class="code">$ENV{HTTP_FOOBAR}</span> sería prohibitivamente complejo y requeriría mucho tiempo, sin mencionar que tendrías que rehacer todo ese trabajo cada vez que actualices la aplicación.</p>
+</div>
+<h3><span id="Solucion:_Editar_el_script_CGI_script_para_configurar_la_variable_en_si">Opción 2: Editar el script CGI para configurar la variable en sí</span></h3>
+<p>Coloca <span class="code">$ENV{FOOBAR} = 'foo';</span> en la parte superior del script. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">#!/usr/bin/perl
+
+use strict;
+use CGI;
+
+<span class="code-highlight">$ENV{FOOBAR} = 'foo';</span>
+
+$ENV{FOOBAR} ||= 'default';
+my $q = CGI-&gt;new;
+print $q-&gt;header();
+print $ENV{FOOBAR};</pre>
+</div>
+<div class="notebox-note">
+<p><strong>Cuando usar esta opción</strong></p>
+<p>Al igual que la Opción 1, esta solución se adapta mejor a las aplicaciones que estás desarrollando tú mismo.</p>
+<p>Sin embargo, ten en cuenta que el propósito de usar variables de entorno es alterar el comportamiento de tu secuencia de comandos en función del contexto (o entorno) desde el que se ejecuta. Si configuras la variable desde el propio script, el comportamiento del script es el mismo independientemente del contexto desde el que se ejecute.</p>
+</div>
+<h3><span id="Solucion_C:_Crear_un_script_envoltorio">Opción 3: Crear un scipt envoltorio</span></h3>
+<p>Crea un archivo llamado <span class="text-object">wrapper.cgi</span> con el siguiente contenido:</p>
 <div class="preboxcontainer">
 <pre class="prebox">#!/bin/sh
 
 export FOOBAR=foo
-exec /home/<span class="code-highlight">username/example.com</span>$SCRIPT_URL
+exec /home/<span class="code-highlight">username/example.com/foobar.cgi</span>
 </pre>
 </div>
-<ul>
-<li>Si solo tienes un script CGI para el que deseas establecer una variable de entorno, puedes cambiar la última línea de la wrapper a:</li>
-</ul>
-<dl>
-<dd>
-<div class="preboxcontainer">
-<pre class="prebox">exec /home/<span class="code-highlight">username/example.com</span>/foobar.cgi</pre>
-</div>
-</dd>
-</dl>
-<ul>
-<li>Si necesitas establecer una variable de entorno para docenas o incluso cientos de archivos de una aplicación de terceros, <span class="code">$SCRIPT_URL</span> te permite determinar qué script se solicitó y establecer la variable de entorno para ese script.</li>
-</ul>
-<p>Luego, usa un <span class="text-object">.htaccess</span> para redirigir las solicitudes del script a <span class="text-object">wrapper.cgi</span>:</p>
+<p>Luego agrega el contenido a tu archivo <span class="text-object">.htaccess</span> para redirigir los requerimientos del script a <span class="text-object">wrapper.cgi</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
-RewriteRule ^application/.*\.cgi /wrapper.cgi
+RewriteRule ^<span class="code-highlight">script.cgi</span> /wrapper.cgi
 </pre>
 </div>
+<div class="notebox-important">
 <ul>
-<li><span class="text-object">application</span> es el directorio donde se encuentra tu aplicación (desarrollada por terceros o internamente).</li>
-<li>Si solo estás configurando una variable de entorno para uno (o algunos) scripts CGI, puedes especificar el script en RewriteRule (por ejemplo, <span class="code">RewriteRule ^script.cgi/wrapper.cgi</span>). Simplemente agrega RewriteRules adicionales para scripts adicionales.</li>
-<li>Como puedes imaginar, simplemente continuar agregando RewriteRules más allá de algunos scripts se vuelve difícil de manejar. En cambio, es mejor hacer coincidir todos los archivos que terminan con una extensión de archivo específica. Al hacer coincidir solo los archivos que terminan en <span class="text-object">.cgi</span>, <span class="text-object">.pl</span>, <span class="text-object">.py</span>, <span class="text-object">.rb</span>, etc., los archivos estáticos como documentos e imágenes HTML no se ven afectados.</li>
-<li>Si tu secuencia de comandos de wrapper está en el mismo directorio que las secuencias de comandos que deseas envolver y estás haciendo coincidir por patrón (esto no importa si estás haciendo coincidir un nombre de archivo específico), tu wrapper debe tener una extensión de archivo diferente a tus secuencias de comandos. Por ejemplo, si tu wrapper termina en <span class="text-object">.cgi</span>, es posible que desees utilizar <span class="text-object">.pl</span> (<span class="code">RewriteRule .*\.pl wrapper.cgi</span>) o .py (<span class="code">RewriteRule .*\.py wrapper.cgi</span>) para tus scripts.</li>
-<li><span class="text-object">wrapper.cgi</span> puede llamar a un script fuera del directorio de tu dominio. Esto es realmente lo que probablemente quiera hacer, ya que la wrapper en <span class="text-object">/home/username/example.com/</span> y <span class="text-object">/home/username/example2.com</span> puede hacer referencia a los mismos scripts en /home/shared.</li>
-</ul>
-<p>La solución alternativa C es complicada, pero es adecuada para una gama mucho más amplia de casos que la solución alternativa A o la solución B. A diferencia de la solución alternativa A, puedes establecer una variable de entorno para cientos (o miles) de archivos editando solo dos archivos (<span class="text-object">wrapper.cgi</span> y <span class="text-object">.htaccess</span>). Y, cuando estableces una variable de entorno para una aplicación de terceros, no tienes que modificar ningún archivo cuando actualizas la aplicación. Puedes tener varios scripts de wrapper, por lo que, a diferencia de la Solución B, el contexto (o el entorno) puede alterar el comportamiento de los scripts. Simplemente copia <span class="text-object">wrapper.cgi</span> y <span class="text-object">.htaccess</span> de <strong>example.com</strong> a <strong>example2.com</strong>, edita <span class="text-object">wrapper.cgi</span>, y luego cambia&nbsp;<span class="code">export FOOBAR=foo</span>&nbsp;a&nbsp;<span class="code">export FOOBAR=bar</span>, y has terminado.</p>
+<li>Como puedes imaginar, simplemente continuar agregando RewriteRules más allá de algunos scripts se vuelve difícil de manejar. En cambio, es mejor hacer coincidir todos los archivos que terminan con una extensión de archivo específica. Haciendo coincidir solo los archivos que terminan en <span class="text-object">.cgi</span>, <span class="text-object">.pl</span>, <span class="text-object">.py</span>, <span class="text-object">.rb</span>, y así, los archivos estáticos, como documentos HTML e imágenes, no se ven afectados.</li>
+<li>Si la secuencia de comandos de tu envoltorio está en el mismo directorio que las secuencias de comandos que deseas envolver y estás haciendo coincidir el patrón (esto no importa si estás haciendo coincidir un nombre de archivo específico), tu envoltorio debe tener una extensión de archivo diferente a la de tus secuencias de comandos. . Por ejemplo, si tu envoltorio termina en<span class="text-object">.cgi</span>, es posible que desees usar lo siguiente para las extensiones <span class="text-object">.pl</span> y <span class="text-object">.py</span>.
+<div class="preboxcontainer">
+<pre class="prebox">RewriteRule .*\.pl wrapper.cgi
+RewriteRule .*\.py wrapper.cgi</pre>
 </div>
-<h2><span id="See_also">Ver también</span></h2>
+</li>
+<li><span class="text-object">wrapper.cgi</span> puede llamar a un script fuera del directorio de tu dominio. Esto es probablemente lo que en realidad quieras hacer, ya que el envoltorio en ambos <span class="text-object">/home/username/example.com/</span> y <span class="text-object">/home/username/example2.com</span> puede referirse a los mismos scripts en <span class="text-object">/home/username</span>.</li>
+<li>Si estás configurando variables de entorno para una aplicación, puedes especificar el directorio de la aplicación en su lugar. Por ejemplo:
+<div class="preboxcontainer">
+<pre class="prebox">RewriteEngine On
+RewriteRule ^application/.*\.cgi /wrapper.cgi</pre>
+</div>
+</li>
+</ul>
+</div>
+<div class="notebox-note">
+<p><strong>Cuando usar esta opción</strong></p>
+<p>La Opción 3 es complicada pero es adecuada para una gama mucho más amplia de casos</p>
+<p>A diferencia de la Opción 1, puedes establecer una variable ambiental para cientos (o miles) de archivos editando solo dos archivos (<span class="text-object">wrapper.cgi</span> y <span class="text-object">.htaccess)</span>.</p>
+<p>Y, cuando configuras una variable ambiental para una aplicación de terceros, no tienes que modificar ningún archivo cuando actualiza la aplicación.</p>
+<p>Puedes tener varias secuencias de comandos envoltorios, por lo que, a diferencia de la Opción 2, el contexto (o el entorno) puede alterar el comportamiento de las secuencias de comandos. Simplemente copia <span class="text-object">wrapper.cgi</span> y <span class="text-object">.htaccess</span> de <strong>example.com</strong> a <strong>example2.com</strong>, edita <span class="text-object">wrapper.cgi</span>, y luego cambia <span class="code">export FOOBAR=foo</span> a <span class="code">export FOOBAR=bar</span>, y ya estás listo.</p>
+</div>
+</div>
+<h2><span id="Ver_tambien">Ver también</span></h2>
 <div class="solvvy-hidden">
 <h3>Enlaces internos</h3>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache">Servidor Apache HTTP</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/217297307-Generalidades-sobre-CGI">Generalidades de CGI</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">Generalidades de .htaccess</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214750918-Comandos-UNIX-Cambiar-propiedad">Comandos UNIX - Cambiar propiedad</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos">Comandos UNIX - Cambiar permisos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache">Servidor HTTP Apache </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217297307-Generalidades-sobre-CGI">Generalidades de CGI </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">Generalidades de .htaccess </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214750918-Comandos-UNIX-Cambiar-la-propiedad">Comandos de UNIX — Cambiar la propiedad </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos">Comandos de Unix — Cambiar permisos </a></li>
 </ul>
 <h3>Enlaces externos</h3>
 <ul>
-<li><a href="http://httpd.apache.org/docs/2.2/suexec.html">Documentación Apache 2.2 suexec&nbsp;</a></li>
+<li><a href="https://httpd.apache.org/docs/2.4/suexec.html" target="_self" rel="undefined">Documentación de Apache 2.4 suEXEC</a></li>
 </ul>
 </div>
