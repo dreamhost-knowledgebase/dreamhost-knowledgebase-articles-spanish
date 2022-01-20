@@ -15,16 +15,6 @@
 </div>
 <h2>Listar la información de las direcciones IP flotantes</h2>
 <div class="solvvy-solution">
-<p>Para listar todas los grupos de direcciones IP flotante que provee, corre:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack ip floating pool list</span>
-+--------+
-| Name   |
-+--------+
-| public |
-+--------+
-</pre>
-</div>
 <p>Para listar todas las direcciones IP flotantes que están alocadas en tu proyecto, corre:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack ip floating list</span>
@@ -75,7 +65,7 @@
 </li>
 <li>Asociar una dirección IP con una instancia en el proyecto, como sigue:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack ip floating add <span class="code-highlight">FLOATING_IP_ADDRESS INSTANCE_ID</span></span>
+<pre class="prebox"><span class="server">[user@localhost]$ <span class="command">openstack server add floating ip</span></span><span class="command"> add <span class="code-highlight">71e499c1-7b9d-42b9... 172.24.4.225</span></span>
 </pre>
 </div>
 <p>Por ejemplo:</p>
@@ -107,7 +97,8 @@
 </div>
 <p>Para eliminar una dirección IP flotante de tu proyecto:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack ip floating delete <span class="code-highlight">FLOATING_IP_ADDRESS</span></span>
+<pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server remove floating ip <span class="code-highlight">INSTANCE_NAME_OR_ID FLOATING_IP_ADDRESS</span></span>
+
 </pre>
 </div>
 <p>La dirección IP se devuelve al grupo de direcciones IP que está disponible para todos los proyectos. Si la dirección IP aún está asociada con una instancia en ejecución, se desasocia automáticamente de esa instancia.</p>

@@ -1,0 +1,73 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>git está instalado en todos los servidores DreamHost de forma predeterminada, pero si deseas ejecutar la versión más reciente, puedes instalarla localmente con tu nombre de usuario. Este artículo te guía a través de cómo instalar una versión personalizada de git que tu Shell usará cuando inicies sesión vía <a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</p>
+<h2>Instalar git</h2>
+<ol>
+<li>Inicia sesión en tu servidor DreamHost vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Visita la página de descarga de Linux.
+<ul>
+<li><a href="https://git-scm.com/download/linux" target="_blank" rel="noopener">Descarga Git</a></li>
+</ul>
+</li>
+<li>Hay un enlace en el primer párrafo a la versión más reciente. Haz clic derecho aquí y elige <span class="text-object">Copiar Dirección de Enlace</span>.</li>
+<li>Asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio home del usuario</a>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li>Corre el siguiente comando para descargar git.
+<div class="notebox-note">
+<p>Cambia la versión al enlace que copiaste.</p>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget  https://www.kernel.org/pub/software/scm/git/git-<span class="code-highlight">2.34.1</span>.tar.gz</span></pre>
+</div>
+</li>
+<li>Decomprime el archivo.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar -zxf git-<span class="code-highlight">2.34.1</span>.tar.gz</span></pre>
+</div>
+<div class="notebox-note">
+<p>Esto crea un nuevo directorio con el nombre del número de versión.</p>
+</div>
+</li>
+<li>Cambia a este nuevo directorio.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd git-<span class="code-highlight">2.34.1</span></span></pre>
+</div>
+</li>
+<li>Corre los siguientes comandos uno a la vez para instalar. Asegúrate de cambiar el nombre de usuario a tu usuario <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">make prefix=/home/<span class="code-highlight">username</span>/local all
+<span class="server">[server]$ </span><span class="command">make prefix=/home/<span class="code-highlight">username</span> install</span>
+<span class="server">[server]$ </span><span class="command">exec bash</span></span></pre>
+</div>
+</li>
+<li>Corre el siguiente comando para confirmar que se estás usando la nueva versión de git.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git --version</span></pre>
+</div>
+</li>
+</ol>
+<h2>Actualiza tu .bash_profile</h2>
+<p>Ahora que git está instalado, debes actualizar tu <span class="text-object">.bash_profile</span> para cargarlo automáticamente cuando inicies sesión en tu servidor a través de SSH.</p>
+<ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Edita el archivo</a> <span class="text-object">.bash_profile</span> para agregar la siguiente línea.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">export PATH=$HOME/local/bin:$PATH</span></pre>
+</div>
+</li>
+</ol>
+<p>Cuando inicies sesión en tu servidor en el futuro, la nueva versión de git se cargará automáticamente.</p>
+</div>
+<h2 class="subheader">Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000677931--Qu%C3%A9-es-un-Git-">¿Qué es Git? </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000676991-Enviar-tu-repositorio-DreamHost-Git-a-GitHub">Enviar tu repositorio Git de DreamHost a GitHub </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216445197-Enviar-tu-repositorio-Git-local-a-un-servidor-de-DreamHost-Linux-Mac-OS-X">Enviar tu repositorio local de Git a un servidor de DreamHost — Linux &amp; Mac OS X </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000732471-Enviar-tu-repositorio-Git-local-a-un-servidor-DreamHost-Windows">Enviar tu repositorio local de Git a un servidor DreamHost — Windows </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000684492-Usar-Git-para-el-desarrollo-web">Usar Git para el desarrollo web </a></li>
+</ul>
+</div>
