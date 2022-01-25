@@ -1,10 +1,19 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>PHP tiene funciones integradas que te permiten conectarse a tu servidor de base de datos para recuperar datos. Este artículo detalla algunos ejemplos de uso de estas funciones.</p>
+<p>PHP tiene funciones integradas que te permiten conectarse a tu servidor de base de datos para recuperar datos. Este artículo detalla algunos ejemplos de uso de estas funciones usando la extensión <span class="code">mysqli</span>.</p>
+<div class="notebox-important">
+<p>Los ejemplos de este artículo deben colocarse en un archivo PHP separado. Tus otros archivos PHP harían referencia a este script para realizar la conexión. Revisa los siguientes enlaces para obtener más información:</p>
+<ul>
+<li><a href="https://www.w3schools.com/php/php_mysql_connect.asp" target="_self" rel="undefined">w3schools.com/php/php_mysql_connect</a></li>
+<li><a href="https://www.php.net/manual/en/book.mysqli.php" target="_self" rel="undefined">php.net/manual/en/book.mysqli</a></li>
+</ul>
 </div>
-<h2>Conexiones estándar de mysqli</h2>
+<div class="prereqs">
+<p>Revisa el <a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-de-phpMyAdmin">phpMyAdmin</a> para ver detalles de como encontrar las credenciales de tu base de datos.</p>
+</div>
+<h2><span id="Conexiones_estandar">Crear una conexión</span></h2>
 <div class="solvvy-solution">
-<p>El siguiente script crea un recurso MySQL llamado <span class="code">$link</span>. Este recurso se puede usar para crear consultas. A continuación se muestra un ejemplo muy simple de un script de conexión PHP. Mira el artículo <a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin">phpMyAdmin</a> para obtener detalles sobre cómo encontrar las credenciales de tu base de datos:</p>
+<p>Crea un archivo llamado <span class="text-object">connection.php</span> con el siguiente código. Este script crea un recurso de MySQL llamado <span class="code">$link</span>. Este recurdo puede ser usado para crear consultas.</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
 
@@ -17,32 +26,31 @@ $link = mysqli_connect($hostname, $username, $password, $database);
 if (mysqli_connect_errno()) {
    die("Connect failed: %s\n" + mysqli_connect_error());
    exit();
-}
+}<br /><span class="phpkeywordcolor">echo</span>&nbsp;<span class="phpstringcolor">"Connected successfully"</span>;
+
 ?&gt;
 </pre>
 </div>
-<p>Es una buena idea poner este script en un archivo separado y luego usar la función include() de PHP para agregarlo al principio de cualquier página web que requiera acceso a la base de datos. Normalmente, no hay razón para tener más de una base de datos para un sitio web (particularmente porque no hay un límite teórico para el número de tablas por base de datos), por lo que rara vez se necesita más de un recurso de conexión. La conexión se cierra una vez que finalizas la ejecución del script o al invocar la función mysqli_close().</p>
+<p>Corre el script y deberás ver <span class="text-object">Connected successfully</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">php connection.php</span></pre>
+</div>
+<p>Otros scripts de PHP que requeiren acceso a la base de datos pueden usar entonces la función <span class="code">include()</span> para acceder a este archivo.</p>
 </div>
 <h2>Ejecutar consultas</h2>
 <div class="solvvy-solution">
 <h3>Extraer un ResultSet</h3>
-<p>El siguiente ejemplo extrae datos de la tabla especificada y los muestra en una tabla HTML para que los vea. Este script es una adición al script anterior, así que asegúrate de haber creado tu script de conexión. Luego, el recurso <span class="code">$link</span> se usa para extraer los datos.</p>
-<p>En este ejemplo, una tabla MySQL llamada ‘test_data’ contiene lo siguiente:</p>
-<div class="preboxcontainer">
-<pre class="prebox">+----+---------------+
-| id | test_data     |
-+----+---------------+
-|  1 | A value       |
-|  2 | Another value |
-|  3 | Still another |
-+----+---------------+
-</pre>
+<p>El siguiente ejemplo extrae datos de la tabla especificada y los muestra en una tabla HTML para que los vea.</p>
+<div class="notebox-note">
+<p>Este script de comandos es una adición a la secuencia de comandos anterior, así que asegúrate de que ya hayas creado tu secuencia de comandos de conexión.</p>
+<p>Agrega una llamada <span class="code">include</span> en la parte superior de tu script al archivo <span class="text-object">connection.php</span>. El recurso <span class="code">$link</span> es entonces usado para extraer la información.</p>
 </div>
 <p>Este script luego extrae los datos de esa tabla:</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
+<span class="code-highlight">include 'connection.php';</span>
 
-$sql = "SELECT * FROM test_table";
+$sql = "SELECT * FROM <span class="code-highlight">test_table</span>";
 $result = mysqli_query($link,$sql) or die("Unable to select: ".mysql_error());
 print "&lt;table&gt;\n";
 while($row = mysqli_fetch_row($result)) {
@@ -59,7 +67,7 @@ mysqli_close($link);
 </pre>
 </div>
 </div>
-<h2><span id="See_Also">Ver también</span></h2>
+<h2><span id="Ver_tambien">Ver también</span></h2>
 <div class="solvvy-hidden">
 <h3>Información General</h3>
 <ul>
@@ -81,4 +89,5 @@ mysqli_close($link);
 <li><a href="https://www.php.net/manual/en/function.mysql-fetch-row.php" target="_self" rel="undefined">La función mysql_fetch_row()</a></li>
 <li><a href="https://www.php.net/manual/en/mysqli-result.fetch-row.php" target="_self" rel="undefined">La función mysqli_fetch_row()</a></li>
 </ul>
+</div>
 </div>
