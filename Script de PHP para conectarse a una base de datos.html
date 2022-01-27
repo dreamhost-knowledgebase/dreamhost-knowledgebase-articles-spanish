@@ -1,0 +1,93 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>PHP tiene funciones integradas que te permiten conectarse a tu servidor de base de datos para recuperar datos. Este artículo detalla algunos ejemplos de uso de estas funciones usando la extensión <span class="code">mysqli</span>.</p>
+<div class="notebox-important">
+<p>Los ejemplos de este artículo deben colocarse en un archivo PHP separado. Tus otros archivos PHP harían referencia a este script para realizar la conexión. Revisa los siguientes enlaces para obtener más información:</p>
+<ul>
+<li><a href="https://www.w3schools.com/php/php_mysql_connect.asp" target="_self" rel="undefined">w3schools.com/php/php_mysql_connect</a></li>
+<li><a href="https://www.php.net/manual/en/book.mysqli.php" target="_self" rel="undefined">php.net/manual/en/book.mysqli</a></li>
+</ul>
+</div>
+<div class="prereqs">
+<p>Revisa el <a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-de-phpMyAdmin">phpMyAdmin</a> para ver detalles de como encontrar las credenciales de tu base de datos.</p>
+</div>
+<h2><span id="Conexiones_estandar">Crear una conexión</span></h2>
+<div class="solvvy-solution">
+<p>Crea un archivo llamado <span class="text-object">connection.php</span> con el siguiente código. Este script crea un recurso de MySQL llamado <span class="code">$link</span>. Este recurdo puede ser usado para crear consultas.</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+
+$hostname = "<span class="code-highlight">mysql.example.com</span>"; // the hostname you created when creating the database
+$username = "<span class="code-highlight">yourusername</span>";      // the username specified when setting up the database
+$password = "<span class="code-highlight">yourpassword</span>";      // the password specified when setting up the database
+$database = "<span class="code-highlight">databasename</span>";      // the database name chosen when setting up the database 
+
+$link = mysqli_connect($hostname, $username, $password, $database);
+if (mysqli_connect_errno()) {
+   die("Connect failed: %s\n" + mysqli_connect_error());
+   exit();
+}<br><span class="phpkeywordcolor">echo</span>&nbsp;<span class="phpstringcolor">"Connected successfully"</span>;
+
+?&gt;
+</pre>
+</div>
+<p>Corre el script y deberás ver <span class="text-object">Connected successfully</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">php connection.php</span></pre>
+</div>
+<p>Otros scripts de PHP que requeiren acceso a la base de datos pueden usar entonces la función <span class="code">include()</span> para acceder a este archivo.</p>
+</div>
+<h2>Ejecutar consultas</h2>
+<div class="solvvy-solution">
+<h3>Extraer un ResultSet</h3>
+<p>El siguiente ejemplo extrae datos de la tabla especificada y los muestra en una tabla HTML para que los vea.</p>
+<div class="notebox-note">
+<p>Este script de comandos es una adición a la secuencia de comandos anterior, así que asegúrate de que ya hayas creado tu secuencia de comandos de conexión.</p>
+<p>Agrega una llamada <span class="code">include</span> en la parte superior de tu script al archivo <span class="text-object">connection.php</span>. El recurso <span class="code">$link</span> es entonces usado para extraer la información.</p>
+</div>
+<p>Este script luego extrae los datos de esa tabla:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+<span class="code-highlight">include 'connection.php';</span>
+
+$sql = "SELECT * FROM <span class="code-highlight">test_table</span>";
+$result = mysqli_query($link,$sql) or die("Unable to select: ".mysql_error());
+print "&lt;table&gt;\n";
+while($row = mysqli_fetch_row($result)) {
+   print "&lt;tr&gt;\n";
+   foreach($row as $field) {
+       print "&lt;td&gt;$field&lt;/td&gt;\n";
+   }
+   print "&lt;/tr&gt;\n";
+}
+print "&lt;/table&gt;\n";
+mysqli_close($link);
+
+?&gt;
+</pre>
+</div>
+</div>
+<h2><span id="Ver_tambien">Ver también</span></h2>
+<div class="solvvy-hidden">
+<h3>Información General</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL">Generalidades sobre MySQL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-PHP">Generalidades sobre PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217185277-Ejecuci%C3%B3n-de-scripts-web-en-tu-zona-horaria">Ejecutar scripts web en tu zona horaria</a></li>
+<li><a href="https://www.php.net/manual/en/ref.mysql.php" target="_self" rel="undefined">Funciones MySQL</a></li>
+</ul>
+<h3>Conectarse a MySQL con PHP</h3>
+<ul>
+<li><a href="https://www.php.net/manual/en/function.mysql-connect.php" target="_self" rel="undefined">La función mysql_connect()</a></li>
+<li><a href="https://www.php.net/manual/en/function.mysqli-connect.php" target="_self" rel="undefined">La función mysqli_connect()</a></li>
+</ul>
+<h3>Ejecutar Consultas</h3>
+<ul>
+<li><a href="https://www.php.net/manual/en/function.mysql-query.php" target="_self" rel="undefined">La función mysql_query()</a></li>
+<li><a href="https://www.php.net/manual/en/mysqli.query.php" target="_self" rel="undefined">La función mysqli_query()</a></li>
+<li><a href="https://www.php.net/manual/en/function.mysql-fetch-row.php" target="_self" rel="undefined">La función mysql_fetch_row()</a></li>
+<li><a href="https://www.php.net/manual/en/mysqli-result.fetch-row.php" target="_self" rel="undefined">La función mysqli_fetch_row()</a></li>
+</ul>
+</div>
+</div>
