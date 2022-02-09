@@ -5,14 +5,42 @@
 <p>Si tu dominio usa una aplicación de administración de contenido como WordPress, esto puede causar un problema ya que la URL utilizada por la aplicación ha cambiado. Si necesitas cambiar tu dominio para incluir WWW en la URL, también debes asegurarte de actualizar la URL utilizada en su aplicación o código. Es mejor hacer los cambios en tu programa o código CMS antes de habilitar Cloudflare en el dominio.</p>
 <p>Mira el artículo <a href="https://help.dreamhost.com/hc/es/articles/214580498--Como-cambio-la-URL-de-mi-sitio-WordPress-" target="_self">Cambiar la URL del sitio de WordPress</a>&nbsp;para obtener detalles sobre cómo ajustar esta configuración para un sitio de WordPress.</p>
 </div>
-<h2>Uso de Cloudflare con subdominios dreamhosters.com</h2>
+<h2>Usar Cloudflare con subdominios dreamhosters.com</h2>
 <div class="solvvy-solution">
 <p>Cloudflare no se puede usar con los subdominios&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360002284771--Que-es-un-subdominio-dreamhosters-com-">dreamhosters.com</a>&nbsp;en este momento.</p>
 </div>
 <h2>Usar Cloudflare con nameservers externos</h2>
 <div class="solvvy-solution">
-<p>Si tu dominio no utiliza los nameservers de DreamHost, debes actualizar manualmente los registros DNS de tu dominio. Puede ver todos los registros DNS que están configurados para cualquier sitio que aloje en DreamHost simplemente haciendo clic en el enlace <span class="text-link">DNS</span> debajo del nombre de dominio en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>. Mira el artículo sobre DNS para más detalles.</p>
-<p>Si el dominio utiliza WWW o la IP del subdominio cambió, deberás actualizar la dirección IP en la empresa que aloja tus nameservers. Al igual que con cualquier cambio de DNS, la propagación del DNS tarda varias horas en completarse.</p>
+<p><strong>Nameservers de DreamHost</strong></p>
+<p>Si los <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers">nameservers</a> de tu dominio están apuntando a DreamHost, el plan de Cloudflare que agregaste a tu panel de DreamHost se conectará automáticamente a tu dominio.</p>
+<p><strong>Nameservers que no son de DreamHost</strong></p>
+<p>Si los nameservers de tu dominio <strong>NOT</strong> apuntan a DreamHost, tus registros DNS están controlados en una empresa diferente. Para usar la suscripción de Cloudflare en tu panel de DreamHost, debes apuntar tu DNS a DreamHost usando una de las siguientes opciones:</p>
+<ul>
+<li>Point your nameservers (recommended)</li>
+<li>Point individual A Records</li>
+</ul>
+<p>La mejor opción es apuntar tus nameservers a DreamHost ya que esto apunta TODOS tus registros DNS a DreamHost.</p>
+<p>La única razón para no apuntar tu nameservers es si tiene servicios específicos que necesitas continuar alojando en otra empresa. En ese caso, deberás configurar manualmente los registros A individuales en el host donde se administran actualmente los nameservers de tu dominio. Revisa el siguiente artículo para obtener instrucciones sobre cómo verificar a dónde apuntan los nameservers de tu dominio.</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/es/articles/360030114711-Verificar-hacia-d%C3%B3nde-apuntan-tus-nameservers">Verificar hacia donde apuntan tus nameservers </a></li>
+</ul>
+<p>Luego puedes usar el siguiente artículo para ubicar las direcciones IP de tu dominio de DreamHost. Estos son los valores que usas para crear registros A en la empresa a la que apuntan tus nameservers.</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio-">¿A qué registros DNS debo apuntar mi sitio? </a></li>
+</ul>
+<p>Necesitarás crear los siguientes Registros A.</p>
+<ul>
+<li><strong>example.com</strong></li>
+<li><strong>www.example.com</strong></li>
+</ul>
+<p>O si estás usando un subdominio:</p>
+<ul>
+<li><strong>subdomain.example.com</strong></li>
+</ul>
+<p>Los nuevos registros DNS tardarán unas horas en actualizarse en línea.</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS">Generalidades de la propagación de DNS </a></li>
+</ul>
 </div>
 <h2>Cambiar la cuenta de Cloudflare</h2>
 <div class="solvvy-solution">
