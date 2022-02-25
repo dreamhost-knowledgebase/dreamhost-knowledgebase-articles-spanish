@@ -52,7 +52,7 @@
 <dd><img src="https://kbimages.dreamhosters.com/images/gitgui_06.png" alt="gitgui.png" /></dd>
 </dl>
 </li>
-<li>Haz clic derecho y seleccione <span class="text-object">Git Bash Here</span>. Esto abre una terminal. Desde que abriste <span class="text-object">Git Bash</span> dentro de la carpeta <span class="text-object">Documentos</span>, el indicador del terminal debería verse así:<br />
+<li>Haz clic derecho y selecciona <span class="text-object">Git Bash Here</span>. Esto abre una terminal. Desde que abriste <span class="text-object">Git Bash</span> dentro de la carpeta <span class="text-object">Documentos</span>, el indicador del terminal debería verse así:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">user@computer MINGw64 ~/Documents
 $</span></pre>
@@ -136,11 +136,17 @@ $</span></pre>
 <dd><em>Esto abre una terminal que ya ejecuta Git.</em></dd>
 </dl>
 </li>
-<li>Ejecuta lo siguiente para crear tu usuario y correo para usar con Git:<br />
+<li>Corre lo siguiente para crear tu usuario y correo para usar con Git. Esto también establece la rama principal en main en lugar de master:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git config --global user.name <span class="code-highlight">"John Doe"</span></span>
 <span class="server">[local ~]$ </span><span class="command">git config --global user.email <span class="code-highlight">johndoe@example.com</span></span>
-</pre>
+<span class="server">[local ~]$ </span><span class="command">git config --global init.defaultBranch main</span></pre>
+</div>
+<div class="notebox-note">
+<p>La última línea asegura que los repositorios recién creados usen el nombre <span class="text-object">main</span> como la rama principal. Revisa el siguiente artículo para obtener más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/4466702078740-Configurar-git-para-usar-main-como-la-rama-principal">Configurar git para usar 'main' como la rama principal </a></li>
+</ul>
 </div>
 <dl>
 <dd><em>Esto crea un archivo <span class="text-object">.gitconfig</span> con tu nombre de usuario.</em></dd>
@@ -148,9 +154,9 @@ $</span></pre>
 </li>
 <li>Ejecuta lo siguiente en el directorio de tu proyecto para inicializar el repositorio y crear tu primera confirmación:<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">git init</span>
-<span class="server">[server]$ </span><span class="command">git add .</span>
-<span class="server">[server]$ </span><span class="command">git commit -m "First Commit"</span>
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git init</span>
+<span class="server">[local ~]$ </span><span class="command">git add .</span>
+<span class="server">[local ~]$ </span><span class="command">git commit -m "First Commit"</span>
 </pre>
 </div>
 <dl>
@@ -158,10 +164,13 @@ $</span></pre>
 </dl>
 </li>
 <li>Cuando inicializas el repositorio, se crea un directorio llamado <span class="text-object">.git</span>. Por defecto, no puedes ver esto en Windows. Si deseas ver archivos ocultos (archivos que comienzan con un punto), haz clic en <span class="text-object">View</span> en el menú superior. A la derecha, marca la casilla para archivos ocultos. No necesitas ver esta carpeta <span class="text-object">.git</span> para continuar con estos pasos. Esta es solo una forma de ver que tus comandos han creado el repositorio local.</li>
-<li>Agrega el repositorio remoto. Asegúrate de usar tu nombre de usuario y servidor.<br />
+<li>Agrega el repositorio remoto. Asegúrate de usar tu <a href="https://help.dreamhost.com/hc/es/articles/4402199390996-Diferencia-entre-los-usuarios-de-SFTP-y-Shell" target="_self">usuario Shell</a> y nombre de servidor.
+<div class="notebox-note">
+<p>La palabra <span class="code">dreamhost</span>es solo un alias. Se puede llamar como quieras. Pero este nombre de alias se usará cuando envíe tu contenido a <strong>github.com</strong>.</p>
+</div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git remote add dreamhost ssh://<span class="code-highlight">user@server.dreamhost.com/~/example.com.git</span></span>
-<span class="server">[local ~]$ </span><span class="command">git push -u dreamhost master</span>
+<span class="server">[local ~]$ </span><span class="command">git push -u dreamhost main</span>
 </pre>
 </div>
 </li>
@@ -195,7 +204,7 @@ $</span></pre>
 <div class="solvvy-solution">
 <p>Mira el siguiente artículo para obtener instrucciones sobre cómo enviar los cambios en tu computador local a tu sitio web en vivo.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115000684492-Usando-Git-para-el-desarrollo-web" target="_self">Usar Git para desarrollo We</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000684492-Usando-Git-para-el-desarrollo-web" target="_self">Usar Git para desarrollo web</a></li>
 </ul>
 </div>
 <h2>Ver también</h2>

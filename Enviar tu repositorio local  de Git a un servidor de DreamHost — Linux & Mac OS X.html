@@ -5,7 +5,7 @@
 </div>
 <p>Los siguientes pasos describen cómo enviar tu repositorio Git local a tu servidor DreamHost. De esta manera, puedes desarrollar tu sitio web en el computador de tu hogar e empujar los cambios a tu sitio web en vivo DreamHost.</p>
 </div>
-<h2>Enviar desde Linux o Mac OS X</h2>
+<h2 class="subheader"><span id="Enviar_desde_Linux">Crear una llave de emparejamiento de SSH</span></h2>
 <div class="solvvy-solution">
 <ol>
 <li>En tu computador local, navega hasta el directorio de tu usuario <span class="text-object">~/.ssh</span>:<br />
@@ -35,6 +35,11 @@ dreamhost-git-key
 dreamhost-git-key.pub</pre>
 </div>
 </li>
+</ol>
+</div>
+<h2 class="subheader">Subir la llave pública a tu servidor de DreamHost</h2>
+<div class="solvvy-solution">
+<ol>
 <li>Usa las siguientes instrucciones para copiar tu clave pública en el archivo <span class="text-object">authorized_keys</span> del servidor DreamHost.<br />
 <div class="notebox-note">
 <p>Para correr los siguientes comandos, necesitas el nombre de tu servidor DreamHost y el usuario/contraseña de tu sitio web. Visita los siguientes artículos para ubicar esta información:</p>
@@ -99,23 +104,39 @@ dreamhost-git-key.pub</pre>
 </pre>
 </div>
 </li>
-<li>Navega a tu repositorio git en tu computador local, y luego empuja al repositorio remoto en tu servidor DreamHost. Asegúrate de cambiar <span class="code">user</span> y <span class="code">server</span>&nbsp;por tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214694298--Cu%C3%A1les-son-los-diferentes-tipos-de-usuarios-de-DreamHost-" target="_self">Nombre de usuario DreamHost</a> y&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027#nombre-de-host" target="_self">nombre de servidor real</a>:
+</ol>
+</div>
+<h2 class="subheader">Crear un repositorio Git en tu computador</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Corre lo siguiente para crear tu usuario y correo para usar con Git. Esto también establece la rama principal en main en lugar de master:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git remote add dreamhost ssh://<span class="code-highlight">user@server.dreamhost.com/~/example.com.git</span></span>
-<span class="server">[local ~]$ </span><span class="command">git push -u dreamhost master</span>
-</pre>
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git config --global user.name <span class="code-highlight">"John Doe"</span></span>
+<span class="server">[local ~]$ </span><span class="command">git config --global user.email <span class="code-highlight">johndoe@example.com</span></span>
+<span class="server">[local ~]$ </span><span class="command">git config --global init.defaultBranch main</span></pre>
+</div>
+<div class="notebox-note">
+<p>La última línea asegura que los repositorios recién creados usen el nombre <span class="text-object">main</span> como la rama principal. Revisa el siguiente artículo para obtener más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/4466702078740-Configurar-git-para-usar-main-como-la-rama-principal">Configurar git para usar 'main' como la rama principal </a></li>
+</ul>
 </div>
 <dl>
-<dd><em>Deberías ver la siguiente respuesta:</em></dd>
+<dd><em>Esto crea un archivo <span class="text-object">.gitconfig</span> debajo tu usuario.</em></dd>
 </dl>
 <div class="preboxcontainer">
-<pre class="prebox">Counting objects: 3, done.
-Delta compression using up to 2 threads.
-Compressing objects: 100% (2/2), done.
-Writing objects: 100% (3/3), 200 bytes | 0 bytes/s, done.
-Total 3 (delta 0), reused 0 (delta 0)
-To ssh://username@server.dreamhost.com/~/example.com.git
-* [new branch] master -&gt; master
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git init</span>
+<span class="server">[local ~]$ </span><span class="command">git add .</span>
+<span class="server">[local ~]$ </span><span class="command">git commit -m "First Commit"</span></pre>
+</div>
+</li>
+<li>Navega a tu repositorio git en tu computador local y luego envía al repositorio remoto en tu servidor DreamHost. Asegúrate de cambiar <span class="code">user</span> y <span class="code">server</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/214694298--Cu%C3%A1les-son-los-diferentes-tipos-de-usuarios-de-DreamHost-">usuario de DreamHost</a> y <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales#Ubicar_el_hostname">nombre de servidor</a>:
+<div class="notebox-note">
+<p>La palabra <span class="code">dreamhost</span> es solamente un alias. Se puede llamar como quieras. Pero este nombre de alias se usará cuando envíes tu contenido a <strong>github.com</strong>.</p>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git remote add dreamhost ssh://<span class="code-highlight">user@server.dreamhost.com/~/example.com.git</span></span>
+<span class="server">[local ~]$ </span><span class="command">git push -u dreamhost main</span>
 </pre>
 </div>
 </li>

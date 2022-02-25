@@ -1,0 +1,74 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Historicamente, cuando un nuevo repositorio de git era creado, la primera rama era llamada <span class="text-object">master</span>. Muchas compañías que usan el software de git como <a href="https://github.com/" target="_blank" rel="noopener">github.com</a>, <a href="https://gitlab.com/" target="_blank" rel="noopener">gitlab.com</a>, y <a href="https://bitbucket.org/" target="_blank" rel="noopener">bitbucket.org</a> han renombrado su rama principal a <span class="text-object">main</span>. Los siguientes enlaces te dan más información sobre este tema:</p>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Git-Branching-Branch-Management">https://git-scm.com/book/en/v2/Git-Branching-Branch-Management</a></li>
+<li><a href="https://github.com/github/renaming">https://github.com/github/renaming</a></li>
+<li><a href="https://sfconservancy.org/news/2020/jun/23/gitbranchname/">https://sfconservancy.org/news/2020/jun/23/gitbranchname/</a></li>
+<li><a href="https://about.gitlab.com/blog/2021/03/10/new-git-default-branch-name/">https://about.gitlab.com/blog/2021/03/10/new-git-default-branch-name/</a></li>
+<li><a href="https://bitbucket.org/blog/moving-away-from-master-as-the-default-name-for-branches-in-git">https://bitbucket.org/blog/moving-away-from-master-as-the-default-name-for-branches-in-git</a></li>
+</ul>
+<h3>¿Qué significa esto?</h3>
+<p>Si creaste un repositorio en tu servidor de DreamHost en el pasado, la rama principal se llama <span class="text-object">master</span>. Esto continuará funcionando normalmente en tu servidor DreamHost sin ningún problema.</p>
+<p>Sin embargo, se recomienda que, de ahora en adelante, crees nuevos repositorios con el nombre de rama principal de <span class="text-object">main</span>. Esto asegurará la futura compatibilidad con otros programas de software como se mencionó anteriormente.</p>
+</div>
+<h2>Actualizar tu archivo de configuración de git</h2>
+<div class="solvvy-solution">
+<p>Puedes correr el siguiente comando para agregar una línea a tu archivo git <span class="text-object">config</span>. Esto asegurará que todos los repositorios futuros que creas usen <span class="text-object">main</span> como la rama principal.</p>
+<p>Los siguientes pasos se pueden ejecutar en tu computador local o en tu servidor de DreamHost.</p>
+<ol>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215360828-Software-de-clientes-de-SSH" target="_self">Abre una terminal</a> en el computador de tu casa o inicia sesión en tu servidor DreamHost a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Corre el siguiente comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git config --global init.defaultBranch main</span></pre>
+</div>
+</li>
+</ol>
+<p>Ahora, cuando inicializas un nuevo repositorio corriendo <span class="code">git init</span>, <span class="text-object">main</span> se usará en lugar de <span class="text-object">master</span> como la rama principal.</p>
+<h3>Cambiar un repositorio existente para usar main</h3>
+<p>Si creaste un repositorio en el pasado usando git, la rama principal se llama <span class="text-object">master</span>. Puedes verificar corriendo el siguiente comando en el computador de tu hogar o en el servidor de DreamHost.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git branch -a</span></pre>
+</div>
+<p>Si hay varias ramas, la rama activa mostrará un <span class="code">*</span> a la izquierda. Si ves que la rama principal es <span class="text-object">master</span>, corre los siguientes comandos para actualizarlo a <span class="text-object">main</span>.</p>
+<ol>
+<li>Asegúrate de que la rama activa sea <span class="text-object">master</span>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git checkout master</span></pre>
+</div>
+</li>
+<li>Renombralo usando la opción <span class="code">-m</span>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git branch -m main</span></pre>
+</div>
+<div class="notebox-note">
+<p>Si la rama principal existe por alguna razón, puedes usar <span class="code">-M</span> para forzar el cambio de nombre.</p>
+</div>
+</li>
+</ol>
+<h3>Actualizar repositorios remotos</h3>
+<p>Si has enviado este repositorio local a un repositorio remoto (como github.com), debes enviarlo nuevamente para restablecer la rama ascendente.</p>
+<div class="notebox-tip">
+<p>Cambia <span class="code">REMOTENAME</span> al nombre de tu repositorio remoto. Corre <span class="code">git remote</span> para ver los remotos existentes.</p>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git push -u <span class="code-highlight">REMOTENAME</span> main</span></pre>
+</div>
+<p>Luego, debes eliminar la rama maestra antigua.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git push <span class="code-highlight">REMOTEBRANCH</span> --delete master</span></pre>
+</div>
+<p>RFevisa el siguiente enlace para más detalles.</p>
+<ul>
+<li><a href="https://git-scm.com/docs/git-branch">https://git-scm.com/docs/git-branch</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000677931--Qu%C3%A9-es-Git-">¿Qué es Git?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216445317--C%C3%B3mo-configurar-un-repositorio-Git-">¿Cómo configurar un repositorio Git?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000676991-Enviar-tu-repositorio-Git-de-DreamHost-a-GitHub">Enviar tu repositorio Git de DreamHost a GitHub</a></li>
+<li><a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/renaming-a-branch" target="_self">Renombrar una rama en github.com</a></li>
+</ul>
+</div>

@@ -1,0 +1,16 @@
+<div class="solvvy-solution">
+<p>Si eliges ejecutar PHP 7.3, puede aparecer el siguiente error en tu sitio:</p>
+<div class="preboxcontainer">
+<pre class="prebox">JIT compilation failed: no more memory errors</pre>
+</div>
+<p>Este es un error con PCRE sobre el que puedes leer aquí:</p>
+<ul>
+<li><a href="https://bugs.php.net/bug.php?id=77260">https://bugs.php.net/bug.php?id=77260</a></li>
+<li><a href="https://bugs.php.net/bug.php?id=78630">https://bugs.php.net/bug.php?id=78630</a></li>
+</ul>
+<p>Para evitar este error, DreamHost agrega automáticamente las siguientes líneas al archivo <span class="text-object">phprc</span> de tu sitio:</p>
+<div class="preboxcontainer">
+<pre class="prebox">pcre.jit = 0</pre>
+</div>
+<p>Esta configuración se adapta a la mayoría de todos los sitios web PHP. Sin embargo, si necesitas habilitar esto específicamente, puedes ajustar la configuración al valor de <span class="code">1</span> en tu archivo <span class="text-object">phprc</span>.</p>
+</div>
