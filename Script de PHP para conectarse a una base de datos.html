@@ -11,18 +11,60 @@
 <div class="prereqs">
 <p>Revisa el <a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-de-phpMyAdmin">phpMyAdmin</a> para ver detalles de como encontrar las credenciales de tu base de datos.</p>
 </div>
+<h2>Crear un archivo para almacenar las credenciales de tu base de datos</h2>
+<div class="solvvy-solution">
+<p>Por motivos de seguridad, siempre debes evitar colocar las credenciales de tu base de datos directamente en tus scripts de PHP.</p>
+<p>En su lugar, crea un archivo separado para almacenar las credenciales de tu base de datos. Luego puedes llamar a este archivo dentro de tu script PHP para conectarte a la base de datos.</p>
+<ol>
+<li>Navega dentro del <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio home de tu usuario</a>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li>Crear un nuevo directorio llamado algo parecido a la base de datos.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir database</span></pre>
+</div>
+</li>
+<li>Cambiar dentro de este nuevo usuario.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd database</span></pre>
+</div>
+</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crea un nuevo archivo</a> llamado algo así como <span class="text-object">dbcredentials.php</span>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nano dbconnection.php</span></pre>
+</div>
+</li>
+<li>Agrega el siguiente código a este archivo.
+<div class="notebox-note">
+<p>Cambia las palabas resaltadas a tus <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encontrar-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">credenciales de la base de datos</a>.</p>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;?php
+  $DBhostname = "<span class="code-highlight">HOSTNAME</span>";  
+  $DBusername = "<span class="code-highlight">USERNAME</span>";
+  $DBpassword = "<span class="code-highlight">PASSWORD</span>"; <br />  $DBname = "<span class="code-highlight">DATABASE_NAME</span>";
+?&gt;</pre>
+</div>
+</li>
+</ol>
+<p>Puedes entonces llamar a este archivo usando <span class="code">require_once</span> como se muestra abajo.</p>
+</div>
 <h2><span id="Conexiones_estandar">Crear una conexión</span></h2>
 <div class="solvvy-solution">
-<p>Crea un archivo llamado <span class="text-object">connection.php</span> con el siguiente código. Este script crea un recurso de MySQL llamado <span class="code">$link</span>. Este recurdo puede ser usado para crear consultas.</p>
+<p>En el directorio del sitio web, crea un archivo llamado <span class="text-object">connection.php</span> con el siguiente código. AEl script crea un recurso de MySQL llamado <span class="code">$link</span>. Este recurso puede entonces ser usado para crear queries.</p>
+<div class="notebox-note">
+<p>Cambia <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.&nbsp;</p>
+<p><span class="text-object">database</span> y <span class="text-object">dbcredentials.php</span> son de las instrucciones de arriba.</p>
+</div>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
 
-$hostname = "<span class="code-highlight">mysql.example.com</span>"; // the hostname you created when creating the database
-$username = "<span class="code-highlight">yourusername</span>";      // the username specified when setting up the database
-$password = "<span class="code-highlight">yourpassword</span>";      // the password specified when setting up the database
-$database = "<span class="code-highlight">databasename</span>";      // the database name chosen when setting up the database 
+require_once "/home/<span class="code-highlight">username/database/dbcredentials.php</span>";
 
-$link = mysqli_connect($hostname, $username, $password, $database);
+$link = mysqli_connect($DBhostname, $DBusername, $DBpassword, $DBname);
+
 if (mysqli_connect_errno()) {
    die("Connect failed: %s\n" + mysqli_connect_error());
    exit();
