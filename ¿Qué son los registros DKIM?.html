@@ -19,20 +19,18 @@
 </li>
 <li>Da clic a la pestaña <span class="text-link">DNS </span> para ver los registros <a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">DNS</a>.</li>
 </ol>
-<p>Los registros DKIM del servidor de correo DreamHost se verán así, ambos identificables by_domainkey en el registro y escribe TXT:</p>
-<table class="wikitable">
+<p>El registro DKIM del servidor de correo DreamHost se verá así, ambos identificables por _domainkey en el registro y tipo TXT:</p>
+<table class="wikitable" style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
 <tr>
-<td><strong>_domainkey</strong></td>
-<td>TXT</td>
-<td>o=~; r=postmaster@example.com</td>
+<th style="width: 25%;">Nombre</th>
+<th style="width: 6%;">Tipo</th>
+<th style="width: 70%;">Valor</th>
 </tr>
 <tr>
-<td><strong>dreamhost._domainkey</strong></td>
-<td>TXT</td>
-<td>
-<p>k=rsa; t=y; p=qMQDy8aI0BIskx4Mld4UoU7dCtAYy1ksUnCOHhS4Vlw+K1H7LjOAwoz3QuAvgJA8QN09qQNEGkk0/RlzloWBgHcNwsOyJhfmOWLUDRwEzs+SmkvaD/68fPb/CirMRdG4vOeJBT1hvWB1LA7BHBkbSYVwe3nnuLebRnKSoW6ADk+QAaR90uARQEUp6XNB8hVOIfVXSiYFoGICAmUGpGJKkmN1RpE+6CgIOZWGF2Dt74AizO4kmbHAk87+VcLbqx2oeQKfQyAe2PFVQd3RssYx+ywrwsOkAtVcPOlAoMA9AxGezg5rqr9ev0z8pIEK1ONZ3gZld7BEM8EA9Dl9AWG+vhtdDtvxfqocdEPS0PbT1vR5fqAXKX8FYrKQFagdejgKNKsVIEK+</p>
-</td>
+<td style="width: 25%;"><strong>dreamhost._domainkey</strong></td>
+<td style="width: 6%;">TXT</td>
+<td style="width: 70%;">k=rsa; t=y; p=qMQDy8aI0BIskx4Mld4UoU7dCtAYy1ksUnCOHhS4Vlw+K1H7LjOAwoz3QuAvgJA8QN09qQNEGkk0/RlzloWBgHcNwsOyJhfmOWLUDRwEzs+SmkvaD/68fPb/CirMRdG4vOeJBT1hvWB1LA7BHBkbSYVwe3nnuLebRnKSoW6ADk+QAaR90uARQEUp6XNB8hVOIfVXSiYFoGICAmUGpGJKkmN1RpE+6CgIOZWGF2Dt74AizO4kmbHAk87+VcLbqx2oeQKfQyAe2PFVQd3RssYx+ywrwsOkAtVcPOlAoMA9AxGezg5rqr9ev0z8pIEK1ONZ3gZld7BEM8EA9Dl9AWG+vhtdDtvxfqocdEPS0PbT1vR5fqAXKX8FYrKQFagdejgKNKsVIEK+</td>
 </tr>
 </tbody>
 </table>
@@ -71,7 +69,7 @@
 <li>El registro DNS DKIM con la larga cadena de galimatías es la clave de firma pública. Un dominio puede tener muchos de estos, ya que tiene servidores con claves privadas que firman correos. Cada uno de estos debe tener un selector que lo identifique de forma exclusiva. Si solo hay uno, puede que no tenga ningún selector, solo "_domainkey". Los adicionales usarían selectores para mantenerlos separados, por ejemplo "list._domainkey" y "bananas._domainkey".</li>
 </ul>
 <p>Los selectores son cómo los servidores receptores saben qué clave pública utilizar para un correo y qué clave privada correspondiente se usó para firmar el correo. DreamHost recomienda que uses el selector sugerido por tu proveedor de correo o uno que puedas identificar fácilmente.</p>
-<p>Puedes encontrar más información sobre selectores y registros DKIM de DNS en las siguientes páginas:</p>
+<p>Puedes encontrar más información sobre selectores y registros DKIM de DNS en las siguientes páginas:&nbsp;</p>
 <ul>
 <li><a href="https://dkimcore.org/specification.html" target="_self" rel="undefined">https://dkimcore.org/specification.html</a></li>
 <li><a href="https://simpledns.plus/kb/17/configuring-dns-records-for-domainkeys-dkim" target="_self" rel="undefined">https://simpledns.plus/kb/17/configuring-dns-records-for-domainkeys-dkim</a></li>
