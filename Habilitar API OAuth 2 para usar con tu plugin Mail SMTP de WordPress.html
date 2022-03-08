@@ -1,6 +1,11 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este plugin explica cómo habilitar la <a href="https://oauth.net/articles/authentication/" target="_self" rel="undefined">autenticación OAuth2</a> en tu panel de Google para autenticar tu plugin <span class="text-object">WP Mail SMTP</span> de WordPress. Esto te permite enviar DESDE tu dirección de Google utilizando este plugin. Las credenciales creadas durante este proceso se pueden utilizar en cualquier plugin que las permita.</p>
+<p>Este artículo explica cómo habilitar la <a href="https://oauth.net/articles/authentication/" target="_self" rel="undefined">autenticación OAuth2</a> en tu panel de Google para autenticar tu plugin <span class="text-object">WP Mail SMTP</span> de WordPress. Esto te permite enviar DESDE tu dirección de Google utilizando este plugin. Las credenciales creadas durante este proceso se pueden utilizar en cualquier plugin que las permita.</p>
+<p>El proceso es partirlo en dos partes:</p>
+<ul>
+<li><a href="#Configurar_OAuth2_en_tu_cuenta_de_Google" target="_self">Configurar OAuth2 en tu cuenta de Google</a></li>
+<li><a href="#Conectar_WP_SMTP_Mail_a_Google_via_OAuth2" target="_self">Conectar WP SMTP Mail a Google vía OAuth2</a></li>
+</ul>
 <div class="alert-warning">
 <p>Asegúrate de haber iniciado sesión en tu sitio de WordPress y en Google utilizando el mismo navegador mientras sigues estas instrucciones.</p>
 <p>Asegúrate de que también hayas iniciado sesión en una única cuenta de Google. Esto ayudará a evitar problemas de configuración.</p>
@@ -21,55 +26,73 @@
 <li>Inicia sesión en tu cuenta de Google.</li>
 <li>Visita el siguiente enlace en tu cuenta de Google.
 <ul>
-<li><a href="https://console.developers.google.com/flows/enableapi?apiid=gmail&amp;credential=client_key&amp;pli=1" target="_blank" rel="noopener"> https://console.developers.google.com/flows/enableapi?apiid=gmail&amp;credential=client_key&amp;pli=1 </a></li>
+<li><a href="https://console.developers.google.com/projectcreate" target="_blank" rel="noopener"> https://console.developers.google.com/projectcreate </a></li>
 </ul>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_01.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-google-cloud-project-create.png" width="500" height="347" /></dd>
 </dl>
-<p>Configura el primer menú desplegable a <span class="text-object">Create a project</span>.</p>
-<p>Si es la primera vez que habilitas la API, acepta los términos de servicio y haz clic en <strong>Agree and continue</strong>.</p>
+<p>Si esta es la primera vez que has habilitado la API, ingresa un nombre de proyecto y luego haz clic en el botón <strong>Create</strong>.</p>
 </li>
-<li>La siguiente pantalla confirma que la API se ha habilitado.
+<li>Visita el siguiente enlace luego de crear tu proyecto.
+<ul>
+<li><a href="https://console.developers.google.com/flows/enableapi?apiid=gmail&amp;credential=client_key&amp;pli=1" target="_blank" rel="noopener"> https://console.developers.google.com/flows/enableapi?apiid=gmail&amp;credential=client_key&amp;pli=1 </a></li>
+</ul>
+</li>
+<li>Cuando la siguiente pantalla te solicita que confirmes el proyecto seleccionado, haz clic en el botón <strong>Next</strong>.</li>
+<li>Da clic en el botón <strong>Enable</strong> en la pantalla subsecuente.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/google-oauth2_02.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-google-cloud-api-menu.png" width="501" height="251" /></dd>
 </dl>
 </li>
-<li>Da clic en <strong>Go to credentials</strong>.<br />
+<li>En el menú de la mano izquierda, navega a <span class="text-section">APIs &amp; Services &gt; Credentials</span>.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/google-oauth2_03.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-google-cloud-credentials-configure-consent.png" width="601" height="501" /></dd>
+</dl>
+</li>
+<li>Da clic en <span class="text-object">+ Create Credentials</span> y selecciona "Help me choose" de las opciones que aparecen.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-google-cloud-create-credentials-type.png" width="601" height="501" /></dd>
 </dl>
 </li>
 <li>Selecciona lo siguiente:
 <ul>
-<li>Primer menú desplegable: <span class="text-object">Gmail API.</span></li>
-<li>Segundo menú desplegable: <span class="text-object">Web browser (Javascript).</span></li>
+<li>Menú desplegable: <span class="text-object">Gmail API</span></li>
 <li>Botones de opción: seleccione el botón de opción titulado <span class="text-object">User data</span>.</li>
 </ul>
 </li>
-<li>Da clic en el botón <strong>What credentials do I need?</strong>.
+<li>Da clic en el botón <strong>NEXT</strong>. Una nueva página aparece.</li>
+<li>Cuando la página Scopes setting aparece, da clic en el botón <strong>SAVE AND CONTINUE</strong>. WP Mail SMTP configura esto por ti, entonces puedes dejar esta sección como está.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/google-oauth2_04.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-google-cloud-create-credentials-client-id.png" width="445" height="601" /></dd>
 </dl>
 </li>
-<li>Aparecerá una ventana emergente que te notificará que primero debes configurar una pantalla de consentimiento de OAuth. Haz clic en el enlace <span class="text-link">SET UP CONSENT SCREEN</span> Esto abre una página en una nueva pestaña.
+<li>Rellena los cambioa en la siguiente página como lo siguiente:<br />
+<ul>
+<li><span class="text-object">Application type</span>: selecciona <span class="text-object">Web application</span> del menú desplegable.</li>
+<li><span class="text-object">Name</span>: Ingresa cualquier nombre que desees. Esto solamente es usado dentro de tu cuenta de Google.</li>
+<li><span class="text-object">Authorized JavaScript origins</span>: Ingresa la URL de tu sitio. Por ejemplo <strong>https://example.com</strong>.</li>
+<li><span class="text-object">Authorized redirect URIs</span>: Copia la URL de tu panel de WordPress. Esto se puede encontrar cuando <a href="https://help.dreamhost.com/hc/es/articles/360029770912-Configuraci%C3%B3n-del-plugin-WP-Mail-SMTP-con-Gmail" target="_self">configuras el plugin de SMTP</a>.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_05.png" alt="oauth consent screen.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-wp-mail-smtp-uri.png" width="519" height="50" /></dd>
 </dl>
-<div class="notebox-note">
-<p>Esta pantalla de consentimiento solo se utiliza durante este proceso de configuración. Tus usuarios nunca lo verán.</p>
-<p>Esta opción aparece solo si has iniciado sesión en una cuenta de Google Workspace. No verás esta opción si está usando una cuenta de Gmail normal.</p>
-</div>
 </li>
-<li>Selecciona el botón de opción <span class="text-object">Internal</span>.</li>
-<li>Da clic en el botón <strong>CREATE</strong>. Una nueva página se abre.</li>
-<li>Hay tres secciones en la página siguiente.
+</ul>
+</li>
+<li>Da clic en el botón <strong>Create</strong>.
+<dl></dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-google-cloud-create-credentials-download.png" width="533" height="500" /></dd>
+</dl>
+</li>
+<li>Cuando la siguiente pantalla muestre tu <span class="text-object">Client ID</span>, da clic en el botón <strong>DONE</strong>. Necesitas más información para completar esta configuración.</li>
+<li>Selecciona <span class="text-object">OAuth consent screen</span> del menú de la izquierda. Las siguientes secciones aparecen:
 <ul>
 <li>App information.</li>
 <li>App domain.</li>
 <li>Developer contact information.</li>
 </ul>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_06.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-google-cloud-oauth-consent-app-info.png" width="499" height="295" /></dd>
 </dl>
 </li>
 <li>Configura los siguientes campos en la sección <span class="text-section">App information</span>:
@@ -79,7 +102,7 @@
 <li><span class="text-object">App logo</span>: No es necesario que agregues el logotipo, ya que esta aplicación no requerirá que los usuarios vean una pantalla de consentimiento.</li>
 </ul>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_07.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-google-cloud-oauth-consent-app-domain.png" width="502" height="466" /></dd>
 </dl>
 </li>
 <li>Configura lo siguiente:
@@ -91,74 +114,42 @@
 </li>
 <li>Da clic en el botón <strong>+ADD DOMAIN</strong> Se abre un campo para que ingreses un dominio. Ingresa el dominio de nivel superior de tu sitio. Por ejemplo, si tu sitio es example.com, <strong>example.com</strong>, solo ingresa <strong>example.com</strong>. Sin embargo, si tu sitio está en un subdirectorio como <strong>blog.example.com</strong>, aún debes ingresar <strong>example.com</strong>.&nbsp;<br />
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_08.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-google-cloud-oauth-consent-dev-contact.png" width="500" height="170" /></dd>
 </dl>
 </li>
 <li>Ingresa tu dirección de correo en el campo <span class="text-object">Developer contact information</span> field.</li>
-<li>Da clic en el botón <strong>SAVE AND CONTINUE</strong>.
+<li>Da clic en el botón <strong>SAVE AND CONTINUE</strong> para proceder.</li>
+<li>Cuando la página de resumen aparece, para las credenciales que se acaban de crear, navega fuera de esta.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_09.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-google-cloud-create-credentials-download.png" width="500" height="469" /></dd>
 </dl>
 </li>
-<li>La siguiente página es donde puedes configurar los ámbitos para tu aplicación. WP Mail SMTP configura esto por tí, por lo que puedes dejar esta sección como está. Haz clic en el botón <strong>SAVE AND CONTINUE</strong> para continuar.
-<div class="notebox-note">
-<p>Una página de resumen muestra la información que acabas de configurar. Puedes cerrar esta pestaña ahora.</p>
-</div>
+</ol>
+<h2><span id="Conectar_WP_SMTP_Mail_a_Google_via_OAuth2">Conectar WP SMTP Mail a Google vía OAuth2</span></h2>
+<ol>
+<li>Selecciona <span class="text-object">Credentials</span> del menú de la parte izquierda.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_10.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-google-cloud-credentials-dashboard.png" width="499" height="369" /></dd>
 </dl>
 </li>
-<li>De vuelta en la primera ventana, ahora puedes agregar credenciales.
-<ul>
-<li><span class="text-object">Name</span>: Ingresa el nombre que desees. Esto solo se usa dentro de tu cuenta de Google.</li>
-<li><span class="text-object">Authorized JavaScript origins</span>: Ingresa la URL de tu sitio web. Por ejemplo:&nbsp; <strong>https://example.com</strong>.</li>
-<li><span class="text-object">Authorized redirect URIs</span>: Copia la URL de tu panel de WordPress. Esto se puede encontrar al <a href="https://help.dreamhost.com/hc/es/articles/360029770912-Configuraci%C3%B3n-del-plugin-WP-Mail-SMTP-con-Gmail" target="_self" rel="undefined">configurar el plugin SMTP plugin</a>.
+<li>Cuando la página <span class="panel-page">Credentials</span> aparece, da clic en el icono de lápiz a la derecha de tu aplicación para ver tu <span class="text-object">Client ID</span> y <span class="text-object">Client secret</span>.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_11.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-google-cloud-client-id.png" width="599" height="83" /></dd>
 </dl>
 </li>
-</ul>
-</li>
-<li>Presiona la tecla <span class="code">Enter</span> en el campo <span class="text-object">Authorized redirect URIs</span> para guardar la URL.</li>
-<li>Da clic en el botón <strong>Refresh</strong>.
+<li>Cuando la siguiente página muestre tu nuevo <span class="text-object">client ID</span> y <span class="text-object">client secret</span>, copia ambos valores en tu plugin WP Mail SMTP.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_12.png" /></dd>
-</dl>
-<dl>
-<dd><em>Se mostrará un icono de papelera a la derecha de este campo cuando se guarde.</em></dd>
-</dl>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_13.png" /></dd>
-</dl>
-</li>
-<li>Un botón de <strong>Create OAuth client ID</strong> aparece. Dale clic a esto.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_14.png" /></dd>
-</dl>
-</li>
-<li>La siguiente pantalla muestra tu <span class="text-object">Client ID</span>. Necesitas más información para completar esta configuración, así que haz clic en el enlace <span class="text-link">I'll do this later</span> para continuar.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_15.png" /></dd>
-</dl>
-</li>
-<li>La página <span class="panel-page">Credentials</span> se muestra. Haz clic en el icono de lápiz a la derecha de tu aplicación para ver tu <span class="text-object">Client ID</span> y <span class="text-object">Client secret</span>.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_16.png" /></dd>
-</dl>
-</li>
-<li>Aparecerá una ventana emergente con tu nuevo <span class="text-object">client ID</span> y <span class="text-object">client secret</span>. Copia ambos valores en tu plugin WP Mail SMTP
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_17.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-wp-mail-smtp-config.png" width="500" height="399" /></dd>
 </dl>
 </li>
 <li>De vuelta a tu sitio de WordPress, pega el <span class="text-object">Client ID</span> y <span class="text-object">Client Secret</span> en tu plugin de WordPress.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/google-oauth2_13.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-wp-mail-smtp-authorization.png" width="501" height="104" /></dd>
 </dl>
 </li>
 <li>Haz clic en <strong>Allow plugin to send emails using your Google account</strong>. Una ventana emergente aparece.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/google-oauth2_14.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-wp-mail-smtp-google-oauth.png" width="450" height="503" /></dd>
 </dl>
 </li>
 <li>En la ventana emergente, elige la dirección de correo desde la que deseas enviar tu formulario de WordPress.
@@ -167,32 +158,21 @@
 <p>Sin embargo, ya deberías haber iniciado sesión en la cuenta correcta, por lo que no deberías tener que ajustar esto.</p>
 </div>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_18.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-wp-mail-smtp-google-oauth-2.png" width="451" height="623" /></dd>
 </dl>
 </li>
 <li>Da clic en <strong>Allow</strong>.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_19.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-button-wp-smtp-save-settings.png" width="150" height="53" /></dd>
 </dl>
 </li>
-<li>Aparece un mensaje en tu panel de WordPress que confirma que la aplicación se ha vinculado a tu sitio. Haz clic en <strong>OK</strong>.
+<li>Cuando regreses a tu plugin, haz cualquier selección de configuración adicional y haz clic en <strong>Save Settings</strong>.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_20.png" /></dd>
-</dl>
-</li>
-<li>Volverás a tu plugin. Haz clic en el botón <strong>Save and Continue</strong>.</li>
-<li>Aparecen varias opciones de configuración y actualización. Haz tus selecciones y continúa con cada página.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_22.png" /></dd>
-</dl>
-</li>
-<li>En la última página, da clic en <strong>Finish Setup</strong>.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/g-oauth2_23.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-wp-mail-smtp-test-email.png" width="599" height="415" /></dd>
 </dl>
 </li>
 <li>Da clic en la pestaña <span class="text-object">Email Test</span> y luego en <strong>Send Email</strong>.</li>
-<li>Deberías ver un mensaje de éxito. Revisa tu bandeja de entrada para confirmar que llegó el correo.</li>
+<li>Cuando veas un mensaje de éxito, revisa tu bandeja de entrada para confirmar que llegó el correo.</li>
 </ol>
 </div>
 <h2>Ver también</h2>
