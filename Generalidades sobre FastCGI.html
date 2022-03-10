@@ -1,4 +1,50 @@
-<h2><span id="Errores_y_solucion_de_problemas">Errores y solución de problemas</span></h2>
+<div class="document">
+<div class="documentwrapper">
+<div class="body">
+<div id="article-name" class="solvvy-hidden">
+<div class="table-of-content container">
+<ul class="simple">
+<li><a class="reference internal" href="#Generalidades">Generalidades</a></li>
+<li><a class="reference internal" href="#Errores">Errores</a></li>
+</ul>
+</div>
+</div>
+<h2><span id="Generalidades">Generalidades</span></h2>
+<div class="solvvy-solution">
+<p><a href="https://es.wikipedia.org/wiki/FastCGI" target="_blank" rel="noopener">FCGI</a> es un protocolo para permitir que los programas interactúen con un servidor web. Mejora el rendimiento sobre CGI al reducir la sobrecarga y permitir que un servidor maneje más solicitudes de páginas web a la vez.</p>
+<h3>PHP</h3>
+<p>PHP se corre a través de <a href="https://www.php.net/manual/es/install.fpm.php" target="_blank" rel="noopener">FastCGI</a> por defecto en DreamHost. Puedes cambiar esto en tu panel ajustando la versión de PHP de tu sitio.</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambiar-la-versi%C3%B3n-PHP-de-mi-sitio-" target="_blank" rel="noopener">¿Cómo cambiar la versión PHP de mi sitio?</a></li>
+</ul>
+</div>
+<h2>Diferencias entre CGI y FCGI</h2>
+<div class="solvvy-solution">
+<h3>CGI</h3>
+<p><a href="https://en.wikipedia.org/wiki/Common_Gateway_Interface" target="_blank" rel="noopener">CGI</a> es un protocolo para servidores web para ejecutar programas web dinámicos. CGI crea nuevos procesos para cada solicitud, lo que hace que los programas de CGI sean simples de implementar pero limita la eficiencia y la escalabilidad. Con cargas altas, la sobrecarga de creación de procesos CGI se vuelve significativa.</p>
+<h3>FCGI</h3>
+<p>FCGI usa procesos persistentes para manejar una serie de solicitudes. Cada proceso FastCGI individual puede manejar muchas solicitudes a lo largo de su vida útil, lo que evita la sobrecarga de la creación y terminación de procesos por solicitud.</p>
+</div>
+<h2><span id="Detalles_de_configuración">Detalles de configuración</span></h2>
+<div class="solvvy-solution">
+<p>En los servidores de DreamHost, FastCGI es manejado por <a href="https://httpd.apache.org/mod_fcgid/" target="_blank" rel="noopener">mod_fcgid</a>. Este es un módulo de Apache que proporciona una interfaz FastCGI que está específicamente ajustada para la configuración dinámica de FastCGI usada en los servidores DreamHost.</p>
+</div>
+<h2>Usar $ENV{'QUERY_STRING'} en vez de @ARGV</h2>
+<div class="solvvy-solution">
+<p>No puedes obtener la cadena de consulta en FastCGI usando la matriz <span class="code">@ARGV</span>. Debes usar <span class="code">$ENV{'QUERY_STRING'}</span>en vez. Por ejemplo, agrega el siguiente código a un nombre de archivo <span class="text-object">test.pl</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">#!/usr/bin/perl
+
+print "Content-type:text/html\n\n";
+print "QUERY_STRING = $ENV{'QUERY_STRING'}";</pre>
+</div>
+<p>Siguiente, visita la siguiente URL.</p>
+<ul>
+<li><strong>example.com?123</strong></li>
+</ul>
+<p>Verás que el valor <span class="code">123</span> está impreso en la página.</p>
+</div>
+<h2><span id="Errores">Errores y solución de problemas</span></h2>
 <div class="solvvy-solution">
 <h3>Errores</h3>
 <p>Si ocurre un error en tu secuencia de comandos FastCGI, es posible que no se devuelva de inmediato. Si el script carga una página web, la página parecerá que se cuelga. Cuando se agota el tiempo de espera de la secuencia de comandos, es posible que el mensaje de error no se registre y solo veas un error 500.</p>
@@ -64,4 +110,7 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/217297307-Generalidades-de-CGI">Generalidades de CGI</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214750888-Generalidades-sobre-los-comandos-UNIX">Comandos de UNIX</a></li>
 </ul>
+</div>
+</div>
+</div>
 </div>
