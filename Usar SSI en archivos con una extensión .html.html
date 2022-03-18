@@ -1,3 +1,12 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p><a href="https://en.wikipedia.org/wiki/Server_Side_Includes" target="_blank" rel="noopener noreferrer">Server Side Includes</a> (SSI) te permite usar un lenguaje de secuencias de comandos del lado del servidor para obtener información dinámica (como hora, tamaño, fecha de modificación, incluso archivos CGI/PL) y secuencias de comandos básicas en archivos HTML normales.</p>
+<p>Revisa el siguiente artículo para aprender más sobre usar Server Side Includes:</p>
+<ul>
+<li><a href="https://httpd.apache.org/docs/current/howto/ssi.html" target="_blank" rel="noopener noreferrer">Apache httpd Tutorial: Introduction to Server Side Includes</a></li>
+</ul>
+<p>Lo siguiente describe como usar archivos SSI en servidores de DreamHost.</p>
+</div>
 <h2>Crear un archivo .htaccess en tu servidor web DreamHost</h2>
 <div class="solvvy-solution">
 <p>Consulta el siguiente artículo para obtener instrucciones sobre cómo crear un archivo <span class="text-object">.htaccess</span> en tu servidor web:</p>
@@ -10,15 +19,15 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo por medio de SSH</a></li>
 </ul>
 </div>
-<h2><span id="Analizando_todos_los_archivos_.html">Analizar todos los archivos .html</span></h2>
+<h2><span id="Analizar_todos_los_archivos_.html">Analizar todos los archivos .html</span></h2>
 <div class="solvvy-solution">
-<p>Los servidores de DreamHost están configurados de manera predeterminada para analizar solo archivos con una extensión <span class="text-object">.shtml</span> con servidor incluido. Si te aseguras de que todos tus archivos que incluyen otros archivos (usando SSI) se denominan <span class="text-object">something.shtml</span>, no tendrás que hacer nada para que funcionen.</p>
+<p>Los servidores de DreamHost están configurados de manera predeterminada para analizar solo archivos con una extensión <span class="text-object">.shtml</span> con servidor incluido. Si te aseguras de que tus archivos que incluyen otros archivos (usando SSI) se denominan <span class="text-object">something.shtml</span>, no tendrás que hacer nada para que funcionen.</p>
 <p>Sin embargo, algunos clientes han transferido un sitio desde una configuración de servidor diferente donde se analizó cualquier archivo <span class="text-object">.html</span> para SSI. Puede ser difícil cambiar el nombre de todos los archivos en un sitio web, así como corregir los enlaces entre ellos. Debido a esto, DreamHost permite a los usuarios activar el análisis de CUALQUIER tipo de archivo que deseen.</p>
-<p>Para hacer esto, simplemente crea un archivo de texto plano llamado <span class="text-object">.htaccess</span> en el directorio en el que deseas que se analicen todos los archivos con una extensión diferente para SSI. Dentro del archivo <span class="text-object">.htaccess</span>, pon esta línea:</p>
+<p>Para hacer esto, simplemente crea un archivo de texto plano llamado <span class="text-object">.htaccess</span> en el directorio en el que deseas que se analicen todos los archivos con una extensión diferente para SSI. Dentro del archivo <span class="text-object">.htaccess</span>, agrega esta línea:</p>
 <div class="preboxcontainer">
 <pre class="prebox">AddHandler server-parsed .html</pre>
 </div>
-<p>Eso es. Ahora cualquier archivo que termine en <span class="text-object">.html</span> tendrá SSI ejecutado en él. DreamHost realmente no recomienda hacer esto, a menos que sea absolutamente necesario. Agrega algo de sobrecarga a la publicación web para analizar SSI ya que todas y cada una de las solicitudes de un archivo <span class="text-object">.html</span> (incluso las que no tienen ningún SSI) son un poco más lentas cuando activa esta opción. Es mucho mejor simplemente nombrar los archivos apropiados con la extensión <span class="text-object">.shtml</span>.</p>
+<p>Ahora cualquier archivo que termine en <span class="text-object">.html</span> tendrá SSI ejecutado en él. DreamHost realmente no recomienda hacer esto, a menos que sea absolutamente necesario. Agrega algo de sobrecarga a la publicación web para analizar SSI ya que todas y cada una de las solicitudes de un archivo <span class="text-object">.html</span> (incluso las que no tienen ningún SSI) es un poco más lento cuando activa esta opción. Es mucho mejor simplemente nombrar los archivos apropiados con la extensión <span class="text-object">.shtml</span>.</p>
 </div>
 <h2><span id="Usando_XBitHack">Usar XBitHack</span></h2>
 <div class="solvvy-solution">
@@ -39,7 +48,7 @@
 </pre>
 </div>
 <div class="notebox-note">
-<p>SSI normalmente no funciona cuando ejecutas Phusion Passenger (Rails y otras aplicaciones de Rack). Esto se debe a que cuando el servidor recibe una URL que termina en / pasa a Passenger. Si necesitas servir archivos de índice de forma estática (incluso a través de SSI), tu aplicación Phusion Passenger debes devolver una redirección al archivo apropiado para tales URL, reemplazando <span class="text-object">... /</span> con <span class="text-object">... /index.shtml</span>. Luego, el navegador solicita el archivo de índice explícitamente y los SSI funcionan correctamente</p>
+<p>SSI normalmente no funciona cuando ejecutas Phusion Passenger (Rails y otras aplicaciones de Rack). Esto se debe a que cuando el servidor recibe una URL que termina en <span class="text-object">/</span>, luego esto lo pasa a Passenger. Si necesitas servir archivos de índice de forma estática (incluso a través de SSI), tu aplicación Phusion Passenger debes devolver una redirección al archivo apropiado para tales URL, reemplazando <span class="text-object">... /</span> con <span class="text-object">... /index.shtml</span>. Luego, el navegador solicita el archivo de índice explícitamente y los SSI funcionan correctamente</p>
 </div>
 </div>
 <h2><span id="See_also">Ver también</span></h2>
