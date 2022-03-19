@@ -12,14 +12,14 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/215036058-Resumen-de-la-pol%C3%ADtica-de-dominio-del-remitente-y-suplantaci%C3%B3n-de-identidad-o-spoofing">Política de envío de dominio y Spoofing</a></li>
 </ul>
 <p>Si necesitas utilizar una dirección de correo externa para el usuario remitente 'De', es posible que desees considerar la posibilidad de configurar un formulario SMTP para el sitio.</p>
-<p>Ten en cuenta que existen límites estrictos de envío al enviar correo desde un servidor web. Visita el siguiente artículo para obtener más detalles:</p>
+<p>Por favor ten en cuenta que existen límites estrictos de envío al enviar correos desde un servidor web. Visita el siguiente artículo para obtener más detalles:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215730467-Generalidades-sobre-la-cuota-SMTP">Cuota SMTP</a></li>
 </ul>
 </div>
-<h2><span id="Basic_.27mail.28.29.27_function_replacement">Función básica para reemplazar 'mail()'&nbsp;</span></h2>
+<h2><span id="Basic_.27mail.28.29.27_function_replacement">Función básica para reemplazar mail()</span></h2>
 <div class="solvvy-solution">
-<p>La función imap_mail() puede reemplazar la función estándar mail() que se usa normalmente para enviar correo. Los parámetros para ambas funciones son en su mayoría similares.</p>
+<p>La función <span class="text-object">imap_mail()</span> puede reemplazar la función estándar <span class="text-object">mail()</span> que se usa normalmente para enviar correo. Los parámetros para ambas funciones son en su mayoría similares.</p>
 <p>Aquí hay un ejemplo básico usando imap_mail():</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
@@ -58,7 +58,7 @@ imap_mail($to, $subject, $body, $headers, $cc, $bcc, $return_path);
 </div>
 <h2><span id="Saving_sent_emails">Guardando correos enviados</span></h2>
 <div class="solvvy-solution">
-<p>La configuración del formulario anterior le permite enviar el mensaje, pero no lo guarda en la carpeta SENT. Si desea ver un registro de todos los correos enviados, puede agregar otra función para almacenar el mensaje en la carpeta SENT</p>
+<p>La configuración del formulario anterior le permite enviar el mensaje pero no lo guarda en la carpeta SENT. Si desea ver un registro de todos los correos enviados, puede agregar otra función para almacenar el mensaje en la carpeta SENT</p>
 <p>Para almacenar el mensaje enviado en la carpeta 'Sent', agrega esta función al archivo PHP. Asegúrate de utilizar el <a href="https://help.dreamhost.com/hc/es/articles/214918038-Generalidades-de-las-configuraciones-del-cliente-de-correo#nombre-del-servidor" target="_self" rel="undefined">nombre de tu servidor de correo</a> para el nombre de host. En este ejemplo es <strong>imap.dreamhost.com</strong>.</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
