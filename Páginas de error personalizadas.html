@@ -1,28 +1,37 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Las páginas de error personalizadas te permiten personalizar las páginas que se muestran cuando ocurre un error. No solo hacen que tu sitio web sea más profesional, sino que también pueden evitar que pierdas visitas a tu sitio. Si un visitante ve una página de error genérico, es probable que abandone tu sitio. Sin embargo, si ven una página de error útil, es posible que continúen allí porque simplemente pueden hacer clic en un enlace para ir a otra página dentro de tu sitio.</p>
-<div class="notebox-note">
-<p>Las siguientes instrucciones son para un servidor Apache. Si estás ejecutando Nginx, ve a la sección en la parte inferior titulada <a href="#nginx">Crear páginas de error personalizadas con Nginx</a>.</p>
+<p>Este artículo explica cómo redirigir los errores del servidor a páginas de error personalizadas en tu sitio web.</p>
+<p>Las páginas de error personalizadas te permiten personalizar las páginas que se muestran cuando se produce un error. Esto hace que tu sitio web parezca más profesional y también evita que los visitantes abandonen tu sitio.</p>
+<p>Si un visitante ve una página de error genérica, es probable que abandone tu sitio. Sin embargo, si ven una página de error útil, es más probable que se queden porque simplemente pueden hacer clic en un enlace para ir a otra página dentro de tu sitio.</p>
 </div>
+<p>&nbsp;</p>
+<h2 class="header-section">Apache</h2>
+<div class="notebox-important">
+<p>Las siguientes instrucciones son para un <a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache" target="_self">servidor Apache</a>. Si tu servidor está corriendo <a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx" target="_self">Nginx</a>, mira la seccion de la parte inferior titulada <a href="#nginx">Crear páginas de errores personalizadas con Nginx</a>.</p>
 </div>
-<h2>Una anotación sobre los errores 500</h2>
+<h2>Errores 500 en un servidor Apache</h2>
 <div class="solvvy-solution">
-<p>Debido a cómo está configurado Apache, no es posible redirigir a una página de error 500 personalizada. Cuando se encuentra un error 500, se mostrará la página 500 predeterminada del navegador.</p>
-</div>
-<h2><span id="Simple_configuration">Configuración simple</span></h2>
-<div class="solvvy-solution">
-<p>Para crear una página de error personalizada para tu dominio, agrega la siguiente línea a un archivo <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a> ubicado en el directorio web de tu dominio:</p>
+<p>No es posible redirigir a una página de error 500 personalizada debido a cómo están configurados los servidores DreamHost Apache. Cuando se encuentra un error 500, siempre se muestra la página 500 predeterminada del navegador.</p>
+<h2><span id="Configuracion_simple">Ejemplo simple</span></h2>
+<ol>
+<li>Inicia sesión en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Navega a tu <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home#el-directorio-del-sitio-web" target="_self" rel="undefined">directorio del sitio web</a>.</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear un archivo</a> llamado <span class="text-object">.htaccess</span>.</li>
+<li>Agrega la siguiente línea a tu archivo <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self" rel="undefined">.htaccess</a> de tu sitio web:
 <div class="preboxcontainer">
 <pre class="prebox">ErrorDocument 404 /error.php
 </pre>
 </div>
-<p>Esto redirige los navegadores que experimentan un error 404 (No encontrado) al archivo <span class="text-object">error.php</span> ubicado en el mismo directorio que tu archivo <span class="text-object">.htaccess</span>. Alternativamente, puedes usar la línea anterior como plantilla para crear páginas de error personalizadas separadas para cada error.</p>
-<h3><span id="Status_codes">Códigos de estado</span></h3>
-<p>La lista completa (y muy larga) de errores está disponible aquí:</p>
+</li>
+</ol>
+<p>Esta sola línea redirige los navegadores que experimentan un error 404 (No encontrado) al archivo <span class="text-object">error.php</span> localizado en el mismo directorio del archivo <span class="text-object">.htaccess</span> de tu sitio web.</p>
+<p>Puedes usar la línea anterior como plantilla para crear páginas de error personalizadas separadas para cada código de error.</p>
+<h2><span id="Codigos_de_estado">Códigos de estado</span></h2>
+<p>L lista completa de errores está disponible aquí:</p>
 <ul>
-<li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">Códigos de estado</a></li>
+<li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">Status codes</a></li>
 </ul>
-<p>Algunos de los errores más comunes por los que probablemente querrá realizar entradas son:</p>
+<p>La lista de códigos de estado es muy larga, pero solo hay algunos errores comunes para los que probablemente quieras hacer entradas, que incluyen:</p>
 <ul>
 <li>400 – Bad Request</li>
 <li>401 – Unauthorized</li>
@@ -37,103 +46,102 @@ ErrorDocument 403 /error.php
 ErrorDocument 404 /error.php
 </pre>
 </div>
-<p>Esto obliga al navegador a redirigir al archivo <span class="text-object">/error.php</span> si encuentra alguno de los códigos de estado anteriores.</p>
+<p>Estas líneas fuerzan al buscador a redireccionar al archivo <span class="text-object">/error.php</span> si este encuentra cualquiera de estos códigos de estado de arriba.</p>
 </div>
-<h2>Configurar el archivo error.php</h2>
+<h2><span id="Configurar_el_archivo_error.php">Ejemplo de un archivo error.php</span></h2>
 <div class="solvvy-solution">
-<p>A continuación, en error.php, agrega algo similar a lo siguiente. Este ejemplo en particular está hecho para un sitio wiki: si alguien visita <strong>https://www.example.com/Foo</strong>, se le redirige a <strong>https://www.example.com/wiki/Foo</strong>. Se supone que todo lo que aparece después de la última "/" es un artículo wiki al que están intentando acceder:</p>
+<p>El siguiente código es un ejemplo de que puedes agregar a un archivo <span class="text-object">error.php</span>. Este ejemplo está escrito en PHP, pero puedes usar cualquier idioma que desees.</p>
+<p>Luego puedes agregar estilos CSS a la página para que se mezcle con el resto de tu sitio web:</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
 
 $page_redirected_from = $_SERVER['REQUEST_URI'];  // this is especially useful with error 404 to indicate the missing page.
-$server_url = "http://" . $_SERVER["SERVER_NAME"] . "/";
+$server_url = "http://" . $_SERVER["SERVER_NAME"];
 $redirect_url = $_SERVER["REDIRECT_URL"];
 $redirect_url_array = parse_url($redirect_url);
 $end_of_path = strrchr($redirect_url_array["path"], "/");
 
 switch(getenv("REDIRECT_STATUS"))
 {
-	# "400 - Bad Request"
-	case 400:
-	$error_code = "400 - Bad Request";
-	$explanation = "The syntax of the URL submitted by your browser could not be understood. Please verify the address and try again.";
-	$redirect_to = "";
-	break;
+    # "400 - Bad Request"
+    case 400:
+    $error_code = "400 - Bad Request";
+    $explanation = "The syntax of the URL submitted by your browser could not be understood. Please    verify the address and try again.";
+    $redirect_to = "";
+    break;
 
-	# "401 - Unauthorized"
-	case 401:
-	$error_code = "401 - Unauthorized";
-	$explanation = "This section requires a password or is otherwise protected. If you feel you have reached this page in error, please return to the login page and try again, or contact the webmaster if you continue to have problems.";
-	$redirect_to = "";
-	break;
+    # "401 - Unauthorized"
+    case 401:
+    $error_code = "401 - Unauthorized";
+    $explanation = "This section requires a password or is otherwise protected. If you feel you have reached this page in error, please return to the login page and try again, or contact the webmaster if you continue to have problems.";
+    $redirect_to = "";
+    break;
 
-	# "403 - Forbidden"
-	case 403:
-	$error_code = "403 - Forbidden";
-	$explanation = "This section requires a password or is otherwise protected. If you feel you have reached this page in error, please return to the login page and try again, or contact the webmaster if you continue to have problems.";
-	$redirect_to = "";
-	break;
+    # "403 - Forbidden"
+    case 403:
+    $error_code = "403 - Forbidden";
+    $explanation = "This section requires a password or is otherwise protected. If you feel you have reached this page in error, please return to the login page and try again, or contact the webmaster if you continue to have problems.";
+    $redirect_to = "";
+    break;
 
-	# "404 - Not Found"
-	case 404:
-	$error_code = "404 - Not Found";
-	$explanation = "The requested resource '" . $page_redirected_from . "' could not be found on this server. Please verify the address and try again.";
-	$redirect_to = $server_url . "wiki" . $end_of_path;
-	break;
+    # "404 - Not Found"
+    case 404:
+    $error_code = "404 - Not Found";
+    $explanation = "The requested resource '" . $page_redirected_from . "' could not be found on this server. Please verify the address and try again.";
+    $redirect_to = $server_url . $end_of_path;
+    break;
 }
 ?&gt;
-<br />&lt;!DOCTYPE&nbsp;html&gt;
+
+&lt;!DOCTYPE html&gt;
 &lt;head&gt;
-
-	&lt;link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" /&gt;
+  &lt;link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" /&gt;
 &lt;?php
-	if ($redirect_to != "")
-	{
+    if ($redirect_to != "")
+    {
 ?&gt;
 
-	&lt;meta http-equiv="Refresh" content="5; url='&lt;?php print($redirect_to); ?&gt;'"&gt;
+&lt;meta http-equiv="Refresh" content="5; url='&lt;?php print($redirect_to); ?&gt;'"&gt;
 &lt;?php
-	}
+    }
 ?&gt;
-
-	&lt;title&gt;Page not found: &lt;?php print ($redirect_to); ?&gt;&lt;/title&gt;
-
-&lt;/head&gt;
+&lt;title&gt;Page not found: &lt;?php print ($redirect_to); ?&gt;&lt;/title&gt;<br /><br />&lt;/head&gt;
 &lt;body&gt;
 
 &lt;h1&gt;Error Code &lt;?php print ($error_code); ?&gt;&lt;/h1&gt;
 
-&lt;p&gt;The &lt;a href="https://en.wikipedia.org/wiki/URL"&gt;URL&lt;/a&gt; you requested was not found. &lt;?PHP echo($explanation); ?&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Did you mean to type &lt;a href="&lt;?php print ($redirect_to); ?&gt;"&gt;&lt;?php print ($redirect_to); ?&gt;&lt;/a&gt;?&lt;/strong&gt; You will be automatically redirected there in five seconds.&lt;/p&gt;
-
-&lt;p&gt;You may also want to try starting from the home page: &lt;a href="&lt;?php print ($server_url); ?&gt;"&gt;&lt;?php print ($server_url); ?&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;?PHP echo($explanation); ?&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;p&gt;&lt;i&gt;A project of &lt;a href="&lt;?php print ($server_url); ?&gt;"&gt;&lt;?php print ($server_url); ?&gt;&lt;/a&gt;.&lt;/i&gt;&lt;/p&gt;
 
 &lt;/body&gt;
-&lt;/html&gt;
-</pre>
+&lt;/html&gt;</pre>
 </div>
-<p>Diseña la página para que se adapte al resto de tu sitio y habrás terminado con el manejo básico de errores.</p>
 </div>
-<h2>Crear páginas de error personalizadas con Nginx</h2>
+<p>&nbsp;</p>
+<h2 class="header-section">Nginx</h2>
+<h2><span id="nginx">Crear páginas de errores personalizadas con Nginx</span></h2>
 <div class="solvvy-solution">
-<p>También puedes crear páginas de error personalizadas si estás ejecutando Nginx en lugar de Apache.</p>
-<ol>
-<li>Primero, mira el siguiente artículo para comprender dónde deben ir tus archivos de configuración:
+<p>Los siguientes pasos te guiarán a través de la creación de páginas de error personalizadas en un servidor Nginx.</p>
+<div class="notebox-note">
+<p>Ten en cuenta que los archivos de configuración para los sitios de Nginx van a un directorio especial bajo tu usuario. Revisa el siguiente artículo para obtener más detalles sobre dónde colocar tu archivo de configuración:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">Ubicación de archivos de configuración Nginx</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">Ubicaciones de archivos de configuración de Nginx</a></li>
 </ul>
-</li>
-<li>Crea un archivo llamado <span class="text-object">error.conf</span> en el siguiente directorio. Asegúrate de cambiar el <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> a tu sitio website.
-<div class="preboxcontainer">
-<pre class="prebox">/home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/error.conf</pre>
 </div>
-Esto asume que tu nombre de usuario es 'username' y que tu sitio es <strong>example.com</strong>.</li>
-<li>En el archivo <span class="text-object">error.conf</span>, añade lo siguiente:
+<ol>
+<li>Inicia sesión en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Navega al siguiente directorio.
+<div class="notebox-important">
+<p>Asegúrate de cambiar <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario</a>&nbsp;y <strong>example.com</strong> a tu sitio web:</p>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd /home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span></span></pre>
+</div>
+</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear un archivo</a> llamado <span class="text-object">error.conf</span> en este directorio con el siguiente código:
 <div class="preboxcontainer">
 <pre class="prebox">error_page 404 /404.html;
 location  /404.html {
@@ -141,27 +149,27 @@ location  /404.html {
 }</pre>
 </div>
 </li>
-<li>Seguido, navega al directorio de tu sitio. Por ejemplo:
+<li>Navega al <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-del-sitio-web" target="_self">directorio del sitio web</a>. Por ejemplo:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/example.com</span></pre>
 </div>
 </li>
-<li>En ese directorio, crea una página titulada <span class="text-object">404.html</span> con cualquier mensaje de error que desees mostrar.</li>
-<li>Reinicia tu servidor (si estás en un VPS). Si estás en Dedicado, puedes <a href="https://help.dreamhost.com/hc/es/articles/216454967-Como-recargar-y-reiniciar-Nginx-Solo-para-servidores-dedicados-">recargar Nginx tu mismo</a>.</li>
-<li>Si ahora visitas una página de tu sitio que no existe, se mostrará tu página de error personalizada.</li>
+<li>Crea una página titulada <span class="text-object">404.html</span> con cualquier mensaje de error que desees mostrar.</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216454967-Como-recargar-y-reiniciar-Nginx" target="_self">Reinicia tu servidor</a> (si está en un VPS). Si está en un Dedicado, puedes <a href="https://help.dreamhost.com/hc/es/articles/216454967-Como-recargar-y-reiniciar-Nginx">recargar Nginx tu mismo</a>.</li>
 </ol>
+<p>Cuando visitas ahora una página en tu sitio que no existe, se muestra su página de error personalizada.</p>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
 <h3>Enlaces internos</h3>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-PHP">Generalidades sobre PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-de-PHP">Generalidades de PHP</a></li>
 <li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-">¿Qué puedo hacer con un archivo .htaccess?</a></li>
 </ul>
-<h3>Enlaces internos</h3>
+<h3>Enlaces externos</h3>
 <ul>
-<li><a href="http://httpd.apache.org/docs/2.2/custom-error.html">Apache Docs - Repuestas de errores personalizadas</a></li>
-<li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">HTTP/1.1 Definiciones de estados de código</a> (ver específicamente los códigos 4xx y 5xx)</li>
+<li><a href="https://httpd.apache.org/docs/2.2/es/custom-error.html">Apache Docs - Custom Errors Responses</a></li>
+<li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">HTTP/1.1 Status Code Definitions</a> (ver específicamente los códigos 4xx y 5xx)</li>
 </ul>
 </div>
