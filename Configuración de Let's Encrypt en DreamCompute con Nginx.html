@@ -2,7 +2,7 @@
 <div class="solvvy-solution">
 <p><a class="reference external" href="https://letsencrypt.org">Let’s Encrypt</a> es una nueva autoridad de certificación que proporciona certificados seguros gratuitos para ayudar a que Internet sea 100% <span class="text-object">HTTPS</span>. Ve el siguiente enlace para obtener más información sobre Let's Encrypt.</p>
 <ul>
-<li><a href="https://letsencrypt.org/" target="_blank" rel="noopener">https://letsencrypt.org</a></li>
+<li><a href="https://letsencrypt.org/" target="_blank" rel="noopener noreferrer">https://letsencrypt.org</a></li>
 </ul>
 <p>DreamHost ha integrado el soporte de Let's Encrypt en el <a href="https://panel.dreamhost.com">panel</a> para los servicios alojados, pero si deseas configurar certificados de renovación automática para los dominios que alojas en una instancia de DreamCompute, deberás realizar un poco de instalación manual. Pero la buena noticia es que no tarda mucho y, una vez que finaliza la configuración, ¡no deberías tener que preocuparte nunca más por renovar un certificado!.</p>
 </div>
@@ -22,11 +22,11 @@
 <li><a class="reference external" href="https://help.dreamhost.com/hc/es/articles/218672058-Configurar-el-DNS-de-tus-dominios" target="_self" rel="undefined">Configurar el DNS para tus dominios</a></li>
 </ul>
 <p>Digamos que tienes <strong>example.com</strong> configurado con un registro DNS A que apunta a la dirección IP de tu instancia, y tienes nginx configurado correctamente para responder a las solicitudes de <strong>example.com</strong>. (La configuración de tu servidor web está fuera del alcance de esta guía, pero hay <a class="reference external" href="https://www.nginx.com/resources/wiki/start/">una variedad de tutoriales</a> allá afuera).</p>
-<p>Si no estás usando <code class="docutils literal"><span class="pre">nginx</span></code> en una instancia Debian o Ubuntu, puedes usar el complemento nginx para certbot-auto como se muestra a continuación.</p>
+<p>Si no estás usando <code class="docutils literal"><span class="pre">nginx</span></code> en una instancia Debian o Ubuntu, puedes usar el complemento de nginx para certbot-auto como se muestra a continuación.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[root@instance]$ </span><span class="command">/opt/certbot/certbot-auto --nginx -d <span class="code-highlight">example.com</span></span></pre>
 </div>
-<p>Esto te pedirá cierta información, incluida tu dirección de correo. Lénalo con información válida y deberías obtener un nuevo certificado. Ni siquiera deberías necesitar reiniciar tu servidor web o modificar un archivo de configuración, ya que el complemento nginx para certbot-auto fue diseñado para manejar eso por ti.</p>
+<p>Esto te pedirá cierta información, incluida tu dirección de correo. Lénalo con información válida y deberías obtener un nuevo certificado. Ni siquiera deberías necesitar reiniciar tu servidor web o modificar un archivo de configuración, ya que el complemento de nginx para certbot-auto fue diseñado para manejar eso por ti.</p>
 <p><span style="font-size: 1.5em;">Agregar un subdominio a un certificado existente</span></p>
 </div>
 <div class="solvvy-solution">
