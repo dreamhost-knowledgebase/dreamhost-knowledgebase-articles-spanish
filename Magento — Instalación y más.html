@@ -1,7 +1,7 @@
 <div class="solvvy-solution">
 <div class="alert-warning">
 <p><span class="wysiwyg-font-size-x-large">Magento 2.4+</span></p>
-<p>Ya no es posible instalar Magento (versiones 2.4+) en servidores DreamHost desde Magento ahora <a href="https://devdocs.magento.com/guides/v2.4/install-gde/prereq/elasticsearch.html" target="_blank" rel="noopener">requiere que Elasticsearch</a> sea instalado en el servidor para que funcione.</p>
+<p>Ya no es posible instalar Magento (versiones 2.4+) en servidores DreamHost desde Magento ahora <a href="https://devdocs.magento.com/guides/v2.4/install-gde/prereq/elasticsearch.html" target="_blank" rel="noopener noreferrer">requiere que Elasticsearch</a> sea instalado en el servidor para que funcione.</p>
 <p>Si deseas ejecutar Magento 2.4+ en un servidor DreamHost, la única opción sería actualizar a un Servidor Dedicado. Allí podrías instalar Elasticsearch</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215945457--C%C3%B3mo-agrego-un-servidor-dedicado-" target="_self" rel="undefined">¿Cómo agregar un Servidor Dedicado?</a></li>
@@ -45,7 +45,7 @@ memory_limit = 756M</pre>
 <li><a href="https://help.dreamhost.com/hc/es/articles/221691727-Crear-una-base-de-datos-MySQL" target="_self">Crear una base de datos</a></li>
 </ul>
 </li>
-<li>Configura tu dominio para usar PHP 7.3. Consulta el siguiente artículo para obtener más información:<br />
+<li>Configura tu dominio para usar PHP 7.4. Consulta el siguiente artículo para obtener más información:<br />
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-" target="_self">Cambiar versión PHP</a></li>
 </ul>
@@ -86,7 +86,7 @@ Asegúrate de reemplazar todo el texto de ejemplo en ese comando con tu base de 
 <div class="preboxcontainer">
 <pre class="prebox">mod_fcgid: stderr: PHP Parse error: syntax error, unexpected '?', expecting variable (T_VARIABLE) in /home/username/example.com/vendor/magento/framework/Filesystem/Directory/Write.php on line 35</pre>
 </div>
-<p>Esto se debe a que la versión de Magento no es compatible con la versión de PHP que estás utilizando. Si estás usando Magento versión 2.3.0, asegúrate de utilizar PHP 7.3. Eso resolverá el mensaje de error.</p>
+<p>Esto se debe a que la versión de Magento no es compatible con la versión de PHP que estás utilizando. Si estás usando Magento versión 2.3.0, asegúrate de utilizar PHP 7.4. Eso resolverá el mensaje de error.</p>
 <h3><span id="I_can.27t_find_the_installation_wizard">No puedo encontrar el asistente de instalación</span></h3>
 <p>Si no puedes cargar el asistente de instalación de Magento, es posible que tengas el archivo de instalación en otra ubicación distinta al directorio raíz del dominio. Verifica que el archivo de instalación no esté en un subdirectorio, y también asegúrate de que todos los archivos, carpetas y subcarpetas tengan el permiso correcto.</p>
 <h3>Los enlaces no redirigen correctamente</h3>
@@ -144,30 +144,30 @@ Se verá así:<br />
 </div>
 <p><strong>Cron Job #1</strong></p>
 <div class="preboxcontainer">
-<pre class="prebox">/usr/local/php73/bin/php /home/username/example.com/bin/magento cron:run | grep
+<pre class="prebox">/usr/local/php74/bin/php /home/username/example.com/bin/magento cron:run | grep
   -v "Ran jobs by schedule" &gt;&gt; /home/username/example.com/var/log/magento.cron.log</pre>
 </div>
 <p><strong>Cron Job #2</strong></p>
 <div class="preboxcontainer">
-<pre class="prebox">/usr/local/php73/bin/php /home/username/example.com/update/cron.php &gt;&gt;
+<pre class="prebox">/usr/local/php74/bin/php /home/username/example.com/update/cron.php &gt;&gt;
   /home/username/example.com/var/log/update.cron.log</pre>
 </div>
 <p><strong>Cron Job #3</strong></p>
 <div class="preboxcontainer">
-<pre class="prebox">/usr/local/php73/bin/php /home/username/example.com/bin/magento setup:cron:run
+<pre class="prebox">/usr/local/php74/bin/php /home/username/example.com/bin/magento setup:cron:run
   &gt;&gt; /home/username/example.com/var/log/setup.cron.log</pre>
 </div>
 <p>Esto configura correctamente los cron job que Magento necesita. Sin embargo, ahora debes correrlos manualmente para que Magento sepa que existen. Corre los siguientes tres comandos para forzar la actualización de los cron job en Magento:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php73/bin/php /home/username/example.com/bin/magento cron:run | grep
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php74/bin/php /home/username/example.com/bin/magento cron:run | grep
   -v "Ran jobs by schedule" &gt;&gt; /home/username/example.com/var/log/magento.cron.log</span></pre>
 </div>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php73/bin/php /home/username/example.com/update/cron.php &gt;&gt;
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php74/bin/php /home/username/example.com/update/cron.php &gt;&gt;
   /home/username/example.com/var/log/update.cron.log</span></pre>
 </div>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php73/bin/php /home/username/example.com/bin/magento setup:cron:run
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php74/bin/php /home/username/example.com/bin/magento setup:cron:run
   &gt;&gt; /home/username/example.com/var/log/setup.cron.log</span></pre>
 </div>
 <p>Haz clic en el botón <strong>Intentar de nuevo (Try Again)</strong> en Magento. Esta vez, el error cron ya no se mostrará.</p>
@@ -188,7 +188,7 @@ Se verá así:<br />
 <p><img class="img-border" src="https://kbimages.dreamhosters.com/images/magento-extension-install-failure_02.png" /></p>
 <p>De ser así, corre el siguiente comando en el directorio de tu sitio web.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php73/bin/php bin/magento config:set system/backup/functionality_enabled 1</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php74/bin/php bin/magento config:set system/backup/functionality_enabled 1</span></pre>
 </div>
 <p>Haz clic en el botón <strong>Intentar de nuevo (Try Again)</strong> y se creará tu copia de seguridad.</p>
 </div>
