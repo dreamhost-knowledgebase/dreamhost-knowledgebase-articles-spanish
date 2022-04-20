@@ -5,9 +5,12 @@
 </div>
 <h2>Crear una migración</h2>
 <div class="solvvy-solution">
+<div class="notebox-note">
+<p>El siguiente proceso <em>copia</em> tu contenido de un bucket AWS S3 a DreamObjects. Tu información NO se elimina de AWS como resultado.</p>
+</div>
 <ol>
 <li>Visita la página <a href="https://docs.aws.amazon.com/es_es/general/latest/gr/aws-security-credentials.html" target="_self" rel="undefined">Credenciales de Seguridad de los Servicios de Amazon Web</a>&nbsp;en el sitio de Amazon S3 para obtener tu 'Access Key' y 'Secret Key'.</li>
-<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener">DreamObjects</a> en tu panel de DreamHost.
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener noreferrer">DreamObjects</a> en tu panel de DreamHost.
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/S3_Migration_01.png" alt="" /></dd>
 </dl>
@@ -60,7 +63,7 @@
 <p>Haz clic en el botón <strong>View Details</strong> para ver información sobre la migración. Por ejemplo, puedes ver el estado actual, cuánto tiempo ha estado procesándose y su estado actual.</p>
 <p>Los buckets migrados y en migración reflejan uno de los cinco estados siguientes:</p>
 <ul>
-<li><strong>Queued</strong> — el Bucket y todos tus objetos se han copiado con éxito en DreamObjects.</li>
+<li><strong>Queued</strong> — un requerimiento de migración está "en línea" y listo para proceder en DreamObjects. Normalmente, si varios buckets están en línea para migrar, un requerimiento está "queued" (en cola) hasta que DreamObjects esté listo para continuar con el siguiente.</li>
 <li><strong>In Progress</strong> —&nbsp; el Bucket está en proceso de copiarse a DreamObjects y aún no ha completado la acción.</li>
 <li><strong>Stopped</strong> — el proceso de migración para el Bucket ha fallado o el usuario que solicitó la migración lo detuvo manualmente.</li>
 <li><strong>Partial</strong> — algunos Buckets y su contenido se han migrado y otros no. Esto puede deberse a un error durante la sincronización de objetos. Tales fallas pueden deberse a la eliminación de tus Buckets de S3 o al revocar tus credenciales de S3 antes de que se complete la migración.</li>
