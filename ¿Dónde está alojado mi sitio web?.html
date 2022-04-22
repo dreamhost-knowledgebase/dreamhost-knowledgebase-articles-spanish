@@ -1,40 +1,43 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Hay dos opciones de DNS para controlar dónde está alojado tu sitio.</p>
+<p>Tu sitio web está alojado en la empresa a la que apunta el DNS del registro de tu dominio. Esta es una combinación de lo siguiente:</p>
 <ul>
-<li>Cambiando los nameservers (esto debe hacerse en la compañía de <a href="https://help.dreamhost.com/hc/es/articles/215413857#registrar" target="_self">Registro</a> de tu sitio).</li>
-<li>Cambiando los registros A.</li>
+<li><strong>El Registrador</strong>: La compañía donde tu dominio está registrado</li>
+<li><strong>La compañía de alojamiento</strong>: La compañía donde los DNS están apuntados</li>
+</ul>
+<p>Revisa el siguiente artículo para ver una explicación de estos términos:</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost#donde_registros_dns" target="_self" rel="undefined">¿Dónde están controlados mis registros DNS?</a></li>
 </ul>
 </div>
-<h2>Verificar dónde está alojado tu DNS</h2>
+<h3>Ver donde está registrado tu dominio</h3>
+<p>Puedes confirmar la empresa donde está registrado tu dominio ejecutando una consulta de WHOIS. Esto se puede hacer usando sitios en línea o vía SSH. El siguiente artículo explica cómo ejecutar una consulta de WHOIS.</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/es/articles/215842648-C%C3%B3mo-ejecutar-una-consulta-de-WHOIS">Cómo ejecutar una consulta de WHOIS </a></li>
+</ul>
+<h3>Ver donde está apuntando el DNS de tu dominio</h3>
 <div class="solvvy-solution">
-<p>Este artículo te ayuda a determinar dónde está alojado tu&nbsp;<strong>sitio web</strong>.&nbsp;Para resolver esto, primero debes verificar dónde está alojado el <strong>DNS</strong> de tu sitio.</p>
 <p>El siguiente artículo explica cómo ver hacia dónde apuntan tus registros DNS actuales.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360030415072-Verificando-d%C3%B3nde-est%C3%A1-alojado-tu-DNS" target="_self">Verificando dónde está alojado tu DNS</a></li>
 </ul>
 </div>
-<h2>¿Qué sucede cuando cambias tu DNS?</h2>
 <div class="solvvy-solution">
-<h3>Cambiar los Nameservers</h3>
+<h2><span style="font-size: 1.5em; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">Diferentes maneras de apuntar tu DNS</span></h2>
+</div>
+<p>Hay dos opciones de DNS para controlar donde está alojado tu sitio.</p>
+<ul>
+<li>Cambiar los Nameservers (esto debe ser hecho en el <a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost#registrar" target="_self">Registrador</a>) de tu sitio web</li>
+<li>Cambiar los registros A</li>
+</ul>
+<div class="solvvy-solution">
+<h3>Nameservers</h3>
 <p>Todos los registros DNS de tu sitio se controlan en la compañía a la que apuntan los nameservers.</p>
 <p>Cambiar tus nameservers apunta&nbsp;<strong>TODOS</strong> los registros DNS de su sitio a una compañía específica. Esto significa que tu sitio web, correo electrónico, mysql, ftp, ssh y cualquier otro registro se controlan en la nueva compañía.</p>
 <p>Debes iniciar sesión en la empresa donde compraste el registro de tu dominio para cambiar los nameservers. La empresa se llama Registrador de tu dominio.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215413857#registrar" target="_self">Compañía de Registro de Dominio</a></li>
 </ul>
-<h3>Cambiar los registros A</h3>
-<p>Los registros son solo las direcciones IP de tu sitio web. Esta sería la dirección IP para la versión www y no www de tu sitio. Por ejemplo:</p>
-<ul>
-<li><strong>example.com</strong></li>
-<li><strong>www.example.com</strong></li>
-</ul>
-<p>Si solo apunta tus registros A a una compañía diferente, solo tu sitio web está alojado en la nueva compañía. Todos tus otros registros DNS (correo, mysql, ftp, ssh) continúan alojados donde apuntan tus nameservers.</p>
-<p>Las siguientes ilustraciones muestran algunas formas en que esto podría implementarse.</p>
-</div>
-<h2>Diferentes formas de apuntar tu DNS</h2>
-<div class="solvvy-solution">
-<h3>Ejemplos Nameservers</h3>
 <table class="wikitable"><colgroup> <col width="15%" /> <col width="20%" /> <col width="20%" /> <col width="15%" /> <col width="60%" /> </colgroup>
 <tbody>
 <tr>
@@ -82,7 +85,14 @@
 </tr>
 </tbody>
 </table>
-<h3>Ejemplos de registros A</h3>
+<h3>Registros A</h3>
+<p>Los registros A son solo las direcciones IP de tu sitio web. Esta sería la dirección IP para la versión www y no www de tu sitio. Por ejemplo:</p>
+<ul>
+<li><strong>example.com</strong></li>
+<li><strong>www.example.com</strong></li>
+</ul>
+<p>Si solo apuntas tus registros A a una empresa diferente, solo tu sitio web se aloja en la nueva empresa. Todos sus otros registros DNS (correo electrónico, mysql, ftp, ssh) continúan alojados donde apuntan tus nameservers.</p>
+<p>Las ilustraciones a continuación muestran algunas formas en que esto podría implementarse.</p>
 <table class="wikitable"><colgroup> <col width="15%" /> <col width="20%" /> <col width="20%" /> <col width="15%" /> <col width="60%" /> </colgroup>
 <tbody>
 <tr>
