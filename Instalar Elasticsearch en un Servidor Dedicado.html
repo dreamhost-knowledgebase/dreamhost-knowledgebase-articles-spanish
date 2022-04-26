@@ -1,6 +1,6 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p><a href="https://www.elastic.co/" target="_blank" rel="noopener">Elasticsearch</a> es un software de motor de búsqueda que puedes instalar en tu sitio web.</p>
+<p><a href="https://www.elastic.co/" target="_blank" rel="noopener noreferrer">Elasticsearch</a> es un software de motor de búsqueda que puedes instalar en tu sitio web.</p>
 <p>Al instalarlo en un Servidor Dedicado, te encontrarás con errores relacionados con Grsecurity. Esto se debe a que Elasticsearch viene con su propio binario de Java que se actualiza y utiliza después de cada actualización o nueva instalación de Elasticsearch.</p>
 <p>Dado que estas configuraciones se reemplazan en la instalación, las configuraciones de Grsec se sobrescriben. Para resolver este problema, deberás instalar un kernel diferente que no sea grsec en tu Servidor Dedicado.</p>
 <div class="notebox-important">
@@ -8,7 +8,7 @@
 </div>
 <div class="prereqs">
 <p><strong>Prerrequisitos</strong></p>
-<p>Asegúrate de haber creado un <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-" target="_self">usuario admin</a> en tu Servidor Dedicado. Necesitarás este tipo de usuario para instalar un nuevo kernel.</p>
+<p>Asegúrate de haber creado un <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-Servidor-Dedicado" target="_self">usuario admin</a> en tu Servidor Dedicado. Necesitarás este tipo de usuario para instalar un nuevo kernel.</p>
 </div>
 </div>
 <h2>¿A qué servidores aplica esto?</h2>
@@ -29,14 +29,14 @@ Codename:       bionic</pre>
 <div class="solvvy-solution">
 <p>Como se mencionó anteriormente, para resolver los problemas de instalación, debes instalar un nuevo kernel sobre el kernel 5.4.32-grsec-grsec.virt +.</p>
 <ol>
-<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> como tu <a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-" target="_self">usuario admin</a>. Tu intento debería mostrar root como usuario.</li>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> como tu <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-Servidor-Dedicado" target="_self">usuario admin</a>. Tu intento debería mostrar root como usuario.</li>
 <li>Corre el siguiente comando.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">root@[server]# </span><span class="command">apt-get update; apt-get install linux-headers-5.4.32-generic.virt linux-image-5.4.32-generic.virt; sed -i 's/5.4.32-grsec-grsec.virt+/5.4.32-generic.virt/' /etc/default/grub; update-grub</span>
 </pre>
 </div>
 </li>
-<li>Reinicia tu servidor. Puedes hacer esto al navegar al <a class="panel-link" href="https://panel.dreamhost.com/?tree=dedicated.dashboard" target="_blank" rel="noopener">Panel Dedicado</a>&nbsp;en tu panel y haciendo clic en el botón <strong>Reiniciar</strong>.
+<li>Reinicia tu servidor. Puedes hacer esto al navegar al <a class="panel-link" href="https://panel.dreamhost.com/?tree=dedicated.dashboard" target="_blank" rel="noopener noreferrer">Panel Dedicado</a>&nbsp;en tu panel y haciendo clic en el botón <strong>Reiniciar</strong>.
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-button-ds-powercycle.png" alt="powercycle" width="151" height="41" /></dd>
 </dl>
@@ -47,6 +47,6 @@ Codename:       bionic</pre>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215945467--C%C3%B3mo-agregar-usuarios-a-un-servidor-dedicado-" target="_self">Añadir un usuario admin a un Servidor Dedicado</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-Servidor-Dedicado" target="_self">Agregar usuarios a un Servidor Dedicado </a></li>
 </ul>
 </div>

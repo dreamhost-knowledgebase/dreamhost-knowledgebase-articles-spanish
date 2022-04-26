@@ -1,0 +1,64 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Hay muchos plugins populares para usar para hacer una copia de seguridad en WordPress. Puedes almacenar tus copias de seguridad en Amazon S3, DropBox o incluso en <a href="https://help.dreamhost.com/hc/es/articles/214823108--Qu%C3%A9-es-DreamObjects-">DreamObjects</a>. Siempre que sea posible, DreamHost recomienda que limites la cantidad de copias de seguridad a una cantidad razonable, ya que las copias de seguridad infinitas pueden causar problemas de rendimiento en tu sitio.</p>
+</div>
+<h2>Plugins sugeridos</h2>
+<div class="solvvy-solution">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360002133291-Copia-de-seguridad-de-BoldGrid-Total-Upkeep-" target="_self">Copia de seguridad de BoldGrid</a> – (Gratis con cualquier plan de WordPress DreamHost).</li>
+<li><a href="https://wordpress.org/plugins/dreamobjects/" target="_self">Plugin de copias de seguridad de DreamObjects</a> – Diseñado específicamente para trabajar con DreamObjects.</li>
+<li><a href="https://updraftplus.com/">UpdraftPlus</a> –&nbsp;Admite DreamObjects de forma nativa.</li>
+<li><a href="https://blogvault.net">BlogVault</a></li>
+<li><a href="https://ithemes.com/backupbuddy/">BackupBuddy</a></li>
+<li><a href="https://vaultpress.com/">VaultPress</a></li>
+</ul>
+<p>Para obtener más información sobre el servicio DreamObjects, visita el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214823108--Qu%C3%A9-es-DreamObjects-">DreamObjects</a></li>
+</ul>
+<div class="notebox-note">
+<p>Almacenar copias de seguridad personales o copias de seguridad del sitio en los servidores host va contra la política de DreamHost (Esto no aplica para&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215560437-Qu%C3%A9-tipos-de-planes-de-alojamiento-est%C3%A1n-disponibles-" target="_self">VPS o Servidores Dedicados</a>.)&nbsp;Debes eliminar cualquier contenido de respaldo del sitio y almacenarlo localmente. Puedes leer más sobre la política ilimitada aquí:</p>
+<ul>
+<li><a href="https://www.dreamhost.com/es/legal/politica-ilimitada/" target="_self" rel="undefined">https://www.dreamhost.com/es/legal/politica-ilimitada/</a></li>
+</ul>
+</div>
+</div>
+<h2>Hacer una copia de seguridad manual de tu sitio WordPress</h2>
+<div class="solvvy-solution">
+<p>Puedes hacer una copia de seguridad manual de tu sitio WordPress usando el proceso a continuación.</p>
+<h3>¿Dónde correr el comando?</h3>
+<p>Debes iniciar sesión en tu servidor web vía SSH para correr los siguientes comandos. Revisa el siguiente artículo para obtener instrucciones completas sobre cómo iniciar sesión en tu servidor en una terminal:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+</ul>
+<h3>Hacer la copia de la base de datos de tu sitio usando wp-cli</h3>
+<p>Inicia sesión en una terminal. Asegúrate de que estás en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#El_directorio_del_sitio_web" target="_self">directorio del sitio web</a>. Luego, corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db export ~/backup`date +"%d-%m-%Y"-%T`.sql</span></pre>
+</div>
+<h3>Hacer la copia de los archivos de tu sitio usando SSH</h3>
+<p>Navega de nuevo al <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio home del usuario</a>. Luego, corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">zip –r <span class="code-highlight">exampledomain.com.zip</span> <span class="code-highlight">exampledomain.com</span></span></pre>
+</div>
+<p>Asegúrate de cambiar el comando para que coincida con el nombre del directorio de tu sitio web.</p>
+<h3>Descargar la copia de tu sitio</h3>
+<p>Si los archivos .zip y .sql de la copia de seguridad tienen un tamaño inferior a 1 GB, puedes descargarlos mediante WebFTP. Revisa el artículo vinculado a continuación para obtener más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360003490852-Usar-el-administrador-de-archivos-del-sitio-web-WebFTP-#descargando" target="_self">Usar el administrador de archivos del sitio web en el panel</a></li>
+</ul>
+<p>De lo contrario, deberás descargar cualquier archivo de la copia de más de 1 GB mediante FTP. Revisa el artículo a continuación para obtener más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">Generalidades sobre FTP y sus credenciales </a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_self">Cómo iniciar sesión en tu sitio WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215768237-Respaldar-la-informaci%C3%B3n-de-un-sitio-web-manualmente" target="_self">Respaldar la información de un sitio web manualmente </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089918-Respaldar-una-cuenta-en-el-panel" target="_self">Respaldar una cuenta en el panel </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215768257--C%C3%B3mo-restauro-mi-sitio-web-" target="_self">¿Cómo restaurar mi sitio web?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217906467-Haz-una-copia-de-seguridad-o-restaura-los-archivos-de-tu-sitio-dedicado" target="_self">Hacer una copia de seguridad o restaurar los archivos de tu sitio en un Servidor Dedicado</a></li>
+</ul>
+</div>
