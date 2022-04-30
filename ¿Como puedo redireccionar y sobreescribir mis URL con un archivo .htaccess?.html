@@ -14,14 +14,14 @@
 <div class="solvvy-solution">
 <p>Los ejemplos a continuación pueden ser ingresados dentro de tu archivo de <span class="text-object">.htaccess</span> como se muestran. Solo asegurate de ajustar el camino al archivo para que el <span class="text-object">.htaccess</span> sepa donde está localizado. También, si ves el dominio <strong>example.com</strong> cambialo por tu nombre de dominio.</p>
 </div>
-<h2><span id="todas">Redireccionar todas las URL</span></h2>
+<h2><span id="Redireccionar_todas_las_URL_a_un_nuevo_sitio">Redireccionar todas las URL a un nuevo sitio</span></h2>
 <div class="solvvy-solution">
 <p>La siguiente línea redirecciona todas las URL en tu sitio a un nuevo sitio.</p>
 <div class="preboxcontainer">
 <pre class="prebox">Redirect 301 / https://example.com/</pre>
 </div>
 </div>
-<h2>Redireccionar una URL</h2>
+<h2><span id="Redireccionar_una_URL">Redireccionar una URL</span></h2>
 <div class="solvvy-solution">
 <p>Usando una redirección en un archivo <span class="text-object">.htaccess</span> puedes redireccionar a los usuarios de una vieja página a una nueva sin tener que mantener la vieja página. Por ejemplo, si usas <span class="text-object">index.html</span> como tu archivo index y luego renombras <span class="text-object">index.html</span> a <span class="text-object">home.html</span>, puedes hacer una redirección para enviar a los usuarios del <span class="text-object">index.html</span> a <span class="text-object">home.html</span>. Por ejemplo:</p>
 <p><strong>Redireccionar a un archivo del sitio local</strong></p>
@@ -78,8 +78,17 @@
 <div class="preboxcontainer">
 <pre class="prebox">RewriteRule ^blog/archives/(.*)$ /newarchives/$1 [R=301,NC,L]</pre>
 </div>
+<h3>Redireccionar un directorio antiguo al directorio de inicio</h3>
+<p>Esto redirige los archivos en un directorio antiguo (<span class="text-object">/blog/archives</span>) al directorio de inicio o home.</p>
+<ul>
+<li>Si agregas un archivo específico (<span class="text-object">example.com/blog/archives/test.html</span>) al final, este debe existir en el directorio de inicio para cargar.</li>
+<li>Si solo el subdirectorio esvisitado, el directorio de inicio carga. Si agregaste un archivo index (como <span class="text-object">index.html</span>), cargará.</li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox">RewriteRule ^blog/archives/(.*)$ /$1 [R=301,NC,L]</pre>
 </div>
-<h2>Redireccionar páginas no existentes a index.php</h2>
+</div>
+<h2><span id="Redireccionar_paginas_no_existentes_a_index.php">Redireccionar páginas no existentes a index.php</span></h2>
 <div class="solvvy-solution">
 <p>Si un visitante intenta acceder a un página que no existe, se les presentará un error 404. Tu puedes en vez de eso redirigir cualquier requerimiento a una página no existente a tu archivo <span class="text-object">index.php</span> (o cualquier archivo index) agregando el siguiente código a tu <span class="text-object">.htaccess</span>:</p>
 <div class="preboxcontainer">
@@ -92,7 +101,7 @@ RewriteRule . /index.php [L]
 </div>
 <p>Si tu página no es <span class="text-object">index.php</span>, solo cambia la última línea a tu archivo index. Luego el visitante será redirigido de vuelta a tu página principal.</p>
 </div>
-<h2>Cargar un subdirectorio automáticamente</h2>
+<h2><span id="Cargar_un_subdirectorio_automaticamente">Cargar un subdirectorio automáticamente</span></h2>
 <div class="solvvy-solution">
 <p>Este ejemplo redirige la URL del dominio ROOT a cualquier subdirectorio. En este ejemplo, éste automáticamente carga <span class="text-object">example.com/subdir1</span>:</p>
 <div class="preboxcontainer">
@@ -101,7 +110,7 @@ RewriteRule ^$ /subdir1/ [L]
 </pre>
 </div>
 </div>
-<h2><span id="forzar">Forzar www en una URL</span></h2>
+<h2><span id="Forzar_www_en_una_URL">Forzar www en una URL</span></h2>
 <div class="solvvy-solution">
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
@@ -118,7 +127,7 @@ RewriteCond&nbsp;%{HTTP_HOST} ^<span class="code-highlight">www.example.com</spa
 RewriteRule (.*) https://<span class="code-highlight">example.com</span>/$1 [R=301,L]</pre>
 </div>
 </div>
-<h2>Sobrescribir una URL</h2>
+<h2><span id="Sobreescribir_una_URL">Sobrescribir una URL</span></h2>
 <div class="solvvy-solution">
 <p>Este ejemplo sobrescribe una URL a otra URL. Este ejemplo de sobreescritura <strong>example.com/1.html</strong> a <strong>example.com/abc.php?id=1</strong>.</p>
 <div class="preboxcontainer">
@@ -147,7 +156,7 @@ RewriteRule ^<span class="code-highlight">([0-9]+).html /abc.php</span>?id=$1 [Q
 <li><a href="https://cheatography.com/davechild/cheat-sheets/mod-rewrite/" target="_self" rel="undefined">Archivo de trucos de mod-rewrite</a></li>
 </ul>
 </div>
-<h2>Sobrescribir enlaces no existentes a index.php</h2>
+<h2><span id="Sobrescribir_enlaces_no_existentes_a_index.php">Sobrescribir enlaces no existentes a index.php</span></h2>
 <div class="solvvy-solution">
 <p>Lo siguiente redirige todos los enlaces o carpetas que no existen a <span class="text-object">index.php</span>. Sin embargo, si el archivo o directorio existe, este carga normalmente:</p>
 <div class="preboxcontainer">
@@ -169,7 +178,7 @@ RewriteRule . /<span class="code-highlight">index.php</span> [L]
 <li><a href="https://help.dreamhost.com/hc/es/articles/215747758-Forzar-tu-sitio-a-cargar-de-forma-segura-con-un-archivo-htaccess" target="_self">Forzar tu sitio a cargar de forma segura con tu archivo .htaccess</a></li>
 </ul>
 </div>
-<h2>Ver también</h2>
+<h2><span id="Ver_tambien">Ver también</span></h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades de .htaccess</a></li>
