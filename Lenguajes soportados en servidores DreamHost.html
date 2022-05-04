@@ -1,0 +1,69 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Los servidores de DreamHost corren diferentes <a href="https://help.dreamhost.com/hc/es/articles/360059767631-Ver-las-versiones-del-software-de-tu-servidor" target="_self">sistemas operativos</a> que son todos basados en Linux. Los servidores Linux usan algo llamado <span class="code">locale</span> para especificar los lenguajes disponibles que es servidor es capaz de reconocer. Esto te permite usar los carácteres de lenguaje preferidos cuando estés creando archivos y directorios en el servidor.</p>
+<h2>Ver los lenguajes disponibles</h2>
+<p>Los lenguajes específicos están instalados en todos los servidores por defecto. Los siguientes pasos explican como ver los lenguajes disponibles.</p>
+<ol>
+<li>Inicia sesión en tu servidor DreamHost vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Corre el siguiente comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">locale -a</span></pre>
+</div>
+</li>
+</ol>
+<dl>
+<dd><em>Una lista de todos los lenguajes disponibles aparece.</em></dd>
+</dl>
+<h2>Ver los caracteres en un buscador</h2>
+<p>Los locales instalados en el servidor te permiten crear archivos y directorios usando tu lenguaje preferido, sin embargo, un buscador web puede no ser capaz de convertir los caracteres no latinos predeterminadamente. Para resolver esto, puedes especificar el código para que el buscador pueda leerlos. Puedes hacer esto de dos maneras:</p>
+<ul>
+<li>Agrega el código a los archivos individualmente</li>
+<li>Agrega el código a tu archivo <span class="text-object">.htaccess</span></li>
+</ul>
+<h3>Archivos individuales</h3>
+<p>Puedes agregar la siguiente línea a la sección <span class="code">&lt;head&gt;</span> de una página HTML para mostrar los caracteres en tu lenguaje preferido.</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+&lt;/head&gt;</pre>
+</div>
+<p>Este es el código predeterminado para HTML5. El siguiente enlace explica esto con mayor detalle:</p>
+<ul>
+<li><a href="https://www.w3schools.com/charsets/ref_html_utf8.asp" target="_blank" rel="noopener noreferrer">HTML Unicode (UTF-8) Reference</a></li>
+</ul>
+<h3>Agregar una línea a tu archivo .htaccess</h3>
+<p>También puedes <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">agregar una línea</a> al archivo <span class="text-object">.htaccess</span> de tu sitio web para configurar el código para todos los archivos. Por ejemplo, agrega la siguiente línea para que todos los archivos <span class="text-object">.html</span> puedan usar el código <span class="code">UTF-8</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">AddCharset UTF-8 .html</pre>
+</div>
+<p>El siguiente enlace explica esto con más detalle:</p>
+<ul>
+<li><a href="https://www.w3.org/International/questions/qa-htaccess-charset" target="_self" rel="undefined">Configurar la información charset en un .htaccess</a></li>
+</ul>
+<h2><span id="directorio-index">Mostrar caracteres no latinos en un directorio index</span></h2>
+<p>Si visitas un directorio sin un archivo index (como <span class="text-object">index.html</span>), una lista de todos los archivos y directorios dentro de ese directorio se mostrarán. Sin embargo, si estás usando caracteres no latinos, puede que no se muestren por defecto. Para corregir esto, <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self" rel="undefined">agrega la siguiente línea</a> al archivo <span class="text-object">.htaccess</span> de tu sitio web.</p>
+<div class="preboxcontainer">
+<pre class="prebox">IndexOptions Charset=UTF-8</pre>
+</div>
+<p>Recarga el directorio index y todos los archivos y directorios mostrarán los caracteres correctamente.</p>
+<h2>Agregar diferentes locales</h2>
+<p>Si deseas instalar un locale que no está ya configurado en tu servidor DreamHost, debes actualizar a un servidor Dedicado.</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-los-Servidores-Dedicados">Generalidades de los servidores Dedicados</a></li>
+</ul>
+<p>On a Dedicated server, you are able to create an <a href="https://help.dreamhost.com/hc/en-us/articles/215945467-Add-users-to-a-Dedicated-server" target="_self">admin user</a>. This admin user would then have root/sudo access to install additional locales. DreamHost support is unable to assist with such custom configurations, but the following link may be of help:</p>
+<ul>
+<li><a href="https://askubuntu.com/questions/76013/how-do-i-add-locale-to-ubuntu-server">https://askubuntu.com/questions/76013/how-do-i-add-locale-to-ubuntu-server</a></li>
+</ul>
+<p>DreamHost también ofrece servicios de desarrollo Profesional quienes pueden asistir más:</p>
+<ul>
+<li><a href="https://www.dreamhost.com/pro-services/development/">https://www.dreamhost.com/pro-services/development/</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://man7.org/linux/man-pages/man1/locale.1.html">https://man7.org/linux/man-pages/man1/locale.1.html</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Locale_(computer_software)">https://en.wikipedia.org/wiki/Locale_(computer_software)</a></li>
+</ul>
+</div>
