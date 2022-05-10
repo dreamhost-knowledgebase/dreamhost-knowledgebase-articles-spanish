@@ -1,0 +1,55 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>La <a href="https://www.php.net/manual/en/book.intl.php" target="_self">extensión intl</a> está habilitada de manera predeterminada en las versiones de PHP superiores a 7.2. Si observas algún error en tu sitio relacionado con esta extensión, <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">comunícate con Soporte</a> para obtener más ayuda.</p>
+<p>Si tu sitio aún ejecuta PHP 5.6, debes habilitar esta extensión manualmente haciendo una pequeña adición a tu archivo <span class="text-object">phprc</span>.</p>
+<div class="notebox-important">
+<p>No es posible habilitar esto si tu sitio está ejecutando PHP 7.0&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360022178852#version" target="_self">en un servidor que ejecuta Ubuntu Bionic</a>.&nbsp;Ten en cuenta que PHP 7.0 <a href="https://www.php.net/supported-versions.php" target="_self">ha sido puesto al final de su vida por php.net</a>, por lo tanto, es muy recomendable que utilices una versión más nueva, ya que pronto se eliminará de los servidores DreamHost.</p>
+</div>
+<h3>Error que puedes ver si esto no está instalado</h3>
+<p>Si falta esta extensión, tu sitio puede arrojar diferentes errores. Aquí hay un error que puede aparecer en WordPress.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Fatal error: Uncaught Error: Class 'NumberFormatter' not found</pre>
+</div>
+</div>
+<h2>El archivo phprc DreamHost</h2>
+<div class="solvvy-solution">
+<p>El término estándar para un archivo de configuración de PHP es&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">php.ini</a>.&nbsp;Sin embargo, DreamHost utiliza el término archivo <span class="text-object">phprc</span> en su lugar. Esto actúa de la misma manera: solo el nombre es diferente. En este artículo, solo se usa el término <span class="text-object">phprc</span>.</p>
+<p>Revisa los siguientes artículos para obtener instrucciones sobre cómo crear un archivo <span class="text-object">phprc</span>.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214894037-Crear-un-archivo-phprc-v%C3%ADa-FTP" target="_self">Crear un archivo phprc vía FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200668-Crear-un-archivo-phprc-v%C3%ADa-SSH" target="_self">Crear un archivo phprc vía SSH</a></li>
+</ul>
+<p>Si el archivo ya existe, consulta los siguientes artículos para obtener instrucciones sobre cómo actualizarlo (dependiendo de si estás usando un cliente FTP o SSH):</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar un archivo a través de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo a través de SSH</a></li>
+</ul>
+</div>
+<h2>Habilitar la extensión intl</h2>
+<div class="solvvy-solution">
+<p>Agrega la siguiente línea a tu archivo <span class="text-object">phprc</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">extension=intl.so</pre>
+</div>
+</div>
+<h2>Eliminar todos los procesos de php en ejecución</h2>
+<div class="solvvy-solution">
+<p>Asegúrate de <a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">eliminar todos los procesos de PHP en ejecución</a>&nbsp;para garantizar que tu nueva configuración surta efecto.</p>
+</div>
+<h2>Confirmar tus cambios</h2>
+<div class="solvvy-solution">
+<p>Después de editar el archivo y eliminar todos los procesos PHP, verifica para confirmar que la extensión ha sido habilitada. Puedes hacer esto creando un <a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">archivo phpinfo.php</a>.&nbsp;Deberías ver lo siguiente:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-05_php_extension_intl.png" alt="" /></dd>
+</dl>
+<p>Si no ves que tus cambios se han actualizado, intenta terminar tus procesos PHP nuevamente:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no está actualizándose</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214893957-Habilitar-las-extensiones-y-loaders-de-PHP" target="_self">Habilitar las extensiones y loaders de PHP</a></li>
+</ul>
+</div>

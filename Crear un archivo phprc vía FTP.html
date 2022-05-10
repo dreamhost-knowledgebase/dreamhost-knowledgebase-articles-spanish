@@ -1,0 +1,115 @@
+<div class="notebox-tip">
+<p>Si te encuentras en una situación que requiere cambios en tu sitio y tu desarrollador no está disponible para ayudarte, el equipo de soporte calificado de DreamHost puede ayudarte por una pequeña tarifa. Puedes encontrar más información sobre los servicios admitidos y los costos asociados en el artículo de <a href="https://help.dreamhost.com/hc/es/articles/360042256912-Generalidades-sobre-Servicios-Profesionales-">Servicios Profesionales de DreamHost</a>.</p>
+</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cada instalación de PHP viene con la configuración predeterminada que generalmente está bien para la mayoría de sitios web. En ocasiones, las necesidades de un sitio web hacen que sea necesario ajustar estas configuraciones de PHP. Crear un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">php.ini (phprc)</a>&nbsp;es la solución para ajustar la configuración de PHP para tu sitio web.</p>
+<div class="notebox-note">
+<p>El término estándar para un archivo de configuración de PHP es <span class="text-object">php.ini</span>. Sin embargo, DreamHost usa el término <span class="text-object">phprc</span> en lugar de ese. El archivo actúa de la misma manera, solo el nombre es diferente. En este artículo, solo se va a utilizar el término <span class="text-object">phprc</span>.</p>
+</div>
+<p>Puedes crear un archivo <span class="text-object">phprc</span> utilizando un cliente de FTP o iniciando sesión en el servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/214200668-Crear-un-archivo-phprc-v%C3%ADa-SSH" target="_self">SSH</a>, sin embargo, crear un archivo <span class="text-object">phprc</span> es más fácil utilizando un cliente de FTP. Este artículo va a utilizar Filezilla como el cliente de FTP.</p>
+<div class="notebox-important">
+<p>El directorio <span class="text-object">.php</span> que se discute en este artículo es creado automáticamente luego de que hayas <a href="https://help.dreamhost.com/hc/es/articles/215416227" target="_self">agregado un alojamiento a tu sitio web</a>, excepto en ciertos servidores Dedicados. Si estás tratando de crear un archivo <span class="text-object">phprc</span> en un servidor Dedicado, necesitas crear el directorio <span class="text-object">.php</span> con los subdirectorios anidados para cualquier versión de PHP que estés usando.</p>
+</div>
+</div>
+<h2>Agregar un archivo phprc a través de Filezilla</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu servidor web a través de FTP. Visita el siguiente artículo para obtener instrucciones más detalladas:<br />
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">Generalidades sobre FTP y credenciales</a></li>
+</ul>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-12_3rdparty_filezilla_phprc_01.png" /></dd>
+</dl>
+</li>
+<li>Asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio de tu usuario</a>.<br />
+<dl>
+<dd><em>Puedes ver esto en Filezilla en el campo 'Sitio remoto:'. Dirá <span class="text-object">/home/username</span>.</em></dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-12_3rdparty_filezilla_phprc_02.png" /></dd>
+</dl>
+</li>
+<li>En el directorio del usuario, haz clic en el directorio <span class="text-object">.php</span> que ya debería existir.
+<div class="notebox-important">
+<p>Asegúrate de que te has conectado usando el <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales#Usuario" target="_self">usuario FTP que aloja el sitio</a>. Si aún no ves este directorio en tu cliente, asegúrate de haber habilitado los archivos ocultos en tu cliente FTP:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215613037-Como-ver-archivos-ocultos-en-un-cliente-FTP" target="_self" rel="undefined">Como ver archivos ocultos en un cliente FTP</a></li>
+</ul>
+</div>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-12_3rdparty_filezilla_phprc_03.png" /></dd>
+</dl>
+</li>
+<li>En el directorio <span class="text-object">.php</span> verás varias carpetas para las diferentes versiones de PHP. Haz clic en la versión que tu sitio está ejecutando. Recuerda&nbsp;<a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self" rel="undefined">verificar primero qué versión de PHP</a> está usando tu sitio.</li>
+<li>En este directorio verás un archivo <span class="text-object">phprc</span>.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-12_3rdparty_filezilla_phprc_04.png" /></dd>
+</dl>
+</li>
+<li>Haz clic derecho en el archivo <span class="text-object">phprc</span>, y selecciona luego<strong> View/Edit</strong>.
+<div class="notebox-note">
+<p>Si es la primera vez que abres este archivo en un computador con Windows, es posible que veas la siguiente advertencia.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/filezilla-warning.png" /></dd>
+</dl>
+<p>Selecciona la casilla titulada <span class="text-object">Always use selection for all unassociated files</span> y da clic en <strong>OK</strong>.</p>
+</div>
+<dl>
+<dd>
+<p><em><em>Se abrirá un editor de texto predeterminado para que&nbsp;<a href="https://help.dreamhost.com/hc/es/sections/203272338-Configuraciones-personalizadas" target="_self">agregues tus modificaciones</a>.&nbsp;Notarás que ya hay una línea en tu archivo <span class="text-object">phprc</span> por defecto relacionada con opcache.</em></em></p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-12_3rdparty_filezilla_phprc_05.png" /></dd>
+</dl>
+</dd>
+</dl>
+<em><em>Se abre un editor de texto predeterminado para que puedas&nbsp;<a href="https://help.dreamhost.com/hc/es/sections/203272338-Configuraciones-personalizadas" target="_self">agregar tus personalizaciones</a>. </em></em>
+<div class="notebox-important">
+<p>Cuando abras este archivo originalmente, notarás las siguientes líneas de código agregadas por DreamHost.</p>
+<div class="preboxcontainer">
+<pre class="prebox">; {{{ The following lines were automatically added by DreamHost
+zend_extension=opcache.so
+; }}} That's all from DreamHost</pre>
+</div>
+<p>Tu código debe colocarse debajo del bloque de código DreamHost. No agregues ninguna línea dentro del punto y coma del principio o fin.</p>
+<p>Si colocas tu código dentro del punto y coma, el servidor lo sobrescribirá.</p>
+</div>
+</li>
+<li>Ingresa cualquiera de tus modificaciones debajo de esa línea.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-12_3rdparty_filezilla_phprc_06.png" /></dd>
+</dl>
+</li>
+<li>Cuando intentas guardar este archivo en Filezilla, se abre el siguiente cuadro emergente.</li>
+<li>Marca la casilla que dice <span class="text-object">Finalizar la edición y eliminar archivo local</span>, luego haz clic en el botón <strong>Yes</strong> para guardar.</li>
+</ol>
+</div>
+<h2>Terminar los procesos PHP en ejecución</h2>
+<div class="solvvy-solution">
+<p>Una vez que hayas guardado los cambios, debes acabar todos los procesos PHP en ejecución. Esto asegura que tu nueva configuración se actualice. Visita el siguiente artículo para obtener instrucciones sobre cómo hacerlo en el panel:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748#actualizando-el-archivo-phprc-en-el-panel" target="_self">Cómo actualizar tu archivo <span class="text-object">phprc</span> en el panel</a></li>
+</ul>
+</div>
+<h2>Confirmar tus cambios</h2>
+<div class="solvvy-solution">
+<p>Una vez que hayas editado el archivo y eliminado todos los procesos PHP, debes verificar para así confirmar que los valores se hayan actualizado. Puedes hacer esto creando un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versión-y-la-configuración-de-PHP-de-tu-sitio" target="_self">phpinfo.php</a>.</p>
+<p>Si no ves que tus cambios se han actualizado, intenta eliminar tus procesos PHP nuevamente:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no se está actualizando</a></li>
+</ul>
+</div>
+<h2>Resumen</h2>
+<div class="solvvy-solution">
+<p>El archivo <span class="text-object">phprc</span> que acabas de crear se usa para cualquier dominio con este nombre de usuario específico que también ejecuta la versión específica de PHP que elegiste en el paso #6 al crear el directorio.</p>
+<p>Por ejemplo, si el usuario tiene tres dominios donde dos ejecutan PHP 7.3 y el tercero ejecuta PHP 7.4, solo los dos primeros dominios que ejecutan 7.3 se verán afectados por el archivo <span class="text-object">phprc</span>. Necesitarás crear un archivo <span class="text-object">phprc</span> separado para el sitio PHP 7.4.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">Generalidades de php.ini</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200668-Crear-un-archivo-phprc-v%C3%ADa-SSH" target="_self">Crear un archivo phprc vía SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">Generalidades sobre FTP y credenciales</a></li>
+</ul>
+</div>

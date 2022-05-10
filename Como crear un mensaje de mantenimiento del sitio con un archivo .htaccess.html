@@ -1,0 +1,39 @@
+<h2>Crear un archivo .htaccess en tu servidor web DreamHost</h2>
+<div class="solvvy-solution">
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo crear un archivo <span class="text-object">.htaccess</span> en tu servidor web:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227#crear-un-archivo-htaccess" target="_self">Crear un archivo .htaccess en tu servidor web en DreamHost</a></li>
+</ul>
+<p>Si el archivo ya existe, revisa los siguientes artículos para obtener instrucciones sobre cómo actualizarlo (dependiendo de si estás usando un cliente FTP o SSH):</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar un archivo por medio de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo por medio de SSH</a></li>
+</ul>
+</div>
+<h2>Señalar tu sitio a la página de mantenimiento</h2>
+<div class="solvvy-solution">
+<p>Si tu sitio está en mantenimiento, puedes reenviar a los visitantes a un mensaje de mantenimiento automáticamente. Primero, debes crear un archivo llamado <span class="text-object">maintenance.html</span> en tu directorio web.</p>
+<p>Visita los siguientes artículos para obtener instrucciones sobre cómo crear un archivo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214894037-Crear-un-archivo-phprc-v%C3%ADa-FTP" target="_self">Crear un archivo phprc vía FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200668-Crear-un-archivo-phprc-v%C3%ADa-SSH" target="_self">Crear un archivo phprc vía SSH</a></li>
+</ul>
+<p>Luego, agrega lo siguiente a tu archivo <span class="text-object">.htaccess</span>. Solo necesitas cambiar la URL en negrita a la página que deseas mostrar:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Options +FollowSymlinks
+RewriteEngine On
+RewriteBase /
+RewriteCond&nbsp;%{REQUEST_URI}&nbsp;!/<span class="code-highlight">maintenance.html</span>$
+RewriteRule .* /<span class="code-highlight">maintenance.html</span> [L]
+</pre>
+</div>
+<p>Si ahora visitas el sitio, carga automáticamente el contenido del archivo <span class="text-object">maintenance.html</span>, pero la URL no cambia.</p>
+<p>Puedes reemplazar [L] con [R = 307, L] si prefieres que el usuario vea el cambio de URL a <strong>example.com/maintenance.html</strong>. Sin embargo, esto generalmente no es lo que quisieras.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades sobre .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-" target="_self">¿Qué puedo hacer con un archivo .htaccess?</a></li>
+</ul>
+</div>

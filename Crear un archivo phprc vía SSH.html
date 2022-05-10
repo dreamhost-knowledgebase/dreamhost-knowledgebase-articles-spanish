@@ -1,0 +1,108 @@
+<div class="notebox-tip">
+<p>Si te encuentras en una situación que requiere cambios en tu sitio y tu desarrollador no está disponible para ayudarte, el equipo de soporte calificado de DreamHost puede ayudarte por una pequeña tarifa. Puedes encontrar más información sobre los servicios admitidos y los costos asociados en el artículo de <a href="https://help.dreamhost.com/hc/es/articles/360042256912-Generalidades-sobre-Servicios-Profesionales-">Servicios Profesionales de DreamHost.</a></p>
+</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cada instalación de PHP viene con configuraciones predeterminadas que generalmente están bien para la mayoría de los sitios web. Ocasionalmente, las necesidades de un sitio web hacen que sea necesario ajustar esta configuración de PHP. Crear un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">php.ini (phprc)</a>&nbsp;es la solución para ajustar la configuración de PHP para tu sitio web.</p>
+<div class="notebox-note">
+<p>El término estándar para un archivo de configuración de PHP es php.ini. Sin embargo, DreamHost utiliza el término archivo <span class="text-object">phprc</span> en su lugar. Esto actúa de la misma manera: solo el nombre es diferente. En este artículo, solo se usa el término <span class="text-object">phprc</span>.</p>
+</div>
+<p>Puedes crear un archivo <a href="https://help.dreamhost.com/hc/es/articles/214894037-Crear-un-archivo-phprc-v%C3%ADa-FTP" target="_self">phprc usado un cliente FTP</a>,&nbsp;o iniciando sesión en el servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>,&nbsp;sin embargo, crear un archivo <span class="text-object">phprc</span> es más fácil con un cliente FTP. Este artículo es para usuarios más avanzados y explica cómo crear este archivo <span class="text-object">phprc</span> a través de SSH.</p>
+<div class="notebox-important">
+<p>El directorio <span class="text-object">.php</span> que se discute en este artículo es creado automáticamente luego de que hayas <a href="https://help.dreamhost.com/hc/es/articles/215416227" target="_self">agregado un alojamiento a tu sitio web</a>, excepto en ciertos servidores Dedicados. Si estás tratando de crear un archivo <span class="text-object">phprc</span> en un servidor Dedicado, necesitas crear el directorio <span class="text-object">.php</span> con los subdirectorios anidados para cualquier versión de PHP que estés usando.</p>
+</div>
+</div>
+<h2>Agregar un archivo phprc usando SSH</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu servidor a través de SSH. Visita el siguiente artículo para obtener instrucciones sobre cómo hacerlo según el sistema operativo que estés usando:<br />
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+</ul>
+</li>
+<li>Asegúrate de estar en tu <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio de usuario</a> escribiendo <span class="code">pwd</span> para confirmar:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">pwd</span> <br /><span class="cmdoutput">/home/username</span></pre>
+</div>
+<div class="notebox-note">
+<p>Recuerda primero <a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">verificar qué versión de PHP está usando tu sitio</a>. En el siguiente ejemplo, asumiremos que el sitio está usando PHP 7.4. En este directorio, puedes correr un solo comando para crear la carpeta <span class="text-object">/.php</span>, así como la carpeta <span class="text-object">/7.4</span>&nbsp;que se encuentra dentro de ella. Si tu sitio ejecuta PHP 7.3, el directorio se llamaría 7.3 en su lugar.</p>
+</div>
+</li>
+<li>Corre el siguiente comando para cambiar al directorio <span class="text-object">.phprc</span>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/.php</span></pre>
+</div>
+</li>
+<li>Cambia al directorio de la versión PHP de tu sitio web usando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd 7.4</span></pre>
+</div>
+<ul>
+<li><em>Cuando ejecutas <span class="code">pwd</span>, ahora ves la ruta de archivo completa que acaba de crear:</em></li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">pwd</span>
+<span class="cmdoutput">/home/username/.php/7.4</span></pre>
+</div>
+</li>
+<li>En esta carpeta, crea el archivo <span class="text-object">phprc</span> sin una extensión.<br />
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="notebox-note">
+<p>Hay algunos programas que puedes ejecutar para crear este archivo. Este ejemplo usa un programa llamado&nbsp;<a href="https://en.wikipedia.org/wiki/GNU_nano">nano</a>. Visita el artículo '<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Creando y editando archivos por medio de SSH</a>'&nbsp;para más detalles.</p>
+</div>
+</li>
+<li>Corre lo siguiente para crear el archivo <span class="text-object">phprc</span>.<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nano phprc</span></pre>
+</div>
+<ul>
+<li><em>Aparece un editor de texto.</em></li>
+</ul>
+</li>
+<li>Edita el archivo con todas tus&nbsp;<a href="https://help.dreamhost.com/hc/es/sections/203272338-Configuraciones-personalizadas" target="_self">personalizaciones PHP</a>.
+<div class="notebox-important">
+<p>Cuando abras este archivo originalmente, notarás las siguientes líneas de código agregadas por DreamHost.</p>
+<div class="preboxcontainer">
+<pre class="prebox">; {{{ The following lines were automatically added by DreamHost
+zend_extension=opcache.so
+; }}} That's all from DreamHost</pre>
+</div>
+<p>Tu código debe colocarse debajo del bloque de código DreamHost. No agregues ninguna línea dentro del punto y coma del principio o fin.</p>
+<p>Si colocas tu código dentro del punto y coma, el servidor lo sobrescribirá.</p>
+</div>
+</li>
+<li>Cierra el archivo y regresa a tu shell.</li>
+</ol>
+</div>
+<h2>Eliminar los procesos PHP en ejecución</h2>
+<div class="solvvy-solution">
+<p>Una vez que hayas guardado los cambios, debes eliminar todos los procesos PHP en ejecución. Esto garantiza que se actualicen tus nuevas configuraciones. Consulta el siguiente artículo para obtener instrucciones sobre cómo eliminar todos los procesos PHP en ejecución:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Eliminar procesos PHP</a></li>
+</ul>
+</div>
+<h2>Confirmar tus cambios</h2>
+<div class="solvvy-solution">
+<p>Después de editar el archivo y eliminar todos los procesos PHP, debes verificar para confirmar que los valores se hayan actualizado. Puedes hacer esto creando un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">phpinfo.php</a>.</p>
+<p>Si no ves que tus cambios se han actualizado, intenta eliminar tus procesos PHP nuevamente:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no está actualizando</a></li>
+</ul>
+</div>
+<h2>Resumen</h2>
+<div class="solvvy-solution">
+<p>El archivo <span class="text-object">phprc</span> que acabas de crear se usa para cualquier dominio con este nombre de usuario específico que también ejecuta la versión específica de PHP que elegiste en el paso 3 al crear el directorio.</p>
+<p>Por ejemplo, si el usuario tiene tres dominios donde dos ejecutan PHP 7.4 y el tercero ejecuta PHP 7.3, solo los dos primeros dominios que ejecutan 7.4 se verían afectados por el archivo <span class="text-object">phprc</span>. Deberías crear un archivo <span class="text-object">phprc</span> separado para el sitio PHP 7.3.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">Generalidades de php.ini</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo por medio de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214894037-Crear-un-archivo-phprc-v%C3%ADa-FTP" target="_self">Crear un archivo phprc vía FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+</ul>
+</div>

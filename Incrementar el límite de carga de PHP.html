@@ -1,0 +1,55 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cada instalación de PHP viene por defecto con una configuración que usualmente funciona bien para la mayoría de los sitios. Ocasionalmente, las necesidades de un sitio pueden hacer que sea necesario ajustar dicha configuración de PHP. Por ejemplo, tu sitio puede necesitar la subida de archivos que son más pesados de lo que los límites actuales permiten. En ese caso, deberás crear un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">php.ini (phprc)</a>&nbsp;-o acceder al archivo ya creado- para actualizar dicho valor.</p>
+</div>
+<h2>El archivo phprc de DreamHost</h2>
+<div class="solvvy-solution">
+<p>El término estándar para un archivo de configuración PHP es&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">php.ini</a>.&nbsp;Sin embargo, DreamHost usa el término <span class="text-object">phprc</span> para dicho archivo. Esto actúa de la misma manera, solo el nombre es diferente. En este artículo solo se usará el término <span class="text-object">phprc</span>.</p>
+<div class="notebox-note">
+<p>Algunas variables (en particular: <span class="code">memory_limit</span>, <span class="code">post_max_size</span> y <span class="code">upload_max_filesize</span>) están sujetas a limitaciones internas; aumentarlas significativamente por encima de los valores establecidos por defecto puede causar que no funcionen correctamente y provocar errores en tu sitio.</p>
+</div>
+</div>
+<h2>Aumentar el límite del tamaño de archivo</h2>
+<div class="solvvy-solution">
+<p>El límite de tamaño predeterminado para subir archivos es 64MB, el cual puede ser muy bajo para tus necesidades. Si necesitas incrementar este límite, debes crear un archivo <span class="text-object">phprc</span>. Revisa los siguientes artículos para obtener instrucciones sobre cómo crear el archivo <span class="text-object">phprc</span>:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214894037-Crear-un-archivo-phprc-v%C3%ADa-FTP" target="_self">Crear un archivo phprc vía FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200668-Crear-un-archivo-phprc-v%C3%ADa-SSH" target="_self">Crear un archivo phprc vía SSH</a></li>
+</ul>
+<p>Si el archivo ya existe, revisa los siguientes artículos sobre cómo actualizarlo (dependiendo si estás usando FTP o SSH para acceder):</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar un archivo vía FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo vía SSH</a></li>
+</ul>
+<p>Para incrementar dicho límite a 512MB, usa los siguientes parámetros:</p>
+<div class="preboxcontainer">
+<pre class="prebox">upload_max_filesize = 600M
+post_max_size = 650M
+max_execution_time = 500
+max_input_time = 500</pre>
+</div>
+<div class="notebox-note">
+<p>Para subir archivos más pesados, el parámetro <span class="code">post_max_size</span> debe ser más alto que el parámetro <span class="code">upload_max_filesize</span>.</p>
+</div>
+</div>
+<h2>Eliminar todos los procesos de PHP en ejecución</h2>
+<div class="solvvy-solution">
+<p>Asegúrate de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">eliminar los procesos de php en ejecución</a>&nbsp;para que la nueva configuración sea aplicada correctamente y surta efecto.</p>
+</div>
+<h2>Confirma tus cambios</h2>
+<div class="solvvy-solution">
+<p>Cuando hayas editado el archivo y eliminado todos los procesos PHP, puedes revisar que los valores se hayan actualizado adecuadamente. Esto lo puedes hacer creando un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">phpinfo.php</a>.</p>
+<p>Si ves que tus cambios no se han aplicado, intenta nuevamente eliminar los procesos en ejecución de PHP:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no se está actualizando</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">Generalidades de php.ini</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/sections/203272338-Configuraciones-personalizadas" target="_self">Configuraciones personalizadas de PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/sections/203275788-Soluci%C3%B3n-del-problemas" target="_self">Solución de problemas de PHP</a></li>
+</ul>
+</div>
