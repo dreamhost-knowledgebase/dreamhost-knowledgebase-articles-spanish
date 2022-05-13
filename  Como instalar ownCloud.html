@@ -1,0 +1,110 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="notebox-note">
+<p>Mira la documentación de ownCloud para confirmar la versión que planeas descargar funcionará con la versión PHP de tu sitio.</p>
+<ul>
+<li><a href="https://doc.owncloud.com/server/10.8/admin_manual/installation/system_requirements.html" target="_self">Requerimientos de software de ownCloud</a></li>
+</ul>
+<p>Puedes usar entonces los siguientes artículos para ajustar la versión PHP de tu sitio si es necesario:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214895317--C%C3%B3mo-cambio-la-versi%C3%B3n-PHP-de-mi-sitio-">¿Cómo cambiar la versión de PHP de mi sitio?</a></li>
+</ul>
+</div>
+<p>Este artículo te guía a través de la instalación de ownCloud usando SSH. Revisa los siguientes artículos antes de comenzar, ya que necesitarás acceso a una terminal y conocimientos básicos de cómo correr comandos de Shell:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Crear un usuario con acceso Shell (SSH)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+</ul>
+<div class="notebox-important">
+<p>Por favor ten en cuenta lo siguiente:</p>
+<ul>
+<li>Al usar este software, puedes estar violando las políticas de DreamHost – asegúrate de revisar la <a href="https://www.dreamhost.com/es/legal/politica-de-uso-aceptable/" target="_self" rel="undefined">Política General de Uso Aceptable (copias de seguridad personales)</a> de DreamHost. Para evitar violar la Política General de Uso Aceptable, deberás <a href="https://help.dreamhost.com/hc/es/articles/215987867--Conectar-ownCloud-a-DreamObjects" target="_self">conectar ownCloud a DreamObjects</a> en vez de almacenar la información en tu servidor.</li>
+<li>También asegúrate de cumplir con la <a href="https://www.dreamhost.com/es/legal/politica-ilimitada/">Política Ilimitada</a> cuando uses ownCloud.</li>
+</ul>
+</div>
+</div>
+<h2><span id="Instalarlo_manualmente">Instalarlo manualmente</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Visita la <a href="https://owncloud.com/download-server/#instructions-server">página de descarga de ownCloud</a>.</li>
+<li>Busca la sección para descargar un archivo <span class="text-object">.Tar</span> o <span class="text-object">.Zip</span>.
+<div class="notebox-note">
+<p>Este ejemplo usa el archivo <span class="text-object">.Tar</span>.</p>
+</div>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_owncloud_installing_01.png" alt="" /></dd>
+</dl>
+</li>
+<li>La siguiente página detalla todos los pasos para instalar. Haz clic derecho en el botón <strong>Download Tar</strong> y elige <span class="text-object">Copy link Address</span>.</li>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH.</a></li>
+<li>Navega hasta el directorio en el que deseas instalar ownCloud</li>
+<li>Corre un comando <span class="code">wget</span> para descargar el archivo <span class="text-object">.tar.bz2</span>. Escribe <span class="code">wget</span>, seguido por el enlace que copiaste anteriormente.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://download.owncloud.org/community/owncloud-10.0.8.tar.bz2</span></pre>
+</div>
+</li>
+<li>Bajo el botón <strong>Download Tar</strong>, haz clic derecho en 'sha256' y elige <span class="text-object">Copy link Address</span>. Luego corre <span class="code">wget</span> para descargar este archivo.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://download.owncloud.org/community/owncloud-10.0.8.tar.bz2.sha256</span></pre>
+</div>
+</li>
+<li>Luego, verifica la firma sha256 con el archivo <span class="text-object">.tar.bz2</span> para asegurarte de que coincida.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">sha256sum -c owncloud-10.0.8.tar.bz2.sha256 &lt; owncloud-10.0.8.tar.bz2</span>
+owncloud-10.0.8.tar.bz2: OK</pre>
+</div>
+</li>
+<li>Si dice 'OK', <a href="https://help.dreamhost.com/hc/es/articles/115002768331#tarbz2">descomprime el archivo</a>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">tar xvjf owncloud-10.0.8.tar.bz2</span></pre>
+</div>
+<em>Esto crea un nuevo subdirectorio llamado <span class="text-object">/owncloud</span> en el mismo directorio en el que corriste el comando.<br /></em></li>
+<li>En tu navegador, navega hasta la carpeta /owncloud. Lo más probable es que la URL sea algo como <strong>example.com/owncloud</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_owncloud_installing_02.png" alt="owncloud installing.png" /></dd>
+</dl>
+</li>
+<li>Ingresa un nombre de usuario y contraseña, y luego haz clic en el botón <strong>Finish setup</strong>.</li>
+</ol>
+</div>
+<h2>Instalar un cliente de escritorio</h2>
+<div class="solvvy-solution">
+<p>También puedes instalar un cliente de escritorio para Windows, Mac y Linux. Estos te permiten interactuar con ownCloud desde tu computador local. Visita el siguiente enlace para obtener más detalles:</p>
+<ul>
+<li><a href="https://owncloud.com/download-server/#install-clients">Clientes de escritorio</a></li>
+</ul>
+</div>
+<h2>Conectarse con DreamObjects</h2>
+<div class="solvvy-solution">
+<p>Ahora que has instalado ownCloud, puedes comenzar a usarlo para administrar tus datos. Si ya estás utilizando una cuenta de DreamObjects para almacenar tus datos, puedes vincularla a tu instalación de ownCloud. Ve el siguiente artículo para obtener instrucciones:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215987867--Conectar-ownCloud-a-DreamObjects">Usar ownCloud con DreamObjects</a></li>
+</ul>
+</div>
+<h2>Eliminar ownCoud</h2>
+<div class="solvvy-solution">
+<p>Para eliminar la instalación de ownCloud de tu sitio web, simplemente elimina el directorio de archivos de <span class="text-object">ownCloud</span>.</p>
+<p>Para los clientes de escritorio, desinstala el programa como cualquier otro programa en tu sistema operativo.</p>
+</div>
+<h2>Solución de problemas</h2>
+<div class="solvvy-solution">
+<p>Después de la instalación, es posible que veas la siguiente advertencia en la página Configuración &gt; General:</p>
+<p><strong>Transactional file locking should be configured to use memory-based locking, not the default slow database-based locking</strong></p>
+<p>Esta es solo una recomendación para mejorar el rendimiento al instalar Redis y usar Memcache como se indica aquí:</p>
+<ul>
+<li><a href="https://doc.owncloud.com/server/10.7/admin_manual/configuration/server/caching_configuration.html#redis-configuration">https://doc.owncloud.com/server/10.7/admin_manual/configuration/server/caching_configuration.html#redis-configuration</a></li>
+</ul>
+<p>Dado que esta instalación requiere acceso a sudo, solo es posible en un Servidor Dedicado o DreamCompute, ya que estos planes permiten el acceso root sudo al servidor:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self" rel="undefined">Generalidades de los Servidores Dedicados</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214840947--Qu%C3%A9-es-DreamCompute-" target="_self" rel="undefined">¿Qué es DreamCompute?</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216472457-Generalidades-ownCloud">Generalidades ownCloud</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216820817--Errores-ownCloud-debido-a-OPcache">Errores ownCloud debido a OPcache</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades SSH</a></li>
+</ul>
+</div>

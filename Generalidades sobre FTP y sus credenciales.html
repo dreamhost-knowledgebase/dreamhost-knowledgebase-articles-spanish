@@ -1,35 +1,17 @@
-<div class="document">
-<div class="documentwrapper">
-<div class="body">
-<div id="FTP overview and credentials" class="solvvy-hidden">
-<div class="table-of-content container">
-<div class="altTitle">Credenciales de FTP</div>
-<ul class="simple">
-<li><a class="reference internal" href="#Sitios_DreamPress">Sitios DreamPress</a></li>
-<li><a class="reference internal" href="#Ubicar_tus_credenciales_de_inicio_de_sesion_de_FTP">Ubicar tus credenciales</a></li>
-<li><a class="reference internal subtoc" href="#Ubicar_el_hostname">Servidor/Hostname</a></li>
-<li><a class="reference internal subtoc" href="#Usuario">Usuario</a></li>
-<li><a class="reference internal subtoc" href="#Contrasena">Contraseña</a></li>
-<li><a class="reference internal subtoc" href="#Puerto">Puerto</a></li>
-<li><a class="reference internal" href="#Seguridad_FTP">Seguridad FTP</a></li>
-<li><a class="reference internal" href="#Donde_poner_tus_archivos">Donde poner tus archivos</a></li>
-<li><a class="reference internal" href="#host_key_is_unknown">Advertencia: The server's host key is unknown</a></li>
-<li><a class="reference internal" href="#Bloqueos_temporales">Bloqueos temporales</a></li>
-</ul>
-</div>
-</div>
+<div class="auto-toc">&nbsp;</div>
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>File Transfer Protocol (<span class="text-object">FTP</span>) es un protocolo de red que se usa para cargar datos de sitios web desde tu computador local a tu servidor web para que aparezcan en línea.</p>
 <p>Este artículo explica cómo ubicar tus credenciales e iniciar sesión en tu servidor usando un cliente SFTP.</p>
 <div class="notebox-tip">
-<p><strong><span id="Sitios_DreamPress">Sitios DreamPress</span></strong></p>
+<p><strong> <span id="Sitios_DreamPress">Sitios DreamPress</span> </strong></p>
 <p>En su lugar, mira el siguiente artículo si necesitas iniciar sesión en tu sitio DreamPress.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360020552911-Iniciar-sesi%C3%B3n-en-tu-sitio-DreamPress-a-trav%C3%A9s-de-FTP">Iniciar sesión en tu sitio DreamPress vía FTP</a></li>
 </ul>
 </div>
-<h2><span id="Diferencias_entre_FTP_y_SFTP">Diferencias entre FTP y SFTP</span></h2>
+<div id="Diferencias_entre_FTP_y_SFTP" class="section-link">&nbsp;</div>
+<h2>Diferencias entre FTP y SFTP</h2>
 <p><span class="text-object">FTP</span> es un protocolo antiguo que <span class="wysiwyg-color-red">NO ES SEGURO</span>. Usa el puerto #21.</p>
 <p><span class="text-object">SFTP</span> es un protocolo nuevo que <strong>SEGURO</strong>. Usa el puerto #22.</p>
 <h3>El término FTP</h3>
@@ -37,7 +19,6 @@
 <p>Los nuevos usuarios creados en DreamHost se crean automáticamente como usuarios de SFTP, por lo que no es necesario ajustar nada. <strong>Deberías entender que cuando ves el término FTP, generalmente hace referencia a SFTP (que es la opción segura).</strong></p>
 <div class="notebox-important">
 <p>Usa solo el puerto 22 cuando te conectes. Esto asegura que estás usando una conexión SFTP segura.</p>
-</div>
 </div>
 <h2>Prerrequisitos</h2>
 <h3>Agregar alojamiento</h3>
@@ -52,25 +33,27 @@
 </ul>
 </div>
 </div>
-<h2><span id="Ubicar_tus_credenciales_de_inicio_de_sesion_de_FTP">Ubicar tus credenciales de inicio de sesión de FTP</span></h2>
+<h2>Ubicar tus credenciales de inicio de sesión de FTP</h2>
 <div class="solvvy-solution">
 <p>Necesitarás la siguiente información para iniciar sesión en tu servidor web:</p>
 <ul>
-<li><a href="#Ubicar_el_hostname_FTP_de_tu_servidor" target="_self" rel="undefined">Servidor/Hostname</a></li>
+<li><a href="#Ubicar_el_hostname" target="_self" rel="undefined">Servidor/Hostname</a></li>
 <li><a href="#Usuario" target="_self" rel="undefined">Usuario</a></li>
 <li><a href="#Contrasena" target="_self" rel="undefined">Contraseña</a></li>
 <li><a href="#Puerto" target="_self" rel="undefined">Puerto</a></li>
 </ul>
 </div>
 <p>Las siguientes secciones explican cómo obtener cada uno.</p>
-<h2><span id="Ubicar_el_hostname">Ubicar el hostname</span></h2>
+<div id="Ubicar_el_hostname" class="section-link">&nbsp;</div>
+<h2>Ubicar el hostname</h2>
 <div class="solvvy-solution">
 <p>Hay dos nombres de host que puede usar para iniciar sesión en su servidor DreamHost.</p>
 <ul>
-<li><strong><a href="#El_nombre_del_sitio">El nombre del sitio</a></strong> — Puedes usar el nombre de tu sitio para iniciar sesión en tu servidor, pero solo si el <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio-">DNS ya está apuntando a DreamHost</a></li>
-<li><strong><a href="#El_nombre_del_servidor">El nombre del servidor</a></strong> — Siempre puedes usar el nombre del servidor para iniciar sesión en tu servidor, incluso si el DNS aún no apunta a DreamHost.</li>
+<li><strong> <a href="#El_nombre_del_sitio">El nombre del sitio</a> </strong> — Puedes usar el nombre de tu sitio para iniciar sesión en tu servidor, pero solo si el <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio-">DNS ya está apuntando a DreamHost</a></li>
+<li><strong> <a href="#Usar_el_nombre_del_servidor">El nombre del servidor</a> </strong> — Siempre puedes usar el nombre del servidor para iniciar sesión en tu servidor, incluso si el DNS aún no apunta a DreamHost.</li>
 </ul>
-<h3>Opción 1 — <span id="Usa_el_nombre_de_tu_sitio_web">Usa el nombre de tu sitio web</span></h3>
+<div id="El_nombre_del_sitio" class="section-link">&nbsp;</div>
+<h3>Opción 1 — Usa el nombre de tu sitio web</h3>
 <p>Si has <a href="https://help.dreamhost.com/hc/es/articles/215416227--C%C3%B3mo-agregar-un-dominio-">agregado un alojamiento</a> a tu dominio y el <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio-">DNS</a> de tu dominio está configurado para apuntar a tu hosting en DreamHost, puedes usar el nombre de tu dominio como el hostname SFTP. Por ejemplo, si tu sitio web se llama <strong>https://www.example.com</strong> solo usa <strong>example.com</strong>.</p>
 <div class="notebox-note">
 <p>No agregues <span class="text-object">https://www</span> en frente del dominio pues puede causar que no conecte.</p>
@@ -79,7 +62,8 @@
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-filezilla-credentials-01.png" alt="Filezilla hostname" width="698" height="75" /></dd>
 </dl>
-<h3><span id="Usar_el_nombre_del_servidor"> Opción 2 — Usar el nombre del servidor</span></h3>
+<div id="Usar_el_nombre_del_servidor" class="section-link">&nbsp;</div>
+<h3>Opción 2 — Usar el nombre del servidor</h3>
 <p>Si tienes <a href="https://help.dreamhost.com/hc/es/articles/215416227--C%C3%B3mo-agregar-un-dominio--">agregado alojamiento</a> a tu sitio, pero aún no has apuntado tu DNS a DreamHost, aún puedes conectarte al servidor usando el hostname del servidor.</p>
 <p>La URL del servidor es el nombre de tu servidor seguido de <strong>.dreamhost.com</strong>.</p>
 <ol>
@@ -103,7 +87,7 @@
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-filezilla-credentials-02.png" alt="Filezilla hostname" width="698" /></dd>
 </dl>
 <div class="notebox-note">
-<p><strong><span id="Hostnames_de_VPS.2C_Dedicados.2C_y_DreamPress">Hostnames de VPS, Dedicados, y DreamPress hostnames</span></strong></p>
+<p><strong> <span id="Hostnames_de_VPS.2C_Dedicados.2C_y_DreamPress">Hostnames de VPS, Dedicados, y DreamPress hostnames</span> </strong></p>
 <p>Si estás alojando tu sitio en un servidor <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-un-Servidor-Virtual-Privado-VPS-">VPS</a>, <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicados</a>, o <a href="https://help.dreamhost.com/hc/es/articles/214581158-Generalidades-sobre-DreamPress">DreamPress</a>, el hostname aparece diferente en la columna <span class="text-object">Tipo de Alojamiento</span>. Esto cambiaría el texto que agregas después del nombre del servidor. Por ejemplo:</p>
 <table>
 <tbody>
@@ -131,7 +115,8 @@
 </table>
 </div>
 </div>
-<h2><span id="Usuario">Ubicar tu usuario</span></h2>
+<div id="Usuario" class="section-link">&nbsp;</div>
+<h2>Ubicar tu usuario</h2>
 <div class="solvvy-solution">
 <ol>
 <li>Navega a la página <a class="panel-link" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
@@ -150,7 +135,8 @@
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-filezilla-credentials-03.png" alt="Filezilla username" width="698" /></dd>
 </dl>
-<h2><span id="Contrasena">Ubicar la contraseña del usuario</span></h2>
+<div id="Contrasena" class="section-link">&nbsp;</div>
+<h2>Ubicar la contraseña del usuario</h2>
 <p>La contraseña se creó originalmente cuando se creó el nombre de usuario. Si no recuerdas esta contraseña, puedes restablecerla.</p>
 <p>Para cambiar la contraseña del usuario en el panel:</p>
 <ol>
@@ -211,7 +197,8 @@
 </li>
 </ol>
 </div>
-<h2><span id="Puerto">Escoger el número de puerto</span></h2>
+<div id="Puerto" class="section-link">&nbsp;</div>
+<h2>Escoger el número de puerto</h2>
 <div class="solvvy-solution">
 <p>Como se <a href="#Diferencias_entre_FTP_y_SFTP" target="_self" rel="undefined">explica arriba</a>, el puerto #22 es el único número de puerto que debes usar para conectarte pues usa SFTP.</p>
 <div class="alert-warning">
@@ -223,14 +210,15 @@
 </dl>
 <p>Finalmente, da clic en <strong>Quickconnect</strong> para iniciar sesión en tu servidor:</p>
 </div>
-<h2><span id="Seguridad_FTP">Seguridad FTP</span></h2>
+<div id="seguridad" class="section-link">&nbsp;</div>
+<h2>Seguridad FTP</h2>
 <div class="solvvy-solution">
 <p>Mira el siguiente artículo para más detalles sobre la diferencia entre FTP y SFTP y cómo proteger tu usuario.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115001051531-Seguridad-FTP" target="_self">Seguridad FTP</a></li>
 </ul>
 </div>
-<h2><span id="Donde_poner_tus_archivos">¿Dónde debo poner mis archivos?</span></h2>
+<h2>¿Dónde debo poner mis archivos?</h2>
 <div class="solvvy-solution">
 <p>Una vez que hayas iniciado sesión, verás varios archivos y carpetas. Mira el siguiente artículo para obtener instrucciones sobre dónde cargar los archivos de tu sitio:</p>
 <ul>
@@ -256,11 +244,11 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/360004634231-Alerta-The-server-s-host-key-is-unknown-La-llave-host-del-servidor-es-desconocida-" target="_self" rel="undefined">Alerta The server's host key is unknown (La llave host del servidor es desconocida)</a></li>
 </ul>
 </div>
-<h2><span id="Bloqueos_temporales">Bloqueos temporales</span></h2>
+<h2>Bloqueos temporales</h2>
 <div class="solvvy-solution">
 <p>Múltiples intentos fallidos de conexión FTP o SSH pueden resultar en que el servidor bloquee temporalmente tu IP. Este bloqueo eventualmente se levantará automáticamente, pero si lo necesitas antes, por favor <a href="https://panel.dreamhost.com/index.cgi?tree=support.msg" target="_blank" rel="noopener noreferrer">contacta a soporte</a>.</p>
 </div>
-<h2><span id="Ver_también">Ver también</span></h2>
+<h2>Ver también</h2>
 <div class="solvvy-hidden">
 <h3>Enlaces internos</h3>
 <ul>
@@ -277,5 +265,3 @@
 </ul>
 </div>
 <div class="clearer">&nbsp;</div>
-</div>
-</div>
