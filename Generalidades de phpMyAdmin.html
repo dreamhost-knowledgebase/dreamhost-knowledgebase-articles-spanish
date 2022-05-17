@@ -4,7 +4,7 @@
 <p>Las operaciones de uso frecuente (gestión de bases de datos, tablas, columnas, relaciones, índices, usuarios, permisos, etc.) se pueden realizar a través de la interfaz de usuario además de tener la capacidad de ejecutar directamente cualquier instrucción SQL.</p>
 <p>DreamHost proporciona phpMyAdmin para clientes en opciones de alojamiento de Servidor compartido, VPS, DreamPress y Dedicado. Este artículo te ayuda a acceder a tus bases de datos usando el software phpMyAdmin administrado por DreamHost.</p>
 <div class="notebox-note">
-<p>phpmyadmin.dreamhost.com ya no funciona para abrir phpMyAdmin. De ahora en adelante, debes usar el nombre de host correcto para tu base de datos que&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221610868-Finding-your-database-login-credentials" target="_self">se muestra en el panel</a>, o usar el nombre de host phpMyAdmin oficial de tu centro de datos. Primero revisa la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.dc&amp;" target="_blank" rel="noopener">Centro de Datos</a>. Desplázate hacia abajo para ubicar el centro de datos en el que se encuentran tus servicios MySQL. Las opciones serán Costa Oeste o Costa Este. A continuación, puedes usar los siguientes nombres de host para conectarte según la ubicación de tu servidor MySQL.</p>
+<p>phpmyadmin.dreamhost.com ya no funciona para abrir phpMyAdmin. De ahora en adelante, debes usar el nombre de host correcto para tu base de datos que&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221610868-Finding-your-database-login-credentials" target="_self">se muestra en el panel</a>, o usar el nombre de host phpMyAdmin oficial de tu centro de datos. Primero revisa la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.dc&amp;" target="_blank" rel="noopener noreferrer">Centro de Datos</a>. Desplázate hacia abajo para ubicar el centro de datos en el que se encuentran tus servicios MySQL. Las opciones serán Costa Oeste o Costa Este. A continuación, puedes usar los siguientes nombres de host para conectarte según la ubicación de tu servidor MySQL.</p>
 <br /><strong>Costa Oeste:&nbsp;</strong> <a href="https://west1-phpmyadmin.dreamhost.com">https://west1-phpmyadmin.dreamhost.com</a><br /><strong>Costa Este:&nbsp;</strong> <a href="https://east1-phpmyadmin.dreamhost.com">https://east1-phpmyadmin.dreamhost.com</a></div>
 </div>
 <h2>Prerrequisitos</h2>
@@ -12,9 +12,9 @@
 <div class="prereqs">
 <p>Antes de usar phpMyAdmin en DreamHost, debes completar los siguientes pasos:</p>
 <ol>
-<li>Configura un dominio en alojamiento completo o reflejado en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener">Administrar Dominios</a>.&nbsp;Las opciones de redireccionamiento y estacionamiento (dominio parqueado) pueden no funcionar correctamente.</li>
+<li>Configura un dominio en alojamiento completo o reflejado en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener noreferrer">Administrar Dominios</a>.&nbsp;Las opciones de redireccionamiento y estacionamiento (dominio parqueado) pueden no funcionar correctamente.</li>
 <li>No habilites&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215769578-Generalidades-sobre-Passenger">Passenger</a>&nbsp;n un dominio alojado, al que vas a querer acceder por phpMyAdmin, ya que intercepta las solicitudes HTTP y mostrará un error.</li>
-<li>Agrega un nombre de host MySQL en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">Bases de Datos MySQL</a>.</li>
+<li>Agrega un nombre de host MySQL en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener noreferrer">Bases de Datos MySQL</a>.</li>
 <li>Dale suficiente tiempo para que los registros DNS&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">progaguen</a>&nbsp;después de agregar el nombre de host y el activar el alojamiento completo.</li>
 </ol>
 <p>Una vez que completes estos pasos, phpMyAdmin estará disponible en tu dominio.</p>
@@ -29,14 +29,14 @@
 </div>
 <h2>Si deseas borrar/eliminar una base de datos</h2>
 <div class="solvvy-solution">
-<p>No puedes borrar una base de datos en DreamHost usando phpMyAdmin; solo puedes eliminar una base de datos en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">Bases de Datos MySQL</a>.</p>
+<p>No puedes borrar una base de datos en DreamHost usando phpMyAdmin; solo puedes eliminar una base de datos en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener noreferrer">Bases de Datos MySQL</a>.</p>
 </div>
 <h2><span id="Diferencias_en_el_tamaño_de_las_bases_de_datos_reportada">Diferencias en el tamaño de las bases de datos reportada</span></h2>
 <div class="solvvy-solution">
 <p>Con el tiempo, el tamaño de la base de datos reportado por phpMyAdmin comenzará a diferir del tamaño real de la base de datos en el disco de tu servidor MySQL. Esto ocurre porque phpMyAdmin muestra el tamaño de la base de datos usando los índices de la base de datos, que pueden ser más pequeños que el uso real del disco después de muchos ciclos de lectura y escritura.</p>
 <p>Una forma posible de resolver este problema es optimizar tu base de datos, aunque esto no está garantizado. Hay dos métodos relativamente simples que puedes usar para optimizarla:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215036388--C%C3%B3mo-optimizar-mi-base-de-datos-#Optimizar_tu_base_de_datos" target="_self">Usando phpMyAdmin</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215036388-Optimizar-una-base-de-datos#Optimizar_tu_base_de_datos" target="_self">Usando phpMyAdmin</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/4404267062164-Optimizar-las-bases-de-datos-de-WordPress" target="_self">Usando wp-cli de Wordpress</a></li>
 </ul>
 </div>

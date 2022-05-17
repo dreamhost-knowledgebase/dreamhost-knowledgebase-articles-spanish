@@ -1,0 +1,62 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Puedes acceder a tu base de datos mientras el DNS de tu sitio principal no está dirigido a DreamHost. Esto requiere tres pasos:</p>
+<ol>
+<li>Crear un nuevo subdominio <a href="https://help.dreamhost.com/hc/es/articles/360002284771-Usar-un-subdominio-dreamhosters-com" target="_self">dreamhosters.com</a> (por ejemplo: example.dreamhosters.com).</li>
+<li>Usando ese subdominio, crea un hostname MySQL.</li>
+<li>Usar este hostname MySQL para acceder a tu base de datos a través de <a href="/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin" target="_self">phpMyAdmin</a>.</li>
+</ol>
+</div>
+<h2>Paso 1 — Agregar un subdominio dreamhosters.com</h2>
+<div class="solvvy-solution">
+<p>Agrega un subdominio&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360002284771-Usar-un-subdominio-dreamhosters-com" target="_self">dreamhosters.com</a> (por ejemplo: example.dreamhosters.com) que refleja tu dominio principal en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener noreferrer">Administrar Dominios</a>.</p>
+<p>Para obtener instrucciones más detalladas sobre este proceso, consulta el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214695758-Vista-previa-de-tu-sitio-con-un-dominio-temporal" target="_self">Ver tu sitio utilizando un subdominio dreamhosters.com antes de cambiar los DNS</a></li>
+</ul>
+</div>
+<h2>Paso 2 — Agregar un hostname MySQL</h2>
+<div class="solvvy-solution">
+<p>Para agregar un hostname para tu nuevo subdominio:</p>
+<ol>
+<li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener noreferrer">Bases de Datos MySQL</a>.
+<dl>
+<dd><em>Se abre la página <span class="panel-page">Bases de Datos MySQL</span>:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-add-mysql-hostname-01.png" alt="es-panel-add-mysql-hostname-01.png" width="469" height="102" /></dd>
+</dl>
+</li>
+<li>Da click en el botón&nbsp;<strong>Agregar nuevo nombre de host</strong><span style="font-weight: 400;">.</span>
+<dl>
+<dd><em>Se abre la página "Agregar un nombre de host MySQL":</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-add-mysql-hostname-02.png" alt="es-panel-add-mysql-hostname-02.png" /></dd>
+</dl>
+<div class="notebox-note">
+<p>En el ejemplo anterior:</p>
+<ul>
+<li>El dominio primario es "example.dreamhosters.com".</li>
+<li>El hostname de MySQL es "mysql.example.dreamhosters.com".</li>
+</ul>
+</div>
+</li>
+</ol>
+<ul>
+<li>Ingresa el prefijo de hostname de tu elección (comúnmente "mysql"), y luego selecciona el nuevo subdominio usando el menú desplegable.</li>
+<li>Da click en el botón <strong>¡Crear este nombre de host MySQL ahora!</strong> para terminar.</li>
+</ul>
+</div>
+<h2>Paso 3 — Acceder a tu base de datos con phpMyAdmin</h2>
+<div class="solvvy-solution">
+<p>Una vez que los cambios de DNS se propagan (lo que puede demorar entre 4 y 24 horas), puedes acceder a la utilidad de administración MySQL phpMyAdmin usando el hostname mysql que acaba de crear. En el ejemplo anterior, sería mysql.example.dreamhosters.com.</p>
+<p>Si intentas acceder a phpMyAdmin antes de que se actualicen los registros DNS del hostname MySQL, la interfaz phpMyAdmin de DreamHost no podrá reconocer tu información de inicio de sesión.</p>
+<p>Para obtener más información sobre phpMyAdmin y cómo iniciar sesión, consulta el siguiente artículo:</p>
+<ul>
+<li><a href="/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin" target="_self">Generalidades sobre phpMyAdmin</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215730267-Acceder-a-una-base-de-datos-antes-de-apuntar-el-DNS-a-DreamHost" target="_self">Acceder a una base de datos antes de apuntar el DNS a DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360002284771-Usar-un-subdominio-dreamhosters-com" target="_self">Usar un subdominio dreamhosters.com</a></li>
+</ul>
+</div>

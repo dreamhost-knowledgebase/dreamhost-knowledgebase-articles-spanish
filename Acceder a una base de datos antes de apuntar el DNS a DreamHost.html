@@ -1,0 +1,29 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Para acceder a tu base de datos MySQL, necesitas un nombre de host único (nombre de dominio) o una dirección IP para tu servidor MySQL. Este nombre de host puede ser cualquier nombre que desees, siempre que lo haya registrado, pero comúnmente es un subdominio de tu dominio principal y se llama "mysql.example.TLD".</p>
+<p>Por ejemplo, supongamos que tu dominio es <strong>example.com</strong>: puede crear el subdominio <strong>mysql</strong>.example.com, que se utilizas para conectarte a tu servidor de base de datos.</p>
+<p>Este arreglo es conveniente para usar con las instalaciones MySQL de DreamHost, ya que puedes crear y administrar todas tus bases de datos desde la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener noreferrer">Bases de Datos MySQL</a>.</p>
+</div>
+<h2>¿Qué nombre de host se debe usar si DNS aún no apunta a DreamHost?</h2>
+<div class="solvvy-solution">
+<p>Durante una migración de servidor o servidor web, el <a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">DNS</a> para <strong>example.tld</strong>&nbsp;puede no apuntar a los <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers">nameservers</a> de DreamHost, por lo que no podrás usar <strong>mysql</strong>.example.tld para el nombre de host de MySQL.</p>
+<p>Si tienes otros dominios alojados en DreamHost, puedes usar tu nombre de host en tu lugar. Esto se debe a que tu servidor MySQL (que aloja todas tus bases de datos) es accesible desde <em><strong>cualquier</strong></em> subdominio que le asignes dentro de tu cuenta DreamHost.</p>
+<p>Por ejemplo, si tienes otro dominio como <strong>dreamhostexample.com</strong> y tus nameservers apuntan a DreamHost, puedes crear un nombre de host mysql titulado <strong>mysql</strong>.dreamhostexample.com. Luego puedes usar este nombre de host para conectarte a CUALQUIER base de datos en tu cuenta DreamHost.</p>
+</div>
+<h2>¿Qué sucede si no tengo dominios apuntados a DreamHost?</h2>
+<div class="solvvy-solution">
+<p>Si no tienes ningún dominio alojado en DreamHost, aún puedes conectarte a tu base de datos. Para hacer esto, debe agregar un <a href="https://help.dreamhost.com/hc/es/articles/360002284771-Usar-un-subdominio-dreamhosters-com">subdominio dreamhosters.com</a> gratis. Aparecería como '<strong>example.dreamhosters.com</strong>'. Luego puedes crear un nombre de host mysql como '<strong>mysql</strong>.example.dreamhosters.com'. Consulta el siguiente artículo para obtener instrucciones sobre cómo crear este subdominio.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215036088-Conectase-a-una-base-de-datos-con-un-hostname-de-MySQL-temporal">Conectase a una base de datos con un hostname de MySQL temporal</a></li>
+</ul>
+<p>También puedes usar el nombre de host oficial phpMyAdmin de tu centro de datos. Primero revisa la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.dc&amp;" target="_blank" rel="noopener noreferrer">Data Center</a>. Desplázate hacia abajo para ubicar el centro de datos en el que se encuentran tus servicios MySQL. Es la costa oeste o la costa este. Luego puedes usar los siguientes nombres de host para conectarse según la ubicación de su servidor MySQL.</p>
+<p><strong>Costa Oeste:</strong><br /><a href="https://west1-phpmyadmin.dreamhost.com">https://west1-phpmyadmin.dreamhost.com </a><br /><br /><strong>Costa Este:</strong><br /><a href="https://east1-phpmyadmin.dreamhost.com">https://east1-phpmyadmin.dreamhost.com</a></p>
+</div>
+<h2>Encontrar la dirección IP de tu nombre de host mysql</h2>
+<div class="solvvy-solution">
+<p>También puedes conectarte usando la dirección IP de tu nombre de host. Consulta el siguiente artículo para obtener instrucciones sobre cómo ver los registros DNS de tu sitio:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">Generalidades de DNS</a></li>
+</ul>
+<p>Habrá un registro en esa lista llamado 'mysql'. Puedes usar la IP a la derecha para conectarte.</p>
+</div>

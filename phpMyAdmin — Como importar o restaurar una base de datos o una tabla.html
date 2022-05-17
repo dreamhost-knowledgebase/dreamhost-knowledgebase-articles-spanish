@@ -1,0 +1,74 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica como importar lo siguiente:</p>
+<ul>
+<li>Una sola tabla (que no existe) en una base de datos (que ya existe en el panel)</li>
+<li>Todo el contenido de la base de datos en una base de datos vacía (que ya existe en el panel)</li>
+</ul>
+<div class="alert-warning">
+<p>Primero debe screar la base de datos en tu panel DreamHost antes de importar contenido.</p>
+<p>No es posible crear una base de datos a través de SSH.</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/es/articles/221691727-Crear-una-base-de-datos-MySQL">Crear una base de datos MySQL </a>&nbsp;</li>
+</ul>
+</div>
+<h3>Importar una tabla</h3>
+<p>Solo puedes importar una tabla si no existe en la base de datos actual.</p>
+<p>Si la tabla existe, se produce un error y la importación no se completará.</p>
+<h3>Importar una base de datos</h3>
+<p>Solo puedes importar el contenido de la base de datos a una base de datos que ya se ha creado en el panel y que actualmente está vacía.</p>
+</div>
+<h2>Ubicar las credenciales de tu base de datos</h2>
+<div class="solvvy-solution">
+<p>Visita el siguiente artículo para obtener detalles sobre cómo encontrar tus credenciales de inicio de sesión e inicia sesión en phpMyAdmin:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encontrar tus credenciales de inicio de sesión de phpMyAdmin</a></li>
+</ul>
+<div class="notebox-note">
+<p>Este artículo asume que la base de datos ya existe en tu panel de DreamHost.</p>
+</div>
+</div>
+<h2>Importar o restaurar una base de datos o tabla</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos">phpMyAdmin</a>.
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/2018-05_mysql_exporting_database_01.png" alt="" /></dd>
+</dl>
+</li>
+<li>Selecciona la base de datos de destino en el panel izquierdo.<br />
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/2018-05_mysql_importing_database_01.png" alt="" /></dd>
+</dl>
+</li>
+<li>Haz clic en la pestaña <span class="text-object">Import</span>&nbsp;en el panel central superior.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/phpMyAdmin_Import.png" alt="phpMyAdmin_import" /></dd>
+</dl>
+</li>
+<li>En la sección <span class="text-section">File to import</span>, haz clic en <strong>Choose File</strong> y localiza el archivo con la extensión <span class="text-object">.sql</span> que deseas importar.</li>
+<li>Selecciona o deselecciona las casillas de 'Importación parcial' y 'Otras opciones'.</li>
+<li>En el menú desplegable <span class="text-object">Format</span>, selecciona 'SQL'.</li>
+<li>Haz clic en el botón <strong>Go&nbsp;</strong>en la parte inferior para importar la base de datos.</li>
+</ol>
+<p>Si importaste una base de datos, todas las tablas se mostrarán al seleccionar la base de datos en el panel izquierdo de phpMyAdmin.</p>
+<p>Si importaste una tabla, la tabla recién importada aparecerá en la lista de tablas.</p>
+</div>
+<h2>¿Qué pasa si el archivo es demasiado grande para importar a través de phpMyAdmin?</h2>
+<div class="solvvy-solution">
+<p>Si el archivo <span class="text-object">.sql</span> que intentas importar es más grande de lo que permite phpMyAdmin, la única otra opción es importar a través de SSH. Visita el siguiente artículo para obtener instrucciones de cómo realizar esto:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221614988-SSH-Importar-una-base-de-datos" target="_self">SSH — Importar una base de datos</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin" target="_self">Generalidades de phpMyAdmin</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encontrar tus credenciales de inicio de sesión de base de datos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215100557-Restaurar-una-base-de-datos-en-el-panel" target="_self">Restaurar una base de datos en el panel</a></li>
+<li><a href="/hc/es/articles/215039758-Generalidades-sobre-copias-de-seguridad-de-bases-de-datos" target="_self">Generalidades sobre copias de seguridad de bases de datos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214882998-Conectarse-a-una-base-de-datos-v%C3%ADa-SSH" target="_self">Conectarse a una base de datos vía SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221614988-SSH-Importar-una-base-de-datos" target="_self">SSH — Importar una base de datos</a></li>
+</ul>
+</div>

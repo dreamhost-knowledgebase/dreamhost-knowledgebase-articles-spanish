@@ -8,14 +8,14 @@
 <p>Este artículo te explicará las causas probables de que estés viendo este error, y como resolverlo.</p>
 </div>
 <h2>La causa del error 'Site Not Found'</h2>
-<div id="La_causa_del_error_site_not_found" class="solvvy-solution">
+<div class="solvvy-solution">
 <p>El error de 'Site Not Found' significa que la dirección IP que tu dominio está usando no está orientada <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-apunto-mi-sitio-" target="_self">hacia la IP correcta</a>.</p>
 <p>De manera más técnica, el error "Site Not Found" significa que los registros de DNS para tu dominio se están resolviendo hacia la dirección IP de un servidor web Apache que no está configurado para tu dominio.</p>
 <p>Cuando esto ocurre, el servidor web Apache está diseñado para simplemente mostrar el primer dominio listado en tu archivo de configuración. Para garantizar que nunca ocurra que la página web de alguien muestre accidentalmente otra página cualquiera que esté alojada en el mismo servicio Apache, DreamHost deliberadamente hace que el primer dominio en todos sus archivos de configuración muestre la misma página de error personalizada.</p>
 <p>Existen algunas razones, que se explican a continuación, por las cuales tu IP pudiera no estar dirigida correctamente hacia la IP de tu servidor web.</p>
 </div>
 <h2>Ver la dirección IP de la página en tu navegador</h2>
-<div id="Ver_la_direccion_IP_de_la_pagina_en_tu_navegador" class="solvvy-solution">
+<div class="solvvy-solution">
 <p>Debido a la forma en la que DreamHost configura Apache, a menos que tu hayas comprado una dirección IP única para tu dominio, el intentar ver tu página web introduciendo la dirección IP en tu navegador arrojará automáticamente el error de Site Not Found. Esto se debe a que tu estarías viendo la IP compartida de tu servidor web, en vez de la IP de tu página.</p>
 <p>Si necesariamente debes ver tu página a través de una dirección IP, deberás adquirir una IP única. Puedes leer más acerca de las IP únicas aquí:</p>
 <ul>
@@ -23,7 +23,7 @@
 </ul>
 </div>
 <h2>Cambios en el DNS</h2>
-<div id="Cambios_en_el_DNS" class="solvvy-solution">
+<div class="solvvy-solution">
 <div class="notebox-note">
 <p>Si el mensaje de error 'Site Not Found' aparece poco después de hacer un cambio de configuración para el dominio en el panel de control, la dirección IP puede cambiar para ese dominio. Si ese es el caso, este error debe irse dentro de 4 horas—una vez los cambios de DNS propaguen a través de Internet, pues esto es normal. Si no se va en 6 horas, entonces trata las técnicas de solución de problemas.</p>
 </div>
@@ -48,7 +48,7 @@
 <p>Cuando das clic en el botón <strong>Actualizar DNS</strong> en la parte superior, se fuerza una actualización de DNS en el sistema de DreamHost. Para repetir, la propagación de DNS en línea aún puede tardar varias horas.</p>
 </div>
 <h2>Como consultar tus registros de DNS actuales</h2>
-<div id="Como_consultar_tus_registros_de_DNS_actuales" class="solvvy-solution">
+<div class="solvvy-solution">
 <p>Para consultar el estado de tu actualización de DNS, puedes usar el <a href="https://help.dreamhost.com/hc/es/articles/360055964552-Ver-tus-registros-DNS-de-DreamHost">Verificador de Propagación de DNS</a> de DreamHost para ver hacia cuál dirección IP se resuelve tu dominio actualmente.</p>
 <h3><span id="Si_usas_Linux_o_Apple_Mac">Si usas Linux o Apple Mac</span></h3>
 <p>Si usas un computador Linux o Mac, también puedes ejecutar algunos comandos en tu terminal para consultar la IP actual de tu página. Visita el artículo de SSH acerca de cómo iniciar sesión en tu terminal:</p>
@@ -96,7 +96,7 @@ Dirección: 64.90.47.165</span>
 </ul>
 </div>
 <h2>HTTPS</h2>
-<div id="HTTPS" class="solvvy-solution">
+<div class="solvvy-solution">
 <p>El error 'Sitio Web no encontrado' también puede aparecer al intentar acceder a un sitio a través de una conexión segura (HTTPS) al dominio sin tener un certificado SSL activo. Esto ocurre cuando el servicio HTTP Apache del dominio carece de un servicio HTTPS Apache coincidente para manejar la solicitud segura. Para resolver esto, agrega <a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL">un certificado SSL</a> al dominio.</p>
 <h2>Si no estás usando el DNS de DreamHost</h2>
 <p>Si tu no está usando DreamHost para administrar el DNS de tu dominio, lo más probable es que la dirección IP de su proveedor de DNS que apunta hacia DreamHost sea incorrecta.</p>
@@ -116,7 +116,7 @@ Dirección: 64.90.47.165</span>
 </ol>
 <p>Una vez que la DNS se haya propagado, no debería seguir apareciendo el robot durmiendo de DreamHost.</p>
 <h2>Usar Passenger WSGI habilitado</h2>
-<div id="Usar_Passenger_WSGI_habilitado" class="solvvy-solution">
+<div class="solvvy-solution">
 <p>Este problema, o uno similar, se puede manifestar ocasionalmente en dominios que usan <a href="https://help.dreamhost.com/hc/es/articles/215769548-Passenger-y-Python-WSGI">Passenger WSGI</a>. En este caso, el error aparece de manera diferente, pues la página de error en el servidor no se muestra.</p>
 <p>Los síntomas pueden incluir:</p>
 <ul>
@@ -127,7 +127,7 @@ Dirección: 64.90.47.165</span>
 <p>En esta instancia, la solución es la misma – editar el dominio y hacer clic en <strong>Cambiar ajustes</strong>. Y después esperar que se propague. También puedes probar a desactivar y reactivar el Passenger en la misma página de editar dominios.</p>
 <p>Esto cambiará las configuraciones del dominio sin alterar los registros de DNS de este.</p>
 <h2>Usar una cuenta suspendida</h2>
-<div id="Usar_una_cuenta_suspendida" class="solvvy-solution">
+<div class="solvvy-solution">
 <p>Para cuentas que se hayan suspendido por falta de pago, DreamHost dejará de servir el DNS para la cuenta. Tus páginas mostrarán el mensaje de "Site Not Found " hasta que se haya ejecutado el pago, y la cuenta se haya reactivado. Inicia sesión en tu panel de control o consulta tus correos de DreamHost para ver si este es el caso.</p>
 <h2>Contactar a soporte</h2>
 <div id="Contactar_a_soporte" class="solvvy-solution">
