@@ -5,10 +5,10 @@
 <p>Solo los certificados de Sectigo se pueden utilizar en otro servidor. Los certificados Let's Encrypt solo funcionan en el servidor al que se emitieron.</p>
 </div>
 </div>
-<h2>Exportar</h2>
+<h2>Exportar los archivos de tu certificado</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Navega hasta la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.secure&amp;" target="_blank" rel="noopener">Certificados Seguros</a>&nbsp;en tu panel.
+<li>Navega hasta la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.secure&amp;" target="_blank" rel="noopener noreferrer">Certificados Seguros</a>&nbsp;en tu panel.
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel_ssl_settings_button.png" /></dd>
 </dl>
@@ -20,5 +20,35 @@
 </dl>
 </li>
 <li>Haz clic en el botón <strong>Copiar al Portapapeles</strong>&nbsp;al lado de cada uno, luego copia a un archivo local en tu computador personal.</li>
+</ol>
+</div>
+<h2>Crear un archivo .pem</h2>
+<div class="solvvy-solution">
+<p>Los archivos de Correo con Privacidad Mejorada (PEM) contienen un certificado, una llave privada RSA, y certificados intermediarios dentro de un solo archivo. Algunos proveedores de alojamiento prefieren usar archivos .pem para importar certificados de SSL de terceros.<span style="font-weight: 400;">&nbsp;Lo siguiente describe como </span>puedes crear un archivo .pem para tu certificado de DreamHost exportado corriendo unos comandos simples en tu servidor.</p>
+<div class="notebox-important">
+<p>Asegúrate de cargar tus archivos .crt y .key a tu usuario antes de comenzar. Cambia los nombres de los archivos en los comandos de abajo para coincidir tus archivos subidos.</p>
+</div>
+<ol>
+<li>Conéctate a tu dominio vía SSH. Visita el <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">artículo de SSH</a> para ver instrucciones.</li>
+<li>Una vez iniciado sesión en tu servidor vía SSH, asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-servidor" target="_self">directorio home del usuario</a>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
+</div>
+</li>
+<li>Corre el siguiente comando para agregar tu llave privada a un nuevo archivo .pem:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat <span class="code-highlight">private.key</span> &gt; <span class="code-highlight">example.pem</span></span></pre>
+</div>
+</li>
+<li>Corre el siguiente comando para agregar tu certificado al archivo .pem:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat <span class="code-highlight">certificate.crt</span> &gt;&gt; <span class="code-highlight">example.pem</span></span></pre>
+</div>
+</li>
+<li>Corre el siguiente comando para agregar tu certificado intermediario al archivo .pem:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat <span class="code-highlight">intermediate.crt</span> &gt;&gt; <span class="code-highlight">example.pem</span></span></pre>
+</div>
+</li>
 </ol>
 </div>
