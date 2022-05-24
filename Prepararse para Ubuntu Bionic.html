@@ -1,34 +1,13 @@
-<div class="document">
-<div class="documentwrapper">
-<div class="body">
-<div id="ubuntu_bionic" class="solvvy-hidden">
-<div class="altTitle">Ubuntu Bionic</div>
-<div class="table-of-content container">
-<ul class="simple">
-<li><a class="reference internal" href="#que-esperar">¿Qué esperar?</a></li>
-<li><a class="reference internal" href="#version">Verificar la versión de Ubuntu</a></li>
-<li><a class="reference internal" href="#mysql">MySQL</a></li>
-</ul>
-<span class="toc-sublink"> <a href="#servidor">Cambios de servidor</a> </span> <span class="toc-sublink"> <a href="#reservadas">Palabras reservadas</a> </span>
-<ul class="simple">
-<li><a class="reference internal" href="#servidor-web">Servidor web</a></li>
-</ul>
-<span class="toc-sublink"><a href="#apache">Versión de Apache</a></span> <span class="toc-sublink"><a href="#boto_s3cmd">Boto-rsync y S3cmd</a></span> <span class="toc-sublink"> <a href="#curl">curl</a> </span> <span class="toc-sublink"> <a href="#ffmpeg_libav">FFmpeg y Libav</a></span> <span class="toc-sublink"> <a href="#filterprovider">FilterProvider</a></span> <span class="toc-sublink"> <a href="#gcc">Versión de GCC</a></span> <span class="toc-sublink"> <a href="#java" target="_self">Versión Java</a></span> <span class="toc-sublink"> <a href="#node">Node / NVM</a></span> <span class="toc-sublink"> <a href="#openssl">OpenSSL</a></span> <span class="toc-sublink"> <a href="#passenger">Passenger</a></span> <span class="toc-sublink"> <a href="#perl">Versión Perl</a> </span> <span class="toc-sublink"> <a href="#php-errores" target="_self">Registro PHP</a> </span> <span class="toc-sublink"> <a href="#python">Versión de Python</a> </span> <span class="toc-sublink"> <a href="#django" target="_self">Errores de Django</a></span> <span class="toc-sublink"> <a href="#virtualenv">Entorno virtual de Python</a></span> <span class="toc-sublink"> <a href="#ruby">Versión Ruby</a> </span> <span class="toc-sublink"> <a href="#ssh">Versión SSH</a> </span> <span class="toc-sublink"> <a href="#telnet">Telnet</a></span>
-<ul class="simple">
-<li><a class="reference internal" href="#apoyo">¿Cómo puedo encontrar apoyo?</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
+<div class="auto-toc">&nbsp;</div>
 <p>A continuación te proporcionamos información para ayudarte a preparar tu sitio para la actualización de Ubuntu de Trusty Tahr a la versión 18.04.1 LTS (también conocida como Bionic).</p>
-<h2><span id="que-esperar">¿Qué esperar?</span></h2>
+<h2>¿Qué esperar?</h2>
 <div class="solvvy-solution">
 <p>DreamHost se comunicará contigo por correo antes de la actualización.</p>
 <p>El período de tiempo de una actualización puede variar de un servidor a otro, sin embargo, este tiempo garantiza que haya varios ingenieros altamente capacitados disponibles en caso de que surjan problemas importantes. La actualización en sí no debería tardar más de una hora en completarse.</p>
 <p>No se podrá acceder a ningún servicio que dependa de la disponibilidad de tu servidor MySQL (WordPress o cualquier otro sitio web basado en bases de datos, aplicaciones, etc.) hasta que se complete la actualización. Esto NO afectará a la nube o servicios de correo electrónico.</p>
 </div>
-<h2><span id="version">Comprobar la versión de Ubuntu</span></h2>
+<div id="version" class="section-link">&nbsp;</div>
+<h2>Comprobar la versión de Ubuntu</h2>
 <div class="solvvy-solution">
 <p>Como se mencionó anteriormente, recibirás un correo informándote de la actualización de tu servidor. Sin embargo, esto puedes verificar manualmente a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</p>
 <p>El siguiente comando confirma que el servidor todavía está ejecutando Ubuntu 14.</p>
@@ -42,20 +21,20 @@ Ubuntu 14.04.5 LTS \n \l</pre>
 Ubuntu 18.04.1 LTS \n \l</pre>
 </div>
 </div>
-<h2><span id="mysql">MySQL</span></h2>
+<h2>MySQL</h2>
 <div class="solvvy-solution">
-<h3><span id="servidor">Cambios de servidor</span></h3>
+<h2>Cambios de servidor</h2>
 <p>Los servidores DreamHost MySQL se actualizarán a la versión MySQL 5.7 como parte de la actualización de Ubuntu.</p>
-<h3><span id="reservadas">Palabras reservadas</span></h3>
+<h2>Palabras reservadas</h2>
 <p>MySQL 5.7 incluye una lista de "palabras reservadas" (como 'SELECT', 'DELETE', 'BIGINT', y 'VIRTUAL') que no pueden usarse como nombre de base de datos. Estas palabras pueden usarse como un nombre de tabla de base de datos, pero deben escaparse en las consultas de la base de datos. Las palabras reservadas en MySQL 5.7 requieren un tratamiento especial para su uso como identificadores, como nombres de tabla y columna.</p>
 <p>Consulta el siguiente artículo para obtener más información sobre cómo usar palabras reservadas en MySQL 5.7:</p>
 <ul>
 <li><a href="https://dev.mysql.com/doc/refman/5.7/en/keywords.html">Palabras clave de MySQL y palabras reservadas</a></li>
 </ul>
 </div>
-<h2><span id="servidor-web">Cambios en el servidor web</span></h2>
+<h2>Cambios en el servidor web</h2>
 <div class="solvvy-solution">
-<h3><span id="apache">Cambio de versión de Apache (de 2.2 a 2.4))</span></h3>
+<h2>Apache</h2>
 <p>Apache está actualizando a la versión 2.4 (desde 2.2). Aunque esto no debería causar problemas importantes a tu entorno de alojamiento, puedes ver una lista de cambios en el siguiente artículo:</p>
 <ul>
 <li><a href="https://httpd.apache.org/docs/2.4/upgrading.html" target="_self">Actualización a 2.4 desde 2.2</a></li>
@@ -82,19 +61,19 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 <div class="preboxcontainer">
 <pre class="prebox">DirectoryIndex disabled</pre>
 </div>
-<h3><span id="boto_s3cmd">Boto-rsync</span></h3>
+<h2>Boto-rsync</h2>
 <p>Debido a que boto-rsync es un software desactualizado y ya no se está en desarrollo, también se elimina de la última versión de Ubuntu Bionic. DreamHost te recomienda usar&nbsp;<a href="https://s3tools.org/s3cmd">S3cmd</a>&nbsp;en su lugar. Puedes encontrar más información sobre cómo usar S3cmd (o AWS CLI) en DreamHost en los siguientes artículos:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/sections/360003569291-S3cmd" target="_self" rel="undefined">S3cmd</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/sections/360003559251-AWS-CLI" target="_self" rel="undefined">Interfaz de línea de comandos de AWS</a></li>
 </ul>
-<h3><span id="curl">Cambiar la versión curl a 7.58.0</span></h3>
+<h2>curl</h2>
 <p>La versión de curl cambió de 7.35.0 a 7.58.0.</p>
 </div>
-<h3><span id="ffmpeg_libav">FFmpeg y Libav</span></h3>
+<h2>FFmpeg y Libav</h2>
 <p>Ambas bibliotecas están cambiando en la actualización Bionic de Ubuntu.</p>
 <p>En Ubuntu Trusty, Libav reemplazó a FFmpeg, y FFmpeg fue eliminado de Trusty por completo. Con la actualización de Bionic, esto se está revirtiendo: FFmpeg está de vuelta y Libav se ha eliminado. Por favor, asegúrate de actualizar la configuración de tu archivo en consecuencia.</p>
-<h3><span id="filterprovider">Cambiar la sintaxis de FilterProvider</span></h3>
+<h2>Cambiar la sintaxis de FilterProvider</h2>
 <p>En Apache 2.4, la sintaxis de FilterProvider ha cambiado.</p>
 <p>Ejemplo de la antigua versión:</p>
 <div class="preboxcontainer">
@@ -108,7 +87,7 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 <ul>
 <li><a href="https://httpd.apache.org/docs/2.4/mod/mod_filter.html" target="_self">https://httpd.apache.org/docs/2.4/mod/mod_filter.html</a></li>
 </ul>
-<h3><span id="gcc">Cambiar la versión de GCC a 7</span></h3>
+<h2>GCC</h2>
 <p>Bionic incluye gcc-7, lo que significa que las versiones de Ruby anteriores a 2.4 ya no son compatibles, ya que requieren gcc-6.</p>
 <ul>
 <li><a href="https://gcc.gnu.org/install/index.html">https://gcc.gnu.org/install/index.html</a></li>
@@ -116,37 +95,37 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 <div class="notebox-important">
 <p>Los sitios que se basan en versiones de Ruby anteriores a Ruby 2.4 deben migrarse a una versión más reciente.</p>
 </div>
-<h3><span id="java">Cambiar la versión de Java (de 7u151 a 8u171)</span></h3>
+<h2>Java</h2>
 <p>Ubuntu Bionic incluye una nueva versión de Java versión 8, 8u171.</p>
 <p>Esta es la primera actualización importante en bastante tiempo, por lo que definitivamente es una buena idea asegurarse de que las dependencias de Java que tengas sean compatibles con la versión 8.</p>
 <p>Para obtener más información sobre las últimas versiones de Java, visita el siguiente enlace:</p>
 <ul>
 <li><a href="https://www.java.com/es/download/help/release_changes.html" target="_self" rel="undefined">Aspectos destacados de la versión de Java 8</a></li>
 </ul>
-<h3><span id="node">Node / NVM</span></h3>
+<h2>Node / NVM</h2>
 <p>Al instalar una versión personalizada de Node.js/NVM, la instalación quedará atrapada por grsec. Debes ejecutar un comando para cambiar las <span class="code">pax flags</span> para que grsec ignore los archivos. Revisa el siguiente artículo para obtener instrucciones completas:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360029083351-Instalar-una-versi%C3%B3n-personalizada-de-NVM-y-Node-js" target="_self">Instalar una versión personalizada de NVM y Node.js</a></li>
 </ul>
-<h3><span id="openssl">Cambiar la versión de OpenSSL (1.0.1f a 1.1.0g)</span></h3>
+<h2>OpenSSL</h2>
 <p>Bionic incluye la versión 1.1.0g de OpenSSL.</p>
-<h3><span id="passenger">Passenger</span></h3>
+<h2>Passenger</h2>
 <p>Para habilitar las páginas amigables con errores de Passenger (que ayudan a solucionar problemas de actualización), agrega lo siguiente a un archivo <span class="text-object">.htaccess</span> dentro de la aplicación:</p>
 <div class="preboxcontainer">
 <pre class="prebox">PassengerFriendlyErrorPages on</pre>
 </div>
-<h3><span id="perl">Cambiar la versión de Perl (de 5.18.4 a 5.26)</span></h3>
+<h2>Perl</h2>
 <p>Ubuntu Bionic incluye una nueva versión de Perl, 5.26. Entre los muchos cambios, esta actualización elimina el directorio actual (".") De @INC por razones de seguridad. Puedes leer sobre esto con más detalle <a href="https://metacpan.org/release/XSAWYERX/perl-5.26.0/view/pod/perldelta.pod#Removal-of-the-current-directory-%28%22.%22%29-from-@INC" target="_self">aquí</a>.</p>
 <p>Para obtener más información sobre la actualización de tu versión de Perl, visita el siguiente artículo:</p>
 <ul>
 <li><a href="https://metacpan.org/release/XSAWYERX/perl-5.26.0/changes" target="_self">Modificar documentación entre 5.24 y 5.26</a></li>
 </ul>
-<h3><span id="php-errores">Registro de errores de PHP</span></h3>
+<h2>Registro de errores de PHP</h2>
 <p>Los errores de PHP se registran en el archivo <span class="text-object">error.log</span> de tu sitio por defecto. Tu cambias los errores que se registran y la ubicación en donde se registran al actualizar el archivo <span class="text-object">phprc</span> de tu sitio. Visita el siguiente artículo para más detalles:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214894197-Habilitar-el-registro-de-errores-de-PHP" target="_self">Habilitar el registro de errores de PHP</a></li>
 </ul>
-<h3><span id="python">Cambios en la versión de Python</span></h3>
+<h2>Python</h2>
 <p>Las siguientes versiones de Python están cambiando:</p>
 <ul>
 <li>Python 2 (de 2.7.5 a 2.7.15)</li>
@@ -170,7 +149,7 @@ Ubuntu 18.04.1 LTS \n \l</pre>
 <li><a href="https://docs.python.org/2/whatsnew/2.7.html" target="_self">Novedades en Python 2.7.15</a></li>
 <li><a href="https://docs.python.org/3/whatsnew/3.6.html" target="_self">Novedades en Python 3.6</a></li>
 </ul>
-<h3><span id="django">Errores de Python Django</span></h3>
+<h2>Errores de Python Django</h2>
 <p>Después de la actualización, es posible que veas errores en tu aplicación Django. Por ejemplo.</p>
 <div class="preboxcontainer">
 <pre class="prebox">django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module: libmysqlclient.so.18: cannot open shared object file: No such file or directory.
@@ -178,10 +157,10 @@ Did you install mysqlclient or MySQL-python?</pre>
 </div>
 <h4>Solución</h4>
 <p>Borra tu directorio pip <span class="text-object">.cache</span>.</p>
-<h3><span id="virtualenv">Entorno virtual de Python</span></h3>
+<h2>Python virtualenv</h2>
 <p>Si tu sitio web utiliza un entorno virtual Python y observas algún error después de la actualización, vuelve a instalar tu entorno virtual y todos los módulos. Esto ayuda a garantizar que todo sea compatible con las nuevas bibliotecas en el servidor.</p>
 <p>Algunos ejemplos de errores que puedes ver son los errores o advertencias de Django, Passenger o Python.</p>
-<h3><span id="ruby">Cambiar la versión de Ruby (de 1.9.3.4 a 2.5.1)</span></h3>
+<h2>Ruby</h2>
 <p>La versión de Ruby en el servidor está cambiando a 2.5.1. Si deseas más control sobre esto, DreamHost recomienda el uso de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/217185247-Ruby-Version-Manager-RVM-">RVM</a>.</p>
 <p>Si estás usando <a href="https://help.dreamhost.com/hc/es/articles/115001070131-Usar-Bundler-para-instalar-Ruby-gems">Bundler</a>,&nbsp;solo necesitas ejecutar:</p>
 <div class="preboxcontainer">
@@ -193,12 +172,12 @@ Did you install mysqlclient or MySQL-python?</pre>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">touch  tmp/restart.txt</span>
 </pre>
 </div>
-<h3><span id="ssh">Cambiar la versión SSH a 7.6p1</span></h3>
+<h2>SSH</h2>
 <p>La versión de SSH en los servidores Bionic es 7.6p1. Ten en cuenta que las claves DSA no están disponibles en esta versión.</p>
-<h3><span id="telnet">Telnet</span></h3>
+<div id="telnet" class="section-link">&nbsp;</div>
+<h2>Telnet</h2>
 <p>Debido a que Telnet es un protocolo obsoleto, se elimina de la última versión de Ubuntu Bionic para ayudar a mantener tu servidor seguro. Si necesitas Telnet, DreamHost recomienda que lo ejecutes en tu computador local.</p>
-<h2><span id="apoyo">¿Cómo puedo encontrar apoyo?</span></h2>
+<h2>¿Cómo puedo encontrar apoyo?</h2>
 <div class="solvvy-solution">
 <p>Si tienes alguna pregunta o inquietud, no dudes en ponerse en contacto el&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener noreferrer">Equipo de Soporte</a>.</p>
-</div>
 </div>

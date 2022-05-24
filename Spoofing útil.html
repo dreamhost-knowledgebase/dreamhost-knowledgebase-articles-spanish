@@ -1,0 +1,38 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>La suplantación de identidad útil sería cuando cambia tu dirección DE a un correo alojado en DreamHost. En términos generales, debes establecer la configuración DE o "remitente" para que coincida con una dirección de correo alojada en DreamHost (que suele ser un correo en tu dominio). Muchas veces es una opción en tu CMS, plugin o script para que pueda decirle que envíe correos de esta manera. Por ejemplo, un plugin popular con esta opción que se usa con WordPress es <a href="https://help.dreamhost.com/hc/es/articles/214831378-Soluci%C3%B3n-de-problemas-de-los-formularios-de-contacto-de-WordPress" target="_self" rel="undefined">Contact Form 7</a>.</p>
+<p>Sin embargo, no todos los programas tienen este tipo de opciones de configuración. Por ejemplo, algunos plugins de formularios de contacto siempre usan la información del visitante del sitio como remitente y no le permiten cambiarla. En esta situación, es posible que debas cambiar a un plugin diferente o modificar el script. Al seleccionar o configurar un plugin o secuencia de comandos para tu sitio, es posible que desees verificar que falsifique toda la información necesaria para que los correos rebotados vayan a ti en lugar de al directorio <span class="text-object">Maildir/new</span> en el servidor web.</p>
+</div>
+<h2><span id="Spoofing_in_a_CMS">Spoofing en un CMS</span></h2>
+<div class="solvvy-solution">
+<p>Para saber si un script o plugin de tu sitio web utiliza falsificaciones tanto en el encabezado DE como en el remitente del sobre, puedes preguntarle al desarrollador o la persona que creó el script o plugin. Si ves mensajes de correo devueltos que envían al directorio <span class="text-object">Maildir/new</span> en el servidor web, esto es un gran indicio de que el remitente del sobre probablemente no está siendo falsificado en tu formulario de correo.</p>
+</div>
+<h2><span id="Comparison_to_paper_letters">Comparación con las cartas de papel</span></h2>
+<div class="solvvy-solution">
+<p>Los mensajes de correo son similares a las cartas de papel antiguas en que ambos tienen dos conjuntos de información de direcciones. Los encabezados Para y De de un correo son similares al saludo y la firma de una carta en papel. El sobre de una carta en papel tiene información del remitente y del destinatario que se utiliza para la entrega, y el sobre de un correo también tiene un remitente y un destinatario.</p>
+<p>Los encabezados Para y De de un correo se muestran en un programa de correo. Consulta el artículo <a href="https://help.dreamhost.com/hc/es/articles/215466778--C%C3%B3mo-reviso-los-encabezados-de-correo-electr%C3%B3nico-" target="_self" rel="undefined">Visualización de Encabezados Completos</a> para obtener más detalles. Por separado, el remitente y el destinatario del sobre son los que utilizan los servidores de correo para obtener instrucciones sobre dónde enviar el correo y dónde se envían los errores o rebotes. El plugin o secuencia de comandos que utiliza establece automáticamente dónde se envía el correo. Toma el encabezado Para del mensaje de correo y lo usa como destinatario en el sobre. Se puede enviar un correo solo con esa información, y el servidor completará automáticamente el encabezado De y el remitente del sobre. Aquí es de donde proviene el remitente predeterminado <span class="text-object">usuario@servidor.dreamhost.com</span>, ya que el servidor web lo configura automáticamente en función del nombre de usuario que aloja el sitio o el script que envió el correo. Si deseas un encabezado y/o remitente personalizado más agradable como <span class="text-object">admin@example.com</span>, el script o programa que uses debe configurarlo.</p>
+</div>
+<h2><span id="Email_flow">Flujo de correo</span></h2>
+<div class="solvvy-solution">
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/Spoof6.3large.png" alt="Spoof6.3large.png" width="368" height="771"></dd>
+</dl>
+<p>El diagrama de flujo ilustra la ruta que puede recorrer un correo desde tu sitio web (como el envío de un formulario de contacto o una confirmación de compra de comercio electrónico).</p>
+<p>Si el correo se puede enviar correctamente, se envía normalmente y podrás verlo con tu correo habitual. Si el correo no se puede entregar y el remitente del sobre se falsifica correctamente, el correo devuelto se envía a esa dirección de correo que se falsificó como el encabezado De. En este caso, verás el correo rebotado en la bandeja de entrada habitual de esa dirección de correo. Si el correo no se puede entregar y no se falsifica correctamente, el correo devuelto se devuelve al servidor web y se almacena en esa carpeta <span class="text-object">Maildir/new</span>.</p>
+</div>
+<h2><span id="Why_are_my_emails_bouncing.3F">¿Por qué rebotan mis correos?</span></h2>
+<div class="solvvy-solution">
+<p>El encabezado De y el remitente del sobre no coinciden automáticamente entre sí, como lo hacen el encabezado A y el destinatario del sobre. A menudo, solo el encabezado De se falsifica o se establece en una dirección personalizada, y el remitente del sobre se deja sin cambios y aún se establece en el nombre de <span class="text-object">usuario@servidor.dreamhost.com</span> predeterminado. Esta es la razón por la que muchos correos rebotados se envían al directorio <span class="text-object">Maildir/new</span> en el servidor web y no a tu cuenta de correo donde normalmente revisas el correo. Si el remitente del sobre no es suplantado, los correos rebotados volverán al usuario del servidor que aloja el sitio que envió el correo. Esos correos se almacenan en la carpeta <span class="text-object">Maildir/new</span> de ese usuario en el servidor web. Cada archivo es un correo y, a pesar de los nombres bastante extraños, son archivos de texto simples que se pueden ver con cualquier editor de texto.</p>
+</div>
+<h2><span id="Troubleshooting">Solución de problemas</span></h2>
+<div class="solvvy-solution">
+<p>Entonces, ¿qué puedes hacer tú al respecto? Como se mencionó anteriormente, si estás recibiendo correos rebotados en el directorio <span class="text-object">Maildir/new</span> en lugar de en la bandeja de entrada de tu correo, es probable que el remitente del sobre no esté siendo falsificado o configurado en tu dirección personalizada para que coincida con el encabezado De. Puedes pedirle al desarrollador del plugin o script que usa actualmente que lo actualice para que falsifique ambos (encabezado y sobre). También puedes cambiar a un plugin o script diferente que falsifique ambos (encabezado y sobre). Si no estás seguro de cuáles hacen esto, puedes probar algunos o pedir a tus desarrolladores que te informen si esto es algo que hace tu plugin o script. Si escribiste tu propio código, puedes hacer este cambio tú mismo.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215036058-Resumen-de-la-pol%C3%ADtica-de-dominio-del-remitente-y-suplantaci%C3%B3n-de-identidad-o-spoofing" target="_self" rel="undefined">Descripción general de la suplantación y la política de dominio del remitente</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215035988-C%C3%B3mo-hacer-spoofing-o-suplantar-en-tu-CMS-o-aplicaci%C3%B3n-web" target="_self" rel="undefined">Cómo suplantar en tu CMS o aplicación web</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215036118-Preguntas-frecuentes-sobre-la-pol%C3%ADtica-de-dominio-del-remitente" target="_self" rel="undefined">Preguntas frecuentes sobre la Política de Dominio del Remitente</a></li>
+</ul>
+</div>
