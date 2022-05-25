@@ -1,20 +1,4 @@
-<div class="document">
-<div class="documentwrapper">
-<div class="body">
-<div id="ARTICLE-TITLE-NAME" class="solvvy-hidden">
-<div class="table-of-content container">
-<ul class="simple">
-<li><a class="reference internal" href="#Configurar_los_enlaces_permanentes_de_WordPress">Configurar los enlaces permanentes de WordPress</a></li>
-<li><a class="reference internal" href="#Como_configurar_WP_Super_Cache">Cómo configurar WP Super Cache</a></li>
-<li><a class="reference internal" href="#Activar_WP_Super_Cache">Activar WP Super Cache</a></li>
-<li><a class="reference internal" href="#Verificar_de_que_WP_Super_Cache_realmente_este_funcionando">Verificar que WP Super Cache realmente esté funcionando</a></li>
-<li><a class="reference internal" href="#Las_marcas_de_tiempo_difieren_o_no_se_encontraron_errores">Las marcas de tiempo difieren o no se encontraron errores</a></li>
-<li><a class="reference internal" href="#Cambiar_el_tipo_de_almacenamiento_en_cache">Cambiar el tipo de almacenamiento en caché</a></li>
-<li><a class="reference internal" href="#Hacer_que_WP_Super_Cache_funcione_con_Nginx">Hacer que WP Super Cache funcione con Nginx</a></li>
-<li><a class="reference internal" href="#Eliminar_el_cache">Eliminar el caché</a></li>
-</ul>
-</div>
-</div>
+<div class="auto-toc">&nbsp;</div>
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <div class="notebox-important">
@@ -27,7 +11,7 @@
 </ul>
 <p>A continuación se describe cómo configurar y usar&nbsp;<a href="https://wordpress.org/plugins/wp-super-cache/">WP Super Cache</a>.</p>
 </div>
-<h2><span id="Configurar_los_enlaces_permanentes_de_WordPress">Configurar los enlaces permanentes de WordPress</span></h2>
+<h2>Configurar los enlaces permanentes de WordPress</h2>
 <div class="solvvy-solution">
 <p>Debido a que WP Super Cache requiere el uso de enlaces permanentes, es posible que debas configurarlos antes de continuar, especialmente si estás utilizando una instalación más vieja de WordPress.</p>
 <p>Si instalas WordPress usando el <a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-Instalador-de-Un-Clic" target="_self">Instalador de Un Clic</a>&nbsp;de DreamHost, los enlaces permanentes ya están configurados por defecto.</p>
@@ -50,7 +34,7 @@
 <li>Haz clic en el botón&nbsp;<strong>Guardar Cambios</strong> para guardar tu nueva configuración.</li>
 </ol>
 </div>
-<h2><span id="Como_configurar_WP_Super_Cache">Como configurar WP Super Cache</span></h2>
+<h2>Como configurar WP Super Cache</h2>
 <div class="solvvy-solution">
 <div class="notebox-important">
 <p>WP Super Cache ya está incluido y listo para usar si seleccionas la opción 'Deluxe Install' cuando usas el <a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-Instalador-de-Un-Clic">Instalador de Un Clic de wordPress</a>&nbsp;de DreamHost. Es posible que veas un botón 'Activate' cuando inicies tu instalación de WordPress Deluxe de un solo clic inicialmente, en cuyo caso debes hacer clic en él y luego continuar a la página de configuración.</p>
@@ -81,7 +65,7 @@
 </li>
 </ol>
 </div>
-<h2><span id="Activar_WP_Super_Cache">Activar WP Super Cache</span></h2>
+<h2>Activar WP Super Cache</h2>
 <div class="solvvy-solution">
 <p>Para activar el plugin WP Super Cache:</p>
 <ol>
@@ -116,7 +100,7 @@
 </li>
 </ol>
 </div>
-<h2><span id="Verificar_de_que_WP_Super_Cache_realmente_este_funcionando">Verificar de que WP Super Cache realmente esté funcionando</span></h2>
+<h2>Verificar de que WP Super Cache realmente esté funcionando</h2>
 <div class="solvvy-solution">
 <p>Para probar WP Super Cache:</p>
 <ol>
@@ -163,7 +147,7 @@
 <li>Espera al menos 30 segundos, luego prueba tu caché nuevamente en WordPress. Esta vez debería mostrar que las marcas de tiempo coinciden.</li>
 </ol>
 </div>
-<h2><span id="Cambiar_el_tipo_de_almacenamiento_en_cache">Cambiar el tipo de almacenamiento en caché</span></h2>
+<h2>Cambiar el tipo de almacenamiento en caché</h2>
 <div class="solvvy-solution">
 <p>Haz clic en la pestaña <span class="text-object">Avanzado</span> para ver los diferentes tipos de almacenamiento en caché. WP Super Cache admite dos modos:</p>
 <ul>
@@ -177,7 +161,7 @@
 <p>Hay pros y contras para cada opción. Si el rendimiento es una prioridad o si tu contenido no se actualiza con tanta frecuencia, usa el modo 'Expert' (mod_rewrite) que acelera el tiempo hasta el primer byte (TTFB) por orden de magnitud. Esto se debe a que no tiene que buscar controladores PHP adicionales para analizar el archivo en caché. En cambio, escribe el contenido como HTML sin formato y luego sirve el HTML por sí mismo.</p>
 <p>Si estás usando Nginx, usa el modo 'Simple' en su lugar.</p>
 </div>
-<h2><span id="Hacer_que_WP_Super_Cache_funcione_con_Nginx">Hacer que WP Super Cache funcione con Nginx</span></h2>
+<h2>Hacer que WP Super Cache funcione con Nginx</h2>
 <div class="solvvy-solution">
 <p>Puedes encontrar tu archivo <span class="text-object">wordpress.conf</span> en tu servidor Nginx en el siguiente directorio. Cambia <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> a tu sitio website.</p>
 <div class="preboxcontainer">
@@ -207,7 +191,8 @@ if (!-e $request_filename) {
 <li><a href="https://help.dreamhost.com/hc/es/articles/214824958--C%C3%B3mo-hacer-que-las-estad%C3%ADsticas-y-los-enlaces-permanentes-funcionen-con-WordPress-y-Nginx" target="_self">Cómo hacer que las estadísticas y los enlaces permanentes funcionen con WordPress y Nginx</a></li>
 </ul>
 </div>
-<h2><span id="Eliminar_el_cache">Eliminar el caché</span></h2>
+<div id="eliminar-cache" class="section-link">&nbsp;</div>
+<h2>Eliminar el caché</h2>
 <div class="solvvy-solution">
 <p>Si es necesario, puedes eliminar tu caché almacenado en el panel de WordPress.</p>
 <ol>
@@ -224,7 +209,7 @@ if (!-e $request_filename) {
 <li>Desplázate hacia abajo y haz clic en el botón&nbsp;<strong>Delete Cache</strong>.</li>
 </ol>
 </div>
-<h2><span id="Ver_también">Ver también</span></h2>
+<h2>Ver también</h2>
 <div class="solvvy-hidden">
 <h3>Enlaces internos</h3>
 <ul>
@@ -239,7 +224,4 @@ if (!-e $request_filename) {
 <li><a href="https://odd.blog/wp-super-cache/">WP Super Cache Homepage</a></li>
 <li><a href="https://wordpress.org/plugins/wp-super-cache/">WordPress.org's WP Super Cache listing</a></li>
 </ul>
-</div>
-</div>
-</div>
 </div>

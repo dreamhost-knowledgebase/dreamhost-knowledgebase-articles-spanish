@@ -1,28 +1,10 @@
-<div class="document">
-<div class="documentwrapper">
-<div class="body">
-<div id="ubuntu_bionic" class="solvvy-hidden">
-<div class="altTitle">Debian Buster</div>
-<div class="table-of-content container">
-<ul class="simple">
-<li><a class="reference internal" href="#prep">Que esperar</a></li>
-<li><a class="reference internal" href="#host-keys">Cambio de llaves de Host</a></li>
-<li><a class="reference internal" href="#admin_sudo">Legacy VPS con usuarios admin/sudo</a></li>
-<li><a class="reference internal" href="#webserver">Servidor Web</a></li>
-</ul>
-<span class="toc-sublink"><a href="#apache">Versión de Apache</a></span> <span class="toc-sublink"><a href="#boto_s3cmd">Boto-rsync y S3cmd</a></span> <span class="toc-sublink"> <a href="#curl">curl</a> </span> <span class="toc-sublink"> <a href="#ffmpeg_libav">FFmpeg y Libav</a></span> <span class="toc-sublink"> <a href="#filterprovider">FilterProvider syntax</a></span> <span class="toc-sublink"> <a href="#java">Versión de Java</a></span> <span class="toc-sublink"> <a href="#openssl">OpenSSL</a></span> <span class="toc-sublink"> <a href="#perl">Versión de Perl</a> </span> <span class="toc-sublink"> <a href="#php-error-logs">Registro de errores de PHP</a> </span> <span class="toc-sublink"> <a href="#python">Versión de Python</a> </span> <span class="toc-sublink"> <a href="#django">Errores de Python</a> </span> <span class="toc-sublink"> <a href="#virtualenv">virtualenv de Python</a> </span> <span class="toc-sublink"> <a href="#ruby">Versión de Ruby</a> </span> <span class="toc-sublink"> <a href="#ssh">Versión de SSH</a> </span>
-<ul class="simple">
-<li><a class="reference internal" href="#support">¿Cómo encuentro soporte?</a></li>
-</ul>
-</div>
-</div>
-<p>Lo siguiente proporciona información para ayudarte a preparar tu sitio para Debian Buster.</p>
-<h2><span id="prep">Que esperar</span></h2>
+<div class="auto-toc">&nbsp;</div>
+<h2>Que esperar</h2>
 <div class="solvvy-solution">
 <p>DreamHost se comunicará contigo por correo antes de la actualización.</p>
 <p>El plazo de una actualización puede variar de un servidor a otro; sin embargo, el tiempo garantiza que haya varios ingenieros altamente capacitados disponibles en caso de que surja algún problema importante. La actualización en sí no debería tardar más de una hora en completarse.</p>
 </div>
-<h2><span id="host-keys">Cambio de llaves de host</span></h2>
+<h2>Cambio de llaves de host</h2>
 <div class="solvvy-solution">
 <p>Cada servidor DreamHost utiliza Llaves SSH únicas para garantizar que tu conexión sea segura y confiable. Cuando usas por primera vez un cliente SFTP o SSH para conectarte a tu servidor, verifica las Llaves para confirmar que la conexión es segura.</p>
 <p>Cuando tu servidor se actualice, estas Llaves cambiarán. Esto significa que la próxima vez que intentes conectarte al servidor mediante un cliente SFTP o SSH, verás el siguiente mensaje:</p>
@@ -36,7 +18,7 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/360004634231-Alerta-The-server-s-host-key-is-unknown-La-llave-host-del-servidor-es-desconocida-" target="_self" rel="undefined">Alerta 'The server's host key is unknown' (La llave host del servidor es desconocida)</a></li>
 </ul>
 </div>
-<h2><span id="admin_sudo">VPS antiguos con usuarios admin/sudo</span></h2>
+<h2>VPS antiguos con usuarios admin/sudo</h2>
 <div class="solvvy-solution">
 <p>Aunque seguirás teniendo acceso de admin/sudo para realizar cambios en tu VPS después de la actualización, es posible que la actualización a Buster no sea compatible con tus necesidades actuales. Por ejemplo, los siguientes cambios pueden afectar tu configuración actual:</p>
 <ul>
@@ -50,10 +32,10 @@
 </ul>
 </div>
 <div class="solvvy-solution">&nbsp;</div>
-<h2><span id="webserver">Cambios de servidor Web</span></h2>
+<h2>Cambios de servidor Web</h2>
 <div class="solvvy-solution">
 <div class="solvvy-solution" style="box-sizing: border-box; color: #333333; font-family: 'Proxima Nova', Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-style: initial; text-decoration-color: initial;">
-<h3 style="box-sizing: border-box; padding: 0px; margin: 0px; font-family: Ubuntu, Arial, sans-serif; color: #000000; font-weight: 400; font-size: 20px;"><span id="apache" style="box-sizing: border-box;">Cambio de versión de Apache (de 2.2 a 2.4)</span></h3>
+<h2>Apache</h2>
 <p style="box-sizing: border-box;">Los VPS que ejecutan Apache se actualizarán a la versión 2.4 (desde 2.2). Aunque esto no debería causar ningún problema importante en tu entorno de alojamiento, puedes ver una lista de cambios en el siguiente artículo:</p>
 <ul style="box-sizing: border-box; list-style: outside disc; margin: 4px 0px 14px 20px; padding: 0px 0px 0px 20px;">
 <li style="box-sizing: border-box;"><a style="box-sizing: border-box; background-color: transparent; color: #1a73e8; font-family: 'Proxima Nova', Arial, sans-serif; text-decoration: none;" href="https://httpd.apache.org/docs/2.4/upgrading.html">Actualizar a 2.4 desde 2.2</a></li>
@@ -81,38 +63,39 @@
 <pre class="prebox" style="box-sizing: border-box; overflow: auto; font-family: monospace, monospace; font-size: 1em; border-radius: 3px; padding: 10px 15px; border: 1px solid black; background: #000000; max-width: 940px; color: #d0d0d0; white-space: pre; overflow-wrap: normal; line-height: 20px;">DirectoryIndex disabled</pre>
 </div>
 </div>
-<h3><span id="boto_s3cmd">Boto-rsync</span></h3>
+<h2>Boto-rsync</h2>
 <p>Debido a que boto-rsync es un software desactualizado y ya no se mantiene, también se elimina de la última versión de Debian Buster. DreamHost recomienda usar S3cmd o AWS CLI en su lugar. Puedes encontrar más información sobre cómo utilizar S3cmd o AWS CLI en los siguientes artículos:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/sections/360003569291-S3cmd">S3cmd</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/sections/360003559251-AWS-CLI" target="_self" rel="undefined">Interfaz de línea de comandos de AWS</a></li>
 </ul>
-<h3><span id="curl">la versión de curl cambió a 7.64.0<br /></span></h3>
+<h2>curl</h2>
 <p>La versión de curl en Debian Buster es 7.64.0</p>
 </div>
-<h3><span id="ffmpeg_libav">FFmpeg y Libav</span></h3>
+<h2>FFmpeg y Libav</h2>
 <p>En Ubuntu 14 (Trusty), Libav reemplazó a FFmpeg, y FFmpeg se eliminó de Trusty por completo. Con la actualización de Debian Buster, esto se invierte: FFmpeg está de vuelta y Libav se ha eliminado. Asegúrate de actualizar la configuración de tu archivo en consecuencia.</p>
-<h3><span id="openssl">Cambio de versión de&nbsp;</span><span id="java">Java (11.0.8)</span></h3>
+<h2>Java</h2>
 <p>Debian Buster incluye una nueva versión de Java 11.0.8.</p>
 <p>Esta es la primera actualización importante en bastante tiempo, por lo que definitivamente es una buena idea asegurarse de que cualquier dependencia de Java que pueda tener sea compatible con la versión 8.</p>
 <p>Para más información sobre las últimas versiones de Java, visita el siguiente enlace:</p>
 <ul>
 <li><a href="https://www.oracle.com/java/technologies/javase/11-relnotes.html" target="_self">Notas de la versión de Java 11</a></li>
 </ul>
-<h3><span id="openssl">Cambio de versión de OpenSSL (1.1.1d)</span></h3>
+<h2>OpenSSL</h2>
 <p>Debian Buster incluye una nueva versión de OpenSSL 1.1.1d.</p>
-<h3><span id="perl">Cambio de versión de Perl (5.28.1)</span></h3>
+<h2>Perl</h2>
 <p>Debian Buster incluye una nueva versión de Perl, 5.28.1.</p>
 <p>Para más información sobre cómo actualizar tu versión de Perl, visita el siguiente artículo:</p>
 <ul>
 <li><a href="https://metacpan.org/release/SHAY/perl-5.28.1-RC1/view/pod/perldelta.pod" target="_self">Cambiar la documentación para 5.28.1</a></li>
 </ul>
-<h3><span id="php-error-logs">Registro de errores de PHP</span></h3>
+<h2>Registro de errores de PHP</h2>
 <p>Los errores de PHP se registran en el archivo <span class="text-object">error.log</span> de tu sitio de forma predeterminada. Puedes cambiar los errores que se informan y la ubicación donde se informan actualizando el archivo <span class="text-object">phprc</span> de tu sitio. Consulta el siguiente artículo para obtener más detalles:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214894197-Habilitar-el-registro-de-errores-de-PHP" target="_self">Habilitar el registro de errores de PHP</a></li>
 </ul>
-<h3><span id="python">Cambios en la versión de Python</span></h3>
+<div id="python" class="section-link">&nbsp;</div>
+<h2>Python</h2>
 <p>Las siguientes versiones de Python están cambiando:</p>
 <ul>
 <li>Actualización de la versión a 3.7.3</li>
@@ -135,7 +118,7 @@
 <li><a href="https://docs.python.org/2/whatsnew/2.7.html">Novedades de Python 2.7.15</a></li>
 <li><a href="https://docs.python.org/3.7/whatsnew/3.7.html" target="_self">Novedades de Python 3.7</a></li>
 </ul>
-<h3><span id="django">Errores de Python Django</span></h3>
+<h2>Errores de Python Django</h2>
 <p>Después de la actualización, es posible que veas errores en tu aplicación Django. Por ejemplo.</p>
 <div class="preboxcontainer">
 <pre class="prebox">django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module: libmysqlclient.so.18: cannot open shared object file: No such file or directory.
@@ -143,10 +126,11 @@ Did you install mysqlclient or MySQL-python?</pre>
 </div>
 <h4>Solución</h4>
 <p>Elimina tu directorio pip <span class="text-object">.cache</span>.</p>
-<h3><span id="virtualenv">Entorno virtual de Python</span></h3>
+<h2>Python virtualenv</h2>
 <p>Si tu sitio web utiliza un entorno virtual de Python y notas cualquier error después de la actualización, reinstala tu entorno virtual y todos los módulos. Esto ayuda a garantizar que todo sea compatible con las nuevas bibliotecas del servidor.</p>
 <p>Ejemplos de errores que puedes ver son los errores/advertencias de Django, Passenger o Python.</p>
-<h3><span id="ruby">Versión 2.5 de Ruby</span></h3>
+<div id="ruby" class="section-link">&nbsp;</div>
+<h2>Ruby</h2>
 <p>La versión de Ruby en el servidor es 2.5.5. Si deseas tener más control sobre esto, DreamHost recomienda encarecidamente usar <a href="https://help.dreamhost.com/hc/es/articles/217185247-Administrador-de-versiones-de-Ruby-Ruby-Version-Manager-RVM-" target="_self" rel="undefined">RVM</a>.</p>
 <p>Si estás usando <a href="https://help.dreamhost.com/hc/es/articles/115001070131-Usar-Bundler-para-instalar-Ruby-gems" target="_self" rel="undefined">Bundler</a>, solo necesitas correr:</p>
 <div class="preboxcontainer">
@@ -158,12 +142,9 @@ Did you install mysqlclient or MySQL-python?</pre>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">touch  tmp/restart.txt</span>
 </pre>
 </div>
-<h3><span id="ssh">Cambio de versión SSH a 7.9p1 (sin claves dsa)</span></h3>
+<h2>SSH</h2>
 <p>La versión de SSH en los servidores Debian es 7.9p1. Ten en cuenta que las llaves DSA no están disponibles en esta versión.</p>
-<h2><span id="support">¿Cómo puedo encontrar soporte?</span></h2>
+<h2>¿Cómo puedo encontrar soporte?</h2>
 <div class="solvvy-solution">
 <p>Si tienes cualquier pregunta o inquietud, no dudes en <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener noreferrer">contactar a soporte</a>.</p>
-</div>
-</div>
-</div>
 </div>

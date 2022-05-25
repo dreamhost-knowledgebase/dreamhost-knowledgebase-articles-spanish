@@ -1,34 +1,17 @@
-<div class="document">
-<div class="documentwrapper">
-<div class="body">
-<div id="ARTICLE-TITLE-NAME" class="solvvy-hidden">
-<div class="table-of-content container">
-<ul class="simple">
-<li><a class="reference internal" href="#Generalidades">Generalidades</a></li>
-<li><a class="reference internal" href="#Necesito_un_plugin_de_cache">¿Necesito un plugin de caché?</a></li>
-<li><a class="reference internal" href="#Probar_el_rendimiento_de_memoria_cache_de_tu_sitio_con_el_plugin_Proxy_Cache_Purge">Probar el rendimiento de memoria caché de tu sitio con el plugin Proxy Cache Purge</a></li>
-<li><a class="reference internal" href="#Probar_el_cache_de_tu_sitio_via_SSH">Probar el cache de tu sitio vía SSH</a></li>
-<li><a class="reference internal" href="#Solucionar_inconvenientes_de_cache_de_DreamPress">Solucionar inconvenientes de cache de DreamPress</a></li>
-<li><a class="reference internal" href="#Desviar_temporalmente_el_cache_de_DreamPress">Desviar temporalmente el caché de DreamPress</a></li>
-<li><a class="reference internal" href="#Cuando_necesitaria_purgar_mi_cache">¿Cuándo necesitaría purgar mi caché?</a></li>
-<li><a class="reference internal" href="#Purgar_el_cache_manualmente_usando_el_plugin">Purgar manualmente el caché usando el plugin</a></li>
-<li><a class="reference internal" href="#Purgar_el_cache_manualmente_a_traves_de_SSH">Purgar manualmente el caché a través de SSH</a></li>
-</ul>
-</div>
-</div>
+<div class="auto-toc">&nbsp;</div>
 <div class="notebox-important">
 <p>Las siguientes instrucciones asumen que tienes la última versión del plugin&nbsp;<a href="https://wordpress.org/plugins/varnish-http-purge/">Proxy Cache Purge</a> (anteriormente llamado “Varnish HTTP Purge”). Si tu <span style="font-weight: 400;">WP-Admin</span> muestra que hay una actualización disponible para este plugin, actualízalo antes de continuar o si tienes dificultades con alguno de los siguientes pasos.</p>
 </div>
-<h2><span id="Generalidades">Generalidades</span></h2>
+<h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>DreamPress incluye almacenamiento en caché del servidor incorporado, lo que acelera significativamente tu sitio. Dado que el almacenamiento en caché crea versiones estáticas de tu sitio, el servidor necesita menos recursos cuando un cliente visita tu sitio. Esto permite que tu sitio no solo se cargue más rápido, sino que también ayuda a administrar grandes cantidades de tráfico. Sin embargo, cuando el caché no funciona, tu sitio generalmente se ejecutará más lentamente y tu uso de recursos será mayor.</p>
 </div>
-<h2><span id="Necesito_un_plugin_de_cache">¿Necesito un plugin de caché?</span></h2>
+<h2>¿Necesito un plugin de caché?</h2>
 <div class="solvvy-solution">
 <p>Muchas guías de WordPress,&nbsp;incluidas las de <a href="https://www.dreamhost.com/wordpress/guide-to-wp-caching/#">DreamHost</a>, recomiendan plugin de almacenamiento en caché como WP Super Cache en sitios de WordPress. Sin embargo, dado que DreamPress viene con almacenamiento en caché incorporado, un plugin de almacenamiento en caché de terceros como WP Super Cache no es necesario y podría entrar en conflicto con el caché de DreamPress. En cambio, DreamHost recomienda usar su caché de servidor incorporado en tu sitio DreamPress. El plugin <a href="https://wordpress.org/plugins/varnish-http-purge/">Proxy Cache Purge</a> está optimizado para proporcionar todas las herramientas que necesitas para administrar automáticamente el caché de DreamPress y analizar la capacidad de tu sitio para almacenar en caché. Deshabilitar el plugin no deshabilita el caché, ya que es simplemente una herramienta para ayudar a determinar si el caché funciona correctamente o no.</p>
 <p>El plugin Proxy Cache Purge viene preinstalado en todas las instalaciones nuevas y actualizadas de DreamPress. Si has copiado un sitio de WordPress existente desde otro host a DreamPress, se recomienda instalar este plugin para que la administración de tu caché DreamPress sea automática y no requiera tu atención en circunstancias normales.</p>
 </div>
-<h2><span id="Probar_el_rendimiento_de_memoria_cache_de_tu_sitio_con_el_plugin_Proxy_Cache_Purge"> Probar el rendimiento de la memoria caché de tu sitio con el plugin Proxy Cache Purge</span></h2>
+<h2>Probar el rendimiento de la memoria caché de tu sitio con el plugin Proxy Cache Purge</h2>
 <div class="solvvy-solution">
 <p>Debido a los miles de plugins y personalizaciones disponibles para los sitios de WordPress, no todos los sitios funcionan automáticamente de manera efectiva con todos los métodos de almacenamiento en caché. El plugin Proxy Cache Purge ofrece una opción en tu panel WP-Admin para que puedas verificar las URL de las páginas en tu sitio para asegurarte de que se almacenan en caché correctamente. Si una página de tu sitio no se almacena en caché, la opción 'Check Caching' te indica los elementos que puedes verificar que pueden resolver este problema.</p>
 <p>Para acceder esta opción:</p>
@@ -54,7 +37,7 @@
 </ol>
 <p>Esta función escanea automáticamente la URL que seleccionaste e informa cualquier problema que encuentres, así como cualquier plugin problemático conocido. Si el reporte dice <span class="text-object">Your caching service appears to be running properly</span>, quiere decir que el caché en el servidor está funcionando correctamente. Sin embargo, si ves <span class="text-object">Varnish caching service is running but is unable to cache your site</span>, quiere decir que hay un inconveniente con el cache del servidor.</p>
 </div>
-<h2><span id="Probar_el_cache_de_tu_sitio_via_SSH">Probar el cache de tu sitio vía SSH</span></h2>
+<h2>Probar el cache de tu sitio vía SSH</h2>
 <div class="solvvy-solution">
 <p>Si no puedes usar el plugin Proxy Cache Purge, también puedes usar un <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">comando SSH</a> para ver el caché de tu sitio.</p>
 <div class="preboxcontainer">
@@ -62,7 +45,7 @@
 </div>
 <p>Tu terminal mostrará varias líneas de información sobre el dominio especificado. Si ves <span class="code">x-cache: hit</span> y <span class="code">x-cacheable: Yes:Forced</span>, el caché del servidor proxy está funcionando como se espera. Si el caché del proxy no está funcionando, el comando revolverá <span class="code">x-cache: Miss</span> en vez.</p>
 </div>
-<h2><span id="Solucionar_inconvenientes_de_cache_de_DreamPress">Solucionar inconvenientes de cache de DreamPress</span></h2>
+<h2>Solucionar inconvenientes de cache de DreamPress</h2>
 <div class="solvvy-solution">
 <p>Si el plugin Proxy Cache Purge informa que tu caché no funciona, hay varias cosas que puedes probar. Los pasos más comunes para resolver problemas de caché son alternar tus plugins, cambiar tu tema o identificar posibles problemas de codificación.</p>
 <div class="notebox-note">
@@ -107,7 +90,8 @@
 </div>
 <p>Una vez que hayas configurado el .htaccess predeterminado, vuelve a probar el caché de tu sitio. Si la codificación predeterminada de .htaccess aún no corrige el error de almacenamiento en caché, lo más probable es que se uses el código personalizado en tu dominio. Asegúrate de consultar con tu desarrollador sobre cualquier contenido personalizado.</p>
 </div>
-<h2><span id="Desviar_temporalmente_el_cache_de_DreamPress">Desviar temporalmente el caché de DreamPress</span></h2>
+<div id="evitar" class="section-link">&nbsp;</div>
+<h2>Desviar temporalmente el caché de DreamPress</h2>
 <div class="solvvy-solution">
 <p>El plugin Proxy Cache Purge incluye una función de '<span style="font-weight: 400;">Development Mode</span>', que te permite omitir temporalmente el almacenamiento en caché para todos los visitantes. Esto evita que los visitantes vean cualquier contenido antiguo en caché en tu sitio de WordPress. Puede resultarte útil si tu sitio aún está en desarrollo o si estás realizando cambios importantes en el diseño. Además, si tienes problemas con un tema o plugin, tu desarrollador puede pedirte que intentes deshabilitar el caché para realizar más pruebas.</p>
 <div class="notebox-important">
@@ -147,11 +131,12 @@
 </ol>
 <p>El Development mode permanece activo durante 24 horas, después de lo cual se desactiva y el almacenamiento en caché se reanuda normalmente. También puedes deshabilitar manualmente el Development mode en esta misma página volviendo a la página 'Settings' y desmarcando la casilla de verificación <span class="text-object">Development mode</span> y luego guardándolo.</p>
 </div>
-<h2><span id="Cuando_necesitaria_purgar_mi_cache">¿Cuándo necesitaría purgar mi caché?</span></h2>
+<h2>¿Cuándo necesitaría purgar mi caché?</h2>
 <div class="solvvy-solution">
 <p>Cuando haces cambios en tu sitio, como personalizar o crear contenido nuevo, es posible que los nuevos cambios aún no se muestren en vivo porque la versión anterior de tu sitio está en caché. Purgar tu caché puede ayudar a impulsar tus cambios en vivo para que los visitantes vean la versión más reciente de tu sitio.</p>
 </div>
-<h2><span id="Purgar_el_cache_manualmente_usando_el_plugin">Purgar el caché manualmente usando el plugin</span></h2>
+<div id="cuando" class="section-link">&nbsp;</div>
+<h2>Purgar el caché manualmente usando el plugin</h2>
 <div class="solvvy-solution">
 <p>El plugin Proxy Cache Purge incluye un botón <strong>Purge Cache</strong> ubicado en la barra de herramientas WP-Admin en la parte superior:</p>
 <dl>
@@ -176,7 +161,7 @@
 <p>Si necesitas purgar selectivamente archivos específicos como CSS que cambiaste y cargaste manualmente a través de SFTP/SSH, deberás hacerlo a través de SSH por ahora.</p>
 </div>
 </div>
-<span id="Purgar_el_cache_manualmente_a_traves_de_SSH">Purgar manualmente el caché a través de SSH</span>
+<p>Purgar manualmente el caché a través de SSH</p>
 <div class="solvvy-solution">
 <p>Para purgar manualmente el caché de DreamPress, debes verificar que el usuario de DreamPress sea una <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Cuenta shell</a>, y usa la herramienta de línea de comandos WP-CLI mientras estás conectado a tu dominio a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</p>
 <p>El siguiente es un comando de ejemplo de cómo purgar un solo archivo CSS:</p>
@@ -190,13 +175,10 @@
 </pre>
 </div>
 </div>
-<h2><span id="Ver_tambien">Ver También</span></h2>
+<h2>Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214581158-Generalidades-sobre-DreamPress">Generalidades de DreamPress</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214581728-Preguntas-frecuentes-de-DreamPress">Preguntas Frecuentes sobre DreamPress</a></li>
 </ul>
-</div>
-</div>
-</div>
 </div>

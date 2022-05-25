@@ -1,31 +1,11 @@
-<div class="document">
-<div class="documentwrapper">
-<div class="body">
-<div id="sample_aws_php.v3_sdk" class="solvvy-hidden">
-<div class="table-of-content container">
-<ul class="simple">
-<li><a class="reference internal" href="#Crear_una_conexión">Crear una conexión</a></li>
-<li><a class="reference internal" href="#Enlistar_Buckets_propios">Enlistar Buckets propios</a></li>
-<li><a class="reference internal" href="#Crear_un_Bucket">Crear un Bucket</a></li>
-<li><a class="reference internal" href="#Enlistar_los_contenidos_de_un_Bucket">Enlistar los contenidos de un Bucket</a></li>
-<li><a class="reference internal" href="#Eliminar_todos_los_contenidos_de_un_Bucket">Eliminar todos los contenidos de un Bucket</a></li>
-<li><a class="reference internal" href="#Eliminar_un_Bucket">Eliminar un Bucket</a></li>
-<li><a class="reference internal" href="#Crear_un_object">Crear un object</a></li>
-<li><a class="reference internal" href="#Cambiar_el_ACL_de_un_object">Cambiar el ACL de un object</a></li>
-<li><a class="reference internal" href="#Eliminar_un_object">Eliminar un object</a></li>
-<li><a class="reference internal" href="#Descargar_un_object_de_un_archivo">Descargar un object de un archivo</a></li>
-<li><a class="reference internal" href="#Generar_una_URL_de_descarga_de_objects">Generar una URL de descarga de objects</a></li>
-</ul>
-</div>
-</div>
-<span id="EXACT_HEADING_NAME"></span>
+<div class="auto-toc">&nbsp;</div>
 <div class="notebox-note">
 <p>No se recomienda almacenar credenciales en un archivo ejecutable. Una mejor opción es cargar credenciales desde 'environment variables' o desde un 'credentials ini file'. Visita el siguiente sitio para obtener más detalles:</p>
 <ul>
 <li><a href="https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/guide_configuration.html#credentials">Credenciales de Amazon Web Services (AWS)</a></li>
 </ul>
 </div>
-<h2><span id="Crear_una_conexión">Crear una conexión</span></h2>
+<h2>Crear una conexión</h2>
 <div class="solvvy-solution">
 <p>Crear un cliente S3 de un objeto para interactuar con el servidor DHO:</p>
 <div class="preboxcontainer">
@@ -51,7 +31,7 @@ $client = new Aws\S3\S3Client([
 ]);</pre>
 </div>
 </div>
-<h2><span id="Enlistar_Buckets_propios">Enlistar Buckets propios</span></h2>
+<h2>Enlistar Buckets propios</h2>
 <div class="solvvy-solution">
 <p>Enlista los buckets poseídos por el usuario S3:</p>
 <div class="preboxcontainer">
@@ -72,7 +52,7 @@ mahbuckat2   2011-04-21T18:05:48.000Z
 mahbuckat3   2011-04-21T18:07:18.000Z</pre>
 </div>
 </div>
-<h2><span id="Crear_un_Bucket">Crear un Bucket</span></h2>
+<h2>Crear un Bucket</h2>
 <div class="solvvy-solution">
 <div class="preboxcontainer">
 <pre class="prebox">$BUCKET_NAME='<span class="code-highlight">my-new-bucket</span>';
@@ -87,7 +67,7 @@ try {
 }</pre>
 </div>
 </div>
-<h2><span id="Enlistar_los_contenidos_de_un_Bucket">Enlistar los contenidos de un Bucket</span></h2>
+<h2>Enlistar los contenidos de un Bucket</h2>
 <div class="solvvy-solution">
 <div class="preboxcontainer">
 <pre class="prebox">$objects = $client-&gt;listObjectsV2([
@@ -103,14 +83,14 @@ foreach ($objects['Contents'] as $object){
 myphoto2.jpg 262518  2011-08-08T21:38:01.000Z</pre>
 </div>
 </div>
-<h2><span id="Eliminar_todos_los_contenidos_de_un_Bucket">Eliminar todos los contenidos de un Bucket</span></h2>
+<h2>Eliminar todos los contenidos de un Bucket</h2>
 <div class="solvvy-solution">
 <div class="preboxcontainer">
 <pre class="prebox">$batch = Aws\S3\BatchDelete::fromListObjects($client, ['Bucket' =&gt; '<span class="code-highlight">my-new-bucket</span>']);
 $batch-&gt;delete();</pre>
 </div>
 </div>
-<h2><span id="Eliminar_un_Bucket">Eliminar un Bucket</span></h2>
+<h2>Eliminar un Bucket</h2>
 <div class="solvvy-solution">
 <div class="notebox-important">
 <p>El Bucket debe estar vacío, si no la siguiente llamada no funcionará.</p>
@@ -119,7 +99,7 @@ $batch-&gt;delete();</pre>
 <pre class="prebox">$client-&gt;deleteBucket(array('Bucket' =&gt; '<span class="code-highlight">my-new-bucket</span>'));</pre>
 </div>
 </div>
-<h2><span id="Crear_un_object">Crear un object</span></h2>
+<h2>Crear un object</h2>
 <div class="solvvy-solution">
 <p>Sube un archivo desde el sistema de archivos y lo configura como 'private' o privado:</p>
 <div class="preboxcontainer">
@@ -138,7 +118,7 @@ try{
 }</pre>
 </div>
 </div>
-<h2><span id="Cambiar_el_ACL_de_un_object">Cambiar un Access Control List (ACL) de un objeto</span></h2>
+<h2>Cambiar un Access Control List (ACL) de un objeto</h2>
 <div class="solvvy-solution">
 <p>Cambia la disponibilidad del object <span class="text-object">hello.txt</span> a 'publicly readable', un object <span class="text-object">secret_plans.txt</span> a 'private'.</p>
 <div class="preboxcontainer">
@@ -160,7 +140,7 @@ $client-&gt;putObjectAcl(array(
 </ul>
 </div>
 </div>
-<h2><span id="Eliminar_un_object">Eliminar un object</span></h2>
+<h2>Eliminar un object</h2>
 <div class="solvvy-solution">
 <p>Elimina el object <span class="text-object">goodbye.txt</span>:</p>
 <div class="preboxcontainer">
@@ -170,7 +150,7 @@ $client-&gt;putObjectAcl(array(
 ));</pre>
 </div>
 </div>
-<h2><span id="Descargar_un_object_a_un_archivo">Descargar un object a un archivo</span></h2>
+<h2>Descargar un object a un archivo</h2>
 <div class="solvvy-solution">
 <p>Descarga el object <span class="text-object">poetry.pdf</span> de ‘my-bucket-name’ y lo guarda en <span class="text-object">/home/username/documents.&nbsp;</span>. Asegúrate de cambiar <span class="text-object">username</span> a tu usuario Shell.</p>
 <div class="preboxcontainer">
@@ -181,7 +161,7 @@ $client-&gt;putObjectAcl(array(
 ));</pre>
 </div>
 </div>
-<h2><span id="Generar_una_URL_de_descarga_de_objects">Generar una URL de descarga de objects (sin firmar y pre-firmado)</span></h2>
+<h2>Generar una URL de descarga de objects (sin firmar y pre-firmado)</h2>
 <div class="solvvy-solution">
 <p>Genera una URL sin firmar para <span class="text-object">hello.txt</span>. Esto funciona por que <span class="text-object">hello.txt</span> se hizo público configurando la ACL anterior, que luego genera una URL de descarga firmada para <span class="text-object">secret_plans.txt</span> que funciona durante 1 hora. Las URL de descarga firmadas funcionan durante el período de tiempo, incluso si el objeto es privado (cuando finaliza el período de tiempo, la URL deja de funcionar):</p>
 <div class="preboxcontainer">
@@ -199,8 +179,5 @@ echo $signed_url-&gt;getUri() . "\n";</pre>
 <div class="preboxcontainer">
 <pre class="prebox">https://my-bucket-name.objects-us-east-1.dream.io/hello.txt
 https://my-bucket-name.objects-us-east-1.dream.io/secret_plans.txt?Signature=XXXXXXXXXXXXXXXXXXXXXXXXXXX&amp;Expires=1316027075&amp;AWSAccessKeyId=XXXXXXXXXXXXXXXXXXX</pre>
-</div>
-</div>
-</div>
 </div>
 </div>

@@ -1,34 +1,10 @@
-<div class="document">
-<div class="documentwrapper">
-<div class="body">
-<div id="ubuntu_bionic" class="solvvy-hidden">
-<div class="altTitle">Debian Stretch</div>
-<div class="table-of-content container">
-<ul class="simple">
-<li><a class="reference internal" href="#que-esperar">¿Qué esperar?</a></li>
-<li><a class="reference internal" href="#llaves-de-host">Cambio de Llaves de host</a></li>
-<li><a class="reference internal" href="#admin_sudo">VPS antiguo</a></li>
-<li><a class="reference internal" href="#mysql">MySQL</a></li>
-</ul>
-<span class="toc-sublink"> <a href="#servidor">Cambios de servidor</a> </span> <span class="toc-sublink"> <a href="#reservadas">Palabras reservadas</a> </span> <span class="toc-sublink"> <a href="#mariadb" target="_self">MariaDB</a> </span>
-<ul class="simple">
-<li><a class="reference internal" href="#servidor-web">Servidor web</a></li>
-</ul>
-<span class="toc-sublink"><a href="#apache">Versión de Apache</a></span> <span class="toc-sublink"><a href="#boto_s3cmd">Boto-rsync y S3cmd</a></span> <span class="toc-sublink"> <a href="#curl">curl</a> </span> <span class="toc-sublink"> <a href="#ffmpeg_libav">FFmpeg y Libav</a></span> <span class="toc-sublink"> <a href="#filterprovider">FilterProvider</a></span> <span class="toc-sublink"> <a href="#java" target="_self">Versión Java</a></span> <span class="toc-sublink"> <a href="#openssl">OpenSSL</a></span> <span class="toc-sublink"> <a href="#passenger">Passenger</a></span> <span class="toc-sublink"> <a href="#perl">Versión Perl</a> </span> <span class="toc-sublink"> <a href="#php-errores" target="_self">Registro PHP</a> </span> <span class="toc-sublink"> <a href="#python">Versión de Python</a> </span> <span class="toc-sublink"> <a href="#django" target="_self">Errores de Django</a></span> <span class="toc-sublink"> <a href="#virtualenv">Entorno virtual de Python</a></span> <span class="toc-sublink"> <a href="#ruby">Versión Ruby</a> </span> <span class="toc-sublink"> <a href="#ssh">Versión SSH</a> </span>
-<ul class="simple">
-<li><a class="reference internal" href="#apoyo">¿Cómo puedo encontrar apoyo?</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<p>A continuación se proporciona información para ayudarte a preparar tu sitio web para Debian Stretch.</p>
-<h2><span id="que-esperar">Que esperar</span></h2>
+<div class="auto-toc">&nbsp;</div>
+<h2>Que esperar</h2>
 <div class="solvvy-solution">
 <p>DreamHost se comunicará contigo por correo electrónico antes de la actualización.</p>
 <p>El marco de tiempo de una actualización puede variar de un servidor a otro, sin embargo, el tiempo asegura que haya varios ingenieros altamente capacitados disponibles en caso de que surjan problemas importantes. La actualización en sí no debería tardar más de una hora en completarse.</p>
 </div>
-<h2><span id="llaves-de-host">Cambio de Llaves de host</span></h2>
+<h2>Cambio de Llaves de host</h2>
 <div class="solvvy-solution">
 <p>Cada servidor DreamHost usa Llaves SSH únicas para garantizar que tu conexión sea segura y confiable. Cuando usas por primera vez un cliente SFTP o SSH para conectarte a tu servidor, verifica las Llaves para confirmar que la conexión es segura.</p>
 <p>Cuando tu servidor se actualice, estas Llaves cambiarán. Esto significa que la próxima vez que intentes conectarte al servidor mediante un cliente SFTP o SSH, verás el siguiente mensaje:</p>
@@ -42,7 +18,7 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/360004634231-Alerta-The-server-s-host-key-is-unknown-La-llave-host-del-servidor-es-desconocida-" target="_self" rel="undefined">Alerta 'The server's host key is unknown' (La llave host del servidor es desconocida)</a></li>
 </ul>
 </div>
-<h2><span id="admin_sudo">VPS antiguo/descontinuado con usuarios admin/sudo</span></h2>
+<h2>VPS antiguo/descontinuado con usuarios admin/sudo</h2>
 <div class="solvvy-solution">
 <p>Aunque aún tendrás acceso de admin/sudo para realizar cambios en tu VPS después de la actualización, la actualización a Stretch puede no ser compatible con tus necesidades actuales. Por ejemplo, los siguientes cambios pueden afectar tu configuración actual:</p>
 <ul>
@@ -55,25 +31,25 @@
 <li>Si no estás seguro o deseas analizar más a fondo una solución viable, no dudes en ponerte en <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg" target="_blank" rel="noopener noreferrer">Contacto con Soporte</a>.</li>
 </ul>
 </div>
-<h2><span id="mysql">MySQL</span></h2>
+<h2>MySQL</h2>
 <div class="solvvy-solution">
-<h3><span id="servidor">Cambios de servidor</span></h3>
+<h2>Cambios de servidor</h2>
 <p>Los servidores DreamHost MySQL se actualizarán a la versión MySQL 5.7 como parte de la actualización de Ubuntu.</p>
-<h3><span id="reservadas">Palabras reservadas</span></h3>
+<h2>Palabras reservadas</h2>
 <p>MySQL 5.7 incluye una lista de "palabras reservadas" (como 'SELECT', 'DELETE', 'BIGINT', y 'VIRTUAL') que no pueden usarse como nombre de base de datos. Estas palabras pueden usarse como un nombre de tabla de base de datos, pero deben escaparse en las consultas de la base de datos. Las palabras reservadas en MySQL 5.7 requieren un tratamiento especial para su uso como identificadores, como nombres de tabla y columna.</p>
 <p>Consulta el siguiente artículo para obtener más información sobre cómo usar palabras reservadas en MySQL 5.7:</p>
 <ul>
 <li><a href="https://dev.mysql.com/doc/refman/5.7/en/keywords.html">Palabras clave de MySQL y palabras reservadas</a></li>
 </ul>
-<h3><span id="mariadb">MariaDB usado como cliente mysql</span></h3>
+<h2>MariaDB</h2>
 <p>MariaDB se utiliza como cliente mysql cuando se conecta a una base de datos desde el VPS. Todos los comandos de MySQL continúan funcionando igual, la única diferencia es el texto que aparece cuando se conecta originalmente al servidor de la base de datos. Mira el siguiente artículo para ver un ejemplo:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214882998-Conectarse-a-una-base-de-datos-v%C3%ADa-SSH#mariadb" target="_self">Cliente mysql MariaDB utilizado en Debian Stretch</a></li>
 </ul>
 </div>
-<h2><span id="servidor-web">Cambios en el servidor web</span></h2>
+<h2>Cambios en el servidor web</h2>
 <div class="solvvy-solution">
-<h3><span id="apache">Cambio de versión de Apache (de 2.2 a 2.4)</span></h3>
+<h2>Apache</h2>
 <p>Apache se está actualizando a la versión 2.4 (desde 2.2). Aunque esto no debería causar problemas importantes a tu entorno de alojamiento, puedes ver una lista de cambios en el siguiente artículo:</p>
 <ul>
 <li><a href="https://httpd.apache.org/docs/2.4/upgrading.html" target="_self">Actualizar a 2.4 de 2.2</a></li>
@@ -100,17 +76,17 @@
 <div class="preboxcontainer">
 <pre class="prebox">DirectoryIndex disabled</pre>
 </div>
-<h3><span id="boto_s3cmd">Boto-rsync</span></h3>
+<h2>Boto-rsync</h2>
 <p>Debido a que boto-rsync es un software desactualizado y ya no se mantiene, también se elimina de la última versión de Debian Stretch. DreamHost recomienda usar S3cmd o AWS CLI en su lugar. Puedes encontrar más información sobre cómo usar S3cmd o AWS CLI en los siguientes artículos:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/sections/360003569291-S3cmd" target="_self" rel="undefined">S3cmd</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/sections/360003559251-AWS-CLI" target="_self" rel="undefined">Interfaz de línea de comandos de AWS</a></li>
 </ul>
-<h3><span id="curl">La versión de curl cambió a 7.52.1</span></h3>
+<h2>curl</h2>
 <p>La versión de curl cambió de 7.35.0 a 7.52.1.</p>
-<h3><span id="ffmpeg_libav">FFmpeg y Libav</span></h3>
+<h2>FFmpeg y Libav</h2>
 <p>En Ubuntu 14 (Trusty), Libav reemplazó a FFmpeg, y FFmpeg fue eliminado por completo de Trusty. Con la actualización de Debian Stretch, esto se revierte: FFmpeg está de vuelta y Libav ha sido eliminado. Asegúrate de actualizar la configuración de tu archivo en consecuencia.</p>
-<h3><span id="filterprovider">Cambio de sintaxis de FilterProvider</span></h3>
+<h2>Cambiar la sintaxis de FilterProvider</h2>
 <p>En Apache 2.4, la sintaxis de FilterProvider ha cambiado.</p>
 <p>Muestra de versión anterior:</p>
 <div class="preboxcontainer">
@@ -124,32 +100,33 @@
 <ul>
 <li><a href="https://httpd.apache.org/docs/2.4/mod/mod_filter.html" target="_self">https://httpd.apache.org/docs/2.4/mod/mod_filter.html</a></li>
 </ul>
-<h3><span id="java">Cambio de versión de Java (de 7u151 a 8u242)</span></h3>
+<h2>Java</h2>
 <p>Debian Stretch incluye una nueva versión de Java versión 8, 8u242.</p>
 <p>Esta es la primera actualización importante en bastante tiempo, por lo que definitivamente es una buena idea asegurarse de que las dependencias de Java que pueda tener sean compatibles con la versión 8.</p>
 <p>Para obtener más información sobre las últimas versiones de Java, visita el siguiente enlace:</p>
 <ul>
 <li><a href="https://www.java.com/en/download/help/release_changes.html" target="_self">Aspectos destacados de la versión Java 8</a></li>
 </ul>
-<h3><span id="openssl">Cambio de versión de OpenSSL (1.0.1f a1.1.0l)</span></h3>
+<h2>OpenSSL</h2>
 <p>Debian Stretch incluye la versión 1.1.0l de OpenSSL.</p>
-<h3><span id="passenger">Passenger</span></h3>
+<h2>Passenger</h2>
 <p>Para habilitar las páginas amigables con los errores de Passenger (que ayuda a solucionar problemas de actualización), agrega lo siguiente a un archivo <span class="text-object">.htaccess</span> dentro de la aplicación:</p>
 <div class="preboxcontainer">
 <pre class="prebox">PassengerFriendlyErrorPages on</pre>
 </div>
-<h3><span id="perl">Cambio de versión de Perl (de 5.18.4 a 5.24.1)</span></h3>
+<h2>Perl</h2>
 <p>Debian Stretch incluye una nueva versión de Perl, 5.24.1. Entre los muchos cambios, esta actualización elimina el directorio actual (".") De @INC por razones de seguridad. Puedes leer sobre esto con más detalle&nbsp;<a href="https://metacpan.org/release/XSAWYERX/perl-5.26.0/view/pod/perldelta.pod#Removal-of-the-current-directory-%28%22.%22%29-from-@INC" target="_self">aquí</a>.</p>
 <p>Para obtener más información sobre cómo actualizar su versión de Perl, visita el siguiente artículo:</p>
 <ul>
 <li><a href="https://metacpan.org/release/XSAWYERX/perl-5.26.0/changes" target="_self">Cambiar documentación entre 5.24 y 5.26</a></li>
 </ul>
-<h3><span id="php-errores">Registro de errores de PHP</span></h3>
+<h2>Registro de errores de PHP</h2>
 <p>Los errores de PHP se registran en el archivo <span class="text-object">error.log</span> de tu sitio de forma predeterminada. Tú cambia qué errores se informan y la ubicación de dónde se informan actualizando el archivo <span class="text-object">phprc</span> de tu sitio. Revisa el siguiente artículo para más detalles:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214894197-Habilitar-el-registro-de-errores-de-PHP" target="_self">Habilitar el registro de errores de PHP</a></li>
 </ul>
-<h3><span id="python">Cambios de versión de Python</span></h3>
+<div id="python" class="section">&nbsp;</div>
+<h2>Python</h2>
 <p>Las siguientes versiones de Python están cambiando:</p>
 <ul>
 <li>Actualización de versión de Python 2.7.13 a 3.5.3</li>
@@ -172,7 +149,7 @@
 <li><a href="https://docs.python.org/2/whatsnew/2.7.html" target="_self">Qué hay de nuevo en Python 2.7.15</a></li>
 <li><a href="https://docs.python.org/3/whatsnew/3.6.html" target="_self">¿Qué hay de nuevo en Python 3.6?</a></li>
 </ul>
-<h3><span id="django">Errores de Python Django</span></h3>
+<h2>Errores de Python Django</h2>
 <p>Después de la actualización, es posible que veas errores en tu aplicación Django. Por ejemplo.</p>
 <div class="preboxcontainer">
 <pre class="prebox">django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module: libmysqlclient.so.18: cannot open shared object file: No such file or directory.
@@ -180,10 +157,11 @@ Did you install mysqlclient or MySQL-python?</pre>
 </div>
 <h4>Solución</h4>
 <p>Elimina tu directorio pip <span class="text-object">.cache</span>.</p>
-<h3><span id="virtualenv">Python virtual environment</span></h3>
+<h2>Python virtualenv</h2>
 <p>Si tu sitio web está utilizando un entorno virtual de Python y nota algún error después de la actualización, reinstala tu entorno virtual y todos los módulos. Esto ayuda a garantizar que todo sea compatible con las nuevas bibliotecas del servidor.</p>
 <p>Ejemplos de errores que puede ver son errores/advertencias de Django, Passenger o Python.</p>
-<h3><span id="ruby">Ruby 2.7.0</span></h3>
+<div id="ruby" class="section">&nbsp;</div>
+<h2>Ruby</h2>
 <p>La versión de Ruby en el servidor es 2.7.0. Si deseas tener más control sobre esto (por ejemplo, deseas utilizar una versión anterior o más reciente de Ruby), DreamHost recomienda encarecidamente usar <a href="https://help.dreamhost.com/hc/es/articles/217185247-Ruby-Version-Manager-RVM-">RVM</a>.</p>
 <p>Si estás usando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115001070131-Usar-Bundler-para-instalar-Ruby-gems">Bundler</a>,&nbsp;solo necesitas ejecutar:</p>
 <div class="preboxcontainer">
@@ -195,11 +173,10 @@ Did you install mysqlclient or MySQL-python?</pre>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">touch  tmp/restart.txt</span>
 </pre>
 </div>
-<h3><span id="ssh">Cambio de versión de SSH a 7.4p1 (Sin llaves dsa)</span></h3>
+<h2>SSH</h2>
 <p>La versión de SSH en los servidores Debian es 7.4p1. Ten en cuenta que las claves DSA no están disponibles en esta versión.</p>
 </div>
-<h2><span id="apoyo">¿Cómo puedo encontrar soporte?</span></h2>
+<h2>¿Cómo puedo encontrar soporte?</h2>
 <div class="solvvy-solution">
 <p>Si tienes alguna pregunta o inquietud, no dudes en&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener noreferrer">contactar a soporte</a>.</p>
-</div>
 </div>
