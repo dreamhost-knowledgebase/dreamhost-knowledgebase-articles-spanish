@@ -1,21 +1,4 @@
-<div class="document">
-<div class="documentwrapper">
-<div class="body">
-<div id="passenger_troubleshooting" class="solvvy-hidden">
-<div class="table-of-content container">
-<ul class="simple">
-<li><a class="reference internal" href="#La_Aplicación_no_se_reinicia">La Aplicación no se reinicia</a></li>
-<li><a class="reference internal" href="#Error_broken_pipe">Error broken pipe</a></li>
-<li><a class="reference internal" href="#El_registro_de_producción_no_está_siendo_escrito">El registro de producción no está siendo escrito</a></li>
-<li><a class="reference internal" href="#Configuraciones_de_conexión_faltantes">Configuraciones de conexión faltantes</a></li>
-<li><a class="reference internal" href="#Usar_una_conexión_socket_en_lugar_de_un_host">Usar una conexión socket en lugar de un host</a></li>
-<li><a class="reference internal" href="#Nombres_erróneos_de_parametros">Usar nombres erróneos de parametros</a></li>
-<li><a class="reference internal" href="#Passenger_no_puede_encontrar_rails">Passenger no puede encontrar rails</a></li>
-<li><a class="reference internal" href="#Comentarios_ERB_causan_que_el_inicio_de_tu_vista_desaparezca">Comentarios ERB causan que el inicio de tu vista desaparezca</a></li>
-<li><a class="reference internal" href="#Habilitar_las_páginas_amigables_de_errores_de_Passenger">Habilitar las páginas amigables de errores de Passenger</a></li>
-</ul>
-</div>
-</div>
+<div class="auto-toc">&nbsp;</div>
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <div class="notebox-important">
@@ -30,27 +13,27 @@
 <div class="solvvy-solution">
 <p>El uso de Passenger con Node.js te permite cargar tu sitio en el puerto 80 o 443. Sin embargo, esto solo funciona si tu aplicación tiene un nombre <strong>app.js</strong>.</p>
 </div>
-<h2><span id="La_Aplicación_no_se_reinicia">La Aplicación no se reinicia</span></h2>
+<h2>La Aplicación no se reinicia</h2>
 <div class="solvvy-solution">
 <p>Por lo general, esto no es un problema. Solo se percibe como un problema. En Passenger 2.1, el comportamiento del mecanismo de reinicio cambió. Ahora Passenger simplemente verifica la marca de tiempo de la modificación en el archivo <span class="text-object">restart.txt</span>. Si es más reciente que la última vez que lo comprobaste, se reinicia. El archivo no se elimina. Esto se hizo para que el reinicio de las aplicaciones funcionara sin problemas en los recursos compartidos de NFS.</p>
 <p>En sitios de menor tráfico, por lo general, aún puedes ver visualmente que la aplicación se reinicia "preparando" una página (cargándola un par de veces en tu navegador), tocando el archivo <span class="text-object">restart.txt</span> y luego cargando esa página nuevamente. Debería tardar un tiempo notablemente más largo en cargarse que el par de veces anteriores. Sin embargo, esto realmente no funcionará en sitios en vivo que están recibiendo tráfico, ya que es muy posible que la solicitud de otra persona reinicie la aplicación en el momento en que la pruebes tu mismo.</p>
 </div>
-<h2><span id="Error_broken_pipe">Error Broken pipe</span></h2>
+<h2>Error Broken pipe</h2>
 <div class="solvvy-solution">
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/Passenger_error_broken_pipe.jpg" alt="Passenger error broken pipe.jpg" width="410" height="223" /></dd>
 </dl>
 <p>Si recibes un mensaje de error que menciona un broken pipe con la clase de excepción <strong>PhusionPassenger::Railz::ApplicationSpawner::Error</strong> como se muestra en la imagen, lo más probable es que tengas problemas de límite de memoria. Lo que está sucediendo es que la solicitud que está procesando Passenger provocó que se excediera el límite de memoria de usuario en el servidor y el proceso de Rails que estaba manejando esa solicitud fue cancelado. Desafortunadamente, no hay mucho que se pueda hacer al respecto, ya que incluso una aplicación Rails muy básica requiere mucha memoria por adelantado. Esto sucede con más frecuencia si tienes más de una aplicación Rails alojada en la misma cuenta. La mejor manera de asegurarte de no encontrarte con este problema es mover tus sitios de Rails a un <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a>. Eso te brinda una memoria escalable garantizada que puedes ajustar hasta que se satisfagan tus necesidades de memoria.</p>
 </div>
-<h2><span id="El_registro_de_producción_no_está_siendo_escrito">El registro de producción no se está escribiendo</span></h2>
+<h2>El registro de producción no se está escribiendo</h2>
 <div class="solvvy-solution">
 <p>Esto suele deberse a un archivo <span class="text-object">database.yml</span> mal configurado. Si tu archivo <span class="text-object">database.yml</span> no está configurado correctamente, Passenger muere antes de que se cargue tu aplicación. Como tal, no recibe mensajes de error útiles de Passenger y tu archivo <span class="text-object">production.log</span> no se toca.</p>
 </div>
-<h2><span id="Configuraciones_de_conexión_faltantes">Configuraciones de conexión faltantes</span></h2>
+<h2>Configuraciones de conexión faltantes</h2>
 <div class="solvvy-solution">
 <p>A algunas versiones de Passenger realmente no les gusta si tu archivo <span class="text-object">database.yml</span> no incluye al menos configuraciones (pueden estar en blanco) para todos los entornos. El síntoma de que esto sucede es que tu aplicación se carga sin cesar sin salida al archivo <span class="text-object">production.log</span>. Por lo tanto, asegúrate de dejar la información de conexión para todos los entornos en tu archivo <span class="text-object">database.yml</span> -- incluso si solo estás utilizando la configuración de producción.</p>
 </div>
-<h2><span id="Usar_una_conexión_socket_en_lugar_de_un_host">Usar una conexión socket en lugar de un host</span></h2>
+<h2>Usar una conexión socket en lugar de un host</h2>
 <div class="solvvy-solution">
 <p>Este error simplemente no cambiar de usar una conexión de socket a un host. La información de conexión de MySQL predeterminada se ve así:</p>
 <div class="preboxcontainer">
@@ -65,7 +48,7 @@
   socket: /tmp/mysql.sock
 </pre>
 </div>
-<p>Como puedes ver, está configurado para usar una conexión de socket de forma predeterminada. Debes asegurarte de reemplazar esa línea con la información correcta de host, nombre de usuario y contraseña para una base de datos. Puedes encontrar esta información en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener">Bases de Datos MySQL</a>. Una configuración correcta podría verse así:</p>
+<p>Como puedes ver, está configurado para usar una conexión de socket de forma predeterminada. Debes asegurarte de reemplazar esa línea con la información correcta de host, nombre de usuario y contraseña para una base de datos. Puedes encontrar esta información en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener noreferrer">Bases de Datos MySQL</a>. Una configuración correcta podría verse así:</p>
 <div class="preboxcontainer">
 <pre class="prebox">production:
   adapter: mysql2
@@ -79,7 +62,7 @@
 </pre>
 </div>
 </div>
-<h2><span id="Nombres_erróneos_de_parametros">Nombres erróneos de parámetros</span></h2>
+<h2>Nombres erróneos de parámetros</h2>
 <div class="solvvy-solution">
 <p>Otro error común es simplemente tener un parámetro necesario mal nombrado. Esto puede suceder más fácil de lo que parece porque cuando generas una aplicación Rails, esta genera de forma predeterminada un archivo de configuración sqlite3 <span class="text-object">database.yml</span>. Debes especificar manualmente que deseas un archivo MySQL (rails --database mysql &lt;nombre de proyecto&gt;) o tendrás que cambiarlo manualmente. Dado que mucha gente no se da cuenta de esto, terminan cambiándolo después del hecho y los archivos de configuración sqlite3 no tienen nombre de usuario o parámetros de host. Así es como se ve una sección sqlite3 predeterminada:</p>
 <div class="preboxcontainer">
@@ -113,11 +96,11 @@
 </pre>
 </div>
 </div>
-<h2><span id="Passenger_no_puede_encontrar_rails">Passenger no puede encontrar rails</span></h2>
+<h2>Passenger no puede encontrar rails</h2>
 <div class="solvvy-solution">
 <p>Ha habido algunos casos en los que aparece este error al implementar aplicaciones que incluyen tu propio config.ru, como Fat Free CRM. Si encuentras este error, intenta cambiar el nombre de config.ru y ve si el error desaparece.</p>
 </div>
-<h2><span id="Comentarios_ERB_causan_que_el_inicio_de_tu_vista_desaparezca"> Los comentarios ERB hacen que el inicio de tu vista desaparezca </span></h2>
+<h2>Los comentarios ERB hacen que el inicio de tu vista desaparezca</h2>
 <div class="solvvy-solution">
 <p>Es posible que tengas la tentación de comenzar una vista con un comentario que te ayude a recordar qué archivo estás editando. Esto puede ser útil si, por ejemplo, tienes "index.html.erb" bajo muchos controladores diferentes. Puedes tener la tentación de hacer esto.</p>
 <p>Esta vista está rota:</p>
@@ -137,7 +120,7 @@
 <p>Este error puede sorprenderte porque la vista anterior se muestra exactamente como debería en Mongrel en un entorno de desarrollo.</p>
 <p>La solución es eliminar el comentario o reemplazarlo con un comentario HTML de la vieja escuela (del tipo &lt;!-- ).</p>
 </div>
-<h2><span id="Habilitar_las_páginas_amigables_de_errores_de_Passenger">Habilitar las páginas amigables de errores</span></h2>
+<h2>Habilitar las páginas amigables de errores</h2>
 <div class="solvvy-solution">
 <p>Las páginas amigables de errores de Passenger te ayudan a solucionar problemas de actualización. Para habilitarlas, agrega lo siguiente a un archivo <span class="text-object">.htaccess</span> dentro de la aplicación:</p>
 <div class="preboxcontainer">
@@ -152,7 +135,4 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/215769548-Passenger-y-Python-WSGI">Passenger y Python WSGI</a></li>
 </ul>
 </div>
-</div>
-</div>
 <div class="clearer">&nbsp;</div>
-</div>
