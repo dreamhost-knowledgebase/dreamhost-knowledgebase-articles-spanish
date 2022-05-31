@@ -1,0 +1,102 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Un problema común después de agregar un certificado SSL es que tu navegador todavía muestra tu sitio como inseguro. Esto sucede con mayor frecuencia porque hay enlaces en tu página que aún apuntan a <span class="text-object">HTTP</span> en lugar de <span class="text-object">HTTPS</span>. Por ejemplo, mira el siguiente código para vincular una imagen.</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;img src="<span class="code-highlight">http</span>://www.example.com/images/pic_mountain.jpg" alt="Mountain View"&gt;</pre>
+</div>
+<p>Nota cómo la URL está directamente vinculada arriba con <span class="text-object">http</span> al principio. Al visitar el sitio en Firefox, se muestra lo siguiente:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/mixed-content-site-error-01.png" alt="mixed-content-site-error-01.png" width="618" height="340" /></dd>
+</dl>
+<p>Puedes ver que el icono del <span class="text-object">candado</span> en la barra de navegación muestra un icono de <span class="text-object">advertencia</span> en su lugar.</p>
+</div>
+<h2>Causa de este error</h2>
+<div class="solvvy-solution">
+<p>Si haces clic en el icono de <span class="text-object">advertencia</span>, el texto explica que hay 'elementos no cifrados' en la página que estás viendo.</p>
+<p>En el ejemplo anterior, esto sucede porque la imagen se vinculó usando <span class="text-object">HTTP</span> y no <span class="text-object">HTTPS</span>. Otra forma de confirmar qué en tu sitio está vinculado de manera insegura es utilizar el siguiente sitio:</p>
+<ul>
+<li><a href="https://www.whynopadlock.com/">whynopadlock.com</a></li>
+</ul>
+</div>
+<h2>Errores HTTPS de navegador</h2>
+<div class="solvvy-solution">
+<p>Si intentas conectarte a un sitio que tiene un certificado SSL faltante, inválido o autofirmado mediante una URL <span class="text-object">HTTPS</span>, tu navegador muestra una <a href="https://help.dreamhost.com/hc/es/articles/215767487#advertencias_autofirmadas" target="_self">advertencia de seguridad</a> como 'Your connection to this site is not secure' en Chrome o 'Potential Security Risk Ahead' en Firefox. Por ejemplo:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/mixed-content-site-error-02.png" alt="mixed-content-site-error-02.png" width="422" height="252" /></dd>
+</dl>
+<h3>Revisar la consola JavaScript</h3>
+<p>También puedes consultar la consola de JavaScript en tu navegador. Esto también puede mostrar una advertencia de por qué el sitio no se está cargando.</p>
+<p>En FireFox y Chrome, puedes abrir la consola presionando las siguientes teclas:</p>
+<ul>
+<li><strong>Windows</strong> — <span class="code">Ctrl + Shift + i</span></li>
+<li><strong>Mac</strong> — <span class="code">Option&nbsp;+ Cmd + i</span></li>
+</ul>
+<p>Haz clic en la pestaña de la consola:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/mixed-content-site-error-03.png" alt="mixed-content-site-error-03.png" /></dd>
+</dl>
+<p>Un mensaje de error similar a lo siguiente aparece en la consola:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/mixed-content-site-error-04.png" alt="mixed-content-site-error-04.png" width="896" height="38" /></dd>
+</dl>
+<p>El enlace enlistado en el mensaje de error abre la siguiente página con más información sobre este problema:</p>
+<ul>
+<li><a href="https://blog.chromium.org/2019/10/no-more-mixed-messages-about-https.html" target="_self" rel="undefined">No Más Mensajes Mixtos Sobre HTTPS (Chromium Blog)</a></li>
+</ul>
+</div>
+<h2>Arreglar el error</h2>
+<div class="solvvy-solution">
+<p>Hay algunos pasos que debes realizar para corregir este error.</p>
+<h3>Paso 1 — Agrega un certificado SSL</h3>
+<p>Todos los sitios modernos deben utilizar un certificado SSL válido. Consulta el siguiente artículo para obtener instrucciones sobre cómo agregar un certificado SSL a tu sitio:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL" target="_self">Generalidades sobre agregar un certificado SSL</a></li>
+</ul>
+<h3>Paso 2 — Arreglar enlaces sin encriptación</h3>
+<p>Hay dos soluciones:</p>
+<h4><strong>Usa enlaces absolutos</strong></h4>
+<p>Los enlaces absolutos son la ubicación de la URL completa a tu archivo. Esto incluye el nombre de dominio. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;img src="<span class="code-highlight">https://www.example.com</span>/images/pic_mountain.jpg" alt="Mountain View"&gt;</pre>
+</div>
+<strong>Mac</strong> — <span class="code">Option&nbsp;+ Cmd + i</span>
+<p>Solo asegúrate de usar <span class="text-object">HTTPS</span> al vincular de esta manera.</p>
+<h4><strong>Usa enlaces relativos</strong></h4>
+<p>Los enlaces relativos no incluyen el nombre de dominio. En su lugar, estos enlaces apuntan a un archivo local. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;img src="images/pic_mountain.jpg" alt="Mountain View"&gt;</pre>
+</div>
+<p>Mira el siguiente enlace para más detalles:</p>
+<ul>
+<li><a href="https://www.w3schools.com/html/html_filepaths.asp" target="_self">Rutas de archivo HTML</a></li>
+</ul>
+<h3>Paso 3 — Resolver la advertencia al añadir código a tu archivo .htaccess</h3>
+<p>En lugar de actualizar manualmente los enlaces en tu código, puedes agregar las siguientes líneas al archivo <span class="text-object">.htaccess</span> de tu sitio.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar un archivo a través de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades sobre .htaccess</a></li>
+</ul>
+<div class="preboxcontainer">
+<pre class="prebox">Header always set Content-Security-Policy "upgrade-insecure-requests;"</pre>
+</div>
+<p>Estas líneas obligan al navegador a actualizar automáticamente cualquier enlace inseguro a enlaces seguros. Una vez agregada, la advertencia debería desaparecer inmediatamente. Mira el siguiente enlace para más detalles.</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests" target="_self">CSP: upgrade-insecure-requests</a></li>
+</ul>
+</div>
+<h2>Sitios WordPress</h2>
+<div class="solvvy-solution">
+<p>Hay algunos pasos adicionales que debes seguir para proteger un sitio de WordPress. Visita el siguiente artículo para obtener una lista de pasos para asegurarte de que tu sitio de WordPress utiliza enlaces seguros tanto en los archivos del sitio web como en la base de datos.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/218428687--C%C3%B3mo-uso-un-certificado-SSL-con-WordPress-" target="_self">¿Cómo usar un certificado SSL con WordPress?</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041537-Generalidades-sobre-certificados-SSL" target="_self">Generalidades sobre certificados SSL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215364588--Cu%C3%A1nto-cuesta-un-certificado-SSL-" target="_self">¿Cuánto cuesta un certificado SSL?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215364598--Debo-agregar-www-a-mi-certificado-SSL-de-Sectigo-" target="_self">¿Debo agregar 'www' a mi certificado SSL Sectigo?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115003505112-C%C3%B3mo-forzar-a-su-sitio-a-redireccionar-a-https-SSL-" target="_self">Cómo forzar tu sitio para que redirija a https (SSL)</a></li>
+</ul>
+</div>
