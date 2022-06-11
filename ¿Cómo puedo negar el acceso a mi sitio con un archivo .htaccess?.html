@@ -1,27 +1,56 @@
-<h2>Crear un archivo .htaccess en tu servidor web DreamHost</h2>
+<h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Da clic en el siguiente artículo para ver instrucciones de como crear un archivo <span class="text-object">.htaccess</span> en tu servidor web:</p>
+<p>Este artículo explica las diferentes maneras en las que puedes negar el acceso a tu sitio web o partes específicas de tu sitio usando un archivo <span class="text-object">.htaccess</span>.</p>
+<div class="notebox-note">
+<p>Este artículo muestra ejemplos de las <a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache" target="_self">versiones de Apache</a> 2.2 y 2.4.</p>
+<p>Todos los servidores de DreamHost corren actualmente la versión 2.4, pero el código antiguo 2.2 seguirá funcionando.</p>
+</div>
+</div>
+<div class="prereqs">
+<p><strong>Crear un archivo .htaccess en tu servidor web de DreamHost</strong></p>
+<div class="solvvy-solution">
+<p>Los códigos de ejemplo en este artículo deben ser puestos en el archivo <span class="text-object">.htaccess</span> de tu sitio web. Revisa el siguiente artículo para ver instrucciones de como crear un archivo <span class="text-object">.htaccess</span> en tu servidor web:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216456227#crear-un-archivo-htaccess-en-tu-servidor-web-dreamhost" target="_self">Crear un archivo .htaccess en tu servidor web DreamHost</a></li>
 </ul>
 <p>Si el archivo ya existe, da clic en los siguientes artículos para ver instrucciones de como actualizarlo (dependiendo si estás usando FTP o SSH):</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar un archivo vía FTP</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_blank" rel="noopener">Crear y editar un archivo vía SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_blank" rel="noopener noreferrer">Crear y editar un archivo vía SSH</a></li>
 </ul>
 <p>Una vez el archivo ha sido creado, puedes agregar los ejemplos de código abajo de él.</p>
+</div>
+</div>
+<h2>Negar acceso a un sitio web completo</h2>
+<div class="solvvy-solution">
+<p>El siguiente código previene que cualquier persona vea tu sitio web. Los visitantes verán un <span class="code">403</span> en vez cuando vean tu sitio web.</p>
+<h3>Apache 2.2</h3>
+<div class="preboxcontainer">
+<pre class="prebox">Order deny,allow
+Deny from all</pre>
+</div>
+<h3>Apache 2.4</h3>
+<div class="preboxcontainer">
+<pre class="prebox">Require all denied</pre>
+</div>
 </div>
 <h2>Negar acceso a archivos</h2>
 <div class="solvvy-solution">
 <h3>Rechazar acceso a extensiones de archivo específicos</h3>
 <p>El siguiente código fuerza a cualquier archivo terminado en .inc a dar el error 403 cuando sea visitado:</p>
+<h3>Apache 2.2</h3>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;Files ~ "\.inc$"&gt;  
-Order Allow,Deny
-Deny from All
+  Order Allow,Deny
+  Deny from All
 &lt;/Files&gt;
 </pre>
 </div>
+</div>
+<h3>Apache 2.4</h3>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;FilesMatch "\.(inc)$"&gt;<br />  Require all denied<br />&lt;/FilesMatch&gt;
+</pre>
 </div>
 <h2>Negar acceso a archivos "escondidos"</h2>
 <div class="solvvy-solution">
@@ -72,7 +101,9 @@ RewriteRule (^|/)blah(/|$) - [F]
 </div>
 <h2>Negar acceso de IPs específicas</h2>
 <div class="solvvy-solution">
-<p>Si tienes problemas con ciertos visitantes de tu sitio web, puedes rechazarlos fácilmente. Hay dos maneras diferentes de rechazar visitantes:</p>
+<p>Si tienes problemas con ciertos visitantes de tu sitio web, puedes rechazarlos fácilmente.</p>
+<h3>Apache 2.2</h3>
+<p>Hay dos maneras diferentes de prohibir la entrada a los visitantes:</p>
 <ul>
 <li>Usando su dirección IP, o</li>
 <li>El dominio del que están visitando.</li>
@@ -91,19 +122,31 @@ RewriteRule (^|/)blah(/|$) - [F]
 <li><a href="https://ip2cidr.com/" target="_self">IP a CIDR</a></li>
 </ul>
 </div>
+<h3>Apache 2.4</h3>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;RequireAll&gt;<br />  Require all granted<br />  Require not ip xxx.xxx.xxx.xxx<br />&lt;/RequireAll&gt;</pre>
+</div>
 <h2>Permitir acceso a una IP específica</h2>
 <div class="solvvy-solution">
 <p>Si necesitas negar acceso a tu sitio a todos pero poder seguir accediendo con tu IP u otra específica para visitarlo, usa esto:</p>
+<h3>Apache 2.2</h3>
 <div class="preboxcontainer">
 <pre class="prebox">order deny,allow
 deny from all
 allow from <span class="code-highlight">&lt;YOUR_IP_ADDRESS&gt;</span>
 </pre>
 </div>
+<h3>Apache 2.4</h3>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;RequireAll&gt;<br />  Require all denied<br />  Require ip <span class="code-highlight">&lt;YOUR_IP_ADDRESS&gt;</span><br />&lt;/RequireAll&gt;
+</pre>
+</div>
 </div>
 <h2>Negar acceso a un dominio específico</h2>
 <div class="solvvy-solution">
-<p>Esto niega acceso a cualquiera que se conecte a tu sitio desde <strong>www.example.com</strong>. Si alguien da clic en un enlace en <strong>example.com</strong> que redireccione a tu sitio, ellos verán un error 403 Forbidden error:</p>
+<p>Esto niega acceso a cualquiera que se conecte a tu sitio desde <strong>www.example.com</strong>.</p>
+<h3>Apache 2.2</h3>
+<p>Si alguien da clic en un enlace en <strong>example.com</strong> que redireccione a tu sitio, ellos verán un error 403 Forbidden error:</p>
 <div class="preboxcontainer">
 <pre class="prebox">SetEnvIfNoCase Referer "<span class="code-highlight">example.com</span>" bad_referer
 Order Allow,Deny
@@ -124,6 +167,13 @@ RewriteRule .* - [F]
 RewriteCond&nbsp;%{HTTP_REFERER} ^<span class="code-highlight">https://example.com/</span>
 RewriteRule /* <span class="code-highlight">https://www.google.com</span> [R,L]
 </pre>
+</div>
+<h3>Apache 2.4</h3>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;RequireAll&gt;
+  Require all granted
+  Require not host <span class="code-highlight">example.com</span>
+&lt;/RequireAll&gt;</pre>
 </div>
 </div>
 <h2>Ver también</h2>
