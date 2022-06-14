@@ -19,7 +19,7 @@
 <ol>
 <li>Haz clic en el nombre de la base de datos cuyo tamaño estás verificando en el menú del lado izquierdo.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-phpmyadmin-database-size.png" alt="phpMyAdmin database size" width="913" height="25"></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/misc-phpmyadmin-database-size.png" alt="phpMyAdmin database size" width="913" height="25" /></dd>
 </dl>
 </li>
 <li>En el extremo derecho de la fila inferior del panel principal, puedes ver el tamaño completo de la base de datos.</li>
@@ -38,28 +38,28 @@
 <div class="solvvy-solution">
 <p>En el lado izquierdo de phpMyAdmin, verás una lista de bases de datos:</p>
 <ol>
-<li>Selecciona tu base de datos de la lista.<br>
+<li>Selecciona tu base de datos de la lista.<br />
 <dl>
 <dd><em>En el panel central, aparece una lista de tus tablas:</em></dd>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/01_Optimizing_Database.fw.png" alt="01 Optimizing Database.fw.png" width="864" height="381"></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/01_Optimizing_Database.fw.png" alt="01 Optimizing Database.fw.png" width="864" height="381" /></dd>
 </dl>
 </li>
-<li>Mira la columna <span class="text-object">Overhead</span> a la derecha: si ves algún valor numérico, esas tablas se pueden optimizar. En el ejemplo anterior, solo se han seleccionado esas tablas.<br>
+<li>Mira la columna <span class="text-object">Overhead</span> a la derecha: si ves algún valor numérico, esas tablas se pueden optimizar. En el ejemplo anterior, solo se han seleccionado esas tablas.<br />
 <div class="notebox-note">
 <p>También puedes hacer clic en el enlace <span class="text-link">Check All</span> en la parte inferior izquierda que selecciona todas las tablas.</p>
 </div>
 </li>
 </ol>
 <ul>
-<li>Al final de la lista de la tabla, haz clic en el menú desplegable <span class="text-object">With selected</span>.<br>
+<li>Al final de la lista de la tabla, haz clic en el menú desplegable <span class="text-object">With selected</span>.<br />
 <dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/02_Optimizing_Database.fw.png" alt="02 Optimizing Database.fw.png"></dd>
+<dd><img src="https://kbimages.dreamhosters.com/images/02_Optimizing_Database.fw.png" alt="02 Optimizing Database.fw.png" /></dd>
 </dl>
 </li>
-<li>En el menú desplegable, selecciona <span class="text-object">Optimize table</span>.<br>
+<li>En el menú desplegable, selecciona <span class="text-object">Optimize table</span>.<br />
 <dl>
 <dd><em>La optimización puede tardar un tiempo en completarse dependiendo del tamaño de la base de datos. Una vez que se completa, la página muestra la consulta que se ejecutó junto con un mensaje de éxito:</em></dd>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/03_Optimizing_Database.fw.png" alt="03 Optimizing Database.fw.png" width="567" height="325"></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/03_Optimizing_Database.fw.png" alt="03 Optimizing Database.fw.png" width="567" height="325" /></dd>
 </dl>
 <div class="notebox-note">
 <p>Puedes ignorar con seguridad el mensaje “Table does not support optimize, doing recreate + analyze instead” ya que es solo informativo.</p>
@@ -71,7 +71,7 @@
 <div class="solvvy-solution">
 <p>Además de optimizar una tabla, también puedes 'reparar' una tabla. Sigue todos los pasos mencionados anteriormente. En el paso 3, elige <span class="text-object">Repair table</span> (reparar tabla) en el menú desplegable.</p>
 <dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/01_Optimizing_Database_repair_table.fw.png" alt="01 Optimizing Database repair table.fw.png"></dd>
+<dd><img src="https://kbimages.dreamhosters.com/images/01_Optimizing_Database_repair_table.fw.png" alt="01 Optimizing Database repair table.fw.png" /></dd>
 </dl>
 <p>Las dos opciones son similares pero se usan en diferentes circunstancias:</p>
 <ul>
@@ -104,7 +104,7 @@
 <pre class="prebox">&gt;&gt; results.txt</pre>
 </div>
 <h3>Usar un cron job para optimizar</h3>
-<p>También puedes hacer una limpieza general a través de un script de shell y/o un cron job usando <a href="https://dev.mysql.com/doc/refman/5.7/en/mysqlcheck.html">mysqlcheck</a>&nbsp;que verifica, repara y optimiza las tablas. Es una buena idea ejecutar un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-">cron job</a> mensual para hacer esto por ti. El cron job podría verse así:</p>
+<p>También puedes hacer una limpieza general a través de un script de shell y/o un cron job usando <a href="https://dev.mysql.com/doc/refman/5.7/en/mysqlcheck.html">mysqlcheck</a>&nbsp;que verifica, repara y optimiza las tablas. Es una buena idea ejecutar un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215088668-Crear-un-Cron-Job">cron job</a> mensual para hacer esto por ti. El cron job podría verse así:</p>
 <div class="preboxcontainer">
 <pre class="prebox">#!/bin/sh
 /usr/bin/mysqlcheck -o -v -u <span class="code-highlight">USER</span> -p <span class="code-highlight">PASSWORD</span> -h <span class="code-highlight">MYSQL.EXAMPLE.COM DATABASENAME</span>;

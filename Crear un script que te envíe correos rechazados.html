@@ -18,7 +18,7 @@
 <div class="solvvy-solution">
 <ol>
 <li>Inicia sesión en tu servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
-<li>Asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de tu usuario</a>:<br>
+<li>Asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de tu usuario</a>:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span>
 <span class="server">[server]$ </span><span class="command">pwd</span>
@@ -26,7 +26,7 @@
 </div>
 </li>
 <li>Crea&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">un nuevo archivo por medio de SSH</a>,&nbsp;y luego nombrarlo algo así como <span class="text-object">mailrejections.sh</span>.</li>
-<li>Agrega el siguiente código a este archivo:<br>
+<li>Agrega el siguiente código a este archivo:<br />
 <div class="notebox-note">
 <ul>
 <li>Solo necesitas cambiar los campos resaltados.</li>
@@ -41,8 +41,8 @@ files=$(find ~/Maildir/new -type f -mmin -15)
 
 for emailFileName in $files; do
   #open each email individually and assign to new variable
-  emailContent=$(cat $emailFileName)<br>  printf '%s\n' "${emailContent[*]}" | mail -s "<span class="code-highlight">These emails were rejected" admin@example.com</span>
-done<br>exit 0</pre>
+  emailContent=$(cat $emailFileName)<br />  printf '%s\n' "${emailContent[*]}" | mail -s "<span class="code-highlight">These emails were rejected" admin@example.com</span>
+done<br />exit 0</pre>
 </div>
 </li>
 <li>Asegúrate de cambiar el correo a la dirección de la que deseas recibir estas notificaciones.</li>
@@ -52,14 +52,14 @@ done<br>exit 0</pre>
 <div class="solvvy-solution">
 <p>Después de crear el script, debes crear un nuevo cron job para que se ejecute cada 15 minutos. El cron job luego ejecuta el archivo que acabas de crear.</p>
 <ol>
-<li>Crea un nuevo cron job&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215088668--C%C3%B3mo-crear-un-cron-job-" target="_self">en tu panel</a>:
+<li>Crea un nuevo cron job&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215088668-Crear-un-Cron-Job" target="_self">en tu panel</a>:
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel_cron_emailrejection.png" alt=""></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel_cron_emailrejection.png" alt="" /></dd>
 </dl>
 </li>
 <li>Asegúrate de ajustar el nombre de usuario al usuario de Shell correcto para el que creaste el script.</li>
 <li>Da clic en el menú desplegable&nbsp;<strong>Cuando correr:</strong> y selecciona&nbsp;<strong>Personalizado</strong></li>
-<li>Selecciona 'Cada 15 minutos' para el marco de tiempo.<br>
+<li>Selecciona 'Cada 15 minutos' para el marco de tiempo.<br />
 <div class="notebox-note">
 <p>Puedes cambiar el período de tiempo a lo que desees, pero solo asegúrate de actualizar el mismo período de tiempo en tu secuencia de comandos para que coincida.</p>
 </div>

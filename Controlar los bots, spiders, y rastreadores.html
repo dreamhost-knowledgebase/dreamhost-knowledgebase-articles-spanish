@@ -1,0 +1,155 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Los bots, las spiders y otros crawlers que lleguen a tus páginas dinámicas pueden causar un uso extenso de recursos (memoria y CPU). Esto puede generar una gran carga en el servidor y ralentizar tu(s) sitio(s).</p>
+<p>Una opción para reducir la carga del servidor de bots, spiders y otros crawlers es crear un archivo <span class="text-object">robots.txt</span> en la raíz de tu sitio web. Esto le dice a los motores de búsqueda qué contenido en tu sitio deben y no deben indexar. Esto puede ser útil, por ejemplo, si deseas mantener una parte de tu sitio fuera del índice del motor de búsqueda de Google.</p>
+<p>Si prefieres no crear este archivo tú mismo, puedes hacer que DreamHost cree uno automáticamente (por dominio) en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.robots&amp;" target="_blank" rel="noopener noreferrer">Bloquear Spiders</a>.</p>
+<div class="notebox-note">
+<p>Si bien la mayoría de los principales motores de búsqueda respetan las directivas de <span class="text-object">robots.txt</span>, este archivo solo actúa como una <em>sugerencia</em> para los motores de búsqueda compatibles y no <em>impide</em> que los motores de búsqueda (u otras herramientas similares, como los raspadores de correo/contenido) accedan al contenido o lo hagan disponible.</p>
+</div>
+</div>
+<h2><span id="Blocking_robots">Bloquear robots</span></h2>
+<div class="solvvy-solution">
+<p>El problema puede ser que Google, Yahoo u otro robot de motor de búsqueda está navegando demasiado en tu sitio. (Este es el tipo de problema que se alimenta a sí mismo; si el bot no puede completar su búsqueda debido a la falta de recursos, puede iniciar la misma búsqueda una y otra vez).</p>
+</div>
+<h2><span id="Blocking_Googlebots">Bloquear Googlebots</span></h2>
+<div class="solvvy-solution">
+<p>En el siguiente ejemplo, la IP de 66.249.66.167 se encontró en tu <a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP">access.log</a>. Puedes verificar a qué compañía pertenece esta IP corriendo el comando "host" a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">host 66.249.66.167</span>
+<span class="cmdoutput">167.66.249.66.in-addr.arpa domain name pointer crawl-66-249-66-167.googlebot.com.</span>
+</pre>
+</div>
+<p>Para bloquear este robot de Google, usa lo siguiente en tu archivo <span class="text-object">robots.txt</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"># go away Googlebot
+User-agent: Googlebot
+Disallow: /</pre>
+</div>
+<dl>
+<dt>
+<h3>Explicación de los campos anteriores:</h3>
+</dt>
+</dl>
+<dl>
+<dt><strong># go away</strong></dt>
+<dd>Este es un comentario que solo se usa para que sepas por qué creó esta regla.</dd>
+<dt><strong>User-agent</strong></dt>
+<dd>El nombre del bot al que se aplicará la siguiente regla.</dd>
+<dt><strong>Disallow</strong></dt>
+<dd>La ruta de la URL que desea bloquear. Esta barra diagonal significa que se bloqueará todo el sitio.</dd>
+</dl>
+<p>Ve más información sobre los robots de Google haciendo clic en lo siguiente:</p>
+<ul>
+<li><a href="https://developers.google.com/search/docs/advanced/robots/intro">robots.txt de Google</a></li>
+</ul>
+</div>
+<h2><span id="Blocking_Yahoo">Bloquear Yahoo</span></h2>
+<div class="solvvy-solution">
+<p>Los robots rastreadores de Yahoo cumplen con la regla <span class="code">crawl-delay</span> en <span class="text-object">robots.txt</span> que limita su actividad de recuperación. Por ejemplo, para decirle a Yahoo que no busque una página más de una vez cada 10 segundos, debes agregar lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"># slow down Yahoo
+User-agent: Slurp
+Crawl-delay: 10</pre>
+</div>
+<dl>
+<dt>
+<h3>Explicación de los campos anteriores:</h3>
+</dt>
+</dl>
+<dl>
+<dt><strong># slow down Yahoo</strong></dt>
+<dd>Este es un comentario que solo se usa para que sepas por qué creó esta regla.</dd>
+<dt><strong>User-agent: Slurp</strong></dt>
+<dd>Slurp es el nombre del agente de usuario de Yahoo. Debes usar esto para bloquear Yahoo.</dd>
+<dt><strong>Crawl-delay</strong></dt>
+<dd>Le dice al agente de usuario que espere 10 segundos entre cada solicitud al servidor.</dd>
+</dl>
+<p>Ve más información sobre los robots de Yahoo haciendo clic en lo siguiente:</p>
+<ul>
+<li><a href="https://help.yahoo.com/kb/search/slurp-crawling-page-sln22600.html">robots.txt de Yahoo</a></li>
+</ul>
+</div>
+<h2><span id="Slowing_good_bots">Retardar buenos bots</span></h2>
+<div class="solvvy-solution">
+<p>Usa lo siguiente para ralentizar algunos, pero no todos, los buenos bots:</p>
+<div class="preboxcontainer">
+<pre class="prebox">User-agent: * <br>Crawl-Delay: 10</pre>
+</div>
+<dl>
+<dt>
+<h3>Explicación de los campos anteriores:</h3>
+</dt>
+</dl>
+<dl>
+<dt><strong>User-agent: *</strong></dt>
+<dd>Se aplica a todos los Agentes de usuario.</dd>
+<dt><strong>Crawl-delay</strong></dt>
+<dd>Le dice al agente de usuario que espere 10 segundos entre cada solicitud al servidor.</dd>
+</dl>
+<div class="notebox-note">
+<p><strong>Google Bots</strong></p>
+<ul>
+<li>Googlebot ignora la directiva de retraso de rastreo.</li>
+<li>Para ralentizar el robot de Google, deberás registrarte en <a href="https://search.google.com/search-console/about?hl=en" target="_self">Google Search Console</a>.</li>
+<li>Una vez que se crea tu cuenta, puedes <a href="https://support.google.com/webmasters/answer/48620?hl=en" target="_blank" rel="noopener noreferrer">establecer la frecuencia de rastreo</a> y generar un <span class="text-object">robots.txt</span>.</li>
+</ul>
+</div>
+</div>
+<h2><span id="Blocking_all_bots">Bloquear todos los bots</span></h2>
+<div class="solvvy-solution">
+<p>Para deshabilitar todos los robots:</p>
+<div class="preboxcontainer">
+<pre class="prebox">User-agent: *
+Disallow: /</pre>
+</div>
+<p>Para rechazarlos en una carpeta específica:</p>
+<div class="preboxcontainer">
+<pre class="prebox">User-agent: *
+Disallow: /<span class="code-highlight">yourfolder</span>/</pre>
+</div>
+<dl>
+<dd></dd>
+<dd></dd>
+</dl>
+<div class="notebox-important">
+<p>Los bots defectuosos pueden usar este contenido como una lista de objetivos.</p>
+</div>
+<dl>
+<dt>
+<h3>Explicación de los campos anteriores:</h3>
+</dt>
+</dl>
+<dl>
+<dt><strong>User-agent: *</strong></dt>
+<dd>Se aplica a todos los Agentes de usuario.</dd>
+<dt><strong>Disallow: /</strong></dt>
+<dd>No permite la indexación de todo.</dd>
+<dt><strong>Disallow: /yourfolder/</strong></dt>
+<dd>No permite la indexación de esta carpeta única.</dd>
+</dl>
+</div>
+<h2><span id="Use_caution">Usar precaución</span></h2>
+<div class="solvvy-solution">
+<p>Si bloqueas todos los bots (User-agent: *) de todo tu sitio (Disallow: /), tu sitio será indexado de los motores de búsqueda legítimos. Además, ten en cuenta que los bots incorrectos probablemente ignorarán tu archivo <span class="text-object">robots.txt</span>, por lo que es posible que desee bloquear tu agente de usuario con un <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">archivo .htaccess</a>.</p>
+<p>Los robots malos pueden usar tu archivo <span class="text-object">robots.txt</span> como una lista de destino, por lo que es posible que desee omitir los directorios de la lista en el archivo <span class="text-object">robots.txt</span>. Los bots malos también pueden usar agentes de usuario falsos o engañosos, por lo que bloquear agentes de usuario con .htaccess puede no funcionar tan bien como se esperaba.</p>
+<p>Si no deseas bloquear a nadie, este es un buen archivo <span class="text-object">robots.txt</span> predeterminado:</p>
+<div class="preboxcontainer">
+<pre class="prebox">User-agent: *
+Disallow:</pre>
+</div>
+<p>Es posible que debas eliminar el archivo <span class="text-object">robots.txt</span> en este caso, si no te molestan las solicitudes 404 en tus registros.</p>
+<p>DreamHost recomienda que solo bloquees agentes de usuario específicos y archivos/directorios, en lugar de *, a menos que estés 100% seguro de que eso es lo que deseas.</p>
+</div>
+<h2><span id="Blocking_bad_referrers">Bloqueo de referencias malas</span></h2>
+<div class="solvvy-solution">
+<p>Para obtener instrucciones detalladas, visite el artículo sobre cómo <a href="https://help.dreamhost.com/hc/es/articles/216363197--C%C3%B3mo-evito-el-enlace-directo-de-im%C3%A1genes-">bloquear referencias</a>.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">Generalidades de .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP">Ver tu registro de acceso y error a través de SFTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216105097-Ver-y-examinar-tu-access-log-a-trav%C3%A9s-de-SSH">Ver y examinar tu registro de acceso a través de SSH</a></li>
+</ul>
+</div>

@@ -1,0 +1,34 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Es posible que se te indique que comprimas con&nbsp;<a href="https://en.wikipedia.org/wiki/Gzip">GZIP</a> para optimizar la velocidad de tu sitio web, especialmente si usas herramientas como GTMetrix, Pingdom, Page Speed ​​Insights o YSlow.</p>
+<p>A continuación se describe cómo se habilita GZIP en DreamHost.</p>
+</div>
+<h2>¿Qué es la compresión GZIP?</h2>
+<div class="solvvy-solution">
+<p>La compresión GZIP es un método para ayudar a acelerar la carga de sitios web al reducir el tamaño de ciertos archivos para transferirlos del servidor del sitio web el computador o dispositivo del visitante. Por ejemplo, una página web de 1MB de tamaño solo puede necesitar transferir 800 KB.</p>
+<p>La carga de una página de 1MB en realidad puede ser un 25% más lenta que la carga de una página de 800 KB, por lo que asegurarte de aprovechar la compresión puede significar un sitio de carga más rápida.</p>
+</div>
+<h2>¿DreamHost habilita la compresión GZIP?</h2>
+<div class="solvvy-solution">
+<p>DreamHost habilita la compresión GZIP de forma predeterminada en todos los planes de alojamiento web, por lo que no es necesario que hagas más pasos para activarla en tu sitio.</p>
+<p>Sin embargo, ten en cuenta que <span class="code">SSLCompression</span> está deshabilitado por defecto en los servidores de DreamHost debido a una <a href="http://breachattack.com/">vulnerabilidad de seguridad</a> cuando la compresión es combinada con <span class="text-object">HTTPS</span> (usando un Certificado TLS/<a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL">SSL</a>).</p>
+</div>
+<h2>Si GZIP está habilitado de forma predeterminada, ¿por qué la herramienta de optimización de mi sitio me dice que necesito comprimir con GZIP?</h2>
+<div class="solvvy-solution">
+<p>Hay algunas razones por las que algunos servicios de análisis de sitios web pueden decirte que necesitas comprimir algunos archivos con GZIP a pesar de que ya está habilitado para tu sitio <span class="text-object">HTTP</span>. Esto incluye:</p>
+<ul>
+<li>Las URL que informan que necesitan compresión son para un sitio de terceros, no para tu dominio. En este caso, DreamHost no puede controlar la compresión en un sitio de terceros. Para compensar, puedes preguntar al sitio de terceros si pueden comprimir o crear alguna alternativa para tus URL, o puedes eliminar las URL del código de tu página y reemplazarlas con las URL de tu propio sitio o las URL de un sitio de terceros que pueda comprimir esos archivos.</li>
+<li>Has creado tu sitio web solo <span class="text-object">HTTPS</span>, donde todas las páginas y URL se cargan en <span class="text-object">https://</span> en lugar de <span class="text-object">http://</span>. Debido a una vulnerabilidad de seguridad que se describe en la sección anterior, la compresión GZIP está desactivada para <span class="text-object">HTTPS</span>.</li>
+<li>Es posible que tengas un archivo <span class="text-object">.htaccess</span> en tu sitio con un código que anula la compresión GZIP. Si tienes URLs&nbsp;<span class="text-object">http://</span> en tu dominio que parecen necesitar compresión,&nbsp;puedes revisar el código en tu <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">archivo .htaccess</a> y hacer las correcciones necesarias. Si no estás familiarizado con el código en <span class="text-object">.htaccess</span>, también puedes intentar cambiar temporalmente el nombre de <span class="text-object">.htaccess</span> a <span class="text-object">.htaccess_off</span> e intentar cargar la página nuevamente. Para asegurarte de que otras funciones de tu sitio no se rompan permanentemente, recuerda cambiar el nombre del archivo <span class="text-object">.htaccess_off</span> a <span class="text-object">.htaccess</span>.</li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216477717-Habilitar-Cloudflare-en-un-dominio">Habilitar Cloudflare en un dominio</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300567-Actualizar-un-sitio-de-WordPress-a-DreamPress" target="_self">Actualizar un sitio de WordPress a DreamPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL">Generalidades sobre agregar un certificado SSL</a>&nbsp;</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">Generalidades sobre .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216363157--C%C3%B3mo-puedo-almacenar-en-cach%C3%A9-mi-sitio-con-un-archivo-htaccess-" target="_self">¿Cómo puedo almacenar en caché mi sitio con un archivo .htaccess?</a></li>
+</ul>
+</div>

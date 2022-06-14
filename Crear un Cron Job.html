@@ -1,0 +1,162 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Puedes hacer que DreamHost configure automáticamente un cron job desde el panel, en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.cron&amp;" target="_blank" rel="noopener noreferrer">Cron Jobs</a>.&nbsp;Este artículo contiene los siguientes contenidos.</p>
+<ul>
+<li><a href="#panel" target="_self">Crear un cron job en el panel</a></li>
+<li><a href="#variables" target="_self">Ejecutar un cron job desde una URL con variables</a></li>
+<li><a href="#rutas-a-programas-comunes" target="_self">Rutas a programas comunes</a></li>
+</ul>
+<div class="notebox-note">
+<p>Cuando se crea un cron job en el panel, puedes asignarlo a un usuario SFTP o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">shell</a>.</p>
+<p>Sin embargo, solo los usuarios shell pueden <a href="https://help.dreamhost.com/hc/es/articles/215767047-Crear-un-Cron-Job-personalizado" target="_self" rel="undefined">crear y editar manualmente cron jobs</a> en el servidor.</p>
+<p>Los cron job se pueden crear en cualquier plan de alojamiento.</p>
+</div>
+</div>
+<h2><span id="panel">Crear un cron job en el panel</span></h2>
+<div class="solvvy-solution">
+<div class="notebox-note">
+<p>Este ejemplo ejecuta un solo archivo llamado <span class="text-object">script.php</span>.</p>
+</div>
+<ol>
+<li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.cron&amp;" target="_blank" rel="noopener noreferrer">Cron Jobs</a>.
+<dl>
+<dd><em>La página <span class="panel-page">Cron Jobs</span> aparece:</em></dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-cron-job-create-01.png" width="305" height="98"></dd>
+</dl>
+</li>
+<li>Haz clic en el botón <strong>Agregar nuevo Cron Job</strong>.<br>
+<dl>
+<dd><em>Se abre la página <span class="panel-page">Crear nuevo Cron Job</span> :</em></dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-create-a-cronjob.png" width="618" height="377"></dd>
+</dl>
+</li>
+<li>Para crear el cron, completa los siguientes campos:<br>
+<ul>
+<li><strong>Usuario</strong>: En el menú desplegable, elige un usuario SFTP o <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">shell</a> existente en el que desea que se ejecute el cron job.</li>
+<li><strong>Título</strong>: Asigna al cron job un nombre que recordarás.</li>
+<li><strong>Salida le correo a</strong>: Ingresa una dirección de correo a la que te gustaría recibir la salida del cron job. También puedes dejar esto en blanco para no recibir correos.</li>
+<li><strong>Comando a ejecutar</strong>: Ingresa el comando para correr.<br>
+<div class="notebox-note">
+<p>El comando que ingresas generalmente debe primero especificar la ruta al programa que te gustaría usar para ejecutar el cron job. Consulta las '<a href="#paths" target="_self">Rutas a programas comunes</a>'&nbsp;a continuación para ver ejemplos. Por ejemplo, supongamos que tiene un archivo PHP llamado <span class="text-object">script.php</span> en tu directorio de dominios:</p>
+<ul>
+<li><span class="text-object">/home/usuario/example.com/script.php</span></li>
+</ul>
+<p>Para ejecutar este comando, debes incluir en ruta, la versión elegida de PHP seguida de un espacio, seguido de la ruta al archivo:</p>
+<ul>
+<li><span class="text-object">/usr/local/php74/bin/php/home/usuario/example.com/script.php</span></li>
+</ul>
+</div>
+</li>
+<li><strong>Usar bloqueo</strong>: Habilítalo si deseas evitar que el trabajo se ejecute más de una vez al tiempo.</li>
+<li><strong>Cuándo ejecutarlo</strong>: En el menú desplegable, elige con qué frecuencia deseas que se corra este cron job.<br>
+<div class="notebox-important">
+<p>El tiempo que elijas debe ser PDT/PST ya que esta es la zona horaria en la que está configurado tu servidor web. Para determinar la hora correcta, puedes iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y correr la fecha del comando, o puedes consultar un <a href="https://www.worldtimezone.com/" target="_self">sitio web</a> que enumera esta información.</p>
+<p><strong>Minutos personalizados</strong></p>
+<p>Actualmente solo es posible agregar 12 minutos diferentes en una hora. Puedes organizarlos como desees, pero el cron job no puede ejecutarse más de 12 veces en una sola hora.</p>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+<h2>Los campos del 'Día de la Semana' y 'Día del Mes'</h2>
+<div class="solvvy-solution">
+<h3>Cuando el campo del 'Día de la Semana' anula el 'Día del Mes'</h3>
+<p>El campo del <span class="text-object">'Día de la Semana'</span> anulará el campo del <span class="text-object">Dia del mes</span> solo si el campo del <span class="text-object">Día del Mes</span> está configurado para <span class="text-object">Todos los Días</span>. Por ejemplo, la siguiente configuración solo correrá los Jueves.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-cron-job-create-03.png" alt="es-panel-cron-job-create-03.png" width="607" height="555"></dd>
+</dl>
+<h3>Cuando el campo del 'Día de la Semana' NO anula el 'Día del Mes'</h3>
+<p>El campo del <strong><span class="text-object">Día de la Semana</span> NO</strong> anulará el campo del <strong><span class="text-object">Día del Mes</span></strong>, si el campo del <strong><span class="text-object">Día del Mes</span></strong> está configurado a día(s) específico(s). En ese caso correrán juntos.</p>
+<p>En el ejemplo a continuación, el campo del <strong><span class="text-object">Día de la Semana</span></strong> está configurado para correr los Jueves a las 3:44 pm. El campo del <strong><span class="text-object">Día del Mes</span></strong> esta también ajustado para el 26 (que es un Miércoles). El cron job seguirá corriendo todos los Jueves, pero también el 26 de cada mes.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-cron-job-create-04.png" alt="es-panel-cron-job-create-04.png" width="611" height="644"></dd>
+</dl>
+</div>
+<h2><span id="variables">Ejecutar un cron job desde una URL con variables</span></h2>
+<div class="solvvy-solution">
+<p>Es común que una URL personalizada en tu sitio use variables. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">https://example.com/script.php<span class="code-highlight">?firstname=john&amp;lastname=doe</span></pre>
+</div>
+<p>El problema es que las variables solo funcionan en un navegador web cuando se visita la URL. No funcionarán cuando se ejecuta la URL en el servidor. Hay dos formas de hacer que un cron job ejecute dicha URL.</p>
+<h3>Usar curl o wget</h3>
+<p>Cuando ejecutes <span class="code">curl</span> o <span class="code">wget</span> en una URL con variables, asegúrate de encerrar la URL entre comillas simples.</p>
+<div class="preboxcontainer">
+<pre class="prebox">curl 'https://example.com/script.php?firstname=john&amp;lastname=doe'</pre>
+</div>
+<p>Así es como se vería en el panel.</p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-cron-job-create-05.png" alt="es-panel-cron-job-create-05.png"></p>
+<h3>Usar php.cgi</h3>
+<p>La otra opción es usar php.cgi en lugar de la ruta a PHP. Al crear la URL, debes cambiar el primer signo de pregunta ? por un espacio, y cada signo &amp; después de eso en un espacio también. Por ejemplo:</p>
+<p><strong>Ruta al archivo original y URL</strong></p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span>/script.php?firstname=john&amp;lastname=doe</pre>
+</div>
+<p><strong>Ruta editada al archivo y URL</strong></p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span>/script.php firstname=john lastname=doe</pre>
+</div>
+<p>Finalmente, agrega la ruta al binario php.cgi.</p>
+<div class="preboxcontainer">
+<pre class="prebox">/dh/cgi-system/php74.cgi /home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span>/script.php firstname=john lastname=doe</pre>
+</div>
+<p>Así es como se vería en el panel.</p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-cron-job-create-06.png" alt="es-panel-cron-job-create-06.png"></p>
+</div>
+<h2><span id="rutas-a-programas-comunes">Rutas a programas comunes</span></h2>
+<div class="solvvy-hidden">
+<p>A continuación se muestran las rutas a los programas comunes en el servidor. Esta es la ruta que agregarías antes del archivo que deseas ejecutar.</p>
+<table style="border-collapse: collapse; width: 30%;" border="1">
+<tbody>
+<tr>
+<th style="width: 34.8327%;">Programa</th>
+<th style="width: 65.1673%;">Camino</th>
+</tr>
+<tr>
+<td style="width: 34.8327%;">bash</td>
+<td style="width: 65.1673%;">/bin/bash</td>
+</tr>
+<tr>
+<td style="width: 34.8327%;">java</td>
+<td style="width: 65.1673%;">/usr/bin/java</td>
+</tr>
+<tr>
+<td style="width: 34.8327%;">perl</td>
+<td style="width: 65.1673%;">/usr/bin/perl</td>
+</tr>
+<tr>
+<td style="width: 34.8327%;">php</td>
+<td style="width: 65.1673%;">
+<p>/usr/bin/php<br>/usr/local/php72/bin/php<br>/usr/local/php73/bin/php<br>/usr/local/php74/bin/php<br>/usr/local/php80/bin/php</p>
+</td>
+</tr>
+<tr>
+<td style="width: 34.8327%;">php-cgi</td>
+<td style="width: 65.1673%;">/dh/cgi-system/php72.cgi<br>/dh/cgi-system/php73.cgi<br>/dh/cgi-system/php74.cgi<br>/dh/cgi-system/php80.cgi</td>
+</tr>
+<tr>
+<td style="width: 34.8327%;">python</td>
+<td style="width: 65.1673%;">/usr/bin/python<br>/usr/bin/python3</td>
+</tr>
+<tr>
+<td style="width: 34.8327%;">ruby</td>
+<td style="width: 65.1673%;">/usr/bin/ruby</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215088608-Generalidades-sobre-Crontab" target="_self">Generalidades de crontab</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215767047-Crear-un-Cron-Job-personalizado" target="_self">Crear un cron job personalizado</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215767107-Entorno-de-ejecuci%C3%B3n-de-un-trabajo-cron" target="_self">Entorno de ejecución de un cron job</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360038608892-Soluci%C3%B3n-de-problemas-de-Cron-job" target="_self">Solución de problemas de un cron job</a></li>
+</ul>
+</div>
