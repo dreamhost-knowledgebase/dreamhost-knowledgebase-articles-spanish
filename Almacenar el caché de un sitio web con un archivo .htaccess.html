@@ -1,0 +1,126 @@
+<h2>Crear un archivo .htaccess en tu servidor web DreamHost</h2>
+<div class="solvvy-solution">
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo crear un archivo <span class="text-object">.htaccess</span> en tu servidor web:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227#crear-un-archivo-htaccess" target="_self">Crear un archivo .htaccess en tu servidor web DreamHost</a></li>
+</ul>
+<p>Si el archivo ya existe, consulte los siguientes artículos para obtener instrucciones sobre cómo actualizarlo (dependiendo de si estás usando un cliente FTP o SSH):</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar un archivo por medio de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo por medio de SSH</a></li>
+</ul>
+</div>
+<h2><span id="GZIP">GZIP</span></h2>
+<div class="solvvy-solution">
+<div class="notebox-important">
+<p>DreamHost habilita la compresión GZIP de forma predeterminada en todos los planes de alojamiento web, por lo que no es necesario que hagas más pasos para activarla en tu sitio.</p>
+<p>Sin embargo, ten en cuenta que&nbsp;<span class="code">SSLCompression</span>&nbsp;está deshabilitado por defecto en los servidores de DreamHost debido a una&nbsp;<a href="http://breachattack.com/">vulnerabilidad de seguridad</a>&nbsp;cuando la compresión es combinada con&nbsp;<span class="text-object">HTTPS</span>&nbsp;(usando un Certificado TLS/<a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL">SSL</a>).</p>
+<p>Puedes leer más sobre la compresión GZIP y las alternativas a usar para HTTPS en el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360005040932-Habilitar-la-compresi%C3%B3n-GZIP" target="_self">Habilitar la compresión GZIP</a></li>
+</ul>
+</div>
+<p>DEFLATE es un algoritmo de compresión de datos sin pérdidas similar a gzip, pero funciona en Apache 2. En el pasado, mod_gzip era una herramienta recomendada. Pero DreamHost usa Apache 2 y mod_deflate, que llama a gzip en el back-end automáticamente.</p>
+<div class="notebox-note">
+<p>Las siguientes son configuraciones predeterminadas en los servidores DreamHost y no es necesario habilitarlas. Sin embargo, puedes ajustar estos valores en tu archivo <span class="text-object">.htaccess</span> según sea necesario:</p>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;ifmodule mod_deflate.c&gt;
+  # Compress HTML, CSS, JavaScript, Text, XML and fonts
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+  AddOutputFilterByType DEFLATE application/x-font
+  AddOutputFilterByType DEFLATE application/x-font-opentype
+  AddOutputFilterByType DEFLATE application/x-font-otf
+  AddOutputFilterByType DEFLATE application/x-font-truetype
+  AddOutputFilterByType DEFLATE application/x-font-ttf
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE font/opentype
+  AddOutputFilterByType DEFLATE font/otf
+  AddOutputFilterByType DEFLATE font/ttf
+  AddOutputFilterByType DEFLATE image/x-icon
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/xml
+  # Remove browser bugs (only needed for really old browsers)
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+  Header append Vary User-Agent
+&lt;/ifmodule&gt;</pre>
+</div>
+<p>Visita la página siguiente para más detalles:</p>
+<ul>
+<li><a href="https://httpd.apache.org/docs/2.4/mod/mod_deflate.html" target="_self" rel="undefined">mod_deflate</a></li>
+</ul>
+</div>
+<h2>Almacenamiento en caché del navegador</h2>
+<div class="solvvy-solution">
+<p>Usando <a href="http://httpd.apache.org/docs/2.2/mod/mod_expires.html">mod_expires</a>, puedes decirle a los navegadores visitantes que retengan ciertos archivos por más tiempo (le gustan las imágenes, que rara vez se cambian).</p>
+<div class="notebox-note">
+<p>Las siguientes son configuraciones predeterminadas en los servidores DreamHost y no es necesario habilitarlas. Sin embargo, puedes ajustar estos valores en tu archivo <span class="text-object">.htaccess</span> según sea necesario:</p>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"># BEGIN Expire headers  
+&lt;IfModule mod_expires.c&gt;  
+  # Turn on the module.
+  ExpiresActive on
+  # Set the default expiry times.
+  ExpiresDefault "access plus 2 days"
+  ExpiresByType image/jpg "access plus 1 month"
+  ExpiresByType image/svg+xml "access 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType application/x-shockwave-flash "access plus 1 month"
+  ExpiresByType image/ico "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+  ExpiresByType text/html "access plus 600 seconds"
+&lt;/IfModule&gt;  
+# END Expire headers  
+</pre>
+</div>
+</div>
+<h2>Deshabilitar el almacenamiento en caché</h2>
+<div class="solvvy-solution">
+<p>Los ejemplos anteriores muestran la configuración predeterminada del servidor de DreamHost. Sin embargo, a veces puede ser necesario deshabilitar el almacenamiento en caché por completo. Esto se puede lograr agregando las siguientes reglas a tu archivo <span class="text-object">.htaccess</span>.</p>
+<div class="notebox-important">
+<p>Deshabilitar la memoria caché podría afectar significativamente la velocidad de tu sitio y los puntajes de optimización del sitio.&nbsp;Es muy recomendable que dejes el almacenamiento en caché activo en tu sitio para asegurarte de que responda lo más rápido posible.</p>
+<p>Solo continúa agregando las siguientes reglas si estás absolutamente seguro de saber lo que estás haciendo y comprendes las consecuencias. Puedes probar la velocidad de tu sitio utilizando algunos de los sitios web mencionados aquí:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216560958-#Herramientas-de-carga-de-sitios-web" target="_self">Herramientas de carga de sitios web</a></li>
+</ul>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">#Disables GZIP
+SetEnv no-gzip 1
+    
+#Turns off the expires headers for Apache
+&lt;IfModule mod_expires.c&gt;
+  ExpiresActive Off
+&lt;/IfModule&gt;
+
+# Disable Caching
+&lt;IfModule mod_headers.c&gt;
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+&lt;/IfModule&gt;</pre>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades sobre .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-" target="_self">¿Qué puedo hacer con un archivo .htaccess?</a></li>
+</ul>
+</div>

@@ -1,0 +1,91 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<div class="notebox-important">
+<p>Si tu aplicación Ruby no se inicia debido a una gema faltante, entonces debes instalarla localmente usando Bundler. Para obtener más información sobre el uso de Bundler, visita la siguiente página:</p>
+<ul>
+<li><a href="/hc/es/articles/115001070131-Usar-Bundler-para-instalar-Ruby-gems" target="_self">Usar Bundler para instalar gemas de Ruby</a></li>
+</ul>
+</div>
+<p>Ruby Version Manager (RVM) es una utilidad que te permite agregar tu propia versión personal de Ruby a un usuario. Te permite agregar, eliminar o tener múltiples versiones de Ruby y sus bibliotecas en tu directorio de usuarios.</p>
+<p>Este artículo describe cómo habilitar la opción RVM usando el panel DreamHost.</p>
+<p>Ten en cuenta que esto <strong>NO</strong> instala RVM. Todavía debes instalarlo manualmente tu mismo. Visita el articulo <a href="https://help.dreamhost.com/hc/es/articles/217185247-Ruby-Version-Manager-RVM-" target="_self">RVM</a> para obtener instrucciones detalladas sobre cómo instalar manualmente. Una vez que se haya instalado RVM y hayas instalado una versión personalizada de Ruby, puedes seleccionar qué versión de Ruby te gustaría usar (para un dominio específico) habilitando la opción en el panel a continuación.</p>
+<div class="notebox-note">
+<p>Tu dominio debe correrse en un Servidor <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-un-Servidor-Virtual-Privado-VPS-">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicado</a> para habilitar RVM en el panel de DreamHost. Si tu VPS está ejecutando Nginx, revisa el siguiente artículo en su lugar.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360044520212-Ejecutar-una-aplicaci%C3%B3n-Nginx-sin-Passenger" target="_self">Ejecutar una aplicación Nginx sin Passenger</a></li>
+</ul>
+</div>
+</div>
+<h2>Habilitar RVM en el Panel</h2>
+<div class="solvvy-solution">
+<p>Para habilitar RVM:</p>
+<ol>
+<li>Visita el artículo <a href="https://help.dreamhost.com/hc/es/articles/217185247-Ruby-Version-Manager-RVM-" target="_self">RVM</a> para obtener instrucciones sobre cómo instalar manualmente Ruby Version Manager.</li>
+<li>Usando RVM, instala cualquier versión personalizada de Ruby que desees bajo tu <a href="/hc/es/articles/216385837-Cómo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario de Shell</a>.</li>
+<li>Naviga a pagina <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.manage&amp;" target="_blank" rel="noopener noreferrer">Administrar Dominios</a>.</li>
+<li>Haz clic en el botón&nbsp;<strong>Edit</strong> a la derecha de tu dominio en la columna <span class="text-object">Web Hosting</span>.
+<dl>
+<dd><em>Se abrirá la página de configuración <span class="panel-page">Administrar Dominios</span>:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-passenger-enable.png" alt="Enable Passenger checkbox" width="427" height="272" /></dd>
+</dl>
+</li>
+<li>Desplázate hacia abajo hasta la sección <span class="text-section">Web Options</span> y marca la casilla <span class="text-object">Passenger (solo aplicaciones Ruby/NodeJS/Python):</span>.
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/2x/panel-passenger-enable-warning.png" alt="Enable Passenger checkbox warning" width="291" height="131" /></dd>
+</dl>
+</li>
+<li>Aparecerá un mensaje de Pasajero que te notifica que se agregará un directorio <span class="text-object">/public</span> al final de la ruta del directorio <span class="text-object">web</span>. Haz clic en <strong>OK</strong> para continuar.
+<div class="notebox-important">
+<p>Si ya tienes un directorio <span class="text-object">/public</span> en el directorio <span class="text-object">web</span> actual, al hacer clic en Aceptar solo cambiarás el directorio <span class="text-object">web</span> a esta nueva carpeta/public. Nada en él se elimina.</p>
+<p>Si aún no tienes un directorio <span class="text-object">/public</span>, el panel lo crea para tí con una página próximamente. Los archivos en tu directorio <span class="text-object">web</span> actual permanecen intactos.</p>
+</div>
+</li>
+<li>La casilla de verificación RVM aparece junto con un campo para ingresar tu ruta personalizada:<img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-ruby-enable.png" alt="Enable Ruby Checkbox" width="546" height="100" /></li>
+<li>Ingresa la siguiente:
+<ul>
+<li>Marca la casilla de verificación 'RVM:'.</li>
+<li>Ingresa la ruta para tu instalación de Ruby y guarda tus cambios.</li>
+</ul>
+</li>
+</ol>
+<div class="notebox-important">
+<p>Asegúrate de cambiar el <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.</p>
+<p>La ruta puede no aparecer exactamente como en el panel. Por ejemplo, una vez que haya instalado manualmente una versión de Ruby, también podría aparecer en el siguiente directorio:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/<span class="code-highlight">username</span>/.rvm/wrappers/ruby-<span class="code-highlight">2.2.2</span>/ruby</pre>
+</div>
+<p>Asegúrate de confirmar dónde se ha instalado tu versión personalizada de Ruby antes de guardar los cambios anteriores.</p>
+</div>
+<div class="notebox-important">
+<p>Puedes configurar múltiples dominios/subdominios en un solo usuario a través de&nbsp;<a href="https://rvm.io/gemsets/basics">Gemsets</a>, pero necesitarás crear&nbsp;<a href="https://rvm.io/rubies/alias">aliases</a> sin el carácter '@'.</p>
+<p>Entonces, si las siguientes rutas dan un mensaje de caracteres no válidos:</p>
+<ul>
+<li>/home/username/.rvm/wrappers/ruby-2.2.1@firstsite/ruby</li>
+<li>/home/username/.rvm/wrappers/ruby-2.2.1@secondsite/ruby</li>
+</ul>
+<p>Corre los siguientes comandos para crear un alias. (Ajuste 'firstsite' y 'secondsite' según sea necesario):</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rvm alias create <span class="code-highlight">firstsite</span> ruby-<span class="code-highlight">2.2.1@firstsite</span></span>
+<span class="server">[server]$ </span><span class="command">rvm alias create <span class="code-highlight">secondsite</span> ruby-<span class="code-highlight">2.2.1</span>@<span class="code-highlight">secondsite</span></span>
+</pre>
+</div>
+<ul>
+<li>/home/username/.rvm/wrappers/firstsite/ruby</li>
+<li>/home/username/.rvm/wrappers/secondsite/ruby</li>
+</ul>
+</div>
+<p>Una vez que hayas guardado los cambios, este dominio específico utilizará tu versión personalizada de Ruby junto con Passenger.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217185247-Ruby-Version-Manager-RVM-" target="_self">Gestor de Versiones de Ruby (RVM)</a></li>
+<li><a href="/hc/es/articles/215769578-Generalidades-sobre-Passenger" target="_self">Generalidades sobre Passenger</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a class="new" title="W:Ruby Version Manager (page does not exist)" href="https://en.wikipedia.org/wiki/Ruby_Version_Manager" target="_self">Artículo de Wikipedia sobre Ruby Version Manager</a></li>
+<li><a href="https://rvm.io/" target="_self">Gestor de Versiones de Ruby</a></li>
+</ul>
+</div>

@@ -1,0 +1,152 @@
+<div class="notebox-note">
+<p>Este artículo asume que estás configurando tu repositorio Git en tu servidor DreamHost. Consulta el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">artículo de Generalidades de SSH</a>&nbsp;para obtener instrucciones sobre cómo iniciar sesión en tu servidor.</p>
+</div>
+<h2>Git Preinstalado</h2>
+<div class="solvvy-solution">
+<p>Git está instalado en todos los servidores DreamHost. Corre los siguientes comandos para ver la ubicación y versión.&nbsp;</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">which git</span>
+<span class="cmdoutput">/usr/bin/git</span>
+<span class="server">[server]$ </span><span class="command">git --version</span>
+</pre>
+</div>
+</div>
+<h2>Cómo configurar Git por primera vez</h2>
+<div class="solvvy-solution">
+<p>Cuando configuras tu entorno Git por primera vez, querrás configurar algunas variables. Mira el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="http://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup" target="_self">Primera configuración de Git</a></li>
+</ul>
+<p>También puedes continuar con los siguientes pasos para una configuración básica.</p>
+</div>
+<h2><span id="Crear_tu_identidad">Crear tu identidad</span></h2>
+<div class="solvvy-solution">
+<p>Los siguientes comandos crean tu identidad para usar con Git. Revisa el artículo de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> para obtener detalles sobre cómo iniciar sesión en tu servidor:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git config --global user.name "<span class="code-highlight">John Doe</span>"</span>
+<span class="server">[server]$ </span><span class="command">git config --global user.email <span class="code-highlight">johndoe@example.com</span></span>
+<span class="server">[server]$ </span><span class="command">git config --global init.defaultBranch main</span>
+</pre>
+</div>
+<div class="notebox-note">
+<p>La última línea asegura que los repositorios recién creados usen el nombre <span class="text-object">main</span> como rama principal. Revisa el siguiente artículo para obtener más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/4466702078740-Configurar-git-para-usar-main-como-la-rama-principal">Configurar git para usar 'main' como la rama principal </a></li>
+</ul>
+</div>
+<p>Esto crea un archivo llamado <span class="text-object">.gitconfig</span> en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio de tu usuario</a> con el siguiente contenido:</p>
+<div class="preboxcontainer">
+<pre class="prebox">[user]
+ name = John Doe
+ email = johndoe@example.com
+</pre>
+</div>
+<p>Asegúrate de confirmar que Git puede encontrar esa configuración corriendo lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git config --list</span>
+<span class="cmdoutput">user.name=John Doe
+user.email=johndoe@example.com</span>
+</pre>
+</div>
+</div>
+<h2>Configurar el repositorio y commit</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega al directorio de tu aplicación (o sitio web). Este ejemplo configura Git en el directorio de tu <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-de-sitio-web" target="_self">sitio web</a>. Cambia <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> a tu sitio web.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd /home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span></span>
+</pre>
+</div>
+</li>
+<li>Corre lo siguiente para inicializar el nuevo repositorio:<br>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git init
+<span class="cmdoutput">Initialized empty Git repository in /home/username/example.com/.git/</span>
+</span></pre>
+</div>
+<dl>
+<dd>Este comando crea el directorio <span class="text-object">/.git</span> y su repositorio git.</dd>
+</dl>
+</li>
+<li>Agrega todos los archivos de tu aplicación al repositorio de Git. El siguiente comando muestra cómo agregar todos los archivos:<br>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git add .</span>
+</pre>
+</div>
+<dl>
+<dd>También puedes elegir archivos específicos si lo deseas.</dd>
+</dl>
+</li>
+<li>Corre el <a href="http://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" target="_self">comando de estado</a>&nbsp;para confirmar qué archivos están en el área de preparación:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git status</span>
+<br>Initial commit
+
+Changes to be committed:
+  (use "git rm --cached ..." to unstage)
+<span class="green">
+        new file:   favicon.ico
+        new file:   images/image1.jpg
+        new file:   images/image2.jpg
+        new file:   images/image3.jpg
+        new file:   index.html
+        new file:   mystyles.css</span>
+</pre>
+</div>
+<div class="notebox-note">
+<p>En este ejemplo, puedes ver que los siguientes archivos y carpetas están siendo rastreados y listos para ser confirmados:</p>
+<ul>
+<li>favicon.ico</li>
+<li>images/image1.jpg</li>
+<li>images/image2.jpg</li>
+<li>images/image3.jpg</li>
+<li>index.html</li>
+<li>mystyles.css</li>
+</ul>
+</div>
+</li>
+<li>Si estás seguro de que estás listo para confirmar (guardar) estas versiones de los archivos en tu repositorio de Git, corre el siguiente comando:<br>
+<div class="notebox-note">
+<p>Asegúrate de agregar un mensaje corto y claro que explique para qué fue este commit. Mira el siguiente artículo para obtener detalles sobre cómo crear un buen mensaje de confirmación.</p>
+<ul>
+<li><a href="https://github.com/erlang/otp/wiki/Writing-good-commit-messages" target="_self">Escribir buenos mensajes de commit</a></li>
+</ul>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git commit -m "Committing website files for the first time"</span>
+[main (root-commit) e11cdb7] Committing website files for the first time
+ 6 files changed, 34 insertions(+)
+ create mode 100644 favicon.ico
+ create mode 100644 images/image1.jpg
+ create mode 100644 images/image2.jpg
+ create mode 100644 images/image3.jpg
+ create mode 100644 index.html<br> create mode 100644 mystyles.css
+</pre>
+</div>
+<dl>
+<dd>El indicador <span class="code">-m</span> te permite agregar un mensaje a esta confirmación .</dd>
+</dl>
+</li>
+</ol>
+<p>Esto crea tu primer commit. Puedes ver tu historial de confirmaciones corriendo lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git log --oneline</span>
+e11cdb7 (HEAD -&gt; main) Committing website files for the first time</pre>
+</div>
+<div class="notebox-tip">
+<p>No necesitas el indicador <span class="code">--oneline</span>, esto solo acorta la respuesta para que sea más fácil de leer. Revisa el siguiente enlace para más ejemplos y explicaciones:</p>
+<ul>
+<li><a href="http://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" target="_self">Grabar cambios en el repositorio</a></li>
+</ul>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000677931-Generalidades-de-Git" target="_self">Generalidades de Git</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000676991-Empujando-tu-repositorio-DreamHost-Git-a-GitHub" target="_self">Enviar a tu repositorio Git de DreamHost a GitHub</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216445197-Empujar-tu-repositorio-Git-local-a-un-servidor-de-DreamHost-Linux-Mac-OS-X" target="_self">Enviar a tu repositorio Git local a un servidor de DreamHost — Linux &amp; Mac OS X</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000732471-Empujando-tu-repositorio-Git-local-amun-servidor-DreamHost-Windows" target="_self">Enviar a tu repositorio Git local a un servidor DreamHost — Windows</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000684492-Usando-Git-para-el-desarrollo-web" target="_self">Usar Git para desarrollo web</a></li>
+</ul>
+</div>
