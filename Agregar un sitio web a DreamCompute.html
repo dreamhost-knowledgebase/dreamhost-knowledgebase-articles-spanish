@@ -3,6 +3,10 @@
 <p>Hay varios pasos que debes seguir para agregar tu sitio web a DreamCompute. Asegúrate de seguir los pasos a continuación en orden.</p>
 <p>Todos los pasos asumen que está ejecutando comandos bajo el <a href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined">usuario predeterminado de tu instancia</a>.</p>
 </div>
+<div class="steps-section--container">
+<div class="steps-section--border">&nbsp;</div>
+<div class="steps-section--content">
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-1.svg" width="50px" />
 <h2>Paso 1 — Crea una instancia</h2>
 <div class="solvvy-solution">
 <p>Primero debes lanzar una nueva instancia. Puedes hacer esto en el panel de DreamCompute o mediante la CLI de OpenStack. Ve los siguientes artículos para obtener instrucciones:</p>
@@ -10,12 +14,16 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/215912848-C%C3%B3mo-lanzar-una-instancia-usando-el-panel-de-DreamCompute" target="_self" rel="undefined">Cómo lanzar una instancia usando el panel de DreamCompute</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115003441752-Agregar-un-sitio-web-a-DreamCompute" target="_self" rel="undefined">Cómo lanzar una instancia usando CLI de OpenStack</a></li>
 </ul>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-2.svg" width="50px" />
 <h2>Paso 2 — Apunta tu DNS a la nueva instancia</h2>
 <p>Ahora debes iniciar sesión en tu panel DreamHost. Allí puede ajustar el DNS de tu dominio para que apunte a tu instancia de DreamCompute.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/218672058-Configurar-el-DNS-para-tus-dominios" target="_self" rel="undefined">Configurar el DNS para tus dominios</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115001754711-Localizar-las-direcciones-IP-de-tu-instancia" target="_self" rel="undefined">Localización de la dirección IP de tu instancia</a></li>
 </ul>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-3.svg" width="50px" />
 <h2>Paso 3 — Instala Apache o LAMP en la instancia</h2>
 <p>Inicia sesión en tu instancia utilizando la <a href="https://help.dreamhost.com/hc/es/articles/216201547-Generalidades-sobre-la-conexi%C3%B3n-a-tu-instancia-con-las-claves-SSH" target="_self" rel="undefined">Llave de Emparejamiento</a> y el<a href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined"> usuario por defecto asignado</a>. Instala Apache según la imagen desde la que eliges crear la instancia. A continuación se muestra cómo hacer esto en Ubuntu.</p>
 <ul>
@@ -25,6 +33,8 @@
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215879467-Como-configurar-LAMP-en-DreamCompute-corriendo-Debian-o-Ubuntu" target="_self" rel="undefined">Cómo configurar LAMP en DreamCompute con Debian o Ubuntu</a></li>
 </ul>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-4.svg" width="50px" />
 <h2>Paso 4 — Crear un nuevo usuario</h2>
 <p>Crea un nuevo usuario para el sitio web. Asegúrate de asignar privilegios de sudo al usuario, luego inicia sesión como el nuevo usuario.</p>
 <ul>
@@ -34,12 +44,16 @@
 <p>Los comandos restantes de este artículo asumen que ha iniciado sesión como el nuevo usuario que acabas de crear.</p>
 </div>
 <div id="add-ssh-access">&nbsp;</div>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-5.svg" width="50px" />
 <h2>Paso 5 — Agregar acceso SSH</h2>
 <p>Dependiendo de los permisos que tu usuario pueda necesitar, es posible que desees habilitar SSH para el usuario. Esto permite al usuario iniciar sesión en la instancia a través de SSH, a diferencia de las claves de seguridad.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360000281572--A%C3%B1adir-acceso-SSH-a-tus-usuarios" target="_self" rel="undefined">Agregar acceso SSH a tus usuarios</a></li>
 </ul>
 <div id="add-your-domain">&nbsp;</div>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-6.svg" width="50px" />
 <h2>Paso 6 — Agrega tu dominio</h2>
 <div class="notebox-note">
 <p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> a tu sitio web.</p>
@@ -89,6 +103,8 @@ To activate the new configuration, you need to run:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo service apache2 reload</span></pre>
 </div>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-7.svg" width="50px" />
 <h2>Paso 7 — Habilitar userdir</h2>
 <p>Corre lo siguiente con tu usuario predeterminado:</p>
 <div class="preboxcontainer">
@@ -118,12 +134,17 @@ To activate the new configuration, you need to run:
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo service apache2 reload</span></pre>
 </div>
 <p>Si ves tu sitio ahora, verás que se resuelve en la instancia de DreamCompute.</p>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-8.svg" width="50px" />
 <h2>Step 8&nbsp;— Adding a Let's Encrypt certificate</h2>
 <p>Si agregas ahora un <a href="https://help.dreamhost.com/hc/es/articles/222168828--Configuraci%C3%B3n-de-Let-s-Encrypt-en-DreamCompute-con-Apache" target="_self" rel="undefined">certificado 'Let's Encrypt' </a>se instalará en tu dominio sin más configuración. El archivo de configuración también se mostrará en:</p>
 <div class="preboxcontainer">
 <pre class="prebox">/etc/apache2/sites-available/</pre>
 </div>
 <p>Si visitas tu sitio ahora, deberías ver cómo se resuelve desde el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-servidor" target="_self" rel="undefined">directorio /home de tu usuario.</a><span style="font-family: monospace, monospace; font-size: 1em;">&nbsp;</span></p>
+</div>
+</div>
+</div>
 </div>
 <h2>Editar archivos del sitio con un cliente FTP</h2>
 <div class="solvvy-solution">
