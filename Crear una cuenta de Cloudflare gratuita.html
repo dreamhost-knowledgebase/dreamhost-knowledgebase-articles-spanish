@@ -1,0 +1,158 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica cómo crear una cuenta gratuita en Cloudflare y configurar los registros de nameservers de DreamHost para que apunten a Cloudflare. Revisa lo siguiente para obtener más detalles sobre el plan gratuito de Cloudflare:</p>
+<ul>
+<li><a href="https://www.cloudflare.com/plans/free/">https://www.cloudflare.com/plans/free/</a></li>
+</ul>
+<div class="notebox-note">
+<p>Este arículo asume que has <a href="https://help.dreamhost.com/hc/es/articles/224220668-Como-comprar-un-registro-de-dominio" target="_self">comprado el registro de tu dominio en DreamHost</a> y has actualizado los nameservers de tu dominio para que apunten a Cloudflare.</p>
+</div>
+<div class="prereqs">
+<p><strong>DNSSEC</strong></p>
+<p>Antes de proceder, asegúrate de que tu dominio de DreamHost no esté usando <a href="https://help.dreamhost.com/hc/es/articles/219539467-Generalidades-DNSSEC" target="_self">DNSSEC</a>. Puedes verificar eso en el siguiente sitio:</p>
+<ul>
+<li><a href="https://dnssec-analyzer.verisignlabs.com/">https://dnssec-analyzer.verisignlabs.com/</a></li>
+</ul>
+<p>Ingresa el nombre de tu dominio a verificar. Si ves cualquier ícono de <span class="wysiwyg-color-red">X ROJA</span>, tu dominio no está usando DNSSEC y puedes proceder con los siguientes pasos. En el caso contrario, <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">contacta a soporte</a> para obtener ayuda.</p>
+</div>
+<h2>Crear una cuenta gratuita</h2>
+<p>Los siguientes pasos te guían a través de la creación de una cuenta gratuita de Cloudflare.</p>
+<ol>
+<li>Regístrate para tener una cuenta en Cloudflare.
+<ul>
+<li><a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noopener noreferrer">Crea una cuenta</a></li>
+</ul>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-3rd-cloudflare-add-free-account-01.png" alt="ES 3rd-cloudflare-add-free-account-01.png " width="94" height="49" /></dd>
+</dl>
+<dl>
+<dd>Luego de crear una cuenta estáras dentro del panel</dd>
+</dl>
+</li>
+<li>En la parte superior derecha, da clic en el botón <strong>Add Site</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-cloudflare-add-free-account-02.png" width="524" height="151" /></dd>
+</dl>
+</li>
+<li>Agrega el nombre de tu dominio, y luego da clic en el botón <strong>Add site</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-cloudflare-add-free-account-03.png" width="189" height="134" /></dd>
+</dl>
+<dl>
+<dd>Una página se abre mostrando los diferentes planes de Cloudflare.</dd>
+</dl>
+</li>
+<li>Debajo de la opción <span class="text-object">Free</span>, da clic en el botón <strong>Get started</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-cloudflare-add-free-account-05.png" width="517" height="90" /></dd>
+</dl>
+<dl>
+<dd>La siguiente pagína enumera tus registros actuales de DNS en DreamHost.
+<div class="alert-warning">
+<p>Este escaneo no garantiza que se encuentren todos los registros DNS de tu dominio. Revise todos los registros DNS enumerados para confirmar que sean correctos o si falta alguno. Revisa el siguiente artículo para obtener más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360055964552-Ver-tus-registros-DNS-de-DreamHost">Ver tus registros DNS de DreamHost</a></li>
+</ul>
+<p>Revisa el siguiente artícylo si necesitas agregar cualquier registro que haga falta:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/7181260919572-Actualizar-los-registros-DNS-en-Cloudflare.html" target="_self" rel="undefined">Actualizar los registros DNS en Cloudflare</a></li>
+</ul>
+</div>
+</dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-cloudflare-add-free-account-04.png" width="540" height="80" /></dd>
+</dl>
+</li>
+<li>Un mensaje informa que tu dominio está en <a href="https://developers.cloudflare.com/dns/manage-dns-records/reference/proxied-dns-records#pending-domains" target="_blank" rel="noopener noreferrer">Estado Pentiente en Cloudflare</a>. Esto quiere decir que no ha sido verificado aún con Cloudflare.</li>
+<li>Baja hasta el fondo de la página y da clic en el botón <strong>Continue</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-cloudflare-add-free-account-06.png" width="470" height="100" /></dd>
+</dl>
+<dl>
+<dd>La siguiente página explica que debes actualizar tus nameservers en DreamHost para que apunten a Cloudflare.</dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-cloudflare-add-free-account-07.png" width="361" height="142" /></dd>
+</dl>
+</li>
+<li>Las instrucciones en esta página muestran los nameservers únicos de Cloudflare de tu sitio. Ahora debes agregar estos registros a tu dominio en DreamHost. En este ejemplo, los nameservers son:
+<ul>
+<li><span class="text-object">lilyana.ns.cloudflare.com</span></li>
+<li><span class="text-object">santino.ns.cloudflare.com</span></li>
+</ul>
+</li>
+<li>Inicia sesión en <a href="https://panel.dreamhost.com" target="_blank" rel="noopener noreferrer">tu cuenta de DreamHost</a>.</li>
+<li>Navega a la página<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!/grid-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
+<li>Abre la página <span class="panel-page">Administrar</span> de tu sitio.
+<ul>
+<li>Si estásen la <a href="https://help.dreamhost.com/hc/es/articles/360001294366-Usar-la-p%C3%A1gina-Sitios-Web-del-panel-#cuadricula_o_lista" target="_self">vista de Cuadrícula</a>, pasa sobre tu sitio y da clic en el botón <strong>Administrar</strong>.</li>
+<li>Si estásen la <a href="https://help.dreamhost.com/hc/es/articles/360001294366-Usar-la-p%C3%A1gina-Sitios-Web-del-panel-#cuadricula_o_lista" target="_self">vista de Lista</a>, y da clic en el botón <strong>Administrar</strong> a la derecha de tu sitio web.</li>
+</ul>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-dns-tab.png" alt="ES DNS tab" width="245" height="" /></dd>
+</dl>
+</li>
+<li>Da clic en la pestaña <span class="text-object">DNS</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-manage-websites-nameservers-01.png" width="496" height="259" /></dd>
+</dl>
+</li>
+<li>Baja hasta la sección <span class="text-section">Nameservers</span> y da clic en el botón <strong>Cambiar</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-manage-websites-nameservers-02.png" width="458" height="324" /></dd>
+</dl>
+</li>
+<li>Da clic en botón <span class="text-object">Usaré mis propios nameservers</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-manage-websites-nameservers-cloudflare-01.png" width="434" height="307" /></dd>
+</dl>
+</li>
+<li>Elimina los tres nameservers de DreamHost. luego agrega los dos nameservers de Cloudflare.</li>
+<li>Da clic en el botón <strong>Guardar</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-manage-websites-nameservers-cloudflare-02.png" width="453" height="183" /></dd>
+</dl>
+<dl>
+<dd>Luego de guardar los registros, serán visibles en la página <span class="panel-page">DNS</span> de tu dominio.</dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-cloudflare-add-free-account-11.png" width="208" height="62" /></dd>
+</dl>
+</li>
+<li>De vuelta al panel de Cloudflare, da clic en el botón <strong>Done, check nameservers</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-cloudflare-add-free-account-12.png" width="248" height="138" /></dd>
+</dl>
+</li>
+<li>En la siguiente página, selecciona tus opciones de recomendación.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-cloudflare-add-free-account-13.png" width="493" height="101" /></dd>
+</dl>
+</li>
+<li>los nameservers pueden tomar más de 24 horas en actualizar. Cloudflare informa que serás contactado por correo electrónico cuando el sitio esté activo. Puedes también dar clic en el botón <strong>Check nameservers</strong> para iniciar una verificación manual
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-cloudflare-add-free-account-16.png" width="448" height="70" /></dd>
+</dl>
+</li>
+<li>Cuando los nameservers hayan actualizado, el panel de Cloudflare informará que tu sitio está protegido ahora.</li>
+</ol>
+</div>
+<h2>Agregar un certificado SSL</h2>
+<div class="solvvy-solution">
+<p>Revisa el siguiente artículo para ver los pasos de cómo agregar y configurar un certificado SSL en Cloudflare:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216475197-Generalidades-de-Cloudflare-con-SSL">Generalidades de Cloudflare con SSL</a>&nbsp;</li>
+</ul>
+</div>
+<h2>Habilitar DNSSEC</h2>
+<div class="solvvy-solution">
+<p>En este punto, tus nameservers ahora apuntan a Cloudflare y puedes habilitar DNSSEC en tu dominio. Esto es opcional, pero puede ayudar a proteger tu dominio. Revisa el siguiente artículo para obtener más detalles.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/219539467-Generalidades-de-DNSSEC">Generalidades de DNSSEC</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/7181260919572-Actualizar-los-registros-DNS-en-Cloudflare.html" target="_self" rel="undefined">Actualizar los registros DNS en Cloudflare</a></li>
+</ul>

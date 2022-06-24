@@ -1,0 +1,97 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Las extensiones de seguridad del sistema de nombres de dominio (DNSSEC) son DNS normales con firmas agregadas para autenticar el origen de los datos. Es un conjunto de especificaciones para proteger la información de DNS.</p>
+<p>DreamHost admite DNSSEC como registrador. Esto significa que si tu dominio está registrado en DreamHost, DNSSEC está disponible para el registro del dominio. Sin embargo, en este momento, los nameservers de DreamHost no son compatibles con DNSSEC. Por este motivo, debes alojar tus nameservers en un host de terceros que admita DNSSEC.</p>
+<p>Una vez que los nameservers de tu dominio estén alojados en una compañía externa que admita DNSSEC, DreamHost puede completar la configuración de DNSSEC como el registrador del dominio.</p>
+</div>
+<h2>¿Cómo configuro DNSSEC en mi dominio?</h2>
+<div class="solvvy-solution">
+<div class="notebox-important">
+<p>DreamHost no admite DNSSEC para dominios .eu.</p>
+</div>
+<p>Primero debes alojar tus nameservers en un host de terceros que admita DNSSEC. No es posible habilitar esto si tus nameservers apuntan a DreamHost.</p>
+<p>Díle a tu alojador de DNS de terceros que necesitas configurar claves públicas para configurar DNSSEC en tu dominio. Deben proporcionarte 4 piezas de información:</p>
+<ul>
+<li>key tag</li>
+<li>algorithm</li>
+<li>digest type</li>
+<li>digest</li>
+</ul>
+<p>Estos se explican a continuación.</p>
+<table border="1">
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Campo</th>
+<th bgcolor="#F2F2F2">Explicación</th>
+<th bgcolor="#F2F2F2">Ejemplo</th>
+</tr>
+<tr>
+<td>key tag</td>
+<td>Un entero en el rango de 0 a<br />65535.</td>
+<td>62910</td>
+</tr>
+<tr>
+<td>algorithm</td>
+<td>Un entero que hace referencia a un algoritmo criptográfico utilizado para generar la firma. Los valores posibles son<br />1, 2, 3, 5, 6, 7, 8, 10, 12, 13, 14.</td>
+<td>7</td>
+</tr>
+<tr>
+<td>digest type</td>
+<td>Un entero que corresponde al tipo de algoritmo utilizado para construir el resumen. Los valores son 1 o 2.</td>
+<td>1</td>
+</tr>
+<tr>
+<td>digest</td>
+<td>Un valor alfanumérico hexadecimal. Asegúrate de eliminar cualquier espacio en blanco.</td>
+<td>1D6AC75083F3CEC31861993E325E0EEC7E97D1DD</td>
+</tr>
+</tbody>
+</table>
+<p>Cuando tengas esta información, <a href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-a-trav%C3%A9s-de-Correo-Electr%C3%B3nico">crea un tiquete en tu panel de DreamHost </a> y brinda estos datos al soporte técnico. El soporte técnico puede completar la configuración por ti.</p>
+</div>
+<h2><span id="FAQs">Preguntas Frecuentes</span></h2>
+<h2>¿Por qué es necesario DNSSEC?</h2>
+<div class="solvvy-solution">
+<p>Cuando la infraestructura para DNS se diseñó originalmente, no incluía ninguna protección de seguridad. Si buscaste un sitio web, el servidor DNS no verificó las credenciales antes de aceptar una respuesta y enviarte los datos nuevamente para ver el sitio web. Debido a que no se verificaron las credenciales, un usuario malintencionado podría secuestrar/falsificar el DNS y controlarlo por sus propios medios nefastos. DNSSEC ayuda a prevenir esto al agregar seguridad a DNS.</p>
+<p>En pocas palabras, DNSSEC firma digitalmente los datos para que puedas estar seguro de que son válidos y se originan en su fuente original.</p>
+</div>
+<h2>¿Qué proporciona DNSSEC a los clientes DNS (solucionadores)?</h2>
+<div class="solvvy-solution">
+<p>Un solucionador de DNS es responsable de traducir un nombre de dominio a una dirección IP. DNSSEC proporciona a los clientes DNS (solucionadores) herramientas como:</p>
+<ul>
+<li>Autenticación de origen de datos DNS.</li>
+<li>Denegación de existencia autenticada.</li>
+<li>Integridad de los datos.</li>
+</ul>
+<p>DNSSEC puede proteger específicamente cualquier información DNS publicada como:</p>
+<ul>
+<li>registros de texto (TXT).</li>
+<li>registros de intercambio de correo (MX).</li>
+</ul>
+</div>
+<h2>Lo que <strong>DNSSEC NO PUEDE</strong> hacer</h2>
+<div class="solvvy-solution">
+<p><strong>Confidencialidad</strong>&nbsp;— DNSSEC no proporciona confidencialidad de datos. Todas las respuestas DNSSEC están autenticadas, pero <strong>no</strong> están encriptadas.</p>
+<p><strong>Protección DDoS</strong>&nbsp;— DNSSEC no protege directamente contra ataques DDoS.</p>
+<p><strong>Cifrado</strong> — DNSSEC no cifra ningún dato.</p>
+<p><strong>Spoofing</strong> — DNSSEC no evita la suplantación de identidad o el phishing.</p>
+</div>
+<h2>Problemas de DNS después de transferir un dominio a DreamHost</h2>
+<div class="solvvy-solution">
+<p><span style="font-weight: 400;">Si observas problemas intermitentes con DNS después de que se complete tu transferencia de dominio, es posible que tu dominio haya usado DNSSEC antes de la transferencia. Los registros DNSSEC también son únicos, ya que se transfieren junto con un registro de dominio, por lo que los registros DNSSEC no se eliminan cuando un dominio se transfiere de un registrador a otro.</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Si deseas usar los nameservers de DreamHost con tu dominio recién transferido, por favor <a href="https://panel.dreamhost.com/support" target="_self">contacta el soporte de DreamHost</a> para eliminar los registros DNSSEC adjuntos. Si prefieres seguir utilizando DNSSEC, deberás apuntar los nameservers del dominio a un proveedor de DNS que lo admita</span>.</p>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">Generalidades DNS de DreamHost</a>&nbsp;</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS">Generalidades de propagaión de DNS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214694348-Registros-DNS-b%C3%A1sicos">Generalidades de DNS basico</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="https://www.icann.org/resources/pages/dnssec-what-is-it-why-important-2019-03-20-es" target="_self">DNSSEC – ¿Qué son y por qué son importantes?</a></li>
+<li><a href="https://es.wikipedia.org/wiki/Domain_Name_System_Security_Extensions" target="_self">DNSSEC en Wikipedia</a></li>
+<li><a href="https://www.cloudflare.com/dns/dnssec/how-dnssec-works/" target="_self">Como funciona DNSSEC</a></li>
+</ul>
+</div>
