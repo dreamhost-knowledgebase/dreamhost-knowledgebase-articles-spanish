@@ -4,22 +4,28 @@
 </div>
 <h2>Configurar planes de socios de Cloudflare en DreamPress</h2>
 <div class="solvvy-solution">
-<p>Para habilitar los planes de socios de Cloudflare, por favor&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener noreferrer">Contacta el equipo de soporte</a> usando la categoría DreamPress para comenzar el proceso.</p>
-<p>Si deseas habilitar Cloudflare tú mismo sin la participación del equipo de soporte de DreamHost, también puedes suscribirte a los planes de Cloudflare directamente en&nbsp;<a href="https://www.cloudflare.com/" target="_self">cloudflare.com</a>. Ten en cuenta que si eliges esta opción, deberás modificar tus nameservers y administrar tus registros DNS tú mismo, en lugar de hacer que DreamHost administre el DNS por ti usando los namerservers DreamHost.</p>
+<p>Puedes registrarte a los planes de Cloudflare directamente en <a href="https://help.dreamhost.com/hc/es/articles/7087974733332-Crear-una-cuenta-de-Cloudflare-gratuita" target="_self" rel="undefined">cloudflare.com</a>. Por favor recuerda que si escoges esta opción, necesitarás <a href="https://help.dreamhost.com/hc/es/articles/7181260919572-Actualizar-los-registros-de-DNS-en-Cloudflare" target="_self">modificar tus nameservers y administrar tus registros de DNS</a> por ti mismo.</p>
 <h3>Configuración adicional</h3>
-<p>Se recomienda encarecidamente instalar el plugin Proxy Cache Purge en tu sitio DreamPress. Si bien Proxy Cache Purge se instala de manera predeterminada en todos los sitios nuevos de DreamPress, si migras un sitio de WordPress existente a DreamPress, los archivos del plugin podrían sobrescribirse. Puedes instalarlo tú mismo si tu sitio DreamPress no tiene el plugin:</p>
+<p>Se recomienda encarecidamente que instales el plugin Proxy Cache Purge en tu sitio DreamPress. Si bien Proxy Cache Purge se instala de manera predeterminada en todos los sitios nuevos de DreamPress, si migras un sitio de WordPress existente a DreamPress, los archivos del plugin podrían sobrescribirse. Puedes instalarlo tú mismo si tu sitio DreamPress no tiene el plugin:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360027709252-Configuraci%C3%B3n-del-plugin-Proxy-Cache-Purge-en-DreamPress" target="_self">Configurar el plugin Proxy Cache Purge en DreamPress</a></li>
 </ul>
-<p>Si tienes el plugin instalado y activado, visita el menú "Proxy Cache" en tu WP-Admin para verificar que el campo "Set Custom IP" dice&nbsp;<strong>localhost</strong>. De lo contrario, cambia el campo a localhost y haga clic en el botón "Save IP".</p>
-<div class="notebox-note">
-<p>En las máquinas más antiguas de DreamPress, este campo debería ser la dirección IP del servidor DreamPress.</p>
-</div>
-<p>Si observas algún problema extraño de almacenamiento en caché o rendimiento, el plugin Cloudflare, también disponible en el repositorio de WordPress.org, puede ayudarte a optimizar el rendimiento de tu sitio con Cloudflare. Sin embargo, este plugin no es obligatorio.</p>
+<p>Si tienes el plugin instalado y activado, visita el menú "Proxy Cache" en tu WP-Admin para verificar que el campo "Set Custom IP" usa la IP del servidor (<em>por defecto</em>). Si no, ajusta el campo y da clic al botón <strong>Save IP</strong>.</p>
+<p>Si ves algún problema extraño de almacenamiento en caché o rendimiento, el plugin Cloudflare, también disponible en el repositorio de WordPress.org, puede ayudarte a optimizar el rendimiento de tu sitio con Cloudflare. Sin embargo, este plugin no es obligatorio.</p>
 </div>
 <h2>Pros y contras de usar Cloudflare en DreamPress</h2>
 <div class="solvvy-solution">
+<div class="notebox-important">
+<p>Debido a inconvenientes con la compatibilidad, DreamHost NO recomienda usar la <a href="https://developers.cloudflare.com/automatic-platform-optimization/" target="_blank" rel="noopener noreferrer">Automatic Platform Optimizations (APO)</a> de Cloudflare en tu sitio DreamPress.</p>
+</div>
 <p>DreamPress incluye&nbsp;almacenamiento en <a href="https://help.dreamhost.com/hc/es/articles/215300647-Administrar-el-cach%C3%A9-DreamPress" target="_self">caché del servidor</a> incorporado para que tus páginas se carguen muy rápidamente, lo que actúa como un "proxy inverso" de la misma manera que lo hace Cloudflare. Trabajar en tu sitio con Cloudflare activo en DreamPress a veces puede ser complicado ya que Cloudflare está almacenando en caché un sitio que ya está en caché utilizando el mismo método. Puedes reducir este efecto habilitando el <a href="https://help.dreamhost.com/hc/es/articles/215300647-Administrar-el-cach%C3%A9-DreamPress#evitar" target="_self">modo de Desarrollo</a>&nbsp;en Cloudflare y el plugin Proxy Cache Purge.</p>
-<p>Si deseas una alternativa a Cloudflare para evitar posibles problemas de doble caché, la versión gratuita de Jetpack ofrece algunas características similares, como un CDN automático de archivos estáticos, y la suscripción a Jetpack Professional incluida con los planes DreamPress Plus y Pro contiene características de seguridad adicionales que pueden también ofrecer una alternativa a lo que proporciona Cloudflare.</p>
-<p>Cloudflare ofrece características beneficiosas adicionales además del almacenamiento en caché de proxy inverso, y muchos clientes de DreamPress ejecutan con éxito tu sitio con Cloudflare activo. Estas características incluyen protección DDoS básica, desafío de captcha por IP o código de país, bloqueo de IP específicas dentro de la interfaz de Cloudflare, protección contra spam de comentarios y raspado de contenido, y más.</p>
+<p>Si deseas una alternativa a Cloudflare para evitar posibles problemas de doble caché, la versión gratuita de Jetpack ofrece algunas características similares, como un CDN automático de archivos estáticos; y la suscripción a Jetpack Professional incluida con los planes DreamPress Plus y Pro contiene características de seguridad adicionales que pueden también ofrecer una alternativa a lo que proporciona Cloudflare.</p>
+<p>Cloudflare ofrece características beneficiosas adicionales además del almacenamiento en caché de proxy inverso. Muchos clientes de DreamPress ejecutan con éxito tu sitio con Cloudflare activo. Estas características incluyen protección DDoS básica, desafío de captcha por IP o código de país, bloqueo de IP específicas dentro de la interfaz de Cloudflare, protección contra spam de comentarios, legrado de contenido, y más.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/7087974733332-Crear-una-cuenta-de-Cloudflare-gratuita" target="_self" rel="undefined">Crear una cuenta de Cloudflare gratuita</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/7181260919572-Actualizar-los-registros-de-DNS-en-Cloudflare" target="_self">Actualizar los registros de DNS en Cloudflare</a></li>
+</ul>
 </div>
