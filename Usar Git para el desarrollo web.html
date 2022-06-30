@@ -27,12 +27,20 @@
 <li>Agrega este código al archivo. Indica dónde impulsar estos cambios. En este ejemplo, cambia el <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario real de shell</a>,y cambiar <strong>example.com</strong> a tu sitio web.
 <div class="preboxcontainer">
 <pre class="prebox">#!/bin/sh
-GIT_WORK_TREE=/home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span> git checkout -f</pre>
+GIT_WORK_TREE=/home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span> git checkout -f main</pre>
+</div>
+<div class="alert-warning">
+<p>Si has <a href="https://help.dreamhost.com/hc/es/articles/216385637-Habilitar-Passenger-en-un-dominio" target="_self">habilitado Passenger</a> en tu dominio, el directorio web publico es configurado para usar <span class="text-object">/public</span>. En este caso, necesitas agregar este directorio al camino del archivo como se muestra abajo.</p>
+<div class="preboxcontainer">
+<pre class="prebox">#!/bin/sh
+GIT_WORK_TREE=/home/username/example.com<span class="code-highlight">/public</span> git checkout -f main</pre>
+</div>
 </div>
 <div class="notebox-note">
-<p>Por defecto, la primera rama de los repositorios de git se llama <span class="text-object">master</span>. Sin embargo, muchas compañías que usan git han renombrado esta primera rama a <span class="text-object">main</span>. Las ramas locales y remotas deben usar el mismo nombre de la rama principal, entonces puede que necesites cambiar el nombre de la rama local para coincidir con el nombre de tu rama remota. Revisa el siguiente artículo para ver instrucciones de como configurar gir para usar <span class="text-object">main</span>:</p>
+<p>En estos ejemplos, la rama llamada <span class="text-object">main</span> está siendo usada. Si has seguido los artículos de DreamHost, los repositorios de servidores locales y de DreamHost están ya configurados para usar esta rama. Deberías cambiar solamente el nombre de la rama si quieres lanzar una rama diferente a tu sitio web en línea.</p>
+<p>Revisa el siguiente artículo para más instrucciones sobre cómo configurar git para usar <span class="text-object">main</span>:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/4466702078740-Configurar-git-para-usar-main-como-la-rama-principal" target="_self">Configurar git para usar 'main' como la rama principal</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/4466702078740-Configurar-git-para-usar-main-como-la-rama-principal" target="_self">Configurar git para usar 'main' como rama principal</a></li>
 </ul>
 </div>
 </li>

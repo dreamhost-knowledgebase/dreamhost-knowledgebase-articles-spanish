@@ -20,6 +20,10 @@
 <div class="solvvy-solution">
 <p>Debido a que suEXEC solo permite variables consideradas seguras por la configuración del servidor, las directivas proporcionadas por <a href="https://httpd.apache.org/docs/2.4/mod/mod_env.html" target="_self" rel="undefined">mod_env</a> como <span class="code">SetEnv</span>, <span class="code">PassEnv</span>, y <span class="code">SetEnvIf</span> no funcionan como se espera.</p>
 <p>Los siguientes pasos crean un ejemplo simple de cómo funciona suEXEC en DreamHost.</p>
+<div class="steps-section--container">
+<div class="steps-section-sublist--border">&nbsp;</div>
+<div class="steps-section--content">
+<div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-1.svg" width="30px" />
 <h3>Paso 1 — Agregar un archivo a tu sitio</h3>
 <p><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crea un archivo</a> llamado <span class="text-object">foobar.cgi</span> con el siguiente contenido.</p>
 <div class="preboxcontainer">
@@ -38,6 +42,8 @@ print $ENV{FOOBAR};</pre>
 <li><span class="text-object">/home/username/example.com</span></li>
 <li><span class="text-object">/home/username/example2.com</span></li>
 </ul>
+</div>
+<div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-2.svg" width="30px" />
 <h3>Paso 2 — Agrega un archivo .htaccess para cada directorio</h3>
 <p>En el directorio <strong>example.com</strong>, agrega un <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a> con la siguiente directiva:</p>
 <div class="preboxcontainer">
@@ -47,12 +53,17 @@ print $ENV{FOOBAR};</pre>
 <div class="preboxcontainer">
 <pre class="prebox">SetEnv FOOBAR <span class="code-highlight">bar</span></pre>
 </div>
+</div>
+<div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-3.svg" width="30px" />
 <h3>Paso 3 — Visita los archivos en un buscador</h3>
 <p>Visita <strong>example.com/foobar.cgi</strong> en tu buscador. Esperarías que se mostrara <span class="code">foo</span>.</p>
 <p>Visita <strong>example2.com/foobar.cgi</strong> en tu buscador. Esperarías que se mostrara <span class="code">bar</span>.</p>
 <p>En vez, <span class="code">default</span> se muestra en ambas páginas.</p>
 <h3>Explicación</h3>
 <p><span class="code">SetEnv</span> está funcionando correctamente para establecer la variable de entorno. El problema es que suEXEC no lo está pasando a tu script CGI.</p>
+</div>
+</div>
+</div>
 </div>
 <h2 class="header-section">Soluciones alternativas</h2>
 <p>The following sections offer you a few ways to get your environment variables working as intended.</p>

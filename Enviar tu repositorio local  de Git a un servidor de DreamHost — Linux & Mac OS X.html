@@ -98,11 +98,33 @@ dreamhost-git-key.pub</pre>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span>
 <span class="server">[server]$ </span><span class="command">mkdir <span class="code-highlight">example.com.git</span></span>
-<span class="server">[server]$ </span><span class="command">cd <span class="code-highlight">~/example.com.git</span></span>
+<span class="server">[server]$ </span><span class="command">cd ~/<span class="code-highlight">example.com.git</span></span>
 <span class="server">[server]$ </span><span class="command">git init --bare</span>
-<span class="server">[server]$ </span><span class="command">exit</span>
+<span class="server">[server]$ </span><span class="command">git symbolic-ref HEAD refs/heads/main</span>
 </pre>
 </div>
+</li>
+<li>Corre <span class="code">ls -la</span> para confirmar que los archivos y directorios han sido creados.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la</span>
+HEAD
+/branches
+config
+description
+/hooks
+/info
+/objects
+/refs</pre>
+</div>
+</li>
+<li>Confirma que el archivo <span class="text-object">HEAD</span> está configurado para usar <span class="text-object">main</span> corriendo el siguiente comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat HEAD</span>
+ref: refs/heads/main</pre>
+</div>
+<dl>
+<dd><em>Deberás ver que <span class="text-object">main</span> está usándose.</em></dd>
+</dl>
 </li>
 </ol>
 </div>
