@@ -2,6 +2,10 @@
 <div class="solvvy-solution">
 <p>Este artículo explica cómo instalar Nextcloud en dos instancias de DreamCompute. Una instancia es para la propia aplicación y la otra instancia para la base de datos que utiliza.</p>
 </div>
+<div class="steps-section--container">
+<div class="steps-section--border">&nbsp;</div>
+<div class="steps-section--content">
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-1.svg" alt="" width="50px" />
 <h2>Paso 1 —&nbsp;Agregar un grupo de seguridad</h2>
 <div class="solvvy-solution">
 <p>Primero, crea un grupo de seguridad para la instancia de la base de datos. Esto es para que permita TCP en el puerto 3306, el puerto MySQL/MariaDB. Consulta los dos artículos siguientes para obtener más instrucciones:</p>
@@ -10,6 +14,8 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/360000717692-Administrar-Grupos-de-Seguridad-usando-el-CLI-de-Openstack" target="_self" rel="undefined">Administrar los Grupos de Seguridad usando el CLI OpenStack</a></li>
 </ul>
 </div>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-2.svg" alt="" width="50px" />
 <h2>Paso 2 — Lanzar una instancia</h2>
 <div class="solvvy-solution">
 <p>A continuación, inicia dos instancias de Ubuntu 16.04 LTS.</p>
@@ -29,6 +35,8 @@
 <p>Se recomienda reiniciar una <a href="https://help.dreamhost.com/hc/es/articles/217701757--Cu%C3%A1l-es-la-diferencia-entre-los-discos-de-arranque-ef%C3%ADmeros-y-por-volumen-" target="_self" rel="undefined">instancia respaldada por volumen</a> ya que son permanentes en contraposición a los <a href="https://help.dreamhost.com/hc/es/articles/217701757--Cu%C3%A1l-es-la-diferencia-entre-los-discos-de-arranque-ef%C3%ADmeros-y-por-volumen-" target="_self" rel="undefined">discos efímeros</a> y puede tener un tamaño superior a 80 GB si se almacenan grandes cantidades de datos. Esto se puede hacer en el <a class="reference external" href="https://help.dreamhost.com/hc/es/articles/215912848-C%C3%B3mo-lanzar-una-instancia-usando-el-panel-de-DreamCompute" target="_self" rel="undefined">panel de DreamCompute</a> o con el <a href="https://help.dreamhost.com/hc/es/articles/216511617-Como-lanzar-una-instancia-usando-el-CLI-de-OpenStack" target="_self" rel="undefined">cliente de línea de comandos de OpenStack</a>.</p>
 </div>
 <div id="installing-mariadb">&nbsp;</div>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-3.svg" alt="" width="50px" />
 <h2>Paso 3 — Instalar MariaDB en la instancia #1</h2>
 <div class="solvvy-solution">
 <p>Para instalar MariaDB en tu instancia de base de datos, primero, inicia sesión en la instancia con tu <a href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined">usuario predeterminado</a> y la <a href="https://help.dreamhost.com/hc/es/articles/115001736691-Descripci%C3%B3n-general-de-creaci%C3%B3n-de-una-Llave-de-Emparejamiento" target="_self" rel="undefined">llave de seguridad</a>:</p>
@@ -47,6 +55,8 @@
 <p>Durante la instalación, el usuario raíz de la base de datos se configurará sin contraseña, pero un complemento de autenticación evitará el inicio de sesión de cualquier persona que no sea el usuario raíz del sistema operativo. Se puede establecer una contraseña si se desea.</p>
 </div>
 <div id="configuring-mariadb">&nbsp;</div>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-4.svg" alt="" width="50px" />
 <h2>Paso 4 —&nbsp;Configurar MariaDB</h2>
 <div class="solvvy-solution">
 <div id="changing-the-bind-address">
@@ -121,6 +131,8 @@ Bye</pre>
 <p>Esto completa la instalación de la instancia de la base de datos.</p>
 </div>
 <div id="installing-the-nextcloud-application">&nbsp;</div>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-5.svg" alt="" width="50px" />
 <h2>Paso 5 —&nbsp;Instalar la aplicación Nextcloud en la instancia #2</h2>
 <div class="solvvy-solution">
 <div id="installing-dependencies">
@@ -145,6 +157,8 @@ php7.0-mbstring php7.0-intl php7.0-mcrypt php-imagick php7.0-xml php7.0-zip</spa
 </div>
 </div>
 <div id="downloading-nextcloud">&nbsp;</div>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-6.svg" alt="" width="50px" />
 <h2>Paso 6 — Descargar Nextcloud</h2>
 <div class="solvvy-solution">
 <p>Ahora necesitamos descargar la aplicación Nextcloud real.</p>
@@ -180,6 +194,8 @@ Esto descargará una copia comprimida de la aplicación Nextcloud.
 <pre class="prebox"><span class="server">[root@instance]# </span><span class="command">chown -R www-data:www-data /var/www/nextcloud</span></pre>
 </div>
 <div id="configuring-apache">&nbsp;</div>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-7.svg" alt="" width="50px" />
 <h2>Paso 7 — Configurar Apache</h2>
 <div class="solvvy-solution">
 <p>Ahora debes configurar Apache para usar Nextcloud. Crea un archivo en el directorio<span class="text-object">/etc/apache2/sites-available</span> llamado <span class="text-object">nextcloud.conf</span>.</p>
@@ -224,6 +240,8 @@ Esto descargará una copia comprimida de la aplicación Nextcloud.
 </pre>
 </div>
 <div id="finishing-the-installation">&nbsp;</div>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-8.svg" alt="" width="50px" />
 <h2>Paso 8 —&nbsp;Finalizar la Instalación</h2>
 <div class="solvvy-solution">
 <p>Ahora que todo está configurado en la instancia, abre un navegador y visita <a class="reference external" href="https://IP/nextcloud">https://IP/nextcloud</a> donde <strong>IP</strong> es la dirección IP de tu instancia de aplicación.</p>
@@ -236,4 +254,7 @@ Esto descargará una copia comprimida de la aplicación Nextcloud.
 <li>El host es la dirección IP de la instancia de tu base de datos con :3306 al final</li>
 </ul>
 <p>Da clic en <strong>Finish Installation</strong> y tienes una instalación funcional de Nextcloud.</p>
+</div>
+</div>
+</div>
 </div>
