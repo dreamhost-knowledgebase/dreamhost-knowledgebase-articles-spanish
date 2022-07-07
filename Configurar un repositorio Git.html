@@ -19,21 +19,17 @@
 </ul>
 <p>También puedes continuar con los siguientes pasos para una configuración básica.</p>
 </div>
-<h2><span id="Crear_tu_identidad">Crear tu identidad</span></h2>
+<div class="steps-section--container">
+<div class="steps-section--border">&nbsp;</div>
+<div class="steps-section--content">
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-1.svg" width="50px" />
+<h2 id="toc-heading1" class="subheader">Paso 1 —&nbsp; <span id="Crear_tu_identidad">Crear tu identidad</span></h2>
 <div class="solvvy-solution">
 <p>Los siguientes comandos crean tu identidad para usar con Git. Revisa el artículo de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> para obtener detalles sobre cómo iniciar sesión en tu servidor:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">git config --global user.name "<span class="code-highlight">John Doe</span>"</span>
 <span class="server">[server]$ </span><span class="command">git config --global user.email <span class="code-highlight">johndoe@example.com</span></span>
-<span class="server">[server]$ </span><span class="command">git config --global init.defaultBranch main</span>
 </pre>
-</div>
-<div class="notebox-note">
-<p>La última línea asegura que los repositorios recién creados usen el nombre <span class="text-object">main</span> como rama principal. Revisa el siguiente artículo para obtener más detalles:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/4466702078740-Configurar-git-para-usar-main-como-la-rama-principal">Configurar git para usar 'main' como la rama principal </a></li>
-</ul>
-</div>
 <p>Esto crea un archivo llamado <span class="text-object">.gitconfig</span> en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio de tu usuario</a> con el siguiente contenido:</p>
 <div class="preboxcontainer">
 <pre class="prebox">[user]
@@ -49,7 +45,9 @@ user.email=johndoe@example.com</span>
 </pre>
 </div>
 </div>
-<h2>Configurar el repositorio y commit</h2>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-2.svg" width="50px" />
+<h2 id="toc-heading1" class="subheader">Paso 2 — Configurar el repositorio y commit</h2>
 <div class="solvvy-solution">
 <ol>
 <li>Navega al directorio de tu aplicación (o sitio web). Este ejemplo configura Git en el directorio de tu <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-de-sitio-web" target="_self">sitio web</a>. Cambia <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> a tu sitio web.
@@ -58,7 +56,7 @@ user.email=johndoe@example.com</span>
 </pre>
 </div>
 </li>
-<li>Corre lo siguiente para inicializar el nuevo repositorio:<br>
+<li>Corre lo siguiente para inicializar el nuevo repositorio:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">git init
 <span class="cmdoutput">Initialized empty Git repository in /home/username/example.com/.git/</span>
@@ -68,7 +66,7 @@ user.email=johndoe@example.com</span>
 <dd>Este comando crea el directorio <span class="text-object">/.git</span> y su repositorio git.</dd>
 </dl>
 </li>
-<li>Agrega todos los archivos de tu aplicación al repositorio de Git. El siguiente comando muestra cómo agregar todos los archivos:<br>
+<li>Agrega todos los archivos de tu aplicación al repositorio de Git. El siguiente comando muestra cómo agregar todos los archivos:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">git add .</span>
 </pre>
@@ -80,7 +78,7 @@ user.email=johndoe@example.com</span>
 <li>Corre el <a href="http://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" target="_self">comando de estado</a>&nbsp;para confirmar qué archivos están en el área de preparación:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">git status</span>
-<br>Initial commit
+<br />Initial commit
 
 Changes to be committed:
   (use "git rm --cached ..." to unstage)
@@ -105,7 +103,7 @@ Changes to be committed:
 </ul>
 </div>
 </li>
-<li>Si estás seguro de que estás listo para confirmar (guardar) estas versiones de los archivos en tu repositorio de Git, corre el siguiente comando:<br>
+<li>Si estás seguro de que estás listo para confirmar (guardar) estas versiones de los archivos en tu repositorio de Git, corre el siguiente comando:<br />
 <div class="notebox-note">
 <p>Asegúrate de agregar un mensaje corto y claro que explique para qué fue este commit. Mira el siguiente artículo para obtener detalles sobre cómo crear un buen mensaje de confirmación.</p>
 <ul>
@@ -120,7 +118,7 @@ Changes to be committed:
  create mode 100644 images/image1.jpg
  create mode 100644 images/image2.jpg
  create mode 100644 images/image3.jpg
- create mode 100644 index.html<br> create mode 100644 mystyles.css
+ create mode 100644 index.html<br /> create mode 100644 mystyles.css
 </pre>
 </div>
 <dl>
@@ -138,6 +136,19 @@ e11cdb7 (HEAD -&gt; main) Committing website files for the first time</pre>
 <ul>
 <li><a href="http://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" target="_self">Grabar cambios en el repositorio</a></li>
 </ul>
+</div>
+</div>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-3.svg" width="50px" />
+<h2 id="toc-heading1" class="subheader">Paso 3 — Configurar el repositorio para usar 'main' como la rama principal</h2>
+<div class="solvvy-solution">
+<p>Los repositorios recién creados usan el nombre <span class="text-object">master</span> como la rama principal. Para asegurar compatibilidad futura, se recomienda que actualices el nombre de esta rama a <span class="text-object">main</span>.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/4466702078740-Configurar-git-para-usar-main-como-rama-principal#main" target="_self" rel="undefined">Configurar git para usar 'main' como rama principal</a></li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 <h2>Ver también</h2>

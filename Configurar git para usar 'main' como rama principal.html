@@ -12,26 +12,52 @@
 <p>Si creaste un repositorio en tu servidor de DreamHost en el pasado, la rama principal se llama <span class="text-object">master</span>. Esto continuará funcionando normalmente en tu servidor DreamHost sin ningún problema.</p>
 <p>Sin embargo, se recomienda que, de ahora en adelante, crees nuevos repositorios con el nombre de rama principal de <span class="text-object">main</span>. Esto asegurará la futura compatibilidad con otros programas de software como se mencionó anteriormente.</p>
 </div>
+<!--
 <h2>Actualizar tu archivo de configuración de git</h2>
 <div class="solvvy-solution">
-<p>Puedes correr el siguiente comando para agregar una línea a tu archivo git <span class="text-object">config</span>. Esto asegurará que todos los repositorios futuros que creas usen <span class="text-object">main</span> como la rama principal.</p>
-<p>Los siguientes pasos se pueden ejecutar en tu computador local o en tu servidor de DreamHost.</p>
-<ol>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215360828-Software-de-clientes-de-SSH" target="_self">Abre una terminal</a> en el computador de tu casa o inicia sesión en tu servidor DreamHost a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
-<li>Corre el siguiente comando:
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">git config --global init.defaultBranch main</span></pre>
-</div>
-</li>
-</ol>
-<p>Ahora, cuando inicializas un nuevo repositorio corriendo <span class="code">git init</span>, <span class="text-object">main</span> se usará en lugar de <span class="text-object">master</span> como la rama principal.</p>
-<h3>Cambiar un repositorio existente para usar main</h3>
-<p>Si creaste un repositorio en el pasado usando git, la rama principal se llama <span class="text-object">master</span>. Puedes verificar corriendo el siguiente comando en el computador de tu hogar o en el servidor de DreamHost.</p>
+  <p>
+    Puedes correr el siguiente comando para agregar una línea a tu archivo git
+    <span class="text-object">config</span>. Esto asegurará que todos los repositorios
+    futuros que creas usen <span class="text-object">main</span> como la rama
+    principal.
+  </p>
+  <p>
+    Los siguientes pasos se pueden ejecutar en tu computador local o en tu servidor
+    de DreamHost.
+  </p>
+  <ol>
+    <li>
+      <a href="https://help.dreamhost.com/hc/es/articles/215360828-Software-de-clientes-de-SSH" target="_self">Abre una terminal</a>
+      en el computador de tu casa o inicia sesión en tu servidor DreamHost
+      a través de
+      <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.
+    </li>
+    <li>
+      Corre el siguiente comando:
+      <div class="preboxcontainer">
+        <pre class="prebox"><span class="server">[server]$ </span><span class="command">git config --global init.defaultBranch main</span></pre>
+      </div>
+    </li>
+  </ol>
+  <p>
+    Ahora, cuando inicializas un nuevo repositorio corriendo
+    <span class="code">git init</span>, <span class="text-object">main</span>
+    se usará en lugar de <span class="text-object">master</span> como la rama
+    principal.
+  </p>-->
+<div id="main" class="section-link">&nbsp;</div>
+<h2>Cambiar la rama principal para usar 'main'</h2>
+<div class="solvvy-solution">
+<p>Los repositorios recién creados usan el nombre <span class="text-object">master</span> como la rama principal. Para asegurar compatibilidad futura, se recomienda que actualices el nombre de esta rama a <span class="text-object">main</span>.</p>
+<ul>
+<li>Revisa el nombre de tu rama corriendo el siguiente comando en el computador de tu hogar o servidor de DreamHost.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">git branch -a</span></pre>
 </div>
-<p>Si hay varias ramas, la rama activa mostrará un <span class="code">*</span> a la izquierda. Si ves que la rama principal es <span class="text-object">master</span>, corre los siguientes comandos para actualizarlo a <span class="text-object">main</span>.</p>
-<ol>
+<dl>
+<dd>Si hay varias ramas, la rama activa mostrará un <span class="code">*</span> a la izquierda. Si ves que la rama principal es <span class="text-object">master</span>, corre los siguientes comandos para actualizarlo a <span class="text-object">main</span>.</dd>
+</dl>
+</li>
 <li>Asegúrate de que la rama activa sea <span class="text-object">master</span>.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">git checkout master</span></pre>
@@ -45,7 +71,12 @@
 <p>Si la rama principal existe por alguna razón, puedes usar <span class="code">-M</span> para forzar el cambio de nombre.</p>
 </div>
 </li>
-</ol>
+<li>Finalmente, actualiza los <a href="https://git-scm.com/docs/git-symbolic-ref" target="_blank" rel="noopener">symbolic refs</a> para usar <span class="text-object">main</span>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git symbolic-ref HEAD refs/heads/main</span></pre>
+</div>
+</li>
+</ul>
 <h3>Actualizar repositorios remotos</h3>
 <p>Si has enviado este repositorio local a un repositorio remoto (como github.com), debes enviarlo nuevamente para restablecer la rama ascendente.</p>
 <div class="notebox-tip">
