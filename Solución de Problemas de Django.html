@@ -1,7 +1,7 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo muestra algunos pasos que puedes tomar para la solución de problemas con Django.</p>
-<div class="notebox-note">
+<div class="prereqs">
 <p>Para correr los comandos en este artículo, debes acceder a tu servidor via SSH con tu usuario Shell. Revisa los siguientes artículos para obtener más información:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades sobre SSH</a></li>
@@ -10,17 +10,24 @@
 </ul>
 </div>
 </div>
-<h2>Errores debido a actualizaciones de Ubuntu</h2>
+<h2>Errores debido a actualizaciones de servidor</h2>
 <div class="solvvy-solution">
-<p>DreamHost actualizó recientemente los servidores web para usar una&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360022178852--C%C3%B3mo-preparar-mi-sitio-para-Ubuntu-Bionic-" target="_self" rel="undefined">versión más nueva de Ubuntu</a>.&nbsp;Con la nueva versión de Ubuntu viene una versión más nueva de Django. Si anteriormente instalaste tu versión de Django utilizando el antiguo script de instalación django-setup.py, podrías ver errores en tu sitio web. Desafortunadamente, el área de soporte técnico no puede ayudar con errores de instalación anteriores.</p>
-<p>La única manera recomendada actualmente para instalar Django es en entorno virtual (virtualenv).</p>
+<p>DreamHost actualiza frecuentemente los sistemas operativos en sus servidores web para asegurar la seguridad y provisionar actualizaciones de software. El siguiente artículo explica cómo puedes ver el sistema operativo actual que tu servidor está usando.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360059767631-Ver-las-versiones-del-software-de-tu-servidor">Ver las versiones del software de tu servidor</a></li>
+</ul>
+<p>La forma recomendada de instalar Django es en un ambiente virtual:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215317948-Instalar-Django-usando-virtualenv" target="_self">Instalar Django usando virtualenv</a></li>
 </ul>
+<p>Luego de la actualización del servidor, puede que sea necesario reinstalar tu ambiente virtual y el proyecto de Django para solucionar cualquier conflicto.</p>
 </div>
-<h2>La aplicación no está funcionando</h2>
+<h2>Confirmar que las credenciales están correctas</h2>
 <div class="solvvy-solution">
 <p>Si tu aplicación no está funcionando, asegúrate de estar usando la información correcta de usuarios, contraseñas, bases de datos, y hostnames (o nombres de servidor) en el archivo <span class="text-object">/projectname/settings.py</span>.</p>
+</div>
+<h2>Teminar los procesos existentes</h2>
+<div class="solvvy-solution">
 <p>Si haces cambios al código, como trabajar a través de los tutoriales oficiales, y parece que no funcionan, asegúrate de eliminar los procesos Python existentes y vuelve a cargar la página:</p>
 <dl>
 <dd>
@@ -30,7 +37,7 @@
 </dd>
 </dl>
 </div>
-<h2>Los cambios no se reflejan</h2>
+<h2>Los cambios no se ven reflejados</h2>
 <div class="solvvy-solution">
 <p>Si modificaste tu aplicación y los cambios no parecen verse reflejados, puede que necesites notificar a Passenger sobre tu cambio creando o modificando&nbsp;<span class="text-object">~/example.com/tmp/restart.txt</span>. Asegúrate de cambiar <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.</p>
 <dl>
@@ -41,8 +48,27 @@
 </dd>
 </dl>
 <dl>
-<dd>Passenger buscará este archivo y recargará la aplicación cuando hayas modificado este archivo.</dd>
+<dd>Passenger busca este archivo y recarga la aplicación cuando hayas modificado el mismo.</dd>
 </dl>
+<p>Si ves que esto no funciona, intenta recargar tu sitio en el panel como se muestra abajo.</p>
+<h3>Guarda nuevamente las configuraciones de tu dominio en el panel</h3>
+<h3>Servidores compartidos</h3>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.manage" target="_blank" rel="noopener noreferrer">Administrar Dominios</a>.</li>
+<li>Da clic en el enlace <span class="text-link">Editar</span> a la derecha de tu dominio, debajo de la columna <span class="text-object">Alojamiento Web</span>.</li>
+<li>Baja y da clic en el botón <strong>Cambiar configuraciones</strong> para guardar.</li>
+<li>Espera 5 minutos, luego revisa tu sitio.</li>
+</ol>
+<h3>VPS y servidores Dedicados</h3>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=vps.dashboard" target="_blank" rel="noopener noreferrer">VPS</a>&nbsp;ó&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=dedicated.dashboard&amp;" target="_blank" rel="noopener noreferrer">Dedicados</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-button-reload-http.png" alt="ES reload http button" width="129" height="" /></dd>
+</dl>
+</li>
+<li>Da clic en el botón <strong>Volver a cargar HTTP</strong>.</li>
+<li>Espera 5 minutos para que reconstruya el archivo de configuración.</li>
+</ol>
 </div>
 <h2>Los cambios no se ven reflejados en el Shared Hosting</h2>
 <div class="solvvy-solution">
@@ -55,28 +81,12 @@
 </dd>
 </dl>
 </div>
-<h2>Versión personalizada de Python</h2>
+<h2>Premature end of script headers</h2>
 <div class="solvvy-solution">
-<p>Si instalaste una&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000218612-Instalar-una-versi%C3%B3n-de-Python-2" target="_self">versión persolanizada de Python</a>&nbsp;en tu directorio y te gustaría usarla, agrega lo siguiente a tu archivo&nbsp;<span class="text-object">passenger_wsgi.py</span>:</p>
-<dl>
-<dd>
-<div class="preboxcontainer">
-<pre class="prebox">if sys.hexversion &lt; 0x2060000: os.execl("<span class="code-highlight">/path/to/your/copy/of/python2.7</span>", "python2.7", *sys.argv)</pre>
-</div>
-</dd>
-</dl>
-</div>
-<h2>500 error</h2>
-<div class="solvvy-solution">
-<p>Si ves que las páginas de tu sitio muestran un error 500 sin sentido a pesar de que tienes DEBUG (depuración) habilitado en tu aplicación Django, probablemente te encuentres con un problema de Passenger que trata con errores. Revisa el artículo&nbsp;<a href="/hc/es/articles/215769548#errores-500" target="_self">Errores 500 con Passenger WSGI</a>&nbsp;para obtener más detalles.</p>
-<p>Si estás siguiendo el tutorial de Django o estás migrando un proyecto existente, puede que veas "Fin prematuro de los encabezados de script" ("Premature end of script headers") en el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP" target="_self">registro de errores</a> de tu sitio. Esto puede deberse a que el archivo Passenger no incluye el directorio de tu proyecto en su ruta. Una solución es abrir <span class="text-object">passenger_wsgi.py</span>&nbsp;y agregar lo siguiente:</p>
-<dl>
-<dd>
-<div class="preboxcontainer">
-<pre class="prebox">sys.path.append(os.getcwd()+"/&lt;<span class="code-highlight">project_name</span>&gt;")</pre>
-</div>
-</dd>
-</dl>
+<p>Si ves "Premature end of script headers" en el <a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-errores-via-SFTP">registro de errores</a> de tu sitio web, revisa el siguiente artículo para confirmar que tu archivo <span class="text-object">passenger_wsgi.py</span> está configurado correctamente:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360002341572-C%C3%B3mo-crear-un-proyecto-Django-usando-virtualenv">Crear un proyecto de Django</a></li>
+</ul>
 </div>
 <h2>Error 404 en la página de admin</h2>
 <div class="solvvy-solution">
