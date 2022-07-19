@@ -16,10 +16,15 @@
 </div>
 <h2><span id="Redireccionar_todas_las_URL_a_un_nuevo_sitio">Redireccionar todas las URL a un nuevo sitio</span></h2>
 <div class="solvvy-solution">
-<p>La siguiente línea redirecciona todas las URL en tu sitio a un nuevo sitio.</p>
+<p>Los siguientes dos ejemplos redireccionan todas las URL de tu sitio web actual a un segundo sitio web. Esto es útil luego de que hayas migrado tu sitio a un nuevo nombre de dominio.</p>
+<h3>Opción #1</h3>
 <div class="preboxcontainer">
 <pre class="prebox">Redirect 301 / https://example.com/</pre>
 </div>
+<h3>Opción #2</h3>
+<p>En este ejemplo, tu sitio web anterior llamado <strong>example.com</strong> redireccionaría conservando todas las URL a un nuevo sitio llamado <strong>dreamhostexample.com</strong>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">&lt;IfModule mod_rewrite.c&gt;<br />  RewriteEngine On<br />  RewriteCond %{HTTP_HOST} ^<span class="code-highlight">example.com</span>$ [OR]<br />  RewriteCond %{HTTP_HOST} ^www.<span class="code-highlight">example.com</span>$<br />  RewriteRule (.*)$ https://www.<span class="code-highlight">dreamhostexample.com</span>/$1 [R=301,L]<br />&lt;/IfModule&gt;</pre>
 </div>
 <h2><span id="Redireccionar_una_URL">Redireccionar una URL</span></h2>
 <div class="solvvy-solution">
@@ -185,4 +190,5 @@ RewriteRule . /<span class="code-highlight">index.php</span> [L]
 <li><a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-" target="_self">¿Que puedo hacer con un archivo .htacess?</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216456087-Creando-redirecciones-con-Nginx" target="_self">Crear redirecciones con Nginx</a></li>
 </ul>
+</div>
 </div>
