@@ -18,7 +18,7 @@
 </div>
 </li>
 <li>Agrega contenido al archivo <span class="text-object">.conf</span>.</li>
-<li>Recarga Nginx navegando a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=vps.dashboard" target="_blank" rel="noopener">VPS</a> o <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=dedicated.dashboard&amp;" target="_blank" rel="noopener">Dedicado</a>.
+<li>Recarga Nginx navegando a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=vps.dashboard" target="_blank" rel="noopener noreferrer">VPS</a> o <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=dedicated.dashboard&amp;" target="_blank" rel="noopener noreferrer">Dedicado</a>.
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-button-reload-http.png" alt="reload http button" width="132" height="42" /></dd>
 </dl>
@@ -150,107 +150,7 @@ if (!-e $request_filename) {
 </pre>
 </div>
 </div>
-<h2>FeedBurner</h2>
-<div class="solvvy-solution">
-<p>Si tienes la configuración de la fuente RSS de tu blog utilizando <a href="https://feedburner.google.com/fb/a/myfeeds">FeedBurner</a>, entonces agrega las siguientes líneas <strong>sobre</strong> las líneas de enlace permanente o supercaché mencionadas anteriormente:</p>
-<div class="preboxcontainer">
-<pre class="prebox">#######################
-# FeedBurner
-
-if ($http_user_agent&nbsp;!~ FeedBurner) {
-  rewrite ^/comment/feed/ http://feeds.feedburner.com/your-comment-feed last;
-  rewrite ^/feed/ http://feeds.feedburner.com/your-feed last;
-}
-</pre>
-</div>
-<p>Debes reemplazar los bits "your-comment-feed" y "your-feed" con las URL de FeedBurner correspondientes que obtienes cuando agregas tus feeds a tu sistema.</p>
-</div>
-<h2>Drupal</h2>
-<div class="solvvy-solution">
-<p>Antes de configurar Drupal, crea un archivo <span class="text-object">drupal.conf</span> (el nombre realmente no importa, pero generalmente deseas al menos darle una extensión <span class="text-object">.conf</span>) en la siguiente ubicación:</p>
-<div class="preboxcontainer">
-<pre class="prebox">/home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/</pre>
-</div>
-<p>Mira el artículo '<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a>' para instrucciones sobre cómo crear el archivo.</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">nano /home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/drupal.conf</span></pre>
-</div>
-<p>Aquí es donde pondrás todas tus reglas de configuración de nginx.</p>
-</div>
-<h2>Instalación de dominio de nivel superior</h2>
-<div class="solvvy-solution">
-<p>Si tu Drupal está instalado en el nivel superior de tu dominio (e.j., <strong>https://www.example.com/</strong> es tu instalación Drupal), entonces agrega estas reglas:</p>
-<div class="preboxcontainer">
-<pre class="prebox">#######################
-# Drupal Clean URLs (Top Level Domain)
-
-if (!-e $request_filename) {
-rewrite ^/(.*)$ /index.php?q=$1 last;
-}</pre>
-</div>
-</div>
-<h2>Instalación de Subdirectorio</h2>
-<div class="solvvy-solution">
-<p>Si tu Drupal está instalado en un subdirectorio (e.j., <strong>https://www.example.com/drupal/</strong> es tu instalación Drupal), entonces añade estas reglas:</p>
-<div class="preboxcontainer">
-<pre class="prebox">#######################
-# Drupal Clean URLs (Subdirectory)
-
-if (!-e $request_filename) {
-rewrite ^/drupal$ /drupal/ permanent;
-rewrite ^/drupal/(.*)$ /drupal/index.php?q=$1 last;
-rewrite ^/(.*)$ /index.php?q=$1 last;
-}</pre>
-</div>
-<p>Remplaza las ocurrencias de "drupal" de arriba con cualquiera que sea el nombre de tu subdirectorio.</p>
-</div>
-<h2>Habilita los Clean URLs</h2>
-<div class="solvvy-solution">
-<p>Si aún no lo has hecho, debes iniciar sesión en tu usuario administrador de Drupal e ir al área Administer -&gt; Site Configuration -&gt; Clean URLs y encender Clean URLs. Si tienes problemas para encontrarlo, intenta navegar a <strong>https://www.example.com/index.php?q=admin/settings/clean-urls</strong>. Si recibes un mensaje de error que dice que las URL limpias no son compatibles, asegúrate de recordar volver a cargar tu configuración de Nginx como se discutió anteriormente en el artículo.</p>
-</div>
-<h2>Gotchas</h2>
+<h2>Funcionarlidad de búsqueda de Nginx</h2>
 <div class="solvvy-solution">
 <p>Desafortunadamente, esta configuración actualmente hace que las búsquedas de sitios que contienen espacios se rompan. Con Apache, cuando buscas "alguna cosa" que se convierte en "search/node/alguna+cosa". Cuando esto es procesado por nginx, el "+" se codifica para que termine con "search/node/alguna%20cosa". Por lo tanto, tu búsqueda termina buscando la cadena "alguna+cosa" en lugar de "Alguna cosa". Actualmente no hay soluciones alternativas conocidas que estén por venir.</p>
-</div>
-<h2>MediaWiki</h2>
-<div class="solvvy-solution">
-<p><a href="https://www.mediawiki.org/wiki/MediaWiki">MediaWiki</a> es un software wiki popular desarrollado por los fundadores de Wikipedia que continúa utilizando y manteniendo el software en la actualidad. Está disponible de forma gratuita y es un proyecto de código abierto. A continuación, se describe un movimiento exitoso del sitio MediaWiki 1.17.0 (usando URL limpias) en Apache a Nginx. Primero, crea un archivo <span class="text-object">mediawiki.conf</span> en el directorio apropiado:</p>
-<div class="preboxcontainer">
-<pre class="prebox">/home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/mediawiki.conf</pre>
-</div>
-<p>En ese archivo agrega el siguiente contenido:</p>
-<div class="preboxcontainer">
-<pre class="prebox">location / {
-        try_files $uri $uri/ /index.php;
-    }
-	
-location /cache {
-        deny  all;
-    }
-location ~* ^.+\.(js|css|png|jpg|jpeg|gif|ico)$ {
-        expires max;
-        log_not_found off;
-        access_log off;
-    }
-location /dumps {
-        root /home/<span class="code-highlight">username/example.com</span>/local;
-        autoindex on;
-    }
-### Dreamhost analog stats
-if ($request_uri ~* ^/(stats|failed_auth\.html).*$)
-{
-	break;
-}</pre>
-</div>
-</div>
-<h2>Aumentar el tiempo de espera de FastCGI</h2>
-<div class="solvvy-solution">
-<p>Pon esto en un archivo <span class="text-object">.conf</span> como se describe arriba:</p>
-<div class="preboxcontainer">
-<pre class="prebox">fastcgi_read_timeout 120;</pre>
-</div>
-</div>
-<h2>Configuraciones de envío de correos masivos</h2>
-<div class="solvvy-solution">
-<p>Si deseas enviar correos masivos con autenticación SMTP, debes utilizar POP-BEFORE-SMTP como el "Método de autenticación para SMTP".</p>
 </div>
