@@ -1,0 +1,69 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cuando el tema actual se rompe o tiene un problema, puedes hacer que todo el sitio sea inaccesible y presente errores. Esto hace que sea difícil cambiar a un tema de trabajo porque incluso el panel de administración no carga.</p>
+<p>Hay dos formas de cambiar el tema cuando no tienes la capacidad de iniciar sesión en tu sitio:</p>
+<ul>
+<li>Usando la línea de comando.</li>
+<li>Cambiando el tema en la base de datos (usando phpMyAdmin).</li>
+</ul>
+</div>
+<h2>Usar la línea de comandos</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Conéctate a tu servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y usa la&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214693248-Generalidades-sobre-WordPress-wp-cli">herramienta de línea de comando de WordPress</a>.</li>
+<li>Escribe lo siguiente para ver una lista de todos los temas disponibles:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp theme status</span></pre>
+</div>
+</li>
+<li>Corre el comando a continuación para cambiar tu tema:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp theme activate twentytwenty</span></pre>
+</div>
+</li>
+<li>Si no tienes twentytwenty, instálalo y actívalo en un solo comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp theme install twentytwenty --activate</span></pre>
+</div>
+</li>
+</ol>
+</div>
+<h2>Cambiar el tema en la base de datos</h2>
+<div class="solvvy-solution">
+<p>Para cambiar a un tema diferente usando la base de datos:</p>
+<ol>
+<li>Inicia sesión en&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin">phpMyAdmin</a>.</li>
+<li>Haz clic en el nombre de la base de datos a la izquierda.
+<dl>
+<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-03_Change_wordpress_site_url_phpmyadmin.fw.png" alt="ES 03 Change wordpress site url phpmyadmin.fw.png" width="208" height="81" /></dd>
+</dl>
+</li>
+<li>Encuentra la tabla _options en la columna izquierda (el nombre de la tabla tiene un prefijo pero termina en "_options")
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-01_WordPress_Troubleshooting.fw.png" alt="ES 01 WordPress Troubleshooting.fw.png" width="608" height="54" /></dd>
+</dl>
+</li>
+<li>Dirígete a la segunda página y busca las opciones con los nombres <strong>template</strong> y&nbsp;<strong>stylesheet</strong>.</li>
+<li>Haz clic en el icono de <span class="text-object">lápiz</span> a la izquierda de cada una.
+<dl>
+<dd><em>En el campo de texto grande, puedes ver el nombre del tema actual:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-02_WordPress_Troubleshooting.fw.png" alt="ES 02 WordPress Troubleshooting.fw.png" width="655" height="272" /></dd>
+</dl>
+</li>
+<li>Cambia esto a cualquier tema que desees que use tu sitio.</li>
+<li>Haz clic en el botón <strong>Continuar</strong>&nbsp;cuando hayas terminado para guardar tus cambios.</li>
+</ol>
+</div>
+<h2>Solución de problemas</h2>
+<div class="solvvy-solution">
+<p>Si ves un error al correr&nbsp; cualquiera de los comandos anteriores, por favor <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">contacta el equipo de soporte</a>&nbsp;para más asistencia.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress">Cómo iniciar sesión en tu sitio WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-plugins-de-WordPress">Administrando plugins de WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214693248-Generalidades-sobre-WordPress-wp-cli">Generalidades sobre wp-cli</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin">Generalidades sobre phpMyAdmin</a></li>
+</ul>
+</div>
