@@ -1,8 +1,8 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo explica cómo eliminar los registros predeterminados de DNS de alojamiento de DreamHost en tu dominio.</p>
-<p>Cuando tu dominio está como '<a href="https://help.dreamhost.com/hc/es/articles/215416227" target="_self">Dominio Alojado</a>', este tiene varias direcciones IP de DreamHost (registros A) asignadas que controlan dónde está alojado el sitio. Si los <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self">nameservers</a> de tu sitio apuntan a DreamHost y tu sitio está como "Dominio Alojado", este está alojado en los servidores de DreamHost.</p>
-<p>Si los <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self">nameservers</a>&nbsp;de tu sitio apuntan a DreamHost pero <strong>NO</strong> deseas alojar el sitio en DreamHost, debes eliminar el alojamiento al cual elimina estas direcciones IP. Configurar el sitio como 'Solo DNS' elimina el alojamiento y los registros A de tu sitio. Luego de esto, podrás <a href="/hc/es/articles/215414867" target="_self">agregar registros DNS personalizados</a> para apuntar tu sitio a otra empresa de alojamiento.</p>
+<p>Cuando tu dominio está como '<a href="https://help.dreamhost.com/hc/es/articles/215416227" target="_self">Dominio Alojado</a>', este tiene varias direcciones IP de DreamHost (registros A) que controlan dónde está alojado el sitio. Si los <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self">nameservers</a> de tu sitio apuntan a DreamHost y tu sitio está como "Dominio Alojado", este está alojado en los servidores de DreamHost.</p>
+<p>Si los <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self">nameservers</a>&nbsp;de tu sitio apuntan a DreamHost, pero <strong>NO</strong> deseas alojar el sitio en DreamHost, debes eliminar el alojamiento, el cual elimina estas direcciones IP. Configurar el sitio como 'Solo DNS' elimina el alojamiento y los registros A de tu sitio. Luego de esto, podrás <a href="https://help.dreamhost.com/hc/es/articles/360035516812-Agregar-registros-DNS-personalizados" target="_self">agregar registros DNS personalizados</a> para apuntar tu sitio a otra empresa de alojamiento.</p>
 <div class="notebox-note">
 <p>Esto solo funciona con el nombre de dominio principal, como 'example.com'. Esto NO funciona con subdominios como 'blog.example.com'. Para los subdominios, debes agregar registros DNS personalizados al dominio principal como se explica a continuación.</p>
 </div>
@@ -10,12 +10,8 @@
 <h2>Cambiar un dominio alojado a 'Solo DNS'</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Abre la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.
-<dl>
-<dd><span class="wysiwyg-font-size-medium"><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-button-manage-website.png" alt="panel button manage website" width="173" height="38" /></span></dd>
-</dl>
-</li>
-<li>Pasa el cursor sobre el dominio que deseas editar y haz clic en el botón <strong>Administrar</strong>&nbsp;que aparece.</li>
+<li>Abre la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
+<li>Encuantra el dominio que deseas editar y da clic en el botón <strong>Administrar</strong> que aparece a la derecha del nombre de tu dominio.</li>
 <li>Da clic en la pestaña <span class="text-object">Alojamiento</span> en la siguiente página.
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-manage-website-dns-only.png" alt="ES panel website dns only" /></dd>
@@ -54,7 +50,7 @@
 <p>A continuación se muestran algunas cosas a tener en cuenta con respecto a estos cambios:</p>
 <ul>
 <li>Establecer el dominio como 'Solo DNS' no elimina los archivos alojados (excepto los planes de DreamPress) ni elimina ningún <a href="https://help.dreamhost.com/hc/es/articles/360035516812-Agregar-registros-DNS-personalizados" target="_self" rel="undefined">registro DNS personalizado</a> que hayas configurado antes. Puedes volver a configurar el dominio como "Completamente alojado" para volver a crear tus registros DNS del dominio.</li>
-<li>Ten en cuenta que esto solo afecta tu servicio de alojamiento web y deja intactos otros servicios como el correo (esto supone que ya tienes un plan de alojamiento activo en tu cuenta). Si has eliminado tu plan de alojamiento pero deseas continuar alojando el correo con DreamHost, puedes comprar un <a href="https://help.dreamhost.com/hc/es/articles/360024060072-Plan-de-correo-pago" target="_self" rel="undefined">plan de correo pago</a>.</li>
+<li>Ten en cuenta que esto solo afecta tu servicio de alojamiento web y deja intactos otros servicios como el correo (asumiendo que ya tienes un plan de alojamiento activo en tu cuenta). Si has eliminado tu plan de alojamiento pero deseas continuar alojando el correo con DreamHost, puedes comprar un <a href="https://help.dreamhost.com/hc/es/articles/360024060072-Plan-de-correo-pago" target="_self" rel="undefined">plan de correo pago</a>.</li>
 </ul>
 <p>Además, estos cambios solo son posibles para el dominio principal – los subdominios no se pueden configurar como Solo DNS.</p>
 <div class="notebox-note">
@@ -72,7 +68,7 @@
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-dns-only-root-record-02.png" alt="DNS Only warning" width="800" /></dd>
 </dl>
-<p>Un mensaje de confirmación muestra una advertencia de que tu sitio web se desactivará si continúas. Haz clic en <strong>Si, Desactivar Sitio Web</strong>. Esto elimina el alojamiento y los registros raíz <span class="text-object">(@)</span> y <span class="text-object">www</span>, permitiéndote apuntar tu dominio a un alojamiento diferente.</p>
+<p>Un mensaje de confirmación advierte que tu sitio web se desactivará si continúas. Haz clic en <strong>Si, Desactivar Sitio Web</strong>. Esto elimina el alojamiento y los registros raíz <span class="text-object">(@)</span> y <span class="text-object">www</span>, permitiéndote apuntar tu dominio a un alojamiento diferente.</p>
 </div>
 <h2>Agregar un nuevo dominio como 'Solo DNS'</h2>
 <div class="solvvy-solution">
@@ -103,7 +99,7 @@
 <li>En la parte inferior derecha, haz clic en el botón <strong>Estacionar Dominio</strong>.
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-domain-added.png" alt="ES Domain added success message" width="496" height="86" /></dd>
-<dd><em>Serás llevado de vuelta a la página Administrar Sitios Web donde un aparece un mensaje exitoso aparece confirmando que el dominio ha sido agregado.</em></dd>
+<dd><em>Serás llevado de vuelta a la página Administrar Sitios Web, donde un aparece un mensaje exitoso confirmando que el dominio ha sido agregado.</em></dd>
 </dl>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-manage-button.png" alt="ES Manage" width="101" height="48" /></dd>
