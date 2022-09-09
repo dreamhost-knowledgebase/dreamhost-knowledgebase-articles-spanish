@@ -1,3 +1,4 @@
+<div id="auto-toc">&nbsp;</div>
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo explica cómo agregar un certificado SSL de Let's Encrypt gratuito a tu dominio.</p>
@@ -16,8 +17,8 @@
 <p>Esto se debe a que 'Let's Encrypt' agrega una carpeta <span class="text-object">.well_known/</span> a tu sitio para autenticar el certificado. Si el DNS de tu sitio no se resuelve en un dominio totalmente alojado en DreamHost, el certificado no puede crear esta carpeta para autenticarse y tu panel mostrará lo siguiente:</p>
 <p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ssl-adding-le-cert-01.png" width="550" height="264" /></p>
 <p>Visita las siguientes secciones para verificar tus valores de los DNS.</p>
-<h3>Comprobar donde están apuntados tus nameservers</h3>
-<p>Visita el siguiente enlace para verificar a dónde están apuntando tus nameservers:</p>
+<h3 class="subtoc-heading">Verificar dónde están apuntados tus nameservers</h3>
+<p>Visita el siguiente enlace para revisar a dónde están apuntando tus nameservers:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216385467#donde-estan-apuntando-mis-nameservers" target="_self">¿A dónde están apuntado mis nameservers?</a></li>
 </ul>
@@ -30,7 +31,7 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/360029281672-Pol%C3%ADticas-de-Registros-CAA" target="_self">Registros de política CAA</a></li>
 </ul>
 </div>
-<h3>Actualizar los registros A de tu dominio</h3>
+<h3 class="subtoc-heading">Actualizar los registros A de tu dominio</h3>
 <p>Como se explicó anteriormente, si tus nameservers no apuntan a DreamHost y no deseas cambiarlos, la otra opción es actualizar los dos registros A de tu dominio.</p>
 <p>Deberás actualizar el registro www A y el registro no www A. Por ejemplo:</p>
 <ul>
@@ -48,7 +49,7 @@
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-apunto-mi-sitio-" target="_self">¿A qué registros DNS apunto mi sitio?</a></li>
 </ul>
-<h3>Reglas del .htaccess</h3>
+<h3 class="subtoc-heading">Reglas del .htaccess</h3>
 <p>Ciertas reglas <span class="text-object">.htaccess</span> como el bloqueo de IP, las reglas de reescritura y la protección con contraseña pueden hacer que la instalación falle. Para asegurarte que eso no sea un problema, cambia el nombre de tu archivo <span class="text-object">.htaccess</span> (a algo como <span class="text-object">.htaccess_OFF</span>) para deshabilitarlo temporalmente. Luego, instala el certificado. Una vez instalado, puedes cambiar el nombre del archivo a <span class="text-object">.htaccess</span> de vuelta.</p>
 <p>Si deshabilitar tu <span class="text-object">.htaccess</span> afecta tu sitio, a tal punto que se pueda dañar, agrega la siguiente regla que debería permitir que la instalación se procese:</p>
 <div class="preboxcontainer">
