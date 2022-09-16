@@ -1,3 +1,4 @@
+<div id="auto-toc">&nbsp;</div>
 <h2>Crear un archivo .htaccess en tu servidor web de DreamHost</h2>
 <div class="solvvy-solution">
 <p>Mira el siguiente artículo para ver instrucciones de cómo crear un archivo <span class="text-object">.htaccess</span> en tu servidor web:</p>
@@ -14,7 +15,8 @@
 <div class="solvvy-solution">
 <p>Los ejemplos a continuación pueden ser ingresados dentro de tu archivo de <span class="text-object">.htaccess</span> como se muestran. Solo asegurate de ajustar el camino al archivo para que el <span class="text-object">.htaccess</span> sepa donde está localizado. También, si ves el dominio <strong>example.com</strong> cambialo por tu nombre de dominio.</p>
 </div>
-<h2><span id="Redireccionar_todas_las_URL_a_un_nuevo_sitio">Redireccionar todas las URL a un nuevo sitio</span></h2>
+<div id="Redireccionar_todas_las_URL_a_un_nuevo_sitio" class="section-link">&nbsp;</div>
+<h2>Redireccionar todas las URL a un nuevo sitio</h2>
 <div class="solvvy-solution">
 <p>Los siguientes dos ejemplos redireccionan todas las URL de tu sitio web actual a un segundo sitio web. Esto es útil luego de que hayas migrado tu sitio a un nuevo nombre de dominio.</p>
 <h3>Opción #1</h3>
@@ -26,7 +28,9 @@
 <div class="preboxcontainer">
 <pre class="prebox">&lt;IfModule mod_rewrite.c&gt;<br />  RewriteEngine On<br />  RewriteCond %{HTTP_HOST} ^<span class="code-highlight">example.com</span>$ [OR]<br />  RewriteCond %{HTTP_HOST} ^www.<span class="code-highlight">example.com</span>$<br />  RewriteRule (.*)$ https://www.<span class="code-highlight">dreamhostexample.com</span>/$1 [R=301,L]<br />&lt;/IfModule&gt;</pre>
 </div>
-<h2><span id="Redireccionar_una_URL">Redireccionar una URL</span></h2>
+</div>
+<div id="Redireccionar_una_URL" class="section-link">&nbsp;</div>
+<h2>Redireccionar una URL</h2>
 <div class="solvvy-solution">
 <p>Usando una redirección en un archivo <span class="text-object">.htaccess</span> puedes redireccionar a los usuarios de una vieja página a una nueva sin tener que mantener la vieja página. Por ejemplo, si usas <span class="text-object">index.html</span> como tu archivo index y luego renombras <span class="text-object">index.html</span> a <span class="text-object">home.html</span>, puedes hacer una redirección para enviar a los usuarios del <span class="text-object">index.html</span> a <span class="text-object">home.html</span>. Por ejemplo:</p>
 <p><strong>Redireccionar a un archivo del sitio local</strong></p>
@@ -44,23 +48,23 @@
 </div>
 <h2>Ejemplos de redirecciones</h2>
 <div class="solvvy-solution">
-<h3>Redireccionar de un directorio a un archivo HTML</h3>
+<h3 class="subtoc-heading">Redireccionar de un directorio a un archivo HTML</h3>
 <div class="preboxcontainer">
 <pre class="prebox">RedirectMatch 301 ^/blog/about /blog/about.html</pre>
 </div>
-<h3>Redireccionar de un archivo index.html a un directorio diferente</h3>
+<h3 class="subtoc-heading">Redireccionar de un archivo index.html a un directorio diferente</h3>
 <div class="preboxcontainer">
 <pre class="prebox">Redirect /index.html /new/</pre>
 </div>
-<h3>Redireccionar de index.html a default.html</h3>
+<h3 class="subtoc-heading">Redireccionar de index.html a default.html</h3>
 <div class="preboxcontainer">
 <pre class="prebox">Redirect /index.html /default.html</pre>
 </div>
-<h3>Redireccionar de un directorio local /privado a otro directorio privado del sitio</h3>
+<h3 class="subtoc-heading">Redireccionar de un directorio local /privado a otro directorio privado del sitio</h3>
 <div class="preboxcontainer">
 <pre class="prebox">Redirect /private/ https://<span class="code-highlight">www.example.com/private/</span></pre>
 </div>
-<h3>Cargar un archivo .gif de un sitio diferente</h3>
+<h3 class="subtoc-heading">Cargar un archivo .gif de un sitio diferente</h3>
 <div class="notebox-important">
 <p>Asegúrate que el otro sitio sea tuyo. Nunca hagas <a href="https://help.dreamhost.com/hc/es/articles/215747748--Como-puedo-redireccionar-y-sobreescribir-mis-URL-con-un-archivo-htaccess-" target="_self">redirecciones de imágenes (hotlinks)</a>&nbsp;de otros sitios web.</p>
 </div>
@@ -68,22 +72,22 @@
 <pre class="prebox">Redirect /img/logo.gif https://<span class="code-highlight">www.example.com/images/logo.gif</span>
 </pre>
 </div>
-<h3>Usar Expresiones Regulares</h3>
+<h3 class="subtoc-heading">Usar Expresiones Regulares</h3>
 <p>Si quieres usar una Expresión Regular para redirigir algo, usa la directríz <span class="code"><a href="https://httpd.apache.org/docs/2.4/mod/mod_alias.html#redirectmatch">RedirectMatch</a></span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">RedirectMatch "^/oldfile\.html/?$" "https://<span class="code-highlight">example.com/newfile.php</span>"</pre>
 </div>
-<h3>Redirigir mensajes de error</h3>
+<h3 class="subtoc-heading">Redirigir mensajes de error</h3>
 <p>Puedes también redirigir errores 404. En vez de lanzar una página 404, este redirecciona a la página principal del sitio.</p>
 <div class="preboxcontainer">
 <pre class="prebox">ErrorDocument 404 https://<span class="code-highlight">example.com</span>/</pre>
 </div>
-<h3>Redirigir un directorio viejo a un nuevo directorio</h3>
+<h3 class="subtoc-heading">Redirigir un directorio viejo a un nuevo directorio</h3>
 <p>Estos archivos redirigen de un directorio viejo (<span class="text-object">/blog/archivados</span>) a un nuevo directorio (<span class="text-object">/archivados</span>). Este archivo debe existir en el nuevo directorio para que funcione.</p>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteRule ^blog/archives/(.*)$ /newarchives/$1 [R=301,NC,L]</pre>
 </div>
-<h3>Redireccionar un directorio antiguo al directorio de inicio</h3>
+<h3 class="subtoc-heading">Redireccionar un directorio antiguo al directorio de inicio</h3>
 <p>Esto redirige los archivos en un directorio antiguo (<span class="text-object">/blog/archives</span>) al directorio de inicio o home.</p>
 <ul>
 <li>Si agregas un archivo específico (<span class="text-object">example.com/blog/archives/test.html</span>) al final, este debe existir en el directorio de inicio para cargar.</li>
@@ -93,7 +97,8 @@
 <pre class="prebox">RewriteRule ^blog/archives/(.*)$ /$1 [R=301,NC,L]</pre>
 </div>
 </div>
-<h2><span id="Redireccionar_paginas_no_existentes_a_index.php">Redireccionar páginas no existentes a index.php</span></h2>
+<div id="Redireccionar_paginas_no_existentes_a_index.php" class="section-link">&nbsp;</div>
+<h2>Redireccionar páginas no existentes a index.php</h2>
 <div class="solvvy-solution">
 <p>Si un visitante intenta acceder a un página que no existe, se les presentará un error 404. Tu puedes en vez de eso redirigir cualquier requerimiento a una página no existente a tu archivo <span class="text-object">index.php</span> (o cualquier archivo index) agregando el siguiente código a tu <span class="text-object">.htaccess</span>:</p>
 <div class="preboxcontainer">
@@ -106,7 +111,8 @@ RewriteRule . /index.php [L]
 </div>
 <p>Si tu página no es <span class="text-object">index.php</span>, solo cambia la última línea a tu archivo index. Luego el visitante será redirigido de vuelta a tu página principal.</p>
 </div>
-<h2><span id="Cargar_un_subdirectorio_automaticamente">Cargar un subdirectorio automáticamente</span></h2>
+<div id="Cargar_un_subdirectorio_automaticamente" class="section-link">&nbsp;</div>
+<h2>Cargar un subdirectorio automáticamente</h2>
 <div class="solvvy-solution">
 <p>Este ejemplo redirige la URL del dominio ROOT a cualquier subdirectorio. En este ejemplo, éste automáticamente carga <span class="text-object">example.com/subdir1</span>:</p>
 <div class="preboxcontainer">
@@ -115,7 +121,8 @@ RewriteRule ^$ /subdir1/ [L]
 </pre>
 </div>
 </div>
-<h2><span id="Forzar_www_en_una_URL">Forzar www en una URL</span></h2>
+<div id="Forzar_www_en_una_URL" class="section-link">&nbsp;</div>
+<h2>Forzar www en una URL</h2>
 <div class="solvvy-solution">
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
@@ -132,7 +139,8 @@ RewriteCond&nbsp;%{HTTP_HOST} ^<span class="code-highlight">www.example.com</spa
 RewriteRule (.*) https://<span class="code-highlight">example.com</span>/$1 [R=301,L]</pre>
 </div>
 </div>
-<h2><span id="Sobreescribir_una_URL">Sobrescribir una URL</span></h2>
+<div id="Sobreescribir_una_URL" class="section-link">&nbsp;</div>
+<h2>Sobrescribir una URL</h2>
 <div class="solvvy-solution">
 <p>Este ejemplo sobrescribe una URL a otra URL. Este ejemplo de sobreescritura <strong>example.com/1.html</strong> a <strong>example.com/abc.php?id=1</strong>.</p>
 <div class="preboxcontainer">
@@ -161,7 +169,8 @@ RewriteRule ^<span class="code-highlight">([0-9]+).html /abc.php</span>?id=$1 [Q
 <li><a href="https://cheatography.com/davechild/cheat-sheets/mod-rewrite/" target="_self" rel="undefined">Archivo de trucos de mod-rewrite</a></li>
 </ul>
 </div>
-<h2><span id="Sobrescribir_enlaces_no_existentes_a_index.php">Sobrescribir enlaces no existentes a index.php</span></h2>
+<div id="Sobrescribir_enlaces_no_existentes_a_index.php" class="section-link">&nbsp;</div>
+<h2>Sobrescribir enlaces no existentes a index.php</h2>
 <div class="solvvy-solution">
 <p>Lo siguiente redirige todos los enlaces o carpetas que no existen a <span class="text-object">index.php</span>. Sin embargo, si el archivo o directorio existe, este carga normalmente:</p>
 <div class="preboxcontainer">
@@ -183,12 +192,12 @@ RewriteRule . /<span class="code-highlight">index.php</span> [L]
 <li><a href="https://help.dreamhost.com/hc/es/articles/215747758-Forzar-tu-sitio-a-cargar-de-forma-segura-con-un-archivo-htaccess" target="_self">Forzar tu sitio a cargar de forma segura con tu archivo .htaccess</a></li>
 </ul>
 </div>
-<h2><span id="Ver_tambien">Ver también</span></h2>
+<div id="Ver_tambien" class="section-link">&nbsp;</div>
+<h2>Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades de .htaccess</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-" target="_self">¿Que puedo hacer con un archivo .htacess?</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216456087-Creando-redirecciones-con-Nginx" target="_self">Crear redirecciones con Nginx</a></li>
 </ul>
-</div>
 </div>
