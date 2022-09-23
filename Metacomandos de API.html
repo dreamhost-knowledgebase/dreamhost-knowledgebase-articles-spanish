@@ -1,83 +1,42 @@
-<div class="document">
-<div class="documentwrapper">
-<div class="body">
-<div id="API metacommands" class="solvvy-hidden">
-<div class="table-of-content container">
-<ul class="simple">
-<li><a class="reference internal" href="#api-list_accessible_cmds">api-list_accessible_cmds</a></li>
-<li><a class="reference internal" href="#api-list_keys">api-list_keys</a></li>
-<li><a class="Ver_también" href="#Ver_también">Ver también</a></li>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Los metacomandos de API te brindan información sobre la API, como, qué comandos y claves de API están disponibles en tu cuenta. Hay dos metacomandos de API disponibles para correr.</p>
+<ul>
+<li>Enumera todos los comandos disponibles (<a href="#api-list_accessible_cmds" target="_self" rel="undefined">api-list_accessible_cmds</a>)</li>
+<li>Enumera todas las llaves de API (<a href="#api-list_keys" target="_self" rel="undefined">api-list_keys</a>)</li>
+</ul>
+<div class="notebox-note">
+<p>Revisa el siguiente artículo para obtener instrucciones sobre cómo conectarte a la API de DreamHost. Usarás las instrucciones de este artículo para crear tu clave de API.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/4407354972692-Conectarse-con-una-API-de-DreamHost" target="_blank" rel="noopener">Conectarse con una API de DreamHost </a></li>
 </ul>
 </div>
 </div>
-<div class="notebox-note">
-<p>Si ves que alguna de las instrucciones de este artículo no funciona como se esperaba, es posible que esté desactualizada. En caso de duda, por favor comunícate con soporte para obtener más ayuda.</p>
-</div>
-<p><strong>Los Metacomandos de API</strong> te dan información sobre el API, como qué comandos y claves de API están disponibles en tu cuenta.</p>
-</div>
-<h2>Comandos</h2>
+<h2><span id="api-list_accessible_cmds">api-list_accessible_cmds</span></h2>
 <div class="solvvy-solution">
-<h3><span id="api-list_accessible_cmds">api-list_accessible_cmds</span></h3>
-<p>Vuelca una lista de todos los comandos a los que tiene acceso esta clave de API.</p>
-<table class="wikitable">
-<tbody>
-<tr>
-<td><strong>Comando</strong></td>
-<td>api-list_accessible_cmds</td>
-</tr>
-<tr>
-<td><strong>Valores</strong></td>
-<td>(ninguno)</td>
-</tr>
-<tr>
-<td><strong>Resultado</strong></td>
-<td>
-<p>success<br />cmd<br />api-list_accessible_cmds<br />announcement_list-list_lists<br />domain-list_domains<br />dns-list_records</p>
-</td>
-</tr>
-<tr>
-<td><strong>Posibles errores</strong></td>
-<td>(ninguno)</td>
-</tr>
-</tbody>
-</table>
-<h3><span id="api-list_keys">api-list_keys</span></h3>
-<p>Enumera todas las claves disponibles que has creado la cuenta.</p>
-<dl>
-<dd></dd>
-<dd></dd>
-</dl>
-<div class="notebox-note">
-<p>Debes tener acceso a todos los comandos ("*") del API para usar este comando.</p>
+<p>El comando <span class="code">api-list_accessible_cmds</span> enumera todos los comandos a los que tiene acceso la Llave API usada en el comando.</p>
+<p>Por ejemplo, el siguiente comando solo generaría comandos que la Llave <span class="code">1A2B3C4D5E6F7G8H</span> se le han otorgado permisos de acceso.</p>
+<div class="notebox-important">
+<p>Estos permisos fueron configurados cuando la <a href="https://help.dreamhost.com/hc/es/articles/4407354972692-Conectarse-con-una-API-de-DreamHost" target="_self">llave fue creada originalmente</a>.</p>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">https://api.dreamhost.com/?key=1A2B3C4D5E6F7G8H<span class="code-highlight">&amp;cmd=api-list_accessible_cmds</span></pre>
+</div>
+<h2><span id="api-list_keys">api-list_keys</span></h2>
+<p>El comando <span class="code">api-list_keys</span> enumera todas las llaves de API que la cuenta ha creado.</p>
+<div class="notebox-important">
+<p>Debes tener una llave API con acceso a todos los comandos ("*") para usar este comando.</p>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">https://api.dreamhost.com/?key=1A2B3C4D5E6F7G8H<span class="code-highlight">&amp;cmd=api-list_keys</span></pre>
 </div>
 </div>
-<table class="wikitable">
-<tbody>
-<tr>
-<td><strong>Comando</strong></td>
-<td>api-list_keys</td>
-</tr>
-<tr>
-<td><strong>Valores</strong></td>
-<td>(ninguno)</td>
-</tr>
-<tr>
-<td><strong>Resultado</strong></td>
-<td>
-<p>success<br />key created comment functions<br />1234567890ABCDEF 2009-04-29 23:24:57 DreamAdmin *<br />0987654321ABCDEF 2009-05-11 00:15:56 DreamAdmin Test announcement_list-*,dns-*,domain-*,user-*<br />ABCDEF1234567890 2010-02-16 13:27:58 DreamAdmin Test 2 domain-list_registrations</p>
-</td>
-</tr>
-<tr>
-<td><strong>Posibles errores</strong></td>
-<td>(ninguno)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2><span id="Ver_también">Ver también</span></h2>
+<h2><span id="Ver_tambien">Ver también</span></h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/217560167-Generalidades-de-la-interfaz-de-programaci%C3%B3n-de-aplicaciones-API-" target="_self" rel="undefined">Generalidades de la interfaz de programación de aplicaciones</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217560167-Generalidades-de-la-interfaz-de-programaci%C3%B3n-de-aplicaciones-API-">Generalidades de la interfaz de programación de aplicaciones (API) </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/4407354972692-Conectarse-con-una-API-de-DreamHost">Conectarse con una API de DreamHost </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217555707-Comandos-API-de-DNS">Comandos API de DNS </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217077998-Comandos-API-de-Listas-de-Anuncios">Comandos API de Listas de Anuncios </a></li>
 </ul>
-</div>
 </div>
