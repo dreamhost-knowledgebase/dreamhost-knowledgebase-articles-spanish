@@ -10,7 +10,7 @@
 </div>
 <h2>Cosas a tener en cuenta</h2>
 <div class="solvvy-solution">
-<p>Aquí hay un par de cosas a tener en cuenta paraque tengas en cuenta y planees durante la migración.</p>
+<p>Aquí hay un par de cosas a tener en cuenta y planees durante la migración.</p>
 <h3>Sólo Volúmenes</h3>
 <p>Esta guía se centra únicamente en la migración de volúmenes, lo que es útil si tienes varios volúmenes adjuntos a una sola instancia y deseas mantener ese esquema de almacenamiento en el nuevo clúster. Ten en cuenta que este método no funciona con almacenamiento efímero y está diseñado solo para la copia de volumen a volumen. Si deseas mover instancias, consulta el artículo a continuación.</p>
 <ul>
@@ -19,10 +19,10 @@
 <h3>Planea una ventana de mantenimiento</h3>
 <p>Para evitar la corrupción u otro comportamiento extraño, es más seguro mover los datos cuando el volumen no tiene servicios en ejecución o archivos abiertos. La copia de los datos suele ser bastante rápida para volúmenes más pequeños, pero para volúmenes más grandes puede llevar algún tiempo. Recuerda, la copia debe completarse antes de que se pueda restaurar el servicio.</p>
 </div>
-<h2>Migrar un Volúmen usando SSH y dd</h2>
+<h2>Migrar un Volumen usando SSH y dd</h2>
 <div class="solvvy-solution">
 <p>Para este tipo de movimiento, se supone que has detenido todos los servicios que utilizan los datos del volumen, has desmontado de forma segura cualquier partición en la instancia que lo usa y lo ha separado de la instancia en el menú Volúmenes del panel.</p>
-<p>Como una descripción general, lo situiente serpa configuraco para completar esta tarea.</p>
+<p>Como una descripción general, lo siguiente sera configurado para completar esta tarea.</p>
 <div class="code">
 <pre>   CLÚSTER FUENTE      CLÚSTER DE DESTINO
 
