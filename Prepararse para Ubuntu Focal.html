@@ -34,7 +34,14 @@ Ubuntu 20.04.3 LTS \n \l</pre>
 </div>
 <h2>Cambio de nombre de VPS</h2>
 <div class="solvvy-solution">
-<p>El nombre del servidor de tu VPS estará cambiando. Esto solo te afecta si usas tu nombre de servidor en las configuraciones de SFTP o SSH. El nuevo nombre de servidor será incluido en la notificación de mantenimiento completado que recibirás una vez finalice (en adición al cambio de número, también verás que DreamHost ha cambiado el esquema de nombre de <span class="text-object">ps####</span> a <span class="text-object">vps####</span>).</p>
+<p>El nombre del servidor de tu VPS estará cambiando. Esto solo te afecta si usas tu nombre de servidor en las configuraciones de SFTP o SSH. El nuevo nombre de servidor será incluido en la notificación de mantenimiento completado que recibirás una vez finalice.</p>
+<p>Además del cambio de número, también notarás que DreamHost ha cambiado el esquema de nombres de:</p>
+<ul>
+<li><span class="text-object"><strong>ps</strong>######.dreamhostps.com</span>
+<dl>a</dl>
+</li>
+<li><span class="text-object"><strong>vps</strong>######.dreamhostps.com</span></li>
+</ul>
 </div>
 <h2>Cambios en la versión del servidor Web</h2>
 <div class="solvvy-solution">
@@ -61,6 +68,9 @@ Ubuntu 20.04.3 LTS \n \l</pre>
 <li>Python 2 (de 2.7.13/16 a 2.7.17)</li>
 <li>Python 3 (de 3.5.3/3.7.3 a 3.8.2)</li>
 </ul>
+<h3 class="subtoc-heading">virtualenv de Python</h3>
+<p>Si tu sitio web usa un entorno virtual de Python y observas algún error después de la actualización, vuelve a instalar tu entorno virtual y todos los módulos. Esto ayuda a garantizar que todo sea compatible con las nuevas bibliotecas en el servidor.</p>
+<p>Ejemplos de errores que puedes ver son errores/advertencias de Django, Passenger o Python.</p>
 <h3 class="subtoc-heading">Ruby</h3>
 <p>La versión de Ruby en el servidor es 2.7.0p0. Si quieres más control sobre esto (ejemplo, quieres usar una versión antigua o más nueva de Ruby), DreamHost recomienda encarecidamente que uses <a href="https://help.dreamhost.com/hc/es/articles/217185247-Administrador-de-versiones-de-Ruby-Ruby-Version-Manager-RVM-">RVM</a>.</p>
 <p>Si estás usando <a href="https://help.dreamhost.com/hc/es/articles/115001070131-Usar-Bundler-para-instalar-Ruby-gems">Bundler</a>, solo necesitarás correr:</p>
@@ -75,6 +85,9 @@ Ubuntu 20.04.3 LTS \n \l</pre>
 </div>
 <h3 class="subtoc-heading">SSH</h3>
 <p>La versión de SSH cambió de Stretch (7.4p1) o Buster (7.9p1) a 8.2p1.</p>
+<div id="telnet" class="section-link">&nbsp;</div>
+<h3 class="subtoc-heading">Telnet</h3>
+<p>Telnet estaba disponible anteriormente en las máquinas Debian Stretch, sin embargo, dado que es un protocolo obsoleto, no está disponible en las máquinas Focal para ayudar a mantener tu servidor seguro. Si necesitas Telnet, DreamHost recomienda ejecutarlo en tu computador local.</p>
 </div>
 <h2>¿Dónde puedo encontrar soporte?</h2>
 <div class="solvvy-solution">
