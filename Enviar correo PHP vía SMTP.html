@@ -10,7 +10,7 @@
 </div>
 <h2>¿Donde debería agregar esta opción?</h2>
 <div class="solvvy-solution">
-<p>Debes solamente usar esta opción cuando estés creando un formulario personalizado de correo. Si estas usando sofrware como WordPres, debes usar la&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215526937-Configurar-el-plugin-WP-MAIL-SMTP-" target="_self">herramienta built-in o plugins</a> para enviar vía SMTP.</p>
+<p>Debes solamente usar esta opción cuando estés creando un formulario personalizado de correo. Si estas usando software como WordPress, debes usar la <a href="https://help.dreamhost.com/hc/es/articles/215526937-Configurar-el-plugin-WP-MAIL-SMTP-" target="_self">herramienta built-in o plugins</a> para enviar vía SMTP.</p>
 </div>
 <h2>Configurar PEAR para enviar correo</h2>
 <div class="solvvy-solution">
@@ -31,7 +31,7 @@
 <p>El siguiente paquete puede ser usado para enviar correo SMTP usando el paquete PEAR de correo. (Mail PEAR). Crea un archivo llamado algo como <span class="text-object">phpmail.php</span> con el siguiente código.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">Crear y editar archivos vía FTP</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crer y editar un archivo vía SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo vía SSH</a></li>
 </ul>
 <div class="notebox-note">
 <p>Solo necesitas completar los campos que están resaltados.</p>
@@ -40,7 +40,7 @@
 <p>El archivo <span class="text-object">Mail.php</span> está ubicado en el directorio <span class="text-object">/home/username/pear/share/pear</span>. Fue creado cuando tu <a href="https://help.dreamhost.com/hc/es/articles/214395118-Soluci%C3%B3n-de-problemas-de-errores-de-PEAR" target="_self">instalaste el paquete Mail</a> y está referenciado en un código que pusiste en tu archivo phprc cuando tu <a href="https://help.dreamhost.com/hc/es/articles/214392988-Instalar-PEAR" target="_self">instalaste Pear</a>.</p>
 </div>
 <h3>Encontrar tu nombre de alojamiento de correo</h3>
-<p>Asegúrate de usar el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214918038#nombre-del-servidor" target="_self">nombre de servidor de correo</a> para el nombre de alojamiento de correo. Este puede ser imap.dreamhost.com o pop.dreamhost.com, dependiendo del tipo de conección que tu prefieras. El siguiente ejemplo usa el nombre de alojamiento (hostname) 'imap.dreamhost.com'.</p>
+<p>Asegúrate de usar el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214918038#nombre-del-servidor" target="_self">nombre de servidor de correo</a> para el nombre de alojamiento de correo. Este puede ser imap.dreamhost.com o pop.dreamhost.com, dependiendo del tipo de conexión que tu prefieras. El siguiente ejemplo usa el nombre de alojamiento (hostname) 'imap.dreamhost.com'.</p>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;?php
 
@@ -61,7 +61,7 @@ $email_address = "<span class="code-highlight">responder-a@example.com</span>";
 $headers = array ('From' =&gt; $email_from, 'To' =&gt; $to, 'Subject' =&gt; $email_subject, 'Reply-To' =&gt; $email_address);
 $smtp = Mail::factory('smtp', array ('host' =&gt; $host, 'port' =&gt; $port, 'auth' =&gt; true, 'username' =&gt; $username, 'password' =&gt; $password));
 $mail = $smtp-&gt;send($to, $headers, $email_body);
-<br>
+<br />
 if (PEAR::isError($mail)) {
 echo("&lt;p&gt;" . $mail-&gt;getMessage() . "&lt;/p&gt;");
 } else {
