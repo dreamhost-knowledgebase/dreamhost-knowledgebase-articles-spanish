@@ -17,7 +17,7 @@
 <p>Los siguientes pasos te guiarán en cómo habilitarlo.</p>
 <ol>
 <li>Visita el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214392988-Instalar-PEAR">PEAR</a> para instalarlo en tu servidor web.</li>
-<li>Instala los paquetes necesarios de correo PEAR. Visita&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214395118-Soluci%C3%B3n-de-problemas-de-errores-PEAR" target="_self">solucionar PEAR</a> para más instrucciones. Por ejemplo, necesitas instalar los paquetes Mail y Net_SMTP:
+<li>Instala los paquetes necesarios de correo PEAR. Visita&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214395118-Soluci%C3%B3n-de-problemas-de-errores-PEAR" target="_self">solucionar PEAR</a> para más instrucciones. Por ejemplo, necesitas instalar los paquetes <span class="text-object">Mail</span> y <span class="text-object">Net_SMTP</span>:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">pear install --alldeps Mail</span>
 </pre>
@@ -37,7 +37,7 @@
 <p>Solo necesitas completar los campos que están resaltados.</p>
 </div>
 <div class="notebox-important">
-<p>El archivo <span class="text-object">Mail.php</span> está ubicado en el directorio <span class="text-object">/home/username/pear/share/pear</span>. Fue creado cuando tu <a href="https://help.dreamhost.com/hc/es/articles/214395118-Soluci%C3%B3n-de-problemas-de-errores-de-PEAR" target="_self">instalaste el paquete Mail</a> y está referenciado en un código que pusiste en tu archivo phprc cuando tu <a href="https://help.dreamhost.com/hc/es/articles/214392988-Instalar-PEAR" target="_self">instalaste Pear</a>.</p>
+<p>El archivo <span class="text-object">Mail.php</span> está ubicado en el directorio <span class="text-object">/home/username/pear/share/pear</span>. Fue creado cuando tu <a href="https://help.dreamhost.com/hc/es/articles/214395118-Soluci%C3%B3n-de-problemas-de-errores-de-PEAR" target="_self">instalaste el paquete Mail</a> y está referenciado en un código que pusiste en tu archivo <span class="text-object">phprc</span> cuando tu <a href="https://help.dreamhost.com/hc/es/articles/214392988-Instalar-PEAR" target="_self">instalaste Pear</a>.</p>
 </div>
 <h3>Encontrar tu nombre de alojamiento de correo</h3>
 <p>Asegúrate de usar el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214918038#nombre-del-servidor" target="_self">nombre de servidor de correo</a> para el nombre de alojamiento de correo. Este puede ser imap.dreamhost.com o pop.dreamhost.com, dependiendo del tipo de conexión que tu prefieras. El siguiente ejemplo usa el nombre de alojamiento (hostname) 'imap.dreamhost.com'.</p>
@@ -71,7 +71,13 @@ echo("&lt;p&gt;Message successfully sent!&lt;/p&gt;");
 </pre>
 </div>
 <div class="notebox-note">
-<p>Si estás usando Google como tu alojamiento de correo, debes cambiar la línea $host por lo siguiente:</p>
+<p><strong>Correo de DreamHost</strong></p>
+<p>Si estás usando el servicio de correo de DreamHost, el valor <span class="text-object">$host</span> es el mismo que se muestra en el código de arriba value:</p>
+<div class="preboxcontainer">
+<pre class="prebox">$host = "ssl://smtp.dreamhost.com";</pre>
+</div>
+<p><strong>Gmail</strong></p>
+<p>Si estás usando Google como tu alojamiento de correo, debes cambiar la línea <span class="text-object">$host</span> por lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox">$host = "ssl://smtp.gmail.com";</pre>
 </div>
