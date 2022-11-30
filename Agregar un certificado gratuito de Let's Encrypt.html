@@ -9,34 +9,48 @@
 <div class="notebox-note">
 <p>Solo un certificado firmado profesionalmente o 'Let's Encrypt' funcionará con <a href="/hc/es/articles/216475197-Generalidades-de-Cloudflare-con-SSL" target="_blank" rel="noopener noreferrer">la configuración SSL (strict) completa de Cloudflare</a>.</p>
 </div>
-<p>Antes de comenzar a agregar el certificado, asegúrate de que tu dominio esta <a href="https://help.dreamhost.com/hc/es/articles/215416227-C%C3%B3mo-agrego-un-dominio-" target="_self">completamente alojado</a> o configurado como <a href="https://help.dreamhost.com/hc/es/articles/215455377-Redireccionar-un-dominio" target="_self">redirección</a> y que el DNS de tu dominio ya esté apuntando a DreamHost. Esto significa que tus nameservers deben apuntar a DreamHost, o tus registros A (registros www y no www) deben apuntar a la dirección IP de tu dominio (suponiendo que tus nameservers estén en una empresa diferente).</p>
+<p>Antes de comenzar a agregar el certificado, asegúrate de que lo siguiente esté configurado:</p>
+<ol>
+<li>Tu dominio este <a href="https://help.dreamhost.com/hc/es/articles/215416227-Agregar-un-dominio-" target="_self">Alojado Completamente</a> o configurado como <a href="https://help.dreamhost.com/hc/es/articles/215455377-Redireccionar-un-dominio" target="_self">redirección</a></li>
+<li>El DNS de tu dominio ya esté apuntando a DreamHost. Esto quiere decir que:
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self">¿Cuáles son los nameservers de DreamHost?</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360035516812#Registro_A" target="_self">Cómo agregar un registro A</a></li>
+<li>Tus Nameservers deban apuntar a DreamHost</li>
+<li>o si tus Nameservers están apuntando a otra compañía, tus registros A (www y no-www) y AAAA (IPv6) deban estar apuntando a la dirección IP de tu dominio.</li>
 </ul>
+</li>
+<li>Deshabilita tu archivo <span class="text-object">.htaccess</span></li>
+</ol>
+<div class="notebox-important">
+<p><strong>¿Por qué mi DNS necesita apuntar a DreamHost?</strong></p>
 <p>Esto se debe a que 'Let's Encrypt' agrega una carpeta <span class="text-object">.well_known/</span> a tu sitio para autenticar el certificado. Si el DNS de tu sitio no se resuelve en un dominio totalmente alojado en DreamHost, el certificado no puede crear esta carpeta para autenticarse y tu panel mostrará lo siguiente:</p>
 <p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ssl-adding-le-cert-01.png" width="550" height="264" /></p>
+</div>
+<div class="notebox-tip">
+<p><strong>Registros CAA</strong></p>
+<p>Los registros CAA pueden ser creados por el propietario del sitio web para especificar cuales Autoridades Certificadora (CAs) están permitidas de emitir certificados SSL para un dominio.</p>
+<p>Revisa el siguiente artículo si quieres agregar registros CAA a tu dominio antes de comprar un certificado SSL.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360029281672-Pol%C3%ADticas-de-registros-CAA">Políticas de registros CAA</a></li>
+</ul>
+</div>
 <p>Visita las siguientes secciones para verificar tus valores de los DNS.</p>
-<h3 class="subtoc-heading">Verificar dónde están apuntados tus nameservers</h3>
+<h3 class="subtoc-heading">Opción 1 — Apuntar tus nameservers</h3>
 <p>Visita el siguiente enlace para revisar a dónde están apuntando tus nameservers:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216385467#donde-estan-apuntando-mis-nameservers" target="_self">¿A dónde están apuntado mis nameservers?</a></li>
 </ul>
 <p>Si ya están apuntando a DreamHost, no necesitas cambiar nada.</p>
-<p>Si NO están apuntados a DreamHost, necesitarás apuntarlos a DreamHost o cambiar los dos registros A de tu dominio.</p>
-<div class="notebox-important">
-<p>El propietario de un sitio web puede crear registros de CAA para especificar qué autoridades de certificación (CA) pueden emitir certificados SSL para un dominio.</p>
-<p>Mira el siguiente artículo si deseas agregar registros CAA a tu dominio antes de comprar un certificado SSL.</p>
+<p>Si NO están apuntados a DreamHost, necesitarás <a href="https://help.dreamhost.com/hc/es/articles/216385447-Cambiar-los-nameservers-en-tu-alojamiento-actual" target="_self">apuntarlos en tu alojamiento actual</a> o cambiar los registros A de tu dominio como se escriben a continuación.</p>
+<h3 class="subtoc-heading">Opción 2 — Apuntar los registros A de tu dominio</h3>
+<p>Si tus nameservers no están apuntando a DreamHost y no deseas cambiarlos, la otra opción es actualizar los registros A y AAAA de tu dominio. Estos debe ser actualizados en la compañía donde tus nameservers están apuntando. Revisa el siguiente artículo para ver instrucciones de cómo encontrar la dirección IP correcta para apuntarlos:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360029281672-Pol%C3%ADticas-de-Registros-CAA" target="_self">Registros de política CAA</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio-">¿A qué registros DNS debo apuntar mi sitio?</a></li>
 </ul>
-</div>
-<h3 class="subtoc-heading">Actualizar los registros A de tu dominio</h3>
-<p>Como se explicó anteriormente, si tus nameservers no apuntan a DreamHost y no deseas cambiarlos, la otra opción es actualizar los dos registros A de tu dominio.</p>
-<p>Deberás actualizar el registro www A y el registro no www A. Por ejemplo:</p>
+<p><strong>Apuntar los registros A</strong></p>
+<p>Debes actualizar los registros A de los registros www y no-www de tu sitio web. Por ejemplo:</p>
 <ul>
-<li><strong>www.example.com</strong></li>
 <li><strong>example.com</strong></li>
+<li><strong>www.example.com</strong></li>
 </ul>
 <div class="notebox-note">
 <p>Si estás apuntando a un subdominio como <strong>blog.example.com</strong>, deberás crear el registro www también. Por ejemplo:</p>
@@ -45,11 +59,13 @@
 <li><strong>blog.example.com</strong></li>
 </ul>
 </div>
-<p>Estos deben actualizarse en la empresa donde están apuntando tus nameservers. Visita el siguiente artículo para obtener instrucciones sobre cómo encontrar la dirección IP correcta para apuntarlos:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-apunto-mi-sitio-" target="_self">¿A qué registros DNS apunto mi sitio?</a></li>
+<p><strong>Apuntar un registro AAAA</strong>&nbsp;</p>
+<p>Un registro AAAA es un registro IPv6. Ese no se agrega por defecto en DreamHost, pero puedes agregarlo manualmente como se explica en el siguiente artículo:</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/216510458-IPv6">IPv6</a></li>
 </ul>
-<h3 class="subtoc-heading">Agregar reglas del .htaccess</h3>
+<p>Una vez agregado, necesitarás ver la nueva dirección en tu panel. Puedes apuntarlo a este registro desde la compañía donde tus nameservers están apuntando.</p>
+<h3 class="subtoc-heading">Deshabilitar el archivo .htaccess</h3>
 <p>Adicionalmente, ciertas reglas <span class="text-object">.htaccess</span> como el bloqueo de IP, las reglas de reescritura y la protección con contraseña pueden hacer que la instalación falle. Para asegurarte que eso no sea un problema, cambia el nombre de tu archivo <span class="text-object">.htaccess</span> (a algo como <span class="text-object">.htaccess_OFF</span>) para deshabilitarlo temporalmente. Luego, instala el certificado. Una vez instalado, puedes cambiar el nombre del archivo a <span class="text-object">.htaccess</span> de vuelta.</p>
 <p>Si deshabilitar tu <span class="text-object">.htaccess</span> afecta tu sitio, a tal punto que se pueda dañar, agrega la siguiente regla que debería permitir que la instalación se procese:</p>
 <div class="preboxcontainer">
