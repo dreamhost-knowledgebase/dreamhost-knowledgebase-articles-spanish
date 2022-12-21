@@ -1,9 +1,7 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>DreamHost Shared, VPS, Dedicated, y DreamPress son cuatro de nuestros&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215560437-Qu%C3%A9-tipos-de-planes-de-alojamiento-est%C3%A1n-disponibles-" target="_self">planes de alojamiento</a>&nbsp;disponibles para tu sitio web.</p>
-<p>El servidor privado virtual DreamHost (VPS) es una solución de alojamiento premium basada en discos de estado sólido (SSD). Está disponible como complemento de un plan existente en DreamHost o un servicio independiente. Los VPS de DreamHost usan Linux-VServer para crear una "máquina virtual" que protege los recursos de CPU y RAM para que sean solo utilizados por un usuario, y no sean utilizados por otros usuarios en la misma máquina física.</p>
-<p>Por ejemplo, en un servidor compartido los recursos son compartidos por otros usuarios. En un VPS, estos recursos están más aislados, lo que mejora el rendimiento y ayuda a mantener la estabilidad.</p>
-<p>Puedes revisar los detalles de precios de los planes VPS en el <a href="https://www.dreamhost.com/es/hosting/vps/" target="_self" rel="undefined">sitio web de DreamHost</a>.</p>
+<p>El Servidor Virtual Privado de DreamHost (VPS) es un plan de alojamiento premium disponible como adición a un <a href="https://help.dreamhost.com/hc/es/articles/215560437--Qu%C3%A9-tipos-de-planes-de-hosting-disponibles-hay-" target="_self">plan de DreamHost</a> existente o un servicio independiente.</p>
+<p>Los nuevos VPS agregados en el panel ejecutan Ubuntu Focal y usan Linux-Containers (LXC) para crear un servidor "virtual" que protege los recursos de RAM de un usuario de otros usuarios en la misma máquina física. Por ejemplo, en un servidor compartido, los recursos son compartidos por otros usuarios. En un VPS, estos recursos están más aislados, lo que mejora el rendimiento y ayuda a mantener la estabilidad.</p>
 <p>Este artículo proporciona detalles sobre cómo agregar un:</p>
 <ul>
 <li>Servidor VPS.</li>
@@ -14,38 +12,31 @@
 <h2>¿Qué características incluye un VPS?</h2>
 <div class="solvvy-solution">
 <ul>
-<li>CPU y RAM protegida.</li>
+<li>RAM protegida.</li>
 <li>Se permiten procesos persistentes (y nunca se eliminan).</li>
-<li>Capacidad para alterar la memoria sobre la marcha, sin necesidad de reiniciar.</li>
+<li>Habilidad de <a href="https://help.dreamhost.com/hc/es/articles/360026797892-Cambiar-tu-hosting-VPS-o-plan-de-facturaci%C3%B3n" target="_self">mejorar la RAM</a> sin reiniciar (degradar reiniciará el servidor)</li>
 <li>Posibilidad de reiniciar el servidor desde el panel.</li>
 <li>La memoria histórica y los gráficos de carga se pueden ver en el panel.</li>
-<li>Unidades basadas en SSD que ofrecen velocidades 20 veces más rápidas que las unidades de disco SATA tradicionales.</li>
 </ul>
 <h3 class="solvvy-solution">Direcciones IP</h3>
-<p>Cada VPS viene con su propia dirección IP incluida. Luego puedes agregar una IP única a cada dominio (IPv4 o IPv6) por una tarifa adicional. Puede leer más sobre IP únicas aquí:</p>
+<p>Cada VPS viene con su propia dirección IP incluida. Luego puedes agregar una IP única a cada dominio (IPv4 o IPv6) por una tarifa adicional. Revisa el siguiente artículo para más detalles:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216109647-Generalidades-de-las-IP-%C3%9Anicas" target="_self">Generalidades de IP únicas</a></li>
 </ul>
-<p>Por favor ten en cuenta que DreamHost no puede ofrecer direcciones IP estáticas. Esto significa que la IP de tu sitio (incluidas las IP únicas) está sujeta a cambios. Si bien no sucede tan a menudo, DreamHost no garantiza que una dirección IP nunca cambie. Sin embargo, cuando se produce un cambio de IP, se notificará por correo de manera oportuna.</p>
+<div class="notebox-tip">
+<p>Por favor ten en cuenta que DreamHost no puede ofrecer direcciones IP estáticas. Esto significa que la IP de tu sitio (incluidas las IP únicas) está sujeta a cambios.</p>
+<p>Si bien no sucede tan a menudo, DreamHost no garantiza que una dirección IP nunca cambie. Sin embargo, cuando se produce un cambio de IP, se te notificará por correo de manera oportuna.</p>
+</div>
 <h3>Procesos persistentes</h3>
 <p>A diferencia de una configuración de los Shared Hosting regular, los VPS permiten la ejecución de procesos persistentes. Independientemente de cuánto tiempo lleve ejecutar estos procesos (invocado en la web, invocado por la consola, cron o de otro modo), el servidor nunca elimina los procesos.</p>
-<h3>Ajuste dinámico de la configuración del servidor</h3>
-<p>Muchas de las opciones de configuración clave para tu servidor VPS están configuradas sobre la marcha por el sistema de automatización de DreamHost para aprovechar al máximo los recursos disponibles de tu servidor. Por ejemplo, si tienes un servidor VPS de 300 MB, Apache está configurado para usar una cantidad de memoria menor que si tuviera un servidor de 1000 MB. La configuración de Apache es proporcional a la asignación de memoria y se ajusta cuando se aumenta la asignación para el servidor.</p>
-<h3>DNS de Wildcard</h3>
+<h3><span id="DNS_de_Wildcard">DNS de Wildcard</span></h3>
 <p>Por favor visita el artículo de <a href="https://help.dreamhost.com/hc/es/articles/217113237-DNS-Wildcard" target="_self">DNS de Wildcard</a>&nbsp;para obtener instrucciones sobre cómo habilitar este servicio.</p>
 </div>
-<h2>¿Cuanto cuesta un VPS?</h2>
+<h2>¿Cuánto cuesta un VPS?</h2>
 <div class="solvvy-solution">
-<p>Consulta la siguiente página para obtener más información sobre las características de VPS y los precios de los planes de:</p>
+<p>Revisa la siguiente página para obtener más información sobre las características de VPS y los precios de los planes de:</p>
 <ul>
-<li><a href="https://www.dreamhost.com/es/hosting/vps/" target="_self" rel="undefined">https://www.dreamhost.com/es/hosting/vps/</a></li>
-</ul>
-</div>
-<h2 class="subheader">FFmpeg y Libav</h2>
-<div class="solvvy-solution">
-<p>La disponibilidad de estas bibliotecas varía según la versión de Ubuntu que esté ejecutando tu servidor. Revisa el siguiente artículo para más detalles:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360022178852--C%C3%B3mo-preparar-mi-sitio-para-Ubuntu-Bionic-#ffmpeg_libav" target="_self">Prepararse para para Ubuntu Bionic</a></li>
+<li><a href="https://www.dreamhost.com/es/hosting/vps/" target="_blank" rel="noopener noreferrer">Hosting VPS</a></li>
 </ul>
 </div>
 <h2>¿Qué es un VPS Legacy?</h2>
