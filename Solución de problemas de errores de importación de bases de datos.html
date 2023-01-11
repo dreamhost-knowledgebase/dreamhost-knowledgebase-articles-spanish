@@ -1,21 +1,24 @@
 <div class="notebox-tip">
 <p>Si te encuentras en una situación que requiere cambios en tu sitio y tu desarrollador no está disponible para ayudarte, el equipo de soporte técnico de DreamHost puede ayudarte por una pequeña tarifa. Puedes encontrar más información sobre los servicios admitidos y los costos asociados en el artículo de <a href="https://help.dreamhost.com/hc/es/articles/360042256912-Generalidades-sobre-Servicios-Profesionales-">Servicios Profesionales de DreamHost</a>.</p>
 </div>
-
 <h2>ERROR 1044</h2>
 <div class="solvvy-solution">
-<p>La mayoría de los archivos SQL contienen una BASE DE DATOS CREATE y una instrucción USE, que se crean al exportar el contenido de una base de datos existente. Estas declaraciones están destinadas a automatizar completamente el proceso de migración de la base de datos a una nueva instalación.</p>
-<p>Si intentas importar tus datos a una nueva base de datos en DreamHost con dicho archivo, fallará ya que no tiene los permisos CREATE DATABASE desde la línea de comandos (o en cualquier otro lugar, excepto el Panel de control).</p>
-<p>Cuando uses el comando de importación como se describe en la sección anterior, verás el siguiente mensaje de error:</p>
+<p>Las bases de datos MySQL se pueden exportar en un solo archivo el cual se puede usar para migrar la base de datos a otra compañía de alojamiento luego.</p>
+<p>Muy amenudo, este archivo de MySQL contiene una declaración <span class="code">CREATE DATABASE</span> y una <span class="code">USE</span>. Estas declaraciones están destinadas a automatizar el proceso de migración de la base de datos a una nueva ubicación, sin embargo, intentar importar tu base de datos a DreamHost con dicho archivo fallará ya que no tiene los permisos <span class="code">CREATE DATABASE</span>.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000263911-Limitaciones-de-MySQL-debido-a-un-Shared-Hosting">Limitaciones de MySQL debido a un Shared Hosting</a></li>
+</ul>
+<p>Cuando importas una base de datos con estas declaraciones a través de <a href="https://help.dreamhost.com/hc/es/articles/221614988-SSH-Importar-una-base-de-datos" target="_self">SSH</a> o <a href="https://help.dreamhost.com/hc/es/articles/214395768-phpMyAdmin-C%C3%B3mo-importar-o-restaurar-una-base-de-datos-o-una-tabla" target="_self">phpMyAdmin</a>, verás el siguiente error:</p>
 <div class="preboxcontainer">
 <pre class="prebox">ERROR 1044 (42000): Access denied for user 'your_user_name'@'yourhost/hostmask' to database 'newdbname'</pre>
 </div>
-<p>Este mensaje de error indica que no tienes permisos suficientes para crear la nueva base de datos, que es causada por la instrucción CREATE DATABASE en el archivo SQL que se importa. Este no es un problema importante ya que ya ha creado la base de datos. Debido a esto, la declaración CREATE DATABASE que está en tu archivo SQL exportado ni siquiera es necesaria.</p>
+<p>Este mensaje de error indica que no tienes permisos suficientes para crear la nueva base de datos, que es causada por la declaración <span class="code">CREATE DATABASE</span> en el archivo MySQL que está siendo importado.</p>
+<p>La única manera de crear una base de datos en DreamHost es <a href="https://help.dreamhost.com/hc/es/articles/221691727-Crear-una-base-de-datos-MySQL" target="_self">en el panel</a>. Debido a esto, la declaración <span class="code">CREATE DATABASE</span> que está en tu archivo MySQL exportado ni siquiera es necesaria.</p>
 <h3>La solución</h3>
 <p>Para resolver este inconveniente:</p>
 <ol>
-<li>Abre el archivo SQL en un editor de texto (no en un procesador de textos, como MS-Word).</li>
-<li>Elimina las líneas que comienzan con CREATE DATABASE y USE. Por ejemplo:
+<li>Abre el archivo MySQL en un editor de texto (no en un procesador de textos, como MS-Word).</li>
+<li>Elimina las líneas que comienzan con <span class="code">CREATE DATABASE</span> y <span class="code">USE</span>. Por ejemplo:
 <div class="preboxcontainer">
 <pre class="prebox">CREATE DATABASE `newdbname` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_c$ USE `newdbname`;</pre>
 </div>
@@ -25,29 +28,30 @@
 <div class="preboxcontainer">
 <pre class="prebox">USE `newdbname`;</pre>
 </div>
+<div class="notebox-tip">
 <ul>
-<li>El texto exacto de la instrucción CREATE DATABASE difiere según el nombre de la base de datos y el juego de caracteres utilizado.</li>
+<li>El texto exacto de la instrucción <span class="code">CREATE DATABASE</span> difiere según el nombre de la base de datos y el juego de caracteres utilizado.</li>
 <li>Asegúrate de eliminar todo desde el comienzo de la línea hasta el punto y coma, al final de la línea.</li>
 </ul>
+</div>
 </li>
-<li>Una vez que hayas eliminado estas declaraciones, guarda tu archivo SQL editado y luego repite el comando de importación como se indica en la sección anterior.</li>
+<li>Una vez que hayas eliminado estas declaraciones, guarda tu archivo MySQL editado y luego intenta importar de nuevo.</li>
 </ol>
-<p>Si has hecho todo lo demás correctamente, la importación debe continuar sin más problemas.</p>
 </div>
 <h2>ERROR 1227</h2>
 <div class="solvvy-solution">
-<p>Si restauras una copia de seguridad de MySQL en una base de datos con otro usuario y tienes alguna vista en tu base de datos, tendrás un error similar a este:</p>
+<p>Si restauras una copia de seguridad de MySQL en una base de datos con otro usuario y tienes algunas 'vistas' en tu base de datos, tendrás un error similar a este:</p>
 <div class="preboxcontainer">
 <pre class="prebox">ERROR 1227 (42000) at line 694: Access denied; you need the SUPER privilege for this operation.</pre>
 </div>
-<p>Deberás eliminar el DEFINER mencionado en el archivo <span class="text-object">.sql</span> en la línea especificada en el error.</p>
+<p>Deberás eliminar el <span class="code">DEFINER</span> mencionado en el archivo <span class="text-object">.sql</span> en la línea especificada en el error.</p>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL" rel="undefined" target="_self">Generalidades de MySQL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL" target="_self" rel="undefined">Generalidades de MySQL</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214395738-phpMyAdmin-C%C3%B3mo-hacer-una-copia-de-seguridad-o-exportar-una-base-de-datos-o-tabla">phpMyAdmin — Cómo hacer una copia de seguridad/exportar una base de datos o tabla</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214395768-phpMyAdmin-C%C3%B3mo-importar-una-base-de-datos-o-una-tabla" rel="undefined" target="_self">phpMyAdmin — Cómo importar una base de datos o tabla</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214395768-phpMyAdmin-C%C3%B3mo-importar-una-base-de-datos-o-una-tabla" target="_self" rel="undefined">phpMyAdmin — Cómo importar una base de datos o tabla</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/221614988-SSH-Importar-una-base-de-datos">SSH — Importar una base de datos</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/221686207-SSH-C%C3%B3mo-hacer-una-copia-de-seguridad-de-tu-base-de-datos">SSH — Copia de seguridad de tu base de datos</a></li>
 </ul>
