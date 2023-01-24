@@ -1,0 +1,40 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Hay varias formas diferentes de instalar WordPress. Por ejemplo:</p>
+<ul>
+<li>Descargar los archivos directamente de <a href="https://wordpress.org/download/#download-install" target="_self">WordPress.org</a> y subirlos a tu sitio.</li>
+<li>Usando <a href="https://help.dreamhost.com/hc/es/articles/360024826351-Instalar-WordPress-usando-wp-cli-y-SSH" target="_self" rel="undefined">wp-cli vía SSH</a> para instalarlo directamente en tu servidor.</li>
+<li>Usando el <a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-Instalador-de-WordPress-de-DreamHost" target="_self" rel="undefined">instalador WordPress de DreamHost</a> en el panel.</li>
+</ul>
+<p>El servicio de instalación de WordPress de DreamHost del panel es la opción más fácil, sin embargo, es importante que te asegures de que WordPress no se haya instalado ya manualmente en el directorio de tu sitio utilizando un método de instalación diferente. Si ya existe una instalación de WordPress, la misma continuará, pero todos los archivos antiguos se adjuntarán con una marca de tiempo.</p>
+<p>Por ejemplo, los archivos normales de WordPress se verán así:</p>
+<ul>
+<li><span class="text-object">index.php</span></li>
+<li><span class="text-object">wp-login.php</span></li>
+<li><span class="text-object">wp-settings.php</span></li>
+</ul>
+<p>Si estos archivos ya existen y corres la instalación de WordPress de DreamHost, se agregará una marca de tiempo a los archivos recién instalados. Por ejemplo:</p>
+<ul>
+<li><span class="text-object">index.php.1555975213</span></li>
+<li><span class="text-object">wp-login.php.1555975213</span></li>
+<li><span class="text-object">wp-settings.php.1555975213</span></li>
+</ul>
+<p>Los siguientes pasos explican cómo eliminar estos archivos duplicados.</p>
+</div>
+<h2>Eliminar los archivos de instalación duplicados</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">SSH</a>.</li>
+<li>Navega al <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-de-sitio-web" target="_self" rel="undefined">directorio de tu sitio web</a>. Cambia <strong>example.com</strong> a tu sitio web.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/<span class="code-highlight">example.com</span></span></pre>
+</div>
+</li>
+<li>Corre el siguiente comando para eliminar estos archivos duplicados. Solo cambia el número de marca de tiempo.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">find . -name "*<span class="code-highlight">.1555975213</span>" -type f -delete</span></pre>
+</div>
+</li>
+<li>Corre <span class="code">ls -la</span> y verás que se han eliminado todos los archivos duplicados.</li>
+</ol>
+</div>
