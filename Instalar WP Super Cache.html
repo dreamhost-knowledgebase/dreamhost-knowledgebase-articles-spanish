@@ -11,30 +11,7 @@
 </ul>
 <p>A continuación se describe cómo configurar y usar&nbsp;<a href="https://wordpress.org/plugins/wp-super-cache/">WP Super Cache</a>.</p>
 </div>
-<h2>Configurar los enlaces permanentes de WordPress</h2>
-<div class="solvvy-solution">
-<p>Debido a que WP Super Cache requiere el uso de enlaces permanentes, es posible que debas configurarlos antes de continuar, especialmente si estás utilizando una instalación más vieja de WordPress.</p>
-<p>Si instalas WordPress usando el <a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-Instalador-de-WordPress-de-DreamHost" target="_self">instalador de WordPress de DreamHost</a>, los enlaces permanentes ya están configurados por defecto.</p>
-<div class="notebox-note">
-<p>Cuando configuras enlaces permanentesdentro de WordPress, hay varias opciones disponibles. Todas las configuraciones de los enlaces permanentes funcionan con WP Super Cache, excepto la configuración ‘Plain’.</p>
-</div>
-<p>Para cambiar la configuración de los enlaces permanentes:</p>
-<ol>
-<li>Abre el panel de administración de WordPress (ej. <strong>example.com/wp-admin</strong>).
-<dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-01_WP_Super_Cache.fw.png" alt="ES 01 WP Super Cache.fw.png" /></dd>
-</dl>
-</li>
-<li>Navega a <span class="text-section">Ajustes &gt; Enlaces permanentes</span>.
-<dl>
-<dd><em>Cualquiera de las opciones aparte de Default funcionará, por lo que tu configuración debería verse así:</em></dd>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-02_WP_Super_Cache.fw.png" alt="ES 02 WP Super Cache.fw.png" /></dd>
-</dl>
-</li>
-<li>Haz clic en el botón&nbsp;<strong>Guardar Cambios</strong> para guardar tu nueva configuración.</li>
-</ol>
-</div>
-<h2>Cómo configurar WP Super Cache</h2>
+<h2>Configurar WP Super Cache</h2>
 <div class="solvvy-solution">
 <div class="notebox-important">
 <p>WP Super Cache ya está incluido y listo para usar si seleccionas la opción 'Deluxe Install' cuando usas el <a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-Instalador-de-WordPress-de-DreamHost">instalador de wordPress de DreamHost</a>. Es posible que veas un botón 'Activate' cuando inicies tu instalación de WordPress Deluxe de un solo clic inicialmente, en cuyo caso debes hacer clic en él y luego continuar a la página de configuración.</p>
@@ -67,9 +44,7 @@
 </div>
 <h2>Activar WP Super Cache</h2>
 <div class="solvvy-solution">
-<p>Para activar el plugin WP Super Cache:</p>
-<ol>
-<li>Selecciona uno de los siguientes:
+<p>Selecciona uno de los siguientes para activar el plugin WP Super Cache:</p>
 <ul>
 <li>Haz clic en el enlace <span class="text-link">Activar</span> en la página Instalación del Plugin (consulta la sección anterior), o</li>
 <li>Dirígete al área Plugins de tu panel de administración 'Plugins' &gt; 'Plugins instalados', y luego haz clic en el enlace <span class="text-link">Activar</span>.</li>
@@ -80,139 +55,33 @@
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-07_WP_Super_Cache.fw.png" alt="ES 07 WP Super Cache.fw.png" /></dd>
 </dl>
-</li>
-<li>Haz clic en el enlace <span class="text-link">Ajustes</span> para abrir la página de configuración de WP Super Cache.</li>
-<li>Ajusta tu configuración según sea necesario. A continuación se muestra una página de configuración típica de WP Super Cache Settings:
-<dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-08_WP_Super_Cache.fw.png" alt="ES 08 WP Super Cache.fw.png" /></dd>
-</dl>
-</li>
-<li>Haz clic en el botón de radio ‘Almacenamiento en caché activado <em>(Recomendado)</em>’, y luego haz clic en el botón <strong>Actualizar estado</strong>.
-<dl>
-<dd><em>WP Super Cache agrega automáticamente la siguiente línea a tu archivo <span class="text-object">wp-config.php</span>:</em></dd>
-</dl>
-<div class="preboxcontainer">
-<pre class="prebox">define( 'WP_CACHE', true );</pre>
-</div>
 <div class="notebox-important">
 <p>Si WP Super Cache no se instala, WordPress proporcionará enlaces a sus propios documentos de solución de problemas.</p>
 </div>
-</li>
-</ol>
-</div>
-<h2>Verificar de que WP Super Cache realmente esté funcionando</h2>
-<div class="solvvy-solution">
-<p>Para probar WP Super Cache:</p>
-<ol>
-<li>Abre la página de administración de WP Super Cache y haz clic en la pestaña <span class="text-object">Easy</span>.
-<dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-09_WP_Super_Cache.fw.png" alt="ES 09 WP Super Cache.fw.png" /></dd>
-</dl>
-</li>
-<li>Haz clic en el botón&nbsp;<strong>Probar caché</strong>, que prueba si WP Super Cache está funcionando.
-<dl>
-<dd><em>Lo siguiente aparece cuando haces clic en el botón <strong>Probar caché</strong>:</em></dd>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-10_WP_Super_Cache.fw.png" alt="ES 10 WP Super Cache.fw.png" /></dd>
-</dl>
-</li>
-</ol>
-<h3><span id="Las_marcas_de_tiempo_difieren_o_no_se_encontraron_errores">Las marcas de tiempo difieren o no se encontraron errores</span></h3>
-<p>Cuando pruebas tu caché, puedes ver el siguiente mensaje de error:</p>
-<div class="preboxcontainer">
-<pre class="prebox">The pages do not match! Timestamps differ or were not found!</pre>
-</div>
-<p>Este es un problema de Cloudflare Minify y ocurre cuando has habilitado Cloudflare en tu dominio. Para solucionarlo, sigue estos pasos:</p>
-<ol>
-<li>Inicia sesión en tu cuenta de Cloudflare en <a href="https://dash.cloudflare.com/login">https://dash.cloudflare.com/login</a>.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-cloudflare_speed_tab.png" alt="ES cloudflare_speed_tab.png" /></dd>
-</dl>
-</li>
-<li>En el menú de la parte izquierda, haz clic en la pestaña <span class="text-object">Speed</span> y luego a <span class="text-object">Optimización</span>.
-<dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-cloudflare_auto_minify.png" alt="ES cloudflare_auto_minify.png" /></dd>
-</dl>
-</li>
-<li>Baja hasta la sección titulada <span class="text-section">Minificador automático</span>. Desmarca la opción 'HTML'.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-cloudflare_caching_tab.png" alt="ES cloudflare_caching_tab.png" /></dd>
-</dl>
-</li>
-<li>A continuación, haz clic en la pestaña <span class="text-object">Caching</span> y luego <span class="text-object">COnfiguración</span> del menú izquierdo.
-<dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-cloudflare_purge_everything.png" alt="ES cloudflare_purge_everything.png" /></dd>
-</dl>
-</li>
-<li>En la primera sección, haz clic en el botón&nbsp;<strong>Purgar todo</strong>.</li>
-<li>Espera al menos 30 segundos, luego prueba tu caché nuevamente en WordPress. Esta vez debería mostrar que las marcas de tiempo coinciden.</li>
-</ol>
-</div>
-<h2>Cambiar el tipo de almacenamiento en caché</h2>
-<div class="solvvy-solution">
-<p>Haz clic en la pestaña <span class="text-object">Avanzado</span> para ver los diferentes tipos de almacenamiento en caché. WP Super Cache admite dos modos:</p>
-<ul>
-<li>Simple</li>
-<li>Expert (mod_rewrite)</li>
-</ul>
-<p>Puedes cambiarlos en la pestaña <span class="text-object">Advanced Settings</span>:</p>
-<dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-11_WP_Super_Cache.fw.png" alt="ES 11 WP Super Cache.fw.png" /></dd>
-</dl>
-<p>Hay pros y contras para cada opción. Si el rendimiento es una prioridad o si tu contenido no se actualiza con tanta frecuencia, usa el modo 'Expert' (mod_rewrite) que acelera el tiempo hasta el primer byte (TTFB) por orden de magnitud. Esto se debe a que no tiene que buscar controladores PHP adicionales para analizar el archivo en caché. En cambio, escribe el contenido como HTML sin formato y luego sirve el HTML por sí mismo.</p>
-<p>Si estás usando Nginx, usa el modo 'Simple' en su lugar.</p>
-</div>
-<h2>Hacer que WP Super Cache funcione con Nginx</h2>
-<div class="solvvy-solution">
-<p>Puedes encontrar tu archivo <span class="text-object">wordpress.conf</span> en tu servidor Nginx en el siguiente directorio. Cambia <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> a tu sitio website.</p>
-<div class="preboxcontainer">
-<pre class="prebox">/home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/wordpress.conf</pre>
-</div>
-Las siguientes líneas son solo un fragmento de un archivo completo de <span class="text-object">wordpress.conf</span>.
-<div class="preboxcontainer">
-<pre class="prebox">###### rest of wordpress.conf above...
-###
-# only rewrite to the supercache file if it actually exists
-if (-f $document_root$supercache_file) {
-  rewrite ^(.*)$ $supercache_file break;
-}
-
-### stats
-if ($request_uri ~* ^/(stats|doc|failed_auth\.html).*$) {
-  break;
-}
-
-# all other requests go to WordPress
-if (!-e $request_filename) {
-  rewrite ^.*$ /index.php last;
-}</pre>
-</div>
-<p>Revisa el siguiente artículo para obtener más información sobre el uso de WordPress con Nginx:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214824958--C%C3%B3mo-hacer-que-las-estad%C3%ADsticas-y-los-enlaces-permanentes-funcionen-con-WordPress-y-Nginx" target="_self">Cómo hacer que las estadísticas y los enlaces permanentes funcionen con WordPress y Nginx</a></li>
-</ul>
 </div>
 <div id="eliminar_el_cache" class="section-link">&nbsp;</div>
 <h2>Eliminar el caché</h2>
 <div class="solvvy-solution">
-<p>Si es necesario, puedes eliminar tu caché almacenado en el panel de WordPress.</p>
+<p>Para eliminar tu caché almacenado:</p>
 <ol>
-<li>Inicia sesión en tu panel de WordPress.
+<li>Abre el <a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress">panel administrador de WordPress</a>.
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-wordpress-supercache_01.png" alt="ES wordpress-supercache_01.png" /></dd>
 </dl>
 </li>
-<li>Desplázate sobre 'Settings' y elige 'WP Super Cache'.
+<li>Navega a la sección <span class="text-section">Ajustes &gt; WP Super Cache</span>.
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-wordpress-supercache_02.png" alt="ES wordpress-supercache_02.png" /></dd>
 </dl>
 </li>
-<li>Desplázate hacia abajo y haz clic en el botón&nbsp;<strong>Delete Cache</strong>.</li>
+<li>Desplázate hacia abajo y haz clic en el botón <strong>Vaciar el caché</strong>.</li>
 </ol>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
 <h3>Enlaces internos</h3>
 <ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/12966944968724-Configurar-WP-Super-Cache" target="_blank" rel="noopener">Configurar WP Super Cache </a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress">Cómo iniciar sesión en tu sitio WordPress</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215525287-Generalidades-sobre-WordPress">Generalidades WordPress</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-plugins-de-WordPress">Administrar plugins de WordPress</a></li>

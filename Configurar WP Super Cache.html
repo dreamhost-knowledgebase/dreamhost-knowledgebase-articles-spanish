@@ -1,0 +1,170 @@
+<div id="auto-toc">&nbsp;</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Luego de que <a href="https://help.dreamhost.com/hc/es/articles/214588698-Instalar-WP-Super-Cache" target="_blank" rel="noopener noreferrer">instales WP Super Cache</a>, puedes usar la siguiente información para optimizar más el plugin.</p>
+</div>
+<h2>Configurar el plugin WP Super Cache</h2>
+<div class="solvvy-solution">
+<p>Para configurar el plugin WP Super Cache:</p>
+<ol>
+<li>Navega a la sección <span class="text-section">Ajustes &gt; WP Super Cache</span> de tu <a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress">panel administrativo de WordPress</a>.</li>
+<li>Abre la pestña <span class="text-object">Advanced</span> en la página de configuraciones de WP Super Cache y asegúrate de que las siguientes opciones estén seleccionadas/habilitadas:
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/wp-admin-wp-super-cache-advanced-tab.png" alt="wp-admin-wp-super-cache-advanced-tab.png" /></dd>
+</dl>
+<ul>
+<li><strong>Caching</strong>: Habilita el caché</li>
+<li><strong>Cache Delivery Method</strong>: Experto</li>
+<ul>
+<li>Esta opción agrega reglas al archivo <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a> del sitio.</li>
+</ul>
+<li><strong>Miscellaneous / Cache Restrictions</strong>:</li>
+<ul>
+<li>Deshabilita el caché para los visitantes que hayan iniciado sesión.</li>
+<li>No hace cachpe a las páginas con parámetros GET.</li>
+<li>Comprime las páginas para que carguen más rápido a los visitantes.</li>
+<li>Cache reconstruido.</li>
+</ul>
+<li><strong>Advanced</strong></li>
+<ul>
+<li>Hace verificaciones adicionales de la página de inicio.</li>
+</ul>
+</ul>
+</li>
+<li>Da clic al botón <strong>Update Status</strong>, el cual refresca la página.</li>
+<li>Baja a la sección <span class="text-object">Rejected URL Strings</span> y asegúrate de que las siguientes exclusiones se incluyan dentro de la caja de texto:
+<div class="preboxcontainer">
+<pre class="prebox">wp-.*\.php
+index\.php
+/store
+/cart
+/checkout
+/my-account
+/feed
+/addons
+/administrator
+/resetpass
+/register
+/login
+/mepr
+/account
+/thank-you
+/ref</pre>
+</div>
+</li>
+<li>Da clic al botón <strong>Save Strings</strong> y espera a que la página se refresque.</li>
+<li>Abre la pestaña <span class="text-object">Sencillo</span>&nbsp;y baja a la sección <strong>Cache Tester</strong>.</li>
+<li>Da clic al botón <strong>Probar caché</strong> y espera los resultados.</li>
+</ol>
+<p>Aparece la siguiente página, la cual indica que los ajustes han sido configurados correctamente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">The timestamps on both pages match!</pre>
+</div>
+</div>
+<h2>Verificar que WP Super Cache esté funcionando</h2>
+<div class="solvvy-solution">
+<p>Para probar WP Super Cache:</p>
+<ol>
+<li>Abre la página de administración de WP Super Cache y da clic en la pestaña <span class="text-object">Sencillo</span>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-09_WP_Super_Cache.fw.png" alt="ES 09 WP Super Cache.fw.png" /></dd>
+</dl>
+</li>
+<li>Da clic al botón <strong>Probar caché</strong>, el cual prueba si WP Super Cache está funcionando.
+<dl>
+<dd><em>Aparece el siguiente mensaje cuando le das clic al botón <strong>Probar caché</strong>:</em></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-10_WP_Super_Cache.fw.png" alt="ES 10 WP Super Cache.fw.png" /></dd>
+</dl>
+</li>
+</ol>
+<div id="timestamp_error" class="section-link">&nbsp;</div>
+<h3 class="subtoc-heading">Timestamps differ or were not found error</h3>
+<p>Puede que veas el siguiente error cuando pruebes tu caché:</p>
+<div class="preboxcontainer">
+<pre class="prebox">The pages do not match! Timestamps differ or were not found!</pre>
+</div>
+<p>Este es un inconveniente de minificación de Cloudflare y ocurre cuando has habilitado Cloudflare en tu dominio.</p>
+<p>Para corregirlo:</p>
+<ol>
+<li>Inicia sesión en tu <a href="https://dash.cloudflare.com/login">cuenta de Cloudflare</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-cloudflare_speed_tab.png" alt="ES cloudflare_speed_tab.png" /></dd>
+</dl>
+</li>
+<li>En el menú izquierdo, da clic a la pestaña <span class="text-object">Speed</span> y luego a <strong>Optimización</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-cloudflare_auto_minify.png" alt="ES cloudflare_auto_minify.png" /></dd>
+</dl>
+</li>
+<li>Baja a la sección <span class="text-object">Minificador automático</span> y desmarca la opción <strong>HTML</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-cloudflare_caching_tab.png" alt="ES cloudflare_caching_tab.png" /></dd>
+</dl>
+</li>
+<li>Abre la pestaña <span class="text-object">Almacenamiento en caché</span> y luego da clic a <strong>Configuración</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-cloudflare_purge_everything.png" alt="ES cloudflare_purge_everything.png" /></dd>
+</dl>
+</li>
+<li>En la primera sección, da clic al botón <strong>Purgar todo</strong>.</li>
+<li>Espera al menos 30 segundos y luego prueba tu caché nuevamente en WordPress. Debería mostrar ahora la coincidencia en las de marcas de tiempo.</li>
+</ol>
+</div>
+<h2>Cambiar el tipo de caché</h2>
+<div class="solvvy-solution">
+<p>Abre la pestaña <span class="text-object">Advanced</span> para ver los varios tipos de caché. WP Super Cache soporta dos modos:</p>
+<ul>
+<li>Simple</li>
+<li>Expert (mod_rewrite)</li>
+</ul>
+<p>Puedes cambiar estas configuraciones en la pestaña <span class="text-object">Advanced</span>.</p>
+<p>Hay ventajas y desventajas para cada opción: si el rendimiento es una prioridad o si tu contenido no se actualiza con tanta frecuencia, usa la opción <strong>Expert (mod_rewrite)</strong>, el cual acelera el tiempo hasta el primer byte (TTFB) en órdenes de magnitud. Esto se debe a que no tiene que buscar controladores de PHP adicionales para analizar el archivo almacenado en caché. En su lugar, escribe el contenido como HTML sin formato y luego sirve el HTML por sí mismo.</p>
+<p>Si no estás usando Nginx, usa la opción <strong>Simple</strong> en vez.</p>
+</div>
+<h2>Hacer que WP Super Cache funcione con Nginx</h2>
+<div class="solvvy-solution">
+<p>Puedes encontrar el archivo <span class="code">wordpress.conf</span> en tu servidor Nginx en el siguiente directorio. Cambia el usuario a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH-">usuario Shell</a> y <span class="code">example.com</span> a tu sitio web:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/wordpress.conf</pre>
+</div>
+<p>Lo siguientes son unos fragmentos de un archivo <span class="code">wordpress.conf</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">###### rest of wordpress.conf above...
+###
+# only rewrite to the supercache file if it actually exists
+if (-f $document_root$supercache_file) {
+  rewrite ^(.*)$ $supercache_file break;
+}
+
+### stats
+if ($request_uri ~* ^/(stats|doc|failed_auth\.html).*$) {
+  break;
+}
+
+# all other requests go to WordPress
+if (!-e $request_filename) {
+  rewrite ^.*$ /index.php last;
+}</pre>
+</div>
+<p>Revisa el siguiente artículo para más información sobre el uso de WordPress con Nginx:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214824958--C%C3%B3mo-hacer-que-las-estad%C3%ADsticas-y-los-enlaces-permanentes-funcionen-con-WordPress-y-Nginx">Cómo hacer que las estadísticas y los enlaces permanentes funcionen con WordPress y Nginx</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214588698-Instalar-WP-Super-Cache">Instalar WP Super Cache</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress">Cómo iniciar sesión en tu sitio WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215525287-Generalidades-de-WordPress">Generalidades de WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-los-plugins-de-WordPress">Administrar los plugins de WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214586538-Opciones-de-cach%C3%A9-para-WordPress">Opciones de caché para WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300867-T%C3%A9cnicas-generales-de-optimizaci%C3%B3n-en-WordPress">Técnicas generales de optimización en WordPress</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="https://odd.blog/wp-super-cache/">WP Super Cache Homepage</a></li>
+<li><a href="https://es.wordpress.org/plugins/wp-super-cache/">Listado de WP Super Cache de WordPress.org</a></li>
+</ul>
+</div>
