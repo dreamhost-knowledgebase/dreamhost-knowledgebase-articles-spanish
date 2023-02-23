@@ -1,94 +1,98 @@
+<div id="auto-toc">&nbsp;</div>
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
+<p>Este artículo explica cómo eliminar WordPress si fue instalado usando el <a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-instalador-de-WordPress-de-DreamHost" target="_self">instalador de WordPress de DreamHost</a> en el panel.</p>
 <div class="alert-warning">
-<p>NO uses estos pasos si simplemente deseas desactivar las actualizaciones automáticas de WordPress, ya que estas instrucciones eliminarán tu contenido. Consulta el siguiente artículo si deseas desactivar las actualizaciones automáticas para tu sitio de WordPress:</p>
+<p><strong>Estas instrucciones eliminarán el contenido de tu sitio web</strong>. Revisa el siguiente artículo en vez si solamente quieres desactivar las actualizaciones automáticas de WordPress:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215300747-Actualizaciones-autom%C3%A1ticas-para-las-instalaciones-de-WordPress-de-DreamHost">Actualizaciones automáticas para las instalaciones de WordPress de DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300747-Actualizaciones-autom%C3%A1ticas-para-las-instalaciones-de-WordPress-de-DreamHost" target="_self" rel="undefined">Actualizaciones automáticas para las instalaciones de WordPress de DreamHost</a></li>
 </ul>
 </div>
-<p>Este artículo explica cómo eliminar WordPress instalado a través del instalador de WordPress de DreamHost en el panel.</p>
 </div>
-<h2>¿Qué se elimina en el servidor?</h2>
+<h2>¿Qué se elimina del servidor?</h2>
 <div class="solvvy-solution">
-<p>Cuando eliminas una instalación de WordPress de DreamHost, se pueden eliminar varios archivos dependiendo de dónde se encuentre la instalación. Asegúrate de leer los ejemplos a continuación antes de eliminar la instalación de WordPress de DreamHost.</p>
-<h3>Si tu instalación está en el directorio web principal</h3>
-<p>El directorio web principal de tu sitio es el directorio que el servidor busca para servir archivos. Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-Sitio-Web-y-Hosting" target="_self">Agregar un Sitio Web y Hosting</a>.&nbsp;El paso 4 muestra dónde se encuentra el directorio web. También puedes visitar la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.installer&amp;" target="_blank" rel="noopener noreferrer">Instalar WordPress</a></p>
-<p>Haz clic en el botón <strong>Administrar mis aplicaciones</strong>.</p>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel_oneclicks_manage_apps_button.png" alt="Maname my apps button" /></dd>
-</dl>
-<p>Luego haz clic en el nombre de tu sitio web. Mostrará una barra diagonal al lado del ícono instalar WordPress de DreamHost.</p>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel_oneclicks_remove_01.png" alt="Install root directory" /></dd>
-</dl>
-<div class="notebox-note">
-<p>Cuando se le da clic, el botón <span class="text-object">Quitar de la Lista</span> desactiva una Instalación de WordPress de DreamHost y lo elimina de la lista. NO elimina ningún archivo.</p>
-</div>
-<p>En general, este directorio es el nombre de tu sitio web. Por ejemplo, si tu sitio se llama <strong>example.com</strong>, tu directorio web también sería <span class="text-object">/home/username/example.com</span>. Esto significa que cuando visitas tu sitio en <strong>example.com</strong>, estás viendo la instalación de WordPress de DreamHost.</p>
-<div class="notebox-important">
-<p>Si aquí es donde instalaste tu aplicación de WordPress de DreamHost, ten mucho cuidado al eliminarlo en el panel. Si eliminas la aplicación de WordPress de DreamHost almacenada en tu directorio web principal, TODOS LOS ARCHIVOS en el directorio web y todos los subdirectorios se eliminan. Esto significa que si tienes subdirectorios como <span class="text-object">example.com/<strong>images</strong></span> o <span class="text-object">example.com/<strong>blog</strong></span>, también se eliminan.</p>
-<p>Asegúrate de usar esta opción solo si deseas que todo se elimine de tu sitio web y servidor, incluidos todos los demás archivos de este directorio web. Si necesitas alguno de esos archivos o subdirectorios, asegúrate de hacer una copia de seguridad antes de eliminar la instalación de WordPress de DreamHost.</p>
+<p>Se pueden eliminar varios archivos dependiendo de dónde esté instalado WordPress dentro de tu sitio web. Por ejemplo, se podría instalar en:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215768237-Respaldar-la-informaci%C3%B3n-de-un-sitio-web-manualmente" target="_self">Respaldar la información de un sitio web manualmente </a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215089918-Respaldar-una-cuenta-en-el-panel" target="_self">Respaldar una cuenta en el panel </a></li>
+<li>El directorio web Principal (<strong>example.com</strong>)</li>
+<li>En un Subdirectorio (<span class="text-object">example.com</span><strong>/blog</strong>)</li>
+</ul>
+<p>Asegúrate de leer las siguientes secciones antes de eliminar tu instalación de WordPress.</p>
+</div>
+<h2>Confirma dónde está instalado WordPress</h2>
+<div class="solvvy-solution">
+<p>Para confirmar dónde está instalado WordPress en tu sitio web:</p>
+<ol>
+<li>Navega a la página <a class="panel-link">Instalar WordPress</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-button-wordpress-manage-my-apps.png" alt="ES Manage my apps button" width="257" height="56" /></dd>
+</dl>
+</li>
+<li>Da clic en <strong>Gestionar mis Aplicaciones</strong>.</li>
+<li>Da clic a tu sitio web.</li>
+</ol>
+<h3 class="subtoc-heading">El directorio principal</h3>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-wordpress-delete-install.png" alt="ES panel-wordpress-delete-install.png" /></dd>
+</dl>
+<p>Si está ubicado en el directorio web principal, verás una barra inclinada junto al icono de WordPress.</p>
+<p>El <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-del-sitio-web" target="_self">directorio principal del sitio web</a> es el directorio desde del que tu sitio web carga archivos primero. En general, este directorio es el nombre de tu sitio. Por ejemplo, si tu sitio se llama <strong>example.com</strong>, el directorio web sería <span class="text-object">/home/username/example.com</span> también.</p>
+<div class="alert-warning">
+<p>Si aquí es donde instaló tu instalación de WordPress de DreamHost, <strong>ten mucho cuidado</strong> cuando la elimines en el panel. Si eliminas la instalación de WordPress de DreamHost almacenada en tu directorio web principal, <strong>TODOS LOS ARCHIVOS</strong> en el directorio web y todos los subdirectorios se eliminan. Esto quiere decir que si tienes subdirectorios como <span class="text-object">example.com<strong>/images</strong></span> o <span class="text-object">example.com<strong>/blog</strong></span>, también se eliminarán.</p>
+<p>Asegúrate de usar esta opción solo si quieres que <strong>todo</strong> se elimine de tu sitio web incluyendo todos los demás archivos en este directorio web. Si necesitas alguno de esos archivos o subdirectorios, asegúrate de hacer una copia de seguridad antes de eliminar la instalación de WordPress de DreamHost.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215768237-Respaldar-la-informaci%C3%B3n-de-un-sitio-web-manualmente">Respaldar la información de un sitio web manualmente</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089918-Respaldar-una-cuenta-en-el-panel">Respaldar una cuenta en el panel</a></li>
 </ul>
 </div>
-<h3>Si tu instalación está en un subdirectorio</h3>
-<p>Si tu instalación está en un subdirectorio como <strong>example.com/blog</strong>, solo se eliminan los archivos dentro de ese subdirectorio.</p>
+<h3 class="subtoc-heading">Un subdirectorio</h3>
+<p>Si WordPress está ubicado en un subdirectorio, ser mostrará una barra inclinada seguido del nombre del subdirectorio.</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel_oneclicks_remove_02.png" alt="Subdirectory install" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-wordpress-delete-install-subdirectory.png" alt="ES panel-wordpress-delete-install-subdirectory.png" /></dd>
 </dl>
-<div class="notebox-note">
-<p>Cuando se le da clic, el botón <span class="text-object">Quitar de la Lista</span> desactiva una Instalación de WordPress de DreamHost y lo elimina de la lista. NO elimina ningún archivo.</p>
+<p>Eliminar una instalación en un subdirectorio solo eliminará los archivos dentro de ese subdirectorio específico. Por ejemplo, si tu sitio estaba en <strong>example.com/blog</strong>, solo los archivos dentro de ese subdirectorio <span class="text-object">/blog</span> son eliminados, sin embargo, el directorio vacío <span class="text-object">/blog</span> se mantendrá. No se eliminan archivos por encima de este directorio, por lo que cualquier cosa dentro del directorio <span class="text-object">/example.com</span> no se tocará.</p>
 </div>
-<p>Por ejemplo, si tu sitio era <strong>example.com/blog</strong>, solo se eliminarán los archivos dentro de ese subdirectorio <span class="text-object">/blog</span>. Sin embargo, el directorio vacío <span class="text-object">/blog</span> permanecerá. No se tocan archivos encima de este directorio, por lo que queda todo dentro del directorio <span class="text-object">/example.com</span>.</p>
+<h2>La diferencia entre Eliminar y Quitar</h2>
+<div class="solvvy-solution">
+<h3 class="subtoc-heading">Quitar de la Lista</h3>
+<p>Dando clic al botón <strong><span class="text-object">Quitar de la Lista</span></strong> desactiva una instalación de WordPress de DreamHost para que DreamHost ya no la administre. Si deseas continuar usando esta instalación de WordPress, serás responsable de mantenerla actualizada.</p>
+<p>Esta opción lo quita de la lista, pero NO elimina ningún archivo.</p>
 </div>
-<h2>Eliminar una instalación de WordPress de DreamHost</h2>
+<h3 class="subtoc-heading">Eliminar todos los archivos</h3>
+<p>Dando clic al botón <strong>Eliminar todos los Archivos</strong> elimina todo en el directorio de instalación de WordPress y lo elimina del panel. Solo usa esta opción si quieres que <strong>TODO</strong> el contenido dentro de tu instalación de WordPress se elimine como se menciona arriba.</p>
+<p>Asegúrate de respaldar de los datos que no deseas que se eliminen antes de hacer clic en este botón.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215768237-Respaldar-la-informaci%C3%B3n-de-un-sitio-web-manualmente">Respaldar la información de un sitio web manualmente</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089918-Respaldar-una-cuenta-en-el-panel">Respaldar una cuenta en el panel</a></li>
+</ul>
+<h2>Eliminar una instalación de WordPress</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.installer&amp;" target="_blank" rel="noopener noreferrer">Instalar WordPress</a>.
+<li>Navega a la página <a class="panel-link">Instalar WordPress</a>.
 <dl>
-<dd><em>Se abre la página <span class="panel-page">Instalar WordPress</span>:</em></dd>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel_oneclicks_manage_apps_button.png" alt="Manage my apps button" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-button-wordpress-manage-my-apps.png" alt="ES Manage my apps button" width="262" height="58" /></dd>
 </dl>
 </li>
-<li>Haz clic en el botón <strong>Administrar mis aplicaciones</strong>.</li>
-<li>Haz clic en el dominio que está usando la aplicación para expandirlo.<br />
+<li>Da clic a <strong>Gestionar mis Aplicaciones</strong>.</li>
+<li>Da clic a tu sitio web.</li>
+<li>Haz clic en el botón <strong>Eliminar todos los archivos</strong>.
 <dl>
-<dd><em>Se muestran bajo el dominio todas las aplicaciones instaladas de WordPress de DreamHost.</em></dd>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel_oneclicks_remove_03.png" alt="Remove install 03" /></dd>
+<dd><em>Aparece un mensaje de advertencia después de hacer clic en Eliminar todos los archivos:</em></dd>
 </dl>
 </li>
-<li>Haz clic en el botón <strong>Borrar todos los archivos</strong>&nbsp;que se encuentra a la derecha.<br />
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel_oneclicks_remove_04.png" alt="Remove install 04" /></dd>
-<dd><em>Aparece un mensaje de advertencia después de hacer clic en Borrar todos los archivos:</em></dd>
-</dl>
-</li>
-<li>Haz clic en <strong>Ok</strong> para confirmar y espera que la desinstalación se complete. Un mensaje que dice 'Éxito' se mostrará cuando la aplicación sea eliminada:<br />
-<div class="notebox-note">
-<ul>
-<li>Después de desinstalar la aplicación, ya no se muestra en la página Administrar Aplicaciones.</li>
-<li>Si aún aparece en la lista, haz clic en el botón <strong>Quitar de la lista</strong>.</li>
-</ul>
-</div>
-</li>
+<li>Da clic en <strong>Aceptar</strong> para confirmar.</li>
 </ol>
 </div>
-<h2>¿Cómo eliminar la base de datos?</h2>
+<h2>Eliminar la base de datos</h2>
 <div class="solvvy-solution">
-<p>Cuando haces clic en el botón <strong>Borrar todos los archivos</strong>, solo los archivos en el servidor son eliminados. Tu base de datos de WordPress sigue en tu panel. Para eliminar tu base de datos, navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener noreferrer">Bases de Datos MySQL</a>. Hacia la derecha de la respectiva base de datos, haz clic en el botón <strong>Eliminar BD</strong>.</p>
+<p>Cuando das clic en <strong>Eliminar todos los archivos</strong>, solo se eliminan los archivos del servidor web. Tu base de datos de WordPress permanece intacta en el panel. Para eliminar la base de datos:</p>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener noreferrer">Bases de Datos MySQL</a>.</li>
+<li>A la derecha de tu base de datos, da clic al botón <strong>Eliminar DB</strong>.</li>
+</ol>
 </div>
-<h2>¿Qué sucede si no se muestra el botón Eliminar?</h2>
-<div class="solvvy-solution">
-<p>Si encuentras que el botón <strong>Eliminar</strong> no se muestra en tu panel junto a la instalación de WordPress de DreamHost, contacta a soporte para obtener más ayuda.</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">Generalidades sobre contactar el equipo de Soporte.</a></li>
-</ul>
-</div>
-<h2>Ver también</h2>
+<h2><span id="Ver_también">Ver también</span></h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-instalador-de-WordPress-de-DreamHost" target="_self">Instalar WordPress usando el instalador de WordPress de DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-instalador-de-WordPress-de-DreamHost" target="_self" rel="undefined">Instalar WordPress usando el instalador de WordPress de DreamHost</a></li>
 </ul>
 </div>
