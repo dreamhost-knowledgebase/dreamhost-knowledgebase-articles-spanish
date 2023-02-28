@@ -1,6 +1,6 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este artículo explica cómo instalar un nuevo sitio WordPress en tu panel usando el instalador de WordPress de DreamHost..</p>
+<p>Este artículo explica cómo instalar un nuevo sitio WordPress en tu panel usando el instalador de WordPress de DreamHost.</p>
 <div class="notebox-note">
 <p>Revisa el siguiente artículo si en vez necesitas migrar tu sitio existente de WordPress a DreamHost.</p>
 <ul>
@@ -15,35 +15,56 @@
 <p>Si deseas usar las funciones del instalador de WordPress de DreamHost con una instalación existente de WordPress, por favor <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">contacta a soporte</a> para hacer que conviertan tu instalación.</p>
 </div>
 </div>
-<h2 class="subheader">Antes de instalar</h2>
+<h2>Configurar el alojamiento</h2>
 <div class="solvvy-solution">
-<h3>Configurar el alojamiento</h3>
-<p>Para usar el instalador de WordPress de DreamHost, tu dominio primero debe estar <a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-Sitio-Web-y-Hosting" target="_self" rel="undefined">completamente alojado</a>.</p>
+<p>Para usar el instalador de WordPress de DreamHost, tu dominio primero debe estar <a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-Sitio-Web-y-Hosting" target="_self" rel="undefined"> Completamente Alojado</a>.</p>
 <p>Esto significa que no puede estar&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215909407#Redirect" target="_self">Redirigido, Reflejado, Parqueado, o configurado como Solo DNS</a>.</p>
-<h3>Revisa los archivos el directorio de tu sitio web</h3>
-<p>Antes de instalar WordPress, verifica qué archivos ya están en el directorio de tu sitio web.</p>
-<h3>Si hay archivos de WordPress existentes en el directorio del sitio web</h3>
-<p>Si ya hay archivos de WordPress existentes, la instalación parará mostrando el siguiente mensaje.</p>
+</div>
+<h2>Revisar el directorio del sitio web antes de instalar</h2>
+<div class="solvvy-solution">
+<p>Antes de instalar WordPress, verifica qué archivos ya están en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-del-sitio-web" target="_self">directorio del sitio</a>. Puede que existan las siguientes tres configuraciones:</p>
+<ul>
+<li>WordPress ya se instaló usando el instalador de WordPress de DreamHost</li>
+<li>WordPress ya se instaló manualmente</li>
+<li>Hay archivos que no son de WordPress en el directorio</li>
+</ul>
+<h4><strong>Si WordPress ya fue instalado usando el instalador de WordPress de DreamHost</strong></h4>
+<p>Si instalaste WordPress previamente usando el <a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-instalador-de-WordPress-de-DreamHost" target="_self">instalador de WordPress de DreamHost</a>, la instalación parará mostrando el siguiente mensaje:</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-wordpress-installer-03.png" alt="ES Install WordPress error" width="324" height="89" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-wordpress-installer-04.png" alt="ES Install WordPress error" width="310" height="532" /></dd>
 </dl>
-<p>Debes eliminar cualquier archivo de WordPress existente del directorio del sitio web antes de instalar.</p>
-<h3>Si hay archivos que no son de WordPress en tu directorio</h3>
+<p>Debes ingresar:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215916107-Eliminar-una-instalaci%C3%B3n-de-WordPress-de-DreamHost" target="_self">Eliminar la instalación de WordPress de DreamHost</a> en el panel, o</li>
+<li>Instalar WordPress en un subdirectorio Install de ese sitio web</li>
+</ul>
+<h4><strong>Si instalaste WordPress previamente de forma manual</strong></h4>
+<p>Si subiste un sitio de WordPress de forma manual a tu servidor, no se mostrará en el panel. Sin embargo, dado que los archivos de WordPress existen en el directorio de tu sitio web, el instalador de WordPress de DreamHost agregará una marca de tiempo a los archivos antiguos. Por ejemplo:</p>
+<ul>
+<li><span class="text-object">index.php.1555975213</span></li>
+<li><span class="text-object">wp-login.php.1555975213</span></li>
+<li><span class="text-object">wp-settings.php.1555975213</span></li>
+</ul>
+<p>Los nuevos archivos del instalador de WordPress de DreamHost se usarán lugar de los archivos antiguos. A continuación, puedes eliminar los archivos antiguos siguiendo las instrucciones del siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360043577572-Eliminar-archivos-duplicados-en-la-instalaci%C3%B3n-de-WordPress-de-DreamHost">Eliminar archivos duplicados en la instalación de WordPress de DreamHost</a></li>
+</ul>
+<h4><strong>Si hay archivos en tu directorio que no son de WordPress</strong></h4>
 <p>Si hay archivos o directorios que no sean de WordPress, la instalación no los tocará. Los nuevos archivos de WordPress se instalarán junto con tus archivos existentes.</p>
 </div>
 <h2><span id="Instalar_Wordpress">Instalar WordPress</span></h2>
 <div class="solvvy-solution">
 <ol>
-<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.installer&amp;" target="_blank" rel="noopener noreferrer">Instalar WordPress</a>.
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.installer&amp;" target="_blank" rel="noopener noreferrer">Instalar WordPress</a>. page.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-wordpress-installer-01.png" alt="ES Install WordPress" width="301" height="290" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-wordpress-installer-01.png" alt="Install WordPress" width="301" height="290" /></dd>
 </dl>
 </li>
 <li>Selecciona tu dominio del menú desplegable.
 <div class="notebox-tip">
 <p><strong>Instalar en un subdirectorio</strong></p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-wordpress-installer-02.png" alt="ES Install WordPress" width="270" height="375" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-wordpress-installer-02.png" alt="Install WordPress" width="270" height="375" /></dd>
 </dl>
 <p>Si necesitas instalar WordPress en un subdirectorio como example.com/<strong>blog</strong>.</p>
 <ol>
@@ -55,14 +76,15 @@
 <li>Se recomienda que dejes el menú desplegable <span class="text-object">Seleccionar base de datos</span> como <span class="text-object">Crear Base de Datos Automáticamente</span>.
 <div class="notebox-note">
 <p>Si no deseas que se cree una nueva base de datos, puedes usar una base de datos existente que ya hayas creado en su panel. Haz clic en <span class="text-object">Avanzado</span> y selecciona tu base de datos del menú desplegable <span class="text-object">Seleccionar Base de Datos</span>.</p>
+<p>If you choose an existing database from the dropdown that contains a previous WordPress install, the current database tables will remain and the new WordPress tables will be installed alongside the existing tables.</p>
 </div>
 </li>
-<li>Da clic a <strong>Instalar Wordpress</strong>.</li>
+<li>Da clic en <strong>Instalar Wordpress</strong>.</li>
 <li>La siguiente página te permite seleccionar el propósito de un sitio para una instalación guiada de WordPress. Elegir una opción sugerirá plugins específicos para la instalación. Selecciona una opción (o Ninguna) y haz clic en <strong>Siguiente</strong>.</li>
 <li>La siguiente página muestra los plugins sugeridos específicos para el propósito del sitio que eligiste. Si no deseas que se instale un plugin, desmarca la casilla correspondiente.</li>
 <li>Da clic en <strong>Instalar</strong>.</li>
 </ol>
-<p>En 15 minutos, se te envía un correo a la dirección principal que figura en tu cuenta de DreamHost. Este correo detalla los pasos a seguir para completar la instalación.</p>
+<p>Dentro de 15 minutos, se te enviará un correo a la dirección principal que figura en tu cuenta de DreamHost. Este correo detalla los pasos a seguir para completar la instalación.</p>
 </div>
 <h2>Cómo iniciar sesión en tu sitio de WordPress</h2>
 <div class="solvvy-solution">
@@ -72,10 +94,10 @@
 <li>example.com<strong>/wp-login.php</strong></li>
 </ul>
 </div>
-<h2>Problemas de instalación</h2>
+<h2>Inconvenientes de instalación</h2>
 <div class="solvvy-solution">
 <p>Si la instalación se completa pero no recibes el correo con las instrucciones sobre cómo acceder a tu nueva instalación de WordPress, siempre puedes consultar tus <a href="https://help.dreamhost.com/hc/es/articles/360001331583-Ver-tickets-y-mensajes-de-DreamHost" target="_self">"Mensajes Recientes" en la página Contactar a Soporte</a>, y así obtener una copia archivada de ese correo.&nbsp;</p>
-<p>Si la instalación de WordPress de DreamHost no se completa en 20 minutos o falla con un error, <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">comunícate con Soporte</a>.</p>
+<p>Si la instalación de WordPress de DreamHost no se completa en 20 minutos o falla con un error, por favor <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">contacta a Soporte</a>.</p>
 <h3>El enlace de instalación no funciona</h3>
 <p>Un error 404 o "Site Not Found" puede aparecer en las nuevas configuraciones de WordPress cuando intentas ver el sitio después de cambiarlo desde otra opción de alojamiento (como espejo o redirección). En estos casos, el sitio aún se resuelve con los registros A antiguos de reflejo o redirección, en lugar de los nuevos registros A 'Completamente Alojado'. Afortunadamente, esto se resolverá una vez que se complete la propagación de DNS, suponiendo que el sitio esté usando los nameservers de DreamHost. Consulta el siguiente artículo para obtener más información sobre la propagación de DNS:</p>
 <ul>
