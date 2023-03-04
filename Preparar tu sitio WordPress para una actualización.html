@@ -1,97 +1,90 @@
 <div id="auto-toc">&nbsp;</div>
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<div class="notebox-important">
-<p>Siempre debes <a href="https://help.dreamhost.com/hc/es/articles/360001331703-Actualizar-tu-sitio-de-WordPress-a-la-%C3%BAltima-versi%C3%B3n-de-PHP">actualizar a la última versión de PHP</a> pues esta provee un mejor rendimiento y compatibilidad con las últimas versiones de WordPress.</p>
+<p>Este artículo describe cómo preparar tu sitio web WordPress para el lanzamiento de una próxima versión.</p>
+<h3>Actualizar la versión PHP de tu sitio</h3>
+<p>Se recomienda encarecidamente que <a href="https://help.dreamhost.com/hc/es/articles/360001331703-Actualizar-tu-sitio-de-WordPress-a-la-%C3%BAltima-versi%C3%B3n-de-PHP">actualices a la última versión de PHP</a> ya que proporciona un mejor rendimiento y compatibilidad con las últimas versiones de WordPress.</p>
+<div class="alert-warning">
+<p>No todos los temas y plugins de terceros se han actualizado para que sean compatibles con PHP 8. Si tu sitio se basa en un plugin o tema específico, asegúrate de verificar que sea compatible con PHP 8 antes de actualizar.</p>
 </div>
-<p>Lo siguiente describe como preparar tu sitio para los lanzamientos venideros de WordPress.</p>
 </div>
-<h2>Antecedentes</h2>
+<h2>Respalda tu sitio y su base de datos</h2>
 <div class="solvvy-solution">
-<p>Desde la versión 5.6, que se lanzó a fines de 2020, las nuevas instalaciones de WordPress se configuraron para actualizar automáticamente el software principal a la última versión disponible, ya sea mayor o menor, poco después de que esté disponible para su descarga.</p>
-<p>Esto significa que una gran cantidad de sitios de WordPress han recibido versiones importantes de su software principal de WordPress sin ningún problema durante un período de tiempo. Por lo tanto, puede estar seguro de que WordPress continuará funcionando como se espera cuando se realicen actualizaciones pendientes en tu sitio.</p>
-<p>Sin embargo, dada la gran cantidad de temas, plugins y otras personalizaciones que puede haber agregado a tu instalación de WordPress, hay una serie de variables que se deben tenerse en cuenta para asegurarte de que tu proceso de actualización se realice sin problemas.</p>
-</div>
-<h2>Respaldar tu sitio y base de datos</h2>
-<div class="solvvy-solution">
-<p>Antes de realizar cualquier actualización en tu sitio WordPress, DreamHost recomienda hacer una copia de seguridad de tu instalación de WordPress. A continuación se describe cómo hacer una copia de seguridad de tu sitio si fue instalado usando el <a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-instalador-de-WordPress-de-DreamHost" target="_self">instalador de WordPress de DreamHost</a> o DreamPress.</p>
+<p>Antes de hacer cualquier actualización en tu sitio WordPress, DreamHost recomienda hacer una copia de seguridad de tu instalación de WordPress. Los pasos son diferentes dependiendo de si tu sitio se instaló usando el <a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-instalador-de-WordPress-de-DreamHost" target="_self">instalador de WordPress de DreamHost</a> o <a href="https://help.dreamhost.com/hc/es/articles/214581158-Generalidades-de-DreamPress" target="_self">DreamPress</a>.</p>
 <h3 class="subtoc-heading">Instalación de WordPress de DreamHost</h3>
-<p>Si bien DreamHost no ofrece copias de seguridad a pedido en el panel de DreamHost para sitios de WordPress instalados a través del instalador de WordPress de DreamHost, hay dos opciones para asegurarse de tener una copia de seguridad antes de que ocurra una actualización:</p>
+<p>Hay dos opciones para respaldar un sitio de WordPress creado por el <a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-instalador-de-WordPress-de-DreamHost" target="_self">instalador de WordPress de DreamHost</a> en el panel.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215089888-Herramientas-de-respaldo-en-WordPress">Instalar un plugin de respaldo de WordPress</a> <em>(lo más fácil)</em></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215768237-Respaldar-la-informaci%C3%B3n-de-un-sitio-web-manualmente">Correr una copia de seguridad manual</a> <em>(avanzado — requiere usar la línea e iniciar sesión en tu sitio vía SSH)</em></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089888-Herramientas-de-respaldo-en-WordPress">Instalar un plugin de copias de seguridad de WordPress</a> <em>(el más fácil)</em></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215768237-Respaldar-la-informaci%C3%B3n-de-un-sitio-web-manualmente">Hacer una copia de seguridad manual</a> <em>(avanazdo — requiere usar la línea de comando e iniciar sesión en tu sitio vía SSH)</em></li>
 </ul>
-<p>Lo más importante aquí es asegurarse de que cualquier respaldo que realices se guarde en tu computador local o se cargue en un servicio Cloud como Google Drive o Dropbox. De esa manera, tendrás una copia de seguridad externa para restaurar en caso de que ocurra algo desafortunado en tu sitio durante el proceso de actualización.</p>
+<p>Cualquiera de las opciones le proporciona un respaldo fuera del sitio que te permite restaurar rápidamente tu sitio en caso de que ocurra un error durante el proceso de actualización.</p>
 <h3 class="subtoc-heading">DreamPress</h3>
-<p>Los usuarios de DreamPress tienen la capacidad de crear una copia de seguridad a pedido de un sitio de DreamPress. Revisa el siguiente artículo para obtener más información sobre cómo crear un respaldo de DreamPress:</p>
+<p>Los sitios web DreamPress tienen la capacidad de crear una copia de seguridad a pedido en el panel de DreamHost. Revisa el siguiente artículo para obtener instrucciones sobre cómo respaldar de tu sitio web DreamPress:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360001445126-Crear-y-restaurar-copias-de-seguridad-para-DreamPress">Crear y restaurar copias de seguridad para DreamPress</a></li>
 </ul>
 </div>
 <h2>Actualizar tus plugins</h2>
 <div class="solvvy-solution">
-<p>Una de las cosas que hacen que las actualizaciones automáticas de WordPress funcionen sin problemas es asegurarse de que los plugins desactualizados se hayan actualizado antes de que se publique la nueva versión de WordPress.</p>
-<p>Antes de los principales lanzamientos de WordPress, se contacta a los desarrolladores de plugins y se les pide que se aseguren de que su código sea compatible con los cambios que se están realizando en el software principal. Puedes notar una o dos semanas antes de una nueva versión que varios plugins y temas de tu sitio tienen actualizaciones disponibles. Esto generalmente se debe a que los desarrolladores están preparando sus plugins para una nueva versión.</p>
-<p>Afortunadamente, actualizar los plugins es tan simple como <a href="https://help.dreamhost.com/hc/es/articles/360001310966-Como-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress">iniciar sesión en tu sitio</a> y hacer algunas selecciones:</p>
+<p>Asegúrate de que los plugins estén actualizados antes de que se publique la nueva versión de WordPress. Puedes notar una o dos semanas antes de una nueva versión que varios plugins y temas de tu sitio tienen actualizaciones disponibles. Esto generalmente se debe a que los desarrolladores están preparando sus plugins para una nueva versión.</p>
+<p>Revisa el siguiente artículo para obtener instrucciones sobre cómo actualizar tus plugins:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-los-plugins-de-WordPress">Administrar los plugins de WordPress</a></li>
 </ul>
-<p>Si el plugin es parte de la funcionalidad principal de tu sitio (por ejemplo, WooCommerce, Easy Digital Downloads, Paid Memberships Pro, etc.), DreamHost sugiere que crees una copia de seguridad antes de actualizar (ver arriba). Sin embargo, si el plugin es un poco más básico (por ejemplo, Akismet, Smash Balloon, Site Kit, etc.), es posible que desees considerar <a href="https://wordpress.org/support/article/managing-plugins/#enable-automatic-plugin-update">habilitar actualizaciones automáticas de plugins</a>, para que tengas una cosa menos de la que preocuparte.</p>
+<h3 class="subtoc-heading">Actualizaciones de plugins manuales o automáticas</h3>
+<p>Si el plugin es parte de la funcionalidad central de tu sitio (por ejemplo, WooCommerce), DreamHost sugiere que crees una copia de seguridad antes de actualizar (ver arriba).</p>
+<p>Sin embargo, si el plugin es más básico (por ejemplo, Akismet), puedes considerar <a href="https://wordpress.org/support/article/managing-plugins/#enable-automatic-plugin-update" target="_blank" rel="noopener noreferrer">habilitar las actualizaciones de los plugins automáticamente</a> para asegurarte de que estén siempre en su última versión.</p>
 </div>
-<h2>Como probar una versión de WordPress lanzada previamente</h2>
+<h2>Usar un sitio de prueba o staging para probar la nueva versión</h2>
 <div class="solvvy-solution">
-<div class="notebox-note">
-<p>Los siguientes pasos solo son necesarios si hay una próxima versión de WordPress disponible que aún no se ha lanzado oficialmente y te gustaría probar.</p>
+<p>Si tu sitio depende de una funcionalidad esencial, como eCommerce o membresías, es mejor crear un sitio provisional para probar la nueva versión de WordPress antes de actualizar tu sitio en vivo.</p>
+<p>No es necesario hacer pruebas con el sitio provisional, pero es una forma segura de asegurate de que tu sitio seguirá funcionando correctamente antes de actualizar.</p>
+<h3 class="subtoc-heading">Configurar un sitio de prueba o staging</h3>
+<p><strong>Planes de alojamiento de DreamPress</strong></p>
+<p>Revisa el siguiente artículo para configurar un entorno de prueba para tu sitio DreamPress en el panel:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001265112-C%C3%B3mo-hacer-un-sitio-provisional-staging-en-DreamPress">Cómo hacer un sitio provisional (staging) en DreamPress</a></li>
+</ul>
+<p><strong>Todos los demás planes de alojamiento</strong></p>
+<p>Revisa el siguiente artículo para configurar un entorno de prueba si tu sitio de WordPress está alojado en un plan de alojamiento compartido, VPS o dedicado:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360003838631-Crear-un-sitio-provisional-staging-de-WordPress-">Crear un sitio provisional (staging) de WordPress</a></li>
+</ul>
+<p><strong>Opciones de plugins</strong></p>
+<p>Otra opción es usar un plugin como <a href="https://es.wordpress.org/plugins/migrate-guru/" target="_blank" rel="noopener noreferrer">Migrate Guru</a> para migrar los archivos y la base de datos de tu sitio a una instalación secundaria.</p>
 </div>
-<p>Si tu sitio aprovecha algún tipo de funcionalidad avanzada, como comercio electrónico o membresías, es mejor "probar" tu sitio con la nueva versión de WordPress antes de actualizar. Puedes crear un sitio provisional para lograr esto.</p>
-<p>Un sitio provisional es básicamente un entorno secundario en el que hace una copia de tu sitio actual. Luego puedes usar un plugin de prueba para probar los cambios (como plugins actualizados, nuevos diseños y software central actualizado) en tu sitio provisional antes de actualizar tu sitio en vivo.</p>
-Usar los sitios provisionales o staging es totalmente opcional, pero es una práctica recomendada importante para garantizar que todo se vea, funcione y se sienta bien antes de que se produzca la actualización.
-<h3 class="subtoc-heading">Configurar un sitio staging</h3>
-<p>Puedes configurar un entorno de staging según el tipo de plan de alojamiento en el que te encuentres actualmente.</p>
-<h4>DreamPress</h4>
-<p>Revisa el siguiente artículo para configurar rápidamente un ambiente provisional en DreamPress:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360001265112-Como-hacer-un-sitio-provisional-staging-en-DreamPress">Como hacer un sitio provisional (staging) en DreamPress</a></li>
-</ul>
-<h4>Todos los otros planes de alojamiento de DreamHost</h4>
-<p>Revisa el siguiente artículo para obtener más información sobre staging de los planes de alojamiento Shared, VPS y Dedicado, que es un poco más un proceso manual:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360003838631-Crear-un-sitio-provisional-de-WordPress-">Crear un sitio provisional (staging) de WordPress</a></li>
-</ul>
-<p>También puedes usar un plugin como <a href="https://wordpress.org/plugins/migrate-guru/">Migrate Guru</a> para mover los archivos y la base de datos de tu sitio a una instalación secundaria, lo que simplifica considerablemente el proceso.</p>
-<h3 class="subtoc-heading">Usar el plugin WordPress Beta Tester para probar tu sitio</h3>
-<p>Después de crear un sitio provisional, usa las siguientes instrucciones para probarlo.</p>
+<h2>Usas el plugin WordPress Beta Tester para probar la nueva versión</h2>
+<div class="solvvy-solution">
+<div class="notebox-tip">
+<p>Los siguientes pasos solo son necesarios si hay una próxima versión de WordPress disponible que aún no se haya lanzado oficialmente y que te gustaría probar.</p>
+</div>
+<p>Después de crear un sitio de prueba (como se mencionó anteriormente), usa las siguientes instrucciones para probar una versión preliminar de WordPress.</p>
 <ol>
-<li>Inicia sesión en tu sitio staging.</li>
-<li>Instala el plugin <a href="https://es.wordpress.org/plugins/wordpress-beta-tester/">WordPress Beta Tester</a>. Una vez activado, dirígete a <span class="text-object">Herramientas » Pruebas Beta</span> en el panel de WordPress y luego selecciona <span class="text-object">Desarrollo temprano</span>:
+<li>Inicia sesión en su sitio provisional.</li>
+<li>Instala el plugin <a href="https://es.wordpress.org/plugins/wordpress-beta-tester/" target="_blank" rel="noopener noreferrer">WordPress Beta Tester</a>.</li>
+<li>Navega a <span class="text-section">Herramientas &gt; Pruebas beta</span> y selecciona la opción <span class="text-object">Desarrollo temprano</span>.</li>
+<li>Da clic en <strong>Guardar cambios</strong>.</li>
+<li>Cuando la página cargue nuevamente, selecciona la opción <span class="text-object">Solo candidatas a definitivas</span>.</li>
+<li>Da clic en <strong>Guardar cambios</strong>.</li>
+<li>Navega a <span class="text-section">Escritorio &gt; Actualzaciones</span>.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-wp-admin-beta-tester-01.png" alt="ES wp-admin-beta-tester-01.png" /></dd>
-</dl>
-</li>
-<li>Da clic en <strong>Guardar cambios</strong> y luego selecciona la opción <span class="text-object">Solo candidatas a definitivas</span> cuando la página se recargue:
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-wp-admin-beta-tester-02.png" alt="ES wp-admin-beta-tester-02.png" /></dd>
-</dl>
-</li>
-<li>Da clic en <strong>Guardar cambios</strong> nuevamente y luego dirígete a la página <span class="text-object">Escritorio » Actualizaciones</span>.
-<dl>
-<dd><em>Cuando esté disponible un Candidatas a definitivas (RC) de la próxima versión de WordPress, podrás actualizar tu sitio provisional</em></dd>
+<dd><em>Cuando esté disponible un Candidato de Lanzamiento (RC) de la próxima versión de WordPress, podrás actualizar tu sitio provisional en esta página:</em></dd>
 </dl>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-wp-admin-beta-tester-03.png" alt="ES wp-admin-beta-tester-03.png" /></dd>
-</dl>
+<dd>
 <div class="notebox-note">
-<p>Candidatas a definitivas son copias de "vista previa" efectivas de WordPress que están listas para su lanzamiento siempre que no haya errores importantes o que rompan el sitio.</p>
+<p>Los Candidato de Lanzamiento son efectivamente copias de "vista previa" de WordPress que están listas para lanzarse siempre que no haya errores importantes o que rompan el sitio.</p>
 </div>
+</dd>
+</dl>
 </li>
-<li>Una vez que tu sitio staging esté en Candidatas a definitivas más reciente, asegúrate de que todo sea completamente funcional. Aquí hay algunas cosas para verificar:
+<li>Una vez que tu sitio de prueba esté en el Candidato de Lanzamiento más reciente, asegúrate de que todo sea completamente funcional. Aquí hay algunas cosas para verificar:
 <ul>
-<li>¿Se siguen mostrando todas las páginas como deberían?</li>
-<li>¿Ocurre algo inesperado cuando navegas o intentas crear contenido nuevo?</li>
-<li>Si ejecutas un sitio de comercio electrónico, ¿aún puedes agregar productos al carrito y pagar?</li>
+<li>¿Todas las páginas se muestran como deberían?</li>
+<li>¿Sucede algo inesperado cuando navegas o intentas crear nuevo contenido?</li>
+<li>Si usas un sitio eCommerce, ¿aún puedes agregar productos al carrito y pagar?</li>
 </ul>
 </li>
 </ol>
-<p>Si algo no aparece o no funciona como esperabas, ten en cuenta lo que está fallando y comunícate con el desarrollador de cualquier plugin o tema que tengas problemas. Es posible que ya tengan una actualización pendiente que solucione lo que estás viendo. O, si no es así, es posible que haya encontrado algo que se puede arreglar rápidamente y evitará que muchos otros usuarios tengan una mala experiencia de actualización.</p>
-<p>También puedes contactar al <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">soporte de DreamHost</a> si tienes preguntas sobre tu experiencia con WordPress.</p>
+<p>Si algo no funciona como se esperaba, anota lo que está fallando y comunícate con el desarrollador del plugin o tema específico, ya que es posible que ya tenga una actualización pendiente que solucione tu problema.</p>
 </div>
