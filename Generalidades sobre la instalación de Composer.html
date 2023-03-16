@@ -1,8 +1,5 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<div class="notebox-important">
-<p>Para poder correr Composer debes tener un <a href="/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-" target="_self">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">Servidor Dedicado</a> debido a la cantidad de recursos que requiere.</p>
-</div>
 <p>Composer es una herramienta de gestión de dependencias para proyectos PHP. Te permite declarar las bibliotecas que tu proyecto requiere y las instala/actualiza por ti.</p>
 <p>Está implementado como un archivo PHAR (PHP Archive). Phar está habilitado de manera predeterminada en tu servidor de DreamHost. Lo puedes confirmar al ejecutar el siguiente comando por&nbsp;<a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>:</p>
 <div class="preboxcontainer">
@@ -51,7 +48,10 @@ Phar</pre>
 </li>
 <li>Si funciona, verás el siguiente mensaje:
 <div class="preboxcontainer">
-<pre class="prebox">#!/usr/bin/env php All settings correct for using Composer Downloading... Composer successfully installed to: /home/username/example.com/project/composer.phar 
+<pre class="prebox">#!/usr/bin/env php All settings correct for using Composer
+Downloading... 
+
+Composer successfully installed to: /home/username/example.com/project/composer.phar 
 
 Use it: php composer.phar
 </pre>
@@ -88,7 +88,7 @@ Use it: php composer.phar
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">php -r "readfile('https://getcomposer.org/installer');" | php</span></pre>
 </div>
 </li>
-<li>Revisa el artículo&nbsp;<a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">crear y editar un archivo por SSH</a> para que encuentres instrucciones sobre cómo editar tu archivo existente <span class="text-object">.bash_profile</span>. Luego agrega la siguiente ruta para el archivo <span class="text-object">composer.phar</span>.
+<li>Revisa el artículo&nbsp;<a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">crear y editar un archivo por SSH</a> para que encuentres instrucciones sobre cómo editar tu archivo existente <span class="text-object">.bash_profile</span> ubicado en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_blank" rel="noopener">directorio home de tu usuario</a>. Agrega lo siguiente al archivo <span class="text-object">composer.phar</span>.
 <div class="preboxcontainer">
 <pre class="prebox">export PATH=/home/<span class="code-highlight">username</span>/.php/composer:$PATH</pre>
 </div>
@@ -129,9 +129,9 @@ Use it: php composer.phar
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">php -v</span></pre>
 </div>
-<p>A continuación, revisa el archivo <span class="text-object">phprc</span> correspondiente a esa versión. Por ejemplo, si tu shell usa PHP 7.4, ejecuta el siguiente comando:</p>
+<p>A continuación, revisa el archivo <span class="text-object">phprc</span> correspondiente a esa versión. Por ejemplo, si tu shell usa PHP 8.1, corre el siguiente comando:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat ~/.php/7.4/phprc</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat ~/.php/8.1/phprc</span></pre>
 </div>
 <p>Si ves que en alguna de las líneas se menciona a Phar, <a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">elimínalas</a>, y luego elimina los procesos para actualizar el archivo.</p>
 <ul>
