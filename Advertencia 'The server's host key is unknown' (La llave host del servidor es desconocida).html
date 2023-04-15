@@ -1,9 +1,9 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <div class="notebox-important">
-<p>Este artículo explica cómo verificar que estás conectándote a un servidor de DreamHost y que tu conexión es segura. Si sigues los pasos en este artículo y los valores de las huellas digitales no son compatibles con lo que se ve en el panel, NO TE CONECTES al servidor. <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">Pónte en contacto con el soporte de DreamHost</a>&nbsp;para que puedan investigar por qué las huellas digitales son diferentes.</p>
+<p>Este artículo explica cómo verificar que estás conectándote a un servidor de DreamHost y que tu conexión es segura. Si sigues los pasos en este artículo y los valores de las huellas digitales no son compatibles con lo que se ve en el panel, NO TE CONECTES al servidor. <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">Pónte en contacto con el soporte de DreamHost</a> para que puedan investigar por qué las huellas digitales son diferentes.</p>
 </div>
-<p>Cada servidor DreamHost tiene varias claves SSH únicas asignadas. Estas claves se utilizan para identificar el servidor y garantizar que tu conexión sea segura y confiable. Cuando usas por primera vez un programa o terminal SSH para conectarte a tu servidor, verifica las claves. Como actualmente no están almacenados en tu computadora, verás la siguiente advertencia:</p>
+<p>Cada servidor DreamHost tiene varias claves SSH únicas asignadas. Estas claves se utilizan para identificar el servidor y garantizar que tu conexión sea segura y confiable. Cuando usas por primera vez un programa o terminal SSH para conectarte a tu servidor, verifica las claves. Como actualmente no están almacenados en tu computador, verás la siguiente advertencia:</p>
 <dl>
 <dd>
 <p><span class="wysiwyg-color-black"><strong>The server's host key is unknown. You have no guarantee that the server is the computer you think it is.</strong></span></p>
@@ -20,20 +20,10 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/215360828-Software-de-cliente-SSH" target="_self">Clientes de SSH</a></li>
 </ul>
 </div>
-<p>Cuando originalmente inicies sesión en un servidor de DreamHost, puede que veas la siguiente alerta:</p>
-<dl>
-<dd>
-<p><strong>The server's host key is unknown. You have no guarantee that the server is the computer you think it is.</strong></p>
-</dd>
-</dl>
+<p>Para confirmar que este es el servidor correcto, navega a la página de <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=users.sshkeys&amp;" target="_blank" rel="noopener noreferrer">Llaves de SSH</a>. En esa página, verás tu servidor junto con sus huellas digitales compatibles.</p>
 <p>Por ejemplo:</p>
 <dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2018-06_panel_server_host_keys_01.png" alt="" /></dd>
-</dl>
-<p>Para confirmar que este es el servidor correcto, navega a la página de&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=users.sshkeys&amp;" target="_blank" rel="noopener noreferrer">Llaves de SSH</a>.&nbsp;En esa página, verás tu servidor junto con sus huellas digitales compatibles.</p>
-<p>Por ejemplo:</p>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_server_host_keys_02.png" alt="" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_server_host_keys_02.png" alt="ES Panel server host keys"></dd>
 </dl>
 <p>Compara los dos para confirmar que es el mismo servidor. Puedes luego aceptar la alerta e iniciar sesión normalmente.</p>
 </div>
@@ -45,7 +35,7 @@
 </div>
 <p>Esto responde con el número de versión. Hay algunos comandos que NO funcionan si tu versión es menos que 6.8.</p>
 <p>El siguiente ejemplo va a usar las huellas digitales del servidor compartido llamado batroc:</p>
-<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ssl-keys.png" width="599" height="136" /></p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/panel_ssh-keys_verifying-fingerprints_01.png" alt="ES panel SSH keys fingerprints" width="679" height="231"></p>
 <h3>Usar OpenSSH versión 7.6p1</h3>
 <p>Un comando común para correr es: FingerprintHash.</p>
 <h4>Ver la huella digital RSA (MD5)</h4>
@@ -142,7 +132,8 @@ batroc.dreamhost.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbml
     <pre class="prebox"><span class="server">[server]$ </span><span class="command">awk '{print $3}' batrockeys.pub | base64 -d | sha256sum -b | awk '{print $1}' | xxd -r -p | base64</span>
 <span class="green">ijqWGQW20bkvOViujUO5PRknle09aDPUjh25u60T7eQ=</span></pre>
   </div>
---></div>
+-->
+</div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
