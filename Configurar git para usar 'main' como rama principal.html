@@ -1,51 +1,18 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>Cuando inicias un nuevo repositorio de git vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> en un servidor de DreamHost, la primera rama es nombrada <span class="text-object">master</span>. Esto es por que el software de git <a href="https://git-scm.com/docs/git-init" target="_blank" rel="noopener noreferrer"> actualmente predetermina el nombre de la rama</a>.</p>
-<p>Muchas companías que usan el software de git como base de sus plataformas como <a href="https://github.com/" target="_blank" rel="noopener noreferrer">github.com</a>, <a href="https://gitlab.com/" target="_blank" rel="noopener noreferrer">gitlab.com</a>, y <a href="https://bitbucket.org/" target="_blank" rel="noopener noreferrer">bitbucket.org</a> han renombrado la primera rama a <span class="text-object">main</span>. Los siguientes enlaces te dan más información sobre esto:</p>
+<p>Muchas companías que usan el software de git como base de sus plataformas, como <a href="https://github.com/" target="_blank" rel="noopener noreferrer">github.com</a>, <a href="https://gitlab.com/" target="_blank" rel="noopener noreferrer">gitlab.com</a>, y <a href="https://bitbucket.org/" target="_blank" rel="noopener noreferrer">bitbucket.org</a>, han renombrado la primera rama a <span class="text-object">main</span>. Los siguientes enlaces te dan más información sobre esto:</p>
 <ul>
-<li><a href="https://git-scm.com/book/en/v2/Git-Branching-Branch-Management">https://git-scm.com/book/en/v2/Git-Branching-Branch-Management</a></li>
-<li><a href="https://github.com/github/renaming">https://github.com/github/renaming</a></li>
-<li><a href="https://sfconservancy.org/news/2020/jun/23/gitbranchname/">https://sfconservancy.org/news/2020/jun/23/gitbranchname/</a></li>
-<li><a href="https://about.gitlab.com/blog/2021/03/10/new-git-default-branch-name/">https://about.gitlab.com/blog/2021/03/10/new-git-default-branch-name/</a></li>
-<li><a href="https://bitbucket.org/blog/moving-away-from-master-as-the-default-name-for-branches-in-git">https://bitbucket.org/blog/moving-away-from-master-as-the-default-name-for-branches-in-git</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Git-Branching-Branch-Management">git-scm.com/book/en/v2/Git-Branching-Branch-Management</a></li>
+<li><a href="https://github.com/github/renaming">github.com/github/renaming</a></li>
+<li><a href="https://sfconservancy.org/news/2020/jun/23/gitbranchname/">sfconservancy.org/news/2020/jun/23/gitbranchname/</a></li>
+<li><a href="https://about.gitlab.com/blog/2021/03/10/new-git-default-branch-name/">about.gitlab.com/blog/2021/03/10/new-git-default-branch-name/</a></li>
+<li><a href="https://bitbucket.org/blog/moving-away-from-master-as-the-default-name-for-branches-in-git">bitbucket.org/blog/moving-away-from-master-as-the-default-name-for-branches-in-git</a></li>
 </ul>
 <h3>¿Qué significa esto?</h3>
 <p>Cuando creas un repositorio en tu servidor de DreamHost, la rama principal es nombrada <span class="text-object">master</span>. Esto continuará funcionando normalmente en tu servidor DreamHost sin ningún problema.</p>
-<p>Sin embargo, se recomienda que, de ahora en adelante, cambies el nombre de rama principal a <span class="text-object">main</span> de tus repositorios. Esto asegurará la futura compatibilidad con otros programas de software como se mencionó anteriormente.</p>
+<p>Sin embargo, se recomienda que, de ahora en adelante, cambies el nombre de rama principal a <span class="text-object">main</span> de tus repositorios. Esto asegurará la futura compatibilidad con otros programas de software, como se mencionó anteriormente.</p>
 </div>
-<!--
-<h2>Actualizar tu archivo de configuración de git</h2>
-<div class="solvvy-solution">
-  <p>
-    Puedes correr el siguiente comando para agregar una línea a tu archivo git
-    <span class="text-object">config</span>. Esto asegurará que todos los repositorios
-    futuros que creas usen <span class="text-object">main</span> como la rama
-    principal.
-  </p>
-  <p>
-    Los siguientes pasos se pueden ejecutar en tu computador local o en tu servidor
-    de DreamHost.
-  </p>
-  <ol>
-    <li>
-      <a href="https://help.dreamhost.com/hc/es/articles/215360828-Software-de-clientes-de-SSH" target="_self">Abre una terminal</a>
-      en el computador de tu casa o inicia sesión en tu servidor DreamHost
-      a través de
-      <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.
-    </li>
-    <li>
-      Corre el siguiente comando:
-      <div class="preboxcontainer">
-        <pre class="prebox"><span class="server">[server]$ </span><span class="command">git config --global init.defaultBranch main</span></pre>
-      </div>
-    </li>
-  </ol>
-  <p>
-    Ahora, cuando inicializas un nuevo repositorio corriendo
-    <span class="code">git init</span>, <span class="text-object">main</span>
-    se usará en lugar de <span class="text-object">master</span> como la rama
-    principal.
-  </p>-->
 <div id="main" class="section-link"> </div>
 <h2>Cambiar la rama principal para usar 'main'</h2>
 <div class="solvvy-solution">
@@ -94,6 +61,32 @@
 <ul>
 <li><a href="https://git-scm.com/docs/git-branch">https://git-scm.com/docs/git-branch</a></li>
 </ul>
+</div>
+<h2>Actualizar tu archivo config de git (en el computador de tu hogar)</h2>
+<div class="solvvy-solution">
+<div class="notebox-important">
+<p>El siguiente comando solo funciona con las versiones de git 2.28 o superiores. Los servidores DreamHost ejecutan la versión git instalada con el sistema operativo del servidor, que actualmente se encuentra por debajo de la versión 2.28. Para confirmar, inicia sesión en su servidor a través de SSH y corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git --version</span></pre>
+</div>
+<p>Si la versión es anterior a 2.28, debes usar la opción anterior para renombrar manualmente la rama.</p>
+</div>
+<p>Si la versión de git en el computador de tu hogar es superior a 2.28, puedes ejecutar el siguiente comando para agregar una línea a tu archivo <span class="text-object">config</span> de git. Esto garantizará que todos los repositorios futuros que crees (en el computador de tu hogar) usen <span class="text-object">main</span> como la rama principal. Luego puedes enviarlos a tu servidor DreamHost siguiendo las instrucciones de los siguientes artículos:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216445197-Enviar-tu-repositorio-local-de-Git-a-un-servidor-de-DreamHost-Linux-Mac-OS-X">Enviar tu repositorio local de Git a un servidor de DreamHost — Linux &amp; Mac OS X</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000732471-Enviar-tu-repositorio-local-de-Git-a-un-servidor-DreamHost-Windows">Enviar tu repositorio local de Git a un servidor DreamHost — Windows</a></li>
+</ul>
+<h3>Correr el comando</h3>
+<ol>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/215360828-Software-de-clientes-de-SSH" target="_self">Abre una terminal</a> en el computador de tu hogar.</li>
+<li>Corre el siguiente comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">git config --global init.defaultBranch main</span></pre>
+</div>
+</li>
+</ol>
+<p>Ahora, cuando inicies un nuevo repositorio corriendo <span class="code">git init</span>, se usará <span class="text-object">main</span> en lugar de <span class="text-object">master</span> como la primera rama.</p>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
