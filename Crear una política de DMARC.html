@@ -20,8 +20,10 @@
 <h3>Alineamiento estricto y relajado</h3>
 <p>La alineación en tu política puede establecerse como estricta o relajada.</p>
 <ul>
-<li><strong>Alineación estricta</strong> — los dominios deben ser idénticos.</li>
-<li><strong>Alineación relajada</strong> — el "dominio organizacional" de nivel superior debe coincidir.</li>
+<li>
+<strong>Alineación estricta</strong> — los dominios deben ser idénticos.</li>
+<li>
+<strong>Alineación relajada</strong> — el "dominio organizacional" de nivel superior debe coincidir.</li>
 </ul>
 <p>El 'Dominio organizacional' es tu nombre de dominio seguido de su sufijo. Por ejemplo:</p>
 <ul>
@@ -34,24 +36,28 @@
 <div class="solvvy-solution">
 <p>La política DMARC del remitente contiene información sobre cómo manejar los correos que fallan en la autenticación. Se pueden crear dos tipos de informes:</p>
 <ul>
-<li><strong>Reportes agregados</strong>&nbsp;— enviado como formato XML una vez al día, que consiste en datos agregados de todas las fallas de DMARC</li>
-<li><strong>Reportes forenses</strong> (también llamado informes de falla) — generado de inmediato y consiste en correos individuales que fallaron</li>
+<li>
+<strong>Reportes agregados</strong> — enviado como formato XML una vez al día, que consiste en datos agregados de todas las fallas de DMARC</li>
+<li>
+<strong>Reportes forenses</strong> (también llamado informes de falla) — generado de inmediato y consiste en correos individuales que fallaron</li>
 </ul>
 <h3>Analizar los reportes</h3>
 <p>Puedes usar una herramienta como la siguiente para analizar tus reportes.</p>
 <ul>
-<li><a href="https://mxtoolbox.com/DmarcReportAnalyzer.aspx" target="_blank" rel="noopener">https://mxtoolbox.com/DmarcReportAnalyzer.aspx</a></li>
+<li><a href="https://mxtoolbox.com/DmarcReportAnalyzer.aspx" target="_blank" rel="noopener noreferrer">https://mxtoolbox.com/DmarcReportAnalyzer.aspx</a></li>
 </ul>
 </div>
 <h2>Configurar una política DMARC</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Configura un registro&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216107737-Generalidades-sobre-SPF">SPF</a>&nbsp;y/o <a href="https://help.dreamhost.com/hc/es/articles/215029758-Registros-DKIM">DKIM</a> en tu dominio.</li>
+<li>Configura un registro <a href="https://help.dreamhost.com/hc/es/articles/216107737-Generalidades-sobre-SPF">SPF</a> y/o <a href="https://help.dreamhost.com/hc/es/articles/215029758-Registros-DKIM">DKIM</a> en tu dominio.</li>
 <li>Envía un correo a ti mismo (u otra dirección que poseas). Una vez recibido, veas tus encabezados. Verifica la alineación del dominio identificando el dominio listado como la dirección de envío. Se puede ubicar en los siguientes lugares:
 <ul>
-<li>El Sobre From dominio —&nbsp; <strong>From: admin@example.com</strong></li>
-<li>El camino de regreso — <strong>&lt;admin@example.com&gt;</strong></li>
-<li>El d=dominio en la firma DKIM —&nbsp;DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; <strong>d=example.com</strong>;</li>
+<li>El Sobre From dominio —  <strong>From: admin@example.com</strong>
+</li>
+<li>El camino de regreso — <strong>&lt;admin@example.com&gt;</strong>
+</li>
+<li>El d=dominio en la firma DKIM — DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; <strong>d=example.com</strong>;</li>
 </ul>
 Los dominios mencionados en todas estas áreas deben ser idénticos, de lo contrario, DMARC fallará en la alineación.</li>
 <li>
@@ -61,7 +67,8 @@ Los dominios mencionados en todas estas áreas deben ser idénticos, de lo contr
 <li><span class="text-object">dmarc_forensic@example.com</span></li>
 </ul>
 </li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360035516812-Agregar-registros-DNS-personalizados#registro_TXT">Crear el registro TXT</a>.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/360035516812-Agregar-registros-DNS-personalizados#registro_TXT">Crear el registro TXT</a>.</li>
 <ol>
 <li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
 <li>Da clic en el botón <strong>Administrar</strong> para abrir la página <a href="https://help.dreamhost.com/hc/es/articles/360043889332-La-p%C3%A1gina-Administrar-Sitios-Web" target="_blank" rel="noopener noreferrer"> <span class="panel-page">Administrar Sitios Web</span></a>, la cual te permite ajustar múltiples configuraciones de tu sitio.
@@ -70,28 +77,18 @@ Los dominios mencionados en todas estas áreas deben ser idénticos, de lo contr
 <li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366#cuadricula_o_lista" target="_blank" rel="noopener noreferrer">Vista de Lista</a>, da clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
 </ul>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-tabs-dns.png" alt="DNS tab" width="249" height="56" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-tabs-dns.png" alt="ES DNS tab" width="249" height="56"></dd>
 </dl>
 </li>
-<li>Da clic en la pestaña <span class="text-link">DNS</span>.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-button-addrecord.png" alt="Agregar Registro button" width="152" height="32" /></dd>
-</dl>
-</li>
-<li>Da clic en el botón <strong>Agregar Registro</strong>.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-dns-addrecords-txt.png" alt="Add TXT Record" width="602" height="65" /></dd>
-</dl>
-</li>
-<li>Coloca el cursor sobre la sección <span class="text-section">Registro TXT</span> y haz clic en el enlace <span class="text-link">AÑADIR</span>.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-dmarc-add.png" alt="Add TXT Record" width="602" height="258" /></dd>
-</dl>
-</li>
+<li>Haz clic en la pestaña <span class="text-link">DNS</span>.</li>
+<li>Da clic en el botón <strong>Agregar Registro</strong>.</li>
+<li>Coloca el cursor sobre la sección <span class="text-section">Registro TXT</span> y haz clic en el enlace <span class="text-link">AÑADIR</span>.</li>
 <li>Ingresa lo siguiente;
 <ul>
-<li><strong>Host</strong>: _dmarc</li>
-<li><strong>Valor TXT *</strong>: — A continuación se muestra una configuración básica que maneja la mayoría de tus necesidades de DMARC. Solo asegúrate de ajustar las direcciones de correo a las direcciones que creaste anteriormente para recibir informes entrantes.
+<li>
+<strong>Host</strong>: _dmarc</li>
+<li>
+<strong>Valor TXT *</strong>: — A continuación se muestra una configuración básica que maneja la mayoría de tus necesidades de DMARC. Solo asegúrate de ajustar las direcciones de correo a las direcciones que creaste anteriormente para recibir informes entrantes.
 <div class="preboxcontainer">
 <pre class="prebox">v=DMARC1; p=none; fo=1; rua=mailto:<span class="code-highlight">dmarc_agg@example.com</span>;ruf=mailto:<span class="code-highlight">dmarc_forensic@example.com</span>;pct=100</pre>
 </div>
@@ -106,12 +103,13 @@ Ve la sección a continuación para obtener más detalles sobre las diferentes o
 <h2>Etiquetas que puedes usar en tu registro DMARC</h2>
 <div class="solvvy-solution">
 <h3>Etiquetas requeridas</h3>
-<p>Hay 2 etiquetas requeridas, <span class="code">v</span> y&nbsp;<span class="code">p</span>.</p>
+<p>Hay 2 etiquetas requeridas, <span class="code">v</span> y <span class="code">p</span>.</p>
 <h4><strong>La etiqueta v</strong></h4>
 <p>La etiqueta <span class="code">v</span> identifica el registro de texto como un registro DMARC. Esta debe ser la primera etiqueta y tener un valor de DMARC1.</p>
 <h4><strong>La etiqueta p</strong></h4>
 <p>La etiqueta <span class="code">p</span> identifica la acción que el propietario del dominio solicita al destinatario que tome para los mensajes fallidos. Las opciones son:</p>
-<table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
+<table class="wikitable">
+<colgroup> <col width="15%"> <col width="85%"> </colgroup>
 <tbody>
 <tr>
 <th bgcolor="#F2F2F2">Etiqueta</th>
@@ -133,7 +131,8 @@ Ve la sección a continuación para obtener más detalles sobre las diferentes o
 </table>
 <h3>Etiquetas de correo</h3>
 <p>Estos indican dónde se envían los informes.</p>
-<table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
+<table class="wikitable">
+<colgroup> <col width="15%"> <col width="85%"> </colgroup>
 <tbody>
 <tr>
 <th bgcolor="#F2F2F2">Etiqueta</th>
@@ -151,7 +150,8 @@ Ve la sección a continuación para obtener más detalles sobre las diferentes o
 </table>
 <h3>Etiqueta de informe</h3>
 <p><strong>fo</strong> controla cuando se crea un informe de falla.</p>
-<table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
+<table class="wikitable">
+<colgroup> <col width="15%"> <col width="85%"> </colgroup>
 <tbody>
 <tr>
 <th bgcolor="#F2F2F2">Etiqueta</th>
@@ -177,8 +177,9 @@ Ve la sección a continuación para obtener más detalles sobre las diferentes o
 </table>
 <p>Se recomienda una configuración de fo=1 ya que proporciona la mayor cantidad de datos sobre cualquier falla.</p>
 <h3>Etiquetas opcionales</h3>
-Las siguientes etiquetas usan un valor predeterminado si la etiqueta no está configurada:<br />
-<table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
+Las siguientes etiquetas usan un valor predeterminado si la etiqueta no está configurada:<br>
+<table class="wikitable">
+<colgroup> <col width="15%"> <col width="85%"> </colgroup>
 <tbody>
 <tr>
 <th bgcolor="#F2F2F2">Etiqueta</th>
@@ -208,7 +209,8 @@ Las siguientes etiquetas usan un valor predeterminado si la etiqueta no está co
 </table>
 <h3>Etiqueta de subdominio</h3>
 <p>La etiqueta sp se usa para establecer una política de informes diferente para un subdominio. Por ejemplo, puede configurar el dominio primario para usar <strong>p=reject</strong> mientras configura todos los subdominios bajo este dominio para usar <strong>sp=quarantine</strong>.</p>
-<table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
+<table class="wikitable">
+<colgroup> <col width="15%"> <col width="85%"> </colgroup>
 <tbody>
 <tr>
 <th bgcolor="#F2F2F2">Etiqueta</th>
@@ -216,7 +218,7 @@ Las siguientes etiquetas usan un valor predeterminado si la etiqueta no está co
 </tr>
 <tr>
 <td>sp</td>
-<td>Establece una política de informes para el subdominio, diferente del dominio principal. Por ejemplo:<br />
+<td>Establece una política de informes para el subdominio, diferente del dominio principal. Por ejemplo:<br>
 <div class="preboxcontainer">
 <pre class="prebox">v=DMARC1; p=none; <span class="code-highlight">sp=quarantine;</span>fo=1; rua=mailto:dmarc_agg@example.com;ruf=mailto:dmarc_forensic@example.com;pct=100&lt;</pre>
 </div>
