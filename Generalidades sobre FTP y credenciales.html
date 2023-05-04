@@ -1,35 +1,17 @@
-<div class="document">
-<div class="documentwrapper">
-<div class="body">
-<div id="FTP overview and credentials" class="solvvy-hidden">
-<div class="table-of-content container">
-<div class="altTitle">Credenciales de FTP</div>
-<ul class="simple">
-<li><a class="reference internal" href="#Sitios_DreamPress">Sitios DreamPress</a></li>
-<li><a class="reference internal" href="#Ubicar_tus_credenciales_de_inicio_de_sesion_de_FTP">Ubicar tus credenciales</a></li>
-<li><a class="reference internal subtoc" href="#Ubicar_el_hostname_FTP_de_tu_servidor">Servidor/Hostname</a></li>
-<li><a class="reference internal subtoc" href="#Usuario">Usuario</a></li>
-<li><a class="reference internal subtoc" href="#Contrasena">Contraseña</a></li>
-<li><a class="reference internal subtoc" href="#Puerto">Puerto</a></li>
-<li><a class="reference internal" href="#Seguridad_FTP">Seguridad FTP</a></li>
-<li><a class="reference internal" href="#Donde_poner_tus_archivos">Donde poner tus archivos</a></li>
-<li><a class="reference internal" href="#host_key_is_unknown">Advertencia: The server's host key is unknown</a></li>
-<li><a class="reference internal" href="#Bloqueos_temporales">Bloqueos temporales</a></li>
-</ul>
-</div>
-</div>
+<div id="auto-toc">&nbsp;</div>
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>File Transfer Protocol (<span class="text-object">FTP</span>) es un protocolo de red que se usa para cargar datos de sitios web desde tu computador local a tu servidor web para que aparezcan en línea.</p>
 <p>Este artículo explica cómo ubicar tus credenciales e iniciar sesión en tu servidor usando un cliente SFTP.</p>
 <div class="notebox-tip">
-<p><strong><span id="Sitios_DreamPress">Sitios DreamPress</span></strong></p>
+<p><strong> <span id="Sitios_DreamPress">Sitios DreamPress</span> </strong></p>
 <p>En su lugar, mira el siguiente artículo si necesitas iniciar sesión en tu sitio DreamPress.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360020552911-Iniciar-sesi%C3%B3n-en-tu-sitio-DreamPress-a-trav%C3%A9s-de-FTP">Iniciar sesión en tu sitio DreamPress vía FTP</a></li>
 </ul>
 </div>
-<h2><span id="Diferencias_entre_FTP_y_SFTP">Diferencias entre FTP y SFTP</span></h2>
+<div id="Diferencias_entre_FTP_y_SFTP" class="section-link">&nbsp;</div>
+<h2>Diferencias entre FTP y SFTP</h2>
 <p><span class="text-object">FTP</span> es un protocolo antiguo que <span class="wysiwyg-color-red">NO ES SEGURO</span>. Usa el puerto #21.</p>
 <p><span class="text-object">SFTP</span> es un protocolo nuevo que <strong>SEGURO</strong>. Usa el puerto #22.</p>
 <h3>El término FTP</h3>
@@ -38,10 +20,9 @@
 <div class="notebox-important">
 <p>Usa solo el puerto 22 cuando te conectes. Esto asegura que estás usando una conexión SFTP segura.</p>
 </div>
-</div>
 <h2>Prerrequisitos</h2>
 <h3>Agregar alojamiento</h3>
-<p>Asegúrate de tener <a href="https://help.dreamhost.com/hc/es/articles/215416227--C%C3%B3mo-agregar-un-dominio-">agregado un alojamiento</a> a tu dominio en tu panel DreamHost. Esto te asigna las credenciales que necesitas para iniciar sesión en tu servidor.</p>
+<p>Asegúrate de tener <a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-Sitio-Web-y-Hosting">agregado un alojamiento</a> a tu dominio en tu panel DreamHost. Esto te asigna las credenciales que necesitas para iniciar sesión en tu servidor.</p>
 <h3>Escoger un cliente FTP</h3>
 <p>Este artículo usa el cliente de FTP <a href="https://filezilla-project.org/">Filezilla</a> para ilustrar los ejemplos. Tu puedes usar <a href="https://help.dreamhost.com/hc/es/articles/215613107-Listas-de-clientes-de-software-de-FTP">cualquier cliente que desees</a> para iniciar sesión en tu servidor ya que la configuración es la misma.</p>
 <div class="notebox-tip">
@@ -52,58 +33,64 @@
 </ul>
 </div>
 </div>
-<h2><span id="Ubicar_tus_credenciales_de_inicio_de_sesion_de_FTP">Ubicar tus credenciales de inicio de sesión de FTP</span></h2>
+<h2>Ubicar tus credenciales de inicio de sesión de FTP</h2>
 <div class="solvvy-solution">
 <p>Necesitarás la siguiente información para iniciar sesión en tu servidor web:</p>
 <ul>
-<li><a href="#Ubicar_el_hostname_FTP_de_tu_servidor" target="_self" rel="undefined">Servidor/Hostname</a></li>
-<li><a href="#Usuario" target="_self" rel="undefined">Usuario</a></li>
+<li><a href="#Ubicar_el_hostname" target="_self" rel="undefined">Servidor/Hostname</a></li>
+<li><a href="#Ubicar_el_usuario" target="_self" rel="undefined">Usuario</a></li>
 <li><a href="#Contrasena" target="_self" rel="undefined">Contraseña</a></li>
-<li><a href="#Puerto" target="_self" rel="undefined">Puerto</a></li>
+<li><a href="#Escoger_el_numero_de_puerto" target="_self" rel="undefined">Puerto</a></li>
 </ul>
 </div>
 <p>Las siguientes secciones explican cómo obtener cada uno.</p>
-<h2><span id="Ubicar_el_hostname_FTP_de_tu_servidor">Encontrar el hostname</span></h2>
+<div id="Ubicar_el_hostname" class="section-link">&nbsp;</div>
+<h3 class="subtoc-heading">Ubicar el hostname</h3>
 <div class="solvvy-solution">
 <p>Hay dos nombres de host que puede usar para iniciar sesión en su servidor DreamHost.</p>
 <ul>
-<li><strong><a href="#El_nombre_del_sitio">El nombre del sitio</a></strong> — Puedes usar el nombre de tu sitio para iniciar sesión en tu servidor, pero solo si el <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio-">DNS ya está apuntando a DreamHost</a></li>
-<li><strong><a href="#El_nombre_del_servidor">El nombre del servidor</a></strong> — Siempre puedes usar el nombre del servidor para iniciar sesión en tu servidor, incluso si el DNS aún no apunta a DreamHost.</li>
+<li>
+<strong> <a href="#Usa_el_nombre_de_tu_sitio_web">El nombre del sitio</a> </strong> — Puedes usar el nombre de tu sitio para iniciar sesión en tu servidor, pero solo si el <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio-">DNS ya está apuntando a DreamHost</a>
+</li>
+<li>
+<strong> <a href="#Usar_el_nombre_del_servidor">El nombre del servidor</a> </strong> — Siempre puedes usar el nombre del servidor para iniciar sesión en tu servidor, incluso si el DNS aún no apunta a DreamHost.</li>
 </ul>
-<h3>Opción 1 — <span id="Usa_el_nombre_de_tu_sitio_web">Usa el nombre de tu sitio web</span></h3>
-<p>Si has <a href="https://help.dreamhost.com/hc/es/articles/215416227--C%C3%B3mo-agregar-un-dominio-">agregado un alojamiento</a> a tu dominio y el <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio-">DNS</a> de tu dominio está configurado para apuntar a tu hosting en DreamHost, puedes usar el nombre de tu dominio como el hostname SFTP. Por ejemplo, si tu sitio web se llama <strong>https://www.example.com</strong> solo usa <strong>example.com</strong>.</p>
+<div id="Usa_el_nombre_de_tu_sitio_web" class="section-link">&nbsp;</div>
+<h3>Opción 1 — Usa el nombre de tu sitio web</h3>
+<p>Si has <a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-Sitio-Web-y-Hosting">agregado un alojamiento</a> a tu dominio y el <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio-">DNS</a> de tu dominio está configurado para apuntar a tu hosting en DreamHost, puedes usar el nombre de tu dominio como el hostname SFTP. Por ejemplo, si tu sitio web se llama <strong>https://www.example.com</strong> solo usa <strong>example.com</strong>.</p>
 <div class="notebox-note">
 <p>No agregues <span class="text-object">https://www</span> en frente del dominio pues puede causar que no conecte.</p>
 </div>
 <p>Así es como se vería en Filezilla:</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-filezilla-credentials-01.png" alt="Filezilla hostname" width="698" height="75" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-3rd-filezilla-credentials-01.png" alt="ES Filezilla hostname" width="800" height="150"></dd>
 </dl>
-<h3><span id="Usar_el_nombre_del_servidor"> Opción 2 — Usar el nombre del servidor</span></h3>
-<p>Si tienes <a href="https://help.dreamhost.com/hc/es/articles/215416227--C%C3%B3mo-agregar-un-dominio--">agregado alojamiento</a> a tu sitio, pero aún no has apuntado tu DNS a DreamHost, aún puedes conectarte al servidor usando el hostname del servidor.</p>
+<div id="Usar_el_nombre_del_servidor" class="section-link">&nbsp;</div>
+<h3>Opción 2 — Usar el nombre del servidor</h3>
+<p>Si tienes <a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-Sitio-Web-y-Hosting">agregado alojamiento</a> a tu sitio, pero aún no has apuntado tu DNS a DreamHost, aún puedes conectarte al servidor usando el hostname del servidor.</p>
 <p>La URL del servidor es el nombre de tu servidor seguido de <strong>.dreamhost.com</strong>.</p>
 <ol>
-<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!" target="_blank" rel="noopener">Administrar Sitios Web</a>.</li>
-<li>Da clic en el botón <strong>Administrar</strong> para editar las configuraciones de tu sitio.
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
+<li>Da clic en el botón <strong>Administrar</strong> para abrir la página <a href="https://help.dreamhost.com/hc/es/articles/360043889332-La-p%C3%A1gina-Administrar-Sitios-Web" target="_self"><span class="panel-page">Administrar Sitios Web</span></a>, la cual te permite ajustar múltiples configuraciones de tu sitio.
 <ul>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332-Usar-la-nueva-p%C3%A1gina-Administrar-Sitios-Web" target="_self">Vista de cuadrícula</a>, pasa sobre tu dominio y da clic en el botón <strong>Administrar</strong>.</li>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332-Usar-la-nueva-p%C3%A1gina-Administrar-Sitios-Web" target="_self">Vista de lista</a>, da clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Malla</a>, da clic en el botón <strong>Administrar</strong> en la parte inferior de la caja del sitio.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Lista</a>, da clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
 </ul>
 <dl>
-<dd><img class="img-border solvvy-hidden" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-manage-domains-hosting-tab.png" alt="Manage Domains Hosting tab" width="83" height="" /></dd>
+<dd><img class="img-border solvvy-hidden" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-manage-domains-hosting-tab.png" alt="Manage Domains Hosting tab" width="115" height="65"></dd>
 </dl>
 </li>
 <li>Cuando la página <span class="panel-page">Administrar Sitios Web</span> se abra, selecciona la pestaña <span class="text-object">Alojamiento</span>.</li>
 </ol>
 <dl>
-<dd><img class="img-border solvvy-hidden" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-manage-websites-hosting-tab.png" alt="Manage Domains Hosting tab" width="699" height="126" /></dd>
+<dd><img class="img-border solvvy-hidden" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-manage-websites-hosting-tab.png" alt="Manage Domains Hosting tab" width="900" height="200"></dd>
 </dl>
 <p>Tu plan de alojamiento y el nombre de la máquina (servidor) se enumeran en la parte superior. En este ejemplo, el servidor se llama <span class="text-object">philip-livingston</span>, por lo que la dirección del servidor sería <strong>philip-livingston.dreamhost.com</strong>. Así es como aparecería en Filezilla.</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-filezilla-credentials-02.png" alt="Filezilla hostname" width="698" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-3rd-filezilla-credentials-02.png" alt="ES Filezilla hostname" width="800" height="150"></dd>
 </dl>
 <div class="notebox-note">
-<p><strong><span id="Hostnames_de_VPS.2C_Dedicados.2C_y_DreamPress">Hostnames de VPS, Dedicados, y DreamPress hostnames</span></strong></p>
+<p><strong> <span id="Hostnames_de_VPS.2C_Dedicados.2C_y_DreamPress">Hostnames de VPS, Dedicados, y DreamPress hostnames</span> </strong></p>
 <p>Si estás alojando tu sitio en un servidor <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-un-Servidor-Virtual-Privado-VPS-">VPS</a>, <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicados</a>, o <a href="https://help.dreamhost.com/hc/es/articles/214581158-Generalidades-sobre-DreamPress">DreamPress</a>, el hostname aparece diferente en la columna <span class="text-object">Tipo de Alojamiento</span>. Esto cambiaría el texto que agregas después del nombre del servidor. Por ejemplo:</p>
 <table>
 <tbody>
@@ -131,39 +118,41 @@
 </table>
 </div>
 </div>
-<h2><span id="Usuario">Ubicar tu usuario</span></h2>
+<div id="Ubicar_el_usuario" class="section-link">&nbsp;</div>
+<h3 class="subtoc-heading">Ubicar el usuario</h3>
 <div class="solvvy-solution">
 <ol>
-<li>Navega a la página <a class="panel-link" href="https://help.dreamhost.com/hc/es/articles/360043889332-Usar-la-nueva-p%C3%A1gina-Administrar-Sitios-Web" target="_blank" rel="noopener">Administrar Sitios Web</a>.</li>
-<li>Da clic en el botón <strong>Administrar</strong> de tu dominio.
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
+<li>Da clic en el botón <strong>Administrar</strong> para abrir la página <a href="https://help.dreamhost.com/hc/es/articles/360043889332-La-p%C3%A1gina-Administrar-Sitios-Web" target="_self"><span class="panel-page">Administrar Sitios Web</span></a>, la cual te permite ajustar múltiples configuraciones de tu sitio.
 <ul>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332-Usar-la-nueva-p%C3%A1gina-Administrar-Sitios-Web" target="_self">vista de cuadrícula</a>, pasa sobre tu dominio y da clic en el botón <strong>Administrar.</strong></li>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332-Usar-la-nueva-p%C3%A1gina-Administrar-Sitios-Web" target="_self" rel="undefined">vista de Lista</a>, da clic al botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Malla</a>, da clic en el botón <strong>Administrar</strong> en la parte inferior de la caja del sitio.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Lista</a>, da clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
 </ul>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-manage-files-details.png" alt="Panel SFTP username" width="598" height="154" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-manage-files-details.png" alt="Panel SFTP username" width="598" height="154"></dd>
 </dl>
 </li>
 <li>Da clic en <span class="text-object">Mostrar info de inicio de sesión</span> debajo de la sección <span class="text-section">Administrar Archivos</span> para ver el campo de <span class="text-object">Nombre de usuario</span>.</li>
 </ol>
 <p>Así se verá el usuario en Filezilla:</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/3rd-filezilla-credentials-03.png" alt="Filezilla username" width="698" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-3rd-filezilla-credentials-03.png" alt="Filezilla username" width="800" height="150"></dd>
 </dl>
-<h2><span id="Contrasena">Ubicar la contraseña del usuario</span></h2>
+<div id="Contrasena" class="section-link">&nbsp;</div>
+<h3 class="subtoc-heading">Ubicar la contraseña del usuario</h3>
 <p>La contraseña se creó originalmente cuando se creó el nombre de usuario. Si no recuerdas esta contraseña, puedes restablecerla.</p>
 <p>Para cambiar la contraseña del usuario en el panel:</p>
 <ol>
-<li>Navega a la página <a class="panel-link" href="https://help.dreamhost.com/hc/es/articles/360043889332-Usar-la-nueva-p%C3%A1gina-Administrar-Sitios-Web" target="_blank" rel="noopener">Administrar Sitios Web</a>.</li>
-<li>Da clic en el botón <strong>Administrar</strong> de tu dominio.
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
+<li>Da clic en el botón <strong>Administrar</strong> para abrir la página <a href="https://help.dreamhost.com/hc/es/articles/360043889332-La-p%C3%A1gina-Administrar-Sitios-Web" target="_self"><span class="panel-page">Administrar Sitios Web</span></a>, la cual te permite ajustar múltiples configuraciones de tu sitio.
 <ul>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332-Usar-la-nueva-p%C3%A1gina-Administrar-Sitios-Web" target="_self" rel="undefined">vista de cuadrícula</a>, pasa sobre tu dominio y da clic en el botón <strong>Administrar</strong>.</li>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332-Usar-la-nueva-p%C3%A1gina-Administrar-Sitios-Web" target="_self" rel="undefined">vista de Lista</a>, da clic al botón <strong>Administrar </strong>a la derecha de tu dominio.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Malla</a>, da clic en el botón <strong>Administrar</strong> en la parte inferior de la caja del sitio.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Lista</a>, da clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
 </ul>
 </li>
 <li>Da clic en <span class="text-object">Mostrar info de inicio de sesión</span> debajo de la sección <span class="text-section">Administrar Archivos</span> para ver el campo de las configuraciones de usuario.
 <dl>
-<dd><img class="img-border solvvy-hidden" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-change-password-link.png" alt="edit access settings" width="257" height="100" /></dd>
+<dd><img class="img-border solvvy-hidden" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-change-password-link.png" alt="edit access settings" width="257" height="100"></dd>
 </dl>
 </li>
 <li>Da clic en el enlace <span class="text-link">Reset Password</span>.
@@ -171,7 +160,7 @@
 <dd><em>Aparece el siguiente cuadro de diálogo, que te pide que ingreses una contraseña:</em></dd>
 </dl>
 <dl>
-<dd><img class="img-border solvvy-hidden" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-change-password.png" alt="edit access settings 2" width="601" height="210" /></dd>
+<dd><img class="img-border solvvy-hidden" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-change-password.png" alt="edit access settings 2" width="601" height="210"></dd>
 </dl>
 </li>
 <li>Ingresa una contraseña y da clic al botón <strong>Restablecer la contraseña</strong> para reestablecer la contraseña
@@ -180,10 +169,10 @@
 <div class="notebox-important">
 <p>Si la contraseña que ingresaste es encontrada en la base de datos <span class="text-object">haveibeenpwned</span>, el siguiente mensaje aparece:</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ftp-insecure-password-notice.png" alt="Compromise Password Notice" width="313" height="150" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ftp-insecure-password-notice.png" alt="Compromise Password Notice" width="313" height="150"></dd>
 </dl>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ftp-insecure-password-error.png" alt="Compromised Password Error" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ftp-insecure-password-error.png" alt="Compromised Password Error"></dd>
 </dl>
 <p>Debes ingresar una nueva contraseña antes de proceder. Mira <a href="https://haveibeenpwned.com/">Have I been pwned</a> para más información:</p>
 </div>
@@ -195,23 +184,24 @@
 <dd><em>La siguiente barra de progreso aparece:</em></dd>
 </dl>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-change-password-progress.png" alt="Progress bar" width="601" height="177" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-change-password-progress.png" alt="Progress bar" width="601" height="177"></dd>
 </dl>
 <dl>
 <dd><em>Cuando la contraseña se actualiza correctamente, aparece el siguiente mensaje:</em></dd>
 </dl>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ftp-password-change-notice.png" alt="Success Message" width="232" height="50" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ftp-password-change-notice.png" alt="Success Message" width="300" height="100"></dd>
 </dl>
 </li>
 <li>Ingresa la contraseña en tu cliente FTP.
 <dl>
-<dd><img class="solvvy-hidden" src="https://kbimages.dreamhosters.com/images/2x/3rd-filezilla-credentials-04.png" alt="Filezilla password" width="698" /></dd>
+<dd><img class="solvvy-hidden" src="https://kbimages.dreamhosters.com/images/2x/es/es-3rd-filezilla-credentials-04.png" alt="Filezilla password" width="800" height="150"></dd>
 </dl>
 </li>
 </ol>
 </div>
-<h2><span id="Puerto">Escoger el número de puerto</span></h2>
+<div id="Escoger_el_numero_de_puerto" class="section-link">&nbsp;</div>
+<h3 class="subtoc-heading">Escoger el número de puerto</h3>
 <div class="solvvy-solution">
 <p>Como se <a href="#Diferencias_entre_FTP_y_SFTP" target="_self" rel="undefined">explica arriba</a>, el puerto #22 es el único número de puerto que debes usar para conectarte pues usa SFTP.</p>
 <div class="alert-warning">
@@ -219,18 +209,19 @@
 </div>
 <p>Ingresa el puerto 22 en tu cliente de FTP.</p>
 <dl>
-<dd><img class="solvvy-hidden" src="https://kbimages.dreamhosters.com/images/2x/3rd-filezilla-credentials-05.png" alt="Filezilla port" width="698" /></dd>
+<dd><img class="solvvy-hidden" src="https://kbimages.dreamhosters.com/images/2x/es/es-3rd-filezilla-credentials-05.png" alt="Filezilla port" width="800" height="150"></dd>
 </dl>
-<p>Finalmente, da clic en <strong>Quickconnect</strong> para iniciar sesión en tu servidor:</p>
+<p>Finalmente, da clic en <strong>Conexión rápida</strong> para iniciar sesión en tu servidor:</p>
 </div>
-<h2><span id="Seguridad_FTP">Seguridad FTP</span></h2>
+<div id="Seguridad_FTP" class="section-link">&nbsp;</div>
+<h2>Seguridad FTP</h2>
 <div class="solvvy-solution">
 <p>Mira el siguiente artículo para más detalles sobre la diferencia entre FTP y SFTP y cómo proteger tu usuario.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115001051531-Seguridad-FTP" target="_self">Seguridad FTP</a></li>
 </ul>
 </div>
-<h2><span id="Donde_poner_tus_archivos">¿Dónde debo poner mis archivos?</span></h2>
+<h2>¿Dónde debo poner mis archivos?</h2>
 <div class="solvvy-solution">
 <p>Una vez que hayas iniciado sesión, verás varios archivos y carpetas. Mira el siguiente artículo para obtener instrucciones sobre dónde cargar los archivos de tu sitio:</p>
 <ul>
@@ -243,7 +234,7 @@
 </ul>
 </div>
 </div>
-<h2><span id="host_key_is_unknown">Advertencia: The server's host key is unknown</span></h2>
+<h2>Advertencia: The server's host key is unknown</h2>
 <div class="solvvy-solution">
 <p>Cuando inicies sesión originalmente en un servidor DreamHost, es posible que veas la siguiente advertencia:</p>
 <dl>
@@ -253,20 +244,20 @@
 </dl>
 <p>Mira el siguiente artículo para obtener más información sobre cómo confirmar los valores clave que estás viendo e iniciar sesión en tu servidor.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360004634231-La-llave-host-del-servidor-es-desconocida" target="_self" rel="undefined">The server's host key is unknown</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360004634231-Alerta-The-server-s-host-key-is-unknown-La-llave-host-del-servidor-es-desconocida-" target="_self" rel="undefined">Alerta The server's host key is unknown (La llave host del servidor es desconocida)</a></li>
 </ul>
 </div>
-<h2><span id="Bloqueos_temporales">Bloqueos temporales</span></h2>
+<h2>Bloqueos temporales</h2>
 <div class="solvvy-solution">
-<p>Múltiples intentos fallidos de conexión FTP o SSH pueden resultar en que el servidor bloquee temporalmente tu IP. Este bloqueo eventualmente se levantará automáticamente, pero si lo necesitas antes, por favor <a href="https://panel.dreamhost.com/index.cgi?tree=support.msg" target="_blank" rel="noopener">contacta a soporte</a>.</p>
+<p>Múltiples intentos fallidos de conexión FTP o SSH pueden resultar en que el servidor bloquee temporalmente tu IP. Este bloqueo eventualmente se levantará automáticamente, pero si lo necesitas antes, por favor <a href="https://panel.dreamhost.com/index.cgi?tree=support.msg" target="_blank" rel="noopener noreferrer">contacta a soporte</a>.</p>
 </div>
-<h2><span id="Ver_también">Ver también</span></h2>
+<h2>Ver también</h2>
 <div class="solvvy-hidden">
 <h3>Enlaces internos</h3>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215613107-Listas-de-clientes-de-software-de-FTP">Listas de clientes de software de FTP</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214920778--D%C3%B3nde-pongo-mis-archivos-una-vez-conectado-v%C3%ADa-FTP-"> ¿Dónde debo poner mis archivos una vez conectado vía FTP?</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215613037--C%C3%B3mo-muestro-archivos-ocultos-en-mi-cliente-FTP-">¿Cómo mostrar archivos ocultos en mi cliente FTP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215613037-Como-ver-archivos-ocultos-en-un-cliente-FTP">Como ver archivos ocultos en un cliente FTP</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216655867-WinSCP-Subir-a-tu-servidor">WinSCP — Subir a tu servidor</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360003490852-Usar-el-administrador-de-archivos-del-sitio-web" target="_self">Usar el administrador de archivos del sitio web</a></li>
 </ul>
@@ -277,5 +268,3 @@
 </ul>
 </div>
 <div class="clearer">&nbsp;</div>
-</div>
-</div>
