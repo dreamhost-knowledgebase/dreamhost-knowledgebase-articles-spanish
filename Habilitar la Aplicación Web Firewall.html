@@ -1,0 +1,61 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p><strong>mod_security</strong> es un firewall de aplicaciones web (WAF) que filtra y bloquea las solicitudes HTTP maliciosas conocidas. Las solicitudes HTTP bloqueadas incluyen muchas, pero no todas las formas de ataques de fuerza bruta, scripting entre sitios (XSS), inclusión remota de archivos (RFI), ejecución remota e inyección SQL (SQLi).</p>
+<p>DreamHost habilita mod_security de forma gratuita de forma predeterminada, pero tu puedes habilitar/deshabilitar esta función usando la opción 'Extra Web Security' en el panel.</p>
+</div>
+<h2><span id="Habilitar_mod_security">Habilitar/Deshabilitar mod_security en el panel</span></h2>
+<div class="solvvy-solution">
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
+<li>Da clic en el botón <strong>Administrar</strong> para abrir la página <a href="https://help.dreamhost.com/hc/es/articles/360043889332-La-p%C3%A1gina-Administrar-Sitios-Web" target="_self"><span class="panel-page">Administrar Sitios Web</span></a>, la cual te permite ajustar múltiples configuraciones de tu sitio.
+<ul>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Malla</a>, da clic en el botón <strong>Administrar</strong> en la parte inferior de la caja del sitio.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Lista</a>, da clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
+</ul>
+</li>
+<li>Desplázate a la sección <span class="text-section">Configuraciones Adicioneles</span>.</li>
+<li>A la derecha de <span class="text-object">Opciones Web</span>, da clic al botón <strong>Modificar</strong>.</li>
+<li>A la derecha de <span class="text-object">Aplicación Web Firewall</span>, da clic a la palanca para habilitarlo o deshabilitarlo.</li>
+<li>Da clic en el botón <strong>Guardar Cambios</strong>.</li>
+</ol>
+<p>La opción Aplicación Web Firewall permite el uso de un módulo de seguridad especial para tu sitio web. Esta opción bloquea muchos ataques comunes que pueden comprometer tu sitio web, pero no hay garantías de que se eviten todos los ataques. Con esto habilitado, DreamHost garantiza de manera proactiva que se eviten los ataques más conocidos.</p>
+</div>
+<h2><span id="mod_security_related_log_entries">Entradas de registro relacionadas con mod_security</span></h2>
+<div class="solvvy-solution">
+<p>DreamHost usa el código&nbsp;<a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error">HTTP response code 418</a>. Si ves códigos de respuesta 418 en tus archivos <a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-de-errores-v%C3%ADa-SFTP" target="_self">access.log</a>, significa que la solicitud fue bloqueada por mod_security. Sin embargo, esto puede no significar que un visitante específico fue bloqueado, sino más bien una solicitud a tu sitio web. Debes leer tus entradas de registro para determinar qué causó el error 418.</p>
+<p>Los detalles adicionales relacionados con el bloque a menudo se encuentran en la entrada correspondiente de error estampado en la fecha <a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-de-errores-v%C3%ADa-SFTP" target="_self">error.log</a>. Si tienes problemas para descifrar por qué obtienes un error 418 en tus archivos de registro, no dudes en ponerte en contacto con el soporte técnico en&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener noreferrer">Contactar a Soporte</a>.</p>
+</div>
+<h2>Reglas mod_security de&nbsp;<span id="DreamHost_mod_security_rules">DreamHost </span></h2>
+<div class="solvvy-solution">
+<p>Si bien la mayoría del conjunto de reglas mod_security de DreamHost se crea de forma personalizada a medida que surgen las amenazas, la base del conjunto de reglas mod_security de DreamHost proviene del&nbsp;<a href="https://owasp.org/www-project-modsecurity-core-rule-set/">conjunto de reglas básicas mod_security de OWASP</a>.</p>
+</div>
+<h2>Mensaje de error 'Unused'</h2>
+<div class="solvvy-solution">
+<p>Cuando un usuario que visita tu sitio activa una respuesta de error 418, aparece el siguiente mensaje de error:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Unused. The server encountered an internal error or misconfiguration and was unable to complete your request.</pre>
+</div>
+<p>El error 418 indica que hay una prohibición temporal de <span class="text-product">mod_security</span> en el servidor. Muy a menudo, esto se desencadena por múltiples intentos fallidos de inicio de sesión en un sitio de WordPress. Una vez activado, el mensaje aparece después de cualquier intento posterior de acceder a la página de inicio de sesión.</p>
+<div class="notebox-important">
+<p>El soporte de DreamHost no puede eliminar esta prohibición una vez que se ha activado. Para que la prohibición caduque, el usuario debe dejar de acceder al servidor durante 10 minutos.</p>
+</div>
+<p>Si estás viendo el error 418 fuera del contexto de un inicio de sesión de un sitio WordPress, por favor revisa tus&nbsp;<a href="/hc/es/sections/203242117-Logs">archivos de entrada de registro error y acceso</a>&nbsp;para ver los errores de respuesta o&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener noreferrer">Contacta a Soporte</a>.</p>
+</div>
+<h2><span id="Una_nota_importante_sobre_la_modificacion_de_las_reglas_de_.htaccess_mod_security">Modificar las reglas de mod_security en un archivo .htaccess</span></h2>
+<div class="solvvy-solution">
+<p>La desactivación y modificación de las reglas de mod_security a través de un archivo <span class="text-object">.htaccess</span> no es compatible en este momento.</p>
+</div>
+<h2><span id="See_also">Ver también</span></h2>
+<div class="solvvy-hidden">
+<h3>Enlaces Internos</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215608187-Mantener-tu-panel-DreamHost-seguro">Mantener tu panel de DreamHost seguro</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214916918-Mantener-tu-sitio-web-seguro">Mantener tu sitio web seguro</a></li>
+</ul>
+<h3>Enlaces Externos</h3>
+<ul>
+<li><a href="https://github.com/SpiderLabs/ModSecurity">Sitio oficial Mod_security</a></li>
+<li><a href="https://github.com/SpiderLabs/ModSecurity/wiki">Manual de referencia mod_security</a></li>
+<li><a href="https://modsecurity.comodo.com/">¿Qué es mod_security?</a></li>
+</ul>
+</div>
