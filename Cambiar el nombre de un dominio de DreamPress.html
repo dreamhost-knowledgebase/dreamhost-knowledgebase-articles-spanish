@@ -1,0 +1,81 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica cómo cambiar el nombre de tu sitio DreamPress a un nombre de dominio diferente. Estas instrucciones se pueden usar para un nombre de dominio regular como <strong>example.com</strong> o un dominio temporal de DreamPress como <strong>example.dream.press</strong>.</p>
+<p>Asegúrate de que el dominio al que está cambiando el nombre ya esté configurado como <a href="https://help.dreamhost.com/hc/es/articles/360056398191-Configurar-tu-dominio-como-Solo-DNS-" target="_self" rel="undefined">Solo DNS</a>. Luego puedes usar el cambiador de nombres de dominio en el panel.</p>
+<div class="notebox-note">
+<p>Puedes usar el cambiador de nombres de dominio en el panel de DreamPress para cambiar cualquier dominio temporal, no solo los subdominios <strong>dream.press</strong>.</p>
+</div>
+</div>
+<h2>Preparar tu dominio para la migración</h2>
+<div class="solvvy-solution">
+<p>Confirma lo siguiente para el dominio al que estás moviendo. Si alguno de los siguientes elementos no está configurado, tu sitio no se conectará después de moverlo.</p>
+<h3>Eliminar alojamiento</h3>
+<p>El dominio al que mueves no se puede alojar. Si es así, debes eliminar el alojamiento del dominio antes de continuar. Puedes hacer esto configurando el dominio como <a href="https://help.dreamhost.com/hc/es/articles/360056398191-Configurar-tu-dominio-como-Solo-DNS-" target="_self" rel="undefined">Solo DNS</a>. Esto es para que el dominio se pueda mover de forma segura sin romper un sitio en vivo.</p>
+<h3>Eliminar DNS personalizados</h3>
+<p>Asegúrate de que no hayan <a href="https://help.dreamhost.com/hc/es/articles/360035516812-Agregar-registros-DNS-personalizados" target="_self">Registros de DNS personalizados</a> como registros <strong>A</strong> o <strong>CNAME</strong> en el dominio al que estás moviendo (si existe alguno que apunte a un host web diferente). Si los hay, elimina los registros personalizados. Otros registros DNS personalizados están bien para dejarlos en su lugar.</p>
+</div>
+<div class="steps-section--container">
+<div class="steps-section--border">&nbsp;</div>
+<div class="steps-section--content">
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-1.svg" width="50px" />
+<h2><span id="Paso_1_Cambiar_tu_domino">Paso 1 — Cambiar tu dominio</span></h2>
+<div class="solvvy-solution">
+<div class="notebox-note">
+<p><a href="/hc/es/articles/115006051887-Usando-Jetpack-con-DreamPress" target="_self">JetPack Premium</a> no se conectará automáticamente cuando cambies el nombre de tu dominio. Para volver a conectar, simplemente vuelve a iniciar sesión en tu página de administración de WordPress. JetPack debe volver a conectarse después de iniciar sesión.</p>
+</div>
+<p>Para cambiar el dominio de DreamPress:</p>
+<ol>
+<li>Navega hasta la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=wordpress.dreampress&amp;" target="_blank" rel="noopener noreferrer">WordPress Administrado</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-dreampress-domain.png" alt="DreamPress domain" width="474" height="136" /></dd>
+</dl>
+</li>
+<li>Da clic en el botón <strong>Administrar</strong>&nbsp;al lado de tu dominio.</li>
+<li>Da clic en la pestaña <span class="text-object">Dominio</span> en la parte superior.</li>
+<li>Tienes dos opciones para cambiar el nombre.<br />
+<h3>Usa un dominio de tu propiedad</h3>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-dreampress-change-domain.png" alt="DreamPress domain" width="365" height="352" /></dd>
+</dl>
+Esta opción te permite ingresar un nombre de dominio que ya posees. El panel lo agregará por ti.<br />
+<h3>Elige dominios existentes</h3>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-dreampress-change-existing-domain.png" alt="Dreampress change domain" width="343" height="341" /></dd>
+</dl>
+Esta opción te permite elegir un dominio que ya has agregado a tu panel.</li>
+<li>Haz clic en el botón <strong>Cambiar Domino</strong>.
+<dl>
+<dd><em>Aparece la siguiente advertencia que Te notifica que se eliminarán las copias de seguridad anteriores del antiguo nombre de dominio.</em></dd>
+</dl>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-dreampress-change-domain-warning.png" alt="Dreampress change domain" width="323" height="101" /></dd>
+</dl>
+<dl>
+<dd><em>El DNS tarda entre 4 y 6 horas en actualizarse para tu nuevo dominio en DreamHost.</em></dd>
+</dl>
+</li>
+</ol>
+</div>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-2.svg" width="50px" />
+<h2><span id="Paso_1_Esperar_a_que_se_actualice_tu_DNS_DreamHost">Paso 2 — Esperar a que se actualice tu DNS DreamHost</span></h2>
+<div class="solvvy-solution">
+<p>Como se indicó anteriormente, el DNS puede tardar entre 4 y 6 horas en actualizarse en DreamHost. Si apuntas tu DNS en tu host actual a DreamHost antes de que el DNS se haya actualizado en los servidores de DreamHost, el sitio no se conectará.</p>
+<p>Se recomienda que esperes de 4 a 6 horas antes de actualizar tu DNS en tu host actual.</p>
+</div>
+</div>
+<div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-3.svg" width="50px" />
+<h2><span id="Paso_1_Actualizacion_de_tu_DNS_en_tu_alojamiento_actual">Paso 3 — Actualización de tu DNS en tu alojamiento actual</span></h2>
+<div class="solvvy-solution">
+<p>Finalmente, inicia sesión en tu registrador actual y <a href="/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-apunto-mi-sitio-" target="_self">apunta tu DNS a DreamHost</a>. Después de que el DNS <a href="/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">propague</a>, tu sitio estará alojado con DreamPress.</p>
+</div>
+</div>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="/hc/es/articles/214581158-Generalidades-sobre-DreamPress" target="_self">Generalidades sobre DreamPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214583258-Agregar-DreamPress-a-un-dominio-nuevo" target="_self">Agregar DreamPress a un dominio nuevo</a></li>
+</ul>
+</div>

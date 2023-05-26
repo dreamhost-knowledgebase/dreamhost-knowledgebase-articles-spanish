@@ -1,15 +1,17 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>PHPMailer te permite enviar correos desde tu sitio a través de SMTP. Visita la <a href="https://github.com/PHPMailer/PHPMailer/blob/master/README.md">página de GitHub de PHPMailer</a> para obtener más detalles sobre lo que tiene para ofrecer.</p>
+<div class="notebox-important">
 <p>Este artículo explica cómo instalar PHPMailer en un servidor Shared. Si tu sitio web está en un Servidor VPS o Dedicado, visita el siguiente artículo.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360031176531-PHPMailer-Instalaci%C3%B3n-en-un-servidor-VPS-o-Dedicado" target="_self" rel="undefined">Instalación de PHPMailer en un Servidor VPS o Dedicado</a></li>
 </ul>
+</div>
 <div class="notebox-note">
 <p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
 </div>
 </div>
-<h2><span id="How_to_download_PHPMailer">Instalar PHPMailer</span></h2>
+<h2><span id="Instalar_PHPMailer">Instalar PHPMailer</span></h2>
 <div class="solvvy-solution">
 <ol>
 <li>Inicia sesión en tu servidor a tráves de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
@@ -35,11 +37,15 @@ Esto crea un directorio llamado <span class="text-object">PHPMailer-master</span
 </li>
 </ol>
 </div>
-<h2><span id="Basic_code_example">Código básico de ejemplo para correo alojado en DreamHost</span></h2>
+<h2><span id="Codigo_basico_de_ejemplo_para_correo_alojado_en_DreamHost">Código básico de ejemplo para correo alojado en DreamHost</span></h2>
 <div class="solvvy-solution">
-<p>Inserta el siguiente código en un archivo PHP.</p>
+<p>Crea un nuevo archivo de PHP y llamalo algo como <span class="text-object">phpmail.php</span></p>
+<div class="notebox-note">
+<p>Puede tener cualquier nombre y ser ubicado en cualquier directorio.</p>
+</div>
+<p>Inserta el siguiente código en el archivo de PHP.</p>
 <div class="notebox-important">
-<p>Solo necesitas acutalizar el código en negrilla.</p>
+<p>Solo necesitas acutalizar el código en negrita.</p>
 <p><strong>nombre de usuario </strong>— Asegurate de cambiar el campo 'username' a tu actual&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">nombre de usuario Shell</a>. También, puedes ver esto corriendo el siguiente comando.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">echo $USER</span>
@@ -101,6 +107,25 @@ try {
 <p>Opcionalmente, puedes usar el puerto 587 con TLS.</p>
 </div>
 </div>
+<h2>Correr el archivo</h2>
+<div class="solvvy-solution">
+<p>El archivo que creaste es un archivo de PHP simple, por lo que se puede ejecutar así:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">php phpmail.php</span></pre>
+</div>
+<p>Esto envía un correo a la dirección del destinatario que agregaste al script.</p>
+</div>
+<h2>Usar PHPMailer en un formulario de contacto</h2>
+<div class="solvvy-solution">
+<p>El código anterior es un ejemplo simple que envía un correo cuando se ejecuta el script. La mayoría de las veces, se usa un formulario de contacto para enviar el correo. Revisa el siguiente enlace para ver un ejemplo del uso de PHPMailer en un formulario de contacto.</p>
+<ul>
+<li><a href="https://github.com/PHPMailer/PHPMailer/blob/master/examples/simple_contact_form.phps" target="_self">simple_contact_form.phps</a></li>
+</ul>
+<p>La siguiente página enumera ejemplos adicionales de otras formas en que podrías usar PHPMailer.</p>
+<ul>
+<li><a href="https://github.com/PHPMailer/PHPMailer/tree/master/examples">https://github.com/PHPMailer/PHPMailer/tree/master/examples</a></li>
+</ul>
+</div>
 <h2>Permitir que GMAIL envíe desde tu aplicación de correo</h2>
 <div class="solvvy-solution">
 <p>Si estás usando tu dirección de GMAIL para enviar a través de SMTP, primero debes permitir que tu aplicación acceda a tu dirección de GMAIL. Si no haces esto, tu correo no se autenticará y no se enviará. Mira el siguiente artículo para más detalles:</p>
@@ -108,13 +133,13 @@ try {
 <li><a href="https://help.dreamhost.com/hc/es/articles/115001719551-Soluci%C3%B3n-de-problemas-de-errores-de-autenticaci%C3%B3n-SMTP-de-GMAIL">Solucionar problemas de errores de autenticación de SMTP de GMAIL</a></li>
 </ul>
 </div>
-<h2><span id="See_also">Ver también</span></h2>
+<h2><span id="Ver_tambien">Ver también</span></h2>
 <div class="solvvy-hidden">
 <h3>Enlaces internos</h3>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
 <li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215507058-Generalidades-PHP-mail-">Generalidades sobre PHP mail()</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216140597--Como-env%C3%ADo-correo-PHP-v%C3%ADa-SMTP-">¿Cómo enviar un correo PHP a tráves SMTP?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216140597-Enviar-correo-PHP-v%C3%ADa-SMTP">Enviar correo PHP vía SMTP</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215507068-Soluci%C3%B3n-de-problemas-PHP-mail-">Solucionar problemas de PHP mail()</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215730437-L%C3%ADmites-de-cuota-SMTP">Límites de cuota SMTP</a></li>
 </ul>
