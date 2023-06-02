@@ -1,8 +1,7 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
 <p>Un certificado autofirmado es un certificado SSL que no ha sido validado por una Autoridad de certificación (CA). Eso es lo que significa que está firmado por uno mismo.</p>
-<p>El nivel de cifrado puede ser el mismo que el de cualquier otro certificado, pero debido a que no está validado por una CA, el navegador mostrará una advertencia cuando se visite el sitio.</p>
-<p>Por esta razón, estos tipos de certificados solo se recomiendan para uso interno en un sitio web donde ningún visitante lo vería o entraría en contacto con el sitio.</p>
+<p>El nivel de cifrado puede ser el mismo que el de cualquier otro certificado, pero debido a que no está validado por una CA, el navegador mostrará una advertencia cuando se visite el sitio. Por esta razón, estos tipos de certificados solo se recomiendan para uso interno en un sitio web donde ningún visitante lo vería o entraría en contacto con el sitio.</p>
 </div>
 <h2><span id="Advertencias_del_navegador_para_certificados_autofirmados">Advertencias del navegador para certificados autofirmados</span></h2>
 <div class="solvvy-solution">
@@ -11,13 +10,13 @@
 <p>Si deseas atraer visitantes a tu sitio, <strong>NO</strong> uses un certificado autofirmado.</p>
 </div>
 <p><strong>Firefox</strong></p>
-<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-05_ssl_self_signed_warning_01.png" alt="" width="684" height="456" /></p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-05_ssl_self_signed_warning_01.png" alt="ES SSL Self signed warning 1" width="459" height="306" /></p>
 <p><strong>Chrome</strong></p>
-<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-ssl_self_signed_warning_02.png" alt="ES ssl_self_signed_warning_02.png" width="563" height="452" /></p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-ssl_self_signed_warning_02.png" alt="ES ssl_self_signed_warning_02.png" width="458" height="368" /></p>
 </div>
 <h2>Crear un certificado autofirmado</h2>
 <div class="solvvy-solution">
-<p>En el panel de DreamHost no hay forma de agregar un certificado autofirmado. Tienes dos opciones para crear este tipo de certificado.</p>
+<p>Existen dos opciones para crear este tipo de certificado para usar en DreamHost.</p>
 <ul>
 <li>Crearlo a través de la línea de comando SSH.</li>
 <li>Sitio web externo.</li>
@@ -26,32 +25,22 @@
 <p>Puedes correr estos comandos en un computador Linux o Mac, sin embargo, estas instrucciones muestran cómo iniciar sesión en tu servidor web DreamHost para correr los comandos.</p>
 <ol>
 <li>Inicia sesión en tu servidor web DreamHost a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
-<li>Conéctate a tu dominio a través de SSH. Visita el artículo de SSH para obtener instrucciones.</li>
-<li>Una vez que hayas iniciado sesión en tu servidor a través de SSH, asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de tu usuario</a>:
+<li>Navega al <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio home de tu usuario</a>:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[servidor]$ </span><span class="command">cd ~</span></pre>
 </div>
 </li>
-<li>Usa <span class="code">openssl</span> para crear tu clave privada que usarás para crear el CSR. Escribe lo siguiente para abrir la herramienta de línea de comandos OpenSSL.
+<li>Genera la nueva llave privada RSA ingresando el siguiente comando:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[servidor]$ </span><span class="command">openssl</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">openssl genrsa -out Private.key 2048</span></pre>
 </div>
 <dl>
-<dd><em>El símbolo del sistema ahora cambia a <span class="code">OpenSSL&gt;</span>, lo que significa que estás listo para correr los siguientes comandos.</em></dd>
+<dd><em>Esto crear un archivo llamado <span class="text-object">Private.key</span>.</em></dd>
 </dl>
 </li>
-<li>Genera una nueva clave privada RSA ingresando el siguiente comando sin contraseña:
+<li>Crea el certificado usando este nuevo archivo con la llave privada.
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">OpenSSL&gt; </span><span class="command">genrsa -out Private.key 2048</span>
-Generating RSA private key, 2048 bit long modulus
-........................................................+++
-........................................................+++
-e is 65537 (0x10001)</pre>
-</div>
-</li>
-<li>Crea el certificado con esta nueva clave privada.
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">OpenSSL&gt; </span><span class="command">req -new -x509 -key Private.key -out Certificate.crt -days 365</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">openssl req -new -x509 -key Private.key -out Certificate.crt -days 365</span>
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
 What you are about to enter is what is called a Distinguished Name or a DN.
@@ -67,11 +56,8 @@ Organizational Unit Name (eg, section) []:
 Common Name (e.g. server FQDN or YOUR name) []:
 Email Address []:</pre>
 </div>
-</li>
-<li>El paso anterior te solicita la información de tu sitio para crear una CSR. Puedes hacer clic en estas opciones sin ingresar nada, ya que tu navegador lanzará una advertencia para el certificado autofirmado de forma predeterminada.</li>
-<li>Cierra sesión en OpenSSL.
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">OpenSSL&gt;</span><span class="command"> quit</span></pre>
+<div class="notebox-note">
+<p>Luego de correr el comando, se te pregunratá la información de tu sitio para crear un CSR. Puedes presionar la tecla <span class="code">Ingresar</span> a través de estas opciones sin ingresar nada pues el buscador lanzará una advertencia para el certificado Auto-firmado por defecto.</p>
 </div>
 </li>
 <li>Confirma que tu clave privada y tu certificado han sido creados.
@@ -97,7 +83,7 @@ Private.key</pre>
 <li><a href="https://getacert.com/index.html" target="_self">https://getacert.com/index.html</a></li>
 </ul>
 </div>
-<h2>Obligar a tu sitio a cargar con HTTPS por defecto</h2>
+<h2>Forzar a tu sitio a cargar con HTTPS por defecto</h2>
 <div class="solvvy-solution">
 <p>Incluso después de haber agregado el certificado SSL a tu sitio, los visitantes no podrán usarlo a menos que escriban manualmente <span class="text-object">https</span> antes del nombre de tu dominio. Esto anula el propósito de agregarlo en primer lugar, ya que el certificado está destinado a proteger todo el tráfico de tu sitio web.</p>
 <p>Hay varias formas de arreglar esto. Consulta el siguiente artículo para obtener instrucciones sobre cómo crear un archivo de configuración para redirigir todo el tráfico de visitantes a la versión segura de tu URL (<span class="text-object">https</span>).</p>
