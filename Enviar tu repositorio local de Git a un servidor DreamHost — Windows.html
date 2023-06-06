@@ -9,7 +9,7 @@
 <div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-1.svg" width="50px" />
 <h2>Paso 1 —&nbsp;<span id="Enviar_desde_Linux">Crear una llave de emparejamiento de SSH</span></h2>
 <div class="solvvy-solution">
-<p>Este paso explica como crear una llave de emparejamiento de SSH en tu computador Windows. Necesitarás usar esto par aconectarte a tu servidor de DreamHost.</p>
+<p>Este paso explica como crear una llave de emparejamiento de SSH en tu computador Windows. Debes crear llaves de SSH para interactuar con tu servidor de DreamHost.</p>
 <ol>
 <li>Descarga e instala Git para Windows:
 <ul>
@@ -22,7 +22,7 @@
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/gitgui_01.png" alt="gitgui.png" /></dd>
 </dl>
 </li>
-<li>Debes crear llaves de SSH para interactuar con tu servidor de DreamHost. Del menú de inicio, localiza el programa que acabas de instalar. Busca <span class="text-object">Git Gui</span>.&nbsp;
+<li>Del menú de inicio, localiza el programa que acabas de instalar. Busca <span class="text-object">Git Gui</span>.&nbsp;
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/gitgui_02.png" alt="gitgui.png" /></dd>
 </dl>
@@ -34,15 +34,21 @@
 </li>
 <li>Del menú desplegable, da clic en <strong>Generate Key</strong> en la parte superior derecha.
 <dl>
+<dd><em>Se te pide ingresar una frase de acceso:</em></dd>
+</dl>
+<dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/gitgui_04.png" alt="gitgui.png" /></dd>
 </dl>
 </li>
-<li>Se te pregunta por una frase secreta. Deja el campo de ingreso vacío y da clic en <strong>OK</strong> dos veces.
+<li>Deja el campo de ingreso vacío y da clic en <strong>OK</strong> dos veces.
+<dl>
+<dd><em>Tu llave pública se muestra:</em></dd>
+</dl>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/gitgui_05.png" alt="gitgui.png" /></dd>
 </dl>
 </li>
-<li>Tu llave pública se muestra. Da clic en <strong>Copy To Clipboard</strong>.&nbsp;</li>
+<li>Da clic en <strong>Copy To Clipboard</strong>.&nbsp;</li>
 <li>Abre el menú de inicio y abre el programa <span class="text-object">Block de notas</span>. Una vez abierto, pega la llave pública.</li>
 <li>Guarda el archivo y nómbralo algo así como <span class="text-object">dreamhost-git-key.pub</span>. Asegúrate de guardarlo en la carpeta <span class="text-object">Documentos</span>.</li>
 </ol>
@@ -204,8 +210,7 @@ Si la versión local de tu git es al menos 2.28, corre el siguiente comando <a h
 <h2>Paso 5 — Crear tu repositorio git local</h2>
 <div class="solvvy-solution">
 <p>Estos pasos crean un repositorio git para tu sitio web en el computador de tu hogar. Luego usarás esto para enviar su contenido a tu servidor DreamHost.</p>
-<ol>
-<li>Corre lo siguiente en el directorio de tu proyecto para iniciar el repositorio y crear tu primer commit:
+<p>Corre lo siguiente en el directorio de tu proyecto para iniciar el repositorio y crear tu primer commit:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local ~]$ </span><span class="command">git init</span>
 <span class="server">[local ~]$ </span><span class="command">git add .</span>
@@ -215,14 +220,11 @@ Si la versión local de tu git es al menos 2.28, corre el siguiente comando <a h
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-git_hidden_files.png" alt="ES 01 Git on Windows.png" width="594" height="401" /></dd>
 </dl>
-</li>
-<li>Cuando inicias el repositorio, se crea un directorio titulado <span class="text-object">.git</span>.
+<p>Cuando inicias el repositorio, se crea un directorio titulado <span class="text-object">.git</span>.</p>
 <div class="notebox-tip">
 <p>Por defecto, no puedes ver esto en Windows. Si deseas ver los archivos ocultos (archivos que comienzan con un punto), haz clic en <span class="text-object">Ver</span> en el menú superior. En el menú que se muestra, da clic en <span class="text-object">Mostrar</span> y luego haz clic en la opción <span class="text-object">Elementos ocultos</span>.</p>
 <p>No necesitas ver esta carpeta <span class="text-object">.git</span> para proceder con estos pasos. Esta es solo una forma para ver tus comandos que han creado el repositorio local.</p>
 </div>
-</li>
-</ol>
 </div>
 </div>
 <div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-6.svg" width="50px" />
@@ -269,7 +271,7 @@ dreamhost
 </dd>
 </dl>
 </li>
-<li>Debes clonar el repositorio para ver sus contenidos. Clona el repo a una nueva ubicación corriendo lo siguiente:
+<li>Clona el repositorio a una nueva ubicación corriendo el siguiente comando, el cual te permite ver sus contenidos:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir ~/<span class="code-highlight">cloned-example.com.git</span></span>
 <span class="server">[server]$ </span><span class="command">cd ~/<span class="code-highlight">cloned-example.com.git</span></span>
