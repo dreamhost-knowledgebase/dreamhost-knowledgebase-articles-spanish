@@ -3,7 +3,7 @@
 <p>Para iniciar sesión, necesitarás tu usuario y la dirección IP de la instancia.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined">Cómo encontrar el usuario predeterminado de una imagen</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115001754711-Localizar-las-direcciones-IP-de-tu-instancia" target="_self" rel="undefined">UIbicar una dirección IP de tu instancia</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115001754711-Localizar-las-direcciones-IP-de-tu-instancia" target="_self" rel="undefined">Ubicar una dirección IP de tu instancia</a></li>
 </ul>
 </div>
 <h2>Usar Mac &amp; Linux</h2>
@@ -19,7 +19,7 @@
 <p>Si has creado una Llave de Emparejamiento en el panel, un archivo <span class="text-object">.pem</span> fue automáticamente descargado a tu computador. Mueve ese archivo a tu directorio <span class="text-object">~/.ssh/</span>.</p>
 <p>Por ejemplo, digamos que has llamado a tu llave <span class="text-object">dashboardkey</span> cuando la creaste en el panel. Una llave llamada <span class="text-object">dashboardkey.pem</span> fué descargada.</p>
 <ol>
-<li>Muevela de tu directorio <span class="text-object">/Downloads</span> a <span class="text-object">~/.ssh</span>.<br />
+<li>Mueve el archivo de tu directorio <span class="text-object">/Downloads</span> a <span class="text-object">~/.ssh</span>.<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[macbook]$ </span><span class="command">mv ~/Downloads/dashboardkey.pem ~/.ssh</span></pre>
 </div>
@@ -29,7 +29,7 @@
 <pre class="prebox"><span class="server">[macbook]$ </span><span class="command">chmod 600 ~/.ssh/dashboardkey.pem</span></pre>
 </div>
 </li>
-<li>Ahora puedes iniciar sesión mientras específicas el nombre del archivo:<br />
+<li>Corre el siguiente comando para iniciar sesión mientras específicas el nombre del archivo:<br />
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[macbook]$ </span><span class="command">ssh -i ~/.ssh/dashboardkey.pem <span class="code-highlight">USER@IP_ADDRESS</span></span></pre>
 </div>
@@ -38,13 +38,13 @@
 </div>
 <h2>Si la has creado en tu computador local</h2>
 <div class="solvvy-solution">
-<p>Si has creado la llave de emparejamiento en tu computador local, ahora tienes una llave pública y privada en el directorio <span class="text-object">~/.ssh</span>. Por ejemplo:</p>
+<p>Si has creado la Llave de Emparejamiento en tu computador local, ahora tienes una llave pública y privada en el directorio <span class="text-object">~/.ssh</span>. Por ejemplo:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[macbook]$ </span><span class="command">ls -la ~/.ssh</span>
 id_rsa
 id_rsa.pub</pre>
 </div>
-<p>Puedes ahora iniciar sesión corriendo lo siguiente (asegúrate de cambiarla a tu IP como se muestra):</p>
+<p>Ahora puedes iniciar sesión corriendo lo siguiente (asegúrate de cambiarla a tu IP como se muestra):</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[macbook]$ </span><span class="command">ssh <span class="code-highlight">USER@IP_ADDRESS</span></span></pre>
 </div>
@@ -70,6 +70,16 @@ Enter the file in which you wish to save they key
 <h2>Usar un archivo ~.ssh/config para simplificar el inicio de sesión</h2>
 <div class="solvvy-solution">
 <p>También puedes crear un archivo 'config' para simplificar el proceso de inicio de sesión. Por ejemplo, puedes simplificarlo por algo como <strong>ssh dhc</strong>.</p>
+<div class="notebox-note">
+<p>Aquí hay un ejemplo completo de cómo se vería un archivo <span class="text-object">~/.ssh/config</span>. Este ejemplo asume que descargaste la llave privada desde el panel como un archivo <span class="text-object">.pem</span> y que el usuario es 'ubuntu'.</p>
+<div class="preboxcontainer">
+<pre class="prebox">Host dhc
+
+HostName 208.113.167.187
+User ubuntu
+IdentityFile ~/.ssh/dashboardkey.pem</pre>
+</div>
+</div>
 <ol>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crea un archivo config</a> en tu directorio <span class="text-object">~/.ssh</span>.</li>
 <li>Editar el archivo para agregar lo siguiente:<br />
@@ -80,16 +90,7 @@ Enter the file in which you wish to save they key
 <li>IdentityFile: Esto es necesario si tu llave privada es llamada diferente de id_rsa</li>
 </ul>
 </li>
-<li>He aquí un ejemplo completo de como el archivo <span class="text-object">~/.ssh/config</span> se vería. Este ejemplo asume que la llave privada fué descargada del panel como un archivo <span class="text-object">.pem</span> y el usuario es 'ubuntu'.<br />
-<div class="preboxcontainer">
-<pre class="prebox">Host dhc
-
-HostName 208.113.167.187
-User ubuntu
-IdentityFile ~/.ssh/dashboardkey.pem</pre>
-</div>
-</li>
-<li>Ahora puedes iniciar sesión en tu instancia de servidor con el siguiente comando.<br />
+<li>Corre el siguiente comando para iniciar sesión en tu instancia.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@server]$ </span><span class="command">ssh dhc</span></pre>
 </div>

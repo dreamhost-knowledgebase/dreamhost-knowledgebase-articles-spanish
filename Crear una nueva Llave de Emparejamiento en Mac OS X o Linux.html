@@ -1,0 +1,77 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p><span class="text-object">ssh-keygen</span> es un programa que se puede encontrar en Mac, Linux y otros sistemas operativos basados ​​en UNIX. Para obtener más información sobre el programa, consulta lo siguiente de Wikipedia sobre el tema aquí:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Ssh-keygen" target="_blank" rel="noopener noreferrer">ssh-keygen - Wikipedia</a></li>
+</ul>
+</div>
+<h2>Crear una Llave de Emparejamiento</h2>
+<div class="solvvy-solution">
+<p>Para generar una nueva Llave de Emparejamiento, corre los siguientes comandos en el computador de tu hogar.</p>
+<ol>
+<li>Abre tu terminal y corre el siguiente comando con tu nombre de usuario.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">ssh-keygen -t rsa</span></pre>
+</div>
+<dl>
+<dd><em>Esto crea un par de claves pública/privada del tipo (-t) rsa</em></dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox">Generating a public/private rsa key pair.
+Enter the file in which you wish to save they key (i.e., /home/username/.ssh/id_rsa):
+</pre>
+</div>
+</li>
+<li>Presiona <span class="code">Enter</span> en tu teclado para continuar con el nombre y el directorio predeterminado.
+<div class="notebox-note">
+<p>La línea de comando por defecto guarda la nueva Llave par en el directorio <span class="text-object">/home/username/.ssh/</span> y lo llamará <span class="text-object">id_rsa</span>. Sin embargo, tu puedes cambiar la ubicación o el nombre del archivo aquí si deseas escribiendo la ruta completa.</p>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">Enter a passphrase (leave empty for no passphrase).</pre>
+</div>
+</li>
+<li>Presiona <span class="code">Enter</span> en tu teclado para continuar.
+<div class="notebox-important">
+<p>No se recomienda que uses una frase de acceso.</p>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">Enter same passphrase again:</pre>
+</div>
+</li>
+<li>Presiona la tecla <span class="code">Enter</span> en tu teclado para continuar.<br />
+<dl>
+<dd><em>El siguiente mensaje aparece:</em></dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox">Your identification has been saved in /home/username/.ssh/id_rsa
+Your public key has been saved in /home/username/.ssh/id_rsa.pub
+
+The key fingerprint is:
+ar:bc:d3:9e:g3:1f:63:6f:6b:32:2e:97:ee:42:e1:be username@server.dreamhost.com
+
+The key’s randomart image is:
+
++--[ RSA 2048]----+
+| ..+**B.o++o     |
+|  . o+==o. o     |
+|    . .oo.=      |
+|      . +E+ .    |
+|        S .      |
+|                 |
+|                 |
+|                 |
+|                 |
++-----------------+
+</pre>
+</div>
+</li>
+<li>Corre el siguiente comando para ver la nueva Llave pública y privada:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">ls -1 ~/.ssh/</span>
+id_rsa
+id_rsa.pub</pre>
+</div>
+</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214843617--C%C3%B3mo-cargar-una-llave-SSH-a-trav%C3%A9s-del-panel-de-DreamCompute">Importa la llave publica a tu panel de DreamCompute</a>.</li>
+</ol>
+</div>
