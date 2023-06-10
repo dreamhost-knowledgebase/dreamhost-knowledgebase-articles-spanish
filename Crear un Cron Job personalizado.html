@@ -2,23 +2,29 @@
 <div class="solvvy-solution">
 <p>Este artículo muestra cómo crear manualmente un cron job usando tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>. Esto envuelve iniciar sesión dentro del servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>&nbsp;para correr varios comandos.</p>
 <p>Estas instrucciones pueden ser usadas también para editar un cron job existente creado en el panel, sin embargo por simplicidad, es recomendado que si lo has creado en el panel, seguirlo editando desde el panel.&nbsp;Esto es importante ya que agregar un cron job en el panel sobrescribirá tu archivo crontab personalizado como se menciona a continuación.</p>
-<div class="notebox-note">
-<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+<div class="alert-warning">
+<p><strong>Sitios web de DreamPress</strong></p>
+<p>Las instrucciones en este artículo no aplican a los sitios web <a href="https://help.dreamhost.com/hc/es/articles/214581158-Generalidades-de-DreamPress" target="_self">DreamPress</a>. Si necesitas crear un cron job para un sitio web de DreamPress, debe crearse en el panel. Revisa el siguiente artículo par amás información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215088668-Crear-un-cron-job">Crear un cron job</a></li>
+</ul>
 </div>
 </div>
 <h2>Detalles básicos</h2>
 <div class="solvvy-solution">
+<div class="notebox-note">
+<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+</div>
 <p>Los archivos crontab están donde las listas de jobs y otras instrucciones del cron daemon están guardadas. Cada usuario en DreamHost tiene su propio archivo crontab que puede ser accesado corriendo el siguiente comando en tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">crontab -e</span>
 </pre>
 </div>
 <p>Los archivos crontab son simples archivos de texto que tienen un formato en particular. Cada línea del archivo crontab sigue un formato en particular como series de campos, separados por espacios y/o pestañas. Cada campo puede tener un valor singular o series de valores. Un cronjob debe tener exactamente una línea, pero ésta puede ser una línea larga (más de 80 caracteres).</p>
-<h3>Cosas para ver cuando estás creando/editando un crontab</h3>
+<h3>Algunas cosas para ver cuando estás creando/editando un crontab</h3>
 <p>Cada línea tiene cinco campos de tiempo/fecha, seguido por un comando, seguido por una nueva línea de caracter ('\n'). Un problema común es no incluir una nueva línea, entonces presiona “Enter/Devolverse” una o tres veces al final de tu comando.</p>
 <p>Otro problema común es romper automáticamente un ajuste de línea de una línea larga a múltiples líneas, asegúrate de que tu editor no haga esto.</p>
 <p>Las líneas vacías, los espacios principales y pestañas son ignorados. La líneas que su primer caracter es el signo numeral (#) son ignorados pues son considerados comentarios. Nota que los comentarios no son permitidos en la misma línea que los comandos de cron, pues son interpretados como parte del comando. Similarmente, los comentarios no son permitidos en la misma línea como configuraciones variables del ambiente (cómo <a href="https://help.dreamhost.com/hc/es/articles/215767107#mailto" target="_self">MAILTO</a>).</p>
-</div>
 <h2>¿Que pasa si ya he creado un cron job en el panel dentro del usuario Shell?</h2>
 <div class="solvvy-solution">
 <p>Hay dos manera de crear cron jobs personalizados.</p>
@@ -363,4 +369,5 @@ El tiempo es basado en eso del servidor que corre el cron.
 <li><a href="https://help.dreamhost.com/hc/es/articles/214202238-Generalidades-de-l%C3%ADnea-de-comando-PHP" target="_self">Generalidades de las líneas de comando de PHP</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360038608892-Soluci%C3%B3n-de-problemas-de-Cron-job" target="_self">Solución de problemas de cron job</a></li>
 </ul>
+</div>
 </div>
