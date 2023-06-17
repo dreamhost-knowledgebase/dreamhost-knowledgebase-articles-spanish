@@ -1,79 +1,34 @@
-<h2><span id="seguridad">Generalidades</span></h2>
+<h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>FTP (puerto 21) no se considera un protocolo "seguro". Esto significa que los datos entrantes/salientes no están encriptados y están en texto sin formato. Debido a que los datos no están encriptados, una persona excepcionalmente astuta podría interceptar lo que estás enviando.</p>
-<p>Por este motivo, se recomienda que crees un usuario&nbsp;<a href="#Setting_an_existing_user_to_SFTP">SFTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Shell</a> y solo uses el puerto 22 al conectarte.</p>
-</div>
-<h2><span id="Diferencias-entre-ftp-y-sftp">Diferencias entre FTP y SFTP</span></h2>
-<div class="solvvy-solution">
-<p>SFTP es un protocolo de red diseñado para proporcionar una transferencia segura de archivos a través del protocolo de shell seguro (<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>)&nbsp;SFTP NO es solo una ejecución FTP a través de SSH, sino un nuevo protocolo. A menudo se denomina FTP seguro porque utiliza una capa de transporte cifrada.</p>
-</div>
-<h2><span id="Deshabilitar_el_accesso_a_FTP">Deshabilitar el acceso a FTP</span></h2>
-<div class="solvvy-solution">
-<p>Para deshabilitar el acceso FTP de un usuario:</p>
-<ol>
-<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=users.dashboard" target="_blank" rel="noopener noreferrer">Usuarios &amp; Archivos FTP</a>.<br />
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-button-manage-users-disable-ftp.png" alt="ES panel-button-manage-users-disable-ftp.png" width="306" height="149" /></dd>
-</dl>
-</li>
-<li>Al lado derecho de tu usuario, haz clic en el botón de los 3 puntos verticales.</li>
-<li>De la ventana emergente, da clic en <strong>Denegar conexiones inseguras (FTP)</strong>.
-<dl>
-<dd><em>El panel comienza a actualizar los permisos de este usuario. Cuando haya terminado, se muestra una marca de verificación verde.</em></dd>
-</dl>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-user-updated-green-check.png" alt="User updated" width="59" height="" /></dd>
-</dl>
-</li>
-</ol>
-</div>
-<h2><span id="Habilitar_el_acceso_a_FTP">Habilitar el acceso a FTP</span></h2>
-<div class="solvvy-solution">
-<p>Cuando editas o agregas un nuevo dominio y adicionas un nuevo usuario en el proceso, este se configura automáticamente a SFTP y FTP queda deshabilitado.</p>
-<p>Si necesitas FTP por alguna razón, aún tienes la opción de permitir conexiones inseguras, pero esto <strong>NO ES RECOMENDADO</strong>. Para permitir conexiones inseguras:</p>
-<ol>
-<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=users.dashboard" target="_blank" rel="noopener noreferrer">Archivos y Usuarios FTP</a>.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-button-manage-users-enable-ftp.png" alt="ES panel-button-manage-users-enable-ftp.png" width="294" height="144" /></dd>
-</dl>
-</li>
-<li>Al lado derecho de tu usuario, haz clic en el botón de los 3 puntos verticales.</li>
-<li>De la ventana emergente, da clic en <span class="text-object">Permitir conexiones inseguras (FTP)</span>.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-manage-users-confirm-ftp.png" alt="ES panel-manage-users-confirm-ftp.png" /></dd>
-</dl>
-</li>
-<li>Da clic en <strong>Confirmar Habilitación de FTP</strong>.
-<dl>
-<dd><em>El panel comienza a actualizar los permisos de este usuario. Cuando haya terminado, se muestra una marca de verificación verde.</em></dd>
-</dl>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/panel-user-updated-green-check.png" alt="User updated" width="59" height="" /></dd>
-</dl>
-</li>
-<li>Da clic en el botón <strong>Datos de Ingreso</strong> nuevamente a la derecha del usuario.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-manage-users-ftp-enabled.png" alt="ES panel-manage-users-ftp-enabled.png" /></dd>
-</dl>
-<dl>
-<dd>Un mensaje se muestra notificándote que FTP se ha habilitado:</dd>
-</dl>
-</li>
-</ol>
-</div>
-<h2><span id="deshabilitar">Deshabilitar FTP en un servidor VPS</span></h2>
-<div class="solvvy-solution">
-<p>Si tienes un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a>,&nbsp;puedes desactivar completamente el FTP para asegurar aún más tu servidor. Navega a la página de&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=vps.dashboard&amp;" target="_blank" rel="noopener noreferrer">VPS</a>.&nbsp;A la derecha del servidor, haz clic en el botón <strong>Configurar</strong>.</p>
-<img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-vps-configuration-ftp-server.png" alt="Disable FTP on a VPS" width="379" height="110" />
-<p>Haz clic en el menú desplegable a la derecha de 'Servidor FTP' y selecciona 'Inactivo'. Por último, haz clic en <strong>Guardar la configuración de ps123456</strong> en la parte inferior para guardar.</p>
-</div>
-<h2><span id="notas">Notas sobre el uso de SFTP</span></h2>
-<div class="solvvy-solution">
-<p>Cuando inicies sesión en tu cuenta utilizando SFTP, es posible que notes algunas diferencias con respecto a lo que normalmente verías al iniciar sesión con un usuario de FTP normal.</p>
+<p>Cuando necesitas cargar la información de un sitio web de tu computador local a tu servidor web para que aparezca online, usarías un programa como <a href="https://filezilla-project.org/">FileZilla</a> o <a href="https://cyberduck.io/" target="_self" rel="undefined">Cyberduck</a>. Estos programas se conectan al servidor web usando uno de los siguientes protocolos para conectarte.</p>
 <ul>
-<li>Vas a observar que también puedes acceder a otros directorios que se encuentran sobre el directorio <span class="text-object">/home</span>. Eso es normal, ya que todos los usuarios tienen algún nivel de acceso a esos directorios. Sin embargo, como usuario normal, no podrás ver los archivos a los que no tienes acceso ni puedes dañar el servidor.</li>
+<li><strong>FTP</strong></li>
+<li><strong>SFTP</strong></li>
 </ul>
+<p>Este artículo explica la diferencia entre estos protocolos y cual debes usar cuando te conectes a tu servidor.</p>
+</div>
+<h2>Diferencias entre FTP y SFTP</h2>
+<div class="solvvy-solution">
+<h3>FTP</h3>
+<p>FTP (File Transfer Protocol) es un protocolo de red antiguo que transfiere archivos entre tu computador y el servidor web. El problema con FTP es que los datos <strong>no</strong> se cifran durante la transferencia, lo que los hace inseguros.</p>
+<div class="alert-warning">
+<p>Debido a que los datos no están encriptados, una persona excepcionalmente astuta podría espiar lo que estás enviando. Por esta razón, nunca se debe utilizar FTP.</p>
+</div>
+<h3>SFTP</h3>
+<p>SFTP (Secure File Transfer Protocol) es el protocolo de red moderno que transfiere archivos entre tu computador y el servidor web. Realiza las mismas funciones básicas que el FTP y, al mismo tiempo, cifra tus datos durante la transferencia.</p>
+<div class="notebox-tip">
+<p>Dado que los datos están encriptados, este protocolo es seguro de usar.</p>
+</div>
+</div>
+<h2>FTP y SFTP en DreamHost</h2>
+<div class="solvvy-solution">
+<p>Todos los usuarios web de DreamHost están configurados para usar SFTP y el puerto 22.</p>
+<p>Cuando uses un programa como <a href="https://filezilla-project.org/">FileZilla</a> o <a href="https://cyberduck.io/" target="_self" rel="undefined">Cyberduck</a> para conectarte a tu servidor web, DreamHost recomienda usar siempre SFTP y el puerto 22 para garantizar que sus datos permanezcan seguros y protegidos.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
 <ul>
-<li><strong><span id="archivos-directorios-ocultos">Archivos/Directorios ocultos</span></strong>: En un sistema Unix, los archivos ocultos son aquellos que comienzan con un punto (.) en su nombre. Al igual que con los clientes FTP, los clientes SFTP generalmente tienen la opción de "habilitar/deshabilitar la visualización de archivos ocultos". Si está habilitada, podrás ver estos archivos/directorios (si tu usuario tiene permisos para hacerlo). Si tienes problemas para eliminar un directorio (suponiendo que tiene los permisos correctos para eliminar) y te da un error que dice "el directorio no está vacío", es posible que haya archivos/directorios ocultos en ese directorio que tu cliente FTP no está permitiéndote ver. Verifica las opciones de tu programa antes de continuar. Si tienes la opción habilitada para ver los archivos/directorios ocultos y aún no puedes eliminar un directorio, contacta a soporte para más ayuda. Provee a soporte con el nombre del servidor, la cuenta de usuario y la ruta completa del directorio que estás tratando de eliminar para que puedan investigar. Visita el artículo <a href="https://help.dreamhost.com/hc/es/articles/215613037-Como-ver-archivos-ocultos-en-un-cliente-FTP" target="_self">Como ver archivos ocultos en un cliente FTP</a> para más información.</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">Generalidades sobre FTP y credenciales</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215613107-Listas-de-clientes-de-software-de-FTP">Listas de clientes de software de FTP</a></li>
 </ul>
 </div>
