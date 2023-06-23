@@ -1,42 +1,66 @@
-<h2>Agregar un usuario de Shell</h2>
+<h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Visita el artículo acceso <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Crear un usuario con Shell (SSH) acceso</a> para obtener instrucciones sobre cómo agregar un usuario Shell normal a tu Servidor Dedicado.</p>
-<p>El usuario de Shell puede ejecutar comandos básicos de Shell después de iniciar sesión en el servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</p>
+<p>Este artículo explica cómo agregar un usuario administrador a tu servidor Dedicado. Este usuario es diferente de un <a href="https://help.dreamhost.com/hc/es/articles/4402199390996-Diferencia-entre-los-usuarios-de-SFTP-y-Shell" target="_self">usuario SFTP o Shell (SSH)</a> normal ya que puede ejecutar comandos root/sudo en el servidor, lo que permite un mayor control sobre la personalización de las configuraciones del sistema o la instalación de software.</p>
+<div class="alert-warning">
+<p><strong>Una nota importante sobre los cambios personalizados de los usuarios Administradores</strong></p>
+<p>Con un usuario administrador, puedes hacer cambios de root/sudo en tu servidor, pero ten en cuenta que DreamHost aún administra tu servidor Dedicado. Esto significa que si haces cambios personalizados en Apache, se sobrescribirán cada vez que se ejecute una configuración de Apache. Esto puede suceder al agregar alojamiento a un dominio o al agregar un certificado SSL.</p>
+<p><strong>Si haces cambios personalizados, asegúrate de anotar claramente cuáles fueron para que pueda corregir rápidamente cualquier cosa que se haya sobrescrito.</strong></p>
+</div>
 </div>
 <h2><span id="Agregar_un_usuario_administrador">Agregar un usuario administrador</span></h2>
 <div class="solvvy-solution">
-<p>El usuario normal de Shell no puede ejecutar comandos sudo/root en el servidor. Si necesitas ejecutar comandos sudo/root, debes crear un usuario administrador.</p>
 <p>Para agregar un usuario administrador:</p>
 <ol>
-<li>Ve a la página de <a class="panel-link" href="https://panel.dreamhost.com/?tree=dedicated.usersdashboard" target="_blank" rel="noopener noreferrer">Usuarios Administradores</a>&nbsp;en tu panel.
+<li>Ve a la página de <a class="panel-link" href="https://panel.dreamhost.com/?tree=dedicated.usersdashboard" target="_blank" rel="noopener noreferrer">Usuarios Administradores</a>&nbsp;en tu panel.</li>
+<li>En la parte superior derecha, da clic en el botón <strong>Crear Usuario</strong>.
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-dedicated-add-user-01.png" alt="es-panel-dedicated-add-user-01.png" width="751" height="133" /></dd>
-</dl>
-</li>
-<li>Haz clic en el botón <strong>+ Agregar un Usuario</strong> la esquina superior derecha.
-<dl>
-<dd><em>Aparece la página de 'Add User Details:</em></dd>
-</dl>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-dedicated-add-user-02.png" alt="es-panel-dedicated-add-user-02.png" width="753" height="518" /></dd>
+<dd><em>Aparece un panel de 'Crear Usuario' en la parte derecha:</em></dd>
 </dl>
 </li>
 <li>Ingresa lo siguiente:
 <ul>
 <li><strong>Nombre de Usuario</strong> — Un nombre de usuario para el nuevo usuario.</li>
-<li><strong>Apodo</strong> — Un apodo para el nuevo usuario. Este es un nombre de referencia rápida que solo se muestra en tu panel.</li>
-<li><strong>¿A qué servidor tendrá acceso este usuario?</strong> — Haz clic en la flecha hacia abajo y selecciona el Servidor Dedicado al que tendrá acceso el usuario.</li>
-<li><strong>Selecciona el tipo de Shell</strong> — Selecciona el tipo de Shell que deseas utilizar. Puedes seleccionar bash, tcsh, ksh o zsh de la lista desplegable. Visita el artículo de <a href="https://help.dreamhost.com/hc/es/articles/216557548-Shell-disponibles-en-DreamHost" target="_self">tipos de Shell</a> para obtener más información.</li>
-<li><strong>He leído y acepto los términos de uso</strong> — Marca la casilla de verificación. Debes marcar la casilla de verificación 'términos de uso' para agregar un nuevo usuario administrador.</li>
+<li><strong>Servidor</strong> — Selecciona el servidor Dedicado del menú desplegable.</li>
+<li><strong>Contraseña</strong> — Puedes ingresar tu propia contraseña o dar clic en el botón <strong>Generar contraseña segura</strong> para permitir que el panel cree una por tí.</li>
+<li><strong>Acceso Shell Seguro (SSH)</strong> — Selecciona el tipo de Shell que deseas usar. Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/216557548-Shell-disponibles-en-DreamHost" target="_self">tipos de Shell</a> para más información.</li>
+<li><strong>Términos de uso del usuario administrador</strong> — Lee los términos de uso, luego revisa la casilla llamada <span class="text-object">He leído y acepto los términos de uso</span>.</li>
 </ul>
 </li>
-<li>Cuando termines, haz clic en el botón <strong>Crear Usuario</strong>.</li>
+<li>Da clic en el botón <strong>Crear Usuario</strong>.
+<dl>
+<dd><em>Aparece entonces el usuario en la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=dedicated.usersdashboard" target="_blank" rel="noopener noreferrer">Usuarios Administradores</a>, señalado por un icono.</em></dd>
+</dl>
+</li>
 </ol>
 </div>
-<h2>Nota importante sobre los cambios personalizados del usuario administrador</h2>
+<h2>Asignar un usuario administrador a un dominio</h2>
 <div class="solvvy-solution">
-<p>Con un usuario administrador, puedes realizar cambios de root/sudo en tu servidor, pero ten en cuenta que DreamHost todavía administra tu Servidor Dedicado. Esto significa que si realizas cambios personalizados en Apache, se sobrescribirán cada vez que se ejecute una configuración de Apache. Esto puede suceder al agregar alojamiento a un dominio o al agregar un certificado SSL.&nbsp;</p>
-<p>Si realizas cambios personalizados, asegúrate de anotar claramente cuáles fueron para poder corregir rápidamente cualquier cosa que se haya sobrescrito.</p>
+<p>Cuando se crea un usuario administrador, no se asigna a un dominio en específico. Esto es porque el propósito del usuario administrador es iniciar sesión directamente en el servidor para correr los comandos sudo/root. Si intentas <a href="https://help.dreamhost.com/hc/es/articles/360020605511-Mover-un-dominio-a-un-usuario-nuevo" target="_self">agregar el usuario administrador a un dominio</a> en un servidor Dedicado, aparece el siguiente error:</p>
+<div class="text-blockquote">
+<p><strong>Cambios que no se pueden hacer.</strong></p>
+<p>Los usuarios Administradores no se pueden asignar a un sitio web.</p>
+</div>
+<p>Si necesitas asignar un usuario administrador específico a un dominio, primero debes <a href="#Revocar_los_privilegios_de_usuario_administrador" target="_self" rel="undefined">revocar los privilegios de administrador</a> como se describe a continuación.</p>
+<h3>¿Qué sucede si mi anterior usuario administrador se asigna a un dominio?</h3>
+<p>Los dominios que ya tienen asignado un usuario administrador seguirán funcionando normalmente con el mismo usuario.</p>
+<h3>¿Qué sucede si cambio mi antiguo usuario administrador asignado a un dominio?</h3>
+<p>Si se cambia el usuario administrador anterior asignado a un dominio, no se puede volver a asignar en el futuro, a menos que primero se revoque el acceso de administrador.</p>
+<h3>¿Puedo cambiar un usuario no administrador a un usuario administrador?</h3>
+<p>Un usuario ya asignado a un dominio no se puede cambiar a un usuario administrador Dedicado. Se debe crear un nuevo usuario administrador.</p>
+</div>
+<div id="Revocar_los_privilegios_de_usuario_administrador" class="section-link">&nbsp;</div>
+<h2>Revocar los privilegios de usuario administrador</h2>
+<div class="solvvy-solution">
+<p>Para revocar los privilegios de usuario administrador:</p>
+<ol>
+<li>Navega a la página<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=users.dashboard#" target="_blank" rel="noopener noreferrer">Usuarios &amp; Archivos SFTP</a> en tu panel.</li>
+<li>Pasa el cursor sobr eel icono a la derecha de tu usuario administrador.
+<dl>
+<dd><em>Aparece una ventana emergente.</em></dd>
+</dl>
+</li>
+<li>Da clic en el interruptor para eliminar los privilegios de usuario.</li>
+</ol>
 </div>
 <h2>Ver también</h2>
 <div class="solvvy-hidden">
