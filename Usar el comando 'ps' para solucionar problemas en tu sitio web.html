@@ -1,0 +1,73 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Hay varios comandos que puedes correr para solucionar problemas de tu servidor. Estos comandos deben ejecutarse en una terminal después de iniciar sesión en el servidor a través de SSH. Consulta el siguiente artículo para obtener más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades SSH</a></li>
+</ul>
+</div>
+<h2>El comando 'ps'</h2>
+<div class="solvvy-solution">
+<p>Un comando que puedes utilizar para solucionar problemas es&nbsp;<span class="code">ps</span>. El comando&nbsp;<span class="code">ps</span> te ayuda a realizar un seguimiento de tu memoria y uso de la CPU.</p>
+<p>Por ejemplo, si estás usando una <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">máquina VPS</a>&nbsp;y comienzas a notar que tu <a href="https://help.dreamhost.com/hc/es/articles/214879348-Administrar-el-uso-de-la-memoria-de-tu-VPS" target="_self" rel="undefined">uso de memoria</a> pasó de 60MB a 250MB por día, probablemente deberías observar de cerca lo que sucede detrás de escena.</p>
+<p>A continuación, se describen varios comandos que te ayudan a identificar el uso elevado de memoria y el uso elevado de CPU.</p>
+<div class="notebox-note">
+<p>Los siguientes comandos deben ejecutarse dentro de un terminal de shell. Consulta el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> para obtener más detalles.</p>
+</div>
+<h3>Visualización de los diez procesos principales</h3>
+<p>Los siguientes cuatro comandos muestran los diez (10) procesos principales que están usando memoria:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10</span>
+<span class="server">[server]$ </span><span class="command">ps -eo pcpu,pid,user,args | sort -r -k1 | less</span>
+</pre>
+</div>
+<dl>
+<dd><em><strong>o:</strong></em></dd>
+</dl>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ps -eo pmem,pid,user,args | sort -k 1 -r | head -10</span>
+<span class="server">[server]$ </span><span class="command">ps -eo pmem,pid,user,args | sort -r -k1 | less</span>
+</pre>
+</div>
+<p>El siguiente comando muestra USERNAME, CPU%, MEMORY% y el número de procesos en ejecución. Corre este comando en una sola línea:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ps aux | awk '{cpu[$1]+=$3; mem[$1]+=$4; procs[$1]+=1} END { for (user in cpu){ print user,"cpu:",cpu[user],"mem:",mem[user],"proc:",procs[user] } }'</span>
+</pre>
+</div>
+</div>
+<h2><span id="Displaying_memory_usage_with_.2Fproc.2Fmeminfo">Visualización del uso de memoria con /proc/meminfo</span></h2>
+<div class="solvvy-solution">
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ps aux --sort pmem</span>
+</pre>
+</div>
+<p>Utiliza el siguiente comando para ver el uso de la memoria a lo largo del tiempo (requiere que repitas el comando o el uso de un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215088608-Generalidades-sobre-Crontab">cron job</a>):</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ps ev --pid=[EnterPID]</span>
+</pre>
+</div>
+<p>Para mostrar todos los procesos en ejecución e información detallada, usa el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ps -ef</span>
+</pre>
+</div>
+<p>y en la mayoría de los sistemas:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ps -aux</span>
+</pre>
+</div>
+<p>Puedes encontrar una fuga de memoria ejecutando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ps ev --pid=[HighestEnterPID]</span>
+</pre>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214879308-Generalidades-sobre-optimizaci%C3%B3n-de-un-VPS">Generalidades de optimización de un VPS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214880128-C%C3%B3mo-verificar-el-uso-de-recursos-en-un-VPS">Cómo revisar el uso de recursos en un VPS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214880148-Cambiar-tu-servidor-web-a-Nginx">Cambiar tu servidor web a Nginx</a></li>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215573127-Reiniciar-un-VPS">Reiniciar un VPS</a></li>
+</ul>
+</div>

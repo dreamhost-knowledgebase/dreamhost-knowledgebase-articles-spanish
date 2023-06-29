@@ -1,0 +1,91 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica cómo mover un dominio de un servidor compartido a un servidor privado, ya sea una <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">Servidor Privado Virtual</a>&nbsp;(VPS) o un servidor <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">Dedicado</a> manualmente copiando los datos del dominio del Shared Hosting al servidor privado y luego configurando el nuevo usuario.</p>
+</div>
+<h2>Cómo mover manualmente un dominio copiando tus archivos</h2>
+<div class="solvvy-solution">
+<p>Puedes migrar manualmente tus archivos web desde tu servidor compartido a tu servidor privado de dos maneras:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">¿Cómo usar SFTP para conectarme a mi servidor?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216661778-Rsync" target="_self" rel="undefined">rsync</a></li>
+</ul>
+<h3>Migración manual de archivos a través de FTP</h3>
+<p>Si tienes menos de 1 GB de archivos para mover, puede ser más fácil de usar <a href="https://help.dreamhost.com/hc/es/articles/115000675027#seguridad">SFTP</a>:</p>
+<ol>
+<li>Conéctate a tu servidor web compartido siguiendo las instrucciones del artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a>.</li>
+<li>Descarga todo el contenido de tu sitio web a tu computador local.</li>
+<li>Crea un nuevo usuario en el servidor privado. Visita el artículo<br />Habilitación del acceso a Shell para obtener más detalles.</li>
+<li>Conéctate a tu nuevo servidor.<br />
+<ul>
+<li>El nombre de host para un VPS es psXXXX.dreamhostps.com.</li>
+<li>El nombre de host para un Servidor Dedicado es dsXXXX.dreamservers.com.</li>
+</ul>
+</li>
+<li>Usa el nuevo nombre de usuario y contraseña que se creó para el usuario en el servidor privado.</li>
+<li>Sube los archivos del sitio web de tu dominio al servidor privado en el directorio del dominio.</li>
+</ol>
+<h3>Migración manual de archivos a través de rsync</h3>
+Asegúrate de cambiar el <span class="code">shareduser</span> y <span class="code">vpsuser</span> a tus <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuarios Shell</a> y <strong>example.com</strong> a tu sitio website.
+<ol>
+<li>Crea un nuevo usuario en el servidor privado. Visita el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Crear un usuario con acceso Shell (SSH)</a>&nbsp;para obtener detalles sobre cómo crear este usuario.</li>
+<li>Encuentra la ruta completa a tu nuevo servidor privado y tu nuevo usuario.<br />
+<ul>
+<li>Por ejemplo, si tu servidor privado se llama ps9123456 y el nuevo usuario que creó se llama vpsuser, la ruta al servidor privado es:</li>
+</ul>
+<dl>
+<dd><strong>vpsuser@ps9123456.dreamhostps.com:/home/vpsuser</strong></dd>
+</dl>
+<dl>
+<dd><em>Con esta información, estás listo para correr el siguiente comando <span class="code">rsync</span>.</em></dd>
+</dl>
+</li>
+<li>Inicia sesión en tu servidor compartido a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Corre el siguiente comando para copiar tus datos de su usuario compartido a tu nuevo usuario de servidor privado. Asegúrate de cambiar <span class="text-object">/example.com</span> al directorio web de tu dominio real:<br />
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync -e ssh -av /home/<span class="code-highlight">shareduser</span>/<span class="code-highlight">example.com</span> <span class="code-highlight">vpsuser</span>@ps9123456.dreamhostps.com:/home/<span class="code-highlight">vpsuser</span>/</span></pre>
+</div>
+<em>Después de ejecutar el comando, se te solicita la contraseña del usuario del servidor privado.</em></li>
+<li>Haz clic en Entrar para continuar con <span class="code">rsync</span>.</li>
+</ol>
+<div class="notebox-note">
+<p>Hay tres partes en este comando:</p>
+<ul>
+<li><span class="code">rsync -e ssh -av</span></li>
+<li>/path a la carpeta de dominio compartido.</li>
+<li>/path al usuario del servidor privado.</li>
+</ul>
+<p>NO coloques una barra diagonal después de la ruta a la carpeta del dominio compartido. Al hacerlo, solo se copia el contenido dentro de esta carpeta y no la carpeta en sí.</p>
+</div>
+<p>Una vez completada, tu carpeta de dominio compartida y todos sus contenidos se copian a tu usuario de servidor privado.</p>
+<p>El último paso es ajustar qué nombre de usuario está asignado al dominio en tu panel. Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/215945947-Mover-un-solo-dominio-de-un-alojamiento-Shared-a-un-VPS" target="_self">Mover un solo dominio de un alojamiento compartido a un servidor privado</a> para ver instrucciones. Sin embargo, esta vez hay dos diferencias:</p>
+<ul>
+<li>No es necesario crear un usuario, ya que ya existe. Simplemente selecciona el usuario del servidor privado del menú desplegable que ya ha creado.</li>
+<li>Deje la casilla de verificación <span class="text-object">Move files to a new user?</span> deshabilitada.</li>
+</ul>
+</div>
+<h2>Propagación de DNS después de migrar de un servidor compartido a un servidor privado</h2>
+<div class="solvvy-solution">
+<p>Cuando mueves tu dominio de un servidor compartido a un servidor privado, la IP de tu sitio cambia. Si tu dominio está usando los <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers">nameservers</a>,&nbsp;de DreamHost, entonces la IP del dominio se actualiza automáticamente.</p>
+<p>Si tu dominio no utiliza los nameservers de DreamHost, deberás actualizar tus registros DNS manualmente en la empresa donde se alojan tus nameservers.</p>
+<p>Puedes ver todos los registros DNS configurados para cualquier sitio que aloje en DreamHost en tu panel. Ten en cuenta que después de cualquier cambio de DNS, los registros deben propagarse en línea.</p>
+<p>Visita los siguientes artículos para más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self">Generalidades de DNS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">Propagación de DNS</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<h3>Enlaces de DreamHost</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">Generalidades de la propagación de DNS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215945947-Mover-un-solo-dominio-de-un-alojamiento-Shared-a-un-VPS" target="_self">Mover un solo dominio de un alojamiento Shared a un VPS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360020340732-Agregar-un-usuario-a-un-servidor" target="_self">Agregar un usuario a un servidor</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215280048-Mover-usuarios-y-dominios-a-un-VPS" target="_self" rel="undefined">Mover usuarios y dominios a un VPS</a></li>
+</ul>
+<h3>Enlaces de terceros</h3>
+<ul>
+<li><a href="http://www.ee.surrey.ac.uk/Teaching/Unix/" target="_self">Tutorial de UNIX para principiantes</a></li>
+</ul>
+</div>
