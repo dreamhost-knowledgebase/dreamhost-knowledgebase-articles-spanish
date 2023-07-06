@@ -25,13 +25,13 @@
 <p>Para evitar que los archivos abiertos causen daños u otro comportamiento extraño, es más seguro mover los datos cuando la instancia no se está ejecutando. La copia de los datos suele ser bastante rápida para volúmenes más pequeños, pero para volúmenes más grandes puede llevar algún tiempo. Recuerda, la copia debe completarse antes de que se pueda restaurar el servicio.</p>
 <p>Además, el DNS debe actualizarse de las antiguas IP públicas a las nuevas. Dependiendo del tiempo de vida (TTL) de tu proveedor de DNS, este proceso puede tardar desde unos minutos hasta 24 horas. Las zonas DNS administradas por DreamHost pueden tener el TTL de 5 minutos.</p>
 <h3>Instancias Efímeras</h3>
-<p>Las instancias efímeras no pueden tener acceso a sus datos por otras instancias cuando están apagadas. Estas instancias solo se pueden migrar mientras se ejecutan, por lo que es mejor cerrar tantos servicios como sea posible para limitar la posibilidad de daños. Por favor mira la última sección a continuación para ver <a class="reference external" href="https://help.dreamhost.com/hc/es/articles/218501427-C%C3%B3mo-migrar-instancias-entre-cl%C3%BAsteres-de-DreamCompute" target="_self" rel="undefined">instrucciones sobre la migración de instancias en ejecución</a>.</p>
+<p>Las instancias efímeras no pueden tener acceso a sus datos por otras instancias cuando están apagadas. Estas instancias solo se pueden migrar mientras se ejecutan, por lo que es mejor cerrar tantos servicios como sea posible para limitar la posibilidad de daños. Por favor mira la última sección a continuación para ver <a class="reference external" href="#migrar-una-instancia-efimera" target="_self" rel="undefined">instrucciones sobre la migración de instancias en ejecución</a>.</p>
 </div>
 <h2>Migrar una instancia respaldada por volumen mediante la CLI de OpenStack</h2>
 <div class="solvvy-solution">
 <p>Para este tipo de movimiento, es necesario eliminar la instancia para que deje un volumen para migrar.</p>
 <div class="notebox-important">
-<p>Este método requiere que no selecciones "Sí" para la opción "Eliminar volumen al eliminar la instancia" cuando creaste tu instancia. Si lo hiciste, pasa a la última sección para <a class="reference external" href="https://help.dreamhost.com/hc/es/articles/218501427-C%C3%B3mo-migrar-instancias-entre-cl%C3%BAsteres-de-DreamCompute" target="_self" rel="undefined">instrucciones sobre la migración de instancias en ejecución</a>. Si continúas, puedes destruir permanentemente y perder tus datos.</p>
+<p>Este método requiere que no selecciones "Sí" para la opción "Eliminar volumen al eliminar la instancia" cuando creaste tu instancia. Si lo hiciste, pasa a la última sección para <a class="reference external" href="#migrar-una-instancia-efimera" target="_self" rel="undefined">instrucciones sobre la migración de instancias en ejecución</a>. Si continúas, puedes destruir permanentemente y perder tus datos.</p>
 </div>
 <p>Como descripción general, estos son los componentes involucrados en la realización de esta tarea:</p>
 <div class="code highlight-python">
@@ -104,6 +104,7 @@
 </ol>
 <p>Ahora estás listo para ir al clúster de DESTINO para iniciar una nueva instancia y seleccionar la imagen que se acaba de cargar como fuente. Si los datos están destinados a ser persistentes, es mejor especificar que deseas crear un nuevo volumen la pestaña <span class="text-object">Source</span> cuando lances la nueva instancia.</p>
 </div>
+<div id="migrar-una-instancia-efimera" class="section-link">&nbsp;</div>
 <h2>Migrar una instancia efímera con la CLI de OpenStack</h2>
 <div class="solvvy-solution">
 <p>No se recomienda este tipo de migración. Sin embargo, puede ser necesario en algunas situaciones, por lo que se incluye aquí.</p>
