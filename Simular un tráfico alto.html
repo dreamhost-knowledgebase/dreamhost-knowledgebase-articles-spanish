@@ -1,23 +1,38 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>Si tu problema tiene que ver con el aumento del uso de la memoria en ciertos momentos del día, puede ser difícil averiguar qué está sucediendo, ya que las cosas a menudo funcionan bien cuando puedes verificarlas. Cuando ese es el caso, es importante poder simular el entorno que está causando el problema.</p>
-<p>Una herramienta de referencia que puedes utilizar para simular el tráfico es el comando <span class="code">ab.</span> Ve el siguiente enlace para obtener más detalles:</p>
+<p>Si encuentras picos de uso de la memoria de tu VPS en ciertos momentos del día, puedes usar una herramienta de evaluación comparativa para simular el entorno de alto tráfico. Una vez que se ejecuta, puedes verificar los procesos de memoria para determinar la causa del problema.</p>
+<p>Este artículo explica cómo usar la línea de comando <span class="code">ab</span> como herramienta de evaluación comparativa en tu VPS.</p>
+<div class="prereqs">
+<p>Para correr los comandos de este artículo, debes tener un usuario de Shell configurado en tu panel y conocimientos generales de UNIX Shell. Revisa los siguientes artículos para obtener más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH-">Crear un usuario con acceso Shell (SSH)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+</ul>
+</div>
+</div>
+<h2>Herramienta de referencia</h2>
+<div class="solvvy-solution">
+<p>Revisa el siguiente enlace para ver más detalles del comando <span class="code">ab</span>.</p>
 <ul>
 <li><a href="https://www.unix.com/man-page/linux/1/ab/" target="_blank" rel="noopener noreferrer">ab [linux man page]</a></li>
 </ul>
-<p>Para usarlo, corre el siguiente comando:</p>
+<p>Para usar esta herramienta:</p>
+<ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Corre el siguiente comando:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ab -n 1000 -c 20 <span class="code-highlight">https://www.example.com/index.html</span></span></pre>
 </div>
-<p>Este comando intenta crear 1000 conexiones a <strong>https://www.example.com/index.html,</strong> limitándose a 20 conexiones concurrentes.</p>
+<p>Este comando crea 1000 conexiones a <strong>https://www.example.com/index.html,</strong> limitándose a 20 conexiones concurrentes.</p>
+</li>
+</ol>
 </div>
 <h2><span id="Viewing_your_processes_while_testing">Ver tus procesos mientras prueba</span></h2>
 <div class="solvvy-solution">
-<p>Es probable que desees abrir tres ventanas de terminal, para observar lo que está sucediendo.</p>
+<p>Mientras el comando <span class="code">ab</span> está corriendo, abre 2 pestañas más en tu terminal para observar el proceso del servidor.</p>
 <ul>
-<li>En la primera ventana, <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> a tu servidor y corre <span class="code">top -c</span>. Luego, ordena por memoria (<span class="code">Shift + M</span>).</li>
-<li>En la segunda ventana, corre <span class="code">free -m</span> (o corre <span class="code">watch free -m</span>).</li>
-<li>En la tercera ventana, corre el comando <span class="code">ab</span> para simular el tráfico.</li>
+<li>En la primera ventana, corre <span class="code">top -c</span>. Luego, clasifícalo por memoria (<span class="code">Shift + M</span>).</li>
+<li>En la segunda ventana, corre <span class="code">free -m</span> (o <span class="code">watch free -m</span>).</li>
 </ul>
 <p>Estos comandos son efectivos para perfilar tus sitios y verificar si el almacenamiento en caché funciona. Puedes repetir este proceso para cada dominio para ver cuáles afectan más el uso de memoria y saber dónde optimizar.</p>
 </div>
