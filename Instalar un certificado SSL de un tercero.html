@@ -1,0 +1,82 @@
+<div class="notebox-tip">
+<p>Si te encuentras en una situación que requiere cambios en tu sitio y tu desarrollador no está disponible para ayudarte, el equipo de soporte calificado de DreamHost puede ayudarte por una pequeña tarifa. Puedes encontrar más información sobre los servicios admitidos y los costos asociados en el artículo de <a href="https://help.dreamhost.com/hc/es/articles/360042256912-Generalidades-sobre-Servicios-Profesionales-">Servicios Profesionales de DreamHost</a>.</p>
+</div>
+<h2>Crear un CSR en DreamHost</h2>
+<div class="solvvy-solution">
+<p>Si deseas comprar un certificado SSL de otra compañía, asegúrate de crear primero un CSR en DreamHost antes de solicitarlo a la Autoridad de Certificación elegida. Esa compañía podrá usar esta CSR para generar tu certificado SSL.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/218084098-Generalidades-sobre-CSR" target="_self">Generalidades de un CSR</a></li>
+</ul>
+<h3>¿Qué sucede si ya tengo la información de mi certificado?</h3>
+<p>Si ya tienes una clave privada, un certificado intermedio y un certificado SSL firmado, deberás crear un CSR en DreamHost antes de la instalación. Luego puedes entregar este CSR a tu Autoridad de Certificación, quien volverá a emitir el certificado. Luego puedes usar estos nuevos archivos para instalarlos en tu panel DreamHost.</p>
+<h3>Asegúrate de tener la clave privada</h3>
+<p>Si ya tienes un certificado SSL firmado pero NO tienes la clave privada correspondiente, no podrás instalarlo en los servidores de DreamHost. Además, NO crees una clave privada que esté protegida con contraseña, ya que el panel DreamHost no acepta estas.</p>
+<div class="notebox-important">
+<p>Algunas autoridades de certificación colocan todos los archivos de certificados SSL en un archivo <span class="text-object">.zip</span> para ti. Para ver los archivos, asegúrate de descomprimir primero el archivo zip.</p>
+<p>En una Mac, haz doble clic en el archivo.</p>
+<p>En Windows, hazclic derecho y seleccione 'Extraer todo'.</p>
+</div>
+</div>
+<h2>Instalar el certificado</h2>
+<div class="solvvy-solution">
+<div class="notebox-important">
+<p>Todos los siguientes comandos deben ejecutarse en el servidor donde está alojado tu sitio web.</p>
+</div>
+<ol>
+<li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.secure&amp;" target="_blank" rel="noopener noreferrer">Certificados Seguros</a>. Se muestra una lista de tus dominios.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-secure-certificates-add-certificate.png" alt="es-panel-secure-certificates-add-certificate" /></dd>
+</dl>
+</li>
+<li>A la derecha de tu dominio, haz clic en el botón <strong>Añadir</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ssl-import-cert.png" /></dd>
+</dl>
+</li>
+<li>En la parte superior, haz clic en la pestaña titulada <span class="text-object">Importar un Certificado</span>.</li>
+<li>Luego da clic en el botón <strong>Seleccionar Esta Opción</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ssl-import-cert-02.png" alt="es-panel-ssl-import-cert-02" /></dd>
+</dl>
+</li>
+<li>La página siguiente muestra cuatro cuadros vacíos:
+<dl>
+<dd>
+<ul>
+<li><strong>Solicitud de firma de certificado (CSR) </strong><em>Opcional</em>.</li>
+<li><strong>Certificado</strong>.</li>
+<li><strong>RSA Llave Privada</strong>.</li>
+<li><strong>Certificado Intermediador </strong><em>Opcional</em>.</li>
+</ul>
+</dd>
+</dl>
+En estos campos, ingresa la información de tu certificado de terceros.</li>
+<li>Cuando termines, da clic en el botón <strong>Continuar con la Configuración del Certificado</strong>.</li>
+<li>Si no hay ningún error, el nuevo certificado se envía a los servidores activos en 15 minutos.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-secure-certificates-imported.png" alt="es-panel-secure-certificates-imported" /></dd>
+</dl>
+</li>
+<li>De vuelta a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.secure&amp;" target="_blank" rel="noopener noreferrer">Certificados Seguros</a>, puedes ver que el certificado ahora se muestra como un mensaje de éxito.</li>
+<li>Carga tu sitio en un navegador usando HTTPS.
+<ul>
+<li>Puedes ver el icono del <span class="text-object">candado al comienzo</span> de la URL; si haces clic en el icono, verás que el certificado está verificado y activo.</li>
+</ul>
+</li>
+</ol>
+<div class="notebox-note">
+<p>Si ves el mensaje de error "la clave no coincide con el certificado", eso significa que el certificado SSL que estás intentando instalar no coincide con la clave privada que está instalada actualmente. Esto generalmente significa que la Solicitud de firma de certificado que se utilizó para comprar el certificado SSL no se generó con la clave privada que se encuentra en el panel.</p>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL" target="_self">Generalidades de el proceso de agregar un certificado SSL</a></li>
+<li><a href="/hc/es/articles/216539548-Añadir-un-certificado-gratuito-de-Let-s-Encrypt" target="_self">Agregar un certificado gratuito de Let's Encrypt</a></li>
+<li><a href="/hc/es/articles/216539558-Generalidades-sobre-certificado-de-seguridad-Let-s-Encrypt" target="_self">Generalidades sobre certificado de seguridad Let's Encrypt</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041537-Generalidades-sobre-certificados-SSL" target="_self">Generalidades sobre certificados SSL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089778--Qu%C3%A9-necesito-de-DreamHost-antes-de-comprar-un-certificado-SSL-de-terceros-" target="_self">¿Qué necesito por parte de DreamHost antes de comprar un certificado SSL de un tercero?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089748-Comprar-un-certificado-SSL-firmado-profesionalmente">Comprar un certificado SSL firmado profesionalmente</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215767487-Agregar-un-certificado-SSL-autofirmado-gratuito" target="_self">Agregar un certificado SSL autofirmado gratuito</a></li>
+</ul>
+</div>
