@@ -45,7 +45,7 @@
 <dd>Agrega 2 parámetros extra a mysql_connect, un <span class="code">false</span> para "new link" y luego una banderilla de cliente de <span class="code">128</span> o <span class="code">CLIENT_LOCAL_FILES</span>:</dd>
 </dl>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="cmdoutput">mysql_connect('HOSTNAME','USERNAME','PASSWORD', <span class="green">false, 128</span>);</span></pre>
+<pre class="prebox"><span class="cmdoutput">mysql_connect('HOSTNAME','USERNAME','PASSWORD', <span class="code-highlight">false, 128</span>);</span></pre>
 </div>
 <dl>
 <dt>
@@ -55,7 +55,7 @@
 </dl>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="cmdoutput">$link = mysqli_init();
-<span class="green">mysqli_options</span>($link, MYSQLI_OPT_LOCAL_INFILE, <span class="green">true</span>);
+<span class="code-highlight">mysqli_options</span>($link, MYSQLI_OPT_LOCAL_INFILE, <span class="code-highlight">true</span>);
 mysqli_real_connect($link, 'HOSTNAME','USERNAME','PASSWORD','DATABASENAME');</span></pre>
 </div>
 <dl>
@@ -65,7 +65,7 @@ mysqli_real_connect($link, 'HOSTNAME','USERNAME','PASSWORD','DATABASENAME');</sp
 <dd>El parámetro <span class="code">mysql_local_infile</span> puede ser agregado al nombre de la variable de tu fuente de datos, o directamente en <span class="code">DBI-&gt;connect</span>:</dd>
 </dl>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="cmdoutput">$dbh = DBI-&gt;connect("DBI:mysql:database=DATABASENAME;host=HOSTNAME;<span class="green">mysql_local_infile=1</span>", "USERNAME", "PASSWORD");</span></pre>
+<pre class="prebox"><span class="cmdoutput">$dbh = DBI-&gt;connect("DBI:mysql:database=DATABASENAME;host=HOSTNAME;<span class="code-highlight">mysql_local_infile=1</span>", "USERNAME", "PASSWORD");</span></pre>
 </div>
 <h3>Errores importando una base de datos con mysqlimport</h3>
 <p>DreamHost ha implementado algunas características más nuevas en MySQL 8, lo que puede causar un error al usar el programa de línea de comandos. <span class="code">mysqlimport</span>. Para más detalles, revisa la página <a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL#errores_importando_una-base_de_datos" target="_self">Generalidades de MySQL</a>.</p>
