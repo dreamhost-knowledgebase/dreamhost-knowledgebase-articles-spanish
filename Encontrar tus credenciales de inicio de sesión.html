@@ -11,16 +11,17 @@
 <h3>Si tu DNS está alojado en DreamHost</h3>
 <p>Si tus <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers">nameservers</a> están alojados en DreamHost, sigue los pasos a continuación.</p>
 <h3>Si acabas de instalar WordPress usando el instalador de WordPress de DreamHost</h3>
-<p>Si acabas de instalar WordPress usando el <a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-instalador-de-WordPress-de-DreamHost" target="_self">instalador de WordPress de DreamHost</a> (y tus nameservers apuntan a DreamHost), tendrás que esperar algunas horas para que se actualice el nuevo subdominio mysql. Una vez que el DNS se haya <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">propagado</a>&nbsp;en línea, tu sitio se conectará a tu base de datos.</p>
+<p>Si acabas de instalar WordPress usando el <a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-instalador-de-WordPress-de-DreamHost" target="_self">instalador de WordPress de DreamHost</a> (y tus nameservers apuntan a DreamHost), tendrás que esperar algunas horas para que se actualice el nuevo subdominio <span class="text-object">mysql</span>. Una vez que el DNS se haya <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">propagado</a>&nbsp;en línea, tu sitio se conectará a tu base de datos.</p>
 <h3>Si tu DNS NO está alojado en DreamHost</h3>
-<p>Si tus nameservers NO están alojados en DreamHost, debes crear un registro A (en tu proveedor de alojamiento actual) para que tu nombre de host 'mysql.example.com' apunte a DreamHost. Solo después de que el registro A de mysql se actualice, funcionará el enlace <span class="text-link">phpMyAdmin</span> en tu panel. Revisa el siguiente artículo para obtener instrucciones sobre cómo ubicar tu registro A de mysql de DreamHost. Luego puedes contactar a tu proveedor de alojamiento actual para agregarlo a su sistema.</p>
+<p>Si tus nameservers NO están alojados en DreamHost, debes crear un registro A (en tu proveedor de alojamiento actual) para que hostname <strong>mysql.example.com</strong>. Esto debe apuntar al registro <span class="text-object">mysql</span> A de DreamHost. Solamente luego de que el registro A actualice en línea, el enlace <span class="text-link">phpMyAdmin</span> funcionará en tu panel.</p>
+<p>Revisa el siguiente artículo para ver instrucciones sobre cómo ubicar el registro <span class="text-object">mysql</span> A en DreamHost. Luego puedes contactar a tu compañía de alojamiento actual para agregarlo en su sistema.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214694378#a-que-registros-a-apunto-mi-sitio" target="_self">¿A cuál registro A debo apuntar mi sitio?</a></li>
 </ul>
 <div class="notebox-note">
-<p>Solo necesitas crear el registro 'A' para el subdominio de mysql como en&nbsp;'mysql.example.com'.</p>
+<p>Solo necesitas crear el registro 'A' para el subdominio <span class="text-object">mysql</span> como en <strong>mysql.example.com</strong>.</p>
 </div>
-<p>Como alternativa, puedes ingresar usando los nombres de host de los centros de datos de la costa Este y Oeste como se muestra en el&nbsp;<a href="#paso4" target="_self">Paso #4 debajo</a>.</p>
+<p>Como alternativa, puedes ingresar usando los hostnames de los centros de datos de la costa Este y Oeste como se muestra en el&nbsp;<a href="#paso4" target="_self">Paso #4 debajo</a>.</p>
 </div>
 <h2>Paso 1 — Encuentra el nombre de tu base de datos</h2>
 <div class="solvvy-solution">
@@ -46,8 +47,12 @@
 <p>Hacia la mitad de la página verás una sección titulada <span class="text-section">HOSTNAME</span>. Busca el nombre de host que corresponde a tu sitio. Lo más probable es que el nombre de tu sitio esté incluído en dicho nombre de Host.</p>
 <p>A la derecha del nombre de host verás un enlace que dice <span class="text-link">phpMyAdmin</span>. Haz clic en dicho enlace para acceder a la base de datos a través de phpMyAdmin.</p>
 <div class="notebox-note">
-<p>También puedes usar el nombre de Host oficial de phpMyAdmin de tu <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.dc&amp;" target="_blank" rel="noopener noreferrer">Centro de Datos</a>. Primero, revisa la página Centro de Datos desde el panel. Desliza hacia abajo para ubicar el centro de datos donde tus servicios de MySQL están localizados. Puede ser costa Este o costa Oeste. Puedes entonces usar los nombres de host que se muestran a continuación dependiendo de la ubicación de tu servidor MySQL.</p>
-<br /><strong>West Coast:&nbsp;</strong>&nbsp;<a href="https://west1-phpmyadmin.dreamhost.com">https://west1-phpmyadmin.dreamhost.com</a><br /><strong>East Coast:&nbsp;</strong>&nbsp;<a href="https://east1-phpmyadmin.dreamhost.com">https://east1-phpmyadmin.dreamhost.com</a></div>
+<p>También puedes usar el nombre de Host oficial de phpMyAdmin de tu <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.dc&amp;" target="_blank" rel="noopener noreferrer">Centro de Datos</a>. Primero, revisa la página Centro de Datos desde el panel. Desliza hacia abajo para ubicar el centro de datos donde tus servicios de MySQL están localizados. Puede ser costa Este o costa Oeste. Puedes entonces usar los hostnames que se muestran a continuación dependiendo de la ubicación de tu servidor MySQL.</p>
+<ul>
+<li><strong>Costa Oeste:</strong>&nbsp; <a href="https://west1-phpmyadmin.dreamhost.com">https://west1-phpmyadmin.dreamhost.com</a></li>
+<li><strong>Costa Este:</strong>&nbsp; <a href="https://east1-phpmyadmin.dreamhost.com">https://east1-phpmyadmin.dreamhost.com</a></li>
+</ul>
+</div>
 </div>
 <h2>Iniciar sesión en phpMyAdmin</h2>
 <div class="solvvy-solution">
@@ -57,7 +62,7 @@
 <p>phpMyAdmin requiere que el dominio usado para tu nombre de host de MYSQL esté&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-Sitio-Web-y-Hosting" target="_self">Completamente Alojado</a>&nbsp;y utilizando los&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self">DNS de DreamHost</a>.&nbsp;Puedes hacer esto de dos maneras:</p>
 <ul>
 <li>Apunta tus&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self">nameservers</a> a DreamHost o</li>
-<li>Apunta tu registro 'A' hacia la IP de DreamHost. Revisa el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self">Artículo de DNS</a>&nbsp;para obtener detalles de cómo encontrar tu registro IP de DreamHost.</li>
+<li>Apunta tu registro 'A' hacia la IP de DreamHost. Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio-#A_que_registros_A_apunto_mi_sitio">registros DNS de DreamHost</a> para obtener detalles de cómo encontrar tu registro IP de DreamHost.</li>
 </ul>
 <p>Si ninguno de tus hostnames está funcionando, visita el siguiente artículo sobre cómo acceder a tu base de datos antes de actualizar los DNS:</p>
 <ul>
