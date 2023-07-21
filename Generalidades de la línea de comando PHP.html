@@ -12,16 +12,15 @@
 <div class="solvvy-solution">
 <p>Las rutas para los binarios instalados por defecto de DreamHost PHP-CLI son las siguientes:</p>
 <ul>
-<li><strong>PHP 7.1 </strong> – /usr/local/php71/bin/php</li>
-<li><strong>PHP 7.2 </strong> – /usr/local/php72/bin/php</li>
-<li><strong>PHP 7.3 </strong> – /usr/local/php73/bin/php</li>
-<li><strong>PHP 7.4 </strong> – /usr/local/php74/bin/php</li>
 <li><strong>PHP 8.0 </strong> – /usr/local/php80/bin/php</li>
+<li><strong>PHP 8.1 </strong>– /usr/local/php81/bin/php</li>
+<li><strong>PHP 8.2 </strong>– /usr/local/php82/bin/php</li>
 </ul>
 <p>Para mayor comodidad, DreamHost mantiene accesos directos para todas las versiones de PHP en el directorio <span class="text-object">/usr/local/bin/</span>:</p>
 <div class="preboxcontainer">
-<pre class="prebox">lrwxrwxrwx 1 root root 16 Sep 17 2020 php-7.1 -&gt; ../php71/bin/php<br />lrwxrwxrwx 1 root root 16 Sep 9 2020 php-7.2 -&gt; ../php72/bin/php<br />lrwxrwxrwx 1 root root 16 Sep 9 2020 php-7.3 -&gt; ../php73/bin/php<br />lrwxrwxrwx 1 root root 16 Feb 9 11:30 php-7.4 -&gt; ../php74/bin/php<br />lrwxrwxrwx 1 root root 16 Feb 9 11:50 php-8.0 -&gt; ../php80/bin/php
-</pre>
+<pre class="prebox">lrwxrwxrwx  1 root root    16 Apr 12 11:33 php-8.0 -&gt; ../php80/bin/php
+lrwxrwxrwx  1 root root    16 Apr 12 13:11 php-8.1 -&gt; ../php81/bin/php
+lrwxrwxrwx  1 root root    16 Apr 13 11:11 php-8.2 -&gt; ../php82/bin/php</pre>
 </div>
 <p><span class="text-object">/usr/local/bin</span> está incluido en el shell PATH para usuarios de forma predeterminada, por lo que puedes usar los accesos directos en lugar de la ruta completa a los binarios.ries.</p>
 <div class="notebox-important">
@@ -30,10 +29,9 @@
 </div>
 <h2>Revisar la versión a través de SSH</h2>
 <div class="solvvy-solution">
-<p>Puedes confirmar los números de versión exactos en uso ejecutando el binario desde&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">dentro del shell</a> usando la opción "-v". Por ejemplo, puedes verificar la versión del binario CLI PHP7.4 de la siguiente manera:</p>
+<p>Puedes confirmar los números de versión exactos en uso ejecutando el binario desde&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">dentro del shell</a> usando la opción "-v". Por ejemplo:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">php-7.4 -v</span>
-PHP 7.4.14 (cli) (built: Feb 9 2021 19:30:37) ( NTS )<br />Copyright (c) The PHP Group<br />Zend Engine v3.4.0, Copyright (c) Zend Technologies<br />with Zend OPcache v7.4.14, Copyright (c), by Zend Technologies
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">php-8.2 -v</span>
 </pre>
 </div>
 <p>La interfaz CLI de PHP predeterminada en DreamHost se puede ver corriendo <span class="code">php -v</span>.</p>
@@ -45,7 +43,7 @@ PHP 7.4.14 (cli) (built: Feb 9 2021 19:30:37) ( NTS )<br />Copyright (c) The PHP
 <div class="solvvy-solution">
 <p>Puedes determinar qué módulos PHP están instalados para una versión específica de PHP corriendo el siguiente comando.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php74/bin/php -m</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php82/bin/php -m</span></pre>
 </div>
 <p>Simplemente cambia el número de PHP a la versión que deseas verificar. Tu terminal generará todos los módulos instalados.</p>
 </div>
