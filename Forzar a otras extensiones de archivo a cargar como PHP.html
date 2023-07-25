@@ -1,43 +1,4 @@
-<h2>Generalidades</h2>
-<div class="solvvy-solution">
-<p>Este artículo explica cómo forzar a PHP a cargar un archivo que no termina con la extensión <span class="text-object">.php</span>.</p>
-</div>
-<h2>FCGI</h2>
-<div class="solvvy-solution">
-<p>Para procesar archivos con PHP cuyos nombres no terminan en <span class="text-object">.php</span>, puedes usar una directiva en <span class="text-object">.htaccess</span>.</p>
-<p>Por ejemplo, <a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self" rel="undefined">crea un archivo</a> llamado <span class="text-object">myfile.test</span> con el siguiente código:</p>
-<div class="preboxcontainer">
-<pre class="prebox">&lt;?php
-  echo 'testing an extension using PHP';
-?&gt;</pre>
-</div>
-<p>La extensión <span class="text-object">.test</span> no existe. Pero, puedes forzar que se corra como PHP agregando este código a tu <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self" rel="undefined">archivo .htaccess</a>:</p>
-<div class="preboxcontainer">
-<pre class="prebox">AddHandler fcgid-script .test
-FcgidWrapper "/dh/cgi-system/php74.cgi" .test</pre>
-</div>
-<p>Si cargas el archivo en un navegador, ahora se cargará como un archivo PHP normal.</p>
-</div>
-<h2>CGI</h2>
-<div class="solvvy-solution">
-<p>Si deseas usar CGI (en vez de FastCGI), agrega la siguiente línea a tu archivo <span class="text-object">.htaccess</span>:</p>
-<div class="notebox-note">
-<p>Esta línea fuerza a que todo el código de las extensiones que enumeraste se ejecute mediante CGI. Sin embargo, la versión PHP de tu sitio sigue siendo la misma que la <a href="https://help.dreamhost.com/hc/es/articles/214895317-Cambiar-la-versi%C3%B3n-de-PHP-de-un-sitio-web" target="_self">versión PHP que seleccionaste en el panel</a>.</p>
-<p>Por ejemplo, si seleccionas PHP 8.1 FastCGI en el panel, esta línea obliga a tu sitio a usar PHP 8.1 CGI.</p>
-</div>
-<div class="preboxcontainer">
-<pre class="prebox">AddHandler php5-cgi .test</pre>
-</div>
-</div>
-<h2>Ver también</h2>
-<div class="solvvy-hidden">
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-PHP" target="_self" rel="undefined">Generalidades de PHP</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self" rel="undefined">Generalidades de .htaccess</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self" rel="undefined">Generalidades de php.ini</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self" rel="undefined">Ver la versión y la configuración de PHP de tu sitio</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214202148-Cambiar-la-versi%C3%B3n-de-PHP-que-usa-shell" target="_self">Cambiar la versión de PHP que usa shell</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214895317-Cambiar-la-versi%C3%B3n-PHP-de-un-sitio">Cambiar la versión PHP de un sitio</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214202238-Generalidades-de-l%C3%ADnea-de-comando-PHP" target="_self" rel="undefined">Descripción general de la línea de comandos de PHP</a></li>
+<p>This article redirects to:</p>
+<ul class="article-list">
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/360037073252-Running-PHP-code-in-a-file-with-an-html-extension">Running PHP code in a file with an .html extension</a></li>
 </ul>
-</div>

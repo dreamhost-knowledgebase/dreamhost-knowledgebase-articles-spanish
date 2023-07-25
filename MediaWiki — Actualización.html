@@ -1,0 +1,87 @@
+<div id="auto-toc">&nbsp;</div>
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo describe cómo actualizar tu instalación de MediaWiki. Revisa la siguiente guía en mediawiki.org para obtener instrucciones de actualización ampliadas:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Manual:Upgrading" rel="nofollow">Actualizar</a></li>
+</ul>
+<p>Necesitas descargar la versión actualizada de MediaWiki antes de comenzar. Puedes encontrar enlaces de descarga para las versiones de MediaWiki actualmente compatibles en la siguiente página:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Download" rel="nofollow">Descargar</a></li>
+</ul>
+</div>
+<h2>Revisar los requerimientos</h2>
+<div class="solvvy-solution">
+<p>Puedes encontrar una lista actualizada de los requisitos de MediaWiki en tu manual:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Manual:Installation_requirements" target="_self">Manual: Requerimientos de Instalación</a></li>
+</ul>
+</div>
+<h2>Leer las notas de lanzamiento</h2>
+<div class="solvvy-solution">
+<p>Las notas de la versión de MediaWiki se encuentran en un archivo <span class="text-object">RELEASE-NOTES-1.xx</span> en la carpeta principal extraída. Además, puedes encontrar enlaces a las notas de la versión para todas las versiones de MediaWiki en la siguiente página:</p>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Release_notes" rel="nofollow">Notas de lanzamiento</a></li>
+</ul>
+</div>
+<h2>Hacer copia de seguridad de archivos existentes y la base de datos</h2>
+<div class="solvvy-solution">
+<p>Siempre asegúrate de hacer una copia de seguridad de los archivos de tu base de datos y sitio web antes de realizar cualquier ajuste. De esta manera, si algo fallara, podrías reemplazar rápidamente tus archivos. Mira el siguiente artículo para más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215089918-Respaldar-una-cuenta-en-el-panel">Respaldar una cuenta en el panel </a></li>
+</ul>
+</div>
+<h2>Desempacar los archivos nuevos</h2>
+<div class="solvvy-solution">
+<p>Una vez que hayas hecho una copia de seguridad de los datos de tu sitio existente, carga el archivo MediaWiki actualizado que descargaste en tu servidor web a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a>.&nbsp;Luego, inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>, y&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115002768331-Comandos-UNIX-Descomprimiendo-archivos">descomprime el archivo en el servidor</a>. Ahora deberías tener una nueva carpeta MediaWiki para la instalación actual.</p>
+</div>
+<div class="solvvy-solution">
+<p>Una vez que se extrae el archivo, copia los siguientes archivos y carpetas del directorio de instalación anterior al nuevo:</p>
+<ul>
+<li><span class="text-object">LocalSettings.php</span></li>
+<li>La carpeta de <span class="text-object">images</span>. En versiones anteriores, esto se llamaba <span class="text-object">uploads</span>. Si has configurado un directorio personalizado para images/uploads, cópialo en su lugar.</li>
+<li>Cualquier extensión en el directorio de <span class="text-object">extensiones</span> que aún no hayas actualizado/reinstalado.</li>
+<li>Tu logo personalizado. Las versiones anteriores a la 1.24 almacenarán tu logotipo en <span class="text-object">skins/common/images/</span>, y las versiones más nuevas usan <span class="text-object">resources/assets/</span> o <span class="text-object">images/</span> Asegúrate de actualizar <span class="text-object">LocalSettings.php</span> con la ruta actualizada.</li>
+<li>Skins personalizados, que se encuentran en la carpeta de <span class="text-object">skins</span>.</li>
+<li>Cualquier modificación personalizada a los archivos antiguos, que deberán copiarse manualmente a las nuevas versiones de esos archivos.</li>
+<li>Tu archivo <span class="text-object">.htaccess</span>, si está personalizado.</li>
+</ul>
+Una vez hecho esto, convierte esta nueva carpeta en la carpeta publicada en el servidor web, o cambia el nombre del directorio de instalación anterior y luego cambia el nombre del nuevo para que coincida con el nombre anterior.</div>
+<h2>Actualizar extensiones</h2>
+<div class="solvvy-solution">
+<p>Si has instalado extensiones en la instalación anterior de MediaWiki, es posible que también debas actualizarlas. Los archivos de extensión individuales se pueden descargar a través de la página de&nbsp;<a href="https://www.mediawiki.org/wiki/Special:ExtensionDistributor" target="_self">extensión de descarga de MediaWiki</a>. Alternativamente, puedes cargar&nbsp;<a href="https://www.mediawiki.org/wiki/MwExtUpgrader" target="_self">MwExtUpgrader</a> en tu sitio para actualizar extensiones por lotes. Una vez cargado, ejecuta el siguiente comando para actualizar tus extensiones:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">php mwExtUpgrader.phar</span></pre>
+</div>
+</div>
+<h2>Ejecutar el script de actualización para revisar la base de datos</h2>
+<div class="solvvy-solution">
+<p>Puede que sea necesario ejecutar el script <span class="text-object">/maintenance/update.php</span> después de la actualización. Para hacerlo, inicia sesión en tu sitio a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. Luego corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">php ./maintenance/update.php</span></pre>
+</div>
+<p>Esto ejecuta un script de actualización que debería corregir cualquier error actual en tu sitio. Si eso no funciona, especifica la ruta completa a una versión de PHP. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php82/bin/php ./maintenance/update.php</span></pre>
+</div>
+</div>
+<h2>Probar la actualización</h2>
+<div class="solvvy-solution">
+<p>Asegúrate de que las siguientes funciones del sitio estén funcionando:</p>
+<ul>
+<li>Ver páginas.</li>
+<li>Editar páginas.</li>
+<li>Subir un archivo.</li>
+<li>Visita&nbsp;<strong>/Special:Version</strong> en tu navegador para confirmar la versión de MediaWiki y las extensiones instaladas.</li>
+</ul>
+</div>
+<h2>Eliminar las sobras de instalaciones antiguas</h2>
+<div class="solvvy-solution">
+<p>Asegúrate de eliminar o bloquear cualquier carpeta de instalación de MediaWiki después de que se complete la actualización para asegurarte de que tu sitio sea seguro.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217292577-MediaWiki-Instalando-y-m%C3%A1s" target="_self">Instalar MediaWiki</a></li>
+</ul>
+</div>
