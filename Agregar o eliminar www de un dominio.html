@@ -6,17 +6,14 @@
 <li><strong>example.com</strong></li>
 </ul>
 <p>Mientras unas personas prefieren no usar "www" en la URL de tu sitio, algunos lo prefieren siempre ahí. De cualquier forma, a veces puede ser útil tener un solo nombre canónico en el cuál tu sitio puede ser accesado. Este artículo detalla cómo hacer ambos.</p>
-<div class="notebox-note">
-<p>Este artículo no aplica para dominios alojados en&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214581158-Generalidades-sobre-DreamPress">DreamPress</a>.&nbsp;Para los sitios DreamPress, necesitarás&nbsp;actualizar tu archivo <span class="text-object">.htaccess</span> para <a href="https://help.dreamhost.com/hc/es/articles/215747758-Forzar-tu-sitio-a-cargar-de-forma-segura-con-un-archivo-htaccess#Forzar_HTTPS_con_Dreampress" target="_self">forzar un redireccionamiento</a>.</p>
 </div>
-</div>
-<h2>Agregar o remover "www" usando un archivo .htaccess</h2>
+<h2>Agregar o eliminar "www" usando un archivo .htaccess</h2>
 <div class="solvvy-solution">
 <p>Puedes agregar o eliminar 'www' usando un archivo <span class="text-object">.htaccess</span>. Esto envuelve crear y editar este archivo en tu servidor web. Revisa los siguientes artículos para ver más instrucciones:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades de .htaccess</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar un archivo vía FTP</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo vía SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar un archivo a través de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo a través de SSH</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
 </ul>
 <h3>Eliminar "www" a través de un archivo .htaccess</h3>
@@ -35,11 +32,19 @@ RewriteRule ^(.*) <span class="code-highlight">http://www.example.com</span>/$1 
 </div>
 <p>Si alguien escribe <strong>example.com</strong>, la URL cambiará ahora a <strong>www.example.com</strong>.</p>
 </div>
+<h2><span id="Agregar_o_eliminar_www_en_WordPress">Agregar o eliminar "www" en WordPress</span></h2>
+<div class="solvvy-solution">
+<p>No es necesario editar el archivo <span class="text-object">.htaccess</span> para configurar cómo aparece 'www' en la URL. En vez de eso, puedes cambiarlo dentro de WordPress basado en la URL que configuraste allí, pues WordPress hace las modificaciones del archivo <span class="text-object">.htaccess</span> por su cuenta.</p>
+<p>Revisa el siguiente artículo para ver más información sobre cómo editar la URL del sitio web en WordPress:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214580498-Cambiar-la-URL-de-mi-sitio-WordPress">Cambiar la URL de mi sitio WordPress</a></li>
+</ul>
+</div>
 <h2><span id="Cuando_agregas_o_eliminas_www_rompes_wordpress">Cuando agregas o eliminas "www" rompes WordPress</span></h2>
 <div class="solvvy-solution">
 <p>WordPress es único en eso, él requiere que la URL force o elimine "www" del nombre del dominio. Si tu base de datos forza "www", pero en el panel forza su eliminación (o viceversa), verás un error de redireccionamiento así:</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-05_wordpress_infinite_redirect_01.png" alt=""></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-05_wordpress_infinite_redirect_01.png" alt="" /></dd>
 </dl>
 <p>Asegúrate de que cualquier personalización de tu archivo <span class="text-object">.htaccess</span> sea igual a la que seleccionaste en la configuración de WordPress. Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/214580498-Cambiar-la-URL-de-mi-sitio-WordPress">Cambiar el Site URL de WordPress</a> para ver instrucciones sobre cómo actualizar todas las URL en tu sitio WordPress.</p>
 </div>

@@ -1,0 +1,58 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Si tienes un bucket de S3 en otra empresa, puedes migrar el contenido de ese bucket a DreamObjects dentro de tu panel.</p>
+<p>Este artículo describe cómo migrar un bucket de S3 de Amazon Web Services a DreamObjects.</p>
+</div>
+<h2>Crear una migración</h2>
+<div class="solvvy-solution">
+<div class="notebox-note">
+<p>El siguiente proceso <em>copia</em> tu contenido de un bucket AWS S3 a DreamObjects. Tu información NO se elimina de AWS como resultado.</p>
+</div>
+<ol>
+<li>Visita la página <a href="https://docs.aws.amazon.com/es_es/general/latest/gr/aws-security-credentials.html" target="_self" rel="undefined">Credenciales de Seguridad de los Servicios de Amazon Web</a> en el sitio de Amazon S3 para obtener tu 'Llave de Acceso' y 'Llave Secreta'.</li>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener noreferrer">DreamObjects</a> en tu panel de DreamHost.</li>
+<li>Haz clic en la pestaña <span class="text-object">Migraciones</span>.</li>
+<li>Haz clic en el botón <strong>+ Crear migración</strong>.</li>
+<li>Ingresa las credenciales de tu bucket S3:
+<ul>
+<li>Tipo — Configúralos como S3.</li>
+<li>Host — s3.amazonaws.com.</li>
+<li>Llave de Acceso y Llave Secreta — Tu puedes ubicarlos en tu <a href="https://docs.aws.amazon.com/es_es/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys" target="_self" rel="undefined">cuenta AWS</a>.</li>
+</ul>
+</li>
+<li>Haz clic en el botón <strong>Elegir destino y Buckets</strong>.
+<dl>
+<dd><em>Se abre una lista de tus Buckets S3. De forma predeterminada, todos los buckets están resaltados y seleccionados. Haz clic en un bucket para anular la selección.</em></dd>
+</dl>
+</li>
+<li>Ingresa un nombre para tu migración. El nombre es solo para tu uso.</li>
+<li>Si tienes más de un usuario de DreamObjects, elije cuál te gustaría usar para la migración.</li>
+<li>Haz clic para seleccionar o deseleccionar los buckets que deseas migrar o usa los botones <strong>Seleccionar Todos</strong> o <strong>Seleccionar Ninguno</strong>.</li>
+<li>Haz clic en el botón <strong>Iniciar Migración</strong>.
+<dl>
+<dd><em>La página principal de la pestaña <span class="text-object">Migraciones</span> se abre y tu migración activa se muestra en la sección <span class="text-section">Migraciones Activas.</span></em></dd>
+</dl>
+</li>
+</ol>
+</div>
+<h2>Conflictos de convenciones de nombres de Buckets</h2>
+<div class="solvvy-solution">
+<p>Si las convenciones de nomenclatura utilizadas para tus buckets de S3 no son compatibles con las convenciones de nomenclatura de DreamObjects, aparece una pantalla de 'Conflictos de Nombre de Bucket'.&nbsp;</p>
+<div class="notebox-important">
+<p>Actualmente, los nombres de buckets que utilizan letras mayúsculas no se pueden importar porque las letras mayúsculas pueden crear problemas de DNS. Si tienes Buckets S3 que usan letras mayúsculas, se te pedirá que cambies sus nombres. Si lo deseas, puedes utilizar guiones o puntos para separar palabras.</p>
+<p>Los nombres de bucket deben incluir al menos 3 caracteres y solo pueden contener caracteres en minúscula (a – z), números (0–9), guiones (-) y puntos (solo un punto a la vez y no pueden terminar en un punto). Aunque ciertos símbolos, como guiones o puntos, son válidos, romperán el DNS en el nombre de tu bucket (reduciendo la funcionalidad del bucket) y no se recomiendan.</p>
+<p>Para evitar problemas, modifica los nombres de tus buckets para resolver cualquier conflicto de nombres y luego haz clic en el botón <strong>Resolver Conflictos</strong>.</p>
+</div>
+</div>
+<h2>Ver los detalles de la migración</h2>
+<div class="solvvy-solution">
+<p>Haz clic en el botón <strong>Ver Detalles</strong> para ver información sobre la migración. Por ejemplo, puedes ver el estado actual, cuánto tiempo ha estado procesándose y su estado actual.</p>
+<p>Los buckets migrados y en migración reflejan uno de los cinco estados siguientes:</p>
+<ul>
+<li><strong>En cola</strong> — un requerimiento de migración está "en línea" y listo para proceder en DreamObjects. Normalmente, si varios buckets están en línea para migrar, un requerimiento está "en cola" hasta que DreamObjects esté listo para continuar con el siguiente.</li>
+<li><strong>En Progreso</strong> —&nbsp; el Bucket está en proceso de copiarse a DreamObjects y aún no ha completado la acción.</li>
+<li><strong>Parado</strong> — el proceso de migración para el Bucket ha fallado o el usuario que solicitó la migración lo detuvo manualmente.</li>
+<li><strong>Parcial</strong> — algunos Buckets y su contenido se han migrado y otros no. Esto puede deberse a un error durante la sincronización de objetos. Tales fallas pueden deberse a la eliminación de tus Buckets de S3 o al revocar tus credenciales de S3 antes de que se complete la migración.</li>
+<li><strong>Completo</strong> — el Bucket y todos sus objetos se han copiado correctamente en DreamObjects.</li>
+</ul>
+</div>

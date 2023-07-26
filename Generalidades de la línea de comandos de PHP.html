@@ -1,0 +1,61 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>DreamHost ofrece versiones de PHP de interfaz de línea de comandos que son útiles para desarrollar aplicaciones de shell. Existen bastantes diferencias entre la CLI (interfaz de línea de comando), SAPI (interfaz de programación de aplicaciones de servidor) y otras SAPI (como PHP-CGI). Vale la pena mencionar que CLI y CGI son SAPI diferentes a pesar de que comparten muchos de los mismos comportamientos. Para obtener más información sobre estas diferencias, puedes comenzar por revisar el capítulo del Manual de PHP,&nbsp;<a href="https://www.php.net/manual/en/features.commandline.php" target="_self" rel="undefined">Usar PHP desde la línea de comando</a>.</p>
+<div class="notebox-note">
+<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo acceder a tu Shell.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades SSH</a></li>
+</ul>
+</div>
+</div>
+<h2>Ubicaciones PHP</h2>
+<div class="solvvy-solution">
+<p>Las rutas para los binarios instalados por defecto de DreamHost PHP-CLI son las siguientes:</p>
+<ul>
+<li><strong>PHP 8.0 </strong> – /usr/local/php80/bin/php</li>
+<li><strong>PHP 8.1 </strong>– /usr/local/php81/bin/php</li>
+<li><strong>PHP 8.2 </strong>– /usr/local/php82/bin/php</li>
+</ul>
+<p>Para mayor comodidad, DreamHost mantiene accesos directos para todas las versiones de PHP en el directorio <span class="text-object">/usr/local/bin/</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox">lrwxrwxrwx  1 root root    16 Apr 12 11:33 php-8.0 -&gt; ../php80/bin/php
+lrwxrwxrwx  1 root root    16 Apr 12 13:11 php-8.1 -&gt; ../php81/bin/php
+lrwxrwxrwx  1 root root    16 Apr 13 11:11 php-8.2 -&gt; ../php82/bin/php</pre>
+</div>
+<p><span class="text-object">/usr/local/bin</span> está incluido en el shell PATH para usuarios de forma predeterminada, por lo que puedes usar los accesos directos en lugar de la ruta completa a los binarios.ries.</p>
+<div class="notebox-important">
+<p>La compatibilidad con las versiones obsoletas de PHP se está eliminando de los servidores de DreamHost, y es posible que sus archivos binarios ya no estén disponibles en tu servidor a través de la línea de comandos.</p>
+</div>
+</div>
+<h2>Revisar la versión a través de SSH</h2>
+<div class="solvvy-solution">
+<p>Puedes confirmar los números de versión exactos en uso ejecutando el binario desde&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">dentro del shell</a> usando la opción "-v". Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">php-8.2 -v</span>
+</pre>
+</div>
+<p>La interfaz CLI de PHP predeterminada en DreamHost se puede ver corriendo <span class="code">php -v</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">php -v</span></pre>
+</div>
+</div>
+<h2 class="subheader">Verificar los módulos PHP instalados</h2>
+<div class="solvvy-solution">
+<p>Puedes determinar qué módulos PHP están instalados para una versión específica de PHP corriendo el siguiente comando.</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/local/php82/bin/php -m</span></pre>
+</div>
+<p>Simplemente cambia el número de PHP a la versión que deseas verificar. Tu terminal generará todos los módulos instalados.</p>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-PHP" target="_self">Generalidades de PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202148-Cambiar-la-versi%C3%B3n-de-PHP-que-usa-shell" target="_self">Cambiar la versión de PHP que usa shell</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214895317-Cambiar-la-versi%C3%B3n-PHP-de-un-sitio" target="_self">Cambiar la versión PHP de un sitio</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">Ver la configuración y versión PHP de tu sitio</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">Generalidades de php.ini</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215082337--Qu%C3%A9-versiones-de-PHP-est%C3%A1n-disponibles-en-DreamHost-" target="_self">¿Qué versiones de PHP están disponibles en DreamHost?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+</ul>
+</div>

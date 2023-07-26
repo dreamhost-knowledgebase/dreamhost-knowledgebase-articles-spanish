@@ -5,25 +5,49 @@
 <pre class="prebox">&lt;html
 &lt;body&gt;
 
-&lt;?php
+<span class="code-highlight">&lt;?php
   echo "hello";
-?&gt;
+?&gt;</span>
 
 &lt;/body&gt;
 &lt;/html&gt;</pre>
 </div>
-<p>Sin embargo, si necesitas agregar código PHP en un archivo con una extensión <span class="text-object">.html</span>, debes agregar un Handler a tu archivo <span class="text-object">.htaccess</span>. Por ejemplo, el mismo código de arriba puede ser agregado en un archivo llamado <span class="text-object">hello.html</span>.</p>
+<p>Sin embargo, si necesitas agregar código PHP en un archivo con una extensión <span class="text-object">.html</span>, debes agregar un Handler a tu archivo <span class="text-object">.htaccess</span> para que el código PHP funcione.</p>
+<div class="notebox-important">
+<p><strong>Extensiones de archivo personalizadoas</strong></p>
+<p>Puedes usar los ejemplos de este artículo para cualquier extensión de archivo que necesites. Por ejemplo, la extensión del archivo <span class="text-object">.test</span> no existe, pero si creas un archivo llamado <span class="text-object">myfile.test</span>, puedes forzarlo para correr como PHP.</p>
+<p>Solamente cambia el código en el archivo <span class="text-object">.htaccess</span> para usar la extensión <span class="text-object">.test</span> en vez de <span class="text-object">.html</span>.</p>
+</div>
 </div>
 <h2>Código para agregar a tu archivo .htaccess</h2>
 <div class="solvvy-solution">
-<p>Consulta los siguientes artículos para obtener instrucciones sobre cómo editar archivos con un cliente FTP o SSH.</p>
+<p>El archivo que necesitas agregar al código se llama <span class="text-object">.htaccess</span>. Si no existe en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home#el-directorio-del-sitio-web" target="_self">directorio home del sitio web</a>, revisa los siguientes artículos para ver instrucciones sobre cómo crear un archivo usando un cliente de FTP o SSH.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar archivos vía FTP</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar archivos vía SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar archivos a través de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar archivos a través de SSH</a></li>
 </ul>
-<p>El archivo al que necesitas agregar código se llama <span class="text-object">.htaccess</span>. Si este no existe en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-de-sitio-web" target="_self">directorio principal de tu sitio web</a>, usa los artículos anteriores para crearlo. Agrega la siguiente línea al archivo <span class="text-object">.htaccess</span>.</p>
-<div class="preboxcontainer">
-<pre class="prebox">AddHandler php5-cgi .html</pre>
 </div>
-<p>Esta línea de código permite que los archivos con extensiones <span class="text-object">.html</span> ejecuten código PHP en tu navegador.</p>
+<h2>FCGI</h2>
+<div class="solvvy-solution">
+<p>Agrega la siguiente línea al archivo <span class="text-object">.htaccess</span> para que use FastCGI para PHP:</p>
+<div class="preboxcontainer">
+<pre class="prebox">AddHandler fcgid-script <span class="code-highlight">.html</span>
+FcgidWrapper "/dh/cgi-system/php<span class="code-highlight">82</span>.cgi" <span class="code-highlight">.html</span></pre>
+</div>
+<p>Si cargas el archivo en un buscador, cargará como un archivo de PHP normal.</p>
+<div class="notebox-note">
+<p>Este código también cambia la versión del PHP que tienes configurada en el panel a la versión en la segunda línea.</p>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-de-PHP">Generalidades de PHP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">Generalidades de .htaccess</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">Generalidades de php.ini</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio">Ver la versión y la configuración de PHP de tu sitio</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202148-Cambiar-la-versi%C3%B3n-de-PHP-que-usa-shell">Cambiar la versión de PHP que usa shell</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214895317-Cambiar-la-versi%C3%B3n-de-PHP-de-un-sitio-web">Cambiar la versión de PHP de un sitio web</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214202238-Generalidades-de-la-l%C3%ADnea-de-comandos-de-PHP">Generalidades de la línea de comandos de PHP</a></li>
+</ul>
 </div>
