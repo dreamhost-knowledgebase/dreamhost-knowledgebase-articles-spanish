@@ -1,6 +1,6 @@
 <h2>Generalidades</h2>
 <div class="solvvy-solution">
-<p>suEXEC (que quiere decir "switch user execution" o "cambiar la ejecución del usuario") permitte que los usuarios de <a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache">Apache</a> corran <a href="https://help.dreamhost.com/hc/es/articles/217298967-Generalidades-sobre-FastCGI">CGI</a> y programas SSI en diferentes usuarios. Cuando se usa correctamente, reduce considerablemente los riesgos de seguridad relacionados con permitir que los usuarios desarrollen y ejecuten programas CGI o SSI privados.</p>
+<p>suEXEC (que quiere decir "switch user execution" o "cambiar la ejecución del usuario") permite que los usuarios de <a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache">Apache</a> corran <a href="https://help.dreamhost.com/hc/es/articles/217298967-Generalidades-sobre-FastCGI">CGI</a> y programas SSI en diferentes usuarios. Cuando se usa correctamente, reduce considerablemente los riesgos de seguridad relacionados con permitir que los usuarios desarrollen y ejecuten programas CGI o SSI privados.</p>
 <h2>Seguridad</h2>
 <h3><span id="Permisos_de_Script">Permisos de Script</span></h3>
 <div class="solvvy-solution">
@@ -66,7 +66,7 @@ print $ENV{FOOBAR};</pre>
 </div>
 </div>
 <h2 class="header-section">Soluciones alternativas</h2>
-<p>The following sections offer you a few ways to get your environment variables working as intended.</p>
+<p>Las siguientes secciones te ofrecen algunas formas para que las variables de tu ambiente trabajen como se espera.</p>
 <div class="solvvy-solution">
 <h3><span id="Solucion_A:_Anteponer_HTTP_a_la_variable_del_nombre&lt;">Opción 1: Anteponer HTTP_ a la variable del nombre</span></h3>
 <p>La configuración de DreamHost de suEXEC permite cualquier variable de entorno que comience con <span class="code">HTTP_</span> pase.</p>
@@ -104,7 +104,7 @@ print $ENV{FOOBAR};</pre>
 <p>Al igual que la Opción 1, esta solución se adapta mejor a las aplicaciones que estás desarrollando tú mismo.</p>
 <p>Sin embargo, ten en cuenta que el propósito de usar variables de entorno es alterar el comportamiento de tu secuencia de comandos en función del contexto (o entorno) desde el que se ejecuta. Si configuras la variable desde el propio script, el comportamiento del script es el mismo independientemente del contexto desde el que se ejecute.</p>
 </div>
-<h3><span id="Solucion_C:_Crear_un_script_envoltorio">Opción 3: Crear un scipt envoltorio</span></h3>
+<h3><span id="Solucion_C:_Crear_un_script_envoltorio">Opción 3: Crear un script envoltorio</span></h3>
 <p>Crea un archivo llamado <span class="text-object">wrapper.cgi</span> con el siguiente contenido:</p>
 <div class="preboxcontainer">
 <pre class="prebox">#!/bin/sh
