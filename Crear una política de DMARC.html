@@ -1,8 +1,8 @@
-<h2>Generalidades</h2>
+<h2 id="h_01H9PA2P7994BHJ12PZTFDGEWC">Generalidades</h2>
 <div class="solvvy-solution">
 <p>La autenticación, informe y conformidad de mensajes basados ​​en dominio (DMARC) es una política de correo entrante construida sobre registros SPF y DKIM, diseñada para detectar y prevenir correos fraudulentos.</p>
 <p>Cuando agregas una política DMARC a tu dominio, eliges informar al destinatario que tus correos están protegidos por registros SPF y/o DKIM, y qué hacer si tu política DMARC no se alinea con esos registros.</p>
-<h3>Ejemplo del proceso de envío de DMARC</h3>
+<h3 id="h_01H9PA2P79PKB7CK7S568QTYN8">Ejemplo del proceso de envío de DMARC</h3>
 <ol>
 <li>El remitente agrega una política DMARC a tu dominio.</li>
 <li>Un correo es enviado.</li>
@@ -13,11 +13,11 @@
 </ol>
 <p>Si no se pasa la 'alineación' (incluso si se pasa la verificación SPF/DKIM), el mensaje falla. Esto ayuda a garantizar que la actividad fraudulenta que parece provenir del dominio esté bloqueada.</p>
 </div>
-<h2>¿Qué es la alineación?</h2>
+<h2 id="h_01H9PA2P79RD2EK9X5EDGR14N6">¿Qué es la alineación?</h2>
 <div class="solvvy-solution">
 <p>La política DMARC verifica el nombre de dominio que figura en el campo Remitente: del mensaje. Luego compara ese dominio con otros nombres de dominio autenticados que figuran en el encabezado del correo. Si son idénticos, tu política DMARC está alineada.</p>
 <p>De lo contrario, debes comunicarse con tu servidor de correo y solicitar instrucciones sobre cómo asegurarte de que tus registros estén alineados.</p>
-<h3>Alineamiento estricto y relajado</h3>
+<h3 id="h_01H9PA2P79BYGSBD4054F242FP">Alineamiento estricto y relajado</h3>
 <p>La alineación en tu política puede establecerse como estricta o relajada.</p>
 <ul>
 <li><strong>Alineación estricta</strong> — los dominios deben ser idénticos.</li>
@@ -30,20 +30,20 @@
 <li><strong>example.com.au</strong></li>
 </ul>
 </div>
-<h2>¿Qué pasa si el mensaje falla la alineación?</h2>
+<h2 id="h_01H9PA2P7986CFPBWSV8P0D6VG">¿Qué pasa si el mensaje falla la alineación?</h2>
 <div class="solvvy-solution">
 <p>La política DMARC del remitente contiene información sobre cómo manejar los correos que fallan en la autenticación. Se pueden crear dos tipos de informes:</p>
 <ul>
 <li><strong>Reportes agregados</strong>&nbsp;— enviado como formato XML una vez al día, que consiste en datos agregados de todas las fallas de DMARC</li>
 <li><strong>Reportes forenses</strong> (también llamado informes de falla) — generado de inmediato y consiste en correos individuales que fallaron</li>
 </ul>
-<h3>Analizar los reportes</h3>
+<h3 id="h_01H9PA2P79WWNZW16ZZ6G2KD50">Analizar los reportes</h3>
 <p>Puedes usar una herramienta como la siguiente para analizar tus reportes.</p>
 <ul>
 <li><a href="https://mxtoolbox.com/DmarcReportAnalyzer.aspx" target="_blank" rel="noopener noreferrer">https://mxtoolbox.com/DmarcReportAnalyzer.aspx</a></li>
 </ul>
 </div>
-<h2>Configurar una política DMARC</h2>
+<h2 id="h_01H9PA2P79RT3XJG2FZ8N8E5KZ">Configurar una política DMARC</h2>
 <div class="solvvy-solution">
 <ol>
 <li>Configura un registro&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216107737-Generalidades-sobre-SPF">SPF</a>&nbsp;y/o <a href="https://help.dreamhost.com/hc/es/articles/215029758-Registros-DKIM">DKIM</a> en tu dominio.</li>
@@ -64,10 +64,10 @@ Los dominios mencionados en todas estas áreas deben ser idénticos, de lo contr
 <li><a href="https://help.dreamhost.com/hc/es/articles/360035516812-Agregar-registros-DNS-personalizados#registro_TXT">Crear el registro TXT</a>.</li>
 <ol>
 <li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
-<li>Da clic en el botón <strong>Administrar</strong> para abrir la página <a href="https://help.dreamhost.com/hc/es/articles/360043889332-La-p%C3%A1gina-Administrar-Sitios-Web" target="_blank" rel="noopener noreferrer"> <span class="panel-page">Administrar Sitios Web</span></a>, la cual te permite ajustar múltiples configuraciones de tu sitio.
+<li>Da clic en el botón <strong>Administrar</strong> para abrir la página <a href="https://help.dreamhost.com/hc/es/articles/360043889332-La-p%C3%A1gina-de-Configuraciones-de-Dominios" target="_self"><span class="panel-page">Configuraciones de Dominios</span></a>, la cual te permite ajustar múltiples configuraciones de tu sitio.
 <ul>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366#cuadricula_o_lista" target="_blank" rel="noopener noreferrer">Vista de Malla</a>, pasa sobre tu dominio y da clic al botón <strong>Administrar</strong>.</li>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366#cuadricula_o_lista" target="_blank" rel="noopener noreferrer">Vista de Lista</a>, da clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Malla</a>, pasa sobre tu dominio y da clic al botón <strong>Administrar</strong>.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Lista</a>, da clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
 </ul>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-websites-tabs-dns.png" alt="ES DNS tab" width="249" height="56" /></dd>
@@ -91,13 +91,13 @@ Ve la sección a continuación para obtener más detalles sobre las diferentes o
 </ol>
 <p>Después de hacer clic en el botón <strong>Agregar Registro</strong> comienza la propagación del nuevo registro. Esto puede tardar hasta 6 horas antes de que el nuevo registro se actualice en línea.</p>
 </div>
-<h2>Etiquetas que puedes usar en tu registro DMARC</h2>
+<h2 id="h_01H9PA2P7A4ZNNVDGR0JYSD8H9">Etiquetas que puedes usar en tu registro DMARC</h2>
 <div class="solvvy-solution">
-<h3>Etiquetas requeridas</h3>
+<h3 id="h_01H9PA2P7AWM5N8CSEE66QPE6M">Etiquetas requeridas</h3>
 <p>Hay 2 etiquetas requeridas, <span class="code">v</span> y&nbsp;<span class="code">p</span>.</p>
-<h4><strong>La etiqueta v</strong></h4>
+<h4 id="h_01H9PA2P7A4M6Y4PQFBYSEB373"><strong>La etiqueta v</strong></h4>
 <p>La etiqueta <span class="code">v</span> identifica el registro de texto como un registro DMARC. Esta debe ser la primera etiqueta y tener un valor de DMARC1.</p>
-<h4><strong>La etiqueta p</strong></h4>
+<h4 id="h_01H9PA2P7AH6HR7M9C4HSS93C2"><strong>La etiqueta p</strong></h4>
 <p>La etiqueta <span class="code">p</span> identifica la acción que el propietario del dominio solicita al destinatario que tome para los mensajes fallidos. Las opciones son:</p>
 <table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
 <tbody>
@@ -119,7 +119,7 @@ Ve la sección a continuación para obtener más detalles sobre las diferentes o
 </tr>
 </tbody>
 </table>
-<h3>Etiquetas de correo</h3>
+<h3 id="h_01H9PA2P7A4QF8C89V3MEDQQ2X">Etiquetas de correo</h3>
 <p>Estos indican dónde se envían los informes.</p>
 <table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
 <tbody>
@@ -137,7 +137,7 @@ Ve la sección a continuación para obtener más detalles sobre las diferentes o
 </tr>
 </tbody>
 </table>
-<h3>Etiqueta de informe</h3>
+<h3 id="h_01H9PA2P7APDTHD3WCEE3EKNQ4">Etiqueta de informe</h3>
 <p><strong>fo</strong> controla cuando se crea un informe de falla.</p>
 <table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
 <tbody>
@@ -164,7 +164,7 @@ Ve la sección a continuación para obtener más detalles sobre las diferentes o
 </tbody>
 </table>
 <p>Se recomienda una configuración de fo=1 ya que proporciona la mayor cantidad de datos sobre cualquier falla.</p>
-<h3>Etiquetas opcionales</h3>
+<h3 id="h_01H9PA2P7AHJGQ46HETSKB0GZW">Etiquetas opcionales</h3>
 Las siguientes etiquetas usan un valor predeterminado si la etiqueta no está configurada:<br />
 <table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
 <tbody>
@@ -194,7 +194,7 @@ Las siguientes etiquetas usan un valor predeterminado si la etiqueta no está co
 </tr>
 </tbody>
 </table>
-<h3>Etiqueta de subdominio</h3>
+<h3 id="h_01H9PA2P7AY2VP4E85JH7SD1FA">Etiqueta de subdominio</h3>
 <p>La etiqueta sp se usa para establecer una política de informes diferente para un subdominio. Por ejemplo, puede configurar el dominio primario para usar <strong>p=reject</strong> mientras configura todos los subdominios bajo este dominio para usar <strong>sp=quarantine</strong>.</p>
 <table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
 <tbody>
@@ -213,7 +213,7 @@ Las siguientes etiquetas usan un valor predeterminado si la etiqueta no está co
 </tbody>
 </table>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01H9PA2P7AYJNE3F9MN953XB1J">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://dmarc.org/overview/" target="_self">DMARC Overview</a> - Página de Recursos de DMARC</li>
