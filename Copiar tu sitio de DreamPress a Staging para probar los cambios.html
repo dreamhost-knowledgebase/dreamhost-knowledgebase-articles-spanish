@@ -1,0 +1,86 @@
+<h2 id="h_01HA354CEVBBJX9DYHARVQMCJC">Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo describe el copiar tu sitio principal de DreamPress a un sitio web provisional. El sitio de preparación te permite probar los cambios que planeas realizar en tu sitio en vivo mientras tu sitio en vivo permanece en funcionamiento normalmente.</p>
+<p>Cuando hayas terminado de trabajar en tu sitio de preparación y lo hayas configurado como desees, puedes <a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/115003444252-Publicar-sus-cambios-de-Staging-en-su-sitio-de-DreamPress-en-vivo" target="_self" rel="undefined">publica esos cambios nuevamente en tu sitio web en vivo</a>.</p>
+<h3 id="h_01HA354CEVZXNHH64W5K7ZSF0A">Notas sobre cómo copiar tu sitio DreamPress Staging o provisional</h3>
+<div class="notebox-important">
+<p>Si tu sitio ha sido hackeado previamente y luego usaste el servicio de DreamHost <a href="https://help.dreamhost.com/hc/es/articles/226704048-Habilitar-y-administrar-DreamShield" target="_self">DreamShield</a> debes limpiar los archivos que fueron pirateados/deshabilitados antes de poder habilitar el sitio provisional en tu sitio.</p>
+</div>
+<ul>
+<li>DreamPress Staging usa Git para copiar archivos. Si tienes tu propio repositorio Git activo en una de las carpetas de tu sitio en vivo, el contenido de la carpeta no se copiará en tu sitio provisional. Para utilizar la puesta en escena con éxito, puedes copiar manualmente los contenidos de la carpeta mediante SFTP o SSH. DreamPress recomienda como mejor práctica administrar tu repositorio Git en un entorno de desarrollo separado en lugar de tu sitio en vivo.</li>
+<li>Cuando habilitas Staging por primera vez, tu plan DreamPress debe tener al menos 5 GB de espacio libre.</li>
+<li>La carpeta Cargas no se copia en tu sitio provisional para usar el espacio en disco de manera eficiente. Reemplazar una imagen existente en tu Biblioteca de medios la modificará para el sitio en vivo.</li>
+</ul>
+</div>
+<h2 id="h_01HA354CEVXBK0V4CGZ0NMPMQ2">Copiar tu sitio en vivo al sitio provisional</h2>
+<div class="solvvy-solution">
+<p>Los siguientes pasos te muestran cómo copiar tu sitio web en vivo de DreamPress a tu sitio web provisional. Luego puedes probar y trabajar en el sitio de preparación sin afectar el sitio en vivo.</p>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
+<li>Da clic en el botón <strong>Administrar</strong> para abrir la página de <a href="https://help.dreamhost.com/hc/es/articles/360043889332-La-p%C3%A1gina-de-Configuraciones-de-Dominios">Configuraciones de Dominios</a>, la cual te permite ajustar múltiples configuraciones de tu sitio.
+<ul>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Malla</a>, da clic en el botón <strong>Administrar</strong> en la parte inferior de la caja del sitio.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Lista</a>, da clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
+</ul>
+</li>
+<li>Da clic en la pestaña <span class="text-object">Sitio Provisional</span> para abrir el panel de <span class="text-object">Sitio Provisional</span>.</li>
+<li>Haz clic en el botón <strong>Crear Sitio Provisional</strong>.
+<div class="notebox-note">
+<p>Un sitio provisional se crea automáticamente con un nuevo nombre. Ten en cuenta que no es posible darle un nombre personalizado a tu sitio de vista previa</p>
+</div>
+<dl></dl>
+</li>
+</ol>
+<dl></dl>
+<p>Una vez que tu sitio web haya terminado de copiarse en tu sitio de preparación, se te enviará un correo de confirmación.</p>
+</div>
+<h2 id="h_01HA354CEV2DNCP3JXQJFDWHV7">Administrar tu sitio web provisional</h2>
+<div class="solvvy-solution">
+<div class="notebox-important">
+<p>El entorno provisional no está incluido en las copias de seguridad diarias del dominio DreamPress. Tú es responsable de mantener tus propias copias de seguridad de cualquier contenido que agregues en el entorno provisional.</p>
+</div>
+<p>Luego de crear el ambiente provisional, aparece la página <span class="text-object">Sitio Web Provisional</span> donde se ve el nombre de tu dominio en la parte superior. También aparecen las siguientes configuraciones:</p>
+<ul>
+<li><strong>Acceder al Sitio Provisional</strong> — Muestra el nombre de usuario y la contraseña que usas para acceder a tu sitio web protegido con inicio de sesión.</li>
+<li><strong>Administrador de Vista Provisional del Panel de WordPress</strong> —&nbsp;Abre la página WP-Admin donde puedes editar en tu sitio web provisional.</li>
+<li><strong>Subdir Archivos</strong> — Muestra las credenciales FTP de tu sitio web provisional para que puedas transferir archivos a través del <a href="https://help.dreamhost.com/hc/es/articles/360003490852-Usando-el-administrador-de-archivos-del-sitio-web" target="_self">administrador de archivos</a> de DreamHost o tu cliente FTP de terceros.</li>
+<li><strong>Base de Datos (MySQL)</strong> — Muestra las credenciales de tu base de datos (MySQL) para que puedas administrar tus bases de datos usando phpMyAdmin.</li>
+</ul>
+</div>
+<h2 id="h_01HA354CEVGGX2JRZN4CE5F4VW"><span id="Probar_las_nuevas_versiones_de_PHP_en_Staging">Probar las nuevas versiones de PHP en Staging</span></h2>
+<div class="solvvy-solution">
+<p>La opción Configurar PHP te permite probar versiones más nuevas de PHP en un sitio provisional sin afectar tu sitio web DreamPress en vivo.</p>
+<p>Si tu sitio provisional funciona en una versión más reciente de PHP, puedes publicar tu sitio web Staging, y la versión más nueva de PHP, en tu sitio web DreamPress en vivo. No es posible bajar PHP en tu sitio DreamPress en vivo usando este método.</p>
+<div class="notebox-important">
+<p>Antes de continuar, asegúrate de haber publicado una copia de tu sitio web DreamPress en vivo en Staging, siguiendo los pasos anteriores.</p>
+</div>
+<p>Los siguientes pasos te muestran cómo cambiar la versión PHP de tu sitio web provisional desde el panel de Staging.</p>
+<ol>
+<li>Busca la sección <span class="text-section">Configurar PHP</span> en la parte inferior del panel de <span class="text-object">Sitio Provisional</span>.</li>
+<li>Haz clic en el botón <strong>Cambiar PHP a…</strong>. Una vez se complete la actualización, el panel mostrará la versión de PHP actual en uso en tu sitio provisional debajo de <span class="text-section">Configurar PHP</span>.</li>
+<li>Inicia sesión en tu sitio web provisional y examínalo para asegurarte de que funciona como se espera. Revisa la sección <span class="text-section">Inicias sesión en tu sitio web Provisional</span> de debajo para ver más detalles.</li>
+</ol>
+<p>Si tu sitio funciona con la nueva versión de PHP, puedes publicar cambios desde tu sitio web provisional en tu sitio DreamPress en vivo. Revisa el siguiente artículo para obtener instrucciones:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115003444252-Publicar-tus-cambios-de-Staging-en-tu-sitio-de-DreamPress-en-vivo" target="_self">Publicar tus cambios de Staging en tu sitio de DreamPress en vivo</a></li>
+</ul>
+</div>
+<h2 id="h_01HA354CEV8741PJEPRZ8GBJVK"><span id="Iniciar_sesion_en_tu_sitio_provisional"> Iniciar sesión en tu sitio provisional</span></h2>
+<div class="solvvy-solution">
+<div class="notebox-important">
+<p>Es posible que veas el siguiente mensaje de error de estado de git, que aparece debajo Tools &gt; Site Health (en la sección 'Es posible que las actualizaciones en segundo plano no funcionen correctamente' debajo de <span class="text-object">Security</span> en el panel WP-Admin):</p>
+<div class="preboxcontainer">
+<pre class="prebox">The folder /home/wp_xyz/example.com/ was detected as being under version control (.git).</pre>
+</div>
+<p>Este mensaje siempre aparecerá para cada sitio provisional de DreamPress, y puede ignorarlos con seguridad. Git no romperá tu sitio.</p>
+</div>
+<p>Si anteriormente&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360001310966#contrasena">actualizaste tu contraseña de administrador de DreamPress</a>,&nbsp;puedes usar el mismo nombre de usuario y contraseña de tu sitio en vivo para iniciar sesión en tu sitio provisional.</p>
+<p>Si no cambiaste la contraseña manualmente, puedes iniciar sesión en tu Sitio Provisional de WordPress desde el panel de <span class="text-object">Sitio Web Provisional</span>. Haz clic en el botón <strong>Administrar Sitio Web Provisional de WordPress</strong> para iniciar sesión automáticamente en el panel administrador.</p>
+</div>
+<h2 id="h_01HA354CEV5XJK3SVNSQEWHTD9">Publicar tus cambios</h2>
+<div class="solvvy-solution">
+<p>Cuando estés listo, puedes usar la página de <span class="text-object">Sitio Web Provisional</span> del panel para publicar cambios en tu sitio web en vivo. Revisa el siguiente artículo para obtener más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115003444252-Publicar-sus-cambios-de-Staging-en-su-sitio-de-DreamPress-en-vivo" target="_self">Publicar tus cambios de staging en tu sitio de DreamPress en vivo</a></li>
+</ul>
+</div>
