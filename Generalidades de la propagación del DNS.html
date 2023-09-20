@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HAQ24AJ31S07Y14FZ4E844GF">Generalidades</h2>
 <div class="solvvy-solution">
 <p>La propagación de DNS puede ser pensado como el tiempo en que toman los registros DNS en expirar en un servidor. Por ejemplo, si actualizas los Nameservers para que apunten a una compañía de alojamiento diferente, esos nuevos Nameservers deben propagar a través de Internet. Cada ISP tiene su propio tiempo y que tan a menudo actualizan o expiran sus registros DNS en caché. Por que no hay un tiempo estándar a través de la internet, todo el proceso puede durar unas pocas horas hasta 72.</p>
 <p>Adicionalmente, la Propagación de DNS es más bien un término incorrecto usado para describir el proceso de la resolución de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">DNS</a>.&nbsp;La palabra "propagación" implica que los cambios de DNS se riegan de un servidor DNS a otro servidor DNS, y que no tienes control sobre qué tan rápido lo hace. De hecho, los servidores DNS ven con tu servidor local de DNS cuando necesita, y el administrador de tu servidor local de DNS controla los valores del tiempo de vida o TTL de todos los registros DNS de tu dominio.</p>
@@ -7,36 +7,22 @@
 <p>DreamHost no puede controlar qué tan rápido tu DNS propaga a través de Internet.</p>
 </div>
 </div>
-<h2>Caching</h2>
+<h2 id="h_01HAQ24AJ3HKP6597XTDV8E1ZS">Caching</h2>
 <div class="solvvy-solution">
-<h3>Como funciona el caché de DNS</h3>
+<h3 id="h_01HAQ24AJ3ACB7FZR34GJ31WAD">Como funciona el caché de DNS</h3>
 <p>Por el alto volumen de requerimientos generados por el sistema como DNS, los diseñadores deseaban proveer con un mecanismo que redujera la carga en los servidores DNS individuales. En nuestro lado, la resolución del proceso de DNS permite hacer caché (la grabación local y la consulta posterior de los resultados de una consulta DNS) por un periodo de tiempo después de una respuesta satisfactoria.</p>
 <p>En palabras sencillas, el caché de DNS permite a cualquier servidor de DNS alrededor del mundo guardar localmente los registros DNS para un dominio en ese servidor. Esto permite al servidor usar esos registros inmediatamente sin la necesidad de una consulta de DNS. Eventualmente, sin embargo, los DNS deben ser actualizados, lo cual es cuando el tiempo de vida o TTL juegan su papel.</p>
-<h3>Tiempo de vida o (TTL)</h3>
+<h3 id="h_01HAQ24AJ3AM73Q8AA1N16KP78">Tiempo de vida o (TTL)</h3>
 <p>Por cuánto tiempo el caché guarda la respuesta del DNS (quiere decir, por cuánto tiempo la respuesta del DNS es válida), el&nbsp;<a href="https://en.wikipedia.org/wiki/Time_to_live" target="_self">TTL</a>&nbsp;es configurado por el administrador del servidor de DNS para dar la respuesta. El periodo de validez puede variar de segundos a días o hasta semanas.</p>
 <p>Por ejemplo, el TTL en los servidores de DreamHost está en 5 minutos por defecto. Esto es el tiempo en que un registro DNS tiene caché en nuestro servidor.</p>
 </div>
-<h2>Tiempo de caché</h2>
+<h2 id="h_01HAQ24AJ38NKWSJE4ZAPYZBDM">Tiempo de caché</h2>
 <div class="solvvy-solution">
 <p>Los cambios en el DNS no siempre toman efecto automáticamente y globalmente. Esto se explica mejor con un ejemplo: Si un administrador ha puesto un TTL en 6 horas para el alojamiento www.dreamhost.com, y luego cambia la dirección IP a que www.dreamhost.com resuelva a las 12:01pm, el administrador tiene que considerar que una persona que tenga caché de una respuesta con la viaje dirección IP a las 12:00pm no consultará el servidor de DNS nuevamente antes de las 6:00pm. El periodo entre 12:01pm y 6:00pm en este ejemplo es llamado caching time o tiempo de caché, lo cual es mejor definido como el periodo de tiempo que empieza cuando haces un cambio en un registro DNS y termina después del máximo tiempo especificado cuando el TTL expira.</p>
 <p>Es importante recordar que desde que puede demorar muchas horas los registros DNS en resolver en todas las ubicaciones, diferentes computadores y ubicaciones para verse en diferentes momentos.</p>
 <p>Muchas personas refieren incorrectamente a unas misteriosas 48 o 72 horas de propagación cuando hacen un cambio en el DNS. Cuando cambias los registros Nameservers para tu dominio o las direcciones IP o hostnames o servidores DNS autoritarios usando tu dominio (si hay), puede haber un largo periodo de tiempo antes de que los servidores de DNS usen la nueva información. Esto es porque esos registros son manejados por los servidores de la zona DNS padre (por ejemplo, los servidores DNS de los .com de tu dominio es <strong>example.com</strong>), lo cual típicamente hace caché a los registros por 48 horas. Sin embargo, esos cambios de DNS están disponibles inmediatamente para cualquier servidor de DNS que no los tenga en su caché. Y cualquier DNS en tu dominio que no sean los registros Nameservers y servidores DNS autoritarios pueden ser casi instantáneos, si seleccionas (bajando el TTL antes de tiempo, o esperando hasta que el viejo TTL expire antes de hacer cualquier cambio.</p>
 </div>
-<h2><span id="Time_to_live_.28TTL.29">Ajustar el tiempo de vida o (TTL)</span></h2>
-<div class="solvvy-solution">
-<p>El tiempo de vida o TTL para un dominio es cuanto tiempo un sitio web está con caché (almacenado en la memoria) de un servidor web. El tiempo estimado es 4 horas.</p>
-<p>Si estás moviendo un dominio de un proveedor de alojamiento web a otro, puede ser una buena idea bajar el TTL a lo más bajo posible ANTES de que inicie la migración. Esto permite que los registros DNS en tu alojamiento actual expiren más rápidamente así no tienes que esperar las 4 horas completas hasta que los registros cambien.</p>
-<div class="notebox-note">
-<p>Después de que el TTL para un dominio caiga, tienes que continuar esperando hasta que el TTL expire. Esto puede ser 4 horas (dependiendo del TTL de tu proveedor de hosting). Solo después de que el TTL haya expirado el nuevo valor de TTL del DNS actualizará.</p>
-</div>
-<p>Una vez que las 4 horas hayan expirado y tu nuevo TTL esté activo, debes actualizar tu DNS a que apunte al nuevo proveedor de alojamiento.</p>
-<p>Si por alguna razón necesitas acelerar o ralentizar el TTL para un dominio alojado en DreamHost:</p>
-<ul>
-<li>Crea un ticket en la página de&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener noreferrer">Contactar a Soporte</a>&nbsp;en tu panel y el soporte de DreamHost lo ajustará por ti.</li>
-<li>Asegúrate de hacerle saber a soporte al menos cuatro horas antes del tiempo que quieras actualizar tu DNS, pues va a tomar ese tiempo para habilitar el nuevo TTL.</li>
-</ul>
-</div>
-<h2>Hacer flush al caché del DNS</h2>
+<h2 id="h_01HAM8DRDJADD7FH67QDQF71NN"><span id="Flushing_the_DNS_cache">Limpiar el caché del DNS</span></h2>
 <div class="solvvy-solution">
 <p>Si has hecho cambios recientes a un dominio u otros servicios de DNS relacionados, y no se ve ningún cambio, puede que necesites hacer flush a tu caché del DNS para ver los nuevos cambios que aparezcan en tu ubicación.</p>
 <p>Por favor visita el siguiente artículo para más detalles de como limpiar el caché de DNS para Windows, Mac y Linux:</p>
@@ -44,7 +30,7 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/215680477-Generalidades-de-limpiar-el-DNS" target="_self">Limpiar el DNS</a></li>
 </ul>
 </div>
-<h2>Herramientas que te ayudan a ver el estado de tu DNS</h2>
+<h2 id="h_01HAQ24AJ4XS75Q8F54NRFN92K">Herramientas que te ayudan a ver el estado de tu DNS</h2>
 <div class="solvvy-solution">
 <p>Las siguientes herramientas te ayudan a confirmar en cuales ubicaciones tú DNS ha actualizado:</p>
 <ul>
@@ -53,7 +39,7 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/360055964552-Ver-tus-registros-DNS-de-DreamHost" target="_self">Ver tus registros DNS en DreamHost</a> — Usar el verificador de propagación de DNS de DreamHost en el panel.</li>
 </ul>
 </div>
-<h2>Ver tu sitio antes de que los DNS hayan propagado</h2>
+<h2 id="h_01HAQ24AJ4W4E0F11HR4F6S626">Ver tu sitio antes de que los DNS hayan propagado</h2>
 <div class="solvvy-solution">
 <p>Tú aún puedes ver tu sitio antes de que los DNS hayan cambiado. Hay dos maneras de hacerlo:</p>
 <ul>
@@ -61,7 +47,7 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/115006086308-Ver-tu-sitio-DreamHost-usando-un-archivo-hosts" target="_self">Ver tu sitio DreamHost usando un archivo hosts</a></li>
 </ul>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HAQ24AJ48TMKKXXWZDBVXMA1">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214694348-Registros-DNS-b%C3%A1sicos" target="_self">Registros básicos de DNS</a></li>
