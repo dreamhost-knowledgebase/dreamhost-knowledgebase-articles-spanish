@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HBV568NEY9CXCZFQN5M11DV0">Generalidades</h2>
 <div class="solvvy-solution">
 <div class="notebox-tip">
 <p>Google cambió el nombre de su producto G Suite a Google Workspace. Mira el siguiente artículo para más información:</p>
@@ -13,10 +13,10 @@
 <li><a href="#external-dns" target="_self">Si tu DNS NO está alojado en DreamHost pero te ha registrado en Google Workspace en el panel</a></li>
 </ul>
 </div>
-<h2><span id="dh-dns"> Si tu DNS está alojado en DreamHost pero se ha registrado en Google Workspace en Google </span></h2>
+<h2 id="h_01HBV568NFB03GBC8HVJ0C1NN2"><span id="dh-dns"> Si tu DNS está alojado en DreamHost pero se ha registrado en Google Workspace en Google </span></h2>
 <div class="solvvy-solution">
 <p>Si tus&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self">nameservers</a> apuntan actualmente a DreamHost, el DNS de tu sitio está alojado en DreamHost. Si compraste una cuenta de Google Workspace en Google, debes actualizar los registros MX de tu sitio en el panel DreamHost para que apunte a Google.</p>
-<h3>Registros MX&nbsp;</h3>
+<h3 id="h_01HBV568NFNFYE3Q8XJHHSGD6Q">Registros MX&nbsp;</h3>
 <p>Al configurar tu dominio con Google Workspace, el panel de Google te guiará a través de la configuración de tus registros MX. Dentro del panel de Google Workspace, se muestran los siguientes registros MX:</p>
 <div class="preboxcontainer">
 <pre class="prebox">1 ASPMX.L.GOOGLE.com
@@ -33,10 +33,14 @@
 <ol>
 <li>Navega a la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.mx&amp;" target="_blank" rel="noopener noreferrer">MX Personalizados</a>.</li>
 <li>A la derecha de tu dominio, haz clic en el botón&nbsp;<strong>Editar</strong>.</li>
-<li>Ingresa los registros MX de Google al final de esta página.</li>
+<li>Ingresa los registros MX de Google al final de esta página.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-google-mx-records.png" alt="ES panel-google-mx-records.png" width="499" height="510" /></dd>
+</dl>
+</li>
 </ol>
 <p>Una vez guardado, tardará aproximadamente 6 horas en actualizarse en línea. Tu corre será alojado con Google.</p>
-<h3>Registro SPF</h3>
+<h3 id="h_01HBV568NF1BJBP1M0Y2TKYQGT">Registro SPF</h3>
 <p>También debes actualizar tu registro SPF para apuntar a Google utilizando el siguiente registro:</p>
 <div class="preboxcontainer">
 <pre class="prebox">v=spf1 include:_spf.google.com ~all</pre>
@@ -46,25 +50,25 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/216106197-Agregar-un-registro-SPF" target="_self" rel="undefined">Agregar un registro SPF</a></li>
 </ul>
 </div>
-<h2><span id="dreamhost-dns">Si tu DNS está alojado en DreamHost y te has registrado en Google Workspace en el pane</span>l</h2>
+<h2 id="h_01HBV568NF46PPR3GYY6DSTD34"><span id="dreamhost-dns">Si tu DNS está alojado en DreamHost y te has registrado en Google Workspace en el pane</span>l</h2>
 <div class="solvvy-solution">
 <p>Si tus&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self">nameservers</a> apuntan actualmente a DreamHost, el DNS de tu sitio está alojado en DreamHost. En este caso, DreamHost configura tus registros MX, verifica el dominio con un token en un registro TXT y luego actualiza el registro SPF de su sitio. Por ejemplo, los siguientes registros DNS se ajustan automáticamente:</p>
-<h3>Registros MX&nbsp;</h3>
+<h3 id="h_01HBV568NGQ484K4YNDM4ZYJGJ">Registros MX&nbsp;</h3>
 <pre class="prebox">1 ASPMX.L.GOOGLE.com
 5 ALT1.ASPMX.L.GOOGLE.com
 5 ALT2.ASPMX.L.GOOGLE.com
 10 ALT3.ASPMX.L.GOOGLE.com
 10 ALT4.ASPMX.L.GOOGLE.com</pre>
-<h3>Registro SPF</h3>
+<h3 id="h_01HBV568NGH653GKH3DR09YN4E">Registro SPF</h3>
 <div class="preboxcontainer">
 <pre class="prebox">v=spf1 include:_spf.google.com ~all</pre>
 </div>
-<h3>CNAME</h3>
+<h3 id="h_01HBV568NGD0M6EPFYMP7S0Y9V">CNAME</h3>
 <p>DreamHost crea un CNAME personalizado para el subdominio 'mail' que apunta a <span class="text-object">ghs.googlehosted.com</span>.</p>
-<h3>Verificación TXT</h3>
+<h3 id="h_01HBV568NG04XM22H691TG7GFF">Verificación TXT</h3>
 <p>DreamHost usa el método de crear un registro TXT con una cadena de verificación. Esta cadena de verificación se agrega automáticamente cuando te registras en Google Workspace en tu panel DreamHost. Puedes ver este registro usando la pestaña <span class="text-link">DNS</span> en la página <a class="panel-link" href="https://help.dreamhost.com/hc/es/articles/360053106191-Agregar-DNS" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>. Mira el artículo <a href="https://help.dreamhost.com/hc/es/articles/360053106191-Agregar-DNS" target="_blank" rel="noopener noreferrer">Agregar DNS</a> para más información.</p>
 </div>
-<h2><span id="dns-externo">Si tu DNS no está alojado en DreamHost pero te has registrado en Google Workspace en el panel</span></h2>
+<h2 id="h_01HBV568NGTRDNXQR7QHR2BWKV"><span id="dns-externo">Si tu DNS no está alojado en DreamHost pero te has registrado en Google Workspace en el panel</span></h2>
 <div class="solvvy-solution">
 <p>Si tus&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers" target="_self">nameservers</a> apuntan a otra compañía, DreamHost te envía un correo con información sobre cómo actualizar tus registros DNS en esa compañía. Aquí hay algunos enlaces que pueden ser de ayuda para algunos hosts populares:</p>
 <ul>
@@ -73,7 +77,7 @@
 <li style="font-weight: 400;"><span style="font-weight: 400;">Squarespace </span><span style="font-weight: 400;">— </span><a href="https://support.squarespace.com/hc/en-us/articles/360002101888#toc-mx-records"><span style="font-weight: 400;">Opción 2 para añadir registros personalizados manualmente</span></a></li>
 <li><span style="font-weight: 400;">Wix </span><span style="font-weight: 400;">— </span><a href="https://support.wix.com/es/article/agregando-o-actualizando-los-registros-mx-en-tu-cuenta-wix" target="_self">Agregar registros MX</a></li>
 </ul>
-<h3>Registros MX&nbsp;</h3>
+<h3 id="h_01HBV568NG7HFK9W4KWZN100HK">Registros MX&nbsp;</h3>
 <p>Al configurar tu dominio con Google Workspace, el panel de Google te guiará a través de la configuración de tus registros MX. Dentro del panel de Google Workspace, se mostrarán los siguientes registros MX:</p>
 <div class="preboxcontainer">
 <pre class="prebox">1 ASPMX.L.GOOGLE.com
@@ -133,14 +137,14 @@
 </tr>
 </tbody>
 </table>
-<h3>Registro SPF</h3>
+<h3 id="h_01HBV568NGJDSSFXH2KP64CD3M">Registro SPF</h3>
 <p>También debes actualizar tu registro SPF en la empresa de alojamiento de tu sitio para apuntar a Google usando el siguiente registro:</p>
 <div class="preboxcontainer">
 <pre class="prebox">v=spf1 include:_spf.google.com ~all</pre>
 </div>
-<h3>Verificación de dominio con un registro MX</h3>
+<h3 id="h_01HBV568NG5MQE8PQ7VE78H8CD">Verificación de dominio con un registro MX</h3>
 <p><span style="font-weight: 400;">También puedes verificar tu dominio para Google Workspace con un registro MX. El Asistente de configuración de Google Workspace proporciona un registro MX único, con una prioridad de 15, para la verificación. Este registro solo está disponible desde el Asistente de configuración que aparece justo después de registrarte en Google Workspace.</span></p>
-<h3>Registros CNAME opcionales</h3>
+<h3 id="h_01HBV568NG63ECZNSAWS9MH920">Registros CNAME opcionales</h3>
 <p><span style="font-weight: 400;">También puedes <a href="https://help.dreamhost.com/hc/es/articles/360035516812#Registro_CNAME" target="_self">crear los siguientes registros CNAME</a>&nbsp;si los necesitas:</span></p>
 <table class="wikitable"><colgroup> <col width="20%" /> <col width="20%" /> <col width="20%" /> <col width="20%" /> </colgroup>
 <tbody>
@@ -165,9 +169,9 @@
 </tbody>
 </table>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HBV568NGQ0Q1G3JYCT941B8D">Ver también</h2>
 <div class="solvvy-hidden">
-<h3>Enlaces externos</h3>
+<h3 id="h_01HBV568NGA0G95HC3HV8KWAYJ">Enlaces externos</h3>
 <ul>
 <li><a href="https://support.google.com/a/answer/33786?hl=es" target="_self" rel="undefined">Autorizar remitentes de correo con SPF</a> - Ayuda de Administrador de Google Workspace</li>
 </ul>
