@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HC2WD0JVXM8V5B0KSHK23TYA">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Composer es una herramienta de gestión de dependencias para proyectos PHP. Te permite declarar las bibliotecas que tu proyecto requiere y las instala/actualiza por ti.</p>
 <p>Está implementado como un archivo PHAR (PHP Archive). Phar está habilitado de manera predeterminada en tu servidor de DreamHost. Lo puedes confirmar al ejecutar el siguiente comando por&nbsp;<a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>:</p>
@@ -8,21 +8,21 @@ Phar</pre>
 </div>
 <p>Algunos proyectos PHP sugieren que se use Composer para administrar bibliotecas externas durante la instalación. MediaWiki es uno de esos ejemplos, al&nbsp;<a href="https://www.mediawiki.org/w/index.php?title=Download_from_Git&amp;oldid=1657013#Fetch_external_libraries" target="_self">indicarlo en sus instrucciones de instalación</a>:</p>
 </div>
-<h2>Cambiar el CLI de PHP predeterminada que usa tu shell</h2>
+<h2 id="h_01HC2WD0JVFK04A8CV432QHXWY">Cambiar el CLI de PHP predeterminada que usa tu shell</h2>
 <div class="solvvy-solution">
 <p>Si deseas que tus comandos se ejecuten usando una versión específica de PHP, mira el siguiente artículo:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214202148-Cambiar-la-versi%C3%B3n-de-PHP-que-usa-shell" target="_self">Cambiar la versión de PHP que usa shell</a></li>
 </ul>
 </div>
-<h2>Sitio oficial de instalación de Composer</h2>
+<h2 id="h_01HC2WD0JVA17C4GH4XV7JSKNX">Sitio oficial de instalación de Composer</h2>
 <div class="solvvy-solution">
 <p>Haz clic en el siguiente enlace para encontrar más detalles:</p>
 <ul>
 <li><a href="https://getcomposer.org/doc/00-intro.md" target="_self">Instalar Composer</a></li>
 </ul>
 </div>
-<h2>Instalación Local</h2>
+<h2 id="h_01HC2WD0JVSS4B0JHVY902SNA5">Instalación Local</h2>
 <div class="solvvy-solution">
 <p>Instalar Composer a nivel local es buena idea si sólo tienes que mantener un proyecto.</p>
 <ol>
@@ -45,8 +45,8 @@ Phar</pre>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">php -r "readfile('https://getcomposer.org/installer');" | php</span></pre>
 </div>
-</li>
-<li>Si funciona, verás el siguiente mensaje:
+<div class="notebox-tip">
+<p>Si funciona, verás el siguiente mensaje:</p>
 <div class="preboxcontainer">
 <pre class="prebox">#!/usr/bin/env php All settings correct for using Composer
 Downloading... 
@@ -56,11 +56,11 @@ Composer successfully installed to: /home/username/example.com/project/composer.
 Use it: php composer.phar
 </pre>
 </div>
-<p>Esto descarga el archivo <span class="text-object">composer.phar</span>.</p>
+</div>
 </li>
 </ol>
 </div>
-<h2>Instalación Global</h2>
+<h2 id="h_01HC2WD0JVDBASXMYG22S82ZGJ">Instalación Global</h2>
 <div class="solvvy-solution">
 <ol>
 <li>Inicia sesión por&nbsp;<a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>&nbsp;en tu servidor.</li>
@@ -88,7 +88,7 @@ Use it: php composer.phar
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">php -r "readfile('https://getcomposer.org/installer');" | php</span></pre>
 </div>
 </li>
-<li>Revisa el artículo&nbsp;<a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">crear y editar un archivo por SSH</a> para que encuentres instrucciones sobre cómo editar tu archivo existente <span class="text-object">.bash_profile</span> ubicado en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_blank" rel="noopener">directorio home de tu usuario</a>. Agrega lo siguiente al archivo <span class="text-object">composer.phar</span>.
+<li>Revisa el artículo&nbsp;<a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">crear y editar un archivo por SSH</a> para que encuentres instrucciones sobre cómo editar tu archivo existente <span class="text-object">.bash_profile</span> ubicado en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_blank" rel="noopener noreferrer">directorio home de tu usuario</a>. Agrega lo siguiente al archivo <span class="text-object">composer.phar</span>.
 <div class="preboxcontainer">
 <pre class="prebox">export PATH=/home/<span class="code-highlight">username</span>/.php/composer:$PATH</pre>
 </div>
@@ -109,7 +109,7 @@ Use it: php composer.phar
 </li>
 </ol>
 </div>
-<h2>Usar Composer</h2>
+<h2 id="h_01HC2WD0JWCMXACJXZH1YAV70Z">Usar Composer</h2>
 <div class="solvvy-solution">
 <p>Si instalaste Composer a nivel local, entonces, mientras estás en el directorio del proyecto invocarás a Composer de esta manera:</p>
 <div class="preboxcontainer">
@@ -121,7 +121,7 @@ Use it: php composer.phar
 </div>
 <p>En cualquier caso, reemplaza <span class="code">&lt;composer-command&gt;</span> con el comando de composer que quieras ejecutar. Puedes encontrar una lista de los comandos de Composer aquí en la <a href="https://getcomposer.org/doc/03-cli.md">documentación de Composer</a>.</p>
 </div>
-<h2>Solución de problemas</h2>
+<h2 id="h_01HC2WD0JW248J8N3EDYASJ5W8">Solución de problemas</h2>
 <div class="solvvy-solution">
 <p>Al ejecutar composer, puede que encuentres el siguiente error:</p>
 <p><strong>PHP Fatal error: Uncaught Error: Class 'Phar' not found</strong></p>
@@ -138,7 +138,7 @@ Use it: php composer.phar
 <li><a href="/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no se actualiza</a></li>
 </ul>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HC2WD0JWMZSSTA62KSKJT7ZE">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>

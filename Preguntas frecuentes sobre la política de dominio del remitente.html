@@ -1,4 +1,4 @@
-<h2>¿Cuál es la política de dominio del remitente?</h2>
+<h2 id="h_01HC2X8YBH2A6BBHCEPR7704AB">¿Cuál es la política de dominio del remitente?</h2>
 <div class="solvvy-solution">
 <p>La política de dominio de remitente de DreamHost existe para garantizar que el correo enviado desde tu sitio web sea legítimo. Esta política requiere dos cosas:</p>
 <ul>
@@ -13,60 +13,60 @@
 </ul>
 </div>
 </div>
-<h2>Un ejemplo de lo que no está permitido</h2>
+<h2 id="h_01HC2X8YBHN7EW9SPD1JK5ANXX">Un ejemplo de lo que no está permitido</h2>
 <div class="solvvy-solution">
 <p>Si tu sitio web es <strong>example.com</strong> y tienes un formulario de correo PHP que envía un correo, la dirección DE en ese correo debe ser algo como <span class="text-object">contact@example.com</span>. Los correos que se envían desde el servidor web utilizando una dirección DE desde otro lugar (como Yahoo o Google) se bloquearán y nunca se enviarán.</p>
 <div class="notebox-note">
 <p>Los correos enviados a través de los servidores web compartidos de DreamHost deben usar una dirección DE que esté completamente alojada en DreamHost. Reenviar solo los alias no funcionarán.</p>
 </div>
 </div>
-<h2>¿Qué sucede si tu correo está bloqueado?</h2>
+<h2 id="h_01HC2X8YBH7W106TGRFQVGJ1ZZ">¿Qué sucede si tu correo se bloquea?</h2>
 <div class="solvvy-solution">
 <p>Si esto sucede, puedes ver el error de correo en tu cuenta&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a>.</p>
 <ol>
 <li>Inicia sesión en tu servidor a través de FTP.</li>
-<li>Asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio de tu usuario</a>.</li>
-<li>En el panel derecho, busca la carpeta <span class="text-object">/Maildir</span>. Haz clic en ella.<br />
+<li>Confirma estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio de tu usuario</a>.</li>
+<li>En el panel derecho, haz clic en la carpeta <span class="text-object">/Maildir</span>.<br />
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-Sender_domain_policy_01.png" alt="ES Sender_domain_policy_01.png" /></dd>
 </dl>
 </li>
-<li>En este directorio hay tres carpetas.<br />
-<ul>
-<li><span class="text-object">cur</span></li>
-<li><span class="text-object">new</span></li>
-<li><span class="text-object">tmp</span></li>
-</ul>
-</li>
-<li>Haz clic en la carpeta. /new.<br />
+<li>Haz clic en la carpeta <span class="text-object">/new</span>.
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-Sender_domain_policy_02.png" alt="ES Sender_domain_policy_02.png" width="500" height="600" /></dd>
 </dl>
+<dl>
+<dd><em>Aparecen archivos con nombres largos.</em></dd>
+</dl>
 </li>
-<li>En esta carpeta verás archivos con nombres largos. Haz clic derecho y ábrelo en un editor de texto para ver el contenido de un archivo.</li>
-</ol>
-<p>Abre el archivo en ese directorio para ver por qué no se pudo enviar. Cuando esta política bloquea los correos, verás el siguiente mensaje de error:</p>
+<li>Haz clic derecho y abre el archivo en un editor de texto para ver sus contenidos y la razón que falló al enviar.
+<dl>
+<dd><em>Cuando los correos son bloqueados por esta política, verás el siguiente mensaje de error:</em>
 <div class="preboxcontainer">
 <pre class="prebox">5.7.1 Sender domain not allowed
 </pre>
 </div>
+</dd>
+</dl>
+</li>
+</ol>
 </div>
-<h2>Crear una secuencia de comandos para ver el correo rechazado</h2>
+<h2 id="h_01HC2X8YBJ6Q4QK1DBVT6SF3K5">Crear una secuencia de comandos para ver el correo rechazado</h2>
 <div class="solvvy-solution">
 <p>En lugar de verificar manualmente la carpeta en tu servidor, puedes crear una secuencia de comandos que automáticamente te envíe un correo cada vez que se rechace un correo. Mira el siguiente artículo para más detalles:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360000484412-Crear-un-script-que-te-env%C3%ADe-correos-rechazados" target="_self">Crear un script que te envíe correos rechazados</a></li>
 </ul>
 </div>
-<h2>¿Cuándo se puso en práctica esta política?</h2>
+<h2 id="h_01HC2X8YBJK564WZC7EPY6T731">¿Cuándo se puso en práctica esta política?</h2>
 <div class="solvvy-solution">
 <p>La política la cual restringe el DE de la dirección de correo en correos fue creada en Abril de 2012. Fue sacado lentamente en los siguientes meses.</p>
 </div>
-<h2>¿Por qué DreamHost creó esta política?</h2>
+<h2 id="h_01HC2X8YBJQEQTZD8Z2MFZSA8G">¿Por qué DreamHost creó esta política?</h2>
 <div class="solvvy-solution">
 <p>Con el tiempo, los correos falsificados enviados desde los servidores de DreamHost comenzaron a afectar negativamente la reputación de los servidores de correo de DreamHost. Esto, a su vez, amenazó la capacidad de alojar el correo con DreamHost. Para proteger la reputación de los servidores de correo de DreamHost y proporcionar un servicio estable y confiable a los clientes, se creó esta política.</p>
 </div>
-<h2>¿Cómo funciona esta política?</h2>
+<h2 id="h_01HC2X8YBJS7NNQMM7VQBBE82X">¿Cómo funciona esta política?</h2>
 <div class="solvvy-solution">
 <p>La forma más precisa de enviar correos es enviarlos desde el servidor donde está alojado el servicio de correo del dominio. Por ejemplo, el correo de Hotmail debe enviarse desde los servidores de Hotmail y el correo de Google debe enviarse desde los servidores de Gmail. La política de correo de DreamHost establece que los correos enviados a través del correo de DreamHost y los servidores web compartidos solo deben ser DE dominios que tengan tu servicio de correo alojado en DreamHost. Por lo tanto, cuando envías un correo desde un servidor web compartido DreamHost, debes hacer lo siguiente:</p>
 <ul>
@@ -77,13 +77,13 @@
 <p>Esta política no se aplica a los Servidores <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a>&nbsp;y&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">Dedicados</a>. Los correos enviados desde un Servidor VPS o dedicado utilizando el correo de PHP (), Sendmail o SMTP a través de localhost, se envían directamente a través del sistema de correo postfix del servidor y se envían al destinatario sin pasar por ningún otro servidor DreamHost.&nbsp;</p>
 </div>
 </div>
-<h2>¿Desde qué dominios no puedo enviar?</h2>
+<h2 id="h_01HC2X8YBJZA1K40YRSPKZ7YNM">¿Desde qué dominios no puedo enviar?</h2>
 <div class="solvvy-solution">
 <p>La lista de dominios bloqueados no incluye todos los dominios que no utilizan el servicio de correo DreamHost. En cambio, es una lista dinámica mantenida por los administradores de correo de DreamHost. Si bien ocasionalmente puede enviar un correo utilizando una dirección DE con un dominio que no está alojado en DreamHost, no hay garantía de que no se bloqueará en el futuro. Para asegurarte de que tus correos no serán bloqueados, usa solo una dirección DE en un dominio que use el servicio de correo alojado en DreamHost.</p>
 <p>La otra opción es utilizar la autenticación SMTP en cualquier formulario de sitio web. Cuando usas la autenticación SMTP, puedes usar cualquier dirección DE que desees, aunque la autenticación SMTP debe ocurrir en el sistema que maneja el correo del dominio.</p>
 <p>Mira el artículo <a href="https://help.dreamhost.com/hc/es/articles/216140597-Enviar-correo-PHP-v%C3%ADa-SMTP" target="_self">Envío de correo SMTP</a>&nbsp;para ver un ejemplo.</p>
 </div>
-<h2>¿A dónde van los correos bloqueados? ¿Cómo puedo saber si se ha bloqueado el envío de correos?</h2>
+<h2 id="h_01HC2X8YBJC6GZM8XSAKACT05D">¿A dónde van los correos bloqueados? ¿Cómo puedo saber si se ha bloqueado el envío de correos?</h2>
 <div class="solvvy-solution">
 <p>Los correos bloqueados se devuelven al remitente como un correo devuelto 'no entregado'. Dentro de ese correo rebotado hay tres cosas:</p>
 <ul>
@@ -102,11 +102,11 @@
 <div class="notebox-note">
 <p>Si encuentras que el formulario de tu sitio web no entrega el correo como debería, busca en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio de tu usuario</a> en tu servidor web. Inicia sesión a través de FTP y luego navega a la carpeta <span class="text-object">Maildir/new</span>. Esta carpeta enumerará todos los correos que no se enviaron correctamente.</p>
 </div>
-<h3>La carpeta Maildir</h3>
+<h3 id="h_01HC2X8YBJ955PY1GME6SF8N2W">La carpeta Maildir</h3>
 <p>Los correos bloqueados se filtrarán en tu directorio <span class="text-object">Maildir/new</span>. Un Maildir es un directorio (a menudo llamado <span class="text-object">Maildir</span>) con tres subdirectorios llamados <span class="text-object">tmp</span>, <span class="text-object">new</span>, y <span class="text-object">cur</span>.</p>
 <p>Maildir es un formato muy utilizado para almacenar correo que no requiere el bloqueo de archivos a nivel de aplicación para mantener la integridad del mensaje a medida que se agregan, mueven y eliminan mensajes. Cada mensaje se guarda en un archivo separado con un nombre único.</p>
 </div>
-<h2>Ejemplo de direcciones de destinatario aceptables</h2>
+<h2 id="h_01HC2X8YBKG5ZJR1P0ZW3F7FCC">Ejemplo de direcciones de destinatario aceptables</h2>
 <div class="solvvy-solution">
 <table class="wikitable" style="width: 748px; height: 700px;">
 <tbody>
@@ -203,7 +203,7 @@
 </tbody>
 </table>
 </div>
-<h2>Ejemplos de direcciones de correo DE bloqueadas</h2>
+<h2 id="h_01HC2X8YBMWMNS77JNSFDR0Q2W">Ejemplos de direcciones de correo DE bloqueadas</h2>
 <div class="solvvy-solution">
 <p>Los correos no deben enviarse con una dirección DE alojada en otro lugar. Por ejemplo:</p>
 <ul>
@@ -213,7 +213,7 @@
 </ul>
 <p>Si necesitas usar cualquier dirección que no esté alojada con DreamHost como tu dirección DE, debes usar la autenticación SMTP.</p>
 </div>
-<h2>Ejemplo de un correo completo</h2>
+<h2 id="h_01HC2X8YBME73NCS9CQ0BRJD36">Ejemplo de un correo completo</h2>
 <div class="solvvy-solution">
 <p>Este es un ejemplo de un correo enviado por el formulario de contacto de un sitio web, como cuando un visitante del sitio completa un formulario de envío en tu sitio web. Este ejemplo utiliza el dominio <strong>example.com</strong> que está alojado en DreamHost:</p>
 <div class="preboxcontainer">
@@ -237,7 +237,7 @@ Hola. Estoy interesado en sus servicios, Por favor llamarme al 555-555-5555.
 <li>La información del visitante del sitio también se encuentra en el encabezado Reply-To. Esto es útil porque cuando el destinatario (Joe) hace clic en "responder", el correo se envía automáticamente a la dirección de correo del visitante del sitio.</li>
 </ul>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HC2X8YBMHA5GS4SW6QGJVFT7">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215036058-Resumen-de-la-pol%C3%ADtica-de-dominio-del-remitente-y-suplantaci%C3%B3n-de-identidad-o-spoofing" target="_self">Resumen de la política de dominio del remitente y suplantación de identidad</a></li>

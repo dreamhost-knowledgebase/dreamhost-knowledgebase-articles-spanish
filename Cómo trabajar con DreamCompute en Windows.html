@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HC2S493373VZ0HZCWTPHZWXY">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Es posible usar <a href="https://help.dreamhost.com/hc/es/articles/235817468-Introducci%C3%B3n-al-cliente-de-l%C3%ADnea-de-comandos-de-OpenStack" target="_self" rel="undefined">la interfaz de línea de comando de OpenStack</a> en un computador Windows instalando lo siguiente:</p>
 <ul>
@@ -17,7 +17,7 @@
 <div class="steps-section--border">&nbsp;</div>
 <div class="steps-section--content">
 <div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-1.svg" width="50px" />
-<h2><span id="Username_and_password">Paso 1 — </span>Instala Python y pip</h2>
+<h2 id="h_01HC2S4933QY6RRWGKKQAM95B7"><span id="Username_and_password">Paso 1 — </span>Instalar Python y pip</h2>
 <div class="solvvy-solution">
 <ol>
 <li>Descarga la última versión de Python del sitio web de Python:
@@ -36,10 +36,10 @@
 </div>
 </div>
 <div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-2.svg" width="50px" />
-<h2 class="subheader"><span id="Username_and_password">Paso 2 — </span>Instalar el cliente de OpenStack</h2>
+<h2 id="h_01HC2S4933CTHSB58DPRVBZXSN" class="subheader"><span id="Username_and_password">Paso 2 — </span>Instalar el cliente de OpenStack</h2>
 <div class="solvvy-solution">
 <p>Utiliza el símbolo del sistema para instalar el cliente OpenStack.</p>
-<h3><span id="Windows_8">Windows 10</span></h3>
+<h3 id="h_01HC2S4933SGKN16K2ANY3YSDK"><span id="Windows_8">Windows 10</span></h3>
 <ol>
 <li>En la izquierda inferior, escribe <span class="code">cmd</span> en la barra de búsqueda.</li>
 <li>Haz clic en el icono <span class="text-object">Símbolo del sistema</span> para abrirlo</li>
@@ -50,35 +50,42 @@
 </div>
 </li>
 </ol>
-<h4><strong>Mensaje de error</strong></h4>
-<p>Al instalar, puede ver este error.</p>
+<dl>
+<dd>
+<div class="notebox-tip">
+<p><strong>Mensaje de Error</strong>: Cuando lo instales, puedes que veas este error.</p>
 <div class="preboxcontainer">
-<pre class="prebox">error: Microsoft Visual C++ 14.0 is required. Get it with "Build Tools for Visual Studio": https://visualstudio.microsoft.com/downloads/</pre>
+<pre class="prebox">error: Microsoft Visual C++ 14.0 is required. 
+Get it with "Build Tools for Visual Studio": 
+https://visualstudio.microsoft.com/downloads/</pre>
 </div>
 <p>Para corregirlo:</p>
 <ol>
 <li>Descarga el archivo <a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&amp;rel=16" target="_blank" rel="noopener noreferrer">vs_buildtools.exe</a>.</li>
-<li>Haz clic en el archivo para ejecutarlo.</li>
-<li>Aparece una ventana emergente.<br />
-<ul>
-<li>Debajo de <span class="text-section">Desktop &amp; Mobile</span> selecciona <span class="text-object">C++ build tools</span>.</li>
-</ul>
+<li>Haz clic en el archivo para correrlo.
+<dl>
+<dd><em>Aparece una ventana emergente.</em></dd>
+</dl>
 </li>
+<li>Debajo de <span class="text-section">Escritorio &amp; Mobil</span> selecciona <span class="text-object">Herramientas de construcción C++</span>.</li>
 <li>Haz clic <strong>Instalar</strong>.</li>
 </ol>
 <p>Después de que <span class="text-object">C++ Build tools</span> ha sido instalado, ejecuta el comando de nuevo para instalar el cliente de openstack.</p>
 </div>
+</dd>
+</dl>
+</div>
 </div>
 <div class="steps-section--step"><img class="steps-number-icon" src="https://kbimages.dreamhosters.com/graphics/number-3.svg" width="50px" />
-<h2 class="subheader"><span id="Username_and_password">Paso 3 — Establecer variables de entorno</span></h2>
+<h2 id="h_01HC2S4934A37B8VNMDD8YNK5Y" class="subheader"><span id="Username_and_password">Paso 3 — Establecer variables de entorno</span></h2>
 <div class="solvvy-solution">
 <p>Ahora debes establecer variables de entorno para tu usuario de Windows para que los comandos del cliente de OpenStack se autentiquen en tu proyecto. La forma más sencilla de hacer esto es descargar tu archivo <span class="text-object">openrc</span>, modificarlo/volver a guardarlo como un archivo por lotes de Windows y ejecutarlo una vez.</p>
-<h3>Descargar tu archivo openrc</h3>
+<h3 id="h_01HC2S49342EMQXTKF2PPK0BP9">Descargar tu archivo openrc</h3>
 <p>Ve el siguiente artículo para más instrucciones:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/228047207-C%C3%B3mo-descargar-tu-archivo-openrc-de-DreamCompute">Cómo descargar tu archivo openrc DreamCompute</a></li>
 </ul>
-<h3>Modificar el archivo</h3>
+<h3 id="h_01HC2S4934MHAJDJK6T1MN3T4S">Modificar el archivo</h3>
 <p>Una vez que hayas descargado tu archivo <span class="text-object">openrc</span>, deberás modificarlo/volver a guardarlo como un archivo por lotes. Abre el archivo en un editor de texto como el Bloc de notas y elimina todo excepto las siguientes líneas</p>
 <div class="preboxcontainer">
 <pre class="prebox">export OS_AUTH_URL=https://iad2.dream.io:5000/v2.0
@@ -106,14 +113,14 @@ setx OS_PASSWORD "<span class="code-highlight">password</span>"</pre>
 <div class="notebox-note">
 <p>Asegúrate de que el archivo no se guarde con una extensión .txt adicional o Windows no podrás ejecutar el script.</p>
 </div>
-<h3>Ejecutar el archivo</h3>
+<h3 id="h_01HC2S4934FX5C2YT0Q49SRHTJ">Ejecutar el archivo</h3>
 <p>Ahora debes ejecutar el script como administrador.</p>
 <ol>
 <li>Busca el archivo guardado en el Explorador de Windows.</li>
-<li>Haz clic derecho y selecciona la opción <span class="text-object">Run as administrator</span>.</li>
+<li>Haz clic derecho y selecciona la opción <span class="text-object">Ejecutar como administrator</span>.</li>
 </ol>
 <p>Después de ejecutar el script, se deben configurar todas las variables ambientales necesarias. Sin embargo, no están configurados en tu sesión actual de Shell. Ahora debes salir de tu sesión de shell actual y abrir una nueva.</p>
-<h3>Abrir un nuevo prompt de cmd</h3>
+<h3 id="h_01HC2S4934VNNGF0D33W1BFNFM">Abrir un nuevo prompt de cmd</h3>
 <p>Sal de tu sesión de shell actual escribiendo <span class="code">exit</span>. Finalmente, abre un nuevo prompt de <span class="code">cmd</span>.<br />Tus variables ambientales ahora estarán activas. Puedes confirmar mi ejecución del comando <span class="code">set</span>.</p>
 <p>Ahora puedes usar el cliente de línea de comandos de OpenStack para administrar tu proyecto DreamCompute. Para una revisión de algunos de los comandos básicos, ve el siguiente artículo:</p>
 <ul>
@@ -123,9 +130,9 @@ setx OS_PASSWORD "<span class="code-highlight">password</span>"</pre>
 </div>
 </div>
 </div>
-<h2>Solución de problemas</h2>
+<h2 id="h_01HC2S49344JRA8DC1XC1XJBQR">Solución de problemas</h2>
 <div class="solvvy-solution">
-<h3>Revisar las variables de tu entorno</h3>
+<h3 id="h_01HC2S4934PQ5YZSJ0V6V44F76">Revisar las variables de tu entorno</h3>
 <p>Si tienes problemas para conectarte, vuelve a verificar tus variables de entorno. Puedes hacerlo desde el área del panel de <span class="text-section">Sytem Properties</span>, <span class="text-object">Windows PowerShell</span> o el <span class="text-object">símbolo del sistema de Windows</span>. En <span class="text-object">Windows PowerShell</span>, corre este comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">C:\Users\username&gt; </span><span class="command">Get-ChildItem Env:OS_*</span>
@@ -146,7 +153,7 @@ OS_TENANT_NAME=tenantname
 OS_USERNAME=username
 </pre>
 </div>
-<h3>Vuelve a guardar tu archivo openrc.bat</h3>
+<h3 id="h_01HC2S4934562303T5HW23E977">Vuelve a guardar tu archivo openrc.bat</h3>
 <p>Si encuentras que tus variables <span class="code">OS_</span> no están presentes, ve el Paso #3 arriba para guardar tu archivo <span class="text-object">openrc.bat</span> correctamente. Puedes confirmar si las variables están configuradas correctamente ejecutando manualmente el archivo. Por ejemplo:</p>
 <ol>
 <li>En prompt de comando, navega hasta el directorio donde se encuentra tu archivo <span class="text-object">openrc.bat</span>.</li>

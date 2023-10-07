@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HC2RTMF7CVDBVQ58ZEK9FXK2">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo explica cómo tu VPS usa memoria y las diferentes opciones para monitorear y solucionar problemas de memoria que puedan aparecer..</p>
 <div class="prereqs">
@@ -9,19 +9,19 @@
 </ul>
 </div>
 </div>
-<h2>Bases del uso de memoria</h2>
+<h2 id="h_01HC2RTMF8K08P39FBT4Y9TK0X">Bases del uso de memoria</h2>
 <div class="solvvy-solution">
 <p>Todos los <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-" target="_self" rel="undefined">VPS</a> (VPS) de DreamHost utilizan aproximadamente 100 MB de memoria como base sin que se ejecuten procesos de usuario. Esto se debe a que muchos procesos del sistema que deben ejecutarse para que tu VPS funcione (sshd, proftpd, etc.). Debes recordar esto al asignar memoria para tu VPS, ya que esos 100 MB iniciales de memoria son en gran parte inutilizables para los procesos de tu sitio.</p>
 <p>Después de esos 100 MB iniciales, la mayor parte de la memoria que utiliza tu VPS consiste en procesos Apache y PHP (o en el caso de aplicaciones Rails, procesos Passenger y Rails).</p>
 </div>
-<h2><span id="Ejemplo_de_como_los_procesos_utilizan_la_memoria">Ejemplo de cómo los procesos de PHP utilizan la memoria</span></h2>
+<h2 id="h_01HC2RTMF8YJMDEGG1E6DV2TCQ"><span id="Ejemplo_de_como_los_procesos_utilizan_la_memoria">Ejemplo de cómo los procesos de PHP utilizan la memoria</span></h2>
 <div class="solvvy-solution">
 <p>Cuando se visita tu sitio web, el archivo PHP de la página visitada se analiza y ejecuta mediante un proceso PHP. Al mismo tiempo, un proceso de Apache corre para entregar la respuesta HTML resultante del script al navegador.</p>
 <p>La cantidad de estos procesos que se ejecutan es proporcional a la cantidad de tráfico que tiene. Por ejemplo, si tienes una gran afluencia de tráfico, se generarán procesos PHP y Apache adicionales para facilitar ese tráfico. Apache y PHP continuarán generando procesos según lo solicitado hasta que tu VPS esté completamente sin memoria.</p>
 <p>Esto a menudo lleva a problemas en los que los sitios web en un VPS dejarán de trabajar debido a la saturación de la memoria durante las horas pico y comenzarán a trabajar normalmente nuevamente una vez que el tráfico baje a niveles más manejables.</p>
 <p>Por esta razón, debes tener cuidado de cómo configuras las cosas para prevenir estos inconvenientes.</p>
 </div>
-<h2><span id="Revisar_el_uso_de_memoria">Revisar el uso de memoria en el panel</span></h2>
+<h2 id="h_01HC2RTMF8X66SSYVS8P8BJPW3"><span id="Revisar_el_uso_de_memoria">Revisar el uso de memoria en el panel</span></h2>
 <div class="solvvy-solution">
 <p>Puedes ver un gráfico del uso de memoria de tu VPS en tu panel.</p>
 <ol>
@@ -35,7 +35,7 @@
 <p>Esta gráfica se actualiza normalmente una vez diariamente, alrededor de la media noche de PDT/PST para mostrar un promedio del uso del día.</p>
 <p>Dado que se actualiza una vez al día, te ayuda a ver las tendencias de uso. Sin embargo, no es útil para obtener una buena imagen de lo que está sucediendo en tiempo real. Los comandos a continuación te ayudan a ver la información en tiempo real:</p>
 </div>
-<h2><span id="Los_comandos top.2C_free.2C_y_ps_aux">Los comandos top, free y ps aux</span></h2>
+<h2 id="h_01HC2RTMF8J2F1WZMY9C4T07K5"><span id="Los_comandos top.2C_free.2C_y_ps_aux">Los comandos top, free y ps aux</span></h2>
 <div class="solvvy-solution">
 <p>Para correr los siguientes comandos, debes iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>. En tu aplicativo de terminal, abre dos conexiones en pestañas separadas para revisar los resultados más fácilmente. Luego puedes correr los siguientes comandos para solucionar los problemas de memoria:</p>
 <ul>
@@ -43,13 +43,13 @@
 <li><span class="code">free -m</span></li>
 <li><span class="code">ps aux</span></li>
 </ul>
-<h3><span id="Usar_el_comando_top">El comando 'top'</span></h3>
+<h3 id="h_01HC2RTMF8EWFB4QZYXEVWVQPB"><span id="Usar_el_comando_top">El comando 'top'</span></h3>
 <p>En tu terminal, escribe <span class="code">top</span>. Luego presiona la tecla <span class="code">Enter</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">top</span>
 </pre>
 </div>
-<p>El comando <span class="code">top</span> muestras las sesiones actuales activas, el porcentake de la CPU que están usando, cuánta memoria, cual usuario la está corriendo, y demás.</p>
+<p>El comando <span class="code">top</span> muestras las sesiones actuales activas, el porcentaje de la CPU que están usando, cuánta memoria, cual usuario la está corriendo, y demás.</p>
 <p><strong>Filtrar por memoria</strong></p>
 <p>Una vez el comando <span class="code">top</span> esté corriendo, puedes presionar la tecla <span class="code">Shift + m</span> para filtrar los procesos por uso de memoria más que por el uso de CPU.</p>
 <p>Mientras examinas el resultado de top, es importante saber qué información debes observar. La asignación de memoria que establece en tu panel se relaciona con la memoria física que se usa (a diferencia de la memoria virtual). Esto corresponde a la columna <span class="text-object">RES</span> en la respuesta.</p>
@@ -67,7 +67,7 @@
 </pre>
 </div>
 <p>En el ejemplo anterior, verás una serie de procesos php82.cgi en ejecución, lo que significa que el sitio que genera estos procesos se ejecuta bajo PHP 8.2. En la columna <span class="text-object">RES</span>, puedes ver cuánta memoria está usando cada uno. En este caso, todos usan de 12-15 MB de memoria. En un VPS ocupado, es probable que tenga varios procesos de Apache en ejecución. Esos promedian alrededor de 9-11 MB de memoria cada uno. Los procesos de Apache y PHP se multiplican a medida que tus sitios comienzan a atender más solicitudes, por lo que puede ver que el uso de memoria puede dispararse fácilmente si comienzas a recibir mucho tráfico.</p>
-<h3><span id="Usar_el_comando_free">El comando 'free'</span></h3>
+<h3 id="h_01HC2RTMF9B50EMQ422JR28B1P"><span id="Usar_el_comando_free">El comando 'free'</span></h3>
 <p>En otra ventana, corre <span class="code">free -m</span> para mostrar el uso actual de memoria en megabytes.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">free -m</span>
@@ -90,7 +90,7 @@ Swap:             0           0           0
 <li><a href="https://www.linuxatemyram.com/" target="_blank" rel="noopener noreferrer">linuxatemyram.com</a></li>
 </ul>
 </div>
-<h3><span id="Usar_el_comando_ps_aux">El comando ps aux</span></h3>
+<h3 id="h_01HC2RTMF934JMSYD0T4GRFGSK"><span id="Usar_el_comando_ps_aux">El comando ps aux</span></h3>
 <p><span class="code">ps</span> te proporciona información similar a <span class="code">top</span>, pero simplemente toma una captura de los procesos activos y su uso. Esto es útil si solo deseas ver un proceso(sos) en particular.</p>
 <p><strong>Procesos de Apache</strong></p>
 <p>Por ejemplo, si solo deseas ver la ejecución de procesos de Apache, corre el siguiente comando:</p>
@@ -104,7 +104,7 @@ Swap:             0           0           0
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ps aux | grep php</span></pre>
 </div>
-<h2>Recuperarse de una saturación de memoria</h2>
+<h2 id="h_01HC2RTMF90QTH9QKEHN68MMRS">Recuperarse de una saturación de memoria</h2>
 <div class="solvvy-solution">
 <p>La saturación de memoria es cuando tu VPS está usando toda su asignación de memoria.Cuando esto sucede, una variedad de cosas comenzarán a suceder.</p>
 <ul>
@@ -113,17 +113,17 @@ Swap:             0           0           0
 <li>Tu VPS puede entrar en un estado en el que ni siquiera puede iniciar sesión debido a la saturación de la memoria.</li>
 </ul>
 </div>
-<h3>Ver la causa</h3>
+<h3 id="h_01HC2RTMF9MKZ8T579F3M2RKQT">Ver la causa</h3>
 <div class="solvvy-solution">
 <p>Usualmente puedes ver si esto está occurriendo revisando un par de cosas:</p>
-<h4>Revisar el gráfico de recursos en el panel</h4>
+<h4 id="h_01HC2RTMF9ZH71KETFQH6BQKT1">Revisar el gráfico de recursos en el panel</h4>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214880128-Verificar-el-uso-de-recursos-en-un-VPS" target="_self">Verificar el uso de recursos en un VPS</a></li>
 </ul>
 <p>Si el gráfico de uso de recursos muestra que tu memoria se dispara muy por encima de la memoria asignada, es probable que esto sea lo que este sucediendo.</p>
-<h4>Correr el comando 'free'</h4>
+<h4 id="h_01HC2RTMF9HTEYPX8QR7RKPZY1">Correr el comando 'free'</h4>
 <p>Si aún puedes iniciar sesión en tu VPS a través de SSH, intenta correr el comando <span class="code">free -m</span> para ver cuánta memoria tienes disponible. Cuanto más se acerca a cero, peor estás. En cero, has alcanzado la saturación total de la memoria y lo que sucede a continuación puede ser impredecible.</p>
-<h3>Solucionar el problema</h3>
+<h3 id="h_01HC2RTMFANFRAF3T2A0N0BVTZ">Solucionar el problema</h3>
 <p>Los pasos en este artículo explican cómo ubicar la fuente del problema de memoria. A partir de ahí, tendrás que continuar solucionando lo que ha encontrado para determinar la causa original.</p>
 <p>Por ejemplo, si los procesos PHP están causando problemas de memoria y tu sitio web está basado en WordPress, puedes comenzar a solucionar los temas comunes de WordPress.</p>
 <ul>
@@ -132,7 +132,7 @@ Swap:             0           0           0
 <p>Sin embargo, si tu sitio web se basa en el código personalizado, la respuesta de los comandos anteriores podría apuntar el script específico que causa los problemas de memoria.</p>
 <p>Los comandos anteriores deben ejecutarse regularmente para obtener más información para ayudarte a diagnosticar el problema en particular que estás viendo.</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HC2RTMFADF9PV7ZT3PPHJMN8">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214879308-Generalidades-sobre-optimizaci%C3%B3n-de-un-VPS" target="_self" rel="undefined">Generalidades sobre optimización de VPS</a></li>

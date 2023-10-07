@@ -1,9 +1,9 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HC2YB2ZX02RVA11CJJ9X2HWT">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Optimizar las tablas de tu base de datos MySQL es una forma de hacer mejoras en tu sitio web. La función de optimización reorganiza los datos de la tabla y el índice, lo que reduce el espacio y mejora la eficiencia de I/O (Entrada y Salida).</p>
 <p>Esta guía describe cómo optimizar tus tablas a través de phpMyAdmin.</p>
 </div>
-<h2>Acceder a tu base de datos</h2>
+<h2 id="h_01HC2YB2ZXBCABQFQATW139PQ2">Acceder a tu base de datos</h2>
 <div class="solvvy-solution">
 <p>Para obtener instrucciones detalladas sobre cómo iniciar sesión en tu base de datos a través de phpMyAdmin, visita el siguiente artículo:</p>
 <ul>
@@ -11,20 +11,16 @@
 </ul>
 <p>Una vez que hayas iniciado sesión, continúa con los pasos a continuación.</p>
 </div>
-<h2>Ver el tamaño de tu base de datos</h2>
+<h2 id="h_01HC2YB2ZXPV7MSRN2MT7DWPM1">Ver el tamaño de tu base de datos</h2>
 <div class="solvvy-solution">
 <p>Antes de optimizar tu base de datos, debes verificar el tamaño actual de la misma. Puedes verificar el tamaño de tu base de datos usando phpMyAdmin o SSH.</p>
-<h3>Usando phpMyAdmin</h3>
-<p>Usando las instrucciones a continuación, puedes ver el tamaño de tu base de datos dentro de phpMyAdmin.</p>
-<ol>
-<li>Haz clic en el nombre de la base de datos cuyo tamaño estás verificando en el menú del lado izquierdo.
+<h3 id="h_01HC0ZTZCRTJYG75877YYV0VB1">Usar phpMyAdmin</h3>
+<p>Haz clic en el nombre de la base de datos en el menú izquierdo.</p>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-misc-phpmyadmin-database-size.png" alt="ES phpMyAdmin database size" width="913" height="25" /></dd>
 </dl>
-</li>
-<li>En el extremo derecho de la fila inferior del panel principal, puedes ver el tamaño completo de la base de datos.</li>
-</ol>
-<h3>Usando SSH</h3>
+<p>A la derecha de la última fila, puedes ver el tamaño total de la base de datos.</p>
+<h3 id="h_01HC0ZTZCRX19MJ1Q6NVJRHCHM">Usar SSH</h3>
 <p>También puedes usar SSH para conectarte e iniciar sesión en tu base de datos y seguir los pasos a continuación para encontrar el tamaño de ella. Revisa el siguiente artículo para obtener instrucciones sobre cómo conectarte a través de SSH:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214882998-Conectarse-a-una-base-de-datos-v%C3%ADa-SSH" target="_self">Conectarse a una base de datos vía SSH</a></li>
@@ -34,7 +30,7 @@
 <pre class="prebox"><span class="command">SELECT table_schema "database", sum(data_length + index_length)/1024/1024 "size in MB" FROM information_schema.TABLES GROUP BY table_schema;</span></pre>
 </div>
 </div>
-<h2><span id="Optimizar_tu_base_de_datos">Optimizar tu base de datos</span></h2>
+<h2 id="h_01HC2YB2ZXT5CG33KA8Y256KQ5"><span id="Optimizar_tu_base_de_datos">Optimizar tu base de datos</span></h2>
 <div class="solvvy-solution">
 <p>En el lado izquierdo de phpMyAdmin, verás una lista de bases de datos:</p>
 <ol>
@@ -44,7 +40,7 @@
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-01_Optimizing_Database.fw.png" alt="ES 01 Optimizing Database.fw.png" width="864" height="381" /></dd>
 </dl>
 </li>
-<li>Mira la columna <span class="text-object">Residuo a depurar</span> a la derecha: si ves algún valor numérico, esas tablas se pueden optimizar. En el ejemplo anterior, solo se han seleccionado esas tablas.<br />
+<li>Mira la columna <span class="text-object">Residuo a depurar</span> a la derecha.
 <div class="notebox-note">
 <p>También puedes hacer clic en el enlace <span class="text-link">Seleccionar todo</span> en la parte inferior izquierda que selecciona todas las tablas.</p>
 </div>
@@ -53,7 +49,7 @@
 <ul>
 <li>Al final de la lista de la tabla, haz clic en el menú desplegable <span class="text-object">Para los elementos que están marcados</span>.<br />
 <dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-02_Optimizing_Database.fw.png" alt="ES 02 Optimizing Database.fw.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-02_Optimizing_Database.fw.png" alt="ES 02 Optimizing Database.fw.png" /></dd>
 </dl>
 </li>
 <li>En el menú desplegable, selecciona <span class="text-object">Optimizar la tabla</span>.<br />
@@ -67,11 +63,11 @@
 </li>
 </ul>
 </div>
-<h2>Reparar tablas</h2>
+<h2 id="h_01HC2YB2ZYADZXWK3Z9X83JCHE">Reparar tablas</h2>
 <div class="solvvy-solution">
 <p>Además de optimizar una tabla, también puedes 'reparar' una tabla. Sigue todos los pasos mencionados anteriormente. En el paso 3, elige <span class="text-object">Reparar la tabla</span> en el menú desplegable.</p>
 <dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-01_Optimizing_Database_repair_table.fw.png" alt="ES 01 Optimizing Database repair table.fw.png" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-01_Optimizing_Database_repair_table.fw.png" alt="ES 01 Optimizing Database repair table.fw.png" /></dd>
 </dl>
 <p>Las dos opciones son similares pero se usan en diferentes circunstancias:</p>
 <ul>
@@ -81,7 +77,7 @@
 <li><strong>Optimizar la tabla</strong>: simplemente reorganiza el almacenamiento físico para los datos de la tabla y los índices asociados. Esta función mejora el acceso a la tabla ya que parte de su función es reducir el espacio de almacenamiento.</li>
 </ul>
 </div>
-<h2><span id="optimizar-via-SSH">Optimizar via SSH</span></h2>
+<h2 id="h_01HC2YB2ZYN6XN3CZAMWDBF18M"><span id="optimizar-via-SSH">Optimizar via SSH</span></h2>
 <div class="solvvy-solution">
 <p>A veces, ejecutar una optimización a través de phpMyAdmin tiende a fallar y la página finalmente se agota. Esto posiblemente se deba a que la base de datos es demasiado grande para que phpMyAdmin pueda manejarla. La alternativa es optimizar a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.&nbsp;Como usuario de shell, puedes acceder vía SSH en tu dominio y ejecutar el siguiente comando, que es la misma función que se ejecuta en phpMyAdmin:</p>
 <div class="preboxcontainer">
@@ -103,7 +99,7 @@
 <div class="preboxcontainer">
 <pre class="prebox">&gt;&gt; results.txt</pre>
 </div>
-<h3>Usar un cron job para optimizar</h3>
+<h3 id="h_01HC2YB2ZYS53V302EE94S0XVT">Usar un cron job para optimizar</h3>
 <p>También puedes hacer una limpieza general a través de un script de shell y/o un cron job usando <a href="https://dev.mysql.com/doc/refman/5.7/en/mysqlcheck.html">mysqlcheck</a>&nbsp;que verifica, repara y optimiza las tablas. Es una buena idea ejecutar un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215088668-Crear-un-Cron-Job">cron job</a> mensual para hacer esto por ti. El cron job podría verse así:</p>
 <div class="preboxcontainer">
 <pre class="prebox">#!/bin/sh
@@ -111,13 +107,13 @@
 </pre>
 </div>
 <p>Reemplaza los elementos en mayúsculas con las&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">credenciales de tu base de datos</a>.</p>
-<h3>Reparar via SSH</h3>
+<h3 id="h_01HC2YB2ZYNQWNBMJQNWE7TEB8">Reparar via SSH</h3>
 <p>También puedes correr un comando para reparar una tabla en lugar de optimizarla:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql -u <span class="code-highlight">username</span> -p<span class="code-highlight">password</span> -h <span class="code-highlight">hostname</span> <span class="code-highlight">databasename</span> -e "show tables" | grep -v Tables_in | grep -v "+" | gawk '{print "repair table " $1 ";"}' | mysql -u <span class="code-highlight">username</span> -p<span class="code-highlight">password</span> -h <span class="code-highlight">hostname</span> <span class="code-highlight">databasename</span> </span></pre>
 </div>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HC2YB2ZYF4JZNX5271C6YEB8">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL" target="_self">Generalidades sobre MySQL</a></li>
