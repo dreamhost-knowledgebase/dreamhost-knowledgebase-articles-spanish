@@ -1,8 +1,8 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HDHMTWSSM7WJ367M46H3G66T">Generalidades</h2>
 <div class="solvvy-solution">
 <p>DreamCompute, al igual que otras nubes OpenStack, tiene varios tipos de almacenamiento disponibles para su uso. Este artículo trabaja con el almacenamiento de 'Volumen' que se recomienda para almacenar datos críticos e importantes. Para obtener más información sobre los tipos de almacenamiento, visita el artículo sobre las <a class="reference external" href="https://help.dreamhost.com/hc/es/articles/217701757--Cu%C3%A1l-es-la-diferencia-entre-los-discos-de-arranque-ef%C3%ADmeros-y-por-volumen-" target="_self" rel="undefined">diferencias entre almacenamiento efímero y volumétrico</a>.</p>
 </div>
-<h2>¿Qué es el almacenamiento de volumen?</h2>
+<h2 id="h_01HDHMTWSSFP1RYEKHKHBEKA7E">¿Qué es el almacenamiento de volumen?</h2>
 <div class="solvvy-solution">
 <p>Los volúmenes se pueden considerar como un disco duro de intercambio en caliente, ya que puede extraerlo de un sistema (desconectarlo), conectarlo a otro sistema (adjuntarlo) y los datos permanecerán en él mientras se reutilizan.</p>
 <p>Hay varias formas de realizar los pasos iniciales para crear y adjuntar el volumen, así que selecciona el método que deseas utilizar:</p>
@@ -11,30 +11,31 @@
 <li><a class="reference external" href="https://help.dreamhost.com/hc/es/articles/221778268-C%C3%B3mo-crear-y-montar-vol%C3%BAmenes-en-DreamCompute" target="_self" rel="undefined">Línea de comando a través de OpenStack CLI</a></li>
 </ul>
 </div>
-<h2>Crear y adjuntar un volumen usando el panel</h2>
+<h2 id="h_01HDHMTWSSK6BT75BXT33ZZ6AZ">Crear y adjuntar un volumen usando el panel</h2>
 <div class="solvvy-solution">
-<h3>Verficar tu capacidad de almacenamiento</h3>
+<h3 id="h_01HDHMTWSSDW3P7N5C2ZG536WH">Verficar tu capacidad de almacenamiento</h3>
 <p>El primer paso es asegurarse de tener suficiente volumen de almacenamiento para agregar un nuevo volumen. Consulta la página del panel de DreamCompute <a class="reference external" href="https://iad2.dreamcompute.com/project/">Generalidades de un project</a>. En esta página, mira el gráfico circular 'Volume Storage'.</p>
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/how-to-create-and-mount-volumes-on-dreamcompute_01.png" alt="how-to-create-and-mount-volumes-on-dreamcompute_01" /></dd>
 </dl>
-<p>Si necesitas almacenamiento adicional, puedes agregar más en el <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener">panel de control</a> de DreamHost.</p>
-<h3>Crear un Volúmen</h3>
+<p>Si necesitas almacenamiento adicional, puedes agregar más en el <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener noreferrer">panel de control</a> de DreamHost.</p>
+<h3 id="h_01HDHMTWSS50260AHBR6TREJR8">Crear un Volumen</h3>
 <ol>
 <li>Navega hasta la página del panel de DreamCompute '<a class="reference external" href="https://iad2.dreamcompute.com/project/volumes/">volumes</a>'.</li>
 <li>Da clic en el botón <strong>Create Volume</strong> en la parte superior derecha.</li>
 <li>Asigna al volumen un tamaño requerido en GB, y un nombre y descripción opcionales, mientras deja las otras opciones configuradas con los valores predeterminados.</li>
 </ol>
-<h3>Usar el Volúmen</h3>
+<h3 id="h_01HDHMTWSSAMKBYS17XC86XPA8">Adjuntar un Volumen</h3>
+<p>Para usar tu volumen, debe estar adjunto a una instancia en ejecución. Si no tienes instancias, crea una primero.</p>
 <ol>
-<li>Para usar tu volumen, debe estar adjunto a una instancia en ejecución. Si no tienes instancias, crea una primero.</li>
 <li>Navega a la página del panel de DreamCompute <a class="reference external" style="background-color: #ffffff;" href="https://iad2.dreamcompute.com/project/volumes/">volumes</a>.</li>
 <li>Da clic en el menú desplegable y selecciona <strong>Manage Attachments</strong>:
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-create-and-mount-volumes-on-dreamcompute_02.png" alt="how-to-create-and-mount-volumes-on-dreamcompute_02" /></dd>
+<dd>La nueva ventana no mostrará archivos adjuntos en este momento. También muestra un menú desplegable con una lista de tus instancias.</dd>
 </dl>
 </li>
-<li>La nueva ventana no mostrará archivos adjuntos en este momento. También muestra un menú desplegable con una lista de tus instancias. Haz clic en la lista y selecciona el nombre de tu instancia, luego haz clic en <strong>Attach Volume</strong>.
+<li>Haz clic en la lista y selecciona el nombre de tu instancia, luego haz clic en <strong>Attach Volume</strong>.
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/how-to-create-and-mount-volumes-on-dreamcompute_03.png" alt="how-to-create-and-mount-volumes-on-dreamcompute_03" /></dd>
 </dl>
@@ -45,24 +46,23 @@
 <li><a href="#Crear_un_Sistema_de_Archivos">Crear un Sistema de Archivos</a></li>
 </ul>
 </div>
-<h2>Crear y adjuntar un volumen usando la CLI de OpenStack</h2>
+<h2 id="h_01HDHMTWSS7CYG6GC2MCYGTD0V">Crear y adjuntar un volumen usando la CLI de OpenStack</h2>
 <div class="solvvy-solution">
 <p>El primer paso es asegurarse de tener suficiente volumen de almacenamiento para agregar un nuevo volumen. Consulta el panel de DreamCompute <a class="reference external" href="https://iad2.dreamcompute.com/project/">Generalidades de un project</a>. En esta página, mira el gráfico circular 'Volume Storage'.</p>
 <dl>
 <dd><img src="https://kbimages.dreamhosters.com/images/how-to-create-and-mount-volumes-on-dreamcompute_01.png" alt="how-to-create-and-mount-volumes-on-dreamcompute_01" /></dd>
 </dl>
-<p>Si necesitas almacenamiento adicional, se puede agregar más en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener">panel de control</a>.</p>
-<h3>Crear un Volumen</h3>
+<p>Si necesitas almacenamiento adicional, se puede agregar más en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener noreferrer">panel de control</a>.</p>
+<h3 id="h_01HDHMTWSSGJM6D94Y0XKZWMHP">Crear un Volumen</h3>
 <p>Para crear un nuevo volune, corre este comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack volume create --size SIZE_IN_GB VOLUME_NAME</span>
 </pre>
 </div>
 <p>El volumen ahora debería aparecer en el tablero, y en la línea de comando.</p>
-<h3>Usar el Volumen</h3>
-<p>Para usar tu volumen, ahora debe estar adjunto a una instancia en ejecución.</p>
-<ol>
-<li>Si no tienes instancias, deberás crear una. El uso de la CLI requiere el nombre de la instancia y el UUID del volumen. Encuentra los detalles del volumen corriendo:
+<h3 id="h_01HDEDFZFWWND4578Z8X8487KQ">Adjuntar el Volume</h3>
+<p>Para usar tu volumen, necesita ser adjuntado para una instancia que ya está corriendo. Si no tienes instancias, necesitarás crear una. Usando CLI requiere que el nombre de la instancia y el UUID del volumen.</p>
+<p>Primero, ubica los detalles del volumen corriendo:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack volume list</span>
 +-----------------------+--------------+-----------+------------+-----------------------+
@@ -73,20 +73,18 @@
 +-----------------------+--------------+-----------+------------+-----------------------+
 </pre>
 </div>
-En este ejemplo, la instancia se llama 'VOLUME_NAME' y solo hay un volumen 'disponible' que es el que se acabas de crear.</li>
-<li>Una vez que tengas tus valores, adjunta el volumen con el siguiente comando:
+<p>En este ejemplo, la instancia se llama 'VOLUME_NAME' y solo hay un volumen 'disponible' que es el que se acabas de crear.</p>
+<p>Una vez que tengas tus valores, adjunta el volumen con el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server add volume mysql VOLUME_NAME</span>
 </pre>
 </div>
-</li>
-</ol>
 <div class="notebox-important">
 <p>Es posible que el nombre del dispositivo que aparece en la lista no siempre sea exacto, por lo que debes verificarlo antes de usar un dispositivo nuevo.</p>
 </div>
 </div>
 <div id="Crear_un_Sistema_de_Archivos">
-<h2>Crear un Sistema de Archivos</h2>
+<h2 id="h_01HDHMTWSSA03Q5B35WM6MK1Y6">Crear un Sistema de Archivos</h2>
 </div>
 <div class="solvvy-solution">
 <p>La nueva unidad ahora necesita un sistema de archivos para poder almacenar datos. Hay muchas opciones cuando se trata de sistemas de archivos, pero para este ejemplo, se usa un valor predeterminado seguro de ext4.</p>
@@ -127,7 +125,7 @@ Writing superblocks and filesystem accounting information: done</pre>
 <p>El archivo del sistema está creado ahora.</p>
 </div>
 <div id="Montar_el_Sistema_de_Archivos">
-<h2>Montar el Sistema de Archivos</h2>
+<h2 id="h_01HDHMTWSTHG7CFDQ90KJH2VHX">Montar el Sistema de Archivos</h2>
 </div>
 <div class="solvvy-solution">
 <p>Como se mencionó anteriormente, el dispositivo de la unidad puede cambiar en caso de que ocurran cambios udev u otros, y tal error puede evitar que tu instancia se inicie correctamente. Para evitar esto, inicia a través de UUID. Puedes encontrar el UUID de las unidades corriendo el comando blkid:</p>
@@ -157,7 +155,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 <p>Comprobar específicamente el dispositivo /dev/vdb en la parte delantera.</p>
 <p>Eso es todo. Cuando reinicies tu instancia, tu volumen se volverá a montar y estará listo para usar.</p>
 </div>
-<h2>Eliminar un Volumen</h2>
+<h2 id="h_01HDHMTWST7NSQZC14X4S7Z3DD">Eliminar un Volumen</h2>
 <div class="solvvy-solution">
 <p>Si necesitas eliminar un volumen, primero deberás desconectarlo de una instancia a la que esté conectado.</p>
 <ol>

@@ -1,13 +1,13 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HDHWGZJABWV0T6AW63AM4Z6J">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Cuando <a href="https://help.dreamhost.com/hc/es/articles/215912848-C%C3%B3mo-lanzar-una-instancia-usando-el-panel-de-DreamCompute" target="_self" rel="undefined">creas una instancia</a>, se crea un usuario predeterminado. Puedes usar esto para iniciar sesión y configurar la instancia.</p>
 <p>Si está agregandos sitios web a tu instancia, se recomienda crear usuarios separados para cada sitio para asegurar aún más cada uno. Por ejemplo, tener un usuario que solo tiene acceso a un sitio web limitará el caos que podría causar si ese usuario se ve comprometido. Esto también limita el peligro que podrían causar los plugins o temas dudosos. La instancia en sí estará segura, conteniendo el daño solo a esa cuenta de usuario.</p>
 </div>
-<h2>Crear un nuevo usuario</h2>
+<h2 id="h_01HDHWGZJAZQ13KY3TH6BE6F0H">Crear un nuevo usuario</h2>
 <div class="solvvy-solution">
 <ol>
 <li>Inicia sesión en tu instancia utilizando la <a href="https://help.dreamhost.com/hc/es/articles/216201547-Generalidades-sobre-la-conexi%C3%B3n-a-tu-instancia-con-las-claves-SSH" target="_self" rel="undefined">Llave de Emparejamiento</a>&nbsp;y el <a href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined">usuario predeterminado asignado</a>.</li>
-<li>Una vez que hayas iniciado sesión, crea el nuevo usuario.
+<li>Crea el nuevo usuario cuando hayas iniciado sesión.
 <div class="notebox-note">
 <p>Este ejemplo asume una instancia de Ubuntu con un usuario predeterminado llamado 'ubuntu'.</p>
 <p>En el siguiente ejemplo, el nuevo usuario se llama 'newuser'.</p>
@@ -16,9 +16,8 @@
 <pre class="prebox"><span class="server">ubuntu@instance:~$ </span><span class="command">sudo adduser newuser</span>
 </pre>
 </div>
-</li>
-<li>Se te solicita una contraseña junto con detalles adicionales sobre el usuario.</li>
-<li>Ahora puedes verificar para confirmar que el usuario existe.
+Se te solicita una contraseña junto con detalles adicionales sobre el usuario.</li>
+<li>Verifica para confirmar que el usuario existe.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">ubuntu@instance:~$ </span><span class="command">ls -la /home</span></pre>
 </div>
@@ -28,15 +27,14 @@
 <pre class="prebox"><span class="server">ubuntu@instance:~$ </span><span class="command">sudo su newuser</span></pre>
 </div>
 </li>
-<li>Tu mensaje de terminal ahora cambia al nuevo usuario.
+</ol>
+<p>Tu mensaje de terminal ahora cambia al nuevo usuario:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">newuser@instance:~$ </span></pre>
 </div>
-</li>
-</ol>
 <p>Ahora puedes ejecutar comandos y administrar tu sitio web con este nuevo usuario.</p>
 </div>
-<h2>Asignar privilegios 'sudo' al nuevo usuario</h2>
+<h2 id="h_01HDHWGZJBR0SW79AC4S403KT6">Asignar privilegios 'sudo' al nuevo usuario</h2>
 <div class="solvvy-solution">
 <p>Dependiendo de las necesidades de tu usuario, es posible que debas asignarles privilegios 'sudo' para instalar software. Esto solo debe hacerse si confías en el usuario.</p>
 <ol>
@@ -52,7 +50,7 @@
 <pre class="prebox"><span class="server">ubuntu@instance:~$ </span><span class="command">sudo usermod -aG sudo newuser</span></pre>
 </div>
 </li>
-<li>Para confirmar los nuevos privilegios, cambia al nuevo usuario.
+<li>Cambia al nuevo usuario para confirmar los nuevos privilegios.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">ubuntu@instance:~$ </span><span class="command">sudo su newuser</span></pre>
 </div>
@@ -63,10 +61,10 @@
 newuser sudo</pre>
 </div>
 </li>
-<li>Dado que 'sudo' está en la lista, ahora puedes correr comandos <span class="code">sudo</span> con este nuevo usuario.</li>
 </ol>
+<p>Dado que 'sudo' está en la lista, ahora puedes correr comandos <span class="code">sudo</span> con este nuevo usuario.</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HDHWGZJB3WKA9S6MP1PBGWQ6">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360000281572--A%C3%B1adir-acceso-SSH-a-tus-usuarios" target="_self" rel="undefined">Agregar acceso SSH a tus usuarios</a></li>

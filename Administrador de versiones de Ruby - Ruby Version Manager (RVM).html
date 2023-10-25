@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HDHMKEXVQA39ABS1Q4C8YHD2">Generalidades</h2>
 <div class="solvvy-solution">
 <div class="notebox-important">
 <p>Si tu aplicación Ruby no se inicia porque falta un gema, debes instalarlo localmente usando Bundler. Para obtener más información sobre el uso de Bundler, visita la siguiente página:</p>
@@ -9,7 +9,7 @@
 <p>El Administrador de versiones de Ruby (RVM) es una utilidad que te permite agregar tu propia versión personal de Ruby a un usuario. Te permite agregar, eliminar o tener múltiples versiones de Ruby y sus bibliotecas en tu directorio de usuario.</p>
 <p>Este artículo te explica cómo instalar RVM manualmente, así como una versión personalizada de Ruby y/o Rails. Una vez completado, puedes habilitar Passenger dentro de tu panel y seleccionar qué versión de Ruby deseas usar con tu sitio.</p>
 </div>
-<h2><span id="Instalar_RVM">Instalar RVM</span></h2>
+<h2 id="h_01HDHMKEXW3YYKN4K2DZCG5841"><span id="Instalar_RVM">Instalar RVM</span></h2>
 <div class="solvvy-solution">
 <p>Para comenzar, primero deberás instalar RVM en tu usuario de shell y configurarlo para que se cargue automáticamente. Visita el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Crear un usuario con acceso Shell (SSH)</a> para asegurarte de que tu usuario sea un usuario de Shell. Luego puedes iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> para corre los siguientes comandos en el directorio de tu usuario.</p>
 <ol>
@@ -74,7 +74,7 @@ rvm 1.29.12-next (master) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [htt
 </li>
 </ol>
 </div>
-<h2><span id="Instalar_cualquier_version_de_Ruby_que_desees">Instalar cualquier versión de Ruby que desees</span></h2>
+<h2 id="h_01HDHMKEXXK0F930HZSC725Y6F"><span id="Instalar_cualquier_version_de_Ruby_que_desees">Instalar cualquier versión de Ruby que desees</span></h2>
 <div class="solvvy-solution">
 <p>Una vez que RVM está configurado, puedes instalar cualquier versión de Ruby que desees.</p>
 <p>Primero debes deshabilitar&nbsp;<a href="https://rvm.io/rvm/autolibs">autolibs</a>. Si autolibs no está deshabilitado, la instalación de Ruby falla debido a problemas de permisos.</p>
@@ -106,10 +106,10 @@ rvm 1.29.12-next (master) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [htt
 </li>
 <li>Instala la versión exacta de Ruby que necesites. Este ejemplo instala la versión <span class="x x-first x-last">3.0</span>.1:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">rvm install <span class="x x-first x-last">3.0</span>.1</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rvm use 3.0.1 --default</span></pre>
 </div>
 </li>
-<li>Ahora puedes decirle a tu sistema que use esta versión por defecto:
+<li>Corre lo siguiente para decirle a tu sistema que use esta versión por defecto:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">rvm use <span class="x x-first x-last">3.0</span>.1 --default</span></pre>
 </div>
@@ -122,7 +122,7 @@ ruby <span class="x x-first x-last">3.0.1p64 (2021-04-05</span> revision <span c
 </li>
 </ol>
 </div>
-<h2><span id="Instalar_cualquier_version_de_Rails_que_desees">Instalar cualquier versión de Rails que desees</span></h2>
+<h2 id="h_01HDHMKEXX8JMZJH19Q8D9BMTD"><span id="Instalar_cualquier_version_de_Rails_que_desees">Instalar cualquier versión de Rails que desees</span></h2>
 <div class="solvvy-solution">
 <p>Primero debes deshabilitar&nbsp;<a href="https://rvm.io/rvm/autolibs">autolibs</a>. Si autolibs no está deshabilitado, la instalación de Rails falla debido a problemas de permisos.</p>
 <ol>
@@ -131,19 +131,19 @@ ruby <span class="x x-first x-last">3.0.1p64 (2021-04-05</span> revision <span c
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">gem install rails</span></pre>
 </div>
 </li>
-<li>O puedes instalar una versión específica:
+<li>Alternativamente, corre lo siguiente para instalar una versión específica:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">gem install rails --version 6.0.3.2</span></pre>
 </div>
 </li>
-<li>Ve una lista completa de versiones disponibles en rubygems.org:
+<li>Mira una lista completa de versiones disponibles en rubygems.org:
 <ul>
 <li><a href="https://rubygems.org/gems/rails/versions">Versiones de Rails</a></li>
 </ul>
 </li>
 </ol>
 </div>
-<h2><span id="Habilitar_RVM_usando_el_panel_de_DreamHost">Habilitar RVM usando el panel de DreamHost</span></h2>
+<h2 id="h_01HDHMKEXYNXWWSZ5BQDB54VXB"><span id="Habilitar_RVM_usando_el_panel_de_DreamHost">Habilitar RVM usando el panel de DreamHost</span></h2>
 <div class="solvvy-solution">
 <p>Ahora puedes visitar el artículo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/217185437-Habilitar-RVM">Habilitar RVM</a>&nbsp;para especificar la versión de Ruby que instalaste anteriormente para cualquier dominio específico en ejecutando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215769578-Generalidades-sobre-Passenger">Passenger</a>.</p>
 <div class="notebox-important">
@@ -155,15 +155,15 @@ ruby <span class="x x-first x-last">3.0.1p64 (2021-04-05</span> revision <span c
 <p>Asegúrate de cambiar el <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y la versión de Ruby a la versión de tu aplicación.</p>
 </div>
 </div>
-<h2><span id="Ver_tambien">Ver también</span></h2>
+<h2 id="h_01HDHMKEXY43VE377NKEXEMN9K"><span id="Ver_tambien">Ver también</span></h2>
 <div class="solvvy-hidden">
-<h3>Enlaces internos</h3>
+<h3 id="h_01HDHMKEXY3GM9N13S637R4R8D">Enlaces internos</h3>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades SSH</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/217185437-Habilitar-RVM">Habilitar RVM</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215769578-Generalidades-sobre-Passenger">Generalidades de Passenger</a></li>
 </ul>
-<h3>Enlaces externos</h3>
+<h3 id="h_01HDHMKEXY16W1EQSGQAJMEYZS">Enlaces externos</h3>
 <ul>
 <li><a class="new" title="W:Ruby Version Manager (page does not exist)" href="https://en.wikipedia.org/wiki/Ruby_Version_Manager">Artículo de Wikipedia sobre Ruby Version Manager</a></li>
 <li><a href="https://rvm.io/">Ruby Version Manager</a></li>
