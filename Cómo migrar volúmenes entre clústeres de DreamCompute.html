@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HDPPAZDG2R7YFAMEKKZNN1SP">Generalidades</h2>
 <div class="solvvy-solution">
 <p>DreamCompute ofrece múltiples clústeres (también llamados a menudo zonas de disponibilidad) que son instalaciones independientes de OpenStack con sus propios servidores, almacenamiento y panel de control. Algunos clústeres tienen características diferentes, como el almacenamiento SSD que es útil para un plan de almacenamiento de datos determinado. La migración de datos entre clústeres no está automatizada en este momento, pero esta guía te mostrará cómo lograrlo tú mismo.</p>
 <p>Esta guía asume que te sientes cómodo trabajando con SSH también como con utilidades de líneas de comando como <span class="code">dd</span> y el CLI de OpenStack. Para más información sobre esas utilidades, mira los artículos de abajo.</p>
@@ -8,18 +8,18 @@
 <li><a class="reference internal" href="https://help.dreamhost.com/hc/es/articles/235817468-Introducci%C3%B3n-al-cliente-de-l%C3%ADnea-de-comandos-de-OpenStack" target="_self" rel="undefined">Comenzar con el cliente de línea de comandos de Openstack</a></li>
 </ul>
 </div>
-<h2>Cosas a tener en cuenta</h2>
+<h2 id="h_01HDPPAZDGZD7XJ1RP4RCSPHV5">Cosas a tener en cuenta</h2>
 <div class="solvvy-solution">
 <p>Aquí hay un par de cosas a tener en cuenta y planees durante la migración.</p>
-<h3>Sólo Volúmenes</h3>
+<h3 id="h_01HDPPAZDGZ3WEPYTM2V9GKBHW">Sólo Volúmenes</h3>
 <p>Esta guía se centra únicamente en la migración de volúmenes, lo que es útil si tienes varios volúmenes adjuntos a una sola instancia y deseas mantener ese esquema de almacenamiento en el nuevo clúster. Ten en cuenta que este método no funciona con almacenamiento efímero y está diseñado solo para la copia de volumen a volumen. Si deseas mover instancias, consulta el artículo a continuación.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/218501427-C%C3%B3mo-migrar-instancias-entre-cl%C3%BAsteres-de-DreamCompute" target="_self" rel="undefined">Cómo migrar instancias entre clústeres DreamCompute</a></li>
 </ul>
-<h3>Planea una ventana de mantenimiento</h3>
+<h3 id="h_01HDPPAZDG5AA435J0ACNATDPS">Planea una ventana de mantenimiento</h3>
 <p>Para evitar la corrupción u otro comportamiento extraño, es más seguro mover los datos cuando el volumen no tiene servicios en ejecución o archivos abiertos. La copia de los datos suele ser bastante rápida para volúmenes más pequeños, pero para volúmenes más grandes puede llevar algún tiempo. Recuerda, la copia debe completarse antes de que se pueda restaurar el servicio.</p>
 </div>
-<h2>Migrar un Volumen usando SSH y dd</h2>
+<h2 id="h_01HDPPAZDGC1GYSTV79E80VYKR">Migrar un Volumen usando SSH y dd</h2>
 <div class="solvvy-solution">
 <p>Para este tipo de movimiento, se supone que has detenido todos los servicios que utilizan los datos del volumen, has desmontado de forma segura cualquier partición en la instancia que lo usa y lo ha separado de la instancia en el menú Volúmenes del panel.</p>
 <p>Como una descripción general, lo siguiente sera configurado para completar esta tarea.</p>
@@ -36,11 +36,10 @@
 </pre>
 </div>
 </div>
-<h2>Proceso de migración</h2>
+<h2 id="h_01HDPPAZDHQQ0RDJ3YB4W6J2S7">Proceso de migración</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Crea dos nuevas instancias de "fotocopiadora" (una en cada grupo de origen y de destino), utilizando la versión más pequeña disponible. Esta guía usa comandos de Ubuntu. También se recomienda que las instancias sean efímeras, ya que no serán necesarias una vez que se complete la migración.</li>
-<li>Para simplificar, las dos instancias temporales se conectarán mediante contraseñas en lugar de claves SSH, pero puedes hacerlo de la forma que prefieras. Para configurar las instancias para la autenticación de contraseña, actívala con los siguientes comandos.
+<li>Crea dos nuevas instancias de "fotocopiadora" (una en cada grupo de origen y de destino), utilizando la versión más pequeña disponible. Esta guía usa comandos de Ubuntu. También se recomienda que las instancias sean efímeras, ya que no serán necesarias una vez que se complete la migración. <br /><br /><em> Para simplificar, las dos instancias temporales se conectarán mediante contraseñas en lugar de claves SSH, pero puedes hacerlo de la forma que prefieras. Para configurar las instancias para la autenticación de contraseña, actívala con los siguientes comandos.<br /></em>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo -i</span>
 <span class="server">[root@instance]# </span><span class="command">sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/' \
@@ -60,14 +59,12 @@
 </pre>
 </div>
 </li>
-<li>El que coincide con el tamaño del volumen es el que se va a utilizar. Pueden tener diferentes letras de unidad en cada instancia, así que tome nota de eso.</li>
-<li>Ahora los datos pueden ser copiados usando <span class="code">dd</span> y SSH. Para simplificar las cosas, inicia sesión en la instancia en el clúster de destino utilizando tu dirección IPv6. A continuación, en el siguiente comando, reemplaza IPV6-OF-SOURCE-INSTANCE con la dirección IPv6 de la instancia de origen, el primer /dev/vdX con la letra de unidad del volumen de origen y el segundo /dev/vdX con la letra de unidad del volumen de destino.
+<li>Usa el que coincide con el tamaño del volumen es el que se va a utilizar. Pueden tener diferentes letras de unidad en cada instancia, así que tome nota de eso.<br /><br /><em> Ahora los datos pueden ser copiados usando <span class="code">dd</span> y SSH. Para simplificar las cosas, inicia sesión en la instancia en el clúster de destino utilizando tu dirección IPv6. A continuación, en el siguiente comando, reemplaza IPV6-OF-SOURCE-INSTANCE con la dirección IPv6 de la instancia de origen, el primer /dev/vdX con la letra de unidad del volumen de origen y el segundo /dev/vdX con la letra de unidad del volumen de destino.</em>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[root@destinstance]# </span><span class="command">ssh root@<span class="code-highlight">IPV6-OF-SOURCE-INSTANCE</span> \
                    "dd if=/dev/vdX | gzip -1 -" | gunzip - | dd of=/dev/vdX</span>
 </pre>
 </div>
-</li>
-<li>Una vez que se haya completado el comando, desconecta el volumen de destino de la instancia y verifica que tenga los datos que deseas al intentar iniciarlo o adjuntarlo a otra instancia. Si todo parece correcto, has terminado y puede destruir ambas instancias temporales.</li>
+<em> Una vez que se haya completado el comando, desconecta el volumen de destino de la instancia y verifica que tenga los datos que deseas al intentar iniciarlo o adjuntarlo a otra instancia. Si todo parece correcto, has terminado y puede destruir ambas instancias temporales. </em></li>
 </ol>
 </div>
