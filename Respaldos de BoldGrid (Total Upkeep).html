@@ -1,0 +1,102 @@
+<h2 id="h_01HDS8ZR2NQT8K1Y22ZCGTZ8NK">Generalidades</h2>
+<div class="solvvy-solution">
+<div class="prereqs">
+<p>Para usar el plugin Total Upkeep, primero debes configurar tu sitio web de WordPress con el <a href="https://help.dreamhost.com/hc/es/articles/360031043511-Generalidades-de-BoldGrid" target="_blank" rel="noopener noreferrer">Constructor Web de WP (BoldGrid)</a>. Luego si puedes habilitarlo usando las siguientes instrucciones.</p>
+</div>
+<p>Las instalaciones de BoldGrid viene con un plugin de respaldo llamado 'Total Upkeep'. Este plugin le permite configurar como, cuando y donde se almacenan tu sitio web de WordPress y los archivos de la base de datos.</p>
+<p>El plugin Total Upkeep Premium también está preinstalado con tu instalación de BoldGrid, sin cargos extra. Debajo encontrarás algunas características incluidas con la versión premium:</p>
+<ul>
+<li>Encriptación de base de datos</li>
+<li>Actualizaciones automáticas oportunas</li>
+<li>Historial de actualizaciones</li>
+<li>Restauraciones de archivos individuales</li>
+</ul>
+<p>Tienes las siguientes opciones para almacenar tus copias de seguridad:</p>
+<ul>
+<li>Servidores web DreamHost&nbsp;</li>
+<li>Servidores Web externos</li>
+<li>Cuenta Amazon S3 (Se requiere Total Upkeep Premium)</li>
+<li>Cuenta Google Drive (Se requiere Total Upkeep Premium)</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214823108-Generalidades-de-DreamObjects">DreamObjects</a> (Se requiere Total Upkeep Premium)</li>
+</ul>
+<p>Este artículo te guía a través de la creación de una copia de seguridad y su visualización en tu servidor.</p>
+</div>
+<h2 id="h_01HDS8ZR2PTXK5JH63785ABKSZ">Crear una copia de seguridad</h2>
+<div class="solvvy-solution">
+<h3 id="h_01HDS8ZR2PEZ6HR0HGSYDGSZKA">Seleccionar cuándo ejecutar la copia de seguridad</h3>
+<ol>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_self">Inicia sesión en tu panel de WordPress</a>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/boldgrid-backup_01.png" alt="boldgrid backup" /></dd>
+</dl>
+</li>
+<li>En el menu Izquierdo, desplazate sobre <span class="text-object">Total Upkeep</span> y selecciona <strong>Settings</strong>.
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/boldgrid-backup_02.png" alt="boldgrid backup" /></dd>
+</dl>
+</li>
+<li>En el menú de la izquierda, haz clic en <span class="text-object">Backup Schedule</span> y selecciona qué días ejecutar la copia de seguridad.</li>
+<li>Haz clic en&nbsp;<strong>Save Changes</strong>.</li>
+</ol>
+<h3 id="h_01HDS8ZR2PAZQT2XFRPRZW8N0K">Establecer la ubicación de la copia de seguridad</h3>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/boldgrid-backup_03.png" alt="boldgrid backup" /></dd>
+</dl>
+<ol>
+<li>Selecciona <span class="text-object">Backup Storage</span> del menú Aquí puedes seleccionar entre las siguientes opciones donde se almacena la copia de seguridad.
+<ul>
+<li><strong>Web Server&nbsp;</strong>— Tu servidor DreamHost.</li>
+<li><strong>FTP / SFTP</strong> — Cualquier servidor que te guste.</li>
+<li><strong>Amazon S3</strong> — El servicio en la nube de Amazon.</li>
+<li><strong>Google Drive</strong> — Tu cuenta de Google.</li>
+</ul>
+</li>
+<li>Marca la casilla junto a <strong>Web Server</strong> para almacenar tu copia de seguridad en tu servidor DreamHost.</li>
+<li>Si deseas realizar una copia de seguridad en cualquier otro servicio, haz clic en el botón <span class="text-link">Configure</span> a la derecha.
+<div class="notebox-tip">
+<p>Se recomienda dejar las opciones 'full backup' seleccionadas para tus archivos y base de datos.</p>
+</div>
+</li>
+<li>Haz clic en&nbsp;<strong>Save Changes</strong>.</li>
+</ol>
+<h3 id="h_01HDS8ZR2PJFDS1PKQHJAMREN9">Configurar actualizaciones automáticas</h3>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/boldgrid-backup_07.png" alt="boldgrid backup" /></dd>
+</dl>
+<p>Esta sección controla cómo se manejan las copias de seguridad justo antes de una actualización de la versión de WordPress, y qué datos se respaldan.</p>
+<h3 id="h_01HDS8ZR2PD8JQPNQ7K8XMHJPF">Site Check</h3>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/boldgrid-backup_08.png" alt="boldgrid backup" /></dd>
+</dl>
+<p>Esta sección habilita una herramienta para verificar si hay errores en tu sitio y registrarlos. Puedes encontrar más información sobre Site Check y los comandos utilizados aquí:</p>
+<ul>
+<li><a href="https://github.com/BoldGrid/boldgrid-backup/wiki/CLI-Commands" target="_self">Comandos CLI</a></li>
+</ul>
+<h3 id="h_01HDS8ZR2PBGHFX2GCMBESTWTV">Notificaciones</h3>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/boldgrid-backup_09.png" alt="boldgrid backup" /></dd>
+</dl>
+<p>Aquí puedes establecer la configuración de notificación por correo para cuando se complete una copia de seguridad o cuando falle una verificación del sitio.</p>
+</div>
+<h2 id="h_01HDS8ZR2P2F96KHVQF2XF04QM">Preflight Check</h2>
+<div class="solvvy-hidden">
+<p>Haz clic en la pestaña <span class="text-object">Preflight Check</span> para asegurarte de que el entorno esté configurado correctamente. Deberías ver la palabra 'PASS' en la parte superior.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/boldgrid-backup_05.png" alt="boldgrid backup" /></dd>
+</dl>
+<h2 id="h_01HDS8ZR2P3SCN6Q4HCXTK3442">&nbsp;Ver tus copias de seguridad en WordPress</h2>
+<p>La pestaña <span class="text-object">Backups</span> muestra las copias de seguridad existentes que se han creado.</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/boldgrid-backup_06.png" alt="boldgrid backup" /></dd>
+</dl>
+<p>Haz clic en el botón <strong>View details</strong> para ver información más detallada de la copia de seguridad.</p>
+</div>
+<h2 id="h_01HDS8ZR2PE90E3VKY71Y7WCFX">Ver tus copias de seguridad en el servidor web</h2>
+<div class="solvvy-hidden">
+<p>Si eliges realizar una copia de seguridad en el servidor web, tus copias de seguridad se encuentran debajo de tu nombre de usuario en un directorio llamado&nbsp;<span class="text-object">/boldgrid_backup</span>.&nbsp;Puedes iniciar sesión a través de <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> para ver las copias de seguridad.</p>
+<p>Aquí encontrarás un archivo .zip y .log.</p>
+<div class="preboxcontainer">
+<pre class="prebox">boldgrid-backup-webid.dreamhosters.com-b09a29a6-20190730-170902.log
+boldgrid-backup-webid.dreamhosters.com-b09a29a6-20190730-170902.zip</pre>
+</div>
+</div>
