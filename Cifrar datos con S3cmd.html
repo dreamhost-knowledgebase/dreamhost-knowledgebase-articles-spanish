@@ -59,12 +59,16 @@ Testing a file</pre>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd signurl s3://<span class="code-highlight">my_bucket/my_file.png 1540232086</span></span>
 http://my-bucket.objects-us-east-1.dream.io/my_file.png?AWSAccessKeyId=DHDPTCQ3WFGHPSS5FAXG&amp;Expires=1540232086&amp;Signature=9nf8f9kG%2FqDa76rmET4R%2FpbtaGM%3D</pre>
 </div>
-</li>
-<li>Esto genera la URL firmada. Ahora puedes compartir esta URL para que cualquiera pueda acceder a ese archivo hasta la fecha que hayas especificado.</li>
-</ol>
-<p>También puedes firmarlo por una semana usando este formato:</p>
+<dl>
+<dd><em>Esto genera la URL firmada.</em></dd>
+</dl>
+<div class="notebox-tip">
+<p>Alternativamente, puedes firmarla por 1 semana usando este formato:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd signurl s3://<span class="code-highlight">my_bucket/my_file.png</span> $(echo "`date +%s` + 3600 * 24 * 7" | bc)</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd signurl s3://my_bucket/my_file.png  <span class="code-highlight">$(echo "`date +%s` + 3600 * 24 * 7" | bc)</span></span></pre>
 </div>
-<div class="footer">&nbsp;</div>
+</div>
+</li>
+<li>Comparte esta URL para que cualquiera pueda accesar ese archivo hasta la fecha que hayas especificado.</li>
+</ol>
 </div>
