@@ -68,10 +68,10 @@
 </li>
 <li>Haz clic en <strong>Restaurar contrasenña</strong>.<br />
 <div class="notebox-important">
-<p>Copia esta contraseña a un archivo de texto como Bloc de Notas (Windows) o TextEdit (Mac). Si sólo haces clic en 'Restablecer Contraseña, serás dirigido nuevamente a la página de inicio de sesión, pero el campo de usuario/contraseña puede que estén en blanco. Si lo has copiado en un archivo de texto, fácilmente puedes pegarlo nuevamente en la la nueva página de inicio de sesión.</p>
+<p>Copia esta contraseña a un archivo de texto como Bloc de Notas (Windows) o TextEdit (Mac). Si sólo haces clic en <strong>Restablecer Contraseña</strong>, serás dirigido nuevamente a la página de inicio de sesión, pero el campo de usuario/contraseña puede que estén en blanco. Si lo has copiado en un archivo de texto, fácilmente puedes pegarlo nuevamente en la la nueva página de inicio de sesión.</p>
 </div>
 </li>
-<li>Una vez hayas logrado iniciar sesión, <span id="#reestablecer_contraseña_en_el_panel">restablece tu contraseña en el panel de WordPress como aparece arriba</span>
+<li>Una vez hayas logrado iniciar sesión, <span id="#reestablecer_contraseña_en_el_panel">restablece tu contraseña <a href="#reestablecer_contrasena_en_el_panel">en el panel de WordPress como aparece arriba</a>.</span>
 <div class="notebox-note">
 <p>En algunas circunstancias, es posible que tu sitio no pueda enviar correos. Si no has recibido tu correo de restablecimiento de contraseña en 15 minutos, intenta utilizar uno de los otros métodos que se enumeran a continuación.</p>
 </div>
@@ -132,18 +132,23 @@
 </div>
 <h2 id="h_01HE37Y9NWMFN1JDA50PGWYV7M"><span id="wpcli">Usar wp-cli</span></h2>
 <div class="solvvy-solution">
-<p>wp-cli es una herramienta en la línea de comando que puedes usar en tu servidor de DreamHost para administrar tu sitio WordPress. Para más detalles, dale un vistazo al siguiente artículo:</p>
+<p><a href="https://wp-cli.org/es/" target="_blank" rel="noopener noreferrer nofollow">wp-cli</a> es una herramienta en la línea de comando que puedes usar en tu servidor de DreamHost para administrar tu sitio WordPress. Para más detalles, revisa el siguiente artículo:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214693248-Generalidades-sobre-WordPress-wp-cli" target="_self">Generalidades de WordPress wp-cli</a></li>
 </ul>
-<ol>
-<li>Asegúrate de que el nombre de usuario de tu sitio de WordPress en el servidor sea un usuario de Shell. Revisa el siguiente artículo para confirmar:<br />
+<div class="notebox-important">
+<p><strong>Configurar SSH</strong></p>
+<p>Antes de proceder, asegúrate de que el usuario bajo el cual se encuentra tu sitio de WordPress en el servidor sea un usuario Shell. Revisa el siguiente artículo para confirmarlo:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Cómo crear un usuario con acceso Shell (SSH)</a></li>
 </ul>
-</li>
+</div>
+<ol>
 <li>Accede a tu servidor por&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
-<li>Navega al directorio de WordPress. Lo más probable es que puedas usar el siguiente comando. Asegúrate de cambiar el nombre <strong>example.com</strong> por el nombre de tu dominio:<br />
+<li>Navega al directorio de WordPress. Lo más probable es que puedas usar el siguiente comando:
+<div class="notebox-note">
+<p>Asegúrate de cambiar <strong>example.com</strong> a tu sitio web.</p>
+</div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd <span class="code-highlight">example.com</span></span></pre>
 </div>
@@ -158,9 +163,9 @@ Si tu sitio está en un subdirectorio, agrega el subdirectorio al nombre del sit
 +----+-------------+---------------+------------------+---------------------+---------------+</pre>
 </div>
 </li>
-<li>Para actualizar el usuario, corre el siguiente comando. Solo necesitas cambiar el número de 'ID' e ingresar la contraseña cuando sea solicitada:<br />
+<li>Correo el siguiente comando para actualizar el usuario. Solo necesitas cambiar el número de 'ID' e ingresar la contraseña cuando sea solicitada:<br />
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp user update 1 --prompt=user_pass</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp user update <span class="code-highlight">1</span> --prompt=<span class="code-highlight">user_pass</span></span>
 <span class="green">Success:</span> Updated user 1</pre>
 </div>
 <dl>
