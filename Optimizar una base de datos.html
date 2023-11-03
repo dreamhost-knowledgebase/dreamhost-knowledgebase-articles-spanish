@@ -103,14 +103,14 @@
 <p>También puedes hacer una limpieza general a través de un script de shell y/o un cron job usando <a href="https://dev.mysql.com/doc/refman/5.7/en/mysqlcheck.html">mysqlcheck</a>&nbsp;que verifica, repara y optimiza las tablas. Es una buena idea ejecutar un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215088668-Crear-un-Cron-Job">cron job</a> mensual para hacer esto por ti. El cron job podría verse así:</p>
 <div class="preboxcontainer">
 <pre class="prebox">#!/bin/sh
-/usr/bin/mysqlcheck -o -v -u <span class="code-highlight">USER</span> -p <span class="code-highlight">PASSWORD</span> -h <span class="code-highlight">MYSQL.EXAMPLE.COM DATABASENAME</span>;
+/usr/bin/mysqlcheck -o -v -u <span class="code-highlight">USERNAME</span> -p<span class="code-highlight">PASSWORD</span> -h <span class="code-highlight">MYSQL.EXAMPLE.COM DATABASENAME</span>;
 </pre>
 </div>
 <p>Reemplaza los elementos en mayúsculas con las&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">credenciales de tu base de datos</a>.</p>
 <h3 id="h_01HC2YB2ZYNQWNBMJQNWE7TEB8">Reparar via SSH</h3>
 <p>También puedes correr un comando para reparar una tabla en lugar de optimizarla:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql -u <span class="code-highlight">username</span> -p<span class="code-highlight">password</span> -h <span class="code-highlight">hostname</span> <span class="code-highlight">databasename</span> -e "show tables" | grep -v Tables_in | grep -v "+" | gawk '{print "repair table " $1 ";"}' | mysql -u <span class="code-highlight">username</span> -p<span class="code-highlight">password</span> -h <span class="code-highlight">hostname</span> <span class="code-highlight">databasename</span> </span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql -u <span class="code-highlight">USERNAME</span> -p<span class="code-highlight">PASSWORD</span> -h <span class="code-highlight">HOSTNAME</span> <span class="code-highlight">DATABASENAME</span> -e "show tables" | grep -v Tables_in | grep -v "+" | gawk '{print "repair table " $1 ";"}' | mysql -u <span class="code-highlight">USERNAME</span> -p<span class="code-highlight">PASSWORD</span> -h <span class="code-highlight">HOSTNAME</span> <span class="code-highlight">DATABASENAME</span> </span></pre>
 </div>
 </div>
 <h2 id="h_01HC2YB2ZYF4JZNX5271C6YEB8">Ver también</h2>
