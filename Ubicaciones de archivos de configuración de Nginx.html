@@ -1,18 +1,64 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HFA0X6B622BRFKZEYQRXBDW4">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este artículo enumera las diferentes ubicaciones para los archivos de configuración de Nginx.</p>
+<p>Si has <a href="https://help.dreamhost.com/hc/es/articles/214880148-Cambiar-tu-servidor-web-a-Nginx">cambiado tu servidor web a Nginx</a>, observarás que ciertos archivos de configuración (como <span class="text-object">.htaccess</span>) ya no funcionan. Esto se debe a que Nginx no admite configuraciones a nivel de directorio fuera del archivo de configuración del servidor principal. Sin embargo, todavía es posible configurar <a href="#archivos-de-configuracion">archivos de configuración locales</a> bajo tu nombre de usuario para personalizaciones como una redirección.</p>
+<p>Este artículo enumera las diferentes ubicaciones de archivos de configuración para Nginx en DreamHost.</p>
+</div>
+<h2 id="h_01HF5FX3QCW4AM33V17Q65YGHQ"><span id="Archivos_de_configuracion_local">Archivos de configuración local</span></h2>
+<div class="solvvy-solution">
+<p>Nginx habilita un directorio <span class="text-object">/nginx</span> bajo el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario">usuario de tu sitio web</a>. Este está ubicado en el siguiente directorio:</p>
+<div class="notebox-note">
+<p>En los siguientes ejemplos, el <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox">/home/username/<span class="code-highlight">nginx</span>/example.com</pre>
+</div>
+<p>Este directorio es el único lugar donde debes cargar cualquier archivo <span class="text-object">.conf</span> que desees que use tu sitio web. Además, cualquier archivo que termine en <span class="text-object">.conf</span> se inserta en el bloque del servidor del archivo <span class="text-object">nginx.conf</span>.</p>
+<h3 id="h_01HF5G7FYNKPNXTK1Q407DCK3J">Crear el directorio de configuración</h3>
 <div class="notebox-important">
-<p>Este artículo contiene información/ejemplos utilizando usuarios root/sudo/admin. Si necesitas acceso sudo/admin, debes cambiarte a un Servidor Dedicado.</p>
+<p>Los directorios <span class="text-object">/nginx/example.com</span> no existen por defecto. Debes crearlos manualmente corriendo el siguiente comando bajo tu usuario:</p>
 </div>
+<ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Navega al <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario">directorio home de tu usuario</a>.</li>
+<li>Corre el siguiente comando:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir -p nginx/example.com</span></pre>
 </div>
-<h2><span id="The_nginx.conf_file">El archivo nginx.conf</span></h2>
+</li>
+</ol>
+<p>Ahora puedes agregar tus archivos de configuración personalizados que terminen en <span class="text-object">.conf</span> a este directorio para el sitio web <strong>example.com</strong>.&nbsp;</p>
+<h3 id="h_01HF5HKE8ZTWWW1D4T2H7C0Y1P">Los dos directorios de Nginx</h3>
+<p>Para aclarar, ahora tendrás dos directorios que usa tu dominio:</p>
+<p><strong>El directorio de tu sitio web</strong></p>
+<p>Este es el directorio de tu sitio web donde se encuentran todos los archivos.</p>
+<dl>
+<dd>
+<div class="preboxcontainer">
+<pre class="prebox">/home/username/example.com</pre>
+</div>
+</dd>
+</dl>
+<p><strong>Tu directorio de configuración de nginx</strong></p>
+<p>Este es donde se encuentran todos los archivos de configuración de Nginx.</p>
+<dl>
+<dd>
+<div class="preboxcontainer">
+<pre class="prebox">/home/username/<span class="code-highlight">nginx</span>/example.com</pre>
+</div>
+</dd>
+</dl>
+</div>
+<h2 id="h_01HF5FX3QCW9NDG2XNJ15EESTF"><span id="The_nginx.conf_file">El archivo nginx.conf (solo para servidores Dedicados)</span></h2>
 <div class="solvvy-solution">
+<div class="notebox-important">
+<p>Este ejemplo contiene ejemplos que usan usuarios sudo/admin. Si necesitas acceso sudo/admin, debes actualizar a un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados" target="_self" rel="undefined">Servidor Dedicado</a>.</p>
+</div>
 <p>El archivo de configuración principal solo se puede ver o editar si estás usando un <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-Servidor-Dedicado">usuario admin</a> en un Servidor Dedicado.</p>
 <ol>
-<li>Una vez que hayas creado un usuario administrador, inicia sesión en tu <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self" rel="undefined">Servidor Dedicado</a> y navega al siguiente directorio:
+<li>Inicia sesión en tu Servidor Dedicado a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Navega al directorio <span class="text-object">/etc/nginx</span>:
 <div class="preboxcontainer">
-<pre class="prebox">/etc/nginx/
-</pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd /etc/nginx</span></pre>
 </div>
 </li>
 <li>Usa sudo para ver el contenido de los directorios:
@@ -34,46 +80,17 @@
 <li>Guarda y cierra el archivo, y regresa a tu shell.</li>
 </ol>
 </div>
-<h2><span id="Local_configuration_files">Configuración local de archivos</span></h2>
-<div class="solvvy-solution">
-<div class="notebox-note">
-<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
-</div>
-<p>Nginx codifica una ruta de inclusión para cada dominio, como se ve en el siguiente ejemplo:</p>
-<div class="preboxcontainer">
-<pre class="prebox">/home/username/nginx/example.com
-</pre>
-</div>
-<p>Este directorio&nbsp;<span class="text-object">/home/username/nginx/example.com</span> es el único lugar donde debes cargar cualquier archivo <span class="text-object">.conf</span> que desees que use tu sitio real. Además, cualquier archivo que termine en <span class="text-object">.conf</span> se inserta en el bloque del servidor del archivo <span class="text-object">nginx.conf</span>.</p>
-<div class="notebox-note">
-<p>Las carpetas <span class="text-object">/nginx/example.com</span> no existen de forma predeterminada. Debes crearlos manualmente corriendo los siguientes comandos con tu nombre de usuario:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir -p nginx/example.com</span></pre>
-</div>
-</div>
-<p>Para aclarar, ahora tendrás dos directorios que usa tu dominio:</p>
-<ul>
-<li>Tu directorio web (alias de root de documento).</li>
-</ul>
-<dl>
-<dd><span class="text-object">/home/username/example.com</span></dd>
-</dl>
-<ul>
-<li>Tu directorio&nbsp;<span class="text-object">nginx/example.com</span> donde TODOS los archivos de configuración son ubicados.</li>
-</ul>
-<dl>
-<dd><span class="text-object">/home/username/nginx/example.com</span></dd>
-</dl>
-</div>
-<h2>Ejemplos de archivos .conf</h2>
+<div id="configuration-files" class="section-link">&nbsp;</div>
+<h2 id="h_01HF5FX3QCGWXT5TG9DAR2FZFA">Ejemplos de archivos .conf</h2>
 <div class="solvvy-solution">
 <p>Mira los siguientes artículos para ver ejemplos sobre cómo se vería un archivo <span class="text-object">.conf</span> personalizado para tu sitio:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214824958--C%C3%B3mo-hacer-que-las-estad%C3%ADsticas-y-los-enlaces-permanentes-funcionen-con-WordPress-y-Nginx">Como hacer que las estadísticas y enlaces permanentes funcionen con WordPress y Nginx</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215837528--Proteger-directorios-con-contrase%C3%B1a-con-Nginx">Proteger los directorios con contraseña con Nginx</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456087-Crear-redirecciones-con-Nginx">Crear redirecciones con Nginx</a></li>
 </ul>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HFA0X6B6CXDD1TMNNX4B59YP">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx">Generalidades de Nginx</a></li>
