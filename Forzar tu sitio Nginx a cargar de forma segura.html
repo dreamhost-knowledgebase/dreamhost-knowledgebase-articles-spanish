@@ -1,0 +1,41 @@
+<h2 id="h_01HFSBRX48W52J96N7B60MHKMX"><span id="Redirecting_non-secure_traffic_to_HTTPS">Generalidades</span></h2>
+<div class="solvvy-solution">
+<p>Después de que hayas <a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL">agregado un certificado SSL</a> a tu dominio, DreamHost automáticamente redirige la URL que los visitantes usan para ver tu sitio de <span class="text-object">HTTP</span> a <span class="text-object">HTTPS</span>. La <span class="text-object">S</span> asegura que tu conexión está cifrada. Por ejemplo:</p>
+<ul>
+<li><strong>https</strong>://example.com</li>
+</ul>
+<p>No hay nada de tu parte que debas hacer para obligar a tu sitio a utilizar la URL segura. Sin embargo, en algunos casos especiales, puede ser necesario que crees tu propio archivo de configuración personalizado para forzar la redirección de <span class="text-object">HTTP</span> a <span class="text-object">HTTPS</span>.</p>
+<div class="alert-warning">
+<p><strong>Añadir código personalizado solo es necesario si tu sitio web requiere código específico para forzar la redirección.</strong> De ser así, primero debes deshabilitar la redirección automática en tu panel.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360027022831-Deshabilitar-el-redireccionamiento-autom%C3%A1tico-a-HTTPS" target="_self" rel="undefined">Deshabilitar la redirección automática a HTTPS</a></li>
+</ul>
+<p>Una vez deshabilitado, puedes añadir tu archivo de redirección personalizado.&nbsp;</p>
+</div>
+</div>
+<h2 id="h_01HFSBRX48SDPPVP732XXJWNJR"><span id="Redirecting_non-secure_traffic_to_HTTPS">Redirigir tráfico no seguro a HTTPS</span></h2>
+<div class="solvvy-solution">
+<p>Para redirigir una URL en un sitio web que se ejecuta en un servidor Nginx, debes crear manualmente un archivo <span class="text-object">redirects.conf</span>. Luego agregarás tu código de redireccionamiento a este archivo. Consulta el siguiente artículo para obtener instrucciones sobre cómo ubicar la ubicación del archivo de configuración de Nginx.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">Ubicaciones de archivos de configuración Nginx</a></li>
+</ul>
+<p>Una vez localizado, puedes editar o crear este archivo usando un cliente FTP o SSH.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">Crear y editar un archivo a través de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a></li>
+</ul>
+<p>Esta redirección obliga a tu sitio a cargar la versión <span class="text-object">HTTPS</span> de tu sitio para garantizar que las conexiones de tus visitantes estén encriptadas. Agrega el siguiente código a tu archivo <span class="text-object">redirects.conf</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">if ($server_port = 80) {
+  rewrite ^/(.*)$ https://<span class="code-highlight">example.com</span>/$1 permanent;
+}
+</pre>
+</div>
+</div>
+<h2 id="h_01HFSBRX48XF0VA0B5A7XBGSP9">Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx">Generalidades de Nginx</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+</ul>
+</div>

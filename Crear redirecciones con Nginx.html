@@ -1,48 +1,52 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HFS99Y03VYE4RJ26FW7XWVYY">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Para redirigir una URL en un sitio web que se ejecuta en un servidor Nginx, debes crear manualmente un archivo <span class="text-object">redirects.conf</span>. En este archivo agregará tu código de redireccionamiento.</p>
-</div>
-<h2>Pasos para crear una redirección en un servidor Nginx</h2>
-<div class="solvvy-solution">
-<ol>
-<li>Mira el artículo de <a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">ubicación de archivos de configuración</a> para crear tu directorio local <span class="text-object">/nginx/example.com</span>.</li>
-<li>Crea un archivo llamado <span class="text-object">redirects.conf</span> en este directorio <span class="text-object">/nginx/example.com</span>. Lo puedes crear a través de <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">SSH</a> o <a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">FTP</a>.</li>
-<li>Agrega uno de los contenidos de las siguientes secciones. Asegúrate de cambiar el nombre de dominio a tu dominio real.&nbsp;</li>
-<li>si estás en un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self" rel="undefined">Servidor Dedicado</a>,&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216454967-Como-recargar-y-reiniciar-Nginx-Solo-para-servidores-dedicados-">recarga Nginx</a> para que los cambios tomen efecto. Si estás en un <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-">VPS</a>, reinicia tu servidor en el panel. Puedes hacer esto en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=vps.dashboard&amp;" target="_blank" rel="noopener">VPS</a> al hacer clic en el botón <strong>Restart</strong> a la derecha de tu servidor.</li>
-</ol>
-</div>
-<h2><span id="Redirecting_a_single_file">Redirigir un solo archivo</span></h2>
-<div class="solvvy-solution">
-<div class="preboxcontainer">
-<pre class="prebox">if ($request_filename ~ oldfile.html){
-	rewrite ^ http://example.com/newfile.html? permanent;
-}
-</pre>
-</div>
-<dl>
-<dd><em>Esto redirecciona solicitudes desde <strong>example.com/oldfile.html</strong> a <strong>example.com/newfile.html</strong>.</em></dd>
-</dl>
-</div>
-<h2><span id="Redirecting_an_entire_site">Redirigir un sitio completo</span></h2>
-<div class="solvvy-solution">
-<div class="preboxcontainer">
-<pre class="prebox">if ($request_filename ~ /*){
-        rewrite ^ http://example.com? permanent;
-}
-</pre>
-</div>
-<dl>
-<dd><em>Esto redirige las solicitudes a tu sitio a <strong>example.com</strong>. Cambia <strong>example.com</strong> a cualquier sitio al que te gustaría redirigir.</em></dd>
-</dl>
-</div>
-<h2><span id="Redirecting_non-secure_traffic_to_HTTPS">Redireccionar tu sitio de HTTP a HTTPS</span></h2>
-<div class="solvvy-solution">
-<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo redirigir tu sitio Nginx de <span class="text-object">HTTP</span> a <span class="text-object">HTTPS</span>.</p>
+<p>Para redirigir una URL en un sitio web que se ejecuta en un servidor Nginx, debes crear manualmente un archivo <span class="text-object">redirects.conf</span>. Este artículo explica cómo crear este archivo y ejemplos de código que puedes agregarle.</p>
+<div class="notebox-tip">
+<p><strong>Redirigir tu sitio de HTTP a HTTPS</strong></p>
+<p>Las instrucciones de este artículo se refieren a redirigir solicitudes a otra ubicación.</p>
+<p>Revisa el siguiente artículo en vez si necesitas redirigir solicitudes de HTTP a HTTPS.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115001397291-Forzar-tu-sitio-de-Nginx-a-cargar-de-forma-segura" target="_self">Forzar tu sitio en Nginx a cargar de forma segura</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115001397291-Forzar-tu-sitio-Nginx-a-cargar-de-forma-segura" target="_self">Forzar tu sitio Nginx a cargar de forma segura </a></li>
 </ul>
 </div>
-<h2>Ver también</h2>
+</div>
+<h2 id="h_01HFS99Y035QW30JFFA61AGB4B">Crear una redirección</h2>
+<div class="solvvy-solution">
+<ol>
+<li>Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">Ubicaciones de archivos de configuración de Nginx</a> para crear tu directorio <span class="text-object">/nginx/example.com</span> local.</li>
+<li>Cambia a este directorio.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/nginx/example.com</span></pre>
+</div>
+</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Crea un archivo</a> llamado <span class="text-object">redirects.conf</span>.</li>
+<li>Agrega código de uno de los ejemplos a continuación.
+<div class="notebox-note">
+<p>Asegúrate de cambiar <strong>example.com</strong> a tu dominio.</p>
+</div>
+</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216454967-C%C3%B3mo-recargar-y-reiniciar-Nginx">Recarga Nginx</a> para que los cambios tomen efecto.</li>
+</ol>
+</div>
+<h2 id="h_01HFCTK6S08KJF638GWZ1GZ0NS"><span id="Redirigir_a_un_solo_archivo">Redirigir a un solo archivo</span></h2>
+<div class="solvvy-solution">
+<p>Este código redirige las solicitudes de <strong>example.com/oldfile.html</strong> a <strong>example.com/newfile.html</strong>..</p>
+<div class="preboxcontainer">
+<pre class="prebox">if ($request_filename ~ <span class="code-highlight">oldfile.html</span>){
+    rewrite ^ http://<span class="code-highlight">example.com/newfile.html</span>? permanent;
+}</pre>
+</div>
+</div>
+<h2 id="h_01HFS99Y038XYK3H4X8D7PPSNX"><span id="Redirecting_an_entire_site">Redirigir un sitio completo</span></h2>
+<div class="solvvy-solution">
+<p>Este código redirige todas las solicitudes a tu sitio web a <strong>example.com</strong>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">if ($request_filename ~ /*){
+    rewrite ^ http://<span class="code-highlight">example.com</span>? permanent;
+}</pre>
+</div>
+</div>
+<h2 id="h_01HFS99Y03FKCR28S5XCPPP6D6">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx">Generalidades sobre Nginx</a></li>
