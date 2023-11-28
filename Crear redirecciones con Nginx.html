@@ -1,10 +1,10 @@
 <h2 id="h_01HFS99Y03VYE4RJ26FW7XWVYY">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Para redirigir una URL en un sitio web que se ejecuta en un servidor Nginx, debes crear manualmente un archivo <span class="text-object">redirects.conf</span>. Este artículo explica cómo crear este archivo y ejemplos de código que puedes agregarle.</p>
+<p>Para redirigir una URL en un sitio web que se ejecuta en un servidor Nginx, debes crear manualmente un archivo <span class="text-object">redirects.conf</span>. Este artículo explica cómo crear este archivo e incluye unos cuantos ejemplos de código que puedes agregarle.</p>
 <div class="notebox-tip">
 <p><strong>Redirigir tu sitio de HTTP a HTTPS</strong></p>
 <p>Las instrucciones de este artículo se refieren a redirigir solicitudes a otra ubicación.</p>
-<p>Revisa el siguiente artículo en vez si necesitas redirigir solicitudes de HTTP a HTTPS.</p>
+<p>Revisa el siguiente artículo en vez si necesitas redirigir solicitudes de HTTP a HTTPS:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115001397291-Forzar-tu-sitio-Nginx-a-cargar-de-forma-segura" target="_self">Forzar tu sitio Nginx a cargar de forma segura </a></li>
 </ul>
@@ -14,7 +14,7 @@
 <div class="solvvy-solution">
 <ol>
 <li>Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">Ubicaciones de archivos de configuración de Nginx</a> para crear tu directorio <span class="text-object">/nginx/example.com</span> local.</li>
-<li>Cambia a este directorio.
+<li>Cambia a este directorio:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/nginx/example.com</span></pre>
 </div>
@@ -30,7 +30,7 @@
 </div>
 <h2 id="h_01HFCTK6S08KJF638GWZ1GZ0NS"><span id="Redirigir_a_un_solo_archivo">Redirigir a un solo archivo</span></h2>
 <div class="solvvy-solution">
-<p>Este código redirige las solicitudes de <strong>example.com/oldfile.html</strong> a <strong>example.com/newfile.html</strong>..</p>
+<p>El siguiente código redirige las solicitudes de <strong>example.com/oldfile.html</strong> a <strong>example.com/newfile.html</strong>..</p>
 <div class="preboxcontainer">
 <pre class="prebox">if ($request_filename ~ <span class="code-highlight">oldfile.html</span>){
     rewrite ^ http://<span class="code-highlight">example.com/newfile.html</span>? permanent;
@@ -39,7 +39,7 @@
 </div>
 <h2 id="h_01HFS99Y038XYK3H4X8D7PPSNX"><span id="Redirecting_an_entire_site">Redirigir un sitio completo</span></h2>
 <div class="solvvy-solution">
-<p>Este código redirige todas las solicitudes a tu sitio web a <strong>example.com</strong>.</p>
+<p>El siguiente código redirige todas las solicitudes a tu sitio web a <strong>example.com</strong>.</p>
 <div class="preboxcontainer">
 <pre class="prebox">if ($request_filename ~ /*){
     rewrite ^ http://<span class="code-highlight">example.com</span>? permanent;
