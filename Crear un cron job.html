@@ -1,5 +1,5 @@
 <div id="auto-toc">&nbsp;</div>
-<h2>Generalidades</h2>
+<h2 id="h_01HHD549MREDP1641VGK95RBVK">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Puedes hacer que DreamHost configure automáticamente un cron job desde el panel, en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.cron&amp;" target="_blank" rel="noopener noreferrer">Cron Jobs</a>.&nbsp;Este artículo contiene los siguientes contenidos.</p>
 <div class="notebox-note">
@@ -9,7 +9,7 @@
 </div>
 </div>
 <div id="panel" class="section-link">&nbsp;</div>
-<h2>Crear un cron job en el panel</h2>
+<h2 id="h_01HHD549MR82JGSJNB3EW0RR1Z">Crear un cron job en el panel</h2>
 <div class="solvvy-solution">
 <div class="notebox-note">
 <p>Este ejemplo ejecuta un solo archivo llamado <span class="text-object">script.php.</span></p>
@@ -61,14 +61,14 @@
 </ol>
 </div>
 <div id="Los_campos_de_la_semana_y_del_dia_del_mes" class="section-link">&nbsp;</div>
-<h2>Los campos del 'Día de la Semana' y 'Día del Mes'</h2>
+<h2 id="h_01HHD549MRB9AZCY8ZDXQAVXK7">Los campos del 'Día de la Semana' y 'Día del Mes'</h2>
 <div class="solvvy-solution">
-<h3 class="subtoc-heading">Cuando el campo del 'Día de la Semana' anula el 'Día del Mes'</h3>
+<h3 id="h_01HHD549MRPGA5NJ1YF1X7C78A" class="subtoc-heading">Cuando el campo del 'Día de la Semana' anula el 'Día del Mes'</h3>
 <p>El campo del <span class="text-object">'Día de la Semana'</span> anulará el campo del <span class="text-object">Dia del mes</span> solo si el campo del <span class="text-object">Día del Mes</span> está configurado para <span class="text-object">Todos los Días</span>. Por ejemplo, la siguiente configuración solo correrá los Jueves.</p>
 <dl>
 <dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-cron-job-create-03.png" alt="es-panel-cron-job-create-03.png" width="607" height="555" /></dd>
 </dl>
-<h3 class="subtoc-heading">Cuando el campo del 'Día de la Semana' NO anula el 'Día del Mes'</h3>
+<h3 id="h_01HHD549MS0BMG4N6XTE73QF2Z" class="subtoc-heading">Cuando el campo del 'Día de la Semana' NO anula el 'Día del Mes'</h3>
 <p>El campo del <strong><span class="text-object">Día de la Semana</span> NO</strong> anulará el campo del <strong><span class="text-object">Día del Mes</span></strong>, si el campo del <strong><span class="text-object">Día del Mes</span></strong> está configurado a día(s) específico(s). En ese caso correrán juntos.</p>
 <p>En el ejemplo a continuación, el campo del <strong><span class="text-object">Día de la Semana</span></strong> está configurado para correr los Jueves a las 3:44 pm. El campo del <strong><span class="text-object">Día del Mes</span></strong> esta también ajustado para el 26 (que es un Miércoles). El cron job seguirá corriendo todos los Jueves, pero también el 26 de cada mes.</p>
 <dl>
@@ -76,21 +76,21 @@
 </dl>
 </div>
 <div id="variables" class="section-link">&nbsp;</div>
-<h2>Ejecutar un cron job desde una URL con variables</h2>
+<h2 id="h_01HHD549MS713C3SRQ3MNF765P">Ejecutar un cron job desde una URL con variables</h2>
 <div class="solvvy-solution">
 <p>Es común que una URL personalizada en tu sitio use variables. Por ejemplo:</p>
 <div class="preboxcontainer">
 <pre class="prebox">https://example.com/script.php<span class="code-highlight">?firstname=john&amp;lastname=doe</span></pre>
 </div>
 <p>El problema es que las variables solo funcionan en un navegador web cuando se visita la URL. No funcionarán cuando se ejecuta la URL en el servidor. Hay dos formas de hacer que un cron job ejecute dicha URL.</p>
-<h3 class="subtoc-heading">Usar curl o wget</h3>
+<h3 id="h_01HHD549MS03KAM79JF3QTMGTR" class="subtoc-heading">Usar curl o wget</h3>
 <p>Cuando ejecutes <span class="code">curl</span> o <span class="code">wget</span> en una URL con variables, asegúrate de encerrar la URL entre comillas simples.</p>
 <div class="preboxcontainer">
 <pre class="prebox">curl 'https://example.com/script.php?firstname=john&amp;lastname=doe'</pre>
 </div>
 <p>Así es como se vería en el panel.</p>
 <p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-cron-job-create-05.png" alt="es-panel-cron-job-create-05.png" /></p>
-<h3 class="subtoc-heading">Usar php.cgi</h3>
+<h3 id="h_01HHD549MSJVAX4Z2SZS3J2W3P" class="subtoc-heading">Usar php.cgi</h3>
 <p>La otra opción es usar php.cgi en lugar de la ruta a PHP. Al crear la URL, debes cambiar el primer signo de pregunta ? por un espacio, y cada signo &amp; después de eso en un espacio también. Por ejemplo:</p>
 <p><strong>Ruta al archivo original y URL</strong></p>
 <div class="preboxcontainer">
@@ -108,40 +108,40 @@
 <p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-cron-job-create-06.png" alt="es-panel-cron-job-create-06.png" /></p>
 </div>
 <div id="rutas-a-programas-comunes" class="section-link">&nbsp;</div>
-<h2>Rutas a programas comunes</h2>
+<h2 id="h_01HHD549MSJJT96EH6W2GWT253">Rutas a programas comunes</h2>
 <div class="solvvy-hidden">
 <p>A continuación se muestran las rutas a los programas comunes en el servidor. Esta es la ruta que agregarías antes del archivo que deseas ejecutar.</p>
 <table style="border-collapse: collapse; width: 30%;" border="1">
 <tbody>
 <tr>
 <th style="width: 34.8327%;">Programa</th>
-<th style="width: 65.1673%;">Camino</th>
+<th style="width: 65.1673%;">Ruta</th>
 </tr>
 <tr>
-<td style="width: 34.8327%;">bash</td>
-<td style="width: 65.1673%;">/bin/bash</td>
+<td style="width: 47.3077%;">bash</td>
+<td style="width: 136.538%;">/bin/bash</td>
 </tr>
 <tr>
-<td style="width: 34.8327%;">java</td>
-<td style="width: 65.1673%;">/usr/bin/java</td>
+<td style="width: 47.3077%;">java</td>
+<td style="width: 136.538%;">/usr/bin/java</td>
 </tr>
 <tr>
-<td style="width: 34.8327%;">perl</td>
-<td style="width: 65.1673%;">/usr/bin/perl</td>
+<td style="width: 47.3077%;">perl</td>
+<td style="width: 136.538%;">/usr/bin/perl</td>
 </tr>
 <tr>
-<td style="width: 34.8327%;">php</td>
-<td style="width: 65.1673%;">
-<p>/usr/bin/php<br />/usr/local/php80/bin/php<br />/usr/local/php81/bin/php<br />/usr/local/php82/bin/php</p>
+<td style="width: 47.3077%;">php</td>
+<td style="width: 136.538%; vertical-align: top;">
+<p>/usr/bin/php<br />/usr/local/php81/bin/php<br />/usr/local/php82/bin/php<br />/usr/local/php83/bin/php</p>
 </td>
 </tr>
 <tr>
-<td style="width: 34.8327%;">php-cgi</td>
-<td style="width: 65.1673%;">/dh/cgi-system/php80.cgi<br />/dh/cgi-system/php81.cgi<br />/dh/cgi-system/php82.cgi</td>
+<td style="width: 47.3077%;">php-cgi</td>
+<td style="width: 136.538%;">/dh/cgi-system/php81.cgi<br />/dh/cgi-system/php82.cgi<br />/dh/cgi-system/php83.cgi</td>
 </tr>
 <tr>
-<td style="width: 34.8327%;">python</td>
-<td style="width: 65.1673%;">/usr/bin/python<br />/usr/bin/python3</td>
+<td style="width: 47.3077%;">python</td>
+<td style="width: 136.538%;">/usr/bin/python<br />/usr/bin/python3</td>
 </tr>
 <tr>
 <td style="width: 34.8327%;">ruby</td>
@@ -150,7 +150,7 @@
 </tbody>
 </table>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HHD549MTHTPCCFKZ15VDN6Q0">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades sobre SSH</a></li>

@@ -1,7 +1,7 @@
 <div class="notebox-tip">
 <p>Si te encuentras en una situación que requiere cambios en tu sitio y tu desarrollador no está disponible para ayudarte, el equipo de soporte calificado de DreamHost puede ayudarte por una pequeña tarifa. Puedes encontrar más información sobre los servicios admitidos y los costos asociados en el artículo de <a href="https://help.dreamhost.com/hc/es/articles/360042256912-Generalidades-sobre-Servicios-Profesionales-">Servicios Profesionales de DreamHost.</a></p>
 </div>
-<h2>Generalidades</h2>
+<h2 id="h_01HHD246EPHKDHK3AVD6TT21GG">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Cada instalación de PHP viene con configuraciones predeterminadas que generalmente están bien para la mayoría de los sitios web. Ocasionalmente, las necesidades de un sitio web hacen que sea necesario ajustar esta configuración de PHP. Crear un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">php.ini (phprc)</a>&nbsp;es la solución para ajustar la configuración de PHP para tu sitio web.</p>
 <div class="notebox-note">
@@ -9,7 +9,7 @@
 </div>
 <p>Puedes crear un archivo <a href="https://help.dreamhost.com/hc/es/articles/214894037-Crear-un-archivo-phprc-v%C3%ADa-FTP" target="_self">phprc usado un cliente FTP</a>,&nbsp;o iniciando sesión en el servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>,&nbsp;sin embargo, crear un archivo <span class="text-object">phprc</span> es más fácil con un cliente FTP. Este artículo es para usuarios más avanzados y explica cómo crear este archivo <span class="text-object">phprc</span> a través de SSH.</p>
 </div>
-<h2>Agregar un archivo phprc usando SSH</h2>
+<h2 id="h_01HHD246EPJ9HBEEF5EJ06C0G6">Agregar un archivo phprc usando SSH</h2>
 <div class="solvvy-solution">
 <ol>
 <ol>
@@ -23,7 +23,7 @@
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">pwd</span> <br /><span class="cmdoutput">/home/username</span></pre>
 </div>
 <div class="notebox-note">
-<p>Recuerda primero <a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">verificar qué versión de PHP está usando tu sitio</a>. En el siguiente ejemplo, el sitio está usando PHP 8.2. En este directorio, puedes correr un solo comando para crear la carpeta <span class="text-object">/.php</span>, así como la carpeta <span class="text-object">/8.2</span> que se encuentra dentro de ella.</p>
+<p>Recuerda primero <a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">verificar qué versión de PHP está usando tu sitio</a>. En el siguiente ejemplo, el sitio está usando PHP 8.3. En este directorio, puedes correr un solo comando para crear la carpeta <span class="text-object">/.php</span>, así como la carpeta <span class="text-object">/8.3</span>&nbsp;que se encuentra dentro de ella.</p>
 </div>
 </li>
 <li>Corre el siguiente comando para cambiar al directorio <span class="text-object">.phprc</span>:
@@ -47,7 +47,7 @@
 </div>
 <p>3.3 - Crea el subdirectorio para la versión específica de PHP a la que estés creando el archivo <span class="text-object">phprc</span>.</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir 8.2</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir 8.3</span></pre>
 </div>
 </dd>
 </dl>
@@ -55,14 +55,14 @@
 <ol>
 <li>Cambia al directorio de la versión PHP de tu sitio web usando:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd 8.2</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd 8.3</span></pre>
 </div>
 <ul>
 <li><em>Cuando ejecutas <span class="code">pwd</span>, ahora ves la ruta de archivo completa que acaba de crear:</em></li>
 </ul>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">pwd</span>
-<span class="cmdoutput">/home/username/.php/8.2</span></pre>
+<span class="cmdoutput">/home/username/.php/8.3</span></pre>
 </div>
 </li>
 <li>En esta carpeta, crea el archivo <span class="text-object">phprc</span> sin una extensión.<br />
@@ -97,14 +97,14 @@ zend_extension=opcache.so
 <li>Cierra el archivo y regresa a tu shell.</li>
 </ol>
 </div>
-<h2>Eliminar los procesos PHP en ejecución</h2>
+<h2 id="h_01HHD246EQ1DHAYE7B2FNS80NW">Eliminar los procesos PHP en ejecución</h2>
 <div class="solvvy-solution">
 <p>Una vez que hayas guardado los cambios, debes eliminar todos los procesos PHP en ejecución. Esto garantiza que se actualicen tus nuevas configuraciones. Consulta el siguiente artículo para obtener instrucciones sobre cómo eliminar todos los procesos PHP en ejecución:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Eliminar procesos PHP</a></li>
 </ul>
 </div>
-<h2>Confirmar tus cambios</h2>
+<h2 id="h_01HHD246EQAR8G5D1WAJ844AYV">Confirmar tus cambios</h2>
 <div class="solvvy-solution">
 <p>Después de editar el archivo y eliminar todos los procesos PHP, debes verificar para confirmar que los valores se hayan actualizado. Puedes hacer esto creando un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">phpinfo.php</a>.</p>
 <p>Si no ves que tus cambios se han actualizado, intenta eliminar tus procesos PHP nuevamente:</p>
@@ -112,12 +112,12 @@ zend_extension=opcache.so
 <li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no está actualizando</a></li>
 </ul>
 </div>
-<h2>Resumen</h2>
+<h2 id="h_01HHD246EQKK548B96KTY4KKJP">Resumen</h2>
 <div class="solvvy-solution">
 <p>El archivo <span class="text-object">phprc</span> que acabas de crear se usa para cualquier dominio con este nombre de usuario específico que también ejecuta la versión específica de PHP que elegiste en el paso 3 al crear el directorio.</p>
-<p>Por ejemplo, si el usuario tiene tres dominios donde dos ejecutan PHP 8.2 y el tercero ejecuta PHP 8.1, solo los dos primeros dominios que ejecutan 8.2 se verían afectados por el archivo <span class="text-object">phprc</span>. Deberías crear un archivo <span class="text-object">phprc</span> separado para el sitio PHP 8.1.</p>
+<p>Por ejemplo, si el usuario tiene tres dominios donde dos ejecutan PHP 8.3 y el tercero ejecuta PHP 8.2, solo los dos primeros dominios que ejecutan 8.3 se verían afectados por el archivo <span class="text-object">phprc</span>. Deberías crear un archivo <span class="text-object">phprc</span> separado para el sitio PHP 8.2.</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HHD246ER93MJW6MXJ993MJ9V">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">Generalidades de php.ini</a></li>
