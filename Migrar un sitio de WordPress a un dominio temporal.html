@@ -1,9 +1,43 @@
 <h2 id="h_01H9RX3XHS8VT4ARHWZJ8R1GKJ">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este artículo explica cómo usar la Llave de Migración que se encuentra en el plugin <a href="https://es.wordpress.org/plugins/dreamhost-automated-migration/" target="_blank" rel="noopener noreferrer">Plugin de Migración Automatizada de DreamHost (DreamHost Automated Migration Plugin)</a> para migrar tu sitio WordPress a DreamHost.</p>
-<div class="prereqs">
-<p><strong>Directorio de WordPress</strong></p>
-<p>Este plugin solo funcionará si tu instalación de WordPress se encuentra en el directorio principal del sitio web.</p>
+<p>Este artículo explica cómo migrar un sitio de WordPress usando un nombre de dominio temporal a DreamHost. Estas instrucciones usan el plugin <a target="_blank" rel="noopener noreferrer">Migración Automatizada de DreamHost</a> y una llave de migración ubicada en el panel.</p>
+<div class="notebox-important">
+<p><strong>Solo para dominios temporales</strong></p>
+<p>Estas instrucciones se usan ÚNICAMENTE cuando se migra a un nombre de dominio temporal, como por ejemplo:</p>
+<ul>
+<li>example<a href="https://help.dreamhost.com/hc/en-us/articles/360002284771-Using-a-dreamhosters-com-subdomain">.dreamhosters.com</a>&nbsp;</li>
+<li>example<a href="https://help.dreamhost.com/hc/en-us/articles/115002837508-Creating-a-DreamPress-temporary-domain">.dream.press</a></li>
+</ul>
+<p>Si estás migrando al mismo dominio que tu sitio actual, revisa el siguiente artículo en su lugar:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360035448951-Usar-el-Plugin-de-Migraci%C3%B3n-Automatizada-de-WordPress-DreamHost-Automated-Migration-Plugin-">Usar el Plugin de Migración Automatizada de WordPress</a></li>
+</ul>
+</div>
+</div>
+<h2 id="h_01HHMT7B26WH3XCTSXHGVE6GTW">Requisitos Previos</h2>
+<div class="solvvy-solution">
+<p>Se deben configurar los siguientes pasos antes de usar el Plugin de Migración Automatizada de DreamHost.</p>
+<div class="steps-section--container">
+<div class="steps-section-sublist--border">&nbsp;</div>
+<div class="steps-section--content">
+<div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-1.svg" alt="" width="30px" />
+<h3 id="h_01HHN5DM9K85R60R7SEASZ6JWB">Paso 1 — Agregar un plan alojamiento a tu dominio temporal</h3>
+<p>Asegúrate de haberte registrado ya una cuenta de DreamHost, añadido un plan de alojamiento, y agregado tu dominio temporal a ese plan de alojamiento:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/223175988-C%C3%B3mo-crear-una-cuenta-en-DreamHost">Registrarse a una cuenta de DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-sitio-web-y-alojamiento">Agregar un sitio web y alojamiento</a></li>
+</ul>
+</div>
+<div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-2.svg" alt="" width="30px" />
+<h3 id="01HHN5DTWHCZC2C60BHT3K4Y2K">Paso 2 — Instalar WordPress</h3>
+<p>Confirma que WordPress ha sido instalado en tu dominio temporal en DreamHost. Si es así, verás el icono de WordPress junto a tu dominio en la página <a class="panel-link" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</p>
+<p>Si WordPress no está instalado, revisa el siguiente artículo para instalarlo antes de continuar:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215525277-Instalar-WordPress-usando-el-instalador-de-WordPress-de-DreamHost">Instalar WordPress usando el instalador de WordPress de DreamHost</a></li>
+</ul>
+<div class="alert-warning">
+<p><strong>El directorio de WordPress</strong></p>
+<p>Este plugin solo funcionará si tu instalación de WordPress está ubicada en el directorio principal del sitio web de tu sitio web. Por ejemplo:</p>
 <ul>
 <li><strong>example.com</strong></li>
 </ul>
@@ -11,11 +45,30 @@
 <ul>
 <li><strong>example.com/blog</strong></li>
 </ul>
+<p>Si necesitas instalar en un subdirectorio, revisa el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214693178-Migrar-WordPress-a-DreamHost-manualmente">Migrar WordPress a DreamHost manualmente</a></li>
+</ul>
+</div>
+</div>
+<div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-3.svg" alt="" width="30px" />
+<h3 id="h_01HJ997P7BJG2MND1KQ20DM4JA">Paso 3 — Actualizar WordPress (en el antiguo alojamiento del sitio web)</h3>
+<p>Asegúrate de que tu sitio WordPress (en la antigua compañía de alojamiento) esté ejecutándose en la versión más actual.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360037291651-Actualizar-WordPress-manualmente">Actualizar WordPress manualmente </a></li>
+</ul>
+<p>Luego, instala todas las actualizaciones disponibles para tus temas y plugins.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-los-plugins-de-WordPress">Administrar los plugins de WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215527157-Administrar-los-temas-de-WordPress">Administrar los temas de WordPress</a></li>
+</ul>
+</div>
 </div>
 </div>
 <div id="dreampress" class="section-link">&nbsp;</div>
 <h2 id="h_01H9RJKWTZ20GCPMEABG08256T">Migrar tu sitio a DreamHost</h2>
 <div class="solvvy-solution">
+<p>Estos pasos utilizan la Llave de Migración en el panel para migrar tu sitio a DreamHost.</p>
 <div class="steps-section--container">
 <div class="steps-section-sublist--border">&nbsp;</div>
 <div class="steps-section--content">
@@ -31,11 +84,20 @@
 </ul>
 </li>
 <li>Da clic en la pestaña <span class="text-object">Sitio Web</span>.</li>
-<li>Baja hasta la sección <span class="text-section">WordPress</span> y da clic al botón <strong>Obtener Llave</strong>.</li>
+<li>Baja hasta la sección <span class="text-section">WordPress</span> y da clic al botón <strong>Obtener Llave</strong>.
+<div class="notebox-tip">
+<p>Si ya hiciste clic en esto con anterioridad, verás el texto <span class="text-object">Tu Llave de Migración</span> y la clave ya generada.</p>
+</div>
+</li>
+<li>Copia la llave de migración a un archivo local en tu computador.
+<dl>
+<dd>Esto se usará en los siguientes pasos.</dd>
+</dl>
+</li>
 </ol>
 </div>
 <div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-2.svg" alt="" width="30px" />
-<h3 id="h_01H9RHNNK2WPFWDXM4J92600SS">Paso 2 — Instalar el plugin en el alojamiento anterior</h3>
+<h3 id="h_01H9RHNNK2WPFWDXM4J92600SS">Paso 2 — Instalar el plugin (en el alojamiento anterior)</h3>
 <ol>
 <li>Inicia sesión en tu sitio WordPress en vivo en la compañía de alojamiento antigua.</li>
 <li>Selecciona <span class="text-section">Plugins &gt; Añadir Nuevo</span> en el menú de la derecha.</li>
@@ -45,7 +107,7 @@
 </ol>
 </div>
 <div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-3.svg" alt="" width="30px" />
-<h3 id="h_01H9RKCAQMHTJHZEMD8AS44FPX">Paso 3 — Configurar el plugin</h3>
+<h3 id="h_01H9RKCAQMHTJHZEMD8AS44FPX">Paso 3 — Configurar el plugin (en el alojamiento anterior)</h3>
 <ol>
 <li>Da clic en <span class="text-object">DreamHost</span> en el menú de la izquierda.
 <dl>
@@ -75,32 +137,11 @@
 </div>
 <p>La mayoría de las migraciones tardan menos de una hora en completarse, pero si tu sitio tiene varias GB de datos, podría tardar más de una hora. Una vez que se complete, recibirás una notificación por correo a la dirección que ingresaste durante el paso anterior.</p>
 </div>
-<h2 id="h_01H9RHNNK2371YFN7MGKYWTBBF">Revisar el sitio migrado en DreamHost</h2>
-<div class="solvvy-solution">
-<h3 id="h_01H9RHNNK2V3QD1DQXW22Q5CBW">Si el nombre de dominio de DreamHost es el mismo</h3>
-<div class="notebox-note">
-<p><span class="text-object">example.com =&gt; example.com</span></p>
-</div>
-<p>Si el dominio de tu sitio en el alojamiento anterior y el de DreamHost son el mismo, al visitar el sitio se seguirá mostrando en tu alojamiento anterior.</p>
-<p>Para ver cómo aparece en tu servidor DreamHost, debes crear un archivo <span class="text-object">hosts</span> en tu computador. Esto te permite ver el sitio en DreamHost mientras todavía está alojado en tu antigua compañía de alojamiento. Revisa el siguiente artículo para más detalles:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006086308-Ver-tu-sitio-DreamHost-usando-un-archivo-hosts" target="_self" rel="undefined">Ver tu sitio DreamHost usando un archivo hosts</a></li>
-</ul>
-<h4 id="h_01HA2K0SV3DQJ6CKEX0C6N7EC6"><strong>Apuntar el DNS a DreamHost</strong></h4>
-<p>Una vez que hayas confirmado que el sitio se migró correctamente, puedes apuntar el DNS de tu dominio a DreamHost. Para obtener más información sobre cómo cambiar los nameservers en tu alojamiento actual, revisa el siguiente artículo:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216385447-Cambiar-los-nameservers-en-tu-alojamiento-actual" target="_self">Cambiar los nameservers en tu alojamiento actual</a></li>
-</ul>
-<h3 id="h_01H9RHNNK269VKCZYRKT647QP6">Si el dominio de DreamHost es diferente</h3>
-<div class="notebox-note">
-<p><span class="text-object">example.com =&gt; dreamhostexample.com</span></p>
-</div>
-<p>Si migraste a un dominio diferente, y los <a href="https://help.dreamhost.com/hc/es/articles/360030799791--D%C3%B3nde-est%C3%A1-alojado-mi-sitio-web-">registros DNS de tu sitio web están alojados en DreamHost</a>, visitar el sitio mostrará el nuevo contenido migrado.</p>
-</div>
 <h2 id="h_01HA2NJRRX96Z43DWN7X1EHZ9A">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360035448951-Usar-el-Plugin-de-Migraci%C3%B3n-Automatizada-de-WordPress-DreamHost-Automated-Migration-Plugin-">Usar el Plugin de Migración Automatizada de WordPress (DreamHost Automated Migration Plugin)</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/19107366680468-Migrar-WordPress-usando-las-credenciales-de-FTP.html">Migrar WordPress usando las credenciales de FTP</a></li>
 </ul>
+</div>
 </div>
