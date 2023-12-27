@@ -1,8 +1,8 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HJKNKZ9963M99ZE27QZ4C8Q9">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Un&nbsp;<a href="https://en.wikipedia.org/wiki/Cron" target="_self">cron</a> job es un script o función que se ejecuta periódicamente a una hora programada. Pueden ser tareas únicas, como publicar una publicación, o tareas recurrentes, como buscar actualizaciones. Para ayudar a mejorar el rendimiento, WordPress solo verifica los elementos programados con cada carga de página, lo cual es excelente para sitios de tráfico bajo a medio, pero en sitios particularmente ocupados, esta acción de escaneo constante puede ralentizar las cosas considerablemente.</p>
 </div>
-<h2>Entender cómo funciona WP-CRON</h2>
+<h2 id="h_01HJKNKZ99A75AT2BN7J90FDXY">Entender cómo funciona WP-CRON</h2>
 <div class="solvvy-solution">
 <p>WP-CRON no funciona de la misma manera que un cron job normal. En su lugar, comprueba los eventos programados cada vez que se carga una página del sitio. Esto funciona bien con un flujo constante de tráfico moderado, pero surgen problemas con los dos extremos.</p>
 <p><strong>Alto tráfico</strong> — si el sitio recibe demasiado tráfico, verifica continuamente su programación WP-CRON, lo que aumenta el trabajo requerido por el servidor y afecta negativamente al rendimiento.</p>
@@ -13,7 +13,7 @@
 <li>Evitar que WP-CRON busque constantemente esos mismos eventos programados.</li>
 </ol>
 </div>
-<h2>Crear un Cron Job en tu panel de DreamHost&nbsp;</h2>
+<h2 id="h_01HJKNKZ993NF8SSCPS2P952KP">Crear un Cron Job en tu panel de DreamHost&nbsp;</h2>
 <div class="solvvy-solution">
 <div class="notebox-note">
 <p>Si tu sitio está alojado en un plan DreamPress, esto ya está configurado por ti usted. Tu servidor está configurado para verificar eventos programados cada 15 minutos.</p>
@@ -30,23 +30,19 @@
 <p>Reemplaza <strong>https://example.com</strong> con tu nombre de dominio.</p>
 </div>
 </div>
-<h2>Evitar que WordPress busque eventos programados en cada carga de página</h2>
+<h2 id="h_01HJKNKZ99Q1FSEWDKXY11EN3A">Evitar que WordPress busque eventos programados en cada carga de página</h2>
 <div class="solvvy-solution">
 <p>Sigue las instrucciones a continuación para deshabilitar el servicio WP-CRON.</p>
 <ol>
 <li>Conéctate a tu servidor&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/360003490852-Usando-el-administrador-de-archivos-del-sitio-web" target="_blank" rel="noopener noreferrer">a través de WebFTP</a>.</li>
-<li>Haz clic derecho en el archivo&nbsp;<span class="text-object">wp-config.php</span> y selecciona&nbsp;<span class="text-object">edit</span>.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/disablingwpcron_04.png" alt="ES Disabling WP cron" width="702" height="304" /></dd>
-</dl>
-</li>
+<li>Haz clic derecho en el archivo&nbsp;<span class="text-object">wp-config.php</span> y selecciona&nbsp;<span class="text-object">edit</span>.</li>
 <li>Justo antes de la línea&nbsp;<span class="text-object">/* That’s all, stop editing! Happy blogging. */</span>, inserta el siguiente código:
 <div><span class="code">define('DISABLE_WP_CRON', true) ;</span></div>
 </li>
 </ol>
 <p>Esto evita que WP-CRON se ejecute al cargar la página, pero no cuando se llama directamente.</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HJKNKZ99DA75NX21G4VZMN3G">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215088668-Crear-un-Cron-Job">Crear un Cron Job</a></li>
