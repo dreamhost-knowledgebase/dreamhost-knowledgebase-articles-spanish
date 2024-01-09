@@ -1,16 +1,24 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HKN12Z4WVD89FX3PX2C39VQE">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Python3 está disponible en Servidores Compartidos, VPS y Dedicados. Si deseas usar una versión específica, puedes instalarla localmente bajo tu usuario de Shell siguiendo los pasos de este artículo.</p>
-<div class="notebox-note">
-<p>Para correr los siguientes comandos, debes iniciar sesión en tu servidor vía SSH con tu usuario Shell. Ve los siguiente artículos para más información:</p>
+<div class="notebox-important">
+<h3 id="h_01HKDBC0Z1XTWBN94FN0VNRGG8">Solución de problemas de errores 'Resource temporarily unavailable' (Recursos temporalmente no disponibles)</h3>
+<p>Cuando instalas versiones personalizadas de Python, específicamente versiones de 3.8 a 3.11, puedes encontrar el error 'Resource temporarily unavailable' (Recursos temporalmente no disponibles). Para resolver este problema, establece la banderilla <span class="code">-j6</span> usando el comando <span class="code">sed</span> en el proceso de construcción (es decir, <span class="code">sed -i 's/-j0/-j6/g' Makefile*</span>), lo que permite hasta seis trabajos para ejecutarse simultáneamente durante la compilación, optimizando el uso de los recursos del sistema. Esta modificación debe aplicarse a los siguientes tres archivos makefile:</p>
+<ul>
+<li><span class="code">Makefile</span></li>
+<li><span class="code">Makefile.pre</span></li>
+<li><span class="code">Makefile.pre.in</span></li>
+</ul>
+<p>Si los problemas persisten después de realizar estos cambios, por favor, <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">contacta a soporte</a> para obtener ayuda adicional.</p>
+</div>
+<p>Para correr los siguientes comandos, debes iniciar sesión en tu servidor vía SSH con tu usuario Shell. Revisa los siguiente artículos para más información:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Cómo crear un usuario con acceso Shell (SSH)</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo vía SSH</a></li>
 </ul>
 </div>
-</div>
-<h2><span id="ubuntu-18">Instalar Python 3</span></h2>
+<h2 id="h_01HKN12Z4WAS7R2BE1EBRE3WD3"><span id="ubuntu-18">Instalar Python 3</span></h2>
 <div class="solvvy-solution">
 <div class="notebox-important">
 <p>Las instrucciones siguientes instalan la versión 3.10.1. Asegúrate de cambiar esto a tu versión elegida en los comandos a continuación.</p>
@@ -63,7 +71,7 @@
 </li>
 </ol>
 </div>
-<h2>Si estás usando Django</h2>
+<h2 id="h_01HKN12Z4WRK2E2ZQYJQAFSZ1J">Si estás usando Django</h2>
 <div class="solvvy-solution">
 <p>Si estás usando Django, asegúrate de ver los siguientes artículos:</p>
 <ul>
@@ -72,12 +80,12 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/215317698-Soluci%C3%B3n-de-Problemas-de-Django" target="_self">Solución de problemas de Django</a></li>
 </ul>
 </div>
-<h2>Actualizar a una nueva versión</h2>
+<h2 id="h_01HKN12Z4WAVRKRBFVSGN5ZH0C">Actualizar a una nueva versión</h2>
 <div class="solvvy-solution">
 <p>No existe una opción rápida para actualizar tu instalación personalizada de Python a una nueva versión automáticamente.</p>
 <p>Deberás seguir los mismos pasos anteriores para descargar, instalar, y activar la versión de tu elección.</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HKN12Z4W9X4PZXGRMQDH2AG3">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216137717-Generalidades-sobre-Python" target="_self">Generalidades de Python</a></li>
