@@ -1,12 +1,12 @@
 <div id="auto-toc">&nbsp;</div>
 <p>A continuación se proporciona información para ayudarte a preparar tu sitio para la actualización de Ubuntu de Debian Stretch o Debian Buster a la versión 20.04.3 LTS (también conocida como Focal).</p>
-<h2>Que esperar</h2>
+<h2 id="h_01HN379302959T5BN1XAE2CXRR">Que esperar</h2>
 <div class="solvvy-solution">
 <p>DreamHost se comunicará contigo por correo electrónico antes de la actualización.</p>
 <p>El marco de tiempo de una actualización puede variar de un servidor a otro; sin embargo, el tiempo garantiza que haya varios ingenieros altamente capacitados disponibles en caso de que surja algún problema importante. La actualización en sí no debería tardar más de una hora en completarse.</p>
 <p>Cualquier servicio que dependa de la disponibilidad de tu servidor MySQL (WordPress o cualquier otro sitio web, aplicación, etc.) no estará disponible hasta que se complete la actualización. Esto NO afectará a los servicios en la nube o de correo electrónico.</p>
 </div>
-<h2>Ver la versión de Ubuntu</h2>
+<h2 id="h_01HN379302J9NVRP8EE8GHYS9S">Ver la versión de Ubuntu</h2>
 <div class="solvvy-solution">
 <p>Como se mencionó anteriormente, recibirás un correo que te notificará la actualización de tu servidor. Sin embargo, puedes verificar manualmente a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</p>
 <p>El siguiente comando confirma que el servidor aún ejecuta Ubuntu 14:</p>
@@ -20,11 +20,11 @@ Debian GNU/Linux 10 \n \l</pre>
 Ubuntu 20.04.3 LTS \n \l</pre>
 </div>
 </div>
-<h2>Cambio de DNS</h2>
+<h2 id="h_01HN379302KHWD1C23HATM08RQ">Cambio de DNS</h2>
 <div class="solvvy-solution">
 <p>Si estás usando los nameservers de DreamHost, no hay nada que hacer; los cambios de DNS se harán automáticamente. Si estás administrando tus DNS a través de un proveedor externo (como Cloudflare), necesitarás actualizar tus registros DNS dentro de una semana de la notificación de la actualización.</p>
 </div>
-<h2>MySQL</h2>
+<h2 id="h_01HN379302BWNSRBZJQXJGWDTF">MySQL</h2>
 <div class="solvvy-solution">
 <p>Los servidores DreamHost MySQL se actualizarán a la versión 8 de MySQL como parte de la actualización de Ubuntu.</p>
 <p>Revisa el siguiente artículo para obtener más información sobre MySQL 8.0:</p>
@@ -32,7 +32,7 @@ Ubuntu 20.04.3 LTS \n \l</pre>
 <li><a href="https://dev.mysql.com/blog-archive/whats-new-in-mysql-8-0-generally-available/">What’s New in MySQL 8.0?</a></li>
 </ul>
 </div>
-<h2>Cambio de nombre de VPS</h2>
+<h2 id="h_01HN3793022R3RJS0MSWHAGCMT">Cambio de nombre de VPS</h2>
 <div class="solvvy-solution">
 <p>El nombre del servidor de tu VPS estará cambiando. Esto solo te afecta si usas tu nombre de servidor en las configuraciones de SFTP o SSH. El nuevo nombre de servidor será incluido en la notificación de mantenimiento completado que recibirás una vez finalice.</p>
 <p>Además del cambio de número, también notarás que DreamHost ha cambiado el esquema de nombres de:</p>
@@ -43,53 +43,48 @@ Ubuntu 20.04.3 LTS \n \l</pre>
 <li><span class="text-object"><strong>vps</strong>######.dreamhostps.com</span></li>
 </ul>
 </div>
-<h2>Cambios en la versión del servidor Web</h2>
+<h2 id="h_01HN379302PAM8SAHHSV6FWPE2">Cambios en la versión del servidor Web</h2>
 <div class="solvvy-solution">
-<h3 class="subtoc-heading">curl</h3>
+<h3 id="h_01HN3793027WZTDCT1GJTV9DM2" class="subtoc-heading">curl</h3>
 <p>La versión de curl cambió de Stretch (7.52.1) o Buster (7.64.0) a 7.68.0.</p>
-<h3 class="subtoc-heading">FFmpeg</h3>
+<h3 id="h_01HN379302Y6CX3QNPZ3PFH5XF" class="subtoc-heading">FFmpeg</h3>
 <p>La versión de FFmpeg cambió de Stretch (3.2.15) o Buster (4.1.6) a 4.2.4.</p>
-<h3 class="subtoc-heading">GCC</h3>
+<h3 id="h_01HN379302J3PWVKQK3DMRQREM" class="subtoc-heading">GCC</h3>
 <p>La versión de GCC cambió de Stretch (6.3) o Buster (8.3) a 9.3.</p>
-<h3 class="subtoc-heading">Java</h3>
+<h3 id="h_01HN37930256NW5J6MNP615BRZ" class="subtoc-heading">Java</h3>
 <p>Ubuntu Focal incluye una nueva versión de Java versión 8, 8u312.</p>
-<h3 class="subtoc-heading">Node / NVM</h3>
+<h3 id="h_01HN379302SP60FTQCVMJBV720" class="subtoc-heading">Node / NVM</h3>
 <p>Al instalar una versión personalizada de Node.js/NVM, grsec detectará la instalación. Debes ejecutar un comando para cambiar las <span class="code">banderillas pax</span> entonces grsec ignora los archivos. Revisa el siguiente artículo para obtener instrucciones completas:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360029083351-Instalar-una-versi%C3%B3n-personalizada-de-NVM-y-Node-js">Instalar una versión personalizada de NVM y Node.js </a></li>
 </ul>
-<h3 class="subtoc-heading">OpenSSL</h3>
+<h3 id="h_01HN379302DJETTG5QP1Z35EK8" class="subtoc-heading">OpenSSL</h3>
 <p>La versión de OpenSSL cambió de Stretch (1.1.0l) o Buster (1.1.1d) a 1.1.1f.</p>
-<h3 class="subtoc-heading">Perl</h3>
+<h3 id="h_01HN379302SW0HAY1K7BGQP3ZZ" class="subtoc-heading">Perl</h3>
 <p>La versión de Perl cambió de Stretch (5.24.1) o Buster (5.28.1) a 5.30.0.</p>
-<h3 class="subtoc-heading">Python</h3>
+<h3 id="h_01HN379302DYDZ6CNH452Z5457" class="subtoc-heading">Python</h3>
 <p>Las siguientes versiones de Python están cambiando:</p>
 <ul>
 <li>Python 2 (de 2.7.13/16 a 2.7.17)</li>
 <li>Python 3 (de 3.5.3/3.7.3 a 3.8.2)</li>
 </ul>
-<h3 class="subtoc-heading">virtualenv de Python</h3>
+<h3 id="h_01HN379302YRHDWRVHYJH2R7A9" class="subtoc-heading">virtualenv de Python</h3>
 <p>Si tu sitio web usa un entorno virtual de Python y observas algún error después de la actualización, vuelve a instalar tu entorno virtual y todos los módulos. Esto ayuda a garantizar que todo sea compatible con las nuevas bibliotecas en el servidor.</p>
-<p>Ejemplos de errores que puedes ver son errores/advertencias de Django, Passenger o Python.</p>
-<h3 class="subtoc-heading">Ruby</h3>
+<p>Ejemplos de errores que puedes ver son errores/advertencias de Django o Python.</p>
+<h3 id="h_01HN379302B35WQFPFWN6CAXD2" class="subtoc-heading">Ruby</h3>
 <p>La versión de Ruby en el servidor es 2.7.0p0. Si quieres más control sobre esto (ejemplo, quieres usar una versión antigua o más nueva de Ruby), DreamHost recomienda encarecidamente que uses <a href="https://help.dreamhost.com/hc/es/articles/217185247-Administrador-de-versiones-de-Ruby-Ruby-Version-Manager-RVM-">RVM</a>.</p>
 <p>Si estás usando <a href="https://help.dreamhost.com/hc/es/articles/115001070131-Usar-Bundler-para-instalar-Ruby-gems">Bundler</a>, solo necesitarás correr:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">bundle exec gem pristine</span>
 </pre>
 </div>
-<p>Luego, recargar Passenger para que los cambios tengan efecto corriendo <span class="code">touch</span> en un archivo <span class="text-object">restart.txt</span> desde el directorio <span class="text-object">tmp</span> de tus aplicaciones:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">touch  tmp/restart.txt</span>
-</pre>
-</div>
-<h3 class="subtoc-heading">SSH</h3>
+<h3 id="h_01HN37930210MR6674QM5BG2VZ" class="subtoc-heading">SSH</h3>
 <p>La versión de SSH cambió de Stretch (7.4p1) o Buster (7.9p1) a 8.2p1.</p>
 <div id="telnet" class="section-link">&nbsp;</div>
-<h3 class="subtoc-heading">Telnet</h3>
+<h3 id="h_01HN379302MSEZG6TQAZW43MVJ" class="subtoc-heading">Telnet</h3>
 <p>Telnet estaba disponible anteriormente en las máquinas Debian Stretch, sin embargo, dado que es un protocolo obsoleto, no está disponible en las máquinas Focal para ayudar a mantener tu servidor seguro. Si necesitas Telnet, DreamHost recomienda ejecutarlo en tu computador local.</p>
 </div>
-<h2>¿Dónde puedo encontrar soporte?</h2>
+<h2 id="h_01HN379302KFM96KYJPQPJRB4C">¿Dónde puedo encontrar soporte?</h2>
 <div class="solvvy-solution">
 <p>Si tienes cualquier pregunta o duda, por favor siéntete libre de <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener noreferrer">contactar a soporte</a>.</p>
 </div>

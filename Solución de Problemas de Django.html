@@ -1,4 +1,8 @@
-<h2>Generalidades</h2>
+<div class="alert-warning">
+<p>A partir 25/1/2024, Passenger no va a estar disponible en el panel.</p>
+<p>Este artículo contiene referencias obsoletas a Passenger que solo son funcionales si lo habías activado previamente.</p>
+</div>
+<h2 id="h_01HN34RB5W3V8S2Z0RG416K49F">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo muestra algunos pasos que puedes tomar para la solución de problemas con Django.</p>
 <div class="prereqs">
@@ -10,7 +14,7 @@
 </ul>
 </div>
 </div>
-<h2>Errores debido a actualizaciones de servidor</h2>
+<h2 id="h_01HN34RB5WYYE88533ZGQTNJKY">Errores debido a actualizaciones de servidor</h2>
 <div class="solvvy-solution">
 <p>DreamHost actualiza frecuentemente los sistemas operativos en sus servidores web para asegurar la seguridad y provisionar actualizaciones de software. El siguiente artículo explica cómo puedes ver el sistema operativo actual que tu servidor está usando.</p>
 <ul>
@@ -22,11 +26,11 @@
 </ul>
 <p>Luego de la actualización del servidor, puede que sea necesario reinstalar tu ambiente virtual y el proyecto de Django para solucionar cualquier conflicto.</p>
 </div>
-<h2>Confirmar que las credenciales están correctas</h2>
+<h2 id="h_01HN34RB5XQXK1QFJNFAWNQF78">Confirmar que las credenciales están correctas</h2>
 <div class="solvvy-solution">
 <p>Si tu aplicación no está funcionando, asegúrate de estar usando la información correcta de <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encontrar-tus-credenciales-de-inicio-de-sesi%C3%B3n" target="_self">usuarios, contraseñas, bases de datos, y hostnames</a> en el archivo <span class="text-object">/projectname/settings.py</span>.</p>
 </div>
-<h2>Teminar los procesos existentes</h2>
+<h2 id="h_01HN34RB5XCKG55DH4694TJV6M">Teminar los procesos existentes</h2>
 <div class="solvvy-solution">
 <p>Si haces cambios al código, como trabajar a través de los tutoriales oficiales, y parece que no funcionan, asegúrate de eliminar los procesos Python existentes y vuelve a cargar la página:</p>
 <dl>
@@ -37,7 +41,7 @@
 </dd>
 </dl>
 </div>
-<h2>Los cambios no se ven reflejados</h2>
+<h2 id="h_01HN34RB5XR9JA0QE51783FDQ9">Los cambios no se ven reflejados</h2>
 <div class="solvvy-solution">
 <p>Si modificaste tu aplicación y los cambios no parecen verse reflejados, puede que necesites notificar a Passenger sobre tu cambio creando o modificando&nbsp;<span class="text-object">~/example.com/tmp/restart.txt</span>. Asegúrate de cambiar <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.</p>
 <dl>
@@ -48,24 +52,20 @@
 </dd>
 </dl>
 <dl>
-<dd>Passenger busca este archivo y recarga la aplicación cuando hayas modificado el mismo.</dd>
+<dd><em>Passenger busca este archivo y recarga la aplicación cuando hayas modificado el mismo.</em></dd>
 </dl>
 <div class="notebox-important">
 <p>Si ves que este archivo no funciona, <a href="https://help.dreamhost.com/hc/es/sections/203272258-Contactar-a-Soporte-T%C3%A9cnico" target="_self">Contacta a soporte</a> para obtener ayuda.</p>
 </div>
-<h3>Guarda nuevamente las configuraciones de tu dominio en el panel</h3>
+<h3 id="h_01HN34RB5XW2S7NMJ9JJV6Q8Z9">Guarda nuevamente las configuraciones de tu dominio en el panel</h3>
 <p>Si tu dominio está alojado en un servidor VPS o Dedicado, también puedes recargar HTTP en el panel.</p>
 <ol>
-<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=vps.dashboard" target="_blank" rel="noopener noreferrer">VPS</a>&nbsp;ó&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=dedicated.dashboard&amp;" target="_blank" rel="noopener noreferrer">Dedicados</a>.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-button-reload-http.png" alt="ES reload http button" width="129" height="" /></dd>
-</dl>
-</li>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=vps.dashboard" target="_blank" rel="noopener noreferrer">VPS</a>&nbsp;ó&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=dedicated.dashboard&amp;" target="_blank" rel="noopener noreferrer">Dedicados</a>.</li>
 <li>Da clic en el botón <strong>Volver a cargar HTTP</strong>.</li>
 <li>Espera 5 minutos para que reconstruya el archivo de configuración.</li>
 </ol>
 </div>
-<h2>Los cambios no se ven reflejados en el Shared Hosting</h2>
+<h2 id="h_01HN34RB5XXQD698RCA6C9DKMQ">Los cambios no se ven reflejados en el Shared Hosting</h2>
 <div class="solvvy-solution">
 <p>Si estás usando Shared Hosting y tus cambios no parecen reflejarse, puedes notificar a Passenger sobre tu cambio corriendo el siguiente comando:</p>
 <dl>
@@ -76,14 +76,14 @@
 </dd>
 </dl>
 </div>
-<h2>Premature end of script headers</h2>
+<h2 id="h_01HN34RB5XMZ6ZY0XZCJEFF8XN">Premature end of script headers</h2>
 <div class="solvvy-solution">
 <p>Si ves "Premature end of script headers" en el <a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-errores-via-SFTP">registro de errores</a> de tu sitio web, revisa el siguiente artículo para confirmar que tu archivo <span class="text-object">passenger_wsgi.py</span> está configurado correctamente:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360002341572-C%C3%B3mo-crear-un-proyecto-Django-usando-virtualenv">Crear un proyecto de Django</a></li>
 </ul>
 </div>
-<h2>Error 404 en la página de admin</h2>
+<h2 id="h_01HN34RB5XVKPRD1C5SVCV84K2">Error 404 en la página de admin</h2>
 <div class="solvvy-solution">
 <p>Cuando visites tu página<strong> example.com/admin/</strong>, puede que veas un error 404.</p>
 <div class="preboxcontainer">
@@ -101,7 +101,7 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/360020605511-Cambiar-el-usuario-asignado-a-un-dominio">Cambiar el usuario asignado a un dominio</a></li>
 </ul>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HN34RB5XY1HSEN61BF2KRYF5">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215319598-Generalidades-sobre-Django" target="_self">Generalidades de Django</a></li>

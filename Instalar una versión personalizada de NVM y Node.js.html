@@ -21,10 +21,10 @@
 </div>
 <h2 id="h_01HEJQK7AVD53RQNMNG2VE6Z8Y">¿Es posible ejecutar Node.js en los puertos 80 o 443?</h2>
 <div class="solvvy-solution">
-<p>Sí, pero solo si has habilitado Passenger en el panel y el archivo para cargar tu aplicación se llama <span class="text-object">app.js</span>.</p>
-<div class="alert-warning">
-<p>La versión de Passenger que se corre en los servidores DreamHost no funciona actualmente con las versiones 14+ de Node.js.</p>
-</div>
+<p>Aunque no es posible asignar a tu aplicación el uso de los puertos 80 o 443, puedes configurar un <span class="text-product">Servidor Proxy</span> en el panel de DreamHost. Esto permite que tu aplicación use un puerto no privilegiado en combinación con tu certificado SSL. Consulta el siguiente artículo para obtener más detalles:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy">Servidor Proxy</a></li>
+</ul>
 </div>
 <h2 id="h_01HEJQK7AWQ8CFDM5JSW5ZEVC9">Instalar Node Version Manager (NVM)</h2>
 <div class="solvvy-solution">
@@ -78,15 +78,12 @@
 <p>Deberías ver el camino a tu directorio local <span class="text-object">.nvm</span>. Si no lo ves, asegúrate de que el archivo <span class="text-object">.bashrc</span> fue actualizado en el paso 5 de abajo. Luego intenta correr este comando nuevamente.</p>
 </div>
 </li>
-</ol>
-</div>
-<ul>
 <li id="bash_profile">Edita tu <span class="text-object">.bash_profile</span> y <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">agrega la siguiente línea</a>.
 <div class="preboxcontainer">
 <pre class="prebox">source ~/.bashrc</pre>
 </div>
 </li>
-<li>Actualiza tu <span class="text-object" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">.bash_profile</span> para que puedas usar esta nueva versión de nvm.
+<li>Actualiza tu <span class="text-object">.bash_profile</span> para que puedas usar esta nueva versión de nvm.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">. ~/.bash_profile</span></pre>
 </div>
@@ -98,7 +95,8 @@
 </pre>
 </div>
 </li>
-</ul>
+</ol>
+</div>
 <h2 id="h_01HEJQK7AW1Q1WA853FRH8YC52">Instalar Node.js</h2>
 <div class="solvvy-solution">
 <p>Ahora que se ha instalado nvm, puedes usarlo para instalar Node.js</p>
