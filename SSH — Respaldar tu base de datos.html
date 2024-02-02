@@ -1,25 +1,25 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HNJRHT7XHY7G4TG6SJ3KDMN9">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo explica cómo hacer una copia de seguridad de tu sitio usando <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. Esto significa que debes iniciar sesión en tu servidor usando una terminal, luego corres un comando para descargar la base de datos al servidor. Para otras opciones de respaldo, visita el siguiente artículo:</p>
 <ul>
 <li><a href="/hc/es/articles/215039758-Generalidades-sobre-copias-de-seguridad-de-bases-de-datos" target="_self">Generalidades sobre copias de seguridad de bases de datos</a></li>
 </ul>
 </div>
-<h2>Encuentra las credenciales de tu base de datos</h2>
+<h2 id="h_01HNJRHT7XJF7B5C1APTXTWDKK">Encuentra las credenciales de tu base de datos</h2>
 <div class="solvvy-solution">
 <p>Para hacer una copia de seguridad de tu base de datos, debes conocer tus credenciales, como nombre de usuario, contraseña, hostname y el nombre de la base de datos. Revisa el siguiente artículo para obtener instrucciones sobre cómo encontrar estas credenciales:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encuentra tus credenciales para acceder a la base de datos</a></li>
 </ul>
 </div>
-<h2>¿Donde se ejecuta el comando?</h2>
+<h2 id="h_01HNJRHT7X0EWVA1WVRRTTTSV4">¿Donde se ejecuta el comando?</h2>
 <div class="solvvy-solution">
 <p>Debes iniciar sesión en tu servidor web a través de SSH para ejecutar el siguiente comando. Visita el siguiente artículo para obtener instrucciones completas sobre cómo iniciar sesión en tu servidor en una terminal:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades sobre SSH</a></li>
 </ul>
 </div>
-<h2>Ejecutar el comando</h2>
+<h2 id="h_01HNJRHT7X3DQS3XVWQT8FYEK7">Ejecutar el comando</h2>
 <div class="solvvy-solution">
 <p>En este punto, debes tener tus credenciales de base de datos y haber iniciado sesión en tu servidor en una terminal. Asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de tu usuario</a>:</p>
 <div class="preboxcontainer">
@@ -31,7 +31,8 @@
 </div>
 <ul>
 <li>Luego se te pedirá la contraseña del usuario de tu base de datos.</li>
-<li>Puedes usar cualquier nombre para "nombredetucopia.sql" – sólo asegúrate de que termine en .sql.</li>
+<li>Puedes usar cualquier nombre para <span class="code">nombredetucopia.sql</span> – sólo asegúrate de que termine en <span class="code">.sql</span>.</li>
+<li><span class="code">--no-tablespaces</span> se usa para excluir las declaraciones la salida.</li>
 </ul>
 <div class="notebox-note">
 <p>Por favor ten en cuenta lo siguiente cuando corras este comando:</p>
@@ -47,7 +48,7 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">Generalidades sobre FTP</a></li>
 </ul>
 </div>
-<h2>Copiar TODAS las bases de datos bajo un solo usuario</h2>
+<h2 id="h_01HNJRHT7YJA9MGPPZ9DKEC3TV">Copiar TODAS las bases de datos bajo un solo usuario</h2>
 <div class="solvvy-solution">
 <p>El siguiente script copia todas las bases de datos en un solo usuario. En el pasado esto era posible de usar la banderilla <span class="code">--all-databases</span>, pero esto ya no funciona debido a una actualizacion de MySQL. Asegúrate de <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">obtener el hostname, username. y password</a> antes de proceder.</p>
 <ol>
@@ -74,7 +75,7 @@ done</pre>
 </ol>
 <p>Todas las bases de datos dentro de este usuario ahora están descargadas en tu directorio actual.</p>
 </div>
-<h2>Hacer una copia de seguridad de tu base de datos en un cron job</h2>
+<h2 id="h_01HNJRHT7YN230ZZD92BCXEXG8">Hacer una copia de seguridad de tu base de datos en un cron job</h2>
 <div class="solvvy-solution">
 <p>Si deseas hacer una copia de seguridad de tu base de datos en un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215088668-Crear-un-Cron-Job" target="_self">cron job</a>,&nbsp;deberás especificar la contraseña. Por ejemplo, puedes agregar esta línea a un script de Shell para hacer una copia de seguridad de tu base de datos.</p>
 <div class="notebox-important">
@@ -83,7 +84,7 @@ done</pre>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump --opt --user=<span class="code-highlight">usuario</span> --password='<span class="code-highlight">contraseña</span>' --host=<span class="code-highlight">tuHostMySQL</span> --no-tablespaces <span class="code-highlight">nombreBD</span> &gt; <span class="code-highlight">nombredetucopia.sql</span></span></pre>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HNJRHT7YCNQDG4FC2F0NKEG7">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encuentra tus credenciales para acceder a la base de datos</a></li>

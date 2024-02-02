@@ -70,7 +70,7 @@
 <li><strong>Host</strong>: _dmarc</li>
 <li><strong>Valor de TXT*</strong> — A continuación, se presenta una configuración básica que cubre la mayoría de tus necesidades con DMARC. Solo asegúrate de ajustar las direcciones de correo a las que creaste anteriormente para recibir los informes entrantes.
 <div class="preboxcontainer">
-<pre class="prebox">v=DMARC1; p=none; fo=1; rua=mailto:<span class="code-highlight">dmarc_agg@example.com</span>;ruf=mailto:<span class="code-highlight">dmarc_forensic@example.com</span>;pct=100</pre>
+<pre class="prebox">v=DMARC1; p=quarantine; fo=1; rua=mailto:<span class="code-highlight">dmarc_agg@example.com</span>;ruf=mailto:<span class="code-highlight">dmarc_forensic@example.com</span>;pct=100</pre>
 </div>
 <a href="#etiquetas-de-DMARC">Revisa la sección 'Etiquetas de DMARC' a continuación</a> para ver más detalles de las diferentes opciones que puedes usar.</li>
 </ul>
@@ -172,7 +172,13 @@
 </table>
 <p>&nbsp;</p>
 <h4 id="h_01HBGVCKZTTQQ07APABTXYH3TW"><strong>La etiqueta <span class="code">p</span></strong></h4>
-<p>La etiqueta <span class="code">p</span> identifica la acción que el propietario del dominio solicita que el destinatario tome para los mensajes fallidos. Las opciones son:</p>
+<p>La etiqueta <span class="code">p</span> identifica la acción que el propietario del dominio solicita que el destinatario tome para los mensajes fallidos.</p>
+<div class="notebox-important">
+<p>Se recomienda comenzar usando <span class="code">p=none</span> y <span class="code">rua=mailto:dmarc_agg@example.com</span> por lo menos durante una semana. Esto te permite recibir informes diarios sin que los mensajes sean rechazados o marcados como Spam.</p>
+<p>Durante este período inicial, puedes revisar los informes para ver si los correos válidos están siendo rechazados o enviados al Spam, lo que te permite resolver cualquier problema en la política de DMARC.</p>
+<p>Cuando te sientas cómodo con los informes entrantes y con qué correos están siendo marcados, entonces puedes cambiar esto a <span class="code">p=quaratine</span>.</p>
+</div>
+<p>Las opciones son:</p>
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
 <tr>
