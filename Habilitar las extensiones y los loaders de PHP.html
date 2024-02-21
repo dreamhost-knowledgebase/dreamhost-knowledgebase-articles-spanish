@@ -1,15 +1,15 @@
 <div class="notebox-note">
 <p>El término estándar para un archivo de configuración de PHP es php.ini. Sin embargo, DreamHost usa el término archivo <span class="text-object">phprc</span> en su lugar. Esto actúa de la misma manera: solo el nombre es diferente. En este artículo, solo se usa el término <span class="text-object">phprc</span>.</p>
 </div>
-<h2>Loaders y Extensiones</h2>
+<h2 id="h_01HQ3MSG2QX20EMK1E1BFF8RQR">Loaders y Extensiones</h2>
 <div class="solvvy-solution">
-<h3>Loaders</h3>
+<h3 id="h_01HQ3MSG2QR35224PCP2QP53CM">Loaders</h3>
 <p>Los loaders de PHP son extensiones de PHP que cargan tipos especiales de archivos PHP que han sido codificados con un producto de codificación como ionCube Loader.</p>
 <p>Para activar el loader, debes agregar una línea a tu archivo <span class="text-object">phprc</span>. A continuación hay enlaces a páginas que proporcionan más instrucciones sobre cómo instalar y usar los distintos loaders de PHP:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214897027-Habilitar-ionCube-Loader" target="_self">Habilitar ionCube Loader</a></li>
 </ul>
-<h3>Extensiones</h3>
+<h3 id="h_01HQ3MSG2QBER4XQCRWB63JEE6">Extensiones</h3>
 <div class="notebox-important">
 <p>La extensión XML-RPC <a href="https://pecl.php.net/package/xmlrpc">ya no es soportada</a> y ha sido eliminada de las versiones de PHP 8.0 y las más actuales. Agregar <span class="code">extension=xmlrpc.so</span> al archivo <span class="text-object">phprc</span> ya no funcionará.</p>
 </div>
@@ -19,23 +19,22 @@
 </ul>
 <p>Algunas extensiones ya están activadas por defecto (como <span class="text-object">Phar</span>). Otros no lo están, pero se pueden activar agregando una línea a tu archivo <span class="text-object">phprc</span>.</p>
 </div>
-<h2>Comprobar si una extensión ya está activa</h2>
+<h2 id="h_01HQ3MSG2Q938HDZ00D1XE6AMJ">Comprobar si una extensión ya está activa</h2>
 <div class="solvvy-solution">
-<p>Antes de agregar una extensión, asegúrate de que no esté activada de manera predeterminada. Por ejemplo, la extensión <span class="text-object">Phar</span> ya está activada con cualquier versión de PHP en DreamHost. Si luego agregas la extensión <span class="text-object">phar.so</span> a tu archivo <span class="text-object">phprc</span>, tu sitio generará un error, por lo que es importante agregar solo una extensión si es necesario.</p>
-<p>Puedes ver cualquier extensión que esté activa actualmente agregando un archivo <span class="text-object">phpinfo.php</span> a tu sitio.</p>
+<p>Antes de agregar una extensión, asegúrate de que no esté activada de manera predeterminada. Por ejemplo, la extensión <span class="text-object">Phar</span> ya está activada con cualquier versión de PHP en DreamHost. Si luego agregas la extensión <span class="text-object">phar.so</span> a tu archivo <span class="text-object">phprc</span>, tu sitio arrojará un error, por lo que es importante agregar solo una extensión si es necesario.</p>
+<p>Puedes ver cualquier extensión que esté activa agregando un archivo <span class="text-object">phpinfo.php</span> a tu sitio.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">Ver la versión y la configuración de PHP de tu sitio</a></li>
 </ul>
-<p>Si una extensión ya está activa, verás su bloque correspondiente cuando visites el archivo <span class="text-object">phpinfo.php</span>. Por ejemplo, esto muestra que la extensión <span class="text-object">Phar</span> está activa.</p>
-<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/phar.png" alt="phar extension" /></p>
+<p>Si una extensión está activa, verás su bloque correspondiente cuando visites el archivo <span class="text-object">phpinfo.php</span>. Por ejemplo, busca la palabra Phar, y deberías ver <span class="code">Phar: PHP Archive support</span> y <span class="code">enabled</span>.</p>
 </div>
-<h2>Agregar una extensión</h2>
+<h2 id="h_01HQ3MSG2Q4735QW0MXZH4VP8H">Agregar una extensión</h2>
 <div class="solvvy-solution">
 <div class="steps-section--container">
 <div class="steps-section-sublist--border">&nbsp;</div>
 <div class="steps-section--content">
 <div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-1.svg" width="30px" />
-<h3>Paso 1 — Crear un archivo phprc</h3>
+<h3 id="h_01HQ3MSG2RKYPD4ZV5DAJMPQ4R">Paso 1 — Crear un archivo phprc</h3>
 <p>Consulta los siguientes artículos para obtener instrucciones sobre cómo crear un archivo <span class="text-object">phprc</span>:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214894037-Crear-un-archivo-phprc-v%C3%ADa-FTP" target="_self">Crear un archivo phprc vía FTP</a></li>
@@ -48,7 +47,7 @@
 </ul>
 </div>
 <div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-2.svg" width="30px" />
-<h3>Paso 2 — Cargar la extensión</h3>
+<h3 id="h_01HQ3MSG2R0A1CQXQQAMM4PG6J">Paso 2 — Cargar la extensión</h3>
 <p>Para cargar una extensión, agrega la siguiente línea a tu archivo <span class="text-object">phprc</span> (asegúrate de cambiar <span class="text-object">extension_nombre</span> a la extensión real):</p>
 <p>Por ejemplo.</p>
 <div class="preboxcontainer">
@@ -56,15 +55,12 @@
 </div>
 </div>
 <div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-3.svg" width="30px" />
-<h3>Paso 3 — Eliminar todos los procesos php en ejecución</h3>
+<h3 id="h_01HQ3MSG2RHD59JKA63WGQM24A">Paso 3 — Eliminar todos los procesos php en ejecución</h3>
 <p>Asegúrate de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">eliminar los procesos php en ejecución</a>&nbsp;para garantizar que la nueva configuración surta efecto.</p>
 </div>
 <div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-4.svg" width="30px" />
-<h3>Paso 4 — Confirmar tus cambios</h3>
+<h3 id="h_01HQ3MSG2REXE675AHXV4PNKFA">Paso 4 — Confirmar tus cambios</h3>
 <p>Después de editar el archivo y eliminar todos los procesos de PHP, verifica que la extensión se haya habilitado. Puedes hacer esto creando un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">phpinfo.php</a>. Cuando ves este archivo en un buscador, deberías ver la extensión cargada.</p>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-05_php_extension_intl.png" alt="ES Extension PHP intl" /></dd>
-</dl>
 <p>Si no ves que los cambios se han actualizado, intenta eliminar tus procesos PHP nuevamente:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no se actualiza</a></li>
@@ -73,7 +69,7 @@
 </div>
 </div>
 </div>
-<h2>Compilar extensiones PHP</h2>
+<h2 id="h_01HQ3MSG2RGTGM40N620901ZS3">Compilar extensiones PHP</h2>
 <div class="solvvy-solution">
 <p>Algunas extensiones no se cumplen con PHP. En estos casos, debes descargar la extensión y compilarla manualmente.</p>
 <p>Visita los siguientes enlaces para obtener una lista de extensiones disponibles:</p>
@@ -89,11 +85,11 @@
 </div>
 </div>
 </div>
-<h2>WebP</h2>
+<h2 id="h_01HQ3MSG2RBT6AP8EDTJ4TEYEQ">WebP</h2>
 <div class="solvvy-solution">
 <p>El soporte para formato de imagen WebP está disponible vía <a href="https://www.php.net/manual/en/book.image.php">GD</a>, el cual está activado por defecto en los servidores de DreamHost.</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HQ3MSG2RK9WGT9YHJYG9HDER">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">Generalidades de php.ini</a></li>

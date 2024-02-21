@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HQ3PKMPRXK8ARB5HPB3R8QBX">Generalidades</h2>
 <div class="solvvy-solution">
 <div class="alert-warning">
 <p>¡POSIBLE INFORMACIÓN DESACTUALIZADA!<br />DreamHost no admite directamente ninguna de las funciones descritas en esta página y no es responsable de mantener este contenido actualizado o preciso. ¡Úsalo bajo tu propio riesgo!</p>
@@ -8,7 +8,7 @@
 <p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
 </div>
 </div>
-<h2>Pasos de configuración</h2>
+<h2 id="h_01HQ3PKMPRQKJTKNNT9QP3YSX2">Pasos de configuración</h2>
 <div class="solvvy-solution">
 <ol>
 <li>Ve la artículo <a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">Configuraciones de archivo local</a> para crear tu directorio <span class="text-object">/nginx/example.com</span>.</li>
@@ -18,12 +18,8 @@
 </div>
 </li>
 <li>Agrega contenido al archivo <span class="text-object">.conf</span>.</li>
-<li>Recarga Nginx navegando a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=vps.dashboard" target="_blank" rel="noopener noreferrer">VPS</a> o <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=dedicated.dashboard&amp;" target="_blank" rel="noopener noreferrer">Dedicado</a>.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-button-reload-http.png" alt="reload http button" width="132" height="42" /></dd>
-</dl>
-</li>
-<li>Da clic en el botón <strong>Reload HTTP</strong>.</li>
+<li>Recarga Nginx navegando a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=vps.dashboard" target="_blank" rel="noopener noreferrer">VPS</a> o <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=dedicated.dashboard&amp;" target="_blank" rel="noopener noreferrer">Dedicado</a>.</li>
+<li>Da clic en el botón <strong>Recargar HTTP</strong>.</li>
 <li>Espera 5 minutos para que reconstruya el archivo de configuración.</li>
 </ol>
 <p>También puedes <a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/216454967-Como-recargar-y-reiniciar-Nginx" target="_self" rel="undefined">recargar Nginx vía SSH</a>.</p>
@@ -32,7 +28,7 @@
 <li><a href="https://www.nginx.com/resources/wiki/start/">Ejemplos de configuración Nginx</a></li>
 </ul>
 </div>
-<h2>WordPress</h2>
+<h2 id="h_01HQ3PKMPRB294TYS8JSREJHPC">WordPress</h2>
 <div class="solvvy-solution">
 <p>Crea un archivo <span class="text-object">wordpress.conf</span> en tu directorio <span class="text-object">/home/username/nginx/example.com/</span>.</p>
 <p>Aquí es donde pondrás todas tus reglas de configuración de Nginx.</p>
@@ -59,7 +55,7 @@
 </li>
 </ol>
 </div>
-<h2>Permalinks o enlaces permanentes</h2>
+<h2 id="h_01HQ3PKMPR91CS2BXN975JYQCQ">Permalinks o enlaces permanentes</h2>
 <div class="solvvy-solution">
 <p>El conjunto más básico de reglas de WordPress que lo ponen en funcionamiento de inmediato son estos:</p>
 <div class="preboxcontainer">
@@ -80,7 +76,7 @@ if (!-e $request_filename) {
 try_files $uri $uri/ /index.php?$args;
 </pre>
 </div>
-<h3>Multisitio</h3>
+<h3 id="h_01HQ3PKMPRG0GPKXAK68NA69HS">Multisitio</h3>
 <p>Si usas Multisitios, necesitas reglas un poco más avanzadas:</p>
 <div class="preboxcontainer">
 <pre class="prebox">######################
@@ -98,14 +94,14 @@ if (!-e $request_filename) {
 </div>
 <p>Esto proporciona una funcionalidad básica para Multisite.</p>
 </div>
-<h2>W3 Total Cache</h2>
+<h2 id="h_01HQ3PKMPR0YHNE5WAW6VST2YC">W3 Total Cache</h2>
 <div class="solvvy-solution">
 <p>El plugin W3 Total Cache para WordPress reconoce automáticamente que se está ejecutando bajo Nginx y crea un archivo de configuración Nginx predeterminado que puedes copiar en tu directorio <span class="text-object">/nginx/&lt;domain name&gt;/</span>.</p>
 <dl>
 <dd></dd>
 </dl>
 </div>
-<h2>WP Super Cache</h2>
+<h2 id="h_01HQ3PKMPRSCCZ3QTT3E3YC6WB">WP Super Cache</h2>
 <div class="solvvy-solution">
 <p>Si estás usando el plugin WP Super Cache, usa lo siguiente en lugar de las reglas de enlace permanente anteriores:</p>
 <div class="preboxcontainer">
@@ -150,7 +146,7 @@ if (!-e $request_filename) {
 </pre>
 </div>
 </div>
-<h2>Funcionarlidad de búsqueda de Nginx</h2>
+<h2 id="h_01HQ3PKMPRGRZ9JKXNJSCJ19HR">Funcionarlidad de búsqueda de Nginx</h2>
 <div class="solvvy-solution">
 <p>Desafortunadamente, esta configuración actualmente hace que las búsquedas de sitios que contienen espacios se rompan. Con Apache, cuando buscas "alguna cosa" que se convierte en "search/node/alguna+cosa". Cuando esto es procesado por nginx, el "+" se codifica para que termine con "search/node/alguna%20cosa". Por lo tanto, tu búsqueda termina buscando la cadena "alguna+cosa" en lugar de "Alguna cosa". Actualmente no hay soluciones alternativas conocidas que estén por venir.</p>
 </div>

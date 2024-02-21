@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HQ3PW9D1XY9NQV1J8DD0X0FM">Generalidades</h2>
 <div class="solvvy-solution">
 <p>DreamCompute ofrece múltiples clústeres (también llamados a menudo zonas de disponibilidad) que son instalaciones independientes de OpenStack con sus propios servidores, almacenamiento y panel de control. Algunos clústeres tienen características diferentes, como almacenamiento SSD o hardware diferente que es útil para una tarea determinada. La migración de instancias y datos entre clústeres no está automatizada en este momento, pero esta guía te muestra cómo lograrlo tú mismo.</p>
 <p>Esta guía asume que te sientes cómodo trabajando con SSH, así como con algunas utilidades de línea de comando como <span class="code">dd</span> y la CLI de OpenStack. Para obtener más información sobre esas utilidades, consulta los siguientes artículos.</p>
@@ -8,27 +8,21 @@
 <li><a class="reference internal" href="https://help.dreamhost.com/hc/es/articles/235817468-Introducci%C3%B3n-al-cliente-de-l%C3%ADnea-de-comandos-de-OpenStack" target="_self" rel="undefined">Introducción al cliente de línea de comandos de OpenStack</a></li>
 </ul>
 </div>
-<h2>Cosas a tener en cuenta</h2>
+<h2 id="h_01HQ3PW9D1B4TG0WSA1P4MQDXW">Cosas a tener en cuenta</h2>
 <div class="solvvy-solution">
 <p>A continuación, se incluyen algunas cosas que debe tener en cuenta y planificar antes de una migración.</p>
-<h3>Las direcciones IP cambiarán</h3>
+<h3 id="h_01HQ3PW9D12620MSW6KT1EG4XE">Las direcciones IP cambiarán</h3>
 <p>Cada clúster tiene bloques asignados de direcciones IP, por lo tanto, las direcciones IP flotantes, IPv4 públicas y IPv6 públicas no se pueden transferir entre clústeres. Si estás usando redes privadas (opcional en US-East 2), la dirección específica asignada 10.x.x.x también puede cambiar.</p>
-<h3>Llaves de SSH</h3>
-<p>Cada clúster administra sus claves SSH por separado, por lo que si ya tienes tus claves configuradas en el clúster de origen, debes configurar las mismas claves (o nuevas) en el clúster de destino. Puedes obtener la clave pública de cualquier par de claves en tu proyecto desde la página (<a href="https://iad2.dreamcompute.com/project/key_pairs/">'Project' &gt; 'Compute' &gt; 'Key Pairs'</a>) del panel de DreamCompute.</p>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/migrate-instances-between-clusters_01.png" alt="" /></dd>
-</dl>
-<dl>
-<dd>Para acceder a esa página, solo haz clic en el nombre de la llave de emparejamiento.</dd>
-</dl>
-<h3>Planifica una ventana de mantenimiento</h3>
+<h3 id="h_01HQ3PW9D1FBJKYE0VJDHRTAAF">Llaves de SSH</h3>
+<p>Cada clúster administra sus claves SSH por separado, por lo que si ya tienes tus claves configuradas en el clúster de origen, debes configurar las mismas claves (o nuevas) en el clúster de destino. Puedes obtener la clave pública de cualquier par de claves en tu proyecto desde la página (<a href="https://iad2.dreamcompute.com/project/key_pairs/">'Project' &gt; 'Compute' &gt; 'Key Pairs'</a>) del panel de DreamCompute. Para acceder a esa página, solo haz clic en el nombre de la llave de emparejamiento.</p>
+<h3 id="h_01HQ3PW9D1B34Y8WN99NNXX852">Planifica una ventana de mantenimiento</h3>
 <p>Para evitar que los archivos abiertos causen daños u otro comportamiento extraño, es más seguro mover los datos cuando la instancia no se está ejecutando. La copia de los datos suele ser bastante rápida para volúmenes más pequeños, pero para volúmenes más grandes puede llevar algún tiempo. Recuerda, la copia debe completarse antes de que se pueda restaurar el servicio.</p>
 <p>Además, el DNS debe actualizarse de las antiguas IP públicas a las nuevas. Dependiendo del tiempo de vida (TTL) de tu proveedor de DNS, este proceso puede tardar desde unos minutos hasta 24 horas. Las zonas DNS administradas por DreamHost pueden tener el TTL de 5 minutos.</p>
-<h3>Instancias Efímeras</h3>
+<h3 id="h_01HQ3PW9D13XY1GF3GG3HQCWPY">Instancias Efímeras</h3>
 <p>Las instancias efímeras no pueden tener acceso a sus datos por otras instancias cuando están apagadas. Estas instancias solo se pueden migrar mientras se ejecutan, por lo que es mejor cerrar tantos servicios como sea posible para limitar la posibilidad de daños. Por favor mira la última sección a continuación para ver <a class="reference external" href="#migrar-una-instancia-efimera" target="_self" rel="undefined">instrucciones sobre la migración de instancias en ejecución</a>.</p>
 </div>
 <div id="Migrar_una_instancia_respaldada_por_volumen_mediante_la_CLI_de_OpenStack" class="section-link">&nbsp;</div>
-<h2>Migrar una instancia respaldada por volumen mediante la CLI de OpenStack</h2>
+<h2 id="h_01HQ3PW9D1NM03SYS7A1PKCPWH">Migrar una instancia respaldada por volumen mediante la CLI de OpenStack</h2>
 <div class="solvvy-solution">
 <p>Para este tipo de movimiento, es necesario eliminar la instancia para que deje un volumen para migrar.</p>
 <div class="notebox-important">
@@ -47,7 +41,7 @@
 +----------------+
 </pre>
 </div>
-<h3>Proceso de Migración</h3>
+<h3 id="h_01HQ3PW9D1458XW1GRDNRZ4NMV">Proceso de Migración</h3>
 <ol class="arabic simple">
 <li>Crea una "fotocopiadora" temporal lanzando una nueva instancia utilizando el flavor más pequeño disponible. Esta guía usa comandos de Ubuntu. También se recomienda que hagas que la instancia sea efímera, ya que no será necesaria una vez que se complete la migración.</li>
 <li>Instala el software necesario para acceder al servicio de imágenes Glance en esta nueva instancia:
@@ -106,7 +100,7 @@
 <p>Ahora estás listo para ir al clúster de DESTINO para iniciar una nueva instancia y seleccionar la imagen que se acaba de cargar como fuente. Si los datos están destinados a ser persistentes, es mejor especificar que deseas crear un nuevo volumen la pestaña <span class="text-object">Source</span> cuando lances la nueva instancia.</p>
 </div>
 <div id="migrar-una-instancia-efimera" class="section-link">&nbsp;</div>
-<h2>Migrar una instancia efímera con la CLI de OpenStack</h2>
+<h2 id="h_01HQ3PW9D2X4NA4EHM73Y0TNJ2">Migrar una instancia efímera con la CLI de OpenStack</h2>
 <div class="solvvy-solution">
 <p>No se recomienda este tipo de migración. Sin embargo, puede ser necesario en algunas situaciones, por lo que se incluye aquí.</p>
 <ol>
