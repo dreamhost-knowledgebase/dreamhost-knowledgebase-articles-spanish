@@ -1,18 +1,17 @@
-<div id="auto-toc"> </div>
-<h2>Generalidades</h2>
+<div id="auto-toc">&nbsp;</div>
+<h2 id="h_01HQS3AAYCEP69PG76A66E8EY6">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo explica cómo agregar un certificado SSL de Let's Encrypt gratuito a tu dominio.</p>
 <p>Cada dominio debe tener su propio certificado por separado. Esto significa que si deseas un certificado SSL para <strong>example.com</strong> y <strong>blog.example.com</strong>, debes agregarlos por separado.</p>
 </div>
-<h2>Antes de agregar el certificado</h2>
+<h2 id="h_01HQS3AAYDFWPNK0MPBQN1VQ54">Antes de agregar el certificado</h2>
 <div class="solvvy-solution">
 <div class="notebox-note">
 <p>Solo un certificado firmado profesionalmente o 'Let's Encrypt' funcionará con <a href="/hc/es/articles/216475197-Generalidades-de-Cloudflare-con-SSL" target="_blank" rel="noopener noreferrer">la configuración SSL (strict) completa de Cloudflare</a>.</p>
 </div>
 <p>Antes de comenzar a agregar el certificado, asegúrate de que lo siguiente esté configurado:</p>
 <ol>
-<li>Tu dominio este <a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-Sitio-Web-y-Hosting" target="_self">Alojado Completamente</a> o configurado como <a href="https://help.dreamhost.com/hc/es/articles/215455377-Redireccionar-un-dominio" target="_self">redirección</a>
-</li>
+<li>Tu dominio este <a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-Sitio-Web-y-Hosting" target="_self">Alojado Completamente</a> o configurado como <a href="https://help.dreamhost.com/hc/es/articles/215455377-Redireccionar-un-dominio" target="_self">redirección</a></li>
 <li>El DNS de tu dominio ya esté apuntando a DreamHost. Esto quiere decir que:
 <ul>
 <li>Tus Nameservers deban apuntar a DreamHost</li>
@@ -23,8 +22,7 @@
 </ol>
 <div class="notebox-important">
 <p><strong>¿Por qué mi DNS necesita apuntar a DreamHost?</strong></p>
-<p>Esto se debe a que 'Let's Encrypt' agrega una carpeta <span class="text-object">.well_known/</span> a tu sitio para autenticar el certificado. Si el DNS de tu sitio no se resuelve en un dominio totalmente alojado en DreamHost, el certificado no puede crear esta carpeta para autenticarse y tu panel mostrará lo siguiente:</p>
-<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ssl-adding-le-cert-01.png" width="550" height="264"></p>
+<p>Esto se debe a que 'Let's Encrypt' agrega una carpeta <span class="text-object">.well_known/</span> a tu sitio para autenticar el certificado. Si el DNS de tu sitio no se resuelve en un dominio totalmente alojado en DreamHost, el certificado no puede crear esta carpeta para autenticarse y tu panel mostrará la opción no disponible.</p>
 </div>
 <div class="notebox-tip">
 <p><strong>Registros CAA</strong></p>
@@ -35,14 +33,14 @@
 </ul>
 </div>
 <p>Visita las siguientes secciones para verificar tus valores de los DNS.</p>
-<h3 class="subtoc-heading">Opción 1 — Apuntar tus nameservers</h3>
+<h3 id="h_01HQS3AAYD239SAJ4NMQERWQ2J" class="subtoc-heading">Opción 1 — Apuntar tus nameservers</h3>
 <p>Visita el siguiente enlace para revisar a dónde están apuntando tus nameservers:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216385467#donde-estan-apuntando-mis-nameservers" target="_self">¿A dónde están apuntado mis nameservers?</a></li>
 </ul>
 <p>Si ya están apuntando a DreamHost, no necesitas cambiar nada.</p>
 <p>Si NO están apuntados a DreamHost, necesitarás <a href="https://help.dreamhost.com/hc/es/articles/216385447-Cambiar-los-nameservers-en-tu-alojamiento-actual" target="_self">apuntarlos en tu alojamiento actual</a> o cambiar los registros A de tu dominio como se escriben a continuación.</p>
-<h3 class="subtoc-heading">Opción 2 — Apuntar los registros A de tu dominio</h3>
+<h3 id="h_01HQS3AAYD6QQWAA6HM2MH3G9J" class="subtoc-heading">Opción 2 — Apuntar los registros A de tu dominio</h3>
 <p>Si tus nameservers no están apuntando a DreamHost y no deseas cambiarlos, la otra opción es actualizar los registros A y AAAA de tu dominio. Estos debe ser actualizados en la compañía donde tus nameservers están apuntando. Revisa el siguiente artículo para ver instrucciones de cómo encontrar la dirección IP correcta para apuntarlos:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio-">¿A qué registros DNS debo apuntar mi sitio?</a></li>
@@ -60,13 +58,13 @@
 <li><strong>blog.example.com</strong></li>
 </ul>
 </div>
-<p><strong>Apuntar un registro AAAA</strong> </p>
+<p><strong>Apuntar un registro AAAA</strong>&nbsp;</p>
 <p>Un registro AAAA es un registro IPv6. Ese no se agrega por defecto en DreamHost, pero puedes agregarlo manualmente como se explica en el siguiente artículo:</p>
 <ul class="article-list">
 <li><a href="https://help.dreamhost.com/hc/es/articles/216510458-IPv6">IPv6</a></li>
 </ul>
 <p>Una vez agregado, necesitarás ver la nueva dirección en tu panel. Puedes apuntarlo a este registro desde la compañía donde tus nameservers están apuntando.</p>
-<h3 class="subtoc-heading">Deshabilitar el archivo .htaccess</h3>
+<h3 id="h_01HQS3AAYEA26E78EKBVDSH6KP" class="subtoc-heading">Deshabilitar el archivo .htaccess</h3>
 <p>Adicionalmente, ciertas reglas <span class="text-object">.htaccess</span> como el bloqueo de IP, las reglas de reescritura y la protección con contraseña pueden hacer que la instalación falle. Para asegurarte que eso no sea un problema, cambia el nombre de tu archivo <span class="text-object">.htaccess</span> (a algo como <span class="text-object">.htaccess_OFF</span>) para deshabilitarlo temporalmente. Luego, instala el certificado. Una vez instalado, puedes cambiar el nombre del archivo a <span class="text-object">.htaccess</span> de vuelta.</p>
 <p>Si deshabilitar tu <span class="text-object">.htaccess</span> afecta tu sitio, a tal punto que se pueda dañar, agrega la siguiente regla que debería permitir que la instalación se procese:</p>
 <div class="preboxcontainer">
@@ -74,49 +72,35 @@
 </pre>
 </div>
 </div>
-<h2>Agregar el certificado</h2>
+<h2 id="h_01HQS3AAYEQJJ6X880VZ4NMPVE">Agregar el certificado</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Dirígete a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.secure&amp;" target="_blank" rel="noopener noreferrer">Certificados Seguros</a>. Aparecerá una lista de tus dominios.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ssl-adding-le-cert-04.png" width="209" height="74"></dd>
-</dl>
-</li>
-<li>Haz clic en el botón <strong>Añadir</strong> a la derecha del dominio al que deseas agregar el certificado SSL.<br>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-ssl-adding-le-cert-02.png" width="550" height="778"></dd>
-</dl>
-</li>
+<li>Dirígete a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.secure&amp;" target="_blank" rel="noopener noreferrer">Certificados Seguros</a>. Aparecerá una lista de tus dominios.</li>
+<li>Haz clic en el botón <strong>Añadir</strong> a la derecha del dominio al que deseas agregar el certificado SSL.</li>
 <li>En la página siguiente, haz clic en el botón <strong>Seleccionar este Certificado</strong>.
 <dl>
-<dd><em>Aparece un mensaje de éxito confirmando el certificado que se ha comprado</em></dd>
+<dd><em>Aparece un mensaje de éxito confirmando el certificado que se ha comprado.</em></dd>
 </dl>
 <dl></dl>
 </li>
 </ol>
 </div>
-<h2>Probar si el certificado SSL está funcionando</h2>
+<h2 id="h_01HQS3AAYETBQQKFGKXNX75PFJ">Probar si el certificado SSL está funcionando</h2>
 <div class="solvvy-solution">
 <p>El certificado ya está instalado en tu dominio. Visita la URL segura de tu sitio web en:</p>
 <ol>
 <ol>
-</ol>
-</ol>
 <ul>
-<li>
-<strong>https://</strong>example.com</li>
+<li><strong>https://</strong>example.com</li>
 </ul>
-
-
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/Install_Comodo_Cert_08.png" alt="Install_Comodo_Cert_08.png"></dd>
-</dl>
+</ol>
+</ol>
 <p>Puedes ver que la barra del navegador muestra un icono de <span class="text-object">candado</span> que confirma que la conexión es segura.</p>
 <div class="notebox-note">
 <p>Si acabas de instalar el certificado, es posible que debas esperar algunas horas para que se actualice en línea.</p>
 </div>
 </div>
-<h2>Forzar tu sitio a cargar HTTPS por defecto</h2>
+<h2 id="h_01HQS3AAYEPW0GM4HZGWSCNKYM">Forzar tu sitio a cargar HTTPS por defecto</h2>
 <div class="solvvy-solution">
 <p>Incluso después de haber agregado el certificado SSL a tu sitio, los visitantes no podrán usarlo a menos que escriban manualmente <span class="text-object">https</span> antes de tu nombre de dominio. Esto va en contra del propósito de agregarlo en primer lugar, ya que el certificado está destinado a proteger todo el tráfico de tu sitio web.</p>
 <p>Hay varias maneras de solucionar este problema. Visita el siguiente artículo para obtener instrucciones sobre cómo crear un archivo de configuración para redirigir todo el tráfico de visitantes a la versión segura de tu URL (<span class="text-object">https</span>).</p>
@@ -128,14 +112,14 @@
 <p>NO es posible redirigir a un dominio diferente. Por ejemplo: <strong>http://example1.com</strong> a <strong>https://example2.com</strong> no funcionaría con un certificado 'Let's Encrypt'</p>
 </div>
 </div>
-<h2>Solución de problemas</h2>
+<h2 id="h_01HQS3AAYF1PV482KSAWE7K8RC">Solución de problemas</h2>
 <div class="solvvy-solution">
 <p>Después de instalar tu certificado, es posible que tu navegador aún muestre una advertencia insegura cuando visites la versión <span class="text-object">HTTPS</span> de tu URL. Hay algunas razones por las que esto puede ocurrir. Visita el siguiente artículo para obtener más instrucciones sobre cómo resolver este problema.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215364618--Por-qu%C3%A9-mi-navegador-dice-que-mi-sitio-es-inseguro-" target="_self">¿Por qué mi navegador dice que mi sitio es inseguro?</a></li>
 </ul>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HQS3AAYFZ76VQGR5AKJFF110">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="/hc/es/articles/216539558-Generalidades-sobre-certificado-de-seguridad-Let-s-Encrypt" target="_self">Generalidades sobre certificado de seguridad Let's Encrypt</a></li>

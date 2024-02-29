@@ -1,39 +1,34 @@
 <div class="alert-warning">
 <p>Subversion se ha eliminado del panel DreamHost. Si previamente habías configurado Subversion en tu dominio, seguirá funcionando normalmente.</p>
 </div>
-<h2>Generalidades</h2>
+<h2 id="h_01HQS0A7AMPE62PDNNKK3BQBTD">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo enumera varias formas en las que puede conectarse a tu repositorio SVN.</p>
 </div>
-<h2><span id="Conectar_con_tu_navegador">Conectar con tu navegador</span></h2>
+<h2 id="h_01HQS0A7AMDQ46DWM4R853JGZM"><span id="Conectar_con_tu_navegador">Conectar con tu navegador</span></h2>
 <div class="solvvy-solution">
 <ol>
-<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.svn&amp;" target="_blank" rel="noopener noreferrer">Subversion</a>.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_panel_svn_03.png" /></dd>
-</dl>
-</li>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.svn&amp;" target="_blank" rel="noopener noreferrer">Subversion</a>.</li>
 <li>Debajo de la lista de proyectos actuales, haz clic en el enlace de tu repositorio.
 <dl>
-<dd><em>A continuación, aparece un cuadro emergente de autenticación:</em></dd>
-<dd><img src="https://kbimages.dreamhosters.com/images/2018-06_panel_svn_04.png" /></dd>
+<dd><em>A continuación, aparece un cuadro emergente de autenticación.</em></dd>
 </dl>
 </li>
 <li>Utiliza el nombre de usuario y la contraseña que creaste al configurar el repositorio.</li>
 </ol>
 <p>Esto carga tu repositorio dentro de tu navegador para ver.</p>
 </div>
-<h2><span id="Conectar_con_un_cliente">Conectarse con un cliente</span></h2>
+<h2 id="h_01HQS0A7ANJNBHKDV69R5SNAJM"><span id="Conectar_con_un_cliente">Conectarse con un cliente</span></h2>
 <div class="solvvy-solution">
 <p>También puedes conectarte con un cliente de terceros. <a href="https://tortoisesvn.net/downloads.html" target="_self" rel="undefined">TortoiseSVN</a> es una opción muy popular.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216658708-TortoiseSVN" target="_self" rel="undefined">TortoiseSVN</a></li>
 </ul>
 </div>
-<h2><span id="Conexión_a_través_de_SSH.28línea_de_comando.29">Conexión a través de SSH (línea de comando)</span></h2>
+<h2 id="h_01HQS0A7AN6P4Z232ASK00P40K"><span id="Conexión_a_través_de_SSH.28línea_de_comando.29">Conexión a través de SSH (línea de comando)</span></h2>
 <div class="solvvy-solution">
 <p>Hay muchos comandos que puedes correr vía <a class="new" title="SSH (page does not exist)" href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">SSH</a> para conectarte y administrar tu repositorio. A continuación se muestran algunos de los comandos más comunes.</p>
-<h3><span id="Verificación">Verificación</span></h3>
+<h3 id="h_01HQS0A7AN2JD69PVXSRZ6JMXP"><span id="Verificación">Verificación</span></h3>
 <p>Este comando realiza una verificación de tu repositorio:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">svn co <span class="code-highlight">https://example.com/exampleProjectID/</span></span></pre>
@@ -42,13 +37,13 @@
 <ul>
 <li><a href="https://svnbook.red-bean.com/en/1.6/svn.tour.initial.html">Crear una copia de trabajo</a></li>
 </ul>
-<h3><span id="Importar">Importar</span></h3>
+<h3 id="h_01HQS0A7ANSNQC8MN90W3X8GMP"><span id="Importar">Importar</span></h3>
 <p>Una vez que se crea el repositorio, puedes agregar carpetas y archivos que tenga en otra ubicación. Es mejor usar este método para mantener el número de revisiones bajo al crear el repositorio por primera vez. Asegúrate de cambiar <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a>, y <span class="code">path/to/source</span> fuente a la ubicación de tu archivo.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">svn import /home/<span class="code-highlight">username/path/to/source</span> file:///home/<span class="code-highlight">username/path/to/repository --message="Importing Project"</span></span>
 </pre>
 </div>
-<h3><span id="Actualizar">Actualizar</span></h3>
+<h3 id="h_01HQS0A7AN8Z8PX55X32ECHJMM"><span id="Actualizar">Actualizar</span></h3>
 <p>Para asegurarte de que tu Copia de Trabajo esté usando la revisión más reciente, corre svn update:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">svn update</span></pre>
@@ -57,19 +52,19 @@
 <ul>
 <li><a href="https://svnbook.red-bean.com/en/1.6/svn.tour.cycle.html">Ciclo de Trabajo Básico</a></li>
 </ul>
-<h3><span id="Agregar">Agregar</span></h3>
+<h3 id="h_01HQS0A7AN647FRYGTQ7YDHCDY"><span id="Agregar">Agregar</span></h3>
 <p>Una vez que tengas una copia de trabajo, ahora puedes agregarle archivos o directorios. Por ejemplo, si agregas un archivo llamado <span class="text-object">myfile.txt</span> al directorio de la copia de trabajo, debes correr 'svn add' para agregarlo realmente a la copia de trabajo.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">svn add <span class="code-highlight">myfile.txt</span></span></pre>
 </div>
 <p>Una vez que se agrega, ahora puedes confirmar tus cambios en el repositorio.</p>
-<h3><span id="Confirmar">Confirmar</span></h3>
+<h3 id="h_01HQS0A7APT3YRAW3VJJX09B7D"><span id="Confirmar">Confirmar</span></h3>
 <p>Una vez que hayas realizado todos los ajustes, deberás confirmar los cambios en el repositorio.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">svn commit -m <span class="code-highlight">"log messages"</span></span></pre>
 </div>
 <p>Este comando confirma todos los cambios. La bandera <span class="code">-m</span> te permite dejar un mensaje sobre qué y por qué se has comprometido en esta revisión específica.</p>
-<h3><span id="Enlistar">Enlistar</span></h3>
+<h3 id="h_01HQS0A7APCSPJRH7KXXVV63RS"><span id="Enlistar">Enlistar</span></h3>
 <p>Correr el comando list con la banderilla <span class="code">--verbose</span>&nbsp;muestra la siguiente información:</p>
 <dl>
 <dd>
@@ -85,7 +80,7 @@
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">svn list --verbose</span></pre>
 </div>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HQS0A7APKAFSQYXQMPVCF53Q">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215466058-Descripci%C3%B3n-general-de-la-Subversion" target="_self" rel="undefined">Descripción general de Subversion</a></li>

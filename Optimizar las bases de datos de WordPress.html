@@ -38,7 +38,7 @@
 </div>
 <p>Esto devolverá las 25 filas más grandes en una tabla de opciones que se están cargando automáticamente. A partir de aquí, deberás examinar las filas y determinar qué datos se necesitan realmente. Los datos de autoload pueden estar relacionados con tu tema o plugins, y deberás investigar las entradas que no reconoce antes de eliminarlas. Si encuentra filas que se pueden eliminar de forma segura, usa el siguiente comando para hacerlo:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "DELETE FROM wp_postmeta WHERE meta_key LIKE <span class="code-highlight">'%example_%'</span> ;"</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "DELETE FROM $(wp config get table_prefix)options WHERE option_name LIKE <span class="code-highlight">'%example_%'</span> ;"</span></pre>
 </div>
 <div class="notebox-important">
 <p>Recuerda reemplazar <span class="code">%example_%</span> con el prefijo en la fila que quieres eliminar.</p>
@@ -83,7 +83,7 @@
 <p>Estos imprimirán dos tablas (una con un _ inicial y otra sin) que muestran la cadena meta_key, el tamaño que ocupa en la base de datos, la cantidad de filas que la contienen y, lo que es más importante, la fecha y el post_id de la última vez se utilizó. Las entradas de valor de meta_key se pueden usar para identificar filas para plugins o temas que ya no están en uso.</p>
 <p>Si se encuentran filas innecesarias, corre el siguiente comando para eliminarlas:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "DELETE FROM $(wp config get table_prefix)options WHERE option_name LIKE <span class="code-highlight">'%example_%'</span> ;"</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "DELETE FROM wp_postmeta WHERE meta_key LIKE <span class="code-highlight">'%example_%'</span> ;"</span></pre>
 </div>
 <div class="notebox-important">
 <p>Recuerda reemplazar <span class="code">%example_%</span> con el prefijo de la fila que deseas eliminar.</p>
