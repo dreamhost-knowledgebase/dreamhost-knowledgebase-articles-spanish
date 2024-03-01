@@ -1,17 +1,32 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HQVDW754PT2Y66DSDN65MHRE">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Al crear un script de Python en DreamHost, hay ciertas reglas que se deben seguir para garantizar que el archivo funcione correctamente.</p>
 </div>
-<h2>Extensiones de Archivo</h2>
+<h2 id="h_01HQVDW7540DX77FWH21EXRCGP">Extensiones de Archivo</h2>
 <div class="solvvy-solution">
 <p>Todos los scripts Python CGI en DreamHost deben terminar con las siguientes extensiones:</p>
-<ul>
-<li><code>.py</code></li>
-<li><code>.cgi</code></li>
-<li><code>.fcgi</code></li>
-</ul>
+<table style="border-collapse: collapse; width: 50%;" border="1">
+<tbody>
+<tr>
+<th style="width: 20%;">Extensiones</th>
+<th style="width: 40%;">Caso de uso</th>
+</tr>
+<tr>
+<td>.fcgi</td>
+<td>Esta extensión usa&nbsp;FastCGI</td>
+</tr>
+<tr>
+<td>.py</td>
+<td>Esta extensión usa&nbsp;CGI</td>
+</tr>
+<tr>
+<td>.cgi</td>
+<td>Esta extensión usa&nbsp;CGI</td>
+</tr>
+</tbody>
+</table>
 </div>
-<h2>Primera línea del archivo Python</h2>
+<h2 id="h_01HQVDW755J1RVRH23E89FC7YY">Primera línea del archivo Python</h2>
 <div class="solvvy-solution">
 <p>La primera línea del archivo podría ser la ubicación del servidor de Python2 o Python 3</p>
 <div class="preboxcontainer">
@@ -27,25 +42,25 @@
 <pre class="prebox">#!/home/username/opt/python-3.8.5/bin/python3</pre>
 </div>
 </div>
-<h2>Permisos de Archivo</h2>
+<h2 id="h_01HQVDW755PPRHQHP6FN1G206E">Permisos de Archivo</h2>
 <div class="solvvy-solution">
 <p>Los permisos del archivo deben establecerse en 755. Puedes cambiar esto corriendo el siguiente comando a través de <a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 755</span></pre>
 </div>
 </div>
-<h2>Terminaciones de línea</h2>
+<h2 id="h_01HQVDW755093KGKRWZFPHE7TW">Terminaciones de línea</h2>
 <div class="solvvy-solution">
 <p>Asegúrate de usar <a href="https://en.wikipedia.org/wiki/Newline#Representations" target="_self">líneas nuevas de estilo UNIX</a>, no Windows.</p>
 </div>
-<h2>Ver salida</h2>
+<h2 id="h_01HQVDW755FN01WPRSD3CMCHHB">Ver salida</h2>
 <div class="solvvy-solution">
 <p>Si deseas ver la salida impresa de tu código Python, debes <a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">agregar esto como la primera línea</a> de salida:</p>
 <div class="preboxcontainer">
 <pre class="prebox">print "Content-type: text/html\n\n"</pre>
 </div>
 </div>
-<h2 class="subheader">Ejemplo Hello World!</h2>
+<h2 id="h_01HQVDW7558AY8B5YG94P9ZWDS" class="subheader">Ejemplo Hello World!</h2>
 <div class="solvvy-solution">
 <p>El código a continuación mostrará <strong>Hello World!</strong> en un navegador web. Asegúrate de cambiar el <span class="text-object">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>.</p>
 <div class="preboxcontainer">
@@ -55,18 +70,18 @@ print("Content-type: text/html\n\n")
 print("Hello World!")</pre>
 </div>
 </div>
-<h2>Ejecución de Apache</h2>
+<h2 id="h_01HQVDW755E027A1T15K3X8173">Ejecución de Apache</h2>
 <div class="solvvy-solution">
 <p>Si no deseas que Apache ejecute archivos <span class="text-object">.py</span> <a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">agrega lo siguiente</a> a tu archivo <a href="/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">.htaccess</a>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">RemoveHandler .py</pre>
 </div>
 </div>
-<h2>Grupo Unix</h2>
+<h2 id="h_01HQVDW755RMZMP1Q4W6CBN8P1">Grupo Unix</h2>
 <div class="solvvy-solution">
 <p>En DreamHost, todos los scripts Python CGI Y tu directorio primario inmediato deben tener tu usuario Unix y tu grupo Unix configurados para el usuario Unix de tu dominio Y el grupo UNIX PREDETERMINADO de ese usuario (de lo contrario, obtendrás un error interno del servidor <a href="http://svn.apache.org/viewvc/httpd/httpd/trunk/support/suexec.c?annotate=758944#l541" target="_self">desde el suexec de Apache</a>).</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HQVDW755H4WTAKB08D9PA194">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216137717-Generalidades-sobre-Python" target="_self">Generalidades sobre Python</a></li>
