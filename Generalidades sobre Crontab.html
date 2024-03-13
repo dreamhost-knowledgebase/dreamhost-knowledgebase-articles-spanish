@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HRTDQQS1H98EXS60CHX0RTFY">Generalidades</h2>
 <div class="solvvy-solution">
 <p>El comando&nbsp;<span class="code">crontab</span>&nbsp;que se encuentra en los sistemas operativos Unix y similares a Unix, se usa para programar comandos que se ejecutarán periódicamente.</p>
 <p>Generalmente <span class="code">crontab</span>&nbsp;usa un daemon,&nbsp;<code>crond</code>, que se ejecuta constantemente en segundo plano y comprueba una vez por minuto para ver si es necesario ejecutar alguno de los trabajos programados. Estos trabajos generalmente se denominan cron jobs. Los cron jobs se ejecutan como el usuario que los crea, como si ese usuario escribiera el comando en tu shell.</p>
@@ -7,7 +7,7 @@
 <p>Sin embargo, solo los usuarios shell pueden <a href="https://help.dreamhost.com/hc/es/articles/215767047-Crear-un-Cron-Job-personalizado" target="_self" rel="undefined">crear y editar manualmente cron jobs</a> en el servidor.</p>
 </div>
 </div>
-<h2>Crontab contenido del archivo en el servidor</h2>
+<h2 id="h_01HRTDQQS18QTQJZ7KASV3EE8F">Crontab contenido del archivo en el servidor</h2>
 <div class="solvvy-solution">
 <p>Debido a la naturaleza compleja de traducir el contenido proporcionado por el usuario del panel al servidor, lo que ingresas al panel no es lo que ves en el archivo <span class="text-object">crontab</span>. Por ejemplo:</p>
 <p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-create-a-cronjob.png" alt="es-panel-create-a-cronjob.png" width="671" height="462" /></p>
@@ -17,16 +17,16 @@
 ###--- Changes made to this part of the file WILL be destroyed!
 # Cron Example
 MAILTO="admin@example.com"
-@hourly /usr/local/bin/setlock -n /tmp/cronlock.3788814087.215158 sh -c $'/usr/local/php82/bin/php /home/usuario/example.com/script.php'
+@hourly /usr/bin/setlock -n /tmp/cronlock.3788814087.215158 sh -c $'/usr/local/php82/bin/php /home/usuario/example.com/script.php'
 ###--- You can make changes below the next line and they will be preserved!
 ###--- END DREAMHOST BLOCK</pre>
 </div>
 <p>Cuando se selecciona la opción 'Use locking', los comandos que deseas ejecutar se filtran a través de una invocación única del comando setlock.</p>
 <p>Visita la página de manual de&nbsp;<a href="https://manpages.ubuntu.com/manpages/cosmic/en/man8/setlock.8.html">setlock</a> para más información. El uso de setlock genera mensajes de error si se invoca tu cron jobs antes de que la última iteración del trabajo libere tu archivo de bloqueo único. Esto puede suceder si tu script tarda más en ejecutarse que el tiempo entre ejecuciones de trabajo.</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HRTDQQS1J4GHDW9E78QBYMT1">Ver también</h2>
 <div class="solvvy-hidden">
-<h3>Links internos</h3>
+<h3 id="h_01HRTDQQS1SJCAD70HK08YM08G">Links internos</h3>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades sobre SSH</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215767047-Crear-un-Cron-Job-personalizado" target="_self">Crear un cron job personalizado</a></li>
@@ -34,7 +34,7 @@ MAILTO="admin@example.com"
 <li><a href="https://help.dreamhost.com/hc/es/articles/215088668-Crear-un-Cron-Job">Crear un Cron Job</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360038608892-Soluci%C3%B3n-de-problemas-de-Cron-job" target="_self">Solución de problemas de de cron job</a></li>
 </ul>
-<h3>Links externos</h3>
+<h3 id="h_01HRTDQQS11GVQKX1W4FA3CSRM">Links externos</h3>
 <ul>
 <li><a href="https://manpages.ubuntu.com/manpages/cosmic/en/man8/cron.8.html" target="_self">Página de manual Cron de Ubuntu</a></li>
 <li><a href="https://manpages.ubuntu.com/manpages/cosmic/en/man1/crontab.1.html" target="_self">Página de crontab(1) Ubuntu</a></li>
