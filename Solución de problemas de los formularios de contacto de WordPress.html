@@ -1,10 +1,6 @@
 <h2 id="h_01HBV2XZN3N742Y31H3KCBZJ04">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Los correos enviados por formularios de contacto deben enviarse desde el sitio web con una dirección de correo 'de' como &lt;<span class="text-object">contact@example.com</span>&gt; (suponiendo que tu sitio web sea <strong>example.com</strong>).</p>
-<dl>
-<dd></dd>
-<dd></dd>
-</dl>
 <div class="notebox-important">
 <p>WordPress nunca debe usar la dirección de correo del cliente ingresada en el formulario como la dirección 'de o remitente'.</p>
 </div>
@@ -14,10 +10,10 @@
 </ul>
 <p>Este es un ejemplo de una forma inteligente de enviar correos electrónicos desde un formulario de contacto:</p>
 <div class="preboxcontainer">
-<pre class="prebox">From: Site Visitor &lt;contact@example.com&gt;
-Reply-To: Site Visitor &lt;site@example.com&gt;
-To: Admin &lt;admin@example.com&gt;
-Subject: Contact Form Submission
+<pre class="prebox">Correo remitente: Visitante del Sitio &lt;contact@example.com&gt;
+Correo de respuesta: Visitante del Sitio &lt;site@example.com&gt;
+Destinatario: Admin &lt;admin@example.com&gt;
+Asunto: Envío de Formulario de Contacto
 </pre>
 </div>
 <div class="notebox-note">
@@ -30,29 +26,18 @@ Subject: Contact Form Submission
 <p>Para configurar Contact Form 7:</p>
 <ol>
 <li>Inicia sesión en tu sitio de WordPress en <strong>example.com/wp-admin</strong>.</li>
-<li>En la columna de la izquierda, haz clic en la categoría <span class="text-object">Plugins</span> y luego haz clic en la parte de arriba en <span class="text-object">Añadir nuevo</span>.<br />
-<dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-Install_Contact_Form_7.png" alt="ES Install Contact Form 7.png" width="678" height="269" /></dd>
-</dl>
+<li>Haz clic en la categoría <span class="text-object">Plugins</span> en la columna de la izquierda, y luego da clic en <span class="text-object">Añadir Nuevo</span> en la parte superior.</li>
+<li>Ingresa <strong>Contact Form 7</strong> en la barra de búsqueda. Localiza el plugin e instálalo.</li>
+<li>El plugin se ubicará en la página 'Plugins' luego de que se haya instalado.</li>
+<li>Haz clic en el enlace <span class="text-link">Ajustes</span>.</li>
+<li>Encuentra el formulario de contacto específico que deseas editar y luego haz clic en el enlace <span class="text-link">Editar</span>.</li>
+<li>Haz clic en la pestaña <span class="text-object">Correo Electrónico</span> en los ejemplos a continuación:
+<ul>
+<li><span class="text-object">[tu nombre] &lt;wordpress@example.com&gt;</span></li>
+<li><span class="text-object">Correo de respuesta: [tu nombre] &lt;[tu correo]&gt;</span></li>
+</ul>
 </li>
-<li>En el campo de búsqueda, ingresa <strong>Contact Form 7</strong>. Ubica el&nbsp; plugin e instálalo.</li>
-<li>Después de que esté instalado, búscalo en la página 'Plugins'.<br />
-<dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-03_WordPress_Troubleshooting.fw.png" alt="ES 03 WordPress Troubleshooting.fw.png" width="616" height="87" /></dd>
-</dl>
-</li>
-<li>Haz clic en el enlace <span class="text-link">Ajustes</span>.<br />
-<dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-04_WordPress_Troubleshooting.fw.png" alt="04 WordPress Troubleshooting.fw.png" width="209" height="151" /></dd>
-</dl>
-</li>
-<li>Encuentra el formulario de contacto específico que deseas editar y luego haz clic en el enlace <span class="text-link">Editar</span>.<br />
-<dl>
-<dd><img src="https://kbimages.dreamhosters.com/images/2x/es/es-05_WordPress_Troubleshooting.fw.png" alt="ES 05 WordPress Troubleshooting.fw.png" width="483" height="441" /></dd>
-</dl>
-</li>
-<li>Haz clic en la pestaña <span class="text-object">Correo Electrónico</span>&nbsp;en la parte de arriba.</li>
-<li>Ajusta los campos <span class="text-object">De</span> y <span class="text-object">Cabeceras Adicionales</span>&nbsp;como se muestra arriba.</li>
+<li>Ajusta los campos <span class="text-object">Remitente</span> y <span class="text-object">Cabeceras Adicionales</span>&nbsp;como se muestra arriba.</li>
 </ol>
 <p>Visita los siguientes artículos para mayor información:</p>
 <ul>
@@ -64,30 +49,30 @@ Subject: Contact Form Submission
 <div class="solvvy-solution">
 <p>El formulario de contacto de Jetpack no tiene una opción para ajustar fácilmente la dirección de origen para enviar el correo. Puedes acceder manualmente al código PHP de Jetpack para ajustar eso, pero cualquier modificación al código de Jetpack corre el riesgo de sobrescribirse cada vez que Jetpack se actualice. Además, los códigos abreviados de los formularios de contacto de Jetpack pueden interferir con otros formularios de contacto.</p>
 <p>De forma predeterminada, el formulario de contacto de Jetpack no está habilitado. Sin embargo, si lo habilitaste en el pasado, puedes deshabilitar el formulario de contacto de Jetpack para usar todas las demás funciones interesantes de Jetpack mientras usas un formulario de contacto de plugin diferente.</p>
-<ol>
-<li>Después de iniciar sesión en tu panel de WordPress, visita la página de módulos de Jetpack en la siguiente URL:<br />
+<p>Para desactivar el formulario de contacto de Jetpack, inicia sesión en tu panel de WordPress y visita la página de módulos de Jetpack en la siguiente URL:</p>
+<ul>
+<li style="list-style-type: none;">
 <ul>
 <li><strong>example.com/wp-admin/admin.php?page=jetpack_modules</strong></li>
 </ul>
-<img src="https://kbimages.dreamhosters.com/images/2x/es/es-Jetpack_deactivate_contact_form.png" alt="ES Jetpack_deactivate_contact_form" /></li>
-<li>Desplázate sobre la opción 'Formuladio de contacto', luego haz clic en el enlace <span class="text-link">Desactrivar</span>&nbsp;en la parte derecha.<br />
-<dl></dl>
 </li>
-</ol>
+</ul>
+<p>Pasa el cursor sobre la opción ‘Formulario de Contacto’, y luego haz clic en el enlace <span class="text-link">Desactivar</span> a la derecha.</p>
 </div>
 <h2 id="h_01HBV2XZN379YQ5GD3TQE3ZVM7">WPForms-lite</h2>
 <div class="solvvy-solution">
 <p><a href="https://wordpress.org/plugins/wpforms-lite/">WPForms-lite</a> te permite cambiar las opciones del 'Remitente' y 'Correo de respuesta' en su configuración.</p>
 <ol>
-<li>Después de instalar el plugin, haz clic en el elemento de menú 'WPForms' en el panel izquierdo.</li>
+<li>Haz clic en el elemento de menú 'WPForms' en el panel izquierdo después de instalar el plugin.</li>
 <li>Pasa el mouse sobre el nombre de tu formulario. Algunas opciones aparecen debajo de él. Haz clic en 'Editar'. Esto carga tu formulario.</li>
-<li>En el menú de la izquierda, selecciona 'Ajustes'.</li>
-<li>En la ventana emergente, escoge 'Notificaciones'.<br />
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-wpforms-lite-edit-from.png" alt="ES 06 WPForms-lite.png" width="498" height="257" /></dd>
-</dl>
+<li>Selecciona 'Configuraciones' en el menú de la izquierda.</li>
+<li>Escoge 'Notificaciones' de la ventana emergente.</li>
+<li>Desplázate hacia abajo hasta los campos de correo electrónico 'Correo del remitente' y 'Correo de respuesta' y actualiza según sea necesario.
+<ul>
+<li>Correo del remitente: <span class="text-object">{field_id="1"}</span></li>
+<li>Correo de respuesta: <span class="text-object">[tu correo]</span></li>
+</ul>
 </li>
-<li>Desplázate hacia abajo hasta los campos de correo 'Correo electónico del remitente' y 'Dirección de correo electrónico de respuesta' y actualiza según sea necesario.</li>
 </ol>
 </div>
 <h2 id="h_01HBV2XZN4M361RFMFXPVTM01H">¿Qué pasa si quiero usar un correo 'de' que NO está en mi dominio?</h2>
