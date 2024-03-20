@@ -46,8 +46,6 @@ Description=Gunicorn instance to serve application
 After=network.target
 
 [Service]
-User=<span class="code-highlight">your_username</span>
-Group=<span class="code-highlight">your_groupname</span>
 WorkingDirectory=<span class="code-highlight">/path/to/your/app</span>
 Environment="PATH=<span class="code-highlight">/path/to/venv/bin</span>"
 ExecStart=<span class="code-highlight">/path/to/venv/bin/gunicorn</span> --workers 3 --bind=<span class="code-highlight">&lt;example.com&gt;:&lt;port&gt; myapp</span>:app
@@ -63,8 +61,6 @@ WantedBy=default.target</pre>
 </li>
 <li>Edita las líneas resaltadas a continuación como lo siguiente:
 <ul>
-<li><strong>User:</strong> Tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">usuario SSH</a>.</li>
-<li><strong>Group:</strong> El usuario SSH miembro del grupo. Escribe <span class="code">groups</span> para ver este valor. Sería algo como <span class="text-object">pg#####</span>.</li>
 <li><strong>WorkingDirectory:</strong> La ruta a la aplicación de tu sitio web.</li>
 <li><strong>Environment:</strong> La ruta a tu entorno virtual.</li>
 <li><strong>ExecStart:</strong> La ruta a tu instalación de gunicorn.</li>

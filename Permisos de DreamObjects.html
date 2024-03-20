@@ -1,28 +1,64 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HSBN570TWTKVBDJMWVY74SRE">Generalidades</h2>
 <div class="solvvy-solution">
 <p>DreamObjects te permite establecer permisos públicos y privados en buckets y Objects. Estos permisos controlan qué información está disponible al acceder al bucket u Objects dentro de él.</p>
 </div>
-<h2>Permisos de Bucket</h2>
+<h2 id="h_01HSBN570T8D0WTSBM5KRWQPJF">Permisos de Bucket</h2>
 <div class="solvvy-solution">
 <p>Puedes ver los permisos de tu bucket en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener noreferrer">DreamObjects</a>.</p>
 <ol>
 <li>Haz clic en tu usuario para expandir la lista de Buckets.</li>
-<li>A la derecha del Bucket, haz clic en el enlace <span class="text-link">Cambiar Configuraciones</span>.</li>
-<li>En la ventana emergente verás un delizador de 'PERMISOS'. Haz clic para cambiar entre permisos publico y privado para este Bucket.</li>
+<li>Haz clic en el enlace <span class="text-link">Cambiar Configuraciones</span> que está a la derecha del Bucket.</li>
+<li>Da clic en el delizador 'PERMISOS' en la ventana emergente. Haz clic para cambiar entre permisos publico y privado para este Bucket.</li>
 </ol>
-<h3>¿Qué cambia esto?</h3>
+<h3 id="h_01HSBN570T8J8XGN7NJR8HFYS8">¿Qué cambia esto?</h3>
 <p>Los permisos de bucket controlan qué información se puede ver públicamente en línea.</p>
 <p>Si un Bucket tiene permisos públicos, visitar la URL del Bucket mostrará una lista de su contenido. Por ejemplo, este Bucket tiene dos imágenes llamadas 'lake-public.jpg' y 'lake-private.jpg'.</p>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-08_panel_dho_permissions_03.png" alt="DreamObjects Permissions" /></dd>
-</dl>
+<div class="preboxcontainer">
+<pre class="prebox">    &lt;ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"&gt;
+      &lt;Name&gt;dreamhostexample-1&lt;/Name&gt;
+      &lt;Prefix/&gt;
+      &lt;Marker/&gt;
+      &lt;MaxKeys&gt;1000&lt;/MaxKeys&gt;
+      &lt;IsTruncated&gt;false&lt;/IsTruncated&gt;
+      &lt;Contents&gt;
+        &lt;Key&gt;lake-private.jpg&lt;/Key&gt;
+        &lt;LastModified&gt;2018-08-30T15:16:58.554Z&lt;/LastModified&gt;
+        &lt;ETag&gt;"91d13527c81b99fe42f01f47219a250d"&lt;/ETag&gt;
+        &lt;Size&gt;462604&lt;/Size&gt;
+        &lt;StorageClass&gt;STANDARD&lt;/StorageClass&gt;
+        &lt;Owner&gt;
+          &lt;ID&gt;my_user&lt;/ID&gt;
+          &lt;DisplayName&gt;my_user&lt;/DisplayName&gt;
+        &lt;/Owner&gt;
+        &lt;Type&gt;Normal&lt;/Type&gt;
+        &lt;/Contents&gt;
+       &lt;Contents&gt;
+        &lt;Key&gt;lake-public.jpg&lt;/Key&gt;
+        &lt;LastModified&gt;2018-08-30T22:14:52.661Z&lt;/LastModified&gt;
+        &lt;ETag&gt;"91d13527c81b99fe42f01f47219a250d-36"&lt;/ETag&gt;
+        &lt;Size&gt;462604&lt;/Size&gt;
+        &lt;StorageClass&gt;STANDARD&lt;/StorageClass&gt;
+        &lt;Owner&gt;
+          &lt;ID&gt;my_user&lt;/ID&gt;
+          &lt;DisplayName&gt;my_user&lt;/DisplayName&gt;
+        &lt;/Owner&gt;
+      &lt;/Contents&gt;
+    &lt;/ListBucketResult&gt;</pre>
+</div>
 <p>Puedes ver arriba que los nombres de los Objects se muestran junto con el nombre de usuario del Bucket.</p>
 <p>Si los permisos de Buckets se configuraran como privados, no verías el contenido ni el nombre de usuario. Solo verás este mensaje de 'Access Denied':</p>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-08_panel_dho_permissions_04.png" alt="DreamObjects Permissions" /></dd>
-</dl>
+<div class="preboxcontainer">
+<pre class="prebox">    &lt;Error&gt;
+      &lt;Code&gt;AccessDenied&lt;/Code&gt;
+      &lt;BucketName&gt;dreamhostexample&lt;/BucketName&gt;
+      &lt;RequestId&gt;
+        tx00000000000000035767c-005b885a0766e58c8-us-east-1-iad1
+      &lt;/RequestId&gt;
+      &lt;HostId&gt;66e58c8-us-east-1-iad1-us-east-1&lt;/HostId&gt;
+    &lt;/Error&gt;</pre>
 </div>
-<h2>Permisos de los Objects</h2>
+</div>
+<h2 id="h_01HSBN570T092KZEQJR1QXKG1Z">Permisos de los Objects</h2>
 <div class="solvvy-solution">
 <p>Los permisos de los objects controlan cómo se puede ver un objects individual dentro de un bucket.</p>
 <p>Puedes ver los permisos de tu Bucket en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener noreferrer">DreamObjects</a> después de abrir tu Bucket.</p>
@@ -30,35 +66,31 @@
 <li>Haz clic en tu nombre de usuario para expandir tu lista de Buckets.</li>
 <li>Haz clic en el botón&nbsp;<strong>Ver Objects</strong> en la parte inferior. Esto abre una cuadro emergente.</li>
 <li>Haz clic en el nombre de tu bucket en el panel izquierdo para mostrar la lista de tus Objects.</li>
-<li>Haz clic en un Object para ver sus permisos
+<li>Haz clic en un Object para ver sus permisos.
 <dl>
 <dd><em>El botón <strong>PERMISOS</strong> aparece.</em></dd>
 </dl>
 </li>
-<li>Da clic en el botón <strong>PERMISOS</strong>, el cual cambia la URL del enlace al Object. El ejemplo arriba muestra una URL publica. Si la visitas verás la imagen.
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel_dho_permissions_08.png" alt="ES Panel DHO Permissions" width="645" height="137" /></dd>
-</dl>
-El ejemplo anterior muestra una URL privada. Es una cadena larga de caracteres aleatorios que solo es válida por un período de tiempo temporal. Puedes establecer este período en el menú desplegable <span class="text-object">Expira</span>. Solo podrás ver esta imagen si estás usando esta URL privada.&nbsp;</li>
+<li>Da clic en el deslizador <strong>PERMISOS</strong>, que cambia el enlace URL al Objeto.<br />Si la URL es pública, verás la imagen cuando la visites. Si la URL es privada, aparecerá como una larga cadena de caracteres aleatorios que solo es válida por un tiempo. Puedes establecer este período en el menú desplegable <span class="text-object">Expirar</span>. Solo podrás ver esta imagen usando esta URL privada.&nbsp;</li>
 </ol>
 </div>
-<h2>¿Puedo ver mis Objects en un Bucket privado?</h2>
+<h2 id="h_01HSBN570T4WPQKTS4MC6X9874">¿Puedo ver mis Objects en un Bucket privado?</h2>
 <div class="solvvy-solution">
-<p>Sí. No importa si los permisos del Bucket están configurados como Public o Private, siempre podrás ver tus Objects cuando utilices la URL correcta del Object. La URL correcta depende de si el Object está configurado como público o privado como se muestra arriba.</p>
+<p>Sí. No importa si los permisos del Bucket están configurados como Público o Privado; siempre podrás ver tus Objects utilizando la URL correcta del Object. La URL correcta depende de si el Object está configurado como público o privado.</p>
 <p>Los Objects públicos tienen una URL simple, mientras que los Objects privados tienen la URL más larga con una marca de tiempo única.</p>
 </div>
-<h2>¿Cambiar los permisos de un Bucket en el panel cambia los permisos de los Objects en él?</h2>
+<h2 id="h_01HSBN570TJR6HGJD9HNZ20P8W">¿Cambiar los permisos de un Bucket en el panel cambia los permisos de los Objects en él?</h2>
 <div class="solvvy-solution">
 <p>No. Cambiar los permisos del Bucket en el panel no cambia ninguno de los permisos de los Objects. Ellos seguirán siendo los mismos.</p>
 </div>
-<h2>Cambiar permisos en un cliente</h2>
+<h2 id="h_01HSBN570T2RYS30TT6FCNHY0Z">Cambiar permisos en un cliente</h2>
 <div class="solvvy-solution">
 <p>Puedes cambiar los permisos en cualquier&nbsp;<a href="https://help.dreamhost.com/hc/es/sections/115000059232-Clientes-de-DreamObjects" target="_self" rel="undefined">cliente de DreamObjects</a>. Aquí hay un link que muestra como hacer esto en Cyberduck.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/217131247#permisos">Cambiar permisos</a></li>
 </ul>
 </div>
-<h2>Cambiar permisos usando S3cmd o aws-cli</h2>
+<h2 id="h_01HSBN570VDFK81AH5Q168SVFM">Cambiar permisos usando S3cmd o aws-cli</h2>
 <div class="solvvy-solution">
 <p>Esto se puede hacer corriendo un comando vía SSH. Cuando se corre, todos los permisos cambiarán a Público o Privado. El siguiente enlace te muestra como hacer esto usando S3cmd y aws-cli.</p>
 <ul>
@@ -67,10 +99,10 @@ El ejemplo anterior muestra una URL privada. Es una cadena larga de caracteres a
 <p class="mainheader"><a href="https://help.dreamhost.com/hc/es/articles/360022618112-Configuraci%C3%B3n-de-permisos-con-AWS-CLI" target="_self">Configurar permisos con AWS CLI</a></p>
 </li>
 </ul>
-<h3>Solicitar soporte</h3>
+<h3 id="h_01HSBN570VHWW4HECJZNP2G1RK">Solicitar soporte</h3>
 <p>Si necesitas ayuda para actualizar tus permisos de los Objects, <a href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-a-trav%C3%A9s-de-Correo-Electr%C3%B3nico" target="_blank" rel="noopener noreferrer">envía un tiquete al equipo de soporte</a>. En tu ticket, asegúrate de especificar el nombre del Bucket y qué Objects dentro de él deseas que se cambien los permisos. El equipo de soporte podrá realizar los cambios de permisos de los Objects por ti.</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HSBN570VJJWZNCVSF0ZD29BY">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215321178-Buckets-de-DreamObjects">Buckets de DreamObjects</a></li>
