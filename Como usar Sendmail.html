@@ -1,18 +1,22 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HSKE0QSARX98D85T0GA3R46S">Generalidades</h2>
 <div class="solvvy-solution">
 <div class="notebox-important">
 <p>Sendmail está sujeto a los <a href="https://help.dreamhost.com/hc/es/articles/215730437-L%C3%ADmites-de-cuota-SMTP" target="_self">límites de cuota de SMTP</a>. DreamHost recomienda que configures cualquier script que dependa de Sendmail para usar la autenticación SMTP.</p>
 </div>
 <p>Sendmail es un agente de transferencias de correo o mail transfer agent (MTA) que es bien conocido como un proyecto de código abierto, software gratis, y comunidades Unix. Es distribuido como software gratis y software privado. Es usado para enrutar el correo en la Internet para un destinatario específico, y puede ser hecho corriendo el comando de sendmail en un ambiente Shell. Puede ser usado también dentro de un script programado para enviar correo.</p>
-<p>Este artículo cubre algunos ejemplos simples de Sendmail.</p>
+<div class="notebox-tip">
+<p>Este artículo cubre algunos ejemplos simples de Sendmail. Para más opciones, revisa la siguiente página para obtener una lista de diferentes parámetros que puedes usar con sendmail:</p>
+<ul>
+<li><a href="https://linux.die.net/man/8/sendmail.sendmail" target="_blank" rel="noopener noreferrer">sendmail - Página principal de Linux</a></li>
+</ul>
+</div>
+<h2 id="h_01HSEFT15KKYHKQHY0FRRG9VNZ"><span id="Usar_sendmail_desde_la_linea_de_comando">Usar sendmail desde la línea de comando</span></h2>
+<div class="solvvy-solution">
 <div class="notebox-note">
 <p>En los siguientes ejemplos, sólo deberás ajustar el texto que está en negrita.</p>
 </div>
-</div>
-<h2>Usar Sendmail desde el línea de comando</h2>
-<div class="solvvy-solution">
 <p>Los siguientes son dos ejemplos de cómo enviar correo desde la línea de comando usando Sendmail.</p>
-<h3>Ejemplo simple</h3>
+<h3 id="h_01HSKE0QSAB7NRCKCNH35Q4V4D">Ejemplo simple</h3>
 <p>Revisa el <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">artículo de SSH</a>&nbsp;para ver instrucciones detalladas de como iniciar sesion dentro del servidor web vía SSH. Una vez en sesión, puedes correr el siguiente comando para enviar correo:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/sbin/sendmail youremail@example.com</span>
@@ -29,7 +33,7 @@ control d (this key combination of control key and d will finish the email.)
 <li>El correo de DESTINATARIO solo se muestra como destinatarios no revelados (undisclosed-recipients)</li>
 <li>Cuando se recibe el mensaje, la dirección de correo DE aparecerá como tu usuario @servidor. Por ejemplo, <span class="text-object">username@servername.dreamhost.com</span></li>
 </ul>
-<h3>Agregar correos de REMITENTE y DESTINATARIO</h3>
+<h3 id="h_01HSKE0QSAEM0K5K9QBCW13XDT">Agregar correos de REMITENTE y DESTINATARIO</h3>
 <p>Este ejemplo es el mismo que se mostró anteriormente pero especifica el correo Remitente y Destinatario:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/sbin/sendmail youremail@example.com</span>
@@ -52,7 +56,7 @@ control d (this key combination will finish the email.)
 <p>El correo que ingresas al campo de “To” no recibe el correo, solo se muestra como el correo de “To” cuando el que recibe el correo es el DESTINATARIO o “Recipient”. El destinatario sigue siendo el primer correo que tu ingresas en la primera line cuando corres el comando.</p>
 </div>
 </div>
-<h2>Sendmail en un script de cgi</h2>
+<h2 id="h_01HSKE0QSAZKJJ4A2CNG94AKDJ">Sendmail en un script de cgi</h2>
 <div class="solvvy-solution">
 <p>También puedes usar Sendmail en un script. Esto puede hacerse en muchos lenguajes. El siguiente ejemplo muestra un script de perl cgi.</p>
 <p>Crea un archivo llamado <span class="text-object">perltest.pl</span> con el siguiente código y asegúrate que los permisos del archivo estén en 755 o no correrá.</p>
@@ -78,9 +82,10 @@ my($to_address) ='<span class="code-highlight">email@example.com</span>';
 </div>
 <p>Este ejemplo envía el correo a <span class="text-object">email@example.com</span>.</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HSKE0QSBMA6FS44YFM12K6XN">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
 </ul>
+</div>
 </div>
