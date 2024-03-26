@@ -1,4 +1,4 @@
-<h2>Política de dominio del remitente</h2>
+<h2 id="h_01HSV91WZMW419AYEY7D4MDJTN">Política de dominio del remitente</h2>
 <div class="solvvy-solution">
 <p>Si has creado un formulario de correo PHP y encuentras que no está enviando correo, lo más frecuente es que se deba a la dirección DE (FROM) que el formulario está usando en tus encabezados.</p>
 <p>Una forma simple de confirmar si este es el caso:</p>
@@ -16,7 +16,7 @@
 </li>
 </ol>
 </div>
-<h2>¿Por qué pasa esto?</h2>
+<h2 id="h_01HSV91WZNK2H0YGGSHGXAJ42T">¿Por qué pasa esto?</h2>
 <div class="solvvy-solution">
 <p>Esto sucede por las siguientes razones:</p>
 <ul>
@@ -25,19 +25,19 @@
 <li>Por ejemplo, si estás enviando desde un sitio llamado <strong>example.com</strong>, la dirección DE (FROM) en tu formulario de correo PHP debe ser algo como <span class="text-object">admin@example.com</span>. Cambiar esto a tu correo alojado con DreamHost permite que el formulario se envíe correctamente.</li>
 </ul>
 <p>Si DreamHost no está alojando tu correo, debes usar la <a href="https://help.dreamhost.com/hc/es/articles/216140597-Enviar-correo-PHP-v%C3%ADa-SMTP">autenticación SMTP</a> para enviar tu formulario de correo PHP. Si habilitas la autenticación SMTP, puedes usar cualquier dirección de correo que desees como la dirección DE (FROM).</p>
-<h3>Los mensajes de correo no se envían en servidores compartidos</h3>
+<h3 id="h_01HSV91WZN5PHGRQVGB9GM5FWZ">Los mensajes de correo no se envían en servidores compartidos</h3>
 <p>Si has verificado que has configurado tu dominio correctamente para seguir la Política de dominio del remitente, pero los mensajes de correo aún no se envían desde un servidor compartido, es posible que el servidor haya alcanzado su límite de envío por hora. Para evitar esto, asegúrate de que tu sitio esté configurado para usar SMTP para enviar:</p>
 <ul>
 <li><strong>WordPress:</strong> <a href="https://help.dreamhost.com/hc/es/articles/215526937-Configurar-el-plugin-WP-MAIL-SMTP-" target="_self">WP Mail SMTP</a></li>
 <li><strong>PHP:</strong> <a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer" target="_self">PHPMailer</a></li>
 </ul>
 </div>
-<h2><span id="Certificate_errors_using_PHP_5.6">Errores de certificado</span></h2>
+<h2 id="h_01HSV91WZN9DW9GG33AB2S6BP7"><span id="Certificate_errors_using_PHP_5.6">Errores de certificado</span></h2>
 <div class="solvvy-solution">
 <div class="notebox-important">
 <p>En el pasado, era posible usar <strong>mail.example.com</strong> para conectarse (donde <strong>example.com</strong> es tu nombre de dominio real). Debido a cómo los clientes de correo modernos manejan la seguridad, esto NO se recomienda ya que puede generar errores de conexión. Por favor asegúrate de que solo estás usando el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214918038#nombre-del-servidor">nombre de tu servidor de correo</a> al conectarte. Esto debería ser <strong>imap.dreamhost.com</strong> o <strong>pop.dreamhost.com</strong>.</p>
 </div>
-<h3><span id="Error_messages">Mensajes de error</span></h3>
+<h3 id="h_01HSV91WZNFBVV7ZJK2686QF6Z"><span id="Error_messages">Mensajes de error</span></h3>
 <p>Al enviar por correo PHP, puedes ver los siguientes errores:</p>
 <ul>
 <li><strong>PHPMailer</strong></li>
@@ -59,13 +59,13 @@
 <div class="preboxcontainer">
 <pre class="prebox">The SMTP debugging output is shown below:
 
-2015-09-08 19:44:51	Connection: opening to ssl://mail.example.com:465, timeout=300, options=array (
+20xx-09-08 19:44:51	Connection: opening to ssl://mail.example.com:465, timeout=300, options=array (
                    	                  )
-2015-09-08 19:44:53	SMTP ERROR: Failed to connect to server:  (0)
-2015-09-08 19:44:53	SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting
+20xx-09-08 19:44:53	SMTP ERROR: Failed to connect to server:  (0)
+20xx-09-08 19:44:53	SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting
 </pre>
 </div>
-<h3><span id="Solution">Solución</span></h3>
+<h3 id="h_01HSV91WZNJNDX47YXJ09D685C"><span id="Solution">Solución</span></h3>
 <p>Esto se debe al nombre de host que se estás usando. El certificado hace referencia a mail.dreamhost.com que no es el mismo que tu dominio. Mira el siguiente artículo para obtener una explicación de este error:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215306748-Error-Certificate-domain-mismatch-conectando-a-un-servidor-de-correo-de-DreamHost">Error de Coincidencia de Certificado de Dominio</a></li>
@@ -94,7 +94,7 @@
 <li><a href="/hc/es/articles/214918038#nombre-del-servidor">Nombres de servidor de correo</a></li>
 </ul>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HSV91WZNEG9DX6RNP8FJKDY0">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215507058-Generalidades-PHP-mail-">Generalidades sobre PHP mail()</a></li>
