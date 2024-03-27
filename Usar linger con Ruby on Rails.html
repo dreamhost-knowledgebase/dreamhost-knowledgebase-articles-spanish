@@ -1,0 +1,142 @@
+<h2 id="h_01HSVHK37XTNA625NFPB259VYY">Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica cómo ejecutar Puma con Ruby on Rails utilizando Linger. Esta combinación permite que tu aplicación ejecute procesos persistentes y que tus servicios se reinicien si tu aplicación se cae o el servidor se reinicia.</p>
+<div class="prereqs">
+<p><strong>Requisitos previos</strong></p>
+<p>Este artículo asume que has completado los siguientes pasos:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/23628302213652-C%C3%B3mo-mejorar-a-un-VPS-y-usar-un-Servidor-Proxy">Mejorar de un servidor Shared a un VPS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy">Configurado un Servidor Proxy</a> para que corra en el número de puerto de tu escogencia.</li>
+</ul>
+</div>
+</div>
+<h2 id="h_01HQKXDRJM1RTW2ZPYWYNTX365">Paso 1 — Instalar Ruby y Rails</h2>
+<div class="solvvy-solution">
+<p>Instalar Ruby y Rails usando las siguientes guias.</p>
+<h3 id="h_01HSVJJHBQXXKE5Z9CJG1FRBQ6">Ruby</h3>
+<p>Instala una nueva versión de Ruby en tu VPS. Revisa el siguiente artículo para obtener más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217185247-Administrador-de-versiones-de-Ruby-Ruby-Version-Manager-RVM">Administrador de versiones de Ruby (RVM)</a></li>
+</ul>
+<h3 id="h_01HSVJJQ5F04P4F4WZFQB92VJE">Rails</h3>
+<div class="notebox-note">
+<p>El siguiente artículo utiliza el nombre de la aplicación Rails <span class="text-object">blog</span>, pero puedes nombrarla como quieras.</p>
+</div>
+<p>Mira los pasos #1-7.3 en la siguiente guía para configurar Rails:</p>
+<ul>
+<li><a href="https://guides.rubyonrails.org/getting_started.html#hello-rails-bang" target="_blank" rel="noopener noreferrer">guides.rubyonrails.org/getting_started.html#hello-rails-bang</a></li>
+</ul>
+</div>
+<h2 id="01HSVJZBR1H5XC3QNNR4CEJAND">Paso 2 — Instalar Puma</h2>
+<div class="solvvy-solution">
+<p>Revisa las siguientes guías para ver los pasos sobre la instalación de Puma:</p>
+<ul>
+<li><a href="https://github.com/puma/puma" target="_blank" rel="noopener noreferrer">github.com/puma/puma</a></li>
+<li><a href="https://rubygems.org/gems/puma?locale=es" target="_blank" rel="noopener noreferrer">rubygems.org/gems/puma</a></li>
+</ul>
+<h3 id="h_01HSVK8CX8XF9K4NKAD6BBWD4C">Editar el archivo puma.rb</h3>
+<p>Navega al siguiente directorio:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/username/example.com/blog/config</pre>
+</div>
+<p><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Edita el archivo puma.rb</a> para cambiar el número de puerto predeterminado al puerto que elegiste al crear el Servidor Proxy en el panel. Este ejemplo utiliza el puerto 8003:</p>
+<div class="preboxcontainer">
+<pre class="prebox">port ENV.fetch("PORT") {<span class="code-highlight">8003</span>}</pre>
+</div>
+<h3 id="h_01HSVKYBBEXCTC1GAJCZAZR5H5">Inicia el servidor web de Puma</h3>
+<p>Navega al siguiente directorio:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/username/example.com/blog/</pre>
+</div>
+<p>Corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">bin/rails server</span></pre>
+</div>
+<p>Para parar el servidor, presiona <span class="code">CTRL + C</span>.</p>
+<h3 id="h_01HSVM382VAR8C1DSA714H832H">Solucionar un error</h3>
+<p>Si obtienes un error de host bloqueado acerca de tu dominio de aplicación, necesitarás agregar una línea al archivo <span class="text-object">development.rb</span>.</p>
+<p>Navega al siguiente directorio:</p>
+<div class="preboxcontainer">
+<pre class="prebox">/home/username/example.com/blog/config/environments/</pre>
+</div>
+<p>Edita el archivo <span class="text-object">development.rb</span>. Debajo de la línea <span class="code">config.enable_reloading = true</span>, agrega lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">config.hosts &lt;&lt; /example\.com/</pre>
+</div>
+<p><a href="https://help.dreamhost.com/hc/es/articles/215573127-Reiniciar-un-VPS">Reinicia tu VPS</a> e inicia Puma de nuevo. El error ya deberá estar resuelto.</p>
+</div>
+<h2 id="01HSVMGA3V06DVRJJH7AKBARB2">Paso 3 — Instalar Linger</h2>
+<div class="solvvy-solution">
+<p>Para instalar linger bajo tu usuario, inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">loginctl enable-linger</span></pre>
+</div>
+<div class="notebox-note">
+<p>Este comando no responderá con ninguna salida.</p>
+</div>
+</div>
+<h2 id="h_01HSVMRAHV2FBC7609JQ2WAEPP">Paso 4 — Configurar Puma para las unidades de los usuarios Systemd</h2>
+<div class="solvvy-solution">
+<div class="notebox-tip">
+<p>Revisa la guía oficial para más detalles:</p>
+<ul>
+<li><a href="https://github.com/puma/puma/blob/master/docs/systemd.md" target="_blank" rel="noopener noreferrer">github.com/puma/puma/blob/master/docs/systemd.md</a></li>
+</ul>
+</div>
+<p>Para configurar Puma para unidades de usuarios Systemd:</p>
+<ol>
+<li>Crea un archivo llamado <span class="text-object">puma.service</span> en el directorio <span class="text-object">.config/systemd/user</span>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nano ~/.config/systemd/user/puma.service</span></pre>
+</div>
+</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Agrega el siguiente código</a> a este archivo:
+<div class="preboxcontainer">
+<pre class="prebox">[Unit]
+Description=Puma instance to serve application
+After=network.target
+
+[Service]
+WorkingDirectory=<span class="code-highlight">/path/to/your/app</span>
+ExecStart=<span class="code-highlight">/path/to/your/app/bin/puma</span> -C config/puma.rb -e production
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+Restart=on-failure
+
+[Install]
+WantedBy=default.target</pre>
+</div>
+</li>
+<li>Edita las líneas resaltadas de arriba como se aparece a continuación:
+<ul>
+<li><strong>WorkingDirectory:</strong> La ruta a la aplicación de tu sitio web.</li>
+<li><strong>ExecStart:</strong> La tura a tu instalación de Puma.</li>
+</ul>
+</li>
+<li>Habilita la unidad de usuario para puma:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">systemctl --user enable puma</span></pre>
+</div>
+</li>
+<li>Inicia la unidad con puma:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">systemctl --user start puma</span></pre>
+</div>
+</li>
+<li>Confirma que está corriendo:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">systemctl --user status puma</span></pre>
+</div>
+</li>
+</ol>
+<p>Los servicios de tu aplicación ahora se reiniciarán automáticamente cuando el servidor se reinicie o si la aplicación se cae.</p>
+</div>
+<h2 id="h_01HSVNAH5ZHQD16W49GHXJP8X1">Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy">Servidor Proxy</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/sections/203949438-Ruby-on-Rails">Ruby on Rails en DreamHost</a></li>
+</ul>
+</div>

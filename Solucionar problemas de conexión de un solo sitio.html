@@ -9,17 +9,17 @@
 <div class="solvvy-solution">
 <p>Hay dos cosas que pueden hacer que esto suceda.</p>
 <ul>
-<li>Problemas de .htaccess.</li>
+<li>Problemas de <span class="text-object">.htaccess</span></li>
 <li>Alcanzar los límites de memoria del servidor compartido.</li>
 </ul>
 <h3 id="h_01HSV6RWWPT5YWGT3R5JDYP8EN">Problemas de .htaccess</h3>
-<p>Si el error ocurre instantáneamente, lo más probable es que la causa esté relacionada con el archivo .htaccess de tu sitio. Algunas cosas potenciales para buscar:</p>
+<p>Si el error ocurre instantáneamente, lo más probable es que la causa esté relacionada con el archivo <span class="text-object">.htaccess</span> de tu sitio. Algunas cosas potenciales para buscar:</p>
 <ul>
-<li>Errores de sintaxis en el archivo .htaccess</li>
+<li>Errores de sintaxis en el archivo <span class="text-object">.htaccess</span></li>
 <li>Configuración personalizada de PHP que no funciona</li>
 </ul>
-<p>Para ver si esta es la causa, intenta cambiar el nombre del archivo .htaccess en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-de-sitio-web" target="_self">directorio principal de tu sitio</a> a algo como ".htaccess.disabled". Si el problema está en tu archivo .htaccess, eso lo resolverá de inmediato.</p>
-<p>Ten en cuenta que las reglas .htaccess se aplican a todos los subdirectorios, por lo que es posible que un archivo .htaccess fuera del directorio web de tu sitio afecte a tu sitio. Asegúrate de buscar también más arriba en la estructura de directorios los archivos .htaccess que puedan afectar las cosas e intenta cambiar el nombre de cualquiera que encuentres para ver si ayuda.</p>
+<p>Para ver si esta es la causa, intenta cambiar el nombre del archivo <span class="text-object">.htaccess</span> en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-de-sitio-web" target="_self">directorio principal de tu sitio</a> a algo como <span class="text-object">.htaccess.disabled</span>. Si el problema está en tu archivo <span class="text-object">.htaccess</span>, eso lo resolverá de inmediato.</p>
+<p>Ten en cuenta que las reglas <span class="text-object">.htaccess</span> se aplican a todos los subdirectorios, por lo que es posible que un archivo <span class="text-object">.htaccess</span> fuera del directorio web de tu sitio afecte a tu sitio. Asegúrate de buscar también más arriba en la estructura de directorios los archivos <span class="text-object">.htaccess</span> que puedan afectar las cosas e intenta cambiar el nombre de cualquiera que encuentres para ver si ayuda.</p>
 <h3 id="h_01HSV6RWWPJCG9KD0FBFMPGBXC">Alcanzar límites de memoria</h3>
 <p>Si eso no resuelve el problema, es posible que los procesos se cancelen debido a que se excede el límite de memoria de tu usuario. Una forma rápida de ver si esto podría estar afectando es simplemente verificar para ver qué procesos está ejecutando como usuario. Los siguientes artículos enumeran varias herramientas que puedes usar para investigar tus procesos en ejecución y el uso de memoria:</p>
 <ul>
@@ -36,7 +36,7 @@
 <h3 id="h_01HSV6RWWPTPKXCBYDYK4ZP9S0">Tiempo de espera de PHP</h3>
 <p>Si esto solo ocurre en páginas específicas (en particular, páginas de administración para el software que estás usando), entonces es muy probable que esta sea la causa. Puedes averiguar si esta es la causa creando un <a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">phprc</a> personalizado para tu sitio y ajustando la configuración <a href="https://help.dreamhost.com/hc/es/articles/360028776572-Aumentar-el-tiempo-de-ejecuci%C3%B3n-de-PHP">max_execution_time</a>.</p>
 <p>Si esto le sucede a todas tus páginas, aún puede ser un tiempo de espera de PHP. Puedes consultar los&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP" target="_self">logs de errores</a>&nbsp;de tu sitio para ver si hay algún mensaje de error útil. Si todo lo que ves es un error de "Premature end of headers", no hay mucha información para solucionar, ya que esto simplemente significa que la secuencia de comandos salió antes de completarse.</p>
-<p>Puedes leer más sobre cómo crear un archivo phprc personalizado en el siguiente artículo:</p>
+<p>Puedes leer más sobre cómo crear un archivo <span class="text-object">phprc</span> personalizado en el siguiente artículo:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214894037-Crear-un-archivo-phprc-v%C3%ADa-FTP" target="_self">Crear un archivo phprc vía FTP</a></li>
 </ul>
@@ -50,8 +50,8 @@
 </div>
 <h2 id="h_01HSV6RWWPP3EPGFMEX6EZJHCF">El sitio gira intentando cargar para siempre</h2>
 <div class="solvvy-solution">
-<p>Esta es quizás la cosa más genérica que puede suceder con tu sitio. Muy a menudo, esto significa que algo está causando que tus procesos PHP se bloqueen. Si ejecutas el comando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000683852-Usando-el-comando-top-para-solucionar-problemas-de-tu-sitio-web"><span class="code">top -c</span></a>&nbsp;en el servidor, es posible que también veas &lt;defunct&gt; junto a algunos de esos procesos. Esto puede ser causado por una gran cantidad de cosas.</p>
-<p>Con WordPress, esto a menudo tiene que ver con tablas de bases de datos que tienen sobrecarga. Eso no debería causar problemas, pero por alguna razón WordPress puede ponerse en mal estado si hay alguna sobrecarga (particularmente en la tabla wp_options) y a menudo exhibirá este síntoma en esos casos. Otras causas importantes de esto son configuraciones incorrectas de software o plugins de terceros en el software que estás utilizando que tienen un problema de compatibilidad o una codificación deficiente.</p>
+<p>Esta es quizás la cosa más genérica que puede suceder con tu sitio. Muy a menudo, esto significa que algo está causando que tus procesos PHP se bloqueen. Si ejecutas el comando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000683852-Usando-el-comando-top-para-solucionar-problemas-de-tu-sitio-web"><span class="code">top -c</span></a>&nbsp;en el servidor, es posible que también veas <span class="code">&lt;defunct&gt;</span> junto a algunos de esos procesos. Esto puede ser causado por una gran cantidad de cosas.</p>
+<p>Con WordPress, esto a menudo tiene que ver con tablas de bases de datos que tienen sobrecarga. Eso no debería causar problemas, pero por alguna razón WordPress puede ponerse en mal estado si hay alguna sobrecarga (particularmente en la tabla <span class="text-object">wp_options</span>) y a menudo exhibirá este síntoma en esos casos. Otras causas importantes de esto son configuraciones incorrectas de software o plugins de terceros en el software que estás utilizando que tienen un problema de compatibilidad o una codificación deficiente.</p>
 <p>Puedes leer más sobre cómo reducir los gastos generales y optimizar WordPress en los siguientes artículos:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215036388-Optimizar-una-base-de-datos" target="_self">Optimizar una base de datos</a></li>
@@ -64,14 +64,14 @@
 </div>
 <h2 id="h_01HSV6RWWPQK3B9B5CX7MW0J7E">El sitio se carga inmediatamente, pero muestra un error de conexión a la base de datos</h2>
 <div class="solvvy-solution">
-<p>Consulta el siguiente artículo para obtener información sobre cómo solucionar un error de conexión de la base de datos:</p>
+<p>Revisa el siguiente artículo para obtener información sobre cómo solucionar un error de conexión de la base de datos:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360021570592-Error-al-establecer-una-conexi%C3%B3n-de-base-de-datos" target="_self">Error estableciendo conexión a la base de datos</a></li>
 </ul>
 </div>
 <h2 id="h_01HSV6RWWPFQHB2207659T1CFJ">El sitio se carga inmediatamente, pero muestra un error 403 Forbidden</h2>
 <div class="solvvy-solution">
-<p>El error prohibido 403 se muestra cuando se establece una regla de denegación para una IP en el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">archivo .htaccess</a> o cuando los permisos de archivo evitan que el servidor web publique una página. Por lo general, puede tener una idea del problema que causa esto mirando tu archivo error.log:</p>
+<p>El error prohibido 403 se muestra cuando se establece una regla de denegación para una IP en el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">archivo .htaccess</a> o cuando los permisos de archivo evitan que el servidor web publique una página. Por lo general, puede tener una idea del problema que causa esto mirando tu archivo <span class="text-object">error.log</span>:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP" target="_self">Ver tus logs de acceso y error por medio de SFTP</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216512217-Ver-y-examinar-un-log-de-errores-v%C3%ADa-SSH" target="_self">Ver y examinar tu log de error por medio de SSH</a></li>
@@ -79,29 +79,36 @@
 <p>En la mayoría de los casos, esto está relacionado con el permiso de archivo. Para verificar los permisos de tu sitio:</p>
 <ol>
 <li>Inicia sesión por medio de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Navega al <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home#el-directorio-home-del-usuario" target="_blank" rel="noopener noreferrer">directorio home de tu usuario</a>.</li>
 <li>Obtén un listado de directorio ejecutando el comando <span class="code">ls -la</span>:</li>
 </ol>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la</span>
-<span class="cmdoutput">drwxr-x--x   16 username pg123456    4096 2009-12-10 04:25 ./
+<span class="cmdoutput">drwxr-x--x   16 username pg123456    4096 Mar 25 07:30 ./
 ...</span>
 </pre>
 </div>
-<p>La primera línea debe verse como la anterior. Observa la&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">cadena de permisos</a>&nbsp;que dice "drwxr-x--x".&nbsp;La primera letra significa "directorio", luego hay tres conjuntos de tres permisos. El primer conjunto son los permisos del propietario, que están configurados para leer/escribir/ejecutar. El segundo conjunto son los permisos de grupo que están configurados para leer/ejecutar. El tercer conjunto son los permisos "otros" (o lo que tienen todos los demás usuarios), que está configurado para ejecutarse únicamente. Si tienes Enhanced Security habilitada para tu usuario, se vería así en su lugar:</p>
+<p>La primera línea debe verse como la anterior. Observa la&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">cadena de permisos</a>&nbsp;que dice "drwxr-x--x".&nbsp;La primera letra significa "directorio", luego hay tres conjuntos de tres permisos.</p>
+<ul>
+<li>El primer conjunto son los permisos del propietario, que están configurados para leer/escribir/ejecutar.</li>
+<li>El segundo conjunto son los permisos de grupo que están configurados para leer/ejecutar.</li>
+<li>El tercer conjunto son los permisos "otros" (o lo que tienen todos los demás usuarios), que está configurado para ejecutarse únicamente.</li>
+</ul>
+<p>Si tienes Enhanced Security habilitada para tu usuario, se vería así en su lugar:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la</span>
-<span class="cmdoutput">drwxr-x---   16 username adm    4096 Nov 21 07:30 .
+<span class="cmdoutput">drwxr-x---   16 username adm    4096 Mar 25 07:30 .
 ...</span>
 </pre>
 </div>
 <p>Lo anterior son configuraciones de permisos correctas. Si en cambio se ven así:</p>
 <div class="preboxcontainer">
-<pre class="prebox">drw-r-----   16 <span class="cmdoutput">username </span>pg123456    4096 <span class="cmdoutput">4096 Nov 21 07:30 .
+<pre class="prebox">drw-r-----   16 <span class="cmdoutput">username </span>pg123456    4096 <span class="cmdoutput">4096 Mar 25 07:30 .
 </span></pre>
 </div>
 <p>O así:</p>
 <div class="preboxcontainer">
-<pre class="prebox">d---------   16 <span class="cmdoutput">username </span>pg123456    4096 <span class="cmdoutput">4096 Nov 21 07:30 .
+<pre class="prebox">d---------   16 <span class="cmdoutput">username </span>pg123456    4096 <span class="cmdoutput">4096 Mar 25 07:30 .
 </span></pre>
 </div>
 <p>Entonces eso significa que tu usuario ha sido deshabilitado y debes comunicarte con DreamHost. Si este es el caso, es probable que veas errores como este al intentar iniciar sesión y no podrás obtener la lista del directorio como se describió anteriormente:</p>
@@ -111,12 +118,12 @@
 </pre>
 </div>
 <p>Si ves esto,&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">contacta a soporte de DreamHost</a>&nbsp;para ser asistido.</p>
-<p>Si los permisos se ven bien, pero aún recibe un error 403, intenta cambiar el nombre del <a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-" target="_self">archivo .htaccess</a> para tu dominio afectado de ".htaccess" a ".htaccess.disabled" como este:</p>
+<p>Si los permisos se ven bien, pero aún recibe un error 403, intenta cambiar el nombre del <a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-" target="_self">archivo .htaccess</a> para tu dominio afectado de <span class="text-object">.htaccess</span> a <span class="text-object">.htaccess.disabled</span> como este:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mv .htaccess .htaccess.disabled</span>
 </pre>
 </div>
-<p>Luego, intenta cargar tu sitio. Si el error 403 desapareció, abre tu archivo .htaccess y busca líneas que comiencen con "deny". Si encuentras alguno, coméntalo poniendo un "#" antes de la línea y guardando el archivo. Puedes volver a habilitar el archivo .htaccess que deshabilitaste anteriormente de esta manera:</p>
+<p>Luego, intenta cargar tu sitio. Si el error 403 desapareció, abre tu archivo <span class="text-object">.htaccess</span> y busca líneas que comiencen con <span class="code">deny</span>. Si encuentras alguno, coméntalo poniendo un <span class="code">#</span> antes de la línea y guardando el archivo. Puedes volver a habilitar el archivo <span class="text-object">.htaccess</span> que deshabilitaste anteriormente de esta manera:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mv .htaccess.disabled .htaccess</span>
 </pre>
@@ -132,9 +139,9 @@
 <h2 id="h_01HSV6RWWQWTGVV079CQY30JK8">El sitio se carga, pero muestra un error 404 en lugar de lo que esperaba</h2>
 <div class="solvvy-solution">
 <p>Esto sucede con mayor frecuencia con sitios que usan software como WordPress que usan&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215613037-Como-ver-archivos-ocultos-en-un-cliente-FTP" target="_self">reglas de .htaccess</a> para tus permalinks/URL. Si esas reglas se eliminan o cambian de alguna manera, aparecerá un 404 en lugar del contenido que esperas.</p>
-<p>La forma más fácil de solucionar esto es descargar una copia nueva del software que estás usando desde tu sitio web (por ejemplo, <a href="https://downloads.joomla.org/" rel="nofollow">https://downloads.joomla.org/</a>)&nbsp;y luego copiar el contenido del archivo .htaccess predeterminado y pegarlo en tu archivo existente (ten en cuenta que los archivos ".htaccess" son archivos invisibles, por lo que es posible que debas&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215613037-Como-ver-archivos-ocultos-en-un-cliente-FTP" target="_self">habilitar la visualización de archivos invisibles</a>&nbsp;en tu cliente FTP para encontrar el archivo si está allí).</p>
-<p>No todo el software viene con un archivo .htaccess por defecto. Por ejemplo, WordPress genera uno cuando cambias la configuración de tus permalinks, así que tenlo en cuenta también. Si poner las reglas predeterminadas de .htaccess no resuelve el problema 404, escribe para soporte y solicita ayuda adicional.</p>
-<p>Para WordPress específicamente, esto a menudo se puede solucionar simplemente volviendo a guardar su estructura de permalinks. Para hacerlo, inicia sesión en tu panel de administración, ve a <span class="text-section">Settings &gt; Permalinks</span>. y luego haz clic en el botón <strong>Save Changes</strong>.</p>
+<p>La forma más fácil de solucionar esto es descargar una copia nueva del software que estás usando desde tu sitio web (por ejemplo, <a href="https://downloads.joomla.org/" rel="nofollow">https://downloads.joomla.org/</a>)&nbsp;y luego copiar el contenido del archivo <span class="text-object">.htaccess</span> predeterminado y pegarlo en tu archivo existente (ten en cuenta que los archivos <span class="text-object">.htaccess</span> son archivos invisibles, por lo que es posible que debas&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215613037-Como-ver-archivos-ocultos-en-un-cliente-FTP" target="_self">habilitar la visualización de archivos ocultos</a>&nbsp;en tu cliente FTP para encontrar el archivo si está allí).</p>
+<p>No todo el software viene con un archivo <span class="text-object">.htaccess</span> por defecto. Por ejemplo, WordPress genera uno cuando cambias la configuración de tu permalink, así que tenlo en cuenta también. Si poner las reglas predeterminadas de <span class="text-object">.htaccess</span> no resuelve el problema 404, escribe para soporte y solicita ayuda adicional.</p>
+<p>Para WordPress específicamente, esto a menudo se puede solucionar simplemente volviendo a guardar su estructura de permalinks. Para hacerlo, inicia sesión en tu panel de administración, dirígete a <span class="text-section">Configuraciones &gt; Permalinks</span>. y luego haz clic en el botón <strong>Guardar Cambios</strong>.</p>
 </div>
 <h2 id="h_01HSV6RWWQT65N6N7NR7W9QD8S">El sitio carga, pero muestra un error de WordPress</h2>
 <div class="solvvy-solution">
