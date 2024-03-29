@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HT44JTMVCWBYPAWW18B11ECR">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Las máquinas virtuales que se ejecutan dentro de la nube se denominan instancias. Antes de poder lanzar una instancia, recopila los siguientes parámetros:</p>
 <ul class="simple">
@@ -17,11 +17,11 @@
 </ul>
 <p>Puedes lanzar una instancia directamente desde una de las imágenes de OpenStack disponibles o desde una imagen que hayas copiado en un volumen persistente. El servicio OpenStack Image proporciona un conjunto de imágenes a las que pueden acceder los miembros de diferentes proyectos.</p>
 </div>
-<h2>Reúne parámetros para lanzar una instancia</h2>
+<h2 id="h_01HT44JTMWSNHM6GF29AKK8A7D">Reúne parámetros para lanzar una instancia</h2>
 <div class="solvvy-solution">
 <p>Los siguientes ejemplos usan el <a href="https://help.dreamhost.com/hc/es/articles/235817468-Introducci%C3%B3n-al-cliente-de-l%C3%ADnea-de-comandos-de-OpenStack" target="_self" rel="undefined">Cliente de línea de comandos OpenStack</a>:</p>
 <span id="Lista_de_Flavors"></span>
-<h3>Enumera los flavors disponibles</h3>
+<h3 id="h_01HT44JTMWV0HAXG000ZMJJWTQ">Enumera los flavors disponibles</h3>
 <p>Anota el ID del flavor que deseas usar para tu instancia:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack flavor list</span>
@@ -37,7 +37,7 @@
 +-----+----------------+-------+------+-----------+-------+-----------+
 </pre>
 </div>
-<h3>Lista de las imágenes disponibles</h3>
+<h3 id="h_01HT44JTMWHXH7CKYXNZAERW0D">Lista de las imágenes disponibles</h3>
 <p>Anota el ID de la imagen desde la que deseas iniciar tu instancia:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack image list</span>
@@ -61,7 +61,7 @@
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack image list | grep -i Ubuntu-14</span>
 | 03a87e23-77e5-403b-a437-10e0b28b2583 | Ubuntu-14.04 | active      |</pre>
 </div>
-<h3>Enumera los grupos de seguridad disponibles.</h3>
+<h3 id="h_01HT44JTMW7FZ9DV78JMVB2518">Enumera los grupos de seguridad disponibles.</h3>
 <p>Anota el ID del grupo de seguridad que deseas usar para tu instancia:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack security group list</span>
@@ -75,13 +75,13 @@
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack security group show default</span></pre>
 </div>
-<h3>Lista de llaves de emparejamiento disponibles</h3>
+<h3 id="h_01HT44JTMWD49KQ68WQNVQGYBV">Lista de llaves de emparejamiento disponibles</h3>
 <p>Enumera las llaves de emparejamiento disponibles y anota el nombre de las claves que utilizas para el acceso SSH.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack keypair list</span></pre>
 </div>
 </div>
-<h2>Lanzar una instancia desde una imagen</h2>
+<h2 id="h_01HT44JTMW72QCM5VZ8EZKWWPG">Lanzar una instancia desde una imagen</h2>
 <div class="solvvy-solution">
 <p>Una vez que hayas reunido los parámetros necesarios, ahora puedes <a href="https://docs.openstack.org/python-openstackclient/pike/cli/command-objects/server.html#server-create">crear una instancia</a>. En este punto, debes tener las siguientes credenciales:</p>
 <ul>
@@ -95,7 +95,7 @@
 </div>
 </li>
 </ul>
-<h3>Corre lo siguiente para crear tu instancia.</h3>
+<h3 id="h_01HT44JTMW6REFKZ4KQKZMF71F">Corre lo siguiente para crear tu instancia.</h3>
 <p>Este ejemplo divide el comando en líneas separadas.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack server create --flavor 300 \
@@ -140,13 +140,13 @@
 | properties                  |                                                 |
 | security_groups             | name='29abcf85-b79f-43b0-babf-6a5bb5cc7bed'     |
 | status                      | BUILD                                           |
-| updated                     | 2017-10-10T01:25:10Z                            |
+| updated                     | 2024-03-29T01:25:10Z                            |
 | user_id                     | 29825415c4be4d49c27e787a63eb8320                |
 | volumes_attached            |                                                 |
 +-----------------------------+-------------------------------------------------+</pre>
 </div>
 <p>Un estado <strong>BUILD </strong>indica que la instancia se ha iniciado, pero aún no está en línea. Un estado <strong>ACTIVE&nbsp;</strong>indica que la instancia está activa.&nbsp;Copia el valor de la contraseña administrativa del campo <code class="docutils literal"><span class="pre">adminPass</span></code>. Puedes utilizar esta contraseña más tarde para iniciar sesión en tu instancia.</p>
-<p>También podrás ver la nueva instancia en tu <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener">panel de DreamCompute</a>.</p>
+<p>También podrás ver la nueva instancia en tu <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.compute&amp;" target="_blank" rel="noopener noreferrer">panel de DreamCompute</a>.</p>
 <p>Para obtener más opciones, usa el siguiente comando o ve la documentación de OpenStack a continuación.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack help server create</span>
@@ -163,7 +163,7 @@
 </div>
 </div>
 </div>
-<h2>Comprueba si la instancia está en línea</h2>
+<h2 id="h_01HT44JTMW37X49M661HY6K4HE">Comprueba si la instancia está en línea</h2>
 <div class="solvvy-solution">
 <p>Utiliza el comando <span class="code">list</span> para ver una lista de todas las instancias:</p>
 <div class="preboxcontainer">
@@ -182,6 +182,6 @@
 </div>
 <!--DreamCompute Button-->
 <div class="dream-sign-up">
-<h2>Implementa Tus Aplicaciones en Servidores en la Nube Hoy</h2>
+<h2 id="h_01HT44JTMWGPZQ1CRZ7M1800KG">Implementa Tus Aplicaciones en Servidores en la Nube Hoy</h2>
 <div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/computing/" target="_self" rel="undefined">Suscríbete a DreamCompute</a></div>
 </div>

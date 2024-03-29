@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HT43WKBXX4NF3D8GXZVRQ5N1">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Agregar encabezados de seguridad a su archivo <span class="text-object">.htaccess</span> puede ayudar a proteger tu sitio web y sus datos. Este artículo explica cómo agregar los siguientes encabezados de seguridad.</p>
 <ul>
@@ -12,14 +12,14 @@
 <li><a href="#cors" target="_self">Encabezados CORS</a></li>
 </ul>
 </div>
-<h2>Agregar un archivo .htaccess</h2>
+<h2 id="h_01HT43WKBX28VEKH83MQMKWTD5">Agregar un archivo .htaccess</h2>
 <div class="solvvy-solution">
 <p>Los ejemplos en este artículo asumen que tu sitio está en un servidor Apache y que está agregando encabezados al archivo <span class="text-object">.htaccess</span> de tu sitio. Consulta el siguiente artículo para obtener una descripción general de qué es un archivo <span class="text-object">.htaccess</span> y cómo agregar uno a tu sitio.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades del archivo .htaccess</a></li>
 </ul>
 </div>
-<h2><span id="content-security-policy">Content-Security-Policy</span></h2>
+<h2 id="h_01HT43WKBXEC760KY5M17VAPSF"><span id="content-security-policy">Content-Security-Policy</span></h2>
 <div class="solvvy-solution">
 <p>El encabezado Content-Security-Policy especifica las fuentes de contenido aprobadas que el navegador puede cargar desde tu sitio web. Cuando incluyes en la lista blanca fuentes de contenido aprobadas, ayudas a evitar que se cargue código malicioso en tu sitio. Esta es una forma de ayudar a reducir los riesgos de XSS.</p>
 <p>Revisa la siguiente página para más detalles:</p>
@@ -38,16 +38,16 @@
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
 HTTP/1.1 200 OK
-Date: Mon, 25 Nov 2019 22:17:47 GMT
+Date: Fri, 29 Mar 2024 22:17:47 GMT
 Server: Apache
-Last-Modified: Sun, 22 Apr 2018 17:05:19 GMT
+Last-Modified: Fri, 29 Mar 2024 17:05:19 GMT
 ETag: "2f5-56a72ed086011"
 Accept-Ranges: bytes
 Content-Length: 757
 <span class="green">Content-Security-Policy: default-src https://example.com:443</span>
 Content-Type: text/html</pre>
 </div>
-<h3>Solución de advertencias de sitios inseguros y contenido mixto</h3>
+<h3 id="h_01HT43WKBX6D182E0SJRGSF0MN">Solución de advertencias de sitios inseguros y contenido mixto</h3>
 <p>Si tu sitio web tiene activos que se cargan a través de <span class="text-object">http</span>, tu sitio mostrará una advertencia SSL en la barra de URL de tu navegador para notificar al visitante que la conexión no es segura.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215364618--Por-qu%C3%A9-mi-navegador-dice-que-mi-sitio-es-inseguro-" target="_self">Resolver advertencias de sitios inseguros y contenido mixto</a></li>
@@ -57,7 +57,7 @@ Content-Type: text/html</pre>
 <pre class="prebox">Header always set Content-Security-Policy "upgrade-insecure-requests;"</pre>
 </div>
 </div>
-<h2><span id="hsts">Strict-Transport-Security (HSTS)</span></h2>
+<h2 id="h_01HT43WKBX3NBNGPP6SFWM463A"><span id="hsts">Strict-Transport-Security (HSTS)</span></h2>
 <div class="solvvy-solution">
 <div class="notebox-note">
 <p>HSTS se habilita por defecto en todos los sitios DreamPress. Por favor <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_blank" rel="noopener noreferrer">contacta a soporte</a> si deseas agregar HSTS a dominios adicionales.</p>
@@ -75,9 +75,9 @@ Content-Type: text/html</pre>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
 HTTP/1.1 200 OK
-Date: Tue, 05 Jun 2018 20:05:52 GMT
+Date: Fri, 29 Mar 2024 20:05:52 GMT
 Server: Apache
-Last-Modified: Tue, 05 Jun 2018 16:26:52 GMT
+Last-Modified: Fri, 29 Mar 2024 16:26:52 GMT
 ETag: "2f9-56de78493cbc8"
 Accept-Ranges: bytes
 Content-Length: 761
@@ -85,7 +85,7 @@ Content-Length: 761
 Content-Type: text/html
 </pre>
 </div>
-<h3>Precarga de hsts y el subdominio 'www'</h3>
+<h3 id="h_01HT43WKBXRSNWG9MKTTEEFGSP">Precarga de hsts y el subdominio 'www'</h3>
 <p>Chrome te ofrece la opción de agregar tu dominio a su lista de precarga de HSTS.</p>
 <ul>
 <li><a href="https://hstspreload.org">https://hstspreload.org</a></li>
@@ -102,7 +102,7 @@ Content-Type: text/html
 <p><strong>Cloudflare</strong></p>
 <p>Si deseas <a href="https://help.dreamhost.com/hc/es/articles/7087974733332-Crear-una-cuenta-de-Cloudflare-gratuita" target="_blank" rel="noopener noreferrer">usar Cloudflare</a> y agregar tu dominio a la lista de precarga de HSTS, debes comprar una cuenta de Cloudflare directamente en Cloudflare.</p>
 </div>
-<h2><span id="x-frame-options">X-Frame-Options</span></h2>
+<h2 id="h_01HT43WKBXZRSQ7WWG3QF68FWB"><span id="x-frame-options">X-Frame-Options</span></h2>
 <div class="solvvy-solution">
 <p>Este encabezado ayuda a proteger a tus visitantes contra los ataques de clickjacking. Agrega este encabezado en las páginas que no deberían poder representar una página dentro de un marco. Mira los siguientes enlaces para obtener más información:</p>
 <ul>
@@ -121,17 +121,17 @@ Content-Type: text/html
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
 HTTP/1.1 200 OK
-Date: Mon, 25 Nov 2019 22:49:51 GMT
+Date: Fri, 29 Mar 2024 22:49:51 GMT
 Server: Apache
 <span class="green">X-Frame-Options: SAMEORIGIN</span>
-Last-Modified: Sun, 22 Apr 2018 17:05:19 GMT
+Last-Modified: Fri, 29 Mar 2024 17:05:19 GMT
 ETag: "2f5-56a72ed086011"
 Accept-Ranges: bytes
 Content-Length: 757
 Content-Type: text/html</pre>
 </div>
 </div>
-<h2><span id="xss">Protección de secuencias de comandos entre sitios (XSS)</span></h2>
+<h2 id="h_01HT43WKBYGMSHRJ7GPWXN9G79"><span id="xss">Protección de secuencias de comandos entre sitios (XSS)</span></h2>
 <div class="solvvy-solution">
 <p>El encabezado de X-XSS-Protection ayuda a proteger a tus visitantes contra los ataques de Cross-site Scripting. Mira el siguiente artículo para más detalles:</p>
 <ul>
@@ -149,9 +149,9 @@ Content-Type: text/html</pre>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
 HTTP/1.1 200 OK
-Date: Mon, 25 Nov 2019 22:55:52 GMT
+Date: Fri, 29 Mar 2024 22:55:52 GMT
 Server: Apache
-Last-Modified: Sun, 22 Apr 2018 17:05:19 GMT
+Last-Modified: Fri, 29 Mar 2024 17:05:19 GMT
 ETag: "2f5-56a72ed086011"
 Accept-Ranges: bytes
 Content-Length: 757
@@ -160,7 +160,7 @@ Content-Type: text/html
 </pre>
 </div>
 </div>
-<h2><span id="x-content-type-options">X-Content-Type-Options</span></h2>
+<h2 id="h_01HT43WKBY3ED794QCTM3DJ5N2"><span id="x-content-type-options">X-Content-Type-Options</span></h2>
 <div class="solvvy-solution">
 <p>Este encabezado bloquea la detección de contenido que podría transformar los tipos MIME no ejecutables en tipos MIME ejecutables. Revisa el siguiente artículo para más detalles:</p>
 <ul>
@@ -175,9 +175,9 @@ Content-Type: text/html
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
 HTTP/1.1 200 OK
-Date: Mon, 25 Nov 2019 23:10:02 GMT
+Date: Fri, 29 Mar 2024 23:10:02 GMT
 Server: Apache
-Last-Modified: Sun, 22 Apr 2018 17:05:19 GMT
+Last-Modified: Fri, 29 Mar 2024 17:05:19 GMT
 ETag: "2f5-56a72ed086011"
 Accept-Ranges: bytes
 Content-Length: 757
@@ -185,7 +185,7 @@ Content-Length: 757
 Content-Type: text/html</pre>
 </div>
 </div>
-<h2><span id="referrer-policy">Referrer-Policy</span></h2>
+<h2 id="h_01HT43WKBYSFFTT7WMB2PMFGQP"><span id="referrer-policy">Referrer-Policy</span></h2>
 <div class="solvvy-solution">
 <p>Este encabezado controla la cantidad de información de referencia de tu sitio que se envía a otro servidor. Por ejemplo, si un enlace en tu sitio abre un sitio web diferente, el servidor de ese sitio web registra tu nombre de dominio como el referente de ese enlace. Con esta política, puedes controlar qué información de referencia se envía a ese servidor externo. Revisa el siguiente enlace para más detalles.</p>
 <ul>
@@ -199,9 +199,9 @@ Content-Type: text/html</pre>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
 HTTP/1.1 200 OK
-Date: Tue, 26 Nov 2019 00:40:50 GMT
+Date: Fri, 29 Mar 2024 00:40:50 GMT
 Server: Apache
-Last-Modified: Tue, 26 Nov 2019 00:33:15 GMT
+Last-Modified: Fri, 29 Mar 2024 00:33:15 GMT
 ETag: "391-5983506a2c574"
 Accept-Ranges: bytes
 Content-Length: 913
@@ -210,7 +210,7 @@ Content-Type: text/html
 </pre>
 </div>
 </div>
-<h2><span id="feature-policy">Feature-Policy</span></h2>
+<h2 id="h_01HT43WKBYYJVWN8Q6H3EFT5AG"><span id="feature-policy">Feature-Policy</span></h2>
 <div class="solvvy-solution">
 <p>El encabezado Feature-Policy controla qué funciones del navegador están permitidas en tu sitio web. Esta política permite al propietario/desarrollador del sitio web restringir API específicas a las que el sitio puede acceder en el navegador. Aquí están algunos ejemplos:</p>
 <ul>
@@ -231,9 +231,9 @@ Content-Type: text/html
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">curl -I https://example.com</span>
 HTTP/1.1 200 OK
-Date: Tue, 26 Nov 2019 01:00:49 GMT
+Date: Fri, 29 Mar 2024 01:00:49 GMT
 Server: Apache
-Last-Modified: Tue, 26 Nov 2019 00:33:15 GMT
+Last-Modified: Fri, 29 Mar 2024 00:33:15 GMT
 ETag: "391-5983506a2c574"
 Accept-Ranges: bytes
 Content-Length: 913
@@ -241,14 +241,14 @@ Content-Length: 913
 Content-Type: text/html</pre>
 </div>
 </div>
-<h2><span id="cors">Habilitar CORS</span></h2>
+<h2 id="h_01HT43WKBYG9T5HF9W2VA1MBB3"><span id="cors">Habilitar CORS</span></h2>
 <div class="solvvy-solution">
 <p>Consulta el siguiente artículo para obtener información sobre cómo configurar los encabezados CORS.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360037198972-Encabezados-de-CORS" target="_self">Encabezados de CORS</a></li>
 </ul>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01HT43WKBY4DRMT5H5EY7T47H2">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360036487692-Generalidades-de-los-Encabezados-de-HTTP">Generalidades de los Encabezados de HTTP</a></li>
