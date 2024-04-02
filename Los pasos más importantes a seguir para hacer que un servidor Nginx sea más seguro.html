@@ -1,16 +1,16 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HTD84QR5VNM5YTYTBKJ9WSKZ">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Nginx es un servidor web de alto rendimiento diseñado para servir aplicaciones escalables de alto rendimiento de manera eficiente y receptiva. Se puede utilizar para servir contenido estático, equilibrar la carga de solicitudes <span class="text-object">HTTP</span>, proxy inverso FCGI/PSGI/USWGI y conexiones TCP arbitrarias. Dado esto, es importante poder configurar e implementar de forma segura las instalaciones de Nginx para proporcionar una interfaz web segura para tu aplicación y minimizar las superficies de ataque.</p>
 </div>
-<h2>Asegurar el binario</h2>
+<h2 id="h_01HTD84QR5DC4BA9PQFTJTCAQP">Asegurar el binario</h2>
 <div class="solvvy-solution">
-<h3>Manténlo actualizado</h3>
+<h3 id="h_01HTD84QR5CK1BVZ267CX9A77E">Manténlo actualizado</h3>
 <p>La base de código central de Nginx (administración de memoria, manejo de sockets, etc.) es muy segura y estable, aunque las vulnerabilidades en el binario principal sí aparecen de vez en cuando. Por esta razón, es muy importante mantener Nginx actualizado. La mayoría de las distribuciones modernas de Linux no incluirán la última versión de Nginx en tus listas de paquetes predeterminadas, por lo que para instalar la última versión de Nginx a través de un paquete, es posible que deba agregar repositorios de paquetes adicionales a tu sistema. Consulta la documentación de Nginx a continuación para obtener detalles por distribución.</p>
 <ul>
 <li><a href="http://nginx.org/en/linux_packages.html#stable" target="_blank" rel="noopener noreferrer">Nginx.org: paquetes de Linux - paquetes Pre-construidos para la versión Stable</a></li>
 </ul>
 <div id="compiling-from-source">
-<h3>Compilar desde source</h3>
+<h3 id="h_01HTD84QR5VMKE1RSJ27QM3N6R">Compilar desde source</h3>
 <p>Como alternativa a la creación de paquetes, es posible crear Nginx desde la fuente. Hacerlo te permite ejecutar la última versión disponible del equipo de desarrollo de Nginx y permite configuraciones de seguridad adicionales. La construcción desde la fuente requiere algunos pasos. Primero, deberás asegurarte de tener los paquetes de sistema operativo necesarios para compilar desde la fuente.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">sudo apt-get update &amp;&amp; sudo apt-get install automake gcc \
@@ -41,7 +41,7 @@ gpg: no ultimately trusted keys found
 <p>Ahora verifica la firma:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">gpg --trusted-key 0x520A9993A1C052F8 --verify nginx-1.12.2.tar.gz{.asc,}</span>
-gpg: Signature made Tue 17 Oct 2017 01:18:21 PM UTC using RSA key ID A1C052F8
+gpg: Signature made Mon 01 2024 Apr 01:18:21 PM UTC using RSA key ID A1C052F8
 gpg: key A1C052F8 marked as ultimately trusted
 gpg: checking the trustdb
 gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
@@ -57,7 +57,7 @@ gpg: Good signature from "Maxim Dounin &lt;mdounin@mdounin.ru&gt;"
 </pre>
 </div>
 <div id="removing-unnecessary-modules">
-<h3>Eliminar módulos inecesarios</h3>
+<h3 id="h_01HTD84QR54RF3PQK2GDWQCG66">Eliminar módulos inecesarios</h3>
 <p>De forma predeterminada, Nginx se compila con una serie de módulos que amplían su funcionalidad. Estos permiten que Nginx se extienda para realizar una serie de funciones, pero es poco probable que todos los módulos se utilicen en un servidor determinado. Se recomienda eliminar los módulos no utilizados para reducir el tamaño del binario compilado y reducir la superficie de ataque que Nginx presenta al mundo (por ejemplo, una vulnerabilidad encontrada en el proxy uwsgi no sería explotable contra un servidor que no aprovecha el módulo uswgi ). La eliminación de módulos se puede realizar en tiempo de compilación mediante el script de configuración. Por ejemplo:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">./configure --without-http_uwsgi_module</span>
@@ -66,11 +66,11 @@ gpg: Good signature from "Maxim Dounin &lt;mdounin@mdounin.ru&gt;"
 </div>
 <p>El script de configuración proporcionado con el script Nginx proporciona una gran cantidad de opciones en tiempo de compilación.</p>
 </div>
-<h2>Asegurar las configuraciones</h2>
+<h2 id="h_01HTD84QR5SXG82J6JDAN5DTN2">Asegurar las configuraciones</h2>
 <div class="solvvy-solution">
 <p>Los computadores son tan inteligentes como las personas que las usan. Nginx está diseñado para ser estable y seguro, pero solo será tan seguro como el usuario que lo configure. Una vez que Nginx está construido e instalado, es importante configurar el servidor para que sea lo más mínimo posible.</p>
 <div id="run-as-an-unprivileged-user">
-<h3>Ejecutar como un usuario sin privilegios</h3>
+<h3 id="h_01HTD84QR5GACZZ23JW3EW04PK">Ejecutar como un usuario sin privilegios</h3>
 <p>En seguridad, el principio de privilegio mínimo establece que a una entidad no se le debe otorgar más permiso de lo necesario para lograr tus objetivos dentro de un sistema dado. En el contexto de tu servidor web Nginx, esto significa bloquear Nginx para que se ejecute solo con los permisos necesarios para ejecutar.</p>
 <p>Primero, <a href="https://help.dreamhost.com/hc/es/articles/360000274451-Crear-un-nuevo-usuario-en-una-instancia">crea un nuevo usuario</a> sin privilegios sudo. Luego, puedes configurar Nginx para que se ejecute como un usuario del sistema sin privilegios (por ejemplo, no el usuario root o un usuario con privilegios de sudo). Esto se hace mediante la directiva de <span class="code">user</span> en el archivo de configuración <span class="text-object">/etc/nginx/nginx.conf</span>. Al principio puede parecer comentado:</p>
 <div class="preboxcontainer">
@@ -81,14 +81,14 @@ gpg: Good signature from "Maxim Dounin &lt;mdounin@mdounin.ru&gt;"
 <pre class="prebox">user nginx;</pre>
 </div>
 </div>
-<h3>Deshabilitar Server Tokens</h3>
+<h3 id="h_01HTD84QR54CCEJ840AYEGN3RK">Deshabilitar Server Tokens</h3>
 <p>La especificación <span class="text-object">HTTP</span> recomienda (pero no requiere) que los servidores web se identifiquen mediante el encabezado del <span class="code">Server</span>. Históricamente, los servidores web han incluido su información de versión como parte de este encabezado. Revelar la versión de Nginx en ejecución puede ser indeseable, particularmente en entornos sensibles a la revelación de información. Nginx se puede configurar para que no muestre su versión en el encabezado del servidor editando el archivo <span class="text-object">Nginx.conf</span> con lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox">server_tokens off;
 </pre>
 </div>
 <div id="hide-upstream-proxy-headers">
-<h3>Ocultar encabezados de proxy ascendentes</h3>
+<h3 id="h_01HTD84QR54XQW16GM0CFCGZW6">Ocultar encabezados de proxy ascendentes</h3>
 <p>Del mismo modo, cuando se utiliza Nginx para enviar solicitudes desde un servidor ascendente (como una instancia PHP-FPM), puede ser beneficioso ocultar ciertos encabezados enviados en la respuesta ascendente (por ejemplo, la versión de PHP en ejecución). Por ejemplo, considera la siguiente respuesta de un servidor Nginx que ejecuta una aplicación PHP:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">curl -I <span class="code-highlight">https://example.com</span></span>
@@ -117,7 +117,7 @@ Vary: Accept-Encoding
 </pre>
 </div>
 <div id="add-security-headers">
-<h3>Agregar encabezados de seguridad</h3>
+<h3 id="h_01HTD84QR5BJGXFA23ABQEQNHR">Agregar encabezados de seguridad</h3>
 <p>Además de enmascarar información confidencial, Nginx también se puede usar para inyectar encabezados con implicaciones positivas para la seguridad en las respuestas. Un ejemplo trivial es agregar un encabezado <span class="code">X-Frame-Options</span> para evitar ataques de clickjacking:</p>
 <div class="preboxcontainer">
 <pre class="prebox">add_header X-Frame-Options SAMEORIGIN;
@@ -126,7 +126,7 @@ Vary: Accept-Encoding
 </div>
 <p>Esta directiva también se puede usar para agregar encabezados arbitrarios a tu antojo.</p>
 <div id="restrict-access-by-ip">
-<h3>Restringir el acceso por medio de IP</h3>
+<h3 id="h_01HTD84QR55D1JEQDDZW11E6H8">Restringir el acceso por medio de IP</h3>
 <p>Las áreas sensibles de los sitios web, como los paneles de control de administración, deben tener controles de acceso estrictos. Nginx facilita incluir en la lista blanca el acceso IP a ciertas ubicaciones de tu sitio web y negar el tráfico a todas las demás direcciones IP:</p>
 <div class="preboxcontainer">
 <pre class="prebox">location <span class="code-highlight">/wp-admin</span> {
@@ -141,7 +141,7 @@ Vary: Accept-Encoding
 </div>
 </div>
 <div id="restrict-access-by-password">
-<h3>Restringir acceso por contraseña</h3>
+<h3 id="h_01HTD84QR5VN770DW1MC3BVT8Y">Restringir acceso por contraseña</h3>
 <p>El acceso a ciertas ubicaciones también se puede configurar mediante credenciales basadas en contraseña, utilizando el mismo formato que usan los archivos <span class="text-object">.htaccess</span> y <span class="text-object">.htpasswd</span> de Apache:</p>
 <div class="preboxcontainer">
 <pre class="prebox">location <span class="code-highlight">/wp-admin</span> {
@@ -159,11 +159,11 @@ user3:<span class="code-highlight">password3</span>
 </pre>
 </div>
 </div>
-<h2>Asegurar SSL/TLS</h2>
+<h2 id="h_01HTD84QR5WPHVVDMKCV7ABGRN">Asegurar SSL/TLS</h2>
 <div class="solvvy-solution">
 <p>Nginx sobresale en el servicio de tráfico SSL/TLS. Configurar tu servidor web para proporcionar configuraciones SSL/TLS seguras para los clientes es esencial para mantener una conexión segura.</p>
 <p>Como nota, se recomienda encarecidamente que el tráfico cifrado utilice solo protocolos TLS más nuevos, en lugar de SSL heredado. Ambas versiones de SSL ampliamente disponibles en la actualidad (SSLv2 y SSLv3) tienen fallas de seguridad graves y nunca deben usarse en entornos de producción. Históricamente, las directivas asociadas con la configuración de SSL/TLS en Nginx tienen el prefijo ssl. Sin embargo, para promover el uso de protocolos de seguridad modernos, este tutorial usa el término <span class="text-object">TLS</span> cuando hace referencia al tráfico cifrado (<span class="text-object">HTTPS</span>) y <span class="text-object">ssl</span> cuando se aplica a directivas de configuración específicas de Nginx.</p>
-<h3>Encender TLS</h3>
+<h3 id="h_01HTD84QR5WKPJDZF0Z1H8Z3BF">Encender TLS</h3>
 <p>Para servir tráfico cifrado, SSL/TLS debe estar habilitado para tu servidor. Afortunadamente, las conexiones cifradas se pueden habilitar/deshabilitar por servidor en Nginx:</p>
 <div class="preboxcontainer">
 <pre class="prebox">server {
@@ -177,7 +177,7 @@ server {
 }
 </pre>
 </div>
-<h3>Habilitar cifrados TLS sólidos</h3>
+<h3 id="h_01HTD84QR5EHMEG7A7FSPAJ798">Habilitar cifrados TLS sólidos</h3>
 <p>De forma predeterminada, Nginx permite utilizar una amplia variedad de cifrados criptográficos en las conexiones TLS. Algunos de estos cifrados son ofertas heredadas que son débiles o propensas a ataques y no deben utilizarse. DreamHost recomienda usar los conjuntos de cifrado modernos o intermedios descritos por Mozilla aquí:</p>
 <ul>
 <li><a href="https://wiki.mozilla.org/Security/Server_Side_TLS" target="_blank" rel="noopener noreferrer">MozillaWiki - Security/Server Side TLS</a></li>
@@ -188,14 +188,14 @@ server {
 ssl_prefer_server_ciphers on;
 </pre>
 </div>
-<h3>Habilitar el almacenamiento en caché de la sesión TLS</h3>
+<h3 id="h_01HTD84QR5YX58EJJZD19SWCWW">Habilitar el almacenamiento en caché de la sesión TLS</h3>
 <p>Abrir una nueva conexión TLS a un servidor es muy costoso como resultado de los protocolos criptográficos involucrados. Para mantener un entorno de alto rendimiento, se recomienda almacenar en caché las conexiones TLS existentes para que cada nueva solicitud de un cliente/navegador no necesite realizar el protocolo de enlace TLS completo:</p>
 <div class="preboxcontainer">
 <pre class="prebox">ssl_session_cache shared:SSL:50m;
 ssl_session_timeout 5m;
 </pre>
 </div>
-<h3>Usar parámetros personalizados de Diffie-Hellman</h3>
+<h3 id="h_01HTD84QR670T9J3X4VMBHE3JN">Usar parámetros personalizados de Diffie-Hellman</h3>
 <p>El ataque Logjam, publicado en 2015, mostró que era posible que los atacantes (como los actores del estado-nación) rompieran el intercambio de claves Diffie-Hellman, utilizado para implementar el secreto hacia adelante (esencialmente, otra capa por encima de los mensajes cifrados existentes). Mitigar este ataque es posible en Nginx calculando un conjunto único de parámetros Diffie-Hellman y configurando Nginx para usar este valor:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]$ </span><span class="command">openssl dhparam 2048 &gt; /path/to/dhparam</span>
@@ -211,7 +211,7 @@ ssl_session_timeout 5m;
 <li><a href="https://weakdh.org/">https://weakdh.org/</a></li>
 </ul>
 <div id="force-all-connections-over-tls">
-<h3>Forzar todas las conexiones a través de TLS</h3>
+<h3 id="h_01HTD84QR6MZW8YCVR2DERP9Y8">Forzar todas las conexiones a través de TLS</h3>
 <p>Las comunicaciones cifradas solo son útiles cuando están realmente en uso. Si lo deseas, es posible decirle a los navegadores que solo usen conexiones TLS para tu sitio. Esto se logra con el encabezado <span class="code">Strict-Transport-Security</span>, que se puede agregar en tu configuración Nginx de esta manera:</p>
 <div class="preboxcontainer">
 <pre class="prebox">add_header Strict-Transport-Security max-age=15768000;
@@ -235,38 +235,38 @@ server {
 </pre>
 </div>
 </div>
-<h2>Medidas de seguridad adicionales</h2>
+<h2 id="h_01HTD84QR6B8Q8N33J6DGCZ4YH">Medidas de seguridad adicionales</h2>
 <div class="solvvy-solution">
 <p>Más allá de los conceptos básicos de instalar un binario Nginx seguro, bloquear el acceso a áreas sensibles de tu sitio y servir correctamente las conexiones TLS, existen algunos pasos adicionales que se pueden tomar para el usuario más consciente de la seguridad.</p>
 <div id="install-a-waf">
-<h3>Instalar un WAF</h3>
+<h3 id="h_01HTD84QR6M9MS69SQNVEG0M0Q">Instalar un WAF</h3>
 <p>Un WAF (firewall de aplicaciones web) es un software diseñado para inspeccionar el tráfico <span class="text-object">HTTP/HTTPS</span>, rechazar solicitudes maliciosas y, en general, actuar como una capa adicional de seguridad en tu pila web. Un WAF configurado correctamente puede proteger tu sitio de ataques SQLi, XSS, CSRF y DDoS, además de proporcionar mitigación de ataques de fuerza bruta y parches de amenazas de día cero. Hay algunas opciones WAF de código abierto disponibles para Nginx:</p>
-<h3>ModSecurity</h3>
+<h3 id="h_01HTD84QR60CD0D0VX543CRS92">ModSecurity</h3>
 <p>ModSecurity, originalmente escrito como WAF para servidores Apache, es el estándar de facto para las soluciones WAF de código abierto. El trabajo reciente en el proyecto ha cambiado el enfoque hacia el soporte de Nginx; Para obtener más información y detalles sobre la instalación y configuración, consulta la página de inicio del proyecto y la página de GitHub aquí:</p>
 <ul>
 <li><a href="https://www.modsecurity.org/">ModSecurity.org</a></li>
 <li><a href="https://github.com/SpiderLabs/ModSecurity">Página de proyecto de ModSecurity GitHub</a></li>
 </ul>
-<h3>Naxsi</h3>
+<h3 id="h_01HTD84QR6BHRNNB02N5PRDMS5">Naxsi</h3>
 <p>Naxsi es una alternativa ligera a ModSecurity, diseñada como un módulo Nginx nativo y se centra en la prevención XSS/SQLi en los parámetros de solicitud.</p>
 <ul>
 <li><a href="https://github.com/nbs-system/naxsi">Página de proyecto Naxsi GitHub</a></li>
 </ul>
-<h3>OpenResty</h3>
+<h3 id="h_01HTD84QR6R56PT4ASPP2MJP9A">OpenResty</h3>
 <p>Para los usuarios del paquete OpenResty que buscan un WAF programable y de alto rendimiento, consulta lua-resty-waf, que busca proporcionar un motor de reglas compatible con ModSecurity integrado en el ecosistema Nginx + LuaJIT.</p>
 <ul>
 <li><a href="https://github.com/p0pr0ck5/lua-resty-waf">Página de proyecto lua-resty-waf GitHub</a></li>
 </ul>
 </div>
 <div id="automated-log-analysis-monitoring">
-<h3>Automated Log Analysis + Monitoring</h3>
+<h3 id="h_01HTD84QR6QCNMN36GH8RE9MAR">Automated Log Analysis + Monitoring</h3>
 <p>Los programas como Fail2Ban se pueden usar para monitorear el acceso a Nginx y los registros de errores, buscar patrones de ataque y tomar acciones contra el cliente atacante (como eliminar direcciones IP, informar sobre comportamiento malicioso al propietario de la IP, etc.). Fail2Ban es extensible, lo que te permite escribir tu propio patrón de búsqueda y comportamiento de respuesta. Para obtener más información y detalles sobre la instalación y configuración, consulte la página de GitHub del proyecto aquí:</p>
 <ul>
 <li><a class="reference external" href="https://github.com/fail2ban/fail2ban" target="_blank" rel="noopener noreferrer">Página de proyecto fail2ban GitHub</a></li>
 </ul>
 </div>
 <div id="limit-input-traffic-via-iptables">
-<h3>Limitar el tráfico de entrada a través de IPTables</h3>
+<h3 id="h_01HTD84QR6MBWX65PB5TQBZA83">Limitar el tráfico de entrada a través de IPTables</h3>
 <p>Más allá de proteger Nginx en sí, es importante proteger el entorno de host utilizado para alojar tu servidor web. Bloquear el acceso a cosas como SSH puede aumentar en gran medida la seguridad del host al evitar intentos de intrusión. Un enfoque común es incluir en la lista blanca las IP conocidas que accederán a tu host a través de SSH y negar el resto del tráfico del puerto 22, o utilizar un cuadro de salto que filtre estrictamente el acceso al shell. También puedes hacer esto configurando un grupo de seguridad personalizado para tu instancia. Para obtener más información, consulta el artículo de DreamHost aquí:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215912838-Configurar-grupos-de-seguridad" target="_self" rel="undefined">Configurar grupos de seguridad</a></li>
