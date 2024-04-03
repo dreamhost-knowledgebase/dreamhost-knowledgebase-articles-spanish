@@ -1,8 +1,8 @@
-<h2>Generalidades</h2>
+<h2 id="h_01HTFQE4JMQ3Q7VM22GCVD2M4S">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Esta guía es una lista de verificación de problemas comunes que se pueden investigar antes de comunicarse con el soporte. Ten en cuenta que el soporte de DreamHost no tiene acceso a tus instancias y no puede ver tus datos. Para ayudar a resolver el problema, proporciona cualquier mensaje de error, registros u otros detalles que puedas ver.</p>
 </div>
-<h2>Asegúrate de que la instancia se esté ejecutando</h2>
+<h2 id="h_01HTFQE4JM6S83BREZ5V28DX2H">Asegúrate de que la instancia se esté ejecutando</h2>
 <div class="solvvy-solution">
 <p>Inicie sesión en el <a class="reference external" href="https://iad2.dreamcompute.com/project/" target="_self" rel="undefined">panel</a> de DreamCompute y examina la página de <a class="reference external" href="https://iad2.dreamcompute.com/project/instances/">instancias</a>. Examina las columnas <strong>Estado</strong> y&nbsp;<strong>Estado de Energía</strong> de la instancia. Algunas combinaciones comunes de estos valores y su significado se encuentran a continuación:</p>
 <table class="wikitable" style="height: 529px;">
@@ -38,7 +38,7 @@
 </table>
 <p><a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self" rel="undefined">Contacta a soporte</a> si ves otro estado.</p>
 </div>
-<h2>Verifica el registro de la instancia para ver si hay errores de arranque</h2>
+<h2 id="h_01HTFQE4JMDQKZD21X43GZGRWF">Verifica el registro de la instancia para ver si hay errores de arranque</h2>
 <div class="solvvy-solution">
 <p>En la página <a class="reference external" href="https://iad2.dreamcompute.com/project/instances/">Instancias</a> da clic a tu instancia. Luego selecciona la pestaña <span class="text-object">Registro</span> Esto muestra las últimas 35 líneas de la salida de las consolas. Una instancia iniciada correctamente tiene un indicador de inicio de sesión que podría estar ligeramente oculto en el registro. Un ejemplo de Ubuntu-16 se vería así:</p>
 <div class="highlight-console">
@@ -54,13 +54,13 @@
 </div>
 <p>Los mensajes de error, como no encontrar un disco, errores del sistema de archivos o errores de sintaxis en los archivos de configuración, generalmente también se mostrarán allí. Estos tipos de errores son más difíciles de corregir sin crear una nueva instancia; sin embargo, se recomienda crear un ticket de soporte.</p>
 </div>
-<h2>Verifica el registro de la instancia para ver si hay errores de red</h2>
+<h2 id="h_01HTFQE4JMR031BTQ8969QQR8X">Verifica el registro de la instancia para ver si hay errores de red</h2>
 <div class="solvvy-solution">
 <p>En la misma página 'Registro' que se muestra arriba, haz clic en el botón <strong>Ver registro completo</strong>&nbsp;en la parte superior derecha. Esto abre una nueva pestaña del navegador con la salida completa del registro de la consola. Busca 'eth', 'ens o' cloud-init '. Algunos problemas pueden incluir no encontrar un dispositivo de red o, si se utilizó una captura, la red no se reconfigura.</p>
 <p>Compara el resultado de la configuración de red cloud-init (si está disponible), con las direcciones <a href="https://help.dreamhost.com/hc/es/articles/115001754711-Localizar-las-direcciones-IP-de-tu-instancia" target="_self" rel="undefined">IPv4 y IPv6 asignadas a la instancia</a>. Un ejemplo de fragmento de salida para Ubuntu-16 se ve así:</p>
 <div class="preboxcontainer">
 <pre class="prebox">Starting Initial cloud-init job (metadata service crawler)...
-<span class="go">cloud-init[982]: Cloud-init v. 0.7.8 running 'init' at Tue, 24 Jan 2017 21:32:28 +0000. Up 8.86 seconds.</span>
+<span class="go">cloud-init[982]: Cloud-init v. 0.7.8 running 'init' at Tue, 02 Apr 2024 21:32:28 +0000. Up 8.86 seconds.</span>
 <span class="go">cloud-init[982]: ci-info: ++++++++++++++++++++++++++++++++++++++Net device info+++++++++++++++++++++++++++++++++++++++</span>
 <span class="go">cloud-init[982]: ci-info: +--------+------+------------------------------+---------------+-------+-------------------+</span>
 <span class="go">cloud-init[982]: ci-info: | Device |  Up  |           Address            |      Mask     | Scope |     Hw-Address    |</span>
@@ -71,7 +71,7 @@
 </div>
 <p>Esta instancia de ejemplo tiene una dirección IPv4 de 208.113.165.36. Confirma que esta es la <a href="https://help.dreamhost.com/hc/es/articles/115001754711-Localizar-las-direcciones-IP-de-tu-instancia" target="_self" rel="undefined">IP correcta</a> en la página de instancias del panel de DreamCompute.</p>
 </div>
-<h2>Verifica las reglas del grupo de seguridad</h2>
+<h2 id="h_01HTFQE4JMPREZVZ4CZK3GBHZV">Verifica las reglas del grupo de seguridad</h2>
 <div class="solvvy-solution">
 <p>En la página <a class="reference external" href="https://iad2.dreamcompute.com/project/instances/">Instancias</a> en el extremo derecho, verás una columna titulada <span class="text-object">Acciones</span>. Debajo hay un menú desplegable. Haz clic aquí y selecciona '<a href="https://help.dreamhost.com/hc/es/articles/360000607492-Cambiar-el-Grupo-de-Seguridad-de-una-instancia" target="_self" rel="undefined">Editar grupos de seguridad</a>'. Confirma que los grupos de seguridad necesarios están en la lista 'Grupos de seguridad de instancia' a la derecha. Toma nota de la lista de grupos de seguridad para verificar a continuación.</p>
 <p>Vuelve a la página de <a class="reference external" href="https://iad2.dreamcompute.com/project/instances/">Instancias</a> en el panel izquierdo, haz clic en la página 'Red &gt; Grupos de seguridad'. Comprueba que los grupos de seguridad asignados a la instancia tengan abiertos los puertos que se están comprobando. Para hacer esto, haz clic en el botón <strong>Administrar Reglas</strong> para ver la lista de reglas. Todas las instancias deben tener reglas para el tráfico de salida (saliente) sin restricciones como esta:</p>
@@ -94,15 +94,15 @@
 </div>
 <p>Si falta alguna de estas reglas, considera agregarlas para restaurar la funcionalidad predeterminada. A veces, el 'permitir todo' de IPv4 0.0.0.0/0 e IPv6 :: / 0 se modifica para permitir sólo bloques de IP específicos. Si es así, confirma que el rango de IP es suficiente para la conectividad deseada.</p>
 </div>
-<h2>Intenta reiniciar, por si acaso</h2>
+<h2 id="h_01HTFQE4JMPWP9BP6CJ7MZHRHV">Intenta reiniciar, por si acaso</h2>
 <div class="solvvy-solution">
 <p>Se prefieres encontrar la causa de un problema antes de <a href="https://help.dreamhost.com/hc/es/articles/216511647-C%C3%B3mo-reiniciar-una-instancia-de-DreamCompute" target="_self" rel="undefined">reiniciar la instancia</a>, pero si ninguna de las soluciones anteriores solucionó el problema, ahora debe intentar reiniciar. Si esto soluciona el problema, incluye los registros de la consola recopilados previamente para soporte si se abre un ticket de soporte.</p>
 </div>
-<h2>Considera los cambios realizados antes de los problemas</h2>
+<h2 id="h_01HTFQE4JM91HC9HYDENGN4ACN">Considera los cambios realizados antes de los problemas</h2>
 <div class="solvvy-solution">
 <p>Por último, si todo lo anterior parece correcto pero aún existen problemas, considera qué cambios se realizaron por última vez. Algunos ejemplos de cambios que pueden causar problemas son firewalls adicionales, grandes actualizaciones del sistema que podrían modificar kernels o sistemas de red, o modificar archivos de configuración que podrían interrumpir el proceso de arranque si un programa no se inicia.</p>
 </div>
-<h2>Conclusión</h2>
+<h2 id="h_01HTFQE4JMTG5K264E71W3D5A4">Conclusión</h2>
 <div class="solvvy-solution">
 <p>Si no hay otros indicios de problemas en los registros y configuraciones anteriores, por favor <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener noreferrer">contacta a soporte</a> con toda la información disponible.</p>
 </div>
@@ -110,6 +110,6 @@
 <div class="footer">&nbsp;</div>
 <!--DreamCompute Button-->
 <div class="dream-sign-up">
-<h2>Implementa Tus Aplicaciones en Servidores en la Nube Hoy</h2>
+<h2 id="h_01HTFQE4JM121M5TC3YMC75JV7">Implementa Tus Aplicaciones en Servidores en la Nube Hoy</h2>
 <div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/computing/" target="_self" rel="undefined">Suscríbete a DreamCompute</a></div>
 </div>
