@@ -1,7 +1,7 @@
-<div id="auto-toc"> </div>
+<div id="auto-toc">&nbsp;</div>
 <h2 id="h_01H9P9HJY3Y2F7WK7996DHXESC">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Después de haber <a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL" target="_self">agregado un ceritficado SSL a tu dominio</a> DreamHost redirige automáticamente la URL que usan los visitantes para ver tu sitio de <span class="text-object">HTTP</span> a <span class="text-object">HTTPS</span>. La <span class="text-object">S</span> asegura que tu conexión esté encriptada. Por ejemplo:</p>
+<p>Después de haber&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL" target="_self">agregado un certificado SSL a tu dominio</a>&nbsp;DreamHost redirige automáticamente la URL que usan los visitantes para ver tu sitio de <span class="text-object">HTTP</span> a <span class="text-object">HTTPS</span>. La <span class="text-object">S</span> asegura que tu conexión esté encriptada. Por ejemplo:</p>
 <ul>
 <li><strong>https</strong>://example.com</li>
 </ul>
@@ -27,11 +27,11 @@
 </div>
 <p>También puedes confirmar el directorio web del sitio en el panel.</p>
 <ol>
-<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.dashboard#!/list-view" rel="noopener noreferrer" target="_blank">Administrar Sitios Web</a>.</li>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
 <li>Da clic en el botón <strong>Administrar</strong> para abrir la página <a href="https://help.dreamhost.com/hc/es/articles/360043889332-La-p%C3%A1gina-de-Configuraciones-de-Dominios" target="_self"><span class="panel-page">Configuraciones de Dominios</span></a>, la cual te permite ajustar múltiples configuraciones de tu sitio.
 <ul>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" rel="noopener noreferrer" target="_blank">Vista de Malla</a>, da clic en el botón <strong>Administrar</strong> en la parte inferior de la caja del sitio.</li>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" rel="noopener noreferrer" target="_blank">Vista de Lista</a>, da clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Malla</a>, da clic en el botón <strong>Administrar</strong> en la parte inferior de la caja del sitio.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360001294366#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Lista</a>, da clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
 </ul>
 </li>
 <li>Desplázate hasta la sección <span class="text-section">Configuraciones Adicionales</span>, y da clic en el botón <strong>Modificar</strong> a la derecha de la subsección <span class="text-section">Rutas</span>.
@@ -50,33 +50,33 @@
 <h2 id="h_01H9P9HJY3F6GJWFW7SCHYHDXC">¿Qué cambiar en los siguientes ejemplos?</h2>
 <div class="solvvy-solution">
 <p>Los siguientes ejemplos pueden ser ingresados en tu archivo <span class="text-object">.htaccess</span> exactamente como se muestra.</p>
-<p>Solo si el ejemplo contiene una URL en negrita, tu debes cambiarla por tu actual URL.<br/>Por ejemplo, si tu ves el dominio <strong>example.com</strong>, cambialo por el dominio de tu propiedad.</p>
+<p>Solo si el ejemplo contiene una URL en negrita, tu debes cambiarla por tu actual URL.<br />Por ejemplo, si tu ves el dominio <strong>example.com</strong>, cámbialo por el dominio de tu propiedad.</p>
 </div>
 <h2 id="h_01H9P9HJY325RXA3261GQTZ6W6">Forzar un dominio para servir de forma segura usando HTTPS (para cualquier sitio)</h2>
 <div class="solvvy-solution">
 <p>Lo que vas a ver a continuación, fuerza a cualquier requerimiento <span class="text-object">http</span> a ser reescrito usando <span class="text-object">https</span>. Por ejemplo, el siguiente código fuerza el requerimiento <strong>http://example.com</strong> a cargar <strong>https://example.com</strong>. Esto también fuerza a los recursos vinculados directamente (imágenes, css, etc.) a usar <span class="text-object">https</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
-RewriteCond %{HTTPS} !=on
+RewriteCond&nbsp;%{HTTPS}&nbsp;!=on
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
 Header always set Content-Security-Policy "upgrade-insecure-requests;"</pre>
 </div>
 <p>Si esto no te funciona, primero revisa las terminaciones de la línea. Copiar/pegar desde tu buscador web a un editor de texto puede no funcionar bien, entonces después de pegar dentro de tu editor de texto tu deberás eliminar cada salto de línea y agregarla de vuelta (salto de línea = tecla de retorno).</p>
 </div>
-<div class="section-link" id="forzar-https-con-wordpress"> </div>
+<div id="forzar-https-con-wordpress" class="section-link">&nbsp;</div>
 <h2 id="h_01H9P9HJY3BBRKAC5MM61B6751">Forzar HTTPS con WordPress</h2>
 <div class="solvvy-solution">
 <div class="notebox-important">
-<p>Si tu archivo <span class="text-object">.htaccess</span> ya contiene algunos <a href="https://codex.wordpress.org/htaccess" target="_self">códigos agregados por defecto</a>, ingresa lo siguiente arriba o abajo de ese código. Nunca ingreses código dentro de las etiquetas de comentario que empiezan y terminan con:</p>
+<p>Si tu archivo <span class="text-object">.htaccess</span> ya contiene algunos&nbsp;<a href="https://codex.wordpress.org/htaccess" target="_self">códigos agregados por defecto</a>, ingresa lo siguiente arriba o abajo de ese código. Nunca ingreses código dentro de las etiquetas de comentario que empiezan y terminan con:</p>
 <dl>
-<dd># BEGIN WordPress<br/># END WordPress</dd>
+<dd># BEGIN WordPress<br /># END WordPress</dd>
 </dl>
 </div>
-<p>Es posible para un visitante ingresar directamente a una URL <span class="text-object">HTTP</span> en tu sitio WordPress, aún cuando el certificado SSL está activo. Para forzar cualquier requerimiento <span class="text-object">HTTP</span> a redireccionar a <span class="text-object">HTTPS</span>, tu puedes agregar código a tu archivo <span class="text-object">.htaccess</span> de WordPress. Hay dos opciones de código abajo para que los uses. El primero deberá funcionar como se muestra, pero si no, intenta la opción dos en vez.</p>
-<h3 id="h_01H9P9HJY3R3DGNSXKDXAMSPZX"><span style="font-weight: 400;">Opción </span>#1</h3>
+<p>Es posible para un visitante ingresar directamente a una URL <span class="text-object">HTTP</span> en tu sitio WordPress, aún cuando el certificado SSL está activo. Para forzar cualquier requerimiento <span class="text-object">HTTP</span> a redireccionar a <span class="text-object">HTTPS</span>, tu puedes agregar código a tu archivo <span class="text-object">.htaccess</span> de WordPress. Hay dos opciones de código abajo para que los uses.&nbsp;El primero deberá funcionar como se muestra, pero si no, intenta la opción dos en vez.</p>
+<h3 id="h_01H9P9HJY3R3DGNSXKDXAMSPZX"><span style="font-weight: 400;">Opción&nbsp;</span>#1</h3>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
-RewriteCond %{HTTPS} !=on
+RewriteCond&nbsp;%{HTTPS}&nbsp;!=on
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
 Header always set Content-Security-Policy "upgrade-insecure-requests;"</pre>
 </div>
@@ -84,7 +84,7 @@ Header always set Content-Security-Policy "upgrade-insecure-requests;"</pre>
 <p>Abajo es como se verá tu archivo de <span class="text-object">.htaccess</span> con con el nuevo código <span class="text-object">HTTPS</span> y el código de WordPress ya existente.</p>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
-RewriteCond %{HTTPS} !=on
+RewriteCond&nbsp;%{HTTPS}&nbsp;!=on
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
 Header always set Content-Security-Policy "upgrade-insecure-requests;"
 
@@ -103,7 +103,7 @@ RewriteRule . /index.php [L]
 # END WordPress</pre>
 </div>
 <h3 id="h_01H9P9HJY3DEHN1RA9WAB2G2NH">Option #2</h3>
-<p>En este ejemplo, asegurate de cambiar <strong>example.com</strong> a tu dominio.</p>
+<p>En este ejemplo, asegúrate de cambiar <strong>example.com</strong> a tu dominio.</p>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On 
 RewriteCond %{SERVER_PORT} 80 
@@ -133,7 +133,7 @@ RewriteRule . /index.php [L]
 # END WordPress</pre>
 </div>
 </div>
-<div class="section-link" id="Forzar_HTTPS_con_Dreampress"> </div>
+<div id="Forzar_HTTPS_con_Dreampress" class="section-link">&nbsp;</div>
 <h2 id="h_01H9P9HJY3QNRKWMDNDT3P0FGV">Forzar HTTPS con DreamPress</h2>
 <div class="solvvy-solution">
 <p>Es posible para un visitante ingresar directamente con una URL <span class="text-object">HTTP</span> a tu sitio DreamPress. Para forzar cualquier requerimiento <span class="text-object">HTTP</span> a redireccionar a <span class="text-object">HTTPS</span>, agrega lo siguiente a tu archivo <span class="text-object">.htaccess</span> a tu WordPress.</p>

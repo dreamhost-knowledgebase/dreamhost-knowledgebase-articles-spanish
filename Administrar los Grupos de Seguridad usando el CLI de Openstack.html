@@ -36,7 +36,7 @@
 </div>
 <h2 id="h_01HQ3R27XHW2EHWJKPCFG46W7J">Crear y administrar reglas de Grupos de Seguridad</h2>
 <div class="solvvy-solution">
-<p>Puedes modificar los Grupos de Seguridadcon el comando <span class="code">openstack security group rule</span>.</p>
+<p>Puedes modificar los Grupos de Seguridad con el comando <span class="code">openstack security group rule</span>.</p>
 <h3 id="h_01HQ3R27XHKACA28W6KP0MDWXN">Lista de reglas para Grupo de Seguridad</h3>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack security group rule list <span class="code-highlight">SECURITY_GROUP_NAME</span></span>
@@ -45,7 +45,7 @@
 <h3 id="h_681825905161518121085424">Permitir solicitudes al puerto 8080</h3>
 <p>Para permitir solicitudes al puerto 8080 en todas las instancias que usan este grupo, elige una de las siguientes opciones:</p>
 <h3 id="h_01HQ3R27XHEEC8K243ZEQPJD04">Crear nuevas reglas para un grupo</h3>
-<p>Permitir acceso para todas las direcciones IP (especificadas como una subnet de IP <code class="docutils literal"><span class="pre">0.0.0.0/0</span></code> én la notación de CIDR).</p>
+<p>Permitir acceso para todas las direcciones IP (especificadas como una subnet de IP <code class="docutils literal"><span class="pre">0.0.0.0/0</span></code> en la notación de CIDR).</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack security group rule create \
 --proto tcp --dst-port 8080 <span class="code-highlight">SECURITY_GROUP_NAME</span></span>
@@ -70,7 +70,7 @@
 +-------------------+------------------------+
 </pre>
 </div>
-<p>Si ves las reglasde nuevo, verás el nuevo que ha sido agregado:</p>
+<p>Si ves las reglas de nuevo, verás el nuevo que ha sido agregado:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack security group rule list <span class="code-highlight">SECURITY_GROUP_NAME</span></span>
 +---------------+-------------+-----------+------------+-----------------------+
@@ -94,14 +94,14 @@
 | 7b450512-d3... | Cloud       | Security Group for NextCloud | e52ede2a... |
 +----------------+-------------+------------------------------+-------------+</pre>
 </div>
-<p>Una vez que hayas localizado el ID y Nomre del grupo que deseas importar, corre siguiente:</p>
+<p>Una vez que hayas localizado el ID y Nombre del grupo que deseas importar, corre siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@localhost]$ </span><span class="command">openstack security group rule create \
 --proto tcp --dst-port 8080 --remote-group <span class="code-highlight">SOURCE_GROUP_ID GROUP_NAME_TO_ADD_RULE_TO</span></span></pre>
 </div>
 <div class="notebox-note">
 <p><span class="code">SOURCE_GROUP_ID</span> es el ID del grupo que deseas agregar.</p>
-<p><span class="code">GROUP_NAME_TO_ADD_RULE_TO</span> es el grupo al que estás agregando la reglai.</p>
+<p><span class="code">GROUP_NAME_TO_ADD_RULE_TO</span> es el grupo al que estás agregando la regla.</p>
 </div>
 <p>Mira la página 'Grupos de Seguridad' en tu panel. A la derecha del nuevo Grupo de Seguridad, haz clic en el botón <strong>Administrar</strong>. Verás una nueva regla agregada y el nombre del otro Grupo de Seguridad ahora está debajo de la columna <span class="text-object">Grupo de Seguridad Remoto</span>. En el ejemplo anterior, el otro Grupo de Seguridad se denomina 'Cloud'.</p>
 <p>Esto permite que el tráfico de origen de cualquier otra instancia de ese grupo de seguridad acceda a cualquier otra instancia.</p>
