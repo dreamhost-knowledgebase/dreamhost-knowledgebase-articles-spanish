@@ -136,14 +136,7 @@ RewriteRule . /index.php [L]
 <div id="Forzar_HTTPS_con_Dreampress" class="section-link">&nbsp;</div>
 <h2 id="h_01H9P9HJY3QNRKWMDNDT3P0FGV">Forzar HTTPS con DreamPress</h2>
 <div class="solvvy-solution">
-<p>Es posible para un visitante ingresar directamente con una URL <span class="text-object">HTTP</span> a tu sitio DreamPress. Para forzar cualquier requerimiento <span class="text-object">HTTP</span> a redireccionar a <span class="text-object">HTTPS</span>, agrega lo siguiente a tu archivo <span class="text-object">.htaccess</span> a tu WordPress.</p>
-<div class="preboxcontainer">
-<pre class="prebox">RewriteEngine On
-RewriteCond %{HTTP:X-Forwarded-Proto} !https
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
-Header always set Content-Security-Policy "upgrade-insecure-requests;"/pre&gt;</pre>
-</div>
-</div>
+<p>No es posible usar un archivo <span class="text-object">.htaccess</span> en DreamPress ya que utiliza Nginx, que en cambio fuerza automáticamente el uso de <span class="text-object">HTTPS</span> en tu sitio DreamPress.</p>
 <h2 id="h_01H9P9HJY3XV2FQP9KMDE0F5BR">Solución de problemas</h2>
 <div class="solvvy-solution">
 <h3 id="h_01H9P9HJY3DDD5TNNM6RTN4QEA">WordPress</h3>
@@ -173,4 +166,5 @@ Header always set Content-Security-Policy "upgrade-insecure-requests;"/pre&gt;</
 <li><a href="https://help.dreamhost.com/hc/es/articles/216456087-Creando-redirecciones-con-Nginx" target="_self">Forzar tu sitio Nginx a cargar de una forma segura</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/218428687--C%C3%B3mo-uso-un-certificado-SSL-con-WordPress-" target="_self">¿Cómo usar un certificado SSL con WordPress?</a></li>
 </ul>
+</div>
 </div>
