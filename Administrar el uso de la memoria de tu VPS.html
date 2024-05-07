@@ -21,36 +21,13 @@
 <p>Esto a menudo lleva a problemas en los que los sitios web en un VPS dejarán de trabajar debido a la saturación de la memoria durante las horas pico y comenzarán a trabajar normalmente nuevamente una vez que el tráfico baje a niveles más manejables.</p>
 <p>Por esta razón, debes tener cuidado de cómo configuras las cosas para prevenir estos inconvenientes.</p>
 </div>
-<h2 id="h_01HC2RTMF8X66SSYVS8P8BJPW3"><span id="Revisar_el_uso_de_memoria">Revisar el uso de memoria en el panel</span></h2>
+<h2 id="h_01HMS08J3121M3CEC2D4GJZ7FH"><span id="Revisar_tu_uso_de_memoria">Ver el uso de memoria en el panel</span></h2>
 <div class="solvvy-solution">
-<p>Puedes ver un gráfico del uso de memoria de tu VPS en tu panel.</p>
-<p>Abre la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=vps.dashboard&amp;" target="_blank" rel="noopener noreferrer">VPS</a> y haz clic en la gráfica <span class="text-object">RAM</span> debajo de la columna <span class="text-object">Uso</span>:</p>
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-vps-memory-graph.png" alt="ES VPS memory graph" width="478" height="213" /></dd>
-</dl>
-<p>Esta gráfica se actualiza normalmente una vez diariamente, alrededor de la media noche de PDT/PST para mostrar un promedio del uso del día.</p>
+<p>Puedes ver un gráfico del uso de la memoria de tu VPS en tu panel.</p>
+<p>Abre la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=server.dashboard#" target="_blank" rel="noopener noreferrer">Servidores</a> y haz clic en el icono circular a la derecha de tu servidor bajo la columna <span class="text-object">RAM</span>.</p>
+<p>Este gráfico generalmente se actualiza una vez al día, alrededor de la medianoche PDT/PST, para mostrar un promedio del uso del día.</p>
 <p>Dado que se actualiza una vez al día, te ayuda a ver las tendencias de uso. Sin embargo, no es útil para obtener una buena imagen de lo que está sucediendo en el momento. Los comandos a continuación te ayudan a ver la información en tiempo real:</p>
 </div>
-<!---
-<h2 id="h_01HMS08J3121M3CEC2D4GJZ7FH">
-  <span id="Revisar_tu_uso_de_memoria">Ver el uso de memoria en el panel</span>
-</h2>
-<div class="solvvy-solution">
-  <p>Puedes ver un gráfico del uso de la memoria de tu VPS en tu panel.</p>
-  <p>
-   Abre la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=server.dashboard#" target="_blank" rel="noopener noreferrer">Servidores</a> y haz clic en el icono circular a la derecha de tu servidor bajo la columna <span class="text-object">RAM</span>.
-  </p>
-  <p>
-    Este gráfico generalmente se actualiza una vez al día, alrededor de la medianoche PDT/PST, para mostrar un promedio del uso del día.
-  </p>
-  <p>
-    Dado que se actualiza una vez al día, te ayuda a ver las tendencias de uso.
-    Sin embargo, no es útil para obtener una buena imagen de lo que está sucediendo
-    en el momento. Los comandos a continuación te ayudan a ver la información
-    en tiempo real:
-  </p>
-</div>
--->
 <h2 id="h_01HC2RTMF8J2F1WZMY9C4T07K5"><span id="Los_comandos top.2C_free.2C_y_ps_aux">Los comandos top, free y ps aux</span></h2>
 <div class="solvvy-solution">
 <p>Para correr los siguientes comandos, debes iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>. En tu aplicativo de terminal, abre dos conexiones en pestañas separadas para revisar los resultados más fácilmente. Luego puedes correr los siguientes comandos para solucionar los problemas de memoria:</p>
@@ -96,8 +73,8 @@ Swap:             0           0           0
 </pre>
 <ul>
 <li><strong>total&nbsp;—&nbsp;</strong> En el ejemplo anterior, la memoria total disponible es de aproximadamente 1GB. Puedes ver este valor como 1000MB en la columna <span class="text-object">total</span>.</li>
-<li><strong style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">used&nbsp;—&nbsp;</strong><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"> Debajo de la columna </span><span class="text-object" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">used</span><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"> en la primera fila, muestra 233 MB. Esto significa que se utilizan 2,1 GB.</span></li>
-<li><strong style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">available&nbsp;—&nbsp;</strong><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"> Debajo de la columna </span><span class="text-object" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">available</span><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">, en la segunda fila muestra 766MB disponibles. Este es el total de la memoria disponible para empezar nuevas aplicaciones o procesos.</span></li>
+<li><strong>used&nbsp;—&nbsp;</strong>Debajo de la columna<span class="text-object">used</span>en la primera fila, muestra 233 MB. Esto significa que se utilizan 2,1 GB.</li>
+<li><strong>available&nbsp;—&nbsp;</strong>Debajo de la columna<span class="text-object">available</span>, en la segunda fila muestra 766MB disponibles. Este es el total de la memoria disponible para empezar nuevas aplicaciones o procesos.</li>
 </ul>
 <p>El total que ve debe corresponder a la cantidad de memoria que asignó a su VPS en tu panel.</p>
 <div class="notebox-tip">
