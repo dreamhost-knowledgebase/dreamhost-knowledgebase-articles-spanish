@@ -1,0 +1,89 @@
+<h2 id="h_01HQKXCTQD7QZ28YE1K362VFFR">Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica cómo usar <a href="https://pypi.org/project/linger/" target="_blank" rel="noopener noreferrer">linger</a> con un aplicación de Node.js. Esta combinación permite que tu aplicación ejecute procesos persistentes y que tus servicios se reinicien si tu aplicación se cae o el servidor se reinicia.</p>
+<div class="notebox-important">
+<p>Tu debes estar en un plan de alojamiento <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-un-Servidor-Virtual-Privado-VPS">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados">Dedicado</a> para instalar el software en esas instrucciones.</p>
+</div>
+<div class="prereqs">
+<p><strong>Requisitos previos</strong></p>
+<p>Este artículo asume que has configurado un <a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy">Servidor Proxy</a> en el panel.</p>
+</div>
+</div>
+<h2 id="h_01HQKXDKCCVGYBXZCG59TEQ197">Paso #1: Instalar linger</h2>
+<div class="solvvy-solution">
+<p>Para instalar linger en tu usuario, inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y corre el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">loginctl enable-linger</span></pre>
+</div>
+<div class="notebox-note">
+<p>Este comando no responderá con ninguna salida.</p>
+</div>
+</div>
+<h2 id="h_01HQKXDRJM1RTW2ZPYWYNTX365">Paso #2: Configurar la unidad de usuario systemd</h2>
+<div class="solvvy-solution">
+<p>Este paso configura Node para trabajar con unidades de usuario de systemd en el servidor.</p>
+<ol>
+<li>Crea los siguientes directorios:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir -p ~/.config/systemd/user/</span></pre>
+</div>
+</li>
+<li>Crea un archivo <span class="text-object">myapp.service</span> en el directorio <span class="text-object">.config/systemd/user</span>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">nano ~/.config/systemd/user/myapp.service</span></pre>
+</div>
+</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Agrega el siguiente código</a> a este archivo:
+<div class="preboxcontainer">
+<pre class="prebox">[Unit]
+Description=Systemd instance to serve Node application
+After=network.target
+
+[Service]
+WorkingDirectory=<span class="code-highlight">/path/to/your/app</span>
+ExecStart=/usr/bin/node <span class="code-highlight">/path/to/your/app/app.js</span>
+Environment="PATH=/usr/bin:/usr/local/bin"
+Environment=NODE_ENV=production
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+Restart=on-failure
+
+[Install]
+WantedBy=default.target</pre>
+</div>
+</li>
+<li>Edita las líneas resaltadas de arriba así:
+<ul>
+<li>
+<strong>WorkingDirectory:</strong> La ruta a la aplicación de tu sitio web.</li>
+<li>
+<strong>ExecStart:</strong> La ruta a tu instalación de node.</li>
+</ul>
+</li>
+<li>Habilita la unidad del usuario de tu aplicación de Node:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">systemctl --user enable myapp</span></pre>
+</div>
+</li>
+<li>Inicia la unidad de tu aplicación Node:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">systemctl --user start myapp</span></pre>
+</div>
+</li>
+<li>Confirma que está corriendo:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">systemctl --user status myapp</span></pre>
+</div>
+</li>
+</ol>
+<p>Los servicios de tu aplicación ahora se reiniciarán automáticamente cuando el servidor se reinicie o si la aplicación se cae.</p>
+</div>
+<h2 id="h_01HQKXEC8Q1FV61BRGZNE5P32V">Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy">Servidor Proxy</a></li>
+</ul>
+</div>
