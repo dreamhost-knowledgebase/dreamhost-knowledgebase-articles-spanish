@@ -1,0 +1,103 @@
+<div id="auto-toc">&nbsp;</div>
+<h2 id="h_01HBXV98PFMEEQ451TVGF0YDHQ">Generalidades</h2>
+<div class="solvvy-solution">
+<p>Cada archivo y directorio de tu sitio web es controlado por un permiso especifico que controla qué acceso es concedido al archivo o directorio. Por ejemplo, cada <span class="text-object">archivo/directorio</span> tiene 3 tipos de propietario y permisos.</p>
+<p>Este artículo explica los conceptos básicos sobre permisos. Visita el siguiente artículo para instrucciones sobre como cambiar permisos atráves de SSH o FTP.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">Cambiar permisos</a></li>
+</ul>
+</div>
+<h2 id="h_01HBXV98PFTZ0X7BGNKQQFQEAD">Propietarios</h2>
+<div class="solvvy-solution">
+<p>Los siguientes son los 3 tipos de propietarios de un archivo o directorio.</p>
+<ul>
+<li><strong>Usuario&nbsp;</strong>— Propietario del archivo. Este suele ser el usuario que lo cargó o creó.</li>
+<li><strong>Grupo&nbsp;</strong>— Un grupo que puede contener múltiples usuarios que tienen el mismo acceso al <span class="text-object">archivo/directorio</span>.</li>
+<li><strong>Público&nbsp;</strong>— Esto puede pensarse en los permisos mundiales. Cualquiera que visite tu sitio para ver un archivo.</li>
+</ul>
+</div>
+<h2 id="h_01HBXV98PFQ6T289HZP598T130">Permisos</h2>
+<div class="solvvy-solution">
+<p>Cada propietario tiene tres permisos para el archivo o directorio. Estos son:</p>
+<ul>
+<li><strong>Read (r)&nbsp;</strong>— Le da al propietario la capacidad de leer y abrir el archivo o ver el contenido de los directorios.</li>
+<li><strong>Write (w)&nbsp;</strong>— Otorga al propietario la capacidad de editar el contenido del archivo, o administrar archivos en un directorio y eliminar el directorio (cuando está vacío).</li>
+<li><strong>Execute (x)&nbsp;</strong>— Le da al propietario la capacidad de ejecutar el archivo o navegar dentro del directorio.</li>
+</ul>
+</div>
+<h2 id="h_01HBXV98PFSQZ1QB1GBG3YCE2D">Desglose de Propietario y Permisos</h2>
+<div class="solvvy-solution">
+<p>Cuando se juntan, los tres permisos para cada propietario se ven así.</p>
+<table class="wikitable"><colgroup> <col width="45%" /> <col width="55%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Propietario</th>
+<th bgcolor="#F2F2F2">Permisos</th>
+</tr>
+<tr>
+<td>Usuario</td>
+<td>Read<br />Write<br />Execute</td>
+</tr>
+<tr>
+<td>Grupo</td>
+<td>Read<br />Write<br />Execute</td>
+</tr>
+<tr>
+<td>Público</td>
+<td>Read<br />Write<br />Execute</td>
+</tr>
+</tbody>
+</table>
+<p>Estos se pueden ver en el servidor a través de SSH, o usando un cliente FTP.</p>
+</div>
+<h2 id="h_01HBXV98PFSWPSSS3ASJJQZG6A">Ver permisos a través de SSH</h2>
+<div class="solvvy-solution">
+<p>Si inicias sesión en tu servidor a través de SSH, puedes correr <span class="code">ls -la</span> para ver los permisos. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la</span>
+drwxrwxr-x  4 exampleuser pg5034488   4096 Apr  9  2024 example.com
+-rw-r--r--  1 exampleuser pg5034488      0 Apr  9  2024 test.txt
+lrwxrwxrwx  1 bob        webmasters     11 Apr 11  14:08 link -&gt; dir</pre>
+</div>
+<p>Los permisos se muestran horizontalmente. En el extremo izquierdo de cada archivo o nombre de directorio, hay diez caracteres que muestran los atributos y permisos del archivo. La primera columna indica si la entrada es un:</p>
+<ul>
+<li>directorio (<strong>d</strong>),</li>
+<li>un archivo regular (<strong>-</strong>), o</li>
+<li>un enlace simbólico (<strong>l</strong>).</li>
+</ul>
+<p>Los otros nueve personajes están organizados en tres grupos de tres:</p>
+<table class="wikitable"><colgroup> <col width="15%" /> <col width="85%" /> </colgroup>
+<tbody>
+<tr>
+<td>(d<strong>rwx</strong>r-xr-x)</td>
+<td>El primer grupo de tres caracteres son los permisos del propietario. (Tu eres el dueño de tus archivos).</td>
+</tr>
+<tr>
+<td>(drwx<strong>rwx</strong>r-x)</td>
+<td>El segundo grupo de tres caracteres son los permisos de grupo. Estos permisos son compartidos por otros usuarios en tu mismo grupo.</td>
+</tr>
+<tr>
+<td>(drwxr-x<strong>r-x</strong>)</td>
+<td>El tercer grupo de tres caracteres son permisos públicos para cualquier otra persona (como el público).</td>
+</tr>
+</tbody>
+</table>
+<div class="notebox-note">
+<p>Para un enlace, el modo <em>siempre</em> se establecen todos los permisos. Es decir, dado que el enlace simbólico actúa como el archivo o directorio al que apunta (por ejemplo, el enlace de CD anterior lo cambiaría a dir), los permisos del destino son los permisos que realmente están vigentes.</p>
+</div>
+</div>
+<h2 id="h_01HBXV98PGAR15QR0FEKZM3JGA">Ver permisos en un cliente FTP</h2>
+<div class="solvvy-solution">
+<p>En un cliente de FTP, los permisos de un archivo aparecen de las siguiente manera:</p>
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-filezilla-permissions_01.png" alt="ES Filezilla Permissions" width="339" height="364" /></dd>
+</dl>
+<p>Se puede ver este menú dando clic derecho en el archivo y luego haciéndo clic en <strong>Permisos de archivo...</strong>.</p>
+</div>
+<h2 id="h_01HBXV98PGE7ANCXW9XWZ6F20C">Cambiar permisos</h2>
+<div class="solvvy-solution">
+<p>Revisa el siguiente artículo para obtener información sobre cómo cambiar los permisos de tu archivo o directorio:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">Cambiar permisos</a></li>
+</ul>
+</div>

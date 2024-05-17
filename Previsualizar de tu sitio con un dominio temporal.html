@@ -1,0 +1,86 @@
+<h2 id="h_01HY13FSGVW6EDKE9ZF2RF8FM6">Generalidades</h2>
+<div class="solvvy-solution">
+<div class="notebox-note">
+<p>Este artículo explica cómo ver tu sitio antes de apuntar tu DNS a DreamHost usando un subdominio <a href="https://help.dreamhost.com/hc/es/articles/360002284771-Usar-un-subdominio-dreamhosters-com">dreamhosters.com</a>. Para ver otra ver otra opción sobre cómo ver tu sitio en DreamHost antes de apuntar al DNS, consulta el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006086308-Ver-tu-sitio-DreamHost-usando-un-archivo-hosts">Ver tu sitio DreamHost usando un archivo hosts</a></li>
+</ul>
+</div>
+<p>Si estás transfiriendo tu sitio a DreamHost, eventualmente deberás apuntar tu DNS a tu sitio DreamHost. Sin embargo, también es posible probar tu sitio en DreamHost primero antes de cambiar tu DNS. Puedes hacerlo usando un subdominio <a href="https://help.dreamhost.com/hc/es/articles/360002284771-Usar-un-subdominio-dreamhosters-com">dreamhosters.com</a>.</p>
+<p>Hay dos opciones, que se describen en detalle a continuación:</p>
+<h3 id="h_01HY13FSGV81VG6CMX9QC230EN">Opción #1 (funciona con cualquier sitio web)</h3>
+<p>Subir tu sitio directamente al subdominio <strong>dreamhosters.com</strong>.</p>
+<p>Ten en cuenta que si tu sitio utiliza enlaces absolutos (como un sitio WordPress), debes actualizar manualmente todas las URL en los archivos y la base de datos del sitio al nuevo nombre de dominio temporal. Si no lo haces, los enlaces en el sitio apuntarán a la URL del sitio existente que aún no está alojada en DreamHost.</p>
+<h3 id="h_01HY13FSGVTJSQB24DS3KBGJ66">Opción #2 (solo funciona con sitios simples que no usan un certificado SSL)</h3>
+<p>Sube tu sitio a DreamHost, luego usa el subdominio <strong>dreamhosters.com</strong> para 'Reflejar' tu sitio real.</p>
+<p>Ten en cuenta que esta opción no se puede utilizar si tu sitio utiliza un certificado SSL. Esto se debe a que la opción de espejo en el panel DreamHost no funcionará con el certificado SSL de otro sitio.</p>
+</div>
+<h2 id="h_01HY13FSGVJSXAM1FEPP1H0H19"><span id="opción1">Opción #1 — Subir tu sitio directamente al subdominio dreamhosters.com</span></h2>
+<div class="solvvy-solution">
+<p>La mejor opción es subir tu sitio a un <a href="https://help.dreamhost.com/hc/es/articles/360002284771-Usar-un-subdominio-dreamhosters-com" target="_self">subdominio dreamhosters.com</a>. Este es un dominio gratuito que puedes agregar a tu cuenta para que actúe como un sitio temporal. Los siguientes artículos explican cómo crear un subdominio de <strong>dreamhosters.com</strong> y luego cargar los archivos y la base de datos de tu sitio web.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360002284771-Usar-un-subdominio-dreamhosters-com" target="_self">Usar un subdominio dreamhosters.com</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">Descripción general y credenciales de FTP</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215039938--C%C3%B3mo-migrar-mi-base-de-datos-a-DreamHost-">¿Cómo migrar mi base de datos a DreamHost?</a></li>
+</ul>
+<h3 id="h_01HY13FSGV0ST2QE69FYXV4BQB">¿Qué pasa si mi sitio usa WordPress?</h3>
+<p>Si tu sitio ejecuta WordPress, o es un sitio que contiene enlaces absolutos (URL completas a tu sitio), debes actualizar manualmente esos enlaces para que el sitio funcione en el subdominio <strong>dreamhosters.com</strong>.</p>
+<p>Por ejemplo, digamos que tu sitio es <strong>example.com</strong> y has subido el contenido a <strong>example.dreamhosters.com</strong>. Si tu sitio contiene enlaces absolutos (que apuntan a <strong>example.com</strong>), cuando hagas clic en los enlaces de <strong>example.dreamhosters.com</strong>, los enlaces lo llevarán al sitio activo actual de <strong>example.com</strong>.</p>
+<p>Para solucionar esto, debes actualizar todas las URL en tu base de datos que apuntan a tu sitio web en vivo (<strong>example.com</strong>), a <strong>example.dreamhosters.com</strong>. El siguiente artículo explica cómo actualizar las URL en tu base de datos para que apunten al nuevo subdominio <strong>dreamhosters.com</strong>:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214580498-Cambiar-la-URL-de-mi-sitio-WordPress" target="_self">Cambiar la URL de mi sitio WordPress</a></li>
+</ul>
+<p>Una vez que hayas actualizado todas las URL del sitio, deberías ver cómo se resuelve en <strong>example.dreamhosters.com</strong>.</p>
+<h3 id="h_01HY13FSGV605JD6710F5FZYV1">Migrar de nuevo a la URL activa</h3>
+<p>Cuando estés listo para que el sitio entre en funcionamiento, debes actualizar una vez más las URL de tu sitio. Simplemente invierte los pasos anteriores para cambiar todas las URL del subdominio <strong>dreamhosters.com</strong> (<strong>ejemplo.dreamhosters.com</strong>) a la URL de tu sitio en vivo. Solo después de que se hayan actualizado las URL, debes apuntar tu DNS.</p>
+<h3 id="h_01HY13FSGV3JJA6DQ5Q657PRSV">Usar un subdominio en un plan DreamPress</h3>
+<p>También puedes configurar un dominio temporal similar en cualquier plan DreamPress. Consulta el siguiente artículo para obtener más información sobre cómo utilizar un subdominio de <strong>dream.press</strong> con un sitio web de DreamPress:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115002837508-Crear-un-dominio-temporal-de-DreamPress">Crear un dominio temporal de DreamPress</a></li>
+</ul>
+</div>
+<h2 id="h_01HY13FSGVQA7ZYQEH8FKDEJWW"><span id="opción2">Opción #2 — Ver tu sitio a través de un 'Reflejo' dreamhosters.com</span></h2>
+<div class="solvvy-solution">
+<div class="notebox-important">
+<p>Esta opción solo se puede utilizar si se cumple lo siguiente:</p>
+<ul>
+<li>Tu sitio <strong>NO</strong> utiliza un certificado SSL.</li>
+<li>Tu sitio <strong>NO </strong>contiene enlaces absolutos (URL completas a tu sitio).</li>
+</ul>
+</div>
+<p>Para visualizarlo rápidamente en la web, agrega un subdominio <strong>dreamhosters.com</strong> en la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>. Luego puedes usar esto para reflejar tu sitio web real. Revisa el siguiente artículo para obtener instrucciones:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215416417-Generalidades-del-reflejo-de-un-dominio" target="_self">Descripción general del dominio espejo o mirror</a></li>
+</ul>
+<h3 id="h_01HY13FSGVDD0J6EV0WFDD03TV">Esperar que se actualice el DNS</h3>
+<p>Este espejo recién creado puede tardar hasta 6 horas en actualizarse, pero una vez que lo haga, podrás ver tu dominio en DreamHost (<strong>example.com</strong>) utilizando el espejo en <strong>example.dreamhosters.com</strong>.</p>
+<p>Si confirmas que el sitio se ve y funciona como debería, estás preparado para apuntar tu DNS a DreamHost. Cuando estés listo para apuntar tu DNS, visita las siguientes páginas del artículo que brindan instrucciones completas:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">Generalidades del DNS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers">Generalidades de los nameservers</a></li>
+</ul>
+<div class="notebox-note">
+<p>No intentes visitar tu sitio en DreamHost por su dirección IP, ya que la dirección IP es para el servidor, no para el sitio web. Si visitas la IP, verás una página Sitio No Encontrado sobre la que puedes leer aquí:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215613517-P%C3%A1gina-web-no-encontrada" target="_self" rel="undefined">Página web no encontrada</a></li>
+</ul>
+</div>
+<div class="solvvy-solution"> </div>
+<h2 id="h_01HY13FSGVX5VGW251FEYFTQ97"><span id="Ver_tu_base_de_datos_MySQL_antes_del_cambio_de_DNS">Ver tu base de datos MySQL antes del cambio de DNS</span></h2>
+<div class="solvvy-solution">
+<p>Si necesitas acceder a una base de datos MySQL antes de que cambie el DNS, puedes hacer lo mismo usando un arreglo de host MySQL "temporal".</p>
+<p>Visita el siguiente artículo para obtener más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215730267-Acceder-a-una-base-de-datos-antes-de-apuntar-el-DNS-a-DreamHost" target="_self">Acceder a una base de datos antes de apuntar el DNS a DreamHost</a></li>
+</ul>
+</div>
+<h2 id="h_01HY13FSGVKP2DH2ZYQYDM5GN9"><span id="Ver_también">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006086308-Ver-tu-sitio-DreamHost-usando-un-archivo-hosts">Ver tu sitio DreamHost usando un archivo hosts</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360002284771-Usar-un-subdominio-dreamhosters-com">Usar un subdominio dreamhosters.com</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">Descripción general de los DNS de DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers">Descripción general de los nameservers</a></li>
+</ul>
+</div>
+</div>
