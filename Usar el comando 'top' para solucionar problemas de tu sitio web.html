@@ -1,0 +1,118 @@
+<h2 id="h_01HYE9A0GWWY4HBW4G195582XV">Generalidades</h2>
+<div class="solvvy-solution">
+<p>El comando <span class="code">top</span> te permite ver las tareas del sistema que se ejecutan en tiempo real. Proporciona un buen resumen de tu sistema para verificar rápidamente si algo se destaca que pueda estar causando problemas con tu sitio web o servidor. Consulta la siguiente página de manual para obtener más detalles:</p>
+<ul>
+<li><a href="https://linux.die.net/man/1/top" target="_self" rel="undefined">linux.die.net/man/1/top</a></li>
+</ul>
+</div>
+<h2 id="h_01HYE9A0GWV2488AD9SAZSRT0D">¿Cómo ejecuto el comando 'top'?</h2>
+<div class="solvvy-solution">
+<p>Debes iniciar sesión en tu servidor a través de SSH para ejecutar el comando <span class="code">top</span>. Ve los siguientes artículos para obtener información sobre cómo configurar un usuario de Shell e iniciar sesión en tu servidor:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Crear un usuario con acceso Shell (SSH)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
+</ul>
+</div>
+<h2 id="h_01HYE9A0GWQ5K8VKQVPBKS479J">Método abreviado</h2>
+<div class="solvvy-solution">
+<p>La parte superior tiene algunas teclas de método abreviado disponibles que cambian la forma en que se muestra la información:</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2"># Tecla de Abreviación&nbsp;</th>
+<th bgcolor="#F2F2F2">Descripción</th>
+</tr>
+<tr>
+<td align="center">c</td>
+<td>Alterna la columna <span class="text-object">COMMAND</span> entre mostrar el comando o el nombre del programa.</td>
+</tr>
+<tr>
+<td align="center">t</td>
+<td>Muestra información resumida de forma activada y desactivada.</td>
+</tr>
+<tr>
+<td align="center">m</td>
+<td>Muestra información de la memoria activada y desactivada.</td>
+</tr>
+<tr>
+<td align="center">A</td>
+<td>Ordena la pantalla por los principales consumidores de varios recursos del sistema. Útil para la identificación rápida de tareas que requieren un gran rendimiento en el sistema.</td>
+</tr>
+<tr>
+<td align="center">f</td>
+<td>Ingresa a una pantalla de configuración interactiva para <span class="code">top</span>. Útil para configurar <span class="code">top</span> para una tarea específica.</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td>Te permite seleccionar de forma interactiva la orden en <span class="code">top</span>.</td>
+</tr>
+<tr>
+<td align="center">r</td>
+<td>Emite el comando renice.</td>
+</tr>
+<tr>
+<td align="center">k</td>
+<td>Emite el comando kill.</td>
+</tr>
+<tr>
+<td align="center">z</td>
+<td>Activa y desactiva color/mono.</td>
+</tr>
+</tbody>
+</table>
+<p>Este es el primer paso. Muchas veces puedes saber qué sitio está causando problemas simplemente verificando tus procesos activos. Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y observa qué procesos se están ejecutando. Digamos que ves algo como esto:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">top -c</span>
+<span class="cmdoutput">top - 14:37:35 up 10 days, 17:35,  3 users,  load average: 0.83, 0.89, 1.11
+Tasks:  16 total,   1 running,  15 sleeping,   0 stopped,   0 zombie
+Cpu(s): 34.7%us,  4.8%sy,  1.7%ni, 56.5%id,  0.9%wa,  0.2%hi,  1.1%si,  0.0%st
+Mem:  32966092k total, 32546460k used,   419632k free,  6369232k buffers
+Swap:  8000328k total,   228972k used,  7771356k free, 12650516k cached
+
+PID   USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
+8384  username  20   0 66984  11m 6852 S    1  0.0   0:03.62 php5.cgi
+8385  username  20   0 66044  10m 6700 S    0  0.0   0:00.24 php5.cgi
+10895 username  20   0 65940  10m 6848 S    0  0.0   0:00.92 php5.cgi
+10917 username  20   0 65980  10m 6848 S    0  0.0   0:00.79 php5.cgi
+7542  username  20   0 65956  10m 6860 S    0  0.0   0:00.51 php5.cgi
+7818  username  20   0 65980  10m 6860 S    0  0.0   0:00.35 php5.cgi
+7828  username  20   0 65988  10m 6860 S    0  0.0   0:00.33 php5.cgi
+7917  username  20   0 66016  10m 6860 S    0  0.0   0:00.43 php5.cgi
+8152  username  20   0 65976  10m 6856 S    0  0.0   0:04.21 php5.cgi 
+8380  username  20   0 65932  10m 6848 S    0  0.0   0:04.03 php5.cgi
+8386  username  20   0 66020  10m 6860 S    0  0.0   0:00.32 php5.cgi
+10896 username  20   0 65908  10m 6848 S    0  0.0   0:00.66 php5.cgi
+10919 username  20   0 65948  10m 6848 S    0  0.0   0:00.24 php5.cgi
+</span></pre>
+</div>
+<p>Si se parece a lo anterior, es muy probable que te encuentres con este problema. Generalmente, si estás ejecutando más de 10 procesos PHP a la vez y se mantienen bastante estables, esto es una indicación de problemas de memoria.</p>
+<p>Esto puede ayudarte a diagnosticar un problema en un solo sitio con tu nombre de usuario, pero si tienes más de un sitio, debes ejecutar <span class="code">lsof</span> para encontrar cualquier archivo abierto que pueda estar causando un problema.</p>
+</div>
+<h2 id="h_01HYE9A0GW3092G1R46N7RMSAZ">Ordenar resultados por uso de memoria</h2>
+<div class="solvvy-solution">
+<p>Puedes ordenar los resultados de <span class="code">top</span> por uso de memoria. Primero, corre el comando <span class="code">top</span> para ver los resultados en vivo.</p>
+<p>Una vez abierto, presiona&nbsp;<span class="code">Shift + m</span> y los resultados se ordenan por uso de memoria.</p>
+</div>
+<h2 id="h_01HYE9A0GWQ64VDNPEARE6SEBF"><span id="Displaying_memory_usage_of_a_specific_process">Visualización del uso de memoria de un proceso específico</span></h2>
+<div class="solvvy-solution">
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">top -b -n 1 | grep -i <span class="code-highlight">[EnterProcessName]</span></span></pre>
+</div>
+</div>
+<h2 id="h_01HYE9A0GW51RJJFB1GR86JQEN">Servidores VPS y Dedicados</h2>
+<div class="solvvy-solution">
+<p>Si estás en un Servidor VPS o Dedicado, correr <span class="code">top</span> mostrará una gran cantidad de procesos del sistema ejecutados por usuarios como 'root', 'dhapache', 'postfix', etc. Si deseas ver solo los procesos que se ejecutan desde un usuario específico, usa el siguiente comando:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">top -U <span class="code-highlight">[EnterUsername]</span></span></pre>
+</div>
+</div>
+<h2 id="h_01HYE9CPZFEFQMPFKWQYBTWSKZ">Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">Crear un usuario con acceso Shell (SSH)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214880098-Usar-el-comando-ps-para-solucionar-problemas-en-tu-sitio-web">Usar el comando 'ps' para solucionar problemas en tu sitio web</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215945617-Agregar-un-VPS">Agregar un VPS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados">Generalidades de los Servidores Dedicados</a></li>
+</ul>
+</div>
