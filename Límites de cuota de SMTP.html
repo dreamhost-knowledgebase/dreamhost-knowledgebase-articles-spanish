@@ -1,0 +1,179 @@
+<h2 id="h_01HDM5N6JGB33XTRBPE1337C3E">Generalidades</h2>
+<div class="solvvy-solution">
+<p>Mira el artículo de <a href="/hc/es/articles/215730467-Generalidades-sobre-la-cuota-SMTP" target="_self">Cuota de SMTP</a> para detalles relacionados a esta política. Este artículo enumera las limitaciones de cuota SMTP de DreamHost.</p>
+<div class="notebox-note">
+<p>Estos límites se establecen para todas las direcciones de correo de DreamHost y no se pueden ajustar. Los límites a continuación se establecen para cada dirección de correo individual.</p>
+</div>
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<tbody>
+<tr>
+<th style="width: 40;">Método de envío</th>
+<th style="width: 20%;">Destinatarios por hora</th>
+<th style="width: 20%;">Destinatarios máximo por mensaje</th>
+<th style="width: 20%;">Tamaño máximo de mensaje</th>
+</tr>
+<tr>
+<td>Autenticación SMTP en un cliente de correo</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">100</td>
+<td>40MB (codificado)</td>
+</tr>
+<tr>
+<td>Autenticación SMTP en Webmail</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">100</td>
+<td>30MB</td>
+</tr>
+<tr>
+<td>Autenticación SMTP en un formulario web</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">100</td>
+<td>40MB (codificado)</td>
+</tr>
+<tr>
+<td>Usuarios de FTP y Shell en servidores <strong>shared</strong>. Envío mediante scripts PHP/CGI.</td>
+<td style="text-align: center;">200 (por servidor)</td>
+<td style="text-align: center;">40</td>
+<td>40MB (codificado)</td>
+</tr>
+<tr>
+<td>Usuarios de FTP y Shell en <strong>VPS</strong> o Servidores <strong>Dedicados</strong>. Envío mediante scripts PHP/CGI.</td>
+<td style="text-align: center;">Ilimitado</td>
+<td style="text-align: center;">Ilimitado</td>
+<td>40MB (codificado)</td>
+</tr>
+<tr>
+<td>Listas de Anuncios</td>
+<td style="text-align: center;">Ilimitado</td>
+<td style="text-align: center;">Ilimitado</td>
+<td>40MB (codificado)</td>
+</tr>
+<tr>
+<td>Listas de Discusión</td>
+<td style="text-align: center;">Ilimitado</td>
+<td style="text-align: center;">Ilimitado</td>
+<td>
+<p>40MB (codificado)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="notebox-important">
+<p>Los límites anteriores se basan en la cantidad de RECIPIENTES, no en la cantidad de mensajes. Por ejemplo, un solo mensaje de correo con 5 destinatarios contaría como 5 para tu límite de envío. Se cuentan todos los destinatarios en los campos TO, CC y BCC.</p>
+<p>Adicionalmente, DreamHost recomienda encarecidamente que los usuarios de servidores compartidos envíen correo a través de SMTP, como con <a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer" target="_self">PHPMailer</a> o el plugin de WordPress <a href="https://help.dreamhost.com/hc/es/articles/215526937-Configurar-el-plugin-WP-MAIL-SMTP-" target="_self">WP Mail SMTP</a>.</p>
+</div>
+</div>
+<h2 id="h_01HDM5N6JHZS28XC65PQRGD40B">Limitaciones de mensajes entrantes</h2>
+<div class="solvvy-solution">
+<ul>
+<li>Los límites de envío mencionados anteriormente NO se aplican a los mensajes entrantes. Solo para completar, aquí hay dos limitaciones de mensajes entrantes:</li>
+</ul>
+<dl>
+<dd>
+<ul>
+<li>Tamaño máximo del mensaje: se establece en <strong>40MB</strong>. Los mensajes entrantes de más de 40MB rebotan.</li>
+<li>Cantidad de espacio en disco asignado a tu buzón: si tu buzón se llena, los mensajes entrantes rebotan. Es posible que ni siquiera puedas eliminar ningún mensaje porque el servidor necesita algo de espacio libre para funcionar. Por lo tanto, trata de evitar que tus buzones se llenen. Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/215306928-Generalidades-sobre-advertencia-de-uso-de-disco-de-correo-electr%C3%B3nico" target="_self">advertencia de uso del disco</a> para obtener más información sobre cómo configurar el "Limitar el uso total del disco".</li>
+</ul>
+</dd>
+</dl>
+<ul>
+<li>DreamHost recomienda habilitar la opción de mensajes de advertencia "Enviarme un correo electrónico diariamente" para sus cuentas. Estas notificaciones te ayudan a evitar alcanzar el límite de cuota de disco.</li>
+</ul>
+</div>
+<h2 id="h_01HDM5N6JHYA6D3YKYV2VY9426">Ejemplos de cómo se implementan los límites</h2>
+<div class="solvvy-solution">
+<table class="wikitable"><colgroup> <col width="20%" /> <col width="40%" /> <col width="40%" /> </colgroup>
+<tbody>
+<tr>
+<th bgcolor="#F2F2F2">Cómo se envía el mensaje</th>
+<th bgcolor="#F2F2F2">Mensajes y Recipientes</th>
+<th bgcolor="#F2F2F2">Resultado</th>
+</tr>
+<tr>
+<td style="width: 25%; text-align: center;">SMTP</td>
+<td style="width: 29%;">
+<dl>
+<dd>Un mensaje único con 100 destinatarios.</dd>
+</dl>
+</td>
+<td>
+<ul>
+<li>Alcanzas el límite de envío máximo para esa hora.</li>
+<li>Después de una hora, puedes intentar enviar más mensajes.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">SMTP</td>
+<td>
+<dl>
+<dd>5 mensajes con 5 destinatarios cada uno durante una hora.</dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>El sistema cuenta esto como 25 destinatarios durante esa hora.</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">SMTP</td>
+<td>
+<dl>
+<dd>100 mensajes con un solo destinatario cada uno.</dd>
+</dl>
+</td>
+<td>
+<dl>
+<dd>Alcanzas el límite de envío máximo para esa hora.</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">SMTP</td>
+<td>
+<dl>
+<dd>Mensaje único a 50 destinatarios y luego, dentro de esa misma hora, intente enviar otro mensaje con 55 destinatarios.</dd>
+</dl>
+</td>
+<td>
+<ul>
+<li>El segundo mensaje FALLA y tu cuenta está bloqueada porque excedes tu límite de envío.</li>
+<li>Debes esperar a que transcurra esa hora (desde el momento en que envías el primer mensaje) antes de intentar reenviar el mensaje que no pudo enviarse durante la última hora.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="h_01HDM5N6JJZG2BB2EXR6TSW17V">¿Qué sucede cuando alcanzas los límites?</h2>
+<div class="solvvy-solution">
+<p>Una vez que hayas alcanzado tu límite de envío por hora, cualquier mensaje que intentes enviar que exceda tu límite de envío hace que tu cuenta se bloquee de inmediato. Los mensajes que excedieron, o intentaron exceder, tu límite de envío NO se envían y fallan con un mensaje de error "Rechazo de la política - Cuota excedida" ('Policy Rejection- Quota Exceeded'). Esos mensajes no enviados generalmente permanecen en la "bandeja de salida" de tu cliente de correo para que puedas intentar reenviarlos más tarde.</p>
+<div class="notebox-note">
+<p>Si estás bloqueado por exceder la cuota, el bloqueo permanecerá en su lugar hasta que haya transcurrido al menos una hora, tiempo durante el cual no ha habido más intentos de enviar correo desde la cuenta.</p>
+</div>
+<p>Algunos clientes de correo (especialmente Outlook) intentarán enviar cualquier cosa en la "bandeja de salida" a intervalos regulares, o en cada intento de envío. Para que se elimine la cuota lo antes posible, asegúrese de eliminar cualquier mensaje de la bandeja de salida y espere al menos una hora antes de intentar enviar nuevamente.</p>
+<p>Sin embargo, los servidores de correo AUTOMÁTICAMENTE desbloquean/restablecen tu cuenta una hora después del primer mensaje que se envió. No hay necesidad de contactar al soporte cuando esto sucede.</p>
+<p>Además, si un mensaje que se ha enviado con éxito a un destinatario se devuelve por varias razones, todavía cuenta para tu límite de envío. No se deducen de su límite de envío.</p>
+<div class="notebox-important">
+<p>El sistema bloquea permanentemente las cuentas que se bloquean repetidamente por intentar superar el límite de envío. Si esto le sucede a tu cuenta, debes ponerte en contacto con el soporte técnico para obtener ayuda a fin de desbloquear tu cuenta. En tu solicitud de soporte, incluye tu nombre de usuario y dirección de correo.</p>
+</div>
+</div>
+<h2 id="h_01HDM5N6JJWX12VD0TGZZ27C0W">Ejemplos de lo que puede hacer que alcances los límites</h2>
+<div class="solvvy-solution">
+<ul>
+<li>Si tienes una cuenta configurada como reenvío a cualquier correo enviado a otra dirección, esos mensajes reenviados también cuentan para tu límite de envío.</li>
+<li>Si tienes filtros de palabras clave en una cuenta que están configurados para reenviar cualquier correo a otra dirección, esos mensajes reenviados también cuentan para tu límite de envío.</li>
+<li>Los mensajes de respuesta automática también cuentan para el límite de envío por hora de esa cuenta.</li>
+<li>Múltiples sitios web alojados bajo la misma cuenta FTP/Shell que envían correos, todos cuentan para el límite de envío de esa cuenta FTP/Shell.</li>
+<li>Si usas Con Jobs para enviar correos, estos se cuentan para el límite de envío por hora de la cuenta de shell. Los correos de notificación de error/finalización de Cron Jobs también cuentan.</li>
+<li>Los Cron Jobs y otros scripts/procesos CGI que usan SMTP autenticado para enviar mensajes de correo están restringidos al límite de envío de la dirección que usan para la autenticación.</li>
+<li>Los límites de correo son por dirección de correo. Esto no significa que puedas "difundir" tu correo en bloque/masivo en varias direcciones de correo. Si necesitas enviar más de 1 a 2 correos por minuto, debes revisar la <a href="https://www.dreamhost.com/es/legal/politica-anti-spam/" target="_self" rel="undefined">política de envíos masivos y anti spam de DreamHost</a>.</li>
+</ul>
+</div>
+<h2 id="h_01HDM5N6JJVEMTKCFP7PDYTJQS">Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a style="background-color: #ffffff;" href="/hc/es/articles/215730467-Generalidades-sobre-la-cuota-SMTP" target="_self">Generalidades sobre la cuota SMTP</a></li>
+</ul>
+</div>
