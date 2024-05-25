@@ -31,45 +31,45 @@
 </div>
 <h2 id="h_01HCZ632AFFXF8K6VC3CJ19HVM"><span id="Listing_IP_hits">Listado de visitas de IP</span></h2>
 <div class="solvvy-solution">
-<table class="wikitable">
+<table style="width: 798px;">
 <tbody>
 <tr style="font-style: bold;">
-<th bgcolor="#F2F2F2">Comando</th>
-<th bgcolor="#F2F2F2">Descripción</th>
+<th style="width: 613.537px;" bgcolor="#F2F2F2">Comando</th>
+<th style="width: 177.756px;" bgcolor="#F2F2F2">Descripción</th>
 </tr>
 <tr>
-<td>
+<td style="width: 605.526px;">
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cat access.log| awk '{print $1}' | sort | uniq -c |sort -n</span></pre>
 </div>
 </td>
-<td>Genera una lista de direcciones IP precedida por la cantidad de veces que llega a un sitio.</td>
+<td style="width: 169.744px;">Genera una lista de direcciones IP precedida por la cantidad de veces que llega a un sitio.</td>
 </tr>
 <tr>
-<td>
+<td style="width: 605.526px;">
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">tail -10000 access.log| awk '{print $1}' | sort | uniq -c |sort -n</span></pre>
 </div>
 </td>
-<td>Genera una lista que muestra los últimos 10,000 accesos a un sitio.</td>
+<td style="width: 169.744px;">Genera una lista que muestra los últimos 10,000 accesos a un sitio.</td>
 </tr>
 <tr>
-<td>
+<td style="width: 605.526px;">
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">host 66.249.66.167</span>
 <span class="cmdoutput">167.66.249.66.in-addr.arpa domain name pointer crawl-66-249-66-167.googlebot.com</span>
 </pre>
 </div>
 </td>
-<td>El comando 'host' determina la compañía de hosting desde la cual una IP específica está golpeando un sitio. En este ejemplo, la IP pertenece a Google.</td>
+<td style="width: 169.744px;">El comando 'host' determina la compañía de hosting desde la cual una IP específica está golpeando un sitio. En este ejemplo, la IP pertenece a Google.</td>
 </tr>
 <tr>
-<td>
+<td style="width: 605.526px;">
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">tail -f -q access.log</span></pre>
 </div>
 </td>
-<td>Mira los registros de tu servidor en tiempo real para ver si el problema se presenta con una IP específica (para problemas intermitentes).</td>
+<td style="width: 169.744px;">Revisa los registros de tu servidor en tiempo real para ver si el problema se presenta con una IP específica (para problemas intermitentes).</td>
 </tr>
 <tr>
 <td>
@@ -80,34 +80,34 @@ allow from all
 </pre>
 </div>
 </td>
-<td>Bloquea la IP en un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a>.&nbsp;En este ejemplo, el archivo <span class="text-object">.htaccess</span> bloquea la IP de Google anterior.</td>
+<td style="width: 169.744px;">Bloquea la IP en un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a>.&nbsp;En este ejemplo, el archivo <span class="text-object">.htaccess</span> bloquea la IP de Google anterior.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <h2 id="h_01HCZ632AFVT57YB3YX28BW4T2">Listado de archivos, carpetas y dominios principales</h2>
 <div class="solvvy-solution">
-<table class="wikitable">
+<table class="wikitable" style="width: 809px;">
 <tbody>
 <tr style="font-style: bold;">
-<th bgcolor="#F2F2F2">Comando</th>
-<th bgcolor="#F2F2F2">Descripción</th>
+<th style="width: 621.918px;" bgcolor="#F2F2F2">Comando</th>
+<th style="width: 180.369px;" bgcolor="#F2F2F2">Descripción</th>
 </tr>
 <tr>
-<td>
+<td style="width: 613.906px;">
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">awk '{print $7}' access.log|cut -d? -f1|sort|uniq -c|sort -nk1|tail -n10</span></pre>
 </div>
 </td>
-<td>Genera una lista de archivos o directorios en tu sitio que se llaman más.</td>
+<td style="width: 172.358px;">Genera una lista de archivos o directorios en tu sitio que se llaman más.</td>
 </tr>
 <tr>
-<td>
+<td style="width: 613.906px;">
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">for k in `ls -S */https/access.log`; do wc -l $k | sort -r -n; done</span></pre>
 </div>
 </td>
-<td>
+<td style="width: 172.358px;">
 <ul>
 <li>Genera una lista de tráfico para todos los dominios listados bajo un usuario específico (en un servidor compartido).</li>
 <li>Este comando debe ejecutarse en tu directorio <span class="text-object">/logs/</span>.</li>
@@ -122,19 +122,19 @@ allow from all
 <div class="notebox-note">
 <p>Los siguientes comandos solo muestran sitios bajo un solo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>. Si necesitas ver todos los registros del sitio en tu servidor, dirígete&nbsp; la sección a continuación titulada <span class="text-section">Administrar usuarios en un Servidor Dedicado</span>.</p>
 </div>
-<table class="wikitable">
+<table class="wikitable" style="width: 689px;">
 <tbody>
 <tr style="font-style: bold;">
-<th bgcolor="#F2F2F2">Comando</th>
-<th bgcolor="#F2F2F2">Descripción</th>
+<th style="width: 679.105px;" bgcolor="#F2F2F2">Comando</th>
+<th style="width: 128.153px;" bgcolor="#F2F2F2">Descripción</th>
 </tr>
 <tr>
-<td style="width: 44%;">
+<td style="width: 671.094px;">
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">for k in `ls -S /home/*/logs/*/https/access.log`; do wc -l $k | sort -r -n; done</span></pre>
 </div>
 </td>
-<td>
+<td style="width: 120.142px;">
 <ul>
 <li>Genera una lista de todo el tráfico para todos los dominios bajo un solo usuario de SHELL.</li>
 <li>Puedes correr este comando desde cualquier directorio.</li>
@@ -142,14 +142,14 @@ allow from all
 </td>
 </tr>
 <tr>
-<td style="width: 44%;">
+<td style="width: 671.094px;">
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">tail -f -q /home/*/logs/*/https/access.log</span></pre>
 </div>
 </td>
-<td>
+<td style="width: 120.142px;">
 <ul>
-<li>Mira los registros de tu servidor (bajo un solo usuario de Shell) en tiempo real para ver si el problema se presenta con una IP específica (para problemas intermitentes).</li>
+<li>Revisa los registros de tu servidor (bajo un solo usuario de Shell) en tiempo real para ver si el problema se presenta con una IP específica (para problemas intermitentes).</li>
 <li>Puedes correr este comando desde cualquier directorio.</li>
 </ul>
 </td>
