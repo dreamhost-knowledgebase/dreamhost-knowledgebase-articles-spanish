@@ -1,3 +1,4 @@
+<div id="auto-toc">&nbsp;</div>
 <h2 id="h_01HCZ632AFTB15218QN3SM8G1X">Generalidades</h2>
 <div class="solvvy-solution">
 <div class="notebox-tip">
@@ -31,45 +32,45 @@
 </div>
 <h2 id="h_01HCZ632AFFXF8K6VC3CJ19HVM"><span id="Listing_IP_hits">Listado de visitas de IP</span></h2>
 <div class="solvvy-solution">
-<table style="width: 798px;">
+<table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
 <tr style="font-style: bold;">
-<th style="width: 613.537px;" bgcolor="#F2F2F2">Comando</th>
-<th style="width: 177.756px;" bgcolor="#F2F2F2">Descripción</th>
+<th style="width: 50%;" bgcolor="#F2F2F2">Comando</th>
+<th style="width: 50%;" bgcolor="#F2F2F2">Descripción</th>
 </tr>
 <tr>
-<td style="width: 605.526px;">
+<td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cat access.log| awk '{print $1}' | sort | uniq -c |sort -n</span></pre>
 </div>
 </td>
-<td style="width: 169.744px;">Genera una lista de direcciones IP precedida por la cantidad de veces que llega a un sitio.</td>
+<td>Genera una lista de direcciones IP precedida por la cantidad de veces que llega a un sitio.</td>
 </tr>
 <tr>
-<td style="width: 605.526px;">
+<td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">tail -10000 access.log| awk '{print $1}' | sort | uniq -c |sort -n</span></pre>
 </div>
 </td>
-<td style="width: 169.744px;">Genera una lista que muestra los últimos 10,000 accesos a un sitio.</td>
+<td>Genera una lista que muestra los últimos 10,000 accesos a un sitio.</td>
 </tr>
 <tr>
-<td style="width: 605.526px;">
+<td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">host 66.249.66.167</span>
 <span class="cmdoutput">167.66.249.66.in-addr.arpa domain name pointer crawl-66-249-66-167.googlebot.com</span>
 </pre>
 </div>
 </td>
-<td style="width: 169.744px;">El comando 'host' determina la compañía de hosting desde la cual una IP específica está golpeando un sitio. En este ejemplo, la IP pertenece a Google.</td>
+<td>El comando 'host' determina la compañía de hosting desde la cual una IP específica está golpeando un sitio. En este ejemplo, la IP pertenece a Google.</td>
 </tr>
 <tr>
-<td style="width: 605.526px;">
+<td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">tail -f -q access.log</span></pre>
 </div>
 </td>
-<td style="width: 169.744px;">Revisa los registros de tu servidor en tiempo real para ver si el problema se presenta con una IP específica (para problemas intermitentes).</td>
+<td>Revisa los registros de tu servidor en tiempo real para ver si el problema se presenta con una IP específica (para problemas intermitentes).</td>
 </tr>
 <tr>
 <td>
@@ -80,34 +81,34 @@ allow from all
 </pre>
 </div>
 </td>
-<td style="width: 169.744px;">Bloquea la IP en un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a>.&nbsp;En este ejemplo, el archivo <span class="text-object">.htaccess</span> bloquea la IP de Google anterior.</td>
+<td>Bloquea la IP en un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a>.&nbsp;En este ejemplo, el archivo <span class="text-object">.htaccess</span> bloquea la IP de Google anterior.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <h2 id="h_01HCZ632AFVT57YB3YX28BW4T2">Listado de archivos, carpetas y dominios principales</h2>
 <div class="solvvy-solution">
-<table class="wikitable" style="width: 809px;">
+<table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
-<tr style="font-style: bold;">
-<th style="width: 621.918px;" bgcolor="#F2F2F2">Comando</th>
-<th style="width: 180.369px;" bgcolor="#F2F2F2">Descripción</th>
+<tr>
+<th style="width: 621.918px;">Comando</th>
+<th style="width: 180.369px;">Descripción</th>
 </tr>
 <tr>
-<td style="width: 613.906px;">
+<td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">awk '{print $7}' access.log|cut -d? -f1|sort|uniq -c|sort -nk1|tail -n10</span></pre>
 </div>
 </td>
-<td style="width: 172.358px;">Genera una lista de archivos o directorios en tu sitio que se llaman más.</td>
+<td>Genera una lista de archivos o directorios en tu sitio que se llaman más.</td>
 </tr>
 <tr>
-<td style="width: 613.906px;">
+<td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">for k in `ls -S */https/access.log`; do wc -l $k | sort -r -n; done</span></pre>
 </div>
 </td>
-<td style="width: 172.358px;">
+<td>
 <ul>
 <li>Genera una lista de tráfico para todos los dominios listados bajo un usuario específico (en un servidor compartido).</li>
 <li>Este comando debe ejecutarse en tu directorio <span class="text-object">/logs/</span>.</li>
@@ -122,19 +123,19 @@ allow from all
 <div class="notebox-note">
 <p>Los siguientes comandos solo muestran sitios bajo un solo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a>. Si necesitas ver todos los registros del sitio en tu servidor, dirígete&nbsp; la sección a continuación titulada <span class="text-section">Administrar usuarios en un Servidor Dedicado</span>.</p>
 </div>
-<table class="wikitable" style="width: 689px;">
+<table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
-<tr style="font-style: bold;">
-<th style="width: 679.105px;" bgcolor="#F2F2F2">Comando</th>
-<th style="width: 128.153px;" bgcolor="#F2F2F2">Descripción</th>
+<tr>
+<th style="width: 679.105px;">Comando</th>
+<th style="width: 128.153px;">Descripción</th>
 </tr>
 <tr>
-<td style="width: 671.094px;">
+<td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">for k in `ls -S /home/*/logs/*/https/access.log`; do wc -l $k | sort -r -n; done</span></pre>
 </div>
 </td>
-<td style="width: 120.142px;">
+<td>
 <ul>
 <li>Genera una lista de todo el tráfico para todos los dominios bajo un solo usuario de SHELL.</li>
 <li>Puedes correr este comando desde cualquier directorio.</li>
@@ -142,12 +143,12 @@ allow from all
 </td>
 </tr>
 <tr>
-<td style="width: 671.094px;">
+<td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">tail -f -q /home/*/logs/*/https/access.log</span></pre>
 </div>
 </td>
-<td style="width: 120.142px;">
+<td>
 <ul>
 <li>Revisa los registros de tu servidor (bajo un solo usuario de Shell) en tiempo real para ver si el problema se presenta con una IP específica (para problemas intermitentes).</li>
 <li>Puedes correr este comando desde cualquier directorio.</li>
@@ -162,7 +163,7 @@ allow from all
 <div class="notebox-note">
 <p>Los siguientes comandos solo funcionan si tiene un usuario&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-Servidor-Dedicado" target="_self">'Admin'</a> en tu Servidor Dedicado. Luego debes cambiar a tu usuario 'root'. Sólo entonces verás todos los registros de todos los sitios en tu servidor.</p>
 </div>
-<h3 id="h_01HCZ632AFNQ4H57VZ4RK4KV1Q">Cómo cambiar al usuario 'root' después de iniciar sesión como usuario 'admin'</h3>
+<h3 id="h_01HCZ632AFNQ4H57VZ4RK4KV1Q" class="subtoc-heading">Cómo cambiar al usuario 'root' después de iniciar sesión como usuario 'admin'</h3>
 <p>Los siguientes pasos detallan cómo iniciar sesión como usuario 'root' en tu servidor DESPUÉS de iniciar sesión como tu usuario 'admin' primero.</p>
 <ol>
 <li>Inicia sesión en tu servidor como tu usuario 'admin'.</li>
@@ -181,14 +182,14 @@ allow from all
 </pre>
 </div>
 <p>Después de iniciar sesión como usuario 'root', corre los siguientes comandos para ver los registros de todos los sitios en tu servidor.</p>
-<table class="wikitable">
+<table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
 <tr>
-<th bgcolor="#F2F2F2">Comando</th>
-<th bgcolor="#F2F2F2">Descripción</th>
+<th style="width: 50%;">Comando</th>
+<th style="width: 50%;">Descripción</th>
 </tr>
 <tr>
-<td style="width: 44%;">
+<td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">for k in `ls -S /home/*/logs/*/https/access.log`; do wc -l $k | sort -r -n; done</span></pre>
 </div>
@@ -201,7 +202,7 @@ allow from all
 </td>
 </tr>
 <tr>
-<td style="width: 44%;">
+<td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">tail -f -q /home/*/logs/*/https/access.log</span></pre>
 </div>
@@ -216,8 +217,10 @@ allow from all
 </tbody>
 </table>
 </div>
-<h2 id="h_01HCZ632AFKRAC5ZXK1VKXP0M0">Mi IP única está haciendo muchas conexiones</h2>
+<h2 id="h_01HYPCPR51FJEX6TBDK0CXSRK6">Solución de problemas</h2>
 <div class="solvvy-solution">
+<div id="Mi_IP_Unica_esta haciendo_demasiadas_conexiones" class="section-link">&nbsp;</div>
+<h3 id="h_01HYPCPR517CTFC04A4BAY7B2F" class="subtoc-heading">Mi IP Única esta haciendo demasiadas conexiones</h3>
 <p>Puedes encontrar en tu access.log que la IP única de tu sitio está haciendo muchas conexiones. Esto no es un problema y puede ignorarse con seguridad.</p>
 <p>Esto ocurre porque Apache está generando internamente estas conexiones para cerrar procesos innecesarios.</p>
 <p>Puedes leer más al respecto&nbsp;<a href="https://cwiki.apache.org/confluence/display/HTTPD/InternalDummyConnection" target="_self">aquí</a>.</p>
