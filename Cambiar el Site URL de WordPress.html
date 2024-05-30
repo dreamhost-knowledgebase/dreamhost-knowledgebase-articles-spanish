@@ -1,0 +1,196 @@
+<div id="auto-toc">&nbsp;</div>
+<div class="notebox-tip">
+<p>Si te encuentras en una situación que requiere cambios en tu sitio y tu desarrollador no está disponible para ayudarte, el equipo de soporte calificado de DreamHost puede ayudarte por una pequeña tarifa. Puedes encontrar más información sobre los servicios admitidos y los costos asociados en el artículo de <a href="https://help.dreamhost.com/hc/es/articles/360042256912-Generalidades-sobre-Servicios-Profesionales-">Servicios Profesionales de DreamHost</a>.</p>
+</div>
+<h2 id="h_01HCD67T8F18B6GNN33KMZW5K2">Generalidades</h2>
+<div class="solvvy-solution">
+<div class="notebox-important">
+<p>Cambiar la URL del sitio WordPress es solo una parte de una serie de pasos que necesitas tomar para asegurarte que tu sitio WordPress funcione con la nueva URL. Revisa el siguiente artículo para ver una lista con pasos para migrar tu sitio WordPress a tu nuevo dominio.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214693138--Cómo-mover-WordPress-a-un-dominio-diferente-en-DreamHost-" target="_self">Cómo mover WordPress a un dominio diferente</a></li>
+</ul>
+</div>
+<p>Tu puedes mover el nombre de dominios tu sitio WordPress en el momento que quieras, pero hay unas configuraciones importantes que deben hacerse para cambiarlo.</p>
+<p>Asegúrate de seguir cuidadosamente los siguientes pasos para hacerlo correctamente.</p>
+</div>
+<h2 id="h_01HCD67T8F61X7C3WF3GPF958W">Varias razones para cambiar la URL</h2>
+<div class="solvvy-solution">
+<p>Lo que verás son instrucciones de cómo mover una instalación de WordPress de una URL a otra. Hay diferentes casos para mover una instalación de WordPress, como muestra abajo.</p>
+<h3 id="h_01HCD67T8FDG4KNGFA8W11Z2ZG" class="subtoc-heading">Caso #1 — Mover a un directorio diferente</h3>
+<p>El primer caso es cuando un sitio de WordPress mueve su ubicación a un directorio diferente.</p>
+<p>Esto podría ser del dominio principal a un subdirectorio.</p>
+<ul>
+<li><strong>example.com </strong>a <strong>example.com/blog</strong></li>
+</ul>
+<p>o del subdirectorio al dominio principal</p>
+<ul>
+<li><strong>example.com/blog&nbsp;</strong>a <strong>example.com</strong></li>
+</ul>
+<p>Si ya has movido tu dominio a una nueva URL, no vas a poner iniciar sesión pues WordPress está configurado para usar la vieja URL.</p>
+<h3 id="h_01HCD67T8FMDAC7Q5PSE78974F" class="subtoc-heading">Caso #2 — Agregar o eliminar www</h3>
+<p>Otra razón para actualizar tus URLs es si deseas <a href="https://help.dreamhost.com/hc/es/articles/215457387-Agregar-o-eliminar-www-de-un-dominio#Agregar_o_eliminar_www_en_WordPress" target="_blank" rel="noopener noreferrer">agregar o eliminar la <span class="text-object">www</span></a> de tu dominio.</p>
+<p>Después de ajustar la URL, puede que también veas un <a href="https://help.dreamhost.com/hc/es/articles/215457387-Agregar-o-eliminar-www-de-un-dominio#Cuando_agregas_o_eliminas_www_rompes_wordpress">error de redirección en el buscador</a> cuando veas tu sitio. Puede decir también "Too many redirects" o "The page isn't redirecting properly".</p>
+</div>
+<h3 id="h_01HCD67T8F3BDKQDV9RH7GCDND" class="subtoc-heading">Caso #3 — Agregar 'https' a una URL</h3>
+<p>Si estás usando un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/218428687--C%C3%B3mo-uso-un-certificado-SSL-con-WordPress-" target="_self">certificado SSL</a>, la primera parte de la URL cambia de <span class="text-object">http</span> o <span class="text-object">https</span>. Si ya has hecho este cambio, no vas a poder iniciar sesión pues WordPress está configurado para usar la URL antigua.</p>
+<h3 id="h_01HCD67T8F0TC3FH621FW7A6W3" class="subtoc-heading">Caso #4 — Mover a un nuevo dominio</h3>
+<p>El último caso es cuando un sitio WordPress se mueve de un dominio totalmente alojado a uno diferente. Por ejemplo:</p>
+<ul>
+<li>Mover de <strong>https://example.com</strong><br />a</li>
+<li><strong>https://dreamhost.com</strong></li>
+</ul>
+<p>Si esta opción aplica a tu sitio, mira el siguiente artículo para ver instrucciones de cómo mover una instalación de WordPress a un dominio diferente.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214693138--Cómo-mover-WordPress-a-un-dominio-diferente-en-DreamHost-" target="_self">Cómo mover WordPress a un dominio diferente en DreamHost</a></li>
+</ul>
+<p>Las siguientes dos opciones explican como actualizar todas las URL de tu base de datos a una nueva URL.</p>
+<h2 id="h_01HCD67T8GKD0ZNFQEJYEB21XE">Opción 1 — Usar la línea de comando</h2>
+<div class="solvvy-solution">
+<div class="notebox-note">
+<p>Este ejemplo actualiza la URL de <strong>example.com</strong> a <strong>example.com/blog</strong>.</p>
+</div>
+<p>La siguiente sección también está disponible como vídeo instructivo:</p>
+<dl>
+<dd><iframe src="https://www.youtube.com/embed/qr1bNNtSlPk" width="560" height="315" frameborder="0" allowfullscreen=""></iframe></dd>
+</dl>
+<p>Si estás familiarizado con la línea de comando, puedes correr el siguiente comando para actualizar todas las URL en la base de datos al mismo tiempo.</p>
+<ol>
+<li>Inicia sesión en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">SSH</a>.</li>
+<li>Navega a tu <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-del-sitio-web" target="_self" rel="undefined">directorio de WordPress</a>. Asegúrate de cambiar <span class="text-object">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a>.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd /home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span></span></pre>
+</div>
+</li>
+<li>Usa <a href="https://help.dreamhost.com/hc/es/articles/214693248-Generalidades-sobre-WordPress-wp-cli" target="_self" rel="undefined">wp-cli</a> en el directorio de tu sitio web para actualizar las URL a través del siguiente comando.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp search-replace <span class="code-highlight">http://example.com https://example.com/blog</span> --dry-run</span></pre>
+</div>
+</li>
+</ol>
+<p>El <span class="code">--dry-run</span> llama al final de la dirección de pruebas</p>
+<p>Si los cambios tienen sentido para tí, entonces corre el comando de arriba sin the <span class="code">dry-run</span>.</p>
+</div>
+<div id="Changing_the_URL_using_phpMyAdmin" class="section-link">&nbsp;</div>
+<h2 id="h_01HCD67T8GEH8XCK4M1S6MKBK3">Opción 2 – Usar phpMyAdmin y un plugin</h2>
+<div class="solvvy-solution">
+<div class="notebox-note">
+<p>Este ejemplo actualiza la URL de <strong>example.com</strong> a <strong>example.com/blog</strong>.</p>
+</div>
+<div class="notebox-note">
+<p>Este ejemplo actualiza la URL de <strong>example.com</strong> a <strong>example.com/blog</strong>.</p>
+</div>
+<p>Puedes también usar <a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin" target="_self" rel="undefined">phpMyAdmin</a> para actualizar las URL de home y siteurl.</p>
+<p>Visita el siguiente artículo para más información de como iniciar sesión en phpMyAdmin:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self" rel="undefined">Encontrar tus credenciales de inicio de sesión de phpMyAdmin</a></li>
+</ul>
+<div class="steps-section--container">
+<div class="steps-section-sublist--border">&nbsp;</div>
+<div class="steps-section--content">
+<div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-1.svg" width="30px" />
+<h3 id="h_01HCD67T8GG3JJENT011MXWXA4" class="subtoc-heading">Paso 1 — Cambiar las URL de home y siteurl phpMyAdmin</h3>
+<p>La siguiente sección también está disponible como vídeo instructivo:</p>
+<dl>
+<dd><iframe src="https://www.youtube.com/embed/6oOyZefn93E" width="560" height="315" frameborder="0" allowfullscreen=""></iframe></dd>
+</dl>
+<ol>
+<li>Abre phpMyAdmin.</li>
+<li>Da clic en tu base de datos en el panel izquierdo. Muchas tablas aparecen debajo de este. Da clic a la tabla wp_options.</li>
+<li>Localiza las filas de <span class="text-object">siteurl</span> y <span class="text-object">home</span>. Da clic en el icono de <span class="text-object">lápiz</span> al lado de cada uno para editarlos.<br />
+<dl>
+<dd><em>Cuando bajas sobre esas opciones, "Examinar" aparecerá.</em></dd>
+</dl>
+</li>
+<li>Da clic en el icono de <span class="text-object">lápiz</span> al lado de cada uno para editarlos.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-04.5_Change_wordpress_site_url_phpmyadmin.fw.png" alt="ES 04.5 Change wordpress site url phpmyadmin.fw.png" width="580" height="242" /></dd>
+</dl>
+</li>
+<li>Altera la URL escribiendo la nueva.</li>
+<li>Da clic en el botón <strong>Continuar</strong>&nbsp;para guardar los cambios. Haz esto para ambas opciones 'siteurl' y 'home'.</li>
+</ol>
+<p>Ahora deberías poder iniciar sesión en tu sitio <strong>example.com/wp-login.php</strong>.</p>
+</div>
+<div class="steps-section--step"><img class="steps-number-sublist-icon" src="https://kbimages.dreamhosters.com/graphics/number-2.svg" width="30px" />
+<h3 id="h_01HCD67T8GKDRW6PQEVZG8QXR8" class="subtoc-heading">Paso 2 — Actualizar las URL restantes</h3>
+<p>La siguiente sección también está disponible como vídeo instructivo:</p>
+<dl>
+<dd><iframe src="https://www.youtube.com/embed/cSzngRBunoM" width="560" height="315" frameborder="0" allowfullscreen=""></iframe></dd>
+</dl>
+<p>Aunque esto te da acceso a tu sitio, cualquier otra URL en tu base de datos todavía usa la URL anterior. Puedes usar un plugin para actualizar las URL restantes en tu base de datos:</p>
+<div class="notebox-important">
+<p>Al cambiar las URL en WordPress, debes asegurarte de que el panel DreamHost no entre en conflicto con tu nueva configuración de URL agregando o eliminando www del nombre de dominio. Revisa el siguiente artículo para obtener información sobre cómo asegurarte de que el panel esté configurado correctamente.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215457387#cuando-eliminas-www-rompes-wordpress" target="_self" rel="undefined">Cuando cambiar las URL rotas de WordPress</a></li>
+</ul>
+</div>
+<div class="notebox-note">
+<p>Los ejemplos en este paso agregan <span class="text-object">HTTPS</span> a la URL y cambia el nombre de dominio a un subdirectorio.</p>
+</div>
+<p>Abajo hay un par de plugins que funcionan para cambiar todas las URL en tu base de datos.</p>
+<ul>
+<li><a href="https://es.wordpress.org/plugins/velvet-blues-update-urls/" target="_self" rel="undefined">Velvet Blues Update URLs</a></li>
+<li><a href="https://es.wordpress.org/plugins/better-search-replace/" target="_self" rel="undefined">Better Search Replace</a></li>
+</ul>
+<p>Los siguientes pasos te guían en como actualizar tus URL usando el plugin 'Search &amp; Replace'. Este ejemplo cambia las URL de la base de datos de <strong>http://example.com</strong> a <strong>https://example.com/blog</strong>.</p>
+<ol>
+<li>Haz una<a href="https://help.dreamhost.com/hc/es/articles/215039758-Generalidades-sobre-copias-de-seguridad-de-bases-de-datos" target="_self" rel="undefined"> copia de seguridad de tu base de datos</a>. Solo en el caso de que algo salga mal, puedes reemplazar fácilmente tus datos de la anterior base de datos.</li>
+<li>Descarga el <a href="https://es.wordpress.org/plugins/better-search-replace/" target="_self" rel="undefined">plugin Better Search Replace</a>. En tu panel navega a <span class="text-section">Plugins &gt; Añadir nuevo</span>.</li>
+<li>Busca 'Better Search Replace'.</li>
+<li>Da clic en <strong>Instalar ahora</strong>.</li>
+<li>Da clic en <strong>Activar</strong>.&nbsp;</li>
+<li>Navega al plugin debajo de <span class="text-section">Herramientas &gt; Better Search Replace</span> en el Panel.<br />
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-wordpress-change-database-urls-plugin.png" alt="ES wordpress-change-database-urls-plugin.png" height="" /></dd>
+</dl>
+</li>
+<li>Da clic en la pestaña 'Search/Replace'.</li>
+<li>Ingresa tu URL <span class="text-object">http</span> en el primer campo llamado Search for:. Por ejemplo:</li>
+<ul>
+<li><strong>http://example.com</strong></li>
+</ul>
+<li>Ingresa tu nueva URL en el segundo campo titulado <span class="text-object">Sustituir con:</span>. Por ejemplo:</li>
+<ul>
+<li><strong>https://example.com/blog</strong></li>
+</ul>
+<li>Selecciona todas las tablas.</li>
+<li>Deja '¿Sustituir el GUID?' SIN marcar. Revisa el siguiente artículo para más detalles:
+<ul>
+<li><a href="https://wordpress.org/support/article/changing-the-site-url/#important-guid-note" target="_self">Nota importante de GUID</a></li>
+</ul>
+</li>
+<li>Selecciona la casilla titulada <span class="text-object">¿Quieres ejecutar un simulacro?</span>.&nbsp;</li>
+<li>Da clic en <strong>Ejecutar búsqueda/sustitución</strong>.<br /><em>Esto debería responder con un mensaje en la parte superior notificándote lo que se habría actualizado si no marcaras la casilla <span class="text-object">Ejecutar un simulacro</span>.</em></li>
+<li>Córrelo de nuevo con la casilla <span class="text-object">¿Quieres ejecutar un simulacro?</span> SIN marcar si todo parece estar bien.</li>
+</ol>
+<dl>
+<dd><em>Una confirmación se mostrará notificándote de cuantos cambios fueron hechos. </em></dd>
+</dl>
+<p>En este punto, todas las URL en tu base de datos apuntan a tu nueva URL del sitio web.</p>
+</div>
+</div>
+</div>
+</div>
+<h2 id="h_01HCD67T8G67SF4TGF8MTDG05T">Limpieza final</h2>
+<div class="solvvy-solution">
+<h3 id="h_01HCD67T8GC9Z7WK313YP29Y8M" class="subtoc-heading">Limpia tu caché</h3>
+<p>En este punto, deberías eliminar tu cache usando WP Super Cache.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214588698-Instalaci%C3%B3n-de-WP-Super-Cache" target="_self" rel="undefined">Eliminar el caché</a></li>
+</ul>
+<h3 id="h_01HCD67T8GHM65700TA835X7PM" class="subtoc-heading">HTTPS</h3>
+<p>Si ves tu sitio ahora, todas las URL dentro de tu sitio WordPress ahora usarán el nuevo nombre de dominio y apuntarán a <span class="text-object">HTTPS</span>. Sin embargo, hay algunos otros pasos que debes seguir para asegurarte de que todos los enlaces dentro de tu sitio apunten a la versión segura de tu nombre de dominio (esto significa la versión <span class="text-object">HTTPS</span>).</p>
+<p>Mira el siguiente artículo para ver pasos adicionales que deberías tomar para ajustar el sitio WordPress para usar un certificado SSL.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/218428687--C%C3%B3mo-usar-un-certificado-SSL-con-WordPress-" target="_self" rel="undefined">Cómo usar un certificado SSL con WordPress?</a></li>
+</ul>
+</div>
+<h2 id="h_01HCD67T8G4YN8GQ5T1H9MR2TS">Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215525287-Generalidades-sobre-WordPress" target="_self">Generalidades de WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-Cómo-iniciar-sesión-en-tu-sitio-WordPress" target="_self">Cómo iniciar sesión en tu sitio WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214693248-Generalidades-sobre-WordPress-wp-cli" target="_self">Generalidades de WordPress wp-cli</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214693268-Descripci%C3%B3n-general-de-WordPress-wp-config-php" target="_self">Generalidades de wp-config.php</a></li>
+</ul>
+</div>

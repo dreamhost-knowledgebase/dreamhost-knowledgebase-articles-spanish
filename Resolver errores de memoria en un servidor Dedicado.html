@@ -2,7 +2,7 @@
 <div class="solvvy-solution">
 <p>Los usuarios de servidores Dedicados que intentan ejecutar un binario compartido o intérprete (como Python <span class="code">pip</span>) pueden ver un error de memoria similar al siguiente:</p>
 <div class="preboxcontainer">
-<pre class="prebox">MemoryError: Cannot allocate write+execute memory for ffi.callback(). <br>You might be running on a system that prevents this. <br>For more information, see https://cffi.readthedocs.io/en/latest/using.html#callbacks</pre>
+<pre class="prebox">MemoryError: Cannot allocate write+execute memory for ffi.callback(). <br />You might be running on a system that prevents this. <br />For more information, see https://cffi.readthedocs.io/en/latest/using.html#callbacks</pre>
 </div>
 <p>Esto se debe a que grsec bloquea la ejecución no privilegiada y la asignación de memoria que el binario o intérprete necesita para funcionar. Este artículo explica cómo resolver este problema editando un archivo de configuración con tu usuario administrador.</p>
 <div class="prereqs">
@@ -21,8 +21,7 @@
 <p>Este archivo puede ser modificado y ejecutado como un usuario administrador para ajustar la asignación de memoria.</p>
 <ol>
 <li>Inicia sesión en tu servidor usando tu <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-servidor-Dedicado">usuario administrador</a>.</li>
-<li>
-<a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH-">Edita el siguiente archivo</a> usando <span class="code">sudo</span>.
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH-">Edita el siguiente archivo</a> usando <span class="code">sudo</span>.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo nano /root/shared-interpreters-pax.sh</span></pre>
 </div>
@@ -46,4 +45,12 @@
 </dl>
 </li>
 </ol>
+</div>
+<h2 id="h_01HZ01R3DJY3CTDCNMGJH5PX16">Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-servidor-Dedicado">Agregar usuarios a un servidor Dedicado</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">Crear un usuario con acceso Shell (SSH)</a></li>
+</ul>
 </div>
