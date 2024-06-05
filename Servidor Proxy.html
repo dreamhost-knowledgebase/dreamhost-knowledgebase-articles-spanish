@@ -6,13 +6,20 @@
 <h2 id="h_01HDM69VDVF6M1CCHPNDTGXYM6">Detalles Técnicos</h2>
 <div class="solvvy-solution">
 <p>El <span class="text-product">Servidor Proxy</span> de DreamHost es un proxy revertido usando <a href="http://httpd.apache.org/docs/current/mod/mod_proxy.html" target="_blank" rel="noopener noreferrer">mod_proxy</a> de Apache.&nbsp;</p>
-<p id="h_01HMYY85RX2H5PDNZMDT6YEWJS"><strong>Puertos</strong></p>
+<h3 id="h_01HMYY85RX2H5PDNZMDT6YEWJS">Puertos</h3>
 <p>Solo puedes redirigir solicitudes a daemons vinculados a todos los hosts usando puertos entre 8000-65535.</p>
 <p>Los puertos 80 y 443 no se pueden usar, sin embargo, el <span class="text-product">Servidor Proxy</span> usará tu certificado SSL para encriptar todas las conexiones.</p>
 <p>DreamHost no emplea ningún tipo de firewall o bloqueo de puertos en su red.</p>
-<p><strong>Daemon</strong></p>
+<h3 id="h_01HZFZKFCQ3XGAVR425BH371HE">Daemon</h3>
 <p>Un proceso daemon es un proceso de servidor que recibe la comunicación de clientes remotos. Los procesos daemon que se vinculan a un puerto (en el cual recibe conexiones entrantes) son visibles desde Internet.</p>
 <p>Los servidores VPS y Dedicados de DreamHost te permiten ejecutar procesos de servidor daemon, pero ten en cuenta que están limitados a los recursos del servidor (CPU/RAM) de tu tipo de plan.</p>
+<div id="static-assets" class="section-link">&nbsp;</div>
+<h3 id="h_01HZFZMCRMAWB9RW1V5SDRC3RH">Static assets o activos estáticos</h3>
+<p>Los activos estáticos (como CSS, imágenes, vídeos, fuentes, y demás) pueden no cargar adecuadamente debido a como está configurado el servidor proxy. Para resolver este inconveniente, <a href="https://help.dreamhost.com/hc/es/articles/215457827-Agregar-un-subdominio">crea un subdominio por separado</a> para alojar estos recursos estáticos. Por ejemplo:</p>
+<ul>
+<li>assets.example.com</li>
+</ul>
+<p>Then, update the references to these assets in the website you configured with the proxy server to point to their location on the subdomain.</p>
 </div>
 <h2 id="h_01HDM69VDVBS9GB45XMVN6M2S3">Configurar un Servidor Proxy</h2>
 <div class="solvvy-solution">

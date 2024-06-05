@@ -6,7 +6,11 @@
 </div>
 <div class="prereqs">
 <p><strong>Requisitos previos</strong></p>
-<p>Este artículo asume que has configurado un <a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy">Servidor Proxy</a> en el panel.</p>
+<p>Este artículo asume que has completado los siguientes pasos:</p>
+<ul>
+<li>Configurado un <a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy">Servidor Proxy</a> en el panel</li>
+<li>Agregado un subdominio para alojar tus <a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy#static-assets">activos estáticos</a>.</li>
+</ul>
 </div>
 </div>
 <h2 id="h_01HQKXDKCCVGYBXZCG59TEQ197">Paso #1: Instalar linger</h2>
@@ -33,8 +37,7 @@
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">nano ~/.config/systemd/user/myapp.service</span></pre>
 </div>
 </li>
-<li>
-<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Agrega el siguiente código</a> a este archivo:
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Agrega el siguiente código</a> a este archivo:
 <div class="preboxcontainer">
 <pre class="prebox">[Unit]
 Description=Systemd instance to serve Node application
@@ -57,10 +60,8 @@ WantedBy=default.target</pre>
 </li>
 <li>Edita las líneas resaltadas de arriba así:
 <ul>
-<li>
-<strong>WorkingDirectory:</strong> La ruta a la aplicación de tu sitio web.</li>
-<li>
-<strong>ExecStart:</strong> La ruta a tu instalación de node.</li>
+<li><strong>WorkingDirectory:</strong> La ruta a la aplicación de tu sitio web.</li>
+<li><strong>ExecStart:</strong> La ruta a tu instalación de node.</li>
 </ul>
 </li>
 <li>Habilita la unidad del usuario de tu aplicación de Node:
