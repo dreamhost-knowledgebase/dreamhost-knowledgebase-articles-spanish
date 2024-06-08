@@ -1,32 +1,27 @@
 <h2 id="h_01H9PA8WEE45Y0VZ1M4PNYZN8E">Generalidades</h2>
 <div class="solvvy-solution">
-<div class="notebox-important">
-<p>El servicio del panel <span class="text-product">Redireccionar</span> requiere que tengas activo un <a href="https://help.dreamhost.com/hc/es/articles/215560437--Qu%C3%A9-tipos-de-planes-de-alojamiento-hay-disponibles-" target="_self" rel="undefined">alojamiento web </a> para el dominio, o que el dominio esté registrado con DreamHost.</p>
-</div>
-<p>Un dominio "redireccionado" actúa como un puntero a otro dominio. Al acceder a una página web en el dominio redirigido, la URL del navegador se cambia al dominio al que se está redirigiendo. Al configurar esto a través del panel de DreamHost, se crea automáticamente una redirección&nbsp;<a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#3xx_Redirection">301</a>.</p>
 <p>Este artículo explica cómo redirigir un dominio o subdominio con DreamHost.</p>
-<div class="notebox-note">
-<p>Los ejemplos en este artículo utilizan el protocolo <span class="text-object">HTTPS</span>. Para que esto funcione, el dominio al que estás redirigiendo debe tener un <a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL" target="_self">certificado SSL configurado</a>. Si no, solo usa <span class="text-object">HTTP</span> en su lugar.</p>
-</div>
-</div>
-<h2 id="h_01H9PA8WEEV1TMEGH7XS9PMS9C">¿Cómo funciona la redirección?</h2>
+<h2 id="h_01HZPXRNRKXTH0WF7K4FDNPM8R" class="header-section">Preguntas Frecuentes sobre redirecciones</h2>
 <div class="solvvy-solution">
+<h2 id="h_01HZPXAVQ9KF98R9GCYMVSR6JD">¿Qué es una redirección de dominio?</h2>
+<p>Un dominio “redireccionado” actúa como un puntero a otro dominio. Al acceder a una página web en el dominio redirigido, la URL del navegador se cambia al dominio al que se está redirigiendo. Al configurar esto a través del panel de DreamHost, se crea automáticamente una redirección&nbsp;<a>301</a>.</p>
+<div class="notebox-important">
+<div class="“notebox-important”">
+<p>El servicio del panel <span class="“text-product”">Redireccionar</span> requiere que tengas activo un <a target="“_self”" rel="“undefined”">alojamiento web </a> para el dominio, o que el dominio esté registrado con DreamHost.</p>
+</div>
+<p>Adicionalmente, los ejemplos en este artículo utilizan el protocolo <span class="text-object">HTTPS</span>. Para que esto funcione, el dominio al que estás redirigiendo debe <a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-sobre-agregar-un-certificado-SSL">tener un certificado SSL configurado</a>. Si no, usa <span class="text-object">HTTP</span> en su lugar.</p>
+</div>
+<h2 id="h_01HZPXAVQ9KF98R9GCYMVSR6JD">¿Cómo funciona una redirección?</h2>
 <div class="notebox-note">
 <p>Establecer una redirección no elimina tu sitio web actual ni ninguno de tus archivos. Puedes agregar un alojamiento de nuevo al dominio en el futuro en cualquier momento, que luego muestra tu contenido original.</p>
 </div>
 <p>Cualquier página que visites en tu sitio actual (la que se redirige) se reenvía a la página en el sitio redirigido. Por ejemplo, digamos que estás redirigiendo <strong>example.com</strong> a <strong>dreamhost.com</strong>. Si visitas <strong>example.com/contact.html</strong>, la URL cambia a <strong>dreamhost.com/contact.html</strong>.</p>
-</div>
-<h2 id="h_01H9PA8WEEWZHWYJ9SSKM074YK">¿Funciona la redirección para las versiones www y no www del sitio?</h2>
-<div class="solvvy-solution">
+<h2 id="h_01H9PA8WEEWZHWYJ9SSKM074YK">¿La redirección funciona para las versiones www y no www del sitio?</h2>
 <p>Sí. Si configura una redirección en <strong>example.com</strong>, también funcionará para <strong>www.example.com</strong>.</p>
-</div>
 <h2 id="h_01H9PA8WEFRYRACB81R2D63XP8" class="subheader">¿La redirección cambia los registros MX?</h2>
-<div class="solvvy-solution">
 <p>No. La redirección solo cambia donde está alojado el sitio web. Tus registros MX (correo) no se cambiarán de ninguna manera.</p>
-</div>
 <h2 id="h_01H9PA8WEFJJNQ5B3HZXATEBVQ"><span id="redireccionamiento-funciona-con-https">¿El redireccionamiento funciona con https (certificado SSL)? </span></h2>
-<div class="solvvy-solution">
-<p>A continuación se describen algunas formas diferentes de configurar esto.</p>
+<p>Hay varias formas diferentes en las que esto podría configurarse:</p>
 <h3 id="h_01H9PA8WEFMBHXSZX13KDD5ZA9">Opción 1 — Redirigir a la versión segura de un sitio diferente</h3>
 <p>Solo puedes redirigir a otro sitio que ya esté configurado con un certificado SSL. Por ejemplo:</p>
 <p><strong>http://example.com </strong>a<strong> https://dreamhostexample.com</strong></p>
@@ -40,7 +35,7 @@
 <ul>
 <li><strong>https</strong>://example.com</li>
 </ul>
-<p>No hay nada de tu parte que debas hacer para obligar a tu sitio a utilizar la URL segura. Sin embargo, en algunos casos especiales, puede ser necesario que crees tu propio archivo de configuración personalizado para forzar el redireccionamiento de <span class="text-object">HTTP</span> a <span class="text-object">HTTPS</span>.</p>
+<p>No hay nada que debas hacer de tu parte para forzar que tu sitio use la URL segura. Sin embargo, en algunos casos especiales, es posible que necesites crear tu propio archivo de configuración personalizado para forzar la redirección de <span class="text-object">HTTP</span> a <span class="text-object">HTTPS</span>.</p>
 <div class="alert-warning">
 <p><strong>Agregar código personalizado solo es necesario si tu sitio web requiere un código específico para forzar el redireccionamiento</strong>. Si es así, primero deberás desactivar la redirección automática en tu panel.</p>
 <ul>
@@ -49,6 +44,7 @@
 <p>Una vez deshabilitada, puedes proceder a&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115003505112-Forzar-tu-sitio-a-redirigir-a-https-SSL-" target="_self">agregar tu archivo personalizado de redirección</a>.</p>
 </div>
 </div>
+<h2 id="h_01HZPXRNRKXTH0WF7K4FDNPM8R" class="header-section">Agregar, cambiar, y eliminar redirecciones</h2>
 <h2 id="h_01H9PA8WEF0MAD3Q1RH8PDN9RF">Redireccionar un nuevo dominio o subdominio</h2>
 <div class="solvvy-solution">
 <ol>
@@ -56,7 +52,7 @@
 <li>Haz clic en <strong>Añadir un Sitio Web</strong>.</li>
 <li>Selecciona una de las opciones para crear o agregar un dominio, luego da clic al botón <strong>Siguiente: Alojamiento</strong>.</li>
 <li>Desplázate a la sección <span class="text-section">Sin Alojamiento</span>, haz clic en la opción <strong>Redifigir dominio</strong>.</li>
-<li>En la caja de texto <span class="text-object">URL de Destino</span>, ingresa el dominio al que quieres redirigir.</li>
+<li>Ingrese el dominio al que deseas redirigir en el cuadro de texto <span class="text-object">URL de Destino</span>.</li>
 <li>Da clic en el botón <strong>Redirigir Dominio</strong> para guardar.</li>
 </ol>
 </div>
@@ -78,7 +74,7 @@
 </div>
 <h2 id="h_01H9PA8WEFPZ25FECW7AZ7J1WH">Crear un redireccionamiento a un subdirectorio</h2>
 <div class="solvvy-solution">
-<p>Si necesitas crear una redirección a un subdirectorio de otro sitio, asegúrate de agregar una barra diagonal hacia adelante a la URL redirigida. Si no lo haces, la URL no se redireccionará correctamente.</p>
+<p>Si necesitas redirigir a un subdirectorio de otro sitio, agrega una barra diagonal hacia adelante a la URL redirigida. Si no lo haces, la URL no se redireccionará correctamente.</p>
 <p>Por ejemplo, si tu sitio es <strong>example.com</strong> y deseas redirigir a un subdirectorio de otro sitio llamado <strong>dreamhostexample.com/blog</strong>, asegúrate de que la redirección que creaste agregue la barra inclinada hacia delante como esta:</p>
 <ul>
 <li><span class="text-object">dreamhostexample.com/blog/</span></li>
@@ -90,7 +86,7 @@
 </div>
 <h2 id="h_01H9PA8WEFSCZWY944ZN4H89PP">Deshabilitar una redirección</h2>
 <div class="solvvy-solution">
-<p>Para desactivar un Redireccionamiento, debe cambiar la configuración de alojamiento a cualquier otra opción, como 'Completamente Alojado' o 'Solo DNS'. Mira los siguientes artículos para obtener instrucciones:</p>
+<p>Para desactivar un Redireccionamiento, debe cambiar la configuración de alojamiento a cualquier otra opción, como 'Completamente Alojado' o 'Solo DNS'. Revisa los siguientes artículos para obtener instrucciones:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-Sitio-Web-y-Hosting" target="_self">Agregar un Sitio Web y Hosting</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215416417-Generalidades-del-reflejo-de-un-dominio" target="_self">Vista general del dominio espejo</a></li>
@@ -100,7 +96,7 @@
 </div>
 <h2 id="h_01H9PA8WEFVHB54AGHHQ4EC33P">¿Cuánto tiempo hasta que la redirección esté funcionando?</h2>
 <div class="solvvy-solution">
-<p>Redirigir tu sitio es lo mismo que cualquier otro cambio de DNS. Esto significa que el DNS debe <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">propagarse</a> primero antes de que pueda ver los cambios en línea. En general, esto no debería tomar más de 6 horas. Puedes hacer un seguimiento de cuándo se actualizan los <a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self">nuevos registros DNS</a>&nbsp;en diferentes ubicaciones usando cualquiera de los siguientes enlaces:</p>
+<p>Redirigir tu sitio es lo mismo que cualquier otro cambio de DNS. Esto significa que el DNS debe <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS" target="_self">propagarse</a> antes de que pueda ver los cambios en línea. En general, esto no debería tomar más de 6 horas. Puedes hacer un seguimiento de cuándo se actualizan los <a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self">nuevos registros DNS</a>&nbsp;en diferentes ubicaciones usando cualquiera de los siguientes enlaces:</p>
 <ul>
 <li><a href="https://www.whatsmydns.net/" target="_self" rel="undefined">whatsmydns.net</a> — Un sitio popular que verifica los registros DNS en todo el mundo.</li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360055964552-Ver-tus-registros-DNS-de-DreamHost" target="_self">Ver tus registros DNS de DreamHost</a> — Usa el verificador de propagación de DNS de DreamHost en el panel.</li>
@@ -111,4 +107,5 @@
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/sections/203272388-Agregar-y-administrar-dominios" target="_self">Agregar y administrar dominios (lista de artículos)</a></li>
 </ul>
+</div>
 </div>
