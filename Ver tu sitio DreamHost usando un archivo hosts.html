@@ -1,7 +1,7 @@
 <div id="auto-toc">&nbsp;</div>
 <h2 id="h_01HCAR4FWGJT27WKV7XGX4F3DY">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este artículo explica cómo ver tu sitio antes de apuntar tu DNS a DreamHost editando el archivo <span class="text-object">hosts</span> en tu computador <strong>de escritorio o portátil</strong>.</p>
+<p>Este artículo explica cómo ver tu sitio web antes de apuntar tu DNS a DreamHost editando el archivo <span class="text-object">hosts</span> en tu computador computador.</p>
 <div class="notebox-note">
 <p>Para probar en un dispositivo móvil, o para otra opción sobre cómo ver tu sitio en DreamHost antes de apuntar DNS, visita el siguiente artículo:</p>
 <ul>
@@ -10,17 +10,27 @@
 </div>
 </div>
 <h2 id="h_01HCAR4FWGPE9QGCJ12M9GQCV1">¿Qué es un archivo hosts?</h2>
-<p>Un archivo <span class="text-object">hosts</span> es un archivo de texto en el computador de tu hogar. Se utiliza para asignar un nombre de dominio a un servidor específico. Si lo editas, puedes cambiar el lugar donde tu computador busca un sitio web.</p>
-<p>Por ejemplo, cuando buscas una URL en tu navegador, tu computador envía una consulta a Internet para encontrar dónde se encuentra tu sitio. tu sitio está ubicado donde apuntan los DNS. Si editas el archivo <span class="text-object">hosts</span>, puedes cambiar dónde tu computador busca un sitio web. De esta manera, puedes ver un sitio en tu servidor de DreamHost cuando el DNS apunta a otra compañía.</p>
 <div class="solvvy-solution">
-<p>Cada sitio en DreamHost tiene dos registros A para la URL: Uno para tu dominio con y sin www. Por ejemplo:</p>
+<p>Un archivo <span class="text-object">hosts</span> es un archivo de texto utilizado por tu computador que cambia dónde este busca un sitio web específico. Por ejemplo:</p>
 <ul>
-<li>208.113.137.245 example.com</li>
-<li>208.113.137.245 www.example.com</li>
+<li>cuando visitas un sitio web, tu computador sigue los registros DNS públicos de Internet.</li>
+<li>cuando editas el archivo <span class="text-object">hosts</span>, controlas los registros DNS que tu computador utiliza.</li>
 </ul>
-<p>Anótalos, ya que necesitarás agregar las IP de cada uno a tu archivo de hosts en el siguiente paso. El artículo sobre <a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">DNS</a> te da detalles sobre cómo ver estos registros.</p>
+<p>Esto te permite ver un sitio en tu servidor de DreamHost cuando los registros DNS públicos están apuntando a otra compañía.</p>
+<h3 id="h_01HC64VWMHHCG05AFBTYB6XRSV">Registros A</h3>
+<p>El archivo hosts utiliza registros A (direcciones IP) para localizar tu sitio en DreamHost. Cada sitio en DreamHost tiene dos registros A para la URL: uno para tu dominio con www y otro sin www. Por ejemplo:</p>
+<ul>
+<li>111.222.333.444 example.com</li>
+<li>111.222.333.444 www.example.com</li>
+</ul>
+<p>Revisa el siguiente artículo para localizar estos dos registros para tu sitio web:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio">¿A qué registros DNS debo apuntar mi sitio?</a></li>
+</ul>
 </div>
-<h2 id="h_01HCAR4FWG87BZ7JG873TGSB5A">Usando Windows 10</h2>
+<h2 id="h_01J01R54JZQRH2DFPY1KXYFAYP">Actualizar tu archivo hosts</h2>
+<p>Las siguientes secciones describen cómo localizar y actualizar tu archivo hosts en diferentes sistemas operativos.</p>
+<h3 id="h_01HC64VWMHH95X6R2HNQ0A2HNC">Windows 10</h3>
 <div class="solvvy-solution">
 <p>En la mayoría de los sistemas Windows, puedes encontrar el archivo <span class="text-object">hosts</span> en el siguiente directorio:</p>
 <div class="preboxcontainer">
@@ -43,22 +53,18 @@
 </dl>
 </li>
 <li>Elige el archivo <span class="text-object">hosts</span> y haz clic en <strong>Abrir</strong>. Es posible que debas cambiar los <span class="text-object">Todos los documentos (* .txt)</span> en la esquina inferior derecha a <span class="text-object">Todos los archivos</span> en la lista desplegable.</li>
-<li>Agrega la dirección IP de tu sitio DreamHost seguido del dominio en la parte inferior del archivo.<br />
+<li>Agrega <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio">las IP de tu sitio DreamHost</a> seguidas del dominio en la parte inferior del archivo.
 <div class="preboxcontainer">
-<pre class="prebox">208.113.137.245 example.com <br />208.113.137.245 www.example.com</pre>
+<pre class="prebox">xxx.xxx.xxx.xxx example.com <br />xxx.xxx.xxx.xxx www.example.com</pre>
 </div>
 </li>
 <li>Guarda el archivo.</li>
-<li>Vacia los DNS de tu computador para garantizar la actualización de la nueva configuración.<br />
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215680477-Generalidades-de-limpiar-el-DNS" target="_self">Limpiar los DNS</a></li>
-</ul>
-</li>
-<li>Reinicia tu navegador e intenta acceder a tu dominio.</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214981268-Limpiar-el-cach%C3%A9-del-DNS-en-Windows">Limpia el DNS de tu computador</a> para asegurar de que las nuevas actualizaciones se lleven a cabo.</li>
+<li>Reinicia tu navegador y visita tu dominio.</li>
 </ol>
-<p>Ahora puedes ver tu sitio como aparece en tu servidor DreamHost. Una vez que apuntes tus DNS a DreamHost, puedes eliminar estas líneas.</p>
+<p>Ahora puedes ver tu sitio como aparece en tu servidor DreamHost. Una vez que <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio">apuntes tus DNS a DreamHost</a>, puedes eliminar estas líneas.</p>
 </div>
-<h2 id="h_01HCAR4FWHK8NRYEC8ZWPHX9K0">Usando Apple Mac OS</h2>
+<h3 id="h_01HC64VWMHJ8D58RA4KBP45ZFV">Mac OS</h3>
 <div class="solvvy-solution">
 <ol>
 <li>Inicia Terminal presionando el<strong> comando (⌘) + barra espaciadora</strong> que abre el cuadro de búsqueda.</li>
@@ -70,7 +76,7 @@
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo nano /private/etc/hosts</span></pre>
 </div>
 </li>
-<li>Ingresa la contraseña del administrador. <strong>Nota:</strong> Las contraseñas escritas no se muestran en la línea de comandos.<br />
+<li>Ingresa la contraseña del administrador.
 <dl>
 <dd><!-- image not updated - platform not translated --> <img class="img-border" src="https://kbimages.dreamhosters.com/images/08_DNS_hosts.fw.png" alt="08 DNS hosts.fw.png" /></dd>
 </dl>
@@ -78,11 +84,11 @@
 <li>Usa las teclas de flecha para navegar hacia la parte inferior Una vez que el archivo de <span class="text-object">hosts</span> esté abierto para hacer cualquier modificación.</li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">guarda y cierra</a> el archivo cuando termines para volver a la terminal.</li>
 <li>Cierra la Terminal cuando hayas terminado.</li>
-<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/214981288-Limpiar-el-cach%C3%A9-del-DNS-en-Mac-OS-X-y-Linux">Limpia tu DNS</a> para asegurarte de que las nuevas configuraciones se actualicen.</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214981288-Limpiar-el-cach%C3%A9-del-DNS-en-Mac-OS-X-y-Linux">Limpia tu DNS</a> para asegurarte de que las nuevas configuraciones se actualicen.</li>
 </ol>
-<p>Una vez que apuntes tus DNS a DreamHost, puedes eliminar estas.</p>
+<p>Ahora puedes ver tu sitio tal como aparece en tu servidor de DreamHost. Una vez que <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio">apuntes tus DNS a DreamHost</a>, puedes eliminar estas líneas..</p>
 </div>
-<h2 id="h_01HCAR4FWH43SADXXAVXZW1HDF">Usando Linux</h2>
+<h3 id="h_01HC64VWMHCMSEGDXF725Q5JH1">Linux</h3>
 <div class="solvvy-solution">
 <p>En la mayoría de los sistemas basados en Linux:</p>
 <ul>
@@ -92,52 +98,37 @@
 </ul>
 <p>Los pasos para editar y guardar el archivo son los mismos que las instrucciones de 'Mac OS' presentadas anteriormente.</p>
 </div>
-<h2 id="h_01HCAR4FWHX94GXEY8VXPQHG6R">Instrucciones para el movimiento de WordPress</h2>
+<h3 id="h_01HC64VWMH7CTWVA0P70ZVV8Q4">Migraciones de los Servicios Profesionales de WordPress</h3>
 <div class="solvvy-solution">
 <p>Esta sección explica cómo ver tu sitio de WordPress (en DreamHost) si fue migrado por el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115004182807-WPM1-Servicio-de-migraci%C3%B3n-de-WordPress" target="_self">Equipo de Servicios Profesionales</a>. Esta sección solo se aplica a las migraciones que no son de DreamPress.</p>
-<p>Primero, lee las secciones anteriores para ubicar y editar el archivo <span class="text-object">hosts</span> de tu computador.</p>
-<p>Normalmente, actualizar un archivo <span class="text-object">hosts</span> solo requiere que agregues dos líneas (como se mencionó anteriormente). Con este proceso de migración, también debes agregar una tercera línea de texto para el servidor MySQL. Por ejemplo, si tu sitio fuese <strong>example.com</strong>, agregaría estas líneas al final de tu archivo <span class="text-object">hosts</span>:</p>
+<p>Localiza y edita el archivo <span class="text-object">hosts</span> de tu computador como se describió anteriormente. Con este proceso de migración, debes agregar una tercera línea de texto para el servidor MySQL. Por ejemplo, si tu sitio fuera <strong>example.com</strong>, agregarías estas líneas al final de tu archivo <span class="text-object">hosts</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">111.111.111.111 example.com
 111.111.111.111 www.example.com.com
 222.222.222.222 mysql.example.com</pre>
 </div>
-<p>Reemplaza las direcciones IP de example anteriores con las direcciones IP reales de tu sitio.</p>
-<p>Puedes usar las siguientes instrucciones para encontrar las direcciones IP en la página registros DNS:</p>
-<ol>
-<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!/grid-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
-<li>Abre la página <span class="text-link">Configuraciones DNS</span>:
-<dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-manage-websites-dns-settings.png" alt="DNS Settings" width="222" height="205" /></dd>
-</dl>
-<ul>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" target="_self" rel="undefined">Vista de Malla</a>, da clic en el botón de los '3 puntos verticales' debajo de tu dominio. Del menú que aparece da clic en el enlace <span class="text-link">Configuraciones DNS</span>.</li>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" target="_self" rel="undefined">Vista de Lista</a>, da clic en el botón de los '3 puntos verticales' a la derecha de tu dominio. Del menú que aparece da clic en el enlace <span class="text-link">Configuraciones DNS</span>.
-<dl>
-<dd><em>Aparecen los registros DNS del dominio.</em></dd>
-</dl>
-</li>
-</ul>
-</li>
-</ol>
-<p>Si necesitas más ayuda para ubicar las direcciones IP de tu sitio, revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">DNS</a> para obtener instrucciones más detalladas.</p>
+<div class="notebox-important">
+<p><strong>Realizando más cambios en tu sitio</strong></p>
+<p>Por favor, abstente de realizar cambios que puedan alterar el aspecto o comportamiento del sitio, ya que el equipo de Servicios Profesionales debe poder comparar el sitio migrado (en DreamHost) con el sitio en vivo (en tu alojamiento actual).</p>
+</div>
+</div>
+<h2 id="h_01J01RP51NKSZECGMJG62T7RMY">Ver tu sitio</h2>
+<div class="solvvy-solution">
+<p>Esta sección explica cómo comparar tu sitio de DreamHost con tu sitio web en vivo.</p>
 <h3 id="h_01HCAR4FWHRQYHN9J5G5RHYWH3">Confirmar que el archivo 'hosts' funciona</h3>
 <p>Puedes confirmar que está cargando el sitio migrado desde los servidores de DreamHost si puedes cargar la siguiente página (reemplazando <strong>example.com</strong> con tu dominio):</p>
 <ul>
 <li><strong>http://example.com/quickstart.html</strong></li>
 </ul>
 <h3 id="h_01HCAR4FWH11X00GVGC1YSA4E0">Ver tu sitio público a través de un proxy</h3>
-<p>Una vez que tu archivo <span class="text-object">hosts</span> esté funcionando, tu computador te mostrará cómo se ve tu sitio en DreamHost. Si también deseas ver tu sitio actual (público), debes usar un sitio web proxy.</p>
-<p>Un ejemplo de un sitio proxy es&nbsp;<a href="https://kproxy.com/" target="_self" rel="undefined">kproxy.com</a>. Visita este enlace en tu navegador, ingresa tu nombre de dominio en el cuadro, luego haz clic en Enter. El sitio proxy usará el DNS público de tu sitio (no el archivo <span class="text-object">hosts</span> local) para ver el sitio en tu empresa de alojamiento actual.</p>
-<h3 id="h_01HCAR4FWHC6J585B2VT6A9T3B">Comparar los sitios</h3>
-<p>Ver tu sitio usando un archivo <span class="text-object">hosts</span> y un sitio proxy te permite ver ambas versiones de tu sitio para una comparación lado a lado. Puedes abrir una pestaña del navegador en el sitio migrado (visto usando tu archivo <span class="text-object">hosts</span>) y otra pestaña del navegador abierta en el sitio proxy (visto usando DNS) para ver tu sitio público actual.</p>
-<h3 id="h_01HCAR4FWHFHTB5EHGB3W1BYND">Realizar más cambios en tu sitio</h3>
-<p>Durante tu inspección del sitio, puedes sentir la necesidad de cambiar la configuración de algo que estaba fuera del alcance del servicio de migración. Abstente de cambiar cualquier cosa que pueda alterar el aspecto o el comportamiento del sitio, ya que el Equipo de Servicios Profesionales debe poder comparar el sitio migrado (en DreamHost) con el sitio en vivo (en tu alojamiento actual).</p>
-<p>Si debes actualizar algo, documenta cualquier cambio para que el Equipo de Servicios Profesionales pueda separar lo que pudo haber sido afectado por la migración de las modificaciones posteriores por tu parte.</p>
+<p>Una vez que tu archivo <span class="text-object">hosts</span> funcione, tu computador te mostrará cómo se ve tu sitio en DreamHost. Si también quieres ver tu sitio actual (público), debes usar un sitio web proxy.</p>
+<p>Un ejemplo de un sitio proxy es <a href="https://kproxy.com/" target="_self" rel="undefined">kproxy.com</a>. El sitio proxy utilizará el DNS público de tu sitio (no tu archivo local <span class="text-object">hosts</span>) para ver el sitio en tu compañía de alojamiento actual. Ver tu sitio usando un archivo <span class="text-object">hosts</span> y un sitio proxy te permite ver ambas versiones de tu sitio para una comparación lado a lado.</p>
 </div>
 <h2 id="h_01HCAR4FWH0VRJG0WHSNZ7KY98">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214695758-Vista-previa-de-tu-sitio-con-un-dominio-temporal" target="_self">Previsualizar tu sitio con un subdominio dreamhosters.com antes de cambiar los DNS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio">¿A qué registros DNS debo apuntar mi sitio?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215680477-Generalidades-sobre-limpiar-el-DNS">Limpiar tu DNS</a></li>
 </ul>
 </div>
