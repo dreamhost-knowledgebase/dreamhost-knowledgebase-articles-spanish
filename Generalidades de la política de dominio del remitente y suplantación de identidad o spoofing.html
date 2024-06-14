@@ -1,27 +1,27 @@
-<h2>Generalidades</h2>
+<h2 id="h_01J0954PJA2B70QTC6BZB51RC3">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Cuando se envían correos el programa o script de correo puede decir que el remitente es "de" cualquier dirección que desee. La suplantación de correo ocurre cuando el correo se envía con una dirección DE falsificada. Por ejemplo, puede enviar correos desde tu sitio web <strong>example.com</strong> que son "de" <span class="text-object">FakeFromAddress@example.com</span>. Por lo tanto, siempre es posible cambiar la dirección FROM o DE al enviar un correo.</p>
 <p>Este artículo detalla la falsificación buena y mala y explica la política de dominio de remitente de DreamHost que protege el correo legítimo.</p>
 </div>
-<h2>¿Qué es la suplantación de identidad útil?</h2>
+<h2 id="h_01J0954PJA5X01RZJNNZ8TD1K1">¿Qué es la suplantación de identidad útil?</h2>
 <div class="solvvy-solution">
 <p>Sin falsificaciones, cualquier correo enviado desde tu sitio web se enviará "desde" tuusuario@tuservidor.dreamhost.com. Si bien eso es exacto, no es muy agradable de ver, y puede ser confuso para los usuarios del sitio o los clientes que esperan ver el correo proveniente del mismo nombre de dominio que tu sitio web. Entonces, en cierto sentido, el correo es falso para mostrar claramente que se origina en tu sitio web.</p>
 </div>
-<h2>¿Qué es mala suplantación de identidad o spoofing?</h2>
+<h2 id="h_01J0954PJADE1YHRKJ107S3ZAC">¿Qué es mala suplantación de identidad o spoofing?</h2>
 <div class="solvvy-solution">
 <p>Los spammers a menudo usan suplantación de correo para esconderse desde donde se envían sus correos no deseados. Hacen esto para poder enviar cientos de correos que parecen ser originarios de tu sitio web. Si recibe correos devueltos "imposibles de entregar" (undeliverable) que nunca enviaste, un spammer podría estar falsificando tu dominio.</p>
 </div>
 <div class="notebox-important">
 <p>DreamHost recomienda que no <a href="https://help.dreamhost.com/hc/es/articles/215686487-Configurar-los-ajustes-Anti-Spam" target="_self">agregues a la lista blanca tu propio correo o dominio</a>, pues podría permitir a los spammers hacer spoofing tu dirección mucho más fácil.</p>
 </div>
-<h2>Protección contra la mala suplantación de identidad o spoofing</h2>
+<h2 id="h_01J0954PJAPRJXBCFA0EGQMNM5">Protección contra la mala suplantación de identidad o spoofing</h2>
 <div class="solvvy-solution">
 <p>Los registros DKIM pueden hacer que los correos falsificados sean más fácilmente reconocibles como sospechosos y, con suerte, desalienten a los spammers de falsificar tu dominio:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215029758-Registros-DKIM">DKIM</a> es un método de autenticación de correo que se habilita automáticamente para todas las cuentas de correo de DreamHost.</li>
 </ul>
 </div>
-<h2>Código PHP</h2>
+<h2 id="h_01J0954PJAH461KZC2CXX670D2">Código PHP</h2>
 <div class="solvvy-solution">
 <p>Este código básico envía correos de formulario de contacto utilizando tu dirección de correo como remitente. los $visitor_name, $visitor_email, y $message son establecidos por el formulario de contacto:</p>
 <div class="preboxcontainer">
@@ -39,7 +39,7 @@ $subject = "Envío de formulario de contacto desde " . $visitor_name;
 $emailMessage = "Nombre: " . $visitor_name . "\r\n";
 $emailMessage .= "Email: " . $visitor_email . "\r\n";
 $emailMessage .= "Mensaje: " $message . "\r\n";
-<br />//envia el correo
+<br />//envía el correo
 mail($to_email, $subject, $emailMessage, $header);
 </pre>
 </div>
@@ -55,7 +55,7 @@ mail($to_email, $subject, $emailMessage, $header);
 <li><a href="https://help.dreamhost.com/hc/es/articles/215507058-Generalidades-PHP-mail-">PHP mail()</a></li>
 </ul>
 </div>
-<h2>¿Qué sucede si mi dominio no utiliza el servicio de correo alojado en DreamHost? (SMTP)</h2>
+<h2 id="h_01J0954PJAZN0P7AFA2M74MZXA">¿Qué sucede si mi dominio no utiliza el servicio de correo alojado en DreamHost? (SMTP)</h2>
 <div class="solvvy-solution">
 <p>Si tu dominio no utiliza el servicio de correo regular alojado en DreamHost, entonces tu dominio puede tener servicio de correo de otro proveedor como Google Suite. Para estos dominios, tu sitio web debe usar SMTP para conectarse directamente al servidor de correo de tu dominio. De esta manera, tu sitio web inicia sesión en su cuenta de correo en ese host y envía correos a través de tu servidor en lugar de hacerlo a través de los servidores de correo de DreamHost.</p>
 <ul>
@@ -66,16 +66,16 @@ mail($to_email, $subject, $emailMessage, $header);
 </ul>
 <p>Si tu sitio web fue creado por tí u otra persona a mano y está escrito en PHP, puedes agregar soporte SMTP usando <a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer">PHPMailer</a>. Solo usa el host/servidor SMTP que te proporciona tu proveedor de correo y tu&nbsp; usuario y contraseña en tu sistema.</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01J0954PJB78S6FAXRWTY8TNVJ">Ver también</h2>
 <div class="solvvy-hidden">
-<h3>Enlaces internos</h3>
+<h3 id="h_01J0954PJB81E61ZXR5MD0MDC2">Enlaces internos</h3>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215035988-C%C3%B3mo-hacer-spoofing-o-suplantar-en-tu-CMS-o-aplicaci%C3%B3n-web" target="_self" rel="undefined">Cómo falsificar tu CMS o aplicación web</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215036118-Preguntas-frecuentes-sobre-la-pol%C3%ADtica-de-dominio-del-remitente" target="_self">Preguntas frecuentes sobre la política de dominio del remitente</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215730427-Spoofing-%C3%BAtil" target="_self" rel="undefined">Spoofing útil</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216140597-Enviar-correo-PHP-v%C3%ADa-SMTP">Enviar correo PHP vía SMTP</a></li>
 </ul>
-<h3>Enlaces externos</h3>
+<h3 id="h_01J0954PJB7RDVXCWQY5X1KXJN">Enlaces externos</h3>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Email_spoofing" target="_self">Suplantación de correo electrónico o spoofing</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Bounce_address" target="_self">Dirección de rebote</a></li>

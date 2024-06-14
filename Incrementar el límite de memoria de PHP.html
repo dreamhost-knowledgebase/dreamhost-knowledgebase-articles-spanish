@@ -1,15 +1,15 @@
-<h2>Generalidades</h2>
+<h2 id="h_01J096PNE0PQQGYRDKJ2K86QKB">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Cada instalación de PHP viene con una configuración predeterminada las cuales se ajustan a las necesidades de la mayoría de los sitios web. De vez en cuando, las necesidades de un sitio web requieren un ajuste en las configuraciones del PHP. Por ejemplo, puede que tu sitio necesite incrementar el límite de memoria para permitir que un proceso llegue a término. En ese caso, debes crear un archivo <a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">php.ini (phprc)</a>&nbsp;y actualizar dicho valor.</p>
 </div>
-<h2>El archivo phprc en DreamHost</h2>
+<h2 id="h_01J096PNE0BQAXW7RVC3TDZ2BC">El archivo phprc en DreamHost</h2>
 <div class="solvvy-solution">
 <p>El término estándar para un archivo de configuración PHP es <span class="text-object">php.ini</span>. Sin embargo, DreamHost aplica el término <span class="text-object">phprc</span> en su lugar. Este archivo funciona de la misma manera – solo el nombre es diferente. En este artículo, sólo vamos a usar el término phprc.</p>
 <div class="notebox-note">
 <p>Algunas variables (particularmente, el límite de memoria: <span class="code">memory_limit</span>, tamaño máximo de subida por post <span class="code">post_max_size</span> y tamaño máximo de archivo <span class="code">upload_max_filesize</span>) están sujetas a limitaciones internas; hacer un incremento significativamente mayor a los valores predeterminados dará como resultado un mal funcionamiento y causa inconvenientes en tu sitio web.</p>
 </div>
 </div>
-<h2>¿Por qué incrementar el límite de memoria PHP?</h2>
+<h2 id="h_01J096PNE0XCA5Y74PW88YG3YJ">¿Por qué incrementar el límite de memoria PHP?</h2>
 <div class="solvvy-solution">
 <p>PHP permite que se use una cantidad predeterminada de memoria al procesar un sitio web. A veces, un sitio web necesita más que la cantidad predeterminada de memoria. Si ese es el caso, puedes aumentarlo para satisfacer las necesidades de tu sitio.</p>
 <p>También puede recibir un error en su sitio que indica que se ha alcanzado el límite de memoria. Puede aparecer así:</p>
@@ -18,7 +18,7 @@
 </div>
 <p>Este error significa que tu sitio necesita más memoria de la que está disponible actualmente. Si ves un error como este, intenta aumentar el límite de memoria en 10 MB. Luego continúa ajustando según sea necesario.</p>
 </div>
-<h2>Incrementar el límite de memoria PHP</h2>
+<h2 id="h_01J096PNE0QRCTD6C69CRW2RJ2">Incrementar el límite de memoria PHP</h2>
 <div class="solvvy-solution">
 <p>El límite de memoria predeterminado es 256M, el cual suele ser más que suficiente para la mayoría de las necesidades. Si necesitas aumentar este límite, debes crear un archivo <span class="text-object">phprc</span>. Revisa los siguientes artículos para obtener instrucciones sobre cómo crear un archivo <span class="text-object">phprc</span>:</p>
 <ul>
@@ -38,11 +38,11 @@
 <p>Si te das cuenta de que está aumentando la memoria en gran medida, es hora de considerar abandonar el Shared Hosting, ya que tu sitio web tiene mayores necesidades de las que el Shared Hosting puede proporcionar de manera confiable.</p>
 </div>
 </div>
-<h2><span id="Paso_extra_para_los_sitios_WordPress">Paso extra para los sitios WordPress</span></h2>
+<h2 id="h_01J096PNE0C6ZS6792XGK6Y687"><span id="Paso_extra_para_los_sitios_WordPress">Paso extra para los sitios WordPress</span></h2>
 <div class="solvvy-solution">
 <p>Si estás ejecutando un sitio de WordPress, la configuración en el archivo <span class="text-object">phprc</span> puede no tener efecto ya que WordPress lo anula en su archivo <span class="text-object">wp-config.php</span>. Para solucionar esto, solo actualiza el archivo <span class="text-object">wp-config.php</span> con el límite de memoria específico. Por ejemplo:</p>
 <ol>
-<li>Conectate a tu sitio WordPress ya sea por&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Conéctate a tu sitio WordPress ya sea por <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
 <li>Asegúrate de estar en el directorio de tu sitio. Verás el archivo <span class="text-object">wp-config.php</span> aquí.</li>
 <li>Edita el archivo (usando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">SSH</a>)&nbsp;para agregar las siguientes líneas. Asegúrate de agregarlos antes de la inclusión 'wp-settings.php'. Por ejemplo:
 <div class="preboxcontainer">
@@ -59,11 +59,11 @@ require_once(ABSPATH . 'wp-settings.php');</pre>
 <li><a href="https://wordpress.org/support/article/editing-wp-config-php/#increasing-memory-allocated-to-php" target="_self">Incrementar la memoria asignada a PHP</a></li>
 </ul>
 </div>
-<h2>Elimina todos los procesos de php en ejecución</h2>
+<h2 id="h_01J096PNE0RE8JNWYQP2KWSQVH">Elimina todos los procesos de php en ejecución</h2>
 <div class="solvvy-solution">
 <p>Asegúrate de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">eliminar los procesos php en ejecución</a>&nbsp;para asegurarte de que la nueva configuración surta efecto.</p>
 </div>
-<h2>Confirma tus cambios</h2>
+<h2 id="h_01J096PNE0DN8KRCXTAH2RMGN6">Confirma tus cambios</h2>
 <div class="solvvy-solution">
 <p>Después de editar el archivo y eliminar todos los procesos PHP, debes verificar para confirmar que los valores se hayan actualizado. Esto lo puedes hacer al crear un archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">phpinfo.php</a>.</p>
 <p>Si no ves que tus cambios se han actualizado, intenta eliminar los procesos PHP nuevamente:</p>
@@ -71,7 +71,7 @@ require_once(ABSPATH . 'wp-settings.php');</pre>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214200748-Mi-archivo-phprc-no-se-actualiza" target="_self">Mi archivo phprc no se actualiza</a></li>
 </ul>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01J096PNE0S9B7RPV8AMF89JC9">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">Generalidades sobre php.ini</a></li>
