@@ -1,85 +1,42 @@
-<div id="auto-toc">&nbsp;</div>
-<p>La siguiente información te ayudará a preparar tu sitio para la actualización de Ubuntu de la versión 20.04 LTS a la 24.04.2 LTS, conocida como Noble.</p>
-<h2 id="h_01HN199BH1H8TSEJFG4S03H4B1"><span id="prep">Qué esperar</span></h2>
+<h2 id="h_01J0VKXT5W3744YBZHYQ1984GH">Generalidades</h2>
 <div class="solvvy-solution">
-<p>DreamHost te contactará por correo antes de la actualización.</p>
-<p>El tiempo de actualización puede variar de un servidor a otro, pero se asegura que haya varios ingenieros altamente capacitados disponibles en caso de que surjan problemas importantes. La actualización en sí no debería tardar más de una hora en completarse.</p>
-<p>Durante la actualización de tu servidor MySQL, cualquier servicio que dependa de su disponibilidad, como sitios web basados en WordPress o cualquier otra aplicación que utilice bases de datos, no estará accesible hasta que la actualización se complete. Sin embargo, esto no afectará los servicios de nube o de correo.</p>
-</div>
-<div id="version" class="section-link">&nbsp;</div>
-<h2 id="h_01HN199BH122PP6RHZSK1EWJWX">Revisar la versión de Ubuntu</h2>
-<div class="solvvy-solution">
-<p>Como se menciona anteriormente, recibirás un correo notificándote sobre la actualización del servidor. Sin embargo, puedes revisarlo manualmente a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</p>
-<p>El siguiente comando confirma que el servidor aún está ejecutando una versión antigua de Ubuntu:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat /etc/issue</span>
-Ubuntu 20.04.2 LTS \n \l</pre>
-</div>
-<p>Y esto muestra un servidor corriendo Ubuntu 24.04:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">cat /etc/issue</span>
-Ubuntu 24.04.1 LTS \n \l</pre>
-</div>
-</div>
-<h2 id="h_01HN199BH19N87ATVRMW3M5D0M">MySQL</h2>
-<div class="solvvy-solution">
-<div class="notebox-important">
-<p>Ubuntu Noble dejará de ofrecer soporte para la versión 2 de <a href="https://www.sqlite.org/" target="_blank" rel="noopener noreferrer">SQLite</a>. Necesitarás actualizar cualquier referencia de SQLite versión 2 a SQLite versión 3.</p>
-</div>
-</div>
-<h2 id="h_01HN199BH1CR0BAK8E15AGM8CD">ssh-rsa</h2>
-<div class="solvvy-solution">
-<p>El cifrado de clave SSH <span class="text-object">ssh-rsa</span> ya no está permitido. Necesitarás regenerar tu clave SSH si estás usando ssh-rsa. Por favor, revisa las siguientes guías para instrucciones sobre cómo crear nuevas llaves de emparejamiento:</p>
+<p>Este artículo proporciona información para ayudarte a preparar tu sitio para la actualización a Ubuntu 24.04.2 LTS (también conocida como Noble).</p>
+<h3 id="h_01HN199BH1H8TSEJFG4S03H4B1"><span id="prep">¿Qué esperar?</span></h3>
+<p>DreamHost te contactará por correo electrónico antes de la actualización.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216499537-C%C3%B3mo-configurar-el-inicio-de-sesi%C3%B3n-sin-contrase%C3%B1a-en-Mac-OS-y-Linux" target="_self">Cómo configurar el inicio de sesión sin contraseña en Mac OS y Linux</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215464758-Configurar-el-inicio-de-sesi%C3%B3n-sin-contrase%C3%B1a-en-PuTTY" target="_self">Configurar el inicio de sesión sin contraseña en PuTTY</a></li>
+<li>El horario garantiza que habrá varios ingenieros altamente capacitados disponibles en caso de que surjan problemas importantes.</li>
+<li>La actualización en sí no debería tardar más de una hora en completarse.</li>
+<li>Cualquier servicio que dependa de la disponibilidad de tu servidor MySQL (WordPress u otros sitios web y aplicaciones que utilicen bases de datos, etc.) <strong>no estará disponible</strong> hasta que se complete la actualización. Esto NO afectará los servicios de nube o correo electrónico.</li>
 </ul>
 </div>
 <h2 id="h_01HN199BH1R9RH1KGYWYP72DT0">Cambios en la versión del servidor web</h2>
 <div class="solvvy-solution">
-<h3 id="h_01HN199BH14N16YWQMB0PBSSJB" class="subtoc-heading">curl</h3>
-<p>La versión de curl está cambiando de la 7.68.0 a la 8.5.0.</p>
-<h3 id="h_01HN199BH1ZVYDSS21XV3R91TC" class="subtoc-heading">FFmpeg</h3>
-<p>La versión de FFmpeg está cambiando de la 4.2.7 a la 6.1.1.</p>
-<h3 id="h_01HN199BH1DJM2ZG9FSAQ1GDVK" class="subtoc-heading">GCC</h3>
-<p>La versión de GCC está cambiando de la 9.4 a la 13.2.</p>
-<h3 id="h_01HN199BH1VH4WBE5WAM422MRY" class="subtoc-heading">Java</h3>
-<p>Ubuntu Noble incluye una nueva versión de Java, la versión 8u402.</p>
-<h3 id="h_01HN199BH1A357QAZFE7EXKMT1" class="subtoc-heading">Node / NVM</h3>
-<p>Al instalar una versión personalizada de Node.js/NVM, la instalación puede ser bloqueada por grsec. Debes ejecutar un comando para cambiar los <span class="code">pax flags</span> de manera que grsec ignore los archivos. Revisa el siguiente artículo para obtener instrucciones completas:</p>
+<p>Revisa el siguiente artículo para obtener instrucciones sobre cómo encontrar las versiones del software instalado en tu servidor.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360029083351-Instalar-una-versi%C3%B3n-personalizada-de-NVM-y-Node-js">Instalar una versión personalizada de NVM y Node.js</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360059767631-Ver-las-versiones-del-software-de-tu-servidor">Ver las versiones del software de tu servidor</a></li>
 </ul>
-<h3 id="h_01HN199BH10JAKGM4RTPJ5RGCP" class="subtoc-heading">OpenSSL</h3>
-<p>La versión de OpenSSL está cambiando de la 1.1.1f a la 3.0.13.</p>
-<h3 id="h_01HN199BH13DGHM0JY2MX0TR6W" class="subtoc-heading">Perl</h3>
-<p>La versión de Perl está cambiando de la 5.30.0 a la 5.38.2.</p>
-<h3 id="h_01HN199BH16WPHMKNXH04SGF5A" class="subtoc-heading">Python</h3>
-<p>Las siguientes versiones de Python están cambiando:</p>
-<ul>
-<li>Python 2 (<strong>EOLd</strong>)</li>
-<li>Python 3 (de 3.8.10 a 3.12.3)</li>
-</ul>
-<h3 id="h_01HN199BH2P6CNK36TH4CDCYC6" class="subtoc-heading">virtualenv de Python</h3>
-<p>Si tu sitio web utiliza un entorno virtual de Python y notas errores después de la actualización, reinstala tu entorno virtual y todos los módulos. Esto ayuda a asegurar que todo sea compatible con las nuevas bibliotecas en el servidor.</p>
-<h3 id="h_01HN199BH29EEHR4GCR0VJP3PB" class="subtoc-heading">Ruby</h3>
-<p>La versión de Ruby en el servidor es 3.2. Si deseas tener más control sobre esto (por ejemplo, deseas utilizar una versión anterior o más nueva de Ruby), DreamHost recomienda encarecidamente usar <a href="https://help.dreamhost.com/hc/es/articles/217185247-Administrador-de-versiones-de-Ruby-Ruby-Version-Manager-RVM">RVM</a>.</p>
-<p>Si estás usando <a href="https://help.dreamhost.com/hc/es/articles/115001070131-Usar-Bundler-para-instalar-Ruby-gems">Bundler</a>, solo necesitas correr:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">bundle exec gem pristine</span>
-</pre>
 </div>
-<h3 id="h_01HN199BH2KR2HET2DXFA8G0Q1" class="subtoc-heading">SSH</h3>
-<p>La versión de SSH está cambiando de la 8.2p1 a la 9.6p1.</p>
-</div>
-<h2 id="h_01HN199BH23912R3SPE658Z2SP">¿Cómo puedo encontrar soporte?</h2>
+<h2 id="h_01J0VMJK9RFK9VH9F1A33NSZ9G">Solución de problemas</h2>
 <div class="solvvy-solution">
-<p>Si tienes cualquier pregunta o inquietud, por favor <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener noreferrer">contacta a soporte</a>.</p>
+<p><strong>ssh-rsa</strong></p>
+<p>El cifrado de clave ssh <span class="text-object">ssh-rsa</span> ya no está permitido. Deberás regenerar tu llave de ssh si estás utilizando ssh-rsa. Revisa las siguientes guías para obtener instrucciones sobre cómo crear nuevas llaves de emparejamienot:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216499537-C%C3%B3mo-configurar-el-inicio-de-sesi%C3%B3n-sin-contrase%C3%B1a-en-Mac-OS-y-Linux" target="_self">Cómo configurar el inicio de sesión sin contraseña en Mac OS y Linux</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215464758-Configurar-el-inicio-de-sesi%C3%B3n-sin-contrase%C3%B1a-en-PuTTY" target="_self">Configurar el inicio de sesión sin contraseña en PuTTY</a></li>
+</ul>
+<p><strong>Entorno virtual de Python</strong></p>
+<p>Si tu sitio web está utilizando un entorno virtual de Python y notas algún error después de la actualización, reinstala tu entorno virtual y todos los módulos. Esto ayuda a asegurar que todo sea compatible con las nuevas bibliotecas en el servidor.</p>
+<p><strong>sqlite</strong></p>
+<p>Ubuntu Noble ya no proporcionará soporte para <a href="https://www.sqlite.org/" target="_blank" rel="noopener noreferrer">SQLite</a> versión 2. Deberás actualizar todas las referencias de SQLite Versión 2 a SQLite Versión 3.</p>
 </div>
-<h2 id="h_01HYC276BP6Y137N3PN027B3C6">Ver también</h2>
+<h2 id="h_01HN199BH23912R3SPE658Z2SP">¿Dónde puedo encontrar soporte?</h2>
+<div class="solvvy-solution">
+<p>Si tienes alguna pregunta o inquietud, por favor <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.msg&amp;" target="_blank" rel="noopener noreferrer">contacta a soporte</a>.</p>
+</div>
+<h2 id="h_01HYC25DNQBQ5VQZETWDPQ5VD0">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360059767631-Ver-las-versiones-del-software-de-tu-servidor">Ver las versiones del software de tu servidor</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/15506945971220-Prepararse-para-Ubuntu-Jammy">Prepararse para Ubuntu Jammy</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/26139217919380-Preparase-para-Ubuntu-Noble">Preparase para Ubuntu Noble</a></li>
 </ul>
 </div>
