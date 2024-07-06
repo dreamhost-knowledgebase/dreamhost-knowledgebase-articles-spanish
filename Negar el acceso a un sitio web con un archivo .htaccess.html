@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01J21YM8CHREP83E2S8WXNR0ER">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo explica las diferentes maneras en las que puedes negar el acceso a tu sitio web o partes específicas de tu sitio usando un archivo <span class="text-object">.htaccess</span>.</p>
 <div class="notebox-note">
@@ -21,24 +21,24 @@
 <p>Una vez el archivo ha sido creado, puedes agregar los ejemplos de código abajo de él.</p>
 </div>
 </div>
-<h2>Negar acceso a un sitio web completo</h2>
+<h2 id="h_01J21YM8CHN0WRR12910Q0ZKY4">Negar acceso a un sitio web completo</h2>
 <div class="solvvy-solution">
 <p>El siguiente código previene que cualquier persona vea tu sitio web. Los visitantes verán un <span class="code">403</span> en vez cuando vean tu sitio web.</p>
-<h3>Apache 2.2</h3>
+<h3 id="h_01J21YM8CHG7VJ1JFQHFA8SYBN">Apache 2.2</h3>
 <div class="preboxcontainer">
 <pre class="prebox">Order deny,allow
 Deny from all</pre>
 </div>
-<h3>Apache 2.4</h3>
+<h3 id="h_01J21YM8CHE2S2WPD25423FEYN">Apache 2.4</h3>
 <div class="preboxcontainer">
 <pre class="prebox">Require all denied</pre>
 </div>
 </div>
-<h2>Negar acceso a archivos</h2>
+<h2 id="h_01J21YM8CHS7XC8G3XBGVRCC8V">Negar acceso a archivos</h2>
 <div class="solvvy-solution">
-<h3>Rechazar acceso a extensiones de archivo específicos</h3>
+<h3 id="h_01J21YM8CHENYD22WFJXA9QXSK">Rechazar acceso a extensiones de archivo específicos</h3>
 <p>El siguiente código fuerza a cualquier archivo terminado en .inc a dar el error 403 cuando sea visitado:</p>
-<h3>Apache 2.2</h3>
+<h3 id="h_01J21YM8CHTM0KT91GC6GZQEBZ">Apache 2.2</h3>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;Files ~ "\.inc$"&gt;  
   Order Allow,Deny
@@ -47,12 +47,12 @@ Deny from all</pre>
 </pre>
 </div>
 </div>
-<h3>Apache 2.4</h3>
+<h3 id="h_01J21YM8CHW4MTEAWX69GC7ZXA">Apache 2.4</h3>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;FilesMatch "\.(inc)$"&gt;<br />  Require all denied<br />&lt;/FilesMatch&gt;
 </pre>
 </div>
-<h2>Negar acceso a archivos "escondidos"</h2>
+<h2 id="h_01J21YM8CHB0442X35H6MX1FM9">Negar acceso a archivos "escondidos"</h2>
 <div class="solvvy-solution">
 <p>Los archivos que empiezan con un punto son considerados "escondidos" por UNIX. Usualmente, no quieres darlos a ver a los visitantes.</p>
 <p>DreamHost deshabilita el acceso a <span class="text-object">.htaccess</span> y <span class="text-object">.htpasswd</span>, pero puedes recursivamente negar todos los accesos a todos los archivos poniendo el siguiente <span class="text-object">.htaccess</span> dentro del nivel más alto.</p>
@@ -60,16 +60,16 @@ Deny from all</pre>
 <pre class="prebox">RedirectMatch 403 /\..*$</pre>
 </div>
 </div>
-<h2>Negar acceso a carpetas</h2>
+<h2 id="h_01J21YM8CHW5XX3A6Y6X1MFJS7">Negar acceso a carpetas</h2>
 <div class="solvvy-solution">
-<h3>Negar acceso a listar el directorio</h3>
+<h3 id="h_01J21YM8CHG9W1GD4185CKD7KD">Negar acceso a listar el directorio</h3>
 <p>Si no tienes un archivo index en tu directorio, todos tus archivos son listados en una lista de directorio para que que lo vea cualquiera. El siguiente código fuerza a esta lista a dar un error 403 Forbidden cuando lo visiten:</p>
 <div class="preboxcontainer">
 <pre class="prebox">Options -Indexes
 </pre>
 </div>
 </div>
-<h2>Negar acceso durante una hora específica en el día</h2>
+<h2 id="h_01J21YM8CH97TR2N7WG60QRGFJ">Negar acceso durante una hora específica en el día</h2>
 <div class="solvvy-solution">
 <p>Si deseas bloquear el acceso a archivos en un directorio durante un momento específico en el día, entonces agrega el siguiente código a tu archivo de <span class="text-object">.htaccess</span>:</p>
 <div class="preboxcontainer">
@@ -80,7 +80,7 @@ RewriteCond&nbsp;%{TIME_HOUR} ^16$
 RewriteRule ^.*$ - [F,L]
 </pre>
 </div>
-<p>Si alguien visita el directorio a cualquier hora entre las 4:00 – 4:59 pm, un error 500 Internal server error se mostrará. Tu puedes especificar multiples horas también.</p>
+<p>Si alguien visita el directorio a cualquier hora entre las 4:00 – 4:59 pm, un error 500 Internal server error se mostrará. También puedes especificar múltiples horas.</p>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
 # Multiple hour blocks
@@ -90,7 +90,7 @@ RewriteCond&nbsp;%{TIME_HOUR} ^16|17|08$
 RewriteRule ^.*$ - [F,L]</pre>
 </div>
 </div>
-<h2>Negar acceso a un directorio</h2>
+<h2 id="h_01J21YM8CHRBKR34KGP29KPCT2">Negar acceso a un directorio</h2>
 <div class="solvvy-solution">
 <p>Si tienes un directorio llamado <span class="text-object">blah</span> que quieres bloquear, pero puede aparecer en cualquier lado de tu directorio, usa el siguiente código:</p>
 <div class="preboxcontainer">
@@ -99,10 +99,10 @@ RewriteRule (^|/)blah(/|$) - [F]
 </pre>
 </div>
 </div>
-<h2>Negar acceso de IPs específicas</h2>
+<h2 id="h_01J21YM8CHK5QZABP7036E7Y8J">Negar acceso de IPs específicas</h2>
 <div class="solvvy-solution">
 <p>Si tienes problemas con ciertos visitantes de tu sitio web, puedes rechazarlos fácilmente.</p>
-<h3>Apache 2.2</h3>
+<h3 id="h_01J21YM8CHHJG81628486PV90A">Apache 2.2</h3>
 <p>Hay dos maneras diferentes de prohibir la entrada a los visitantes:</p>
 <ul>
 <li>Usando su dirección IP, o</li>
@@ -122,30 +122,30 @@ RewriteRule (^|/)blah(/|$) - [F]
 <li><a href="https://ip2cidr.com/" target="_self">IP a CIDR</a></li>
 </ul>
 </div>
-<h3>Apache 2.4</h3>
+<h3 id="h_01J21YM8CHV7SP1MB0K0WADM9T">Apache 2.4</h3>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;RequireAll&gt;<br />  Require all granted<br />  Require not ip xxx.xxx.xxx.xxx<br />&lt;/RequireAll&gt;</pre>
 </div>
-<h2>Permitir acceso a una IP específica</h2>
+<h2 id="h_01J21YM8CJVCM8J167A3GVDB9G">Permitir acceso a una IP específica</h2>
 <div class="solvvy-solution">
 <p>Si necesitas negar acceso a tu sitio a todos pero poder seguir accediendo con tu IP u otra específica para visitarlo, usa esto:</p>
-<h3>Apache 2.2</h3>
+<h3 id="h_01J21YM8CJH58JT3AYVRREJVFC">Apache 2.2</h3>
 <div class="preboxcontainer">
 <pre class="prebox">order deny,allow
 deny from all
 allow from <span class="code-highlight">&lt;YOUR_IP_ADDRESS&gt;</span>
 </pre>
 </div>
-<h3>Apache 2.4</h3>
+<h3 id="h_01J21YM8CJ2094TJR39PVPDCBA">Apache 2.4</h3>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;RequireAny&gt;<br />  Require all denied<br />  Require ip <span class="code-highlight">&lt;YOUR_IP_ADDRESS&gt;</span><br />&lt;/RequireAny&gt;
 </pre>
 </div>
 </div>
-<h2>Negar acceso a un dominio específico</h2>
+<h2 id="h_01J21YM8CJKTV9MF4FVPS69QSC">Negar acceso a un dominio específico</h2>
 <div class="solvvy-solution">
 <p>Esto niega acceso a cualquiera que se conecte a tu sitio desde <strong>www.example.com</strong>.</p>
-<h3>Apache 2.2</h3>
+<h3 id="h_01J21YM8CJNMYVV0S5QJ1D6QRV">Apache 2.2</h3>
 <p>Si alguien da clic en un enlace en <strong>example.com</strong> que redireccione a tu sitio, ellos verán un error 403 Forbidden error:</p>
 <div class="preboxcontainer">
 <pre class="prebox">SetEnvIfNoCase Referer "<span class="code-highlight">example.com</span>" bad_referer
@@ -168,7 +168,7 @@ RewriteCond&nbsp;%{HTTP_REFERER} ^<span class="code-highlight">https://example.c
 RewriteRule /* <span class="code-highlight">https://www.google.com</span> [R,L]
 </pre>
 </div>
-<h3>Apache 2.4</h3>
+<h3 id="h_01J21YM8CJM6J0KJF2NYQTM3C2">Apache 2.4</h3>
 <div class="preboxcontainer">
 <pre class="prebox">&lt;RequireAll&gt;
   Require all granted
@@ -176,7 +176,7 @@ RewriteRule /* <span class="code-highlight">https://www.google.com</span> [R,L]
 &lt;/RequireAll&gt;</pre>
 </div>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01J21YM8CJ3BB51P9ENZ94VPQZ">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades de .htaccess</a></li>

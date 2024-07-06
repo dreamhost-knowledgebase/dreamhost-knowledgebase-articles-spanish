@@ -1,4 +1,4 @@
-<h2>Generalidades</h2>
+<h2 id="h_01J21YWFTQBSQD1PF1ZVGB55KA">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Apache es el servidor HTTP más utilizado en Internet y DreamHost lo utiliza como servidor HTTP predeterminado para todos los productos de alojamiento.</p>
 <div class="notebox-note">
@@ -8,7 +8,7 @@
 </ul>
 </div>
 </div>
-<h2>Iniciar sesión en tu instancia como usuario por defecto</h2>
+<h2 id="h_01J21YWFTQ18Y9HY07HH92SARZ">Iniciar sesión en tu instancia como usuario por defecto</h2>
 <div class="solvvy-solution">
 <p>Inicia sesión en tu nueva instancia usando las Llaves de SSH que has asignaste cuando se creó.</p>
 <ul>
@@ -19,7 +19,7 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/228377408-C%C3%B3mo-encontrar-el-usuario-predeterminado-de-una-imagen" target="_self" rel="undefined">Como encontrar el usuario por defecto de una imagen</a></li>
 </ul>
 </div>
-<h2>Instalar Apache</h2>
+<h2 id="h_01J21YWFTQBSR09BQ6SE3D4V5Y">Instalar Apache</h2>
 <div class="solvvy-solution">
 <p>Corre los siguientes comandos:</p>
 <div class="preboxcontainer">
@@ -28,41 +28,41 @@
 </div>
 <p>Cuando se completa, el servidor HTTP Apache está instalado y se ejecuta con su configuración predeterminada. Si visitas la <a href="https://help.dreamhost.com/hc/es/articles/115001754711-Localizar-las-direcciones-IP-de-tu-instancia" target="_self" rel="undefined">dirección IP pública de tu instancia</a> en tu buscador, verás la página por defecto de Apache.</p>
 <img src="https://kbimages.dreamhosters.com/images/Apache_default_page.png" />
-<h2>El directorio /etc/apache2</h2>
+<h2 id="h_01J21YWFTQRZNWNDFVCZP1JK1R">El directorio /etc/apache2</h2>
 <p>Este directorio contiene todos los archivos de configuración de tu servidor Apache. Si <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self" rel="undefined">editas cualquiera de los archivos</a> encontrarás que muchos incluyen detalles del propósito general en la parte superior.</p>
-<h3>Archivo /etc/apache2/apache2.conf</h3>
+<h3 id="h_01J21YWFTQVTK7MQ73FY1GYJ48">Archivo /etc/apache2/apache2.conf</h3>
 <p>Este es el archivo de configuración principal que finalmente controla cómo funciona Apache. Si bien es posible configurar completamente tus sitios y módulos directamente en este archivo, en su lugar se recomienda usar archivos individuales más pequeños para cada uno de tus sitios y módulos para simplificar. Ve el artículo "Agregar un sitio web a DreamCompute" para obtener más instrucciones sobre cómo agregar archivos de configuración del sitio en el directorio<span class="text-object">/etc/apache2/sites-available</span>.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115003441752-Agregar-un-sitio-web-a-DreamCompute" target="_self" rel="undefined">Agregar un sitio a DreamCompute</a></li>
 </ul>
 <p>Esto es posible gracias a la directiva Include para insertar otros archivos en apache2.conf en tiempo de ejecución. Algunos de los valores de interés aquí son:</p>
-<h4>Timeout</h4>
+<h4 id="h_01J21YWFTQNT4HZACVVJEXGWNJ">Timeout</h4>
 <dl>
 <dd>Tiempo en segundos que Apache intenta completar una solicitud. Predeterminado: 300</dd>
 </dl>
-<h4>KeepAlive</h4>
+<h4 id="h_01J21YWFTQGXGHSPBC8R51X269">KeepAlive</h4>
 <dl>
 <dd>Define si se permiten conexiones persistentes, lo que permite más de una solicitud por conexión. Predeterminado: Activado</dd>
 </dl>
-<h4>MaxKeepAliveRequests</h4>
+<h4 id="h_01J21YWFTQBNWW3HC01F8B36VG">MaxKeepAliveRequests</h4>
 <dl>
 <dd>Define el número máximo de solicitudes permitidas para cada conexión persistente KeepAlive. Predeterminado: 100</dd>
 </dl>
-<h4>KeepAliveTimeout</h4>
+<h4 id="h_01J21YWFTQPDJKJ6QX6H07GJNX">KeepAliveTimeout</h4>
 <dl>
 <dd>Define la cantidad de segundos para esperar otra solicitud antes de finalizar la conexión persistente KeepAlive. Por defecto: 5</dd>
 </dl>
 </div>
-<h2>Configuración MPM</h2>
+<h2 id="h_01J21YWFTQKGV1NYHTYVEWWT06">Configuración MPM</h2>
 <div class="solvvy-solution">
-<p>Debian y Ubuntu tienen diferentes paquetes de Apache que están optimizados para diferentes situaciones. Cada paquete es un tipo diferente de MPM (módulo de multiprocesamiento) y las configuraciones para cada uno se definen cerca del final de este archivo.</p>
+<p>Debian y Ubuntu tienen diferentes paquetes de Apache que están optimizados para diferentes situaciones. Cada paquete es un tipo diferente de MPM (módulo de procesamiento múltiple) y las configuraciones para cada uno se definen cerca del final de este archivo.</p>
 <p>Los paquetes disponibles son:</p>
 <ul>
 <li>mpm-event</li>
 <li>mpm-prefork</li>
 <li>mpm-worker</li>
 </ul>
-<h3>Comprueba qué configuración de MPM está habilitada</h3>
+<h3 id="h_01J21YWFTQQD6NTQN35K2JTTD0">Comprueba qué configuración de MPM está habilitada</h3>
 <p>Corre el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">apache2ctl -M | grep mpm</span>
@@ -75,17 +75,17 @@
 <span class="server">[user@instance]:$ </span><span class="command">sudo service apache2 restart</span></pre>
 </div>
 </div>
-<h2>Hosts Virtuales</h2>
+<h2 id="h_01J21YWFTQFPVKJMM78P5K1N4S">Hosts Virtuales</h2>
 <div class="solvvy-solution">
 <p>Los hosts virtuales definen cada sitio para que Apache sepa qué debe hacer cuando recibe una solicitud. Puedes ver todos los archivos de configuración del host virtual en el directorio <span class="text-object">/etc/apache2/sites-available</span>.</p>
-<h3>/etc/apache2/sites-available/000-default.conf</h3>
+<h3 id="h_01J21YWFTQ4A83TTRW25BV983G">/etc/apache2/sites-available/000-default.conf</h3>
 <p>El directorio <span class="text-object">/etc/apache2-sites-available</span> contiene un archivo de configuración predeterminada titulado <span class="text-object">000-default.conf</span>. Estos archivos de configuración son responsables de lo siguiente:</p>
 <ul class="simple">
 <li>Definir que debe hacer Apache cuando tiene una solicitud que no coincide con otos hosts virtuales.</li>
 <li>Si solo esperas tener un sitio en tu instancia de DreamCompute, puedes usar este archivo y ningún otro si lo prefieres.</li>
 <li>Para aquellos con varios sitios, esto se puede utilizar para indicar al visitante que puede haber hecho algo mal o redirigirlo a otro sitio.</li>
 </ul>
-<h3>/etc/apache2/sites-available/example.com.conf</h3>
+<h3 id="h_01J21YWFTQR7F6GHY5NB6GVXG3">/etc/apache2/sites-available/example.com.conf</h3>
 <p>Cualquier sitio agregado a tu instancia de DreamCompute tendría su propio archivo de configuración creado. Si tu sitio era example.com, el archivo de configuración se titularía <span class="text-object">example.com.conf</span>.</p>
 <ul class="simple">
 <li>Para cada sitio que desees configurar, se recomienda que nombre un archivo similar al nombre de tu sitio en el directorio <span class="text-object">/etc/apache2/sites-available/</span>.</li>
@@ -106,14 +106,14 @@ ErrorLog /var/log/apache/www.example.com-error.log
 <pre class="prebox">&lt;VirtualHost 1.1.1.1:80&gt;</pre>
 </div>
 </div>
-<h2>Agregar el código de tu sitio</h2>
+<h2 id="h_01J21YWFTQ9HB63FEQ9GZF72K9">Agregar el código de tu sitio</h2>
 <div class="solvvy-solution">
 <p>Ahora que se creó el archivo de configuración, debes agregar el código de tu sitio a la instancia. Lo agregarás en el siguiente directorio:</p>
 <div class="preboxcontainer">
 <pre class="prebox">/var/www/<span class="code-highlight">example.com</span>/index.html</pre>
 </div>
 <div id="managing-virtual-host-files">
-<h3>Administrar archivos de Virtual Host</h3>
+<h3 id="h_01J21YWFTQX7BBS153MK20YTRX">Administrar archivos de Virtual Host</h3>
 <p>Cuando hayas configurado el archivo de host virtual de tu sitio, puedes habilitarlo/deshabilitarlo ingresando los siguientes comandos:</p>
 <span class="code">sudo a2ensite</span>&nbsp;—&nbsp;Proporciona una lista de archivos de sitios que puedes habilitar.
 <div class="preboxcontainer">
@@ -127,10 +127,10 @@ ErrorLog /var/log/apache/www.example.com-error.log
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[user@instance]:$ </span><span class="command">sudo service apache2 reload</span></pre>
 </div>
-<p>Este commando crea un enlace simbólico pára los archivos de tu sitio desde /etc/apache2/sites-enabled a su archivo correspondiente en /etc/apache2/sites-available.</p>
+<p>Este comando crea un enlace simbólico en los archivos de tu sitio desde /etc/apache2/sites-enabled a su archivo correspondiente en /etc/apache2/sites-available.</p>
 </div>
 </div>
-<h2>Módulos</h2>
+<h2 id="h_01J21YWFTQHXA8RRQ9Q0PBMF1D">Módulos</h2>
 <div class="solvvy-solution">
 <p>Los módulos pueden ser habilitados o deshabilitados por los siguientes comandos:</p>
 <div class="preboxcontainer">
@@ -146,6 +146,6 @@ ErrorLog /var/log/apache/www.example.com-error.log
 <div class="footer">&nbsp;</div>
 <!--DreamCompute Button-->
 <div class="dream-sign-up">
-<h2>Implementa Tus Aplicaciones en Servidores en la Nube Hoy</h2>
+<h2 id="h_01J21YWFTQSBCPPGD757K8TBV6">Implementa Tus Aplicaciones en Servidores en la Nube Hoy</h2>
 <div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/computing/" target="_self" rel="undefined">Suscríbete a DreamCompute</a></div>
 </div>
