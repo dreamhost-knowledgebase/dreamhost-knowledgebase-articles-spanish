@@ -1,32 +1,35 @@
+<div id="advanced"> </div>
 <h2 id="h_01HGTSXA9R9BMPRBQEWAHZB6WW">Generalidades</h2>
 <div class="solvvy-solution">
+<p>Este artículo explica cómo resolver errores de memoria en un Servidor Dedicado editando un archivo de configuración con tu usuario administrador.</p>
+<div class="prereqs">
+<p><strong>Requisitos Previos</strong></p>
+<p>Los comandos en este artículo requieren que <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-servidor-Dedicado">crees un usuario administrador</a> en tu <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados">Servidor Dedicado</a>.</p>
+</div>
+<h3 id="h_01J1TR9RQCJFHC6FS28H62SS84">El error</h3>
 <p>Los usuarios de servidores Dedicados que intentan ejecutar un binario compartido o intérprete (como Python <span class="code">pip</span>) pueden ver un error de memoria similar al siguiente:</p>
 <div class="preboxcontainer">
-<pre class="prebox">MemoryError: Cannot allocate write+execute memory for ffi.callback(). <br />You might be running on a system that prevents this. <br />For more information, see https://cffi.readthedocs.io/en/latest/using.html#callbacks</pre>
+<pre class="prebox">MemoryError: Cannot allocate write+execute memory for ffi.callback(). <br>You might be running on a system that prevents this. <br>For more information, see https://cffi.readthedocs.io/en/latest/using.html#callbacks</pre>
 </div>
-<p>Esto se debe a que grsec bloquea la ejecución no privilegiada y la asignación de memoria que el binario o intérprete necesita para funcionar. Este artículo explica cómo resolver este problema editando un archivo de configuración con tu usuario administrador.</p>
-<div class="prereqs">
-<p>Los pasos en este artículo requieren que crees un usuario administrador en tu servidor Dedicado. Revisa el siguiente artículo para obtener instrucciones sobre cómo crear este usuario:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-servidor-Dedicado">Agregar usuarios a un servidor Dedicado</a></li>
-</ul>
-</div>
+<p>Esto se debe a que <a href="https://grsecurity.net/faq" target="_blank" rel="noopener noreferrer">grsec</a> bloquea la ejecución no privilegiada y la asignación de memoria que el binario o el intérprete necesitan para funcionar. </p>
 </div>
 <h2 id="h_01HGTT1N7PYGAKATFX817NSJP8">Corregir el error</h2>
 <div class="solvvy-solution">
-<p>Se ha añadido un script al siguiente directorio en tu servidor Dedicado:</p>
+<p>DreamHost ha agregado un script al siguiente directorio en tu Servidor Dedicado:</p>
 <div class="preboxcontainer">
 <pre class="prebox">/root/shared-interpreters-pax.sh</pre>
 </div>
 <p>Este archivo puede ser modificado y ejecutado como un usuario administrador para ajustar la asignación de memoria.</p>
 <ol>
 <li>Inicia sesión en tu servidor usando tu <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-servidor-Dedicado">usuario administrador</a>.</li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH-">Edita el siguiente archivo</a> usando <span class="code">sudo</span>.
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH-">Edita el siguiente archivo</a> usando <span class="code">sudo</span>.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo nano /root/shared-interpreters-pax.sh</span></pre>
 </div>
 <dl>
-<dd>Aparece la siguiente lista en el archivo:
+<dd>
+<em> Aparece la siguiente lista en el archivo:</em>
 <div class="preboxcontainer">
 <pre class="prebox">list=( java javac pip pip3 python python3 )</pre>
 </div>
@@ -41,7 +44,7 @@
 </li>
 <li>Corre nuevamente el comando original.
 <dl>
-<dd>Los errores de memoria se resolverán.</dd>
+<dd><em>Los errores de memoria se resolverán.</em></dd>
 </dl>
 </li>
 </ol>

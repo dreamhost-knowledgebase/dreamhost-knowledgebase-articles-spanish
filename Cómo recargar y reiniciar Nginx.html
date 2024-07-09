@@ -1,64 +1,59 @@
+<div id="advanced"> </div>
+<h2 id="h_01J1TMF3CZD6NVW9DE5WBMABHT">Generalidades</h2>
+<p>Este artículo explica cómo recargar y reiniciar Nginx en tu panel o a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. Esto se recomienda después de hacer un cambio en un archivo de configuración para asegurar que se utilicen los nuevos ajustes.</p>
 <div class="notebox-important">
-<p>Este artículo contiene información/ejemplos usando usuarios root/sudo/admin. Si necesitas acceso sudo/admin, debes actualizar a un Servidor Dedicado.</p>
+<p>Este artículo contiene ejemplos utilizando usuarios sudo/admin. Si necesitas acceso sudo/admin, debes actualizar a un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados">Servidor Dedicado</a> y agregar un <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-servidor-Dedicado">usuario administrador</a>.</p>
 </div>
-<p>Debes volver a cargar Nginx cada vez que hagas un cambio en un archivo de configuración. Puedes hacer esto en el panel o iniciando sesión en tu servidor a través de SSH con tu usuario administrador en un Servidor Dedicado.</p>
-<h2 id="h_01HQTW8JKBN927EABRXA328KH7">Recargarlo en el panel (Servidores VPS y Dedicados)</h2>
+<h2 id="h_01J1TMHXSN5SH3DC8CWSZY4MJJ">Cómo recargar Nginx</h2>
+<p>Se recomienda recargar ya que mantiene el servidor en funcionamiento mientras vuelve a leer cualquier actualización de los archivos de configuración. Esto es más seguro que reiniciar porque si se detecta un error de sintaxis en un archivo de configuración, no procederá con la recarga, permitiendo que tu servidor siga funcionando.</p>
+<ul>
+<li>Si en lugar de eso reinicias con un error de sintaxis, es posible que tu servidor no se reinicie correctamente.</li>
+</ul>
+<h3 id="h_01HQQVT92CD2NTPFQZ1X3P6PW3">Reiniciar en el panel (Servidores VPS y Dedicados)</h3>
+<p>Para reiniciar tu servidor en el panel:</p>
 <div class="solvvy-solution">
 <ol>
 <li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=server.dashboard#" target="_blank" rel="noopener noreferrer">Servidores</a>.</li>
-<li>Haz clic en el botón de 'tres puntos verticales'a la derecha del servidor que deseas eliminar.</li>
+<li>Haz clic en el botón de 'tres puntos verticales'a la derecha del servidor que deseas reiniciar</li>
 <li>Da clic en el botón <strong>Recargar HTTP</strong>.</li>
 <li>Espera 5 minutos para que reconstruya el archivo de configuración.</li>
 </ol>
 </div>
-<h2 id="h_01HQTW8JKBA3CPN8SJG0YH993K"><span id="Recargar_via_SSH">Recargar vía SSH (Solo para Servidores Dedicados)</span></h2>
+<h3 id="h_01HQTW8JKBA3CPN8SJG0YH993K"><span id="Recargar_via_SSH">Recargar vía SSH (Solo para Servidores Dedicados)</span></h3>
 <div class="solvvy-solution">
-<p>Inicia sesión en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> con tu <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-Servidor-Dedicado">usuario admin</a>. luego, correo el siguiente comando:</p>
+<p>Puedes reiniciar Nginx con el siguiente comando después de iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> con tu <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-servidor-Dedicado">usuario administrador</a>:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo /etc/init.d/nginx reload</span>
 </pre>
 </div>
-<ul>
-<li>Recargar mantiene el servidor corriendo mientras relee cualquier actualización en el archivo de configuración.</li>
-<li>Recargar es más seguro que reiniciar pues si un error de sintaxis es encontrado en el archivo de configuración no procederá con la recarga, y tu servidor seguirá corriendo.</li>
-<li>Si hay un error de sintaxis y tu reinicias, es posible que el servidor no reinicie correctamente.</li>
-</ul>
 </div>
-<h2 id="h_01HQTW8JKB9ANM31234XK61F9T"><span id="Reiniciando">Reiniciar (Solo para Servidores Dedicados)</span></h2>
+<h2 id="h_01HQQVT92CAVHT5ZJ9WDXHQ0E5"><span id="Reiniciar">Cómo reiniciar</span></h2>
+<p>Las siguientes secciones explican cómo reiniciar Nginx desde el panel o a través de SSH.</p>
+<h3 id="h_01J1TN4DR3T4QC5SPC37J4CPZM">Reiniciar en el panel (VPS y Servidores Dedicados)</h3>
+<p>Para reiniciar tu servidor en el panel:</p>
 <div class="solvvy-solution">
-<p>Puedes reiniciar Nginx con los siguientes comandos después de iniciar sesión en tu servidor vía&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>&nbsp;con tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-Servidor-Dedicado" target="_self">usuario admin</a>:</p>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=server.dashboard#" target="_blank" rel="noopener noreferrer">Servidores</a>.</li>
+<li>Haz clic en el botón de 'tres puntos verticales' a la derecha del servidor que deseas reiniciar.</li>
+<li>Da clic en el botón <strong>Reiniciar Servidor</strong>.</li>
+<li>Espera 5 minutos para que reconstruya el archivo de configuración.</li>
+</ol>
+</div>
+<h3 id="h_01J1TN2JVZAEKA1TVYS04PJYNY"><span id="Restarting">Reiniciar a través de SSH (Solo para Servidore Dedicados)</span></h3>
+<div class="solvvy-solution">
+<p>Puedes reiniciar Nginx con los siguientes comandos después de iniciar sesión en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> con tu <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-Servidor-Dedicado" target="_self">usuario admin</a>:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo /etc/init.d/nginx stop</span>
 <span class="server">[server]$ </span><span class="command">sudo /etc/init.d/nginx start</span>
 </pre>
-</div>
-<p>También puedes reiniciarlo en el panel de DreamHost. Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=server.dashboard#" target="_blank" rel="noopener noreferrer">Servidores</a>, y da clic en el botón <strong>Reiniciar</strong> a la derecha de tu servidor.</p>
-</div>
-<h2 id="h_01HQTW8JKBW76PJDY641D282JC">Actualizar tu archivo phprc</h2>
-<div class="solvvy-solution">
-<p>Si has creado un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">archivo phprc</a>&nbsp;y ves que el archivo&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versión-y-la-configuración-de-PHP-de-tu-sitio">phpinfo.php</a>&nbsp;no ha sido actualizado, tienes tres opciones:</p>
-<h3 id="h_01HQTW8JKBJK110PDPVANWDE8R">Actualizar la configuración de tu sitio en tu panel</h3>
-<p>Puedes guardar nuevamente la&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200748#actualizando-el-archivo-phprc-en-el-panel" target="_self">configuración de tu sitio en el panel</a>&nbsp;para actualizar tu archivo <span class="text-object">phprc</span>.</p>
-<h3 id="h_01HQTW8JKB4HXTRJJBSGTKTVXZ">Recargar Nginx (Solo para Servidores Dedicados)</h3>
-<p>Si estás en un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self" rel="undefined">Servidor Dedicado</a> con un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-Servidor-Dedicado" target="_self">usuario admin</a>,&nbsp;puedes recargar Nginx <a href="https://help.dreamhost.com/hc/es/articles/216454967#Reiniciando" target="_self">usando los pasos que están más arriba</a>.&nbsp;Si recargando no actualiza los cambios, trata reiniciando y matando todos los procesos de PHP como muestra abajo.</p>
-<h3 id="h_01HQTW8JKB9SEM8KM9Y7G719BK">Reiniciar Nginx y matar los procesos de PHP (Solo para Servidores Dedicados)</h3>
-<p>Si estás en un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self" rel="undefined">Servidor Dedicado</a>&nbsp;con un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-Servidor-Dedicado" target="_self">usuario admin</a>,&nbsp;puedes reiniciar Nginx y matar todos los procesos de PHP que se están corriendo. Corre el siguiente comando en tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-Servidor-Dedicado" target="_self">usuario admin Dedicado</a>:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo /etc/init.d/nginx stop</span>
-<span class="server">[server]$ </span><span class="command">pkill -9 php</span>
-<span class="server">[server]$ </span><span class="command">sudo /etc/init.d/nginx start</span></pre>
-</div>
 </div>
 <h2 id="h_01HQTW8JKBR0XFH21F2T1BHD05">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx" target="_self">Generalidades de Nginx</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215833158-PHP-con-Nginx-en-DreamHost" target="_self">PHP con Nginx en DreamHost</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214880148-Cambiar-tu-servidor-web-a-Nginx" target="_self">Cambiar tu servidor web a Nginx </a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx" target="_self">Ubicaciones del archivo de configuración de Nginx</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215837528--Proteger-directorios-con-contrase%C3%B1a-con-Nginx" target="_self">Contraseña para protección de directorios con Nginx</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216456087-Creando-redirecciones-con-Nginx" target="_self">Crear redirecciones con Nginx</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216456127-Bloqueando-direcciones-IP-con-Nginx" target="_self">Bloquear IPs con Nginx</a></li>
 </ul>
+</div>
 </div>
