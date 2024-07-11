@@ -1,20 +1,20 @@
-<div id="auto-toc">&nbsp;</div>
-<h2>Generalidades</h2>
+<div id="auto-toc"> </div>
+<h2 id="h_01J2ENWW1D0BK9ZCDT1EE11X8A">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este artículo muestra cómo cambiar los permisos de un archivo o directorio usando SSH o FTP. Para ver las generalidades de los permisos, mira el siguiente artículo:</p>
+<p>Este artículo muestra cómo cambiar los permisos de un archivo o directorio usando SSH o FTP. Para ver las generalidades de los permisos, revisa el siguiente artículo:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360029138491-Generalidades-de-Permisos-Unix" target="_self">Generalidades de los permisos</a></li>
 </ul>
 </div>
-<h2>Cambiar permisos vía SSH</h2>
+<h2 id="h_01J2ENWW1D1HCH66DEAF1EZP8S">Cambiar permisos vía SSH</h2>
 <div class="solvvy-solution">
-<p>Si has iniciado sesión en tu servidor vía&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>,&nbsp;puedes cambiar los permisos corriendo el comando <span class="code">chmod</span>. Hay dos maneras de establecer permisos usando <span class="code">chmod</span>.</p>
+<p>Si has iniciado sesión en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>, puedes cambiar los permisos corriendo el comando <span class="code">chmod</span>. Hay dos maneras de establecer permisos usando <span class="code">chmod</span>.</p>
 <ul>
 <li>Modo numérico.</li>
 <li>Modo nombrado.</li>
 </ul>
 <p>El modo numérico es más fácil de entender pues solo debes agregar los valores.</p>
-<h3 class="subtoc-heading">Modo Numérico</h3>
+<h3 id="h_01J2ENWW1DBKWNTJ62QY6NXDVN" class="subtoc-heading">Modo Numérico</h3>
 <p>Usar el modo numérico, puedes asignar números a casa permiso. Por ejemplo:</p>
 <dl>
 <dd>4 = r (leer)</dd>
@@ -73,7 +73,7 @@
 <li>Público.</li>
 </ul>
 <p>Todos tres tienen sus propios permisos, Así, todos tres tienen ahora que ser agregados juntos para obtener un valor completo.</p>
-<h3 class="subtoc-heading">Ejemplos</h3>
+<h3 id="h_01J2ENWW1D8MVGZTJHFSD38NCT" class="subtoc-heading">Ejemplos</h3>
 <table class="wikitable">
 <tbody>
 <tr>
@@ -156,7 +156,7 @@
 <div class="notebox-note">
 <p>Mientras que los comandos de arriba sobre <span class="code">chmod</span> son útiles, puede ser entendido si un usuario no quiere tener que iniciar sesión vía SSH solo para cambiar permisos en un archivo. Afortunadamente, muchos <a href="https://help.dreamhost.com/hc/es/articles/215613107-Listas-de-clientes-de-software-de-FTP" target="_self">clientes de FTP</a> como FileZilla tienen la habilidad de cambiar permisos directamente con el cliente.</p>
 </div>
-<h3 class="subtoc-heading">Modo Nombrado</h3>
+<h3 id="h_01J2ENWW1DQ1A9962V9CB25DRM" class="subtoc-heading">Modo Nombrado</h3>
 <p>Hay dos grupos de permisos a asignar cuando se usa el 'Modo Nombrado', los cuales son el 'quién' y el 'que' de los permisos. Por ejemplo:</p>
 <p><strong>Permisos de quién</strong></p>
 <table border="1" cellspacing="0" cellpadding="4">
@@ -201,7 +201,7 @@
 </tbody>
 </table>
 <p>Usar ("+") y ("-") con la información de arriba, te permite combinar permisos de los grupos 'quién' y 'qué' para asignar los permisos exactos que deseas.</p>
-<h3 class="subtoc-heading">Ejemplos</h3>
+<h3 id="h_01J2ENWW1DNYMEG5FKYG98TZXD" class="subtoc-heading">Ejemplos</h3>
 <p>El formato para usar <span class="code">chmod</span> en los siguientes comandos es:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod “groups”+”access” <span class="code-highlight">file.example</span></span></pre>
@@ -223,10 +223,10 @@
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod g+s <span class="code-highlight">somedir</span></span></pre>
 </div>
 </div>
-<h2>Permisos especiales</h2>
+<h2 id="h_01J2ENWW1DXCMAYGX1MRPGJ82R">Permisos especiales</h2>
 <div class="solvvy-solution">
 <p>Los permisos especiales pueden ser agregados lo cual te permite la habilidad especial de cambiar usuarios o grupo, o especificar un directorio como directorio "temporal".</p>
-<h3 class="subtoc-heading">La banderilla 's'</h3>
+<h3 id="h_01J2ENWW1DCCXH83662K0MT43T" class="subtoc-heading">La banderilla 's'</h3>
 <p>Una <span class="code">s</span> puede ser agregada al dueño o grupo con permisos de 'leer'. Esto indica el permiso setuid/setgid.</p>
 <ul>
 <li>Si configuras el grupo con el permiso de leer, el configura el bit de setgid. Esto quiere decir que cualquier usuario que cambie en el directorio de plataformas repentinamente todas las acciones como si los dueños del grupo fueran los del grupo por defecto. Esto puede ser útil si quieres que todos los archivos en ese directorio puedan crear/ser propietarios de ese grupo dueño.</li>
@@ -234,19 +234,19 @@
 <ul>
 <li>Si configuras los dueños con permisos de lectura, éste configura el bit de setuid. Esta no es normalmente una buena idea, entonces no lo hagas a menos que sepas realmente lo que estás haciendo.</li>
 </ul>
-<h3 class="subtoc-heading">La banderilla 't'</h3>
+<h3 id="h_01J2ENWW1DBBDE7NVBM4KMQA7E" class="subtoc-heading">La banderilla 't'</h3>
 <p>La banderilla <span class="code">t</span> es básicamente la misma cosa que la <span class="code">s</span> para un usuario o grupo, pero es usada cuando aplica para todos los otros. Aquí, el significado es un poco diferente. Quiere decir que cualquiera puede crear un archivo en el directorio, pero solo el propietario es capaz de eliminar ese archivo, no importan los permisos asignados. Este es el permiso al directorio "temporal" y deberá también ser ignorado a menos que sepas lo que estás haciendo.</p>
 </div>
-<h2>Cambiar permisos en un cliente FTP</h2>
+<h2 id="h_01J2ENWW1D51050P0AMQY66Q6P">Cambiar permisos en un cliente FTP</h2>
 <div class="solvvy-solution">
 <p>Si das clic derecho a un archivo en un cliente FTP, podrás ver sus permisos. Por ejemplo:</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-filezilla-permissions_01.png" alt="ES filezilla-permissions_01.png" width="350" height="450" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-filezilla-permissions_01.png" alt="ES filezilla-permissions_01.png" width="350" height="450"></dd>
 </dl>
 <p>Como se discutió arriba, este formato usa el Modo Numérico para configurar permisos. Solo necesitas agregar los valores para cambiarlo.</p>
 <p>Este ejemplo usa Filezilla. Puedes dar clic en las casillas, o escribir en el valor Numérico de los permisos que necesitas cambiar.</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01J2ENWW1DDPVZXTAW3SWHVZJ8">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
