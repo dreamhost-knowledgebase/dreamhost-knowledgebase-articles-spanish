@@ -1,0 +1,144 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Esta guía proporciona formas de eliminar las advertencias que ves cuando te conecta a tu dominio/servidor web a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. La advertencia a la que se refiere esta guía es la de 'claves de host no coinciden':</p>
+<div class="notebox-important">
+<p>Si eliminas las entradas de <span class="text-object">known_host</span> como se recomienda aquí, vas a estar vulnerable a un ataque de 'hombre en el medio'.</p>
+</div>
+</div>
+<h2>El mensaje de error</h2>
+<div class="solvvy-solution">
+<p>Si ves la siguiente advertencia al acceder a tu dominio o servidor web a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>, generalmente significa que la clave de host no coincide con la clave en tu archivo <span class="text-object">known_host</span>.</p>
+<div class="preboxcontainer">
+<pre class="prebox">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that the RSA host key has just been changed.
+The fingerprint for the RSA key sent by the remote host is
+REMOVED FOR SECURITY REASONS
+Please contact your system administrator.
+Add correct host key in /home/username/.ssh/known_hosts to get rid of this message.
+Offending key in /home/username/.ssh/known_hosts:10278
+Password authentication is disabled to avoid man-in-the-middle attacks.
+Keyboard-interactive authentication is disabled to avoid man-in-the-middle attacks.
+
+–
+</pre>
+</div>
+<p>Esto no suele ser un motivo de preocupación y puede remediarse de diferentes maneras.</p>
+</div>
+<h2>Resolver el mensaje de advertencia</h2>
+<div class="solvvy-solution">
+<p>Hay tres métodos para eliminar este error. Ten en cuenta que la modificación para corregir esto debe realizarse en el lado del cliente SSH, por lo que si obtienes esta conexión desde tu casa/trabajo, debes actualizar esa computadora en específico.</p>
+<h3> </h3>
+<h3>Método uno -- Generar una nueva clave de host (MAC o Linux)</h3>
+<p>Si te has conectado a un host en el pasado, la clave de host anterior se almacena en el archivo <span class="text-object">/user/.ssh/known_hosts</span>. Si la clave se ha actualizado en el servidor, ahora debes eliminar la clave anterior en tu computador.</p>
+<p>Corre el siguiente comando en tu shell.</p>
+<div class="notebox-note">
+<p>Cambia <span class="code">HOSTNAME</span> al host al que te estás conectando, como <strong>example.com</strong></p>
+</div>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">ssh-keygen -R <span class="code-highlight">HOSTNAME</span></span>
+</pre>
+</div>
+<p>La opción <span class="code">-R</span> elimina la clave anterior relacionada con un hostname específico.</p>
+<ul>
+<li><a href="https://linux.die.net/man/1/ssh-keygen">https://linux.die.net/man/1/ssh-keygen</a></li>
+</ul>
+<p>Ahora puedes conectarte a través de SSH para almacenar una nueva clave.</p>
+<div class="notebox-tip">
+<p>Cuando te conectes la siguiente vez, verás la advertencia <strong>La llave de host del servidor es desconocida</strong>. Esto solamente quiere decir que no está en el archivo <span class="text-object">known_hosts</span>. Debes confirmar que la huella dactilar es la que se muestra en el panel usando las instrucciones del siguiente artículo.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360004634231-Advertencia-The-server-s-host-key-is-unknown-La-llave-host-del-servidor-es-desconocida-">Advertencia 'The server's host key is unknown' (La llave host del servidor es desconocida)</a></li>
+</ul>
+<p>Una vez hayas confirmado que coinciden puedes iniciar sesión y la llave será actualizada automáticamente en el archivo <span class="text-object">known_hosts</span> de tu computador.</p>
+</div>
+<h3> </h3>
+<h3><span id="Metodo_Dos_.E2.80.94_Eliminar_el_archivoknown_hosts">Método Dos — Eliminar el archivo known_hosts</span></h3>
+<div class="alert-warning">
+<p>No uses este método si inicias sesión en otros servidores que no son de DreamHost. Si es así, no tendrás manera de saber si tus llaves de SSH cambiaron pues el archivo <span class="text-object">known_hosts</span> habrá sido eliminado.</p>
+</div>
+<p>Elimina completamente el archivo <span class="text-object">known_hosts</span> (en tu computador local) si tienes varios hosts que necesitan ser actualizados.</p>
+<p><strong>En una máquina Mac o Linux</strong></p>
+<p>El archivo <span class="text-object">known_hosts</span> está ubicado en el directorio <span class="text-object">.ssh/known_hosts</span>. Puedes simplemente correr este comando en una terminal para eliminar el archivo <span class="text-object">known_host</span>:</p>
+<dl>
+<dd>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">rm .ssh/known_hosts</span>
+</pre>
+</div>
+</dd>
+</dl>
+<p><strong>En una máquina Windows usando <a href="https://help.dreamhost.com/hc/es/articles/215464538-Configurar-PuTTY">PuTTY</a></strong></p>
+<p>Debes acceder al registro para eliminar el archivo <span class="text-object">known_hosts</span>:</p>
+<ol>
+<li>Abre 'regedit.exe' haciendo una búsqueda.</li>
+<li>Navega a <span class="text-object">HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\SshHostKeys</span>
+</li>
+<li>Elimina todas las llaves allí o elimina la clave de host individual.</li>
+</ol>
+<div class="notebox-tip">
+<p>Cuando te conectes la siguiente vez, verás la advertencia <strong>La llave de host del servidor es desconocida</strong>. Esto solamente quiere decir que no está en el archivo <span class="text-object">known_hosts</span>. Debes confirmar que la huella dactilar es la que se muestra en el panel usando las instrucciones del siguiente artículo.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360004634231-Advertencia-The-server-s-host-key-is-unknown-La-llave-host-del-servidor-es-desconocida-">Advertencia 'The server's host key is unknown' (La llave host del servidor es desconocida)</a></li>
+</ul>
+<p>Una vez hayas confirmado que coinciden puedes iniciar sesión y la llave será actualizada automáticamente en el archivo <span class="text-object">known_hosts</span> de tu computador.</p>
+</div>
+<h3> </h3>
+<h3><span id="Metodo_Tres_.E2.80.94_Edit_the_known_hosts_file">Método Tres — Editar el archivo known_hosts</span></h3>
+<div class="alert-warning">
+<p>Este es un método avanzado. Solo edita <span class="text-object">known_hosts</span> si te sientes cómodo <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH" target="_self">editar archivos vía SSH</a>.</p>
+</div>
+<p>Edita el archivo <span class="text-object">known_hosts</span>. En el caso de arriba, abre el archivo <span class="text-object">/home/username/.ssh/known_hosts</span> en tu editor de texto preferido, y luego elimina la línea que causa el problema. Asegúrate de cambiar <span class="code">username</span> a tu usuario Shell.</p>
+<div class="notebox-note">
+<p>Esto es similar al método dos pero en vez de eliminar completamente el archivo <span class="text-object">known_hosts</span>, tu eliminas la línea del host específica en el archivo.</p>
+</div>
+<p>El mensaje de advertencia muestra el número de la línea; se puede encontrar después del nombre del archivo en el error. En el mensaje de error de arriba, la línea de error es 10,278. Si estás en una máquina Mac o Linux y si estás <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH" target="_self" rel="undefined">usando el editor "vim"</a>, puedes simplemente escribir el siguiente comando para saltar a esa línea:</p>
+<dl>
+<dd>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">vim +10278 known_hosts</span></pre>
+</div>
+</dd>
+</dl>
+<dl>
+<dd>El editor se abre a esa línea específica. Haz clic dos veces en la tecla <span class="code">d</span> para eliminar esa línea, y escribe dos puntos (<span class="code">:</span>) seguido de la letra <span class="code">x</span>:</dd>
+</dl>
+<dl>
+<dd>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">:x</span></pre>
+</div>
+</dd>
+</dl>
+<p>Finalmente, presiona la tecla <span class="code">Entrar</span> para guardar.</p>
+<p>Visita el siguiente artículo para obtener más detalles sobre cómo usar vim.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo a través de SSH</a></li>
+</ul>
+<p>En una máquina Windows que utiliza <a href="https://help.dreamhost.com/hc/es/articles/215464538-Configurar-PuTTY">PuTTY</a>, navega a la carpeta de Registro como se muestra en el método dos en la parte superior. En ese directorio, aparece una lista de nombres de host. Haz clic con el botón derecho en el que necesitas eliminar y luego selecciona 'Eliminar'.</p>
+<div class="notebox-tip">
+<p>Cuando te conectes la siguiente vez, verás la advertencia <strong>La llave de host del servidor es desconocida</strong>. Esto solamente quiere decir que no está en el archivo <span class="text-object">known_hosts</span>. Debes confirmar que la huella dactilar es la que se muestra en el panel usando las instrucciones del siguiente artículo.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360004634231-Advertencia-The-server-s-host-key-is-unknown-La-llave-host-del-servidor-es-desconocida-">Advertencia 'The server's host key is unknown' (La llave host del servidor es desconocida)</a></li>
+</ul>
+<p>Una vez hayas confirmado que coinciden puedes iniciar sesión y la llave será actualizada automáticamente en el archivo <span class="text-object">known_hosts</span> de tu computador.</p>
+</div>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<h3>Enlaces internos</h3>
+<ul>
+<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Cómo crear un usuario con acceso Shell (SSH)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216557548-Shell-disponibles-en-DreamHost" target="_self">Tipos de Shell disponibles en DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214750888-Generalidades-sobre-comandos-UNIX" target="_self">Comandos UNIX</a></li>
+</ul>
+<h3>Enlaces externos</h3>
+<ul>
+<li><a href="http://mah.everybody.org/docs/ssh" target="_self">Usar ssh-agent con ssh</a></li>
+<li><a href="https://openssh.com/" target="_self">El proyecto OpenSSH</a></li>
+<li><a href="https://ss64.com/bash/" target="_self">Un índice A-Z de comandos de Linux BASH en el sitio web de Simon Sheppard</a></li>
+</ul>
+</div>

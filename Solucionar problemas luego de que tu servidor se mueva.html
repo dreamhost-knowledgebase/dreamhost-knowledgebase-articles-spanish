@@ -1,0 +1,79 @@
+<div id="intermediate"> </div>
+<h2 id="h_01HVH8Q5F7W1RX3WV7XZ95S29D">Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica qué configuraciones cambian cuando se mueve un servidor y cómo resolver cualquier problema posterior.</p>
+<div class="notebox-note">
+<p>DreamHost puede mover tu servidor en ocasiones para optimizar el entorno de alojamiento y asegurar que permanezca confiable y seguro. Recibirás avisos por correo electrónico antes y después de este tipo de movimiento para mantenerte informado sobre el proceso.</p>
+</div>
+</div>
+<h2 id="h_01HVH8Q5F89EKJFG59GYFZCA2K"><span id="Que_cambia_cuando_se_mueve_un_servidor.3F">¿Qué cambia cuando se mueve un servidor?</span></h2>
+<div class="solvvy-solution">
+<h3 id="h_01HVH8Q5F845R5PYKCK3GV17VP"><span id="Nombre_del_servidor">Nombre del servidor</span></h3>
+<p>Cuando se mueve tu servidor, también cambia su nombre. Cada servidor compartido en DreamHost tiene un <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales#Ubicar_el_hostname_FTP_de_tu_servidor">hostname único que puedes ver en el panel</a>.</p>
+<p>Si estás utilizando el nombre del servidor para conectarte en tu cliente FTP, debes actualizarlo al nuevo nombre. De lo contrario, aún puedes usar el nombre de tu sitio web para conectarte.</p>
+<h3 id="h_01HVH8Q5F8PB057S1A7QPD2MCH"><span id="Configuraciones_de_DNS">Configuraciones de DNS</span></h3>
+<p>Solo necesitas ajustar tu configuración de DNS si no estás utilizando los <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-nameservers">nameservers</a> de DreamHost. En este caso, debes actualizar las direcciones IP de tu sitio web en la compañía que aloja tus nameservers.</p>
+<dl>
+<dd><strong><em>Si tu IP sigue apuntando a la IP del servidor antiguo, tu sitio no funcionará.</em></strong></dd>
+</dl>
+<p>Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio">¿A qué registros DNS debo apuntar mi sitio?</a> para obtener información sobre cómo encontrar las direcciones IP correctas de tu sitio.</p>
+<div class="notebox-important">
+<p><a href="https://help.dreamhost.com/hc/es/articles/216109647-Generalidades-de-las-IP-%C3%9Anicas">Las IPs únicas</a> también cambiarán, ya que DreamHost no ofrece direcciones IP estáticas.</p>
+</div>
+</div>
+<h2 id="h_01HVH8Q5F8B3HWN99AP8QKASGV"><span id="Reparar_inconvenientes_luego_del_movimiento">Solucionar problemas después del movimiento</span></h2>
+<div class="solvvy-solution">
+<p>Después de completar la migración, puedes notar errores en tu sitio o que no responde como lo hacía antes. Las siguientes secciones te ayudarán a solucionar las causas más comunes de esto.</p>
+<h3 id="h_01HVH8Q5F8JTF8C9N8C8ZYSJZS"><span id="Mi_sitio_no_responde">El sitio no responde</span></h3>
+<p>Aquí hay algunos errores del sitio que puedes ver y cómo solucionarlos.</p>
+<h4 id="h_01J27HH79YYM28HM4916156DV0">El sitio no carga</h4>
+<p>Esto es muy probablemente un problema de DNS. Revisa la sección de <a href="#Configuraciones_de_DNS" target="_self">configuraciones de DNS</a> anterior para corregir esto.</p>
+<h4 id="h_01J27FWTY0S6WDDAW960DQY5GY">Error de sitio no encontrado</h4>
+<p>Si tu sitio está apuntado correctamente a tu nueva IP de DreamHost, es posible que veas un error de <span class="text-object">Sitio No Encontrado</span>. Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/215613517-Site-not-found-o-Sitio-no-encontrado">Sitio no encontrado</a> para solucionarlo.</p>
+<h3 id="h_01HVH8Q5F88XPKRNXQJ8H0YR0Q"><span id="Mi_formulario_de_correo_o_el_cron_job_no_funciona">El formulario de correo o el cron job no funciona</span></h3>
+<p>Es posible usar el nombre de tu servidor como parte de tu dirección de correo en un <a href="https://help.dreamhost.com/hc/es/sections/203272178-Formularios-de-Contacto">formulario de correo personalizado</a> o en un <a href="https://help.dreamhost.com/hc/es/articles/215088608-Generalidades-sobre-Crontab">cron job</a> donde <span class="code">username</span> es tu <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales#Usuario">usuario del sitio web</a> y el <span class="code">nombre del servidor</span> es el nombre de tu <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales#Ubicar_el_hostname_FTP_de_tu_servidor">servidor web</a>. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">username@servername.dreamhost.com</pre>
+</div>
+<p>Si estás usando este formato, asegúrate de actualizar el nombre de tu servidor en la dirección de correo electrónico.</p>
+<h3 id="h_01HVH8Q5F87EJDVD06GYRATFND"><span id="Mis_archivos_subidos_no_aparecen_en_linea">Los archivos subidos no aparecen</span></h3>
+<p>Esto probablemente se deba a que estás utilizando el nombre del servidor antiguo en tu cliente FTP, por lo que los archivos se subieron al servidor antiguo. Revisa la sección anterior <a href="#Nombre_del_servidor">nombre del servidor</a> para más detalles.</p>
+<h3 id="h_01HVH8Q5F84KQF93YMAJDHJNK8"><span id="Mi_llave_del_servidor_es_incorrecta">Llave del servidor incorrecta</span></h3>
+<p>Las llaves SSH también cambiarán cuando se mueva el servidor. Si tu cliente SSH o FTP guardó previamente la llave del servidor antiguo, necesitarás eliminarla. Revisa el artículo de <a href="https://help.dreamhost.com/hc/es/articles/217239087-Actualizar-las-llaves-del-host">Actualizar las llaves del host</a> para obtener instrucciones sobre cómo resolver este error.</p>
+<p>Cuando inicies sesión en el nuevo servidor, tu cliente te pedirá que guardes la nueva llave. Aquí tienes un ejemplo de cómo se verá cuando inicies sesión con una llave guardada incorrectamente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@ WARNING: POSSIBLE DNS SPOOFING DETECTED! @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+The RSA host key for www.example.com has changed,
+and the key for the corresponding IP address xxx.xxx.x.xxx
+is unknown. This could either mean that
+DNS SPOOFING is happening or the IP address for the host
+and its host key have changed at the same time.
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that the RSA host key has just been changed.
+The fingerprint for the RSA key sent by the remote host is
+0e:c2:f6:f4:d9:86:9d:4b:c4:3d:77:e7:a4:bb:59:14.
+Please contact your system administrator.
+Add correct host key in /Users/username/.ssh/known_hosts to get rid of
+this message.
+Offending key in /Users/username/.ssh/known_hosts:3
+RSA host key for www.example.com has changed and you have requested
+strict checking.
+Host key verification failed.</pre>
+</div>
+<h2 id="h_01HVH8Q5F89E7VM31GB83X8X7Z"><span id="Ver_Tambien">Ver también</span></h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales">Generalidades sobre FTP y sus credenciales</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">Generalidades de los DNS de DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215613517-Site-not-found-o-Sitio-no-encontrado">Site not found o Sitio no encontrado</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217239087-Actualizar-las-llaves-del-host">Actualizar las llaves del host</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">Generalidades sobre contactar a soporte</a></li>
+</ul>
+</div>
+</div>
