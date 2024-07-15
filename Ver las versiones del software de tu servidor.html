@@ -1,8 +1,8 @@
-<div id="auto-toc">&nbsp;</div>
+<div id="advanced"> </div>
+<div id="auto-toc"> </div>
 <h2 id="h_01HFSGYQ59MAFPF4KNV6G5P426">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este artículo enumera varios comandos que puedes usar para ver la versión de un software diferente en DreamHost. Todos los comandos que se listan en este artículo deben ejecutarse en un servidor DreamHost después de iniciar sesión vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</p>
-<p>Se cubren los siguiente temas en este artículo:</p>
+<p>Este artículo explica cómo ver las versiones de diferentes tipos de software en tu servidor. Se cubren los siguientes temas:</p>
 <ul>
 <li><a href="#seguridad">Seguridad, Vulnerabilidades, Parches, Actualizaciones</a></li>
 <li><a href="#Sistema_operativo" target="_self">Sistema operativo</a></li>
@@ -12,17 +12,19 @@
 <li><a href="#Varios_software" target="_self">Varios software</a></li>
 <li><a href="#Versiones_de_paquetes" target="_self">Versiones de paquetes</a></li>
 </ul>
+<div class="prereqs">
+<p><strong>Requisitos previos</strong></p>
+<p>Todos los comandos en este artículo requieren SSH. Antes de continuar, asegúrate de haber <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">configurado un usuario Shell</a> y de poder <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">iniciar sesión en tu servidor a través de SSH</a>.</p>
 </div>
-<div id="seguridad" class="section-link">&nbsp;</div>
+<div id="seguridad" class="section-link"> </div>
 <h2 id="h_01HFPYM6H6YHBWV06Y66536D6W">Seguridad, Vulnerabilidades, Parches, Actualizaciones</h2>
 <div class="solvvy-solution">
-<p>DreamHost solo usa las versiones de 'Soporte a Largo Plazo' (Long Term Support, LTS) de Ubuntu. Esto significa que, aunque la versión no cambie, tu servidor siempre está protegido, ya que Ubuntu está continuamente agregando parches de seguridad para mitigar cualquier vulnerabilidad que se descubra.</p>
-<p>Revisa la siguiente página para obtener más información sobre las versiones de Ubuntu y su ciclo de vida:</p>
+<p>DreamHost solo usa las versiones de 'Soporte a Largo Plazo' (Long Term Support, LTS) de Ubuntu. Esto significa que, aunque la versión no cambie, tu servidor siempre está protegido, ya que Ubuntu está continuamente agregando parches de seguridad para mitigar cualquier vulnerabilidad que se descubra. Revisa la siguiente página para obtener más información sobre las versiones de Ubuntu y su ciclo de vida:</p>
 <ul>
 <li><a href="https://ubuntu.com/about/release-cycle" target="_blank" rel="noopener noreferrer">The Ubuntu lifecycle and release cadence</a></li>
 </ul>
 </div>
-<div id="Sistema_operativo" class="section-link">&nbsp;</div>
+<div id="Sistema_operativo" class="section-link"> </div>
 <h2 id="h_01HFPYGBRT5ETZ7K7YWD368E53">Ver de la versión del sistema operativo del servidor</h2>
 <div class="solvvy-solution">
 <p>Los siguientes dos comandos muestran la versión del sistema operativo del servidor.</p>
@@ -37,25 +39,17 @@ Release: 22.04
 Codename: jammy</pre>
 </div>
 <h3 id="h_01HFSGYQ59AZ6NBK5SZF1ERD16" class="subtoc-heading">Revisar el archivo /etc/issue</h3>
-<p>Corre el siguiente comando para ver los contenidos del archivo <span class="text-object">/etc/issue</span> el cual muestra la versión del sistema operativo de tu servidor.</p>
+<p>Corre el siguiente comando para ver los contenidos del archivo <span class="text-object">/etc/issue</span>, el cual muestra la versión del sistema operativo de tu servidor.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cat /etc/issue</span>
 Ubuntu 22.04.2 LTS</pre>
 </div>
 </div>
-<div id="Linux_Kernel" class="section-link">&nbsp;</div>
+<div id="Linux_Kernel" class="section-link"> </div>
 <h2 id="h_01HFSGYQ59GBZWSBHE342W3819">Ver la versión de Linux kernel del servidor</h2>
 <div class="solvvy-solution">
 <h3 id="h_01HFSGYQ59J3MW2X97MYSZVG68" class="subtoc-heading">El comando uname</h3>
-<p>Corre el comando <span class="code">uname</span> con la banderilla <span class="code">-a</span> para ver lo siguiente:</p>
-<ul>
-<li>El nombre de Kernel</li>
-<li>El nombre del servidor</li>
-<li>El lanzamiento de Kernel</li>
-<li>La versión del Kernel</li>
-<li>La arquitectura del hardware del servidor</li>
-<li>Sistema operativo</li>
-</ul>
+<p>Corre el comando <span class="code">uname</span> con la banderilla <span class="code">-a</span> para ver la información del kernel.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">uname -a</span></pre>
 </div>
@@ -63,7 +57,7 @@ Ubuntu 22.04.2 LTS</pre>
 <p>El archivo <span class="text-object">/proc/version</span> muestra la versión del kernel, así como información sobre el compilador GCC usado para construir el kernel.</p>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cat /proc/version</span></pre>
 </div>
-<div id="Apache" class="section-link">&nbsp;</div>
+<div id="Apache" class="section-link"> </div>
 <h2 id="h_01HFSGYQ59TYB360JN24Q9S3HM">La versión y el estado de Apache</h2>
 <div class="solvvy-solution">
 <p>Corre lo siguiente para ver la versión de <a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache" target="_self">Apache</a> instalada.</p>
@@ -83,24 +77,21 @@ Ubuntu 22.04.2 LTS</pre>
 24769 ?        Sl    0:16 apache2</pre>
 </div>
 </div>
-<div id="Nginx" class="section-link">&nbsp;</div>
-<h2 id="h_01HFSGYQ5AJ2CV932C5N6T1J4F">Versión y estado de Nginx</h2>
+<div id="Nginx" class="section-link"> </div>
+<h2 id="h_01HFSGYQ5AJ2CV932C5N6T1J4F">Versión y estado de Nginx (Servidores VPS y Dedicados)</h2>
 <div class="solvvy-solution">
-<div class="notebox-important">
-<p>Nginx solo está disponible en Servidores VPS y Dedicados.</p>
-<p>Este comando solo muestra la versión de Nginx instalada en un VPS o Servidor Dedicado. No confirma si Nginx se está ejecutando. Revisa el siguiente artículo para ver instrucciones sobre cómo configurar tu VPS para que ejecute Nginx en lugar de Apache.</p>
-<ul class="article-list">
-<li><a href="https://help.dreamhost.com/hc/es/articles/214880148-Cambiar-tu-servidor-web-a-Nginx">Cambiar tu servidor web a Nginx</a></li>
-</ul>
-</div>
+<h3 id="h_01J2F4VF12NRMMWA262TVRJ07W" class="subtoc-heading">View the version of Nginx installed</h3>
 <p>Corre lo siguiente para ver la versión de <a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx" target="_self">Nginx</a> instalada.</p>
+<div class="notebox-tip">
+<p>Nginx solo está disponible en <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-los-Servidores-Virtuales-Privados-VPS">Servidores VPS</a> y <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados">Dedicados</a>. Este comando solo muestra la versión de Nginx instalada. No confirma si Nginx está en funcionamiento. Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/214880148-Cambiar-tu-servidor-web-a-Nginx">Cambiar tu servidor web a Nginx</a> para obtener instrucciones sobre cómo ejecutar Nginx en lugar de Apache.</p>
+</div>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">/usr/sbin/nginx -v</span></pre>
 </div>
-<h3 id="h_01HFSGYQ5A6HY8C4TAX2JV5PC0" class="subtoc-heading">Revisar si Nginx está corriendo en un Servidor VPS o Dedicado</h3>
+<h3 id="h_01HFSGYQ5A6HY8C4TAX2JV5PC0" class="subtoc-heading">Revisar si Nginx está corriendo</h3>
 <p>Corre el siguiente comando para ver si Nginx está corriendo.</p>
 <ul>
-<li>Si Nginx está corriendo verás la siguiente salida.</li>
+<li>Si Nginx está corriendo, verás la siguiente salida.</li>
 <li>Si no hay salida, Nginx no se está ejecutando. Corre el comando de Apache anterior para confirmar que se está ejecutando en su lugar.</li>
 </ul>
 <div class="preboxcontainer">
@@ -110,10 +101,10 @@ Ubuntu 22.04.2 LTS</pre>
 26798 ?        S      0:00 nginx</pre>
 </div>
 </div>
-<div id="Varios_software" class="section-link">&nbsp;</div>
+<div id="Varios_software" class="section-link"> </div>
 <h2 id="h_01HFSGYQ5AMGSW4R1XH6NPW8Y6">Versiones de software</h2>
 <div class="solvvy-solution">
-<p>Puede ver las versiones del siguiente software después de iniciar sesión en tu servidor vía <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> y correr el comando correspondiente.</p>
+<p>Corre los siguientes comandos para ver las versiones del siguiente software.</p>
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
 <tr>
@@ -153,11 +144,10 @@ Ubuntu 22.04.2 LTS</pre>
 </td>
 </tr>
 <tr>
+<td><strong>MySQL</strong></td>
 <td>
 <p><strong>MySQL</strong></p>
-<p><br />Inicia sesión en tu servidor MySQL vía <a href="https://help.dreamhost.com/hc/es/articles/214882998-Conectarse-a-una-base-de-datos-v%C3%ADa-SSH" target="_self" rel="undefined">SSH</a> y corre el siguiente comando.</p>
-</td>
-<td>
+<p>Inicia sesión en tu <a href="https://help.dreamhost.com/hc/es/articles/214882998-Conectarse-a-una-base-de-datos-v%C3%ADa-SSH">servidor MySQL a través de SSH</a> para correr este comando.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">select version();</span></pre>
 </div>
@@ -220,8 +210,10 @@ Ubuntu 22.04.2 LTS</pre>
 </td>
 </tr>
 <tr>
-<td><strong>sqlite</strong>
-<p><br />Corre el comando <span class="code">sqlite</span> para entrar a su Shell. Escribe <span class="code">.quit</span> para salir el Shell de sqlite.</p>
+<td> </td>
+<td>
+<strong>sqlite</strong>
+<p><br>Corre el comando <span class="code">sqlite</span> para ingresar a su Shell. Escribe <span class="code">.quit</span> para salir del Shell de sqlite.</p>
 </td>
 <td>
 <div class="preboxcontainer">
@@ -244,7 +236,7 @@ Enter ".help" for instructions
 </tbody>
 </table>
 </div>
-<div id="Versiones_de_paquetes" class="section-link">&nbsp;</div>
+<div id="Versiones_de_paquetes" class="section-link"> </div>
 <h2 id="h_01HFSGYQ5AVPQZNJTXK0MNVKPA">Versiones de paquetes en todos los servidores</h2>
 <div class="solvvy-solution">
 <table style="border-collapse: collapse; width: 60%;" border="1">
@@ -349,4 +341,5 @@ Enter ".help" for instructions
 <li><a href="https://help.dreamhost.com/hc/es/articles/214880148-Cambiar-tu-servidor-web-a-Nginx">Cambiar tu servidor web a Nginx</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215082337--Qu%C3%A9-versiones-de-PHP-est%C3%A1n-disponibles-en-DreamHost">¿Qué versiones de PHP están disponibles en DreamHost?</a></li>
 </ul>
+</div>
 </div>
