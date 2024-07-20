@@ -1,25 +1,45 @@
+<div id="advanced"> </div>
 <h2 id="h_01HDM69VDVNMVPKDXDRE53W7CR">Generalidades</h2>
 <div class="solvvy-solution">
-<p>DreamHost ofrece un <a href="https://es.wikipedia.org/wiki/Proxy_server" target="_blank" rel="noopener noreferrer">Servidor Proxy</a> que puedes usar para configurar una aplicación para que corra en un <a href="https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html" target="_blank" rel="noopener noreferrer">puerto no privilegiado</a> sin vincular el número de puerto a la URL. Este servicio está disponible en los planes de alojamiento <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-un-Servidor-Virtual-Privado-VPS" target="_self" rel="undefined">VPS</a> o un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados" target="_self" rel="undefined">Servidor Dedicado</a> que se ejecuten en <a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx">Nginx</a> o <a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache">Apache</a>.</p>
-<p>Este artículo explica como el <span class="text-product">Servidor Proxy</span> de DreamHost está configurado y ejemplos de cómo crear un servidor independiente para aplicaciones de Node.js y Python.</p>
+<p>Este artículo explica cómo está configurado el <span class="text-product">Servidor Proxy</span> de DreamHost y proporciona ejemplos de creación de un servidor independiente para aplicaciones Node.js y Python.</p>
+<p>Este <a href="https://es.wikipedia.org/wiki/Servidor_proxy" target="_blank" rel="noopener noreferrer">Servidor Proxy</a> se puede utilizar para configurar una aplicación para que se ejecute en un <a href="https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html" target="_blank" rel="noopener noreferrer">puerto sin privilegios</a> sin vincular el número de puerto a la URL.</p>
+<div class="prereqs">
+<p><strong>Requisitos previos</strong></p>
+<p>El servicio solo está disponible en los planes de alojamiento <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-los-Servidores-Virtuales-Privados-VPS" target="_self" rel="undefined">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados" target="_self" rel="undefined">Servidor Dedicado</a> que ejecutan <a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx">Nginx</a> o <a href="https://help.dreamhost.com/hc/es/articles/217214317-Servidor-HTTP-Apache">Apache</a>..</p>
+<p>También debes <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">crear un usuario SSH</a> para configurar los ejemplos en este artículo.</p>
+</div>
 </div>
 <h2 id="h_01HDM69VDVF6M1CCHPNDTGXYM6">Detalles Técnicos</h2>
 <div class="solvvy-solution">
 <p>El <span class="text-product">Servidor Proxy</span> de DreamHost es un proxy revertido usando <a href="http://httpd.apache.org/docs/current/mod/mod_proxy.html" target="_blank" rel="noopener noreferrer">mod_proxy</a> de Apache. </p>
-<h3 id="h_01HMYY85RX2H5PDNZMDT6YEWJS">Puertos</h3>
-<p>Solo puedes redirigir solicitudes a daemons vinculados a todos los hosts usando puertos entre 8000-65535.</p>
-<p>Los puertos 80 y 443 no se pueden usar, sin embargo, el <span class="text-product">Servidor Proxy</span> usará tu certificado SSL para encriptar todas las conexiones.</p>
+<p id="h_01HMYY85RX2H5PDNZMDT6YEWJS"><strong>Puertos</strong></p>
+<dl>
+<dd>
+<p>Solo puedes reenviar solicitudes a demonios vinculados a todos los hosts utilizando puertos entre 8000-65535. Aunque los puertos 80 y 443 no se pueden usar, el <span class="text-product">Servidor Proxy</span> utilizará tu certificado SSL para cifrar todas las conexiones.</p>
+</dd>
+</dl>
+<p><strong>Bloquear el firewall y el puerto</strong></p>
+<dl>
+<dd>
 <p>DreamHost no emplea ningún tipo de firewall o bloqueo de puertos en su red.</p>
-<h3 id="h_01HZFZKFCQ3XGAVR425BH371HE">Daemon</h3>
-<p>Un proceso daemon es un proceso de servidor que recibe la comunicación de clientes remotos. Los procesos daemon que se vinculan a un puerto (en el cual recibe conexiones entrantes) son visibles desde Internet.</p>
-<p>Los servidores VPS y Dedicados de DreamHost te permiten ejecutar procesos de servidor daemon, pero ten en cuenta que están limitados a los recursos del servidor (CPU/RAM) de tu tipo de plan.</p>
-<div id="static-assets" class="section-link"> </div>
-<h3 id="h_01HZFZMCRMAWB9RW1V5SDRC3RH">Static assets o activos estáticos</h3>
+</dd>
+</dl>
+<p id="h_01HZFZKFCQ3XGAVR425BH371HE"><strong>Daemon</strong></p>
+<dl>
+<dd>
+<p>Un daemon es un proceso de servidor que escucha la comunicación de clientes remotos. Los procesos daemon que se vinculan a un puerto (en el cual escuchan las conexiones entrantes) son visibles desde Internet. Los servidores VPS y Dedicados de DreamHost te permiten ejecutar procesos de servidor daemon, pero por favor ten en cuenta que están limitados a los recursos del servidor (CPU/RAM) según el tipo de tu plan.</p>
+</dd>
+</dl>
+<p id="h_01HZFZMCRMAWB9RW1V5SDRC3RH"><strong>Activos estáticos</strong></p>
+<dl>
+<dd>
 <p>Los activos estáticos (como CSS, imágenes, vídeos, fuentes, y demás) pueden no cargar adecuadamente debido a como está configurado el servidor proxy. Para resolver este inconveniente, <a href="https://help.dreamhost.com/hc/es/articles/215457827-Agregar-un-subdominio">crea un subdominio por separado</a> para alojar estos recursos estáticos. Por ejemplo:</p>
 <ul>
 <li>assets.example.com</li>
 </ul>
 <p>Luego, actualiza las referencias a estos activos en el sitio web que configuraste con el servidor proxy para que apunten a su ubicación en el subdominio.</p>
+</dd>
+</dl>
 </div>
 <h2 id="h_01HDM69VDVBS9GB45XMVN6M2S3">Configurar un Servidor Proxy</h2>
 <div class="solvvy-solution">
@@ -35,8 +55,10 @@
 <div class="notebox-important">
 <p><strong>path/to/proxy</strong></p>
 <ul>
-<li>Directorio principal: Para usar el directorio web principal, deja este campo en blanco.</li>
-<li>Subdirectorio: Para usar un subdirectorio, escribe su nombre.</li>
+<li>
+<span class="text-object"> Directorio principal</span>: Para usar el directorio web principal, deja este campo en blanco.</li>
+<li>
+<span class="text-object"> Subdirectorio</span>: Para usar un subdirectorio, escribe su nombre.</li>
 </ul>
 </div>
 </li>
@@ -52,43 +74,44 @@
 <p>Los siguientes ejemplos de Node.js y Python muestran cómo crear un servidor simple para ejecutarse en el puerto #8002 para que puedas hacer proxy.</p>
 <h3 id="h_01HMSQHHH1GH3FC1H5YEETQ94Z">Node.js</h3>
 <ol>
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
 <li>Instala una <a href="https://help.dreamhost.com/hc/es/articles/360029083351-Instalar-una-versi%C3%B3n-personalizada-de-NVM-y-Node-js" target="_self">versión personalizada de Node.js</a>.</li>
-<li>En el directorio de la aplicación (<span class="text-object">example.com</span>), <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH" target="_self">crea un archivo</a> llamado <span class="text-object">app.js</span> con el siguiente código:
+<li>En el directorio de la aplicación (<span class="text-object">example.com</span>), <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH" target="_self">crea un archivo</a> llamado <span class="text-object">app.js</span> con el siguiente código. Cambia el número de puerto en la función <span class="code">listen</span> para controlar en qué puerto recibe la aplicación.
 <div class="preboxcontainer">
 <pre class="prebox">var http = require("http");
 
 var server = http.createServer(function (request, response) {
   response.writeHead(200, {"Content-Type": "text/plain"});
   response.end("Hello World From Node");
-}).listen(8002);</pre>
-</div>
-<div class="notebox-note">
-<p>La función <span class="code">listen</span> le indica a Node en qué puerto debe recibir la aplicación.</p>
+}).<span class="code-highlight">listen(8002)</span>;</pre>
 </div>
 </li>
-<li>Inicia el servidor node predeterminado ejecutando el archivo <span class="text-object">app.js</span>.
+<li>Inicia el servidor node ejecutando el archivo <span class="text-object">app.js</span>.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">node app.js</span></pre>
 </div>
-<div class="notebox-important">
-<p>Esto carga el archivo <span class="text-object">app.js</span> solo mientras tu sesión SSH actual esté activa. También puedes usar un administrador de procesos como <a href="https://pm2.keymetrics.io/" target="_blank" rel="noopener noreferrer">PM2</a> que te permitirá salir de la sesión SSH mientras continúas ejecutando la aplicación.</p>
+<div class="notebox-tip">
+<p>Esto carga el archivo <span class="text-object">app.js</span> solo mientras tu sesión <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> actual esté activa. También puedes usar un administrador de procesos como <a href="https://pm2.keymetrics.io/" target="_blank" rel="noopener noreferrer">PM2</a> para salir de la sesión SSH mientras continúas ejecutando la aplicación.</p>
 </div>
 </li>
-<li>Visita el dominio (sin añadir el puerto a la URL) y verás la aplicación en funcionamiento.</li>
+<li>Visita el dominio (sin añadir el puerto a la URL) para ver corriendo la aplicación.</li>
 </ol>
 <div id="python" class="section-link"> </div>
 <h3 id="h_01HMSQHHH2ZB4BRAH9YW04TRA2">Python</h3>
-<p>Un servidor independiente comúnmente utilizado para aplicaciones Python es <a href="https://gunicorn.org/" target="_self">Gunicorn</a>, inspirado en el servidor Unicorn de Ruby.</p>
+<p>Este ejemplo utiliza <a href="https://gunicorn.org/" target="_blank" rel="noopener noreferrer">Gunicorn</a>, un servidor independiente común para aplicaciones Python.</p>
 <div class="prereqs">
-<p>Primero debes instalar una versión personalizada de Python. Esto te permite crear un entorno virtual y instalar módulos de Python personalizados localmente.</p>
+<p><strong>Requisitos previos</strong></p>
+<p>Antes de continuar, primero debes instalar una versión personalizada de Python. Esto te permitirá crear un virtualenv e instalar módulos personalizados de Python localmente.</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115000702772-Instalar-una-versi%C3%B3n-personalizada-de-Python-3" target="_self">Instalar una versión personalizada de Python 3</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3" target="_self">Instalar y usar virtualenv con Python 3</a></li>
 </ul>
 </div>
 <ol>
-<li>Asegúrate de tener <a href="https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3" target="_self">activado tu entorno virtual</a>. La primera parte de tu línea de comandos cambia al nombre de tu entorno virtual.</li>
-<li>Luego puedes usar <span class="code"><a href="https://help.dreamhost.com/hc/es/articles/115000699011-Usar-pip3-para-instalar-m%C3%B3dulos-de-Pytho%20target=">pip</a></span> para instalar Gunicorn.
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3">Activa tu virtualenv</a>. Cuando está activo, la primera parte de tu indicador de comando cambia al nombre de tu virtualenv.</li>
+<li>Use <span class="code"><a href="https://help.dreamhost.com/hc/en-us/articles/115000699011-Using-pip3-to-install-Python3-modules" target="_self">pip</a></span> to install Gunicorn:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">(venv)[server]$ </span><span class="command">pip3 install gunicorn</span></pre>
 </div>
@@ -109,10 +132,7 @@ var server = http.createServer(function (request, response) {
   return iter([data])</pre>
 </div>
 </li>
-<li>Inicia Gunicorn pasando el número de puerto al comando.
-<dl>
-<dd><em>Asegúrate de cambiar <strong>example.com</strong> al nombre de tu dominio.</em></dd>
-</dl>
+<li>Inicia Gunicorn pasando el número de puerto al siguiente comando.
 <div class="notebox-tip">
 <p>Agregar <span class="code">--log-level=debug</span> proporciona información útil si ocurre un error. Luego puedes compartir esta información al contactar a soporte para ayudar a identificar el problema.</p>
 </div>
@@ -127,5 +147,8 @@ var server = http.createServer(function (request, response) {
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-un-Servidor-Virtual-Privado-VPS" target="_self" rel="undefined">Generalidades de un Servidor Virtual Privado (VPS)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados">Generalidades de los Servidores Dedicados</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Crear y editar un archivo vía SSH</a></li>
 </ul>
 </div>

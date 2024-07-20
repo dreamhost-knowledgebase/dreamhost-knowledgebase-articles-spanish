@@ -1,22 +1,27 @@
+<div id="advanced"> </div>
 <h2 id="h_01HQKXCTQD7QZ28YE1K362VFFR">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo explica cómo usar el paquete de <a href="https://pypi.org/project/linger/" target="_blank" rel="noopener noreferrer">linger</a> de Python con el servidor <a href="https://gunicorn.org/" target="_blank" rel="noopener noreferrer">Gunicorn WSGI</a>. Esta combinación permite que tu aplicación ejecute procesos persistentes y que tus servicios se reinicien si tu aplicación se cae o el servidor se reinicia.</p>
-<div class="notebox-important">
-<p>Tu debes estar en un plan de alojamiento <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-un-Servidor-Virtual-Privado-VPS">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados">Dedicado</a> para instalar el software en esas instrucciones.</p>
-</div>
 <div class="prereqs">
 <p><strong>Requisitos previos</strong></p>
 <p>Este artículo asume que has completado los siguientes pasos:</p>
 <ul>
+<li>Actualizado a un plan de alojamiento <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-los-Servidores-Virtuales-Privados-VPS">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados">Servidor Dedicado</a>
+</li>
 <li>Configurado un <a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy">Servidor Proxy</a> en el panel</li>
-<li>Instalado una <a href="https://help.dreamhost.com/hc/es/articles/115000702772-Instalar-una-versi%C3%B3n-personalizada-de-Python-3">versión personalizada de Python</a></li>
-<li>Creado un <a href="https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3">entorno virtual</a></li>
+<li>Instalado una <a href="https://help.dreamhost.com/hc/es/articles/115000702772-Instalar-una-versi%C3%B3n-personalizada-de-Python-3">versión personalizada de Python</a>
+</li>
+<li>Creado un <a href="https://help.dreamhost.com/hc/es/articles/115000695551-Instalar-y-usar-virtualenv-con-Python-3">entorno virtual</a>
+</li>
 <li>Configurado tu <a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy#python">aplicación Gunicorn</a> en el entorno virtual</li>
 <li>Agregado un subdominio para alojar tus <a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy#static-assets">activos estáticos</a>.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">Creado un usuario Shell</a> y puedas iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>
+</li>
 </ul>
 </div>
 </div>
-<h2 id="h_01HQKXDKCCVGYBXZCG59TEQ197">Paso #1: Instalar linger</h2>
+<h2 id="h_01HQKXDKCCVGYBXZCG59TEQ197">Paso 1 — Instalar linger</h2>
 <div class="solvvy-solution">
 <p>Para instalar linger en tu usuario, inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y corre el siguiente comando:</p>
 <div class="preboxcontainer">
@@ -26,7 +31,7 @@
 <p>Este comando no responderá con ninguna salida.</p>
 </div>
 </div>
-<h2 id="h_01HQKXDRJM1RTW2ZPYWYNTX365">Paso #2: Configurar Gunicorn</h2>
+<h2 id="h_01HQKXDRJM1RTW2ZPYWYNTX365">Paso 2 — Configurar Gunicorn</h2>
 <div class="solvvy-solution">
 <p>Este paso configura Gunicorn para trabajar con unidades de usuario de systemd en el servidor.</p>
 <ol>
@@ -40,7 +45,8 @@
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">nano ~/.config/systemd/user/gunicorn.service</span></pre>
 </div>
 </li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Agrega el siguiente código</a> a este archivo.
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Agrega el siguiente código</a> a este archivo.
 <div class="preboxcontainer">
 <pre class="prebox">[Unit]
 Description=Gunicorn instance to serve application
@@ -62,12 +68,18 @@ WantedBy=default.target</pre>
 </li>
 <li>Edita las líneas resaltadas a continuación como lo siguiente:
 <ul>
-<li><strong>WorkingDirectory:</strong> La ruta a la aplicación de tu sitio web.</li>
-<li><strong>Environment:</strong> La ruta a tu entorno virtual.</li>
-<li><strong>ExecStart:</strong> La ruta a tu instalación de gunicorn.</li>
-<li><strong>example.com</strong>: El nombre de tu sitio web.</li>
-<li><strong>port:</strong> El número de puerto que configuraste en tu Servidor Proxy.</li>
-<li><strong>myapp:</strong> El nombre de tu aplicación.</li>
+<li>
+<strong>WorkingDirectory:</strong> La ruta a la aplicación de tu sitio web.</li>
+<li>
+<strong>Environment:</strong> La ruta a tu entorno virtual.</li>
+<li>
+<strong>ExecStart:</strong> La ruta a tu instalación de gunicorn.</li>
+<li>
+<strong>example.com</strong>: El nombre de tu sitio web.</li>
+<li>
+<strong>port:</strong> El número de puerto que configuraste en tu Servidor Proxy.</li>
+<li>
+<strong>myapp:</strong> El nombre de tu aplicación.</li>
 </ul>
 <div class="notebox-tip">
 <p>Revisa <a href="https://docs.gunicorn.org/en/latest/run.html" target="_blank" rel="noopener noreferrer">Running Gunicorn</a> para más información.</p>
@@ -95,5 +107,7 @@ WantedBy=default.target</pre>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy">Servidor Proxy</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000702772-Instalar-una-versi%C3%B3n-personalizada-de-Python-3">Instalar una versión personalizada de Python 3</a></li>
 </ul>
 </div>

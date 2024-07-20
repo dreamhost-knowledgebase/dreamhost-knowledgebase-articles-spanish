@@ -1,19 +1,22 @@
+<div id="advanced"> </div>
 <h2 id="h_01HQKXCTQD7QZ28YE1K362VFFR">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo explica cómo usar <a href="https://pypi.org/project/linger/" target="_blank" rel="noopener noreferrer">linger</a> con un aplicación de Node.js. Esta combinación permite que tu aplicación ejecute procesos persistentes y que tus servicios se reinicien si tu aplicación se cae o el servidor se reinicia.</p>
-<div class="notebox-important">
-<p>Tu debes estar en un plan de alojamiento <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-un-Servidor-Virtual-Privado-VPS">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados">Dedicado</a> para instalar el software en esas instrucciones.</p>
-</div>
 <div class="prereqs">
 <p><strong>Requisitos previos</strong></p>
 <p>Este artículo asume que has completado los siguientes pasos:</p>
 <ul>
+<li>Actualizado a un plan de alojamiento <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-los-Servidores-Virtuales-Privados-VPS">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados">Servidor Dedicado</a>
+</li>
 <li>Configurado un <a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy">Servidor Proxy</a> en el panel</li>
-<li>Agregado un subdominio para alojar tus <a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy#static-assets">activos estáticos</a>.</li>
+<li>Agrega un subdominio para alojar tus <a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy">activos estáticos</a>
+</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">Creado un usuario Shell</a> y asegúrate de poder iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
 </ul>
 </div>
 </div>
-<h2 id="h_01HQKXDKCCVGYBXZCG59TEQ197">Paso #1: Instalar linger</h2>
+<h2 id="h_01HQKXDKCCVGYBXZCG59TEQ197">Paso 1 — Instalar linger</h2>
 <div class="solvvy-solution">
 <p>Para instalar linger en tu usuario, inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y corre el siguiente comando:</p>
 <div class="preboxcontainer">
@@ -23,7 +26,7 @@
 <p>Este comando no responderá con ninguna salida.</p>
 </div>
 </div>
-<h2 id="h_01HQKXDRJM1RTW2ZPYWYNTX365">Paso #2: Configurar la unidad de usuario systemd</h2>
+<h2 id="h_01HQKXDRJM1RTW2ZPYWYNTX365">Paso 2 — Configurado la unidad de usuario systemd</h2>
 <div class="solvvy-solution">
 <p>Este paso configura Node para trabajar con unidades de usuario de systemd en el servidor.</p>
 <ol>
@@ -37,7 +40,8 @@
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">nano ~/.config/systemd/user/myapp.service</span></pre>
 </div>
 </li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Agrega el siguiente código</a> a este archivo:
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Agrega el siguiente código</a> a este archivo:
 <div class="preboxcontainer">
 <pre class="prebox">[Unit]
 Description=Systemd instance to serve Node application
@@ -60,8 +64,10 @@ WantedBy=default.target</pre>
 </li>
 <li>Edita las líneas resaltadas de arriba así:
 <ul>
-<li><strong>WorkingDirectory:</strong> La ruta a la aplicación de tu sitio web.</li>
-<li><strong>ExecStart:</strong> La ruta a tu instalación de node.</li>
+<li>
+<strong>WorkingDirectory:</strong> La ruta a la aplicación de tu sitio web.</li>
+<li>
+<strong>ExecStart:</strong> La ruta a tu instalación de node.</li>
 </ul>
 </li>
 <li>Habilita la unidad del usuario de tu aplicación de Node:
@@ -86,5 +92,7 @@ WantedBy=default.target</pre>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/217955787-Servidor-Proxy">Servidor Proxy</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360029083351-Instalar-una-versi%C3%B3n-personalizada-de-NVM-y-Node-js">Instalar una versión personalizada de NVM y Node.js</a></li>
 </ul>
 </div>
