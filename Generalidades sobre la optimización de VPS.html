@@ -1,77 +1,56 @@
+<div id="advanced"> </div>
 <h2 id="h_01HC2QZ6VNJ87ZMGMW9XAQK34N">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este artículo te da unas cuantas sugerencias sobre cómo identificar inconvenientes de memoria y optimizar tu <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-un-Servidor-Virtual-Privado-VPS-">VPS de DreamHost</a>. Esto ayudará a usar menos memoria lo que te ahorra dinero mientras aceleras tus sitios web.</p>
+<p>Las siguientes sugerencias te ayudarán a identificar problemas comunes de memoria y a optimizar tu <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-los-Servidores-Virtuales-Privados-VPS">VPS de DreamHost</a>. Optimizar tu VPS ayuda a garantizar un menor uso de memoria mientras acelera tus sitios web.</p>
 </div>
-<h2 id="h_01HC2QZ6VN5G01PT17VH6EVWZJ">Bloquear bots abusivos</h2>
+<h2 id="h_01HC2QZ6VN5G01PT17VH6EVWZJ">Cómo bloquear bots abusivos</h2>
 <div class="solvvy-solution">
-<h3 id="h_01HC2QZ6VN3GDFV3Y271MQZX4C">Bloqueo de acceso abusivo</h3>
-<p>Un problema común para los sitios web es causado por los bots de indexación de los motores de búsqueda que repetidamente acceden a tu sitio web.</p>
-<h3 id="h_01HC2QZ6VNDDC9ETYZ351PD1F2">Crear un archivo robots.txt</h3>
-<p>Para minimizar los inconvenientes de bot abusivos, debes configurar un archivo <span class="text-object">robots.txt</span>. Este archivo ayuda a controlar que bots pueden buscar y cada cuanto.</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216105077-Controlar-los-bots-spiders-y-rastreadores">Controlar los bots, spiders, y rastreadores</a></li>
-</ul>
-<h3 id="h_01HC2QZ6VNV4TJN2XEY4TQWHF1">Ver el archivo access.log</h3>
-<p>Encontrar los bots abusivos puede ser más un arte que una ciencia, pero puedes encontrar información sobre esto analizando el archivo <span class="text-object">access.log</span> de tus sitios web. Revisa el siguiente artículo para ver información detallada sobre cómo revisar el archivo <span class="text-object">access.log</span> y ver de dónde está viniendo más tráfico:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216105097-Ver-y-examinar-tu-access-log-a-través-de-SSH" target="_self">Ver y examinar tu access.log a través de SSH</a></li>
-</ul>
-</div>
-<h2 id="h_01HC2QZ6VN4NESB2NPBAK6G6EK">Prevención de enlaces directos de imágenes o hotlinking</h2>
+<p>A common problem for websites is caused by search engine indexing bots repeatedly hitting the website. The following can help you troubleshoot this issue.</p>
+<p id="h_01J341FWWZBNEZ5KSJ7RSYR55Y"><strong>Crear un archivo robots.txt</strong>: Para minimizar el problema de los bots abusivos, deberías configurar un archivo <span class="text-object">robots.txt</span>. Este archivo ayuda a <a href="https://help.dreamhost.com/hc/es/articles/216105077-Controlar-los-bots-spiders-y-rastreadores">controlar qué bots</a> pueden buscar y con qué frecuencia.</p>
+<strong>Ver el archivo access.log</strong>: Encontrar bots abusivos puede ser más un arte que una ciencia, pero puedes obtener algunos datos sobre esto analizando el archivo <span class="text-object">access.log</span> de tus sitios web. Revisa <a href="https://help.dreamhost.com/hc/es/articles/216105097-Ver-y-examinar-tu-access-log-a-trav%C3%A9s-de-SSH">este artículo</a> para obtener más información sobre cómo revisar tu archivo <span class="text-object">access.log</span> y ver de dónde proviene la mayor parte del tráfico.</div>
+<h2 id="h_01HC2QZ6VN4NESB2NPBAK6G6EK">Prevenir enlaces directos de imágenes o hotlinking</h2>
 <div class="solvvy-solution">
-<p>Hotlinking es cuando otro sitio web usa una imagen de tu sitio. Para ello, usan la URL de la imagen completa del tuyo en su propio sitio web. Esto puede causar problemas masivos en tu sitio, ya que incluso uno con un tráfico relativamente bajo puede causar un rendimiento deficiente del servidor.</p>
+<p>El hotlinking ocurre cuando otro sitio web utiliza una imagen de tu sitio web. Esto sucede cuando se usa la URL completa de una imagen de tu sitio en su propio sitio. Esto puede causar problemas importantes ya que incluso un sitio con relativamente poco tráfico puede causar un rendimiento deficiente del servidor.</p>
 <p>Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/216363197-Prevenir-el-enlace-directo-de-im%C3%A1genes-hotlinking-" target="_self" rel="undefined">Prevenir hotlinking de imágenes</a> para más información sobre cómo prevenir que esto suceda.</p>
 </div>
-<h2 id="h_01HC2QZ6VNN79GX3PM45TWH3FP"><span id="Almacenamiento_en_cache_en_tu_sitio">Almacenamiento en caché en tu sitio</span></h2>
+<h2 id="h_01HC2QZ6VNN79GX3PM45TWH3FP"><span id="Almacenamiento_en_cache_en_tu_sitio">Cómo almacenar caché en tu sitio</span></h2>
 <div class="solvvy-solution">
 <p>El almacenamiento en caché ayuda a almacenar archivos de sitios web, lo que hace que tus visitantes accedan a ellos más rápidamente. Asegúrate de que el software de tu sitio web use alguna funcionalidad de almacenamiento en caché para evitar problemas de memoria y mejorar el rendimiento general.</p>
-<h3 id="h_01HC2QZ6VN9F64B497Y2EMY2BF">Procesos de PHP</h3>
-<p>Los procesos de PHP pueden ocupar una cantidad significativa de memoria. Si tu sitio recibe mucho tráfico, habilitar el almacenamiento en caché ayudará a reducir la cantidad de procesos PHP que se generan.</p>
-<p>El almacenamiento en caché representa un script de PHP y luego "almacena en caché" esa salida HTML como un archivo. La próxima vez que se acceda a esa página, el servidor generará la página HTML estática en lugar de volver a procesar el script PHP.</p>
-<h3 id="h_01HC2QZ6VNRHKWNQK2WQV0WW0E">Cloudflare</h3>
-<p>También puedes habilitar un servicio de terceros como <a href="https://help.dreamhost.com/hc/es/articles/7087974733332-Crear-una-cuenta-de-Cloudflare-gratuita" target="_blank" rel="noopener noreferrer">Cloudflare</a>, el cual te da opciones adicionales de almacenamiento en caché para tus sitios web si esperas un gran volumen de visitantes.</p>
+<p id="h_01J341FWWZCSEZEAQ7RW7RHKQB"><strong>Trabajar con procesos de PHP</strong>: Los procesos de PHP pueden consumir una cantidad significativa de memoria. Si tu sitio está recibiendo mucho tráfico, habilitar el almacenamiento en caché ayudará a reducir la cantidad de procesos de PHP generados. El almacenamiento en caché renderiza un script PHP y luego "almacena en caché" esa salida HTML como un archivo. La próxima vez que se acceda a esa página, el servidor mostrará la página HTML estática en lugar de procesar nuevamente el script PHP.</p>
+<p id="h_01J341FWWZP53R3HKSFH73RAH9"><strong>Usar Cloudflare</strong>: También puedes habilitar un servicio de terceros como <a href="https://help.dreamhost.com/hc/es/articles/7087974733332-Crear-una-cuenta-de-Cloudflare-gratuita" target="_blank" rel="noopener noreferrer">Cloudflare</a>, que ofrece opciones adicionales de almacenamiento en caché para tus sitios web si esperas un gran volumen de visitantes.</p>
 </div>
-<h2 id="h_01HC2QZ6VN82S0RFHM8SP9B3AC">Usar OPcache con sitios web de PHP</h2>
-<div class="solvvy-solution">
-<p>OPcache es un motor de almacenamiento en caché construido en PHP que, cuando se habilita, incrementa dramáticamente el funcionamiento de los sitios web basados en PHP. Revisa el siguiente artículo para obtener detalles sobre esta función:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216660668-Generalidades-OPcache" target="_self">Generalidades de OPcache</a></li>
-</ul>
-</div>
+<p id="h_01J341FWWZBX5AQZA89NSTFZF2"><strong><span id="Habilitar_FastCGI_y_XCache">Usar OPcache con sitios PHPs</span></strong>: OPcache es un motor de almacenamiento en caché integrado en PHP que, cuando está habilitado, aumenta drásticamente el rendimiento de los sitios web basados en PHP. Revisa <a href="https://help.dreamhost.com/hc/es/articles/216660668-Generalidades-de-OPcache">este artículo</a> para obtener más información sobre cómo usar OPcache con tu sitio web.</p>
 <h2 id="h_01HC2QZ6VNR0ARTSG0N5S33D9T">Optimizaciones específicas de WordPress</h2>
 <div class="solvvy-solution">
-<p>Si estás ejecutando varias instancias del software de WordPress en VPS, revisa la categoría <a href="https://help.dreamhost.com/hc/es/sections/203242637-Optimizaciones" target="_self">Optimización de WordPress</a> para obtener artículos detallados.</p>
-<p>Asegúrate de hacer lo siguiente con cada instalación:</p>
+<p>Revisa la categoría de <a href="https://help.dreamhost.com/hc/es/sections/203242637-Optimizaciones" target="_self" rel="undefined">Optimización de WordPress</a> para obtener artículos detallados si estás ejecutando múltiples instancias de WordPress en tu VPS. Asegúrate de hacer lo siguiente con cada instalación:</p>
 <ul>
 <li>Ejecuta siempre la versión más reciente de WordPress.</li>
 <li>Instala sólo plugins esenciales.</li>
 <li>Mantén actualizados tus plugins.</li>
 <li>Elimina plugins que no utilices en lugar de simplemente desactivarlos.</li>
 <li>Confirma que el tema que está activo no esté generando ningún error en tu archivo <span class="text-object">error.log</span> (ubicado en el mismo directorio que <span class="text-object">access.log</span>).</li>
-<li>Revisa la página&nbsp;<a href="https://www.die.net/musings/page_load_time/">Optimizing Page Load Time</a> (optimización del tiempo de carga de la página) y asegúrate de tener un plugin de almacenamiento en caché de WordPress instalado y configurado. Por ejemplo, W3TC o WP Super Cache.</li>
-<li>Finalmente, comprimir tus archivos de imagen mejora el tiempo de carga y reduce el uso general de memoria.</li>
+<li>Revisa la página <a href="https://www.die.net/musings/page_load_time/">Optimizing Page Load Time</a> (optimización del tiempo de carga de la página) y asegúrate de tener un plugin de almacenamiento en caché de WordPress instalado y configurado. Por ejemplo, W3TC o WP Super Cache.</li>
+<li>Comprime tus archivos de imagen, lo cual mejora el tiempo de carga y reduce el uso general de memoria.</li>
 </ul>
 </div>
 <h2 id="h_01HC2QZ6VN19Q7BM4JV5330PC4"><span id="Configurar_las_Tablas_IP">Configurar las Tablas de IPs</span></h2>
 <div class="solvvy-solution">
-<p>No es posible personalizas las tablas de IPs en un VPS de DreamHost. Esto es por que los VPS se ejecutan en una sola máquina donde las tablas de IPs están configuradas, pero no hay acceso a la misma.</p>
+<p>No es posible personalizar las tablas IP en un VPS de DreamHost. Esto se debe a que las tablas IP están configuradas en una sola máquina host a la que no hay acceso.</p>
 <p>Si necesitas ejecutar tus propias tablas de IPs, la única opción sería actualizar a un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados" target="_self">Servidor Dedicado</a> o <a href="https://help.dreamhost.com/hc/es/articles/214840947--Qu%C3%A9-es-DreamCompute-" target="_self">DreamCompute</a> e instalar este software manualmente.</p>
 </div>
 <h2 id="h_01HC2QZ6VN89HFSGEB4XM1CMQ4">Ver también</h2>
 <div class="solvvy-hidden">
-<h3 id="h_01HC2QZ6VNEG7VJ6FS49VNEVEA">Enlaces de DreamHost</h3>
+<p id="h_01J341FWX0CKDPXNFMY9CX4VEH"><strong>Enlaces de DreamHost</strong></p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214879348-Administrar-el-uso-de-la-memoria-de-tu-VPS" target="_self" rel="undefined">Administrar el uso de memoria de tu VPS</a></li>
-<li><a href="/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-" target="_self">Generalidades de un Servidor Virtual Privado (VPS)</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215572647-Simulando-mucho-tr%C3%A1fico" target="_self">Simulación de tráfico elevado</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215572647-Simular-un-tr%C3%A1fico-alto" target="_self">Simular tráfico alto</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214880098-Usando-el-comando-ps-para-solucionar-problemas-de-tu-sitio-web" target="_self">Uso del comando 'ps' para solucionar problemas de tu sitio web</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215945987-Comparaci%C3%B3n-de-rendimiento-del-servidor-web" target="_self">Comparación de rendimiento del servidor web</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215573127-Reiniciar-un-VPS" target="_self">Reiniciar un VPS</a></li>
 </ul>
-<h3 id="h_01HC2QZ6VNHB9THK8K4B1FAQDR">Enlaces de terceros</h3>
+<p id="h_01J341FWX0KZN6ZDX2DC2J9FK6"><strong>Enlaces de terceros</strong></p>
 <ul>
-<li><a href="https://www.cyberciti.biz/tips/howto-performance-benchmarks-a-web-server.html">nixCraft Howto: Performance Benchmark a Webserver</a></li>
-<li><a href="https://www.unix.com/man-page/linux/1/ab/">Apache HTTP server benchmarking tool</a></li>
-<li><a href="https://www.die.net/musings/page_load_time/">Optimizing Page Load Time</a></li>
+<li><a href="https://www.unix.com/man-page/linux/1/ab/" target="_blank" rel="noopener noreferrer">Apache HTTP server benchmarking tool</a></li>
+<li><a href="https://www.die.net/musings/page_load_time/" target="_blank" rel="noopener noreferrer">Optimizing Page Load Time</a></li>
 </ul>
 </div>

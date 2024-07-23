@@ -1,47 +1,37 @@
-<h2 id="h_01J35TVGR9PMMMWXHM0H9FMYB3">Generalidades</h2>
+<div id="advanced"> </div>
+<h2 id="h_01J31C92EHGRSE440TYEYAEY6Y">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Si encuentras picos de uso de la memoria de tu VPS en ciertos momentos del día, puedes usar una herramienta de evaluación comparativa para simular el entorno de alto tráfico. Una vez que se ejecuta, puedes verificar los procesos de memoria para determinar la causa del problema.</p>
-<p>Este artículo explica cómo usar la línea de comando <span class="code">ab</span> como herramienta de evaluación comparativa en tu VPS.</p>
+<p>Este artículo explica cómo usar la <a href="https://httpd.apache.org/docs/2.4/programs/ab.html" target="_blank" rel="noopener noreferrer">herramienta de evaluación comparativa ab</a> en tu <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-los-Servidores-Virtuales-Privados-VPS">VPS</a> para simular un alto tráfico.</p>
 <div class="prereqs">
-<p>Para correr los comandos de este artículo, debes tener un usuario de Shell configurado en tu panel y conocimientos generales de UNIX Shell. Revisa los siguientes artículos para obtener más información:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH-">Crear un usuario con acceso Shell (SSH)</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
-</ul>
+<p><strong>Requisitos Previos</strong></p>
+<p>Para correr los comandos en este artículo, debes tener un <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">usuario de Shell configurado</a> en tu panel y un conocimiento general del <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Shell de UNIX</a>.</p>
 </div>
 </div>
-<h2 id="h_01J35TVGR9C7VSZBMRD6TKAZVJ">Herramienta de referencia</h2>
+<h3 id="h_01J31GM2SJHS124NJ9XYP0D2R6">¿Qué hace una herramienta de evaluación comparativa?</h3>
+<p>Si descubres que el uso de memoria de tu VPS aumenta en ciertos momentos del día, puedes utilizar una herramienta de evaluación comparativa para simular un entorno de alto tráfico. Una vez en funcionamiento, puedes revisar los procesos de memoria para determinar la causa del problema.</p>
+<h2 id="h_01J31C92EHJT1EPJN8DXTS85KJ">Usar la herramienta de evaluación comparativa del servidor HTTP de Apache</h2>
 <div class="solvvy-solution">
-<p>Revisa el siguiente enlace para ver más detalles del comando <span class="code">ab</span>.</p>
-<ul>
-<li><a href="https://www.unix.com/man-page/linux/1/ab/" target="_blank" rel="noopener noreferrer">ab [linux man page]</a></li>
-</ul>
-<p>Para usar esta herramienta:</p>
-<ol>
-<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
-<li>Corre el siguiente comando:
+<p>Para usar la herramienta de comandos <span class="code">ab</span>, inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> y corre el siguiente comando:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ab -n 1000 -c 20 <span class="code-highlight">https://www.example.com/index.html</span></span></pre>
 </div>
-<p>Este comando crea 1000 conexiones a <strong>https://www.example.com/index.html,</strong> limitándose a 20 conexiones concurrentes.</p>
-</li>
-</ol>
+<p>Este comando crea 1000 conexiones a <strong>https://www.example.com/index.html</strong>, limitándose a 20 conexiones concurrentes.</p>
 </div>
-<h2 id="h_01J35TVGR9C4H0TDFNFZENX2H6"><span id="Viewing_your_processes_while_testing">Ver tus procesos mientras prueba</span></h2>
+<h2 id="h_01J31C92EJER6E6WPV57TKWHQN"><span id="Ver_los_procesos_mientras_haces_pruebas">Ver los procesos mientras haces pruebas</span></h2>
 <div class="solvvy-solution">
-<p>Mientras el comando <span class="code">ab</span> está corriendo, abre 2 pestañas más en tu terminal para observar el proceso del servidor.</p>
+<p>Mientras el comando <span class="code">ab</span> se está ejecutando, abre dos pestañas más en tu terminal para observar los procesos del servidor:</p>
 <ul>
-<li>En la primera pestaña, corre <span class="code">top -c</span>. Luego, clasifícalo por memoria (<span class="code">Shift + M</span>).</li>
+<li>En la primera pestaña, ejecuta <span class="code">top -c</span>. Luego, ordena por memoria (<span class="code">Shift + M</span>).</li>
 <li>En la segunda pestaña, corre <span class="code">free -m</span> (o <span class="code">watch free -m</span>).</li>
 </ul>
-<p>Estos comandos son efectivos para perfilar tus sitios y verificar si el almacenamiento en caché funciona. Puedes repetir este proceso para cada dominio para ver cuáles afectan más el uso de memoria y saber dónde optimizar.</p>
+<p>Estos comandos son efectivos para perfilar tus sitios y verificar si el caché está funcionando. Puedes repetir este proceso para cada uno de tus dominios para ver cuáles están afectando más el uso de memoria y así saber dónde optimizar.</p>
 </div>
-<h2 id="h_01J35TVGR9A7MA7ZXYTATR5JHC">Ver también</h2>
+<h2 id="h_01J31C92EJ2GNZJHP7Q54D3K24">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214879308-Generalidades-sobre-optimizaci%C3%B3n-de-un-VPS">Descripción general de la optimización de VPS</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214879348-Administrar-el-uso-de-la-memoria-de-tu-VPS" target="_self" rel="undefined">Administrar el uso de la memoria de tu VPS</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216475397-Solucionar-problemas-de-conexi%C3%B3n-de-un-solo-sitio">Solución de problemas de conexión de un solo sitio</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214879308-Generalidades-sobre-la-optimizaci%C3%B3n-de-VPS">Generalidades sobre la optimización de VPS</a></li>
+<li><a href="https://help.dreamhost.com/hc/en-us/articles/214879348-Managing-your-VPS-memory-usage">Managing your VPS memory usage</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216475397-Solucionar-problemas-de-conexi%C3%B3n-de-un-solo-sitio">Solucionar problemas de conexión de un solo sitio</a></li>
 </ul>
 </div>
