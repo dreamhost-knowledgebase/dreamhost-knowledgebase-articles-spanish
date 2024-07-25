@@ -1,52 +1,55 @@
-<h2>Generalidades</h2>
+<div class="intermediate"> </div>
+<h2 id="h_01J3JSSEKHHBHC3DR9N2KXM2R8">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Con los años, se ha escrito una gran cantidad de servidores web.</p>
-<p>Apache, siendo uno de los más antiguos, es <a href="https://news.netcraft.com/archives/2015/01/15/january-2015-web-server-survey.html">el más utilizado hoy en día</a>.&nbsp;Sin embargo, se implementó con un mecanismo de escala que puede ser relativamente ineficiente en algunos aspectos. Algunos servidores web más nuevos han aparecido en los últimos años que intentan abordar algunas de las deficiencias de Apache. Uno de los más destacados es <a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx">Nginx</a>.</p>
+<p>Este artículo examina el rendimiento relativo de los servidores web Apache y <a href="https://help.dreamhost.com/hc/es/articles/216431827-Visi%C3%B3n-general-de-Nginx">Nginx</a> para ver cómo se comparan.</p>
+<p>Por favor ten en cuenta que los siguientes resultados solo deben utilizarse para medir el rendimiento <em>relativo</em> (y no absoluto), ya que las pruebas se realizaron localmente en el servidor bajo condiciones comunes.</p>
+<p><strong>Apache y Nginx</strong></p>
+<ul>
+<li>Apache es uno de los servidores web más antiguos y todavía se utiliza ampliamente hoy en día. Sin embargo, se implementó con un mecanismo de escalado que puede ser relativamente ineficiente en algunos aspectos.</li>
+<li>Nginx es un servidor web más reciente que se creó para abordar algunas de las deficiencias de Apache.</li>
+</ul>
 <div class="notebox-note">
-<p>Tanto Apache como Nginx están disponibles preconfigurados en las plataformas de Alojamiento <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-" target="_self">VPS</a>&nbsp;y&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicado.</a> El alojamiento compartido regular usa Apache (principalmente debido a su soporte de características más amplio).</p>
+<p>Tanto Apache como Nginx están disponibles preconfigurados en las plataformas de Alojamiento <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-" target="_self">VPS</a> y <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicado.</a></p>
 </div>
-<p>Este artículo examina el rendimiento relativo de cada servidor web para ver cómo se comparan cara a cara. Ten en cuenta que esto no pretende ser una comparación exhaustiva del rendimiento general. La esperanza es simplemente dar una comparación de rendimiento relativo en condiciones comunes.</p>
 </div>
-<h2>Método de prueba</h2>
+<h2 id="h_01J3JSSEKHW50VBFJF8JK1YKYE">Método de prueba</h2>
 <div class="solvvy-solution">
+<p>El método para probar estos servidores web usa <a href="http://httpd.apache.org/docs/2.0/programs/ab.html">ApacheBench</a> (una herramienta de evaluación comparativa del servidor HTTP).</p>
 <ul>
-<li>El método para probar estos servidores web usa&nbsp;<a href="http://httpd.apache.org/docs/2.0/programs/ab.html">ApacheBench</a> (una herramienta de evaluación comparativa del servidor HTTP).</li>
+<li>Cada prueba se realiza localmente desde un VPS para eliminar las condiciones de red potencialmente variables de la ecuación.</li>
+<li>En cada prueba, se realizan 25,000 solicitudes de un <a href="https://kbimages.dreamhosters.com/images/Dreamhost_logo.png">archivo PNG de 5k</a>
+</li>
+<li>Antes de cada prueba, el servidor web se reiniciaba para eliminar cualquier posible almacenamiento en caché u otros problemas que pudieran interferir con los resultados.</li>
+<li>Cada prueba se ejecutó con diferentes números de solicitudes concurrentes para medir el rendimiento en diferentes niveles de uso.</li>
 </ul>
-<ul>
-<li>En cada prueba, se realizan 25,000 solicitudes de un&nbsp;<a href="https://kbimages.dreamhosters.com/images/Dreamhost_logo.png">archivo PNG de 5k</a> localmente desde un VPS para eliminar las condiciones de red potencialmente variables de la ecuación.</li>
-</ul>
-<ul>
-<li>Antes de cada prueba, el servidor web en cuestión se reiniciaba para eliminar cualquier posible almacenamiento en caché u otros problemas que pudieran interferir con los resultados.</li>
-</ul>
-<ul>
-<li>Cada prueba se ejecutó con diferentes números de solicitudes concurrentes para medir el rendimiento en diferentes niveles de uso. (Ten en cuenta que es muy común que los navegadores permitan hasta 6 conexiones simultáneas por usuario individual que tengas navegando en un sitio. Por lo tanto, 10 usuarios navegando en tu sitio al mismo tiempo equivaldrían a aproximadamente 60 conexiones concurrentes).</li>
-</ul>
-<p>Los comandos que se usan en esta prueba siguen este formato:</p>
+<h3 id="h_01J3E4QFHCACHH6QRR1E3CD4WP">El comando de prueba</h3>
+<p>El siguiente formato se usa para probar donde la bandera the <span class="code">-c</span> incrementa el nivel de concurrencia.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ab -n 25000 -c 50 https://www.example.com/dreamhost_logo.png</span></pre>
 </div>
-<p>donde la bandera&nbsp;<span class="code">-c</span> aumentó con el nivel de concurrencia.</p>
 </div>
-<h2><span id="Memory_usage">Uso de memoria</span></h2>
+<h2 id="h_01J3E3Y91XRES7NJRW4WMAYQC2"><span id="Uso_de_memoria">Comprarción de uso de memoria</span></h2>
 <div class="solvvy-solution">
-<p>Esto es importante para medir, especialmente en un VPS donde su uso de memoria tiene un límite máximo y aumentarlo te cuesta dinero adicional. (Ten en cuenta que la memoria está en megabytes).</p>
-<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/Web_Server_Memory_Graph.png" alt="Webserver memory graph" /></p>
-<p>Como puedes ver, Nginx sale como líder claro en esta prueba. De hecho, la diferencia es TAN dramática que es casi un poco increíble. ¿Cómo puede existir una discrepancia tan grande?</p>
-<p>Tiene que ver con cómo Apache maneja la escala con más solicitudes entrantes. Para manejar solicitudes adicionales, genera nuevos procesos. A medida que entran más y más conexiones, se generan más y más procesos de Apache para manejarlas. Esto hace que el uso de memoria crezca bastante rápido.</p>
-<p>En comparación, verás que Nginx tiene un uso de memoria bastante estático y se mantiene bastante estático en todos los ámbitos de principio a fin.</p>
+<p>Como puedes ver, Nginx es el claro lider de esta prueba.</p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/Web_Server_Memory_Graph.png" alt="Webserver memory graph"></p>
+<p>La diferencia tiene que ver con cómo Apache maneja la escalabilidad con más solicitudes entrantes. Para manejar solicitudes adicionales, genera nuevos procesos.</p>
+<ul>
+<li>A medida que ingresan más conexiones, se generan más procesos de Apache para manejarlas. Esto hace que el uso de memoria crezca bastante rápido.</li>
+<li>En comparación, el uso de memoria de Ninx es casi estático.</li>
+</ul>
 </div>
-<h2><span id="Requests_per_second">Solicitudes por segundo</span></h2>
+<h2 id="h_01J3E3Y91X5HNQDXWARA636809"><span id="Solicitudes_por_segundo">Comparación de solicitudes por segundo</span></h2>
 <div class="solvvy-solution">
-<p>Esto es esencialmente una medida de qué tan rápido el servidor puede recibir y atender solicitudes en diferentes niveles de concurrencia. Cuantas más solicitudes puedan manejar por segundo, más capaz será el servidor de manejar grandes cantidades de tráfico. Así es como se comparan los servidores en este campo:</p>
-<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/Web_Server_Requests_Graph.png" alt="Webserver requests graph" /></p>
-<p>Nginx domina claramente en la cantidad bruta de solicitudes por segundo que puede atender. En niveles más altos de concurrencia, puede manejar menos solicitudes por segundo, pero aún más que Apache.</p>
-<p>Recuerda, los resultados mostrados son buenos solo para medir el rendimiento&nbsp;<em>relativo</em> (y no absoluto), ya que las pruebas se realizaron localmente en el servidor.</p>
+<p>Esta es una medida de qué tan rápido el servidor puede recibir y atender solicitudes a diferentes niveles de concurrencia. Cuantas más solicitudes por segundo pueda manejar el servidor, mejor podrá gestionar grandes cantidades de tráfico. Una vez más, Nginx es claramente superior en la cantidad bruta de solicitudes por segundo que puede atender.</p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/Web_Server_Requests_Graph.png" alt="Webserver requests graph"></p>
 </div>
-<h2><span id="Caveat">Consideración</span></h2>
-<div class="solvvy-solution">
-<p>Recuerda, Apache admite una caja de herramientas más grande de cosas que puede hacer de inmediato y es probablemente el más compatible en todos los software web que existen en la actualidad. Además, la mayoría de los sitios web realmente no obtienen tantos éxitos simultáneos como para obtener grandes beneficios de rendimiento/memoria de Nginx, pero puedes verificarlo para ver si funciona mejor para tus necesidades.</p>
-</div>
-<h2><span id="See_also">Ver también</span></h2>
+<h2 id="h_01J3E5CC7CTHGE4ENPKR5R4J0N">¿Qué servidor debería usar?</h2>
+<p>Tu elección de servidor depende de los requisitos de tu sitio web.</p>
+<ul>
+<li>Apache es compatible con una gama más amplia de herramientas y probablemente sea el más compatible con la mayoría de los sitios web.</li>
+<li>Nginx puede ser una buena opción si tu sitio web recibe muchas visitas concurrentes, ya que mejora el uso de memoria y el rendimiento general.</li>
+</ul>
+<h2 id="h_01J3JSSEKHQNCDG23G3ZFSJK8K"><span id="Ver_tambien">Ver también</span></h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>

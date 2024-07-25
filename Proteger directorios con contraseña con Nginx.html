@@ -1,23 +1,22 @@
-<h2>Generalidades</h2>
+<div id="advanced"> </div>
+<h2 id="h_01J3JRCCR6QRN8605351JPHKVQ">Generalidades</h2>
 <div class="solvvy-solution">
-<p>En un servidor Apache, es posible proteger con contraseña un directorio usando archivos <span class="text-object">.htaccess</span> y <span class="text-object">.htpasswd</span>. Sin embargo, los archivos <span class="text-object">.htaccess</span> no son compatibles con Nginx.</p>
-<p>Aún puedes proteger con contraseña tus directorios, pero necesitas usar un archivo <span class="text-object">basic_auth.conf</span> en su lugar.</p>
-<div class="notebox-note">
-<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+<p>Lo siguiente explica cómo proteger los directorios con contraseña de un sitio web que se ejecuta en un <a href="https://help.dreamhost.com/hc/es/articles/216431827-Visi%C3%B3n-general-de-Nginx">servidor Nginx</a>.</p>
+<p id="h_01J3E2HKCQDF5CQZ507AZERZ3Y"><strong>¿En qué se diferencia de Apache?</strong></p>
+<p>En un servidor Apache, es posible proteger con contraseña un directorio usando archivos <span class="text-object">.htaccess</span> y <span class="text-object">.htpasswd</span>. Sin embargo, los archivos <span class="text-object">.htaccess</span> no son compatibles con Nginx. Aún puedes proteger con contraseña tus directorios, pero necesitas usar un archivo <span class="text-object">basic_auth.conf</span> en su lugar.</p>
+<div class="prereqs">
+<p><strong>Requisitos previos</strong></p>
+<p>Este artículo asume que has <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">creado un usuario Shell</a> y que puedes iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</p>
 </div>
 </div>
-<h2>Creando el archivo</h2>
+<h2 id="h_01J3DTXJN1JFT4FBR4Q16NCNGC">Configurar un directorio protegido con contraseña</h2>
 <div class="solvvy-solution">
+<p>Los siguientes pasos explican cómo crear un archivo de configuración y confirmar que está funcionando en un navegador.</p>
 <ol>
 <li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
-<li>Navega al directorio de tu usuario.</li>
-<li>Asegúrate de que tienes un directorio <span class="text-object">/home/username/nginx/example.com</span>. Este no existe por defecto; debes crearlo al correr lo siguiente:
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir -p nginx/example.com</span>
-</pre>
-</div>
-</li>
-<li>En este directorio <span class="text-object">/home/username/nginx/example.com</span>, agrega un archivo llamado <span class="text-object"><span class="text-object">basic_auth.conf con lo siguiente:</span></span>
+<li>Navega al <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home#el-directorio-home-del-usuario">directorio del usuario</a>.</li>
+<li>Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">Ubicaciones de archivos de configuración de Nginx</a> para crear tu directorio local <span class="text-object">/nginx/example.com</span>.</li>
+<li>En este directorio <span class="text-object">/home/username/nginx/example.com</span>, <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">crea un archivo</a> llamado <span class="text-object">basic_auth.conf</span> con lo siguiente:
 <div class="preboxcontainer">
 <pre class="prebox">location / {
   auth_basic "Restricted";
@@ -26,12 +25,14 @@
 </pre>
 </div>
 <ul>
+<li>
+<span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH" target="_self">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</li>
 <li>El parámetro <span class="code">auth_basic</span> es solo el título del mensaje que el usuario ve cuando visita este directorio.</li>
 <li>El parámetro <span class="code">auth_basic_user_file</span> especifica dónde está el archivo de contraseña. Observa cómo su ruta se establece en el directorio <span class="text-object">/nginx</span>.</li>
 </ul>
-<div class="notebox-note">
+<div class="notebox-tip">
 <ul>
-<li>En este ejemplo, la directiva <span class="code">location</span> protege con contraseña el dominio entero, ya que está apuntando a <span class="text-object">/</span>.</li>
+<li>En este ejemplo, la directiva <span class="code">location</span> protege con contraseña el dominio entero, ya que está apuntando a <span class="code">/</span>.</li>
 <li>Si quieres que un subdirectorio esté protegido con contraseña, cambia la directiva <span class="code">location</span> de la siguiente manera:</li>
 </ul>
 <div class="preboxcontainer">
@@ -40,15 +41,11 @@
 </div>
 </div>
 </li>
-<li>Corre lo siguiente para crear el archivo <span class="text-object">.htpasswd</span>:
+<li>Corre lo siguiente para crear el archivo <span class="text-object">.htpasswd</span>. <span class="code">LOGIN</span> es el usuario que vas a usar para autenticar el inicio de sesión. Cámbialo a lo que desees.
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">htpasswd -c /home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/.htpasswd LOGIN</span>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">htpasswd -c /home/<span class="code-highlight">username</span>/nginx/<span class="code-highlight">example.com</span>/.htpasswd <span class="code-highlight">LOGIN</span></span>
 </pre>
 </div>
-<ul>
-<li>
-<span class="code">LOGIN</span> es el nombre de usuario que deseas utilizar para autenticar en el indicador de inicio de sesión.</li>
-</ul>
 </li>
 <li>Después de escribir ese comando, ingresa una contraseña y confírmala cuando se te solicite:
 <div class="preboxcontainer">
@@ -60,22 +57,15 @@ Adding password for user LOGIN
 </li>
 <li>
 <a href="https://help.dreamhost.com/hc/es/articles/216454967-Como-recargar-y-reiniciar-Nginx-Solo-para-servidores-dedicados-">Recarga el archivo de configuración de Nginx</a>.</li>
-<li>En tu navegador, carga el directorio al que apunta <span class="text-object">/home/username/nginx/example.com/basic_auth.conf</span>.
-<div class="notebox-note">
-<p>En el ejemplo arriba, esto sería el directorio raíz de tu dominio ya que la directiva <span class="code">location</span> apunta a <span class="text-object">/</span>.</p>
-</div>
-</li>
-<li>Ingresa un usuario/contraseña cuando se te solicite iniciar sesión.
-<div class="notebox-note">
-<p>En este ejemplo, tu nombre de usuario es <span class="code">LOGIN</span> y la contraseña es la que creó anteriormente.</p>
-</div>
-</li>
+<li>En tu navegador, carga el directorio al que apunta <span class="text-object">/home/username/nginx/example.com/basic_auth.conf</span>. En el ejemplo arriba, esto sería el directorio raíz de tu dominio ya que la directiva <span class="code">location</span> apunta a <span class="text-object">/</span>.</li>
+<li>Ingresa un usuario/contraseña cuando se te solicite iniciar sesión. En este ejemplo, tu nombre de usuario es <span class="code">LOGIN</span> y la contraseña es la que creó anteriormente.</li>
 </ol>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01J3JRCCR7Q3NJG1ZJWMSVXB5M">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx">Generalidades sobre Nginx</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">Ubicaciones de archivos de configuración de Nginx</a></li>
 </ul>
 </div>
