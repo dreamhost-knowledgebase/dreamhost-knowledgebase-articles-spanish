@@ -1,74 +1,102 @@
-<h2 id="h_01HFSDVXCETPVK4ERD35RZ4307"><span id="Como_bloquear_IPS">Generalidades</span></h2>
-<div class="solvvy-solution">
-<p>Los servidores Nginx te permiten controlar el acceso por IP a tu sitio web creando un archivo de configuración personalizado. Puedes ver las direcciones IP que han visitado tu sitio web <a href="https://help.dreamhost.com/hc/es/articles/216105097-Ver-y-examinar-tu-access-log-a-trav%C3%A9s-de-SSH">consultando tu archivo access.log</a>. Los usuarios cuya dirección IP esté bloqueada verán un error <strong>403 Forbidden</strong> al visitar tu sitio web.</p>
-<p>Este artículo explica cómo crear este archivo e incluye ejemplos de código que puedes agregarle.</p>
-<div class="notebox-note">
-<p>Revisa la siguiente página para obtener más detalles sobre el módulo <span class="code">location</span> de Nginx:</p>
+<div class="advanced"> </div>
+<h2 id="h_01HFPST59QRA7WSMEVZFE2BQXN"><span id="How_to_block_IPs">Generalidades</span></h2>
+<p>Este artículo explica cómo crear un archivo de configuración personalizado para controlar el acceso IP a tu sitio web que se ejecuta en un servidor <a href="https://help.dreamhost.com/hc/es/articles/216431827-Visi%C3%B3n-general-de-Nginx">Nginx</a>. Esto se logra utilizando el módulo <span class="code"><a href="https://nginx.org/en/docs/http/ngx_http_core_module.html#location" target="_blank" rel="noopener noreferrer">location</a></span> de Nginx.</p>
+<p>Los usuarios cuya dirección IP esté bloqueada verán un error <strong>403 Forbidden</strong> cuando visiten tu sitio web.</p>
+<div class="prereqs">
+<p><strong>Requisitos previos</strong></p>
+<p>Este artículo asume que has completado los siguientes pasos:</p>
 <ul>
-<li><a href="https://nginx.org/en/docs/http/ngx_http_core_module.html#location" target="_blank" rel="noopener noreferrer">nginx.org/en/docs/http/ngx_http_core_module.html#location</a></li>
+<li>Actualizado a un plan de alojamiento <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-los-Servidores-Virtuales-Privados-VPS">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados">Dedicado</a>.</li>
+<li>Cambiado tu servidor para <a href="https://help.dreamhost.com/hc/es/articles/214880148-Cambiar-tu-servidor-web-a-Nginx">ejecutar Nginx</a>.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">Creado un usuario Shell</a> y puedes iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
 </ul>
 </div>
-</div>
-<h2 id="h_01HFPSXFFQ5FG17Y0TCBYY2KCH"><span id="Como_bloquear_IPS">Bloquear IPs</span></h2>
+<h2 id="h_01HFPSXFFQ5FG17Y0TCBYY2KCH"><span id="Como_blquear_IPs">Crear el archivo de configuración</span></h2>
 <div class="solvvy-solution">
-<p>Los siguientes pasos crean un archivo llamado <span class="text-object">access.conf</span>, que se usa para agregar los ejemplos de código a continuación.</p>
+<p>Los siguientes pasos crean un archivo llamado <span class="text-object">access.conf</span>, que se utiliza para agregar los ejemplos de código en este artículo.</p>
 <ol>
-<li>Revisa el archivo <a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">Ubicaciones de archivos de configuración de Nginx</a> para crear tu directorio <span class="text-object">/nginx/example.com</span> local.</li>
+<li>Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/216455077-Ubicaciones-de-archivos-de-configuraci%C3%B3n-de-Nginx">Ubicaciones de archivos de configuración de Nginx</a> para crear tu directorio local <span class="text-object">/nginx/example.com</span>.</li>
 <li>Cambia a este directorio:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/nginx/example.com</span></pre>
 </div>
 </li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Crea un archivo</a> llamado <span class="text-object">access.conf</span>.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Crea un archivo</a> llamado <span class="text-object">access.conf</span>.</li>
 <li>Agrega el código de uno de los ejemplos a continuación.</li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216454967-C%C3%B3mo-recargar-y-reiniciar-Nginx">Recarga Nginx</a> para que los cambios tomen efecto.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/216454967-C%C3%B3mo-recargar-y-reiniciar-Nginx">Recarga Nginx</a> para que los cambios surtan efecto.</li>
 </ol>
 </div>
 <h2 id="h_01HFPXEMZNW5J0JBFPEWJHKPES">Ejemplos de código</h2>
-<div class="solvvy-solution">
-<h3 id="h_01HFPST59QM60CMCYKJT204NC6"><span id="Bloquear_una_IP_desde_tu_sitio">Bloquear una IP desde tu sitio web</span></h3>
-<p>El siguiente código bloquea la dirección IP de <code>1.2.3.4</code> para impedir el acceso a tu sitio web.</p>
+<p>Los siguientes ejemplos se pueden agregar a tu archivo <span class="text-object">access.conf</span> según sea necesario.</p>
+<div class="notebox-tip">
+<p>Para ver las direcciones IP que han visitado tu sitio web, revisa el archivo <a href="https://help.dreamhost.com/hc/es/articles/216105097-Ver-y-examinar-tu-access-log-a-trav%C3%A9s-de-SSH">access.log del mismo</a>.</p>
+</div>
+<h3 id="h_01HFPST59QM60CMCYKJT204NC6"><span id="Bloquear_una_IP_de_acceder_a_tu_sitio">Bloquear una IP a tu sitio</span></h3>
+<p>El siguiente código bloquea la dirección IP <span class="code">1.2.3.4</span> para que no acceda a tu sitio web.</p>
+<ul>
+<li>La barra diagonal <span class="code">/</span> indica todo tu sitio web.</li>
+<li>La directiva <span class="code">deny</span> controla qué se bloquea.</li>
+</ul>
+<dl>
+<dd>
 <div class="preboxcontainer">
-<pre class="prebox">location <span class="code-highlight">/</span> {
+<pre class="prebox">location <strong><span class="code-highlight">/</span></strong> {
   deny 1.2.3.4;
 }</pre>
 </div>
-<h3 id="h_01HFPST59QT24G9E3ZBWAZFFBJ"><span id="Bloquear_una_IP_desde_un_subdirectorio">Bloquear una IP desde un subdirectorio</span></h3>
-<p>El siguiente código bloquea la dirección IP de <code>1.2.3.4</code> para impedir el acceso a un subdirectorio en tu sitio llamado <span class="text-object">/blog</span>.</p>
+</dd>
+</dl>
+<h3 id="h_01HFPST59QT24G9E3ZBWAZFFBJ"><span id="Bloquear_una_IP_de_acceder_a__un_subdirectorio">Bloquear una IP a un subdirectorio</span></h3>
+<p>El siguiente código bloquea la dirección IP de <span class="code">1.2.3.4</span> para que no acceda a un subdirectorio de tu sitio llamado <span class="text-object">/blog</span>:</p>
+<dl>
+<dd>
 <div class="preboxcontainer">
 <pre class="prebox">location <span class="code-highlight">/blog/</span> {
   deny 1.2.3.4;
 }</pre>
 </div>
-<h3 id="h_01HFPST59QN32WBC6QJRQN0GP0"><span id="Permitir_que_una_sola_IP_acceda_a_tu_sitio-web">Permitir que una sola IP acceda a tu sitio web</span></h3>
-<p>El siguiente código permite que una única dirección IP acceda a tu sitio web mientras bloquea a todas las demás. Esto puede ser útil si estás construyendo tu sitio web y no deseas que nadie lo vea mientras estás trabajando en él.</p>
+</dd>
+</dl>
+<h3 id="h_01HFPST59QN32WBC6QJRQN0GP0"><span id="Permitir_una_sola_IP_y_bloquear_las_otras">Permitir que solo una única dirección IP acceda a tu sitio web</span></h3>
+<p>El siguiente código permite que solo la dirección IP <span class="code">1.2.3.4</span> acceda a tu sitio web, bloqueando todas las demás. Esto puede ser útil si estás construyendo tu sitio web y no deseas que nadie lo vea mientras está en desarrollo.</p>
 <div class="alert-warning">
 <p>La línea <span class="code">deny all;</span> debe aparecer después de todas las direcciones IP en la lista.</p>
-<p>Si es la primera línea, <strong>TODAS</strong> las direcciones IP serán bloqueadas.</p>
+<p>Si está en la primera línea, <strong>TODAS</strong> las direcciones IP serán bloqueadas.</p>
 </div>
+<dl>
+<dd>
 <div class="preboxcontainer">
-<pre class="prebox">location <span class="code-highlight">/</span> {
+<pre class="prebox">location <strong><span class="code-highlight">/</span></strong> {
   allow 1.2.3.4;
   deny all;
 }</pre>
 </div>
+</dd>
+</dl>
 <h3 id="h_01HFPST59QHC2EZ4F5ZX03H2X8"><span id="Combinar_reglas">Múltiples reglas</span></h3>
-<p>También puedes combinar varias reglas. El siguiente ejemplo permite que una sola dirección IP acceda al subdirectorio <span class="text-object">/blog</span> mientras bloquea a todas las demás del sitio web.</p>
+<p>También puedes combinar múltiples reglas. El siguiente ejemplo permite que una sola dirección IP acceda al subdirectorio <span class="text-object">/blog</span> mientras bloquea a todas las demás desde la URL principal del sitio web:</p>
+<dl>
+<dd>
 <div class="preboxcontainer">
 <pre class="prebox">location <span class="code-highlight">/blog</span> {
   allow 1.2.3.4;
   deny all;
 }
 
-location <span class="code-highlight">/</span> {
+location <strong><span class="code-highlight">/</span></strong> {
   deny all;
 }</pre>
 </div>
-</div>
-<h2 id="h_01HFSDVXCFXBA3QZ9KXZ847WAG">Ver también</h2>
+</dd>
+</dl>
+<h2 id="h_01HFPST59QNR0X3FDXSNYQ2G99">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216431827-Generalidades-sobre-Nginx">Generalidades de Nginx</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216431827-Visi%C3%B3n-general-de-Nginx">Visión general de Nginx</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216105097-Ver-y-examinar-tu-access-log-a-trav%C3%A9s-de-SSH">Ver y examinar tu access.log a través de SSHH</a></li>
 </ul>
 </div>
