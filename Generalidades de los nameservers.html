@@ -1,59 +1,84 @@
-<div class="notebox-tip">
-<p>Si te encuentras en una situación que requiere cambios en tu sitio y tu desarrollador no está disponible para ayudarte, el equipo de soporte calificado de DreamHost puede ayudarte por una pequeña tarifa. Puedes encontrar más información sobre los servicios admitidos y los costos asociados en el artículo de <a href="https://help.dreamhost.com/hc/es/articles/360042256912-Generalidades-sobre-Servicios-Profesionales-">Servicios Profesionales de DreamHost</a>.</p>
-</div>
-<h2 id="h_01HZ53T1AZTX4971GZ330R4HMK">Generalidades</h2>
-<div class="solvvy-solution">
-<p>Los nameservers de tu dominio, controla donde son administrados todos los registros DNS de tu dominio. Si lo configuras a usar los NameServers de DreamHost, tu dominio automáticamente usará los registros DNS configurados en el panel de DreamHost.</p>
-</div>
-<h2 id="h_01HZ53T1AZ59Z0715978E1H0DA">¿Por que debería apuntar mis nameservers a DreamHost?</h2>
-<div class="solvvy-solution">
-<p>Un beneficio de mantener los nameservers de tu sitio apuntando a DreamHost es que si los DNS de DreamHost cambian por alguna razón, tu sitio web se actualizará automáticamente para usar la nueva información de DNS. Por ejemplo, si tu sitio se mueve a otro servidor. El dominio resolverá automáticamente a la nueva IP del nuevo servidor. Mientras que si tienes los nameservers apuntando a otro lugar que no sea DreamHost, tendrás que actualizar los registros A para apuntar a la IP del nuevo servidor.</p>
+<div id="beginner"> </div>
+<h2 id="h_01J3P1T2454NNQTQY5R6BAW7YD">Generalidades</h2>
+<p>Este artículo proporciona una visión general de los nameservers y cómo controlan dónde se administran los registros DNS de tu sitio web.</p>
+<h2 id="h_01J3ZJ7SYJHEEKY4SBQMST1P7S">Preguntas Frecuentes</h2>
+<p><strong>¿Qué son los nameservers?</strong></p>
+<dl>
+<dd>
+<p>Nameservers son los registros DNS principales asociados a un <a href="https://help.dreamhost.com/hc/es/articles/215767937-Generalidades-sobre-el-registro-de-dominios">registro de dominio</a>. La compañía a la que apunten es donde se administran <strong>TODOS</strong> los registros DNS de tu dominio. </p>
+<p>Con mayor frecuencia, se trata de una compañía de alojamiento como DreamHost, que aloja tu sitio web en un servidor web para que esté disponible en línea.</p>
+</dd>
+</dl>
+<p><strong>¿Dónde administro los registros DNS de mi dominio?</strong></p>
+<dl>
+<dd>
+<p>Solo necesitas conocer dos clasificaciones principales de registros DNS al alojar un sitio web.</p>
+<ul>
+<li>Nameservers</li>
+<li>Registros de dominio (A, CNAME, MX, etc.)</li>
+</ul>
+<p>Si configuras tu dominio para usar los nameservers de DreamHost, tu dominio utilizará automáticamente los registros DNS configurados en tu panel de DreamHost.</p>
+<p>Sin embargo, si tus nameservers apuntan a otra compañía, necesitarás iniciar sesión en su panel para administrar tus configuraciones de DNS.</p>
 <div class="notebox-important">
-<p>Ten en cuenta que los nameservers controlan la información DNS, incluyendo los de tu sitio web y correo. Cambiar los nameservers que tu dominio usa podría cambiar todos los servicios del dominio (sitio web, correo, y demás) para apuntar a la nueva locación o alojamiento.</p>
+<p>Antes de apuntar los nameservers a otra compañía, asegúrate de que todos los registros DNS que deseas que tu dominio continúe utilizando ya estén configurados con la nueva compañía de alojamiento. De esta manera, una vez que el DNS se resuelva para los nuevos nameservers externos, los servicios funcionarán de inmediato.</p>
 </div>
-<p>Antes de cambiar los nameservers, asegúrate de que todos los registros DNS que quieres que tu dominio continúe usando estén ya configurados con el nuevo proveedor de DNS. De esta manera, una vez los DNS resuelvan para los nuevos nameservers externos, los servicios funcionen de una vez. Pero recuerda que la propagación de los nameservers pueden durar de 4 a 72 horas antes de que resuelvan a la nueva compañía de alojamiento.</p>
-</div>
-<h2 id="h_01HZ53T1AZ5KW2Y6CR782C046H">Propagación DNS de los nameservers</h2>
-<div class="solvvy-solution">
+</dd>
+</dl>
+<p id="h_01J3P1T245XF6Y615CTSF98BM9"><strong>¿Qué son los nameservers de DreamHost?</strong></p>
+<dl>
+<dd>
+<p>Todos los dominios administrados por DreamHost utilizan los siguientes nameservers:</p>
 <ul>
-<li>Los cambios de nameservers pueden tomar de 4 a 72 horas para que la modificación se complete en propagar, entonces tu dominio no va a enrutar los nuevos NameServers de una vez.</li>
-<li>Cuando configures los nuevos nameservers con el registrador, puede tomar una hora para la modificación de WHOIS sea procesada.</li>
-<li>Deberás ver que WHOIS refleje los nuevos NameServers para el dominio dentro de una hora, pero el dominio todavía necesitará que los DNS resuelvan a la nueva IP dentro de los nuevos NameServers agregados.</li>
+<li>
+<strong>ns1.dreamhost.com</strong> <span class="wysiwyg-color-black40" style="color: #aaa;">162.159.26.14</span>
+</li>
+<li>
+<strong>ns2.dreamhost.com</strong> <span class="wysiwyg-color-black40" style="color: #aaa;">162.159.26.81</span>
+</li>
+<li>
+<strong>ns3.dreamhost.com</strong> <span class="wysiwyg-color-black40" style="color: #aaa;">162.159.27.84</span>
+</li>
 </ul>
+<div class="notebox-tip">
+<p>Si estás actualizando tus nameservers en tu registrador, solo deberías agregar la URL del nameserver, no la IP. Las IPs están listadas arriba en caso de que tu registrador las solicite.</p>
 </div>
-<h2 id="h_01HZ53T1AZ5QNX8D6D7FFSB5ZP">Subdominios</h2>
-<div class="solvvy-solution">
-<p>Los nameservers son asignados a tu dominio primario solamente. Por ejemplo, <strong>example.com</strong>. Los subdominios son registros DNS dentro del dominio primario, entonces no tienen sus propios nameservers. Tu solo pondrás nameservers para el dominio primario.</p>
-</div>
-<h2 id="h_01HZ53T1AZE91YGBM6ZQV5FAB4">¿Dónde están los nameservers de DreamHost?</h2>
-<div class="solvvy-solution">
-<p>Los nameservers para todos los dominios administrados por DreamHost, incluyendo 'dreamhost.com'. Son configurados usando los siguientes:</p>
 <ul>
-<li><strong>ns1.dreamhost.com</strong> <span class="wysiwyg-color-black40" style="color: #aaa;">162.159.26.24</span></li>
-<li><strong>ns2.dreamhost.com</strong> <span class="wysiwyg-color-black40" style="color: #aaa;">162.159.27.142</span></li>
-<li><strong>ns3.dreamhost.com</strong> <span class="wysiwyg-color-black40" style="color: #aaa;">162.159.27.84</span></li>
+<li>
+<strong>Si tu dominio está registrado en DreamHost</strong>: Estos se configuran automáticamente.</li>
+<li>
+<strong>Si tu dominio está registrado en otra compañía</strong>: Necesitarás iniciar sesión en la compañía donde compraste el registro del dominio (<a href="https://help.dreamhost.com/hc/es/articles/215413857-Visi%C3%B3n-general-de-los-DNS-de-DreamHost#registrador">el Registrador</a>). Allí es donde actualizarás tus nameservers para que apunten a DreamHost.</li>
 </ul>
-<div class="notebox-note">
-<p>Si estás actualizando los nameservers en tu registrador, deberás solamente agregar la URL del nameserver, no la IP. La lista de IPs de arriba están ahí solo en caso de que tu registrador las pregunte.</p>
-</div>
-<p>Si tu dominio es registrado con DreamHost, el panel mostrará la opción de configurar estos nameservers de DreamHost sin necesitar ingresar la información de arriba.</p>
-<p>Si tu dominio es registrado en otro lugar, el cambio de tus nameservers tendrá que ser hecho con el registrador actual del dominio. Los detalles de arriba pueden configurados con el registrar actual del dominio para apuntar al administrador DNS de tu dominio con DreamHost. De esta manera, DreamHost puede administrar las configuraciones de DNS por tu a través de la pestaña <span class="text-link">DNS</span> en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!/grid-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a> en el panel. Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/360053106191-Agregar-DNS" target="_blank" rel="noopener noreferrer">Agregar DNS</a> para más información.</p>
-<div class="notebox-note">
-<p>Se recomienda que tu dominio apunte a los nameservers de DreamHost. Esto hace que el manejo de los DNS sea más simple pues todos los registros pueden ser encontrados en tu cuenta de DreamHost.</p>
-</div>
-</div>
-<h2 id="h_01HZ53T1AZNZXQKDCX9HE7E46R"><span id="revisar-nameservers">¿Como puedo ver a donde están apuntando mis nameservers?</span></h2>
+</dd>
+</dl>
+<p id="h_01J3P1T245Q2V0CPT3YKMN2B4K"><strong>¿Por qué debería apuntar mis nameservers a DreamHost?</strong></p>
 <div class="solvvy-solution">
-<p>Tu puedes verlos en un sitio como este:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360030114711-Verificando-hacia-d%C3%B3nde-apuntan-tus-nameservers" target="_self">Ver a donde están apuntando tus nameservers.</a></li>
-</ul>
+<dl>
+<dd>
+<p>Se recomienda que apuntes todos tus registros DNS a una sola compañía. Alojar todos los registros en DreamHost facilita mucho la gestión de todos los servicios de tu dominio desde el <a href="https://panel.dreamhost.com" target="_blank" rel="noopener noreferrer">panel de DreamHost</a>.</p>
+</dd>
+</dl>
+<p><strong>¿Los subdominios tienen nameservers?</strong></p>
+<dl>
+<dd>
+<p>Los nameservers solo se asignan a tu dominio principal (<strong>example.com</strong>). Los subdominios son registros DNS bajo tu nombre de dominio principal, por lo que no tienen nameservers propios.</p>
+</dd>
+</dl>
 </div>
-<h2 id="h_01HZ53T1AZ762V4KPJK00Q5A5R">Ver también</h2>
+<p id="h_01J3P1T245PV924RSSF22D3YCG"><strong><span id="revisar_los_nameservers">¿Cómo puedo verificar a dónde están apuntados mis nameservers?</span></strong></p>
+<dl>
+<dd>
+<p>Revisa <a href="https://help.dreamhost.com/hc/es/articles/360030114711-Verificar-hacia-donde-apuntan-tus-nameservers">este artículo</a> para obtener instrucciones sobre cómo verificar a dónde están apuntados tus nameservers.</p>
+</dd>
+</dl>
+<h2 id="h_01J3P1T245HZ086BHHR3H4272M"><span id="Propagacion_DNS_de_los_nameservers">Propagación DNS de los nameservers</span></h2>
+<p>Los cambios en los nameservers pueden tardar entre 4 y 72 horas en actualizarse completamente en línea. Esto se conoce como <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-del-DNS">propagación de DNS</a>.</p>
+<h3 id="h_01J3ZT1PPZWYS1X0S8DRA3D39Y">Actualizaciones de WHOIS</h3>
+<p>Cuando configures los nuevos nameservers con el registrador, la modificación del <a href="https://help.dreamhost.com/hc/es/articles/216458227-Generalidades-de-WHOIS">WHOIS</a> puede tardar hasta una hora en procesarse. Sin embargo, el DNS aún requerirá tiempo para actualizarse en línea.</p>
+<h2 id="h_01J3P1T245ZAT4CHFA1877HB16">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216385067-Crear-nameservers-personalizados-o-vanity" target="_self">Crear nameservers personalizados o vanity</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360038897151-Cambiar-tus-nameservers-en-DreamHost">Cambiar tus nameservers en DreamHost </a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216385447-Cambiar-los-nameservers-en-tu-alojamiento-actual" target="_self">Cambiar los nameservers en tu alojamiento actual</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385067-Crear-nameservers-personalizados-o-vanity">Crear nameservers personalizados o vanity</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360038897151-Cambiar-tus-nameservers-en-DreamHost">Cambiar tus nameservers en DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385447-Cambiar-los-nameservers-en-tu-alojamiento-actual">Cambiar los nameservers en tu alojamiento actual</a></li>
 </ul>
 </div>

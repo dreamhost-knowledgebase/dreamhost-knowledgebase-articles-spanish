@@ -1,56 +1,21 @@
-<h2>Limpiar tu caché en Mac OS X</h2>
-<h3>Antes de empezar</h3>
-<div class="solvvy-solution">
-<p>La siguiente sección está también disponible como video instructivo:</p>
-<dl>
-<dd><iframe src="https://www.youtube.com/embed/Shww5FILMMA" width="560" height="315" frameborder="0" allowfullscreen=""></iframe></dd>
-</dl>
-<p>Los comandos para limpiar el cache en el sistema operativo Mac X son un poco diferentes dependiendo de la versión que estás corriendo. Primero, asegúrate que has abierto el terminal en tu computador.</p>
+<div id="intermediate"> </div>
+<h2 id="h_01J3RJ4K7Z4V9W9BXSFFES3X62">Generalidades</h2>
+<p>Lo siguiente describe cómo limpiar la caché DNS en un sistema operativo macOS o Linux.</p>
+<div class="prereqs">
+<p>Antes de continuar, asegúrate de haber abierto una terminal en tu computador. Aquí es donde escribirás el comando para limpiar el caché DNS.</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215360828-Software-de-cliente-SSH" target="_self">Cliente de Software SSH</a></li>
+<li><a href="https://support.apple.com/es-co/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac" target="_blank" rel="noopener noreferrer">Abrir la Terminal en la Mac</a></li>
+<li><a href="https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal" target="_blank" rel="noopener noreferrer">Open la terminal en Ubuntu Linux</a></li>
 </ul>
-<p>Una vez abierto, corre el comando de abajo que corresponde a tu <a href="https://support.apple.com/es-co/HT201260" target="_self" rel="undefined">versión de Sistema Operativo X</a>.</p>
-<h3>OS X 10.12 (Sierra) y siguientes</h3>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">macbook$ </span><span class="command">sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache</span></pre>
 </div>
-<h3>OS X 10.11 (El Capitan) y OS X 10.12 (Sierra)</h3>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">macbook$ </span><span class="command">sudo killall -HUP mDNSResponder</span></pre>
-</div>
-</div>
-<h2>Versiones anteriores</h2>
-<div class="solvvy-solution">
-<h3><span id="OS_X_10.10_.28Yosemite.29">OS X 10.10 (Yosemite)</span></h3>
-<h4><span id="Versions_10.10.4.2B">Versiones 10.10.4+</span></h4>
+<h2 id="h_01J3RJG10WVCDF6PH44706XNPQ">Limpiar el DNS en macOS</h2>
+<p>Corre el siguiente comando para limpiar el caché DNS en macOS (Sonoma, Ventura, Monterey):</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">macbook$ </span><span class="command">sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder</span></pre>
 </div>
-<h4><span id="Versions_10.10.1.2C_10.10.2.2C_10.10.3">Versiones 10.10.1, 10.10.2, 10.10.3</span></h4>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">macbook$ </span><span class="command">sudo discoveryutil udnsflushcaches</span></pre>
-</div>
-<h3><span id="OS_X_10.9_.28Mavericks.29">OS X 10.9 (Mavericks)</span></h3>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">macbook$ </span><span class="command">dscacheutil -flushcache; sudo killall -HUP mDNSResponder</span></pre>
-</div>
-<h3><span id="OS_X_10.7_.28Lion.29_and_10.8_.28Mountain_Lion.29">OS X 10.7 (Lion) y 10.8 (Mountain Lion)</span></h3>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">macbook$ </span><span class="command">sudo killall -HUP mDNSResponder</span></pre>
-</div>
-<h3><span id="OS_X_10.5_.28Leopard.29_and_10.6_.28Snow_Leopard.29">OS X 10.5 (Leopard) y 10.6 (Snow Leopard)</span></h3>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">macbook$ </span><span class="command">dscacheutil -flushcache</span></pre>
-</div>
-<h3><span id="OS_X_10.4_.28Tiger.29">OS X 10.4 (Tiger)</span></h3>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">macbook$ </span><span class="command">lookupd -flushcache</span></pre>
-</div>
-</div>
-<h2>Limpiar tu caché de DNS en Linux</h2>
-<div class="solvvy-solution">
-<p>Las distribuciones más recientes de Linux no usan un solucionador de caché de la misma forma que Windows y Mac OS X. Para confirmar cual está instalado en tu distribución de Linux, mira la página web o sus foros.</p>
-<p>Sin embargo, una aplicación de DNS que comúnmente se usa es <a href="https://linux.die.net/man/8/nscd">Name Service Caching Daemon (nscd)</a>. No está normalmente instalada por defecto pues no hay necesidad de limpiar el caché. Pero, si ya lo has instalado, puedes limpiar el caché corriendo el siguiente comando en un terminal:</p>
+<h2 id="h_01J3RHMDKVCHCMZBR7VE4C5VQF"><span id="Limpiar_el_cache_del_DNS_en_Linux">Limpiar el DNS en Linux</span></h2>
+<p>La mayoría de las distribuciones de Linux no utilizan una caché de resolución DNS como Windows y macOS. En su lugar, deberás consultar el sitio web o los foros de tu distribución de Linux para confirmar qué demonio particular está instalado.</p>
+<p>Sin embargo, una aplicación de caché DNS comúnmente utilizada es el <a href="https://linux.die.net/man/8/nscd" target="_blank" rel="noopener noreferrer">Name Service Caching Daemon (nscd)</a>. Es probable que no esté instalada por defecto, por lo que no es necesario limpiar la caché. Pero, si ya la has instalado, puedes limpiar la caché ejecutando el siguiente comando en una terminal:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[local]$ </span><span class="command">sudo service nscd restart </span></pre>
 </div>
@@ -59,13 +24,15 @@
 <pre class="prebox"><span class="server">[local]$ </span><span class="command">/etc/rc.d/init.d/nscd stop</span>
 <span class="server">[local]$ </span><span class="command">/etc/rc.d/init.d/nscd start</span></pre>
 </div>
-</div>
-<h2>Ver también</h2>
-<div class="solvvy-hidden">
+<h2 id="h_01J3RHMDKVPAKPW9C0BMES5XKZ">Ver también</h2>
+<h3 id="h_01J428CS3ARCT51CBMX71Y3XW5">Enlaces de DreamHost</h3>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215680477-Generalidades-de-limpiar-el-DNS" target="_self">Generalidades de limpiar el DNS</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214981268-Vaciar-tu-cach%C3%A9-DNS-en-Windows" target="_self">Vaciar tu caché DNS en Windows</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216456827-C%C3%B3mo-limpiar-el-cache-de-tu-buscador" target="_self">¿Cómo limpiar el caché de tu buscador?</a></li>
-<li><a href="https://support.apple.com/es-co/HT201260" target="_self" rel="undefined">Busca la versión de tu MacOS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215680477-Generalidades-sobre-limpiar-el-DNS">Generalidades sobre limpiar el DNS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214981268-Limpiar-el-cach%C3%A9-del-DNS-en-Windows">Limpiar el caché del DNS en Windows</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456827-C%C3%B3mo-limpiar-el-cache-de-tu-buscador">Cómo limpiar el cache de tu buscador</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215360828-Software-de-cliente-SSH">Software de cliente SSH</a></li>
 </ul>
-</div>
+<h3 id="h_01J428D2480NVC064PVP8JTCRG">Enlaces de terceros</h3>
+<ul>
+<li><a href="https://support.apple.com/es-co/109033" target="_blank" rel="noopener noreferrer">Cómo averiguar qué macOS tiene la Mac</a></li>
+</ul>
