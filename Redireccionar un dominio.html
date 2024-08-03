@@ -1,15 +1,19 @@
-<div id="intermediate">&nbsp;</div>
+<div id="intermediate"> </div>
 <h2 id="h_01HQPD4CK23D074S2G1KHR8W1H">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Este artículo explica cómo redirigir un dominio (o subdominio) en DreamHost. Al crear una redirección, cualquier página que visites en tu sitio actual (el que se está redirigiendo) se enviará a la página del sitio al que estás redirigiendo. Por ejemplo, supongamos que estás redirigiendo <strong>example.com</strong> a <strong>dreamhost.com</strong>.</p>
 <ul>
-<li>Cuando visitas <strong>example.com/contact.html</strong></li>
-<li>la URL redirecciona a <strong>dreamhost.com/contact.html</strong></li>
+<li>Cuando visitas <strong>example.com/contact.html</strong>
+</li>
+<li>la URL redirecciona a <strong>dreamhost.com/contact.html</strong>
+</li>
 </ul>
 <div class="prereqs">
 <p><strong>Requisitos previos</strong></p>
 <p>El servicio de <span class="text-product">Redirección</span> del panel requiere que tu dominio esté <a href="https://help.dreamhost.com/hc/es/articles/215560437--Qu%C3%A9-tipos-de-planes-de-hosting-hay-disponibles">alojado</a> o <a href="https://help.dreamhost.com/hc/es/articles/224220668-C%C3%B3mo-comprar-un-registro-de-dominio">registrado</a> con DreamHost.</p>
 <p>Los ejemplos en este artículo utilizan el protocolo <span class="text-object">HTTPS</span>. Para que esto funcione, el dominio al que estás redirigiendo debe <a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-sobre-agregar-un-certificado-SSL">tener un certificado SSL configurado</a>. Si no, simplemente utiliza <span class="text-object">HTTP</span> en su lugar.</p>
+<p><strong>Eliminar los registros de DNS personalizados</strong></p>
+<p>Si tu dominio está actualmente configurado como '<a href="https://help.dreamhost.com/hc/es/articles/360056398191-Configurar-tu-dominio-como-Solo-DNS">Solo DNS</a>' y deseas cambiarlo a un Reflejo, primero verifica si has añadido anteriormente algún <a href="https://help.dreamhost.com/hc/es/articles/360035516812-Agregar-registros-de-DNS-personalizados">registro A o CNAME personalizado</a> al dominio. Si es así, estos deberán ser eliminados, ya que entrarán en conflicto con la nueva configuración.</p>
 </div>
 </div>
 <h2 id="h_01J02327NY6VSCNW8GZ8Y16S4W">Crear una redirección</h2>
@@ -57,13 +61,17 @@
 <div class="solvvy-solution">
 <p>Solo puedes redirigir a otro sitio que ya esté configurado con un certificado SSL. Por ejemplo:</p>
 <ul>
-<li><strong>http://example.com</strong> a <strong> https://dreamhostexample.com</strong></li>
+<li>
+<strong>http://example.com</strong> a <strong> https://dreamhostexample.com</strong>
+</li>
 </ul>
 <p>Si no se ha <a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-sobre-agregar-un-certificado-SSL">agregado un certificado SSL al dominio</a> al que estás redirigiendo (<strong>https://dreamhostexample.com</strong>), verás un error de <a href="https://help.dreamhost.com/hc/es/articles/215613517-Site-not-found-o-Sitio-no-encontrado" target="_self">Sitio No Encontrado</a> al visualizar la redirección.</p>
 <div class="notebox-important">
 <p>No es posible usar el servicio de <span class="text-product">Redirección</span> del panel para redirigir a <span class="text-object">HTTPS en el <strong>mismo</strong> dominio</span>. Por ejemplo:</p>
 <ul>
-<li><strong>http://example.com</strong> a <strong> https://example.com</strong></li>
+<li>
+<strong>http://example.com</strong> a <strong> https://example.com</strong>
+</li>
 </ul>
 <p>Esto tampoco es necesario ya que, después de que hayas <a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-sobre-agregar-un-certificado-SSL">agregado un certificado SSL</a> a tu dominio, DreamHost redirige automáticamente la URL de <span class="text-object">HTTP</span> a <span class="text-object">HTTPS</span>.</p>
 </div>
@@ -72,8 +80,10 @@
 <div class="solvvy-solution">
 <p>Redirigir tu sitio es lo mismo que cualquier otro cambio de DNS. Esto significa que el DNS debe <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-del-DNS">propagarse</a> primero antes de que puedas ver los cambios en línea. En general, esto no debería tardar más de 6 horas. Puedes hacer un seguimiento de cuándo se actualizan los <a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">nuevos registros DNS</a> en diferentes ubicaciones utilizando cualquiera de los siguientes enlaces:</p>
 <ul>
-<li><a href="https://www.whatsmydns.net/" target="_blank" rel="noopener noreferrer">whatsmydns.net</a> — Un sitio popular que verifica los registros DNS en todo el mundo.</li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360055964552-Ver-tus-registros-DNS-de-DreamHost" target="_self">Ver tus registros DNS de DreamHost</a> — Usa el verificador de propagación DNS de DreamHost en el panel.</li>
+<li>
+<a href="https://www.whatsmydns.net/" target="_blank" rel="noopener noreferrer">whatsmydns.net</a> — Un sitio popular que verifica los registros DNS en todo el mundo.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/360055964552-Ver-tus-registros-DNS-de-DreamHost" target="_self">Ver tus registros DNS de DreamHost</a> — Usa el verificador de propagación DNS de DreamHost en el panel.</li>
 </ul>
 </div>
 <h2 id="h_01HQPD4CK3CZHCCVVQ3NQ557S0">Deshabilitar una redirección</h2>
