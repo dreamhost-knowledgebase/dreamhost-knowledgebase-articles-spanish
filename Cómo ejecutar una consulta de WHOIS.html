@@ -1,33 +1,37 @@
-<h2>Generalidades</h2>
-<div class="solvvy-solution">
-<p>Una consulta de <span class="code">whois</span> muestra información sobre dónde está registrado tu sitio web. También muestra información en tus nameservers que muestra dónde está alojado tu sitio.</p>
+<div id="intermediate"> </div>
+<h2 id="h_01J4J5VK3T417FDXVN848XGH9F">Generalidades</h2>
+<p>La siguiente información describe cómo realizar una consulta WHOIS para un registro de dominio. Una consulta <span class="code">whois</span> muestra información sobre un dominio, como dónde está registrado y a dónde apuntan tus <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-nameservers">nameservers</a>.</p>
+<h2 id="h_01J4J6WNJ93XR0S98VSP9YYQ4P">Cómo hacer una consulta WHOIS</h2>
+<p>Hay dos opciones para realizar una consulta WHOIS.</p>
+<h3 id="h_01J4J5VK3TV9NFN8QHVX9JMS7N">Opción 1 — Usando una herramienta online</h3>
+<p>La forma más sencilla de buscar información sobre el registro de un dominio es usar una herramienta en línea de la siguiente lista:</p>
+<ul>
+<li><a href="https://lookup.icann.org/es" target="_blank" rel="noopener noreferrer">lookup.icann.org</a></li>
+<li><a href="https://www.whois.com/whois/" target="_blank" rel="noopener noreferrer">whois.com/whois</a></li>
+<li><a href="https://whois.domaintools.com/" target="_blank" rel="noopener noreferrer">whois.domaintools.com</a></li>
+<li><a href="https://mxtoolbox.com/Whois.aspx" target="_blank" rel="noopener noreferrer">mxtoolbox.com/Whois</a></li>
+</ul>
+<h3 id="h_01J4J5VK3TZX8TD5D1V5MHYCG2"><span id="Ingresar_una_consulta_de_WHOIS_desde_la_linea_de_comando">Opción 2 — Corriendo una consulta en la línea de comando</span></h3>
+<div class="notebox-note">
+<p>Para ejecutar una consulta <span class="code">whois</span> desde la línea de comandos, debes iniciar sesión en un terminal a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. Esto puede ser un terminal <a href="https://help.dreamhost.com/hc/es/articles/215360828-Software-de-cliente-SSH">en tu computador</a> o un servidor de DreamHost.</p>
 </div>
-<h2>Usar una herramienta en línea</h2>
-<div class="solvvy-solution">
-<p>Esta es la forma más sencilla de buscar el registro de dominio y la información de propiedad almacenada en la base de datos pública. Puedes usar sitios web como&nbsp;<a href="https://whois-search.com" target="_self" rel="undefined">whois-search.com</a>&nbsp;para verificar los registros de WHOIS actuales para dominios.</p>
-</div>
-<h2>Ingresar una consulta WHOIS desde la línea de comando</h2>
-<div class="solvvy-solution">
-<p>También puedes realizar una consulta de <span class="code">whois</span> desde tu computador si tu sistema operativo lo admite. Abre una terminal en tu computador y ejecuta una consulta de <span class="code">whois</span> desde una línea de comando. Por ejemplo:</p>
+<p>Abre un terminal y corre el siguiente comando.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">whois example.com</span>
 </pre>
 </div>
-<p>Para algunas extensiones de dominio, es posible que debas verificar el registro directamente en el servidor de WHOIS de ese dominio específico. Sin embargo, no existe un estándar actual para determinar el servidor WHOIS responsable de una extensión de dominio. Algunas búsquedas de <span class="code">whois</span> requieren un trabajo adicional, como realizar la búsqueda a través del registrador específico del nombre de dominio para recuperar los detalles de propiedad.</p>
-<p>Puedes leer más sobre esto en:</p>
-<ul>
-<li><a class="new" title="W:Whois (page does not exist)" href="https://en.wikipedia.org/wiki/WHOIS#Server_discovery" target="_self">Artículo de Wikipedia sobre Descubrir Servidores en WHOIS</a></li>
-</ul>
-<p>En la mayoría de los casos, es más fácil usar un sitio de búsqueda de WHOIS de terceros para realizar tus consultas de búsqueda de <span class="code">whois</span>.</p>
+<div class="notebox-tip">
+<p>Para algunas extensiones de dominio, es posible que necesites consultar el registro directamente en el servidor WHOIS específico de ese dominio. Sin embargo, no existe un estándar actual para determinar el servidor WHOIS responsable para una extensión de dominio. Algunas búsquedas con <span class="code">whois</span> requieren trabajo adicional, como realizar la búsqueda a través del registrador específico del nombre de dominio para obtener detalles de propiedad. Puedes leer más sobre esto <a href="https://en.wikipedia.org/wiki/WHOIS#Server_discovery" target="_blank" rel="noopener noreferrer">aquí</a>.</p>
+<p>En la mayoría de los casos, es más fácil usar un sitio de WHOIS de terceros para realizar tus consultas <span class="code">whois</span>.</p>
 </div>
-<h2>Desglosar una consulta de WHOIS</h2>
+<h2 id="h_01J4J5VK3TMH981G4FSCBYN03T"><span id="Entender_una_consulta_de_WHOIS">Entender una respuesta de consulta WHOIS</span></h2>
 <div class="solvvy-solution">
-<p>Hay dos partes en una consulta de <span class="code">whois</span>:</p>
+<p>Hay dos partes en una consulta <span class="code">whois</span>:</p>
 <ul>
-<li>La información del registro central.</li>
-<li>La información del registrador.</li>
+<li>La información del registro central</li>
+<li>La información del registrador</li>
 </ul>
-<h3>La información del registro central</h3>
+<h3 id="h_01J4J5VK3TWVSA51B7MNWM3255"><span id="La_informacion_del_registro_central">La información del registro central</span></h3>
 <div class="preboxcontainer">
 <pre class="prebox">Domain Name: DREAMHOST.COM
 Registrar: DREAMHOST, LLC
@@ -43,8 +47,12 @@ Creation Date: 23-sep-1997
 Expiration Date: 22-sep-2015
 </pre>
 </div>
-<p>La información del registro central muestra el nombre de dominio en cuestión, qué compañía proporcionó servicios de registro, un enlace a su servidor WHOIS, el estado del dominio, los, <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers">nameservers</a>, y las fechas de creación/caducidad. Una vez que tengas esta información, tu cliente de WHOIS generalmente se conectará al servidor del registrador para buscar la información de contacto. La información en el registro central se actualiza aproximadamente cada 24 horas, por lo que si ves información en la sección de registro de <span class="text-section">WHOIS</span> que es diferente al registro central, intenta nuevamente en aproximadamente 24 horas.&nbsp;</p>
-<h3>La información del registrador</h3>
+<p>La información del registro central muestra el nombre del dominio en cuestión, la compañía que proporcionó los servicios de registro, un enlace a su servidor WHOIS, el estado del dominio, los <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-nameservers">nameservers</a> y las fechas de creación/expiración.</p>
+<h3 id="h_01J4J5VK3TT8ZG0E5STPHDNEV6"><span id="La_informacion_del_registrador">La información del registrador</span></h3>
+<p>Después de que tu cliente recupere la información del registro central, se conectará al servidor del registrador para buscar la información de contacto.</p>
+<div class="notebox-tip">
+<p>La información en el registro central se actualiza aproximadamente cada 24 horas, por lo que si ves información en la sección <span class="text-section">WHOIS</span> del registrador que es diferente a la del registro central, inténtalo de nuevo en aproximadamente 24 horas.</p>
+</div>
 <div class="preboxcontainer">
 <pre class="prebox">Registrar: DREAMHOST
 Registrar IANA ID: 431
@@ -67,13 +75,13 @@ Registrar Abuse Contact Email: domain-abuse@dreamhost.com
 Registrar Abuse Contact Phone: +1.2132719359
 </pre>
 </div>
-<p>La información del registrador muestra la información de contacto actual para el dominio. Esta información debe mantenerse actualizada en todo momento, en caso de que haya un problema (como un problema de propiedad del dominio) que requiera que los detalles de la propiedad sean precisos para poder ser atendidos.</p>
+<p>La información del registrador muestra la información de contacto actual para el dominio. Esta información debe mantenerse actualizada en todo momento, en caso de que surja algún problema (como un problema de propiedad del dominio), ya que se requiere que los detalles de propiedad sean precisos para poder abordarlo.</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01J4J5VK3TTQW286MJM0NFTSSX">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216458227-Generalidades-de-WHOIS" target="_self">Generalidades de WHOIS</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216458407-Habilitar-la-configuraci%C3%B3n-de-privacidad-de-WHOIS" target="_self">Habilitar las configuraciones de privacidad de WHOIS</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115004549487-Privacidad-de-registro-de-dominio" target="_self">Privacidad de registro de dominio</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216458227-Generalidades-de-WHOIS">Generalidades de WHOIS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216458407-Habilitar-la-configuraci%C3%B3n-de-privacidad-de-WHOIS">Habilitar la configuración de privacidad de WHOIS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115004549487-Privacidad-de-registro-de-dominio">Privacidad de registro de dominio</a></li>
 </ul>
 </div>
