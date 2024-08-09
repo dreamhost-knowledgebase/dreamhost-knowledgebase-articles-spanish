@@ -1,16 +1,16 @@
 <h2 id="h_01HRTDQQS1H98EXS60CHX0RTFY">Generalidades</h2>
 <div class="solvvy-solution">
-<p>El comando&nbsp;<span class="code">crontab</span>&nbsp;que se encuentra en los sistemas operativos Unix y similares a Unix, se usa para programar comandos que se ejecutarán periódicamente.</p>
-<p>Generalmente <span class="code">crontab</span>&nbsp;usa un daemon,&nbsp;<code>crond</code>, que se ejecuta constantemente en segundo plano y comprueba una vez por minuto para ver si es necesario ejecutar alguno de los trabajos programados. Estos trabajos generalmente se denominan cron jobs. Los cron jobs se ejecutan como el usuario que los crea, como si ese usuario escribiera el comando en tu shell.</p>
+<p>El comando <span class="code">crontab</span> que se encuentra en los sistemas operativos Unix y similares a Unix, se usa para programar comandos que se ejecutarán periódicamente.</p>
+<p>Generalmente <span class="code">crontab</span> usa un daemon, <code>crond</code>, que se ejecuta constantemente en segundo plano y comprueba una vez por minuto para ver si es necesario ejecutar alguno de los trabajos programados. Estos trabajos generalmente se denominan cron jobs. Los cron jobs se ejecutan como el usuario que los crea, como si ese usuario escribiera el comando en tu shell.</p>
 <div class="notebox-important">
-<p>Cuando se crea un cron job en el panel, puedes asignarlo a un usuario SFTP o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">shell</a>.</p>
+<p>Cuando se crea un cron job en el panel, puedes asignarlo a un usuario SFTP o <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">shell</a>.</p>
 <p>Sin embargo, solo los usuarios shell pueden <a href="https://help.dreamhost.com/hc/es/articles/215767047-Crear-un-Cron-Job-personalizado" target="_self" rel="undefined">crear y editar manualmente cron jobs</a> en el servidor.</p>
 </div>
 </div>
 <h2 id="h_01HRTDQQS18QTQJZ7KASV3EE8F">Crontab contenido del archivo en el servidor</h2>
 <div class="solvvy-solution">
 <p>Debido a la naturaleza compleja de traducir el contenido proporcionado por el usuario del panel al servidor, lo que ingresas al panel no es lo que ves en el archivo <span class="text-object">crontab</span>. Por ejemplo:</p>
-<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-create-a-cronjob.png" alt="es-panel-create-a-cronjob.png" width="671" height="462" /></p>
+<p><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-create-a-cronjob.png" alt="es-panel-create-a-cronjob.png" width="671" height="462"></p>
 <p>El archivo crontab en el servidor aparece de la siguiente manera:</p>
 <div class="preboxcontainer">
 <pre class="prebox">###--- BEGIN DREAMHOST BLOCK
@@ -22,11 +22,49 @@ MAILTO="admin@example.com"
 ###--- END DREAMHOST BLOCK</pre>
 </div>
 <p>Cuando se selecciona la opción 'Use locking', los comandos que deseas ejecutar se filtran a través de una invocación única del comando setlock.</p>
-<p>Visita la página de manual de&nbsp;<a href="https://manpages.ubuntu.com/manpages/cosmic/en/man8/setlock.8.html">setlock</a> para más información. El uso de setlock genera mensajes de error si se invoca tu cron jobs antes de que la última iteración del trabajo libere tu archivo de bloqueo único. Esto puede suceder si tu script tarda más en ejecutarse que el tiempo entre ejecuciones de trabajo.</p>
+<p>Visita la página de manual de <a href="https://manpages.ubuntu.com/manpages/cosmic/en/man8/setlock.8.html">setlock</a> para más información. El uso de setlock genera mensajes de error si se invoca tu cron jobs antes de que la última iteración del trabajo libere tu archivo de bloqueo único. Esto puede suceder si tu script tarda más en ejecutarse que el tiempo entre ejecuciones de trabajo.</p>
+</div>
+<h2 id="h_01HCMZGDN5TAJCGHJ5H0CW6FTF"><span id="Salida">Salida</span></h2>
+<div class="solvvy-solution">
+<p><strong>¿Cuándo produce datos el cronjob?</strong></p>
+<dl>
+<dd>
+<p>Solo recibirá un correo con la salida del cron job si el script que ejecuta está escrito para enviar datos a la terminal.</p>
+<p>Si el script que ejecuta el cron job no genera ninguna salida en la línea de comandos, no habrá salida para enviar por correo.</p>
+</dd>
+</dl>
+<p><strong>¿A dónde se envía la respuesta?</strong></p>
+<dl>
+<dd>
+<p>Toda la salida se envía por correo electrónico a la ubicación especificada en la <a href="https://help.dreamhost.com/hc/es/articles/215767107-Entorno-de-ejecuci%C3%B3n-de-un-cron-job#mailto">variable MAILTO</a>.</p>
+</dd>
+</dl>
+<p><strong>¿Cómo un script crea la salida?</strong></p>
+<dl>
+<dd>
+<p>Puedes proporcionar instrucciones especiales para la salida estándar <span class="code">STDOUT</span> y para el error estándar <span class="code">STDERR</span> utilizando el operador <span class="code">&gt;</span>.</p>
+<ul>
+<li>Cuando usas <span class="code">&gt;</span> sin un número antes de él, se predetermina a <span class="code">1&gt;</span>. Esta es la salida estándar (no de error).</li>
+<li>Cuando usas <span class="code">2&gt;</span>, estás especificando qué hacer con la salida de error.</li>
+</ul>
+<p>Por ejemplo:</p>
+<ul>
+<li>
+<span class="code">&gt;my_file.txt</span> redirecciona la salida estándar a un archivo llamado <span class="text-object">my_file.txt</span>
+</li>
+<li>
+<span class="code">2&gt;my_errors.txt</span> redirecciona los errores a un archivo llamado <span class="text-object">my_errors.txt</span>.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<h2 id="h_01HCMZGDN55KFHA4TQ7ZX2BRT7"><span id="Permisos">Permisos</span></h2>
+<div class="solvvy-solution">
+<p>Por defecto, los archivos creados en los servidores de DreamHost tienen un nivel de permisos de 644. Si eliges ejecutar un script a través de un cron job, es posible que necesites establecer los permisos del archivo en 744 usando <span class="code"><a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos">chmod</a></span> para permitir que se ejecute correctamente.</p>
 </div>
 <h2 id="h_01HRTDQQS1J4GHDW9E78QBYMT1">Ver también</h2>
 <div class="solvvy-hidden">
-<h3 id="h_01HRTDQQS1SJCAD70HK08YM08G">Links internos</h3>
+<h3 id="h_01HRTDQQS1SJCAD70HK08YM08G">Enlaces de DreamHost</h3>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades sobre SSH</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215767047-Crear-un-Cron-Job-personalizado" target="_self">Crear un cron job personalizado</a></li>
@@ -34,7 +72,7 @@ MAILTO="admin@example.com"
 <li><a href="https://help.dreamhost.com/hc/es/articles/215088668-Crear-un-Cron-Job">Crear un Cron Job</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360038608892-Soluci%C3%B3n-de-problemas-de-Cron-job" target="_self">Solución de problemas de de cron job</a></li>
 </ul>
-<h3 id="h_01HRTDQQS11GVQKX1W4FA3CSRM">Links externos</h3>
+<h3 id="h_01HRTDQQS11GVQKX1W4FA3CSRM">Enlaces de terceros</h3>
 <ul>
 <li><a href="https://manpages.ubuntu.com/manpages/cosmic/en/man8/cron.8.html" target="_self">Página de manual Cron de Ubuntu</a></li>
 <li><a href="https://manpages.ubuntu.com/manpages/cosmic/en/man1/crontab.1.html" target="_self">Página de crontab(1) Ubuntu</a></li>
