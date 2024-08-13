@@ -1,65 +1,36 @@
-<div id="auto-toc">&nbsp;</div>
-<h2 id="h_01HVH6BC8T1VTJKS96JAVRMJE3">Generalidades</h2>
-<div class="solvvy-solution">
-<p>La Interfaz de Línea de Comando de WordPress (<a href="https://wp-cli.org/" target="_self" rel="undefined">wp-cli</a>) es una herramienta de línea de comando de WordPress instalada en todos los servidores de DreamHost. <span class="text-product">wp-cli</span> te permite correr comandos de WordPress desde tu <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">terminal Shell</a> para administrar tu sitio WordPress sin tener que iniciar sesión en el panel de WordPress.</p>
-<div class="notebox-note">
-<p>Necesitarás iniciar sesión en tu servidor vía SSH para usar <span class="text-product">wp-cli</span>. Mira los siguientes artículos para ver información de como crear un usuario Shell e iniciar sesión en tu servidor.</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">Crear un usuario con acceso Shell (SSH)</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">Generalidades de SSH</a></li>
-</ul>
-<p>Después de iniciar sesión en tu servidor, asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-de-sitio-web" target="_self" rel="undefined">directorio del sitio web</a>. Allí es donde corerrás los comandos de este artículo.</p>
+<div id="advanced"> </div>
+<div id="auto-toc"> </div>
+<h2 id="h_01J51B3C42TS5P6Z3PJBW175QD">Generalidades</h2>
+<p>La Interfaz de Línea de Comandos de WordPress (<a href="https://wp-cli.org/" target="_blank" rel="noopener noreferrer">wp-cli</a>) es una herramienta de línea de comandos instalada en todos los servidores de DreamHost. <span class="text-product">Te</span> permite ejecutar comandos de WordPress desde tu <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">terminal Shell</a> para gestionar tu sitio de WordPress sin necesidad de iniciar sesión en el panel de WordPress.</p>
+<div class="prereqs">
+<p><strong>Requisitos previos</strong></p>
+<p>Este artículo asume que has <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">creado un usuario de Shell</a> y que puedes iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</p>
+<p>Después de iniciar sesión en tu servidor, asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home#el-directorio-del-sitio-web" target="_self">directorio de tu sitio web</a>. Aquí es donde ejecutarás todos los comandos en este artículo.</p>
 </div>
-</div>
-<h2 id="h_01HVH6BC8TK5J0KDJM8C460SVQ" class="header-section">General</h2>
-<p>Estos son unos de los comandos generales para empezar.</p>
-<div id="Ver_todos_los_comandos_de_wp-cli" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8TRMQ2SK6F2HBKQJB5">Ver todos los comandos de wp-cli</h2>
+<h2 id="h_01J51B3C426SEQBFB21M900X06" class="header-section">Comandos generales</h2>
+<p>Estos son algunos comandos generales para comenzar.</p>
+<div id="comandos" class="section-link"> </div>
+<h3 id="h_01J51B3C43RV2JGJ1B0WQQBBH6">Ver todos los comandos de wp-cli</h3>
 <div class="solvvy-solution">
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp</span></pre>
 </div>
-<p>Una lista de comandos disponibles se muestra.</p>
+<p>Aparece una lista de todos los comandos disponibles.</p>
 </div>
-<div id="Usar_la_ayuda_para_ver_información_de_los_comandos" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8TDZAFMYHP02PQH7HX">Usar --help para ver la información de los comandos</h2>
+<div id="help" class="section-link"> </div>
+<h3 id="h_01J51B3C43WP6MT10NXCC166CZ">Usar --help para ver la información del comando</h3>
 <div class="solvvy-solution">
-<p>Para obtener más información sobre un comando en especifico, corre la opción <span class="code">--help</span>.</p>
+<p>Para obtener más información sobre un comando específico, usa la opción <span class="code">--help</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin --help</span></pre>
 </div>
-<p>Esto imprime una lista de subcomandos disponibles. Por ejemplo:</p>
+<p>Esto imprimirá una lista de subcomandos disponibles. Luego puedes agregar uno de estos subcomandos al comando principal para realizar una acción. Aquí se muestra cómo instalar un plugin llamado <span class="text-object">hello-dolly</span>:</p>
 <div class="preboxcontainer">
-<pre class="prebox">SUBCOMANDOS
-  
-    activate              Activa uno o más plugins.
-    deactivate            Desactiva uno o más plugins.
-    delete                Elimina los archivos de los plugins sin desactivar o desinstalar.
-    get                   Obtiene detalles sobre un plugin instalado.
-    install               Instala uno o más plugins.
-    is-active             Mira si el plugin dado está activo.
-    is-installed          Mira si el plugin dado está instalado.
-    list                  Obtiene una lista de plugins.
-    path                  Obtiene el camino a un plugin o el directorio del plugin.
-    search                Busca el directorio del plugin WordPress.org.
-    status                Revela el estado de uno o todos los plugins.
-    toggle                Alterna el estado de activación del plugin.
-    uninstall             Desinstala uno o más plugins.
-    update                Actualiza uno o más plugins.
-    verify-checksums      Verifica los archivos del plugin contra la suma de comprobación de WordPress.org.  </pre>
-</div>
-<p>Luego puedes agregar uno de estos subcomandos al comando principal para realizar una acción. Así es como instalarías un plugin llamado <span class="text-object">hello-dolly</span>:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin install <span class="code-highlight">hello-dolly</span></span>
-  Installing Hello Dolly (1.6)
-  Downloading install package from https://downloads.wordpress.org/plugin/hello-dolly.1.6.zip...
-  Unpacking the package...
-  Installing the plugin...
-  Plugin installed successfully.  </pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin install <span class="code-highlight">hello-dolly</span></span> </pre>
 </div>
 </div>
-<div id="Versiones_de_wp-cli" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8TCYHGXYCDXTR5TS8Y">Versiones de wp cli</h2>
+<div id="version" class="section-link"> </div>
+<h3 id="h_01J51B3C43DC3921E4XQD2KX8G">Versión de wp cli</h3>
 <div class="solvvy-solution">
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
@@ -69,7 +40,7 @@
 </tr>
 <tr>
 <td>
-<p><span class="wysiwyg-font-size-large">Mirar la versión de <span class="text-product">wp-cli</span></span></p>
+<p>Revisa la versión de <span class="text-product">wp-cli</span></p>
 </td>
 <td>
 <div class="preboxcontainer">
@@ -79,7 +50,7 @@
 </tr>
 <tr>
 <td>
-<p><span class="wysiwyg-font-size-large">Mirar las actualizaciones</span></p>
+<p>Revisa si hay actualizaciones</p>
 </td>
 <td>
 <div class="preboxcontainer">
@@ -88,8 +59,7 @@
 </td>
 </tr>
 <tr>
-<td>
-<p><span class="wysiwyg-font-size-large">Actualizar <span class="text-product">wp-cli</span></span></p>
+<td>Actualiza <span class="text-product">wp-cli</span>
 </td>
 <td>
 <div class="preboxcontainer">
@@ -100,18 +70,18 @@
 </tbody>
 </table>
 </div>
-<h2 id="h_01HVH6BC8T6HJCB285DJGMZ9MD" class="header-section">Comandos principales</h2>
-<p>Estos comandos son los más usados.</p>
-<div id="plugins" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8T9AE9VBCY46TGDYJJ">Plugins</h2>
+<h2 id="h_01J51B3C43WGHFZ4XA05PAHBN1" class="header-section">Comandos Top</h2>
+<p>Estos comandos son los más utilizados comúnmente.</p>
+<div id="plugins" class="section-link"> </div>
+<h3 id="h_01J51B3C43A1VMANXW01W0S4AF">Plugins</h3>
 <div class="solvvy-solution">
 <div class="notebox-important">
-<p><strong>Obtiene el nombre correcto del plugin</strong></p>
-<p>El nombre que usas cuando ingresas el <span class="code">PLUGIN_NAME</span> debe ser del sitio web del plugin. Por ejemplo, si quisieras instalar <span class="text-object">W3 Total Cache</span> deberás visitar esta página:</p>
+<p><strong>Obtener el nombre correcto del plugin</strong></p>
+<p>El nombre que uses al ingresar el <span class="code">PLUGIN_NAME</span> debe ser el nombre exacto de la página web del plugin. Por ejemplo, si quisieras instalar <span class="text-object">W3 Total Cache</span>, visitarías esta página:</p>
 <ul>
-<li><a href="https://wordpress.org/plugins/w3-total-cache/" target="_blank" rel="noopener noreferrer">https://wordpress.org/plugins/w3-total-cache/</a></li>
+<li><a href="https://es.wordpress.org/plugins/w3-total-cache/" target="_blank" rel="noopener noreferrer">https://es.wordpress.org/plugins/w3-total-cache/</a></li>
 </ul>
-<p>Puedes ver que termina con <span class="code">w3-total-cache</span>. Éste es el nombre del plugin que necesitas ingresar en los comandos de abajo.</p>
+<p>Puedes ver que termina con <span class="code">w3-total-cache</span>. Este es el nombre del plugin que deberías ingresar en los comandos a continuación.</p>
 </div>
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
@@ -121,7 +91,7 @@
 </tr>
 <tr>
 <td>
-<p><span class="wysiwyg-font-size-large">Ver los plugins instalados</span></p>
+<p>Revisa los plugins instalados</p>
 </td>
 <td>
 <div class="preboxcontainer">
@@ -131,7 +101,7 @@
 </tr>
 <tr>
 <td>
-<p><span class="wysiwyg-font-size-large">Instalar un plugin</span></p>
+<p>Instala un plugin</p>
 </td>
 <td>
 <div class="preboxcontainer">
@@ -140,9 +110,7 @@
 </td>
 </tr>
 <tr>
-<td>
-<p><span class="wysiwyg-font-size-large">Activar un plugin</span></p>
-</td>
+<td>Activa un plugin</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin activate <span class="code-highlight">PLUGIN_NAME</span></span></pre>
@@ -151,14 +119,14 @@
 </tr>
 <tr>
 <td>
-<p><span class="wysiwyg-font-size-large">Desactivar un plugin</span></p>
+<p>Desactiva unplugin</p>
 </td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin deactivate <span class="code-highlight">PLUGIN_NAME</span></span></pre>
 </div>
 <dl>
-<dd><em><strong>-o-</strong></em></dd>
+<dd><em>-o-</em></dd>
 </dl>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp plugin toggle <span class="code-highlight">PLUGIN_NAME</span></span></pre>
@@ -168,8 +136,8 @@
 </tbody>
 </table>
 </div>
-<div id="Temas" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8VMGW88PPNXEYQMM7V">Temas</h2>
+<div id="temas" class="section-link"> </div>
+<h3 id="h_01J51B3C435VJQTTGKJEGE48MD">Temas</h3>
 <div class="solvvy-solution">
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
@@ -179,7 +147,7 @@
 </tr>
 <tr>
 <td>
-<p><span class="wysiwyg-font-size-large">Ver los temas instalados</span></p>
+<p>Revisa los temas instalados</p>
 </td>
 <td>
 <div class="preboxcontainer">
@@ -189,7 +157,7 @@
 </tr>
 <tr>
 <td>
-<p><span class="wysiwyg-font-size-large">Instalar un tema</span></p>
+<p>Instala un tema</p>
 </td>
 <td>
 <div class="preboxcontainer">
@@ -199,7 +167,7 @@
 </tr>
 <tr>
 <td>
-<p><span class="wysiwyg-font-size-large">Activar un tema diferente</span></p>
+<p>Activa un tema diferente</p>
 </td>
 <td>
 <div class="preboxcontainer">
@@ -209,7 +177,7 @@
 </tr>
 <tr>
 <td>
-<p><span class="wysiwyg-font-size-large">Actualizar un tema</span></p>
+<p>Actualiza un tema</p>
 </td>
 <td>
 <div class="preboxcontainer">
@@ -220,8 +188,8 @@
 </tbody>
 </table>
 </div>
-<div id="Actualizar_WordPress" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8V3179XHD4JGCV1KMB">Actualizar WordPress</h2>
+<div id="Actualizar_WordPress" class="section-link"> </div>
+<h3 id="h_01J51B3C43B9A26CENDXES48HA">Actualizar WordPress</h3>
 <div class="solvvy-solution">
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
@@ -230,7 +198,7 @@
 <th style="width: 60%;">Comando</th>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Mirar la versión actual de WordPress</span></td>
+<td>Revisa la versión de WordPress actual</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp core version</span></pre>
@@ -238,7 +206,7 @@
 </td>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Mirar las actualizaciones de versiones de WordPress</span></td>
+<td>Revisa si hay actualizaciones de versión de WordPress</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp core check-update</span></pre>
@@ -246,16 +214,17 @@
 </td>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Actualizar WordPress a una nueva versión</span></td>
+<td>Actualiza WordPress a una nueva versión</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp core update</span></pre>
 </div>
-y</td>
+</td>
 </tr>
 <tr>
 <td>
-<p><span class="wysiwyg-font-size-large">Forzar la descarga de todos los archivos principales.</span> Esto obliga a que los archivos principales de WordPress se vuelvan a descargar en tu directorio actual y sobrescriban los archivos principales que ya existen.</p>
+<p>Fuerza la descarga de todos los archivos principales.</p>
+<p>Esto vuelve a descargar los archivos principales de WordPress y sobrescribe cualquier archivo principal que ya exista.</p>
 </td>
 <td>
 <div class="preboxcontainer">
@@ -266,10 +235,9 @@ y</td>
 </tbody>
 </table>
 </div>
-<div id="Usuarios" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8V3XQJDK43B8RXJ84T">Usuarios</h2>
+<div id="usuarios" class="section-link"> </div>
 <div class="solvvy-solution">
-<h3 id="h_01HVH6BC8V7RH3E8GS2C6MVSGF">Crear usuarios</h3>
+<h3 id="h_01J51B3C43DQ4JX91RF2A79GQ0">Crear usuarios</h3>
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
 <tr>
@@ -277,7 +245,7 @@ y</td>
 <th style="width: 60%;">Comando</th>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Mirar una lista de los usuarios actuales</span></td>
+<td>Revisa la lista de todos los usuarios actuales</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp user list</span></pre>
@@ -286,7 +254,7 @@ y</td>
 </tr>
 <tr>
 <td>
-<p><span class="wysiwyg-font-size-large">Crear un nuevo usuario mientras usas su correo y <a href="https://wordpress.org/support/article/roles-and-capabilities/" target="_blank" rel="noopener noreferrer">rol</a>.</span> Una nueva contraseña se imprima en la terminal luego que el usuario es creado.</p>
+<p>Crea un nuevo usuario mientras asignas su correo y <a href="https://wordpress.org/support/article/roles-and-capabilities/" target="_blank" rel="noopener noreferrer">rol</a>. Se imprimirá una nueva contraseña en la terminal después de que el usuario sea creado.</p>
 </td>
 <td>
 <div class="preboxcontainer">
@@ -297,7 +265,8 @@ y</td>
 </tbody>
 </table>
 </div>
-<h3 id="h_01HVH6BC8VN3YDF7FDFRN3KYKB">Cambiar una contraseña</h3>
+<div id="Cambiar_una_contraseña" class="section-link"> </div>
+<h3 id="h_01J51B3C45S5WWWZ73CW92K058">Cambiar una contraseña</h3>
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
 <tr>
@@ -305,7 +274,7 @@ y</td>
 <th style="width: 60%;">Comando</th>
 </tr>
 <tr>
-<td>Correr <span class="code">wp user list</span> para obtener el número de identificación de un usuario. Usa ese número para actualizar su contraseña. Este ejemplo cambia un usuario con su ID<span class="code">3</span>. Necesitarás informar al usuario del cambio de contraseña.</td>
+<td>Corre <span class="code">wp user list</span><span class="code">3</span>. Luego, deberás informar al usuario sobre el cambio de contraseña.</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp user update <span class="code-highlight">3</span> --user_pass=<span class="code-highlight">NEW_PASSWORD</span></span></pre>
@@ -314,7 +283,7 @@ y</td>
 </tr>
 </tbody>
 </table>
-<h3 id="h_01HVH6BC8W96P14DT580MHHFSD">Eliminar un usuario</h3>
+<h3 id="h_01J51B3C45T8GBTKE8R1E7W5V5">Eliminar un usuario</h3>
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
 <tr>
@@ -322,7 +291,7 @@ y</td>
 <th style="width: 60%;">Comando</th>
 </tr>
 <tr>
-<td>Correr <span class="code">wp user list</span> para obtener el número de identificación del usuario que deseas eliminar y el usuario al que deseas reasignar sus publicaciones. Deberás reasignar las publicaciones a otro usuario para que no se eliminen de forma permanente. Este ejemplo elimina un usuario con un número de ID de <span class="code">13</span> y reasigna sus publicaciones al usuario <span class="code">7</span>.</td>
+<td>Corre <span class="code">wp user list</span>` para obtener el número de ID del usuario que deseas eliminar y del usuario al que deseas reasignar sus publicaciones. Deberás reasignar las publicaciones a otro usuario para que no se eliminen permanentemente. Este ejemplo elimina a un usuario con un ID# de <span class="code">13</span> y reasigna sus publicaciones al usuario <span class="code">7</span>.</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp user delete <span class="code-highlight">13</span> --reassign=<span class="code-highlight">7</span></span></pre>
@@ -331,10 +300,10 @@ y</td>
 </tr>
 </tbody>
 </table>
-<p>&nbsp;</p>
-<h2 id="h_01HVH6BC8W8HHHF2KWRFM93N8F" class="header-section">Solución de problemas</h2>
-<div id="cache" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8WSQQ5RH30Y5JWDB16">Caché</h2>
+<p> </p>
+<h2 id="h_01J51B3C45VM1E2RMKYGTKXVG4" class="header-section">Comandos de solución de problemas</h2>
+<div id="cache" class="section-link"> </div>
+<h3 id="h_01J51B3C45VFR4TEYJ4RADKHYD">Caché</h3>
 <div class="solvvy-solution">
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
@@ -343,7 +312,7 @@ y</td>
 <th style="width: 60%;">Comando</th>
 </tr>
 <tr>
-<td style="width: 40%;"><span class="wysiwyg-font-size-large">Limpiar el caché de tu sitio</span></td>
+<td style="width: 40%;">Limpiar el caché del sitio</td>
 <td style="width: 60%;">
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp cache flush</span></pre>
@@ -351,7 +320,8 @@ y</td>
 </td>
 </tr>
 <tr>
-<td style="width: 40%;"><span class="wysiwyg-font-size-large">Limpiar el caché de <span class="text-product">wp-cli</span></span></td>
+<td style="width: 40%;">Limpia el caché de <span class="text-product">wp-cli</span>
+</td>
 <td style="width: 60%;">
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp cli cache clear</span></pre>
@@ -361,8 +331,8 @@ y</td>
 </tbody>
 </table>
 </div>
-<div id="Bases_de_datos" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8W6V1Z1GXV24YFSWVP">Bases de datos</h2>
+<div id="Bases_de_datos" class="section-link"> </div>
+<h3 id="h_01J51B3C45D5W8HYS7E5BZMAE3">Bases de datos</h3>
 <div class="solvvy-solution">
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
@@ -371,7 +341,9 @@ y</td>
 <th style="width: 60%;">Comando</th>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Mirar el estado de la base de datos</span></td>
+<td>
+<p>Revisa el estado de la base de datos</p>
+</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db check</span></pre>
@@ -379,7 +351,7 @@ y</td>
 </td>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Optimizar la base de datos</span></td>
+<td>Optimiza la base de datos</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db optimize</span></pre>
@@ -387,7 +359,7 @@ y</td>
 </td>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Reparar la base de datos</span></td>
+<td>Repara la base de datos</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db repair</span></pre>
@@ -395,7 +367,8 @@ y</td>
 </td>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Buscar texto en la base de datos.</span><br />Esto busca la palabra <span class="text-object">hello</span></td>
+<td>Busca texto en la base de datos.<br>Esto busca la palabra <span class="text-object">hello.</span>
+</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db search <span class="code-highlight">hello</span></span></pre>
@@ -403,7 +376,7 @@ y</td>
 </td>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Actualizar la versión de la base de datos</span></td>
+<td>Actualiza la versión de la base de datos</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp core update-db</span></pre>
@@ -413,8 +386,8 @@ y</td>
 </tbody>
 </table>
 </div>
-<div id="Permalinks" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8WCEGD18KGDTDQ1EFX">Permalinks</h2>
+<div id="permalinks" class="section-link"> </div>
+<h3 id="h_01J51B3C45EJPJ9YD2299199CK">Permalinks</h3>
 <div class="solvvy-solution">
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
@@ -423,7 +396,7 @@ y</td>
 <th style="width: 60%;">Comando</th>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Limpiar los permalinks. </span>Esto es lo mismo que guardarlos nuevamente en el panel.</td>
+<td>Limpia los permalinks. Esto es lo mismo que volver a guardarlas en el panel de control.</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command"> wp rewrite flush</span></pre>
@@ -433,9 +406,9 @@ y</td>
 </tbody>
 </table>
 </div>
-<h2 id="h_01HVH6BC8WW8WN8Y96NWXRN3DE" class="header-section">Cambios personalizados</h2>
-<div id="Actualizar_home_y_siteurl" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8WVN2KEBPJMGN5WRA8">Actualizar home y siteurl</h2>
+<h2 id="h_01J51B3C46SG6A6TJ3V0H4Y6CH" class="header-section">Cambios personalizados</h2>
+<div id="home-siteurl" class="section-link"> </div>
+<h3 id="h_01J51B3C46ST66TF4J3SYX7WA5">Actualizar el home y siteurl</h3>
 <div class="solvvy-solution">
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
@@ -444,7 +417,7 @@ y</td>
 <th style="width: 60%;">Comando</th>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Mirar el home y siteurl</span></td>
+<td>Revisa el home y siteurl</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command"> wp option list | grep -E "^(siteurl|home)"</span></pre>
@@ -452,7 +425,8 @@ y</td>
 </td>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Actualizar la URL de <span class="text-object">home</span></span></td>
+<td>Actualiza la URL del <span class="text-object">home</span>
+</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp option update home <span class="code-highlight">https://example.com</span></span></pre>
@@ -460,7 +434,8 @@ y</td>
 </td>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Actualizar <span class="text-object">siteurl</span></span></td>
+<td>Actualiza el <span class="text-object">siteurl</span>
+</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp option update siteurl <span class="code-highlight">https://example.com</span></span></pre>
@@ -470,28 +445,25 @@ y</td>
 </tbody>
 </table>
 </div>
-<div id="Importar_y_exportar_un_archivo_WXR" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8XZ2KP2CR1Y9X5HTV6">Importar y exportar un archivo WXR</h2>
+<div id="wxr" class="section-link"> </div>
+<h3 id="h_01J51B3C46DR7G7SNS7M0CTBPC">Importar y exportar un archivo WXR</h3>
 <div class="solvvy-solution">
-<p>Puedes usar los comandos <span class="code">import</span> y <span class="code">export</span> para administrar los datos de tu sitio con un archivo <span class="text-object">WXR</span>. Mira el siguiente artículo para más detalles.</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360050852091-Importar-y-exportar-un-archivo-WXR-en-WordPress" target="_self" rel="undefined">Importar y exportar un archivo WXR</a></li>
-</ul>
+<p>Puedes usar los comandos <span class="code">import</span> y <span class="code">export</span> para gestionar los datos de tu sitio con un archivo <span class="text-object">WXR</span>. Revisa <a href="https://help.dreamhost.com/hc/es/articles/360050852091-Importar-y-exportar-un-archivo-WXR-en-WordPress">este artículo</a> para más detalles.</p>
 </div>
-<div id="Search-and-Replace" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8X712MXREDBDWJ704Q">Search and Replace</h2>
+<div id="buscar_y_reemplazar" class="section-link"> </div>
+<h3 id="h_01J51B3C46E4X7SDHRBH53CT6T">Buscar y reemplazar</h3>
 <div class="solvvy-solution">
-<p>Busca y reemplaza texto en tu base de datos. Asegúrate de usar la banderilla <span class="code">--dry-run</span> la primera vez para ver que va a cambiar.</p>
+<p>Busca y reemplaza texto en tu base de datos. Asegúrate de usar la opción <span class="code">--dry-run</span> la primera vez para ver qué cambios se realizarán.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp search-replace <span class="code-highlight">http://example.com https://example.com/blog</span> --dry-run</span></pre>
 </div>
-<p>Aparece una lista de campos que se actualizarán en tu terminal. Si deseas actualizar todos los resultados que se muestran, corre el comando nuevamente sin la banderilla <span class="code">--dry-run</span>.</p>
+<p>Una lista de campos que serán actualizados se mostrará en tu terminal. Si deseas actualizar todos los resultados mostrados, ejecuta el comando nuevamente sin la opción <span class="code">--dry-run</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp search-replace <span class="code-highlight">http://example.com https://example.com/blog</span></span></pre>
 </div>
 </div>
-<div id="wpconfig" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8XPRK0GMJ7NDQ2X1AW">wp-config.php</h2>
+<div id="wpconfig" class="section-link"> </div>
+<h3 id="h_01J51B3C46VARZDNXF6KQ1RS7X">wp-config.php</h3>
 <div class="solvvy-solution">
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <tbody>
@@ -500,7 +472,8 @@ y</td>
 <th style="width: 60%;">Comando</th>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Mirar todas las configuraciones en tu archivo <span class="text-object">wp-config.php</span></span></td>
+<td>Revisa todas las configuraciones del archivo <span class="text-object">wp-config.php</span>
+</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp config list</span></pre>
@@ -508,7 +481,7 @@ y</td>
 </td>
 </tr>
 <tr>
-<td><span class="wysiwyg-font-size-large">Actualizar una configuración en tu archivo <span class="text-object">wp-config.php</span>.</span><br />Esto actualiza el valor <span class="code">DB_HOST</span>.</td>
+<td>Actualiza una configuración en tu archivo <span class="text-object">wp-config.php</span>. Esto actualiza el valor de `<span class="code">DB_HOST</span>`.</td>
 <td>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp config set <span class="code-highlight">DB_HOST mysql.example.com</span></span></pre>
@@ -518,16 +491,16 @@ y</td>
 </tbody>
 </table>
 </div>
-<div id="Actualizar_la_versión_PHP_de_los_usuarios_wp-cli" class="section-link">&nbsp;</div>
-<h2 id="h_01HVH6BC8XQFNSTXGSZ90JX9BP">Actualizar la versión de PHP para usuarios wp-cli</h2>
+<div id="Actualizar_la_version_de_php" class="section-link"> </div>
+<h3 id="h_01J51B3C46J6QFJ4XMSD1MPC0Q">Actualizar la versión de PHP que usa</h3>
 <div class="solvvy-solution">
 <ol>
-<li>Revisa la versión actual de PHP y su ubicación corriendo el siguiente comando:
+<li>Para ver la versión actual de PHP y su ubicación, corre el siguiente comando:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp cli info</span></pre>
 </div>
 </li>
-<li>Para cambiar la versión que PHP <span class="text-product">wp-cli</span> usa, <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self" rel="undefined">agrega la siguiente línea</a> a tu <span class="text-object">.bash_profile</span>. Cambia la versión como necesites. Este ejemplo usa PHP 8.2.
+<li>Para cambiar la versión de PHP que utiliza <span class="text-product">wp-cli</span>, <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH" target="_self">agrega la siguiente línea</a> a tu archivo <span class="text-object">.bash_profile</span>. Cambia la versión según sea necesario. Este ejemplo usa PHP 8.2.
 <div class="preboxcontainer">
 <pre class="prebox">export WP_CLI_PHP=/usr/local/php82/bin/php wp</pre>
 </div>
@@ -537,21 +510,23 @@ y</td>
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">. ~/.bash_profile</span></pre>
 </div>
 </li>
-<li>Selecciona para confirmar si <span class="text-product">wp-cli</span> está usando ésta nueva versión.
+<li>Revisa para confirmar que <span class="text-product">wp-cli</span> está usando esta nueva versión.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wp cli info</span>
 PHP binary:     /usr/local/php82/bin/php
-PHP version:    8.2</pre>
+PHP version:    8.2
+</pre>
 </div>
 </li>
 </ol>
 </div>
-<h2 id="h_01HVH6BC8XZNSGF2ST5501K2ZK">Ver también</h2>
+<h2 id="h_01J51B3C46VDBRJXAEP4VPDMJ8">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://wp-cli.org/" target="_self" rel="undefined">wp-cli.org</a> – Sitio Web de WP CLI Oficial</li>
-<li><a href="https://developer.wordpress.org/cli/commands/" target="_self">wp-cli commands</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_self" rel="undefined">Cómo iniciar sesión en tu sitio web WordPress</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215525287-Generalidades-sobre-WordPress" target="_self" rel="undefined">Generalidades de WordPress</a></li>
+<li>
+<a href="https://wp-cli.org/" target="_blank" rel="noopener noreferrer">wp-cli.org</a> – Official WP CLI website</li>
+<li><a href="https://developer.wordpress.org/cli/commands/" target="_blank" rel="noopener noreferrer">wp-cli commands</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress">Cómo iniciar sesión en tu sitio WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215525287-Visi%C3%B3n-general-de-WordPress">Visión general de WordPress</a></li>
 </ul>
 </div>
