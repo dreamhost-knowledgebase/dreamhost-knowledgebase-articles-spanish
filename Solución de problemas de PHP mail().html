@@ -1,61 +1,73 @@
-<h2 id="h_01HSV91WZMW419AYEY7D4MDJTN">Política de dominio del remitente</h2>
+<div id="intermediate"> </div>
+<h2 id="h_01HSV90P4VZBKSEK8072EXGJ6G"><span id="Politica_de_dominio_del_remitente">Generalidades</span></h2>
+<p>A continuación se explica cómo solucionar y resolver dos errores comunes de PHP mail():</p>
+<ul>
+<li>Errores de la política de dominio del remitente</li>
+<li>Errores de certificado</li>
+</ul>
+<h2 id="h_01J4WT7D2JQM5SB7Z5SRCDSDEN"><span id="Sender_domain_policy">Cómo corregir errores de política de dominio del remitente</span></h2>
+<p>Si has creado un formulario de correo PHP y encuentras que no está enviando correo, lo más frecuente es que se deba a la dirección del REMITENTE que el formulario está usando en tus encabezados.</p>
+<h3 id="h_01J4WT7D2JDVG6H3J604TV36PV">Encontrar los errores</h3>
 <div class="solvvy-solution">
-<p>Si has creado un formulario de correo PHP y encuentras que no está enviando correo, lo más frecuente es que se deba a la dirección DE (FROM) que el formulario está usando en tus encabezados.</p>
 <p>Una forma simple de confirmar si este es el caso:</p>
 <ol>
-<li>Inicia sesión en tu servidor web a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Inicia sesión en tu servidor web a través de <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales">FTP</a> o <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
 <li>Navega al directorio <span class="text-object">/Maildir/new</span> que se encuentra en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio de tu usuario</a>:
+<dl>
+<dd>
 <div class="preboxcontainer">
-<pre class="prebox">/home/<span class="code-highlight">usuario</span>/Maildir/new</pre>
+<pre class="prebox">/home/<span class="code-highlight">username</span>/Maildir/new</pre>
 </div>
-<em>En este directorio, verás los correos que no se pudieron enviar.</em></li>
-<li>Abre los correos en un editor de texto. <em>Puedes ver el siguiente error:</em>
+</dd>
+<dd><em>En este directorio, verás los correos que no se pudieron enviar.</em></dd>
+</dl>
+</li>
+<li>Edita los correos a través de <a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">FTP</a> o <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">SSH</a>.
+<dl>
+<dd><em>Puedes que veas el siguiente error:</em></dd>
+<dd>
 <div class="preboxcontainer">
 <pre class="prebox">Sender domain not allowed. Please read: https://dhurl.org/20b (in reply to end of DATA command))</pre>
 </div>
+</dd>
+</dl>
 </li>
 </ol>
 </div>
-<h2 id="h_01HSV91WZNK2H0YGGSHGXAJ42T">¿Por qué pasa esto?</h2>
+<h3 id="h_01HSV90P4VJXNZ8ZN1Q1ZGS676">Corregir el error</h3>
 <div class="solvvy-solution">
 <p>Esto sucede por las siguientes razones:</p>
 <ul>
-<li>Las políticas salientes de prevención de spam que se pusieron en vigencia, como se detalla&nbsp;<a href="https://dhurl.org/20b">aquí</a>.</li>
-<li>La dirección DE (FROM) que estás utilizando no es una dirección de correo en el dominio desde el que está enviando y/o no está alojada en DreamHost.</li>
-<li>Por ejemplo, si estás enviando desde un sitio llamado <strong>example.com</strong>, la dirección DE (FROM) en tu formulario de correo PHP debe ser algo como <span class="text-object">admin@example.com</span>. Cambiar esto a tu correo alojado con DreamHost permite que el formulario se envíe correctamente.</li>
+<li>Las políticas de prevención de spam saliente que se pusieron en práctica, como se detalla <a href="https://www.dreamhost.com/es/legal/politica-anti-spam/" target="_blank" rel="noopener noreferrer">aquí</a>.</li>
+<li>La dirección del REMITENTE que estás usando no es una dirección de correo del dominio desde el cual estás enviando y/o no está alojada en DreamHost. Por ejemplo, si estás enviando desde un sitio llamado <strong>example.com</strong>, la dirección REMITENTE en tu formulario PHP Mail debe ser algo como <span class="text-object">admin@example.com</span>. Cambiar esto a tu correo alojado en DreamHost permitirá que el formulario se envíe correctamente.</li>
 </ul>
 <p>Si DreamHost no está alojando tu correo, debes usar la <a href="https://help.dreamhost.com/hc/es/articles/216140597-Enviar-correo-PHP-v%C3%ADa-SMTP">autenticación SMTP</a> para enviar tu formulario de correo PHP. Si habilitas la autenticación SMTP, puedes usar cualquier dirección de correo que desees como la dirección DE (FROM).</p>
-<h3 id="h_01HSV91WZN5PHGRQVGB9GM5FWZ">Los mensajes de correo no se envían en servidores compartidos</h3>
-<p>Si has verificado que has configurado tu dominio correctamente para seguir la Política de dominio del remitente, pero los mensajes de correo aún no se envían desde un servidor compartido, es posible que el servidor haya alcanzado su límite de envío por hora. Para evitar esto, asegúrate de que tu sitio esté configurado para usar SMTP para enviar:</p>
+<strong> Los mensajes de correo no se envían en servidores compartidos </strong>
+<p>Si has verificado que has configurado tu dominio correctamente para seguir la Política de dominio del remitente, pero los mensajes de correo aún no se envían desde un servidor compartido, es posible que el servidor haya alcanzado su límite de envío por hora. Para evitar esto, asegúrate de que tu sitio esté configurado para usar SMTP para enviar. Revisa los siguientes artículos para más información:</p>
 <ul>
-<li><strong>WordPress:</strong> <a href="https://help.dreamhost.com/hc/es/articles/215526937-Configurar-el-plugin-WP-MAIL-SMTP-" target="_self">WP Mail SMTP</a></li>
-<li><strong>PHP:</strong> <a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer" target="_self">PHPMailer</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215526937-Configurar-el-plugin-WP-MAIL-SMTP">Mail SMTP de WordPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer" target="_self">PHPMailer</a></li>
 </ul>
 </div>
-<h2 id="h_01HSV91WZN9DW9GG33AB2S6BP7"><span id="Certificate_errors_using_PHP_5.6">Errores de certificado</span></h2>
+<h2 id="h_01HSV91WZN9DW9GG33AB2S6BP7"><span id="Certificate_errors_using_PHP_5.6">Cómo corregir los errores de certificado</span></h2>
 <div class="solvvy-solution">
 <div class="notebox-important">
-<p>En el pasado, era posible usar <strong>mail.example.com</strong> para conectarse (donde <strong>example.com</strong> es tu nombre de dominio real). Debido a cómo los clientes de correo modernos manejan la seguridad, esto NO se recomienda ya que puede generar errores de conexión. Por favor asegúrate de que solo estás usando el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214918038#nombre-del-servidor">nombre de tu servidor de correo</a> al conectarte. Esto debería ser <strong>imap.dreamhost.com</strong> o <strong>pop.dreamhost.com</strong>.</p>
+<p>En el pasado, era posible usar <strong>mail.example.com</strong> para conectarse (donde <strong>example.com</strong> es tu nombre de dominio real). Debido a cómo los clientes de correo modernos manejan la seguridad, esto NO se recomienda ya que puede generar errores de conexión. Por favor asegúrate de que solo estás usando el <a href="https://help.dreamhost.com/hc/es/articles/214918038#nombre-del-servidor">nombre de tu servidor de correo</a> al conectarte. Esto debería ser <strong>imap.dreamhost.com</strong> o <strong>pop.dreamhost.com</strong>.</p>
 </div>
-<h3 id="h_01HSV91WZNFBVV7ZJK2686QF6Z"><span id="Error_messages">Mensajes de error</span></h3>
-<p>Al enviar por correo PHP, puedes ver los siguientes errores:</p>
-<ul>
-<li><strong>PHPMailer</strong></li>
-</ul>
+<p>Los errores de certificado son otro problema común que puede ocurrir al enviar PHP mail(). A continuación, se muestra cómo encontrar el error y algunos pasos para ayudarte a resolverlo.</p>
+<h3 id="h_01HSV90P4VNC80Q9EQZSRTXC98"><span id="Mensajes_de_error">Encontrar el error</span></h3>
+<p>Al enviar PHP mail(), es posible que veas los siguientes mensajes de error:</p>
+<p><strong>PHPMailer</strong></p>
 <div class="preboxcontainer">
 <pre class="prebox">Warning: stream_socket_enable_crypto(): Peer certificate CN=`*.mail.dreamhost.com' did not match expected CN=`mail.example.com'
 </pre>
 </div>
-<ul>
-<li><strong>PHP SMTP mail</strong></li>
-</ul>
+<p><strong>PHP SMTP mail</strong></p>
 <div class="preboxcontainer">
 <pre class="prebox">Failed to connect to ssl://mail.example.com:465 [SMTP: Failed to connect socket: fsockopen(): unable to connect to ssl://mail.example.com:465 (Unknown error) (code: -1, response: )]
 </pre>
 </div>
-<ul>
-<li><strong>Plugin SMTP de WordPress</strong></li>
-</ul>
+<p><strong>WordPress SMTP plugins</strong></p>
 <div class="preboxcontainer">
 <pre class="prebox">The SMTP debugging output is shown below:
 
@@ -65,39 +77,25 @@
 2024-03-25 19:44:53	SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting
 </pre>
 </div>
-<h3 id="h_01HSV91WZNJNDX47YXJ09D685C"><span id="Solution">Solución</span></h3>
-<p>Esto se debe al nombre de host que se estás usando. El certificado hace referencia a mail.dreamhost.com que no es el mismo que tu dominio. Mira el siguiente artículo para obtener una explicación de este error:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215306748-Error-Certificate-domain-mismatch-conectando-a-un-servidor-de-correo-de-DreamHost">Error de Coincidencia de Certificado de Dominio</a></li>
-</ul>
-<p>La solución es usar el nombre de tu servidor de correo como hostname. En el código de tu formulario de correo PHP, estás utilizando tu dominio como el&nbsp;<a href="/hc/es/articles/214918038#nombre-del-servidor">nombre de servidor</a>&nbsp;de correo. Puede parecer algo como esto:</p>
+<h3 id="01J4WTQ2N6DHJK5M2NBXK2BN1M">Corregir el error</h3>
+<p>Esto se debe al nombre de host que se está utilizando. El certificado hace referencia a <strong>mail.dreamhost.com</strong>, que no es el mismo que tu dominio. Revisa <a href="https://help.dreamhost.com/hc/es/articles/215306748-Error-Certificate-domain-mismatch-conectando-a-un-servidor-de-correo-de-DreamHost">este artículo</a> para obtener una explicación de este error.</p>
+<p>La solución es utilizar el <a href="https://help.dreamhost.com/hc/es/articles/214918038-Generalidades-de-la-configuraci%C3%B3n-de-clientes-de-correo#Nombres_de_servidor">nombre del servidor de correo</a> como el nombre de host. Por ejemplo, en el código PHP de tu formulario de correo, estás utilizando tu dominio como el nombre de host:</p>
 <div class="preboxcontainer">
 <pre class="prebox">$mail_host = "mail.example.com";
 </pre>
 </div>
-<p>En lugar de usar tu nombre de dominio en la variable del servidor de correo, usa tu nombre real de servidor de correo. Consulta el siguiente artículo para obtener instrucciones sobre cómo localizar el nombre de tu servidor de correo.</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214918038#nombre-del-servidor">Cómo encontrar tu nombre de servidor de correo</a></li>
-</ul>
-<p>Actualiza tu código de formulario de correo utilizando un cliente FTP o SSH:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">Crear y editar un archivo a través de FTP</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">Crear y editar un archivo a través de SSH</a></li>
-</ul>
-<p>En tu formulario de correo, cambia tu nombre de host a lo siguiente:</p>
+<p>En su lugar, utiliza el nombre del servidor de correo de DreamHost. Actualiza el código de tu formulario de correo utilizando un <a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">cliente FTP</a> o <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">SSH</a> a lo siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox">$mail_host = "<span class="code-highlight">imap.dreamhost.com</span>"; 
 </pre>
 </div>
-<p>Cambiar el nombre de host corrige este error. Tu hostname de correo puede diferir del anterior. Consulta el siguiente artículo para obtener más detalles sobre cómo ubicar tu nombre de servidor de correo específico.</p>
-<ul>
-<li><a href="/hc/es/articles/214918038#nombre-del-servidor">Nombres de servidor de correo</a></li>
-</ul>
+<p>Cambiar el nombre de host corrige el error.</p>
 </div>
 <h2 id="h_01HSV91WZNEG9DX6RNP8FJKDY0">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215507058-Generalidades-PHP-mail-">Generalidades sobre PHP mail()</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer">Generalidades de PHPMailer</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216140597-Enviar-correo-PHP-v%C3%ADa-SMTP">Enviar correo PHP vía SMTP</a></li>
 </ul>
 </div>
