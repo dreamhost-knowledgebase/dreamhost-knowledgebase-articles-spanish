@@ -1,138 +1,93 @@
-<div id="auto-toc"> </div>
-<h2 id="h_01H9PAXSYB6EF1J564RTTNJ9XV">Generalidades</h2>
+<div id="beginner"> </div>
+<h2 id="h_01HHNA5XC7521RW6GZBG3QYTDR">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Es posible que, al intentar visitar tu página, se encuentre con un error que dice 'Site Not Found':</p>
+<p>Este artículo explica las razones por las que podrías ver el mensaje de error <span class="text-object">Site Not Found</span> al visitar tu sitio web y los pasos para resolverlo.</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/site-not-found.png" alt="Site Not Found" width="399" height="399"></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/site-not-found.png" alt="Site Not Found" width="338" height="338"></dd>
 </dl>
-<p>Este artículo te explicará las causas probables de que estés viendo este error, y como resolverlo.</p>
 </div>
-<h2 id="h_01H9PAXSYB3RFFBD8W9QY3QAQ7">La causa del error 'Site Not Found'</h2>
+<h2 id="h_01J5BYYK42BC8H2H1XNC1T75PQ" class="header-section">Causas de DNS</h2>
+<h2 id="h_01J5K2E7W06JC76KBCNAVMZ14D">Causas comúnes de DNS</h2>
+<p>Los siguientes son problemas relacionados con el DNS que podrían causar este error.</p>
+<h3 id="h_01HHNA5XC7JEKV2K8638A2SR7N">Cargar la dirección IP en un buscador</h3>
 <div class="solvvy-solution">
-<p>El error de 'Site Not Found' significa que la dirección IP que tu dominio está usando no está orientada <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-apunto-mi-sitio-" target="_self">hacia la IP correcta</a>.</p>
-<p>De manera más técnica, el error "Site Not Found" significa que los registros de DNS para tu dominio se están resolviendo hacia la dirección IP de un servidor web Apache que no está configurado para tu dominio.</p>
-<p>Cuando esto ocurre, el servidor web Apache está diseñado para simplemente mostrar el primer dominio listado en tu archivo de configuración. Para garantizar que nunca ocurra que la página web de alguien muestre accidentalmente otra página cualquiera que esté alojada en el mismo servicio Apache, DreamHost deliberadamente hace que el primer dominio en todos sus archivos de configuración muestre la misma página de error personalizada.</p>
-<p>Existen algunas razones, que se explican a continuación, por las cuales tu IP pudiera no estar dirigida correctamente hacia la IP de tu servidor web.</p>
+<p>Intentar ver tu sitio ingresando la dirección IP en tu navegador muestra automáticamente el error <span class="text-object">Site Not Found</span>. Esto ocurre porque estás viendo la IP compartida de tu servidor web, no la IP de tu sitio.</p>
+<p>Si definitivamente necesitas ver tu sitio a través de una dirección IP, la única opción es adquirir una <a href="https://help.dreamhost.com/hc/es/articles/216109647-Generalidades-de-las-IP-%C3%9Anicas">IP Única</a>.</p>
 </div>
-<h2 id="h_01H9PAXSYCRS7QC09WE826A124">Ver la dirección IP de la página en tu navegador</h2>
 <div class="solvvy-solution">
-<p>Debido a la forma en la que DreamHost configura Apache, a menos que tu hayas comprado una dirección IP única para tu dominio, el intentar ver tu página web introduciendo la dirección IP en tu navegador arrojará automáticamente el error de Site Not Found. Esto se debe a que tu estarías viendo la IP compartida de tu servidor web, en vez de la IP de tu página.</p>
-<p>Si necesariamente debes ver tu página a través de una dirección IP, deberás adquirir una IP única. Puedes leer más acerca de las IP únicas aquí:</p>
+<h3 id="h_01J5C2MQ8MGR4JDB8RVJCGMZ74">Cambiar el estado del alojamiento en el panel</h3>
+<p>Existen varias opciones de alojamiento que puedes configurar para tu sitio en tu panel. Por ejemplo:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216109647-Generalidades-de-las-IP-%C3%9Anicas">IP única</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360056398191-Configurar-tu-dominio-como-Solo-DNS">Solo DNS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-sitio-web-y-alojamiento">Completamente Alojado</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215416417-Generalidades-del-reflejo-de-un-dominio">Reflejo</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001299083-Dominios-parqueados">Parqueo</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215455377-Redireccionar-un-dominio">Redirección</a></li>
 </ul>
-</div>
-<h2 id="h_01H9PAXSYC088W2E0RC9R1PAN6">Cambios en el DNS</h2>
+<p>Cuando se ajusta el estado del alojamiento, la nueva información DNS debe actualizarse en servidores de todo el mundo. Esto se conoce como <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-del-DNS">propagación de DNS</a>. El error puede aparecer durante este período porque la información de DNS que estás recibiendo en tu computador local está desactualizada. Dependiendo de tu ubicación, puede tomar hasta varias horas para que los cambios de DNS se propaguen.</p>
+<h3 id="h_01HHNA5XC7968PQQT3KPRCS1FJ">Apuntar el DNS a la dirección IP errónea</h3>
 <div class="solvvy-solution">
+<p>Esto puede suceder si tu dominio está registrado en otra compañía y tu DNS no está correctamente apuntando a tus registros de DreamHost. Revisa <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-de-DNS-debo-apuntar-mi-sitio">este artículo</a> para confirmar a qué registros DNS de DreamHost debes apuntar tu sitio.</p>
+<p>Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/215413857-Visi%C3%B3n-general-de-los-DNS-de-DreamHost">Visión general de los DNS de DreamHost</a> para una descripción completa de cómo se configura el DNS en tu dominio.</p>
+</div>
+<h2 id="h_01J5K2HZ3EDKJZQQEYZQBZHGF6">Refrescar y revisar tu DNS</h2>
+<p>A continuación, se explica cómo actualizar el DNS de tu dominio en el panel y verificar si se ha actualizado en línea.</p>
+<h3 id="h_01J5C3SYHX920445WWDT81DNME">Refrescar el DNS en el panel</h3>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!/grid-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
+<li>Abre la página <span class="text-link">Configuraciones DNS</span>:
+<dl>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-manage-websites-dns-settings.png" alt="DNS Settings" width="222" height="205"></dd>
+</dl>
+<ul>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" target="_self" rel="undefined">Vista de Malla</a>, da clic en el botón de los '3 puntos verticales' debajo de tu dominio. Del menú que aparece da clic en el enlace <span class="text-link">Configuraciones DNS</span>.</li>
+<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" target="_self" rel="undefined">Vista de Lista</a>, da clic en el botón de los '3 puntos verticales' a la derecha de tu dominio. Del menú que aparece da clic en el enlace <span class="text-link">Configuraciones DNS</span>.
+<dl>
+<dd><em>Aparecen los registros DNS del dominio.</em></dd>
+</dl>
+</li>
+</ul>
+</li>
+<li>Haz clic en el botón <strong>Refrescar DNS</strong> en la parte superior. Esto forza una actualización de DNS en el sistema de DreamHost.</li>
+</ol>
+</div>
+<h3 id="h_01HHNA5XC7RXNXMTF52CM9GGE0">Revisar los registros actuales de DNS</h3>
+<p id="h_01J5C2V6JH0AZ9NYNW7YG2B22R"><strong>Herramientas online</strong></p>
+<dl>
+<dd>
+<p>Puedes usar el <a href="https://help.dreamhost.com/hc/es/articles/360055964552-Ver-tus-registros-DNS-de-DreamHost">Verificador de Propagación de DNS</a> de DreamHost en el panel o herramientas <a href="https://help.dreamhost.com/hc/es/articles/216560958-Herramientas-de-soluci%C3%B3n-de-problemas-de-sitios-web#Buscador_de_registros_DNS_generales" target="_blank" rel="noopener noreferrer">en línea</a> para confirmar a dónde están apuntando los registros DNS de tu dominio.</p>
+</dd>
+</dl>
+<p id="h_01J5C2VGZ5WTMDWMXZXCGDC4KJ"><strong>Herramientas de línea de comando</strong></p>
+<dl>
+<dd>
 <div class="notebox-note">
-<p>Si el mensaje de error 'Site Not Found' aparece poco después de hacer un cambio de configuración para el dominio en el panel de control, la dirección IP puede cambiar para ese dominio. Si ese es el caso, este error debe irse dentro de 4 horas—una vez los cambios de DNS propaguen a través de Internet, pues esto es normal. Si no se va en 6 horas, entonces trata las técnicas de solución de problemas.</p>
+<p>Para ejecutar herramientas de línea de comandos, debes estar conectado a un terminal a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</p>
 </div>
-<p>Es frecuente encontrar el error 'Site Not Found' debido a un cambio en tu dirección IP, que suele ser desencadenado por la eliminación del alojamiento web para un dominio, seguido por la configuración de alguno de los siguientes: <a href="https://help.dreamhost.com/hc/es/articles/215416417-Generalidades-del-reflejo-de-un-dominio">Espejo</a>, <a href="https://help.dreamhost.com/hc/es/articles/215455377-Redireccionar-un-dominio">Redirección</a>, o Parqueo. Si bien los cambios en el DNS de DreamHost son casi instantáneos, la nueva información no llega a los demás servidores en distintas partes del mundo hasta que los otros servidores hagan caducar los datos antiguos que aún contienen. A esto se le conoce como <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS">propagación de DNS</a>.</p>
-<p>El motivo por el cual tu recibes este error durante este período es que la información de DNS que está recibiendo en tu computador local está desactualizada, y que la instancia de Apache a la cual se le está (incorrectamente) dirigiendo ya no cuenta con ningún registro de tu página. Dependiendo de tu ubicación, los cambios en el DNS pueden tardar algunas horas en propagarse, así que lo mejor que se puede hacer es dejar tu dominio tal y como está durante algunas horas antes de intentar cualquier tipo de arreglo.</p>
-<p>Para refrescar el DNS:</p>
-<ol>
-<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
-<li>Da clic en el botón <strong>Administrar</strong> para abrir la página <a href="https://help.dreamhost.com/hc/es/articles/360043889332-La-p%C3%A1gina-de-Configuraciones-de-Dominios" target="_self"><span class="panel-page">Configuraciones de Dominios</span></a>, la cual te permite ajustar múltiples configuraciones de tu sitio.
-<ul>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Malla</a>, da clic en el botón <strong>Administrar</strong> en la parte inferior de la caja del sitio.</li>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Lista</a>, da clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
-</ul>
-</li>
-</ol>
-<dl>
-<dd><em>Aparece la página de DNS, que muestra un botón <strong>Actualizar DNS</strong>.</em></dd>
+<p>Revisa la sección <span class="text-section">Revisar los registros DNS de tu dominio</span> de <a href="https://help.dreamhost.com/hc/es/articles/216560958-Herramientas-de-soluci%C3%B3n-de-problemas-de-sitios-web#Revisar_los_registros_DNS_de_tu_dominio">este artículo</a> para confirmar a dónde apuntan los registros DNS de tu dominio utilizando el comando <span class="code">dig</span>.</p>
+</dd>
 </dl>
-<p>Cuando das clic en el botón <strong>Actualizar DNS</strong> en la parte superior, se fuerza una actualización de DNS en el sistema de DreamHost. Para repetir, la propagación de DNS en línea aún puede tardar varias horas.</p>
-</div>
-<h2 id="h_01H9PAXSYCSZPJBV43ET3T1Z6K">Como consultar tus registros de DNS actuales</h2>
+<h2 id="h_01J5C3WR0JGAR3VENDE7YBCPD3" class="header-section">Otras causas</h2>
+<h2 id="h_01HHNA5XC79D31310V1101QTQX">HTTPS</h2>
 <div class="solvvy-solution">
-<p>Para consultar el estado de tu actualización de DNS, puedes usar el <a href="https://help.dreamhost.com/hc/es/articles/360055964552-Ver-tus-registros-DNS-de-DreamHost">Verificador de Propagación de DNS</a> de DreamHost para ver hacia cuál dirección IP se resuelve tu dominio actualmente.</p>
-<h3 id="h_01H9PAXSYCD4V0W4HS2XQ29HGJ"><span id="Si_usas_Linux_o_Apple_Mac">Si usas Linux o Apple Mac</span></h3>
-<p>Si usas un computador Linux o Mac, también puedes ejecutar algunos comandos en tu terminal para consultar la IP actual de tu página. Visita el artículo de SSH acerca de cómo iniciar sesión en tu terminal:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
-</ul>
-<p>Una vez que hayas iniciado sesión en tu terminal, puedes ejecutar el comando <span class="code">dig</span> para verificar el estado de la resolución de IP. Por ejemplo, este comando comprueba la dirección IP actual que se resuelve por internet en tu ubicación. (Tu IP será diferente dependiendo del servidor en el cual esté ubicada tu página):</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">dig +short example.com</span>
-<span class="cmdoutput">64.90.47.165</span>
-</pre>
+<p>El error <span class="text-object">Site Not Found</span> también puede aparecer si intentas ver la URL segura de tu sitio (<strong>https</strong>://example.com) pero no has añadido un certificado SSL a tu dominio.</p>
+<p>Para resolver esto, agrega un <a href="https://help.dreamhost.com/hc/es/articles/216539548-Agregar-un-certificado-gratuito-Let-s-Encrypt">certificado gratuito de Let's Encrypt</a> o un <a href="https://help.dreamhost.com/hc/es/articles/215089748-Comprar-un-certificado-SSL-firmado-profesionalmente">certificado profesional de pago</a> a tu dominio.</p>
 </div>
-<p>Este comando consulta la dirección IP asignada actualmente a tu servidor web de DreamHost. (Tu IP será diferente dependiendo del servidor en el cual esté ubicada tu página.)</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">dig +short example.com @ns1.DreamHost.com</span>
-<span class="cmdoutput">64.90.47.165</span>
-</pre>
-</div>
-<p>Si <strong>example.com</strong> está usando nameservers de DreamHost, ambos comandos deberían arrojar la misma IP. Si no, intenta purgar tu DNS local. Puedes leer más acerca de esto en el siguiente artículo:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215680477-Generalidades-de-limpiar-el-DNS">Resumen de Purga de DNS</a></li>
-</ul>
-<h3 id="h_01H9PAXSYCD92E4AGZPVW5XDTZ"><span id="Si_usas_Windows">Si usas Windows</span></h3>
-<p>Los usuarios de Windows pueden usar el comando <span class="code">nslookup</span> en el símbolo de sistema. Puedes leer más acerca del uso del símbolo de sistema en Windows aquí:</p>
-<ul>
-<li><a href="https://docs.microsoft.com/es-mx/windows-server/administration/windows-commands/windows-commands" target="_self">Comandos de Windows</a></li>
-</ul>
-<p>El siguiente comando verifica la dirección IP actual resolviendo en línea en su ubicación (tu IP es diferente dependiendo de la servidor en el que se encuentra tu sitio):</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">C:\Users\user&gt; </span><span class="command">nslookup example.com</span>
-<span class="cmdoutput">Nombre: example.com
-Dirección: 64.90.47.165</span>
-</pre>
-</div>
-<p>Este comando comprueba la dirección IP actual que se resuelve por internet en tu ubicación. (Tu IP será diferente dependiendo del servidor en el cual esté ubicada tu página.)</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">C:\Users\user&gt; </span><span class="command">nslookup example.com ns1.DreamHost.com</span>
-<span class="cmdoutput">Nombre: example.com
-Dirección: 64.90.47.165</span>
-</pre>
-</div>
-<p>Si <strong>example.com</strong> estás usando los nameservers DreamHost, ambos comandos deberían arrojar la misma IP. Si no, intenta purgar tu DNS local. Puedes leer más acerca de esto en el siguiente artículo:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215680477-Generalidades-de-limpiar-el-DNS">Generalidades sobre limpiar el DNS</a></li>
-</ul>
-</div>
-<h2 id="h_01H9PAXSYCZE01XMM81G6DYVGW">HTTPS</h2>
+<h2 id="h_01HHNA5XC7NZ8R6AJECZ1VVA9A">Tu cuenta es suspendida</h2>
 <div class="solvvy-solution">
-<p>El error 'Sitio Web no encontrado' también puede aparecer al intentar acceder a un sitio a través de una conexión segura (HTTPS) al dominio sin tener un certificado SSL activo. Esto ocurre cuando el servicio HTTP Apache del dominio carece de un servicio HTTPS Apache coincidente para manejar la solicitud segura. Para resolver esto, agrega <a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL">un certificado SSL</a> al dominio.</p>
-<h2 id="h_01H9PAXSYCTECHA9G7G9JP37C5">Si no estás usando el DNS de DreamHost</h2>
-<p>Si tu no está usando DreamHost para administrar el DNS de tu dominio, lo más probable es que la dirección IP de su proveedor de DNS que apunta hacia DreamHost sea incorrecta.</p>
-<p>Tu puedes averiguar la IP correcta haciendo una consulta al los nameservers de DreamHost con uno de los comandos en la sección anterior (dependiendo de tu sistema operativo).</p>
-<p>Aquí hay otra forma de <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-apunto-mi-sitio-">averiguar la IP correcta</a>:</p>
-<ol>
-<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
-<li>Da clic en el botón <strong>Administrar</strong> para abrir la página <a href="https://help.dreamhost.com/hc/es/articles/360043889332-La-p%C3%A1gina-de-Configuraciones-de-Dominios" target="_self"><span class="panel-page">Configuraciones de Dominios</span></a>, la cual te permite ajustar múltiples configuraciones de tu sitio.
-<ul>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Malla</a>, da clic en el botón <strong>Administrar</strong> en la parte inferior de la caja del sitio.</li>
-<li>Si estás en la <a href="https://help.dreamhost.com/hc/es/articles/360043889332#Vista_de_Malla_o_Lista" target="_blank" rel="noopener noreferrer">Vista de Lista</a>, da clic en el botón <strong>Administrar</strong> a la derecha de tu dominio.</li>
-</ul>
-</li>
-<li>Da clic en la pestaña <span class="text-object">DNS</span> en la parte superior.</li>
-<li>Cuando la página se abra <span class="panel-page">DNS</span>, ubica el registro A en la sección <span class="text-section">Registros</span>.</li>
-<li>Actualiza tu registro A con tu proveedor de DNS para apuntar hacia esta IP de DreamHost.</li>
-</ol>
-<p>Una vez que la DNS se haya propagado, no debería seguir apareciendo el robot durmiendo de DreamHost.</p>
-<h2 id="h_01H9PAXSYCM1V1KJ1Y1JM72YSJ">Usar una cuenta suspendida</h2>
-<div class="solvvy-solution">
-<p>Para cuentas que se hayan suspendido por falta de pago, DreamHost dejará de servir el DNS para la cuenta. Tus páginas mostrarán el mensaje de "Site Not Found " hasta que se haya ejecutado el pago, y la cuenta se haya reactivado. Inicia sesión en tu panel de control o consulta tus correos de DreamHost para ver si este es el caso.</p>
-<h2 id="h_01H9PAXSYC0ACZ7MFB515KPPP4">Contactar a soporte</h2>
-<div id="Contactar_a_soporte" class="solvvy-solution">
-<p>Si no puedes resolver este problema con las sugerencias antes mencionadas, por favor contacta a nuestro departamento de soporte técnico para recibir asistencia.</p>
-<p>Puedes contactar a soporte técnico a través de tu panel en <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=support.dashboard#" target="_self">Contactar a Soporte</a>. O consulta el siguiente artículo para otros métodos de contacto:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">Contactar a DreamHost</a></li>
-</ul>
+<p>Si tu cuenta está <a href="https://help.dreamhost.com/hc/es/articles/215213247-Cuentas-suspendidas-y-deshabilitadas">suspendida</a> debido a falta de pago, DreamHost dejará de servir el DNS para todos los dominios en la cuenta. Hasta que la cuenta se pague y reactive, se mostrará el error <span class="text-object">Site Not Found</span>.</p>
+<p>Para confirmar si este podría ser el caso, <a href="https://panel.dreamhost.com" target="_blank" rel="noopener noreferrer">inicia sesión en tu panel</a>. Se mostrará un mensaje si tu cuenta está suspendida.</p>
 </div>
-<h2 id="h_01H9PAXSYCQHH272J9S25BT0HP">Ver también</h2>
+<h2 id="h_01HHNA5XC7P3Q8QVWM628AXAMP">Contactar a soporte</h2>
+<div class="solvvy-solution">
+<p>Si no puedes resolver este problema con las sugerencias anteriores, <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">contacta a soporte</a> para obtener más ayuda.</p>
+</div>
+<h2 id="h_01HHNA5XC8GGR0GHN4FFFB4KDF">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">Generalidades sobre contactar a soporte</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/categories/202186727-Soluci%C3%B3n-de-problemas">Lista de artículos de resolución de problemas en páginas web</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216109647-Generalidades-de-las-IP-%C3%9Anicas">Resumen de IP única</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216456827-C%C3%B3mo-limpiar-el-cache-de-tu-buscador" target="_self">Como limpiar el cache de tu navegador</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215680477-Generalidades-de-limpiar-el-DNS">Resumen de Limpieza de DNS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456827-C%C3%B3mo-limpiar-el-cache-de-tu-buscador">Cómo limpiar el cache de tu buscador</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215680477-Generalidades-sobre-limpiar-el-DNS">Generalidades sobre limpiar el DNS</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Visi%C3%B3n-general-de-los-DNS-de-DreamHost">Visión general de los DNS de DreamHost </a></li>
 </ul>
-</div>
-</div>
 </div>
