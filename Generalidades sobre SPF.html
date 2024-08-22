@@ -1,106 +1,54 @@
-<h2>Generalidades</h2>
-<div class="solvvy-solution">
-<p>El Convenio de Remitentes, también conocido como <a href="https://en.wikipedia.org/wiki/Sender_Policy_Framework">SPF</a> (Sender Policy Framework), especifica qué servidores de correo pueden enviar correos desde tu dominio. De esta manera, ayudan a evitar que los spammers se hagan pasar por ti y pueden ayudar a reducir el spam y la suplantación de identidad (por correo).</p>
-<p>Para obtener más detalles sobre la suplantación de mensajes, consulta el siguiente artículo:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215036058-Resumen-de-la-pol%C3%ADtica-de-dominio-del-remitente-y-suplantaci%C3%B3n-de-identidad-o-spoofing">Política de dominio del remitente y suplantación de identidad</a></li>
-</ul>
+<div id="intermediate"> </div>
+<h2 id="h_01J59NM9ETRQ633SP36MGGWAX8">Generalidades</h2>
+<p>A continuación se explica qué son los <a href="https://es.wikipedia.org/wiki/Sender_Policy_Framework">registros SPF</a> (Sender Policy Framework) y cómo funcionan en DreamHost.</p>
+<p id="h_01J5C1NH6F7C8GA5VD8VSPBAXE"><strong>¿Qué son los registro SPF?</strong></p>
+<p>Los registros SPF son registros DNS de correo electrónico que especifican qué servidores de correo están autorizados para enviar correos desde tu dominio. Los servidores de correo receptores utilizan estos registros para verificar el remitente del sobre y aprobar o rechazar el correo entrante, ayudando así a reducir el spam y el suplantamiento de identidad por parte de los spammers.</p>
+<div class="prereqs">
+<p>Las siguientes secciones asumen que <a href="https://help.dreamhost.com/hc/es/articles/215035818-Ubicar-tus-registros-DNS-de-correo-de-DreamHost">tu correo está alojado en DreamHost</a>. Si no estás utilizando los <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-nameservers">nameservers de DreamHost</a>, debes configurar los registros SPF con el proveedor de correo actual en su lugar.</p>
+<p>Ten en cuenta que SPF trata los subdominios (como <strong>sub.example.com</strong>) por separado, por lo que puede ser conveniente especificar los registros SPF tanto para <strong>example.com</strong> como para cualquier alojamiento, como <strong>yourhost.example.com</strong>.</p>
 </div>
-<h2><span id="¿Cómo_funcionan_los_registros_SPF?">¿Cómo funcionan los registros SPF?</span></h2>
-<div class="solvvy-solution">
-<p>Los servidores de correo que reciben un correo para su posterior entrega pueden verificar el SPF comparando la dirección IP del servidor remitente con el registro DNS SPF del remitente del sobre del correo. Si el correo se envió desde un servidor que no está incluido en ese registro SPF, es más probable que el correo sea falso o no sea confiable. El servidor de correo receptor puede manejar el correo de manera diferente debido a la falla del SPF, como por ejemplo, marcar el correo como spam o rechazar el correo.</p>
-</div>
-<h2><span id="Registros_SPF_de_DreamHost">Registros SPF de DreamHost</span></h2>
-<div class="solvvy-solution">
-<div class="notebox-note">
-<p>Si no estás usando los <a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-Nameservers">nameservers</a> de DreamHost, debe configurar los registros SPF con el proveedor DNS de correo actual.</p>
-<p>Ten en cuenta que SPF trata los subdominios (como <strong>sub.example.com</strong>) por separado, por lo tanto, es posible que desee especificar registros SPF tanto para <strong>example.com</strong> como para cualquier host como <strong>tuhost.example.com</strong>.</p>
-</div>
-<h3>Si tu correo está alojado en DreamHost y NO has agregado un registro SPF personalizado</h3>
-<p>Esta sección sólo aplica si tu correo está alojado en DreamHost y actualmente no tienes un registro SPF personalizado configurado en tu dominio. Puedes verificar hacia dónde apuntan tus registros MX en un sitio como este:</p>
-<ul>
-<li><a href="https://mxtoolbox.com/">mxtoolbox.com</a></li>
-</ul>
-<p>Si tu correo está alojado en DreamHost, el resultado debería aparecer así:</p>
-<p>Registros MX No-filtrados:</p>
-<div class="preboxcontainer">
-<pre class="prebox">mx1.dreamhost.com
-mx2.dreamhost.com</pre>
-</div>
-<p><span class="x x-first x-last">Registros MX filtrados</span><span class="x x-first x-last"> (MailChannels)</span>:</p>
-<div class="preboxcontainer">
-<pre class="prebox">mx1.mailchannels.net
-mx2.mailchannels.net</pre>
-</div>
-<div class="notebox-note">
-<p>Revisa el siguiente artículo para verificar que la entrada sea igual que la información del <span class="text-object">DNS</span> que ves en el panel:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215035818-C%C3%B3mo-encontrar-tus-registros-DNS-de-correo-electr%C3%B3nico-DreamHost" target="_self">Ubicar tus registros DNS de correo de DreamHost</a></li>
-</ul>
-</div>
-<p>DreamHost agregará el siguiente registro SPF automáticamente a tu dominio:</p>
+<h2 id="h_01J59NM9EVX86BEAC3HCQ5BE9Q">Registros SPF de DreamHost</h2>
+<p>DreamHost agrega automáticamente los siguientes registros SPF a tu dominio:</p>
 <div class="preboxcontainer">
 <pre class="prebox">v=spf1 mx include:netblocks.dreamhost.com include:relay.mailchannels.net -all</pre>
 </div>
-<h3>Si tu correo está alojado en DreamHost y ya has agregado un registro SPF personalizado</h3>
-<p>Esta sección solo aplica si tu correo está alojado en DreamHost y ya tienes un registro SPF personalizado configurado en tu dominio. Por ejemplo, es posible que ya tengas configurado un registro SPF de Google que se vea así:</p>
+<h2 id="h_01J59NM9EVG1ZD55EPG7RHRZ0Y"><span id="dreamhost-spf-records">Agregar o editar registros SPF</span></h2>
+<p>Esta sección explica cómo agregar o editar un registro SPF.</p>
+<div class="notebox-tip">
+<p>Al agregar un registro SPF personalizado se elimina automáticamente el registro predeterminado de DreamHost. Si necesitas recuperarlo, debes agregarlo manualmente, como aparece a continuación.</p>
+<p>Si eliminas tu registro SPF personalizado, el registro SPF de DreamHost se agregará de nuevo automáticamente.</p>
+</div>
+<h3 id="h_01J5P08YQM6F1Y2QTSXDS1QRXP">Agregar un registro SPF personalizado</h3>
+<p>Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/360035516812-Agregar-registros-de-DNS-personalizados#Registro_TXT">Agregar registros DNS personalizados</a> para obtener instrucciones sobre cómo agregar o editar un registro TXT. Un registro SPF personalizado de Google puede verse así:</p>
 <div class="preboxcontainer">
 <pre class="prebox">v=spf1 include:_spf.google.com ~all</pre>
 </div>
-<p>Si también necesitas agregar el registro de DreamHost de <strong>include:netblocks.dreamhost.com</strong>, puedes agregarlo así:</p>
+<h3 id="h_01J5P092F7D4CZNYMKQM5MRE0F">Agregar un registro SPF de DreamHost a tu registro personalizado</h3>
+<p>Si también necesitas agregar el registro de DreamHost <span class="code">include:netblocks.dreamhost.com</span>, edita tu registro SPF y agrégalo después del registro personalizado de Google. Por ejemplo:</p>
 <div class="preboxcontainer">
 <pre class="prebox">v=spf1 include:_spf.google.com include:netblocks.dreamhost.com -all</pre>
 </div>
-<p>Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/360035516812-Agregar-registros-DNS-personalizados#Registro_TXT">Agregar registros de DNS personalizados</a> para obtener instrucciones sobre cómo editar un registro TXT existente.</p>
-</div>
-<h2>¿Qué sucede si agrego un nuevo registro SPF personalizado?</h2>
+<h2 id="h_01J59NM9EV2XYF75CGYMPFRXRT">Verificar tu registro SPF</h2>
 <div class="solvvy-solution">
-<p>Si agregas un registro SPF personalizado a tu dominio, el registro SPF DreamHost predeterminado se elimina automáticamente. Si lo necesitas de nuevo, debes agregarlo manualmente como se muestra arriba.</p>
-</div>
-<h2>¿Qué sucede si elimino mi registro SPF personalizado?</h2>
-<div class="solvvy-solution">
-<p>Si eliminas tu registro SPF personalizado, el registro SPF DreamHost se agrega automáticamente.</p>
-</div>
-<h2><span style="font-weight: 400;">¿Qué sucede si envío un correo fuera del servidor web desde un formulario de contacto?</span></h2>
-<div class="solvvy-solution">
-<p><span style="font-weight: 400;">Se recomienda encarecidamente que cualquier correo que envíes desde tu servidor web utilice SMTP. Esto garantiza que el correo se envíe desde el servidor de correo y utilice los registros SPF correctos. Revisa los siguientes artículos para obtener más información:</span></p>
+<p>Puedes utilizar herramientas en línea como las siguientes para probar tu registro SPF:</p>
 <ul>
-<li style="font-weight: 400;"><a href="https://help.dreamhost.com/hc/es/articles/216140597-Enviar-correo-PHP-v%C3%ADa-SMTP">Enviar correo PHP vía SMTP</a></li>
-<li style="font-weight: 400;"><a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer"><span style="font-weight: 400;">Generalidades sobre PHPMailer</span></a></li>
-<li style="font-weight: 400;"><a href="https://help.dreamhost.com/hc/es/articles/215526937-Configurar-el-plugin-WP-MAIL-SMTP-" target="_self">Configurar el plugin 'WP MAIL SMTP'</a></li>
+<li>
+<a href="https://www.kitterman.com/spf/validate.html" target="_blank" rel="noopener noreferrer">Las herramientas de prueba de registros SPF</a> verifican la sintaxis de un registro y realizan una búsqueda DNS para comprobar que el registro ha sido publicado.</li>
+<li><a href="https://appmaildev.com/es/spf/" target="_blank" rel="noopener noreferrer">Comprueba el registro SPF usando Gmail o Yahoo</a></li>
 </ul>
 </div>
-<h2><span style="font-weight: 400;">Probar el registro SPF</span></h2>
-<div class="solvvy-solution">
-<p><span style="font-weight: 400;">Hay algunas formas de probar tu registro SPF antes y después de crearlo:</span></p>
+<h2 id="h_01J59NM9EVT9X5E2VNX4SXHJZJ">Formularios de contacto y registros SPF</h2>
+<p>Asegúrate de que cualquier formulario de contacto en tu sitio web esté configurado para usar SMTP. Esto garantiza que el correo se envíe desde el servidor de correo y utilice los registros SPF correctos. Revisa los siguientes artículos para obtener más información:</p>
 <ul>
-<li style="font-weight: 400;">
-<a href="https://www.kitterman.com/spf/validate.html"><span style="font-weight: 400;">SPF Record Testing Tools</span></a><span style="font-weight: 400;"> es un probador para verificar la sintaxis de un registro antes de agregarlo, y es también un buscador de DNS para verificar que el registro ha sido publicado.</span>
-</li>
-<li style="font-weight: 400;">
-<a href="https://appmaildev.com/es/spf/"><span style="font-weight: 400;">Prueba el registro SPF usando Gmail o Yahoo</span></a><span style="font-weight: 400;"> enviando un correo a uno o ambos hosts desde todas las fuentes desde las cuales envías el correo. </span>
-</li>
-<li style="font-weight: 400;">
-<span style="font-weight: 400;">Haz una prueba enviando un correo a </span><a href="https://250ok.com/tools/spf-analyzer/"><span style="font-weight: 400;">una herramienta de prueba automatizada</span></a><span style="font-weight: 400;"> desde todas las fuentes desde las cuales envía correo.</span>
-</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216140597-Enviar-correo-PHP-v%C3%ADa-SMTP">Enviar correo PHP vía SMTP </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer">Generalidades de PHPMailer </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215526937-Configurar-el-plugin-WP-MAIL-SMTP" target="_self">Configurar el plugin 'WP MAIL SMTP' </a></li>
 </ul>
-</div>
-<h2><span style="font-weight: 400;">Nota sobre el remitente del sobre</span></h2>
-<div class="solvvy-solution">
-<p><span style="font-weight: 400;">Cuando el alojamiento receptor maneja las verificaciones SPF, la validación se realiza en el remitente del sobre y no en los detalles del encabezado real. La información sobre la diferencia entre el remitente 'sobre' y los detalles reales del encabezado 'desde' se detalla aquí:</span></p>
+<h2 id="h_01J59NM9EVVCEXXAHYDHX0J6JJ"><span id="Ver_tambien">Ver también</span></h2>
 <ul>
-<li style="font-weight: 400;"><a href="https://help.dreamhost.com/hc/es/articles/215036058-Resumen-de-la-pol%C3%ADtica-de-dominio-del-remitente-y-suplantaci%C3%B3n-de-identidad-o-spoofing"><span style="font-weight: 400;">Generalidades sobre la política de dominio del remitente y suplantación de identidad</span></a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215036058-Generalidades-de-la-pol%C3%ADtica-de-dominio-del-remitente-y-suplantaci%C3%B3n-de-identidad-o-spoofing">Generalidades de la política de dominio del remitente y suplantación de identidad o spoofing </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216106197-Agregar-un-registro-SPF">Agregar un registro SPF </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214694348-Registros-b%C3%A1sicos-de-DNS">Registros básicos de DNS </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Visi%C3%B3n-general-de-los-DNS-de-DreamHost">Visión general de los DNS de DreamHost </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360035516812-Agregar-registros-de-DNS-personalizados">Agregar registros de DNS personalizados </a></li>
 </ul>
-</div>
-<h2><span id="See_also">Ver también</span></h2>
-<div class="solvvy-hidden">
-<h3>Enlaces internos</h3>
-<ul>
-<li><a style="background-color: #ffffff;" href="https://help.dreamhost.com/hc/es/articles/215036058-Resumen-de-la-pol%C3%ADtica-de-dominio-del-remitente-y-suplantaci%C3%B3n-de-identidad-o-spoofing">Generalidades sobre la política de dominio del remitente y suplantación de identidad</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216106197-Agregar-un-registro-SPF" target="_self" rel="undefined">Agregar un registro SPF</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214694348-Registros-DNS-b%C3%A1sicos">Registros DNS básicos</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS">Generalidades de la propagación de DNS</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">Generalidades de los DNS de DreamHost</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360035516812-Agregar-registros-DNS-personalizados">Agregar registros de DNS personalizados</a></li>
-</ul>
-</div>

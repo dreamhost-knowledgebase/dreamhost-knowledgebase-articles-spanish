@@ -1,173 +1,117 @@
-<div id="auto-toc">&nbsp;</div>
-<h2 id="h_01HRSSYJVV1PD465DMFESEMJMX">Generalidades</h2>
-<div class="solvvy-solution">
-<p>Verás los términos directorio <span class="text-object">/home</span>, <span class="text-object">directorio principal de usuario</span>, y <span class="text-object">directorio de sitio web</span> se utilizan con mucha frecuencia al leer artículos sobre dónde cargar y administrar los archivos de tu sitio web. Estos términos pueden ser confusos, ya que todos apuntan a una ubicación diferente en el servidor.</p>
-<p>Este artículo explica qué son estos directorios y cómo confirmar que te encuentras en la ubicación correcta en el servidor al administrar tu sitio web.</p>
-</div>
-<h2 id="h_01HRSSYJVWCVFWBKA18RE388C2">Terminología</h2>
-<div class="solvvy-solution">
-<p>Los siguientes términos se explican en este artículo:</p>
-<table class="wikitable" style="height: 170px;"><colgroup> <col width="34%" /> <col width="66%" /> </colgroup>
+<div id="beginner"> </div>
+<h2 id="h_01HRSSGRMKB84GX73NEMNT4QYZ">Generalidades</h2>
+<p>Este artículo explica los distintos directorios que puedes ver en tu servidor web y cómo confirmar que te encuentras en la ubicación correcta al administrar tu sitio.</p>
+<h2 id="h_01HRSSGRMKT72C3F9FQHMRK25F" class="header-section">Terminología</h2>
+<p>Verás los términos directorio <span class="text-object">/home</span>, <span class="text-object">directorio principal del usuario</span> y <span class="text-object">directorio del sitio web</span> utilizados con mucha frecuencia al leer artículos sobre dónde cargar y administrar los archivos de tu sitio web. Estos términos pueden ser confusos ya que todos apuntan a una ubicación diferente en el servidor.</p>
+<h3 id="h_01J5RAGFGKH05ZBCYW0NRWQ8EA">Usuario</h3>
+<p>Un usuario (o nombre de usuario) es el nombre de identificación en un servidor web al que se asigna un dominio específico. Este es el usuario que se utiliza para iniciar sesión en tu servidor con un cliente <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales" target="_self">SFTP</a> o <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> para administrar tu sitio web. Se pueden crear varios sitios web con un solo usuario. Revisa los siguientes artículos para obtener más información sobre los usuarios en DreamHost.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360020340732-Agregar-un-usuario-a-un-servidor">Agregar un usuario a un servidor</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360020605511-Mover-un-dominio-a-un-usuario-nuevo">Mover un dominio a un usuario nuevo</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215562847-Pol%C3%ADtica-de-un-usuario-por-dominio">Política de un usuario por dominio</a></li>
+</ul>
+<h3 id="h_01J5RAGKZZCWAQYR7J9G4C2K6Q">Directorios</h3>
+<p>En este artículo se explican los siguientes directorios:</p>
+<table style="border-collapse: collapse; width: 80%;" border="1">
 <tbody>
-<tr style="height: 22px;">
-<th style="height: 22px; width: 235.6px;" bgcolor="#F2F2F2">Términos</th>
-<th style="height: 22px; width: 458px;" bgcolor="#F2F2F2">Explicación</th>
+<tr>
+<th style="width: 30%;">Término</th>
+<th style="width: 70%;">Explicación</th>
 </tr>
-<tr style="height: 44px;">
-<td style="height: 44px; width: 227.6px;"><a href="#usuario" target="_self" rel="undefined">Usuario</a></td>
-<td style="height: 44px; width: 450px;">Un usuario/nombre de usuario es el nombre asignado a un dominio en el servidor.</td>
+<tr>
+<td><a href="#el-directorio-home-del-servidor" target="_self" rel="undefined">El directorio /home del servidor</a></td>
+<td>El directorio en el servidor web donde se encuentran todos los usuarios.</td>
 </tr>
-<tr style="height: 22px;">
-<td style="height: 22px; width: 227.6px;"><a href="#el-directorio-home-del-servidor" target="_self" rel="undefined">El directorio /home del servidor</a></td>
-<td style="height: 22px; width: 450px;">Directorio donde se encuentran todos los usuarios</td>
+<tr>
+<td><a href="#el-directorio-home-del-usuario" target="_self">El directorio principal del usuario</a></td>
+<td>El directorio del usuario individual.</td>
 </tr>
-<tr style="height: 22px;">
-<td style="height: 22px; width: 227.6px;"><a href="#directorios-de-usuario" target="_self">Directorios de usuario</a></td>
-<td style="height: 22px; width: 450px;">Varios directorios de usuarios en el directorio <span class="text-object">/home</span></td>
-</tr>
-<tr style="height: 38px;">
-<td style="height: 38px; width: 227.6px;"><a href="#el-directorio-home-del-usuario" target="_self" rel="undefined">El directorio /home del usuario</a></td>
-<td style="height: 38px; width: 450px;">Directorio de un solo usuario. (También referenciado por el símbolo <span class="text-object wysiwyg-font-size-x-large">~</span>)</td>
-</tr>
-<tr style="height: 22px;">
-<td style="height: 22px; width: 227.6px;"><a href="#el-directorio-del-sitio-web" target="_self">El directorio del sitio web</a></td>
-<td style="height: 22px; width: 450px;">Directorio de sitios web con un solo nombre de usuario</td>
+<tr>
+<td><a href="#el-directorio-del-sitio-web" target="_self">The website directory</a></td>
+<td>Los directorios específicos de cada sitio web administrado por el usuario.</td>
 </tr>
 </tbody>
 </table>
+<p>Esta es una representación simple de cómo se organiza cada término anterior en el servidor para múltiples usuarios.</p>
+<div class="preboxcontainer">
+<pre class="prebox">/home<br>     /user1<br>           /example1.com<br>           /example2.com<br>     /user2<br>           /example3.com<br>           /example4.com</pre>
 </div>
-<div id="usuario" class="section-link">&nbsp;</div>
-<h2 id="h_01HRSSYJVWGP52YS6JCQ6JD02S">Usuario</h2>
+<div id="el-directorio-home-del-servidor" class="section-link"> </div>
+<h2 id="h_01J5RAB1ZPT6MR09HQ5GRKCS82" class="header-section">Directorios en el servidor</h2>
+<h2 id="h_01HRSSGRMMCN0Z6ZHP2ZBHZ4G0">El directorio /home del servidor</h2>
 <div class="solvvy-solution">
-<p>Un usuario del sitio web es el nombre de usuario asignado a tu nombre de dominio en el servidor. Este es el nombre de usuario que se usa para iniciar sesión en tu servidor con un cliente <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">SFTP</a> o <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> para administrar tu sitio web. Se pueden crear varios sitios web con un solo nombre de usuario. Ve los siguientes artículos para obtener más información sobre los usuarios de DreamHost.</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360020340732-Agregar-un-usuario-a-un-servidor">Agregar un usuario a un servidor</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360020605511-Mover-un-dominio-a-un-nuevo-usuario">Mover un dominio a un usuario nuevo</a></li>
-</ul>
-</div>
-<div id="el-directorio-home-del-servidor" class="section-link">&nbsp;</div>
-<h2 id="h_01HRSSYJVWT2H3WD2SCT2HZ8QY">El directorio /home del servidor</h2>
-<div class="solvvy-solution">
-<p>El directorio <span class="text-object">/home</span> es el directorio en el servidor donde <strong>TODOS</strong> los usuarios están ubicados. Este es referenciado como <span class="text-object">/home</span>. En el servidor se verá simplemente así:</p>
+<p>El directorio <span class="text-object">/home</span> es el directorio del servidor donde se encuentran <strong>TODOS</strong> los usuarios. Se hace referencia a este como <span class="text-object">/home</span>. En el servidor, simplemente se vería así:</p>
 <div class="preboxcontainer">
 <pre class="prebox">/home</pre>
 </div>
 <ul>
-<li>Ningún usuario en DreamHost tiene acceso a este directorio.</li>
-<li>Este directorio solo contiene varios directorios de nombre de usuario.</li>
-<li>Estos directorios de usuarios contienen sitios web.&nbsp;</li>
+<li>Los usuarios no tienen acceso a este directorio.</li>
+<li>Este directorio solo contiene directorios de usuarios.</li>
+<li>Estos directorios de usuarios contienen sitios web.</li>
 </ul>
 </div>
-<div id="directorios-de-usuario" class="section-link">&nbsp;</div>
-<h2 id="h_01HRSSYJVWBJ3R33BCSZ65SKGS">Directorios de usuario</h2>
+<div id="el-directorio-home-del-usuario" class="section-link"> </div>
+<h2 id="h_01HRSSGRMM6TNS8XQ2BTP1Z1A7">El directorio principal del usuario</h2>
 <div class="solvvy-solution">
-<p>El directorio <span class="text-object">/home</span> del servidor contiene muchos nombres de usuario diferentes. Cada nombre de usuario es su propio directorio independiente en el directorio <span class="text-object">/home</span>.</p>
-<h3 id="h_01HRSSYJVWA3GM4A7ZSP6NGYNS">Servidores Shared</h3>
-<p>Si estás en un <a href="https://help.dreamhost.com/hc/es/articles/360022117051-Agregar-un-plan-de-alojamiento-Starter-Shared" target="_self">servidor web compartido</a>, los nombres de usuario que has creado junto con otros usuarios de ese servidor se encuentran en este directorio <span class="text-object">/home</span>. Por ejemplo:</p>
+<p>El directorio principal del usuario es específico de un único usuario en el servidor. Es uno de los muchos usuarios que figuran en el directorio <span class="text-object">/home</span> del servidor. Por ejemplo:</p>
 <div class="preboxcontainer">
 <pre class="prebox">/home
-    /youruser1
-    /youruser2<br />    /youruser3
-    /otheruser1
-    /otheruser2
-    /otheruser3</pre>
+    /user1
+    /user2<br>    /user3</pre>
 </div>
-<h3 id="h_01HRSSYJVWH2AGN90V1PDY5S0G">Servidores VPS o Dedicados</h3>
-<p>Si estás en un Servidor <a href="https://help.dreamhost.com/hc/es/articles/215280058-Generalidades-de-Servidor-Virtual-Privado-VPS-" target="_self">VPS</a> o <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self">Dedicados</a>, solo tus nombres de usuario personales están ubicados en el directorio <span class="text-object">/home</span>. Por ejemplo:</p>
+<p><a href="https://help.dreamhost.com/hc/es/articles/215562847-Pol%C3%ADtica-de-un-usuario-por-dominio">Sólo tu usuario tiene acceso a este directorio de usuarios específico</a>. Nadie más puede acceder.</p>
+<div class="notebox-tip">
+<p><strong>SSH</strong></p>
+<p>Si has iniciado sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>, puedes correr el comando <span class="code">pwd</span> para ver en qué directorio te encuentras actualmente. Así es como se vería si ya te encuentras en el directorio principal de tu usuario.</p>
 <div class="preboxcontainer">
-<pre class="prebox">/home
-    /youruser1
-    /youruser2
-    /youruser3</pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">pwd</span>
+<span class="cmdoutput">/home/user</span></pre>
 </div>
-</div>
-<div id="el-directorio-home-del-usuario" class="section-link">&nbsp;</div>
-<h2 id="h_01HRSSYJVW7M5Z9AGEFEP8RRGP">El directorio /home del usuario</h2>
-<div class="solvvy-solution">
-<div class="notebox-note">
-<p>Este es el directorio al que se hace referencia en este centro de ayuda cuando se menciona el término <span class="text-object">directorio /home o inicio del usuario</span>.</p>
-<p>Este directorio a menudo es referenciado por el símbolo <span class="text-object wysiwyg-font-size-x-large">~</span>. Por ejemplo:</p>
+<p>Puedes navegar hasta este directorio utilizando el símbolo <span class="text-object wysiwyg-font-size-x-large">~</span>. Por ejemplo:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
 </div>
 </div>
-<p>El directorio principal del usuario es específico para un solo usuario en el servidor. Es uno de los muchos usuarios que figuran en el directorio <span class="text-object">/home</span> del servidor. Por ejemplo:</p>
-<div class="preboxcontainer">
-<pre class="prebox">/home/youruser1</pre>
-</div>
-<p>Solo tu usuario tiene acceso a este directorio de usuarios específico. Nadie más puede acceder a él. Aquí es donde residen todos los archivos de configuración de usuario y de tu sitio web.</p>
-<p>Si has iniciado sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>, puedes correr el comando <span class="code">pwd</span> para ver en qué directorio se encuentra actualmente. Así es como aparecería si ya estuvieras en el directorio principal de tu usuario.</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">pwd</span>
-<span class="cmdoutput">/home/username</span></pre>
-</div>
-<h3 id="h_01HRSSYJVW8B66BNZ6ER8GQNNM">¿Para qué se usa este directorio?</h3>
-<p>Este directorio se usa con mayor frecuencia para administrar los archivos de configuración de tu usuario (como <span class="text-object">.bash_profile</span>) y revisa tus <a href="https://help.dreamhost.com/hc/es/sections/203242117-Logs" target="_self" rel="undefined">registros de error y acceso</a>. Si necesitas administrar los archivos de tu sitio web, debes navegar al directorio de tu sitio web.</p>
-<p>Así es como se vería en un cliente SFTP como Filezilla:</p>
+<h3 id="h_01HRSSGRMMT107882GCTGB12GW">¿Para qué se usa este directorio?</h3>
+<p>Aquí es donde residen todos los archivos de configuración de usuario y de tu sitio web. Aquí puedes acceder a tu <span class="text-object">.bash_profile</span>, <a href="https://help.dreamhost.com/hc/es/sections/203242117-Registros" target="_self">registros de acceso y errores</a>, y <a href="https://help.dreamhost.com/hc/es/sections/203272338-Configuraciones-personalizadas">personalizar tu configuración de PHP</a> en un <a href="https://help.dreamhost.com/hc/es/articles/214894037-Crear-un-archivo-phprc-v%C3%ADa-FTP" target="_self">archivo phprc</a>. Aquí se muestra cómo se vería en un <a href="https://help.dreamhost.com/hc/es/articles/215613107-Listas-de-clientes-de-software-de-FTP">Cliente SFTP</a> como Filezilla:</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-users-home-directory.png" alt="ES user's home directory" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-users-home-directory.png" alt="ES user's home directory" width="402" height="376"></dd>
 </dl>
-<h3 id="h_01HRSSYJVWG20H6158Y93JH2GV">Archivos predeterminados en el directorio principal del usuario</h3>
-<p>Estos son los archivos predeterminados que verás en el directorio principal del usuario.</p>
+<h3 id="h_01HRSSGRMMPFTY9M1HEMGB7D0E">Archivos predeterminados en el directorio home del usuario</h3>
+<p>Estos son los archivos predeterminados que verás en el directorio home del usuario.</p>
 <div class="preboxcontainer">
-<pre class="prebox">/home/youruser1/
-               .alias
-               .bash_profile
-               .bashrc
-               .cshrc
-               /Maildir
-               /logs
-               /example.com</pre>
+<pre class="prebox">/home<br>     /user1
+           .alias
+           .bash_profile
+           .bashrc
+           .cshrc
+           /Maildir
+           /logs
+           /example.com</pre>
 </div>
 </div>
-<div id="el-directorio-del-sitio-web" class="section-link">&nbsp;</div>
-<h2 id="h_01HRSSYJVWK0C9BKTTV2869H88">El directorio del sitio web</h2>
+<div id="el-directorio-del-sitio-web" class="section-link"> </div>
+<h2 id="h_01HRSSGRMMJV0JFRQDBAMMX8SG">El directorio del sitio web</h2>
 <div class="solvvy-solution">
-<p>El directorio del sitio web es donde se encuentran los archivos reales del sitio web. Por ejemplo:</p>
+<p>El directorio del sitio web es donde se encuentran los archivos reales de tu sitio web. Por ejemplo:</p>
 <div class="preboxcontainer">
-<pre class="prebox">/home/youruser1/example.com</pre>
+<pre class="prebox">/home<br>     /user1<br>           /example.com</pre>
 </div>
-<p>Si has iniciado sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>, puedes correr el comando <span class="code">pwd</span> para ver en qué directorio te encuentras actualmente. Así es como aparecería si ya estuvieras en el directorio de tu sitio web.</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">pwd</span>
-<span class="cmdoutput">/home/username/example.com</span></pre>
-</div>
-<p>Un dominio recién creado tendrá los siguientes archivos agregados al directorio del sitio web:</p>
+<p>Cuando <a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-sitio-web-y-alojamiento">agregas un alojamiento a un sitio web</a> en el panel, se le asigna un usuario. Los sitios web nuevos tienen los siguientes archivos agregados al directorio del sitio web:</p>
 <ul>
 <li><span class="text-object">favicon.ico</span></li>
 <li><span class="text-object">favicon.gif</span></li>
 <li><span class="text-object">quickstart.html</span></li>
 </ul>
-<p><span class="text-object">favicon.ico</span> y <span class="text-object">favicon.gif</span> ayuda a evitar la carga del servidor de un exceso de páginas 404 cuando el sitio está experimentando un tráfico intenso de visitantes o rastreadores web. <span class="text-object">quickstart.html</span> actúa como la página de índice predeterminada cuando no hay otros archivos de índice válidos presentes. Para obtener más información, revias el siguiente artículo:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215747718-Controlar-los-directorios-index-con-un-archivo-htaccess">Controlar los directorios index con un archivo .htaccess</a></li>
-</ul>
-<p>Así es como se vería en un cliente SFTP como Filezilla. Verás todos los archivos de tu sitio web enumerados.</p>
+<p><span class="text-object">favicon.ico</span> y <span class="text-object">favicon.gif</span> ayudan a evitar la carga del servidor por exceso de páginas 404 cuando el sitio está experimentando mucho tráfico de visitantes o rastreadores web. <span class="text-object">quickstart.html</span> actúa como la página de índice predeterminada cuando no hay otros archivos de índice válidos. Revisa <a href="https://help.dreamhost.com/hc/es/articles/215747718-Controlar-los-directorios-index-con-un-archivo-htaccess">este artículo</a> para obtener más información.</p>
+<p>Así es como se vería en un cliente SFTP como Filezilla. Verás todos los archivos de tu sitio web en una lista.</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-10_Filezilla_windows.fw.png" alt="ES filezilla" /></dd>
+<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-10_Filezilla_windows.fw.png" alt="filezilla" width="396" height="507"></dd>
 </dl>
-<h3 id="h_01HRSSYJVWVK0Z28R6NKAYH90K">Asignar un usuario a un dominio</h3>
-<p>Cuando agregas alojamiento a un sitio web en el panel, se te asigna un nombre de usuario. Los siguientes artículos explican las diferentes formas de agregar un usuario a un dominio y servidor.</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360049378932-Agregar-un-Sitio-Web-y-Hosting" target="_self">Agregar un Sitio Web y Hosting</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360020605511-Mover-un-dominio-a-un-nuevo-usuario">Mover un dominio a un usuario nuevo</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360020340732-Agregar-un-usuario-a-un-servidor">Agregar un usuario a un servidor</a></li>
-</ul>
-<h3 id="h_01HRSSYJVWCZE0BTEJVTK3FEAS">Política de un usuario por dominio</h3>
-<p>Un sitio web solo puede pertenecer a un único nombre de usuario, pero un solo usuario puede tener varios sitios web debajo. El siguiente artículo explica esto con más detalle.</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215562847-Pol%C3%ADtica-de-un-usuario-por-dominio">Política de un usuario por dominio</a></li>
-</ul>
+<h3 id="h_01HRSSGRMMCJ0YWNA392N3X7ZK">Política de un usuario por dominio</h3>
+<p>Un sitio web solo puede pertenecer a un único usuario, pero un único usuario puede tener varios sitios web bajo su control. Revisa la <a href="https://help.dreamhost.com/hc/es/articles/215562847-Pol%C3%ADtica-de-un-usuario-por-dominio">Política de un usuario por dominio</a> para obtener más detalles.</p>
 </div>
-<h2 id="h_01HRSSYJVWW7XX6S22WF9YG8HV">Resumen</h2>
-<div class="solvvy-solution">
-<p>Cuando necesites administrar tu sitio web, estarás en el directorio principal de tu usuario o en el directorio del sitio web.</p>
-<h3 id="h_01HRSSYJVWNKVSRCENGNWGJPSY">El directorio home del usuario</h3>
-<p>En este directorio, configurarías los ajustes para el usuario, ya que se aplica a todos los sitios web que se encuentran debajo. Por ejemplo, editar tú <span class="text-object">.bash_profile</span> o <a href="https://help.dreamhost.com/hc/es/sections/203272338-Configuraciones-personalizadas" target="_self" rel="undefined">personalizar tu configuración de PHP</a> en un <a href="https://help.dreamhost.com/hc/es/articles/214894037-Crear-un-archivo-phprc-v%C3%ADa-FTP" target="_self">archivo phprc</a>.</p>
-<h3 id="h_01HRSSYJVW48V1T0VYAC1NRBHQ">Directorio de sitio web</h3>
-<p>Este es el directorio donde editaría los archivos de un sitio web específico.</p>
-</div>
-<h2 id="h_01HXYZB4QCVCAMCHQ6TB42N7S6">Verr también</h2>
+<h2 id="h_01HXYZB4QCVCAMCHQ6TB42N7S6">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH</a></li>
