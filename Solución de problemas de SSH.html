@@ -1,0 +1,89 @@
+<h2><span id="Private_key_doesn.27t_work">El Private key no funciona</span></h2>
+<div class="solvvy-solution">
+<p>El caso más común para un private key que no funciona es que los permisos están configurados incorrectamente en tu directorio <span class="text-object">.ssh</span>. En particular, el directorio <span class="text-object">.ssh</span>, así como tu archivo de <span class="text-object">authorized_keys</span> , deben <strong>ambos</strong> deben estar configurados para que solo tu usuario pueda leerlos. Si tienes problemas, intenta correr lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 700 ~/.ssh</span>
+<span class="server">[server]$ </span><span class="command">chmod 600 ~/.ssh/authorized_keys</span></pre>
+</div>
+</div>
+<h2>Too many failed attempts</h2>
+<div class="solvvy-solution">
+<p>Si estás recibiendo el error 'too many failed attempts' cuando intentas iniciar sesión en tu servidor a través de SSH, intenta agregar el indicador <span class="code">-v</span> para ver la salida de la conexión. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$</span><span class="command">ssh -v <span class="code-highlight">user@server.dreamhost.com</span></span></pre>
+</div>
+<p>En la salida, busca líneas con el texto 'Trying private key' para ver cuántas claves se están utilizando para conectarse. Con el tiempo, es posible que se hayan agregado demasiados a tu configuración de SSH, lo que hace que el agente de SSH intente demasiadas claves antes de establecer de forma predeterminada la autenticación de contraseña. Puedes ver y eliminar cualquier clave desactualizada en tu computador en el directorio <span class="text-object">.ssh</span>.</p>
+</div>
+<h2>No aparece ninguna solicitud de contraseña después de conectarte</h2>
+<div class="solvvy-solution">
+<p>Si no ves una solicitud de contraseña después de conectarte al servidor, asegúrate de que tu nombre de usuario esté configurado como usuario de shell. Consulta el siguiente artículo para obtener instrucciones sobre cómo habilitar el acceso de shell en tu usuario:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">Crear un usuario con acceso Shell (SSH)</a></li>
+</ul>
+</div>
+<h2>Los nombres de directorio/archivo que contienen caracteres no ingleses/asiáticos aparecen como ?????? o son corruptos</h2>
+<div class="solvvy-solution">
+<p>Si tienes problemas con los nombres de archivo o el contenido que no se muestran correctamente, puedes agregar lo siguiente a tu archivo <span class="text-object">.bash_profile</span> para habilitar la compatibilidad con UTF. Ve el artículo <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH">crear y editar un archivo por medio de SSH</a> para obtener instrucciones sobre cómo editar tu <span class="text-object">.bash_profile</span> existente.</p>
+<div class="preboxcontainer">
+<pre class="prebox">export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export G_FILENAME_ENCODING=UTF-8\
+</pre>
+</div>
+<p>UTF-8 probablemente ya esté habilitado. Puedes registrar tu terminal ingresando el comando <span class="code">locale</span>:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">locale</span> <br><span class="cmdoutput">LANG=en_US.UTF-8 <br>LANGUAGE= <br>LC_CTYPE="en_US.UTF-8" <br>LC_NUMERIC="en_US.UTF-8" <br>LC_TIME="en_US.UTF-8" <br>LC_COLLATE=C <br>LC_MONETARY="en_US.UTF-8" <br>LC_MESSAGES="en_US.UTF-8" <br>LC_PAPER="en_US.UTF-8" <br>LC_NAME="en_US.UTF-8" <br>LC_ADDRESS="en_US.UTF-8" <br>LC_TELEPHONE="en_US.UTF-8" <br>LC_MEASUREMENT="en_US.UTF-8" <br>LC_IDENTIFICATION="en_US.UTF-8" <br>LC_ALL= </span></pre>
+</div>
+<p>Puedes ver que la primera línea es <span class="code">LANG=en_US.UTF-8</span>. Si por alguna razón esto todavía no funciona, lo más probable es que sea el cliente terminal que estás utilizando. Para obtener instrucciones sobre cómo configurar esto en PuTTY, visite el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215464538-Configurar-PuTTY">PuTTY</a></li>
+</ul>
+</div>
+<h2>Conexión de red cerrada inesperadamente del servidor</h2>
+<div class="solvvy-solution">
+<p>Si recibes este error al intentar SSH, esto puede significar que tu IP ha sido bloqueada. Contacta a soporte para ver si tu IP está bloqueada. Si es así, el soporte puede incluirte en la lista blanca. Si no conoces tu IP, visita <a href="https://whatismyipaddress.com/">whatismyipaddress.com</a>.</p>
+</div>
+<h2>[Usuario] no está en el grupo de sudoers</h2>
+<div class="solvvy-solution">
+<p>DreamHost no permite a los usuarios regulares de shell acceso sudo en servidores compartidos por motivos de seguridad. Si bien se pueden realizar muchas tareas sin el uso de <span class="code">sudo</span>, si necesitas acceso sudo, debes mejorar tu plan a un Servidor <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado">Dedicado</a> y crear un <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-Servidor-Dedicado">usuario administrador</a>.</p>
+</div>
+<h2>Las conexiones inactivas se están cayendo</h2>
+<div class="solvvy-solution">
+<p>DreamHost y otros ISP pueden eliminar conexiones ssh que permanecen inactivas durante más de un cierto número de minutos. La solución es simple en Linux u OSX. Todo lo que necesitas hacer es configurar keep-alive editando el archivo /etc/ssh/ssh_config o <span class="text-object">~/.ssh/config</span> en tu computador. En ese archivo, agrega lo siguiente:</p>
+<div class="preboxcontainer">
+<pre class="prebox">  Host *
+      ServerAliveInterval 15
+      ServerAliveCountMax 4
+</pre>
+</div>
+<p>Ahora, el cliente ssh le pide al servidor una señal de vida cada 15 segundos, manteniendo así la conexión abierta.</p>
+<p>Para obtener instrucciones sobre cómo configurar esta configuración en PuTTY, por favor visita el siguiente artículo:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215466658-Soluci%C3%B3n-de-problemas-de-PuTTY">Solución de problemas de PuTTY</a></li>
+</ul>
+</div>
+<h2><span id="Operation timed out">Operation timed out</span></h2>
+<div class="solvvy-solution">
+<p>Si recibes un error de "Operation timed out" cuando intentas iniciar sesión en tu servidor a través de SSH, verifica si hay errores tipográficos en el nombre de usuario o la contraseña, teniendo en cuenta que tu nombre de usuario y contraseña distinguen entre mayúsculas y minúsculas.</p>
+<p>Si estás usando tu nombre de dominio en lugar del nombre del servidor DreamHost para conectarte, asegúrate de que el DNS de tu dominio apunta a DreamHost. Revisa el siguiente artículo para obtener instrucciones sobre cómo encontrar los registros DNS a los que debes apuntar tu sitio:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-debo-apuntar-mi-sitio-">¿A qué registros DNS debo apuntar mi sitio?</a></li>
+</ul>
+<p>Si continúas teniendo problemas después de seguir los pasos de la solución de problemas, por favor <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">contacta a soporte</a>.</p>
+</div>
+<h2><span id="Killed">Killed</span></h2>
+<div class="solvvy-solution">
+<p>La ejecución de procesos a través de SSH que consumen grandes cantidades de memoria y/o potencia del procesador puede llevarlos a ser "Killed" o finalizados – consulta el siguiente artículo para obtener más información:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216540488--Por-qu%C3%A9-se-cancelaron-los-procesos-en-mi-servidor-Compartido-" target="_self" rel="undefined">¿Por qué se pararon mis procesos en mi servidor compartido?</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215360828-Software-de-cliente-SSH">Sofware de cliente SSH</a></li>
+</ul>
+<p> </p>
+</div>

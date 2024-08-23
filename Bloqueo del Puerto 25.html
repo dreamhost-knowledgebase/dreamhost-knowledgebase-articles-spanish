@@ -1,43 +1,23 @@
-<h2 id="h_01J4PTRMY3SXWQNCGP94RYSES5">Generalidades</h2>
+<div id="intermediate"> </div>
+<h2 id="h_01J4JDWN9Y470GWY3W2BZYXQ1X">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Al transmitir correo, el contenido se envía a través de un número de puerto específico. El correo enviado a través de SMTP tradicionalmente tiene como valor predeterminado el puerto 25. Para obtener una descripción general de SMTP, consulta el siguiente enlace:</p>
+<p>Lo siguiente describe cómo funciona el bloqueo del puerto 25 y algunos pasos para ayudarte a resolverlo.</p>
+<h2 id="h_01J5V8PXJTWN7VDCW8B5W88SCE">¿Qué es un bloquedo de puertos?</h2>
+<p>El correo se transmite desde un número de puerto específico. El correo enviado a través de <a href="https://es.wikipedia.org/wiki/Protocolo_para_transferencia_simple_de_correo" target="_blank" rel="noopener noreferrer">SMTP</a> tradicionalmente usa el puerto 25 de manera predeterminada. El problema es que <a href="https://es.wikipedia.org/wiki/Antispam" target="_blank" rel="noopener noreferrer">el puerto 25 es bloqueado con frecuencia</a> por los <a href="https://es.wikipedia.org/wiki/Proveedor_de_servicios_de_internet" target="_blank" rel="noopener noreferrer">Proveedores de Servicios de Internet</a> (ISP) como una técnica antispam. Para enviar correo a través de dichos ISP, uno debe:</p>
+</div>
+<div class="solvvy-solution">
 <ul>
-<li><a class="new" title="W:Simple Mail Transfer Protocol (page does not exist)" href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">SMTP</a></li>
+<li>
+<strong>usar SMTP para enviar</strong> — la opción recomendada para enviar correos desde DreamHost es usar <a href="/hc/es-es/articles/29620648776980#h_01J4JDWN9Y537YQ39N7QXEEA31">el puerto 465 o 587</a>.</li>
+<li>
+<strong>usar el servidor SMTP propio del ISP</strong> — esto puede requerir que utilices el dominio del Proovedor de Servicio de Internet para enviar correos.</li>
 </ul>
 </div>
-<h2 id="h_01J4PTRMY36JJ8ET45ZSD4BBBS"><span id="The_problem">El problema</span></h2>
 <div class="solvvy-solution">
-<p><a class="new" title="W:Anti-spam techniques (page does not exist)" href="https://en.wikipedia.org/wiki/Anti-spam_techniques">El puerto 25 TCP es frecuentemente bloqueado</a> por <a class="new" title="W:Internet Service Provider (page does not exist)" href="https://en.wikipedia.org/wiki/Internet_service_provider">Proveedores de Servicio de Internet</a> (ISPs), como una técnica anti-spam, ya que se utiliza en spam de MX y abuso de máquinas de retransmisión/proxy abierto.</p>
-<p>Para enviar correo en dichos ISP, uno debe:</p>
-<ul>
-<li>Utilizar el propio servidor SMTP del ISP – esto puede requerir que utilices el dominio del ISP en tu dirección de correo, en lugar de tu propio dominio</li>
-<li>Conectarte a tu servidor SMTP en DreamHost usando los puertos 465 o 587.</li>
-</ul>
-</div>
-<h2 id="h_01J4PTRMY30ZMZQEHCHCAQAVGD"><span id="Port_25_at_DreamHost">Puerto 25 en DreamHost</span></h2>
-<div class="solvvy-solution">
-<p>DreamHost bloquea las llamadas SMTP SALIENTES en servidores compartidos. Sin embargo, esto no es una restricción para Servidores VPS/Dedicados. Por ejemplo:</p>
-<ul>
-<li>Si un cliente de DreamHost envía un correo desde tu servidor web a través de un script SMTP y está intentando conectarse a un servidor de correo externo (no a un servidor de correo de DreamHost), el puerto 25 está bloqueado; pero pueden conectarse desde el servidor web a través del puerto 25 directamente a cualquier servidor de correo DreamHost.</li>
-</ul>
-</div>
-<h2 id="h_01J4PTRMY3555FC647TKD6PJYP"><span id="The_solution">La solución</span></h2>
-<div class="solvvy-solution">
-<p>La solución más fácil es <a href="https://help.dreamhost.com/hc/es/articles/214918038-Generalidades-de-las-configuraciones-del-cliente-de-correo">configurar tu cliente de correo</a> y establecer tu puerto de salida en 465 con SSL (recomendado) o 587 con (STARTTLS).</p>
-<p>Otra opción es utilizar el servidor SMTP de su ISP. Si recibes mensajes de error cuando intenta enviar correo que indica que <strong>smtp.example.com</strong> no responde o no se encuentra, comunícate con tu ISP y averigua si están bloqueando el puerto 25. Si es así, probablemente puedas enviar correo saliente a través de tu servidor de correo saliente.</p>
-<p>A veces, sin embargo, un ISP no permitirá que se envíe correo a través de su servidor SMTP con un dominio diferente. En otras palabras, es posible que solo puedas usar tu servidor SMTP si tienes tu dirección de respuesta configurada en tu dirección de correo basada en ISP, no en tu dirección de nombre de dominio personalizado que tienes en DreamHost.</p>
-</div>
-<h2 id="h_01J4PTRMY3197FS34MKP8Q9AX7">Opciones SMTP de PHP mail</h2>
-<div class="solvvy-solution">
-<p>Ve los siguientes artículos para ver ejemplos completos sobre cómo enviar correo a través SMTP PHP mail:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer">Generalidades PHPmailer</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216140597-Enviar-correo-PHP-v%C3%ADa-SMTP">Enviar correo PHP vía SMTP</a></li>
-</ul>
-</div>
-<h2 id="h_01J4PTRMY3KATB23FR9AV9HVK3"><span id="List_of_ISPs">Lista de ISPs</span></h2>
-<div class="solvvy-solution">
-<p>Algunos ISP importantes que bloquean el puerto 25 y las direcciones de tus servidores SMTP son:</p>
+<h3 id="h_01J5VN86GHGNBMH89ZP7W14CYC">Lista de Proovedores de Servicio de Internet (ISP)</h3>
+<p>A continuación se muestra una lista de proveedores de servicios de Internet que bloquean el puerto 25, incluidas las direcciones de sus servidores SMTP:</p>
+<dl>
+<dd>
 <table border="1" cellspacing="0" cellpadding="5">
 <tbody>
 <tr>
@@ -45,35 +25,63 @@
 <th>Servidor SMTP</th>
 </tr>
 <tr>
-<td><a href="https://www.cox.com/residential/myconnection/home.html" target="_self" rel="undefined">Cox</a></td>
+<td><a href="https://espanol.cox.com/residential/myconnection/home.html" target="_blank" rel="noopener noreferrer">Cox</a></td>
 <td>smtp.cox.net</td>
 </tr>
 <tr>
-<td><a href="https://www.earthlink.net/" target="_self" rel="undefined">EarthLink</a></td>
+<td><a href="https://www.earthlink.net/" target="_blank" rel="noopener noreferrer">EarthLink</a></td>
 <td>smtp.cox.net</td>
 </tr>
 <tr>
-<td><a href="http://www.grandecom.com">Grande Communications</a></td>
+<td><a href="http://www.grandecom.com" target="_blank" rel="noopener noreferrer">Grande Communications</a></td>
 <td>mail.mygrande.net</td>
 </tr>
 <tr>
-<td><a href="https://www.optimum.net/" target="_self" rel="undefined">Optimum Online</a></td>
+<td><a href="https://espanol.optimum.net/" target="_blank" rel="noopener noreferrer">Optimum Online</a></td>
 <td>mail.optonline.net</td>
 </tr>
 <tr>
-<td><a href="https://www.spectrum.net">Spectrum</a></td>
+<td><a href="https://www.spectrum.net/es/" target="_blank" rel="noopener noreferrer">Spectrum</a></td>
 <td>mobile.charter.net</td>
 </tr>
 <tr>
-<td><a href="https://www.xfinity.com/overview" target="_self" rel="undefined">xfinity</a></td>
+<td><a href="https://www.xfinity.com/overview" target="_blank" rel="noopener noreferrer">xfinity</a></td>
 <td>smtp.comcast.net</td>
 </tr>
 </tbody>
 </table>
+</dd>
+</dl>
 </div>
-<h2 id="h_01J4PTRMY3J9EV1SY0RCGNBT2S"><span id="See_also">Ver también</span></h2>
+<h3 id="h_01J4JDWN9YEKEE0QY4JNNYQRVB"><span id="Puerto_25_en_DreamHost">Puerto 25 en DreamHost</span></h3>
+<div class="solvvy-solution">
+<p>DreamHost bloquea el puerto 25 para llamadas salientes de SMTP en servidores compartidos (esto no es una restricción en los <a href="https://help.dreamhost.com/hc/es/articles/215560437--Qu%C3%A9-tipos-de-planes-de-hosting-hay-disponibles">Servidores VPS/Dedicados</a>).</p>
+<p>Esto sucede a menudo cuando se envía desde un formulario de correo o un script de correo personalizado mientras se intenta conectarse a un servidor de correo externo (no a un servidor de correo DreamHost).</p>
+</div>
+<h2 id="h_01J4JDWN9Y537YQ39N7QXEEA31"><span id="Resolver_el_inconveniente">Resolver el inconveniente</span></h2>
+<div class="solvvy-solution">
+<p><strong>Cambiar el puerto de salida</strong></p>
+<p>La solución más sencilla es <a href="https://help.dreamhost.com/hc/es/articles/214918038-Generalidades-de-la-configuraci%C3%B3n-de-clientes-de-correo">configurar tu cliente de correo</a> para utilizar uno de los siguientes puertos de salida:</p>
+<ul>
+<li>465 con SSL (recomendado)</li>
+<li>587 con STARTTLS</li>
+</ul>
+<p><strong>Usar el servidor SMTP del ISP</strong></p>
+<p>Si ves el error "<strong>smtp.example.com</strong> no responde o no se encuentra", comunícate con tu ISP y averigüe si están bloqueando el puerto 25. Si es así, probablemente puedas enviar correo saliente a través de tus servidores de correo de salida.</p>
+</div>
+<p id="h_01J4JDWN9YV1Y7H3RRVPQZJV21"><strong>Usar el correo SMTP de PHP</strong></p>
+<div class="solvvy-solution">
+<p>Si utilizas PHP para enviar correos, revisa los siguientes artículos para ver la información completa sobre el uso de SMTP.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215842658-Generalidades-de-PHPMailer">Generalidades de PHPMailer </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216140597-Enviar-correo-PHP-v%C3%ADa-SMTP">Enviar correo PHP vía SMTP </a></li>
+</ul>
+</div>
+<h2 id="h_01J4JDWN9YVXXB920P5FBJFT8K"><span id="Ver_tambien">Ver también</span></h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214918038-Generalidades-de-las-configuraciones-del-cliente-de-correo">Generalidades de configuración de clientes de correo</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214918038-Generalidades-de-la-configuraci%C3%B3n-de-clientes-de-correo">Generalidades de la configuración de clientes de correo</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215030208-Lista-de-problemas-de-correo-para-escalaci%C3%B3n">Lista de problemas de correo para escalación</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115005095667-Correo-electr%C3%B3nico-bloqueado">Correo electrónico bloqueado</a></li>
 </ul>
 </div>
