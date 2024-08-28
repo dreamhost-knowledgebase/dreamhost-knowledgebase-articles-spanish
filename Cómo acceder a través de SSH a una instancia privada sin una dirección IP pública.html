@@ -1,8 +1,8 @@
-<h2>Generalidades</h2>
+<h2 id="h_01J6AQ7MXYHP6QQBVPPCV9QBFK">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Si tienes habilitada la <a href="https://help.dreamhost.com/hc/es/articles/229789688-Descripci%C3%B3n-general-de-las-redes-privadas" target="_self" rel="undefined">red privada</a>, puedes usarla para exponer algunas instancias a Internet mientras limita el acceso a otras en la red privada. Por ejemplo, es posible que desees que tu instancia esté expuesta en el puerto 80 o 443 mientras mantienes el acceso a la base de datos restringido solo a la red privada. Una complicación de esta configuración es cómo acceder a tus instancias privadas sin una dirección IP flotante. La respuesta a eso es usar un host de salto.</p>
 </div>
-<h2>Cómo funciona</h2>
+<h2 id="h_01J6AQ7MXYYS3NFCG55VSY2Y0R">Cómo funciona</h2>
 <div class="solvvy-solution">
 <p>Un host de salto (o bastión) actúa como intermediario de todo el tráfico a tus instancias no públicas. Es fácil de configurar usando SSH y sus opciones de configuración.</p>
 <p>Lo primero que debes hacer es asegurarte de tener una instancia ejecutándose con una dirección IP flotante. Esta podría ser cualquier instancia de DreamCompute con una IP flotante, pero normalmente usarías un host de salto dedicado o tu instancia. Asegúrate de que puedes acceder a través de SSH en esa máquina con tu llave SSH. Consulta el siguiente artículo para obtener instrucciones sobre cómo cargar una llave pública en tu panel de DreamCompute:</p>
@@ -10,7 +10,7 @@
 <li><a class="reference external" href="https://help.dreamhost.com/hc/es/articles/214843617--C%C3%B3mo-cargar-una-llave-SSH-a-trav%C3%A9s-del-panel-de-DreamCompute" target="_self" rel="undefined">Cómo cargar una llave SSH a través del panel de DreamCompute</a></li>
 </ul>
 </div>
-<h2>Configurar un host de salto en DreamCompute</h2>
+<h2 id="h_01J6AQ7MXYAASZBQ1HNR5PYQP1">Configurar un host de salto en DreamCompute</h2>
 <div class="solvvy-solution">
 <p>La siguiente configuración muestra un archivo de configuración SSH (<span class="text-object">~/.ssh/config</span>) en una máquina local para que puedas conectarte primero a un host de salto llamado <span class="code">jump</span>. Cambia el nombre de usuario al usuario predeterminado para tu imagen.</p>
 <ul>
@@ -38,12 +38,9 @@ ProxyCommand ssh jump -W %h:%p
 User <span class="code-highlight">username</span>
 IdentityFile ~/.ssh/dreamcompute.pem</pre>
 </div>
-<div class="alert alert-important">
-<div class="alert-icon"><img src="https://kbimages.dreamhosters.com/images/dh-kb-important-icon.svg" width="60" height="60" /></div>
-<div class="alert-content">
+<div class="notebox-important">
 <p>Este ejemplo usa una clave separada para instancias privadas en lugar del host de salto, lo que te permite mantener ambas claves en tu máquina - el host de salto no necesita la llave privada para las otras instancias. Esto proporciona un nivel adicional de seguridad.</p>
 <p>La opción <span class="code">-W</span> reenvía todos los <span class="code">stdin</span> y <span class="code">stdout</span> al host y puerto especificados.</p>
-</div>
 </div>
 </li>
 <li>
@@ -56,6 +53,6 @@ IdentityFile ~/.ssh/dreamcompute.pem</pre>
 </div>
 <!--DreamCompute Button-->
 <div class="dream-sign-up">
-<h2>Despliega tus aplicaciones en servidores en la nube hoy</h2>
+<h2 id="h_01J6AQ7MXYK9F4PQTRBJ2ERT65">Despliega tus aplicaciones en servidores en la nube hoy</h2>
 <div class="solvvy-hidden"><a href="https://www.dreamhost.com/cloud/computing/" target="_self" rel="undefined">Suscríbete a DreamCompute</a></div>
 </div>

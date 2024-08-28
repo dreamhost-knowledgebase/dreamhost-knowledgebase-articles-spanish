@@ -1,6 +1,6 @@
 <h2 id="h_01HF4Q0XY7XG8HT59QEG3MPB7B">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este artículo explica cómo configurar el inicio de sesión sin contraseña con PuTTY. Asegúrate de haber&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215464538-Configurar-PuTTY" target="_self">configurado PuTTY</a>&nbsp;antes de continuar con este artículo.</p>
+<p>Este artículo explica cómo configurar el inicio de sesión sin contraseña con PuTTY. Asegúrate de haber <a href="https://help.dreamhost.com/hc/es/articles/215464538-Configurar-PuTTY" target="_self">configurado PuTTY</a> antes de continuar con este artículo.</p>
 <div class="notebox-note">
 <p>Estas instrucciones también se pueden usar para crear y asignar Llaves de SSH a un <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-Servidor-Dedicado" target="_self">usuario admin/root</a> en un Servidor Dedicado.</p>
 </div>
@@ -8,15 +8,15 @@
 <h2 id="h_01HF4Q0XY7832Q62R1NV0W2NJG">Crear una Llave de Emparejamiento</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Abre el archivo <span class="text-object">puttygen.exe</span> que&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215464538-Configurar-PuTTY" target="_self">descargaste al configurar PuTTY</a>. Lo usarás para crear tu Llave de Emparejamiento privada/pública.</li>
+<li>Abre el archivo <span class="text-object">puttygen.exe</span> que <a href="https://help.dreamhost.com/hc/es/articles/215464538-Configurar-PuTTY" target="_self">descargaste al configurar PuTTY</a>. Lo usarás para crear tu Llave de Emparejamiento privada/pública.</li>
 <li>En el cuadro Generador de Llaves de PuTTY, asegúrate de que el botón de opción en la parte inferior esté seleccionado para <span class="text-object">RSA</span>.</li>
 <li>Haz clic en el botón <strong>Generar</strong>.</li>
-<li>Mueve el cursor alrededor de la caja para ayudar a generar las Llaves.<br />
+<li>Mueve el cursor alrededor de la caja para ayudar a generar las Llaves.<br>
 <dl>
 <dd><em>Una vez que se crea la Llave, aparece un nuevo cuadro emergente:</em></dd>
 </dl>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/03_pubkey.png" alt="Puttygen key" width="607" height="487" /></dd>
+<dd><img alt="Puttygen key" class="img-border" height="487" src="https://dreamhostknowledgebase.com/images/en/2x/03_pubkey.png" width="607"></dd>
 </dl>
 </li>
 <li>Haz clic en los botones <strong>Save public key</strong> y <strong>Save private key</strong>, que aparecen en la parte inferior derecha para guardar estas llaves en tu computador.
@@ -31,7 +31,7 @@
 <p><strong><span id="mysql-workbench">Si estás creando Llaves para MySQL Workbench</span></strong></p>
 <p>Si estás creando una Llave de Emparejamiento para MySQL Workbench, debes exportar la Llave privada en formato OpenSSH.</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/mysql-workbench_05.png" alt="convert to openssh key" width="358" height="144" /></dd>
+<dd><img alt="convert to openssh key" class="img-border" height="144" src="https://dreamhostknowledgebase.com/images/en/1x/mysql-workbench_05.png" width="358"></dd>
 </dl>
 <ol>
 <li>Haz clic en la pestaña <span class="text-object">Conversions</span> tab y selecciona <span class="text-object">Export OpenSSH key</span>.</li>
@@ -54,7 +54,7 @@
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
 </div>
 </li>
-<li>Crea un directorio <span class="text-object">/.ssh</span> corriendo el siguiente comando:<br />
+<li>Crea un directorio <span class="text-object">/.ssh</span> corriendo el siguiente comando:<br>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir .ssh</span></pre>
 </div>
@@ -64,13 +64,13 @@
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 700 .ssh</span></pre>
 </div>
 </li>
-<li>Mientras todavía estás en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de usuario</a>, agrega la Llave pública que acabas de cargar a un nuevo archivo llamado <span class="text-object">authorized_keys</span>, que se encuentra en el directorio <span class="text-object">/.ssh</span> corriendo el siguiente comando:<br />
+<li>Mientras todavía estás en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de usuario</a>, agrega la Llave pública que acabas de cargar a un nuevo archivo llamado <span class="text-object">authorized_keys</span>, que se encuentra en el directorio <span class="text-object">/.ssh</span> corriendo el siguiente comando:<br>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">ssh-keygen -i -f <span class="code-highlight">dreamhostpublickey</span> &gt;&gt; ~/.ssh/authorized_keys</span></pre>
 </div>
 <p>Esto agrega el <span class="text-object">dreamhostpublickey</span> que cargó desde tu computador a un nuevo archivo llamado <span class="text-object">authorized_keys</span>. Solo asegúrate de que el nombre del archivo de Llave pública, en el comando, sea el nombre del archivo que cargaste.</p>
 </li>
-<li>Ajusta los permisos corriendo el siguiente comando:<br />
+<li>Ajusta los permisos corriendo el siguiente comando:<br>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 600 ~/.ssh/authorized_keys</span></pre>
 </div>
@@ -84,23 +84,27 @@
 </li>
 <li>Sal de PuTTY y vuelve a iniciar el programa.</li>
 <li>Abre el cuadro de configuración y haz clic en la categoría <span class="text-object">Conexión &gt; Data</span> a la izquierda.</li>
-<li>Ingresa tu nombre de usuario SHELL en el primer campo que se llama usuario <span class="text-object">Auto-login</span>.<br />
+<li>Ingresa tu nombre de usuario SHELL en el primer campo que se llama usuario <span class="text-object">Auto-login</span>.<br>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/05_auth.png" alt="Putty credentials" width="505" height="508" /></dd>
+<dd><img alt="Putty credentials" class="img-border" height="508" src="https://dreamhostknowledgebase.com/images/en/2x/05_auth.png" width="505"></dd>
 </dl>
 </li>
 <li>En el mismo cuadro de configuración, haz clic en <span class="text-object">Conexión &gt; SSH &gt; Auth &gt; Credentials</span>.</li>
-<li>Haz clic en el botón <strong>Browse</strong> y navega hasta la ubicación en tu computador donde guardaste el archivo de <span class="text-object">dreamhostprivatekey</span>.<br />
+<li>Haz clic en el botón <strong>Browse</strong> y navega hasta la ubicación en tu computador donde guardaste el archivo de <span class="text-object">dreamhostprivatekey</span>.<br>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/06_sessions.png" alt="Putty login" width="507" height="509" /></dd>
+<dd><img alt="Putty login" class="img-border" height="509" src="https://dreamhostknowledgebase.com/images/en/2x/06_sessions.png" width="507"></dd>
 </dl>
 </li>
-<li>En el cuadro de configuración, haz clic en la categoría <span class="text-object">Sesión</span> e ingresa la siguiente información:<br />
+<li>En el cuadro de configuración, haz clic en la categoría <span class="text-object">Sesión</span> e ingresa la siguiente información:<br>
 <ul>
-<li><strong>Host Name</strong>: Tu servidor.dreamhost.com (<a href="https://help.dreamhost.com/hc/es/articles/115000675027#Ubicar_el_hostname" target="_self">Este es el nombre de tu servidor DreamHost</a>)</li>
-<li><strong>Port</strong>: 22</li>
-<li><strong>Connection Type</strong>: SSH</li>
-<li><strong>Saved Session</strong>: Ingresa un nombre nuevo</li>
+<li>
+<strong>Host Name</strong>: Tu servidor.dreamhost.com (<a href="https://help.dreamhost.com/hc/es/articles/115000675027#Ubicar_el_hostname" target="_self">Este es el nombre de tu servidor DreamHost</a>)</li>
+<li>
+<strong>Port</strong>: 22</li>
+<li>
+<strong>Connection Type</strong>: SSH</li>
+<li>
+<strong>Saved Session</strong>: Ingresa un nombre nuevo</li>
 </ul>
 </li>
 <li>Haz clic en el botón <strong>Save</strong>.</li>

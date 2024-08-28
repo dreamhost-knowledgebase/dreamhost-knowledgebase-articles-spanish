@@ -17,7 +17,7 @@
 <h3 id="h_01HC0ZTZCRTJYG75877YYV0VB1">Usar phpMyAdmin</h3>
 <p>Haz clic en el nombre de la base de datos en el menú izquierdo.</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-misc-phpmyadmin-database-size.png" alt="ES phpMyAdmin database size" width="913" height="25" /></dd>
+<dd><img alt="ES phpMyAdmin database size" class="img-border" height="25" src="https://dreamhostknowledgebase.com/images/es/2x/es-misc-phpmyadmin-database-size.png" width="913"></dd>
 </dl>
 <p>A la derecha de la última fila, puedes ver el tamaño total de la base de datos.</p>
 <h3 id="h_01HC0ZTZCRX19MJ1Q6NVJRHCHM">Usar SSH</h3>
@@ -34,7 +34,7 @@
 <div class="solvvy-solution">
 <p>En el lado izquierdo de phpMyAdmin, verás una lista de bases de datos:</p>
 <ol>
-<li>Selecciona tu base de datos de la lista.<br />
+<li>Selecciona tu base de datos de la lista.<br>
 <dl>
 <dd><em>En el panel central, aparece una lista de tus tablas.</em></dd>
 </dl>
@@ -46,7 +46,7 @@
 </div>
 </li>
 <li>Al final de la lista de la tabla, haz clic en el menú desplegable <span class="text-object">Para los elementos que están marcados</span>.</li>
-<li>En el menú desplegable, selecciona <span class="text-object">Optimizar la tabla</span>.<br />
+<li>En el menú desplegable, selecciona <span class="text-object">Optimizar la tabla</span>.<br>
 <dl>
 <dd><em>La optimización puede tardar un tiempo en completarse dependiendo del tamaño de la base de datos. Una vez que se completa, la página muestra la consulta que se ejecutó junto con un mensaje exitoso.</em></dd>
 </dl>
@@ -61,23 +61,28 @@
 <p>Además de optimizar una tabla, también puedes 'reparar' una tabla. Sigue todos los pasos mencionados anteriormente. En el paso 3, elige <span class="text-object">Reparar la tabla</span> en el menú desplegable.</p>
 <p>Las dos opciones son similares pero se usan en diferentes circunstancias:</p>
 <ul>
-<li><strong>Reparar la tabla</strong>: repara una tabla posiblemente dañada. Esto se ejecuta generalmente si recibes errores de la base de datos. Esto se puede ejecutar a través de phpMyAdmin o configurarlo como un cron job para que se ejecute de manera rutinaria.</li>
+<li>
+<strong>Reparar la tabla</strong>: repara una tabla posiblemente dañada. Esto se ejecuta generalmente si recibes errores de la base de datos. Esto se puede ejecutar a través de phpMyAdmin o configurarlo como un cron job para que se ejecute de manera rutinaria.</li>
 </ul>
 <ul>
-<li><strong>Optimizar la tabla</strong>: simplemente reorganiza el almacenamiento físico para los datos de la tabla y los índices asociados. Esta función mejora el acceso a la tabla ya que parte de su función es reducir el espacio de almacenamiento.</li>
+<li>
+<strong>Optimizar la tabla</strong>: simplemente reorganiza el almacenamiento físico para los datos de la tabla y los índices asociados. Esta función mejora el acceso a la tabla ya que parte de su función es reducir el espacio de almacenamiento.</li>
 </ul>
 </div>
 <h2 id="h_01HC2YB2ZYN6XN3CZAMWDBF18M"><span id="optimizar-via-SSH">Optimizar via SSH</span></h2>
 <div class="solvvy-solution">
-<p>A veces, ejecutar una optimización a través de phpMyAdmin tiende a fallar y la página finalmente se agota. Esto posiblemente se deba a que la base de datos es demasiado grande para que phpMyAdmin pueda manejarla. La alternativa es optimizar a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.&nbsp;Como usuario de shell, puedes acceder vía SSH en tu dominio y ejecutar el siguiente comando, que es la misma función que se ejecuta en phpMyAdmin:</p>
+<p>A veces, ejecutar una optimización a través de phpMyAdmin tiende a fallar y la página finalmente se agota. Esto posiblemente se deba a que la base de datos es demasiado grande para que phpMyAdmin pueda manejarla. La alternativa es optimizar a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. Como usuario de shell, puedes acceder vía SSH en tu dominio y ejecutar el siguiente comando, que es la misma función que se ejecuta en phpMyAdmin:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqlcheck -h <span class="code-highlight">HOSTNAME</span> -u <span class="code-highlight">USERNAME</span> -p -o <span class="code-highlight">DATABASE</span></span></pre>
 </div>
 <p>Reemplaza las variables en el comando arriba con la información correspondiente de tu base de datos:</p>
 <ul>
-<li><strong>USERNAME</strong> – el usuario de la base de datos.</li>
-<li><strong>HOSTNAME</strong> – el hostname de la base de datos que configuras y está activo.</li>
-<li><strong>DATABASE</strong> – el nombre de la base de datos en la cual estás corriéndo este comando.</li>
+<li>
+<strong>USERNAME</strong> – el usuario de la base de datos.</li>
+<li>
+<strong>HOSTNAME</strong> – el hostname de la base de datos que configuras y está activo.</li>
+<li>
+<strong>DATABASE</strong> – el nombre de la base de datos en la cual estás corriéndo este comando.</li>
 </ul>
 <p><span class="code">-p</span> te pedirá que ingreses tu contraseña de base de datos, que evitará que la contraseña se guarde en la historia de Bash de tu usuario SSH.</p>
 <div class="notebox-note">
@@ -90,13 +95,13 @@
 <pre class="prebox">&gt;&gt; results.txt</pre>
 </div>
 <h3 id="h_01HC2YB2ZYS53V302EE94S0XVT">Usar un cron job para optimizar</h3>
-<p>También puedes hacer una limpieza general a través de un script de shell y/o un cron job usando <a href="https://dev.mysql.com/doc/refman/5.7/en/mysqlcheck.html">mysqlcheck</a>&nbsp;que verifica, repara y optimiza las tablas. Es una buena idea ejecutar un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215088668-Crear-un-Cron-Job">cron job</a> mensual para hacer esto por ti. El cron job podría verse así:</p>
+<p>También puedes hacer una limpieza general a través de un script de shell y/o un cron job usando <a href="https://dev.mysql.com/doc/refman/5.7/en/mysqlcheck.html">mysqlcheck</a> que verifica, repara y optimiza las tablas. Es una buena idea ejecutar un <a href="https://help.dreamhost.com/hc/es/articles/215088668-Crear-un-Cron-Job">cron job</a> mensual para hacer esto por ti. El cron job podría verse así:</p>
 <div class="preboxcontainer">
 <pre class="prebox">#!/bin/sh
 /usr/bin/mysqlcheck -o -v -u <span class="code-highlight">USERNAME</span> -p<span class="code-highlight">PASSWORD</span> -h <span class="code-highlight">MYSQL.EXAMPLE.COM DATABASENAME</span>;
 </pre>
 </div>
-<p>Reemplaza los elementos en mayúsculas con las&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">credenciales de tu base de datos</a>.</p>
+<p>Reemplaza los elementos en mayúsculas con las <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">credenciales de tu base de datos</a>.</p>
 <h3 id="h_01HC2YB2ZYNQWNBMJQNWE7TEB8">Reparar via SSH</h3>
 <p>También puedes correr un comando para reparar una tabla en lugar de optimizarla:</p>
 <div class="preboxcontainer">

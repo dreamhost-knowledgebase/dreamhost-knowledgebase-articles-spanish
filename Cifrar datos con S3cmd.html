@@ -2,7 +2,7 @@
 <div class="solvvy-solution">
 <p>S3cmd puede cifrar tus datos mientras los carga en DreamObjects. Para utilizar esta funcionalidad, primero debes configurar tu archivo <span class="text-object">.s3cfg</span> como se muestra en este artículo:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215916627-Instalar-S3cmd" target="_self" rel="undefined">Instalar S3cmd</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215916627-Instalar-S3cmd" rel="undefined" target="_self">Instalar S3cmd</a></li>
 </ul>
 <h3 id="h_01HBV8P83EDXAB0F2RZ3K20AB7">Configurar tu archivo .s3cfg</h3>
 <p>Abre el archivo en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231#el-directorio-home-del-usuario" target="_self">directorio de tu usuario</a>.</p>
@@ -27,13 +27,13 @@ gpg_passphrase = <span class="code-highlight">yourpassword</span></pre>
 upload: '/tmp/tmpfile-zFGwbLHMVEINdHh3615n' -&gt; 's3://bucket-name/testfile.txt'  [1 of 1]
  63 of 63   100% in    0s   129.96 B/s  done</pre>
 </div>
-<p>Para confirmar que está encriptado, navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" target="_blank" rel="noopener noreferrer">DreamObjects</a>. Haz clic en el botón <strong>Ver objetos</strong> debajo de tu nombre de usuario. Se abre un mensaje para que puedas ver los objetos en tu bucket.</p>
+<p>Para confirmar que está encriptado, navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=cloud.objects&amp;" rel="noopener noreferrer" target="_blank">DreamObjects</a>. Haz clic en el botón <strong>Ver objetos</strong> debajo de tu nombre de usuario. Se abre un mensaje para que puedas ver los objetos en tu bucket.</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel-dho-s3cmd.png" alt="ES DreamObjects view an object" width="636" height="136" /></dd>
+<dd><img alt="ES DreamObjects view an object" class="img-border" height="136" src="https://dreamhostknowledgebase.com/images/es/2x/es-panel-dho-s3cmd.png" width="636"></dd>
 </dl>
 <p>Haz clic en el objeto, copia la URL y luego pégalo en un navegador. Verás que los datos del archivo están cifrados.</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2018-06_dho-viewing-encrypted-object.png" alt="DreamObjects view encrypted object" /></dd>
+<dd><img alt="DreamObjects view encrypted object" class="img-border" src="https://dreamhostknowledgebase.com/images/en/1x/2018-06_dho-viewing-encrypted-object.png"></dd>
 </dl>
 <h3 id="h_01HBV8P83EQ58YXVXA3VJ8WN0N">Descifrar un archivo</h3>
 <p>Cuando usas s3cmd para descargar un archivo cifrado, se descifra automáticamente:</p>
@@ -54,7 +54,7 @@ Testing a file</pre>
 <ol>
 <li>Decide la fecha límite en la que deseas permitir que se firme/acceda a la URL.</li>
 <li>Visita <a href="https://www.epochconverter.com/">Epoch Converter</a> para convertir tu fecha en una marca de tiempo de la época. Se verá como una cadena de números. Por ejemplo: 1540232086</li>
-<li>Corre el siguiente comando para firmar la URL hasta esta marca de tiempo. (Asegúrate de cambiar el nombre del bucket y el nombre del archivo por tu información real).<br />
+<li>Corre el siguiente comando para firmar la URL hasta esta marca de tiempo. (Asegúrate de cambiar el nombre del bucket y el nombre del archivo por tu información real).<br>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">s3cmd signurl s3://<span class="code-highlight">my_bucket/my_file.png 1540232086</span></span>
 http://my-bucket.objects-us-east-1.dream.io/my_file.png?AWSAccessKeyId=DHDPTCQ3WFGHPSS5FAXG&amp;Expires=1540232086&amp;Signature=9nf8f9kG%2FqDa76rmET4R%2FpbtaGM%3D</pre>

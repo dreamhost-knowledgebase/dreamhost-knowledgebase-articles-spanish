@@ -1,4 +1,4 @@
-<div id="auto-toc">&nbsp;</div>
+<div id="auto-toc"> </div>
 <h2 id="h_01HCAS0MC3Z9K7PK5WB3YHR571">Generalidades</h2>
 <div class="solvvy-solution">
 <p>La opción de respaldo del panel es una manera simple de crear una copia de seguridad toda tu cuenta, incluyendo todos los usuarios, bases de datos, y buzones de correo electrónico.</p>
@@ -6,32 +6,39 @@
 <h2 id="h_01HCAS0MC35KEXS1SMYP929Y8J">Respaldos del panel</h2>
 <div class="solvvy-solution">
 <p>Puedes usar el panel para hacer una copia de seguridad y luego ver detalles sobre ellas.</p>
-<h3 id="h_01HYEQZDHWN5ZETN2EJFDEB2KW" class="subtoc-heading">Respaldar tu cuenta</h3>
+<h3 class="subtoc-heading" id="h_01HYEQZDHWN5ZETN2EJFDEB2KW">Respaldar tu cuenta</h3>
 <p>Para respaldar tu cuenta en el panel:</p>
 <ol>
 <li>Visita la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=billing.account" target="_self">Administrar Cuenta</a>.</li>
-<li>Baja hasta la sección <span class="text-section">Hacer Un Respaldo De Tu Cuenta</span></li>
+<li>Baja hasta la sección <span class="text-section">Hacer Un Respaldo De Tu Cuenta</span>
+</li>
 <li>Da clic en el botón <strong>Crear una Copia de Seguridad</strong> para abrir la página de respaldo del panel.</li>
 <li>Da clic en el botón <strong>¡Cópiame!</strong>.</li>
 </ol>
 <p>El proceso de copia de seguridad comienza y tarda un tiempo en completarse en función de la cantidad de contenido que hay para copiar. Se te notificará por correo una vez que esto se complete.</p>
-<h3 id="h_01HYEQZDHW6QXR9B4KP6G2981T" class="subtoc-heading">Ver tus respaldos</h3>
+<h3 class="subtoc-heading" id="h_01HYEQZDHW6QXR9B4KP6G2981T">Ver tus respaldos</h3>
 <p>El correo de notificación que recibes te dirige de vuelta a la página <span class="panel-page">Respaldar Tu Cuenta</span> en el panel, donde puedes ver detalles como los siguientes:</p>
 <dl>
-<dd><img class="img-border" src="https://kbimages.dreamhosters.com/images/2x/es/es-panel_account_backup_03.png" alt="" width="624" height="183" /></dd>
+<dd><img alt="" class="img-border" height="183" src="https://dreamhostknowledgebase.com/images/es/2x/es-panel_account_backup_03.png" width="624"></dd>
 </dl>
-<p>Cada una de las copias de seguridad está listada como un archivo <span class="text-object">.tar.gz</span> o <span class="text-object">.sql.gz</span> y están temporalmente alojados en DreamObjects para que puedas descargarlos localmente. La columna <span class="text-object">Tamaño</span>&nbsp;muestra el tamaño de cada archivo.</p>
+<p>Cada una de las copias de seguridad está listada como un archivo <span class="text-object">.tar.gz</span> o <span class="text-object">.sql.gz</span> y están temporalmente alojados en DreamObjects para que puedas descargarlos localmente. La columna <span class="text-object">Tamaño</span> muestra el tamaño de cada archivo.</p>
 <ul>
-<li><strong>Usuarios de correo</strong>: <span class="text-link">correo/usuario@example.com.tar.gz</span></li>
-<li><strong>Bases de datos</strong>: <span class="text-link">mysql/nombredebasededatos.sql.gz</span></li>
-<li><strong>Usuarios</strong>: <span class="text-link">usuario/nombredeservidor_usuario.tar.gz</span></li>
+<li>
+<strong>Usuarios de correo</strong>: <span class="text-link">correo/usuario@example.com.tar.gz</span>
+</li>
+<li>
+<strong>Bases de datos</strong>: <span class="text-link">mysql/nombredebasededatos.sql.gz</span>
+</li>
+<li>
+<strong>Usuarios</strong>: <span class="text-link">usuario/nombredeservidor_usuario.tar.gz</span>
+</li>
 </ul>
 <p>Puedes hacer clic en cada archivo para descargarlos uno por uno a tu computador. Desafortunadamente, no es posible descargar todos los archivos al mismo tiempo.</p>
 </div>
 <h2 id="h_01HCAS0MC38YYZT8VAADDK4EW9">Cómo descargar tu copia de seguridad via Línea de Comando</h2>
 <div class="solvvy-solution">
 <p>Puedes descargar estos archivos directamente a tu servidor o computador con Mac OSX / Linux usando los comandos <span class="code">curl</span> o <span class="code">wget</span>. Si estás utilizando Windows, necesitarás <a href="https://curl.se/download.html">instalar curl</a>. Deberás descargar el archivo zip desde la sección <span class="text-section">Win64 - Generic</span>.</p>
-<h3 id="h_01HC65J9NZ5A9EGAHWXMSZ38J2" class="subtoc-heading">Usar curl</h3>
+<h3 class="subtoc-heading" id="h_01HC65J9NZ5A9EGAHWXMSZ38J2">Usar curl</h3>
 <p>Aquí encontrarás un ejemplo de cómo descargar un solo archivo usando el comando <span class="code">curl</span>.</p>
 <ol>
 <li>Haz clic derecho en el enlace del archivo en tu panel. En este ejemplo es <span class="text-link">user/servername_username.tar.gz</span>.</li>
@@ -45,7 +52,7 @@
 </pre>
 </div>
 <div class="notebox-note">
-<p>El archivo <span class="text-object">filename.tar.gz</span> es uno de los nombres de archivos en tu panel en la página&nbsp;<a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=billing.backup&amp;" target="_blank" rel="noopener noreferrer">Copia de Seguridad de Tu Cuenta</a>. Asegúrate de <strong>NO</strong> incluir la primera parte del nombre del archivo antes de la barra inclinada. Si el enlace en el panel es <span class="text-link">user/servername_username.tar.gz</span>, el nombre del archivo debe tomarse solamente como <span class="text-object">servidor_usuario.tar.gz</span>.</p>
+<p>El archivo <span class="text-object">filename.tar.gz</span> es uno de los nombres de archivos en tu panel en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=billing.backup&amp;" rel="noopener noreferrer" target="_blank">Copia de Seguridad de Tu Cuenta</a>. Asegúrate de <strong>NO</strong> incluir la primera parte del nombre del archivo antes de la barra inclinada. Si el enlace en el panel es <span class="text-link">user/servername_username.tar.gz</span>, el nombre del archivo debe tomarse solamente como <span class="text-object">servidor_usuario.tar.gz</span>.</p>
 <p>La parte que dice <span class="code">COPIED_LINK_LOCATIAON</span> es la información que copiaste cuando hiciste clic derecho en el nombre del archivo y que pegaste en tu editor de texto.</p>
 </div>
 </div>
@@ -56,7 +63,7 @@
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">curl --insecure --output <span class="code-highlight">servername_username.tar.gz "https://objects-us-east-1.dream.io/accountbackup/1358572/2024-04-09-SLRG8WEQ57K6CQTE/user/server_username.tar.gz?AWSAccessKeyId=2XoecBOZcL8WQXo9DT9E&amp;Signature=9HWxQE28LaYxxGXX6NsvcEELAwE%3D&amp;Expires=1451659279"</span></span></pre>
 </div>
-<h3 id="h_01HC65J9NZRP3N5H6PHTATHCES" class="subtoc-heading">Usar wget</h3>
+<h3 class="subtoc-heading" id="h_01HC65J9NZRP3N5H6PHTATHCES">Usar wget</h3>
 <div class="solvvy-solution">
 <p>Corre el comando <span class="code">wget</span> con la siguiente sintaxis:</p>
 <div class="preboxcontainer">
@@ -64,7 +71,7 @@
 </pre>
 </div>
 <div class="notebox-note">
-<p>El archivo <span class="text-object">nombre.tar.gz</span> es uno de los nombres de archivos en tu panel en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=billing.backup&amp;" target="_blank" rel="noopener noreferrer">Copia de Seguridad de Tu Cuenta</a>. Asegúrate de <strong>NO</strong> incluir la primera parte del nombre del archivo antes de la barra inclinada. Si el enlace en el panel es <span class="text-link">user/servername_username.tar.gz</span>, el nombre del archivo debe tomarse solamente como <span class="text-object">servidor_usuario.tar.gz</span>.</p>
+<p>El archivo <span class="text-object">nombre.tar.gz</span> es uno de los nombres de archivos en tu panel en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=billing.backup&amp;" rel="noopener noreferrer" target="_blank">Copia de Seguridad de Tu Cuenta</a>. Asegúrate de <strong>NO</strong> incluir la primera parte del nombre del archivo antes de la barra inclinada. Si el enlace en el panel es <span class="text-link">user/servername_username.tar.gz</span>, el nombre del archivo debe tomarse solamente como <span class="text-object">servidor_usuario.tar.gz</span>.</p>
 <p>La parte que dice <span class="code">COPIED_LINK_LOCATION</span> es la información que copiaste cuando hiciste clic derecho en el nombre del archivo y que pegaste en tu editor de texto.</p>
 </div>
 <p>Aquí hay un ejemplo completo de <span class="code">wget</span>:</p>
@@ -75,17 +82,17 @@
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wget --no-check-certificate --output-document=<span class="code-highlight">servername_username.tar.gz "https://objects-us-east-1.dream.io/accountbackup/1358572/2024-04-09-SLRG8WEQ57K6CQTE/user/server_username.tar.gz?AWSAccessKeyId=2XoecBOZcL8WQXo9DT9E&amp;Signature=9HWxQE28LaYxxGXX6NsvcEELAwE%3D&amp;Expires=1451659279"</span></span></pre>
 </div>
 </div>
-<div id="descomprimir" class="section-link">&nbsp;</div>
+<div class="section-link" id="descomprimir"> </div>
 <h2 id="h_01HCAS0MC3YCC44M20VCJGV9WH">Descomprimir los archivos descargados</h2>
 <div class="solvvy-solution">
 <p>Una vez esté descargado en tu computador, se comprime en un archivo comprimido de formato <span class="text-object">.tar.gz</span> o <span class="text-object">.sql.gz</span>.</p>
 <ul>
-<li>Si estás usando Windows, necesitarás un programa para descomprimir como&nbsp;<a href="https://www.7-zip.org/">7-Zip</a>.</li>
-<li>Si estás usando Mac o Linux, puedes correr el siguiente comando para descomprimir archivos <span class="text-object">.tar.gz</span>:<br />
+<li>Si estás usando Windows, necesitarás un programa para descomprimir como <a href="https://www.7-zip.org/">7-Zip</a>.</li>
+<li>Si estás usando Mac o Linux, puedes correr el siguiente comando para descomprimir archivos <span class="text-object">.tar.gz</span>:<br>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">macbook$ </span><span class="command">tar -zxvf <span class="code-highlight">user\@example.com.tar.gz</span></span></pre>
 </div>
-Si el archivo tiene una extensión <span class="text-object">.sql.gz</span> ,corre el siguiente comando:<br />
+Si el archivo tiene una extensión <span class="text-object">.sql.gz</span> ,corre el siguiente comando:<br>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">macbook$ </span><span class="command">gunzip <span class="code-highlight">databasename.sql.gz</span></span></pre>
 </div>
@@ -94,7 +101,7 @@ Si el archivo tiene una extensión <span class="text-object">.sql.gz</span> ,cor
 </div>
 <h2 id="h_01HCAS0MC3D0KEWHF1VGKY83JN">Solución de Problemas</h2>
 <div class="solvvy-solution">
-<p>Si crees que la copia de seguridad realizada no se ejecutó por completo y no incluye realmente toda la información de tu cuenta, por favor&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">contacta a soporte</a>&nbsp;para obtener asistencia.</p>
+<p>Si crees que la copia de seguridad realizada no se ejecutó por completo y no incluye realmente toda la información de tu cuenta, por favor <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">contacta a soporte</a> para obtener asistencia.</p>
 </div>
 <h2 id="h_01HCAS0MC3EMK66XYNTQQPTFEZ">Ver también</h2>
 <div class="solvvy-hidden">
