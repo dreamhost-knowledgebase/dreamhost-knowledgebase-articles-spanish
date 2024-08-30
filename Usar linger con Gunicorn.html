@@ -103,6 +103,16 @@ WantedBy=default.target</pre>
 </ol>
 <p>Los servicios de tu aplicación ahora se reiniciarán automáticamente cuando el servidor se reinicie o si la aplicación se cae.</p>
 </div>
+<h2 id="h_01J6CYJXNBSKVYEAH9S9HMT4MD">Configurar el inicio de sesión</h2>
+<p>Puedes configurar el acceso y el registro de errores modificando el archivo <span class="text-object">gunicorn.service</span> creado anteriormente. El código que apunta a tus archivos de registro debe agregarse a la línea <span class="code">ExecStart</span>. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox">ExecStart=/path/to/venv/bin/gunicorn --workers 3 --bind=&lt;example.com&gt;:&lt;port&gt; <span class="code-highlight">--access-logfile /path/to/venv/bin/gunicorn/logs/gunicorn_access --error-logfile /path/to/venv/bin/gunicorn/logs/gunicorn_error --capture-output</span> myapp:app</pre>
+</div>
+<p>Solo tienes que ajustar la ruta a tu directorio de registros. Por ejemplo:</p>
+<ul>
+<li><span class="code">/path/to/venv/bin/gunicorn/logs/</span></li>
+</ul>
+<p>Luego, Gunicorn creará automáticamente los archivos de registro de acceso y errores utilizando este código.</p>
 <h2 id="h_01HQKXEC8Q1FV61BRGZNE5P32V">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>

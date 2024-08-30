@@ -1,0 +1,194 @@
+<div id="beginner"> </div>
+<h2 id="h_01HJ7C2Y76P4GSY44678HBH2J9">Generalidades</h2>
+<p>En este artículo describe cómo transferir manualmente tu sitio web y correo de GoDaddy a DreamHost. Este proceso implica los siguientes pasos:</p>
+<ul>
+<li><a href="#Paso1">Paso 1 — Respaldar tu información en GoDaddy</a></li>
+<li><a href="#Paso2">Paso 2 — Subirla a DreamHost</a></li>
+<li><a href="#Paso3">Paso 3 — Ver tu sitio en DreamHost antes de apuntar DNS</a></li>
+<li><a href="#Paso4">Paso 4 — Apuntar el DNS a DreamHost</a></li>
+</ul>
+<div class="prereqs">
+<p id="h_01HJ7CFBS62R7C5C8FJJGJGRPD"><strong>Requisitos Previos</strong></p>
+<p>Antes de continuar, asegúrate de haber creado una cuenta DreamHost <a href="https://help.dreamhost.com/hc/es/articles/223175988-C%C3%B3mo-crear-una-cuenta-en-DreamHost">registrándote en un plan de alojamiento</a>. Durante el proceso de registro, selecciona la opción <span class="text-object">Ya tengo un dominio</span>. Esto te permite agregar tu nombre de dominio actual a tu nueva cuenta DreamHost.</p>
+</div>
+<h2 id="h_01J5K9FGCMK8D3K4560TJP4KJQ">Preguntas frecuentes</h2>
+<p><strong>¿Agregar mi dominio a DreamHost afecta mi sitio web en vivo?</strong></p>
+<dl>
+<dd>
+<p>No. Agregar tu dominio a DreamHost en este momento <strong>NO</strong> afecta tu sitio web actual de ninguna manera. Seguirá funcionando normalmente en tu alojamiento actual hasta que apuntes tus registros DNS en el Paso número 4.</p>
+</dd>
+</dl>
+<p id="h_01J5K5VCR14GSS1TVBZYJJNVFC"><strong>¿Existen otras opciones de transferencia?</strong></p>
+<dl>
+<dd>
+<p>Las siguientes opciones alternativas están disponibles para transferir su sitio a DreamHost.</p>
+</dd>
+</dl>
+<dl>
+<dd>
+<p><span class="text-product">Servicio de migración</span> — Si tienes problemas para migrar tu sitio web o simplemente no tienes tiempo, DreamHost ofrece un servicio que se encarga de esto por ti. Puedes encontrar más información en el artículo <a href="https://help.dreamhost.com/hc/es/articles/360027686731-Servicios-de-migraci%C3%B3n-de-sitios-web">Servicios de migración de sitios web</a>.</p>
+<p><span class="text-product">Opciones de migración de WordPress</span> — Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/115000650291-Generalidades-de-las-migraciones-de-WordPress">Generalidades de la migración de WordPress</a> para obtener una lista de opciones alternativas de WordPress.</p>
+</dd>
+</dl>
+<p id="h_01HJ7C8K1RCAWYKB3VHNDEFA1T"><strong>¿Necesito transferir mi registro de dominio?</strong></p>
+<dl>
+<dd>
+<p>No. No es necesario que transfieras tu registro a DreamHost durante este proceso. Este artículo solo explica cómo transferir los datos de tu sitio web a DreamHost, lo cual es independiente del registro de tu dominio.</p>
+<p>Siempre puedes transferirlo en cualquier momento en el futuro siguiendo los pasos de <a href="https://help.dreamhost.com/hc/es/articles/215250318-Transferir-el-registro-de-un-dominio-a-DreamHost">este artículo</a>.</p>
+</dd>
+</dl>
+<h2 id="h_01J5K5W7B587XVM6ZQP0ZVN7P3">Cómo transferir tu sitio en vivo</h2>
+<p>Los siguientes pasos transfieren el contenido de tu sitio web a DreamHost.</p>
+<div class="steps-section--container">
+<div class="steps-section--h3-border"> </div>
+<div class="steps-section--content">
+<div id="Paso1" class="section-link"> </div>
+<div class="steps-section--step">
+<img class="steps-number-h3-icon" src="https://dreamhostknowledgebase.com/graphics/number-1.svg" alt="" width="30px">
+<h3 id="h_01HJ7DCEAS14XCRBC37AESAA0Z">Respaldar tu informarción en GoDaddy</h3>
+<div class="solvvy-solution">
+<p>Este paso hace un respaldo de los datos del sitio web de GoDaddy en tu computador.</p>
+<img class="gfx-border" src="https://dreamhostknowledgebase.com/graphics/es/es-migrate-from-godaddy-01.svg" alt="ES Back up files">
+<p id="h_01HJ7DCEAST79K8DXC7B53TM8H"><strong>Descargar los archivos de tu sitio web en GoDaddy</strong></p>
+<ol>
+<li>
+<a href="https://sso.godaddy.com/" target="_blank" rel="noopener noreferrer">Inicia sesión</a> en tu cuenta de GoDaddy.</li>
+<li>Selecciona el enlace en la página <a href="https://account.godaddy.com/products" target="_blank" rel="noopener noreferrer">Mis productos</a>.</li>
+<li>Debajo de la sección <span class="text-section">Alojamiento Web</span>, busca tu dominio y haz clic en el botón <strong>Administrar</strong> que se encuentra junto a él.</li>
+<li>En la barra de menú superior, selecciona <strong>Administrador de archivos</strong>. <em>Se iniciará el administrador de archivos de cPanel, que te mostrará una lista de directorios a la izquierda.</em>
+</li>
+<li>Da clic en la carpeta <span class="text-object">public_html</span>. Todos los archivos de tu sitio estarán visibles a la derecha.</li>
+<li>Marca la casilla <span class="text-object">Seleccionar todo</span> para seleccionar los archivos de tu sitio y luego fa clic en el botón <strong>Comprimir</strong> en la barra de menú superior izquierda.</li>
+<li>Selecciona la opción Archivo Zip y da clic en <strong>Comprimir ahora</strong>.</li>
+<li>Una vez que se complete la compresión y se haya creado el archivo zip, haz clic en él y selecciona el botón <strong>Descargar</strong>.</li>
+</ol>
+<p id="h_01HJ7DCEATTKX874VTJ854WENP"><strong>Exportar la base de datos de tu sitio en GoDaddy</strong></p>
+<ol>
+<li>
+<a href="https://sso.godaddy.com/" target="_blank" rel="noopener noreferrer">Inicia sesión</a> en tu cuenta de GoDaddy.</li>
+<li>Selecciona el enlace en la página <a href="https://account.godaddy.com/products" target="_blank" rel="noopener noreferrer">Mis productos</a>.</li>
+<li>Debajo de la sección <span class="text-section">Alojamiento Web</span>, busca tu dominio y haz clic en el botón <strong>Administrar</strong> que se encuentra junto a él.</li>
+<li>En la barra de menú superior, seleccionA <strong>phpMyAdmin</strong>.</li>
+<li>Cuando se inicie phpMyAdmin, selecciona tu base de datos en el menú de la izquierda.</li>
+<li>En el menú superior, da clic en el botón <strong>Exportar</strong>.</li>
+<li>Selecciona <span class="text-object">Rápido</span> como método de exportación y <span class="text-object">SQL</span> como Formato.</li>
+<li>Presiona el botón <strong>Ir</strong>, la base de datos se descargará a tu computador.</li>
+</ol>
+</div>
+</div>
+<div id="Paso2" class="section-link"> </div>
+<div class="steps-section--step">
+<img class="steps-number-h3-icon" src="https://dreamhostknowledgebase.com/graphics/number-2.svg" alt="" width="30px">
+<h3 id="h_01HJ7DCEASV85DQ4MTSSW74TD8">Subir tu información a DreamHost</h3>
+<div class="solvvy-solution">
+<p>Este paso carga los datos de tu computador de hogar a tu nueva cuenta DreamHost.</p>
+<img class="gfx-border" src="https://dreamhostknowledgebase.com/graphics/es/es-migrate-from-godaddy-02.svg" alt="ES Upload site data">
+<p><strong>Subir los archivos de tu sitio web a DreamHost</strong></p>
+<ol>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a> del panel de DreamHost.</li>
+<li>Bajo tu dominio, da clic en el botón <strong>Mis archivos</strong>. Esto le permitirá iniciar sesión automáticamente en el servidor del administrador de archivos.</li>
+<li>Da doble clic en el directorio de tu sitio desde la lista de archivos y carpetas para ingresar.</li>
+<li>En el directorio del sitio, selecciona el ícono <span class="text-object">cargar</span>.</li>
+<li>En el menú que aparece, selecciona <strong>Cargar Zip</strong>.</li>
+<li>Selecciona el archivo zip de su carpeta <span class="text-object">public_html</span> que descargó anteriormente. <em>Aparece una ventana que te pregunta qué deseas hacer con el archivo.</em>
+</li>
+<li>Da clic en el botón <strong>Cargar y descomprimir</strong> para cargar los datos del sitio y completar el proceso.</li>
+</ol>
+<p id="h_01HJ7DCEATB0BM622VRT1BWPG2"><strong>Subir tu base de datos en DreamHost</strong></p>
+<ol>
+<li>Inicia sesión en tu cuenta de DreamHost y navega hasta la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=advanced.mysql" target="_blank" rel="noopener noreferrer">Bases de datos MySQL</a>.</li>
+<li>Inicia sesión en <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encontrar-tus-credenciales-de-inicio-de-sesi%C3%B3n">phpMyAdmin</a>.</li>
+<li>Selecciona la base de datos de destino en el menú izquierdo.</li>
+<li>Da clic en la pestaña <span class="text-object">Importar</span> en el panel central superior.</li>
+<li>En la sección <span class="text-section">Archivo a importar</span>, da clic en <strong>Explorar</strong> y busca el archivo con la extensión <span class="text-object">.sql</span> que desea importar.</li>
+<li>Selecciona o deselecciona las casillas de <span class="text-object">Importación parcial</span> y <span class="text-object">Otras opciones</span>.</li>
+<li>En el menú desplegable <span class="text-object">Formato</span>, selecciona <span class="text-object">SQL</span>.</li>
+<li>Da clic en el botón <strong>Ir</strong> en la parte inferior para importar la base de datos.</li>
+</ol>
+<div class="notebox-tip">
+<p>Todas las tablas aparecen al seleccionar la base de datos en el menú izquierdo de phpMyAdmin.</p>
+<p>Una vez que se haya cargado la base de datos, es probable que debas actualizar el archivo de configuración de tu sitio para conectarse a la nueva base de datos. Revisa <a href="https://help.dreamhost.com/hc/es/articles/360021570592-Error-al-establecer-una-conexi%C3%B3n-de-base-de-datos">este artículo</a> para obtener una lista de software popular y sus archivos de configuración.</p>
+</div>
+<p><strong><span id="Subir_el_correo_a_DreamHost">Subir el correo a DreamHost</span></strong></p>
+<p>Revisa <a href="https://help.dreamhost.com/hc/es/articles/215730827-Importar-el-correo-otro-alojamiento-a-DreamHost">este artículo</a> para obtener instrucciones sobre cómo importar el correo a tu nueva cuenta de DreamHost.</p>
+</div>
+</div>
+<div id="Paso3" class="section-link"> </div>
+<div class="steps-section--step">
+<img class="steps-number-h3-icon" src="https://dreamhostknowledgebase.com/graphics/number-3.svg" alt="" width="30px">
+<h3 id="h_01HJ7DCEAT7XZ4E2DWJ6SG3GN0">Ver tu sitio web en DreamHost (antes de apuntar el DNS)</h3>
+<div class="solvvy-solution">
+<p>Este paso te permite ver cómo aparecerá tu sitio en DreamHost antes de apuntar el DNS.</p>
+<ul>
+<li>Esto no afecta a tu sitio en vivo en absoluto.</li>
+<li>Simplemente te permite confirmar que tu sitio está configurado correctamente en DreamHost antes de apuntar el DNS.</li>
+</ul>
+<img class="gfx-border" src="https://dreamhostknowledgebase.com/graphics/es/es-migrate-from-godaddy-03.svg" alt="ES Point the hosts file">
+<p>En este punto, has subido el contenido de tu sitio web a DreamHost, pero aún está alojado en tu antigua compañía de alojamiento. Esto significa que cuando lo visualizas en un navegador, se carga desde tu antiguo servidor. Solo se cargará desde tu servidor DreamHost después de que apuntes tus registros DNS a DreamHost.</p>
+<p>Sin embargo, antes de apuntar los registros DNS, debes hacer una prueba para confirmar que tu sitio se ve y funciona como se espera en tu nuevo servidor de DreamHost.</p>
+<p id="h_01HJ7CFBS76FN6ZYGEJ8HZXBDJ"><strong>Editar el archivo host de tu computador</strong></p>
+<p>Para ver tu sitio tal como aparece en tu servidor DreamHost, tendrás que editar el archivo <span class="text-object">hosts</span> de tu computador. Este archivo se usa para asignar un nombre de dominio a una dirección IP, por lo que al editarlo, puedes obligar a tu computador de hogar a cargar el sitio web desde tu servidor DreamHost (aunque aún esté alojado en la antigua compañía de alojamiento). Revisa <a href="https://help.dreamhost.com/hc/es/articles/115006086308-Ver-tu-sitio-DreamHost-usando-un-archivo-hosts">este artículo</a> para obtener instrucciones sobre cómo editar el archivo <span class="text-object">hosts</span> para que apunte a DreamHost.</p>
+<div class="notebox-important">
+<p>Después de confirmar que tu sitio funciona correctamente, asegúrate de eliminar las líneas que acaba de agregar durante la prueba.</p>
+</div>
+</div>
+</div>
+<div id="Paso4" class="section-link"> </div>
+<div class="steps-section--step">
+<img class="steps-number-h3-icon" src="https://dreamhostknowledgebase.com/graphics/number-4.svg" width="30px">
+<h3 id="h_01HJ7DCEATQ2DFMRPEC47JVF7H">Apuntar el DNS a DreamHost</h3>
+<div class="solvvy-solution">
+<p>Este paso apunta los registros DNS de tu sitio web a DreamHost.</p>
+<img class="gfx-border" src="https://dreamhostknowledgebase.com/graphics/migrate-from-godaddy-04.svg" alt="Point DNS">
+<p>En este punto, tu sitio web y todos sus archivos están en los servidores de DreamHost, pero el mismo aún está "alojado" en GoDaddy. Ahora debes actualizar su DNS para que apunte a DreamHost</p>
+<p>Tienes dos opciones al apuntar el DNS.</p>
+<ul>
+<li>Apuntar los nameservers (recomendado)</li>
+<li>Apuntar los registros A</li>
+</ul>
+<h3 id="h_01HJ7CFBS7R613NGHPMAGHVDDC">¿Qué opción debería escoger?</h3>
+<p>Ambas opciones funcionan para cargar tu sitio en DreamHost. Sin embargo, según los requisitos de alojamiento de tu sitio web, es posible que debas utilizar una opción en lugar de la otra.</p>
+<div class="notebox-tip">
+<p>Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/215413857-Visi%C3%B3n-general-de-los-DNS-de-DreamHost">Visión general del DNS de DreamHost</a> para obtener una descripción general rápida de cómo se utiliza el DNS para controlar dónde se alojan los servicios de tu dominio.</p>
+</div>
+<p><strong>Nameservers (recomendado)</strong></p>
+<p>Se recomienda apuntar tus nameservers porque automáticamente apunta TODOS tus registros de DNS a DreamHost. Revisa los siguientes artículos para obtener más información sobre los nameservers, cómo ver dónde apuntan y apuntarlos a DreamHost.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385467-Generalidades-de-los-nameservers">Generalidades de los nameservers </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360030114711-Verificar-hacia-donde-apuntan-tus-nameservers">Verificar hacia donde apuntan tus nameservers</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216385447-Cambiar-los-nameservers-en-tu-alojamiento-actual">Cambiar los nameservers en tu alojamiento actual</a></li>
+</ul>
+<p><strong>Registros A</strong></p>
+<p>Solo es necesario apuntar registros A si necesitas mantener activos servicios específicos (como el correo electrónico) en tu antigua compañía de alojamiento. Esto es más difícil porque debes confirmar qué servicios apuntar a DreamHost y cuáles continuar alojando en tu compañía actual.</p>
+<p>Revisa <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-de-DNS-debo-apuntar-mi-sitio">este artículo</a> para obtener instrucciones sobre cómo ver las direcciones IP en DreamHost a las que deberás apuntar tus Registros A. Luego, deberás consultar con tu antigua compañía de alojamiento para obtener instrucciones sobre cómo actualizar estos registros.</p>
+</div>
+</div>
+</div>
+</div>
+<h2 id="h_01HJ7CFBS73GRZTH1K1VJJ00VB">Espero a que los registros DNS actualicen</h2>
+<div class="solvvy-solution">
+<p>Después de apuntar tus registros DNS a DreamHost, necesitarán tiempo para propagarse en línea.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-del-DNS">Generalidades de la propagación del DNS</a></li>
+</ul>
+<p>Los registros A pueden tardar 6 horas en actualizarse, pero los nameservers pueden tardar hasta 72 horas en actualizarse por completo.</p>
+<div class="notebox-important">
+<p>No es posible acelerar este proceso ya que los servidores de todo el mundo actualizan los registros DNS según su propio horario</p>
+</div>
+<p>Una vez que los registros DNS se hayan actualizado en línea, tu sitio web se cargará tal como está configurado en tu servidor de DreamHost.</p>
+</div>
+<h2 id="h_01HJ7DCEAT7SM1RGG9MCXWJS0T">Ver también</h2>
+<div class="solvvy-hidden">
+<h3 id="h_01HJ7DCEATXDTCYE5M32MGHSCQ">Enlaces de DreamHost</h3>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006086308-Ver-tu-sitio-DreamHost-usando-un-archivo-hosts" target="_self" rel="undefined">Ver tu sitio DreamHost usando un archivo hosts</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215250318-Transferir-el-registro-de-un-dominio-a-DreamHost" target="_self" rel="undefined">Transferir el registro de un dominio a DreamHost </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Visi%C3%B3n-general-de-los-DNS-de-DreamHost">Visión general de los DNS de DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales">Generalidades sobre FTP y sus credenciales</a></li>
+</ul>
+<h3 id="h_01HJ7DCEAT2T9ZNWZMNQXMSF32">Enlaces de terceros</h3>
+<ul>
+<li>
+<a href="https://www.godaddy.com/es/help/migrar-mi-sitio-de-wordpress-manualmente-27392" target="_blank" rel="noopener noreferrer">Migrar mi sitio de WordPress manualmente</a> - Página de Soporte de Godaddy</li>
+</ul>
+</div>
