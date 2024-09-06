@@ -1,95 +1,86 @@
-<h2 id="h_01HNJRHT7XHY7G4TG6SJ3KDMN9">Generalidades</h2>
-<div class="solvvy-solution">
-<p>Este artículo explica cómo hacer una copia de seguridad de tu sitio usando <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. Esto significa que debes iniciar sesión en tu servidor usando una terminal, luego corres un comando para descargar la base de datos al servidor. Para otras opciones de respaldo, visita el siguiente artículo:</p>
-<ul>
-<li><a href="/hc/es/articles/215039758-Generalidades-sobre-copias-de-seguridad-de-bases-de-datos" target="_self">Generalidades sobre copias de seguridad de bases de datos</a></li>
-</ul>
+<div id="intermediate"> </div>
+<h2 id="h_01HNGVSJNV123P8KBRKMWQA9T8">Generalidades</h2>
+<p>Este artículo explica cómo respaldar tu base de datos a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</p>
+<div class="prereqs">
+<p>Antes de continuar, asegúrate de haber completado lo siguiente.</p>
+<p id="h_01HNGVSJNVMMNWQ3534W5W8Z6Y"><strong>Encontrar las credenciales de tu base de datos</strong>: Para crear una copia de seguridad de tu base de datos, necesitarás las credenciales de la misma, como usuario, contraseña, hostname y nombre de la base de datos. Revisa <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encontrar-tus-credenciales-de-inicio-de-sesi%C3%B3n">este artículo</a> para obtener instrucciones sobre cómo encontrar esta información.</p>
+<p id="h_01HNGVSJNVKCQMWSFE1CEJZE3J"><strong>Configurar SSH</strong>: Asegúrate de haber <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">creado un usuario de Shell</a> y de poder iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. Esto es necesario para correr los comandos de este artículo.</p>
 </div>
-<h2 id="h_01HNJRHT7XJF7B5C1APTXTWDKK">Encuentra las credenciales de tu base de datos</h2>
-<div class="solvvy-solution">
-<p>Para hacer una copia de seguridad de tu base de datos, debes conocer tus credenciales, como nombre de usuario, contraseña, hostname y el nombre de la base de datos. Revisa el siguiente artículo para obtener instrucciones sobre cómo encontrar estas credenciales:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encuentra tus credenciales para acceder a la base de datos</a></li>
-</ul>
-</div>
-<h2 id="h_01HNJRHT7X0EWVA1WVRRTTTSV4">¿Donde se ejecuta el comando?</h2>
-<div class="solvvy-solution">
-<p>Debes iniciar sesión en tu servidor web a través de SSH para ejecutar el siguiente comando. Visita el siguiente artículo para obtener instrucciones completas sobre cómo iniciar sesión en tu servidor en una terminal:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades sobre SSH</a></li>
-</ul>
-</div>
-<h2 id="h_01HNJRHT7X3DQS3XVWQT8FYEK7">Ejecutar el comando</h2>
-<div class="solvvy-solution">
-<p>En este punto, debes tener tus credenciales de base de datos y haber iniciado sesión en tu servidor en una terminal. Asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de tu usuario</a>:</p>
+<h2 id="h_01J6WSJVS4Q36MBE65TZ5SAPQ2">Respaldar una sola base de datos</h2>
+<h3 id="h_01J6Z7Q9Y290MNKBAYS81ZS3ER">Respaldarla corriendo un comando</h3>
+<p>El siguiente comando respalda una sola base de datos bajo tu usuario.</p>
+<ol>
+<li>Inicia sesión a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Navega al <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home#el-directorio-home-del-usuario" target="_self">directorio principal del usuario</a>.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
 </div>
-<p>Una vez allí, ejecuta el siguiente comando. Asegúrate de cambiar el nombre de usuario, la contraseña, tu HostMySQL y nombreBD (base de datos) por las credenciales correctas.</p>
+</li>
+<li>Corre el siguiente comando para respaldar tu base de datos en el directorio actual.
+<div class="notebox-tip">
+<p>Anota los siguientes ajustes ha hacer:</p>
+<ul>
+<li>Asegurate de cambiar el <span class="code">usuario</span>, <span class="code">hostname</span>, y <span class="code">basededatos</span> a tus credenciales.</li>
+<li>Puedes usar cualquier nombre para <span class="code">nombredeturespaldo.sql</span> – solo asegúrate de que termine en <span class="code">.sql</span>.</li>
+<li>
+<span class="code">--no-tablespaces</span> se usa para excluir las declaracionesen del resultado.</li>
+</ul>
+</div>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump --opt --user=<span class="code-highlight">usuario</span> -p --host=<span class="code-highlight">tuHostMySQL</span> --no-tablespaces <span class="code-highlight">nombreBD</span> &gt; <span class="code-highlight">nombredetucopia.sql</span></span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump --opt --user=<span class="code-highlight">usuario</span> -p --host=<span class="code-highlight">hostname</span> --no-tablespaces <span class="code-highlight">basededatos</span> &gt; <span class="code-highlight">nombredeturespaldo.sql</span></span></pre>
 </div>
+</li>
+<li>Cuando se te pida, ingrese la contraseña de usuario de la base de datos.
+<div class="notebox-important">
+<p>Por favor ten en cuenta lo siguiente al correr este comando:</p>
 <ul>
-<li>Luego se te pedirá la contraseña del usuario de tu base de datos.</li>
-<li>Puedes usar cualquier nombre para <span class="code">nombredetucopia.sql</span> – sólo asegúrate de que termine en <span class="code">.sql</span>.</li>
-<li><span class="code">--no-tablespaces</span> se usa para excluir las declaraciones la salida.</li>
-</ul>
-<div class="notebox-note">
-<p>Por favor ten en cuenta lo siguiente cuando corras este comando:</p>
-<ul>
-<li>Sólo debes correr el comando una vez.</li>
-<li>No vas a ver ningún resultado al correr el comando.</li>
-<li>Para un usuario inexperto, puede parecer que el servidor no responde. ¡No canceles la acción del comando! Si no hay respuesta del servidor, puedes suponer que el comando continúa con la copia de seguridad.</li>
-<li>Para base de datos grandes, la copia de respaldo puede tardarse unos minutos en completarse.</li>
+<li>El comando no proporciona ningún resultado, por lo que debes asegurarte de <strong>no cancelarlo</strong>.</li>
+<li>Si el servidor no responde, puedes asumir que el comando continúa con la copia de seguridad.</li>
+<li>En el caso de bases de datos grandes, un respaldo puede tardar varios minutos en completarse.</li>
 </ul>
 </div>
-<p>Ahora puedes usar el siguiente artículo sobre FTP para obtener instrucciones sobre cómo iniciar sesión en tu servidor y descargar el archivo .sql:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">Generalidades sobre FTP</a></li>
-</ul>
+</li>
+</ol>
+<p>Ahora puedes utilizar <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales">este artículo de FTP</a> para obtener instrucciones sobre cómo iniciar sesión en tu servidor y descargar el archivo de la base de datos.</p>
+<h3 id="h_01J6Z7QPXA53JPTNW6MEFE189J">Respaldarlo a través de un cron job</h3>
+<p>Si desea realizar una copia de seguridad de tu base de datos usando un <a href="https://help.dreamhost.com/hc/es/articles/215088668-Crear-un-cron-job" target="_self">cron job</a>, deberás especificar la contraseña. Por ejemplo:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump --opt --user=usuario <span class="code-highlight">--password='contraseña'</span> --host=hostname --no-tablespaces basededatos &gt; nombredeturespaldo.sql</span></pre>
 </div>
-<h2 id="h_01HNJRHT7YJA9MGPPZ9DKEC3TV">Copiar TODAS las bases de datos bajo un solo usuario</h2>
-<div class="solvvy-solution">
-<p>El siguiente script copia todas las bases de datos en un solo usuario. En el pasado esto era posible de usar la banderilla <span class="code">--all-databases</span>, pero esto ya no funciona debido a una actualizacion de MySQL. Asegúrate de <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">obtener el hostname, username. y password</a> antes de proceder.</p>
+<p>Asegúratee de agregar comillas simples antes y después de tu contraseña para garantizar que el comando la lea correctamente.</p>
+<h2 id="h_01HNGVSJNVSR9B2K3VT7TJXZSF">Respaldar TODAS las bases de datos</h2>
+<p>El siguiente script realiza una copia de seguridad de todas las bases de datos bajo un solo nombre de usuario.</p>
 <ol>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear un archivo</a> en tu computador Mac, Linux, o en tu servidor DreamHost. Nombrálo algo así como <span class="text-object">db-export.sh</span>.</li>
-<li>Agregale el siguiente código. Asegúrate de actualizar los campos <span class="code">host</span>, <span class="code">username</span>, y <span class="code">password</span>.
+<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y navega hasta el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home#el-directorio-home-del-usuario" target="_self">directorio principal del usuario</a>.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH" target="_self">Crea un archivo</a> y nómbralo algo como <span class="text-object">bd-exportada.sh</span>.</li>
+<li>Agrégale el siguiente código.
+<div class="notebox-tip">
+<p>Asegúrate de cambiar el <span class="code">hostname</span>, <span class="code">usuario</span>, y <span class="code">contraseña</span> a tus credentiales. </p>
+</div>
 <div class="preboxcontainer">
 <pre class="prebox">#!/bin/sh
 
-host="<span class="code-highlight">yourMySQLHostname</span>"
-username="<span class="code-highlight">username</span>"
-password="<span class="code-highlight">password</span>"
+host="<span class="code-highlight">hostname</span>"
+username="<span class="code-highlight">usuario</span>"
+password="<span class="code-highlight">contraseña</span>"
 
-for DB in $(mysql --host="$host" --user="$username" -p"$password" -e"show databases" --skip-column-names -s | grep -v information_schema); 
+for DB in $(mysql --host="$host" --user="$usuario" -p"$contraseña" -e"show databases" --skip-column-names -s | grep -v information_schema); 
 do 
-  mysqldump --opt --host="$host" --user="$username" -p"$password" --no-tablespaces $DB &gt; ./$DB.sql; 
+  mysqldump --opt --host="$host" --user="$usuario" -p"$contraseña" --no-tablespaces $DB &gt; ./$DB.sql; 
 done</pre>
 </div>
 </li>
-<li>Corre el archivo.
+<li>Corre el archivo:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">sh db-export.sh</span></pre>
 </div>
 </li>
 </ol>
-<p>Todas las bases de datos dentro de este usuario ahora están descargadas en tu directorio actual.</p>
-</div>
-<h2 id="h_01HNJRHT7YN230ZZD92BCXEXG8">Hacer una copia de seguridad de tu base de datos en un cron job</h2>
-<div class="solvvy-solution">
-<p>Si deseas hacer una copia de seguridad de tu base de datos en un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215088668-Crear-un-Cron-Job" target="_self">cron job</a>,&nbsp;deberás especificar la contraseña. Por ejemplo, puedes agregar esta línea a un script de Shell para hacer una copia de seguridad de tu base de datos.</p>
-<div class="notebox-important">
-<p>Asegúrate de agregar comillas simples antes y después de tu contraseña para asegurarte de que el comando lo lea correctamente.</p>
-</div>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysqldump --opt --user=<span class="code-highlight">usuario</span> --password='<span class="code-highlight">contraseña</span>' --host=<span class="code-highlight">tuHostMySQL</span> --no-tablespaces <span class="code-highlight">nombreBD</span> &gt; <span class="code-highlight">nombredetucopia.sql</span></span></pre>
-</div>
-<h2 id="h_01HNJRHT7YCNQDG4FC2F0NKEG7">Ver también</h2>
-<div class="solvvy-hidden">
+<p>Luego, todas las bases de datos bajo este nombre de usuario se descargan en tu directorio actual.</p>
+<h2 id="h_01HNGVSJNW1DSTA19M0VPWVW7C">Ver también</h2>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encuentra tus credenciales para acceder a la base de datos</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214395738-phpMyAdmin-C%C3%B3mo-hacer-una-copia-de-seguridad-o-exportar-una-base-de-datos-o-tabla" target="_self">phpMyAdmin — Cómo hacer una copia de seguridad o exportar una base de datos o tabla</a></li>
-<li><a href="/hc/es/articles/215039758-Generalidades-sobre-copias-de-seguridad-de-bases-de-datos" target="_self">Generalidades sobre copias de seguridad de bases de datos</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encontrar-tus-credenciales-de-inicio-de-sesi%C3%B3n">Encontrar tus credenciales de inicio de sesión </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214395738-phpMyAdmin-C%C3%B3mo-respaldar-o-exportar-una-base-de-datos-o-una-tabla">phpMyAdmin — Cómo respaldar o exportar una base de datos o una tabla</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215039758-Generalidades-sobre-el-respaldo-de-las-bases-de-datos">Generalidades sobre el respaldo de las bases de datos </a></li>
 </ul>
-</div>
-</div>
