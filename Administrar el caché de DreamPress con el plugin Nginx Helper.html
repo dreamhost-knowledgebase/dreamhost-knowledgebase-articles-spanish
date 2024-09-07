@@ -1,4 +1,4 @@
-<div id="auto-toc">&nbsp;</div>
+<div id="auto-toc"> </div>
 <h2 id="h_01HCFSG0Z04XGY7C74HN855E4J">Generalidades</h2>
 <div class="solvvy-solution">
 <p>El plugin <a href="https://es.wordpress.org/plugins/nginx-helper/" target="_blank" rel="noopener noreferrer">Nginx Helper</a> se configura automáticamente con todos los sitios DreamPress. Este plugin ayuda a evitar inconvenientes como la inhabilidad de ver los cambios guardados o mostrar contenido desactualizado a los visitantes.</p>
@@ -6,8 +6,10 @@
 <h3 id="h_01HCG0S8KJY00Q10HJQHA1RHB6">Métodos de caché</h3>
 <p><span class="text-object">Nginx Helper</span> provee dos opciones de caché.</p>
 <ul>
-<li id="h_01HCG10JDSA7VXDN8ZTN07Q4ZB"><strong>nginx Fastcgi cache</strong>: Administra las configuraciones externas de Nginx</li>
-<li><strong>Redis cache</strong>: Esta funcionalidad no está disponible en DreamPress</li>
+<li id="h_01HCG10JDSA7VXDN8ZTN07Q4ZB">
+<strong>nginx Fastcgi cache</strong>: Administra las configuraciones externas de Nginx</li>
+<li>
+<strong>Redis cache</strong>: Esta funcionalidad no está disponible en DreamPress</li>
 </ul>
 <div class="prereqs">
 <p>Las instrucciones en este artículo asumen que está activa la última versión del plugin <a href="https://es.wordpress.org/plugins/nginx-helper/" target="_blank" rel="noopener noreferrer">Nginx Helper</a>. Asegúrate de que este <a href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-los-plugins-de-WordPress#Actualizar_plugins">plugin está actualizado</a> antes de proceder o si encuentras dificultades con estos pasos.</p>
@@ -16,7 +18,8 @@
 <h2 id="h_01HCFT5VM04HX85XA1ZCJS8GDZ">Instalar y activar el plugin Nginx Helper</h2>
 <div class="solvvy-solution">
 <ol>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_blank" rel="noopener noreferrer">Inicia sesión</a> en tu sitio WordPress en example.com/<strong>wp-login.php</strong>.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_blank" rel="noopener noreferrer">Inicia sesión</a> en tu sitio WordPress en example.com/<strong>wp-login.php</strong>.</li>
 <li>En el menú de la izquierda, navega a <span class="text-section">Plugins &gt; Añadir Nuevo</span>.</li>
 <li>Busca <span class="text-object">Nginx Helper</span>.</li>
 <li>Haz clic en los botones <strong>Instalar Ahora</strong> y <strong>Activar</strong>.
@@ -34,13 +37,14 @@
 </ul>
 <p>Si el plugin se elimina, siempre puedes instalarlo de nuevo en el panel de WordPress.</p>
 </div>
-<div id="configuraciones-de-cache" class="section-link">&nbsp;</div>
+<div id="configuraciones-de-cache" class="section-link"> </div>
 <h2 id="01HCTFC8MHT8BND2FAYGD2EBXR">Activar las configuraciones de caché</h2>
 <div class="solvvy-solution">
 <p>El plugin <span class="text-object">Nginx Helper</span> te brinda un control detallado sobre la administración y eliminación del caché de tu sitio, así como acceso a opciones de configuración de depuración.</p>
 <p>Para acceder a la pantalla de configuraciones:</p>
 <ol>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_blank" rel="noopener noreferrer">Inicia sesión</a> en tu sitio WordPress en example.com/<strong>wp-login.php</strong>.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_blank" rel="noopener noreferrer">Inicia sesión</a> en tu sitio WordPress en example.com/<strong>wp-login.php</strong>.</li>
 <li>En el menú de la izquierda selecciona <span class="text-section">Configuraciones &gt; Nginx Helper</span>.</li>
 <li>En la sección Debug Options, selecciona las casillas:
 <ul>
@@ -55,7 +59,7 @@
 <div class="preboxcontainer">
 <pre class="prebox">example.com/wp-content/uploads/nginx-helper/nginx.log</pre>
 </div>
-<div id="fuente-de-la-pagina" class="section-link">&nbsp;</div>
+<div id="fuente-de-la-pagina" class="section-link"> </div>
 <h3 id="h_01HCTG5N7HXCSFT8VHJZMYD2WF">Habilitar las marcas de tiempo de Nginx en HTML</h3>
 <p>Esta configuración crea un comentario oculto al final de cada página. Este contiene:</p>
 <ul>
@@ -65,8 +69,10 @@
 </ul>
 <p>Puedes ver este comentario oculto revisando el código fuente de la página en tu navegador.</p>
 <ul>
-<li>Windows: <span class="code">Ctrl + U</span></li>
-<li>Mac: <span class="code">Option + CMD + U</span></li>
+<li>Windows: <span class="code">Ctrl + U</span>
+</li>
+<li>Mac: <span class="code">Option + CMD + U</span>
+</li>
 </ul>
 <p>Desplázate hacia abajo hasta la última línea en la parte inferior del código HTML para ver esta información. Aparecerá así:</p>
 <div class="preboxcontainer">
@@ -115,11 +121,12 @@ content-type: text/html; charset=UTF-8
 vary: Accept-Encoding
 vary: Accept-Encoding, Cookie
 cache-control: max-age=3, must-revalidate
-strict-transport-security: max-age=31536000;<br />x-cache-status: <span class="code-highlight">HIT</span></pre>
+strict-transport-security: max-age=31536000;<br>x-cache-status: <span class="code-highlight">HIT</span></pre>
 </div>
 </div>
-<div id="purge-cache-plugin" class="section-link">&nbsp;</div>
+<div id="purge-cache-plugin" class="section-link"> </div>
 <h2 id="h_01HCWR0BKYFWEXD2RJZYDBJCZ1">Purgar el caché</h2>
+<p>El caché se purga automáticamente cada hora en el caso de los sitios alojados en DreamPress Pro y cada 24 horas en el caso de otros planes de DreamPress. Además, puedes hacer una purga manual de todo o parte de la caché siguiendo los pasos que se describen en las siguientes secciones.</p>
 <div class="solvvy-solution">
 <h3 id="h_01HCG8VQDZDRF8N1AFX38FWGRQ" class="subtoc-heading">Usar el plugin</h3>
 <div class="notebox-important">
@@ -127,7 +134,8 @@ strict-transport-security: max-age=31536000;<br />x-cache-status: <span class="c
 </div>
 <p><strong>Purgar TODO el caché</strong></p>
 <ol>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_blank" rel="noopener noreferrer">Inicia sesión</a> en tu sitio WordPress en example.com/<strong>wp-login.php</strong>.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_blank" rel="noopener noreferrer">Inicia sesión</a> en tu sitio WordPress en example.com/<strong>wp-login.php</strong>.</li>
 <li>En el menú de la izquierda selecciona <span class="text-section">Configuraciones &gt; Nginx Helper</span>.</li>
 <li>En la parte superior derecha, da clic al botón <strong>Purge Entire Cache</strong>.</li>
 </ol>
@@ -135,7 +143,8 @@ strict-transport-security: max-age=31536000;<br />x-cache-status: <span class="c
 <p>Una mejor alternativa es purgar el caché selectivamente de una página o publicación específica. Puedes purgar los mismos usando el botón <strong>Purge Cache</strong> del plugin cuando veas la página en vivo.</p>
 <p>To purge cache for an individual page or post:</p>
 <ol>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_blank" rel="noopener noreferrer">Inicia sesión</a> en tu sitio WordPress en example.com/<strong>wp-login.php</strong>.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_blank" rel="noopener noreferrer">Inicia sesión</a> en tu sitio WordPress en example.com/<strong>wp-login.php</strong>.</li>
 <li>Navega a la página o publicación que quieres purgar el caché.</li>
 <li>Haz clic en el enlace <span class="text-link">View</span> debajo de el título para abrir la URL pública.</li>
 <li>En la barra de herramientas de la parte superior, haz clic en <span class="text-link">Purge current Page</span>.
@@ -144,7 +153,7 @@ strict-transport-security: max-age=31536000;<br />x-cache-status: <span class="c
 </dl>
 </li>
 </ol>
-<div id="purge-cache-ssh" class="section-link">&nbsp;</div>
+<div id="purge-cache-ssh" class="section-link"> </div>
 <h3 id="h_01HCG8W1ZYX0XS88Z0TRC8PGC3" class="subtoc-heading">Usar SSH</h3>
 <div class="notebox-note">
 <p>En los siguientes ejemplos, reemplaza <strong>example.com</strong> con tu sitio web.</p>
@@ -174,7 +183,8 @@ strict-transport-security: max-age=31536000;<br />x-cache-status: <span class="c
 <h3 id="h_01HCG1C7XH02Q2PC9R4ENGX5QH">Cambiar a un tema predeterminado</h3>
 <p>La primera cosa y la más sencilla de es revisar el tema de tu sitio.</p>
 <ol>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_blank" rel="noopener noreferrer">Inicia sesión</a> en tu sitio WordPress en example.com/<strong>wp-login.php</strong>.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_blank" rel="noopener noreferrer">Inicia sesión</a> en tu sitio WordPress en example.com/<strong>wp-login.php</strong>.</li>
 <li>En el menú de la izquierda, navega a <span class="text-section">Apariencia &gt; Temas</span>.</li>
 <li>Cambia el tema activo a uno predeterminado (como twentytwentythree).</li>
 <li>Prueba el caché otra vez.</li>
@@ -186,7 +196,8 @@ strict-transport-security: max-age=31536000;<br />x-cache-status: <span class="c
 <p>Usa los pasos a continuación para probar los plugins activos de tu sitio.</p>
 <ol>
 <li>Asegúrate de haber habilitado las configuraciones de caché <strong>Enable Logging</strong> y <strong>Enable Nginx Timestamp in HTML</strong> como se <a href="#configuraciones-de-cache">explica arriba</a>.</li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-los-plugins-de-WordPress#Como_deshabilitar_un_plugin">Deshabilitar todos los plugins</a> excepto <span class="text-object">Nginx Helper</span>.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/215300817-Administrar-los-plugins-de-WordPress#Como_deshabilitar_un_plugin">Deshabilitar todos los plugins</a> excepto <span class="text-object">Nginx Helper</span>.</li>
 <li>Purga el caché usando el <a href="#purge-cache-plugin">plugin</a> o a través de <a href="#purge-cache-ssh">SSH</a>.</li>
 <li>Visita tu sitio web en un buscador.</li>
 <li>Carga en un buscador la página que quieres arreglar.</li>
@@ -206,7 +217,7 @@ strict-transport-security: max-age=31536000;<br />x-cache-status: <span class="c
 <p>Si se necesitan los plugins deshabilitados para la funcionalidad prevista de tu sitio, debes comunicarte con el desarrollador del plugin para encontrar una solución alternativa para trabajar con el caché del sitio.</p>
 </div>
 </div>
-<div id="purge-cache-plugin" class="section-link">&nbsp;</div>
+<div id="purge-cache-plugin" class="section-link"> </div>
 <h2 id="h_01HCG8TAHMAGMKA4PAWT44NNK1">Saltar el caché en una sola página</h2>
 <div class="solvvy-solution">
 <p>Puedes saltar el caché en una sola página agregando <span class="code">?nocache</span> al final de la URL. Por ejemplo:</p>
