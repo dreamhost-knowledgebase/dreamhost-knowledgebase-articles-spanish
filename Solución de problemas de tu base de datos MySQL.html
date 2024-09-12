@@ -1,81 +1,32 @@
-<div class="notebox-tip">
-<p>Si te encuentras en una situación que requiere cambios en tu sitio y tu desarrollador no está disponible para ayudarte, el equipo de soporte calificado de DreamHost puede ayudarte por una pequeña tarifa. Puedes encontrar más información sobre los servicios admitidos y los costos asociados en el artículo de <a href="https://help.dreamhost.com/hc/es/articles/360042256912-Generalidades-sobre-Servicios-Profesionales-">Servicios Profesionales de DreamHost</a>.</p>
-</div>
-<h2 id="h_01HRQ4SQV8Y983A0HZFZP731T0">Generalidades</h2>
-<div class="solvvy-solution">
+<div id="intermediate"> </div>
+<h2 id="h_01J7CBYGA4RKDYJWP83G7DRSFH">Generalidades</h2>
+<p>A continuación se proporcionan soluciones a algunos problemas comunes que pueden ocurrir en una base de datos MySQL.</p>
 <div class="notebox-note">
-<p>No hay acceso SSH a un servidor MySQL compartido o privado. Toda la solución de problemas debe realizarse en el panel DreamHost o dentro de tu software.</p>
-<p>Si necesitas acceso SSH, debes actualizar a un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self" rel="undefined">Servidor Dedicado</a> o <a href="https://help.dreamhost.com/hc/es/articles/214840947--Qu%C3%A9-es-DreamCompute-" target="_self" rel="undefined">DreamCompute</a> donde la base de datos está alojada en la misma máquina.</p>
+<p><strong>Acceso a SSH</strong></p>
+<p>No hay acceso SSH a un servidor MySQL Shared o Privado. Toda la resolución de problemas debe realizarse en el panel de DreamHost o dentro de tu software.</p>
+<p>Si necesitas acceso a SSH, debes mejorar a un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados" target="_self" rel="undefined">Servidor Dedicado</a> o <a href="https://help.dreamhost.com/hc/es/articles/214840947--Qu%C3%A9-es-DreamCompute">DreamCompute</a>, donde la base de datos está alojada en la misma máquina.</p>
 </div>
-</div>
-<h2 id="h_01HRQ4SQV841VPEKP90Q8PQM4P">Problemas para iniciar sesión</h2>
-<div class="solvvy-solution">
-<h3 id="h_01HRQ4SQV87GV17F3MYN1FZA41">Actualización de 'Hosts permitidos'</h3>
-<p>Además, asegúrate de agregar tu dirección IP actual a los hosts permitidos de la base de datos. Puedes administrar esta configuración en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener noreferrer">Bases de Datos MySQL</a>. A la derecha de tu base de datos, haz clic en el nombre de usuario. En la siguiente página podrás ver el campo de 'Hosts permitidos'.</p>
-<p>A la derecha de tu base de datos, haz clic en el nombre de usuario. En la página siguiente puede ver el campo 'Hosts permitidos' ('Allowable hosts').</p>
+<h2 id="h_01J7CBYGA5FCTJAVH5PCRD3A80"><span id="Si_estas_teniendo_problemas_al_iniciar_sesion">Iniciar sesión</span></h2>
+<p>Si no puedes iniciar sesión con el usuario, el problema puede estar en la configuración de tu archivo <span class="text-object">Hosts permitidos</span>.</p>
+<h3 id="h_01J7CBYGA5B1G9Z60KCGT701G6">Actualizar los 'Hosts Permitidos'</h3>
+<p>Puedes administrar esta configuración en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener noreferrer">Bases de Datos MySQL</a>. A la derecha de tu base de datos, da clic en el nombre de usuario para ver la página de configuración.</p>
 <dl>
-<dd><img class="img-border" src="https://dreamhostknowledgebase.com/images/es/2x/es-panel-mysql-allowable-hosts.png" alt="allowable hosts.png" width="291" height="151"></dd>
+<dd><img class="img-border" src="https://dreamhostknowledgebase.com/images/es/2x/es-panel-mysql-allowable-hosts.png" alt="ES allowable hosts.png" width="297" height="154"></dd>
 </dl>
-<p>En la imagen de arriba, reemplazarías xxx.xxx.xxx.xxx con la dirección IP de tu computador. Puedes encontrarla en un sitio como <a href="https://whatismyipaddress.com/">whatismyipaddress.com</a>. El panel también muestra tu dirección IP actual en esta sección.</p>
-</div>
-<h2 id="h_01HRQ4SQV87T4WTEZJ91QM218S">Reiniciar el servidor</h2>
-<div class="solvvy-solution">
-<p>Debido a la naturaleza del alojamiento compartido de MySQL, no es posible reiniciar tu servidor MySQL. La única forma en que esto sería posible es si estuviera en un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self" rel="undefined">plan de Alojamiento Dedicado</a>. En un plan dedicado, el servidor MySQL está alojado en la misma máquina, lo que te permite acceso completo a la raíz.</p>
-</div>
-<h2 id="h_01HRQ4SQV8D37E8T97R9NXZSYW"><span id="Mensajes_de_Error">Mensajes de Error</span></h2>
-<div class="solvvy-solution">
-<h3 id="h_01HRQ4SQV8DY1XAX3H90ZCT8Y2">"<em>The used command is not allowed with this MySQL version</em>"</h3>
-<p>Este error puede ocurrir cuando usas la declaración <span class="code">LOAD DATA LOCAL INFILE</span> en los servidores web Ubuntu 12.04. Un cambio en la biblioteca mysql de Debian a Ubuntu requiere cambios de código para solucionar este error y permitir que se ejecute tu declaración.</p>
-<dl>
-<dt>
-<h3 id="h_01HRQ4SQV8WQS8Y0YTTVHWSEJ8">mysql command line</h3>
-</dt>
-<dd>Agrega la banderilla <span class="code">--local-infile</span> a tu declaración de conexión de mysql, como:</dd>
-</dl>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mysql --local-infile -h <span class="code-highlight">HOSTNAME</span> -u <span class="code-highlight">USERNAME</span> -p<span class="code-highlight">PASSWORD DATABASENAME</span></span></pre>
-</div>
-<dl>
-<dt>
-<h3 id="h_01HRQ4SQV8AYCTFFABK3ZB9VCS">PHP mysql_connect()</h3>
-</dt>
-<dd>Agrega 2 parámetros extra a mysql_connect, un <span class="code">false</span> para "new link" y luego una banderilla de cliente de <span class="code">128</span> o <span class="code">CLIENT_LOCAL_FILES</span>:</dd>
-</dl>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="cmdoutput">mysql_connect('HOSTNAME','USERNAME','PASSWORD', <span class="code-highlight">false, 128</span>);</span></pre>
-</div>
-<dl>
-<dt>
-<h3 id="h_01HRQ4SQV8WN4EJG9H1T4X2M21">PHP mysqli_connect()</h3>
-</dt>
-<dd>Inicia mysqli primero vía <span class="code">mysqli_init</span>, y usa <span class="code">mysqli_options()</span> para especificar el archivo local como <span class="code">true</span> antes de conectar con el servidor mysql:</dd>
-</dl>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="cmdoutput">$link = mysqli_init();
-<span class="code-highlight">mysqli_options</span>($link, MYSQLI_OPT_LOCAL_INFILE, <span class="code-highlight">true</span>);
-mysqli_real_connect($link, 'HOSTNAME','USERNAME','PASSWORD','DATABASENAME');</span></pre>
-</div>
-<dl>
-<dt>
-<h3 id="h_01HRQ4SQV837GXAC6WCEYNPS88">PERL DBI</h3>
-</dt>
-<dd>El parámetro <span class="code">mysql_local_infile</span> puede ser agregado al nombre de la variable de tu fuente de datos, o directamente en <span class="code">DBI-&gt;connect</span>:</dd>
-</dl>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="cmdoutput">$dbh = DBI-&gt;connect("DBI:mysql:database=DATABASENAME;host=HOSTNAME;<span class="code-highlight">mysql_local_infile=1</span>", "USERNAME", "PASSWORD");</span></pre>
-</div>
-<h3 id="h_01HRQ4SQV89Q0RR6WM44B89VHG">Errores importando una base de datos con mysqlimport</h3>
-<p>DreamHost ha implementado algunas características más nuevas en MySQL 8, lo que puede causar un error al usar el programa de línea de comandos. <span class="code">mysqlimport</span>. Para más detalles, revisa la página <a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL#errores_importando_una-base_de_datos" target="_self">Generalidades de MySQL</a>.</p>
-</div>
+<p>En la imagen de arriba, reemplaza <span class="text-object">xxx.xxx.xxx.xxx</span> por la dirección IP de tu computador. Puedes encontrarla en un sitio como <a href="https://whatismyipaddress.com/" target="_blank" rel="noopener noreferrer">whatismyipaddress.com</a>. El panel también muestra tu dirección IP actual en esta sección.</p>
+<p>Asegúrate de que tu dirección IP actual se agregue a este campo.</p>
+<h2 id="h_01J7EDQVZAJJ7EFYBEK52WF3G7">Inconvenientes del servidor</h2>
+<p><strong>Planes Shared y VPS</strong></p>
+<p id="h_01J7CBYGA5GE690PNVXGSE56D7">Reiniciar el servidor puede resolver a menudo problemas comunes del servidor. Sin embargo, debido a la naturaleza del alojamiento MySQL compartido, no es posible reiniciar el servidor MySQL. Si notas salgún problema relacionado con el servidor, <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">contacta a soporte</a> para obtener más ayuda.</p>
+<p><strong>Planes Dedicados</strong></p>
+<p>El reinicio solo es posible si tienes un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados" target="_self" rel="undefined">plan de Alojamiento Dedicado</a>. En un Servidor Dedicado, el servidor MySQL está alojado en la misma máquina, lo que te permite tener acceso completo como root.</p>
+<h2 id="h_01J7CBYGA541GMW2SRMV0H963E">Erroress al importar a una base de datos con mysqlimport</h2>
+<p>DreamHost ha implementado algunas características más nuevas en MySQL 8, que pueden provocar que se produzca un error al utilizar el programa de línea de comandos <span class="code">mysqlimport</span>. Para obtener más detalles, revisa la página <a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL">Generalidades de MySQL</a>.</p>
 <h2 id="h_01HRQ4SQV867TTSXDBYW7GY0SP">Ver también</h2>
-<div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL" target="_self">Generalidades sobre MySQL</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215100557-Restaurar-una-base-de-datos-en-el-panel" target="_self">Restaurar una base de datos en el panel</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/221621388-Administrar-bases-de-datos-MySQL-existentes" target="_self">¿Cómo administrar mi base de datos?</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214882998-Conectarse-a-una-base-de-datos-v%C3%ADa-SSH" target="_self">Conectarse a una base de datos vía SSH</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214883058" target="_self">Conectarse a una base de datos usando MySQL Workbench</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215577937-Usando-SQLyog-para-conectarte-a-tu-base-de-datos" target="_self">¿Cómo conectarme a mi base de datos usando SQLyog?</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115000263911-Limitaciones-de-MySQL-debido-al-alojamiento-compartido" target="_self">Limitaciones de MySQL debido a un Shared Hosting</a></li>
 </ul>
-</div>

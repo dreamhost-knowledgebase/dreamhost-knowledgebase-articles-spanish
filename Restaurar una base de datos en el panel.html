@@ -1,46 +1,70 @@
-<h2 id="h_01HNX5S7CS34XB97ECVMYH2J9A">Copias de seguridad diarias de DreamHost</h2>
+<div id="beginner"> </div>
+<h2 id="h_01HRW6GGQ6R4CC9TDN1Y2TDQBZ"><span id="DreamHost.27s_daily_backups">Generalidades</span></h2>
+<p>A continuación se explica cómo restaurar una base de datos en el panel.</p>
+<h2 id="h_01J6Z0M60R2R3ZMF8488KH3SR6">DreamHost's daily backups</h2>
+<p>Todas las bases de datos MySQL de DreamHost se respaldan diariamente. Las copias de seguridad comienzan a medianoche y se completan después de que se haya realizado una de cada base de datos. En general, hay cinco días de respaldos disponibles.</p>
+<p>Se <strong>RECOMIENDA ENCARECIDAMENTE</strong> que <a href="https://help.dreamhost.com/hc/es/sections/203242427-Copias-de-Seguridad">crees tus propios respaldos externos</a> de todas tus bases de datos para complementar las que a corto plazo crea DreamHost. DreamHost no garantiza que las copias de seguridad estén disponibles.</p>
 <div class="solvvy-solution">
 <div class="alert-warning">
-<p>DreamHost no puede garantizar que los datos se retendrán en cuentas inactivas (suspendidas/cerradas/deshabilitadas) durante más de dos semanas después del cambio de estado de la cuenta. Consulta los siguientes artículos del centro de ayuda para obtener más información sobre cómo puedes hacer una copia de seguridad de tu cuenta o realizar un pago:</p>
+<p><strong>Cuentas suspendidas/cerradas/deshabilitadas</strong></p>
+<p>DreamHost no puede garantizar que los datos se retendrán en cuentas inactivas (suspendidas/cerradas/deshabilitadas) durante más de dos semanas después del cambio de estado de la cuenta. Consulta los siguientes artículos para obtener más información sobre cómo puedes hacer una copia de seguridad de tu cuenta o realizar un pago:</p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215089918-Respaldar-una-cuenta-en-el-panel">Respaldar una cuenta en el panel</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215202667-Hacer-un-pago">Hacer un pago</a></li>
 </ul>
 </div>
-<p>Todas las bases de datos DreamHost MySQL hacen copias de seguridad diariamente. Las copias de seguridad comienzan a medianoche y se completan después de que se haya hecho una copia de seguridad de cada base de datos. Se RECOMIENDA ALTAMENTE que crees tus propias copias de seguridad externas de todas tus bases de datos para complementar las copias de seguridad a corto plazo que DreamHost crea. DreamHost no garantiza que haya copias de seguridad disponibles.</p>
 </div>
-<div class="notebox-note">
-<p><strong>Copia de seguridad de tu cuenta</strong></p>
-<p>Para hacer una copia de seguridad de toda tu cuenta (usuarios FTP, usuarios de correo y bases de datos), consulta la función de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215089918-Respaldar-una-cuenta-en-el-panel" target="_self">copia de seguridad de tu cuenta</a>. Las copias de seguridad creadas se pueden descargar a otra ubicación externa para su custodia.</p>
-</div>
-<h2 id="h_01HNX5S7CSS7RXM8PM6TN88M4K">Restaurar una base de datos</h2>
-<div class="solvvy-solution">
-<p>Generalmente hay 5 días de copias de seguridad disponibles. Ten en cuenta que esto no está garantizado, por lo que siempre debes hacer tus propias copias de seguridad personales en caso de que no haya ninguna disponible para restaurar en tu panel.</p>
+<h2 id="h_01J6Z0M60RFW479MY213MBNAJ6">Restaurar una base de datos</h2>
+<p>Para restaurar una base de datos:</p>
 <ol>
-<li><span style="font-weight: 400;">Navega a la página&nbsp;</span><a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener noreferrer">Bases de Datos MySQL</a>.</li>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.mysql" target="_blank" rel="noopener noreferrer">Bases de Datos MySQL</a>.</li>
 <li>Haz clic en el botón <strong>Restaurar BD</strong> que se encuentra a la derecha de tu base de datos.</li>
-<li>Escoge lo que te gustaría restaurar:<br />
+<li>Escoge lo que te gustaría restaurar:<br>
 <ul>
-<li><strong>¿Restaurar qué copia de seguridad?</strong> — Elige cualquier copia de seguridad disponible del menú desplegable.</li>
-<li><strong>Tablas para restaurar</strong> — Si deseas restaurar toda la base de datos, deja este espacio con un asterisco, como *</li>
-<li><strong>Al restaurar</strong> — Tienes 4 opciones de cómo se restauran tus tablas.</li>
+<li>
+<strong>¿Restaurar qué copia de seguridad?</strong> — Elige cualquier copia de seguridad disponible del menú desplegable.</li>
+<li>
+<strong>Tablas para restaurar</strong> — Si deseas restaurar toda la base de datos, deja este espacio con un asterisco, como *</li>
+<li>
+<strong>Al restaurar</strong> — Tienes 4 opciones de cómo se restauran tus tablas.</li>
 </ul>
 <dl>
 <dd>
-<dl>
-<dd><strong>Opción 1 (Mis tablas restauradas deberían llamarse <em>nombredetabla__Fecha</em> y las tablas de allí deberían estar <em>intactas.</em>) <br />Opción 2</strong> <strong>(Mis tablas restauradas deberían llamarse <em>Fecha_Nombredetabla</em> y las tablas de allí deberían estar <em>intactas.</em>) </strong>— Las dos primeras opciones restauran tus tablas, pero los nombres cambian. De esta manera, los archivos restaurados NO toman el lugar de los archivos actuales. Deberás cambiar manualmente los nombres de las tablas o ajustar el archivo de configuración de tu sitio para ver la base de datos restaurada</dd>
-<dd><strong>Opción (Mis tablas restauradas deberían llamarse <em>nombredetabla</em> y las mismas allí deberían renombrarse a <em>nombredetabla_Fecha.</em>)<br />Opción 4 (Mis tablas restauradas deberían llamarse <em>tablename</em> y las mismas allí deberían renombrarse a <em>Fecha_nombredetabla</em><em>.</em>)</strong> — Las dos últimas opciones reemplazan inmediatamente las tablas de tu base de datos. Las tablas actuales se renombran. Con mayor frecuencia desearás una de las dos últimas opciones</dd>
-</dl>
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<tbody>
+<tr>
+<th class="wysiwyg-text-align-center" style="width: 8%;">Opción</th>
+<th class="wysiwyg-text-align-center" style="width: 46%;">Selección</th>
+<th class="wysiwyg-text-align-center" style="width: 46%;">Descripción</th>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="vertical-align: middle;">1</td>
+<td>Mis tablas restauradas deberían llamarse <em>tablename__Timestamp</em> y las tablas que están ahí ahora deberían estar <em>intactas</em>.</td>
+<td style="vertical-align: middle;" rowspan="2">Las opciones 1 y 2 restauran las tablas, pero se modifican los nombres. De esta manera, los archivos restaurados NO reemplazan los archivos actuales. Deberás cambiar manualmente los nombres de las tablas o ajustar el archivo de configuración de tu sitio para ver la base de datos restaurada.</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="vertical-align: middle;">2</td>
+<td>Mis tablas restauradas deberían llamarse <em>Timestamp__tablename</em> y las tablas que están ahí ahora deberían estar <em>intactas</em>.</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="vertical-align: middle;">3</td>
+<td>Mis tablas restauradas deberían llamarse <em>tablename</em> y las tablas que están ahí ahora deberían cambiar su nombre a <em>tablename__Timestamp.</em>
+</td>
+<td style="vertical-align: middle;" rowspan="2">Las opciones 3 y 4 reemplazan inmediatamente las tablas de la base de datos. Las tablas actuales se renombran. Lo más frecuente es que desees una de las dos últimas opciones.</td>
+</tr>
+<tr>
+<td class="wysiwyg-text-align-center" style="vertical-align: middle;">4</td>
+<td>Mis tablas restauradas deberían llamarse <em>tablename</em> y las tablas que están ahí ahora deberían cambiar su nombre a <em>Timestamp__tablename.</em>
+</td>
+</tr>
+</tbody>
+</table>
 </dd>
 </dl>
-<dl>
-<dd>
-<dl>
-<dd>
-<div class="notebox-note">
+<div class="notebox-tip">
 <p><strong>Sitios de WordPress</strong></p>
 <p>Al restaurar una base de datos del sitio de WordPress, se recomienda encarecidamente que selecciones la Opción 4. Esto te permite revertir fácilmente el sitio a la versión anterior de tu base de datos si hay algún problema con los datos restaurados.</p>
-<p>Puedes volver rápidamente a la versión anterior actualizando el valor del prefijo en tu archivo <span class="text-object">wp-config.php</span>. Inicia sesión en tu sitio a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">FTP</a> o&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>&nbsp;y abre el archivo <span class="text-object">wp-config.php</span> (está en el directorio de tu sitio). Verás la siguiente línea:</p>
+<p>Puedes volver rápidamente a la versión anterior actualizando el valor del prefijo en tu archivo <span class="text-object">wp-config.php</span>. Inicia sesión en tu sitio a través de <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">FTP</a> o <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> y abre el archivo <span class="text-object">wp-config.php</span> (está en el directorio de tu sitio). Verás la siguiente línea:</p>
 <div class="preboxcontainer">
 <pre class="prebox">$table_prefix = 'wp_';</pre>
 </div>
@@ -49,28 +73,18 @@
 <pre class="prebox">$table_prefix = '<span class="code-highlight">20240329_141233_</span>wp_';</pre>
 </div>
 </div>
-</dd>
-</dl>
-</dd>
-</dl>
 </li>
-<li>Haz clic en el botón <strong>¡Restaurar mi copia de seguridad ahora!</strong></li>
+<li>Haz clic en el botón <strong>¡Restaurar mi copia de seguridad ahora!</strong>
+</li>
 </ol>
-<p>Verás un mensaje de éxito que te notificará que tu base de datos se restaurará en 10 minutos.</p>
-</div>
-<h2 id="h_01HNX5S7CSWW6KPP9D3DV6498G">Uso de disco de bases de datos MySQL</h2>
-<div class="solvvy-solution">
-<p>Los servidores MySQL tienen implementados discos muy rápidos, de alto RPM y discos más pequeños dentro de ellos para proporcionar el aumento de velocidad requerido para hacer que MySQL sea rápido. Debido a esto, hay un espacio limitado disponible en los servidores MySQL, y DreamHost alienta a sus clientes a desarrollar bases de datos tan pequeñas y eficientes como sea posible. Para obtener información específica sobre el tamaño de las bases de datos permitidas en un servidor MySQL DreamHost específico, revisa la&nbsp;<a href="https://www.dreamhost.com/es/legal/politica-ilimitada/" target="_self" rel="undefined">Política Ilimitada</a>&nbsp;y pónte en contacto con el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">servicio de soporte</a>&nbsp;si tienes más preguntas.</p>
-</div>
+<p>Aparecerá un mensaje de éxito notificándote que tu base de datos se restaurará dentro de 10 minutos.</p>
+<h2 id="h_01HRW6GGQ62DPQE1Q7HXTMGY57"><span id="MySQL_database_disk_usage">Administrar el uso de disco de la base de datos de MySQL</span></h2>
+<p>DreamHost alienta a sus clientes a desarrollar las bases de datos lo más pequeñas y eficientes posibles. Para obtener información específica sobre el tamaño de las bases de datos permitidas en un servidor MySQL de DreamHost específico, revisa la <a href="https://www.dreamhost.com/es/legal/politica-ilimitada/" target="_blank" rel="noopener noreferrer">Política ilimitada</a> y <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">Contacta a soporte</a> si tienes más preguntas.</p>
 <h2 id="h_01HNX5S7CSNMW032FWRHBGX42F">Ver también</h2>
-<div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215099117-Generalidades-de-MySQL" target="_self">Generalidades sobre MySQL</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214395738-phpMyAdmin-C%C3%B3mo-hacer-una-copia-de-seguridad-o-exportar-una-base-de-datos-o-tabla" target="_self">¿Cómo hacer una copia de seguridad/exportar mi base de datos usando phpMyAdmin?</a></li>
 <li><a href="/hc/es/articles/215039758-Generalidades-sobre-copias-de-seguridad-de-bases-de-datos" target="_self">Generalidades sobre copias de seguridad de bases de datos</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214395768-phpMyAdmin-C%C3%B3mo-importar-una-base-de-datos-o-una-tabla" target="_self" rel="undefined">phpMyAdmin — ¿Cómo importar una base de datos o tabla?</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-sobre-phpMyAdmin" target="_self">Generalidades sobre phpMyAdmin</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214882998-Conectarse-a-una-base-de-datos-v%C3%ADa-SSH" target="_self">Conectarse a una base de datos vía SSH</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades sobre SSH</a></li>
 </ul>
-</div>
