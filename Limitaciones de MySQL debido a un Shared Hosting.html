@@ -1,6 +1,12 @@
+<div id="intermediate"> </div>
 <h2 id="h_01HYDWBXHF0RAYC0ZV69JX97QG">Generalidades</h2>
+<p>A continuación se detallan las limitaciones actuales de MySQL en los servidores MySQL Shared y <a href="https://help.dreamhost.com/hc/es/articles/215945917-Generalidades-de-un-VPS-MySQL">VPS MySQL</a>, así como una lista de privilegios de usuario disponibles.</p>
+<div class="notebox-tip">
+<p>La información de este artículo NO se aplica si mejoras a un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados" target="_self" rel="undefined">servidor Dedicado</a> donde la base de datos MySQL está en la máquina local.</p>
+</div>
 <div class="solvvy-solution">
-<p>En servidores MySQL Shared <em> y </em> VPS MySQL de DreamHost, algunos de los comandos SQL no están disponibles para secuencias de comandos ni en phpMyAdmin. Su funcionalidad está disponible en cambio a través del panel de control de DreamHost. Éstas incluyen:</p>
+<h2 id="h_01J74C44Y5FQMS070ZA8YV8YDC">Current limitations</h2>
+<p>En servidores MySQL Shared <em> y </em> VPS MySQL de DreamHost, algunos de los comandos SQL no están disponibles para secuencias de comandos ni en <a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-de-phpMyAdmin">phpMyAdmin</a>. Su funcionalidad está disponible en cambio a través del panel de control de DreamHost. Éstas incluyen:</p>
 <ul>
 <li>CREATE DATABASE (CREAR BASE DE DATOS)</li>
 <li>GRANT (CONCEDER/OTORGAR)</li>
@@ -13,15 +19,12 @@
 </ul>
 <p>Functions y triggers están disponibles en servidores VPS MySQL. También están disponibles en Servidores Dedicados con MySQL ejecutándose localmente.</p>
 <div class="notebox-note">
-<p>Una base de datos será creada usando el carácter configurado <span class="code">utf8mb3</span> y la colación <span class="code">utf8mb3_general_ci</span>.</p>
+<p>Una base de datos se crea usando el carácter configurado <span class="code">utf8mb3</span> y la colación <span class="code">utf8mb3_general_ci</span>.</p>
 </div>
 </div>
 <h2 id="h_01HYDWBXHF254A291W51696WWD">Tabla de privilegios de MySQL</h2>
 <div class="solvvy-solution">
 <p>La siguiente tabla resume los privilegios de usuario de DreamHost MySQL disponibles.</p>
-<div class="notebox-note">
-<p>La siguiente tabla se refiere tanto a MySQL compartido como a servidores <a href="https://help.dreamhost.com/hc/es/articles/215945917-Generalidades-de-un-VPS-MySQL">VPS MySQL</a>. NO se aplica si actualiza a un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-sobre-Servidor-Dedicado" target="_self" rel="undefined">Servidor Dedicado</a>, donde la base de datos MySQL está en la máquina local.</p>
-</div>
 </div>
 <table class="wikitable">
 <tbody>
@@ -167,7 +170,8 @@
 </tr>
 <tr class="table-background-green">
 <td>TRIGGER</td>
-<td><strong>Shared</strong>: Permite que se usen los triggers existentes (no se admite la creación de nuevos triggers)<br /><strong>VPS MySQL</strong>: Habilita los triggers para crearlos o descartarlos (no se puede establecer DEFINER como usuario que no sea root; elimina DEFINER = 'user' @ 'host' combo para crear el trigger en vez)</td>
+<td>
+<strong>Shared</strong>: Permite que se usen los triggers existentes (no se admite la creación de nuevos triggers)<br><strong>VPS MySQL</strong>: Habilita los triggers para crearlos o descartarlos (no se puede establecer DEFINER como usuario que no sea root; elimina DEFINER = 'user' @ 'host' combo para crear el trigger en vez)</td>
 <td>SI</td>
 </tr>
 <tr class="table-background-green">
