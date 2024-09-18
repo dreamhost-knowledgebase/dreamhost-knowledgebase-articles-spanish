@@ -1,91 +1,81 @@
-<h2 id="h_01HD4YH9JVD32E26M6FKMRM56N">Generalidades</h2>
-<div class="solvvy-solution">
-<p>Es un deseo común personalizar un sitio de WordPress a tu propio estilo personal. Sin embargo, un problema importante con el código de tema personalizado es que cuando el desarrollador actualiza el tema, tus personalizaciones se anulan. Una solución a este problema es crear un tema child con el control de versiones de Git.</p>
-<p>La creación de un tema child generalmente requiere el uso de algo como las herramientas de desarrollo del navegador de Google para averiguar qué cambios debe realizar en la hoja de estilo CSS del tema. También es posible que debas realizar cambios en uno o más de los archivos PHP para actualizar plantillas específicas de WordPress.</p>
-<p>Hacer un seguimiento de múltiples cambios como este puede volverse rápidamente tedioso y confuso. Además, ¿cómo puedes probar nuevos cambios sin perder los cambios actuales y cómo volver a un cambio que realizaste anteriormente si descubres que cometiste un error? Una vez más, la mejor solución es usar el control de versiones de Git con DreamPress.</p>
-</div>
-<h2 id="h_01HD4YH9JVN7GM6EJE2X28Q77C">¿Qué es Git?</h2>
-<div class="solvvy-solution">
-<p>Git es un sistema de control de versiones que le permite realizar un seguimiento de cada cambio que realice en tu sitio. Es ideal para crear y mantener temas, plugins y cualquier personalización de tu sitio web de WordPress más allá de los que puede hacer en el panel. Como herramienta de control de versiones, Git te permite tomar capturas de tu código para que puedas recuperar una copia de seguridad en cualquier momento. Git te permite crear una "rama" para agregar una nueva característica, corregir un error o incluso experimentar con nuevos cambios sin preocuparte por estropear la versión actual.</p>
-<p>En el pasado, usaba FTP/SFTP para actualizar tu sitio web. Sin embargo, un problema importante con estos protocolos es que no puedes volver a una versión anterior de tus personalizaciones en casos como cuando un cambio interrumpe tu sitio. Tampoco puedes revisar una versión anterior para ver qué cambió. Estos problemas se resuelven usando Git.</p>
-<p>Git se usa comúnmente con SSH y un terminal al crear repositorios remotos. Sin embargo, también hay algunas buenas aplicaciones GUI Git que se pueden usar. Dos buenas son <a href="https://www.sourcetreeapp.com/" target="_self">SourceTree</a> y <a href="https://www.git-tower.com/mac/" target="_self">Tower</a> ($$).</p>
-</div>
-<h2 id="h_01HD4YH9JV8TMRXJ77Z6EV107C">¿Para qué se puede usar Git?</h2>
-<div class="solvvy-solution">
-<p>El uso de Git para temas o plugins&nbsp; personalizados te permite compartirlos entre sitios web o con otros usuarios. Si eliges hacer esto, se recomienda encarecidamente colocar cada proyecto (tema o plugin) en su propio repositorio. Hacerlo les permitirá a ti y a otros seguir fácilmente tu trabajo personalizado.</p>
-</div>
-<h2 id="h_01HD4YH9JVHF8358842W9DACNF">¿Cuándo no se debe usar Git?</h2>
-<div class="solvvy-solution">
-<p>No se recomienda usar Git como herramienta de respaldo de WordPress. Por ejemplo, no es necesario poner tu instancia de WordPress bajo control de versiones. Eso ya lo hicieron los desarrolladores principales de WordPress. Además, si tuvieras todo tu sitio bajo el control de versión de Git, todo se sobrescribiría durante una actualización automática de WordPress. Más bien, piensa en Git como una herramienta para administrar tus personalizaciones o tu propio tema y desarrollo de plugins.</p>
-<p>Usar Git para el control de versiones de la base de datos también es difícil y no se recomienda. WordPress ya maneja el control de versiones para publicaciones y páginas, por lo que esto es innecesario.</p>
-</div>
-<h2 id="h_01HD4YH9JV07B76KKXA6CQ28WD">Diferentes formas de usar Git</h2>
-<div class="solvvy-solution">
-<p>Hay algunos flujos de trabajo diferentes que se pueden usar con Git y WordPress. Lo que funciona mejor depende de si se está desarrollando conjuntamente con otros o no, así como de tu preferencia personal.</p>
-<ol>
-<li><strong>Local only&nbsp;—&nbsp;</strong>Solo usa Git localmente (en tu computador) y continúa usando SFTP para actualizar tu servidor con cambios.</li>
-<li><strong>Local and web server&nbsp;—</strong> Crea un repositorio Git tanto localmente (en tu computador) como en tu servidor web. Envía los cambios de tu instancia local a la instancia de tu servidor que se copia en tu tema de WordPress o en el directorio de plugins.</li>
-<li><strong>Local, public Git host and web server&nbsp;—</strong>&nbsp;Esta configuración es ideal cuando se realiza un desarrollo conjunto con otros. Puedes usar <a href="https://github.com/" target="_self">GitHub</a> o <a href="https://bitbucket.org/" target="_self">Bitbucket</a> para alojar tu desarrollo colaborativo para actualizar y compartir cambios de código. Y cada vez que elijas, puedes enviar actualizaciones desde el host Git a tu servidor web. <a href="https://github.com/" target="_self">GitHub</a> es mejor para el código que se compartirá públicamente mientras <a href="https://bitbucket.org/" target="_self">Bitbucket</a> es mejor para un repositorio privado ya que es gratis. (GitHub cobra por repositorios privados.)</li>
-</ol>
-</div>
-<h2 id="h_01HD4YH9JW87V4Y7515AQMP12N">Cómo usar Git con un tema child en DreamPress</h2>
-<div class="solvvy-solution">
-<p>DreamPress ha incorporado soporte para Git. Se puede usar para el segundo o tercer tipo de flujo de trabajo que se muestra arriba. El siguiente ejemplo analiza el segundo método de flujo de trabajo: un repositorio Git local y uno en su servidor DreamPress que mantiene sincronizado.</p>
-<p>Probablemente, el caso de uso más común para usar Git es crear un tema child. Muy a menudo, deseas realizar cambios en un tema y no sobrescribir tus cambios cuando necesitas actualizar el tema.</p>
-<div class="notebox-important">
-<p>Los siguientes pasos usan SSH para ejecutar comandos de shell Git. Revisa los siguientes artículos para obtener una descripción general sobre cómo habilitar SSH:</p>
+<div id="advanced"> </div>
+<div id="auto-toc"> </div>
+<h2 id="h_01HD1TFP5PRKZPC0HJ023W2ZK8">Generalidades</h2>
+<p>Este artículo explica cómo sincronizar automáticamente los cambios del sitio web en tu computador de hogar con tu sitio web DreamPress usando Git. Esto se logra creando un repositorio Git tanto localmente (en tu computador) como en el servidor web, actualizando un tema secundario en tu computador de hogar y luego copiando esos cambios a tu sitio web.</p>
+<p>Se cubren los siguientes temas:</p>
 <ul>
-<li><a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">Generalidades de SSH</a></li>
-<li><a href="/hc/es/articles/216385837-Cómo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">Cómo crear un usuario con acceso Shell (SSH)</a></li>
+<li><a href="#Iniciar_sesion_en_tu_servidor">Iniciar sesión en tu servidor</a></li>
+<li><a href="#Configurar_el_repositorio_Git_de_tu_servidor">Configurar el repositorio Git de tu servidor</a></li>
+<li><a href="#Configurar_tu_repositorio_Git_local">Configurar tu repositorio Git local</a></li>
+<li><a href="#Conectar_tus_repositorios">Conectar tus repositorios</a></li>
 </ul>
-<p>También debes tener un sitio de DreamPress en funcionamiento. Mira el siguiente enlace para saber cómo configurar un sitio DreamPress:</p>
-<ul>
-<li><a href="/hc/es/sections/203242177-Instalación-de-DreamPress" target="_self">Instalación de DreamPress</a></li>
-</ul>
-</div>
-<h3 id="h_01HD4YH9JW40G1G0JVS07WRSKA">Paso 1 — Instalar Git en tu computador</h3>
-<p>Git debe estar instalado en tu computador para que pueda ejecutar los comandos de git. Hay un gran <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="_self">artículo en la documentación en línea de Git</a> eso explica cómo hacer eso para Windows, Mac OS y Linux. Ten en cuenta que Git ahora estás instalado en Mac OS de forma predeterminada si tienes la última versión. Puedes verificar si está instalado con este comando en la aplicación de terminal:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git --version</span></pre>
-</div>
-<h3 id="h_01HD4YH9JWR3YY7BDR4ZSEPMQA">Paso 2 — Crear un usuario de shell en el panel DreamHost</h3>
-<p>Configura un <a href="https://help.dreamhost.com/hc/es/articles/216385837-Cómo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario shell</a> en el panel DreamHost si aún no lo has hecho. También puedes cambiar el usuario actual de DreamPress de SFTP a un usuario Shell. Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH-" target="_blank" rel="noopener noreferrer">cómo crear un usuario con acceso Shell</a>.</p>
-<p>Después de haber cambiado el tipo, escribe tu usuario shell, contraseña y host (nombre del servidor) de shell. Para DreamPress, tu usuario y host se ven algo así:</p>
+<h3 id="h_01J7VEP5XNYZNHWGW7DKSM0A2Z">Antecedentes de Git</h3>
+<p><a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">Git</a> es un software que crea snapshots de los cambios en el código de tu sitio web. Esto hace que sea fácil restaurar una versión anterior si una actualización provoca un error. También te permite probar nuevos cambios sin afectar tu sitio web en vivo.</p>
+<p><strong>¿Cómo se debe utilizar Git?</strong></p>
 <dl>
 <dd>
-<p><strong>Usuario Shell:</strong> wp_ab1cde<br /><strong>Host:</strong> wp_123456.dreamhostps.com</p>
+<p>Git solo debe usarse para administrar tus personalizaciones o tu propio desarrollo de temas y plugin. El caso de uso más común para el uso de Git es la creación de un tema secundario, que te permite realizar cambios en un tema sin que tus cambios se sobrescriban cuando se actualiza el tema.</p>
+<p>Git no debe usarse como una herramienta de respaldo de WordPress porque las actualizaciones automáticas de WordPress sobrescribirán cualquier cambio que hayas realizado en los archivos principales.</p>
 </dd>
 </dl>
-<div class="notebox-important">
-<p>Para el resto de este tutorial, tu nombre de <span class="text-object">Host</span> de DreamPress será referenciado como el <span class="text-object">server</span>.</p>
+<p><strong>¿Puedo usar FTP para actualizar mi sitio?</strong></p>
+<dl>
+<dd>
+<p>Sí, pero <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales">FTP</a> solo te permite iniciar sesión en tu sitio web y actualizar los archivos del mismo. No realiza un seguimiento de tus cambios ni almacena versiones históricas de tu código. Esto significa que no puedes ver actualizaciones anteriores, volver a una versión anterior si un cambio provoca un error o sincronizar cambios desde tu computador personal a tu servidor.</p>
+</dd>
+</dl>
+<div class="prereqs">
+<p>Asegúrate de haber configurado lo siguiente antes de continuar con los pasos de este artículo.</p>
+<p><strong>Instalar DreamPress</strong></p>
+<p>Debes tener un <a href="https://help.dreamhost.com/hc/es/sections/203242177-Instalaci%C3%B3n-de-DreamPress">sitio web de DreamPress</a> en funcionamiento.</p>
+<p><strong>Crear un tema secundario</strong></p>
+<p>Utiliza <a href="https://codex.wordpress.org/Child_Themes" target="_blank" rel="noopener noreferrer">este artículo</a> para crear un tema secundario básico.</p>
+<p><strong>Instalar Git en tu computador</strong></p>
+<p>Git debe estar instalado en tu computador para poder correr los comandos de Git. Revisa <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">este artículo</a> para obtener instrucciones sobre cómo instalar Git para Windows y macOS.</p>
 </div>
-<h3 id="h_01HD4YH9JXAQ5KAFY2KQY5M2KE">Paso 3 — Configurar una clave SSH en tu computador</h3>
-<p>Esto te permite conectarte automáticamente a su servidor DreamPress y permite que los comandos de Git funcionen de forma remota. Esto varía un poco entre Windows, Mac y Linux, así que consulta este artículo de ayuda:</p>
+<p> </p>
+<div id="Iniciar_sesion_en_tu_servidor" class="section-link"> </div>
+<h2 id="h_01HD1TFP5QM8FTKPWXR0XQT2N0" class="header-section">Iniciar sesión en tu servidor</h2>
+<p>Estos pasos configuran SSH para que pueda iniciar sesión en tu servidor sin usar una contraseña.</p>
+<h3 id="h_01J7VQ1JGQZMR6XHF133KQWQYC">Paso 1 — Crear un usuario</h3>
+<p>Antes de continuar, asegúrate de haber <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">creado un usuario de Shell</a> y de poder iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. Anota tu <a href="https://help.dreamhost.com/hc/es/articles/360020552911-Iniciar-sesi%C3%B3n-en-tu-sitio-DreamPress-a-trav%C3%A9s-de-FTP#Ubicar_tus_credenciales_de_inicio_de_sesion_FTP">nombre de usuario, contraseña, y host (nombre del servidor) de Shell</a>. Se verán así:</p>
+<dl>
+<dd>
+<p><strong>Usuario Shell:</strong>  wp_abc123<br><strong>Host:</strong>  wp_123456.dreamhostps.com</p>
+</dd>
+</dl>
+<h3 id="h_01HD1TFP5Q37E60R3M2GJKJNQC">Paso 2 — Elige una aplicación de terminal</h3>
+<p>Los comandos SSH se ejecutan dentro de una aplicación de terminal. Elige la que desee utilizar con su sistema operativo.</p>
 <ul>
-<li><a href="/hc/es/articles/216499537-Cómo-configurar-inicio-de-sesión-sin-contraseña-en-Mac-OS-y-Linux" target="_self">Cómo configurar inicio de sesión sin contraseña en Mac OS y Linux</a></li>
+<li>
+<strong>Windows</strong>: Puedes utilizar el <a href="https://help.dreamhost.com/hc/es/articles/360001439466-Usar-Shell-de-Windows-10">Shell de Windows</a> o un programa de terceros como <a href="https://help.dreamhost.com/hc/es/articles/215464538-Configurar-PuTTY">PuTTY</a>.</li>
+<li>
+<strong>Mac OS y Linux</strong>: Ambos incluyen una terminal, pero también hay opciones de terceros disponibles. Por ejemplo, <a href="https://iterm2.com/" target="_blank" rel="noopener noreferrer">iTerm2</a> es muy popular en Mac.</li>
 </ul>
-<p>Asegúrate de copiar tu frase de contraseña en un lugar seguro. Es posible que lo necesites (como para el llavero Mac OS).</p>
-<div class="notebox-note">
-<p>Ten en cuenta la referencia a <span class="text-object">username@server.dreamhost.com</span> en el artículo de ayuda. Se ves así usando el nombre de usuario y el servidor de shell de ejemplo de este artículo arriba:</p>
-<p><span class="text-object">wp_ab1cde@wp_123456.dreamhostps.com</span></p>
-</div>
-<h3 id="h_01HD4YH9JXAB6QCN9CYZ6N4KNR">Paso 4 — Elegir tu terminal favorito</h3>
-<p><strong>Windows</strong>: Puedes usar <a href="https://help.dreamhost.com/hc/es/articles/360001439466-Usar-Shell-de-Windows-10">Windows Shell</a> o programas de terceros como <a href="https://help.dreamhost.com/hc/es/articles/215464538-Configurar-PuTTY">PuTTY</a>, SuperPutty, y MobaXterm.</p>
-<p><strong>Mac OS y Linux</strong>: Mac y Linux incluyen una terminal, pero las opciones de terceros también están disponibles. Por ejemplo, iTerm2 es muy popular para Mac.</p>
-<p>Abre tu terminal en este punto, que se utiliza de aquí en adelante.</p>
-<h3 id="h_01HD4YH9JXYK2H6M1DJ5DEE82R">Paso 5 — Iniciar sesión en tu servidor</h3>
-<p>Inicia sesión en tu servidor usando <a href="/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>. Esto te lleva directamente a la raíz de usuario de su shell. Usando el usuario y el servidor de shell de muestra, parece que:</p>
+<h3 id="h_01HD1TFP5QNE177V7686XZ2KEZ">Paso 3 — Configurar una clave SSH en tu computador</h3>
+<p>Las claves SSH te permiten conectarte automáticamente a tu servidor DreamPress y habilitar los comandos Git para que funcionen de forma remota. Los siguientes artículos brindan instrucciones sobre cómo configurarlo.</p>
+<ul>
+<li><a href="href">Configurar el inicio de sesión sin contraseña en PuTTY (Windows)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216499537-C%C3%B3mo-configurar-el-inicio-de-sesi%C3%B3n-sin-contrase%C3%B1a-en-Mac-OS-y-Linux">Cómo configurar el inicio de sesión sin contraseña en Mac OS y Linux </a></li>
+</ul>
+<h3 id="h_01HD1TFP5QASF32M0E9PY3NH26">Paso 4 — Iniciar sesión en tu servidor</h3>
+<p>Abre tu terminal e inicia sesión en tu servidor usando <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>. El siguiente ejemplo utiliza un usuario de shell llamado <span class="code">wp_abc123</span> y un nombre de servidor (host) <span class="code">wp_123456.dreamhostps.com</span>:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[computer]$ </span><span class="command">ssh wp_ab1cde@wp_123456.dreamhostps.com</span></pre>
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">ssh <span class="code-highlight">wp_abc123</span>@<span class="code-highlight">wp_123456.dreamhostps.com</span></span></pre>
 </div>
-<p>La primera vez que hagas esto, debes aceptar tu servidor como un host válido. Esta información se guarda en un archivo <span class="text-object">hosts</span> conocido en tu computador. Revisa el siguiente artículo para saber como verificar la identidad del servidor.</p>
-<ul class="article-list">
-<li><a href="https://help.dreamhost.com/hc/es/articles/360004634231-Alerta-The-server-s-host-key-is-unknown-La-llave-host-del-servidor-es-desconocida-">Alerta 'The server's host key is unknown' (La llave host del servidor es desconocida) </a></li>
-</ul>
-<h3 id="h_01HD4YH9JXVS0FNFT18ABJBKHK">Paso 6 — Configurar tu servidor Git repo</h3>
-<p>No es necesario que estés en el mismo directorio que el tema child, pero asegúrate de recordar dónde crea este directorio. Este ejemplo crea un directorio <span class="text-object">/git</span> bajo tu usuario, fuera del directorio del sitio web. Corre los siguientes comandos de Linux para crear el directorio e inicializar el repositorio en tu servidor web.</p>
+<div class="notebox-important">
+<p><strong>Verificar y guardar la información del servidor</strong></p>
+<p>La primera vez que inicies sesión, debes aceptar a tu servidor como un host válido. Esto guarda la información del servidor en tu computador dentro del archivo <span class="text-object">known_hosts</span>. Revisa <a href="https://help.dreamhost.com/hc/es/articles/360004634231-Advertencia-The-server-s-host-key-is-unknown-La-llave-host-del-servidor-es-desconocida">este artículo</a> para obtener información sobre cómo verificar la identidad del servidor antes de guardar.</p>
+</div>
+<p> </p>
+<div id="Configurar_el_repositorio_Git_de_tu_servidor" class="section-link"> </div>
+<h2 id="h_01J7VN1KRN9K8K7AGN96QSCMKM" class="header-section">Configurar el repositorio Git de tu servidor</h2>
+<p>Estos pasos configuran un repositorio Git en tu servidor DreamHost.</p>
+<h3 id="h_01HD1TFP5QM966Z7M3NMHA7H3Z">Paso 1 — Configurar el repositorio Git de tu servidor</h3>
+<p>Estos pasos crean un directorio Git y un repositorio vacío en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home#el-directorio-home-del-usuario">directorio home del usuario</a> en el servidor.</p>
 <ol>
-<li>Corre los siguientes comandos para crear tu identidad para ser usada con Git. Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a> para ver detalles de como iniciar sesión en tu servidor:
+<li>Inicia sesión entu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
+<li>Corre los siguientes comandos para crear tu identidad de Git usando tu nombre y dirección de correo.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">git config --global user.name "<span class="code-highlight">John Doe</span>"</span>
 <span class="server">[server]$ </span><span class="command">git config --global user.email <span class="code-highlight">johndoe@example.com</span></span>
@@ -93,154 +83,152 @@
 </pre>
 </div>
 <div class="notebox-note">
-<p>La última linea asegura que los nuevos repositorios creados usen el nombre <span class="text-object">main</span> como la primera rama. Revisa el siguiente artículo para más detales:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/4466702078740-Configurar-git-para-usar-main-como-la-rama-principal">Configurar git para usar 'main' como la rama principal </a></li>
-</ul>
+<p>La última línea garantiza que los repositorios recién creados utilicen el nombre <a href="https://help.dreamhost.com/hc/es/articles/4466702078740-Configurar-git-para-usar-main-como-rama-principal"><span class="text-object">main</span> como rama principal</a>.</p>
 </div>
 </li>
-<li>Asegúrate de estar en el directorio del usuario corriendo <span class="code">pwd</span>:
+<li>Asegúrate de estar en el directorio de tu usuario:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">pwd</span>
-<span class="cmdoutput">/home/username/</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span>cd ~</pre>
 </div>
 </li>
-<li>Crea el directorio en el que se almacenará el repositorio. Puedes nombrarlo como quieras. En este ejemplo, se crean dos directorios, <span class="text-object">/git</span> y <span class="text-object">/projectname</span>:
+<li>Crea el directorio Git. Puedes nombrarlo como quieras. En este ejemplo, se crean dos directorios, <span class="text-object">/git</span> y <span class="text-object">/projectname</span>:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">mkdir -p git/projectname</span> </pre>
 </div>
 </li>
-<li>Cambia tu directorio actual al directorio recién creado:
+<li>Cambia al directorio recién creado:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd git/projectname</span></pre>
 </div>
 </li>
-<li>Inicializa el repositorio:
+<li>Inicia el repositorio:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">git init --bare</span>
 <span class="cmdoutput">Initialized empty Git repository in /home/username/git/projectname/</span></pre>
 </div>
 </li>
-<li>Asegúrate de crear un directorio para cada proyecto único. Esto te ayuda a realizar un seguimiento de ellos en el futuro.</li>
 </ol>
-<h3 id="h_01HD4YH9JYZXF8WVQQQKW6PSXC">Paso 7 — Crear un archivo para copiar actualizaciones</h3>
-<p>Este paso crea un archivo para copiar actualizaciones desde el repositorio de Git de tu servidor al directorio de temas child. Este ejemplo utiliza un programa editor de texto llamado <span class="text-object">nano</span>. Revisa el artículo <a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo a través de SSH</a> para obtener más información sobre cómo editar un archivo.</p>
+<h3 id="h_01HD1TFP5QDTAKR5G8A79CPZH0">Paso 2 — Crea un archivo para copiar actualizaciones</h3>
+<p>Este paso crea un archivo llamado <span class="text-object">post-receive</span> que se actualiza en el directorio del tema secundario.</p>
 <ol>
 <li>Asegúrate de estar en tu directorio <span class="text-object">/git/projectname</span>.</li>
-<li>Corre <span class="code">nano</span> y crea un archivo llamado <span class="text-object">post-receive</span>:
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Crea un archivo</a> llamado <span class="text-object">post-receive</span>:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">nano hooks/post-receive</span></pre>
 </div>
 </li>
-<li>Agrega este código al archivo, que te dice dónde poner estos cambios. Esto debe apuntar a tu directorio de tema child.
-<div class="notebox-note">
-<p>En este ejemplo, cambia el <span class="code">username</span> a tu usuario real de shell, cambie <strong>example.com</strong> a tu sitio web y cambia el directorio <span class="text-object">child-theme-directory</span> por el nombre de tu directorio child-theme.</p>
-</div>
+<li>Agrega el siguiente código al archivo. Esto le indica a Git que envíe los cambios al directorio del tema secundario.
 <div class="preboxcontainer">
 <pre class="prebox">#!/bin/sh
-GIT_WORK_TREE=/home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span>/wp-content/themes/child-theme-directory git checkout -f</pre>
+GIT_WORK_TREE=/home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span>/wp-content/themes/<span class="code-highlight">child-theme-directory</span> git checkout -f</pre>
 </div>
 </li>
-<li>Guarda y cierra tu archivo para volver a tu shell.</li>
-<li>Otorga al archivo derechos de ejecución en la línea de comando del terminal:
+<li>Guards y cierrs el archivo.</li>
+</ol>
+<h3 id="h_01HD1TFP5QDTAKR5G8A79CPZH0">Paso 3 — Actualizar los permisos del archivo</h3>
+<p>El archivo debe tener permisos de ejecución para poder ejecutarse.</p>
+<ol>
+<li>Corre el siguiente comando para actualizar los permisos del archivo:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod +x hooks/post-receive</span></pre>
 </div>
 </li>
+<li>Verifica los permisos para confirmar que estén actualizados.
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la | grep post-receive</span>
+<span class="cmdoutput">-rwxr-xr-x post-receive</span></pre>
+</div>
+Deberías ver los permisos establecidos en <span class="code">-rwxr-xr-x</span>.</li>
 </ol>
-<h3 id="h_01HD4YH9JYEZBZ7JM034JEFJNV">Paso 8 — Crear un tema child</h3>
-<p>Crea un tema child. Usa el siguiente artículo para obtener instrucciones paso a paso:</p>
-<ul>
-<li style="list-style-type: none;">
-<ul>
-<li><a href="https://codex.wordpress.org/Child_Themes" target="_self">Temas Child</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="h_01HD4YH9JYWMDFBY873HX03707">Paso 9 — Descargar los archivos de tu sitio web a tu computador</h3>
-<p>Debes tener todos los archivos de tu sitio DreamPress en tu computador local. Si no, descárgalos a través de <a href="/hc/es/articles/115000675027#seguridad" target="_self">SFTP</a>.</p>
-<h3 id="h_01HD4YH9JYV30F28TJW1FK67KZ">Paso 10 — Crear tu repositorio git local en tu computador</h3>
+<p> </p>
+<div id="Configurar_tu_repositorio_Git_local" class="section-link"> </div>
+<h2 id="h_01J7VR8YP7F79YZP93P9FTNG6A" class="header-section">Configurar tu repositorio Git local</h2>
+<p>Estos pasos configuran un repositorio Git en tu computador de casa.</p>
+<h3 id="h_01HD1TFP5Q7DCQS20MAV397PJJ">Paso 1 — Descarga los archivos de tu sitio web a tu computador</h3>
+<p>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales">FTP</a> y descarga todos los archivos de tu sitio web DreamPress a tu computador local.</p>
+<h3 id="h_01HD1TFP5QJESGFBTAED3Y0HFY">Paso 2 — Crea tu repositorio Git local</h3>
 <ol>
-<li>Asegúrate de estar en el directorio de temas de tu tema child:
+<li>Abre la aplicación de terminal en tu computadora de hogar.</li>
+<li>Navega al directorio donde realizaste un respaldo de los archivos del sitio web.</li>
+<li>Cambia al directorio de temas secundarios:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[computer]$ </span><span class="command">cd ~/example.com/wp-content/themes/child-theme-directory</span></pre>
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">cd ~/example.com/wp-content/themes/child-theme-directory</span></pre>
 </div>
 </li>
-<li>Corre&nbsp; lo siguiente para inicializarlo:
+<li>Correr lo siguiente para inicializar un repositorio vacío:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git init</span></pre>
-</div>
-</li>
-</ol>
-<h3 id="h_01HD4YH9JYXKRP53ZGA77DX6VF">Paso 11 — Personalizar tu tema child local en tu computador</h3>
-<p>Este paso no está cubierto en este artículo. Mira esta publicación de blog sobre cómo crear un tema child:</p>
-<ul>
-<li><a href="https://developer.wordpress.org/themes/advanced-topics/child-themes/" target="_self">Manual de temas child (WordPress.org)</a></li>
-</ul>
-<h3 id="h_01HD4YH9JY516ZF918N0CC0062">Paso 12 — Configurar la conexión a tu servidor remoto</h3>
-<p>Esto se hace mediante el uso de un comando remoto de git en el directorio de tema child.</p>
-<ol>
-<li>Asegúrate de estar en el directorio de temas child:
-<div class="notebox-note">
-<p>En el siguiente ejemplo, la palabra <span class="code">myserver</span> es solamente un alias. Puede ser llamado como quieras. Pero este alias va a ser usado cuando envíes tu contenido en el futuro.</p>
-</div>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[mycomputer]$ </span><span class="command">git remote add <span class="code-highlight">myserver</span> ssh://<span class="code-highlight">username@server.dreamhostps.com/~/git/projectname</span></span></pre>
-</div>
-<p><em>Lo siguiente es como aparecería con el usuario y servidor de DreamPress:</em></p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git remote add myserver ssh://wp_ab1cde@wp_123456.dreamhostps.com/~/git/projectname</span></pre>
-</div>
-</li>
-<li>Corre lo siguiente para ver si se agregó correctamente:
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git remote -v</span></pre>
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">git init</span></pre>
 </div>
 </li>
 </ol>
-<h3 id="h_01HD4YH9JYMDF5CNY1XEZPJ08J">Paso 13 — Guardar tus cambios</h3>
-<p>Ahora que has personalizado tu tema child, debes guardar los cambios en tu repositorio git local.</p>
+<h3 id="h_01HD1TFP5QWEWCGXCYS0EQZ943">Paso 3 — Personaliza el tema secundario local en tu computador</h3>
+<p>Este paso no se trata en este artículo. Revisa <a href="https://developer.wordpress.org/themes/advanced-topics/child-themes/">esta publicación del blog</a> para obtener instrucciones sobre cómo crear un tema secundario.</p>
+<h3 id="h_01HD1TFP5QZN5JTTFANZPH0F6B">Paso 4 — Guardar tus cambios</h3>
+<p>Estos pasos guardan las personalizaciones del tema secundario en tu repositorio Git local.</p>
 <ol>
-<li>Agrega tus cambios a tu índice git local:
+<li>Agrega tus cambios a tu índice Git local:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git add .</span></pre>
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">git add .</span></pre>
 </div>
 </li>
-<li>Confirma estos cambios, que registran los cambios en el repositorio. Incluye un breve mensaje en el comando de confirmación, que es una nota rápida para recordarte lo que está confirmando. Por ejemplo, podría ser "primer compromiso del tema child":
+<li>Confirma estos cambios en el repositorio. Incluye un breve mensaje en el comando de confirmación para recordarte lo que está confirmando. Esto puede usarse en el futuro para ayudarlo a localizar una actualización específica.
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git commit -m "message about the commit"</span></pre>
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">git commit -m "message about the commit"</span></pre>
 </div>
 </li>
-<li>Verifica el estado de tu repositorio git ejecutando lo siguiente. Puedes consultarlo en cualquier momento:
+<li>Verifica el estado de tu repositorio Git para confirmar que todo se haya guardado:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git status</span></pre>
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">git status</span></pre>
 </div>
 </li>
 </ol>
-<h3 id="h_01HD4YH9JZVJ9S6648GQQKQPAF">Paso 14 — Enviar tus cambios al servidor de tu sitio web</h3>
-<p>Ahora que se establece la conexión entre tus instancias git locales y del servidor, puedes enviar tus cambios al repositorio de tu servidor y a tu sitio de WordPress:</p>
+<p> </p>
+<div id="Conectar_tus_repositorios" class="section-link"> </div>
+<h2 id="h_01J7VN1KRNCNJ8H9CAHTENHAMY" class="header-section">Conectar tus repositorios</h2>
+<p>Estos pasos conectan tu repositorio local al repositorio de tu servidor de DreamHost.</p>
+<h3 id="h_01HD1TFP5QG08S2N27Q5H7HAFQ">Paso 1 — Configurar la conexión a tu servidor remoto</h3>
 <ol>
-<li>En el directorio de temas child, corre el siguiente comando solo una vez:
+<li>En tu computador de hogar, navega al directorio del tema secundario.</li>
+<li>Corre el siguiente comando para agregar un repositorio remoto:
+<div class="notebox-tip">
+<p>En el siguiente ejemplo, la palabra <span class="code">myserver</span> es solo un alias que se utiliza para enviar el contenido a tu servidor en el futuro. Puede tener el nombre que desees.</p>
+</div>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[mycomputer]$ </span><span class="command">git push -u myserver main</span>
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">git remote add <span class="code-highlight">myserver</span> ssh://<span class="code-highlight">username</span>@<span class="code-highlight">servername.dreamhostps.com/~/git/projectname</span></span></pre>
+</div>
+</li>
+<li>Corre lo siguiente para confirmar que se agregó correctamente:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">git remote -v</span></pre>
+</div>
+</li>
+</ol>
+<h3 id="h_01HD1TFP5Q2SQVAB7MWRXMFWF6">Paso 2 — Envía tus cambios al servidor de tu sitio web</h3>
+<p>Ahora que tus repositorios locales y del servidor están conectados, puedes enviar los cambios a tu sitio web cada vez que se realices una actualización en tu computador de hogar.</p>
+<ol>
+<li>En el directorio del tema secundario, corre el siguiente comando solo una vez:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">git push -u myserver main</span>
 <span class="cmdoutput">Branch main set up to track remote branch 'main' from 'myserver'</span></pre>
 </div>
 </li>
-<li>Cada vez que crees una nueva captura en tu repositorio de git local, ponla en tu servidor simplemente con este comando:
+<li>Envía tus cambios al servidor con el siguiente comando:
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[computer]$ </span><span class="command">git push myserver</span></pre>
+<pre class="prebox"><span class="server">[local]$ </span><span class="command">git push myserver</span></pre>
 </div>
 </li>
 </ol>
-<p>¡Eso es! Una vez que hayas configurado esto, es simple mantener estos dos repositorios sincronizados. También tienes todo el desarrollo de tu tema child bajo control de versiones.</p>
-</div>
-<h2 id="h_01HD4YH9JZ1MXPKYCGF5VCDPGP">Ver también</h2>
-<div class="solvvy-hidden">
+<h3 id="01J7VRGXM7BG4RJF41PFCNA4MT">Paso 3 — Revisa tu sitio web en vivo</h3>
+<p>Revisa tu sitio web. Deberías ver que el tema secundario de tu sitio se ha actualizado.</p>
+<h2 id="h_01HD1TFP5QA8JXC2TBJCC0X89Y">Ver también</h2>
+<h3 id="h_01J80N5QWPXPFPF2WYQXQ28VMZ">Enlaces de DreamHost</h3>
 <ul>
-<li><a href="https://git-scm.com/doc" target="_self">Documentación de Git</a></li>
-<li><a href="https://git-scm.com/videos" target="_self">Vídeos de Git</a></li>
-<li><a href="https://docs.github.com/en/get-started/quickstart/set-up-git" target="_self">Tutorial de GitHub</a></li>
-<li><a href="https://www.codecademy.com/learn/learn-git" target="_self">Entrenamiento de Git Codecademy</a></li>
-<li><a href="/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo via SSH</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214581158-Generalidades-de-DreamPress">Generalidades de DreamPress</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Crear y editar un archivo vía SSH</a></li>
 </ul>
-</div>
+<h3>Enlaces de terceros</h3>
+<ul>
+<li><a href="https://git-scm.com/doc" target="_blank" rel="noopener noreferrer">Git documentation</a></li>
+<li><a href="https://git-scm.com/videos" target="_blank" rel="noopener noreferrer">Git videos</a></li>
+</ul>
