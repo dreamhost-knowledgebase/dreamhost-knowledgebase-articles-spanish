@@ -1,10 +1,13 @@
+<div id="intermediate"> </div>
 <h2 id="h_01HCD5NEHZZ2FCGPT22S0RY7MS">Generalidades</h2>
+<p>A continuación se describe cómo cambiar la versión de PHP en el shell.</p>
+<h3 id="h_01J7YG5MECVMT1V2MY7XK2NTJF">Antecedentes</h3>
 <div class="solvvy-solution">
-<p>Cuando ejecutas el comando <strong>php</strong> en el servidor, este utiliza la versión del sistema (que cambia con el tiempo). Puedes especificar una versión de PHP para que la uses tu Shell. De esta manera, todos los comandos PHP usarán esa versión específica.</p>
+<p>Cuando corre un <a href="https://help.dreamhost.com/hc/es/articles/214202238-Generalidades-de-la-l%C3%ADnea-de-comandos-de-PHP">comando php</a> en el servidor, este utiliza la versión del sistema. Sin embargo, como esto puede cambiar con el tiempo, puedes especificar una versión de PHP para que la use tu shell de modo que todos los comandos PHP utilicen esa versión específica.</p>
 </div>
-<h2 id="h_01HCD5NEHZ0QERZXE9RH0SYVE5">¿Qué archivo de usuario de shell se debe actualizar?</h2>
+<p id="h_01HCATNNTMTC0ZHHBTNTT3NB6E"><strong>¿Qué archivo de usuario de shell puedo actualizar?</strong></p>
 <div class="solvvy-solution">
-<p>Los ejemplos en este artículo usan el shell bash. También hay otros shells que puedes usar en DreamHost. El archivo de perfil que se actualiza es diferente según el tipo de shell que estés utilizando. Por ejemplo, los&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216557548-Shell-disponibles-en-DreamHost" target="_self">shells predeterminados admitidos</a>&nbsp;actualmente son Bash, Korn, Tcsh y Zsh. A continuación se muestran los archivos de perfil para cada tipo de shell:</p>
+<p>Los ejemplos en este artículo usan el shell bash. También hay otros shells que puedes usar en DreamHost. El archivo de perfil que se actualiza es diferente según el tipo de shell que estés utilizando. Por ejemplo, los <a href="https://help.dreamhost.com/hc/es/articles/216557548-Shell-disponibles-en-DreamHost" target="_self">shells predeterminados admitidos</a> actualmente son Bash, Korn, Tcsh y Zsh. A continuación se muestran los archivos de perfil para cada tipo de shell:</p>
 <ul>
 <li><span class="text-object">.bash_profile</span></li>
 <li><span class="text-object">.kshrc</span></li>
@@ -12,7 +15,7 @@
 <li><span class="text-object">.zshrc</span></li>
 </ul>
 <div class="notebox-note">
-<p>Si estás usando tcsh, debes modificar las líneas como se muestra a continuación antes de que puedan agregarse al perfil <span class="text-object">.tcshrc</span>:</p>
+<p>Si estás usando Tcsh, debes modificar las líneas como se muestra a continuación antes de que puedan agregarse al perfil <span class="text-object">.tcshrc</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">alias php /usr/local/php83/bin/php
 set path=(/usr/local/php83/bin $path)</pre>
@@ -20,17 +23,19 @@ set path=(/usr/local/php83/bin $path)</pre>
 </div>
 </div>
 <p>También puedes modificar esto en consecuencia utilizando la ruta a cualquiera de los archivos binarios de PHP-CLI.</p>
-<h2 id="h_01HCD5NEHZSHCSGVRT5MXX14ZN">Cambiar la versión PHP de tu usuario de shell</h2>
+<h2 id="h_01HCATNNTN8KGWXWBKXRZQKR43">Cómo cambiar la versión de PHP</h2>
+<p>Las siguientes secciones explican cómo utilizar <span class="text-object">.bash_profile</span> para cambiar la versión de PHP.</p>
+<h3 id="h_01J7YGDA12ZXHRWVKHG346CX6W">Cambiar la versión de PHP bajo tu usuario de shell</h3>
 <div class="solvvy-solution">
-<p>Para cambiar la versión predeterminada de PHP bajo tu usuario de Shell:</p>
+<p>Para cambiar la versión predeterminada de PHP:</p>
 <ol>
-<li>Inicia sesión en tu usuario a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
-<li>Asegúrate de estar en el directorio de tu usuario al correr lo siguiente:<br />
+<li>Inicia sesión en tu usuario a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Asegúrate de estar en el directorio de tu usuario al correr lo siguiente:<br>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
 </div>
 </li>
-<li>Visita el artículo de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">crear y editar un archivo via SSH</a>&nbsp;para obtener instrucciones sobre cómo editar tu archivo <span class="text-object">.bash_profile</span> existente. Agrega la siguiente línea para forzar PHP 8.3.
+<li>Visita el artículo de <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">crear y editar un archivo via SSH</a> para obtener instrucciones sobre cómo editar tu archivo <span class="text-object">.bash_profile</span> existente. Agrega la siguiente línea para forzar PHP 8.3:
 <div class="preboxcontainer">
 <pre class="prebox"><span class="cmdoutput">export PATH=/usr/local/php83/bin:$PATH </span>
 </pre>
@@ -43,14 +48,14 @@ set path=(/usr/local/php83/bin $path)</pre>
 </div>
 </li>
 </ol>
-<p>Si ahora ejecutas <strong>php -v</strong> verás la nueva versión que se está utilizando.</p>
+<p>Luego puedes correr <span class="code">php -v</span> para ver la versión actualmente en uso:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">php -v</span></pre>
 </div>
 </div>
-<h2 id="h_01HCD5NEHZDS4DE8ET98D9TAT2">Usar un alias para cambiar la versión de PHP</h2>
+<h3 id="h_01HCD5NEHZDS4DE8ET98D9TAT2">Usar un alias para cambiar la versión de PHP</h3>
 <div class="solvvy-solution">
-<p>También puedes usar un alias en su lugar.&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Agrega lo siguiente</a> a tu archivo <span class="text-object">.bash_profile</span>.</p>
+<p>También puedes usar un alias en su lugar. <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Agrega lo siguiente</a> a tu archivo <span class="text-object">.bash_profile</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">alias php='/usr/local/php83/bin/php'</pre>
 </div>
@@ -61,11 +66,8 @@ set path=(/usr/local/php83/bin $path)</pre>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-PHP" target="_self">Generalidades de PHP</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo via SSH</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214202238-Generalidades-de-l%C3%ADnea-de-comando-PHP" target="_self">Generalidades de las líneas de comando de PHP</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214895317-Cambiar-la-versi%C3%B3n-PHP-de-un-sitio">Cambiar la versión PHP de un sitio</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versión-y-la-configuración-de-PHP-de-tu-sitio" target="_self">¿Cómo ver la configuración de mi entorno PHP?</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">Generalidades de php.ini</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215082337--Qué-versiones-de-PHP-están-disponibles-en-DreamHost-" target="_self">¿Qué versiones de PHP están disponibles en DreamHost?</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215082337--Qu%C3%A9-versiones-de-PHP-est%C3%A1n-disponibles-en-DreamHost-" target="_self">¿Qué versiones de PHP están disponibles en DreamHost?</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360001301686-Configuraci%C3%B3n-predeterminada-de-PHP-en-DreamHost" target="_self">Configuraciones predeterminadas de PHP en DreamHost</a></li>
 </ul>
 </div>

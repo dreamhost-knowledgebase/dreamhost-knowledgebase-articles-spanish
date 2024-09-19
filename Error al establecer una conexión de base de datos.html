@@ -1,24 +1,22 @@
-<h2>Generalidades</h2>
+<div id="beginner"> </div>
+<h2 id="h_01J7CDGHJYE8MQSWXZ01RXCQGT">Generalidades</h2>
+<p>Lo siguiente te ayudará a identificar y solucionar algunos problemas comunes de la base de datos cuando veas el mensaje <span class="text-object">Error al establecer una conexión a la base de datos</span>.</p>
 <div class="solvvy-solution">
-<p>Es posible que veas el siguiente error al visitar su sitio:</p>
-<p><strong>Error establishing a database connection / Error al establecer una conexión de base de datos</strong></p>
-<p>Este error significa que los archivos de tu sitio web (en el servidor web) no pueden conectarse a tu base de datos (en el servidor de la base de datos). Este artículo enumera algunas razones comunes por las que este error podría aparecer en tu sitio, incluyendo:</p>
-<ul>
-<li><a href="#Credenciales_incorrectas_de_la_base_de_datos_en_tu_archivo_config" target="_self">Credenciales incorrectas de la base de datos en tu archivo config</a></li>
-<li><a href="#El_hostname_no_esta_funcionando" target="_self">El hostname no está funcionando</a></li>
-<li><a href="#La_base_de_datos_del_servidor_no_esta_disponible" target="_self">La base de datos del servidor no está disponible</a></li>
-</ul>
+<h2 id="h_01J7ERQYN5S9EG3GXSCT8VTQ4Y">Cómo corregir el 'error al establecer una conexión a la base de datos'</h2>
+<p>Este error indica que los archivos de tu sitio web en el servidor web no pueden conectarse a la base de datos del servidor de la misma. En las siguientes secciones se describen los motivos más comunes de este error y cómo resolverlos.</p>
 </div>
-<h2><span id="Credenciales_incorrectas_de_la_base_de_datos_en_tu_archivo_config"> Credenciales de base de datos incorrectas en tu archivo de configuración</span></h2>
+<h3 id="h_01J83692SCT7ZN8HPXSHB9B8W3"><span id="Credenciales_incorrectas_de_la_base_de_datos_en_tu_archivo_config">Corregir las credenciales de base de datos en tu archivo de configuración</span></h3>
 <div class="solvvy-solution">
-<p>Cada sitio web que se conecta a una base de datos tiene un archivo de configuración. Este archivo de configuración almacena las siguientes credenciales de base de datos que te permiten conectarte.</p>
+<p>Cada sitio web que se conecta a una base de datos tiene un archivo de configuración que almacena las credenciales esenciales para la conexión:</p>
 <ul>
 <li>Nombre de usuario de la base de datos.</li>
 <li>Contraseña de usuario de la base de datos.</li>
 <li>Hostname de la base de datos.</li>
 <li>Nombre de la base de datos.</li>
 </ul>
-<p>Si la información de inicio de sesión de la base de datos se modificó en el panel sin actualizar la información de conexión en el archivo de configuración del sitio, tu sitio no puede conectarse a la base de datos. Los archivos de configuración estándar para software popular se muestran a continuación:</p>
+<p>Si la información de inicio de sesión de la base de datos cambia en el panel sin actualizar el archivo de configuración del sitio, el sitio no se conectará a la base de datos. A continuación, se muestran los archivos de configuración estándar para el software más conocido:</p>
+<dl>
+<dd>
 <table style="border-collapse: collapse; height: 154px; width: 50%;" border="1">
 <tbody>
 <tr style="height: 22px;">
@@ -58,37 +56,31 @@
 </tr>
 </tbody>
 </table>
+</dd>
+</dl>
 </div>
-<h3>¿Dónde puedo encontrar las credenciales de mi base de datos?</h3>
+<p id="h_01J7CDGHJZ9WJHR3CM78N7XW0S"><strong>Encontrar las credenciales de tu base de datos</strong></p>
 <div class="solvvy-solution">
-<p>Consulta el siguiente artículo para obtener instrucciones sobre cómo ubicar las credenciales de tu base de datos:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encontrar las credenciales de inicio de sesión de tu base de datos</a></li>
-</ul>
+<p>Revisa <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encontrar-tus-credenciales-de-inicio-de-sesi%C3%B3n">this article</a> para obtener instrucciones sobre cómo ubicar las credenciales de tu base de datos:</p>
 <div class="notebox-note">
 <p>Nunca uses localhost para tu hostname. Solo debes usar el hostname configurado en tu panel DreamHost.</p>
 </div>
 </div>
-<h2><span id="El_hostname_no_esta_funcionando"> El hostname no está funcionando </span></h2>
+<h3 id="h_01J7CDGHJZQGZEAE0PKAZJBH4Y"><span id="Corregir_el_hostname">Corregir el hostname</span></h3>
 <div class="solvvy-solution">
-<p>El hostname es la URL que usa para acceder a tu base de datos. Consulta el siguiente artículo para obtener instrucciones sobre cómo ubicar esta URL en tu panel.</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/221610868#paso4" target="_self">Encontrar tu hostname</a></li>
-</ul>
-<p>Primero, prueba el hostname intentando acceder a él con un navegador web. Si no se carga nada, es probable que tengas un hostname incorrecto y deberás reemplazarlo por uno que funcione. Afortunadamente, los nombres de host en el mismo servidor son intercambiables, por lo que si tienes otro hostname que funcione en el mismo servidor, puedes usar el que funcione. Si no tienes otros nombres de host para ese servidor, deberás crear uno y esperar a que se propague. Mira el artículo phpMyAdmin para más detalles.</p>
-<p>Si se carga el hostname, se le solicitará un nombre de usuario y contraseña. Si se rechaza el nombre de usuario y la contraseña del archivo de configuración, es posible que debas actualizarlos con la información correcta. Consulta el siguiente artículo para obtener detalles sobre cómo obtener las credenciales correctas en tu panel.</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encontrar las credenciales de inicio de sesión de tu base de datos</a></li>
-</ul>
+<p>El hostname es la URL que utilizas para acceder a tu base de datos. Revisa <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encontrar-tus-credenciales-de-inicio-de-sesi%C3%B3n#h_01J6WKN82BGVNZQXZQ5CKNSAQW">este artículo</a> para obtener más información sobre cómo encontrar esta URL en tu panel.</p>
+<p>Para probar el hostname, intenta acceder a este a través de un navegador web. Si no se carga nada, es probable que tenga un hostname incorrecto. Los hostname en el mismo servidor son intercambiables; si funciona otro hostname, puedes utilizar ese. Si no tienes una alternativa, crea un nuevo hostname y espera a que se propague. Para obtener más información, revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-de-phpMyAdmin">phpMyAdmin</a>.</p>
+<p>Si se carga el hostname pero se solicita un nombre de usuario y una contraseña, revisa que el usuario y la contraseña en tu archivo de configuración sean correctos. Revisa <a href="https://help.dreamhost.com/hc/es/articles/221610868-Encontrar-tus-credenciales-de-inicio-de-sesi%C3%B3n">este artículo</a> para obtener detalles sobre cómo obtener las credenciales correctas en tu panel.</p>
 </div>
-<h2><span id="La_base_de_datos_del_servidor_no_esta_disponible">El servidor de la base de datos no está disponible</span></h2>
+<h3 id="h_01J7CDGHJZQJBMMC7F2WZEZVJ7"><span id="Asegurate_de_que_el_servidor_de_la_base_de_datos_este_disponible">Asegúrate de que el servidor de la base de datos esté disponible</span></h3>
 <div class="solvvy-solution">
-<p>Es posible que su servidor MySQL no responda debido a problemas de red. Si ves un error al intentar conectarte a phpMyAdmin,&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">contacta a soporte</a>&nbsp;para más asistencia.</p>
+<p>Es posible que su servidor MySQL no responda debido a problemas de red. Si ves un error al intentar conectarte a phpMyAdmin, <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">contacta a soporte</a> para más asistencia.</p>
 </div>
-<h2>Ver también</h2>
+<h2 id="h_01J83692SC0CG6JGDN9M3TCBNC">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/221610868-Encuentra-tus-credenciales-para-acceder-a-la-base-de-datos" target="_self">Encontrar las credenciales de inicio de sesión de tu base de datos</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216479207-Cambiar-contrase%C3%B1a-Usuarios-MySQL-" target="_self">Cambiar contraseña (usuarios de MySQL)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214395638-Generalidades-de-phpMyAdmin">Generalidades de phpMyAdmin</a></li>
 </ul>
 </div>

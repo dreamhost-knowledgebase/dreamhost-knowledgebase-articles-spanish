@@ -1,37 +1,32 @@
+<div id="advanced"> </div>
 <h2 id="h_01HCASJV984N28J5ANAWBNG9CQ">Generalidades</h2>
+<p>Este artículo explica cómo instalar una versión personalizada de <a href="https://curl.se/" target="_blank" rel="noopener noreferrer">curl</a> (herramienta de línea de comandos). curl se instala en todos los servidores de DreamHost de forma predeterminada, pero dependiendo de tus necesidades, es posible que desees instalar una versión más nueva.</p>
 <div class="solvvy-solution">
-<p>curl se instala en todos los servidores DreamHost de forma predeterminada; sin embargo, es posible que desees instalar una versión más nueva según tus necesidades. Este artículo te guía a través de la instalación de una versión personalizada de curl (herramienta de línea de comandos).</p>
 <div class="notebox-note">
-<p>Estas instrucciones explican cómo instalar la herramienta de línea de comando <span class="code">curl</span> que es diferente que cURL. Revisa el siguiente artículo para más información:</p>
-<ul>
-<li><a href="https://daniel.haxx.se/docs/curl-vs-libcurl.html">daniel.haxx.se/docs/curl-vs-libcurl.html</a></li>
-</ul>
+<p>Estas instrucciones explican cómo instalar la herramienta de línea de comandos curl, que es diferente de cURL. Revisa <a href="https://daniel.haxx.se/docs/curl-vs-libcurl.html" target="_blank" rel="noopener noreferrer">este artículo</a> para obtener más información sobre las diferencias entre curl y cURL.</p>
 </div>
 </div>
 <h2 id="h_01HCASJV98ME759WW253KHK22E">Instalar curl</h2>
 <div class="solvvy-solution">
 <ol>
-<li>Inicia sesión en tu servidor por&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">vía SSH</a>.</li>
-<li>Asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de tu usuario</a>.<br />
+<li>Inicia sesión en tu servidor por <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">vía SSH</a>.</li>
+<li>Asegúrate de estar en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-home-del-usuario" target="_self">directorio principal de tu usuario</a>:<br>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~</span></pre>
 </div>
 </li>
-<li>Busca aquí la versión que deseas instalar:<br />
-<ul>
-<li><a href="https://curl.se/download/" target="_self" rel="undefined">https://curl.se/download/</a></li>
-</ul>
-<p>Haz clic derecho en un enlace <span class="text-link">.zip</span> y copie la URL. Luego puedes ejecutar el siguiente comando <span class="code">wget</span> para descargar el archivo .zip.</p>
+<li>Ubica <a href="https://curl.se/download/" target="_blank" rel="noopener noreferrer">la versión</a> que deseas instalar.
+<p>Da clic derecho en el enlace <span class="text-link">.zip</span> y copia su URL. Luego puedes correr el siguiente comando <span class="code">wget</span> para descargar el archivo <span class="text-object">.zip</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://curl.se/download/curl-8.3.0.zip</span></pre>
 </div>
 </li>
-<li>Descomprime el archivo.<br />
+<li>Descomprime el archivo:<br>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">unzip curl-8.3.0.zip</span></pre>
 </div>
 </li>
-<li>Navega al nuevo directorio.<br />
+<li>Navega al nuevo directorio:<br>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">cd curl-8.3.0</span></pre>
 </div>
@@ -51,20 +46,21 @@
 <pre class="prebox">nano ~/.bash_profile</pre>
 </div>
 </li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Agrega esta línea</a>&nbsp;a tu <span class="text-object">.bash_profile</span>:
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Agrega esta línea</a> a tu <span class="text-object">.bash_profile</span>:
 <div class="preboxcontainer">
 <pre class="prebox">export PATH=$HOME/curl/bin:$PATH</pre>
 </div>
 </li>
-<li>Activar tu configuración nueva.<br />
+<li>Activar tu configuración nueva.<br>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">. ~/.bash_profile</span></pre>
 </div>
 </li>
-<li>Verifica la ubicación y la versión de <span class="code">curl</span>:<br />
+<li>Verifica la ubicación y la versión de curl:<br>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">which curl</span>
-/home/username/curl/bin/curl<br />
+/home/username/curl/bin/curl<br>
 <span class="server">[server]$ </span><span class="command">curl --version</span>
 curl 8.3.0 (x86_64-pc-linux-gnu)</pre>
 </div>

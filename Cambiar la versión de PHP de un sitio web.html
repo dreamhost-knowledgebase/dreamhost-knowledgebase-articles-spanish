@@ -1,12 +1,17 @@
+<div id="beginner"> </div>
 <h2 id="h_01H9P8SFFRTZB3RGWDSPAXH34D">Generalidades</h2>
 <div class="solvvy-solution">
-<p>DreamHost ofrece <a href="https://help.dreamhost.com/hc/es/articles/215082337--Qu%C3%A9-versiones-de-PHP-est%C3%A1n-disponibles-en-DreamHost">varias versiones de PHP</a>. Cuando agregas un sitio, hay una opción para elegir qué versión te gustaría usar, pero también puedes cambiar esta versión en cualquier momento desde el panel.</p>
-</div>
-<h2 id="h_01H9P8SFFRTP0YYTF0RSX568W0">Cambiar la versión de PHP</h2>
-<div class="solvvy-solution">
+<p>Lo siguiente describe varias formas en las que puedes cambiar la versión de PHP en tu sitio.</p>
+<p>DreamHost ofrece <a href="https://help.dreamhost.com/hc/es/articles/215082337--Qu%C3%A9-versiones-de-PHP-est%C3%A1n-disponibles-en-DreamHost">varias versiones de PHP</a>. Cuando agregas un sitio, puedes elegir qué versión usar, pero también puedes cambiar esta versión en cualquier momento en el panel.</p>
 <div class="prereqs">
+<p><strong>Requisitos previos</strong></p>
 <p>Tu dominio debe estar Completamente Alojado en un servidor para cambiar la versión de PHP. Dominios con <span class="text-object">Solo DNS</span>, <span class="text-object">Parqueado</span>, y <span class="text-object">Redirección</span> no tienen opciones de PHP.</p>
 </div>
+</div>
+<h2 id="h_01HM789R84N3F43K12VQ2RCDXS">Cómo cambiar la versión de PHP</h2>
+<p>Las siguientes secciones explican cómo cambiar la versión de PHP en el panel o en un archivo <span class="text-object">.htaccess</span>.</p>
+<h3 id="h_01J7YEAD29CD51WMS10G9BYHX1">Cambiar la versión de PHP en el panel</h3>
+<div class="solvvy-solution">
 <p>Para cambiar la versión de <a href="https://help.dreamhost.com/hc/es/articles/214202188-Generalidades-PHP">PHP</a> en cualquiera de sus dominios/subdominios dentro del panel:</p>
 <ol>
 <li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>.</li>
@@ -18,17 +23,13 @@
 </li>
 <li>Debajo de la sección <span class="text-section">PHP</span>, da clic en el icono <span class="text-object">Modificar</span>.</li>
 <li>Escoge una version de PHP del menú desplegable.</li>
-<li>Haz clic en el botón <strong>Cambiar la Versión PHP</strong>.
-<dl>
-<dd>Aparecen las siguientes dos opciones:
+<li>Haz clic en el botón <strong>Cambiar versión de PHP</strong>. <em>Aparecerán las dos opciones siguientes:</em>
 <ul>
 <li>
 <strong>Volver a la versión anterior de PHP</strong> — Revierte a una versión anterior, lo que te permite resolver cualquier problema en un momento posterior sin causar errores en el sitio. (<em>recomendado</em>).</li>
 <li>
 <strong>¡Cambiar la versión de PHP de todos modos!</strong> — Cambia la versión de PHP, lo que podría ocasionar errores de compatibilidad en tu sitio web. (<em>no recomendado</em>).</li>
 </ul>
-</dd>
-</dl>
 </li>
 <li>Selecciona una de estas opciones para controlar que sucede si la actualización falla.</li>
 <li>Haz clic en el botón <strong>Cambiar la Versión de PHP</strong>.
@@ -37,34 +38,34 @@
 </dl>
 </li>
 </ol>
-<div class="alert-warning">
+<p><strong>Si aparece un error</strong></p>
 <p>El siguiente error aparece si el código de tu sitio web no es compatible con la nueva versión de PHP que seleccionaste:</p>
-<dl>
-<dd><strong><em>Cambio de PHP fallido. example.com se ha revertido a la versión de PHP x.x.</em></strong></dd>
-</dl>
-<p>Si seleccionaste <em><span class="text-object">Devolver a la versión anterior de PHP</span></em>, su versión no se cambia. Podrás necesitar el siguiente artículo para ubicar y actualizar el código incompatible antes de intentar cambiar la versión nuevamente.</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360001402163-Soluci%C3%B3n-de-problemas-de-fallas-de-actualizaci%C3%B3n-de-PHP">Solución de problemas de fallas de actualización de PHP</a></li>
-</ul>
+<div class="text-blockquote">
+<p><em>El cambio de PHP no fue exitoso. example.com ha vuelto a la versión x.x de PHP.</em></p>
 </div>
+<p>Si seleccionaste <em><span class="text-object">Revertir a la versión anterior de PHP</span></em>, la versión de PHP no cambia. Luego puedes usar las instrucciones de <a href="https://help.dreamhost.com/hc/es/articles/360001402163-Soluci%C3%B3n-de-problemas-de-fallas-de-actualizaci%C3%B3n-de-PHP">este artículo</a> para localizar y actualizar el código incompatible antes de intentar cambiar la versión de PHP nuevamente.</p>
 </div>
-<h2 id="h_01H9P8SFFRSMJAWKSD44475N7Y"><span id="Cambiar_la_version_de_PHP_de_tu_sitio"> Cambiar la versión de PHP de tu sitio usando un archivo .htaccess </span></h2>
+<h3 id="h_01H9P8SFFRSMJAWKSD44475N7Y"><span id="Cambiar_la_version_de_PHP_de_tu_sitio"> Cambiar la versión de PHP de tu sitio usando un archivo .htaccess </span></h3>
 <div class="solvvy-solution">
 <div class="notebox-important">
-<p>Ten cuidado al usar este método durante largos períodos de tiempo. Si usas <span class="text-object">.htaccess</span> para forzar una versión que ha llegado al final de su vida útil (End of Life), tu sitio puede experimentar problemas cuando esa versión se elimine del servidor.</p>
+<p>Ten cuidado al usar este método durante largos períodos de tiempo. Si usas un archivo <span class="text-object">.htaccess</span> para forzar una versión que ha llegado al final de su <a href="https://help.dreamhost.com/hc/es/articles/215082337--Qu%C3%A9-versiones-de-PHP-est%C3%A1n-disponibles-en-DreamHost">Vida útil</a>, tu sitio puede experimentar problemas cuando esa versión se elimine del servidor.</p>
 </div>
-<p>Además de cambiar la configuración en el panel de DreamHost, también puede cambiar la configuración de PHP usando un <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">archivo .htaccess</a>.</p>
-<p>Revisa los siguientes artículos para obtener instrucciones sobre cómo crear o editar tu archivo <span class="text-object">.htaccess</span>:</p>
+<p>Para cambiar la configuración de PHP usando un archivo <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a>:</p>
+<ol>
+<li>Revisa los siguientes artículos para obtener instrucciones sobre cómo crear o editar tu archivo <span class="text-object">.htaccess</span>:
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Crear y editar un archivo vía FTP</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">Crear y editar un archivo vía SSH</a></li>
 </ul>
-<p>Simplemente agrega las siguientes dos líneas en tu archivo <span class="text-object">.htaccess</span> que obliga a PHP a usar PHP 8.2:</p>
+</li>
+<li>Agrega las siguientes dos líneas en tu archivo <span class="text-object">.htaccess</span>, lo que obliga a PHP a utilizar PHP 8.2:
 <div class="preboxcontainer">
 <pre class="prebox">AddHandler fcgid-script .php <br>FCGIWrapper "/dh/cgi-system/php82.cgi" .php</pre>
 </div>
-<p>Si esto causa algún problema, elimine las líneas para volver a la configuración anterior.</p>
-<p>Hacer este cambio también ajusta la versión de PHP que se muestra en tu panel en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>. Sin embargo, puede tardar hasta 24 horas en actualizarse.</p>
+</li>
+<li>Si esto causa algún problema, elimina las líneas para volver a la configuración anterior.</li>
+</ol>
+<p>Al realizar este cambio también se ajusta la versión de PHP que se muestra en el panel de la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=domain.dashboard#!/list-view" target="_blank" rel="noopener noreferrer">Administrar Sitios Web</a>. Sin embargo, puede tardar hasta 24 horas en actualizarse.</p>
 </div>
 <h2 id="h_01H9P8SFFR8FDYQ78S7Z9NAYYV">Ver también</h2>
 <div class="solvvy-hidden">
@@ -73,7 +74,6 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades de .htaccess</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio" target="_self">¿Cómo ver la configuración de mi entorno PHP?</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/214202148-Cambiar-la-versi%C3%B3n-de-PHP-que-usa-shell" target="_self">Cambiar la versión de PHP que usa shell</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/sections/203242337-Avanzado" target="_self">Resumen de PHP de línea de comandos</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360001301686-Configuraci%C3%B3n-predeterminada-de-PHP-en-DreamHost" target="_self">Configuración predeterminada de PHP en DreamHost</a></li>
 </ul>
 </div>
