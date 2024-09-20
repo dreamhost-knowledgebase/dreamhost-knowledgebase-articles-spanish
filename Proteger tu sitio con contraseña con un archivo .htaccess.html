@@ -1,104 +1,72 @@
-<h2 id="h_01HRSQQDM3VP6D48BE50CX251C">Generalidades</h2>
-<div class="solvvy-solution">
-<p>Este artículo explica cómo proteger con contraseña tu directorio a través de SSH creando un archivo <span class="text-object">.htaccess</span> y <span class="text-object">.htpasswd</span>. Los siguientes pasos están cubiertos en este artículo.</p>
-<p><strong>Crear los archivos</strong></p>
-<ul>
-<li><a href="#htpasswd" rel="undefined" target="_self">Paso 1 — Crear el archivo .htpasswd</a></li>
-<li><a href="#htaccess" rel="undefined" target="_self">Paso 2 — Crear el archivo .htaccess</a></li>
-</ul>
-<p><strong>Ejemplos de WordPress y HTTPS</strong></p>
-<ul>
-<li><a href="#wordpress" target="_self">Código para proteger un subdirectorio de WordPress</a></li>
-<li><a href="#forzar_SSL" target="_self">Forzar SSL (HTTPS) en la solicitud de inicio de sesión</a></li>
-</ul>
-<div class="notebox-note">
-<p><strong>Usar el panel para proteger con contraseña tu sitio</strong></p>
-<p>La forma más fácil de proteger con contraseña tu sitio es usar la herramienta en el panel DreamHost. Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.webdav&amp;" rel="noopener noreferrer" target="_blank">Htaccess/WebDAV</a> Luego puedes configurar la protección con contraseña allí.</p>
-<ul class="article-list">
-<li><a href="https://help.dreamhost.com/hc/es/articles/217239847-Crear-una-contrase%C3%B1a-para-proteger-tu-sitio-en-el-panel-DreamHost">Crear una contraseña para proteger tu sitio en el panel de DreamHost </a></li>
-</ul>
-<p><strong>Sin acceso a tus archivos <span class="text-object">.htaccess</span> y <span class="text-object">.htpasswd</span></strong></p>
-<p>Sin embargo, ten en cuenta que si usas la opción de panel, los archivos <span class="text-object">.htaccess</span> y <span class="text-object">.htpasswd</span> serán propiedad del servidor. Esto significa que no podrás editar manualmente ninguno de estos archivos si es necesario. Además, estas instrucciones sobrescribirán cualquier archivo <span class="text-object">.htaccess</span> existente. Asegúrate de hacer una copia de seguridad de tu archivo <span class="text-object">.htaccess</span> existente antes de comenzar estos pasos.</p>
-<p>Si solo necesitas proteger con contraseña tu sitio y necesitas acceso a tu archivo <span class="text-object">.htaccess</span> y <span class="text-object">.htpasswd</span> en cualquier momento en el futuro, debes usar las instrucciones de este artículo para crear manualmente esos archivos.</p>
+<div id="advanced"> </div>
+<h2 id="h_01J82WMFW7FTC7H317F5B8G6MV">Generalidades</h2>
+<p>Este artículo explica cómo <a href="https://httpd.apache.org/docs/2.4/es/howto/auth.html" target="_blank" rel="noopener noreferrer">proteger tu sitio web con contraseña</a> utilizando un archivo <span class="text-object">.htaccess </span>.</p>
+<p><strong>Usar el panel para proteger a tu sitio con contraseña</strong></p>
+<p><a href="https://help.dreamhost.com/hc/es/articles/217239847-Crear-una-contrase%C3%B1a-para-proteger-tu-sitio-en-el-panel-de-DreamHost">Una opción alternativa</a> es utilizar la herramienta del panel en la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=advanced.webdav&amp;" target="_blank" rel="noopener noreferrer">Htaccess/WebDAV</a>. Sin embargo, por favor ten en cuenta que si necesitas acceso para editar manualmente tus archivos <span class="text-object">.htaccess</span> y <span class="text-object">.htpasswd</span> en el futuro, debes utilizar las instrucciones de este artículo, ya que la opción del panel elimina el acceso a estos archivos.</p>
+<div class="prereqs">
+<p><strong>Requisitos previos</strong></p>
+<p>Este artículo asume que tu has <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">creado un usuario de Shell</a> y puedes iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</p>
 </div>
-<div class="notebox-important">
-<p>En los siguientes ejemplos, cambia <span class="code">username</span> a tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario Shell</a> y <strong>example.com</strong> a tu sitio web.</p>
-</div>
-</div>
+<h2 id="h_01J834JAF5C7G9V1E0GXWFZ403">Cómo proteger tu sitio con contraseña</h2>
+<p>Los siguientes pasos crean un archivo <span class="text-object">.htpasswd</span> y <span class="text-object">.htaccess</span> para proteger un sitio web completo, un subdirectorio específico o archivos específicos.</p>
 <div class="steps-section--container">
-<div class="steps-section--border"> </div>
+<div class="steps-section--h3-border"> </div>
 <div class="steps-section--content">
 <div class="steps-section--step">
-<img class="steps-number-icon" src="https://dreamhostknowledgebase.com/graphics/number-1.svg" width="50px">
-<h2 class="subheader" id="h_01HRSQQDM30WM826KT7700NVQ1">
-<span id="step1">Paso 1 — </span><span id="htpasswd">Crear el archivo .htpasswd</span>
-</h2>
+<img class="steps-number-h3-icon" src="https://dreamhostknowledgebase.com/graphics/number-1.svg" width="30px">
+<h3 id="h_01J82WMFW7HT9TQQD4KYZSQN3C" class="subheader">
+<span id="step1"> </span><span id="htpasswd">Crear el archivo .htpasswd</span>
+</h3>
 <div class="solvvy-solution">
-<p>Puedes usar un archivo <span class="text-object">.htaccess</span> para proteger con una contraseña un archivo o carpeta mediante la autenticación básica.</p>
 <ol>
-<li>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
-<li>Navega al directorio que deseas proteger con una contraseña.
-<div class="notebox-important">
-<p>Si estás protegiendo con contraseña todo el sitio web, lo más probable es que sea <strong>example.com</strong>.</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/example.com</span></pre>
-</div>
-<p>Si estás protegiendo con contraseña un subdirectorio como <strong>example.com/members</strong>, este iría a ese subdirectorio.</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">cd ~/example.com/members</span></pre>
-</div>
+<li>Inicia sesión en tu sewrvidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
+<li>Navega hasta el directorio que desea proteger con contraseña.
+<div class="notebox-tip">
+<p>Esto podría ser <strong>example.com</strong> para todo tu sitio web o <strong>example.com/subdir</strong> para un subdirectorio.</p>
 </div>
 </li>
-<li>Corre <span class="code">pwd</span> para confirmar la ruta completa del archivo a este directorio. Necesitarás esta ruta completa en el siguiente paso.
+<li>Corre <span class="code">pwd</span> para confirmar la ruta completa del archivo a este directorio. Anótalo.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">pwd</span>
 /home/username/example.com</pre>
 </div>
 </li>
-<li>Crea un archivo <span class="text-object">.htpasswd</span> corriendo el siguiente comando en el directorio que deseas proteger con contraseña. Esto usa la utilidad <span class="code">htpasswd</span> y la ruta completa al directorio. Por ejemplo, si el nombre de usuario que estás creando para iniciar sesión es <span class="code">user1</span>, corre lo siguiente:
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">htpasswd -c /home/<span class="code-highlight">username</span>/<span class="code-highlight">example.com</span>/.htpasswd user1</span></pre>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">Crea</a> un archivo <span class="text-object">.htpasswd</span> corriendo el siguiente comando.
+<div class="notebox-note">
+<p>Cambia la ruta del directorio y <span class="code">user1</span> por el usuario de inicio de sesión que deseas crear.</p>
 </div>
-</li>
-<li>Ingresa una contraseña para el nuevo usuario llamado <span class="code">user1</span>. El código en tu archivo <span class="text-object">.htpasswd</span> luego muestra la contraseña encriptada así:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">htpasswd -c <span class="code-highlight">/home/username/example.com</span>/.htpasswd <span class="code-highlight">user1</span></span></pre>
+</div>
+<dl>
+<dd>Cuando se te pida, ingresa una contraseña para el nuevo usuario. El código en tu archivo <span class="text-object">.htpasswd</span> muestra la contraseña cifrada de la siguiente manera:
 <div class="preboxcontainer">
 <pre class="prebox">user1:$apr1$bkS4zPQl$SyGLA9oP75L5uM5GHpe9A2</pre>
 </div>
-<div class="notebox-note">
-<p>Córrelo de nuevo (sin la opción <span class="code">-c</span>) para cualquier otro usuario que desees permitir el acceso a tu directorio.</p>
-</div>
+</dd>
+</dl>
 </li>
-<li>Confirma que los permisos están configurados en 644 corriendo el siguiente comando.
+<li>
+<p>Corre el comando nuevamente (sin la opción <span class="code">-c</span>) para cualquier otro usuario al que deseas permitir acceso a tu directorio.</p>
+</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/360029138491-Generalidades-de-los-Permisos-Unix">Configura los permisos</a> a 644.
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">chmod 644 .htpasswd</span></pre>
 </div>
 </li>
 </ol>
-<p>Revisa la siguiente página para más información:</p>
-<ul>
-<li><a href="https://httpd.apache.org/docs/2.4/howto/auth.html" rel="undefined" target="_self">Apache Authentication HowTo</a></li>
-</ul>
 </div>
 </div>
 <div class="steps-section--step">
-<img class="steps-number-icon" src="https://dreamhostknowledgebase.com/graphics/number-2.svg" width="50px">
-<h2 class="subheader" id="h_01HRSQQDM3ZDJ3Y585N6BESP76">
-<span id="step1">Paso 2 — </span><span id="htaccess">Crear el archivo .htaccess</span>
-</h2>
-<div class="solvvy-solution">
-<p>A continuación, <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-via-SSH" target="_self">crea un archivo .htaccess</a> usando el comando <span class="text-object">nano</span>:</p>
-<div class="notebox-important">
-<p>Asegúrate de agregar este archivo <span class="text-object">.htaccess</span> en el mismo directorio en el que agregaste el archivo <span class="text-object">.htpasswd</span>.</p>
-</div>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">nano .htaccess</span></pre>
-</div>
-<h3 id="h_01HRSQQDM36CSN4M1S4505GWPK">Ejemplos de código para agregar al archivo .htaccess</h3>
-<h4 id="h_01HRSQQDM3B12XG0VJWJ49T0VH"><strong>Proteger un sitio web completo</strong></h4>
-<p>Esta contraseña de ejemplo protege un sitio web completo al colocar los archivos en el directorio web principal del sitio.</p>
-<div class="notebox-note">
-<p>Asegúrate de cambiar las líneas resaltadas por tu usuario, nombre de dominio y nombres de archivo específicos.</p>
-</div>
+<img class="steps-number-h3-icon" src="https://dreamhostknowledgebase.com/graphics/number-2.svg" width="30px">
+<h3 id="h_01J82WMFW7S8GN9KCAFDYMNBR9" class="subheader"><span id="htaccess">Crear el archivo .htaccess</span></h3>
+<p>En el mismo directorio, <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">crea un archivo .htaccess</a> y agrega uno de los siguientes ejemplos de código según las necesidades de tu sitio:</p>
+<p><strong>Proteger un sitio web completo (o subdirectorio)</strong></p>
+<dl>
+<dd>
+<p>Esta contraseña de ejemplo protege un sitio web completo o un subdirectorio, dependiendo de la ruta del archivo.</p>
 <div class="preboxcontainer">
 <pre class="prebox">#Protect Directory
 AuthName "Dialog prompt"
@@ -107,8 +75,12 @@ AuthUserFile <span class="code-highlight">/home/username/example.com/.htpasswd</
 Require valid-user
 </pre>
 </div>
-<h4 id="h_01HRSQQDM3HS3ZFDWQZSJ4GMAF"><strong>Protege un solo archivo</strong></h4>
-<p>Este ejemplo de contraseña protege un solo archivo llamado <span class="text-object">admin.php</span>:</p>
+</dd>
+</dl>
+<p><strong>Proteger un solo archivo</strong></p>
+<dl>
+<dd>
+<p>Esta contraseña de ejemplo protege un solo archivo llamado <span class="text-object">admin.php</span>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">#Protect single file
 &lt;Files <span class="code-highlight">admin.php</span>&gt;
@@ -119,8 +91,12 @@ Require valid-user
 &lt;/Files&gt;
 </pre>
 </div>
-<p><strong>Protege múltiples archivos</strong></p>
-<p>Este ejemplo protege múltiples archivos tales como <span class="text-object">admin.php</span> y <span class="text-object">staff.php</span>.</p>
+</dd>
+</dl>
+<p><strong>Proteger múltiples archivos</strong></p>
+<dl>
+<dd>
+<p>Este ejemplo protege varios archivos como <span class="text-object">admin.php</span> y <span class="text-object">staff.php</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox">#Protect multiple files
 &lt;FilesMatch "<span class="code-highlight">^(admin|staff).php$</span>"&gt;
@@ -131,13 +107,12 @@ Require valid-user
 &lt;/FilesMatch&gt;
 </pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<h2 id="h_01HRSQQDM3MGFTVSMSVDNEB5YC"><span id="wordpress">Código para proteger un subdirectorio de WordPress</span></h2>
-<div class="solvvy-solution">
-<p>Debido a cómo WordPress enruta todas las solicitudes de página, intentar acceder a un subdirectorio protegido por contraseña arrojará un error <span class="code">404 Not Found</span>. Para resolver esto, debes añadir una línea adicional al archivo <span class="text-object">.htaccess</span> para hacer referencia a ErrorDocument.</p>
+</dd>
+</dl>
+<p><strong><span id="Proteger_un_subdirectorio_de_WordPress">Proteger un subdirectorio de WordPress</span></strong></p>
+<dl>
+<dd>
+<p>Debido a la forma en que WordPress enruta todas las solicitudes de página, intentar acceder a un subdirectorio protegido con contraseña arrojará un error <span class="text-object">404 Not Found</span>. Para resolver esto, debes agregar una línea adicional al archivo <span class="text-object">.htaccess</span> para hacer referencia a <span class="code">ErrorDocument</span>.</p>
 <p>Este ejemplo protege un subdirectorio llamado <span class="text-object">members</span>.</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="code-highlight">ErrorDocument 401 default</span>
@@ -149,96 +124,25 @@ AuthUserFile <span class="code-highlight">/home/username/example.com/members/.ht
 Require valid-user
 </pre>
 </div>
+</dd>
+</dl>
 </div>
-<h2 id="h_01HRSQQDM31XEVRGAX7SCTDYAY"><span id="forzar_SSL">Forzar SSL (HTTPS) en la solicitud de inicio de sesión</span></h2>
-<div class="solvvy-solution">
+<div class="steps-section--step">
+<img class="steps-number-h3-icon" src="https://dreamhostknowledgebase.com/graphics/number-3.svg" width="30px">
+<h3 id="h_01J82WMFW7S8GN9KCAFDYMNBR9" class="subheader"><span id="htaccess">Probar tu sitio</span></h3>
+<p>Visita tu sitio web y verifica si la solicitud de contraseña nueva aparece como está configurada.</p>
+</div>
+</div>
+</div>
+<h2 id="h_01J82WMFW8GTN9YAWVBXA4CXHW"><span id="Forzar_SSL">Forzar SSL (HTTPS) en el mensaje de inicio de sesión</span></h2>
+<p>Si tu sitio no utiliza un certificado SSL, el mensaje de inicio de sesión que ves no está cifrado. Esto significa que tu contraseña se enviará como texto sin formato a través de <span class="text-object">http</span>. Para cifrar este inicio de sesión, debes <a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-sobre-agregar-un-certificado-SSL">agregar un certificado SSL</a> en tu dominio.</p>
 <div class="alert-warning">
-<p>Los siguientes pasos no son necesarios si tu sitio redirige automáticamente a <span class="text-object">HTTPS</span>. Este es el caso de los certificados SSL agregados después de septiembre de 2020.</p>
-<p>Si tienes un SSL anterior que actualmente no se redirige automáticamente (sin agregar ningún código personalizado a tu archivo <span class="text-object">.htaccess</span>), <a href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-a-trav%C3%A9s-de-Correo-Electr%C3%B3nico" target="_self">comunícate con soporte para obtener ayuda</a>.</p>
+<p>Si tu sitio utiliza un certificado SSL, pero no se redirecciona automáticamente a HTTPS, <a href="https://help.dreamhost.com/hc/es/articles/215722447-Contactar-a-DreamHost-v%C3%ADa-correo-electr%C3%B3nico" target="_self">contacta a soporte para obtener ayuda</a>.</p>
 </div>
-<p>Si tu sitio no usa un certificado SSL,, la solicitud de inicio de sesión que ves no está encriptada. Esto significa que tu contraseña se enviará como texto sin formato a través de <span class="text-object">http</span>. Para cifrar este inicio de sesión, debes <a href="https://help.dreamhost.com/hc/es/articles/215089118-Generalidades-de-el-proceso-de-agregar-un-certificado-SSL" target="_self">agregar un certificado SSL</a> a tu dominio. Una vez agregues el certificado SSL, agrega el código a continuación para forzar SSL al iniciar sesión.</p>
-<p>Este método evita el envío de una solicitud de contraseña <span class="text-object">.htaccess</span> en una conexión no cifrada. Si deseas asegurarte de que tu servidor sólo sirve documentos a través de un canal SSL encriptado, entonces debes usar la directiva <span class="code">SSLRequireSSL</span> con la opción <span class="code">+StrictRequire</span> habilitada:</p>
-<h3 id="h_01HRSQQDM46ST8QX1FGHF446NT">Paso 1 — Agregar código a tu archivo .htaccess</h3>
-<p>Los siguientes ejemplos de código obligan a que se cargue el mensaje de inicio de sesión mediante HTTPS. Sin embargo, asegúrate de haber configurado correctamente la URL base y el subdominio <span class="text-object">www</span> como se menciona abajo.</p>
-<div class="notebox-note">
-<p><strong>Configurar una URL de base</strong></p>
-<p>Asegúrate de que la URL que ingreses en seguida de <span class="code">SSLRequire</span> es la URL base de tu sitio web. Por ejemplo:</p>
+<h2 id="h_01J82WMFW8H6NM39B99QAJNPXA"><span id="Ver_tambien">Ver también</span></h2>
 <ul>
-<li>
-<strong>example.com</strong>: usa esto para el dominio primario o subdirectorio como example.com/blog</li>
-<li>
-<strong>blog.example.com</strong>: usa esto para un subdominio</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">Generalidades de .htaccess </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades de SSH </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess">¿Qué puedo hacer con un archivo .htaccess? </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/217239847-Crear-una-contrase%C3%B1a-para-proteger-tu-sitio-en-el-panel-de-DreamHost">Crear una contraseña para proteger tu sitio en el panel de DreamHost </a></li>
 </ul>
-<p><strong>El subdominio 'www'</strong></p>
-<p>NO incluyas <span class="code">www</span> en frente de la URL <a href="https://help.dreamhost.com/hc/es/articles/215457387-Agregar-o-eliminar-www-de-un-dominio" target="_self">si estás forzando la eliminación del subdominio www en tu panel</a>.</p>
-<ul>
-<li><strong>example.com</strong></li>
-</ul>
-<p>Sin embargo, <a href="https://help.dreamhost.com/hc/es/articles/215457387-Agregar-o-eliminar-www-de-un-dominio" rel="undefined" target="_self"> si estás forzando a que se agregue el subdominio www en tu panel </a>, asegúrate de agregar www al nombre de dominio.</p>
-<ul>
-<li><strong>www.example.com</strong></li>
-</ul>
-<p>Además, puedes usar cualquier nombre de archivo que desees para tu documento 403. Debajo se llama <span class="text-object">error_redirect.php</span>.</p>
-</div>
-<p><strong>Si estás protegiendo con contraseña todo el sitio web</strong></p>
-<div class="notebox-important">
-<p>El siguiente ejemplo de código asume que has creado los archivos <span class="text-object">.htaccess</span>, <span class="text-object">.htpasswd</span>, y <span class="text-object">error_redirect.php</span> en el directorio principal del sitio que estás protegiendo con contraseña.</p>
-</div>
-<div class="preboxcontainer">
-<pre class="prebox">SSLOptions +StrictRequire
-SSLRequireSSL
-SSLRequire %{HTTP_HOST} eq "<span class="code-highlight">example.com</span>"<br>
-ErrorDocument 403 /<span class="code-highlight">error_redirect.php</span>
-
-&lt;Files /<span class="code-highlight">error_redirect.php</span>&gt;
-  AuthType none
-&lt;/Files&gt;
-
-#Protect Directory
-AuthName "Dialog prompt"
-AuthType Basic
-AuthUserFile /home/username/example.com/.htpasswd
-Require valid-user</pre>
-</div>
-<p><strong>Si solo estás protegiendo con una contraseña un subdirectorio</strong></p>
-<p>Si solo deseas proteger un solo subdirectorio y no todo el sitio, especifica el subdirectorio en tu archivo <span class="text-object">.htaccess</span> como se muestra en el siguiente código:</p>
-<div class="notebox-important">
-<p>El siguiente ejemplo de código asume que has creado los archivos <span class="text-object">.htaccess</span>, <span class="text-object">.htpasswd</span>, y <span class="text-object">error_redirect.php</span> en el subdirectorio que estás protegiendo con contraseña.</p>
-</div>
-<div class="preboxcontainer">
-<pre class="prebox">SSLOptions +StrictRequire
-
-SSLRequireSSL
-SSLRequire %{HTTP_HOST} eq ".example.com"
-
-ErrorDocument 403 /error_redirect.php
-
-&lt;Files /error_redirect.php&gt;
-  AuthType none
-&lt;/Files&gt;
-
-#Protect Directory
-AuthName "Dialog prompt"
-AuthType Basic
-AuthUserFile /home/username/example.com<span class="code-highlight">/blog/</span>.htpasswd
-Require valid-user
-  </pre>
-</div>
-<h3 id="h_01HRSQQDM4WNCW69NDD90G0FK0">Paso 2 — Agrega código a tu archivo error_redirect.php</h3>
-<p>Ahora que tu <span class="text-object">.htaccess</span> redirigirá a la página de error, debes colocar algún código en esta página de error para redirigir correctamente a al inicio de sesión seguro. Agrega el siguiente código PHP.</p>
-<div class="preboxcontainer">
-<pre class="prebox">&lt;?php
-    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-?&gt;</pre>
-</div>
-<p>Si ahora intentas iniciar sesión, verás que tanto la URL como la solicitud de inicio de sesión cambian a <strong>https</strong>://example.com.</p>
-<h3 id="h_01HRSQQDM4G0HSQHV3ZG32P4QC">Problema con la renovación de un certificado 'Let's Encrypt'</h3>
-<p>El código puede hacer que un certificado '<a href="/hc/es/articles/216539558-Generalidades-sobre-certificado-de-seguridad-Let-s-Encrypt">Let's Encrypt</a>' no se renueve correctamente. Si has agregado un certificado 'Let's Encrypt' a tu dominio, asegúrate de deshabilitar el código en tu archivo <span class="text-object">.htaccess</span> cuando tu certificado esté a punto de renovarse. Una vez renovado, puedes volver a habilitar el código.</p>
-</div>
-<h2 id="h_01HRSQQDM4WWAT0JEPQRGTTCKC">Ver también</h2>
-<div class="solvvy-hidden">
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">Generalidades de .htaccess</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-" target="_self">¿Qué puedo hacer con un archivo .htaccess?</a></li>
-</ul>
-</div>
