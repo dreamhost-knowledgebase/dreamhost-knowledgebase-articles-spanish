@@ -1,22 +1,21 @@
+<div id="intermediate"> </div>
 <h2 id="h_01HEN5A7HNGTXG55Z2RHBVBY7E">Generalidades</h2>
+<p>A continuación se describe cómo garantizar que cualquier ajuste realizado en el archivo <span class="text-object">phprc</span> surta efecto.</p>
+<p><strong>Antecedentes</strong></p>
 <div class="solvvy-solution">
-<p>Es posible que aunque hayas agregado el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini" target="_self">archivo phprc</a>,&nbsp;correctamente, puede que te des cuentas de los cambios no se vean aplicados en línea. Es posible que debas eliminar todos los procesos PHP en ejecución para garantizar que la configuración nueva surta efecto.</p>
-<p>A continuación se describen los pasos para enviar los cambios que hagas en el archivo <span class="text-object">phprc</span>.</p>
+<p>Es posible que, incluso si has <a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">actualizado correctamente tu archivo phprc</a>, notes que no aparecen las personalizaciones. Si es así, tendrás que cerrar todos los procesos PHP que se estén ejecutando en tu usuario para asegurarte de que las nuevas configuraciones surtan efecto.</p>
+</div>
 <div class="notebox-note">
-<p>Estas instrucciones se aplican a sitios que no son de DreamPress. Si estás intentando actualizar la configuración de PHP en un sitio de DreamPress, consulta el siguiente artículo:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115002582932-Personalizar-tu-configuraci%C3%B3n-PHP-con-DreamPress" target="_self">Personalizar la configuración PHP en DreamPress</a></li>
-</ul>
+<p><strong>Sitios DreamPress</strong></p>
+<p>Estas instrucciones se aplican a sitios que no son de DreamPress. Si estás intentando actualizar la configuración PHP de un sitio DreamPress, revisa <a href="https://help.dreamhost.com/hc/es/articles/115002582932-Personalizar-tu-configuraci%C3%B3n-PHP-con-DreamPress">este artículo</a>.</p>
 </div>
-</div>
-<h2 id="h_01HEN5A7HNNVPAJG8BH4GAKEXR">Actualizar tu archivo phprc a través de SSH</h2>
+<h2 id="h_01J83PVDAZBF78GMDZEFKKNX0S">Cómo actualizarlo</h2>
+<p>Las siguientes secciones explican cómo hacer que tu servidor lea las actualizaciones del archivo <span class="text-object">phprc</span>.</p>
+<h3 id="h_01HEJYMZ2F4NHNJPD98B1Q5D70">Killing off your PHP processes (all servers)</h3>
 <div class="solvvy-solution">
-<ol>
-<li>Conéctate a tu servidor usando <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self">SSH</a>.</li>
-<li>Una vez conectado, corre el siguiente comando teniendo en cuenta la versión PHP de tu sitio, para parar los procesos PHP que se estén ejecutando en el momento:</li>
-</ol>
+<p>Para eliminar todos los procesos PHP en ejecución, inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y corre el siguiente comando según la versión de PHP:</p>
 <div class="notebox-important">
-<p>En los ejemplos a continuación, reemplaza 'usuarioshell'” por tu&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario SSH</a>&nbsp;todo en minúsculas.</p>
+<p>En los ejemplos a continuación, reemplaza <span class="code">shelluser</span> por tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self">usuario SSH</a> todo en minúsculas.</p>
 </div>
 <p><strong>Para PHP 8.1:</strong></p>
 <div class="preboxcontainer">
@@ -32,16 +31,14 @@
 </div>
 <p>Elimina los procesos PHP de esta manera actualiza tu archivo <span class="text-object">phprc</span>.</p>
 <div class="notebox-note">
-<p>Si después de correr el comando killall ves <strong>php##.cgi: no process found</strong> (no se encontró ningún proceso), esto significa que no hay procesos PHP en ejecución. Haz una <a href="https://help.dreamhost.com/hc/es/articles/216456827#forzar" target="_self">actualización completa en tu navegador</a>&nbsp;para ver tu página phpinfo.php actualizada. Ahora deberías ver que tu configuración se ha actualizado.</p>
+<p>Si después de correr el comando <span class="code">killall</span> ves <span class="text-object">php##.cgi: no process found,</span> significa que no hay procesos PHP corriendo. Para continuar, haz una <a href="https://help.dreamhost.com/hc/es/articles/216456827#forzar" target="_self">actualización completa en tu navegador</a> para ver la página <a href="https://help.dreamhost.com/hc/es/articles/214895287-Ver-la-versi%C3%B3n-y-la-configuraci%C3%B3n-de-PHP-de-tu-sitio">phpinfo.php</a> actualizada. Ahora deberías ver que tu configuración se ha actualizado.</p>
 </div>
 </div>
-<h2 id="h_01HEN5A7HN3CTJ207TD65DQD63">Actualizar del archivo phprc en un servidor Nginx</h2>
+<h3 id="h_01HEJYMZ2FHK0CMQ3WFD9AKZ1P">Reiniciar Nginx</h3>
 <div class="solvvy-solution">
-<p>Si <a href="https://help.dreamhost.com/hc/es/articles/214880148-Cambiar-tu-servidor-web-a-Nginx">cambiaste tu servidor para correr Nginx</a> anteriormente, puedes actualizar el archivo <span class="text-object">phprc</span> recargando Nginx en el panel:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216454967-C%C3%B3mo-recargar-y-reiniciar-Nginx">Cómo recargar y reiniciar Nginx</a></li>
-</ul>
-<h3 id="h_01HQQVT92C4ENHJ1FVHZ4SP11E">Reiniciar Nginx y eliminar los procesos de PHP (solo para Servidores Dedicados)</h3>
+<p id="h_01J863R0X01Y06X1B24MQFA4VQ"><strong>Servidores VPS y Dedicados</strong></p>
+<p>Si anteriormente <a href="https://help.dreamhost.com/hc/es/articles/214880148-Cambiar-tu-servidor-web-a-Nginx">cambiaste tu servidor para correr Nginx</a>, puedes actualizar el archivo <span class="text-object">phprc</span> al <a href="https://help.dreamhost.com/hc/es/articles/216454967-C%C3%B3mo-recargar-y-reiniciar-Nginx">recargar Nginx</a> en el panel.</p>
+<p id="h_01HQQVT92C4ENHJ1FVHZ4SP11E"><strong>Eliminar manualmente los procesos de (Solo para Servidores Dedicados)</strong></p>
 <p>Si estás en un <a href="https://help.dreamhost.com/hc/es/articles/215279658-Generalidades-de-los-Servidores-Dedicados" target="_self" rel="undefined">Servidor Dedicado</a> con un <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-servidor-Dedicado">usuario administrador</a>, puedes reiniciar Nginx y eliminar todos los procesos PHP en ejecución. Corre los siguientes comandos bajo tu <a href="https://help.dreamhost.com/hc/es/articles/215945467-Agregar-usuarios-a-un-servidor-Dedicado">usuario administrador del Servidor Dedicado</a>:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">sudo /etc/init.d/nginx stop</span>
@@ -52,13 +49,13 @@
 <li><a href="https://help.dreamhost.com/hc/es/articles/216454967-Como-recargar-y-reiniciar-Nginx-Solo-para-servidores-dedicados-" target="_self" rel="undefined">Cómo volver a cargar y reiniciar Nginx (solo para Servidores Dedicados)</a></li>
 </ul>
 </div>
-<h2 id="h_01HEN5A7HPQEVYSA7ER8Z6ZHKT">Sitios WordPress</h2>
+<h3 id="h_01HEJYMZ2FGJQJARWVVR6F66YJ">Actualizar sitios WordPress y DreamPress</h3>
 <div class="solvvy-solution">
-<p>Si has hecho algún ajuste a la configuración de PHP y tu sitio de WordPress no muestra el nuevo valor, verifica el archivo <span class="text-object">wp-config.php</span>. Puedes ver una línea como la siguiente:</p>
+<p>Si has <a href="https://help.dreamhost.com/hc/es/articles/214893937-Incrementar-el-l%C3%ADmite-de-memoria-de-PHP">ajustado el límite de memoria de PHP</a> y tu sitio de WordPress no está leyendo el nuevo valor, verifica el archivo <span class="text-object">wp-config.php</span>. Puedes ver una línea como la siguiente:</p>
 <div class="preboxcontainer">
 <pre class="prebox">define( 'WP_MEMORY_LIMIT', '128M' );</pre>
 </div>
-<p>Asegúrate de que cualquier configuración coincida con lo que has agregado al archivo <span class="text-object">phprc</span>.</p>
+<p>Asegúrate de actualizar esta línea para que coincida con lo que has agregado al archivo <span class="text-object">phprc</span>.</p>
 </div>
 <h2 id="h_01HEN5A7HP7QQ08EZ3T5C8SPDR">Ver también</h2>
 <div class="solvvy-hidden">
