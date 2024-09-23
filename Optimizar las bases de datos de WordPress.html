@@ -1,4 +1,4 @@
-<div id="auto-toc">&nbsp;</div>
+<div id="auto-toc"> </div>
 <h2 id="h_01HPPVWNM7RNPMG4S2NZ8S0AF6">Generalidades</h2>
 <div class="solvvy-solution">
 <p>Los sitios de WordPress se componen de dos componentes principales: los archivos del sitio web y la base de datos. Los archivos del servidor web contienen imágenes, plugins y archivos de temas, y los archivos principales de WordPress. La base de datos contiene el núcleo, el plugin y las opciones de tema, el contenido de la publicación, el contenido del usuario y las metatablas. Las herramientas en línea no pueden acceder a la base de datos, y es posible tener una puntuación alta en estas herramientas con un bajo rendimiento de la base de datos. El siguiente artículo describe varios métodos para optimizar la base de datos de un sitio de WordPress.</p>
@@ -31,12 +31,12 @@
 <h3 id="h_01HZTGHPBS5ZHYMJ9K7HMKW9AP" class="subtoc-heading">Cargar automáticamente / Autoload</h3>
 <p>Los datos de Autoload es un conjunto de datos que se carga con cada solicitud a la tabla de opciones. Grandes cantidades de datos de autoload pueden causar un rendimiento deficiente de /wp-admin y también pueden afectar al sitio público. Ejecuta el siguiente comando para averiguar cuántos datos de autoload tiene tu sitio:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SELECT SUM(LENGTH(option_value)/1048576) as 'Autoload(MB)' FROM $(wp config get table_prefix)options WHERE autoload='yes' ;"</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SELECT SUM(LENGTH(option_value)/1048576) as 'Autoload(MB)' FROM $(wp config get table_prefix)options WHERE autoload='yes' or autoload='on' ;"</span></pre>
 </div>
 <p>Menos de 600 KB es bueno para la mayoría de los servidores, pero los servidores de mayor rendimiento como DreamPress pueden manejar grandes cantidades de datos de autoload.</p>
 <p>Si el tamaño de autoload es más grande de lo esperado, corre el siguiente comando:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SELECT option_name, LENGTH(option_value)/1048576 AS "Size" FROM $(wp config get table_prefix)options WHERE autoload='yes' ORDER BY "Size" DESC LIMIT 25 ;"</span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wp db query "SELECT option_name, LENGTH(option_value)/1048576 AS "Size" FROM $(wp config get table_prefix)options WHERE autoload='yes' or autoload='on' ORDER BY "Size" DESC LIMIT 25 ;"</span></pre>
 </div>
 <p>Este comando devuelve las 25 filas más grandes en una tabla de opciones que se están cargando automáticamente. A partir de aquí, deberás examinar las filas y determinar qué datos se necesitan realmente. Los datos de autoload pueden estar relacionados con tu tema o plugins, y deberás investigar las entradas que no reconoce antes de eliminarlas. Si encuentra filas que se pueden eliminar de forma segura, usa el siguiente comando para hacerlo:</p>
 <div class="preboxcontainer">
@@ -122,7 +122,7 @@
 <p>Asegúrate que cualquier adición a tu <span class="text-object">wp-config.php</span> se hacen por encima de la línea que dice <span class="code">/* That's all, stop editing! Happy blogging. */</span>.</p>
 </div>
 </div>
-<div id="Ver_tambien" class="section-link">&nbsp;</div>
+<div id="Ver_tambien" class="section-link"> </div>
 <h2 id="h_01HZTGHPBS0GFSH8SR83E92XH5">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
