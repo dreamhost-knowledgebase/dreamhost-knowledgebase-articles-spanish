@@ -1,72 +1,83 @@
-<h2 id="h_01HQK4CV7CS1RSVJKVXYS24VGW">Generalidades</h2>
+<div id="beginner"> </div>
+<h2 id="h_01HQC4YED1WBBEXXBZM11S032W">Generalidades</h2>
 <div class="solvvy-solution">
-<p>Este artículo repasa algunos detalles sobre cómo se implementan los certificados SSL con Cloudflare.</p>
-<p>Si alguna de las siguientes limitaciones no es aceptable para tí, entonces la única opción es deshabilitar Cloudflare en el dominio.</p>
-</div>
-<h2 id="h_01HQK4CV7EVR6EFA9Z6YX0SKEA">¿Cuánto tiempo llevará configurarlo?</h2>
-<div class="solvvy-solution">
-<p>Al configurar SSL o alojamiento seguro, es posible que debas esperar un tiempo para que se propaguen los cambios de DNS.</p>
-<ul>
-<li>Esto a veces puede tomar hasta varias horas.</li>
-<li>Además, es posible que debas esperar hasta 24 horas para que Cloudflare configure tu certificado.</li>
-</ul>
-<p>Hasta que se complete la configuración, es posible que no puedas conectarte a tu sitio a través de <span class="text-object">HTTPS</span>, o puedes recibir advertencias de certificado no válidas.</p>
-</div>
-<h2 id="h_01HQK4CV7E098W5M88YD5TTTQT">¿Qué certificado verán los visitantes de mi sitio?</h2>
-<div class="solvvy-solution">
-<p>Los visitantes de tu sitio solo verán el certificado que crea Cloudflare.</p>
-<p>El certificado que configuraste en el panel DreamHost <strong>NO</strong> será visible para los visitantes de tu sitio si el sitio usa Cloudflare. Cloudflare siempre usa un certificado "profesional", pero no tendrás ningún control sobre este certificado.</p>
-<p>Los visitantes verán un certificado si revisan la información del mismo en tu sitio (independientemente del tipo que hayas configurado en el panel de DreamHost). Puedes ver el certificado del sitio en tu navegador (por ejemplo, Chrome o Firefox) haciendo clic en el icono que aparece en la barra de URL.</p>
-</div>
-<h2 id="h_01HQK4CV7FVSH3DMD0C5YN8QEM">¿Cuánto tiempo llevará configurar el certificado?</h2>
-<div class="solvvy-solution">
-<p>El certificado puede tardar hasta 24 horas en configurarse completamente.</p>
-<p>Hasta que Cloudflare termine de configurar el certificado de tu sitio, verás advertencias SSL cuando visites tu sitio usando <span class="text-object">HTTPS</span>. Una vez que se configura el certificado (que debe estar dentro de las 24 horas), las advertencias deben desaparecer.</p>
-</div>
-<h2 id="h_01HQK4CV7GW2PTARDXMW7A1WF5">¿Qué pasa con los subdominios de segundo nivel y las advertencias SSL?</h2>
-<div class="solvvy-solution">
-<p>Los subdominios de segundo nivel no funcionan con la opción GRATUITA.</p>
-<p>Esto significa que si intentas configurar SSL y Cloudflare para <strong>www.myblog.example.com</strong>, es posible que veas advertencias como esta cuando visites la página:</p>
+<p>A continuación, se ofrecen respuestas a preguntas frecuentes sobre cómo se implementan los certificados SSL de DreamHost con Cloudflare. Revisa <a href="https://help.dreamhost.com/hc/es/articles/216475197-Generalidades-de-Cloudflare-con-SSL">este artículo</a> para obtener más información.</p>
 <div class="notebox-note">
-<p>Estas advertencias no aparecerán en subdominios de <strong>primer nivel</strong> como <strong>myblog.example.com</strong> o <strong>www.example.com</strong>.</p>
+<p>Si alguna de estas limitaciones no te parece aceptable, la única opción es deshabilitar Cloudflare en el dominio.</p>
 </div>
 </div>
-<h2 id="h_01HQK4CV7GVRM0MA90SCXA9BFJ"><span id="error-ssl-cipher-cloudflare">¿Por qué mi sitio está mostrando un error de SSL cipher?</span></h2>
+<h2 id="h_01J86AX7MV5FF40VX62C2J0C1W">Preguntas frecuentes</h2>
+<p id="h_01HQC4YED1RAQE8TT4EJ45ZH8T"><strong>¿Cuánto tiempo se tarda en configurar un certificado con Cloudflare?</strong></p>
 <div class="solvvy-solution">
-<p>Si tienes un Certificado Seguro válido en tu sitio web, da doble clic a la pestaña SSL/TLS en tu cuenta de Cloudflare y asegúrate de tener seleccionado <span class="text-object">Completo (estricto)</span>. Para más información sobre las configuraciones SSL de Cloudflare, revisa el siguiente artículo:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216475197-Generalidades-de-Cloudflare-con-SSL" target="_blank" rel="noopener noreferrer">Generalidades de Cloudflare con SSL</a></li>
-</ul>
+<dl>
+<dd>
+<p>Cloudflare puede tardar hasta 24 horas en configurar tu certificado. Hasta que se complete la configuración, es posible que no puedas conectarte a tu sitio a través de <span class="text-object">HTTPS</span> o que recibas advertencias de certificado no válido.</p>
+</dd>
+</dl>
 </div>
-<h2 id="h_01HQK4CV7GGE27E513YX967G7N">¿Qué sucede si no habilito Cloudflare en el dominio principal?</h2>
+<p id="h_01HQC4YED18WYQFSJ1MNA2NB6V"><strong>¿Qué certificado ven los visitantes de mi sitio?</strong></p>
 <div class="solvvy-solution">
+<dl>
+<dd>
+<p>Los visitantes de tu sitio solo verán el certificado que crea Cloudflare. El <a href="https://help.dreamhost.com/hc/es/articles/215089748-Comprar-un-certificado-SSL-firmado-profesionalmente">certificado que configure en el panel DreamHost</a> <em>no</em> será visible para los visitantes de tu sitio si el sitio está usando Cloudflare.</p>
+</dd>
+</dl>
+</div>
+<p id="h_01HQC4YED26ESSHYGT2DWXA6DM"><strong>¿Qué pasa con los subdominios de segundo nivel y las advertencias de SSL?</strong></p>
+<div class="solvvy-solution">
+<dl>
+<dd>
+<p>Los subdominios de segundo nivel no funcionan con la opción gratuita de Cloudflare. Esto significa que si intentas configurar SSL y Cloudflare en <strong>www.blog.example.com</strong>, es posible que veas advertencias como "Conexión No Cifrada" al visitar la página.</p>
+<div class="notebox-note">
+<p>Estas advertencias no aparecerán en subdominios de <strong>primer nivel</strong>, como <strong>blog.example.com</strong> o <strong>www.example.com</strong>.</p>
+</div>
+</dd>
+</dl>
+</div>
+<p id="h_01HQC4YED2CJ3R5NECAQ5PSB4Z"><strong><span id="Por_que_mi_sitio_muestra_un_error_de_cifrado_SSL">¿Por qué mi sitio muestra un error de cifrado SSL?</span></strong></p>
+<div class="solvvy-solution">
+<dl>
+<dd>
+<p>Si tienes un Certificado Seguro válido en tu sitio web, vuelve a verificar la pestaña <span class="text-section">SSL/TLS</span> en tu cuenta de Cloudflare y asegúrate de tener seleccionada <span class="text-object">Completo (estricto)</span>. Revisa <a href="https://help.dreamhost.com/hc/es/articles/216475197-Generalidades-de-Cloudflare-con-SSL">este artículo</a> para obtener más información sobre la configuración de SSL de Cloudflare.</p>
+</dd>
+</dl>
+</div>
+<p id="h_01HQC4YED2RAM1A2PWMF4ESR61"><strong>¿Qué sucede si no habilito Cloudflare en el dominio principal?</strong></p>
+<div class="solvvy-solution">
+<dl>
+<dd>
 <p>Recibirás advertencias si Cloudflare no está habilitado en el dominio principal.</p>
-<p>Si deseas que SSL funcione en cualquiera de tus subdominios con Cloudflare, deberás tener tu dominio principal también habilitado en Cloudflare. Esta es una limitación impuesta por el proveedor del Certificado SSL; sin el dominio principal en Cloudflare, el certificado no será válido para los subdominios.</p>
-<p>Por ejemplo, si deseas tener SSL habilitado en <strong>blog.example.com</strong> y usas Cloudflare, entonces también debes habilitar Cloudflare en <strong>example.com</strong>.</p>
-<p>Después de que Cloudflare esté habilitado en el dominio principal (<strong>example.com</strong>) y subdominio (<strong>blog.example.com</strong>), ambos mostrarán un bloqueo seguro SSL válido.</p>
+<p>Si quieres que SSL funcione en cualquiera de tus subdominios con Cloudflare, también debes tener tu dominio principal habilitado en Cloudflare. El proveedor del certificado SSL impone esta limitación: si el dominio principal no está en Cloudflare, el certificado no será válido en los subdominios.</p>
+<p>Por ejemplo, si deseas tener SSL habilitado en <strong>blog.example.com</strong> y usar Cloudflare, entonces debes habilitar también Cloudflare en <strong>example.com</strong>.</p>
+</dd>
+</dl>
 </div>
-<h2 id="h_01HQK4CV7GVYBSN4E44K9861EP">¿Puedo usar la opción SSL universal de Cloudflare?</h2>
+<p id="h_01HQC4YED2GB7N4G28P8W1XSTW"><strong>¿Puedo utilizar la opción SSL Universal de Cloudflare?</strong></p>
 <div class="solvvy-solution">
-<p>Sí. Todos los dominios nuevos que elijan usar el plan básico de Cloudflare tendrán SSL universal disponible. Tenga en cuenta que esto NO se recomienda ya que el certificado SSL universal no protege completamente el tráfico de su sitio. Visita&nbsp;<a href="https://blog.cloudflare.com/introducing-universal-ssl/" target="_self">El blog de publicaciones de Cloudflare</a>&nbsp;para más detalles.</p>
-<p>Ahora también es posible usar un certificado TLS/SSL, como Let's Encrypt, con el plan básico de Cloudflare.</p>
-<ul>
-<li><a href="https://support.cloudflare.com/hc/en-us/articles/204144518-SSL-FAQ">https://support.cloudflare.com/hc/en-us/articles/204144518-SSL-FAQ</a></li>
-</ul>
+<dl>
+<dd>
+<p>Sí. Todos los nuevos dominios que elijan utilizar el plan básico de Cloudflare tendrán disponible el certificado SSL Universal. Por favor ten en cuenta que esto <em>no</em> se recomienda, ya que el certificado SSL Universal no protege completamente el tráfico de tu sitio. Revisa <a href="https://blog.cloudflare.com/introducing-universal-ssl/" target="_blank" rel="noopener noreferrer">la publicación del blog de Cloudflare</a> para obtener más detalles.</p>
+</dd>
+</dl>
 </div>
-<h2 id="h_01HQK4CV7GYBN0JV9DHP12646E">Solución de problemas</h2>
+<p id="h_01HQC4YED2BPG1TX26DDFWNQHA"><strong>¿Cómo soluciono el error 526?</strong></p>
 <div class="solvvy-solution">
-<p>Después de habilitar SSL y Cloudflare y visitar la versión <span class="text-object">HTTPS</span> de tu sitio, puedes notar un error 526 Cloudflare. Dirá esto:</p>
-<p><strong>El sitio web está fuera de línea. Error 526. Certificado SSL no válido</strong></p>
-<p>Este es un problema que debes corregir dentro de tu cuenta de Cloudflare.<br />Mira el siguiente artículo:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216475197-Generalidades-de-Cloudflare-con-SSL" target="_self">Generalidades de Cloudflare con SSL</a></li>
-</ul>
-<p>En ese artículo, desplázate hacia abajo hasta la sección titulada <a href="https://help.dreamhost.com/hc/es/articles/216475197#opciones" target="_self" rel="undefined">Opciones de SSL en el panel Cloudflare</a>. Sigue esas instrucciones para iniciar sesión en su panel de Cloudflare. Luego debes establecer la opción SSL en <span class="text-object">FLEXIBLE</span>.</p>
-<p>Después de cambiar esta opción en Cloudflare, tu sitio debe resolverse inmediatamente usando <span class="text-object">HTTPS</span>.</p>
+<dl>
+<dd>
+<p>Después de habilitar SSL con Cloudflare y luego visitar la versión <span class="text-object">HTTPS</span> de tu sitio, puedes recibir el siguiente mensaje de error 526 de Cloudflare:</p>
+<div class="preboxcontainer">
+<pre class="prebox">Website is offline. Error 526. Invalid SSL certificate</pre>
 </div>
-<h2 id="h_01HQK4CV7H77CSFDZP782T7G84">Ver también</h2>
+<p>Este error indica un problema que debes corregir en tu cuenta de Cloudflare. Para solucionarlo, revisa <a href="https://help.dreamhost.com/hc/es/articles/216475197-Generalidades-de-Cloudflare-con-SSL#opciones">estas instrucciones</a>, que muestran cómo iniciar sesión en tu panel de Cloudflare y configurar la opción SSL en <span class="text-object">FLEXIBLE</span>.</p>
+<p>Después de cambiar esta opción en Cloudflare, tu sitio debería resolverse inmediatamente usando <span class="text-object">HTTPS</span>.</p>
+</dd>
+</dl>
+</div>
+<h2 id="h_01HQC4YED32HWDNPV1AHKBW69F">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216475197-Generalidades-de-Cloudflare-con-SSL" target="_self">Generalidades sobre Cloudflare con SSL</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216475197-Generalidades-de-Cloudflare-con-SSL">Generalidades de Cloudflare con SSL </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/7087974733332-Crear-una-cuenta-de-Cloudflare-gratuita">Crear una cuenta de Cloudflare gratuita </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215873788-Verificar-si-Cloudflare-est%C3%A1-funcionando">Verificar si Cloudflare está funcionando </a></li>
 </ul>
 </div>

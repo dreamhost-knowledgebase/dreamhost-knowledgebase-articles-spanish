@@ -1,159 +1,95 @@
-<div id="auto-toc">&nbsp;</div>
-<h2 id="h_01HSV6RWWNT5Y83SPX3H8X0CEW">Generalidades</h2>
-<div class="solvvy-solution">
-<p>En un entorno de alojamiento compartido, hay muchos problemas que pueden afectar el rendimiento de tu sitio. Estos pueden variar desde problemas con tu base de datos, código comprometido, configuraciones incorrectas en tu sitio y límites de memoria alcanzados, lo que provoca que tus procesos sean terminados.</p>
-<p>Para empeorar las cosas, estos problemas a menudo pueden llevar a más problemas: por ejemplo, un sitio comprometido puede ralentizar la base de datos con datos basura, lo que hace que tome más tiempo y memoria cargar, lo que a su vez hace que el usuario del sitio alcance los límites de memoria.</p>
-<p>Este artículo describe los errores más comunes que puedes ver en tu sitio web junto con soluciones de resolución de problemas para ayudarte a resolverlos.</p>
-</div>
-<h2 id="h_01HSV6RWWNBR2EANFCK7T8GJ2R">500 Internal Server Error Inmediato</h2>
-<div class="solvvy-solution">
-<p>Hay dos cosas que pueden hacer que esto suceda.</p>
+<div id="intermediate"> </div>
+<h2 id="h_01HSM6KHPKETRFNP3V2Z8B9B40">Generalidades</h2>
+<p>En este artículo se describen los errores más comunes que se puedes ver en tu sitio web junto con soluciones para ayudarte a resolverlos.</p>
+<p><strong>Antecedentes</strong></p>
+<p>Muchos problemas pueden afectar el rendimiento de tu sitio. Pueden ir desde problemas con tu base de datos hasta código comprometido, configuraciones incorrectas y alcanzar los límites de memoria, lo que hace que se cancelen los procesos (<a href="https://help.dreamhost.com/hc/es/articles/216540488--Por-qu%C3%A9-se-cancelaron-los-procesos-en-mi-servidor-compartido">solo servidores compartidos</a>). Para descubrir la causa raíz, debes solucionar varios aspectos de tu sitio web y la configuración del servidor.</p>
+<div class="notebox-tip">
+<p><strong>Registros de errores</strong></p>
+<p>Asegúrate de revisar siempre el archivo <span class="text-object">error.log</span> de tu sitio cuando encuentres un error, ya que esto generalmente te dará una idea de la causa y cómo proceder.</p>
 <ul>
-<li>Problemas de <span class="text-object">.htaccess</span></li>
-<li>Alcanzar los límites de memoria del servidor compartido.</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-de-errores-v%C3%ADa-SFTP">Ver tus registros de acceso y de errores vía SFTP </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216512217-Ver-y-examinar-un-registro-de-errores-v%C3%ADa-SSH">Ver y examinar un registro de errores vía SSH </a></li>
 </ul>
-<h3 id="h_01HSV6RWWPT5YWGT3R5JDYP8EN">Problemas de .htaccess</h3>
-<p>Si el error ocurre instantáneamente, lo más probable es que la causa esté relacionada con el archivo <span class="text-object">.htaccess</span> de tu sitio. Algunas cosas potenciales para buscar:</p>
+</div>
+<h2 id="h_01J864X975MNY37PTAXS7ZABCN" class="header-section">Errores 400</h2>
+<h2 id="h_01HSM6KHPK60M916E55Z70BSRF">403 Forbidden Error</h2>
+<p>Los siguientes problemas son las causas más comunes del error 403 Forbidden.</p>
+<h3 id="h_01J8D8FW1XNG56EDNRJK38GAXX">Permisos de directorios y archivos</h3>
+<p><a href="https://help.dreamhost.com/hc/es/articles/360029138491-Generalidades-de-los-Permisos-Unix">Los permisos de directorios y archivos</a> controlan el acceso que otorga el servidor web. Los siguientes son los permisos predeterminados para directorios y archivos:</p>
 <ul>
-<li>Errores de sintaxis en el archivo <span class="text-object">.htaccess</span></li>
+<li>Directorios: 755</li>
+<li>Archivos: 644</li>
+</ul>
+<p>Inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales">FTP</a> o <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> para revisar estos permisos. Si es necesario cambiarlos, revisa <a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos">este artículo</a> para obtener instrucciones sobre cómo actualizar los permisos.</p>
+<h3 id="h_01J8D8R9JKXD727BNX70FQXMHB">Reglas de .htaccess</h3>
+<p>Si los permisos son correctos, pero sigues recibiendo un error 403, continúa con los siguientes pasos:</p>
+<ol>
+<li>Inicia sesión en tu servidor y edita el archivo a través de <a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">FTP</a> o <a href="https://help.dreamhost.com/hc/es/articles/115006413028-Crear-y-editar-un-archivo-v%C3%ADa-SSH">SSH</a> (este ejemplo usa SSH).</li>
+<li>Cambia el nombre del archivo <a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess">.htaccess</a> de <span class="text-object">.htaccess</span> a <span class="text-object">.htaccess_OFF</span>:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mv .htaccess .htaccess_OFF</span>
+</pre>
+</div>
+</li>
+<li>Vuelve a cargar tu sitio. Si el error 403 desapareció, sigue estos pasos.</li>
+<li>Abre el archivo <span class="text-object">.htaccess</span> y comenta cualquier línea que comience con <span class="code">deny</span> colocando un <span class="code">#</span> antes de la línea y guardando el archivo.</li>
+<li>Cambia el nombre del archivo <span class="text-object">.htaccess</span> que deshabilitaste anteriormente:
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">mv .htaccess_OFF .htaccess</span>
+</pre>
+</div>
+</li>
+</ol>
+<p>Si el sitio ahora se carga, habrás descubierto las líneas que causan el problema y podrás resolverlas según sea necesario.</p>
+<div class="notebox-important">
+<p>Ten en cuenta que las reglas de <span class="text-object">.htaccess</span> se aplican a todos los subdirectorios, por lo que es posible que un archivo <span class="text-object">.htaccess</span> que se encuentre fuera del directorio web de tu sitio afecte al mismo. Asegúrate de analizar también en profundidad la estructura del directorio para buscar archivos <span class="text-object">.htaccess</span> que puedan ser la causa.</p>
+</div>
+<h2 id="h_01HSM6KHPKTSMJ2RZ3WFB2B8KE">Error 404</h2>
+<p>Esto suele ocurrir con sitios que utilizan software como WordPress. En estos casos, el software crea reglas para reescribir las URL y facilitar su uso. Sin embargo, si se eliminan o modifican esas reglas, aparece un error 404.</p>
+<div class="notebox-tip">
+<p>En el caso específico de WordPress, esto se puede solucionar con solo volver a guardar la estructura de enlaces permanentes. Para ello, inicia sesión en tu panel de administración, dirígete a <span class="text-section">Configuración Enlaces permanentes</span> y luego da clic en el botón <strong>Guardar cambios</strong>.</p>
+</div>
+<p>La forma más sencilla de solucionar este problema es descargar una copia nueva del software que estás usando desde tu sitio web. Si el software usa un archivo <span class="text-object">.htaccess</span> de manera predeterminada, asegúrate de copiar su contenido y pegarlo en el archivo existente. Si esto no resuelve el problema, <a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte">contacta a soporte</a> para obtener ayuda.</p>
+<h2 id="h_01J864X975MNY37PTAXS7ZABCN" class="header-section">Errores 500</h2>
+<h2 id="h_01HSM6KHPKPBVQG9ENP5K3BAAS">500 Internal Server Error (immediato)</h2>
+<p>Las siguientes son las causas más comunes de los errores 500.</p>
+<h3 id="h_01HSM6KHPKH5BZZ65QGBNZT2SA">.htaccess issues</h3>
+<p>Si el error ocurre instantáneamente, lo más probable es que la causa tenga algo que ver con el archivo <span class="text-object">.htaccess</span> de tu sitio. Algunas posibles cosas que debe buscar:</p>
+<ul>
+<li>Errores de sintaxis en el archivo <span class="text-object">.htaccess</span>
+</li>
 <li>Configuración personalizada de PHP que no funciona</li>
 </ul>
-<p>Para ver si esta es la causa, intenta cambiar el nombre del archivo <span class="text-object">.htaccess</span> en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home-#el-directorio-de-sitio-web" target="_self">directorio principal de tu sitio</a> a algo como <span class="text-object">.htaccess.disabled</span>. Si el problema está en tu archivo <span class="text-object">.htaccess</span>, eso lo resolverá de inmediato.</p>
-<p>Ten en cuenta que las reglas <span class="text-object">.htaccess</span> se aplican a todos los subdirectorios, por lo que es posible que un archivo <span class="text-object">.htaccess</span> fuera del directorio web de tu sitio afecte a tu sitio. Asegúrate de buscar también más arriba en la estructura de directorios los archivos <span class="text-object">.htaccess</span> que puedan afectar las cosas e intenta cambiar el nombre de cualquiera que encuentres para ver si ayuda.</p>
-<h3 id="h_01HSV6RWWPJCG9KD0FBFMPGBXC">Alcanzar límites de memoria</h3>
-<p>Si eso no resuelve el problema, es posible que los procesos se cancelen debido a que se excede el límite de memoria de tu usuario. Una forma rápida de ver si esto podría estar afectando es simplemente verificar para ver qué procesos está ejecutando como usuario. Los siguientes artículos enumeran varias herramientas que puedes usar para investigar tus procesos en ejecución y el uso de memoria:</p>
+<p>Intenta cambiar el nombre del archivo <span class="text-object">.htaccess</span> en el <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home#el-directorio-del-sitio-web" target="_self">directorio principal del sitio</a> a algo como <span class="text-object">.htaccess_OFF</span> (como se describe más arriba). Si el problema está en el archivo <span class="text-object">.htaccess</span>, eso resolverá el problema de inmediato.</p>
+<h3>Alcanzar los límites de la memoria/h3</h3>
+<p>Si estás en un servidor compartido, es posible que tus <a href="https://help.dreamhost.com/hc/es/articles/216540488--Por-qu%C3%A9-se-cancelaron-los-procesos-en-mi-servidor-compartido">procesos se hayan eliminado</a> debido a que se excediste el límite de memoria de tu usuario. Revisa <a href="https://help.dreamhost.com/hc/es/sections/203272488-Herramientas-de-soluci%C3%B3n-de-problemas-de-la-l%C3%ADnea-de-comandos">estos artículos</a> para obtener una lista de varias herramientas que puedes usar para investigar tus procesos en ejecución y el uso de memoria.</p>
+<h2 id="h_01HSM6KHPKR7EX50BK7EZZQA6Y">500 Internal Server Error (after the site tried to load)</h2>
+<p>Esto puede deberse a varias cosas diferentes.</p>
+<h3 id="h_01HSM6KHPKSV6C7M7YBTCDNVG6">PHP timing out</h3>
+<p><strong>Si esto sucede en la página de administración</strong></p>
+<p>Si esto solo sucede en la página de inicio de sesión del administrador, crea un archivo <a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">phprc</a> personalizado en tu sitio y ajusta la configuración <a href="https://help.dreamhost.com/hc/es/articles/360028776572-Aumentar-el-tiempo-de-ejecuci%C3%B3n-de-PHP">max_execution_time</a> para ver si esto resuelve el problema.</p>
+<p><strong>Si esto le sucede a todas tus páginas</strong></p>
+<p>Revisa los registros de errores de tu sitio para ver si hay mensajes de error útiles.</p>
+<h2 id="h_01HSM6KHPK5592VQ4MM86KNKE0">Error 522 connection timed out</h2>
+<p>El error <span class="text-object">522 connection timed-out</span> solo aparece en dominios habilitados de Cloudflare cuando Cloudflare agota el tiempo de espera para comunicarse con el servidor web de origen. Revisa <a href="https://support.cloudflare.com/hc/en-us/articles/115003011431#522error" target="_blank" rel="noopener noreferrer">este artículo</a> para obtener información sobre cómo solucionar un error 522.</p>
+<h2 id="h_01J864X9755ZJF9HSB6C3S9TXT" class="header-section">Errores de carga del sitio web</h2>
+<h2 id="h_01HSM6KHPK16JY9WT74KPMD2CE">El sitio gira mientras carga continuamente</h2>
+<p>En la mayoría de los casos, esto significa que algo está provocando que los procesos PHP se bloqueen. Para solucionar el problema, inicia sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> y corre el comando <a href="https://help.dreamhost.com/hc/es/articles/115000683852-Usar-el-comando-top-para-solucionar-problemas-de-tu-sitio-web">top-c</a>. Es posible que observes que aparece <span class="code">&lt;defunct&gt;</span> junto a algunos de esos procesos. Esto puede deberse a una gran cantidad de cosas que deben investigarse más a fondo en combinación con cualquier cosa que pueda encontrar en el archivo <span class="text-object">error.log</span> de tu sitio.</p>
+<p><strong>Sitios WordPress</strong></p>
+<p>Esto suele estar relacionado con tablas de bases de datos que tienen sobrecarga o complementos de terceros. Revisa los siguientes artículos para conocer formas de optimizar tu sitio de WordPress para evitar estos problemas:</p>
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/sections/203272488-Herramientas-de-soluci%C3%B3n-de-problemas-de-la-l%C3%ADnea-de-comandos" target="_self" rel="undefined">Herramientas de solución de problemas de línea de comando</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215036388-Optimizar-una-base-de-datos">Optimizar una base de datos </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/sections/203242637-Optimizaciones">Artículos de optimización de WordPress</a></li>
 </ul>
-</div>
-<h2 id="h_01HSV6RWWPWGYH0D3Y5G1FB03W">El sitio gira intentando cargarse por un tiempo y luego muestra un 500 Internal Server Error</h2>
-<div class="solvvy-solution">
-<p>Esto puede ser causado por algunas cosas diferentes.</p>
+<h2 id="h_01HSM6KHPKQMW5R02RE5F0JX1N">Aparece una página en blanco</h2>
+<p>Este problema suele estar relacionado con un tema de WordPress que tiene problemas o con un plugin de almacenamiento en caché que se comporta de forma incorrecta. Revisa <a href="https://help.dreamhost.com/hc/es/articles/360030636332-Reparar-la-pantalla-blanca-de-la-muerte-o-White-Screen-of-Death-WSoD">este artículo</a> para obtener más detalles.</p>
+<p>Además, consulta el archivo <span class="text-object">error.log</span> de tu sitio y el <a href="https://help.dreamhost.com/hc/es/articles/360029327771-Habilitar-el-registro-de-Debug-de-WordPress">registro de depuración</a> de WordPress para solucionar problemas más a fondo.</p>
+<h2 id="h_01HSM6KHPKHXRZMKN4J0GCQMRP">Database connection error</h2>
+<p>Revisa <a href="https://help.dreamhost.com/hc/es/articles/360021570592-Error-al-establecer-una-conexi%C3%B3n-de-base-de-datos">este artículo</a> para obtener información sobre cómo solucionar un error de conexión a la base de datos.</p>
+<h2 id="h_01HSM6KHPKY7VAZY9WAWQQC5Q4">Ver también</h2>
 <ul>
-<li>Alcanzar los límites de memoria como se describió anteriormente.</li>
-<li>Tiempo de espera de PHP.</li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/216512217-Ver-y-examinar-un-registro-de-errores-v%C3%ADa-SSH">Ver y examinar un registro de errores vía SSH </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360029138491-Generalidades-de-los-Permisos-Unix">Generalidades de los Permisos Unix </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215867298-Comandos-para-solucionar-problemas-de-tus-sitios-web">Comandos para solucionar problemas de tus sitios web </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/sections/203242637-Optimizaciones">Artículos de optimización de WordPress</a></li>
 </ul>
-<h3 id="h_01HSV6RWWPTPKXCBYDYK4ZP9S0">Tiempo de espera de PHP</h3>
-<p>Si esto solo ocurre en páginas específicas (en particular, páginas de administración para el software que estás usando), entonces es muy probable que esta sea la causa. Puedes averiguar si esta es la causa creando un <a href="https://help.dreamhost.com/hc/es/articles/214200688-Generalidades-de-php-ini">phprc</a> personalizado para tu sitio y ajustando la configuración <a href="https://help.dreamhost.com/hc/es/articles/360028776572-Aumentar-el-tiempo-de-ejecuci%C3%B3n-de-PHP">max_execution_time</a>.</p>
-<p>Si esto le sucede a todas tus páginas, aún puede ser un tiempo de espera de PHP. Puedes consultar los&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP" target="_self">logs de errores</a>&nbsp;de tu sitio para ver si hay algún mensaje de error útil. Si todo lo que ves es un error de "Premature end of headers", no hay mucha información para solucionar, ya que esto simplemente significa que la secuencia de comandos salió antes de completarse.</p>
-<p>Puedes leer más sobre cómo crear un archivo <span class="text-object">phprc</span> personalizado en el siguiente artículo:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214894037-Crear-un-archivo-phprc-v%C3%ADa-FTP" target="_self">Crear un archivo phprc vía FTP</a></li>
-</ul>
-</div>
-<h2 id="h_01HSV6RWWPGB1RM36E4EJPMXS3">El sitio intenta cargar y luego muestra error 522 connection timed out</h2>
-<div class="solvvy-solution">
-<p>El error&nbsp;<span class="text-object">522 connection timed out</span> solo aparece en dominios habilitados para Cloudflare cuando Cloudflare agota el tiempo de contacto con el servidor web de origen. Consulte el siguiente artículo para obtener información sobre cómo solucionar un error 522:</p>
-<ul>
-<li><a href="https://support.cloudflare.com/hc/es-es/articles/115003011431-C%C3%B3mo-solucionar-errores-5XX-de-Cloudflare" target="_self" rel="undefined">Cómo solucionar errores 5XX de Cloudflare</a></li>
-</ul>
-</div>
-<h2 id="h_01HSV6RWWPP3EPGFMEX6EZJHCF">El sitio gira intentando cargar para siempre</h2>
-<div class="solvvy-solution">
-<p>Esta es quizás la cosa más genérica que puede suceder con tu sitio. Muy a menudo, esto significa que algo está causando que tus procesos PHP se bloqueen. Si ejecutas el comando&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/115000683852-Usando-el-comando-top-para-solucionar-problemas-de-tu-sitio-web"><span class="code">top -c</span></a>&nbsp;en el servidor, es posible que también veas <span class="code">&lt;defunct&gt;</span> junto a algunos de esos procesos. Esto puede ser causado por una gran cantidad de cosas.</p>
-<p>Con WordPress, esto a menudo tiene que ver con tablas de bases de datos que tienen sobrecarga. Eso no debería causar problemas, pero por alguna razón WordPress puede ponerse en mal estado si hay alguna sobrecarga (particularmente en la tabla <span class="text-object">wp_options</span>) y a menudo exhibirá este síntoma en esos casos. Otras causas importantes de esto son configuraciones incorrectas de software o plugins de terceros en el software que estás utilizando que tienen un problema de compatibilidad o una codificación deficiente.</p>
-<p>Puedes leer más sobre cómo reducir los gastos generales y optimizar WordPress en los siguientes artículos:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215036388-Optimizar-una-base-de-datos" target="_self">Optimizar una base de datos</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/sections/203242637-Optimizaciones" target="_self">Artículos de optimización de WordPress</a></li>
-</ul>
-</div>
-<h2 id="h_01HSV6RWWPEXJP6VDP4KSVXJ5V">El sitio se carga inmediatamente, pero solo se muestra una página en blanco</h2>
-<div class="solvvy-solution">
-<p>Este problema se relaciona con mayor frecuencia con un tema de WordPress que se está utilizando con problemas o con un plugin de almacenamiento en caché que se comporta incorrectamente. Dependiendo de lo que esté sucediendo exactamente, esto puede ser un poco difícil de resolver y es probable que requiera algunos ajustes para que las cosas vuelvan a funcionar correctamente.</p>
-</div>
-<h2 id="h_01HSV6RWWPQK3B9B5CX7MW0J7E">El sitio se carga inmediatamente, pero muestra un error de conexión a la base de datos</h2>
-<div class="solvvy-solution">
-<p>Revisa el siguiente artículo para obtener información sobre cómo solucionar un error de conexión de la base de datos:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360021570592-Error-al-establecer-una-conexi%C3%B3n-de-base-de-datos" target="_self">Error estableciendo conexión a la base de datos</a></li>
-</ul>
-</div>
-<h2 id="h_01HSV6RWWPFQHB2207659T1CFJ">El sitio se carga inmediatamente, pero muestra un error 403 Forbidden</h2>
-<div class="solvvy-solution">
-<p>El error prohibido 403 se muestra cuando se establece una regla de denegación para una IP en el&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">archivo .htaccess</a> o cuando los permisos de archivo evitan que el servidor web publique una página. Por lo general, puede tener una idea del problema que causa esto mirando tu archivo <span class="text-object">error.log</span>:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216512197-Ver-tus-registros-de-acceso-y-error-via-SFTP" target="_self">Ver tus logs de acceso y error por medio de SFTP</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216512217-Ver-y-examinar-un-log-de-errores-v%C3%ADa-SSH" target="_self">Ver y examinar tu log de error por medio de SSH</a></li>
-</ul>
-<p>En la mayoría de los casos, esto está relacionado con el permiso de archivo. Para verificar los permisos de tu sitio:</p>
-<ol>
-<li>Inicia sesión por medio de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
-<li>Navega al <a href="https://help.dreamhost.com/hc/es/articles/360001219231--D%C3%B3nde-est%C3%A1-el-directorio-home#el-directorio-home-del-usuario" target="_blank" rel="noopener noreferrer">directorio home de tu usuario</a>.</li>
-<li>Obtén un listado de directorio ejecutando el comando <span class="code">ls -la</span>:</li>
-</ol>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la</span>
-<span class="cmdoutput">drwxr-x--x   16 username pg123456    4096 Mar 25 07:30 ./
-...</span>
-</pre>
-</div>
-<p>La primera línea debe verse como la anterior. Observa la&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">cadena de permisos</a>&nbsp;que dice "drwxr-x--x".&nbsp;La primera letra significa "directorio", luego hay tres conjuntos de tres permisos.</p>
-<ul>
-<li>El primer conjunto son los permisos del propietario, que están configurados para leer/escribir/ejecutar.</li>
-<li>El segundo conjunto son los permisos de grupo que están configurados para leer/ejecutar.</li>
-<li>El tercer conjunto son los permisos "otros" (o lo que tienen todos los demás usuarios), que está configurado para ejecutarse únicamente.</li>
-</ul>
-<p>Si tienes Enhanced Security habilitada para tu usuario, se vería así en su lugar:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">ls -la</span>
-<span class="cmdoutput">drwxr-x---   16 username adm    4096 Mar 25 07:30 .
-...</span>
-</pre>
-</div>
-<p>Lo anterior son configuraciones de permisos correctas. Si en cambio se ven así:</p>
-<div class="preboxcontainer">
-<pre class="prebox">drw-r-----   16 <span class="cmdoutput">username </span>pg123456    4096 <span class="cmdoutput">4096 Mar 25 07:30 .
-</span></pre>
-</div>
-<p>O así:</p>
-<div class="preboxcontainer">
-<pre class="prebox">d---------   16 <span class="cmdoutput">username </span>pg123456    4096 <span class="cmdoutput">4096 Mar 25 07:30 .
-</span></pre>
-</div>
-<p>Entonces eso significa que tu usuario ha sido deshabilitado y debes comunicarte con DreamHost. Si este es el caso, es probable que veas errores como este al intentar iniciar sesión y no podrás obtener la lista del directorio como se describió anteriormente:</p>
-<div class="preboxcontainer">
-<pre class="prebox">Could not chdir to home directory /home/<span class="cmdoutput">username</span>: Permission denied
--bash: /home/<span class="cmdoutput">username</span>/.bash_profile: Permission denied
-</pre>
-</div>
-<p>Si ves esto,&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/218084068-Generalidades-sobre-contactar-a-soporte" target="_self">contacta a soporte de DreamHost</a>&nbsp;para ser asistido.</p>
-<p>Si los permisos se ven bien, pero aún recibe un error 403, intenta cambiar el nombre del <a href="https://help.dreamhost.com/hc/es/articles/217738987--Qu%C3%A9-puedo-hacer-con-un-archivo-htaccess-" target="_self">archivo .htaccess</a> para tu dominio afectado de <span class="text-object">.htaccess</span> a <span class="text-object">.htaccess.disabled</span> como este:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mv .htaccess .htaccess.disabled</span>
-</pre>
-</div>
-<p>Luego, intenta cargar tu sitio. Si el error 403 desapareció, abre tu archivo <span class="text-object">.htaccess</span> y busca líneas que comiencen con <span class="code">deny</span>. Si encuentras alguno, coméntalo poniendo un <span class="code">#</span> antes de la línea y guardando el archivo. Puedes volver a habilitar el archivo <span class="text-object">.htaccess</span> que deshabilitaste anteriormente de esta manera:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">mv .htaccess.disabled .htaccess</span>
-</pre>
-</div>
-<div class="notebox-note">
-<p>Si ves que el directorio del sitio tiene una adición al final de tu directorio que dice que fue deshabilitado por DreamHost, revisa tu correo para obtener un aviso de soporte sobre por qué. Si no puedes encontrar uno, solicita ayuda de inmediato.</p>
-<p>Visita la siguiente página para obtener más detalles sobre los permisos de archivos:</p>
-</div>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214751018-Comandos-de-Unix-Cambiar-permisos" target="_self">Permisos de archivos Unix</a></li>
-</ul>
-</div>
-<h2 id="h_01HSV6RWWQWTGVV079CQY30JK8">El sitio se carga, pero muestra un error 404 en lugar de lo que esperaba</h2>
-<div class="solvvy-solution">
-<p>Esto sucede con mayor frecuencia con sitios que usan software como WordPress que usan&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215613037-Como-ver-archivos-ocultos-en-un-cliente-FTP" target="_self">reglas de .htaccess</a> para tus permalinks/URL. Si esas reglas se eliminan o cambian de alguna manera, aparecerá un 404 en lugar del contenido que esperas.</p>
-<p>La forma más fácil de solucionar esto es descargar una copia nueva del software que estás usando desde tu sitio web (por ejemplo, <a href="https://downloads.joomla.org/" rel="nofollow">https://downloads.joomla.org/</a>)&nbsp;y luego copiar el contenido del archivo <span class="text-object">.htaccess</span> predeterminado y pegarlo en tu archivo existente (ten en cuenta que los archivos <span class="text-object">.htaccess</span> son archivos invisibles, por lo que es posible que debas&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/215613037-Como-ver-archivos-ocultos-en-un-cliente-FTP" target="_self">habilitar la visualización de archivos ocultos</a>&nbsp;en tu cliente FTP para encontrar el archivo si está allí).</p>
-<p>No todo el software viene con un archivo <span class="text-object">.htaccess</span> por defecto. Por ejemplo, WordPress genera uno cuando cambias la configuración de tu permalink, así que tenlo en cuenta también. Si poner las reglas predeterminadas de <span class="text-object">.htaccess</span> no resuelve el problema 404, escribe para soporte y solicita ayuda adicional.</p>
-<p>Para WordPress específicamente, esto a menudo se puede solucionar simplemente volviendo a guardar su estructura de permalinks. Para hacerlo, inicia sesión en tu panel de administración, dirígete a <span class="text-section">Configuraciones &gt; Permalinks</span>. y luego haz clic en el botón <strong>Guardar Cambios</strong>.</p>
-</div>
-<h2 id="h_01HSV6RWWQT65N6N7NR7W9QD8S">El sitio carga, pero muestra un error de WordPress</h2>
-<div class="solvvy-solution">
-<p>Una serie de errores específicos de WordPress, como las páginas de error de "dificultades técnicas" o "errores críticos", pueden aparecer debido a problemas de configuración. Consulta el siguiente artículo para obtener más información sobre la solución de problemas y la resolución de estos errores:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360030636332-Arreglando-la-pantalla-blanca-de-la-muerte-o-White-Screen-of-Death-WSoD-">Arreglar la pantalla blanca de la muerte o White Screen of Death (WSoD)</a></li>
-</ul>
-</div>
-<h2 id="h_01HSV6RWWQMZ8NFQ4XHK704V7G">Ver también</h2>
-<div class="solvvy-hidden">
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215867298-Comandos-para-solucionar-problemas-de-sus-sitios-web" target="_self">Comandos para solucionar problemas de tu sitio web</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/217141537-Recopilar-resultados-de-ping" target="_self">Recolectar resultados de ping</a></li>
-</ul>
-</div>
