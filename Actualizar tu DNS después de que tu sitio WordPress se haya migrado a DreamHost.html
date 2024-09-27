@@ -1,0 +1,70 @@
+<h2>Generalidades</h2>
+<div class="solvvy-solution">
+<p>Este artículo explica cómo actualizar tu configuración de DNS para que apunte a DreamHost después de que ya hayas migrado tu sitio web.</p>
+<div class="notebox-note">
+<p>Este artículo solo es necesario si tus <a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost">DNS</a> todavía apuntan a tu host anterior y deseas ver tu sitio en DreamHost antes de cambiar tus DNS para que <a href="https://help.dreamhost.com/hc/es/articles/214694378--A-qu%C3%A9-registros-DNS-apunto-mi-sitio-" target="_self">apunten a DreamHost</a>.</p>
+</div>
+</div>
+<h2>Migrar tu sitio de WordPress a DreamHost</h2>
+<div class="solvvy-solution">
+<p>Visita el siguiente artículo para obtener instrucciones completas sobre cómo agregar y ver tu sitio de WordPress en DreamHost antes de apuntar tus DNS:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214693178-C%C3%B3mo-migrar-manualmente-WordPress-a-DreamHost" target="_self">Cómo migrar manualmente WordPress a DreamHost</a></li>
+</ul>
+<p>Cuando esto se haya completado, podrás ver tu sitio actualizando el archivos <span class="text-object">hosts</span> en el computador de tu casa.</p>
+</div>
+<h2>Apuntar tus DNS a DreamHost</h2>
+<div class="solvvy-solution">
+<p>Después de haber visto tu sitio 'Espejo' para confirmar que tu instalación de WordPress aparece como debería, estás ahora listo para actualizar tus DNS.</p>
+<p>Tienes dos opciones:</p>
+<h3>Opción #1 — Apuntar tus nameservers</h3>
+<p>Esta opción apunta todos tus registros DNS a DreamHost, incluido el correo. Utiliza esta opción solo si deseas que todos los servicios de tu sitio web estén alojados en DreamHost.</p>
+<p>Regresa a tu alojamiento anterior y configura los <a href="https://help.dreamhost.com/hc/es/articles/216385447-Cambiar-los-nameservers-en-tu-alojamiento-actual">nameservers</a> para el registro de tu dominio para que apunten a DreamHost usando estos nameservers:</p>
+<ul>
+<li>
+<strong>ns1.dreamhost.com</strong> <span class="wysiwyg-color-black40">162.159.26.24</span>
+</li>
+<li>
+<strong>ns2.dreamhost.com</strong> <span class="wysiwyg-color-black40">162.159.27.142</span>
+</li>
+<li>
+<strong>ns3.dreamhost.com</strong> <span class="wysiwyg-color-black40">162.159.27.84</span>
+</li>
+</ul>
+<div class="notebox-note">
+<p>Al actualizar tus nameservers en tu registrador, solo deberías agregar la URL de los nameservers, no la IP. Las IP se indican arriba en caso de que tu registrador las solicite.</p>
+</div>
+<div class="notebox-note">
+<p>Esta modificación tarda entre 3 y 72 horas en <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-de-DNS">propagar</a> por Internet, después de lo cual tus nuevos nameservers dirigirán a los visitantes a tu cuenta con DreamHost.</p>
+<p>Puedes seguir el progreso de actualización de tus DNS usando cualquiera de los siguientes enlaces:</p>
+<ul>
+<li>
+<a href="https://www.whatsmydns.net/" target="_self" rel="undefined">whatsmydns.net</a> — Un sitio popular que verifica los registros DNS en todo el mundo.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/360055964552-Ver-tus-registros-DNS-de-DreamHost" target="_self">Ver tus registros DNS de DreamHost</a> — Usa el verificador de propagación de DNS de DreamHost en el panel.</li>
+</ul>
+</div>
+<h3>Opción #2 — Apuntar tus registros A</h3>
+<p>Esta opción te permite solo señalar los registros A (direcciones IP) de tu sitio a DreamHost. Usa esta opción si alojas correo en otra empresa y solo deseas que tu sitio web esté alojado en DreamHost. Visita el siguiente artículo para obtener instrucciones sobre cómo encontrar las direcciones IP de tu sitio:</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215413857-Generalidades-de-los-DNS-de-DreamHost" target="_self">Generalidades de los DNS de DreamHost</a></li>
+</ul>
+<p>Una vez que los DNS resuelven a DreamHost, al visitar tu sitio, se muestra el sitio tal como aparece en tu servidor DreamHost.</p>
+</div>
+<h2>Verificar una instalación exitosa</h2>
+<div class="solvvy-solution">
+<p>Si has hecho todo correctamente, tu dominio ahora resolverá tu instalación de WordPress en tu cuenta DreamHost. Si necesitas verificar si el dominio apunta al servidor correcto, sube un archivo de texto en el directorio raíz de tu dominio en tu servidor DreamHost. Por ejemplo, sube un archivo llamado <span class="text-object">test.txt</span>. Luego, intenta acceder a ese archivo a través de un navegador web en <strong>example.com/test.txt</strong>. Si está allí, eso significa que tu dominio ahora está apuntando al lugar correcto.</p>
+<p>Asegúrate de no realizar modificaciones en tu instalación de WordPress durante el período de espera de 48 horas, ya que cualquier cambio que realices o cualquier contenido nuevo que agregues no se transferirá a tu cuenta DreamHost a menos que vuelva a transferir la base de datos como se describe en el siguiente artículo.</p>
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214693178-C%C3%B3mo-migrar-manualmente-WordPress-a-DreamHost" target="_self">Cómo migrar manualmente tus archivos de WordPress</a></li>
+</ul>
+</div>
+<h2>Ver también</h2>
+<div class="solvvy-hidden">
+<ul>
+<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_self">Cómo iniciar sesión en tu sitio WordPress</a></li>
+<li><a href="/hc/es/articles/360035448951-Uso-del-plugin-de-migraci%C3%B3n-de-WordPress-DreamHost-Automated-Migration-" target="_self">Usar el plugin de Migración Automatizada de WordPress (DreamHost Automated Migration)</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214693178-C%C3%B3mo-migrar-manualmente-WordPress-a-DreamHost" target="_self">Cómo migrar manualmente WordPress a DreamHost</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214693248-Generalidades-sobre-WordPress-wp-cli" target="_self">Generalidades de wp-cli</a></li>
+</ul>
+</div>
