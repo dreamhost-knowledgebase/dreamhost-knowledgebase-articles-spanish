@@ -1,76 +1,97 @@
-<h2 id="h_01HP5JFF3VAGRHBW8PDB4M7XVA">Generalidades</h2>
+<div id="advanced"> </div>
+<h2 id="h_01HP5JF2XD0XACVFXJN56FRA72">Generalidades</h2>
+<p>Este artículo proporciona información sobre cómo utilizar la herramienta de copia rsync.</p>
+<p><strong>Antecedentes</strong></p>
 <div class="solvvy-solution">
-<p><a class="new" href="https://en.wikipedia.org/wiki/Rsync">rsync</a> es una herramienta de copia/sincronización de archivos rápida y versátil que se utiliza en los sistemas operativos Linux y OSX. Es útil para hacer una copia de seguridad de tu contenido en tu computador local, así como para enviar tu contenido local al servidor web. También te permite sincronizar rápidamente archivos de dos computadores para que sigan siendo los mismos.</p>
+<p><a class="new" href="https://es.wikipedia.org/wiki/Rsync" target="_blank" rel="noopener noreferrer">rsync</a> es una herramienta rápida y versátil de copia y sincronización de archivos que se utiliza en los sistemas operativos Linux y macOS. Es útil para realizar respaldos de tu contenido en tu computador local, enviar el contenido a un servidor web y sincronizar rápidamente archivos entre dos computadores.</p>
+</div>
+<h2 id="h_01J8N1MZEE2NDNK4QTTZ12Z7VN"><span id="Usar_sync_para_publicar_tus_archivos">Usar sync para publicar tus archivos</span></h2>
+<div class="solvvy-solution">
+<p>Cuando utilizas rsync para cargar los archivos (o los cambios) de tu sitio, determina qué archivos han cambiado y carga solo los archivos modificados. Esto garantiza que un archivo no se duplique al sincronizar.</p>
+</div>
+<div class="solvvy-solution">
 <div class="notebox-note">
-<p>En los siguientes ejemplos, <span class="code">username</span> sería tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> y <strong>example.com</strong> tu sitio web.</p>
+<p>En los siguientes ejemplos, el <span class="code">username</span> es tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">usuario shell</a>, y <span class="code">server</span> es tu <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales#Ubicar_el_hostname_FTP_de_tu_servidor">servidor web de DreamHost</a>.</p>
 </div>
-</div>
-<h2 id="h_01HP5JFF3V6FWCVSTPHSXGQ48J"><span id="Usar_rsync_para_publicar_tus_archivos">Usar rsync para publicar tus archivos</span></h2>
-<div class="solvvy-solution">
-<p>Cuando usas rsync para cargar los archivos (o cambios) de tu sitio, puede determinar qué archivos han cambiado y cargar solo los archivos modificados. Esto asegura que un archivo no se duplique al sincronizar.</p>
-</div>
-<h2 id="h_01HP5JFF3WRYC68AYGVM208YH7"><span id="Ejemplo_básico">Ejemplo básico</span></h2>
-<div class="solvvy-solution">
-<p>En el caso más simple, sin ningún filtro, así es como se ve un comando rsync "push out to webhost":</p>
+<p>Aquí hay una sintáxis básica:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync -e "/usr/bin/ssh"  --bwlimit=2000 -av <span class="code-highlight">local_directory username@server.dreamhost.com:remote_directory</span></span></pre>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync -e "/usr/bin/ssh" -av <span class="code-highlight">local_directory </span><span class="code-highlight">username@server.dreamhost.com:remote_directory</span></span></pre>
 </div>
-<p><strong>Explicación de campos</strong></p>
-<ul>
-<li><strong>rsync</strong> - siempre inicia el comando completo con esto..</li>
-<li><strong>-e</strong> - Especifica el programa de shell remoto que se utilizará. Esto siempre puede permanecer como /usr/bin/ssh.</li>
-<li><strong>bwlimit</strong> - (Opcional) Te permite especificar una tasa de transferencia máxima en kb/sec.</li>
-<li><strong>-av</strong> - Modo de archivo y detallado.</li>
-<li><strong>local_directory</strong> - Este es el directorio local en tu computador donde almacenas la información para ser subida. Por ejemplo: <span class="text-object">/home/username/documents/mybackups</span></li>
-<li><strong>username</strong> - Este es tu <a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-" target="_self" rel="undefined">usuario Shell</a> de DreamHost asignado a tu sitio.</li>
-<li><strong>server</strong> - Este es el nombre del servidor al que está cargando contenido. Consulta el artículo <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self" rel="undefined">Cómo encontrar tu nombre de host</a> para obtener instrucciones sobre cómo ubicar este nombre.</li>
-<li><strong>remote_directory</strong> - Este es el directorio en el servidor al que desea cargar contenido. Por ejemplo, si deseas descargar todo el contenido de tu directorio <span class="text-object">/example.com</span> agrega la ruta completa del archivo en el servidor: <span class="text-object">/home/username/example.com/</span>.
-<div class="notebox-important">
-<p>Si agregas una barra diagonal al final de la ruta, solo descargará el contenido de ese directorio, pero no el nombre del directorio en sí.</p>
-<p>Si no agregas la barra al final, el directorio se descargará con todo lo que contiene.</p>
-</div>
-</li>
-</ul>
-<div class="notebox-note">
-<p>Para evitar errores, se recomienda utilizar la ruta completa para los directorios locales y remotos. Aquí hay un ejemplo completo (excluyendo la banderilla <span class="code">--bwlimit</span>).:</p>
+<p>Para evitar errores, se recomienda utilizar la ruta completa tanto para los directorios locales como para los remotos. A continuación, se incluye un ejemplo completo:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync -e "/usr/bin/ssh" -av <span class="code-highlight">/home/username/documents/mybackups username@server.dreamhost.com:/home/username/example.com </span></span></pre>
 </div>
+<h2 id="h_01J8QHT5VMQ7C05SHPD967XMDV">Campos y filtros</h2>
+<p>Puedes usar varias <a href="https://linux.die.net/man/1/rsync" target="_blank" rel="noopener noreferrer">configuraciones de campo y filtros</a> cuando utilizas rsync.</p>
+<h3 id="h_01J8QJ7Z1TMRG7DNR2NQATDNEF">Campos</h3>
+<table style="border-collapse: collapse; width: 100%; height: 377px;" border="1">
+<tbody>
+<tr style="height: 22px;">
+<th style="width: 10%; height: 22px;">Campo</th>
+<th style="width: 40%; height: 22px;">Descripción</th>
+</tr>
+<tr style="height: 22px;">
+<td class="wysiwyg-text-align-center" style="height: 22px;">rsync</td>
+<td style="height: 22px;">El comando rsync. Inicia siempre el comando completo con <span class="code">rsync</span>.</td>
+</tr>
+<tr style="height: 44px;">
+<td class="wysiwyg-text-align-center" style="height: 44px;">-e</td>
+<td style="height: 44px;">Especifica el programa de shell remoto que se utilizará. Esto siempre puede ser <span class="text-object">/usr/bin/ssh</span>.</td>
+</tr>
+<tr style="height: 22px;">
+<td class="wysiwyg-text-align-center" style="height: 22px;">bwlimit</td>
+<td style="height: 22px;">(<em>Opcional</em>) Te permite especificar una velocidad de transferencia máxima en kb/seg.</td>
+</tr>
+<tr style="height: 22px;">
+<td class="wysiwyg-text-align-center" style="height: 22px;">-av</td>
+<td style="height: 22px;">Modo archivo y verbose.</td>
+</tr>
+<tr style="height: 67px;">
+<td class="wysiwyg-text-align-center" style="height: 67px;">local_directory</td>
+<td style="height: 67px;">Este es el directorio local de tu computador donde almacenas los datos que se van a cargar. Por ejemplo: <span class="text-object">/home/username/documents/mybackups</span>
+</td>
+</tr>
+<tr style="height: 22px;">
+<td class="wysiwyg-text-align-center" style="height: 22px;">username</td>
+<td style="height: 22px;">Este es el <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">usuario shell</a> de DreamHost asignado a tu sitio.</td>
+</tr>
+<tr style="height: 67px;">
+<td class="wysiwyg-text-align-center" style="height: 67px;">server</td>
+<td style="height: 67px;">Este es el nombre del servidor al que estás subiendo el contenido. Revisa el artículo <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales#Ubicar_el_hostname_FTP_de_tu_servidor">FTP</a> para obtener instrucciones sobre cómo ubicar este nombre.</td>
+</tr>
+<tr style="height: 89px;">
+<td class="wysiwyg-text-align-center" style="height: 89px;">remote_directory</td>
+<td style="height: 89px;">Este es el directorio del servidor al que deseas cargar el contenido. Por ejemplo, si deseas descargar todo el contenido del directorio <span class="text-object">/example.com</span>, agrega la ruta completa del archivo en el servidor: <span class="text-object">/home/username/example.com/</span>.
+<div class="notebox-important">
+<p>Si agregas una barra diagonal al final de la ruta, se descargará solo el contenido de ese directorio, pero no el nombre del directorio en sí. Si no agregas la barra diagonal, se descargará el directorio con todo lo que contiene.</p>
 </div>
-<p>Puedes encontrar más información sobre las banderas o tags utilizadas anteriormente aquí:</p>
-<ul>
-<li><a href="https://linux.die.net/man/1/rsync" target="_self" rel="undefined">linux.die.net/man/1/rsync</a></li>
-</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<h2 id="h_01HP5JFF3W41Z8BAAEGSHY2QYA"><span id="Configurar_filtros">Configurar filtros</span></h2>
+<h3 id="h_01HP5JF2XDYR29BYDWHZJ1DBN0"><span id="Configurar_filtros">Filtros</span></h3>
 <div class="solvvy-solution">
-<p>También es posible establecer filtros para qué archivos incluirá y cuáles ignorará. Esto hace posible tener una configuración de un solo paso completamente automatizada una vez que sus filtros están en su lugar.</p>
+<p>También es posible configurar filtros para incluir e ignorar determinados archivos. Esto permite tener una configuración completamente automatizada en un solo paso una vez que los filtros están en su lugar.</p>
 </div>
-<h2 id="h_01HP5JFF3WRGRMGVFRZD2QMSK4"><span id="Ejemplo_de_filtro">Ejemplo de filtro</span></h2>
+<p id="h_01HP5JF2XD9Y9E5XTTJBBJN8BQ"><strong><span id="Ejemplo_de_filtro">Ejemplo</span></strong></p>
 <div class="solvvy-solution">
-<p>La forma más sencilla de agregar un filtro es agregarlo a la línea de comando <span class="code">rsync</span>. Puedes hacer lo siguiente para filtrar archivos <span class="text-object">.pyc</span> y directorios <span class="text-object">/.git</span>:</p>
+<p>Este comando filtra los archivos <span class="text-object">.pyc</span> y los directorios <span class="text-object">/.git</span>:</p>
 <div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync <strong>--filter '- *.pyc' --filter '- /.git' </strong> -e "/usr/bin/ssh" --bwlimit=2000 -av <span class="code-highlight">local_directory username@server.dreamhost.com:remote_directory</span></span>
-</pre>
-</div>
-<p>Consulta la siguiente página para obtener más detalles:</p>
-<ul>
-<li><a href="https://linux.die.net/man/1/rsync" target="_self" rel="undefined">linux.die.net/man/1/rsync</a></li>
-</ul>
-</div>
-<h2 id="h_01HP5JFF3WX8CMA6CWYHW9HSRS"><span id="rsync_para_Windows">rsync para Windows</span></h2>
-<div class="solvvy-solution">
-<p>rsync también está disponible para Windows, pero la configuración incluye algunos pasos más. Una solución es usar <a href="http://www.aboutmyip.com/AboutMyXApp/DeltaCopy.jsp">Delta Copy</a>. La versión 'sin formato' sin instalador funciona bien.</p>
-<div class="notebox-note">
-<p>Una nota sobre rsync para Windows es que usa rutas de estilo * nix incluso si están en tu máquina con Windows.</p>
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">rsync <span class="code-highlight">--filter '- *.pyc' --filter '- /.git'</span>  -e "/usr/bin/ssh" -av <span class="code-highlight">local_directory username@server.dreamhost.com:remote_directory</span></span></pre>
 </div>
 </div>
-<h2 id="h_01HP5JFF3WDST3ZFSNQW8W2RYF"><span id="Ver_también">Ver también</span></h2>
+<h2 id="h_01HP5JFF3WDST3ZFSNQW8W2RYF"><span id="Ver_tambien">Ver también</span></h2>
+<p><strong>Enlaces de DreamHost</strong></p>
 <div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216560958-Herramientas-Web" target="_self" rel="undefined">Herramientas del sitio web</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH" target="_self" rel="undefined">Descripción general de SSH</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/217213327-Wget" target="_self" rel="undefined">Wget</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215840708-Traceroute" target="_self" rel="undefined">Traceroute</a></li>
+</ul>
+<p><strong>Enlaces de terceros</strong></p>
+<ul>
+<li><a href="https://linux.die.net/man/1/rsync" target="_blank" rel="noopener noreferrer">Linux man page (rsync)</a></li>
 </ul>
 </div>
