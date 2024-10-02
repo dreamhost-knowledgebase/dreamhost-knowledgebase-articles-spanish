@@ -19,16 +19,16 @@
 <h3 id="h_01HQ105HCCC3TYQ9R64YMEG3XY">Eliminar "www" a través de un archivo .htaccess</h3>
 <p>Para eliminar automáticamente <em>www</em> del principio de tu dominio, agrega las siguientes lineas al archivo <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess">.htaccess</a>. Si no tienes ese archivo, créalo en el editor de texto y luego subirlo a tu directorio root:</p>
 <div class="preboxcontainer">
-<pre class="prebox">RewriteEngine on
-RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^(.*)$ http://%1/$1 [R=301,L]</pre>
+<pre class="prebox">RewriteEngine On 
+RewriteCond %{HTTP_HOST} ^<span class="code-highlight">www.example.com</span> 
+RewriteRule (.*) <span class="code-highlight">https://example.com</span>/$1 [R=301,L]</pre>
 </div>
 <h3 id="h_01HQ105HCCEH5ZGP4V61RHDKVS">Forzar el subdominio 'www' en un archivo .htaccess</h3>
 <p>Para forzar el uso de 'www' cuando los visitantes lean tu sitio, agrega las siguientes líneas al archivo <a href="https://help.dreamhost.com/hc/es/articles/216456227-Generalidades-de-htaccess" target="_self">.htaccess</a>:</p>
 <div class="preboxcontainer">
 <pre class="prebox">RewriteEngine On
-RewriteCond %{HTTP_HOST}  !^www\.<span class="code-highlight">example</span>\.com$ [NC]
-RewriteRule ^(.*) <span class="code-highlight">http://www.example.com</span>/$1 [L,R]</pre>
+RewriteCond %{HTTP_HOST} ^<span class="code-highlight">example.com</span> 
+RewriteRule (.*) <span class="code-highlight">https://www.example.com</span>/$1 [R=301,L]</pre>
 </div>
 <p>Si alguien escribe <strong>example.com</strong>, la URL cambiará ahora a <strong>www.example.com</strong>.</p>
 </div>
