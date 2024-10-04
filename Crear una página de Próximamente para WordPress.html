@@ -1,9 +1,14 @@
+<div id="intermediate"> </div>
 <h2 id="h_01HF4R69ZER02S2NKAY4JAQZZA">Generalidades</h2>
-<p>Este artículo describe como crear una página estática de <span class="text-object">Próximamente</span> que se establecerá como la página de inicio de tu sitio web WordPress. Este tipo de página es útil cuando necesitas mostrar una página general a los visitantes antes de que tu sitio web completo se publique.</p>
-<h2 id="h_01HF4R69ZEDX6GVZ9CCH2AX6PM">Crear una página estática</h2>
+<p>En este artículo se describen varias opciones para crear una página estática de <span class="text-object">Próximamente</span> que se configure como página de inicio de tu sitio web WordPress. Este tipo de página es útil cuando necesitas mostrar una página general a los visitantes antes de que se haga público todo tu sitio web.</p>
+<h2 id="h_01J8V01AVH9DXGR36WWEQRJQ8P">Crear una página estática</h2>
+<p>Hay varias opciones que puedes seguir para crear una página estática, dependiendo de tus necesidades y nivel de experiencia.</p>
+<h3 id="h_01HEXC6J27TV2N30TB30ZZDNK1">Opción 1 — Crear una página estática</h3>
+<p>Para crear una págoina estática en WordPress:</p>
 <div class="solvvy-solution">
 <ol>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_self">Inicia sesión</a> en tu panel de WordPress.</li>
+<li>
+<a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress" target="_self">Inicia sesión</a> en tu panel de WordPress.</li>
 <li>En el panel izquierdo, navega a <span class="text-section">Páginas &gt; Añadir nueva</span>.</li>
 <li>Edita la página <span class="text-object">Próximanente</span> como quisieras que apareciera.</li>
 <li>En la parte superior derecha, haz clic en el botón <strong>Publicar</strong>.
@@ -18,37 +23,41 @@
 <li>Visita la página de inicio de tu sitio para ver la nueva página que creaste.</li>
 </ol>
 </div>
-<h2 id="h_01HF4R69ZFV3ZKTR3AABPQ35H5">Habilitar manualmente la página de mantenimiento programado de WordPress</h2>
+<h3 id="h_01HF4R69ZFV3ZKTR3AABPQ35H5">Opción 2 — Habilitar manualmente la página de mantenimiento programado de WordPress</h3>
 <div class="solvvy-solution">
 <p>Una alternativa de de crear una página de <span class="text-object">Próximanente</span> es habilitar la página de mantenimiento programado de WordPress.</p>
 <ol>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP" target="_self">Inicia sesión en tu servidor y crea un archivo</a> llamado <strong>.maintenance</strong>.</li>
+<li>Inicia sesión en tu servidor y <a href="https://help.dreamhost.com/hc/es/articles/115000098272-Crear-y-editar-un-archivo-v%C3%ADa-FTP">crea un archivo</a> llamado <span class="text-object">.maintenance</span>.</li>
 <li>Agrega las siguientes lineas al archivo:
 <div class="preboxcontainer">
-<pre class="prebox">&lt;?php<br />  $upgrading = time();<br />?&gt;
+<pre class="prebox">&lt;?php<br>  $upgrading = time();<br>?&gt;
 </pre>
 </div>
 </li>
-<li>Visita tu sitio y verás un mensaje de mantenimiento predeterminado.</li>
+<li>Visita tu sitio. Deberás ver un mensaje de mantenimiento predeterminado.</li>
 </ol>
-<p>Para eliminar la página de mantenimiento programado, elimina o renombra el archivo <strong>.maintenance</strong>.</p>
+<p>Para eliminar la página de mantenimiento programado, elimina o cambiael nombre del archivo <span class="text-object">.maintenance</span>.</p>
 </div>
-<div id="Como_administrar_el_modo_de_mantenimiento" class="section-link">&nbsp;</div>
+<h3 id="h_01HEXC6J28WHATBWZPC7VQDN0Y">Opción 3 — Usar un plugin para crear una página de Próximanente</h3>
+<div class="solvvy-solution">
+<p>También existen plugins de terceros que se pueden utilizar para crear una página de "Próximamente" con algunas opciones adicionales. A continuación, se incluye una lista de algunos plugins de terceros.</p>
+<ul>
+<li><a href="https://www.seedprod.com/es/" target="_blank" rel="noopener noreferrer">SeedProd CMP – Plugin de Próximamente &amp; Mantenimiento</a></li>
+<li><a href="https://es.wordpress.org/plugins/wp-maintenance-mode/" target="_blank" rel="noopener noreferrer">WP Maintenance Mode</a></li>
+</ul>
+</div>
+<div id="Como_administrar_el_modo_de_mantenimiento" class="section-link"> </div>
 <h2 id="h_01HPF1R9VXFVN478GYDF6WBQVD">Cómo administrar el modo de mantenimiento</h2>
 <div class="solvvy-solution">
 <p>Cuando actualizas tus plugins, temas o archivos principales de WordPress, tu sitio de WordPress muestra el siguiente mensaje:</p>
 <div class="preboxcontainer">
 <pre class="prebox">Briefly unavailable for scheduled maintenance. Check back in a minute.</pre>
 </div>
-<p>WordPress elimina automáticamente ese mensaje una vez que se completan las actualizaciones. Sin embargo, en algunos casos, los conflictos o errores dejan el mensaje activo en el sitio, incluso después de que se completen las actualizaciones.</p>
-<h3 id="h_01HPF1R9VXEZ937NDF3M1Y8MVJ" class="subtoc-heading">Eliminar el mensaje de "mantenimiento programado" de WordPress</h3>
-<p>Si el mensaje de 'mantenimiento programado' permanece activo en tu sitio, usa las siguientes instrucciones para eliminarlo:</p>
+<p>WordPress elimina automáticamente ese mensaje una vez que se completan las actualizaciones. Sin embargo, en algunos casos, los conflictos o errores dejan el mensaje activo en el sitio, incluso después de que se completan las actualizaciones. Las siguientes secciones te muestran cómo eliminar el mensaje.</p>
+<h3 id="h_01HPF1R9VXEZ937NDF3M1Y8MVJ" class="subtoc-heading">Eliminar el mensaje de mantenimiento programado de WordPress</h3>
+<p>Si el mensaje de <em>mantenimiento programado</em> permanece activo en tu sitio, usa las siguientes instrucciones para eliminarlo:</p>
 <ol>
-<li>Consulta el siguiente artículo para obtener instrucciones sobre cómo iniciar sesión en tu servidor web.&nbsp;Puede usar el administrador de archivos en el panel o un cliente de terceros para iniciar sesión:<br />
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-credenciales" target="_self">Generalidades sobre FTP y credenciales</a></li>
-</ul>
-</li>
+<li>Revisa <a href="https://help.dreamhost.com/hc/es/articles/115000675027-Generalidades-sobre-FTP-y-sus-credenciales">este artículo</a> para obtener instrucciones sobre cómo iniciar sesión en tu servidor web. Puedes usar el administrador de archivos en el panel o un cliente de terceros para iniciar sesión.</li>
 <li>Una vez que hayas iniciado sesión, navega hasta el directorio de tu sitio web donde se encuentran tus archivos.</li>
 <li>En este directorio, busca un archivo llamado <span class="text-object">.maintenance</span> y elimínalo.</li>
 <li>Una vez que elimines el archivo, asegúrate de borrar cualquier caché en tu sitio y luego actualiza tu navegador. El mensaje ya no debería aparecer en tu sitio.</li>
@@ -56,24 +65,11 @@
 </div>
 <h3 id="h_01HF4R69ZF6SWE5EJ8EHE90Z65">Usar una página de mantenimiento personalizada</h3>
 <div class="solvvy-solution">
-<p>El siguiente artículo explica cómo usar una página de mantenimiento de sitio personalizada usando un archivo .htaccess:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/216363137-Crear-un-mensaje-de-mantenimiento-de-sitio-con-un-archivo-htaccess" target="_self">Crear un mensaje de mantenimiento de sitio con un archivo .htaccess</a></li>
-</ul>
-</div>
-<h2 id="h_01HF4R69ZFRESM4S6739K9X23G">Usar un plugin para crear un página de Próximamente</h2>
-<div class="solvvy-solution">
-<p>También hay plugins de terceros que se pueden usar para crear páginas de Próximamente con algunas opciones adicionales. A continuación se muestra una lista de algunos plugins de terceros.</p>
-<ul>
-<li><a href="https://www.seedprod.com/">SeedProd CMP – Coming Soon &amp; Maintenance Plugin</a></li>
-<li><a href="https://en-ca.wordpress.org/plugins/wp-maintenance-mode/">WP Maintenance Mode</a></li>
-</ul>
+<p>Este <a href="https://help.dreamhost.com/hc/es/articles/216363137-Crear-un-mensaje-de-mantenimiento-de-sitio-con-un-archivo-htaccess">artículo</a> explica cómo usar una página de mantenimiento de sitio personalizada en un archivo <span class="text-object">.htaccess</span>.</p>
 </div>
 <h2 id="h_01HZ262FTZQT90RZWQ3VY17MSY">Ver también</h2>
-<div class="solvvy-hidden">
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216363137-Crear-un-mensaje-de-mantenimiento-de-sitio-con-un-archivo-htaccess">Crear un mensaje de mantenimiento de sitio con un archivo .htaccess</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/360001310966-C%C3%B3mo-iniciar-sesi%C3%B3n-en-tu-sitio-WordPress">Cómo iniciar sesión en tu sitio WordPress</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/6109053154964-Preparar-tu-sitio-WordPress-para-una-actualizaci%C3%B3n">Preparar tu sitio WordPress para una actualización</a></li>
 </ul>
-</div>
