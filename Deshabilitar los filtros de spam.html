@@ -1,46 +1,31 @@
-<h2 id="h_01HE3RYKJF7JARHFHQV0P2W88A">Generalidades</h2>
-<p>Este artículo explica cómo deshabilitar el filtrado de spam de DreamHost y actualizar los registros MX en tu dominio.</p>
-<div class="notebox-note">
-<p>La desactivación de la carpeta de correo no deseado no desactiva el filtrado de salida. Si el algoritmo del sistema de filtrado de DreamHost detecta spam potencial de tu dirección de correo electrónico, se te devolverá como imposible de entregar. Después de revisar el mensaje, <a href="https://help.dreamhost.com/hc/es/articles/360032561551--Informar-de-correo-no-deseado-falso-positivo-en-MailChannels" target="_self">márcalo como falso positivo</a>. Si notas que esto sucede con regularidad, puede haber formas de prevenirlo. Consulta el siguiente artículo para obtener más información:</p>
-<ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/360001447486--Por-qu%C3%A9-mi-correo-electr%C3%B3nico-va-al-spam-">¿Por qué mi correo está yendo a spam?</a></li>
-</ul>
+<div id="beginner"> </div>
+<h2 id="h_01HDW2HDXXYGK3GGZK9H88D23V">Generalidades</h2>
+<p>Este artículo explica cómo desactivar el filtrado de spam en un dominio.</p>
+<div class="notebox-important">
+<p>Deshabilitar la carpeta de correo no deseado NO deshabilita el filtrado de correo saliente. Si el sistema de filtrado de DreamHost detecta correo no deseado potencial de tu dirección de correo, se devuelve. Después de revisar el mensaje, puedes <a href="https://help.dreamhost.com/hc/es/articles/360032561551-Reportar-un-correo-falso-positivo-spam-en-MailChannels" target="_self">marcarlo como un falso positivo</a>.</p>
+<p>Si notas que esto sucede con regularidad, revisa <a href="https://help.dreamhost.com/hc/es/articles/360001447486--Por-qu%C3%A9-mi-correo-electr%C3%B3nico-va-a-spam">este artículo</a> para conocer formas de evitarlo.</p>
 </div>
-<h2 id="h_01HE3RYKJF1X0HY524CQWSYF3E"><span id="Deshabilitar_el_filtro_de_spam_de_un_dominio">Deshabilitar el filtro de spam de un dominio</span></h2>
+<h2 id="h_01HDW2HDXX21MW2WYV0QXMNQQJ"><span id="Deshabilitar_los_filtros_de_spam">Deshabilitar los filtros de spam</span></h2>
+<p>Para deshabilitar todos los filtros en un dominio:</p>
 <div class="solvvy-solution">
 <ol>
-<li>Navega hasta la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.junk" target="_blank" rel="noopener noreferrer">Filtros de Spam</a>.</li>
+<li>Navega a la página <a class="panel-link" href="https://panel.dreamhost.com/index.cgi?tree=mail.junk" target="_blank" rel="noopener noreferrer">Filtros de Spam</a>.</li>
 <li>Haz clic en el botón <strong>Editar filtro</strong> a la derecha del dominio.</li>
-<li>Haz clic en el botón <strong>Editar configuración para example.com</strong> para editar la configuración de todo el dominio.</li>
+<li>Da clic en el botón <strong>Editar configuración para example.com</strong> para editar la configuración de todo el dominio.</li>
 <li>Haz clic en el menú desplegable <span class="text-object">Cambiar la configuración del filtro</span>.</li>
-<li>Haz clic en el botón <strong>Proceder a Desactivar Filtro</strong>.
-<dl>
-<dd><em>Aparece una advertencia final.</em></dd>
-</dl>
-</li>
+<li>Haz clic en el botón <strong>Proceder a Desactivar Filtro</strong>.</li>
 <li>Haz clic en <strong>Desactivar Filtro y Eliminar Listas de Permitir/Bloquear</strong>.</li>
 </ol>
 </div>
-<h2 id="h_01HE3RYKJGZKBB10XV77JN7QWN">Actualizar los registros MX</h2>
+<h2 id="h_01HDW2HDXXHH5X6W60QVJ0M8S2">Actualizar los registros MX</h2>
+<p>Cuando deshabilitas el filtrado de correo, los registros MX de tu dominio cambian a registros MX sin filtro. Si el DNS de tu dominio no apunta a DreamHost, deberás actualizar manualmente los registros MX para usar estos registros sin filtro.</p>
+<p>Para determinar esto, revisa <a href="https://help.dreamhost.com/hc/es/articles/360030114711-Verificar-hacia-donde-apuntan-tus-nameservers">este artículo</a> para confirmar hacia dónde apuntan actualmente los nameservers de tu dominio.</p>
 <div class="solvvy-solution">
-<h3 id="h_01HE3RYKJGC0Z8MQGTFB6G0HN6">Si tus nameservers están apuntando a DreamHost</h3>
-<p>Si tus nameservers apuntan a DreamHost, no necesitas hacer nada. Tus registros MX se actualizarán automáticamente a los registros no filtrados después de eliminar el filtro de Spam.</p>
-<h3 id="h_01HE3RYKJHJGT94D3ED85AWCJA">Si tus nameservers NO están apuntando a DreamHost</h3>
-<p>Si tus nameservers NO apuntan a DreamHost, debes actualizar tus registros MX para que apunten a los nuevos registros MX no filtrados. Si no lo haces, tu correo no será entregado.</p>
-<h3 id="h_01HE3RYKJJD62CXMFS9JX9DM6P">Confirma a dónde apuntan tus nameservers</h3>
-<p>Revisa el siguiente artículo para confirmar dónde apuntan tus nameservers.</p>
-<ul class="article-list">
-<li><a href="https://help.dreamhost.com/hc/es/articles/360030114711-Verificar-hacia-d%C3%B3nde-apuntan-tus-nameservers">Verificar hacia dónde apuntan tus nameservers</a></li>
-</ul>
-<p>Los siguientes son los nameservers de DreamHost:</p>
-<ul>
-<li><strong>ns1.dreamhost.com</strong></li>
-<li><strong>ns2.dreamhost.com</strong></li>
-<li><strong>ns3.dreamhost.com</strong></li>
-</ul>
-<p>Si ves algo más, debes actualizar tus registros MX en la empresa donde están alojados tus nameservers.</p>
-<h3 id="h_01HE3RYKJJJQXG1BJ598DPJ6PE">¿Qué registros MX necesito cambiar?</h3>
-<p>Actualiza los siguientes registros MX en la empresa que aloja tus nameservers. Esto asegura que tu correo seguirá funcionando.</p>
+<h3 id="h_01HDW2HDXX0DZ6MV4RVQ6MM64V">Si están apuntando a DreamHost</h3>
+<p>En este caso, no es necesario que hagas nada. Tus registros MX se actualizan automáticamente a los registros no filtrados.</p>
+<h3 id="h_01HDW2HDXX4M6YM3BPSRVRS8XX">Si NOT están apuntando a DreamHost</h3>
+<p>Debes actualizar manualmente tus registros MX para garantizar que tu correo siga entregándose.</p>
+<p>Inicia sesión en el panel de la compañía a la que apuntan los nameservers y actualiza los registros MX de tu dominio de la siguiente manera:</p>
 <table style="border-collapse: collapse; width: 50%;" border="1">
 <tbody>
 <tr>
@@ -65,12 +50,13 @@
 </tr>
 </tbody>
 </table>
-<div> </div>
+<div>Es posible que transcurran algunas horas hasta que el DNS <a href="https://help.dreamhost.com/hc/es/articles/215840248-Generalidades-de-la-propagaci%C3%B3n-del-DNS">se actualice en línea</a>. Después de eso, tu correo seguirá enviándose a DreamHost.</div>
 </div>
-<h2 id="h_01HE3RYKJJGTK59APK3JQJMJ12">Ver también</h2>
+<h2 id="h_01HDW2HDXX3ACBRTEXEH3HD6QZ">Ver también</h2>
 <div class="solvvy-hidden">
 <ul>
-<li><a href="https://help.dreamhost.com/hc/es/articles/214984738-Generalidades-sobre-Anti-spam">Descripción general de antispam</a></li>
-<li><a href="https://help.dreamhost.com/hc/es/articles/215686487-Configurar-los-ajustes-Anti-Spam">Configurar los ajustes Anti Spam</a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/214984738-Generalidades-sobre-Anti-spam">Generalidades sobre Anti-spam </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215686487-Configurar-los-ajustes-Anti-Spam">Configurar los ajustes Anti Spam </a></li>
+<li><a href="https://help.dreamhost.com/hc/es/articles/215686667-Soluci%C3%B3n-de-problemas-de-configuraci%C3%B3n-de-Anti-spam">Solución de problemas de configuración de Anti-spam </a></li>
 </ul>
 </div>
