@@ -1,86 +1,51 @@
-<h2 id="h_01HP5JH174JHW4TV5W86G3J6RC">Generalidades</h2>
-<div class="solvvy-solution">
-<p><strong>GNU Wget</strong> (o solo&nbsp;<strong>Wget</strong>, antes&nbsp;<strong>Geturl</strong>)&nbsp;es un programa que recupera contenido de servidores web y es parte del Proyecto GNU. Su nombre se deriva de las palabras <em>World Wide Web</em>&nbsp;y&nbsp;<em>get</em>. Admite protocolos de descarga <span class="text-object">HTTP</span>, <span class="text-object">HTTPS</span> y <span class="text-object">FTP</span>.</p>
+<div id="intermediate"> </div>
+<h2 id="h_01HP5JGPCQTD1TKH5HTX5H1TNE">Generalidades</h2>
+<p>Este artículo explica qué es Wget y cómo utilizar esta herramienta en DreamHost.</p>
+<div class="prereqs">
+<p><strong>Requisitos previos</strong></p>
+<p>Este artículo asume que has <a href="https://help.dreamhost.com/hc/es/articles/216385837-Crear-un-usuario-con-acceso-Shell-SSH">creado un usuario de Shell</a> y ha iniciado sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</p>
 </div>
-<h2 id="h_01HP5JH1746A1E40XHCBZW8THH"><span id="Why_should_I_use_Wget.3F">¿Por que debería usar Wget?</span></h2>
-<div class="solvvy-solution">
-<p>Usar el programa Wget a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> en la línea de comandos de UNIX es un excelente atajo para descargar archivos desde un servidor remoto a tu servidor DreamHost.</p>
-<p>El uso de Wget ayuda a evitar el proceso de descarga, a veces lento y doloroso, porque descarga los archivos directamente en tu servidor DreamHost. De lo contrario, necesitarías descargarlos a tu computador, luego usar un programa FTP como Filezilla para subirlos en tu servidor que, debido a la naturaleza de esas aplicaciones, toma más tiempo.</p>
-<p>Wget es una herramienta poderosa, con muchas opciones, pero incluso lo básico es útil.</p>
-<div class="notebox-note">
-<p><a href="https://help.dreamhost.com/hc/es/articles/216661778-Rsync" target="_self" rel="undefined">rsync</a> puede ser una opción mejor (más rápida, menos complicada) para los usuarios que migran entre dos servidores habilitados para rsync (como pasar del Shared&nbsp; Hosting al alojamiento VPS de DreamHost).</p>
+<h3 id="h_01J8QN4012S2YFYM5NEQ5QB8JF">Antecedentes</h3>
+<p>Wget es un programa que recupera contenido de servidores web. Su nombre hace referencia a la <em>World Wide Web</em> y a <em>Get</em>.</p>
+<p id="h_01HP5JGPCQEJMZDVV3CQP7HHA0"><strong><span id="Cuando_usar_Wget">Cuándo usar Wget</span></strong></p>
+<p>Wget se utiliza a menudo después de iniciar sesión en tu servidor a través de <a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a> para descargar archivos desde un servidor remoto a tu servidor de DreamHost. Esta es una opción mucho más rápida y más sencilla que descargar manualmente los archivos a través de FTP desde la fuente y luego subirlos a tu servidor.</p>
+<div class="notebox-tip">
+<p><a href="https://help.dreamhost.com/hc/es/articles/216661778-Rsync">rsync</a> puede ser una opción mejor (más rápida y menos complicada) para los usuarios que mueven datos entre dos servidores (como mover archivos de un alojamiento Shared a un alojamiento VPS).</p>
 </div>
-</div>
-<h2 id="h_01HP5JH1748A3678R6152S0Z33"><span id="Basic_usage">Uso básico</span></h2>
-<div class="solvvy-solution">
-<p>Para usar Wget:</p>
-<ol>
-<li>Crea un&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216385837-C%C3%B3mo-crear-un-usuario-con-acceso-Shell-SSH-">usuario shell</a>&nbsp;en tu panel.</li>
-<li>Inicia sesión en tu servidor a través de&nbsp;<a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">SSH</a>.</li>
-<li>Escribe&nbsp;<span class="code">wget</span> seguido de la URL completa del archivo que deseas descargar. Por ejemplo, corre el siguiente comando para descargar el archivo <span class="text-object">.tar.gz</span> para Python versión 3.8.1:
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://www.python.org/ftp/python/3.8.1/Python-3.8.1.tgz</span></pre>
-</div>
-<ul>
-<li>Esto descarga el archivo <span class="text-object">.tgz</span> al directorio en el que corriste el comando.</li>
-<li>Wget se usa a menudo para descargar archivos comprimidos.</li>
-</ul>
-</li>
-<li>Si el archivo que descargas está comprimido, descomprímelo usando&nbsp;<a class="new" title="W:gzip (page does not exist)" href="https://en.wikipedia.org/wiki/Gzip">gunzip</a>, <a class="new" title="W:Zip (file format) (page does not exist)" href="https://en.wikipedia.org/wiki/Zip_%28file_format%29">unzip</a>, o tar para expandir y descomprimir la descarga.</li>
-<li>Si necesitas pasar variables a un script, incluye la URL entre comillas simples para evitar que el carácter et (&amp;) se interprete como el comando de shell:
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget 'https://www.example.com/myscript.php?var1=foo&amp;var2=bar'</span></pre>
-</div>
-</li>
-</ol>
-</div>
-<h2 id="h_01HP5JH175BXKMDF39S2VQPMGJ"><span id="Advanced_usage">Uso avanzado</span></h2>
-<div class="solvvy-solution">
-<p>Para crear una imagen reflejada de una carpeta en un servidor diferente (con la misma estructura que la original), simplemente puedes usar <span class="code">ftp</span> para iniciar sesión en el servidor y transferir la carpeta:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget -r  ftp://username:password@example.com/folder/*
-</span></pre>
-</div>
-<p>Este comando descarga <span class="text-object">folder/</span> y todo lo que contiene mientras mantiene su estructura de directorio. Esto te ahorra mucho tiempo en lugar de ejecutar&nbsp;<span class="code">wget</span> en cada archivo individualmente.</p>
-<p>Para ahorrar espacio, simplemente puedes comprimir la carpeta usando:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">zip -r  folder.zip folder
-</span></pre>
-</div>
-<p>y luego limpiar borrando la copia:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">rm -rf folder
-</span></pre>
-</div>
-<p>Es una excelente manera de hacer una copia de seguridad de todo tu sitio web a la vez y, por supuesto, es muy útil mover sitios grandes entre hosts.</p>
-<p>Por ejemplo, usa el siguiente comando para descargar todo el contenido de <strong>example.com</strong>:</p>
-<div class="preboxcontainer">
-<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget -r -l 0 https://www.example.com/
-</span></pre>
-</div>
-<ul>
-<li>Tomado de: <a href="http://www.gnu.org/software/wget/manual/wget.html#Advanced-Usage">GNU Wget Manual/Examples – Advanced Usage</a></li>
-</ul>
-</div>
-<h2 id="h_01HP5JH175NTMR51QRJVHE1GQD"><span id="Man_page_info">Página de información Man</span></h2>
-<div class="solvvy-solution">
+<h2 id="h_01HP5JGPCQPNEA0HJF7X3CBG9W"><span id="Como_usar_Wget">Cómo usar Wget</span></h2>
+<p>Puedes usar el comando Wget para ejecutar tareas simples y avanzadas en tu servidor.</p>
+<h3 id="h_01J9PV1HE5NBWQ86PC6MAKJVHM">Ver el manual</h3>
 <p>Para ver la página del manual de Wget, corre lo siguiente en tu terminal:</p>
 <div class="preboxcontainer">
 <pre class="prebox"><span class="server">[server]$ </span><span class="command">man wget 
 </span></pre>
 </div>
+<h3 id="h_01J9PV1MP74YDD2FQVX4YXR8EM">Descargar el archivo</h3>
+<p>Para descargar un archivo en tu servidor:</p>
+<p>Escribe <span class="code">wget</span> seguido de la URL completa del archivo que desea descargar. Por ejemplo, corre el siguiente comando para descargar el archivo <span class="text-object">.tar.gz</span> para la versión 3.8.1 de Python:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget https://www.python.org/ftp/python/3.8.1/Python-3.8.1.tgz</span></pre>
+</div>
+<ul>
+<li>Esto descarga el archivo <span class="text-object">.tgz</span> al directorio donde ejecutaste el comando.</li>
+<li>Si el archivo que descargas está comprimido, descomprime el archivo usando <a class="new" title="W:gzip (la página no existe)" href="https://es.wikipedia.org/wiki/Gzip">gunzip</a>, <a class="new" title="W:Zip (formato de archivo) (la página no existe)" href="https://es.wikipedia.org/wiki/Formato_de_compresi%C3%B3n_ZIP">unzip</a>, o tar para expandir y descomprimir la descarga.</li>
+</ul>
+<div class="notebox-tip">
+<p>Si necesitas pasar variables a un script, encierra la URL entre comillas simples, lo que evita que el carácter &amp; se interprete como el comando de shell:</p>
+<div class="preboxcontainer">
+<pre class="prebox"><span class="server">[server]$ </span><span class="command">wget 'https://www.example.com/myscript.php?var1=foo&amp;var2=bar'</span></pre>
+</div>
 </div>
 <h2 id="h_01HP5JH1751QS2KGG5254A5ERZ"><span id="See_also">Ver también</span></h2>
-<div class="solvvy-hidden">
-<h3 id="h_01HP5JH1753SH8MXM6KXGQZJBX">Enlaces internos</h3>
+<p id="h_01HP5JH1753SH8MXM6KXGQZJBX"><strong>Enlaces de DreamHost</strong></p>
 <ul>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216560958-Herramientas-Web">Herramientas de sitio web</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216041267-Generalidades-de-SSH">Generalidades sobre SSH</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/216661778-Rsync" target="_self" rel="undefined">Rsync</a></li>
 <li><a href="https://help.dreamhost.com/hc/es/articles/215840708-Traceroute">Traceroute</a></li>
 </ul>
-<h3 id="h_01HP5JH1756F0FWG79B0KT39CR">Enlaces externos</h3>
+<p id="h_01HP5JH1756F0FWG79B0KT39CR"><strong>Enlaces de terceros</strong></p>
 <ul>
 <li><a class="new" title="W:Wget (page does not exist)" href="https://en.wikipedia.org/wiki/Wget">Wget en Wikipedia</a></li>
+<li><a href="http://www.gnu.org/software/wget/manual/wget.html#Advanced-Usage" target="_blank" rel="noopener noreferrer">Wget — Advanced Usage</a></li>
 </ul>
-</div>
